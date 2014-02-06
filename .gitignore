@@ -1,0 +1,9 @@
+bin/
+obj/
+.DS_Store
+
+#Don't want dll and package in there will use config to get packages
+projdir/bin
+projdir/obj
+*.userprefs
+*.log

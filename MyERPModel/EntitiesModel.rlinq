@@ -1,0 +1,586 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="MyERPModel" namespace="MyERPModel" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
+  <orm:orm name="MyERPModel" backend="postgresql" default-schema="public" xmlns:orm="http://tempuri.org/ORM">
+    <orm:namespace name="MyERPModel" default="true">
+      <orm:class name="Ct11" uniqueId="b8685eec-59e0-4751-8566-c055712e62ce">
+        <orm:table name="ct11" />
+        <orm:identity>
+          <orm:multiple-field>
+            <orm:single-field field-name="_stt_Rec" />
+            <orm:single-field field-name="_ln" />
+          </orm:multiple-field>
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_stt_Rec" property="Stt_Rec" behavior="readwrite" uniqueId="55d8b353-4b3b-4d8b-ae46-7c66ab0f5697" type="System.String">
+          <orm:column name="stt_rec" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        </orm:field>
+        <orm:field name="_ma_Ct" property="Ma_Ct" behavior="readwrite" uniqueId="ce79210f-0c6a-4e3d-9849-67a6e84df080" type="System.String">
+          <orm:column name="ma_ct" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ngay_Ct" property="Ngay_Ct" behavior="readwrite" uniqueId="e3461be3-c720-48e7-a111-0220789982a1" type="System.DateTime">
+          <orm:column name="ngay_ct" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_so_Ct" property="So_Ct" behavior="readwrite" uniqueId="a8fbce8b-6f41-4418-b898-b0b5dfe3303d" type="System.String">
+          <orm:column name="so_ct" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_dien_Giaii" property="Dien_Giaii" behavior="readwrite" uniqueId="b762b2ea-10d0-4a71-9708-5b9530b1e01b" type="System.String">
+          <orm:column name="dien_giaii" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_tk_I" property="Tk_I" behavior="readwrite" uniqueId="bfcd5f72-c931-4fa4-9623-32e39445f31c" type="System.String">
+          <orm:column name="tk_i" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ps_No_Nt" property="Ps_No_Nt" behavior="readwrite" uniqueId="6ea15a06-b4ee-4d16-bc91-d2059d9fdb72" type="System.Decimal">
+          <orm:column name="ps_no_nt" sql-type="numeric" nullable="false" length="38" scale="200" ado-type="" />
+        </orm:field>
+        <orm:field name="_ps_Co_Nt" property="Ps_Co_Nt" behavior="readwrite" uniqueId="5a0c48f7-1c87-471e-ab06-0fdac760e637" type="System.Decimal">
+          <orm:column name="ps_co_nt" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        </orm:field>
+        <orm:field name="_ps_No" property="Ps_No" behavior="readwrite" uniqueId="991f8718-6f20-4b34-9c53-234a5fc8be27" type="System.Decimal">
+          <orm:column name="ps_no" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        </orm:field>
+        <orm:field name="_ps_Co" property="Ps_Co" behavior="readwrite" uniqueId="3a8c4e51-bd19-4179-a704-a33f738e86c2" type="System.Decimal">
+          <orm:column name="ps_co" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        </orm:field>
+        <orm:field name="_nh_Dk" property="Nh_Dk" behavior="readwrite" uniqueId="965b1344-def7-497f-a8f4-f7a5b39138b2" type="System.String">
+          <orm:column name="nh_dk" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ma_Kh_I" property="Ma_Kh_I" behavior="readwrite" uniqueId="19f5b9bd-125f-46f1-ba63-2e55204af82e" type="System.String">
+          <orm:column name="ma_kh_i" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ma_Vv_I" property="Ma_Vv_I" behavior="readwrite" uniqueId="32ab292b-258a-447f-aa14-de06402f9c57" type="System.String">
+          <orm:column name="ma_vv_i" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ma_Td_I" property="Ma_Td_I" behavior="readwrite" uniqueId="2f31479c-de31-46a8-b0ca-a017794a69df" type="System.String">
+          <orm:column name="ma_td_i" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ln" property="Ln" behavior="readwrite" uniqueId="efa54b4e-4c7d-4dac-a47c-a8009fc814be" type="System.Int64">
+          <orm:column name="ln" sql-type="int8" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        </orm:field>
+        <orm:field name="_ma_Ku" property="Ma_Ku" behavior="readwrite" uniqueId="95695939-8b02-4685-ac8a-ef5f4d5e8ac3" type="System.String">
+          <orm:column name="ma_ku" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ph11" property="Ph11" behavior="readwrite" uniqueId="b4b464f3-779f-4e4c-9c1a-d95acb752668" type="MyERPModel.Ph11">
+          <orm:reference uniqueId="5f5ae2ec-ab74-4e18-a6fc-af4f1ed48359" association-name="Ct11HasPh11">
+            <orm:sharedfield name="_stt_Rec" target-class="MyERPModel.Ph11" target-field="_stt_Rec" />
+            <orm:constraint name="FK_ct11_ph11_stt_rec" destination-table="ph11" />
+          </orm:reference>
+        </orm:field>
+      </orm:class>
+      <orm:class name="Ph11" uniqueId="a385f34a-0a56-4973-868a-2e953cafb486">
+        <orm:table name="ph11" />
+        <orm:identity>
+          <orm:single-field field-name="_stt_Rec" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_stt_Rec" property="Stt_Rec" behavior="readwrite" uniqueId="d52f97b2-4565-434f-8434-476d152d8be8" type="System.String">
+          <orm:column name="stt_rec" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        </orm:field>
+        <orm:field name="_ma_Dvcs" property="Ma_Dvcs" behavior="readwrite" uniqueId="51ed4ca7-da52-4e88-ba32-ff539f13a80d" type="System.String">
+          <orm:column name="ma_dvcs" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ma_Ct" property="Ma_Ct" behavior="readwrite" uniqueId="2876533a-bd8b-4227-a1cf-e3f01995d104" type="System.String">
+          <orm:column name="ma_ct" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ngay_Ct" property="Ngay_Ct" behavior="readwrite" uniqueId="5726dd73-4211-4a0d-96f3-878299d0511c" type="System.DateTime">
+          <orm:column name="ngay_ct" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ngay_Lct" property="Ngay_Lct" behavior="readwrite" uniqueId="78711fef-7d4d-47be-92f1-0f488279fa16" type="System.DateTime">
+          <orm:column name="ngay_lct" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_so_Ct" property="So_Ct" behavior="readwrite" uniqueId="65508140-91ca-47f0-adbc-3ce343112d09" type="System.String">
+          <orm:column name="so_ct " sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_so_Lo" property="So_Lo" behavior="readwrite" uniqueId="e23f3ab8-3a24-4e23-b6a3-f54a28039d34" type="System.String">
+          <orm:column name="so_lo" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ngay_Lo" property="Ngay_Lo" behavior="readwrite" uniqueId="65806d0a-3019-4896-b3d7-9b079c589660" type="System.DateTime">
+          <orm:column name="ngay_lo" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ma_Nk" property="Ma_Nk" behavior="readwrite" uniqueId="7b7861d9-17bf-49e7-a0b1-d67808bdab0c" type="System.String">
+          <orm:column name="ma_nk" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ma_Gd" property="Ma_Gd" behavior="readwrite" uniqueId="43253590-f18c-43e8-aeb5-e984d1c58fb4" type="System.Int16">
+          <orm:column name="ma_gd" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ma_Nt" property="Ma_Nt" behavior="readwrite" uniqueId="b1f52ec4-518a-4d5b-ab24-23e9a31d03c8" type="System.String">
+          <orm:column name="ma_nt" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ty_Gia" property="Ty_Gia" behavior="readwrite" uniqueId="107c37f1-ad48-451b-9821-58adcbec430a" type="System.Decimal">
+          <orm:column name="ty_gia" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        </orm:field>
+        <orm:field name="_t_Ps_No_Nt" property="T_Ps_No_Nt" behavior="readwrite" uniqueId="6f0b2e88-6087-4998-a066-bf3b3e79a582" type="System.Decimal">
+          <orm:column name="t_ps_no_nt" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        </orm:field>
+        <orm:field name="_t_Ps_No" property="T_Ps_No" behavior="readwrite" uniqueId="c09ef1b4-38ad-40c3-9155-1cb18eb07e56" type="System.Decimal">
+          <orm:column name="t_ps_no" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        </orm:field>
+        <orm:field name="_t_Ps_Co_Nt" property="T_Ps_Co_Nt" behavior="readwrite" uniqueId="466a19b6-690c-4bce-a6fe-693c4cb1c06e" type="System.Decimal">
+          <orm:column name="t_ps_co_nt" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        </orm:field>
+        <orm:field name="_date0" property="Date0" behavior="readwrite" uniqueId="b8f4882d-e908-44df-9150-0a0a06d85fef" type="System.DateTime">
+          <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_user_Id0" property="User_Id0" behavior="readwrite" uniqueId="e41fae99-3895-42ec-afd4-c37d478982c0" type="System.Int64">
+          <orm:column name="user_id0" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_status" property="Status" behavior="readwrite" uniqueId="8f9cf6bd-e933-4d17-abfb-1a94c7da24a0" type="System.String">
+          <orm:column name="status" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_date2" property="Date2" behavior="readwrite" uniqueId="558f8195-5814-4703-9ea0-a40b971c73d2" type="System.DateTime">
+          <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_user_Id2" property="User_Id2" behavior="readwrite" uniqueId="63b6b144-a427-4b3b-aca1-83900fdf97a4" type="System.Int64">
+          <orm:column name="user_id2" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ct11" property="Ct11" behavior="readwrite" uniqueId="59e29bc8-52db-4f05-b769-9ae30a49cc31" type="MyERPModel.Ct11">
+          <orm:collection element-class="MyERPModel.Ct11" inverse-field="_ph11" order-by="" uniqueId="5f5ae2ec-ab74-4e18-a6fc-af4f1ed48359" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="Dmct" uniqueId="cecd0c3f-0391-4c15-af1d-2c853bfe256b">
+        <orm:table name="dmct" />
+        <orm:identity>
+          <orm:single-field field-name="_ma_Ct" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_ma_Ct" property="Ma_Ct" behavior="readwrite" uniqueId="45a4c5b4-6f44-46ec-983a-464a89a60455" type="System.String">
+          <orm:column name="ma_ct" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        </orm:field>
+        <orm:field name="_user_Id2" property="User_Id2" behavior="readwrite" uniqueId="3fd9ae6b-2a7a-4aef-a295-16a8fdc73632" type="System.Int64">
+          <orm:column name="user_id2" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_user_Id0" property="User_Id0" behavior="readwrite" uniqueId="42efd210-f62e-41f3-a92a-bfb6d897f65a" type="System.Int64">
+          <orm:column name="user_id0" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ten_Ct2" property="Ten_Ct2" behavior="readwrite" uniqueId="ff846e10-0d8d-4fef-9204-a5e909c401ed" type="System.String">
+          <orm:column name="ten_ct2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ten_Ct" property="Ten_Ct" behavior="readwrite" uniqueId="473efbbb-91b6-4111-8e5f-b4a906e63924" type="System.String">
+          <orm:column name="ten_ct" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_stt_Ctntxt" property="Stt_Ctntxt" behavior="readwrite" uniqueId="59ecfc85-b31e-4c98-ba15-a06891b037dc" type="System.Int16">
+          <orm:column name="stt_ctntxt" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_stt_Ct_Nkc" property="Stt_Ct_Nkc" behavior="readwrite" uniqueId="ef864ddb-3647-4432-a257-4d390c01b333" type="System.Int16">
+          <orm:column name="stt_ct_nkc" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_so_Ct" property="So_Ct" behavior="readwrite" uniqueId="ff7cc1a3-9d34-4dae-8c7a-9d6a253a7117" type="System.Int64">
+          <orm:column name="so_ct" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ma_Phan_He" property="Ma_Phan_He" behavior="readwrite" uniqueId="0f1ebfbc-4245-4fa6-b3c5-ba0b86fd6301" type="System.String">
+          <orm:column name="ma_phan_he" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ma_Nt" property="Ma_Nt" behavior="readwrite" uniqueId="195e4664-9b79-4a1f-b269-944a7ae9b4a7" type="System.String">
+          <orm:column name="ma_nt" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ma_Ct_Me" property="Ma_Ct_Me" behavior="readwrite" uniqueId="c68c3cc5-2b16-415f-b0e8-94dbd64996b3" type="System.String">
+          <orm:column name="ma_ct_me" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ma_Ct_In" property="Ma_Ct_In" behavior="readwrite" uniqueId="71986381-1d3c-44c7-a9e2-54c44c007e7b" type="System.String">
+          <orm:column name="ma_ct_in" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_m_Trung_So" property="M_Trung_So" behavior="readwrite" uniqueId="61a94072-ce33-49a2-a7b8-7bf912cb9b0a" type="System.Int16">
+          <orm:column name="m_trung_so" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_m_Status" property="M_Status" behavior="readwrite" uniqueId="2831b7ee-e98b-4013-a2d8-c154da31a9a5" type="System.String">
+          <orm:column name="m_status" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_m_Ngay_Ct" property="M_Ngay_Ct" behavior="readwrite" uniqueId="16440004-6375-49c0-9fe0-f039079fcd6c" type="System.Int16">
+          <orm:column name="m_ngay_ct" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_m_Ma_Nk" property="M_Ma_Nk" behavior="readwrite" uniqueId="fd9f7d91-bc47-4467-921e-ef21f9b16bce" type="System.String">
+          <orm:column name="m_ma_nk" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_m_Ma_Gd" property="M_Ma_Gd" behavior="readwrite" uniqueId="4ce00a93-bd9f-4e9e-965c-5d2a1a7c8a63" type="System.String">
+          <orm:column name="m_ma_gd" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_m_Loc_Nsd" property="M_Loc_Nsd" behavior="readwrite" uniqueId="f1c1e166-2287-4eb4-a3b0-fe124f83f258" type="System.Int16">
+          <orm:column name="m_loc_nsd" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_date2" property="Date2" behavior="readwrite" uniqueId="2228a457-2eb2-40c3-9608-a3dc4baf377c" type="System.DateTime">
+          <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_date0" property="Date0" behavior="readwrite" uniqueId="9ceb6803-1360-4637-a789-2d12cc5d5489" type="System.DateTime">
+          <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_ct_Nxt" property="Ct_Nxt" behavior="readwrite" uniqueId="0baf8d99-e3e1-4c0d-9435-59c8ec037462" type="System.Int16">
+          <orm:column name="ct_nxt" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+      </orm:class>
+    </orm:namespace>
+    <orm:schema schema="">
+      <orm:table name="userinfo">
+        <orm:column name="user_id" sql-type="int8" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="user_name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_pre" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="pass" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="comment" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="is_admin" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="del_yn" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="rights" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="r_access" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="r_add" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="r_edit" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="r_del" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="r_print" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="r_read" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id0" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="status" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id2" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="r_search" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+      </orm:table>
+      <orm:table name="dmtk">
+        <orm:column name="tk" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="ten_tk" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ten_tk2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_nt" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="loai_tk" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="tk_me" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="bac_tk" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="tk_sc" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="tk_cn" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="nh_tk2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id0" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id2" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="nh_tk0" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="status" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+      </orm:table>
+      <orm:table name="dmnt">
+        <orm:column name="ma_nt" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="ten_nt" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id0" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ten_nt2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id2" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="status" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+      </orm:table>
+      <orm:table name="dmkh">
+        <orm:column name="ma_kh" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="ten_kh" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ten_kh2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_so_thue" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="dia_chi" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="dien_thoai" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="fax" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="e_mail" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="home_page" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="doi_tac" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ong_ba" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ten_bp" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ngan_hang" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ghi_chu" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="tk" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="tk_nh" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="nh_kh1" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="nh_kh2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="nh_kh3" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="du_nt13" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="t_tien_cn" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="t_tien_hd" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id0" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id2" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_tt" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="kh_yn" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="cc_yn" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="nv_yn" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+      </orm:table>
+      <orm:table name="dmnhkh">
+        <orm:column name="loai_nh" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_nh" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="ten_nh" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ten_nh2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id0" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id2" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="status" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+      </orm:table>
+      <orm:table name="dmtt">
+        <orm:column name="ma_tt" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="ten_tt" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ten_tt2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="han_tt" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="han_tt_gg" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="pt_gg" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id0" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id2" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="status" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+      </orm:table>
+      <orm:table name="dmvv">
+        <orm:column name="ma_vv" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="ten_vv" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ten_vv2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_kh" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="nh_vv1" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="nh_vv2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="nh_vv3" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ngay_vv1" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ngay_vv2" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_nt" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="tien_nt" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="tien" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="ghi_chu" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id0" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id2" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="status" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="tk" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+      </orm:table>
+      <orm:table name="dmnhvv">
+        <orm:column name="loai_nh" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_nh" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="ten_nh" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ten_nh2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id0" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="status" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id2" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+      </orm:table>
+      <orm:table name="ph11">
+        <orm:column name="stt_rec" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="ma_dvcs" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_ct" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ngay_ct" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ngay_lct" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="so_ct " sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="so_lo" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ngay_lo" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_nk" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_gd" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_nt" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ty_gia" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="t_ps_no_nt" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="t_ps_no" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="t_ps_co_nt" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id0" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="status" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id2" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+      </orm:table>
+      <orm:table name="dmdvcs">
+        <orm:column name="ma_dvcs" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="ten_dvcs" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ten_dvcs2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id0" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id2" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="status" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="m_ws_id" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+      </orm:table>
+      <orm:table name="ct11">
+        <orm:column name="stt_rec" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="ma_ct" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ngay_ct" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="so_ct" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="dien_giaii" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="tk_i" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ps_no_nt" sql-type="numeric" nullable="false" length="38" scale="200" ado-type="" />
+        <orm:column name="ps_co_nt" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="ps_no" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="ps_co" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="nh_dk" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_kh_i" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_vv_i" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_td_i" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ln" sql-type="int8" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="ma_ku" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:constraint name="FK_ct11_ph11_stt_rec" destination-table="ph11">
+          <orm:column name="stt_rec" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="dmct">
+        <orm:column name="ma_ct" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="user_id2" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id0" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ten_ct2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ten_ct" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="stt_ctntxt" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="stt_ct_nkc" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="so_ct" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_phan_he" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_nt" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_ct_me" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_ct_in" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="m_trung_so" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="m_status" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="m_ngay_ct" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="m_ma_nk" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="m_ma_gd" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="m_loc_nsd" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ct_nxt" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+      </orm:table>
+      <orm:table name="dmtd">
+        <orm:column name="user_id2" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="user_id0" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ten_td2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ten_td" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="status" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_td" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+      </orm:table>
+    </orm:schema>
+    <orm:relational-naming-settings>
+      <orm:remove-leading-underscore>False</orm:remove-leading-underscore>
+      <orm:source-strategy>Property</orm:source-strategy>
+      <orm:remove-camel-case>False</orm:remove-camel-case>
+    </orm:relational-naming-settings>
+  </orm:orm>
+  <ModelSettings xmlns="">
+    <SaveConnectionStringInAppConfig>false</SaveConnectionStringInAppConfig>
+    <NamingSettings>
+      <ClassRules>
+        <CaseMode>PascalCase</CaseMode>
+        <UnderscoreAsWordDelimiter>true</UnderscoreAsWordDelimiter>
+      </ClassRules>
+      <FieldRules>
+        <AddPrefix>_</AddPrefix>
+        <CaseMode>CamelCase</CaseMode>
+        <UnderscoreAsWordDelimiter>true</UnderscoreAsWordDelimiter>
+      </FieldRules>
+      <PropertyRules>
+        <CaseMode>PascalCase</CaseMode>
+        <UnderscoreAsWordDelimiter>true</UnderscoreAsWordDelimiter>
+      </PropertyRules>
+      <NavigationPropertyRules>
+        <AddSuffix>Collection</AddSuffix>
+        <PluralizationModeCollections>Unchanged</PluralizationModeCollections>
+        <IsPrefixSuffixEnabled>false</IsPrefixSuffixEnabled>
+      </NavigationPropertyRules>
+    </NamingSettings>
+    <CodeGenerationSettings>
+      <ImplementINotifyPropertyChanging>true</ImplementINotifyPropertyChanging>
+      <ImplementINotifyPropertyChanged>true</ImplementINotifyPropertyChanged>
+      <ImplementIDataErrorInfo>true</ImplementIDataErrorInfo>
+      <GenerateDataAnnotationAttributes>true</GenerateDataAnnotationAttributes>
+      <CustomTemplateFileName>CodeGenerationTemplates\DefaultTemplateCS.tt</CustomTemplateFileName>
+      <UseCustomTemplate>true</UseCustomTemplate>
+      <MappingDefinitionType>Attributes</MappingDefinitionType>
+    </CodeGenerationSettings>
+    <SchemaUpdateSettings>
+      <DeploymentProject>MyERPModel</DeploymentProject>
+    </SchemaUpdateSettings>
+    <BackendConfigurationSettings>
+      <BackendConfiguration>
+        <Backend>PostgreSql</Backend>
+        <ProviderName>Npgsql</ProviderName>
+        <Logging>
+          <MetricStoreSnapshotInterval>0</MetricStoreSnapshotInterval>
+        </Logging>
+      </BackendConfiguration>
+    </BackendConfigurationSettings>
+  </ModelSettings>
+  <Types>
+    <DomainClass Id="b8685eec-59e0-4751-8566-c055712e62ce" name="Ct11" namespace="MyERPModel" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="efa54b4e-4c7d-4dac-a47c-a8009fc814be" name="Ln" type="Int64" label="Ln : Int64" kind="Persistent" identity="true" fieldName="_ln" />
+      <Property Id="55d8b353-4b3b-4d8b-ae46-7c66ab0f5697" name="Stt_Rec" label="Stt_Rec : String" kind="Persistent" identity="true" fieldName="_stt_Rec" />
+      <Property Id="b762b2ea-10d0-4a71-9708-5b9530b1e01b" name="Dien_Giaii" label="Dien_Giaii : String" kind="Persistent" fieldName="_dien_Giaii" />
+      <Property Id="ce79210f-0c6a-4e3d-9849-67a6e84df080" name="Ma_Ct" label="Ma_Ct : String" kind="Persistent" fieldName="_ma_Ct" />
+      <Property Id="19f5b9bd-125f-46f1-ba63-2e55204af82e" name="Ma_Kh_I" label="Ma_Kh_I : String" kind="Persistent" fieldName="_ma_Kh_I" />
+      <Property Id="95695939-8b02-4685-ac8a-ef5f4d5e8ac3" name="Ma_Ku" label="Ma_Ku : String" kind="Persistent" fieldName="_ma_Ku" />
+      <Property Id="2f31479c-de31-46a8-b0ca-a017794a69df" name="Ma_Td_I" label="Ma_Td_I : String" kind="Persistent" fieldName="_ma_Td_I" />
+      <Property Id="32ab292b-258a-447f-aa14-de06402f9c57" name="Ma_Vv_I" label="Ma_Vv_I : String" kind="Persistent" fieldName="_ma_Vv_I" />
+      <Property Id="e3461be3-c720-48e7-a111-0220789982a1" name="Ngay_Ct" type="DateTime" label="Ngay_Ct : DateTime" kind="Persistent" fieldName="_ngay_Ct" />
+      <Property Id="965b1344-def7-497f-a8f4-f7a5b39138b2" name="Nh_Dk" label="Nh_Dk : String" kind="Persistent" fieldName="_nh_Dk" />
+      <Property Id="3a8c4e51-bd19-4179-a704-a33f738e86c2" name="Ps_Co" type="Decimal" label="Ps_Co : Decimal" kind="Persistent" fieldName="_ps_Co" />
+      <Property Id="5a0c48f7-1c87-471e-ab06-0fdac760e637" name="Ps_Co_Nt" type="Decimal" label="Ps_Co_Nt : Decimal" kind="Persistent" fieldName="_ps_Co_Nt" />
+      <Property Id="991f8718-6f20-4b34-9c53-234a5fc8be27" name="Ps_No" type="Decimal" label="Ps_No : Decimal" kind="Persistent" fieldName="_ps_No" />
+      <Property Id="6ea15a06-b4ee-4d16-bc91-d2059d9fdb72" name="Ps_No_Nt" type="Decimal" label="Ps_No_Nt : Decimal" kind="Persistent" fieldName="_ps_No_Nt" />
+      <Property Id="a8fbce8b-6f41-4418-b898-b0b5dfe3303d" name="So_Ct" label="So_Ct : String" kind="Persistent" fieldName="_so_Ct" />
+      <Property Id="bfcd5f72-c931-4fa4-9623-32e39445f31c" name="Tk_I" label="Tk_I : String" kind="Persistent" fieldName="_tk_I" />
+      <AssociationTargets>
+        <Association Id="5f5ae2ec-ab74-4e18-a6fc-af4f1ed48359" SourceMultiplicity="One" name="Ct11HasPh11">
+          <DomainClassMoniker name="/MyERPModel/Ph11" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="067a1987-2ff2-4a83-a386-518cb33de838">
+              <NavigationalPropertyMoniker name="/MyERPModel/Ph11/Ct11" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="95189c13-0d8a-4a6f-be12-d8677f9a5063">
+              <NavigationalPropertyMoniker name="/MyERPModel/Ct11/Ph11" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="97c3e5f0-6c25-4c2f-b52f-ddc14e769e4d">
+          <NavigationalProperty Id="b4b464f3-779f-4e4c-9c1a-d95acb752668" name="Ph11" type="Ph11" label="Ph11 : Ph11" nullable="true" kind="Persistent" fieldName="_ph11" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="a385f34a-0a56-4973-868a-2e953cafb486" name="Ph11" namespace="MyERPModel" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="d52f97b2-4565-434f-8434-476d152d8be8" name="Stt_Rec" label="Stt_Rec : String" kind="Persistent" identity="true" fieldName="_stt_Rec" />
+      <Property Id="b8f4882d-e908-44df-9150-0a0a06d85fef" name="Date0" type="DateTime" label="Date0 : DateTime" kind="Persistent" fieldName="_date0" />
+      <Property Id="558f8195-5814-4703-9ea0-a40b971c73d2" name="Date2" type="DateTime" label="Date2 : DateTime" kind="Persistent" fieldName="_date2" />
+      <Property Id="2876533a-bd8b-4227-a1cf-e3f01995d104" name="Ma_Ct" label="Ma_Ct : String" kind="Persistent" fieldName="_ma_Ct" />
+      <Property Id="51ed4ca7-da52-4e88-ba32-ff539f13a80d" name="Ma_Dvcs" label="Ma_Dvcs : String" kind="Persistent" fieldName="_ma_Dvcs" />
+      <Property Id="43253590-f18c-43e8-aeb5-e984d1c58fb4" name="Ma_Gd" type="Int16" label="Ma_Gd : Int16" kind="Persistent" fieldName="_ma_Gd" />
+      <Property Id="7b7861d9-17bf-49e7-a0b1-d67808bdab0c" name="Ma_Nk" label="Ma_Nk : String" kind="Persistent" fieldName="_ma_Nk" />
+      <Property Id="b1f52ec4-518a-4d5b-ab24-23e9a31d03c8" name="Ma_Nt" label="Ma_Nt : String" kind="Persistent" fieldName="_ma_Nt" />
+      <Property Id="5726dd73-4211-4a0d-96f3-878299d0511c" name="Ngay_Ct" type="DateTime" label="Ngay_Ct : DateTime" kind="Persistent" fieldName="_ngay_Ct" />
+      <Property Id="78711fef-7d4d-47be-92f1-0f488279fa16" name="Ngay_Lct" type="DateTime" label="Ngay_Lct : DateTime" kind="Persistent" fieldName="_ngay_Lct" />
+      <Property Id="65806d0a-3019-4896-b3d7-9b079c589660" name="Ngay_Lo" type="DateTime" label="Ngay_Lo : DateTime" kind="Persistent" fieldName="_ngay_Lo" />
+      <Property Id="65508140-91ca-47f0-adbc-3ce343112d09" name="So_Ct" label="So_Ct : String" kind="Persistent" fieldName="_so_Ct" />
+      <Property Id="e23f3ab8-3a24-4e23-b6a3-f54a28039d34" name="So_Lo" label="So_Lo : String" kind="Persistent" fieldName="_so_Lo" />
+      <Property Id="8f9cf6bd-e933-4d17-abfb-1a94c7da24a0" name="Status" label="Status : String" kind="Persistent" fieldName="_status" />
+      <Property Id="466a19b6-690c-4bce-a6fe-693c4cb1c06e" name="T_Ps_Co_Nt" type="Decimal" label="T_Ps_Co_Nt : Decimal" kind="Persistent" fieldName="_t_Ps_Co_Nt" />
+      <Property Id="c09ef1b4-38ad-40c3-9155-1cb18eb07e56" name="T_Ps_No" type="Decimal" label="T_Ps_No : Decimal" kind="Persistent" fieldName="_t_Ps_No" />
+      <Property Id="6f0b2e88-6087-4998-a066-bf3b3e79a582" name="T_Ps_No_Nt" type="Decimal" label="T_Ps_No_Nt : Decimal" kind="Persistent" fieldName="_t_Ps_No_Nt" />
+      <Property Id="107c37f1-ad48-451b-9821-58adcbec430a" name="Ty_Gia" type="Decimal" label="Ty_Gia : Decimal" kind="Persistent" fieldName="_ty_Gia" />
+      <Property Id="e41fae99-3895-42ec-afd4-c37d478982c0" name="User_Id0" type="Int64" label="User_Id0 : Int64" kind="Persistent" fieldName="_user_Id0" />
+      <Property Id="63b6b144-a427-4b3b-aca1-83900fdf97a4" name="User_Id2" type="Int64" label="User_Id2 : Int64" kind="Persistent" fieldName="_user_Id2" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="f1dcf106-4b65-4767-bfe2-a3c3e48ce4af">
+          <NavigationalProperty Id="59e29bc8-52db-4f05-b769-9ae30a49cc31" name="Ct11" type="IList&lt;Ct11&gt;" label="Ct11 : IList&lt;Ct11&gt;" nullable="true" kind="Persistent" fieldName="_ct11" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="cecd0c3f-0391-4c15-af1d-2c853bfe256b" name="Dmct" namespace="MyERPModel" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="45a4c5b4-6f44-46ec-983a-464a89a60455" name="Ma_Ct" label="Ma_Ct : String" kind="Persistent" identity="true" fieldName="_ma_Ct" />
+      <Property Id="0baf8d99-e3e1-4c0d-9435-59c8ec037462" name="Ct_Nxt" type="Int16" label="Ct_Nxt : Int16" kind="Persistent" fieldName="_ct_Nxt" />
+      <Property Id="9ceb6803-1360-4637-a789-2d12cc5d5489" name="Date0" type="DateTime" label="Date0 : DateTime" kind="Persistent" fieldName="_date0" />
+      <Property Id="2228a457-2eb2-40c3-9608-a3dc4baf377c" name="Date2" type="DateTime" label="Date2 : DateTime" kind="Persistent" fieldName="_date2" />
+      <Property Id="f1c1e166-2287-4eb4-a3b0-fe124f83f258" name="M_Loc_Nsd" type="Int16" label="M_Loc_Nsd : Int16" kind="Persistent" fieldName="_m_Loc_Nsd" />
+      <Property Id="4ce00a93-bd9f-4e9e-965c-5d2a1a7c8a63" name="M_Ma_Gd" label="M_Ma_Gd : String" kind="Persistent" fieldName="_m_Ma_Gd" />
+      <Property Id="fd9f7d91-bc47-4467-921e-ef21f9b16bce" name="M_Ma_Nk" label="M_Ma_Nk : String" kind="Persistent" fieldName="_m_Ma_Nk" />
+      <Property Id="16440004-6375-49c0-9fe0-f039079fcd6c" name="M_Ngay_Ct" type="Int16" label="M_Ngay_Ct : Int16" kind="Persistent" fieldName="_m_Ngay_Ct" />
+      <Property Id="2831b7ee-e98b-4013-a2d8-c154da31a9a5" name="M_Status" label="M_Status : String" kind="Persistent" fieldName="_m_Status" />
+      <Property Id="61a94072-ce33-49a2-a7b8-7bf912cb9b0a" name="M_Trung_So" type="Int16" label="M_Trung_So : Int16" kind="Persistent" fieldName="_m_Trung_So" />
+      <Property Id="71986381-1d3c-44c7-a9e2-54c44c007e7b" name="Ma_Ct_In" label="Ma_Ct_In : String" kind="Persistent" fieldName="_ma_Ct_In" />
+      <Property Id="c68c3cc5-2b16-415f-b0e8-94dbd64996b3" name="Ma_Ct_Me" label="Ma_Ct_Me : String" kind="Persistent" fieldName="_ma_Ct_Me" />
+      <Property Id="195e4664-9b79-4a1f-b269-944a7ae9b4a7" name="Ma_Nt" label="Ma_Nt : String" kind="Persistent" fieldName="_ma_Nt" />
+      <Property Id="0f1ebfbc-4245-4fa6-b3c5-ba0b86fd6301" name="Ma_Phan_He" label="Ma_Phan_He : String" kind="Persistent" fieldName="_ma_Phan_He" />
+      <Property Id="ff7cc1a3-9d34-4dae-8c7a-9d6a253a7117" name="So_Ct" type="Int64" label="So_Ct : Int64" kind="Persistent" fieldName="_so_Ct" />
+      <Property Id="ef864ddb-3647-4432-a257-4d390c01b333" name="Stt_Ct_Nkc" type="Int16" label="Stt_Ct_Nkc : Int16" kind="Persistent" fieldName="_stt_Ct_Nkc" />
+      <Property Id="59ecfc85-b31e-4c98-ba15-a06891b037dc" name="Stt_Ctntxt" type="Int16" label="Stt_Ctntxt : Int16" kind="Persistent" fieldName="_stt_Ctntxt" />
+      <Property Id="473efbbb-91b6-4111-8e5f-b4a906e63924" name="Ten_Ct" label="Ten_Ct : String" kind="Persistent" fieldName="_ten_Ct" />
+      <Property Id="ff846e10-0d8d-4fef-9204-a5e909c401ed" name="Ten_Ct2" label="Ten_Ct2 : String" kind="Persistent" fieldName="_ten_Ct2" />
+      <Property Id="42efd210-f62e-41f3-a92a-bfb6d897f65a" name="User_Id0" type="Int64" label="User_Id0 : Int64" kind="Persistent" fieldName="_user_Id0" />
+      <Property Id="3fd9ae6b-2a7a-4aef-a295-16a8fdc73632" name="User_Id2" type="Int64" label="User_Id2 : Int64" kind="Persistent" fieldName="_user_Id2" />
+    </DomainClass>
+  </Types>
+  <domainContext>
+    <domainModelHasDomainContext Id="d7bd6e8c-e34a-47be-a590-3f03f86938da">
+      <domainContainer name="MyERPModel" namespace="MyERPModel" showPropertiesCompartment="true">
+        <entitySetProperty name="Ct11s" namespace="MyERPModel" type="Ct11" label="Ct11s : IQueryable&lt;MyERPModel.Ct11&gt;" />
+        <entitySetProperty name="Ph11s" namespace="MyERPModel" type="Ph11" label="Ph11s : IQueryable&lt;MyERPModel.Ph11&gt;" />
+        <entitySetProperty name="Dmcts" namespace="MyERPModel" type="Dmct" label="Dmcts : IQueryable&lt;MyERPModel.Dmct&gt;" />
+      </domainContainer>
+    </domainModelHasDomainContext>
+  </domainContext>
+</DomainModel>
