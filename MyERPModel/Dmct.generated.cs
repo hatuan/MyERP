@@ -27,380 +27,380 @@ namespace MyERPModel
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Changed)]
 	public partial class Dmct : IDataErrorInfo, INotifyPropertyChanging, INotifyPropertyChanged
 	{
-		private string _ma_Ct;
+		private string _ma_ct;
 		[Column("ma_ct", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_ma_Ct")]
+		[Storage("_ma_ct")]
 		[Required()]
 		[Key()]
 		public virtual string Ma_Ct
 		{
 			get
 			{
-				return this._ma_Ct;
+				return this._ma_ct;
 			}
 			set
 			{
-				if(this._ma_Ct != value)
+				if(this._ma_ct != value)
 				{
 					this.OnPropertyChanging("Ma_Ct");
-					this._ma_Ct = value;
+					this._ma_ct = value;
 					this.OnPropertyChanged("Ma_Ct");
 				}
 			}
 		}
 		
-		private long _user_Id2;
+		private long _user_id2;
 		[Column("user_id2", Length = 0, Scale = 0, SqlType = "int8")]
-		[Storage("_user_Id2")]
+		[Storage("_user_id2")]
 		[Required()]
 		public virtual long User_Id2
 		{
 			get
 			{
-				return this._user_Id2;
+				return this._user_id2;
 			}
 			set
 			{
-				if(this._user_Id2 != value)
+				if(this._user_id2 != value)
 				{
 					this.OnPropertyChanging("User_Id2");
-					this._user_Id2 = value;
+					this._user_id2 = value;
 					this.OnPropertyChanged("User_Id2");
 				}
 			}
 		}
 		
-		private long _user_Id0;
+		private long _user_id0;
 		[Column("user_id0", Length = 0, Scale = 0, SqlType = "int8")]
-		[Storage("_user_Id0")]
+		[Storage("_user_id0")]
 		[Required()]
 		public virtual long User_Id0
 		{
 			get
 			{
-				return this._user_Id0;
+				return this._user_id0;
 			}
 			set
 			{
-				if(this._user_Id0 != value)
+				if(this._user_id0 != value)
 				{
 					this.OnPropertyChanging("User_Id0");
-					this._user_Id0 = value;
+					this._user_id0 = value;
 					this.OnPropertyChanged("User_Id0");
 				}
 			}
 		}
 		
-		private string _ten_Ct2;
+		private string _ten_ct2;
 		[Column("ten_ct2", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_ten_Ct2")]
+		[Storage("_ten_ct2")]
 		[Required()]
 		public virtual string Ten_Ct2
 		{
 			get
 			{
-				return this._ten_Ct2;
+				return this._ten_ct2;
 			}
 			set
 			{
-				if(this._ten_Ct2 != value)
+				if(this._ten_ct2 != value)
 				{
 					this.OnPropertyChanging("Ten_Ct2");
-					this._ten_Ct2 = value;
+					this._ten_ct2 = value;
 					this.OnPropertyChanged("Ten_Ct2");
 				}
 			}
 		}
 		
-		private string _ten_Ct;
+		private string _ten_ct;
 		[Column("ten_ct", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_ten_Ct")]
+		[Storage("_ten_ct")]
 		[Required()]
 		public virtual string Ten_Ct
 		{
 			get
 			{
-				return this._ten_Ct;
+				return this._ten_ct;
 			}
 			set
 			{
-				if(this._ten_Ct != value)
+				if(this._ten_ct != value)
 				{
 					this.OnPropertyChanging("Ten_Ct");
-					this._ten_Ct = value;
+					this._ten_ct = value;
 					this.OnPropertyChanged("Ten_Ct");
 				}
 			}
 		}
 		
-		private short _stt_Ctntxt;
+		private short _stt_ctntxt;
 		[Column("stt_ctntxt", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_stt_Ctntxt")]
+		[Storage("_stt_ctntxt")]
 		[Required()]
 		public virtual short Stt_Ctntxt
 		{
 			get
 			{
-				return this._stt_Ctntxt;
+				return this._stt_ctntxt;
 			}
 			set
 			{
-				if(this._stt_Ctntxt != value)
+				if(this._stt_ctntxt != value)
 				{
 					this.OnPropertyChanging("Stt_Ctntxt");
-					this._stt_Ctntxt = value;
+					this._stt_ctntxt = value;
 					this.OnPropertyChanged("Stt_Ctntxt");
 				}
 			}
 		}
 		
-		private short _stt_Ct_Nkc;
+		private short _stt_ct_nkc;
 		[Column("stt_ct_nkc", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_stt_Ct_Nkc")]
+		[Storage("_stt_ct_nkc")]
 		[Required()]
 		public virtual short Stt_Ct_Nkc
 		{
 			get
 			{
-				return this._stt_Ct_Nkc;
+				return this._stt_ct_nkc;
 			}
 			set
 			{
-				if(this._stt_Ct_Nkc != value)
+				if(this._stt_ct_nkc != value)
 				{
 					this.OnPropertyChanging("Stt_Ct_Nkc");
-					this._stt_Ct_Nkc = value;
+					this._stt_ct_nkc = value;
 					this.OnPropertyChanged("Stt_Ct_Nkc");
 				}
 			}
 		}
 		
-		private long _so_Ct;
+		private long _so_ct;
 		[Column("so_ct", Length = 0, Scale = 0, SqlType = "int8")]
-		[Storage("_so_Ct")]
+		[Storage("_so_ct")]
 		[Required()]
 		public virtual long So_Ct
 		{
 			get
 			{
-				return this._so_Ct;
+				return this._so_ct;
 			}
 			set
 			{
-				if(this._so_Ct != value)
+				if(this._so_ct != value)
 				{
 					this.OnPropertyChanging("So_Ct");
-					this._so_Ct = value;
+					this._so_ct = value;
 					this.OnPropertyChanged("So_Ct");
 				}
 			}
 		}
 		
-		private string _ma_Phan_He;
+		private string _ma_phan_he;
 		[Column("ma_phan_he", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_ma_Phan_He")]
+		[Storage("_ma_phan_he")]
 		[Required()]
 		public virtual string Ma_Phan_He
 		{
 			get
 			{
-				return this._ma_Phan_He;
+				return this._ma_phan_he;
 			}
 			set
 			{
-				if(this._ma_Phan_He != value)
+				if(this._ma_phan_he != value)
 				{
 					this.OnPropertyChanging("Ma_Phan_He");
-					this._ma_Phan_He = value;
+					this._ma_phan_he = value;
 					this.OnPropertyChanged("Ma_Phan_He");
 				}
 			}
 		}
 		
-		private string _ma_Nt;
+		private string _ma_nt;
 		[Column("ma_nt", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_ma_Nt")]
+		[Storage("_ma_nt")]
 		[Required()]
 		public virtual string Ma_Nt
 		{
 			get
 			{
-				return this._ma_Nt;
+				return this._ma_nt;
 			}
 			set
 			{
-				if(this._ma_Nt != value)
+				if(this._ma_nt != value)
 				{
 					this.OnPropertyChanging("Ma_Nt");
-					this._ma_Nt = value;
+					this._ma_nt = value;
 					this.OnPropertyChanged("Ma_Nt");
 				}
 			}
 		}
 		
-		private string _ma_Ct_Me;
+		private string _ma_ct_me;
 		[Column("ma_ct_me", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_ma_Ct_Me")]
+		[Storage("_ma_ct_me")]
 		[Required()]
 		public virtual string Ma_Ct_Me
 		{
 			get
 			{
-				return this._ma_Ct_Me;
+				return this._ma_ct_me;
 			}
 			set
 			{
-				if(this._ma_Ct_Me != value)
+				if(this._ma_ct_me != value)
 				{
 					this.OnPropertyChanging("Ma_Ct_Me");
-					this._ma_Ct_Me = value;
+					this._ma_ct_me = value;
 					this.OnPropertyChanged("Ma_Ct_Me");
 				}
 			}
 		}
 		
-		private string _ma_Ct_In;
+		private string _ma_ct_in;
 		[Column("ma_ct_in", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_ma_Ct_In")]
+		[Storage("_ma_ct_in")]
 		[Required()]
 		public virtual string Ma_Ct_In
 		{
 			get
 			{
-				return this._ma_Ct_In;
+				return this._ma_ct_in;
 			}
 			set
 			{
-				if(this._ma_Ct_In != value)
+				if(this._ma_ct_in != value)
 				{
 					this.OnPropertyChanging("Ma_Ct_In");
-					this._ma_Ct_In = value;
+					this._ma_ct_in = value;
 					this.OnPropertyChanged("Ma_Ct_In");
 				}
 			}
 		}
 		
-		private short _m_Trung_So;
+		private short _m_trung_so;
 		[Column("m_trung_so", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_m_Trung_So")]
+		[Storage("_m_trung_so")]
 		[Required()]
 		public virtual short M_Trung_So
 		{
 			get
 			{
-				return this._m_Trung_So;
+				return this._m_trung_so;
 			}
 			set
 			{
-				if(this._m_Trung_So != value)
+				if(this._m_trung_so != value)
 				{
 					this.OnPropertyChanging("M_Trung_So");
-					this._m_Trung_So = value;
+					this._m_trung_so = value;
 					this.OnPropertyChanged("M_Trung_So");
 				}
 			}
 		}
 		
-		private string _m_Status;
+		private string _m_status;
 		[Column("m_status", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_m_Status")]
+		[Storage("_m_status")]
 		[Required()]
 		public virtual string M_Status
 		{
 			get
 			{
-				return this._m_Status;
+				return this._m_status;
 			}
 			set
 			{
-				if(this._m_Status != value)
+				if(this._m_status != value)
 				{
 					this.OnPropertyChanging("M_Status");
-					this._m_Status = value;
+					this._m_status = value;
 					this.OnPropertyChanged("M_Status");
 				}
 			}
 		}
 		
-		private short _m_Ngay_Ct;
+		private short _m_ngay_ct;
 		[Column("m_ngay_ct", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_m_Ngay_Ct")]
+		[Storage("_m_ngay_ct")]
 		[Required()]
 		public virtual short M_Ngay_Ct
 		{
 			get
 			{
-				return this._m_Ngay_Ct;
+				return this._m_ngay_ct;
 			}
 			set
 			{
-				if(this._m_Ngay_Ct != value)
+				if(this._m_ngay_ct != value)
 				{
 					this.OnPropertyChanging("M_Ngay_Ct");
-					this._m_Ngay_Ct = value;
+					this._m_ngay_ct = value;
 					this.OnPropertyChanged("M_Ngay_Ct");
 				}
 			}
 		}
 		
-		private string _m_Ma_Nk;
+		private string _m_ma_nk;
 		[Column("m_ma_nk", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_m_Ma_Nk")]
+		[Storage("_m_ma_nk")]
 		[Required()]
 		public virtual string M_Ma_Nk
 		{
 			get
 			{
-				return this._m_Ma_Nk;
+				return this._m_ma_nk;
 			}
 			set
 			{
-				if(this._m_Ma_Nk != value)
+				if(this._m_ma_nk != value)
 				{
 					this.OnPropertyChanging("M_Ma_Nk");
-					this._m_Ma_Nk = value;
+					this._m_ma_nk = value;
 					this.OnPropertyChanged("M_Ma_Nk");
 				}
 			}
 		}
 		
-		private string _m_Ma_Gd;
+		private string _m_ma_gd;
 		[Column("m_ma_gd", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_m_Ma_Gd")]
+		[Storage("_m_ma_gd")]
 		[Required()]
 		public virtual string M_Ma_Gd
 		{
 			get
 			{
-				return this._m_Ma_Gd;
+				return this._m_ma_gd;
 			}
 			set
 			{
-				if(this._m_Ma_Gd != value)
+				if(this._m_ma_gd != value)
 				{
 					this.OnPropertyChanging("M_Ma_Gd");
-					this._m_Ma_Gd = value;
+					this._m_ma_gd = value;
 					this.OnPropertyChanged("M_Ma_Gd");
 				}
 			}
 		}
 		
-		private short _m_Loc_Nsd;
+		private short _m_loc_nsd;
 		[Column("m_loc_nsd", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_m_Loc_Nsd")]
+		[Storage("_m_loc_nsd")]
 		[Required()]
 		public virtual short M_Loc_Nsd
 		{
 			get
 			{
-				return this._m_Loc_Nsd;
+				return this._m_loc_nsd;
 			}
 			set
 			{
-				if(this._m_Loc_Nsd != value)
+				if(this._m_loc_nsd != value)
 				{
 					this.OnPropertyChanging("M_Loc_Nsd");
-					this._m_Loc_Nsd = value;
+					this._m_loc_nsd = value;
 					this.OnPropertyChanged("M_Loc_Nsd");
 				}
 			}
@@ -448,22 +448,22 @@ namespace MyERPModel
 			}
 		}
 		
-		private short _ct_Nxt;
+		private short _ct_nxt;
 		[Column("ct_nxt", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_ct_Nxt")]
+		[Storage("_ct_nxt")]
 		[Required()]
 		public virtual short Ct_Nxt
 		{
 			get
 			{
-				return this._ct_Nxt;
+				return this._ct_nxt;
 			}
 			set
 			{
-				if(this._ct_Nxt != value)
+				if(this._ct_nxt != value)
 				{
 					this.OnPropertyChanging("Ct_Nxt");
-					this._ct_Nxt = value;
+					this._ct_nxt = value;
 					this.OnPropertyChanged("Ct_Nxt");
 				}
 			}

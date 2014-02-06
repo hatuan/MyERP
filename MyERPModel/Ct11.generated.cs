@@ -28,296 +28,296 @@ namespace MyERPModel
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Changed)]
 	public partial class Ct11 : IDataErrorInfo, INotifyPropertyChanging, INotifyPropertyChanged
 	{
-		private string _stt_Rec;
+		private string _stt_rec;
 		[Column("stt_rec", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_stt_Rec")]
+		[Storage("_stt_rec")]
 		[Required()]
 		[Key()]
 		public virtual string Stt_Rec
 		{
 			get
 			{
-				return this._stt_Rec;
+				return this._stt_rec;
 			}
 			set
 			{
-				if(this._stt_Rec != value)
+				if(this._stt_rec != value)
 				{
 					this.OnPropertyChanging("Stt_Rec");
-					this._stt_Rec = value;
+					this._stt_rec = value;
 					this.OnPropertyChanged("Stt_Rec");
 				}
 			}
 		}
 		
-		private string _ma_Ct;
+		private string _ma_ct;
 		[Column("ma_ct", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_ma_Ct")]
+		[Storage("_ma_ct")]
 		[Required()]
 		public virtual string Ma_Ct
 		{
 			get
 			{
-				return this._ma_Ct;
+				return this._ma_ct;
 			}
 			set
 			{
-				if(this._ma_Ct != value)
+				if(this._ma_ct != value)
 				{
 					this.OnPropertyChanging("Ma_Ct");
-					this._ma_Ct = value;
+					this._ma_ct = value;
 					this.OnPropertyChanged("Ma_Ct");
 				}
 			}
 		}
 		
-		private DateTime _ngay_Ct;
+		private DateTime _ngay_ct;
 		[Column("ngay_ct", Length = 0, Scale = 0, SqlType = "date")]
-		[Storage("_ngay_Ct")]
+		[Storage("_ngay_ct")]
 		[Required()]
 		public virtual DateTime Ngay_Ct
 		{
 			get
 			{
-				return this._ngay_Ct;
+				return this._ngay_ct;
 			}
 			set
 			{
-				if(this._ngay_Ct != value)
+				if(this._ngay_ct != value)
 				{
 					this.OnPropertyChanging("Ngay_Ct");
-					this._ngay_Ct = value;
+					this._ngay_ct = value;
 					this.OnPropertyChanged("Ngay_Ct");
 				}
 			}
 		}
 		
-		private string _so_Ct;
+		private string _so_ct;
 		[Column("so_ct", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_so_Ct")]
+		[Storage("_so_ct")]
 		[Required()]
 		public virtual string So_Ct
 		{
 			get
 			{
-				return this._so_Ct;
+				return this._so_ct;
 			}
 			set
 			{
-				if(this._so_Ct != value)
+				if(this._so_ct != value)
 				{
 					this.OnPropertyChanging("So_Ct");
-					this._so_Ct = value;
+					this._so_ct = value;
 					this.OnPropertyChanged("So_Ct");
 				}
 			}
 		}
 		
-		private string _dien_Giaii;
+		private string _dien_giaii;
 		[Column("dien_giaii", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_dien_Giaii")]
+		[Storage("_dien_giaii")]
 		[Required()]
 		public virtual string Dien_Giaii
 		{
 			get
 			{
-				return this._dien_Giaii;
+				return this._dien_giaii;
 			}
 			set
 			{
-				if(this._dien_Giaii != value)
+				if(this._dien_giaii != value)
 				{
 					this.OnPropertyChanging("Dien_Giaii");
-					this._dien_Giaii = value;
+					this._dien_giaii = value;
 					this.OnPropertyChanged("Dien_Giaii");
 				}
 			}
 		}
 		
-		private string _tk_I;
+		private string _tk_i;
 		[Column("tk_i", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_tk_I")]
+		[Storage("_tk_i")]
 		[Required()]
 		public virtual string Tk_I
 		{
 			get
 			{
-				return this._tk_I;
+				return this._tk_i;
 			}
 			set
 			{
-				if(this._tk_I != value)
+				if(this._tk_i != value)
 				{
 					this.OnPropertyChanging("Tk_I");
-					this._tk_I = value;
+					this._tk_i = value;
 					this.OnPropertyChanged("Tk_I");
 				}
 			}
 		}
 		
-		private decimal _ps_No_Nt;
+		private decimal _ps_no_nt;
 		[Column("ps_no_nt", Length = 38, Scale = 200, SqlType = "numeric")]
-		[Storage("_ps_No_Nt")]
+		[Storage("_ps_no_nt")]
 		[Required()]
 		public virtual decimal Ps_No_Nt
 		{
 			get
 			{
-				return this._ps_No_Nt;
+				return this._ps_no_nt;
 			}
 			set
 			{
-				if(this._ps_No_Nt != value)
+				if(this._ps_no_nt != value)
 				{
 					this.OnPropertyChanging("Ps_No_Nt");
-					this._ps_No_Nt = value;
+					this._ps_no_nt = value;
 					this.OnPropertyChanged("Ps_No_Nt");
 				}
 			}
 		}
 		
-		private decimal _ps_Co_Nt;
+		private decimal _ps_co_nt;
 		[Column("ps_co_nt", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_ps_Co_Nt")]
+		[Storage("_ps_co_nt")]
 		[Required()]
 		public virtual decimal Ps_Co_Nt
 		{
 			get
 			{
-				return this._ps_Co_Nt;
+				return this._ps_co_nt;
 			}
 			set
 			{
-				if(this._ps_Co_Nt != value)
+				if(this._ps_co_nt != value)
 				{
 					this.OnPropertyChanging("Ps_Co_Nt");
-					this._ps_Co_Nt = value;
+					this._ps_co_nt = value;
 					this.OnPropertyChanged("Ps_Co_Nt");
 				}
 			}
 		}
 		
-		private decimal _ps_No;
+		private decimal _ps_no;
 		[Column("ps_no", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_ps_No")]
+		[Storage("_ps_no")]
 		[Required()]
 		public virtual decimal Ps_No
 		{
 			get
 			{
-				return this._ps_No;
+				return this._ps_no;
 			}
 			set
 			{
-				if(this._ps_No != value)
+				if(this._ps_no != value)
 				{
 					this.OnPropertyChanging("Ps_No");
-					this._ps_No = value;
+					this._ps_no = value;
 					this.OnPropertyChanged("Ps_No");
 				}
 			}
 		}
 		
-		private decimal _ps_Co;
+		private decimal _ps_co;
 		[Column("ps_co", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_ps_Co")]
+		[Storage("_ps_co")]
 		[Required()]
 		public virtual decimal Ps_Co
 		{
 			get
 			{
-				return this._ps_Co;
+				return this._ps_co;
 			}
 			set
 			{
-				if(this._ps_Co != value)
+				if(this._ps_co != value)
 				{
 					this.OnPropertyChanging("Ps_Co");
-					this._ps_Co = value;
+					this._ps_co = value;
 					this.OnPropertyChanged("Ps_Co");
 				}
 			}
 		}
 		
-		private string _nh_Dk;
+		private string _nh_dk;
 		[Column("nh_dk", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_nh_Dk")]
+		[Storage("_nh_dk")]
 		[Required()]
 		public virtual string Nh_Dk
 		{
 			get
 			{
-				return this._nh_Dk;
+				return this._nh_dk;
 			}
 			set
 			{
-				if(this._nh_Dk != value)
+				if(this._nh_dk != value)
 				{
 					this.OnPropertyChanging("Nh_Dk");
-					this._nh_Dk = value;
+					this._nh_dk = value;
 					this.OnPropertyChanged("Nh_Dk");
 				}
 			}
 		}
 		
-		private string _ma_Kh_I;
+		private string _ma_kh_i;
 		[Column("ma_kh_i", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_ma_Kh_I")]
+		[Storage("_ma_kh_i")]
 		[Required()]
 		public virtual string Ma_Kh_I
 		{
 			get
 			{
-				return this._ma_Kh_I;
+				return this._ma_kh_i;
 			}
 			set
 			{
-				if(this._ma_Kh_I != value)
+				if(this._ma_kh_i != value)
 				{
 					this.OnPropertyChanging("Ma_Kh_I");
-					this._ma_Kh_I = value;
+					this._ma_kh_i = value;
 					this.OnPropertyChanged("Ma_Kh_I");
 				}
 			}
 		}
 		
-		private string _ma_Vv_I;
+		private string _ma_vv_i;
 		[Column("ma_vv_i", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_ma_Vv_I")]
+		[Storage("_ma_vv_i")]
 		[Required()]
 		public virtual string Ma_Vv_I
 		{
 			get
 			{
-				return this._ma_Vv_I;
+				return this._ma_vv_i;
 			}
 			set
 			{
-				if(this._ma_Vv_I != value)
+				if(this._ma_vv_i != value)
 				{
 					this.OnPropertyChanging("Ma_Vv_I");
-					this._ma_Vv_I = value;
+					this._ma_vv_i = value;
 					this.OnPropertyChanged("Ma_Vv_I");
 				}
 			}
 		}
 		
-		private string _ma_Td_I;
+		private string _ma_td_i;
 		[Column("ma_td_i", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_ma_Td_I")]
+		[Storage("_ma_td_i")]
 		[Required()]
 		public virtual string Ma_Td_I
 		{
 			get
 			{
-				return this._ma_Td_I;
+				return this._ma_td_i;
 			}
 			set
 			{
-				if(this._ma_Td_I != value)
+				if(this._ma_td_i != value)
 				{
 					this.OnPropertyChanging("Ma_Td_I");
-					this._ma_Td_I = value;
+					this._ma_td_i = value;
 					this.OnPropertyChanged("Ma_Td_I");
 				}
 			}
@@ -345,29 +345,29 @@ namespace MyERPModel
 			}
 		}
 		
-		private string _ma_Ku;
+		private string _ma_ku;
 		[Column("ma_ku", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_ma_Ku")]
+		[Storage("_ma_ku")]
 		[Required()]
 		public virtual string Ma_Ku
 		{
 			get
 			{
-				return this._ma_Ku;
+				return this._ma_ku;
 			}
 			set
 			{
-				if(this._ma_Ku != value)
+				if(this._ma_ku != value)
 				{
 					this.OnPropertyChanging("Ma_Ku");
-					this._ma_Ku = value;
+					this._ma_ku = value;
 					this.OnPropertyChanged("Ma_Ku");
 				}
 			}
 		}
 		
 		private Ph11 _ph11;
-		[ForeignKeyAssociation(ConstraintName = "FK_ct11_ph11_stt_rec", SharedFields = "Stt_Rec", TargetFields = "Stt_Rec")]
+		[ForeignKeyAssociation(SharedFields = "Stt_Rec", TargetFields = "Stt_Rec")]
 		[Storage("_ph11")]
 		public virtual Ph11 Ph11
 		{
@@ -382,6 +382,86 @@ namespace MyERPModel
 					this.OnPropertyChanging("Ph11");
 					this._ph11 = value;
 					this.OnPropertyChanged("Ph11");
+				}
+			}
+		}
+		
+		private Dmkh _dmkh;
+		[ForeignKeyAssociation(SharedFields = "Ma_Kh_I", TargetFields = "Ma_Kh")]
+		[Storage("_dmkh")]
+		public virtual Dmkh Dmkh
+		{
+			get
+			{
+				return this._dmkh;
+			}
+			set
+			{
+				if(this._dmkh != value)
+				{
+					this.OnPropertyChanging("Dmkh");
+					this._dmkh = value;
+					this.OnPropertyChanged("Dmkh");
+				}
+			}
+		}
+		
+		private Dmvv _dmvv;
+		[ForeignKeyAssociation(SharedFields = "Ma_Vv_I", TargetFields = "Ma_Vv")]
+		[Storage("_dmvv")]
+		public virtual Dmvv Dmvv
+		{
+			get
+			{
+				return this._dmvv;
+			}
+			set
+			{
+				if(this._dmvv != value)
+				{
+					this.OnPropertyChanging("Dmvv");
+					this._dmvv = value;
+					this.OnPropertyChanged("Dmvv");
+				}
+			}
+		}
+		
+		private Dmtk _dmtk;
+		[ForeignKeyAssociation(SharedFields = "Tk_I", TargetFields = "Tk")]
+		[Storage("_dmtk")]
+		public virtual Dmtk Dmtk
+		{
+			get
+			{
+				return this._dmtk;
+			}
+			set
+			{
+				if(this._dmtk != value)
+				{
+					this.OnPropertyChanging("Dmtk");
+					this._dmtk = value;
+					this.OnPropertyChanged("Dmtk");
+				}
+			}
+		}
+		
+		private Dmtd _dmtd;
+		[ForeignKeyAssociation(SharedFields = "Ma_Td_I", TargetFields = "Ma_Td")]
+		[Storage("_dmtd")]
+		public virtual Dmtd Dmtd
+		{
+			get
+			{
+				return this._dmtd;
+			}
+			set
+			{
+				if(this._dmtd != value)
+				{
+					this.OnPropertyChanging("Dmtd");
+					this._dmtd = value;
+					this.OnPropertyChanged("Dmtd");
 				}
 			}
 		}

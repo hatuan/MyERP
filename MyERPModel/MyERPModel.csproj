@@ -53,6 +53,33 @@
     <Compile Include="Dmct.generated.cs">
       <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="Dmdvcs.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="Dmkh.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="Dmnhkh.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="Dmnhvv.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="Dmnt.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="Dmtd.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="Dmtk.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="Dmtt.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="Dmvv.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
     <Compile Include="EntitiesModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -62,6 +89,9 @@
       <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Userinfo.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <OpenAccessDeploy Include="EntitiesModel.rlinq">
@@ -71,19 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="CodeGenerationTemplates\DefaultTemplateCS.tt" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\AttributesGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\ClassGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\ContextGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\DocumentationGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\DomainMethodsGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\Engine.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\FluentMappingGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\InterfacesGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\NamespacesGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\PropertiesGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\Template.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\UsingsGenerator.ttinclude" />
     <None Include="EntitiesModel.rlinq.diagram">
       <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </None>

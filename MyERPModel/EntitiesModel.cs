@@ -25,7 +25,7 @@ namespace MyERPModel
 	[NamingSettings(SourceStrategy = NamingSourceStrategy.Property, ResolveReservedWords = true, UseDelimitedSQL = true, WordBreak = "_")]
 	public partial class MyERPModel : OpenAccessContext, IMyERPModelUnitOfWork
 	{
-		private static string connectionStringName = @"";
+        private static string connectionStringName = @"Connection";
 			
 		private static BackendConfiguration backend = GetBackendConfiguration();
 				
@@ -51,11 +51,67 @@ namespace MyERPModel
 			:base(connection, backendConfiguration, metadataSource)
 		{ }
 			
-		public IQueryable<Ct11> Ct11s 
+		public IQueryable<Dmtk> Dmtks 
 		{
 			get
 			{
-				return this.GetAll<Ct11>();
+				return this.GetAll<Dmtk>();
+			}
+		}
+		
+		public IQueryable<Userinfo> Userinfos 
+		{
+			get
+			{
+				return this.GetAll<Userinfo>();
+			}
+		}
+		
+		public IQueryable<Dmnt> Dmnts 
+		{
+			get
+			{
+				return this.GetAll<Dmnt>();
+			}
+		}
+		
+		public IQueryable<Dmkh> Dmkhs 
+		{
+			get
+			{
+				return this.GetAll<Dmkh>();
+			}
+		}
+		
+		public IQueryable<Dmnhkh> Dmnhkhs 
+		{
+			get
+			{
+				return this.GetAll<Dmnhkh>();
+			}
+		}
+		
+		public IQueryable<Dmtt> Dmtts 
+		{
+			get
+			{
+				return this.GetAll<Dmtt>();
+			}
+		}
+		
+		public IQueryable<Dmvv> Dmvvs 
+		{
+			get
+			{
+				return this.GetAll<Dmvv>();
+			}
+		}
+		
+		public IQueryable<Dmnhvv> Dmnhvvs 
+		{
+			get
+			{
+				return this.GetAll<Dmnhvv>();
 			}
 		}
 		
@@ -64,6 +120,30 @@ namespace MyERPModel
 			get
 			{
 				return this.GetAll<Ph11>();
+			}
+		}
+		
+		public IQueryable<Ct11> Ct11s 
+		{
+			get
+			{
+				return this.GetAll<Ct11>();
+			}
+		}
+		
+		public IQueryable<Dmdvcs> Dmdvcss 
+		{
+			get
+			{
+				return this.GetAll<Dmdvcs>();
+			}
+		}
+		
+		public IQueryable<Dmtd> Dmtds 
+		{
+			get
+			{
+				return this.GetAll<Dmtd>();
 			}
 		}
 		
@@ -80,6 +160,7 @@ namespace MyERPModel
 			BackendConfiguration backend = new BackendConfiguration();
 			backend.Backend = "PostgreSql";
 			backend.ProviderName = "Npgsql";
+			backend.Logging.LogEventsToSysOut = true;
 			backend.Logging.MetricStoreSnapshotInterval = 0;
 			return backend;
 		}
@@ -87,11 +168,51 @@ namespace MyERPModel
 	
 	public interface IMyERPModelUnitOfWork : IUnitOfWork
 	{
-		IQueryable<Ct11> Ct11s
+		IQueryable<Dmtk> Dmtks
+		{
+			get;
+		}
+		IQueryable<Userinfo> Userinfos
+		{
+			get;
+		}
+		IQueryable<Dmnt> Dmnts
+		{
+			get;
+		}
+		IQueryable<Dmkh> Dmkhs
+		{
+			get;
+		}
+		IQueryable<Dmnhkh> Dmnhkhs
+		{
+			get;
+		}
+		IQueryable<Dmtt> Dmtts
+		{
+			get;
+		}
+		IQueryable<Dmvv> Dmvvs
+		{
+			get;
+		}
+		IQueryable<Dmnhvv> Dmnhvvs
 		{
 			get;
 		}
 		IQueryable<Ph11> Ph11s
+		{
+			get;
+		}
+		IQueryable<Ct11> Ct11s
+		{
+			get;
+		}
+		IQueryable<Dmdvcs> Dmdvcss
+		{
+			get;
+		}
+		IQueryable<Dmtd> Dmtds
 		{
 			get;
 		}

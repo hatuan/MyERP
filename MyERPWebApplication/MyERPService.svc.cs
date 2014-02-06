@@ -23,10 +23,10 @@ namespace MyERPWebApplication
 	using System.Runtime.Serialization;
 
 	/// <summary>
-	/// MyERPModelService service class handler.
+	/// MyERPService service class handler.
 	/// </summary>
 	[System.ServiceModel.ServiceBehavior(IncludeExceptionDetailInFaults = true)]
-	public partial class MyERPModelService : OpenAccessDataService<MyERPModel.MyERPModel>
+	public partial class MyERPService : OpenAccessDataService<MyERPModel.MyERPModel>
 	{
 	    /// <summary>
 	    /// Initializes the service.
@@ -34,9 +34,11 @@ namespace MyERPWebApplication
 	    /// <param name="config">The configuration object.</param>
 	    public static void InitializeService(DataServiceConfiguration config)
 	    {
-	        config.SetEntitySetAccessRule("Ct11", EntitySetRights.All);
+            config.UseVerboseErrors = true;
+
+	        config.SetEntitySetAccessRule("Ct11s", EntitySetRights.All);
 	        config.SetEntitySetAccessRule("Dmcts", EntitySetRights.All);
-	        config.SetEntitySetAccessRule("Dmdvcs1", EntitySetRights.All);
+	        config.SetEntitySetAccessRule("Dmdvcss", EntitySetRights.All);
 	        config.SetEntitySetAccessRule("Dmkhs", EntitySetRights.All);
 	        config.SetEntitySetAccessRule("Dmnhkhs", EntitySetRights.All);
 	        config.SetEntitySetAccessRule("Dmnhvvs", EntitySetRights.All);
@@ -45,7 +47,7 @@ namespace MyERPWebApplication
 	        config.SetEntitySetAccessRule("Dmtks", EntitySetRights.All);
 	        config.SetEntitySetAccessRule("Dmtts", EntitySetRights.All);
 	        config.SetEntitySetAccessRule("Dmvvs", EntitySetRights.All);
-	        config.SetEntitySetAccessRule("Ph11", EntitySetRights.All);
+	        config.SetEntitySetAccessRule("Ph11s", EntitySetRights.All);
 	        config.SetEntitySetAccessRule("Userinfos", EntitySetRights.All);
 	
 	        // TODO: Set service behavior configuration options
