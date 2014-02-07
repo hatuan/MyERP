@@ -1,0 +1,23 @@
+﻿<Window xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  x:Class="MyERPApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:MyERPApp"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <telerik:RadDataServiceDataSource x:Name="dataServiceDataSource" 
+										  AutoLoad="True" 
+										  PageSize="10"
+										  QueryName="Ph11s">
+            <telerik:RadDataServiceDataSource.DataServiceContext>
+                <local:MyERPContext/>
+            </telerik:RadDataServiceDataSource.DataServiceContext>
+        </telerik:RadDataServiceDataSource>
+        <telerik:RadGridView Grid.Row="0" ItemsSource="{Binding DataView, ElementName=dataServiceDataSource}" IsBusy="{Binding IsBusy, ElementName=dataServiceDataSource}" ShowGroupPanel="False"/>
+        <telerik:RadDataPager Grid.Row="1" Source="{Binding DataView, ElementName=dataServiceDataSource}" PageSize="10"/>
+
+    </Grid>
+</Window>

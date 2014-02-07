@@ -25,7 +25,7 @@ namespace MyERPModel
 	[NamingSettings(SourceStrategy = NamingSourceStrategy.Property, ResolveReservedWords = true, UseDelimitedSQL = true, WordBreak = "_")]
 	public partial class MyERPModel : OpenAccessContext, IMyERPModelUnitOfWork
 	{
-        private static string connectionStringName = @"Connection";
+		private static string connectionStringName = @"Connection";
 			
 		private static BackendConfiguration backend = GetBackendConfiguration();
 				

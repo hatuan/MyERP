@@ -1122,6 +1122,8 @@
       <ImplementINotifyPropertyChanged>true</ImplementINotifyPropertyChanged>
       <ImplementIDataErrorInfo>true</ImplementIDataErrorInfo>
       <GenerateDataAnnotationAttributes>true</GenerateDataAnnotationAttributes>
+      <CustomTemplateFileName>CodeGenerationTemplates\DefaultTemplateCS.tt</CustomTemplateFileName>
+      <UseCustomTemplate>true</UseCustomTemplate>
       <MappingDefinitionType>Attributes</MappingDefinitionType>
     </CodeGenerationSettings>
     <SchemaUpdateSettings>

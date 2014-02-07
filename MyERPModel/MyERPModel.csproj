@@ -101,6 +101,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <None Include="CodeGenerationTemplates\DefaultTemplateCS.tt" />
+    <None Include="CodeGenerationTemplates\Includes_ver.2\AttributesGenerator.ttinclude" />
+    <None Include="CodeGenerationTemplates\Includes_ver.2\ClassGenerator.ttinclude" />
+    <None Include="CodeGenerationTemplates\Includes_ver.2\ContextGenerator.ttinclude" />
+    <None Include="CodeGenerationTemplates\Includes_ver.2\DocumentationGenerator.ttinclude" />
+    <None Include="CodeGenerationTemplates\Includes_ver.2\DomainMethodsGenerator.ttinclude" />
+    <None Include="CodeGenerationTemplates\Includes_ver.2\Engine.ttinclude" />
+    <None Include="CodeGenerationTemplates\Includes_ver.2\FluentMappingGenerator.ttinclude" />
+    <None Include="CodeGenerationTemplates\Includes_ver.2\InterfacesGenerator.ttinclude" />
+    <None Include="CodeGenerationTemplates\Includes_ver.2\NamespacesGenerator.ttinclude" />
+    <None Include="CodeGenerationTemplates\Includes_ver.2\PropertiesGenerator.ttinclude" />
+    <None Include="CodeGenerationTemplates\Includes_ver.2\Template.ttinclude" />
+    <None Include="CodeGenerationTemplates\Includes_ver.2\UsingsGenerator.ttinclude" />
     <None Include="EntitiesModel.rlinq.diagram">
       <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </None>
