@@ -104,7 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyERPModel\MyERPModel.csproj">
-      <Project>{C50145E6-A244-4F1F-B41F-90D1925B4A00}</Project>
+      <Project>{9529EAEC-44B4-4E50-8EBB-5EAC00B0912B}</Project>
       <Name>MyERPModel</Name>
     </ProjectReference>
   </ItemGroup>

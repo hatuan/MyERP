@@ -42,7 +42,7 @@ protected void RunCodeGeneration()
 {
 	TemplateContext templateContext = TemplateContextFactory.Create(this.Host, this.GenerationEnvironment, this.DomainModel.Bridge.ModelSettings.CodeGenerationSettings);
 	templateContext.NewItemFullPath = this.newItemFullName;
-
+	
 	ModelContext model = new Telerik.OpenAccess.CodeGeneration.ModelContext(
 		this.DomainModel,
 		ProjectLanguage.CSharp,

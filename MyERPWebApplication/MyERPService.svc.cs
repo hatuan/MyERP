@@ -34,8 +34,6 @@ namespace MyERPWebApplication
 	    /// <param name="config">The configuration object.</param>
 	    public static void InitializeService(DataServiceConfiguration config)
 	    {
-            config.UseVerboseErrors = true;
-
 	        config.SetEntitySetAccessRule("Ct11s", EntitySetRights.All);
 	        config.SetEntitySetAccessRule("Dmcts", EntitySetRights.All);
 	        config.SetEntitySetAccessRule("Dmdvcss", EntitySetRights.All);

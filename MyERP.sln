@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERPModel", "MyERPModel\MyERPModel.csproj", "{C50145E6-A244-4F1F-B41F-90D1925B4A00}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERPWebApplication", "MyERPWebApplication\MyERPWebApplication.csproj", "{AB9E4713-11C7-4903-9D30-D7F5C4FCC1DF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERPApp", "MyERPApp\MyERPApp.csproj", "{98BD8A37-90DD-4550-AB8C-157E33EFEC21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenAccessModel1", "OpenAccessModel1\OpenAccessModel1.csproj", "{9529EAEC-44B4-4E50-8EBB-5EAC00B0912B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERPModel", "MyERPModel\MyERPModel.csproj", "{9529EAEC-44B4-4E50-8EBB-5EAC00B0912B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,16 +19,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C50145E6-A244-4F1F-B41F-90D1925B4A00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C50145E6-A244-4F1F-B41F-90D1925B4A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C50145E6-A244-4F1F-B41F-90D1925B4A00}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{C50145E6-A244-4F1F-B41F-90D1925B4A00}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{C50145E6-A244-4F1F-B41F-90D1925B4A00}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C50145E6-A244-4F1F-B41F-90D1925B4A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C50145E6-A244-4F1F-B41F-90D1925B4A00}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C50145E6-A244-4F1F-B41F-90D1925B4A00}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{C50145E6-A244-4F1F-B41F-90D1925B4A00}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{C50145E6-A244-4F1F-B41F-90D1925B4A00}.Release|x86.ActiveCfg = Release|Any CPU
 		{AB9E4713-11C7-4903-9D30-D7F5C4FCC1DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AB9E4713-11C7-4903-9D30-D7F5C4FCC1DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB9E4713-11C7-4903-9D30-D7F5C4FCC1DF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
