@@ -2,47 +2,61 @@
 <?xml-stylesheet type="text/xsl" href="_ConvertModelWizard_Files\UpgradeReferences.xslt"?>
 <UpgradeLog>
   <Events>
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPModel\MyERPModel.csproj" Message="Assembly References" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPModel\MyERPModel.csproj" Message="Project References" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPModel\MyERPModel.csproj" Message="Import Directives" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPModel\App.Config" Message="Assembly References" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPModel\App.Config" Message="Http Handlers" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPModel\App.Config" Message="Handlers (IIS7+)" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPModel\App.Config" Message="Config Sections" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPModel\App.Config" Message="Render Extensions" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPModel\App.Config" Message="App.Config" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPModel\MyERPModel.csproj" Message="MyERPModel" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\MyERPWebApplication.csproj" Message="Assembly References" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\MyERPWebApplication.csproj" Message="Project References" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\MyERPWebApplication.csproj" Message="Import Directives" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\packages.config" Message="Assembly References" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\packages.config" Message="Http Handlers" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\packages.config" Message="Handlers (IIS7+)" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\packages.config" Message="Config Sections" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\packages.config" Message="Render Extensions" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\packages.config" Message="packages.config" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.config" Message="Assembly References" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.config" Message="Http Handlers" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.config" Message="Handlers (IIS7+)" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.config" Message="Config Sections" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.config" Message="Render Extensions" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.config" Message="Web.config" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.Debug.config" Message="Assembly References" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.Debug.config" Message="Http Handlers" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.Debug.config" Message="Handlers (IIS7+)" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.Debug.config" Message="Config Sections" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.Debug.config" Message="Render Extensions" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.Debug.config" Message="Web.Debug.config" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.Release.config" Message="Assembly References" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.Release.config" Message="Http Handlers" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.Release.config" Message="Handlers (IIS7+)" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.Release.config" Message="Config Sections" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.Release.config" Message="Render Extensions" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\Web.Release.config" Message="Web.Release.config" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERPWebApplication\MyERPWebApplication.csproj" Message="MyERPWebApplication" />
-    <Event EventType="Success" Action="Analyze" SourceItem="D:\Projects\MyERP\MyERP.sln" Message="MyERP" />
-    <Event EventType="Success" Action="Upgrade" SourceItem="D:\Projects\MyERP\MyERPModel\MyERPModel.csproj" Message="Assembly References" />
-    <Event EventType="Success" Action="Upgrade" SourceItem="D:\Projects\MyERP\MyERPModel\MyERPModel.csproj" Message="MyERPModel" />
-    <Event EventType="Success" Action="Upgrade" SourceItem="D:\Projects\MyERP\MyERP.sln" Message="MyERP" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPModel\MyERPModel.csproj" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPModel\MyERPModel.csproj" Message="Project References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPModel\MyERPModel.csproj" Message="Import Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPModel\App.Config" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPModel\App.Config" Message="Http Handlers" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPModel\App.Config" Message="Handlers (IIS7+)" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPModel\App.Config" Message="Config Sections" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPModel\App.Config" Message="Render Extensions" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPModel\App.Config" Message="App.Config" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPModel\MyERPModel.csproj" Message="MyERPModel" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\MyERPWebApplication.csproj" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\MyERPWebApplication.csproj" Message="Project References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\MyERPWebApplication.csproj" Message="Import Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\packages.config" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\packages.config" Message="Http Handlers" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\packages.config" Message="Handlers (IIS7+)" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\packages.config" Message="Config Sections" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\packages.config" Message="Render Extensions" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\packages.config" Message="packages.config" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.config" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.config" Message="Http Handlers" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.config" Message="Handlers (IIS7+)" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.config" Message="Config Sections" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.config" Message="Render Extensions" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.config" Message="Web.config" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.Debug.config" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.Debug.config" Message="Http Handlers" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.Debug.config" Message="Handlers (IIS7+)" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.Debug.config" Message="Config Sections" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.Debug.config" Message="Render Extensions" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.Debug.config" Message="Web.Debug.config" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.Release.config" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.Release.config" Message="Http Handlers" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.Release.config" Message="Handlers (IIS7+)" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.Release.config" Message="Config Sections" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.Release.config" Message="Render Extensions" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\Web.Release.config" Message="Web.Release.config" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPWebApplication\MyERPWebApplication.csproj" Message="MyERPWebApplication" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\MyERPApp.csproj" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\MyERPApp.csproj" Message="Project References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\MyERPApp.csproj" Message="Import Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\App.config" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\App.config" Message="Http Handlers" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\App.config" Message="Handlers (IIS7+)" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\App.config" Message="Config Sections" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\App.config" Message="Render Extensions" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\App.config" Message="App.config" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\packages.config" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\packages.config" Message="Http Handlers" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\packages.config" Message="Handlers (IIS7+)" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\packages.config" Message="Config Sections" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\packages.config" Message="Render Extensions" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\packages.config" Message="packages.config" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\Properties\Resources.resx" Message="Resources.resx" />
+    <Event EventType="Success" Action="Analyze" SourceItem="z:\MyERP\MyERPApp\MyERPApp.csproj" Message="MyERPApp" />
+    <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.sln" Message="MyERP" />
   </Events>
 </UpgradeLog>
