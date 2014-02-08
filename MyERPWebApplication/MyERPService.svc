@@ -1,1 +1,0 @@
-<%@ ServiceHost Language="C#" Factory="System.Data.Services.DataServiceHostFactory, Microsoft.Data.Services" Service="MyERPWebApplication.MyERPService" %>
