@@ -1,0 +1,1016 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:vsm="clr-namespace:System.Windows;assembly=System.Windows"
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+	xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Brushes.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+    <!--CONVERTERS-->
+    <telerik:BooleanToOpacityConverter x:Key="BooleanToOpacityConverter" />
+    <telerik:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <telerik:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter"/>
+    <telerik:GridLineWidthToThicknessConverter x:Key="GridLineWidthToThicknessConverter" />
+    <telerik:InvertedBooleanToOpacityConverter x:Key="InvertedBooleanToOpacityConverter"/>
+
+	<!--ACTIVITY STATUS-->
+	<DataTemplate x:Key="ActivityNotStartedDataTemplate">
+        <Path Data="M0.5,0.5 L9.5,0.5 L9.5,9.5 L0.5,9.5 z" 
+              Width="10" Height="10" Stretch="Fill" Stroke="{StaticResource BasicBrush}"  
+              HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="2,0,0,0"/>
+    </DataTemplate>
+	<DataTemplate x:Key="ActivityInProgressDataTemplate">
+        <Path Data="M0.5,0.5 L9.5,5 L0.5,9.5 z" 
+              Width="10"  Height="10" Stretch="Fill" Stroke="{StaticResource BasicBrush}" 
+              HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="2,0,0,0"/>
+    </DataTemplate>
+	<DataTemplate x:Key="ActivityDoneDataTemplate">
+        <Path Data="F1 M 15,21L 22,28L 32.9999,14.0001L 35.9999,17.0001L 22,34L 12.0001,24L 15,21 Z " 
+              Width="12" Height="10" Stretch="Fill" Fill="{StaticResource MainBrush}"
+              HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="2,0,0,0"/>
+    </DataTemplate>
+
+	<!--INDENT PRESENTER/CELL STYLE-->
+    <Style TargetType="telerik:GridViewIndentCell" x:Key="GridViewIndentCellStyle">
+        <Setter Property="Background" Value="#26000000" />
+        <Setter Property="BorderBrush" Value="{StaticResource StrongBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,1,0"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="telerik:GridViewIndentCell">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+							Background="{TemplateBinding Background}"
+							VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+							HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							Padding="{TemplateBinding Padding}"
+							BorderThickness="{TemplateBinding BorderThickness}" Width="25" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <ControlTemplate x:Key="IndentPresenterTemplate" TargetType="telerik:IndentPresenter">
+        <Grid>
+            <ItemsPresenter />
+        </Grid>
+    </ControlTemplate>
+    <DataTemplate x:Key="IndentPresenterItemTemplate">
+        <telerik:GridViewIndentCell Style="{StaticResource GridViewIndentCellStyle}"/>
+    </DataTemplate>
+    <ItemsPanelTemplate x:Key="IndentPresenterItemsPanelTemplate">
+        <StackPanel Orientation="Horizontal" />
+    </ItemsPanelTemplate>
+    <Style TargetType="telerik:IndentPresenter" x:Key="GridViewIndentPresenterStyle">
+        <Setter Property="Template" Value="{StaticResource IndentPresenterTemplate}" />
+        <Setter Property="ItemTemplate" Value="{StaticResource IndentPresenterItemTemplate}" />
+        <Setter Property="ItemsPanel" Value="{StaticResource IndentPresenterItemsPanelTemplate}" />
+    </Style>
+
+    <!--ROW STYLE-->
+    <ControlTemplate x:Key="GridViewRowTemplate" TargetType="telerik:GridViewRow">
+        <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="FocusStates">
+                    <VisualState x:Name="Unfocused" />
+                    <VisualState x:Name="Focused">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NavigatorIndicator" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="SelectionStates">
+                    <VisualState x:Name="Unselected" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="CommonStates">
+                	<VisualStateGroup.Transitions>
+                		<VisualTransition GeneratedDuration="0:0:0.3">
+                			<VisualTransition.GeneratedEasingFunction>
+                				<CircleEase EasingMode="EaseOut"/>
+                			</VisualTransition.GeneratedEasingFunction>
+                		</VisualTransition>
+                	</VisualStateGroup.Transitions>
+                	<VisualState x:Name="Normal" />
+                	<VisualState x:Name="MouseOver">
+                		<Storyboard>
+                			<DoubleAnimation Duration="0" To="0.3" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Background_Over" d:IsOptimized="True"/>
+                		</Storyboard>
+                	</VisualState>
+                	<VisualState x:Name="Selected">
+                		<Storyboard>
+                			<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Background_Selected" d:IsOptimized="True"/>
+                		</Storyboard>
+                	</VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="ValueStates">
+                    <VisualState x:Name="Valid" />
+                    <VisualState x:Name="Invalid"/>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="EditStates">
+                    <VisualState x:Name="ReadOnlyMode" />
+                    <VisualState x:Name="EditMode">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="EditIndicator"
+														   Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NavigatorIndicator"
+														   Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+
+            <telerik:SelectiveScrollingGrid x:Name="grid">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Border x:Name="SelectionBackground"
+						Grid.Column="2" Grid.ColumnSpan="2"
+						Background="{TemplateBinding Background}"
+						telerik:SelectiveScrollingGrid.SelectiveScrollingClip="True"
+						Margin="{TemplateBinding Margin}"
+						VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+						HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+						Padding="{TemplateBinding Padding}"/>
+
+                <Border x:Name="PART_RowBorder"
+						telerik:SelectiveScrollingGrid.SelectiveScrollingClip="True"
+						BorderBrush="{TemplateBinding HorizontalGridLinesBrush}"
+						BorderThickness="{Binding HorizontalGridLinesWidth, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource GridLineWidthToThicknessConverter}, ConverterParameter=Bottom}"
+						Grid.ColumnSpan="4" Grid.Column="2" Grid.RowSpan="4" VerticalAlignment="Bottom"
+						/>
+
+                <Rectangle x:Name="Background_Over"  
+						telerik:SelectiveScrollingGrid.SelectiveScrollingClip="True" Fill="{StaticResource MarkerBrush}" Opacity="0"						
+						Grid.Column="2" Grid.ColumnSpan="4" />
+
+                <Rectangle x:Name="Background_Selected"
+						telerik:SelectiveScrollingGrid.SelectiveScrollingClip="True"
+						Grid.Column="2" Grid.ColumnSpan="4" Opacity="0" Stroke="{StaticResource AccentBrush}" Fill="#1925A0DA" />
+
+                <Rectangle x:Name="Background_Invalid"
+						telerik:SelectiveScrollingGrid.SelectiveScrollingClip="True"
+						Stroke="{StaticResource ValidationBrush}" Fill="{StaticResource MainBrush}" StrokeThickness="1" 
+						Grid.Column="2" Grid.ColumnSpan="4" Visibility="Collapsed"/>
+
+                <telerik:GridViewToggleButton Grid.Column="2" x:Name="PART_HierarchyExpandButton"
+											   Width="25"
+											   telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+											   Opacity="{Binding IsExpandable, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToOpacityConverter}}"
+											   IsHitTestVisible="{Binding IsExpandable, RelativeSource={RelativeSource TemplatedParent}}"
+											   Visibility="{Binding HasHierarchy, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}"
+											   IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+											   IsTabStop="{TemplateBinding IsTabStop}"
+											   telerik:StyleManager.Theme="{StaticResource Theme}"/>
+
+                <Border Grid.Column="2"
+						telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+						Visibility="{Binding HasHierarchy, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                <telerik:DataCellsPresenter telerik:SelectiveScrollingGrid.SelectiveScrollingClip="True" Grid.Column="3"
+										 telerik:StyleManager.Theme="{StaticResource Theme}"
+										 x:Name="PART_DataCellsPresenter" Foreground="{TemplateBinding Foreground}" />
+                <Border Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2">
+                    <ContentPresenter x:Name="PART_HierarchyChildPresenter" telerik:SelectiveScrollingGrid.SelectiveScrollingClip="True" Margin="0,1,0,0"
+						Visibility="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                </Border>
+
+                <telerik:DetailsPresenter x:Name="PART_DetailsPresenter"
+									   Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1"
+									   DetailsProvider="{TemplateBinding DetailsProvider}"
+									   telerik:StyleManager.Theme="{StaticResource Theme}" />
+
+                <Border x:Name="PART_IndicatorPresenter"
+						Width="25"
+						VerticalAlignment="Stretch"
+						Grid.Column="0"
+						Visibility="{TemplateBinding RowIndicatorVisibility}"
+						telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+						Grid.RowSpan="3"
+						Background="Transparent">
+                    <Grid>
+                        <Grid x:Name="NavigatorIndicator" HorizontalAlignment="Center" VerticalAlignment="Center" Width="9" Height="9" Visibility="Collapsed" >
+                            <Path x:Name="plus" Stretch="Fill" Width="8" Height="4" Data="M0,0 L8,2.3841858E-07 L4,4 z" RenderTransformOrigin="0.5,0.5"  Fill="{StaticResource AccentBrush}"  StrokeThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Padding}">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="-1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="90"/>
+                                        <TranslateTransform X="9.5006054579016563E-08" Y="-4.6599587300022449E-08"/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+
+                        <Border x:Name="EditIndicator" HorizontalAlignment="Center" VerticalAlignment="Center" Width="12" Height="10" Visibility="Collapsed" Background="{StaticResource MainBrush}" BorderBrush="{StaticResource StrongBrush}" BorderThickness="1">
+                            <Path Fill="{StaticResource StrongBrush}" Stretch="Fill" Data="M3,2 L4,2 L5,2 L6,2 L6,3 L5,3 L5,4 L5,5 L5,6 L5,7 L6,7 L6,8 L5,8 L4,8 L3,8 L3,7 L4,7 L4,6 L4,5 L4,4 L4,3 L3,3 z" HorizontalAlignment="Left" Margin="1,1,0,1"  Width="3" Height="6"/>
+                        </Border>
+                        <Grid x:Name="ErrorIndicator" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+                            <Ellipse Fill="{StaticResource MainBrush}" Width="16" Height="16" Stroke="{StaticResource ValidationBrush}"/>
+                            <Path Data="M1.0000001,8 C1.5522848,8 2.0000002,8.4477148 2.0000002,9 C2.0000002,9.5522842 1.5522848,10 1.0000001,10 C0.4477154,10 1.527369E-07,9.5522842 1.4901161E-07,9 C1.527369E-07,8.4477148 0.4477154,8 1.0000001,8 z M0,0 L2,0 L2,7 L0,7 z" Fill="{StaticResource ValidationBrush}" Width="2" Height="10"  Stretch="Fill"/>
+                            <ToolTipService.ToolTip>
+                                <ToolTip x:Name="validationTooltip" Placement="Bottom" 
+	                                         Content="{TemplateBinding Errors}"
+	                                         >
+                                </ToolTip>
+                            </ToolTipService.ToolTip>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <telerik:IndentPresenter x:Name="PART_IndentPresenter"
+									  Style="{StaticResource GridViewIndentPresenterStyle}"
+									  IndentLevel="{TemplateBinding IndentLevel}"
+									  Grid.Column="1" Grid.RowSpan="4"
+									  telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" />
+
+            </telerik:SelectiveScrollingGrid>
+        </Border>
+    </ControlTemplate>
+    <Style x:Key="GridViewRowStyle" TargetType="telerik:GridViewRow">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template" Value="{StaticResource GridViewRowTemplate}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+	<Style BasedOn="{StaticResource GridViewRowStyle}" TargetType="telerik:GridViewRow" />
+
+    <!--GROUP ROW STYLE-->
+    <DataTemplate x:Key="GroupHeaderTemplate">
+        <ContentControl Foreground="{StaticResource AccentBrush}" FontWeight="Bold" FontSize="12" Content="{Binding Header}" />
+    </DataTemplate>
+    <ControlTemplate x:Key="GridViewGroupToggleButtonTemplate" TargetType="ToggleButton">
+        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+            <ContentPresenter />
+        </Border>
+    </ControlTemplate>
+    <Style x:Key="GridViewGroupToggleButtonStyle" TargetType="ToggleButton">
+        <Setter Property="Template" Value="{StaticResource GridViewGroupToggleButtonTemplate}" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="9,0,0,0" />
+    </Style>
+    <ControlTemplate x:Key="GridViewGroupRowTemplate" TargetType="telerik:GridViewGroupRow">
+        <Grid x:Name="PART_GroupExpanderGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="PART_HeaderRow" MinHeight="{TemplateBinding MinHeight}" />
+                <RowDefinition x:Name="ContentRow" Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="ExpandStateGroup">
+                    <VisualState x:Name="Expanded">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="BottomBorder" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                            </ObjectAnimationUsingKeyFrames>-->
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="IconOuterBorder" Storyboard.TargetProperty="BorderThickness">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="0,0,0,0"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ExpanderButton">
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Collapsed"/>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <Border x:Name="ToggleButtonBorder" Background="#26000000" Grid.Column="2" Grid.ColumnSpan="2" MinHeight="{TemplateBinding MinHeight}" telerik:SelectiveScrollingGrid.SelectiveScrollingClip="True">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="24" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--Aggregates-->
+                    <Border telerik:SelectiveScrollingGrid.SelectiveScrollingClip="True" Visibility="{Binding ShowHeaderAggregates, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Grid.Column="2">
+                        <telerik:AggregateResultsList ItemsSource="{TemplateBinding AggregateResults}"  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+                            <telerik:AggregateResultsList.ItemTemplate>
+                                <DataTemplate>
+                                    <telerik:GridViewAggregateResultCell AggregateResult="{Binding}" telerik:StyleManager.Theme="{StaticResource Theme}" Foreground="#FF777777" FontWeight="Normal"/>
+                                </DataTemplate>
+                            </telerik:AggregateResultsList.ItemTemplate>
+                            <telerik:AggregateResultsList.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </telerik:AggregateResultsList.ItemsPanel>
+                        </telerik:AggregateResultsList>
+                    </Border>
+
+                    <!--Icon-->
+                    <Border x:Name="IconOuterBorder" BorderBrush="{StaticResource StrongBrush}" BorderThickness="0,0,0,1" Background="Transparent"  HorizontalAlignment="Stretch" telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical">
+
+                        <Path x:Name="ExpanderButton" Grid.Column="0"
+									Fill="{StaticResource BasicBrush}"
+									Width="6" Height="4" Stretch="Fill"
+								    Data="M10.000001,0 L20.000002,20 L2.3395899E-08,20 z"
+									RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="180"/>
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+
+                    </Border>
+
+                    <!--ToggleButton-->
+                    <ToggleButton x:Name="HeaderButton" Grid.Column="0" Grid.ColumnSpan="3"
+									  Background="Transparent" telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+									  IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" 
+									  Opacity="0" IsTabStop="{TemplateBinding IsTabStop}"/>
+
+                    <!--GroupHeader-->
+                    <ToggleButton Grid.Column="1" Padding="0,0,10,0" Height="23"
+									  telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" 
+									  Background="Transparent" BorderThickness="0" BorderBrush="{x:Null}" 
+									  Style="{StaticResource GridViewGroupToggleButtonStyle}" Foreground="{TemplateBinding Foreground}"
+									  IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" IsTabStop="{TemplateBinding IsTabStop}">
+                        <ContentPresenter Grid.Column="1" Margin="0,0,10,0" Content="{TemplateBinding GroupViewModel}" VerticalAlignment="Center" ContentTemplate="{TemplateBinding GroupHeaderTemplate}" />
+                    </ToggleButton>
+
+                    <Border telerik:SelectiveScrollingGrid.SelectiveScrollingClip="True" BorderBrush="{StaticResource StrongBrush}" BorderThickness="0,0,0,1" Grid.Column="1" Grid.ColumnSpan="2" />
+
+                </Grid>
+            </Border>
+
+            <!--Indicator-->
+            <Border x:Name="PART_IndicatorPresenter"
+						Width="25"
+						VerticalAlignment="Stretch"
+						Grid.Column="0"
+						Visibility="{TemplateBinding RowIndicatorVisibility}"
+						telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+						Grid.RowSpan="3"
+						Background="Transparent"
+						BorderBrush="{StaticResource StrongBrush}"
+						BorderThickness="0,0,1,0" />
+
+            <!--Indent-->
+            <telerik:IndentPresenter telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" 
+								  IndentLevel="{TemplateBinding Level}" Style="{StaticResource GridViewIndentPresenterStyle}"
+								  BorderThickness="0,0,1,0"/>
+
+            <!--Content-->
+
+            <Border x:Name="Content" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Visibility="Collapsed" >
+                <StackPanel>
+                    <telerik:GridViewVirtualizingPanel x:Name="PART_GridViewVirtualizingPanel" />
+                    <telerik:GridViewGroupFooterRow x:Name="Footer" telerik:StyleManager.Theme="{StaticResource Theme}" />
+                </StackPanel>
+            </Border>
+
+            <!--<Border x:Name="BottomBorder" Grid.Column="2" Grid.Row="1" BorderBrush="{StaticResource StrongBrush}" BorderThickness="0,0,0,1"  VerticalAlignment="Bottom" Visibility="Collapsed" />-->
+
+        </Grid>
+    </ControlTemplate>
+    <Style TargetType="telerik:GridViewGroupRow">
+        <Setter Property="Template" Value="{StaticResource GridViewGroupRowTemplate}" />
+        <Setter Property="GroupHeaderTemplate" Value="{StaticResource GroupHeaderTemplate}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{StaticResource StrongBrush}" />
+        <Setter Property="BorderThickness" Value="0,0,0,2" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="Padding" Value="10,0,0,0" />
+        <Setter Property="MinHeight" Value="23" />
+    </Style>
+
+    <!--HEADER ROW STYLE-->
+    <DataTemplate x:Key="GridViewHeaderIndentCellDataTemplate">
+        <telerik:GridViewHeaderIndentCell telerik:StyleManager.Theme="{StaticResource Theme}" BorderThickness="0" 
+                                  BorderBrush="{StaticResource StrongBrush}" Background="Transparent"/>
+    </DataTemplate>
+    <ControlTemplate x:Key="GridViewHeaderRowTemplate" TargetType="telerik:GridViewHeaderRow">
+        <telerik:SelectiveScrollingGrid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border x:Name="PART_GridViewHeaderRowBorder" 
+					Background="{TemplateBinding Background}"
+					BorderBrush="{TemplateBinding BorderBrush}" 
+					VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+					HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+					Padding="{TemplateBinding Padding}"
+					Grid.ColumnSpan="4" 
+					BorderThickness="{TemplateBinding BorderThickness}">
+            </Border>
+
+            <telerik:DataCellsPresenter x:Name="PART_DataCellsPresenter"
+									 telerik:StyleManager.Theme="{StaticResource Theme}"
+									 Grid.Column="3" />
+
+            <Border x:Name="PART_IndicatorPresenter"
+					Width="25" 
+					Visibility="{TemplateBinding RowIndicatorVisibility}"
+					telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" />
+
+            <telerik:IndentPresenter x:Name="PART_IndentPresenter" Grid.Column="1" MinHeight="{TemplateBinding MinHeight}"
+								  telerik:StyleManager.Theme="{StaticResource Theme}"
+								  IndentLevel="{TemplateBinding IndentLevel}"
+								  ItemTemplate="{StaticResource GridViewHeaderIndentCellDataTemplate}" 
+								  telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" Opacity="0" />
+
+            <Border x:Name="PART_HierarchyIndentPresenter" Grid.Column="2"
+					Width="25" 
+					BorderBrush="Transparent"
+					BorderThickness="0"
+					Visibility="{Binding HasHierarchy, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}"
+					telerik:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" />
+
+        </telerik:SelectiveScrollingGrid>
+    </ControlTemplate>
+    <Style TargetType="telerik:GridViewHeaderRow">
+        <Setter Property="Template" Value="{StaticResource GridViewHeaderRowTemplate}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="BorderBrush" Value="{StaticResource StrongBrush}"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <!--HEADER CELL STYLE-->
+    <Style x:Key="ColumnHeaderGripperStyle" TargetType="Thumb">
+        <Setter Property="Width" Value="6"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Cursor" Value="SizeWE"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Border Padding="{TemplateBinding Padding}" 
+							Background="{TemplateBinding Background}" 
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="ContentControl" x:Key="StretchedContentControl">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+    </Style>
+    <ControlTemplate x:Key="GridViewHeaderCellTemplate" TargetType="telerik:GridViewHeaderCell">
+        <Grid x:Name="PART_HeaderCellGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto"  />
+            </Grid.ColumnDefinitions>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+            		<VisualState x:Name="Normal" />
+            		<VisualState x:Name="MouseOver" />
+            		<VisualState x:Name="Ascending">
+            			<Storyboard>
+            				<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PART_SortIndicator" />
+            			</Storyboard>
+            		</VisualState>
+            		<VisualState x:Name="Descending">
+            			<Storyboard>
+            				<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PART_SortIndicator" d:IsOptimized="True"/>
+            				<DoubleAnimation Duration="0" To="-1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="PART_SortIndicator" d:IsOptimized="True"/>
+            			</Storyboard>
+            		</VisualState>
+            		<VisualState x:Name="None"/>
+            	</VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <Border x:Name="GridViewHeaderCell" Grid.ColumnSpan="2"
+					Background="Transparent"
+					BorderBrush="{TemplateBinding BorderBrush}" 
+					BorderThickness="{TemplateBinding BorderThickness}" />
+
+            <Border x:Name="GridViewHeaderCell_Over" Opacity="0.2" Grid.ColumnSpan="2" Background="{StaticResource StrongBrush}" Margin="0,0,0,1" Visibility="Collapsed" />
+
+            <Border x:Name="GridViewHeaderCell_Selected"  Grid.ColumnSpan="2" Margin="0,0,0,1" Background="{StaticResource BasicBrush}"  Visibility="Collapsed" />
+
+            <ContentControl x:Name="ContentPresenter" Grid.Column="0" Foreground="{TemplateBinding Foreground}"
+							Style="{StaticResource StretchedContentControl}"
+							Margin="{TemplateBinding Padding}" IsTabStop="{TemplateBinding IsTabStop}"
+							Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+							VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+							HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+
+            <Path x:Name="PART_SortIndicator" Data="M2.6494999,0 L5.2989998,3 L3.6958459E-09,3 z" Fill="{StaticResource StrongBrush}" 
+                  RenderTransformOrigin="0.5,0.5" Height="4" Stretch="Fill" UseLayoutRounding="False" HorizontalAlignment="Center" VerticalAlignment="Top" Width="5.8" 
+                  Margin="0,2,0,0" Opacity="0">
+                <Path.RenderTransform>
+            		<CompositeTransform ScaleY="1"/>
+            	</Path.RenderTransform>
+            </Path>
+
+            <telerik:FilteringDropDown Name="PART_DistinctFilterControl" Grid.Column="1"
+									Visibility="{TemplateBinding FilteringUIVisibility}"
+									telerik:StyleManager.Theme="{StaticResource Theme}" 
+									Margin="0,0,2,0"/>
+
+            <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" IsTabStop="{TemplateBinding IsTabStop}" Style="{StaticResource ColumnHeaderGripperStyle}" Grid.ColumnSpan="2" />
+            <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" IsTabStop="{TemplateBinding IsTabStop}" Style="{StaticResource ColumnHeaderGripperStyle}" Grid.ColumnSpan="2" />
+
+        </Grid>
+    </ControlTemplate>
+    <Style x:Key="GridViewHeaderCellStyle" TargetType="telerik:GridViewHeaderCell">
+        <Setter Property="Template" Value="{StaticResource GridViewHeaderCellTemplate}" />
+        <Setter Property="Foreground" Value="{StaticResource BasicBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{StaticResource StrongBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="4,0,0,0" />
+        <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
+        <Setter Property="FontSize" Value="11"/>
+    </Style>
+	<Style BasedOn="{StaticResource GridViewHeaderCellStyle}" TargetType="telerik:GridViewHeaderCell" />
+    
+    <!--CELL STYLE-->
+    <ControlTemplate x:Key="ValidationToolTipTemplate" TargetType="ToolTip">
+        <Grid x:Name="Root" Margin="5,0" Opacity="0" RenderTransformOrigin="0,0">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="OpenStates">
+                    <VisualStateGroup.Transitions>
+                        <VisualTransition GeneratedDuration="0"/>
+                        <VisualTransition GeneratedDuration="0:0:0.2" To="Open">
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="xform" Storyboard.TargetProperty="X">
+                                    <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Root" Storyboard.TargetProperty="Opacity">
+                                    <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualTransition>
+                    </VisualStateGroup.Transitions>
+                    <VisualState x:Name="Closed">
+                        <Storyboard>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Root" Storyboard.TargetProperty="Opacity">
+                                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Open">
+                        <Storyboard>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="xform" Storyboard.TargetProperty="X">
+                                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Root" Storyboard.TargetProperty="Opacity">
+                                <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid.RenderTransform>
+                <TranslateTransform x:Name="xform" X="-25"/>
+            </Grid.RenderTransform>
+
+            <Border>
+                <ItemsControl ItemsSource="{TemplateBinding Content}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Margin="8,4,8,4" MaxWidth="250" Foreground="White" Text="{Binding}" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Border>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="GridViewCellTemplate" TargetType="telerik:GridViewCell">
+        <Grid>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="SelectionStates">
+                    <VisualState x:Name="Unselected" />
+                    <VisualState x:Name="Selected">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background_Selected" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Current" />
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background_Over" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="EditingStates">
+                    <VisualState x:Name="Edited">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ContentPresenter" Storyboard.TargetProperty="Margin">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="0" />
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ContentPresenter" Storyboard.TargetProperty="VerticalAlignment">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Stretch" />
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_CellBorder" Storyboard.TargetProperty="Background">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource MainBrush}" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Display" />
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="DisabledStates">
+                    <VisualState x:Name="Enabled" />
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ContentPresenter" Storyboard.TargetProperty="Opacity">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="0.3" />
+                            </ObjectAnimationUsingKeyFrames>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Background_Disabled" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="ValueStates">
+                    <VisualState x:Name="Valid" />
+                    <VisualState x:Name="Invalid"/>
+                    <VisualState x:Name="InvalidUnfocused"/>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <Border x:Name="PART_CellBorder" 
+				Background="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}"
+				BorderBrush="{TemplateBinding VerticalGridLinesBrush}"
+				BorderThickness="{Binding VerticalGridLinesWidth, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource GridLineWidthToThicknessConverter}, ConverterParameter=Right}" />
+
+            <Border x:Name="Background_Over" Background="{StaticResource StrongBrush}" Opacity="0.2"
+					BorderBrush="{TemplateBinding VerticalGridLinesBrush}"
+					BorderThickness="{Binding VerticalGridLinesWidth, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource GridLineWidthToThicknessConverter}, ConverterParameter=Right}"
+					Grid.Column="2" Grid.ColumnSpan="2"  Visibility="Collapsed" />
+
+            <Border x:Name="Background_Selected" Background="{StaticResource BasicBrush}"						
+					BorderBrush="{TemplateBinding VerticalGridLinesBrush}"
+					BorderThickness="{Binding VerticalGridLinesWidth, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource GridLineWidthToThicknessConverter}, ConverterParameter=Right}"
+					Grid.Column="2" Grid.ColumnSpan="2" Visibility="Collapsed" />
+
+            <Border x:Name="Background_Current"
+					BorderThickness="1" 
+				    BorderBrush="{StaticResource MarkerBrush}" Opacity="0.2"
+					Grid.Column="2" Grid.ColumnSpan="2" Visibility="Collapsed" />
+
+            <Border x:Name="Background_Invalid_Unfocused"
+						Visibility="Collapsed"
+					    BorderThickness="1"
+						BorderBrush="{StaticResource ValidationBrush}"
+						Grid.Column="2" Grid.ColumnSpan="2" Opacity="1"/>
+
+            <Border x:Name="Background_Invalid"
+					Background="{StaticResource MainBrush}"
+						Margin="1,1,2,2"
+					 BorderThickness="1"
+					BorderBrush="{StaticResource ValidationBrush}" 
+					Grid.Column="2" Grid.ColumnSpan="2" Visibility="Collapsed">
+                <ToolTipService.ToolTip>
+                    <ToolTip x:Name="validationTooltip" Placement="Right" 
+						 Content="{TemplateBinding Errors}"
+						 Template="{StaticResource ValidationToolTipTemplate}">
+                    </ToolTip>
+                </ToolTipService.ToolTip>
+                <Grid  HorizontalAlignment="Right" Height="6" VerticalAlignment="Top" Width="6">
+                    <Path Fill="{StaticResource ValidationBrush}" Width="4" Height="4" Margin="1" Data="M0,0 L4,0 L4,4 z"/>
+                </Grid>
+            </Border>
+
+            <Border x:Name="Background_Disabled"
+						Background="{StaticResource MainBrush}" Opacity="0.5"
+						Grid.Column="2" Grid.ColumnSpan="2" Visibility="Collapsed" />
+
+            <ContentPresenter x:Name="PART_ContentPresenter"
+								Margin="{TemplateBinding Padding}"
+								Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+								VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+								HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+        </Grid>
+    </ControlTemplate>
+    <Style x:Key="GridViewCellStyle" TargetType="telerik:GridViewCell">
+        <Setter Property="Template" Value="{StaticResource GridViewCellTemplate}"/>
+        <Setter Property="Padding" Value="4,0,0,0"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BasicBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,1,0" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="Background" Value="Transparent" />        
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+	<Style BasedOn="{StaticResource GridViewCellStyle}" TargetType="telerik:GridViewCell" />
+	<Style x:Key="RevenueCellStyle" BasedOn="{StaticResource GridViewCellStyle}" TargetType="telerik:GridViewCell">
+		<Setter Property="HorizontalContentAlignment" Value="Right" />
+		<Setter Property="Padding" Value="0,2,4,0"/>
+	</Style>
+
+    <!--SCROLL VIEWER STYLE-->
+    <ControlTemplate x:Key="GridViewScrollViewerTemplate" TargetType="telerik:GridViewScrollViewer">
+        <Grid Name="PART_RootPanel" Background="{TemplateBinding Background}">
+        	
+			<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="VisualStateGroup">
+								<VisualStateGroup.Transitions>
+									<VisualTransition GeneratedDuration="0:0:0.3">
+										<VisualTransition.GeneratedEasingFunction>
+											<CircleEase EasingMode="EaseOut"/>
+										</VisualTransition.GeneratedEasingFunction>
+									</VisualTransition>
+								</VisualStateGroup.Transitions>
+								<VisualState x:Name="Normal"/>
+								<VisualState x:Name="MouseOver">
+									<Storyboard>
+										<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PART_VerticalScrollBar" />
+										<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PART_HorizontalScrollBar" />
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="MouseEnter">
+								<ei:GoToStateAction StateName="MouseOver"/>
+							</i:EventTrigger>
+							<i:EventTrigger EventName="MouseLeave">
+								<ei:GoToStateAction StateName="Normal"/>
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+			
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <telerik:ScrollContentPresenter Grid.Row="2" CanContentScroll="{TemplateBinding CanContentScroll}" />
+            <ScrollBar x:Name="PART_VerticalScrollBar"
+                       IsTabStop="False"
+                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                       Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" Orientation="Vertical" 
+	   				   ViewportSize="{TemplateBinding ViewportHeight}"
+                       Maximum="{TemplateBinding ScrollableHeight}"
+                       Minimum="0.0" Opacity="0"
+                       Value="{Binding VerticalOffset, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"/>
+            <ScrollBar x:Name="PART_HorizontalScrollBar" 
+                       IsTabStop="False"
+                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                       Grid.Column="0" Grid.Row="4" Orientation="Horizontal"
+	   				   ViewportSize="{TemplateBinding ViewportWidth}"
+                       Maximum="{TemplateBinding ScrollableWidth}"
+                       Minimum="0.0" Opacity="0"
+                       Value="{Binding HorizontalOffset, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"/>
+            <Rectangle Grid.Column="1" Grid.Row="4" Fill="Transparent" />
+        </Grid>
+    </ControlTemplate>
+    <Style TargetType="telerik:GridViewScrollViewer" x:Key="GridViewScrollViewerStyle">
+        <Setter Property="Template" Value="{StaticResource GridViewScrollViewerTemplate}" />
+    </Style>
+            
+    <!--GRID VIEW STYLE-->
+    <ControlTemplate x:Key="RadGridViewTemplate" TargetType="telerik:RadGridView">
+
+        <Border Name="PART_MasterGridContainer" 
+					Background="{TemplateBinding Background}"
+					BorderBrush="{TemplateBinding BorderBrush}"
+					BorderThickness="{TemplateBinding BorderThickness}"
+					Padding="{TemplateBinding Padding}">
+            <Grid x:Name="HierrarchyBackground">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition x:Name="PART_AttachedBehaviorRow" Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition x:Name="ScrollBarRow" MinHeight="0" Height="0"/>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition x:Name="ScrollBarColumn" MinWidth="0" Width="0"/>
+                </Grid.ColumnDefinitions>
+
+                <telerik:GridViewGroupPanel x:Name="PART_GroupPanel" Grid.Row="0" Grid.ColumnSpan="2" 
+                                             telerik:StyleManager.Theme="{StaticResource Theme}"
+                                             Tag="{TemplateBinding Tag}" 
+											 Background="{TemplateBinding GroupPanelBackground}"
+											 Foreground="{TemplateBinding GroupPanelForeground}"/>
+
+                <telerik:GridViewScrollViewer x:Name="PART_ItemsScrollViewer" Background="Transparent"
+                                       CanContentScroll="True" Style="{StaticResource GridViewScrollViewerStyle}"
+									   Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <telerik:GridViewScrollViewer.HeaderRow>
+                        <telerik:GridViewHeaderRow x:Name="PART_HeaderRow"
+                                    telerik:StyleManager.Theme="{StaticResource Theme}"
+                                    IndentLevel="{TemplateBinding GroupCount}" />
+                    </telerik:GridViewScrollViewer.HeaderRow>
+                    <telerik:GridViewScrollViewer.NewRow>
+                        <telerik:GridViewNewRow Name="PART_AddNewRow" 
+                                     telerik:StyleManager.Theme="{StaticResource Theme}"
+                                     IndentLevel="{TemplateBinding GroupCount}"
+                                     Visibility="Collapsed" />
+                    </telerik:GridViewScrollViewer.NewRow>
+                    <telerik:GridViewScrollViewer.FooterRow>
+                        <telerik:GridViewFooterRow x:Name="PART_FooterRow"
+                                    telerik:StyleManager.Theme="{StaticResource Theme}"
+                                    IndentLevel="{TemplateBinding GroupCount}" />
+                    </telerik:GridViewScrollViewer.FooterRow>
+                    <telerik:GridViewVirtualizingPanel x:Name="PART_GridViewVirtualizingPanel" />
+                </telerik:GridViewScrollViewer>
+
+                <telerik:ScrollPositionIndicator x:Name="PART_ScrollPositionIndicator"
+												  telerik:StyleManager.Theme="{StaticResource Theme}"
+												  Margin="0,0,28,0" 
+												  IsHitTestVisible="False" HorizontalAlignment="Right" 
+												  Grid.Row="2" Grid.ColumnSpan="2"
+												  Visibility="{Binding IsScrolling, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}"
+												  ContentTemplate="{TemplateBinding ScrollPositionIndicatorTemplate}" />
+
+
+                <Border x:Name="PART_FrozenColumnsPreview" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="4" Background="#33000000" Width="5"/>
+                <telerik:GridViewLoadingIndicator x:Name="PART_GridViewLoadingIndicator" Visibility="Collapsed" telerik:StyleManager.Theme="{StaticResource Theme}"
+												   Grid.RowSpan="4" Grid.ColumnSpan="2" />
+
+
+
+            </Grid>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="GridViewActivity">
+                    <VisualState x:Name="Idle">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_GridViewLoadingIndicator"
+                                                           Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Busy">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_GridViewLoadingIndicator"
+                                                           Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+
+                <VisualStateGroup x:Name="ColumnHeadersVisibility">
+                    <VisualState x:Name="ColumnHeadersVisible">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_HeaderRow" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="ColumnHeadersCollapsed">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_HeaderRow" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+
+                <VisualStateGroup x:Name="ColumnFootersVisibility">
+                    <VisualState x:Name="ColumnFootersVisible">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_FooterRow" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="ColumnFootersCollapsed">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_FooterRow" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+
+                <VisualStateGroup x:Name="GroupPanelVisibility">
+                    <VisualState x:Name="GroupPanelVisible">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_GroupPanel"
+                                                           Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="GroupPanelCollapsed">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_GroupPanel"
+                                                           Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+
+                <VisualStateGroup x:Name="InsertRowVisibility">
+                    <VisualState x:Name="InsertRowVisible">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_AddNewRow" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Visible" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="InsertRowCollapsed">
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_AddNewRow" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="Collapsed" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Border>
+    </ControlTemplate>
+    <Style x:Key="RadGridViewStyle" TargetType="telerik:RadGridView">
+    	<Setter Property="IsReadOnly" Value="True" />
+    	<Setter Property="Template" Value="{StaticResource RadGridViewTemplate}" />
+    	<Setter Property="Background" Value="Transparent" />
+    	<Setter Property="BorderBrush" Value="{StaticResource StrongBrush}" />
+    	<Setter Property="BorderThickness" Value="0" />
+    	<Setter Property="GridLinesVisibility" Value="None"/>    	
+        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource StrongBrush}" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource StrongBrush}" />
+    	<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+    	<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+    	<Setter Property="VerticalAlignment" Value="Stretch" />
+    	<Setter Property="HorizontalAlignment" Value="Stretch" />
+    	<Setter Property="Foreground" Value="{StaticResource BasicBrush}"/>
+    	<Setter Property="FontFamily" Value="Segoe UI" />
+    	<Setter Property="FontSize" Value="14" />
+        <Setter Property="ShowGroupPanel" Value="False"/>
+        <Setter Property="CanUserFreezeColumns" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
+        <Setter Property="IsFilteringAllowed" Value="False"/>
+        <Setter Property="RowIndicatorVisibility" Value="Collapsed"/>
+    </Style>  
+	<Style BasedOn="{StaticResource RadGridViewStyle}" TargetType="telerik:RadGridView" />
+</ResourceDictionary>

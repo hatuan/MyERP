@@ -1,0 +1,5 @@
+﻿<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" EntryPointAssembly="MyERP.Modules.Dashboard" EntryPointType="MyERP.Modules.Dashboard.App" RuntimeVersion="5.0.61118.0">
+  <Deployment.Parts>
+    <AssemblyPart x:Name="MyERP.Modules.Dashboard" Source="MyERP.Modules.Dashboard.dll" />
+  </Deployment.Parts>
+</Deployment>

@@ -5,12 +5,12 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
-        <SilverlightProjectProperties>
-          <StartPageUrl>
-          </StartPageUrl>
-          <StartAction>DynamicPage</StartAction>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <StartPageUrl>MyERPService.svc</StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
           <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>True</SilverlightDebugging>
           <NativeDebugging>False</NativeDebugging>
           <SQLDebugging>False</SQLDebugging>
           <ExternalProgram>
@@ -21,11 +21,13 @@
           </StartCmdLineArguments>
           <StartWorkingDirectory>
           </StartWorkingDirectory>
-          <ShowWebRefOnDebugPrompt>True</ShowWebRefOnDebugPrompt>
-          <OutOfBrowserProjectToDebug>
-          </OutOfBrowserProjectToDebug>
-          <ShowRiaSvcsOnDebugPrompt>True</ShowRiaSvcsOnDebugPrompt>
-        </SilverlightProjectProperties>
+          <EnableENC>True</EnableENC>
+          <AlwaysStartWebServerOnDebug>True</AlwaysStartWebServerOnDebug>
+          <ProjectOutputReferences>
+            <Ref Project="{9B4EBF15-7ECC-4388-85E4-86CBE2CBA0A5}" Folder="ClientBin">MyERP.xap</Ref>
+            <Ref Project="{2493DA95-9A90-4BDA-9D30-07A5B9B784CB}" Folder="ClientBin">MyERP.Modules.Dashboard.xap</Ref>
+          </ProjectOutputReferences>
+        </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>

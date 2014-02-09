@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -9,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using MyERP;
+using MyERP.Helpers;
+using Telerik.Windows.Controls;
 
 namespace MyERP
 {
@@ -26,7 +31,13 @@ namespace MyERP
 
         private void Application_Startup(object sender, StartupEventArgs e) 
         {
-            this.RootVisual = new MainPage();
+            LocalizationManager.DefaultCulture = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = LocalizationManager.DefaultCulture;
+            Thread.CurrentThread.CurrentUICulture = LocalizationManager.DefaultCulture;
+
+            AssemblyCache.Initialize();
+            var bootstrapper = new Bootstrapper();
+            bootstrapper.Run();
         }
 
         private void Application_Exit(object sender, EventArgs e) 
