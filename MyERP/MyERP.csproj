@@ -27,7 +27,7 @@
     <ValidateXaml>true</ValidateXaml>
     <EnableOutOfBrowser>false</EnableOutOfBrowser>
     <OutOfBrowserSettingsFile>Properties\OutOfBrowserSettings.xml</OutOfBrowserSettingsFile>
-    <UsePlatformExtensions>false</UsePlatformExtensions>
+    <UsePlatformExtensions>true</UsePlatformExtensions>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
     <LinkedServerProject>
     </LinkedServerProject>
@@ -97,15 +97,15 @@
     <Reference Include="System.Windows.Browser" />
     <Reference Include="System.Xml.Linq, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Controls, Version=2013.3.1016.1050, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\lib\RCSL\2013.3.1016.1050\Telerik.Windows.Controls.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Telerik\RadControls for Silverlight Q3 2013\Binaries\Silverlight\Telerik.Windows.Controls.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Input, Version=2013.3.1016.1050, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\lib\RCSL\2013.3.1016.1050\Telerik.Windows.Controls.Input.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Telerik\RadControls for Silverlight Q3 2013\Binaries\Silverlight\Telerik.Windows.Controls.Input.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Themes.Windows8, Version=2013.3.1016.1050, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\lib\RCSL\2013.3.1016.1050\Telerik.Windows.Themes.Windows8.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Telerik\RadControls for Silverlight Q3 2013\Binaries\Silverlight\Telerik.Windows.Themes.Windows8.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

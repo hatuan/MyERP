@@ -1809,19 +1809,19 @@
   <domainContext>
     <domainModelHasDomainContext Id="d7bd6e8c-e34a-47be-a590-3f03f86938da">
       <domainContainer name="EntitiesModel" namespace="MyERP.DataAccess" showPropertiesCompartment="true">
-        <entitySetProperty name="Dmtks" namespace="MyERP.DataAccess" type="Dmtk" label="Dmtks : IQueryable&lt;MyERP.DataAccess.Dmtk&gt;" />
-        <entitySetProperty name="Userinfos" namespace="MyERP.DataAccess" type="Userinfo" label="Userinfos : IQueryable&lt;MyERP.DataAccess.Userinfo&gt;" />
-        <entitySetProperty name="Dmnts" namespace="MyERP.DataAccess" type="Dmnt" label="Dmnts : IQueryable&lt;MyERP.DataAccess.Dmnt&gt;" />
-        <entitySetProperty name="Dmkhs" namespace="MyERP.DataAccess" type="Dmkh" label="Dmkhs : IQueryable&lt;MyERP.DataAccess.Dmkh&gt;" />
-        <entitySetProperty name="Dmnhkhs" namespace="MyERP.DataAccess" type="Dmnhkh" label="Dmnhkhs : IQueryable&lt;MyERP.DataAccess.Dmnhkh&gt;" />
-        <entitySetProperty name="Dmtts" namespace="MyERP.DataAccess" type="Dmtt" label="Dmtts : IQueryable&lt;MyERP.DataAccess.Dmtt&gt;" />
-        <entitySetProperty name="Dmvvs" namespace="MyERP.DataAccess" type="Dmvv" label="Dmvvs : IQueryable&lt;MyERP.DataAccess.Dmvv&gt;" />
-        <entitySetProperty name="Dmnhvvs" namespace="MyERP.DataAccess" type="Dmnhvv" label="Dmnhvvs : IQueryable&lt;MyERP.DataAccess.Dmnhvv&gt;" />
-        <entitySetProperty name="Ph11s" namespace="MyERP.DataAccess" type="Ph11" label="Ph11s : IQueryable&lt;MyERP.DataAccess.Ph11&gt;" />
-        <entitySetProperty name="Ct11s" namespace="MyERP.DataAccess" type="Ct11" label="Ct11s : IQueryable&lt;MyERP.DataAccess.Ct11&gt;" />
-        <entitySetProperty name="Dmdvcss" namespace="MyERP.DataAccess" type="Dmdvcs" label="Dmdvcss : IQueryable&lt;MyERP.DataAccess.Dmdvcs&gt;" />
-        <entitySetProperty name="Dmtds" namespace="MyERP.DataAccess" type="Dmtd" label="Dmtds : IQueryable&lt;MyERP.DataAccess.Dmtd&gt;" />
-        <entitySetProperty name="Dmcts" namespace="MyERP.DataAccess" type="Dmct" label="Dmcts : IQueryable&lt;MyERP.DataAccess.Dmct&gt;" />
+        <entitySetProperty name="DmtkSet" namespace="MyERP.DataAccess" type="Dmtk" label="DmtkSet : IQueryable&lt;MyERP.DataAccess.Dmtk&gt;" />
+        <entitySetProperty name="UserinfoSet" namespace="MyERP.DataAccess" type="Userinfo" label="UserinfoSet : IQueryable&lt;MyERP.DataAccess.Userinfo&gt;" />
+        <entitySetProperty name="DmntSet" namespace="MyERP.DataAccess" type="Dmnt" label="DmntSet : IQueryable&lt;MyERP.DataAccess.Dmnt&gt;" />
+        <entitySetProperty name="DmkhSet" namespace="MyERP.DataAccess" type="Dmkh" label="DmkhSet : IQueryable&lt;MyERP.DataAccess.Dmkh&gt;" />
+        <entitySetProperty name="DmnhkhSet" namespace="MyERP.DataAccess" type="Dmnhkh" label="DmnhkhSet : IQueryable&lt;MyERP.DataAccess.Dmnhkh&gt;" />
+        <entitySetProperty name="DmttSet" namespace="MyERP.DataAccess" type="Dmtt" label="DmttSet : IQueryable&lt;MyERP.DataAccess.Dmtt&gt;" />
+        <entitySetProperty name="DmvvSet" namespace="MyERP.DataAccess" type="Dmvv" label="DmvvSet : IQueryable&lt;MyERP.DataAccess.Dmvv&gt;" />
+        <entitySetProperty name="DmnhvvSet" namespace="MyERP.DataAccess" type="Dmnhvv" label="DmnhvvSet : IQueryable&lt;MyERP.DataAccess.Dmnhvv&gt;" />
+        <entitySetProperty name="Ph11Set" namespace="MyERP.DataAccess" type="Ph11" label="Ph11Set : IQueryable&lt;MyERP.DataAccess.Ph11&gt;" />
+        <entitySetProperty name="Ct11Set" namespace="MyERP.DataAccess" type="Ct11" label="Ct11Set : IQueryable&lt;MyERP.DataAccess.Ct11&gt;" />
+        <entitySetProperty name="DmdvcsSet" namespace="MyERP.DataAccess" type="Dmdvcs" label="DmdvcsSet : IQueryable&lt;MyERP.DataAccess.Dmdvcs&gt;" />
+        <entitySetProperty name="DmtdSet" namespace="MyERP.DataAccess" type="Dmtd" label="DmtdSet : IQueryable&lt;MyERP.DataAccess.Dmtd&gt;" />
+        <entitySetProperty name="DmctSet" namespace="MyERP.DataAccess" type="Dmct" label="DmctSet : IQueryable&lt;MyERP.DataAccess.Dmct&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

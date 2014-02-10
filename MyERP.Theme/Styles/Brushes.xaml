@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d">
 
-    <telerik:Office_BlackTheme x:Key="Theme" />
+    <telerik:Windows8Theme x:Key="Theme" />
 
 	<!--MAIN UI BRUSHES-->
     <SolidColorBrush x:Key="AccentBrush" telerik:Windows8Colors.Color="Accent" />

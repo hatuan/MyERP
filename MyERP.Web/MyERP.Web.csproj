@@ -19,7 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <SilverlightApplicationList>{9B4EBF15-7ECC-4388-85E4-86CBE2CBA0A5}|..\MyERP\MyERP.csproj|ClientBin|False,{2493DA95-9A90-4BDA-9D30-07A5B9B784CB}|..\MyERP.Modules.Dashboard\MyERP.Modules.Dashboard.csproj|ClientBin|False</SilverlightApplicationList>
+    <SilverlightApplicationList>{9B4EBF15-7ECC-4388-85E4-86CBE2CBA0A5}|..\MyERP\MyERP.csproj|ClientBin|False,{2493DA95-9A90-4BDA-9D30-07A5B9B784CB}|..\MyERP.Modules.Dashboard\MyERP.Modules.Dashboard.csproj|ClientBin|False,{5F66D21E-ED1A-4D48-BF77-2A08474CDB62}|..\MyERP.Test\MyERP.Test.csproj|ClientBin|False</SilverlightApplicationList>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -60,6 +60,8 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.DomainServices.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.ServiceModel.DomainServices.Server, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Spatial, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Spatial.5.6.0\lib\net40\System.Spatial.dll</HintPath>
@@ -82,10 +84,12 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="Telerik.OpenAccess, Version=2013.3.1211.3, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
     <Reference Include="Telerik.OpenAccess.35.Extensions, Version=2013.3.1211.3, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.OpenAccess.Ria.Extensions, Version=2013.3.1211.3, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientBin\MyERP.Modules.Dashboard.xap" />
+    <Content Include="ClientBin\MyERP.Test.xap" />
     <Content Include="ClientBin\MyERP.xap" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
@@ -97,6 +101,13 @@
     <Content Include="ClientBin\Telerik.Windows.Themes.Windows8.zip" />
     <Content Include="ClientBin\System.Windows.Controls.zip" />
     <Content Include="ClientBin\System.ComponentModel.Composition.Initialization.zip" />
+    <Content Include="MyERPDomainService.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MyERPDomainService.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="ClientBin\System.Windows.Data.zip" />
+    <Content Include="ClientBin\System.Xml.Linq.zip" />
+    <Content Include="ClientBin\Telerik.Windows.Controls.Input.zip" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -113,6 +124,11 @@
     <Compile Include="MyERPDataService.svc.cs">
       <DependentUpon>MyERPDataService.svc</DependentUpon>
     </Compile>
+    <Compile Include="MyERPDomainService.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyERPDomainService.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Telerik.OpenAccess.DataServices\IOpenAccessMetadataProvider.cs" />
     <Compile Include="Telerik.OpenAccess.DataServices\OpenAccessDataService.cs" />
@@ -121,7 +137,6 @@
     <Compile Include="Telerik.OpenAccess.DataServices\OpenAccessUpdateProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ClientBin\Debug\" />
     <Folder Include="ClientBin\Images\" />
     <Folder Include="ClientBin\MyERP.Modules.Dashboard\" />
     <Folder Include="ClientBin\MyERP.Modules.Login\" />
@@ -137,6 +152,9 @@
       <Project>{9529EAEC-44B4-4E50-8EBB-5EAC00B0912B}</Project>
       <Name>MyERP.DataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

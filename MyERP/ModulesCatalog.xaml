@@ -3,8 +3,7 @@
                           xmlns:sys="clr-namespace:System;assembly=mscorlib" 
                           xmlns:Modularity="clr-namespace:Microsoft.Practices.Prism.Modularity;assembly=Microsoft.Practices.Prism">
     
-    <Modularity:ModuleInfo  Ref="MyERP.Modules.Dashboard.xap" InitializationMode="OnDemand" ModuleName="DashboardModule" >
-    </Modularity:ModuleInfo>
+    <Modularity:ModuleInfo  Ref="MyERP.Modules.Dashboard.xap" InitializationMode="OnDemand" ModuleName="DashboardModule" />
     
     
 </Modularity:ModuleCatalog>

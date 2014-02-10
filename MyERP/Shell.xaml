@@ -9,17 +9,18 @@
     xmlns:telerikTransitions="clr-namespace:Telerik.Windows.Controls.TransitionEffects;assembly=Telerik.Windows.Controls"
     mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="768" FontFamily="Segoe UI"
     >
-	<Grid x:Name="LayoutRoot">
+
+    <Grid x:Name="LayoutRoot">
         <Grid.Background>
             <ImageBrush ImageSource="Images/back.jpg"/>
         </Grid.Background>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
+        <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
-		</Grid.RowDefinitions>
-		
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
         <!--Header-->
         <Grid>
             <Grid.ColumnDefinitions>
@@ -34,10 +35,10 @@
             <ContentControl Grid.Column="1" Grid.Row="0" prism:RegionManager.RegionName="MainMenuRegion" x:Name="MainMenuRegionPlaceholder" HorizontalContentAlignment="Stretch" HorizontalAlignment="Right" Margin="0,9,17,0" />
             <ContentControl Grid.Column="1" Grid.Row="1" prism:RegionManager.RegionName="SubMenuRegion" x:Name="SubMenuRegionPlaceholder" HorizontalContentAlignment="Stretch" HorizontalAlignment="Right" Margin="0,0,17,0" />
         </Grid>
-        
+
         <!--Top Border-->
         <Rectangle Grid.Row="1" Fill="{StaticResource AccentBrush}" Height="4" />
-        
+
         <!--Content-->
         <!--<telerik:RadTransitionControl Grid.Row="2" prism:RegionManager.RegionName="ContentRegion" x:Name="ContentRegionPlaceholder" Duration="0:0:0.3" Margin="48,0,16,16">
 			<telerik:RadTransitionControl.Transition>
@@ -50,13 +51,16 @@
         <ContentControl Grid.Row="2" prism:RegionManager.RegionName="ContentRegion" x:Name="ContentRegionPlaceholder" Margin="48,0,16,16"
                         HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
         </ContentControl>
-		<telerik:RadBusyIndicator x:Name="busyIndicator" 
+        
+        <telerik:RadBusyIndicator x:Name="busyIndicator" 
 								  Grid.RowSpan="4" 
 								  IsIndeterminate="{Binding BusyIndicatorIsIndeterminate}" 
 								  IsBusy="{Binding IsBusy}" 
 								  ProgressValue="{Binding ProgressPercentage}" 
 								  telerik:AnimationManager.IsAnimationEnabled="False" DisplayAfter="0:0:0.2" />
 
+
         <Rectangle Fill="#FF000000" Height="6" Opacity="0.3" HorizontalAlignment="Stretch" Grid.Row="3"/>
-	</Grid>
+    </Grid>
+
 </UserControl>

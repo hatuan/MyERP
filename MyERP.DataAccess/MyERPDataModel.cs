@@ -51,7 +51,7 @@ namespace MyERP.DataAccess
 			:base(connection, backendConfiguration, metadataSource)
 		{ }
 			
-		public IQueryable<Dmtk> Dmtks 
+		public IQueryable<Dmtk> DmtkSet 
 		{
 			get
 			{
@@ -59,7 +59,7 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		public IQueryable<Userinfo> Userinfos 
+		public IQueryable<Userinfo> UserinfoSet 
 		{
 			get
 			{
@@ -67,7 +67,7 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		public IQueryable<Dmnt> Dmnts 
+		public IQueryable<Dmnt> DmntSet 
 		{
 			get
 			{
@@ -75,7 +75,7 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		public IQueryable<Dmkh> Dmkhs 
+		public IQueryable<Dmkh> DmkhSet 
 		{
 			get
 			{
@@ -83,7 +83,7 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		public IQueryable<Dmnhkh> Dmnhkhs 
+		public IQueryable<Dmnhkh> DmnhkhSet 
 		{
 			get
 			{
@@ -91,7 +91,7 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		public IQueryable<Dmtt> Dmtts 
+		public IQueryable<Dmtt> DmttSet 
 		{
 			get
 			{
@@ -99,7 +99,7 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		public IQueryable<Dmvv> Dmvvs 
+		public IQueryable<Dmvv> DmvvSet 
 		{
 			get
 			{
@@ -107,7 +107,7 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		public IQueryable<Dmnhvv> Dmnhvvs 
+		public IQueryable<Dmnhvv> DmnhvvSet 
 		{
 			get
 			{
@@ -115,7 +115,7 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		public IQueryable<Ph11> Ph11s 
+		public IQueryable<Ph11> Ph11Set 
 		{
 			get
 			{
@@ -123,7 +123,7 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		public IQueryable<Ct11> Ct11s 
+		public IQueryable<Ct11> Ct11Set 
 		{
 			get
 			{
@@ -131,7 +131,7 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		public IQueryable<Dmdvcs> Dmdvcss 
+		public IQueryable<Dmdvcs> DmdvcsSet 
 		{
 			get
 			{
@@ -139,7 +139,7 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		public IQueryable<Dmtd> Dmtds 
+		public IQueryable<Dmtd> DmtdSet 
 		{
 			get
 			{
@@ -147,7 +147,7 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		public IQueryable<Dmct> Dmcts 
+		public IQueryable<Dmct> DmctSet 
 		{
 			get
 			{
@@ -168,55 +168,55 @@ namespace MyERP.DataAccess
 	
 	public interface IEntitiesModelUnitOfWork : IUnitOfWork
 	{
-		IQueryable<Dmtk> Dmtks
+		IQueryable<Dmtk> DmtkSet
 		{
 			get;
 		}
-		IQueryable<Userinfo> Userinfos
+		IQueryable<Userinfo> UserinfoSet
 		{
 			get;
 		}
-		IQueryable<Dmnt> Dmnts
+		IQueryable<Dmnt> DmntSet
 		{
 			get;
 		}
-		IQueryable<Dmkh> Dmkhs
+		IQueryable<Dmkh> DmkhSet
 		{
 			get;
 		}
-		IQueryable<Dmnhkh> Dmnhkhs
+		IQueryable<Dmnhkh> DmnhkhSet
 		{
 			get;
 		}
-		IQueryable<Dmtt> Dmtts
+		IQueryable<Dmtt> DmttSet
 		{
 			get;
 		}
-		IQueryable<Dmvv> Dmvvs
+		IQueryable<Dmvv> DmvvSet
 		{
 			get;
 		}
-		IQueryable<Dmnhvv> Dmnhvvs
+		IQueryable<Dmnhvv> DmnhvvSet
 		{
 			get;
 		}
-		IQueryable<Ph11> Ph11s
+		IQueryable<Ph11> Ph11Set
 		{
 			get;
 		}
-		IQueryable<Ct11> Ct11s
+		IQueryable<Ct11> Ct11Set
 		{
 			get;
 		}
-		IQueryable<Dmdvcs> Dmdvcss
+		IQueryable<Dmdvcs> DmdvcsSet
 		{
 			get;
 		}
-		IQueryable<Dmtd> Dmtds
+		IQueryable<Dmtd> DmtdSet
 		{
 			get;
 		}
-		IQueryable<Dmct> Dmcts
+		IQueryable<Dmct> DmctSet
 		{
 			get;
 		}
