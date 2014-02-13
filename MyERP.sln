@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{F79FC771-EFB9-4A27-86F6-F5CBF991180A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP", "MyERP\MyERP.csproj", "{9B4EBF15-7ECC-4388-85E4-86CBE2CBA0A5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AB9E4713-11C7-4903-9D30-D7F5C4FCC1DF} = {AB9E4713-11C7-4903-9D30-D7F5C4FCC1DF}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1BCFFFB5-B236-44DB-8208-4058CF67A653}"
 	ProjectSection(SolutionItems) = preProject
@@ -25,6 +28,18 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.DataAccess", "MyERP.DataAccess\MyERP.DataAccess.csproj", "{9529EAEC-44B4-4E50-8EBB-5EAC00B0912B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.Test", "MyERP.Test\MyERP.Test.csproj", "{5F66D21E-ED1A-4D48-BF77-2A08474CDB62}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{CB54CC65-9590-432E-8E1E-28240531E6C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.Repository", "MyERP.Repository\MyERP.Repository.csproj", "{D50D0A5B-2D82-4786-A834-A2579754EA12}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AB9E4713-11C7-4903-9D30-D7F5C4FCC1DF} = {AB9E4713-11C7-4903-9D30-D7F5C4FCC1DF}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedCode", "SharedCode", "{81BE53CB-3357-4C2F-9EEB-1A139F412240}"
+	ProjectSection(SolutionItems) = preProject
+		SharedCode\Cryptography.cs = SharedCode\Cryptography.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -106,6 +121,16 @@ Global
 		{5F66D21E-ED1A-4D48-BF77-2A08474CDB62}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5F66D21E-ED1A-4D48-BF77-2A08474CDB62}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5F66D21E-ED1A-4D48-BF77-2A08474CDB62}.Release|x86.ActiveCfg = Release|Any CPU
+		{D50D0A5B-2D82-4786-A834-A2579754EA12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D50D0A5B-2D82-4786-A834-A2579754EA12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D50D0A5B-2D82-4786-A834-A2579754EA12}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D50D0A5B-2D82-4786-A834-A2579754EA12}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D50D0A5B-2D82-4786-A834-A2579754EA12}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D50D0A5B-2D82-4786-A834-A2579754EA12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D50D0A5B-2D82-4786-A834-A2579754EA12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D50D0A5B-2D82-4786-A834-A2579754EA12}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D50D0A5B-2D82-4786-A834-A2579754EA12}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D50D0A5B-2D82-4786-A834-A2579754EA12}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,5 +141,8 @@ Global
 		{2493DA95-9A90-4BDA-9D30-07A5B9B784CB} = {F79FC771-EFB9-4A27-86F6-F5CBF991180A}
 		{20AC33D9-E8EB-4D60-83DE-069C101A4B54} = {F79FC771-EFB9-4A27-86F6-F5CBF991180A}
 		{5F66D21E-ED1A-4D48-BF77-2A08474CDB62} = {F79FC771-EFB9-4A27-86F6-F5CBF991180A}
+		{D50D0A5B-2D82-4786-A834-A2579754EA12} = {F79FC771-EFB9-4A27-86F6-F5CBF991180A}
+		{AB9E4713-11C7-4903-9D30-D7F5C4FCC1DF} = {CB54CC65-9590-432E-8E1E-28240531E6C8}
+		{9529EAEC-44B4-4E50-8EBB-5EAC00B0912B} = {CB54CC65-9590-432E-8E1E-28240531E6C8}
 	EndGlobalSection
 EndGlobal

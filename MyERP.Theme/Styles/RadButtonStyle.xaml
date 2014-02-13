@@ -437,4 +437,26 @@
 		<Setter Property="FontFamily" Value="Segoe UI Semibold"/>
 		<Setter Property="FontSize" Value="12"/>
 	</Style>
+
+	<Style TargetType="telerik:RadDropDownButton" x:Key="RadDropDownButtonStyle">
+        <Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Foreground" Value="{StaticResource MainBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="3"/>
+    </Style>
+
+	<Style TargetType="telerik:RadDropDownButton" x:Key="RadDropDownButtonLargeStyle" BasedOn="{StaticResource RadDropDownButtonStyle}">
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Margin" Value="26,0,0,0"/>        
+    </Style>
+
+    <Style TargetType="telerik:RadDropDownButton" x:Key="RadDropDownButtonSmallStyle" BasedOn="{StaticResource RadDropDownButtonStyle}">
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Margin" Value="30,0,0,0"/>
+    </Style>
 </ResourceDictionary>

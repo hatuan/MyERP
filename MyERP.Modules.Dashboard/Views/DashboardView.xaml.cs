@@ -42,7 +42,6 @@ namespace MyERP.Modules.Dashboard.Views
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

@@ -2,6 +2,8 @@
   <Deployment.Parts>
     <AssemblyPart x:Name="MyERP.Modules.Dashboard" Source="MyERP.Modules.Dashboard.dll" />
     <AssemblyPart x:Name="Telerik.Windows.Controls" Source="Telerik.Windows.Controls.dll" />
+    <AssemblyPart x:Name="Telerik.Windows.Controls.Input" Source="Telerik.Windows.Controls.Input.dll" />
     <AssemblyPart x:Name="Telerik.Windows.Themes.Windows8" Source="Telerik.Windows.Themes.Windows8.dll" />
+    <AssemblyPart x:Name="System.ComponentModel.DataAnnotations" Source="System.ComponentModel.DataAnnotations.dll" />
   </Deployment.Parts>
 </Deployment>

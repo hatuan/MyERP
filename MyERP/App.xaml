@@ -7,6 +7,7 @@
                 <ResourceDictionary Source="/MyERP.Theme;component/Styles/Brushes.xaml"/>
                 <ResourceDictionary Source="/MyERP.Theme;component/Styles/RadButtonStyle.xaml"/>
                 <ResourceDictionary Source="/MyERP.Theme;component/Styles/CommonStyles.xaml"/>
+                <ResourceDictionary Source="/MyERP.Theme;component/Styles/RadWindowViewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

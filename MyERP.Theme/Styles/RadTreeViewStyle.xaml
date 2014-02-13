@@ -150,7 +150,6 @@
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="CheckState" Value="Off" />
         <Setter Property="IsDropAllowed" Value="True" />
-        <Setter Property="ItemsOptionListType" Value="Default" />
         <Setter Property="IsEnabled" Value="True" />
         <Setter Property="Template">
             <Setter.Value>

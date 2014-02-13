@@ -7,5 +7,7 @@
     public static class ModuleNames
     {
         public const string DashboardModule = "DashboardModule";
+        public const string MyERPModule = "MyERPModule";
+        public const string SettingModule = "SettingModule";
     }
 }

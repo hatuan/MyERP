@@ -36,7 +36,7 @@ namespace MyERP
         public void OnImportsSatisfied()
         {
             LoadModulesInBackground();
-            NavigateToDashboardModule();
+            //NavigateToDashboardModule();
         }
 
         private void NavigateToDashboardModule()

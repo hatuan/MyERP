@@ -59,8 +59,12 @@
 								  ProgressValue="{Binding ProgressPercentage}" 
 								  telerik:AnimationManager.IsAnimationEnabled="False" DisplayAfter="0:0:0.2" />
 
+        <ContentControl x:Name="AllRegions" 
+						Grid.RowSpan="4"
+						prism:RegionManager.RegionName="AllRegions" Canvas.ZIndex="100" />
 
         <Rectangle Fill="#FF000000" Height="6" Opacity="0.3" HorizontalAlignment="Stretch" Grid.Row="3"/>
+        
     </Grid>
 
 </UserControl>
