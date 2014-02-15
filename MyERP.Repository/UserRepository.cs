@@ -18,7 +18,7 @@ namespace MyERP.Repositories
         public void GetUserinfoByUserNameAndPassword(String userName, String pass, Action<Userinfo> callback)
         {
             EntityQuery<Userinfo> query =
-                this.Context.GetUserinfoSetQuery().Where(u => u.User_Name == userName && MyERP.Global.Cryptography.Decrypt(u.Pass, null) == pass);
+                this.Context.GetUserinfoSetQuery().Where(u => u.User_Name == userName && u.Pass == pass);
 
             this.LoadQuery<Userinfo>(query, callback);
         }

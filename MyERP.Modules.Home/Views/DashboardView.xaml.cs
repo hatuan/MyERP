@@ -3,12 +3,12 @@ using System.Windows;
 using System.Windows.Controls;
 using MyERP.Infrastructure;
 using MyERP.Infrastructure.Extensions;
-using MyERP.Modules.Dashboard.ViewModels;
+using MyERP.Modules.Home.ViewModels;
 using MyERP.ViewModels;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
 
-namespace MyERP.Modules.Dashboard.Views
+namespace MyERP.Modules.Home.Views
 {
     [ViewExport(RegionName = "ContentRegion")]
     public partial class DashboardView : UserControl, INavigationAware
@@ -42,6 +42,7 @@ namespace MyERP.Modules.Dashboard.Views
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
+            this.RegionManager.RequestNavigate(RegionNames.MainMenuRegion, "DashboardMainMenuView");
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

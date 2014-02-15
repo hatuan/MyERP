@@ -65,3 +65,8086 @@ namespace MyERP
         }
     }
 }
+namespace MyERP.DataAccess
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Runtime.Serialization;
+    using System.ServiceModel.DomainServices;
+    using System.ServiceModel.DomainServices.Client;
+    using System.ServiceModel.DomainServices.Client.ApplicationServices;
+    
+    
+    /// <summary>
+    /// The 'Ct11' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class Ct11 : Entity
+    {
+        
+        private string _dien_Giaii;
+        
+        private string _error;
+        
+        private long _ln;
+        
+        private string _ma_Ct;
+        
+        private string _ma_Kh_I;
+        
+        private string _ma_Ku;
+        
+        private string _ma_Td_I;
+        
+        private string _ma_Vv_I;
+        
+        private DateTime _ngay_Ct;
+        
+        private string _nh_Dk;
+        
+        private string[] _openAccessGenerated;
+        
+        private decimal _ps_Co;
+        
+        private decimal _ps_Co_Nt;
+        
+        private decimal _ps_No;
+        
+        private decimal _ps_No_Nt;
+        
+        private string _so_Ct;
+        
+        private string _stt_Rec;
+        
+        private string _tk_I;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnDien_GiaiiChanging(string value);
+        partial void OnDien_GiaiiChanged();
+        partial void OnErrorChanging(string value);
+        partial void OnErrorChanged();
+        partial void OnLnChanging(long value);
+        partial void OnLnChanged();
+        partial void OnMa_CtChanging(string value);
+        partial void OnMa_CtChanged();
+        partial void OnMa_Kh_IChanging(string value);
+        partial void OnMa_Kh_IChanged();
+        partial void OnMa_KuChanging(string value);
+        partial void OnMa_KuChanged();
+        partial void OnMa_Td_IChanging(string value);
+        partial void OnMa_Td_IChanged();
+        partial void OnMa_Vv_IChanging(string value);
+        partial void OnMa_Vv_IChanged();
+        partial void OnNgay_CtChanging(DateTime value);
+        partial void OnNgay_CtChanged();
+        partial void OnNh_DkChanging(string value);
+        partial void OnNh_DkChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnPs_CoChanging(decimal value);
+        partial void OnPs_CoChanged();
+        partial void OnPs_Co_NtChanging(decimal value);
+        partial void OnPs_Co_NtChanged();
+        partial void OnPs_NoChanging(decimal value);
+        partial void OnPs_NoChanged();
+        partial void OnPs_No_NtChanging(decimal value);
+        partial void OnPs_No_NtChanged();
+        partial void OnSo_CtChanging(string value);
+        partial void OnSo_CtChanged();
+        partial void OnStt_RecChanging(string value);
+        partial void OnStt_RecChanged();
+        partial void OnTk_IChanging(string value);
+        partial void OnTk_IChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Ct11"/> class.
+        /// </summary>
+        public Ct11()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Dien_Giaii' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Dien_Giaii
+        {
+            get
+            {
+                return this._dien_Giaii;
+            }
+            set
+            {
+                if ((this._dien_Giaii != value))
+                {
+                    this.OnDien_GiaiiChanging(value);
+                    this.RaiseDataMemberChanging("Dien_Giaii");
+                    this.ValidateProperty("Dien_Giaii", value);
+                    this._dien_Giaii = value;
+                    this.RaiseDataMemberChanged("Dien_Giaii");
+                    this.OnDien_GiaiiChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Error' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false)]
+        [ReadOnly(true)]
+        public string Error
+        {
+            get
+            {
+                return this._error;
+            }
+            set
+            {
+                if ((this._error != value))
+                {
+                    this.OnErrorChanging(value);
+                    this.ValidateProperty("Error", value);
+                    this._error = value;
+                    this.RaisePropertyChanged("Error");
+                    this.OnErrorChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ln' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long Ln
+        {
+            get
+            {
+                return this._ln;
+            }
+            set
+            {
+                if ((this._ln != value))
+                {
+                    this.OnLnChanging(value);
+                    this.ValidateProperty("Ln", value);
+                    this._ln = value;
+                    this.RaisePropertyChanged("Ln");
+                    this.OnLnChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Ct' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Ct
+        {
+            get
+            {
+                return this._ma_Ct;
+            }
+            set
+            {
+                if ((this._ma_Ct != value))
+                {
+                    this.OnMa_CtChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Ct");
+                    this.ValidateProperty("Ma_Ct", value);
+                    this._ma_Ct = value;
+                    this.RaiseDataMemberChanged("Ma_Ct");
+                    this.OnMa_CtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Kh_I' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Kh_I
+        {
+            get
+            {
+                return this._ma_Kh_I;
+            }
+            set
+            {
+                if ((this._ma_Kh_I != value))
+                {
+                    this.OnMa_Kh_IChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Kh_I");
+                    this.ValidateProperty("Ma_Kh_I", value);
+                    this._ma_Kh_I = value;
+                    this.RaiseDataMemberChanged("Ma_Kh_I");
+                    this.OnMa_Kh_IChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Ku' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Ku
+        {
+            get
+            {
+                return this._ma_Ku;
+            }
+            set
+            {
+                if ((this._ma_Ku != value))
+                {
+                    this.OnMa_KuChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Ku");
+                    this.ValidateProperty("Ma_Ku", value);
+                    this._ma_Ku = value;
+                    this.RaiseDataMemberChanged("Ma_Ku");
+                    this.OnMa_KuChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Td_I' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Td_I
+        {
+            get
+            {
+                return this._ma_Td_I;
+            }
+            set
+            {
+                if ((this._ma_Td_I != value))
+                {
+                    this.OnMa_Td_IChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Td_I");
+                    this.ValidateProperty("Ma_Td_I", value);
+                    this._ma_Td_I = value;
+                    this.RaiseDataMemberChanged("Ma_Td_I");
+                    this.OnMa_Td_IChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Vv_I' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Vv_I
+        {
+            get
+            {
+                return this._ma_Vv_I;
+            }
+            set
+            {
+                if ((this._ma_Vv_I != value))
+                {
+                    this.OnMa_Vv_IChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Vv_I");
+                    this.ValidateProperty("Ma_Vv_I", value);
+                    this._ma_Vv_I = value;
+                    this.RaiseDataMemberChanged("Ma_Vv_I");
+                    this.OnMa_Vv_IChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ngay_Ct' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Ngay_Ct
+        {
+            get
+            {
+                return this._ngay_Ct;
+            }
+            set
+            {
+                if ((this._ngay_Ct != value))
+                {
+                    this.OnNgay_CtChanging(value);
+                    this.RaiseDataMemberChanging("Ngay_Ct");
+                    this.ValidateProperty("Ngay_Ct", value);
+                    this._ngay_Ct = value;
+                    this.RaiseDataMemberChanged("Ngay_Ct");
+                    this.OnNgay_CtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Nh_Dk' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Nh_Dk
+        {
+            get
+            {
+                return this._nh_Dk;
+            }
+            set
+            {
+                if ((this._nh_Dk != value))
+                {
+                    this.OnNh_DkChanging(value);
+                    this.RaiseDataMemberChanging("Nh_Dk");
+                    this.ValidateProperty("Nh_Dk", value);
+                    this._nh_Dk = value;
+                    this.RaiseDataMemberChanged("Nh_Dk");
+                    this.OnNh_DkChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ps_Co' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public decimal Ps_Co
+        {
+            get
+            {
+                return this._ps_Co;
+            }
+            set
+            {
+                if ((this._ps_Co != value))
+                {
+                    this.OnPs_CoChanging(value);
+                    this.RaiseDataMemberChanging("Ps_Co");
+                    this.ValidateProperty("Ps_Co", value);
+                    this._ps_Co = value;
+                    this.RaiseDataMemberChanged("Ps_Co");
+                    this.OnPs_CoChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ps_Co_Nt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public decimal Ps_Co_Nt
+        {
+            get
+            {
+                return this._ps_Co_Nt;
+            }
+            set
+            {
+                if ((this._ps_Co_Nt != value))
+                {
+                    this.OnPs_Co_NtChanging(value);
+                    this.RaiseDataMemberChanging("Ps_Co_Nt");
+                    this.ValidateProperty("Ps_Co_Nt", value);
+                    this._ps_Co_Nt = value;
+                    this.RaiseDataMemberChanged("Ps_Co_Nt");
+                    this.OnPs_Co_NtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ps_No' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public decimal Ps_No
+        {
+            get
+            {
+                return this._ps_No;
+            }
+            set
+            {
+                if ((this._ps_No != value))
+                {
+                    this.OnPs_NoChanging(value);
+                    this.RaiseDataMemberChanging("Ps_No");
+                    this.ValidateProperty("Ps_No", value);
+                    this._ps_No = value;
+                    this.RaiseDataMemberChanged("Ps_No");
+                    this.OnPs_NoChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ps_No_Nt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public decimal Ps_No_Nt
+        {
+            get
+            {
+                return this._ps_No_Nt;
+            }
+            set
+            {
+                if ((this._ps_No_Nt != value))
+                {
+                    this.OnPs_No_NtChanging(value);
+                    this.RaiseDataMemberChanging("Ps_No_Nt");
+                    this.ValidateProperty("Ps_No_Nt", value);
+                    this._ps_No_Nt = value;
+                    this.RaiseDataMemberChanged("Ps_No_Nt");
+                    this.OnPs_No_NtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'So_Ct' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string So_Ct
+        {
+            get
+            {
+                return this._so_Ct;
+            }
+            set
+            {
+                if ((this._so_Ct != value))
+                {
+                    this.OnSo_CtChanging(value);
+                    this.RaiseDataMemberChanging("So_Ct");
+                    this.ValidateProperty("So_Ct", value);
+                    this._so_Ct = value;
+                    this.RaiseDataMemberChanged("So_Ct");
+                    this.OnSo_CtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Stt_Rec' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Stt_Rec
+        {
+            get
+            {
+                return this._stt_Rec;
+            }
+            set
+            {
+                if ((this._stt_Rec != value))
+                {
+                    this.OnStt_RecChanging(value);
+                    this.ValidateProperty("Stt_Rec", value);
+                    this._stt_Rec = value;
+                    this.RaisePropertyChanged("Stt_Rec");
+                    this.OnStt_RecChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Tk_I' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Tk_I
+        {
+            get
+            {
+                return this._tk_I;
+            }
+            set
+            {
+                if ((this._tk_I != value))
+                {
+                    this.OnTk_IChanging(value);
+                    this.RaiseDataMemberChanging("Tk_I");
+                    this.ValidateProperty("Tk_I", value);
+                    this._tk_I = value;
+                    this.RaiseDataMemberChanged("Tk_I");
+                    this.OnTk_IChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            if ((this._stt_Rec == null))
+            {
+                return null;
+            }
+            return EntityKey.Create(this._ln, this._stt_Rec);
+        }
+    }
+    
+    /// <summary>
+    /// The 'DashboardStats' class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class DashboardStats : ComplexObject
+    {
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DashboardStats"/> class.
+        /// </summary>
+        public DashboardStats()
+        {
+            this.OnCreated();
+        }
+    }
+    
+    /// <summary>
+    /// The 'Dmct' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class Dmct : Entity
+    {
+        
+        private short _ct_Nxt;
+        
+        private DateTime _date0;
+        
+        private DateTime _date2;
+        
+        private string _error;
+        
+        private short _m_Loc_Nsd;
+        
+        private string _m_Ma_Gd;
+        
+        private string _m_Ma_Nk;
+        
+        private short _m_Ngay_Ct;
+        
+        private string _m_Status;
+        
+        private short _m_Trung_So;
+        
+        private string _ma_Ct;
+        
+        private string _ma_Ct_In;
+        
+        private string _ma_Ct_Me;
+        
+        private string _ma_Nt;
+        
+        private string _ma_Phan_He;
+        
+        private string[] _openAccessGenerated;
+        
+        private long _so_Ct;
+        
+        private short _stt_Ct_Nkc;
+        
+        private short _stt_Ctntxt;
+        
+        private string _ten_Ct;
+        
+        private string _ten_Ct2;
+        
+        private long _user_Id0;
+        
+        private long _user_Id2;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnCt_NxtChanging(short value);
+        partial void OnCt_NxtChanged();
+        partial void OnDate0Changing(DateTime value);
+        partial void OnDate0Changed();
+        partial void OnDate2Changing(DateTime value);
+        partial void OnDate2Changed();
+        partial void OnErrorChanging(string value);
+        partial void OnErrorChanged();
+        partial void OnM_Loc_NsdChanging(short value);
+        partial void OnM_Loc_NsdChanged();
+        partial void OnM_Ma_GdChanging(string value);
+        partial void OnM_Ma_GdChanged();
+        partial void OnM_Ma_NkChanging(string value);
+        partial void OnM_Ma_NkChanged();
+        partial void OnM_Ngay_CtChanging(short value);
+        partial void OnM_Ngay_CtChanged();
+        partial void OnM_StatusChanging(string value);
+        partial void OnM_StatusChanged();
+        partial void OnM_Trung_SoChanging(short value);
+        partial void OnM_Trung_SoChanged();
+        partial void OnMa_CtChanging(string value);
+        partial void OnMa_CtChanged();
+        partial void OnMa_Ct_InChanging(string value);
+        partial void OnMa_Ct_InChanged();
+        partial void OnMa_Ct_MeChanging(string value);
+        partial void OnMa_Ct_MeChanged();
+        partial void OnMa_NtChanging(string value);
+        partial void OnMa_NtChanged();
+        partial void OnMa_Phan_HeChanging(string value);
+        partial void OnMa_Phan_HeChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnSo_CtChanging(long value);
+        partial void OnSo_CtChanged();
+        partial void OnStt_Ct_NkcChanging(short value);
+        partial void OnStt_Ct_NkcChanged();
+        partial void OnStt_CtntxtChanging(short value);
+        partial void OnStt_CtntxtChanged();
+        partial void OnTen_CtChanging(string value);
+        partial void OnTen_CtChanged();
+        partial void OnTen_Ct2Changing(string value);
+        partial void OnTen_Ct2Changed();
+        partial void OnUser_Id0Changing(long value);
+        partial void OnUser_Id0Changed();
+        partial void OnUser_Id2Changing(long value);
+        partial void OnUser_Id2Changed();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Dmct"/> class.
+        /// </summary>
+        public Dmct()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ct_Nxt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Ct_Nxt
+        {
+            get
+            {
+                return this._ct_Nxt;
+            }
+            set
+            {
+                if ((this._ct_Nxt != value))
+                {
+                    this.OnCt_NxtChanging(value);
+                    this.RaiseDataMemberChanging("Ct_Nxt");
+                    this.ValidateProperty("Ct_Nxt", value);
+                    this._ct_Nxt = value;
+                    this.RaiseDataMemberChanged("Ct_Nxt");
+                    this.OnCt_NxtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date0
+        {
+            get
+            {
+                return this._date0;
+            }
+            set
+            {
+                if ((this._date0 != value))
+                {
+                    this.OnDate0Changing(value);
+                    this.RaiseDataMemberChanging("Date0");
+                    this.ValidateProperty("Date0", value);
+                    this._date0 = value;
+                    this.RaiseDataMemberChanged("Date0");
+                    this.OnDate0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date2
+        {
+            get
+            {
+                return this._date2;
+            }
+            set
+            {
+                if ((this._date2 != value))
+                {
+                    this.OnDate2Changing(value);
+                    this.RaiseDataMemberChanging("Date2");
+                    this.ValidateProperty("Date2", value);
+                    this._date2 = value;
+                    this.RaiseDataMemberChanged("Date2");
+                    this.OnDate2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Error' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false)]
+        [ReadOnly(true)]
+        public string Error
+        {
+            get
+            {
+                return this._error;
+            }
+            set
+            {
+                if ((this._error != value))
+                {
+                    this.OnErrorChanging(value);
+                    this.ValidateProperty("Error", value);
+                    this._error = value;
+                    this.RaisePropertyChanged("Error");
+                    this.OnErrorChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'M_Loc_Nsd' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short M_Loc_Nsd
+        {
+            get
+            {
+                return this._m_Loc_Nsd;
+            }
+            set
+            {
+                if ((this._m_Loc_Nsd != value))
+                {
+                    this.OnM_Loc_NsdChanging(value);
+                    this.RaiseDataMemberChanging("M_Loc_Nsd");
+                    this.ValidateProperty("M_Loc_Nsd", value);
+                    this._m_Loc_Nsd = value;
+                    this.RaiseDataMemberChanged("M_Loc_Nsd");
+                    this.OnM_Loc_NsdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'M_Ma_Gd' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string M_Ma_Gd
+        {
+            get
+            {
+                return this._m_Ma_Gd;
+            }
+            set
+            {
+                if ((this._m_Ma_Gd != value))
+                {
+                    this.OnM_Ma_GdChanging(value);
+                    this.RaiseDataMemberChanging("M_Ma_Gd");
+                    this.ValidateProperty("M_Ma_Gd", value);
+                    this._m_Ma_Gd = value;
+                    this.RaiseDataMemberChanged("M_Ma_Gd");
+                    this.OnM_Ma_GdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'M_Ma_Nk' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string M_Ma_Nk
+        {
+            get
+            {
+                return this._m_Ma_Nk;
+            }
+            set
+            {
+                if ((this._m_Ma_Nk != value))
+                {
+                    this.OnM_Ma_NkChanging(value);
+                    this.RaiseDataMemberChanging("M_Ma_Nk");
+                    this.ValidateProperty("M_Ma_Nk", value);
+                    this._m_Ma_Nk = value;
+                    this.RaiseDataMemberChanged("M_Ma_Nk");
+                    this.OnM_Ma_NkChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'M_Ngay_Ct' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short M_Ngay_Ct
+        {
+            get
+            {
+                return this._m_Ngay_Ct;
+            }
+            set
+            {
+                if ((this._m_Ngay_Ct != value))
+                {
+                    this.OnM_Ngay_CtChanging(value);
+                    this.RaiseDataMemberChanging("M_Ngay_Ct");
+                    this.ValidateProperty("M_Ngay_Ct", value);
+                    this._m_Ngay_Ct = value;
+                    this.RaiseDataMemberChanged("M_Ngay_Ct");
+                    this.OnM_Ngay_CtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'M_Status' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string M_Status
+        {
+            get
+            {
+                return this._m_Status;
+            }
+            set
+            {
+                if ((this._m_Status != value))
+                {
+                    this.OnM_StatusChanging(value);
+                    this.RaiseDataMemberChanging("M_Status");
+                    this.ValidateProperty("M_Status", value);
+                    this._m_Status = value;
+                    this.RaiseDataMemberChanged("M_Status");
+                    this.OnM_StatusChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'M_Trung_So' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short M_Trung_So
+        {
+            get
+            {
+                return this._m_Trung_So;
+            }
+            set
+            {
+                if ((this._m_Trung_So != value))
+                {
+                    this.OnM_Trung_SoChanging(value);
+                    this.RaiseDataMemberChanging("M_Trung_So");
+                    this.ValidateProperty("M_Trung_So", value);
+                    this._m_Trung_So = value;
+                    this.RaiseDataMemberChanged("M_Trung_So");
+                    this.OnM_Trung_SoChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Ct' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Ct
+        {
+            get
+            {
+                return this._ma_Ct;
+            }
+            set
+            {
+                if ((this._ma_Ct != value))
+                {
+                    this.OnMa_CtChanging(value);
+                    this.ValidateProperty("Ma_Ct", value);
+                    this._ma_Ct = value;
+                    this.RaisePropertyChanged("Ma_Ct");
+                    this.OnMa_CtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Ct_In' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Ct_In
+        {
+            get
+            {
+                return this._ma_Ct_In;
+            }
+            set
+            {
+                if ((this._ma_Ct_In != value))
+                {
+                    this.OnMa_Ct_InChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Ct_In");
+                    this.ValidateProperty("Ma_Ct_In", value);
+                    this._ma_Ct_In = value;
+                    this.RaiseDataMemberChanged("Ma_Ct_In");
+                    this.OnMa_Ct_InChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Ct_Me' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Ct_Me
+        {
+            get
+            {
+                return this._ma_Ct_Me;
+            }
+            set
+            {
+                if ((this._ma_Ct_Me != value))
+                {
+                    this.OnMa_Ct_MeChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Ct_Me");
+                    this.ValidateProperty("Ma_Ct_Me", value);
+                    this._ma_Ct_Me = value;
+                    this.RaiseDataMemberChanged("Ma_Ct_Me");
+                    this.OnMa_Ct_MeChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Nt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Nt
+        {
+            get
+            {
+                return this._ma_Nt;
+            }
+            set
+            {
+                if ((this._ma_Nt != value))
+                {
+                    this.OnMa_NtChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Nt");
+                    this.ValidateProperty("Ma_Nt", value);
+                    this._ma_Nt = value;
+                    this.RaiseDataMemberChanged("Ma_Nt");
+                    this.OnMa_NtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Phan_He' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Phan_He
+        {
+            get
+            {
+                return this._ma_Phan_He;
+            }
+            set
+            {
+                if ((this._ma_Phan_He != value))
+                {
+                    this.OnMa_Phan_HeChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Phan_He");
+                    this.ValidateProperty("Ma_Phan_He", value);
+                    this._ma_Phan_He = value;
+                    this.RaiseDataMemberChanged("Ma_Phan_He");
+                    this.OnMa_Phan_HeChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'So_Ct' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long So_Ct
+        {
+            get
+            {
+                return this._so_Ct;
+            }
+            set
+            {
+                if ((this._so_Ct != value))
+                {
+                    this.OnSo_CtChanging(value);
+                    this.RaiseDataMemberChanging("So_Ct");
+                    this.ValidateProperty("So_Ct", value);
+                    this._so_Ct = value;
+                    this.RaiseDataMemberChanged("So_Ct");
+                    this.OnSo_CtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Stt_Ct_Nkc' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Stt_Ct_Nkc
+        {
+            get
+            {
+                return this._stt_Ct_Nkc;
+            }
+            set
+            {
+                if ((this._stt_Ct_Nkc != value))
+                {
+                    this.OnStt_Ct_NkcChanging(value);
+                    this.RaiseDataMemberChanging("Stt_Ct_Nkc");
+                    this.ValidateProperty("Stt_Ct_Nkc", value);
+                    this._stt_Ct_Nkc = value;
+                    this.RaiseDataMemberChanged("Stt_Ct_Nkc");
+                    this.OnStt_Ct_NkcChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Stt_Ctntxt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Stt_Ctntxt
+        {
+            get
+            {
+                return this._stt_Ctntxt;
+            }
+            set
+            {
+                if ((this._stt_Ctntxt != value))
+                {
+                    this.OnStt_CtntxtChanging(value);
+                    this.RaiseDataMemberChanging("Stt_Ctntxt");
+                    this.ValidateProperty("Stt_Ctntxt", value);
+                    this._stt_Ctntxt = value;
+                    this.RaiseDataMemberChanged("Stt_Ctntxt");
+                    this.OnStt_CtntxtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Ct' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Ct
+        {
+            get
+            {
+                return this._ten_Ct;
+            }
+            set
+            {
+                if ((this._ten_Ct != value))
+                {
+                    this.OnTen_CtChanging(value);
+                    this.RaiseDataMemberChanging("Ten_Ct");
+                    this.ValidateProperty("Ten_Ct", value);
+                    this._ten_Ct = value;
+                    this.RaiseDataMemberChanged("Ten_Ct");
+                    this.OnTen_CtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Ct2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Ct2
+        {
+            get
+            {
+                return this._ten_Ct2;
+            }
+            set
+            {
+                if ((this._ten_Ct2 != value))
+                {
+                    this.OnTen_Ct2Changing(value);
+                    this.RaiseDataMemberChanging("Ten_Ct2");
+                    this.ValidateProperty("Ten_Ct2", value);
+                    this._ten_Ct2 = value;
+                    this.RaiseDataMemberChanged("Ten_Ct2");
+                    this.OnTen_Ct2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id0
+        {
+            get
+            {
+                return this._user_Id0;
+            }
+            set
+            {
+                if ((this._user_Id0 != value))
+                {
+                    this.OnUser_Id0Changing(value);
+                    this.RaiseDataMemberChanging("User_Id0");
+                    this.ValidateProperty("User_Id0", value);
+                    this._user_Id0 = value;
+                    this.RaiseDataMemberChanged("User_Id0");
+                    this.OnUser_Id0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id2
+        {
+            get
+            {
+                return this._user_Id2;
+            }
+            set
+            {
+                if ((this._user_Id2 != value))
+                {
+                    this.OnUser_Id2Changing(value);
+                    this.RaiseDataMemberChanging("User_Id2");
+                    this.ValidateProperty("User_Id2", value);
+                    this._user_Id2 = value;
+                    this.RaiseDataMemberChanged("User_Id2");
+                    this.OnUser_Id2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._ma_Ct;
+        }
+    }
+    
+    /// <summary>
+    /// The 'Dmdvcs' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class Dmdvcs : Entity
+    {
+        
+        private DateTime _date0;
+        
+        private DateTime _date2;
+        
+        private string _error;
+        
+        private string _m_Ws_Id;
+        
+        private string _ma_Dvcs;
+        
+        private string[] _openAccessGenerated;
+        
+        private string _status;
+        
+        private string _ten_Dvcs;
+        
+        private string _ten_Dvcs2;
+        
+        private long _user_Id0;
+        
+        private long _user_Id2;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnDate0Changing(DateTime value);
+        partial void OnDate0Changed();
+        partial void OnDate2Changing(DateTime value);
+        partial void OnDate2Changed();
+        partial void OnErrorChanging(string value);
+        partial void OnErrorChanged();
+        partial void OnM_Ws_IdChanging(string value);
+        partial void OnM_Ws_IdChanged();
+        partial void OnMa_DvcsChanging(string value);
+        partial void OnMa_DvcsChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnStatusChanging(string value);
+        partial void OnStatusChanged();
+        partial void OnTen_DvcsChanging(string value);
+        partial void OnTen_DvcsChanged();
+        partial void OnTen_Dvcs2Changing(string value);
+        partial void OnTen_Dvcs2Changed();
+        partial void OnUser_Id0Changing(long value);
+        partial void OnUser_Id0Changed();
+        partial void OnUser_Id2Changing(long value);
+        partial void OnUser_Id2Changed();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Dmdvcs"/> class.
+        /// </summary>
+        public Dmdvcs()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date0
+        {
+            get
+            {
+                return this._date0;
+            }
+            set
+            {
+                if ((this._date0 != value))
+                {
+                    this.OnDate0Changing(value);
+                    this.RaiseDataMemberChanging("Date0");
+                    this.ValidateProperty("Date0", value);
+                    this._date0 = value;
+                    this.RaiseDataMemberChanged("Date0");
+                    this.OnDate0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date2
+        {
+            get
+            {
+                return this._date2;
+            }
+            set
+            {
+                if ((this._date2 != value))
+                {
+                    this.OnDate2Changing(value);
+                    this.RaiseDataMemberChanging("Date2");
+                    this.ValidateProperty("Date2", value);
+                    this._date2 = value;
+                    this.RaiseDataMemberChanged("Date2");
+                    this.OnDate2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Error' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false)]
+        [ReadOnly(true)]
+        public string Error
+        {
+            get
+            {
+                return this._error;
+            }
+            set
+            {
+                if ((this._error != value))
+                {
+                    this.OnErrorChanging(value);
+                    this.ValidateProperty("Error", value);
+                    this._error = value;
+                    this.RaisePropertyChanged("Error");
+                    this.OnErrorChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'M_Ws_Id' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string M_Ws_Id
+        {
+            get
+            {
+                return this._m_Ws_Id;
+            }
+            set
+            {
+                if ((this._m_Ws_Id != value))
+                {
+                    this.OnM_Ws_IdChanging(value);
+                    this.RaiseDataMemberChanging("M_Ws_Id");
+                    this.ValidateProperty("M_Ws_Id", value);
+                    this._m_Ws_Id = value;
+                    this.RaiseDataMemberChanged("M_Ws_Id");
+                    this.OnM_Ws_IdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Dvcs' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Dvcs
+        {
+            get
+            {
+                return this._ma_Dvcs;
+            }
+            set
+            {
+                if ((this._ma_Dvcs != value))
+                {
+                    this.OnMa_DvcsChanging(value);
+                    this.ValidateProperty("Ma_Dvcs", value);
+                    this._ma_Dvcs = value;
+                    this.RaisePropertyChanged("Ma_Dvcs");
+                    this.OnMa_DvcsChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Status' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Status
+        {
+            get
+            {
+                return this._status;
+            }
+            set
+            {
+                if ((this._status != value))
+                {
+                    this.OnStatusChanging(value);
+                    this.RaiseDataMemberChanging("Status");
+                    this.ValidateProperty("Status", value);
+                    this._status = value;
+                    this.RaiseDataMemberChanged("Status");
+                    this.OnStatusChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Dvcs' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Dvcs
+        {
+            get
+            {
+                return this._ten_Dvcs;
+            }
+            set
+            {
+                if ((this._ten_Dvcs != value))
+                {
+                    this.OnTen_DvcsChanging(value);
+                    this.RaiseDataMemberChanging("Ten_Dvcs");
+                    this.ValidateProperty("Ten_Dvcs", value);
+                    this._ten_Dvcs = value;
+                    this.RaiseDataMemberChanged("Ten_Dvcs");
+                    this.OnTen_DvcsChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Dvcs2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Dvcs2
+        {
+            get
+            {
+                return this._ten_Dvcs2;
+            }
+            set
+            {
+                if ((this._ten_Dvcs2 != value))
+                {
+                    this.OnTen_Dvcs2Changing(value);
+                    this.RaiseDataMemberChanging("Ten_Dvcs2");
+                    this.ValidateProperty("Ten_Dvcs2", value);
+                    this._ten_Dvcs2 = value;
+                    this.RaiseDataMemberChanged("Ten_Dvcs2");
+                    this.OnTen_Dvcs2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id0
+        {
+            get
+            {
+                return this._user_Id0;
+            }
+            set
+            {
+                if ((this._user_Id0 != value))
+                {
+                    this.OnUser_Id0Changing(value);
+                    this.RaiseDataMemberChanging("User_Id0");
+                    this.ValidateProperty("User_Id0", value);
+                    this._user_Id0 = value;
+                    this.RaiseDataMemberChanged("User_Id0");
+                    this.OnUser_Id0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id2
+        {
+            get
+            {
+                return this._user_Id2;
+            }
+            set
+            {
+                if ((this._user_Id2 != value))
+                {
+                    this.OnUser_Id2Changing(value);
+                    this.RaiseDataMemberChanging("User_Id2");
+                    this.ValidateProperty("User_Id2", value);
+                    this._user_Id2 = value;
+                    this.RaiseDataMemberChanged("User_Id2");
+                    this.OnUser_Id2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._ma_Dvcs;
+        }
+    }
+    
+    /// <summary>
+    /// The 'Dmkh' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class Dmkh : Entity
+    {
+        
+        private short _cc_Yn;
+        
+        private DateTime _date0;
+        
+        private DateTime _date2;
+        
+        private string _dia_Chi;
+        
+        private string _dien_Thoai;
+        
+        private string _doi_Tac;
+        
+        private decimal _du_Nt13;
+        
+        private string _e_Mail;
+        
+        private string _error;
+        
+        private string _fax;
+        
+        private string _ghi_Chu;
+        
+        private string _home_Page;
+        
+        private short _kh_Yn;
+        
+        private string _ma_Kh;
+        
+        private string _ma_So_Thue;
+        
+        private string _ma_Tt;
+        
+        private string _ngan_Hang;
+        
+        private string _nh_Kh1;
+        
+        private string _nh_Kh2;
+        
+        private string _nh_Kh3;
+        
+        private short _nv_Yn;
+        
+        private string _ong_Ba;
+        
+        private string[] _openAccessGenerated;
+        
+        private decimal _t_Tien_Cn;
+        
+        private decimal _t_Tien_Hd;
+        
+        private string _ten_Bp;
+        
+        private string _ten_Kh;
+        
+        private string _ten_Kh2;
+        
+        private string _tk;
+        
+        private string _tk_Nh;
+        
+        private long _user_Id0;
+        
+        private long _user_Id2;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnCc_YnChanging(short value);
+        partial void OnCc_YnChanged();
+        partial void OnDate0Changing(DateTime value);
+        partial void OnDate0Changed();
+        partial void OnDate2Changing(DateTime value);
+        partial void OnDate2Changed();
+        partial void OnDia_ChiChanging(string value);
+        partial void OnDia_ChiChanged();
+        partial void OnDien_ThoaiChanging(string value);
+        partial void OnDien_ThoaiChanged();
+        partial void OnDoi_TacChanging(string value);
+        partial void OnDoi_TacChanged();
+        partial void OnDu_Nt13Changing(decimal value);
+        partial void OnDu_Nt13Changed();
+        partial void OnE_MailChanging(string value);
+        partial void OnE_MailChanged();
+        partial void OnErrorChanging(string value);
+        partial void OnErrorChanged();
+        partial void OnFaxChanging(string value);
+        partial void OnFaxChanged();
+        partial void OnGhi_ChuChanging(string value);
+        partial void OnGhi_ChuChanged();
+        partial void OnHome_PageChanging(string value);
+        partial void OnHome_PageChanged();
+        partial void OnKh_YnChanging(short value);
+        partial void OnKh_YnChanged();
+        partial void OnMa_KhChanging(string value);
+        partial void OnMa_KhChanged();
+        partial void OnMa_So_ThueChanging(string value);
+        partial void OnMa_So_ThueChanged();
+        partial void OnMa_TtChanging(string value);
+        partial void OnMa_TtChanged();
+        partial void OnNgan_HangChanging(string value);
+        partial void OnNgan_HangChanged();
+        partial void OnNh_Kh1Changing(string value);
+        partial void OnNh_Kh1Changed();
+        partial void OnNh_Kh2Changing(string value);
+        partial void OnNh_Kh2Changed();
+        partial void OnNh_Kh3Changing(string value);
+        partial void OnNh_Kh3Changed();
+        partial void OnNv_YnChanging(short value);
+        partial void OnNv_YnChanged();
+        partial void OnOng_BaChanging(string value);
+        partial void OnOng_BaChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnT_Tien_CnChanging(decimal value);
+        partial void OnT_Tien_CnChanged();
+        partial void OnT_Tien_HdChanging(decimal value);
+        partial void OnT_Tien_HdChanged();
+        partial void OnTen_BpChanging(string value);
+        partial void OnTen_BpChanged();
+        partial void OnTen_KhChanging(string value);
+        partial void OnTen_KhChanged();
+        partial void OnTen_Kh2Changing(string value);
+        partial void OnTen_Kh2Changed();
+        partial void OnTkChanging(string value);
+        partial void OnTkChanged();
+        partial void OnTk_NhChanging(string value);
+        partial void OnTk_NhChanged();
+        partial void OnUser_Id0Changing(long value);
+        partial void OnUser_Id0Changed();
+        partial void OnUser_Id2Changing(long value);
+        partial void OnUser_Id2Changed();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Dmkh"/> class.
+        /// </summary>
+        public Dmkh()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Cc_Yn' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Cc_Yn
+        {
+            get
+            {
+                return this._cc_Yn;
+            }
+            set
+            {
+                if ((this._cc_Yn != value))
+                {
+                    this.OnCc_YnChanging(value);
+                    this.RaiseDataMemberChanging("Cc_Yn");
+                    this.ValidateProperty("Cc_Yn", value);
+                    this._cc_Yn = value;
+                    this.RaiseDataMemberChanged("Cc_Yn");
+                    this.OnCc_YnChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date0
+        {
+            get
+            {
+                return this._date0;
+            }
+            set
+            {
+                if ((this._date0 != value))
+                {
+                    this.OnDate0Changing(value);
+                    this.RaiseDataMemberChanging("Date0");
+                    this.ValidateProperty("Date0", value);
+                    this._date0 = value;
+                    this.RaiseDataMemberChanged("Date0");
+                    this.OnDate0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date2
+        {
+            get
+            {
+                return this._date2;
+            }
+            set
+            {
+                if ((this._date2 != value))
+                {
+                    this.OnDate2Changing(value);
+                    this.RaiseDataMemberChanging("Date2");
+                    this.ValidateProperty("Date2", value);
+                    this._date2 = value;
+                    this.RaiseDataMemberChanged("Date2");
+                    this.OnDate2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Dia_Chi' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Dia_Chi
+        {
+            get
+            {
+                return this._dia_Chi;
+            }
+            set
+            {
+                if ((this._dia_Chi != value))
+                {
+                    this.OnDia_ChiChanging(value);
+                    this.RaiseDataMemberChanging("Dia_Chi");
+                    this.ValidateProperty("Dia_Chi", value);
+                    this._dia_Chi = value;
+                    this.RaiseDataMemberChanged("Dia_Chi");
+                    this.OnDia_ChiChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Dien_Thoai' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Dien_Thoai
+        {
+            get
+            {
+                return this._dien_Thoai;
+            }
+            set
+            {
+                if ((this._dien_Thoai != value))
+                {
+                    this.OnDien_ThoaiChanging(value);
+                    this.RaiseDataMemberChanging("Dien_Thoai");
+                    this.ValidateProperty("Dien_Thoai", value);
+                    this._dien_Thoai = value;
+                    this.RaiseDataMemberChanged("Dien_Thoai");
+                    this.OnDien_ThoaiChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Doi_Tac' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Doi_Tac
+        {
+            get
+            {
+                return this._doi_Tac;
+            }
+            set
+            {
+                if ((this._doi_Tac != value))
+                {
+                    this.OnDoi_TacChanging(value);
+                    this.RaiseDataMemberChanging("Doi_Tac");
+                    this.ValidateProperty("Doi_Tac", value);
+                    this._doi_Tac = value;
+                    this.RaiseDataMemberChanged("Doi_Tac");
+                    this.OnDoi_TacChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Du_Nt13' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public decimal Du_Nt13
+        {
+            get
+            {
+                return this._du_Nt13;
+            }
+            set
+            {
+                if ((this._du_Nt13 != value))
+                {
+                    this.OnDu_Nt13Changing(value);
+                    this.RaiseDataMemberChanging("Du_Nt13");
+                    this.ValidateProperty("Du_Nt13", value);
+                    this._du_Nt13 = value;
+                    this.RaiseDataMemberChanged("Du_Nt13");
+                    this.OnDu_Nt13Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'E_Mail' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string E_Mail
+        {
+            get
+            {
+                return this._e_Mail;
+            }
+            set
+            {
+                if ((this._e_Mail != value))
+                {
+                    this.OnE_MailChanging(value);
+                    this.RaiseDataMemberChanging("E_Mail");
+                    this.ValidateProperty("E_Mail", value);
+                    this._e_Mail = value;
+                    this.RaiseDataMemberChanged("E_Mail");
+                    this.OnE_MailChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Error' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false)]
+        [ReadOnly(true)]
+        public string Error
+        {
+            get
+            {
+                return this._error;
+            }
+            set
+            {
+                if ((this._error != value))
+                {
+                    this.OnErrorChanging(value);
+                    this.ValidateProperty("Error", value);
+                    this._error = value;
+                    this.RaisePropertyChanged("Error");
+                    this.OnErrorChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Fax' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Fax
+        {
+            get
+            {
+                return this._fax;
+            }
+            set
+            {
+                if ((this._fax != value))
+                {
+                    this.OnFaxChanging(value);
+                    this.RaiseDataMemberChanging("Fax");
+                    this.ValidateProperty("Fax", value);
+                    this._fax = value;
+                    this.RaiseDataMemberChanged("Fax");
+                    this.OnFaxChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ghi_Chu' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ghi_Chu
+        {
+            get
+            {
+                return this._ghi_Chu;
+            }
+            set
+            {
+                if ((this._ghi_Chu != value))
+                {
+                    this.OnGhi_ChuChanging(value);
+                    this.RaiseDataMemberChanging("Ghi_Chu");
+                    this.ValidateProperty("Ghi_Chu", value);
+                    this._ghi_Chu = value;
+                    this.RaiseDataMemberChanged("Ghi_Chu");
+                    this.OnGhi_ChuChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Home_Page' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Home_Page
+        {
+            get
+            {
+                return this._home_Page;
+            }
+            set
+            {
+                if ((this._home_Page != value))
+                {
+                    this.OnHome_PageChanging(value);
+                    this.RaiseDataMemberChanging("Home_Page");
+                    this.ValidateProperty("Home_Page", value);
+                    this._home_Page = value;
+                    this.RaiseDataMemberChanged("Home_Page");
+                    this.OnHome_PageChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Kh_Yn' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Kh_Yn
+        {
+            get
+            {
+                return this._kh_Yn;
+            }
+            set
+            {
+                if ((this._kh_Yn != value))
+                {
+                    this.OnKh_YnChanging(value);
+                    this.RaiseDataMemberChanging("Kh_Yn");
+                    this.ValidateProperty("Kh_Yn", value);
+                    this._kh_Yn = value;
+                    this.RaiseDataMemberChanged("Kh_Yn");
+                    this.OnKh_YnChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Kh' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Kh
+        {
+            get
+            {
+                return this._ma_Kh;
+            }
+            set
+            {
+                if ((this._ma_Kh != value))
+                {
+                    this.OnMa_KhChanging(value);
+                    this.ValidateProperty("Ma_Kh", value);
+                    this._ma_Kh = value;
+                    this.RaisePropertyChanged("Ma_Kh");
+                    this.OnMa_KhChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_So_Thue' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_So_Thue
+        {
+            get
+            {
+                return this._ma_So_Thue;
+            }
+            set
+            {
+                if ((this._ma_So_Thue != value))
+                {
+                    this.OnMa_So_ThueChanging(value);
+                    this.RaiseDataMemberChanging("Ma_So_Thue");
+                    this.ValidateProperty("Ma_So_Thue", value);
+                    this._ma_So_Thue = value;
+                    this.RaiseDataMemberChanged("Ma_So_Thue");
+                    this.OnMa_So_ThueChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Tt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Tt
+        {
+            get
+            {
+                return this._ma_Tt;
+            }
+            set
+            {
+                if ((this._ma_Tt != value))
+                {
+                    this.OnMa_TtChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Tt");
+                    this.ValidateProperty("Ma_Tt", value);
+                    this._ma_Tt = value;
+                    this.RaiseDataMemberChanged("Ma_Tt");
+                    this.OnMa_TtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ngan_Hang' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ngan_Hang
+        {
+            get
+            {
+                return this._ngan_Hang;
+            }
+            set
+            {
+                if ((this._ngan_Hang != value))
+                {
+                    this.OnNgan_HangChanging(value);
+                    this.RaiseDataMemberChanging("Ngan_Hang");
+                    this.ValidateProperty("Ngan_Hang", value);
+                    this._ngan_Hang = value;
+                    this.RaiseDataMemberChanged("Ngan_Hang");
+                    this.OnNgan_HangChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Nh_Kh1' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Nh_Kh1
+        {
+            get
+            {
+                return this._nh_Kh1;
+            }
+            set
+            {
+                if ((this._nh_Kh1 != value))
+                {
+                    this.OnNh_Kh1Changing(value);
+                    this.RaiseDataMemberChanging("Nh_Kh1");
+                    this.ValidateProperty("Nh_Kh1", value);
+                    this._nh_Kh1 = value;
+                    this.RaiseDataMemberChanged("Nh_Kh1");
+                    this.OnNh_Kh1Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Nh_Kh2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Nh_Kh2
+        {
+            get
+            {
+                return this._nh_Kh2;
+            }
+            set
+            {
+                if ((this._nh_Kh2 != value))
+                {
+                    this.OnNh_Kh2Changing(value);
+                    this.RaiseDataMemberChanging("Nh_Kh2");
+                    this.ValidateProperty("Nh_Kh2", value);
+                    this._nh_Kh2 = value;
+                    this.RaiseDataMemberChanged("Nh_Kh2");
+                    this.OnNh_Kh2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Nh_Kh3' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Nh_Kh3
+        {
+            get
+            {
+                return this._nh_Kh3;
+            }
+            set
+            {
+                if ((this._nh_Kh3 != value))
+                {
+                    this.OnNh_Kh3Changing(value);
+                    this.RaiseDataMemberChanging("Nh_Kh3");
+                    this.ValidateProperty("Nh_Kh3", value);
+                    this._nh_Kh3 = value;
+                    this.RaiseDataMemberChanged("Nh_Kh3");
+                    this.OnNh_Kh3Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Nv_Yn' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Nv_Yn
+        {
+            get
+            {
+                return this._nv_Yn;
+            }
+            set
+            {
+                if ((this._nv_Yn != value))
+                {
+                    this.OnNv_YnChanging(value);
+                    this.RaiseDataMemberChanging("Nv_Yn");
+                    this.ValidateProperty("Nv_Yn", value);
+                    this._nv_Yn = value;
+                    this.RaiseDataMemberChanged("Nv_Yn");
+                    this.OnNv_YnChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ong_Ba' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ong_Ba
+        {
+            get
+            {
+                return this._ong_Ba;
+            }
+            set
+            {
+                if ((this._ong_Ba != value))
+                {
+                    this.OnOng_BaChanging(value);
+                    this.RaiseDataMemberChanging("Ong_Ba");
+                    this.ValidateProperty("Ong_Ba", value);
+                    this._ong_Ba = value;
+                    this.RaiseDataMemberChanged("Ong_Ba");
+                    this.OnOng_BaChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'T_Tien_Cn' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public decimal T_Tien_Cn
+        {
+            get
+            {
+                return this._t_Tien_Cn;
+            }
+            set
+            {
+                if ((this._t_Tien_Cn != value))
+                {
+                    this.OnT_Tien_CnChanging(value);
+                    this.RaiseDataMemberChanging("T_Tien_Cn");
+                    this.ValidateProperty("T_Tien_Cn", value);
+                    this._t_Tien_Cn = value;
+                    this.RaiseDataMemberChanged("T_Tien_Cn");
+                    this.OnT_Tien_CnChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'T_Tien_Hd' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public decimal T_Tien_Hd
+        {
+            get
+            {
+                return this._t_Tien_Hd;
+            }
+            set
+            {
+                if ((this._t_Tien_Hd != value))
+                {
+                    this.OnT_Tien_HdChanging(value);
+                    this.RaiseDataMemberChanging("T_Tien_Hd");
+                    this.ValidateProperty("T_Tien_Hd", value);
+                    this._t_Tien_Hd = value;
+                    this.RaiseDataMemberChanged("T_Tien_Hd");
+                    this.OnT_Tien_HdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Bp' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Bp
+        {
+            get
+            {
+                return this._ten_Bp;
+            }
+            set
+            {
+                if ((this._ten_Bp != value))
+                {
+                    this.OnTen_BpChanging(value);
+                    this.RaiseDataMemberChanging("Ten_Bp");
+                    this.ValidateProperty("Ten_Bp", value);
+                    this._ten_Bp = value;
+                    this.RaiseDataMemberChanged("Ten_Bp");
+                    this.OnTen_BpChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Kh' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Kh
+        {
+            get
+            {
+                return this._ten_Kh;
+            }
+            set
+            {
+                if ((this._ten_Kh != value))
+                {
+                    this.OnTen_KhChanging(value);
+                    this.RaiseDataMemberChanging("Ten_Kh");
+                    this.ValidateProperty("Ten_Kh", value);
+                    this._ten_Kh = value;
+                    this.RaiseDataMemberChanged("Ten_Kh");
+                    this.OnTen_KhChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Kh2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Kh2
+        {
+            get
+            {
+                return this._ten_Kh2;
+            }
+            set
+            {
+                if ((this._ten_Kh2 != value))
+                {
+                    this.OnTen_Kh2Changing(value);
+                    this.RaiseDataMemberChanging("Ten_Kh2");
+                    this.ValidateProperty("Ten_Kh2", value);
+                    this._ten_Kh2 = value;
+                    this.RaiseDataMemberChanged("Ten_Kh2");
+                    this.OnTen_Kh2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Tk' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Tk
+        {
+            get
+            {
+                return this._tk;
+            }
+            set
+            {
+                if ((this._tk != value))
+                {
+                    this.OnTkChanging(value);
+                    this.RaiseDataMemberChanging("Tk");
+                    this.ValidateProperty("Tk", value);
+                    this._tk = value;
+                    this.RaiseDataMemberChanged("Tk");
+                    this.OnTkChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Tk_Nh' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Tk_Nh
+        {
+            get
+            {
+                return this._tk_Nh;
+            }
+            set
+            {
+                if ((this._tk_Nh != value))
+                {
+                    this.OnTk_NhChanging(value);
+                    this.RaiseDataMemberChanging("Tk_Nh");
+                    this.ValidateProperty("Tk_Nh", value);
+                    this._tk_Nh = value;
+                    this.RaiseDataMemberChanged("Tk_Nh");
+                    this.OnTk_NhChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id0
+        {
+            get
+            {
+                return this._user_Id0;
+            }
+            set
+            {
+                if ((this._user_Id0 != value))
+                {
+                    this.OnUser_Id0Changing(value);
+                    this.RaiseDataMemberChanging("User_Id0");
+                    this.ValidateProperty("User_Id0", value);
+                    this._user_Id0 = value;
+                    this.RaiseDataMemberChanged("User_Id0");
+                    this.OnUser_Id0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id2
+        {
+            get
+            {
+                return this._user_Id2;
+            }
+            set
+            {
+                if ((this._user_Id2 != value))
+                {
+                    this.OnUser_Id2Changing(value);
+                    this.RaiseDataMemberChanging("User_Id2");
+                    this.ValidateProperty("User_Id2", value);
+                    this._user_Id2 = value;
+                    this.RaiseDataMemberChanged("User_Id2");
+                    this.OnUser_Id2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._ma_Kh;
+        }
+    }
+    
+    /// <summary>
+    /// The 'Dmnhkh' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class Dmnhkh : Entity
+    {
+        
+        private DateTime _date0;
+        
+        private DateTime _date2;
+        
+        private string _error;
+        
+        private short _loai_Nh;
+        
+        private string _ma_Nh;
+        
+        private string[] _openAccessGenerated;
+        
+        private string _status;
+        
+        private string _ten_Nh;
+        
+        private string _ten_Nh2;
+        
+        private long _user_Id0;
+        
+        private long _user_Id2;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnDate0Changing(DateTime value);
+        partial void OnDate0Changed();
+        partial void OnDate2Changing(DateTime value);
+        partial void OnDate2Changed();
+        partial void OnErrorChanging(string value);
+        partial void OnErrorChanged();
+        partial void OnLoai_NhChanging(short value);
+        partial void OnLoai_NhChanged();
+        partial void OnMa_NhChanging(string value);
+        partial void OnMa_NhChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnStatusChanging(string value);
+        partial void OnStatusChanged();
+        partial void OnTen_NhChanging(string value);
+        partial void OnTen_NhChanged();
+        partial void OnTen_Nh2Changing(string value);
+        partial void OnTen_Nh2Changed();
+        partial void OnUser_Id0Changing(long value);
+        partial void OnUser_Id0Changed();
+        partial void OnUser_Id2Changing(long value);
+        partial void OnUser_Id2Changed();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Dmnhkh"/> class.
+        /// </summary>
+        public Dmnhkh()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date0
+        {
+            get
+            {
+                return this._date0;
+            }
+            set
+            {
+                if ((this._date0 != value))
+                {
+                    this.OnDate0Changing(value);
+                    this.RaiseDataMemberChanging("Date0");
+                    this.ValidateProperty("Date0", value);
+                    this._date0 = value;
+                    this.RaiseDataMemberChanged("Date0");
+                    this.OnDate0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date2
+        {
+            get
+            {
+                return this._date2;
+            }
+            set
+            {
+                if ((this._date2 != value))
+                {
+                    this.OnDate2Changing(value);
+                    this.RaiseDataMemberChanging("Date2");
+                    this.ValidateProperty("Date2", value);
+                    this._date2 = value;
+                    this.RaiseDataMemberChanged("Date2");
+                    this.OnDate2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Error' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false)]
+        [ReadOnly(true)]
+        public string Error
+        {
+            get
+            {
+                return this._error;
+            }
+            set
+            {
+                if ((this._error != value))
+                {
+                    this.OnErrorChanging(value);
+                    this.ValidateProperty("Error", value);
+                    this._error = value;
+                    this.RaisePropertyChanged("Error");
+                    this.OnErrorChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Loai_Nh' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Loai_Nh
+        {
+            get
+            {
+                return this._loai_Nh;
+            }
+            set
+            {
+                if ((this._loai_Nh != value))
+                {
+                    this.OnLoai_NhChanging(value);
+                    this.RaiseDataMemberChanging("Loai_Nh");
+                    this.ValidateProperty("Loai_Nh", value);
+                    this._loai_Nh = value;
+                    this.RaiseDataMemberChanged("Loai_Nh");
+                    this.OnLoai_NhChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Nh' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Nh
+        {
+            get
+            {
+                return this._ma_Nh;
+            }
+            set
+            {
+                if ((this._ma_Nh != value))
+                {
+                    this.OnMa_NhChanging(value);
+                    this.ValidateProperty("Ma_Nh", value);
+                    this._ma_Nh = value;
+                    this.RaisePropertyChanged("Ma_Nh");
+                    this.OnMa_NhChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Status' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Status
+        {
+            get
+            {
+                return this._status;
+            }
+            set
+            {
+                if ((this._status != value))
+                {
+                    this.OnStatusChanging(value);
+                    this.RaiseDataMemberChanging("Status");
+                    this.ValidateProperty("Status", value);
+                    this._status = value;
+                    this.RaiseDataMemberChanged("Status");
+                    this.OnStatusChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Nh' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Nh
+        {
+            get
+            {
+                return this._ten_Nh;
+            }
+            set
+            {
+                if ((this._ten_Nh != value))
+                {
+                    this.OnTen_NhChanging(value);
+                    this.RaiseDataMemberChanging("Ten_Nh");
+                    this.ValidateProperty("Ten_Nh", value);
+                    this._ten_Nh = value;
+                    this.RaiseDataMemberChanged("Ten_Nh");
+                    this.OnTen_NhChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Nh2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Nh2
+        {
+            get
+            {
+                return this._ten_Nh2;
+            }
+            set
+            {
+                if ((this._ten_Nh2 != value))
+                {
+                    this.OnTen_Nh2Changing(value);
+                    this.RaiseDataMemberChanging("Ten_Nh2");
+                    this.ValidateProperty("Ten_Nh2", value);
+                    this._ten_Nh2 = value;
+                    this.RaiseDataMemberChanged("Ten_Nh2");
+                    this.OnTen_Nh2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id0
+        {
+            get
+            {
+                return this._user_Id0;
+            }
+            set
+            {
+                if ((this._user_Id0 != value))
+                {
+                    this.OnUser_Id0Changing(value);
+                    this.RaiseDataMemberChanging("User_Id0");
+                    this.ValidateProperty("User_Id0", value);
+                    this._user_Id0 = value;
+                    this.RaiseDataMemberChanged("User_Id0");
+                    this.OnUser_Id0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id2
+        {
+            get
+            {
+                return this._user_Id2;
+            }
+            set
+            {
+                if ((this._user_Id2 != value))
+                {
+                    this.OnUser_Id2Changing(value);
+                    this.RaiseDataMemberChanging("User_Id2");
+                    this.ValidateProperty("User_Id2", value);
+                    this._user_Id2 = value;
+                    this.RaiseDataMemberChanged("User_Id2");
+                    this.OnUser_Id2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._ma_Nh;
+        }
+    }
+    
+    /// <summary>
+    /// The 'Dmnhvv' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class Dmnhvv : Entity
+    {
+        
+        private DateTime _date0;
+        
+        private DateTime _date2;
+        
+        private string _error;
+        
+        private short _loai_Nh;
+        
+        private string _ma_Nh;
+        
+        private string[] _openAccessGenerated;
+        
+        private string _status;
+        
+        private string _ten_Nh;
+        
+        private string _ten_Nh2;
+        
+        private long _user_Id0;
+        
+        private long _user_Id2;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnDate0Changing(DateTime value);
+        partial void OnDate0Changed();
+        partial void OnDate2Changing(DateTime value);
+        partial void OnDate2Changed();
+        partial void OnErrorChanging(string value);
+        partial void OnErrorChanged();
+        partial void OnLoai_NhChanging(short value);
+        partial void OnLoai_NhChanged();
+        partial void OnMa_NhChanging(string value);
+        partial void OnMa_NhChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnStatusChanging(string value);
+        partial void OnStatusChanged();
+        partial void OnTen_NhChanging(string value);
+        partial void OnTen_NhChanged();
+        partial void OnTen_Nh2Changing(string value);
+        partial void OnTen_Nh2Changed();
+        partial void OnUser_Id0Changing(long value);
+        partial void OnUser_Id0Changed();
+        partial void OnUser_Id2Changing(long value);
+        partial void OnUser_Id2Changed();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Dmnhvv"/> class.
+        /// </summary>
+        public Dmnhvv()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date0
+        {
+            get
+            {
+                return this._date0;
+            }
+            set
+            {
+                if ((this._date0 != value))
+                {
+                    this.OnDate0Changing(value);
+                    this.RaiseDataMemberChanging("Date0");
+                    this.ValidateProperty("Date0", value);
+                    this._date0 = value;
+                    this.RaiseDataMemberChanged("Date0");
+                    this.OnDate0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date2
+        {
+            get
+            {
+                return this._date2;
+            }
+            set
+            {
+                if ((this._date2 != value))
+                {
+                    this.OnDate2Changing(value);
+                    this.RaiseDataMemberChanging("Date2");
+                    this.ValidateProperty("Date2", value);
+                    this._date2 = value;
+                    this.RaiseDataMemberChanged("Date2");
+                    this.OnDate2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Error' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false)]
+        [ReadOnly(true)]
+        public string Error
+        {
+            get
+            {
+                return this._error;
+            }
+            set
+            {
+                if ((this._error != value))
+                {
+                    this.OnErrorChanging(value);
+                    this.ValidateProperty("Error", value);
+                    this._error = value;
+                    this.RaisePropertyChanged("Error");
+                    this.OnErrorChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Loai_Nh' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Loai_Nh
+        {
+            get
+            {
+                return this._loai_Nh;
+            }
+            set
+            {
+                if ((this._loai_Nh != value))
+                {
+                    this.OnLoai_NhChanging(value);
+                    this.RaiseDataMemberChanging("Loai_Nh");
+                    this.ValidateProperty("Loai_Nh", value);
+                    this._loai_Nh = value;
+                    this.RaiseDataMemberChanged("Loai_Nh");
+                    this.OnLoai_NhChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Nh' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Nh
+        {
+            get
+            {
+                return this._ma_Nh;
+            }
+            set
+            {
+                if ((this._ma_Nh != value))
+                {
+                    this.OnMa_NhChanging(value);
+                    this.ValidateProperty("Ma_Nh", value);
+                    this._ma_Nh = value;
+                    this.RaisePropertyChanged("Ma_Nh");
+                    this.OnMa_NhChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Status' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Status
+        {
+            get
+            {
+                return this._status;
+            }
+            set
+            {
+                if ((this._status != value))
+                {
+                    this.OnStatusChanging(value);
+                    this.RaiseDataMemberChanging("Status");
+                    this.ValidateProperty("Status", value);
+                    this._status = value;
+                    this.RaiseDataMemberChanged("Status");
+                    this.OnStatusChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Nh' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Nh
+        {
+            get
+            {
+                return this._ten_Nh;
+            }
+            set
+            {
+                if ((this._ten_Nh != value))
+                {
+                    this.OnTen_NhChanging(value);
+                    this.RaiseDataMemberChanging("Ten_Nh");
+                    this.ValidateProperty("Ten_Nh", value);
+                    this._ten_Nh = value;
+                    this.RaiseDataMemberChanged("Ten_Nh");
+                    this.OnTen_NhChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Nh2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Nh2
+        {
+            get
+            {
+                return this._ten_Nh2;
+            }
+            set
+            {
+                if ((this._ten_Nh2 != value))
+                {
+                    this.OnTen_Nh2Changing(value);
+                    this.RaiseDataMemberChanging("Ten_Nh2");
+                    this.ValidateProperty("Ten_Nh2", value);
+                    this._ten_Nh2 = value;
+                    this.RaiseDataMemberChanged("Ten_Nh2");
+                    this.OnTen_Nh2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id0
+        {
+            get
+            {
+                return this._user_Id0;
+            }
+            set
+            {
+                if ((this._user_Id0 != value))
+                {
+                    this.OnUser_Id0Changing(value);
+                    this.RaiseDataMemberChanging("User_Id0");
+                    this.ValidateProperty("User_Id0", value);
+                    this._user_Id0 = value;
+                    this.RaiseDataMemberChanged("User_Id0");
+                    this.OnUser_Id0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id2
+        {
+            get
+            {
+                return this._user_Id2;
+            }
+            set
+            {
+                if ((this._user_Id2 != value))
+                {
+                    this.OnUser_Id2Changing(value);
+                    this.RaiseDataMemberChanging("User_Id2");
+                    this.ValidateProperty("User_Id2", value);
+                    this._user_Id2 = value;
+                    this.RaiseDataMemberChanged("User_Id2");
+                    this.OnUser_Id2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._ma_Nh;
+        }
+    }
+    
+    /// <summary>
+    /// The 'Dmnt' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class Dmnt : Entity
+    {
+        
+        private DateTime _date0;
+        
+        private DateTime _date2;
+        
+        private string _error;
+        
+        private string _ma_Nt;
+        
+        private string[] _openAccessGenerated;
+        
+        private string _status;
+        
+        private string _ten_Nt;
+        
+        private string _ten_Nt2;
+        
+        private long _user_Id0;
+        
+        private long _user_Id2;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnDate0Changing(DateTime value);
+        partial void OnDate0Changed();
+        partial void OnDate2Changing(DateTime value);
+        partial void OnDate2Changed();
+        partial void OnErrorChanging(string value);
+        partial void OnErrorChanged();
+        partial void OnMa_NtChanging(string value);
+        partial void OnMa_NtChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnStatusChanging(string value);
+        partial void OnStatusChanged();
+        partial void OnTen_NtChanging(string value);
+        partial void OnTen_NtChanged();
+        partial void OnTen_Nt2Changing(string value);
+        partial void OnTen_Nt2Changed();
+        partial void OnUser_Id0Changing(long value);
+        partial void OnUser_Id0Changed();
+        partial void OnUser_Id2Changing(long value);
+        partial void OnUser_Id2Changed();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Dmnt"/> class.
+        /// </summary>
+        public Dmnt()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date0
+        {
+            get
+            {
+                return this._date0;
+            }
+            set
+            {
+                if ((this._date0 != value))
+                {
+                    this.OnDate0Changing(value);
+                    this.RaiseDataMemberChanging("Date0");
+                    this.ValidateProperty("Date0", value);
+                    this._date0 = value;
+                    this.RaiseDataMemberChanged("Date0");
+                    this.OnDate0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date2
+        {
+            get
+            {
+                return this._date2;
+            }
+            set
+            {
+                if ((this._date2 != value))
+                {
+                    this.OnDate2Changing(value);
+                    this.RaiseDataMemberChanging("Date2");
+                    this.ValidateProperty("Date2", value);
+                    this._date2 = value;
+                    this.RaiseDataMemberChanged("Date2");
+                    this.OnDate2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Error' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false)]
+        [ReadOnly(true)]
+        public string Error
+        {
+            get
+            {
+                return this._error;
+            }
+            set
+            {
+                if ((this._error != value))
+                {
+                    this.OnErrorChanging(value);
+                    this.ValidateProperty("Error", value);
+                    this._error = value;
+                    this.RaisePropertyChanged("Error");
+                    this.OnErrorChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Nt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Nt
+        {
+            get
+            {
+                return this._ma_Nt;
+            }
+            set
+            {
+                if ((this._ma_Nt != value))
+                {
+                    this.OnMa_NtChanging(value);
+                    this.ValidateProperty("Ma_Nt", value);
+                    this._ma_Nt = value;
+                    this.RaisePropertyChanged("Ma_Nt");
+                    this.OnMa_NtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Status' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Status
+        {
+            get
+            {
+                return this._status;
+            }
+            set
+            {
+                if ((this._status != value))
+                {
+                    this.OnStatusChanging(value);
+                    this.RaiseDataMemberChanging("Status");
+                    this.ValidateProperty("Status", value);
+                    this._status = value;
+                    this.RaiseDataMemberChanged("Status");
+                    this.OnStatusChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Nt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Nt
+        {
+            get
+            {
+                return this._ten_Nt;
+            }
+            set
+            {
+                if ((this._ten_Nt != value))
+                {
+                    this.OnTen_NtChanging(value);
+                    this.RaiseDataMemberChanging("Ten_Nt");
+                    this.ValidateProperty("Ten_Nt", value);
+                    this._ten_Nt = value;
+                    this.RaiseDataMemberChanged("Ten_Nt");
+                    this.OnTen_NtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Nt2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Nt2
+        {
+            get
+            {
+                return this._ten_Nt2;
+            }
+            set
+            {
+                if ((this._ten_Nt2 != value))
+                {
+                    this.OnTen_Nt2Changing(value);
+                    this.RaiseDataMemberChanging("Ten_Nt2");
+                    this.ValidateProperty("Ten_Nt2", value);
+                    this._ten_Nt2 = value;
+                    this.RaiseDataMemberChanged("Ten_Nt2");
+                    this.OnTen_Nt2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id0
+        {
+            get
+            {
+                return this._user_Id0;
+            }
+            set
+            {
+                if ((this._user_Id0 != value))
+                {
+                    this.OnUser_Id0Changing(value);
+                    this.RaiseDataMemberChanging("User_Id0");
+                    this.ValidateProperty("User_Id0", value);
+                    this._user_Id0 = value;
+                    this.RaiseDataMemberChanged("User_Id0");
+                    this.OnUser_Id0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id2
+        {
+            get
+            {
+                return this._user_Id2;
+            }
+            set
+            {
+                if ((this._user_Id2 != value))
+                {
+                    this.OnUser_Id2Changing(value);
+                    this.RaiseDataMemberChanging("User_Id2");
+                    this.ValidateProperty("User_Id2", value);
+                    this._user_Id2 = value;
+                    this.RaiseDataMemberChanged("User_Id2");
+                    this.OnUser_Id2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._ma_Nt;
+        }
+    }
+    
+    /// <summary>
+    /// The 'Dmtd' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class Dmtd : Entity
+    {
+        
+        private DateTime _date0;
+        
+        private DateTime _date2;
+        
+        private string _error;
+        
+        private string _ma_Td;
+        
+        private string[] _openAccessGenerated;
+        
+        private string _status;
+        
+        private string _ten_Td;
+        
+        private string _ten_Td2;
+        
+        private long _user_Id0;
+        
+        private long _user_Id2;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnDate0Changing(DateTime value);
+        partial void OnDate0Changed();
+        partial void OnDate2Changing(DateTime value);
+        partial void OnDate2Changed();
+        partial void OnErrorChanging(string value);
+        partial void OnErrorChanged();
+        partial void OnMa_TdChanging(string value);
+        partial void OnMa_TdChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnStatusChanging(string value);
+        partial void OnStatusChanged();
+        partial void OnTen_TdChanging(string value);
+        partial void OnTen_TdChanged();
+        partial void OnTen_Td2Changing(string value);
+        partial void OnTen_Td2Changed();
+        partial void OnUser_Id0Changing(long value);
+        partial void OnUser_Id0Changed();
+        partial void OnUser_Id2Changing(long value);
+        partial void OnUser_Id2Changed();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Dmtd"/> class.
+        /// </summary>
+        public Dmtd()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date0
+        {
+            get
+            {
+                return this._date0;
+            }
+            set
+            {
+                if ((this._date0 != value))
+                {
+                    this.OnDate0Changing(value);
+                    this.RaiseDataMemberChanging("Date0");
+                    this.ValidateProperty("Date0", value);
+                    this._date0 = value;
+                    this.RaiseDataMemberChanged("Date0");
+                    this.OnDate0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date2
+        {
+            get
+            {
+                return this._date2;
+            }
+            set
+            {
+                if ((this._date2 != value))
+                {
+                    this.OnDate2Changing(value);
+                    this.RaiseDataMemberChanging("Date2");
+                    this.ValidateProperty("Date2", value);
+                    this._date2 = value;
+                    this.RaiseDataMemberChanged("Date2");
+                    this.OnDate2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Error' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false)]
+        [ReadOnly(true)]
+        public string Error
+        {
+            get
+            {
+                return this._error;
+            }
+            set
+            {
+                if ((this._error != value))
+                {
+                    this.OnErrorChanging(value);
+                    this.ValidateProperty("Error", value);
+                    this._error = value;
+                    this.RaisePropertyChanged("Error");
+                    this.OnErrorChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Td' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Td
+        {
+            get
+            {
+                return this._ma_Td;
+            }
+            set
+            {
+                if ((this._ma_Td != value))
+                {
+                    this.OnMa_TdChanging(value);
+                    this.ValidateProperty("Ma_Td", value);
+                    this._ma_Td = value;
+                    this.RaisePropertyChanged("Ma_Td");
+                    this.OnMa_TdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Status' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Status
+        {
+            get
+            {
+                return this._status;
+            }
+            set
+            {
+                if ((this._status != value))
+                {
+                    this.OnStatusChanging(value);
+                    this.RaiseDataMemberChanging("Status");
+                    this.ValidateProperty("Status", value);
+                    this._status = value;
+                    this.RaiseDataMemberChanged("Status");
+                    this.OnStatusChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Td' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Td
+        {
+            get
+            {
+                return this._ten_Td;
+            }
+            set
+            {
+                if ((this._ten_Td != value))
+                {
+                    this.OnTen_TdChanging(value);
+                    this.RaiseDataMemberChanging("Ten_Td");
+                    this.ValidateProperty("Ten_Td", value);
+                    this._ten_Td = value;
+                    this.RaiseDataMemberChanged("Ten_Td");
+                    this.OnTen_TdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Td2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Td2
+        {
+            get
+            {
+                return this._ten_Td2;
+            }
+            set
+            {
+                if ((this._ten_Td2 != value))
+                {
+                    this.OnTen_Td2Changing(value);
+                    this.RaiseDataMemberChanging("Ten_Td2");
+                    this.ValidateProperty("Ten_Td2", value);
+                    this._ten_Td2 = value;
+                    this.RaiseDataMemberChanged("Ten_Td2");
+                    this.OnTen_Td2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id0
+        {
+            get
+            {
+                return this._user_Id0;
+            }
+            set
+            {
+                if ((this._user_Id0 != value))
+                {
+                    this.OnUser_Id0Changing(value);
+                    this.RaiseDataMemberChanging("User_Id0");
+                    this.ValidateProperty("User_Id0", value);
+                    this._user_Id0 = value;
+                    this.RaiseDataMemberChanged("User_Id0");
+                    this.OnUser_Id0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id2
+        {
+            get
+            {
+                return this._user_Id2;
+            }
+            set
+            {
+                if ((this._user_Id2 != value))
+                {
+                    this.OnUser_Id2Changing(value);
+                    this.RaiseDataMemberChanging("User_Id2");
+                    this.ValidateProperty("User_Id2", value);
+                    this._user_Id2 = value;
+                    this.RaiseDataMemberChanged("User_Id2");
+                    this.OnUser_Id2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._ma_Td;
+        }
+    }
+    
+    /// <summary>
+    /// The 'Dmtk' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class Dmtk : Entity
+    {
+        
+        private short _bac_Tk;
+        
+        private DateTime _date0;
+        
+        private DateTime _date2;
+        
+        private string _error;
+        
+        private short _loai_Tk;
+        
+        private string _ma_Nt;
+        
+        private string _nh_Tk0;
+        
+        private string _nh_Tk2;
+        
+        private string[] _openAccessGenerated;
+        
+        private string _status;
+        
+        private string _ten_Tk;
+        
+        private string _ten_Tk2;
+        
+        private string _tk;
+        
+        private short _tk_Cn;
+        
+        private string _tk_Me;
+        
+        private short _tk_Sc;
+        
+        private long _user_Id0;
+        
+        private long _user_Id2;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnBac_TkChanging(short value);
+        partial void OnBac_TkChanged();
+        partial void OnDate0Changing(DateTime value);
+        partial void OnDate0Changed();
+        partial void OnDate2Changing(DateTime value);
+        partial void OnDate2Changed();
+        partial void OnErrorChanging(string value);
+        partial void OnErrorChanged();
+        partial void OnLoai_TkChanging(short value);
+        partial void OnLoai_TkChanged();
+        partial void OnMa_NtChanging(string value);
+        partial void OnMa_NtChanged();
+        partial void OnNh_Tk0Changing(string value);
+        partial void OnNh_Tk0Changed();
+        partial void OnNh_Tk2Changing(string value);
+        partial void OnNh_Tk2Changed();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnStatusChanging(string value);
+        partial void OnStatusChanged();
+        partial void OnTen_TkChanging(string value);
+        partial void OnTen_TkChanged();
+        partial void OnTen_Tk2Changing(string value);
+        partial void OnTen_Tk2Changed();
+        partial void OnTkChanging(string value);
+        partial void OnTkChanged();
+        partial void OnTk_CnChanging(short value);
+        partial void OnTk_CnChanged();
+        partial void OnTk_MeChanging(string value);
+        partial void OnTk_MeChanged();
+        partial void OnTk_ScChanging(short value);
+        partial void OnTk_ScChanged();
+        partial void OnUser_Id0Changing(long value);
+        partial void OnUser_Id0Changed();
+        partial void OnUser_Id2Changing(long value);
+        partial void OnUser_Id2Changed();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Dmtk"/> class.
+        /// </summary>
+        public Dmtk()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Bac_Tk' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Bac_Tk
+        {
+            get
+            {
+                return this._bac_Tk;
+            }
+            set
+            {
+                if ((this._bac_Tk != value))
+                {
+                    this.OnBac_TkChanging(value);
+                    this.RaiseDataMemberChanging("Bac_Tk");
+                    this.ValidateProperty("Bac_Tk", value);
+                    this._bac_Tk = value;
+                    this.RaiseDataMemberChanged("Bac_Tk");
+                    this.OnBac_TkChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date0
+        {
+            get
+            {
+                return this._date0;
+            }
+            set
+            {
+                if ((this._date0 != value))
+                {
+                    this.OnDate0Changing(value);
+                    this.RaiseDataMemberChanging("Date0");
+                    this.ValidateProperty("Date0", value);
+                    this._date0 = value;
+                    this.RaiseDataMemberChanged("Date0");
+                    this.OnDate0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date2
+        {
+            get
+            {
+                return this._date2;
+            }
+            set
+            {
+                if ((this._date2 != value))
+                {
+                    this.OnDate2Changing(value);
+                    this.RaiseDataMemberChanging("Date2");
+                    this.ValidateProperty("Date2", value);
+                    this._date2 = value;
+                    this.RaiseDataMemberChanged("Date2");
+                    this.OnDate2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Error' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false)]
+        [ReadOnly(true)]
+        public string Error
+        {
+            get
+            {
+                return this._error;
+            }
+            set
+            {
+                if ((this._error != value))
+                {
+                    this.OnErrorChanging(value);
+                    this.ValidateProperty("Error", value);
+                    this._error = value;
+                    this.RaisePropertyChanged("Error");
+                    this.OnErrorChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Loai_Tk' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Loai_Tk
+        {
+            get
+            {
+                return this._loai_Tk;
+            }
+            set
+            {
+                if ((this._loai_Tk != value))
+                {
+                    this.OnLoai_TkChanging(value);
+                    this.RaiseDataMemberChanging("Loai_Tk");
+                    this.ValidateProperty("Loai_Tk", value);
+                    this._loai_Tk = value;
+                    this.RaiseDataMemberChanged("Loai_Tk");
+                    this.OnLoai_TkChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Nt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Nt
+        {
+            get
+            {
+                return this._ma_Nt;
+            }
+            set
+            {
+                if ((this._ma_Nt != value))
+                {
+                    this.OnMa_NtChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Nt");
+                    this.ValidateProperty("Ma_Nt", value);
+                    this._ma_Nt = value;
+                    this.RaiseDataMemberChanged("Ma_Nt");
+                    this.OnMa_NtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Nh_Tk0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Nh_Tk0
+        {
+            get
+            {
+                return this._nh_Tk0;
+            }
+            set
+            {
+                if ((this._nh_Tk0 != value))
+                {
+                    this.OnNh_Tk0Changing(value);
+                    this.RaiseDataMemberChanging("Nh_Tk0");
+                    this.ValidateProperty("Nh_Tk0", value);
+                    this._nh_Tk0 = value;
+                    this.RaiseDataMemberChanged("Nh_Tk0");
+                    this.OnNh_Tk0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Nh_Tk2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Nh_Tk2
+        {
+            get
+            {
+                return this._nh_Tk2;
+            }
+            set
+            {
+                if ((this._nh_Tk2 != value))
+                {
+                    this.OnNh_Tk2Changing(value);
+                    this.RaiseDataMemberChanging("Nh_Tk2");
+                    this.ValidateProperty("Nh_Tk2", value);
+                    this._nh_Tk2 = value;
+                    this.RaiseDataMemberChanged("Nh_Tk2");
+                    this.OnNh_Tk2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Status' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Status
+        {
+            get
+            {
+                return this._status;
+            }
+            set
+            {
+                if ((this._status != value))
+                {
+                    this.OnStatusChanging(value);
+                    this.RaiseDataMemberChanging("Status");
+                    this.ValidateProperty("Status", value);
+                    this._status = value;
+                    this.RaiseDataMemberChanged("Status");
+                    this.OnStatusChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Tk' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Tk
+        {
+            get
+            {
+                return this._ten_Tk;
+            }
+            set
+            {
+                if ((this._ten_Tk != value))
+                {
+                    this.OnTen_TkChanging(value);
+                    this.RaiseDataMemberChanging("Ten_Tk");
+                    this.ValidateProperty("Ten_Tk", value);
+                    this._ten_Tk = value;
+                    this.RaiseDataMemberChanged("Ten_Tk");
+                    this.OnTen_TkChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Tk2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Tk2
+        {
+            get
+            {
+                return this._ten_Tk2;
+            }
+            set
+            {
+                if ((this._ten_Tk2 != value))
+                {
+                    this.OnTen_Tk2Changing(value);
+                    this.RaiseDataMemberChanging("Ten_Tk2");
+                    this.ValidateProperty("Ten_Tk2", value);
+                    this._ten_Tk2 = value;
+                    this.RaiseDataMemberChanged("Ten_Tk2");
+                    this.OnTen_Tk2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Tk' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Tk
+        {
+            get
+            {
+                return this._tk;
+            }
+            set
+            {
+                if ((this._tk != value))
+                {
+                    this.OnTkChanging(value);
+                    this.ValidateProperty("Tk", value);
+                    this._tk = value;
+                    this.RaisePropertyChanged("Tk");
+                    this.OnTkChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Tk_Cn' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Tk_Cn
+        {
+            get
+            {
+                return this._tk_Cn;
+            }
+            set
+            {
+                if ((this._tk_Cn != value))
+                {
+                    this.OnTk_CnChanging(value);
+                    this.RaiseDataMemberChanging("Tk_Cn");
+                    this.ValidateProperty("Tk_Cn", value);
+                    this._tk_Cn = value;
+                    this.RaiseDataMemberChanged("Tk_Cn");
+                    this.OnTk_CnChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Tk_Me' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Tk_Me
+        {
+            get
+            {
+                return this._tk_Me;
+            }
+            set
+            {
+                if ((this._tk_Me != value))
+                {
+                    this.OnTk_MeChanging(value);
+                    this.RaiseDataMemberChanging("Tk_Me");
+                    this.ValidateProperty("Tk_Me", value);
+                    this._tk_Me = value;
+                    this.RaiseDataMemberChanged("Tk_Me");
+                    this.OnTk_MeChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Tk_Sc' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Tk_Sc
+        {
+            get
+            {
+                return this._tk_Sc;
+            }
+            set
+            {
+                if ((this._tk_Sc != value))
+                {
+                    this.OnTk_ScChanging(value);
+                    this.RaiseDataMemberChanging("Tk_Sc");
+                    this.ValidateProperty("Tk_Sc", value);
+                    this._tk_Sc = value;
+                    this.RaiseDataMemberChanged("Tk_Sc");
+                    this.OnTk_ScChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id0
+        {
+            get
+            {
+                return this._user_Id0;
+            }
+            set
+            {
+                if ((this._user_Id0 != value))
+                {
+                    this.OnUser_Id0Changing(value);
+                    this.RaiseDataMemberChanging("User_Id0");
+                    this.ValidateProperty("User_Id0", value);
+                    this._user_Id0 = value;
+                    this.RaiseDataMemberChanged("User_Id0");
+                    this.OnUser_Id0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id2
+        {
+            get
+            {
+                return this._user_Id2;
+            }
+            set
+            {
+                if ((this._user_Id2 != value))
+                {
+                    this.OnUser_Id2Changing(value);
+                    this.RaiseDataMemberChanging("User_Id2");
+                    this.ValidateProperty("User_Id2", value);
+                    this._user_Id2 = value;
+                    this.RaiseDataMemberChanged("User_Id2");
+                    this.OnUser_Id2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._tk;
+        }
+    }
+    
+    /// <summary>
+    /// The 'Dmtt' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class Dmtt : Entity
+    {
+        
+        private DateTime _date0;
+        
+        private DateTime _date2;
+        
+        private string _error;
+        
+        private short _han_Tt;
+        
+        private short _han_Tt_Gg;
+        
+        private string _ma_Tt;
+        
+        private string[] _openAccessGenerated;
+        
+        private decimal _pt_Gg;
+        
+        private string _status;
+        
+        private string _ten_Tt;
+        
+        private string _ten_Tt2;
+        
+        private long _user_Id0;
+        
+        private long _user_Id2;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnDate0Changing(DateTime value);
+        partial void OnDate0Changed();
+        partial void OnDate2Changing(DateTime value);
+        partial void OnDate2Changed();
+        partial void OnErrorChanging(string value);
+        partial void OnErrorChanged();
+        partial void OnHan_TtChanging(short value);
+        partial void OnHan_TtChanged();
+        partial void OnHan_Tt_GgChanging(short value);
+        partial void OnHan_Tt_GgChanged();
+        partial void OnMa_TtChanging(string value);
+        partial void OnMa_TtChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnPt_GgChanging(decimal value);
+        partial void OnPt_GgChanged();
+        partial void OnStatusChanging(string value);
+        partial void OnStatusChanged();
+        partial void OnTen_TtChanging(string value);
+        partial void OnTen_TtChanged();
+        partial void OnTen_Tt2Changing(string value);
+        partial void OnTen_Tt2Changed();
+        partial void OnUser_Id0Changing(long value);
+        partial void OnUser_Id0Changed();
+        partial void OnUser_Id2Changing(long value);
+        partial void OnUser_Id2Changed();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Dmtt"/> class.
+        /// </summary>
+        public Dmtt()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date0
+        {
+            get
+            {
+                return this._date0;
+            }
+            set
+            {
+                if ((this._date0 != value))
+                {
+                    this.OnDate0Changing(value);
+                    this.RaiseDataMemberChanging("Date0");
+                    this.ValidateProperty("Date0", value);
+                    this._date0 = value;
+                    this.RaiseDataMemberChanged("Date0");
+                    this.OnDate0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date2
+        {
+            get
+            {
+                return this._date2;
+            }
+            set
+            {
+                if ((this._date2 != value))
+                {
+                    this.OnDate2Changing(value);
+                    this.RaiseDataMemberChanging("Date2");
+                    this.ValidateProperty("Date2", value);
+                    this._date2 = value;
+                    this.RaiseDataMemberChanged("Date2");
+                    this.OnDate2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Error' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false)]
+        [ReadOnly(true)]
+        public string Error
+        {
+            get
+            {
+                return this._error;
+            }
+            set
+            {
+                if ((this._error != value))
+                {
+                    this.OnErrorChanging(value);
+                    this.ValidateProperty("Error", value);
+                    this._error = value;
+                    this.RaisePropertyChanged("Error");
+                    this.OnErrorChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Han_Tt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Han_Tt
+        {
+            get
+            {
+                return this._han_Tt;
+            }
+            set
+            {
+                if ((this._han_Tt != value))
+                {
+                    this.OnHan_TtChanging(value);
+                    this.RaiseDataMemberChanging("Han_Tt");
+                    this.ValidateProperty("Han_Tt", value);
+                    this._han_Tt = value;
+                    this.RaiseDataMemberChanged("Han_Tt");
+                    this.OnHan_TtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Han_Tt_Gg' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Han_Tt_Gg
+        {
+            get
+            {
+                return this._han_Tt_Gg;
+            }
+            set
+            {
+                if ((this._han_Tt_Gg != value))
+                {
+                    this.OnHan_Tt_GgChanging(value);
+                    this.RaiseDataMemberChanging("Han_Tt_Gg");
+                    this.ValidateProperty("Han_Tt_Gg", value);
+                    this._han_Tt_Gg = value;
+                    this.RaiseDataMemberChanged("Han_Tt_Gg");
+                    this.OnHan_Tt_GgChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Tt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Tt
+        {
+            get
+            {
+                return this._ma_Tt;
+            }
+            set
+            {
+                if ((this._ma_Tt != value))
+                {
+                    this.OnMa_TtChanging(value);
+                    this.ValidateProperty("Ma_Tt", value);
+                    this._ma_Tt = value;
+                    this.RaisePropertyChanged("Ma_Tt");
+                    this.OnMa_TtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Pt_Gg' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public decimal Pt_Gg
+        {
+            get
+            {
+                return this._pt_Gg;
+            }
+            set
+            {
+                if ((this._pt_Gg != value))
+                {
+                    this.OnPt_GgChanging(value);
+                    this.RaiseDataMemberChanging("Pt_Gg");
+                    this.ValidateProperty("Pt_Gg", value);
+                    this._pt_Gg = value;
+                    this.RaiseDataMemberChanged("Pt_Gg");
+                    this.OnPt_GgChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Status' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Status
+        {
+            get
+            {
+                return this._status;
+            }
+            set
+            {
+                if ((this._status != value))
+                {
+                    this.OnStatusChanging(value);
+                    this.RaiseDataMemberChanging("Status");
+                    this.ValidateProperty("Status", value);
+                    this._status = value;
+                    this.RaiseDataMemberChanged("Status");
+                    this.OnStatusChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Tt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Tt
+        {
+            get
+            {
+                return this._ten_Tt;
+            }
+            set
+            {
+                if ((this._ten_Tt != value))
+                {
+                    this.OnTen_TtChanging(value);
+                    this.RaiseDataMemberChanging("Ten_Tt");
+                    this.ValidateProperty("Ten_Tt", value);
+                    this._ten_Tt = value;
+                    this.RaiseDataMemberChanged("Ten_Tt");
+                    this.OnTen_TtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Tt2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Tt2
+        {
+            get
+            {
+                return this._ten_Tt2;
+            }
+            set
+            {
+                if ((this._ten_Tt2 != value))
+                {
+                    this.OnTen_Tt2Changing(value);
+                    this.RaiseDataMemberChanging("Ten_Tt2");
+                    this.ValidateProperty("Ten_Tt2", value);
+                    this._ten_Tt2 = value;
+                    this.RaiseDataMemberChanged("Ten_Tt2");
+                    this.OnTen_Tt2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id0
+        {
+            get
+            {
+                return this._user_Id0;
+            }
+            set
+            {
+                if ((this._user_Id0 != value))
+                {
+                    this.OnUser_Id0Changing(value);
+                    this.RaiseDataMemberChanging("User_Id0");
+                    this.ValidateProperty("User_Id0", value);
+                    this._user_Id0 = value;
+                    this.RaiseDataMemberChanged("User_Id0");
+                    this.OnUser_Id0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id2
+        {
+            get
+            {
+                return this._user_Id2;
+            }
+            set
+            {
+                if ((this._user_Id2 != value))
+                {
+                    this.OnUser_Id2Changing(value);
+                    this.RaiseDataMemberChanging("User_Id2");
+                    this.ValidateProperty("User_Id2", value);
+                    this._user_Id2 = value;
+                    this.RaiseDataMemberChanged("User_Id2");
+                    this.OnUser_Id2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._ma_Tt;
+        }
+    }
+    
+    /// <summary>
+    /// The 'Dmvv' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class Dmvv : Entity
+    {
+        
+        private DateTime _date0;
+        
+        private DateTime _date2;
+        
+        private string _error;
+        
+        private string _ghi_Chu;
+        
+        private string _ma_Kh;
+        
+        private string _ma_Nt;
+        
+        private string _ma_Vv;
+        
+        private DateTime _ngay_Vv1;
+        
+        private DateTime _ngay_Vv2;
+        
+        private string _nh_Vv1;
+        
+        private string _nh_Vv2;
+        
+        private string _nh_Vv3;
+        
+        private string[] _openAccessGenerated;
+        
+        private string _status;
+        
+        private string _ten_Vv;
+        
+        private string _ten_Vv2;
+        
+        private decimal _tien;
+        
+        private decimal _tien_Nt;
+        
+        private string _tk;
+        
+        private long _user_Id0;
+        
+        private long _user_Id2;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnDate0Changing(DateTime value);
+        partial void OnDate0Changed();
+        partial void OnDate2Changing(DateTime value);
+        partial void OnDate2Changed();
+        partial void OnErrorChanging(string value);
+        partial void OnErrorChanged();
+        partial void OnGhi_ChuChanging(string value);
+        partial void OnGhi_ChuChanged();
+        partial void OnMa_KhChanging(string value);
+        partial void OnMa_KhChanged();
+        partial void OnMa_NtChanging(string value);
+        partial void OnMa_NtChanged();
+        partial void OnMa_VvChanging(string value);
+        partial void OnMa_VvChanged();
+        partial void OnNgay_Vv1Changing(DateTime value);
+        partial void OnNgay_Vv1Changed();
+        partial void OnNgay_Vv2Changing(DateTime value);
+        partial void OnNgay_Vv2Changed();
+        partial void OnNh_Vv1Changing(string value);
+        partial void OnNh_Vv1Changed();
+        partial void OnNh_Vv2Changing(string value);
+        partial void OnNh_Vv2Changed();
+        partial void OnNh_Vv3Changing(string value);
+        partial void OnNh_Vv3Changed();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnStatusChanging(string value);
+        partial void OnStatusChanged();
+        partial void OnTen_VvChanging(string value);
+        partial void OnTen_VvChanged();
+        partial void OnTen_Vv2Changing(string value);
+        partial void OnTen_Vv2Changed();
+        partial void OnTienChanging(decimal value);
+        partial void OnTienChanged();
+        partial void OnTien_NtChanging(decimal value);
+        partial void OnTien_NtChanged();
+        partial void OnTkChanging(string value);
+        partial void OnTkChanged();
+        partial void OnUser_Id0Changing(long value);
+        partial void OnUser_Id0Changed();
+        partial void OnUser_Id2Changing(long value);
+        partial void OnUser_Id2Changed();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Dmvv"/> class.
+        /// </summary>
+        public Dmvv()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date0
+        {
+            get
+            {
+                return this._date0;
+            }
+            set
+            {
+                if ((this._date0 != value))
+                {
+                    this.OnDate0Changing(value);
+                    this.RaiseDataMemberChanging("Date0");
+                    this.ValidateProperty("Date0", value);
+                    this._date0 = value;
+                    this.RaiseDataMemberChanged("Date0");
+                    this.OnDate0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date2
+        {
+            get
+            {
+                return this._date2;
+            }
+            set
+            {
+                if ((this._date2 != value))
+                {
+                    this.OnDate2Changing(value);
+                    this.RaiseDataMemberChanging("Date2");
+                    this.ValidateProperty("Date2", value);
+                    this._date2 = value;
+                    this.RaiseDataMemberChanged("Date2");
+                    this.OnDate2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Error' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false)]
+        [ReadOnly(true)]
+        public string Error
+        {
+            get
+            {
+                return this._error;
+            }
+            set
+            {
+                if ((this._error != value))
+                {
+                    this.OnErrorChanging(value);
+                    this.ValidateProperty("Error", value);
+                    this._error = value;
+                    this.RaisePropertyChanged("Error");
+                    this.OnErrorChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ghi_Chu' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ghi_Chu
+        {
+            get
+            {
+                return this._ghi_Chu;
+            }
+            set
+            {
+                if ((this._ghi_Chu != value))
+                {
+                    this.OnGhi_ChuChanging(value);
+                    this.RaiseDataMemberChanging("Ghi_Chu");
+                    this.ValidateProperty("Ghi_Chu", value);
+                    this._ghi_Chu = value;
+                    this.RaiseDataMemberChanged("Ghi_Chu");
+                    this.OnGhi_ChuChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Kh' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Kh
+        {
+            get
+            {
+                return this._ma_Kh;
+            }
+            set
+            {
+                if ((this._ma_Kh != value))
+                {
+                    this.OnMa_KhChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Kh");
+                    this.ValidateProperty("Ma_Kh", value);
+                    this._ma_Kh = value;
+                    this.RaiseDataMemberChanged("Ma_Kh");
+                    this.OnMa_KhChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Nt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Nt
+        {
+            get
+            {
+                return this._ma_Nt;
+            }
+            set
+            {
+                if ((this._ma_Nt != value))
+                {
+                    this.OnMa_NtChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Nt");
+                    this.ValidateProperty("Ma_Nt", value);
+                    this._ma_Nt = value;
+                    this.RaiseDataMemberChanged("Ma_Nt");
+                    this.OnMa_NtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Vv' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Vv
+        {
+            get
+            {
+                return this._ma_Vv;
+            }
+            set
+            {
+                if ((this._ma_Vv != value))
+                {
+                    this.OnMa_VvChanging(value);
+                    this.ValidateProperty("Ma_Vv", value);
+                    this._ma_Vv = value;
+                    this.RaisePropertyChanged("Ma_Vv");
+                    this.OnMa_VvChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ngay_Vv1' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Ngay_Vv1
+        {
+            get
+            {
+                return this._ngay_Vv1;
+            }
+            set
+            {
+                if ((this._ngay_Vv1 != value))
+                {
+                    this.OnNgay_Vv1Changing(value);
+                    this.RaiseDataMemberChanging("Ngay_Vv1");
+                    this.ValidateProperty("Ngay_Vv1", value);
+                    this._ngay_Vv1 = value;
+                    this.RaiseDataMemberChanged("Ngay_Vv1");
+                    this.OnNgay_Vv1Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ngay_Vv2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Ngay_Vv2
+        {
+            get
+            {
+                return this._ngay_Vv2;
+            }
+            set
+            {
+                if ((this._ngay_Vv2 != value))
+                {
+                    this.OnNgay_Vv2Changing(value);
+                    this.RaiseDataMemberChanging("Ngay_Vv2");
+                    this.ValidateProperty("Ngay_Vv2", value);
+                    this._ngay_Vv2 = value;
+                    this.RaiseDataMemberChanged("Ngay_Vv2");
+                    this.OnNgay_Vv2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Nh_Vv1' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Nh_Vv1
+        {
+            get
+            {
+                return this._nh_Vv1;
+            }
+            set
+            {
+                if ((this._nh_Vv1 != value))
+                {
+                    this.OnNh_Vv1Changing(value);
+                    this.RaiseDataMemberChanging("Nh_Vv1");
+                    this.ValidateProperty("Nh_Vv1", value);
+                    this._nh_Vv1 = value;
+                    this.RaiseDataMemberChanged("Nh_Vv1");
+                    this.OnNh_Vv1Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Nh_Vv2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Nh_Vv2
+        {
+            get
+            {
+                return this._nh_Vv2;
+            }
+            set
+            {
+                if ((this._nh_Vv2 != value))
+                {
+                    this.OnNh_Vv2Changing(value);
+                    this.RaiseDataMemberChanging("Nh_Vv2");
+                    this.ValidateProperty("Nh_Vv2", value);
+                    this._nh_Vv2 = value;
+                    this.RaiseDataMemberChanged("Nh_Vv2");
+                    this.OnNh_Vv2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Nh_Vv3' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Nh_Vv3
+        {
+            get
+            {
+                return this._nh_Vv3;
+            }
+            set
+            {
+                if ((this._nh_Vv3 != value))
+                {
+                    this.OnNh_Vv3Changing(value);
+                    this.RaiseDataMemberChanging("Nh_Vv3");
+                    this.ValidateProperty("Nh_Vv3", value);
+                    this._nh_Vv3 = value;
+                    this.RaiseDataMemberChanged("Nh_Vv3");
+                    this.OnNh_Vv3Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Status' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Status
+        {
+            get
+            {
+                return this._status;
+            }
+            set
+            {
+                if ((this._status != value))
+                {
+                    this.OnStatusChanging(value);
+                    this.RaiseDataMemberChanging("Status");
+                    this.ValidateProperty("Status", value);
+                    this._status = value;
+                    this.RaiseDataMemberChanged("Status");
+                    this.OnStatusChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Vv' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Vv
+        {
+            get
+            {
+                return this._ten_Vv;
+            }
+            set
+            {
+                if ((this._ten_Vv != value))
+                {
+                    this.OnTen_VvChanging(value);
+                    this.RaiseDataMemberChanging("Ten_Vv");
+                    this.ValidateProperty("Ten_Vv", value);
+                    this._ten_Vv = value;
+                    this.RaiseDataMemberChanged("Ten_Vv");
+                    this.OnTen_VvChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ten_Vv2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ten_Vv2
+        {
+            get
+            {
+                return this._ten_Vv2;
+            }
+            set
+            {
+                if ((this._ten_Vv2 != value))
+                {
+                    this.OnTen_Vv2Changing(value);
+                    this.RaiseDataMemberChanging("Ten_Vv2");
+                    this.ValidateProperty("Ten_Vv2", value);
+                    this._ten_Vv2 = value;
+                    this.RaiseDataMemberChanged("Ten_Vv2");
+                    this.OnTen_Vv2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Tien' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public decimal Tien
+        {
+            get
+            {
+                return this._tien;
+            }
+            set
+            {
+                if ((this._tien != value))
+                {
+                    this.OnTienChanging(value);
+                    this.RaiseDataMemberChanging("Tien");
+                    this.ValidateProperty("Tien", value);
+                    this._tien = value;
+                    this.RaiseDataMemberChanged("Tien");
+                    this.OnTienChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Tien_Nt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public decimal Tien_Nt
+        {
+            get
+            {
+                return this._tien_Nt;
+            }
+            set
+            {
+                if ((this._tien_Nt != value))
+                {
+                    this.OnTien_NtChanging(value);
+                    this.RaiseDataMemberChanging("Tien_Nt");
+                    this.ValidateProperty("Tien_Nt", value);
+                    this._tien_Nt = value;
+                    this.RaiseDataMemberChanged("Tien_Nt");
+                    this.OnTien_NtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Tk' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Tk
+        {
+            get
+            {
+                return this._tk;
+            }
+            set
+            {
+                if ((this._tk != value))
+                {
+                    this.OnTkChanging(value);
+                    this.RaiseDataMemberChanging("Tk");
+                    this.ValidateProperty("Tk", value);
+                    this._tk = value;
+                    this.RaiseDataMemberChanged("Tk");
+                    this.OnTkChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id0
+        {
+            get
+            {
+                return this._user_Id0;
+            }
+            set
+            {
+                if ((this._user_Id0 != value))
+                {
+                    this.OnUser_Id0Changing(value);
+                    this.RaiseDataMemberChanging("User_Id0");
+                    this.ValidateProperty("User_Id0", value);
+                    this._user_Id0 = value;
+                    this.RaiseDataMemberChanged("User_Id0");
+                    this.OnUser_Id0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id2
+        {
+            get
+            {
+                return this._user_Id2;
+            }
+            set
+            {
+                if ((this._user_Id2 != value))
+                {
+                    this.OnUser_Id2Changing(value);
+                    this.RaiseDataMemberChanging("User_Id2");
+                    this.ValidateProperty("User_Id2", value);
+                    this._user_Id2 = value;
+                    this.RaiseDataMemberChanged("User_Id2");
+                    this.OnUser_Id2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._ma_Vv;
+        }
+    }
+    
+    /// <summary>
+    /// The 'Ph11' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class Ph11 : Entity
+    {
+        
+        private DateTime _date0;
+        
+        private DateTime _date2;
+        
+        private string _error;
+        
+        private string _ma_Ct;
+        
+        private string _ma_Dvcs;
+        
+        private short _ma_Gd;
+        
+        private string _ma_Nk;
+        
+        private string _ma_Nt;
+        
+        private DateTime _ngay_Ct;
+        
+        private DateTime _ngay_Lct;
+        
+        private DateTime _ngay_Lo;
+        
+        private string[] _openAccessGenerated;
+        
+        private string _so_Ct;
+        
+        private string _so_Lo;
+        
+        private string _status;
+        
+        private string _stt_Rec;
+        
+        private decimal _t_Ps_Co_Nt;
+        
+        private decimal _t_Ps_No;
+        
+        private decimal _t_Ps_No_Nt;
+        
+        private decimal _ty_Gia;
+        
+        private long _user_Id0;
+        
+        private long _user_Id2;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnDate0Changing(DateTime value);
+        partial void OnDate0Changed();
+        partial void OnDate2Changing(DateTime value);
+        partial void OnDate2Changed();
+        partial void OnErrorChanging(string value);
+        partial void OnErrorChanged();
+        partial void OnMa_CtChanging(string value);
+        partial void OnMa_CtChanged();
+        partial void OnMa_DvcsChanging(string value);
+        partial void OnMa_DvcsChanged();
+        partial void OnMa_GdChanging(short value);
+        partial void OnMa_GdChanged();
+        partial void OnMa_NkChanging(string value);
+        partial void OnMa_NkChanged();
+        partial void OnMa_NtChanging(string value);
+        partial void OnMa_NtChanged();
+        partial void OnNgay_CtChanging(DateTime value);
+        partial void OnNgay_CtChanged();
+        partial void OnNgay_LctChanging(DateTime value);
+        partial void OnNgay_LctChanged();
+        partial void OnNgay_LoChanging(DateTime value);
+        partial void OnNgay_LoChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnSo_CtChanging(string value);
+        partial void OnSo_CtChanged();
+        partial void OnSo_LoChanging(string value);
+        partial void OnSo_LoChanged();
+        partial void OnStatusChanging(string value);
+        partial void OnStatusChanged();
+        partial void OnStt_RecChanging(string value);
+        partial void OnStt_RecChanged();
+        partial void OnT_Ps_Co_NtChanging(decimal value);
+        partial void OnT_Ps_Co_NtChanged();
+        partial void OnT_Ps_NoChanging(decimal value);
+        partial void OnT_Ps_NoChanged();
+        partial void OnT_Ps_No_NtChanging(decimal value);
+        partial void OnT_Ps_No_NtChanged();
+        partial void OnTy_GiaChanging(decimal value);
+        partial void OnTy_GiaChanged();
+        partial void OnUser_Id0Changing(long value);
+        partial void OnUser_Id0Changed();
+        partial void OnUser_Id2Changing(long value);
+        partial void OnUser_Id2Changed();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Ph11"/> class.
+        /// </summary>
+        public Ph11()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date0
+        {
+            get
+            {
+                return this._date0;
+            }
+            set
+            {
+                if ((this._date0 != value))
+                {
+                    this.OnDate0Changing(value);
+                    this.RaiseDataMemberChanging("Date0");
+                    this.ValidateProperty("Date0", value);
+                    this._date0 = value;
+                    this.RaiseDataMemberChanged("Date0");
+                    this.OnDate0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date2
+        {
+            get
+            {
+                return this._date2;
+            }
+            set
+            {
+                if ((this._date2 != value))
+                {
+                    this.OnDate2Changing(value);
+                    this.RaiseDataMemberChanging("Date2");
+                    this.ValidateProperty("Date2", value);
+                    this._date2 = value;
+                    this.RaiseDataMemberChanged("Date2");
+                    this.OnDate2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Error' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false)]
+        [ReadOnly(true)]
+        public string Error
+        {
+            get
+            {
+                return this._error;
+            }
+            set
+            {
+                if ((this._error != value))
+                {
+                    this.OnErrorChanging(value);
+                    this.ValidateProperty("Error", value);
+                    this._error = value;
+                    this.RaisePropertyChanged("Error");
+                    this.OnErrorChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Ct' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Ct
+        {
+            get
+            {
+                return this._ma_Ct;
+            }
+            set
+            {
+                if ((this._ma_Ct != value))
+                {
+                    this.OnMa_CtChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Ct");
+                    this.ValidateProperty("Ma_Ct", value);
+                    this._ma_Ct = value;
+                    this.RaiseDataMemberChanged("Ma_Ct");
+                    this.OnMa_CtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Dvcs' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Dvcs
+        {
+            get
+            {
+                return this._ma_Dvcs;
+            }
+            set
+            {
+                if ((this._ma_Dvcs != value))
+                {
+                    this.OnMa_DvcsChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Dvcs");
+                    this.ValidateProperty("Ma_Dvcs", value);
+                    this._ma_Dvcs = value;
+                    this.RaiseDataMemberChanged("Ma_Dvcs");
+                    this.OnMa_DvcsChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Gd' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Ma_Gd
+        {
+            get
+            {
+                return this._ma_Gd;
+            }
+            set
+            {
+                if ((this._ma_Gd != value))
+                {
+                    this.OnMa_GdChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Gd");
+                    this.ValidateProperty("Ma_Gd", value);
+                    this._ma_Gd = value;
+                    this.RaiseDataMemberChanged("Ma_Gd");
+                    this.OnMa_GdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Nk' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Nk
+        {
+            get
+            {
+                return this._ma_Nk;
+            }
+            set
+            {
+                if ((this._ma_Nk != value))
+                {
+                    this.OnMa_NkChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Nk");
+                    this.ValidateProperty("Ma_Nk", value);
+                    this._ma_Nk = value;
+                    this.RaiseDataMemberChanged("Ma_Nk");
+                    this.OnMa_NkChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ma_Nt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Ma_Nt
+        {
+            get
+            {
+                return this._ma_Nt;
+            }
+            set
+            {
+                if ((this._ma_Nt != value))
+                {
+                    this.OnMa_NtChanging(value);
+                    this.RaiseDataMemberChanging("Ma_Nt");
+                    this.ValidateProperty("Ma_Nt", value);
+                    this._ma_Nt = value;
+                    this.RaiseDataMemberChanged("Ma_Nt");
+                    this.OnMa_NtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ngay_Ct' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Ngay_Ct
+        {
+            get
+            {
+                return this._ngay_Ct;
+            }
+            set
+            {
+                if ((this._ngay_Ct != value))
+                {
+                    this.OnNgay_CtChanging(value);
+                    this.RaiseDataMemberChanging("Ngay_Ct");
+                    this.ValidateProperty("Ngay_Ct", value);
+                    this._ngay_Ct = value;
+                    this.RaiseDataMemberChanged("Ngay_Ct");
+                    this.OnNgay_CtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ngay_Lct' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Ngay_Lct
+        {
+            get
+            {
+                return this._ngay_Lct;
+            }
+            set
+            {
+                if ((this._ngay_Lct != value))
+                {
+                    this.OnNgay_LctChanging(value);
+                    this.RaiseDataMemberChanging("Ngay_Lct");
+                    this.ValidateProperty("Ngay_Lct", value);
+                    this._ngay_Lct = value;
+                    this.RaiseDataMemberChanged("Ngay_Lct");
+                    this.OnNgay_LctChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ngay_Lo' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Ngay_Lo
+        {
+            get
+            {
+                return this._ngay_Lo;
+            }
+            set
+            {
+                if ((this._ngay_Lo != value))
+                {
+                    this.OnNgay_LoChanging(value);
+                    this.RaiseDataMemberChanging("Ngay_Lo");
+                    this.ValidateProperty("Ngay_Lo", value);
+                    this._ngay_Lo = value;
+                    this.RaiseDataMemberChanged("Ngay_Lo");
+                    this.OnNgay_LoChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'So_Ct' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string So_Ct
+        {
+            get
+            {
+                return this._so_Ct;
+            }
+            set
+            {
+                if ((this._so_Ct != value))
+                {
+                    this.OnSo_CtChanging(value);
+                    this.RaiseDataMemberChanging("So_Ct");
+                    this.ValidateProperty("So_Ct", value);
+                    this._so_Ct = value;
+                    this.RaiseDataMemberChanged("So_Ct");
+                    this.OnSo_CtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'So_Lo' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string So_Lo
+        {
+            get
+            {
+                return this._so_Lo;
+            }
+            set
+            {
+                if ((this._so_Lo != value))
+                {
+                    this.OnSo_LoChanging(value);
+                    this.RaiseDataMemberChanging("So_Lo");
+                    this.ValidateProperty("So_Lo", value);
+                    this._so_Lo = value;
+                    this.RaiseDataMemberChanged("So_Lo");
+                    this.OnSo_LoChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Status' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Status
+        {
+            get
+            {
+                return this._status;
+            }
+            set
+            {
+                if ((this._status != value))
+                {
+                    this.OnStatusChanging(value);
+                    this.RaiseDataMemberChanging("Status");
+                    this.ValidateProperty("Status", value);
+                    this._status = value;
+                    this.RaiseDataMemberChanged("Status");
+                    this.OnStatusChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Stt_Rec' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Stt_Rec
+        {
+            get
+            {
+                return this._stt_Rec;
+            }
+            set
+            {
+                if ((this._stt_Rec != value))
+                {
+                    this.OnStt_RecChanging(value);
+                    this.ValidateProperty("Stt_Rec", value);
+                    this._stt_Rec = value;
+                    this.RaisePropertyChanged("Stt_Rec");
+                    this.OnStt_RecChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'T_Ps_Co_Nt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public decimal T_Ps_Co_Nt
+        {
+            get
+            {
+                return this._t_Ps_Co_Nt;
+            }
+            set
+            {
+                if ((this._t_Ps_Co_Nt != value))
+                {
+                    this.OnT_Ps_Co_NtChanging(value);
+                    this.RaiseDataMemberChanging("T_Ps_Co_Nt");
+                    this.ValidateProperty("T_Ps_Co_Nt", value);
+                    this._t_Ps_Co_Nt = value;
+                    this.RaiseDataMemberChanged("T_Ps_Co_Nt");
+                    this.OnT_Ps_Co_NtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'T_Ps_No' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public decimal T_Ps_No
+        {
+            get
+            {
+                return this._t_Ps_No;
+            }
+            set
+            {
+                if ((this._t_Ps_No != value))
+                {
+                    this.OnT_Ps_NoChanging(value);
+                    this.RaiseDataMemberChanging("T_Ps_No");
+                    this.ValidateProperty("T_Ps_No", value);
+                    this._t_Ps_No = value;
+                    this.RaiseDataMemberChanged("T_Ps_No");
+                    this.OnT_Ps_NoChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'T_Ps_No_Nt' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public decimal T_Ps_No_Nt
+        {
+            get
+            {
+                return this._t_Ps_No_Nt;
+            }
+            set
+            {
+                if ((this._t_Ps_No_Nt != value))
+                {
+                    this.OnT_Ps_No_NtChanging(value);
+                    this.RaiseDataMemberChanging("T_Ps_No_Nt");
+                    this.ValidateProperty("T_Ps_No_Nt", value);
+                    this._t_Ps_No_Nt = value;
+                    this.RaiseDataMemberChanged("T_Ps_No_Nt");
+                    this.OnT_Ps_No_NtChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Ty_Gia' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public decimal Ty_Gia
+        {
+            get
+            {
+                return this._ty_Gia;
+            }
+            set
+            {
+                if ((this._ty_Gia != value))
+                {
+                    this.OnTy_GiaChanging(value);
+                    this.RaiseDataMemberChanging("Ty_Gia");
+                    this.ValidateProperty("Ty_Gia", value);
+                    this._ty_Gia = value;
+                    this.RaiseDataMemberChanged("Ty_Gia");
+                    this.OnTy_GiaChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id0
+        {
+            get
+            {
+                return this._user_Id0;
+            }
+            set
+            {
+                if ((this._user_Id0 != value))
+                {
+                    this.OnUser_Id0Changing(value);
+                    this.RaiseDataMemberChanging("User_Id0");
+                    this.ValidateProperty("User_Id0", value);
+                    this._user_Id0 = value;
+                    this.RaiseDataMemberChanged("User_Id0");
+                    this.OnUser_Id0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id2
+        {
+            get
+            {
+                return this._user_Id2;
+            }
+            set
+            {
+                if ((this._user_Id2 != value))
+                {
+                    this.OnUser_Id2Changing(value);
+                    this.RaiseDataMemberChanging("User_Id2");
+                    this.ValidateProperty("User_Id2", value);
+                    this._user_Id2 = value;
+                    this.RaiseDataMemberChanged("User_Id2");
+                    this.OnUser_Id2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._stt_Rec;
+        }
+    }
+    
+    /// <summary>
+    /// The 'Userinfo' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class Userinfo : Entity
+    {
+        
+        private string _comment;
+        
+        private DateTime _date0;
+        
+        private DateTime _date2;
+        
+        private short _del_Yn;
+        
+        private string _error;
+        
+        private short _is_Admin;
+        
+        private string[] _openAccessGenerated;
+        
+        private string _pass;
+        
+        private string _r_Access;
+        
+        private string _r_Add;
+        
+        private string _r_Del;
+        
+        private string _r_Edit;
+        
+        private string _r_Print;
+        
+        private string _r_Read;
+        
+        private string _r_Search;
+        
+        private string _rights;
+        
+        private string _status;
+        
+        private long _user_Id;
+        
+        private long _user_Id0;
+        
+        private long _user_Id2;
+        
+        private string _user_Name;
+        
+        private string _user_Pre;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnCommentChanging(string value);
+        partial void OnCommentChanged();
+        partial void OnDate0Changing(DateTime value);
+        partial void OnDate0Changed();
+        partial void OnDate2Changing(DateTime value);
+        partial void OnDate2Changed();
+        partial void OnDel_YnChanging(short value);
+        partial void OnDel_YnChanged();
+        partial void OnErrorChanging(string value);
+        partial void OnErrorChanged();
+        partial void OnIs_AdminChanging(short value);
+        partial void OnIs_AdminChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnPassChanging(string value);
+        partial void OnPassChanged();
+        partial void OnR_AccessChanging(string value);
+        partial void OnR_AccessChanged();
+        partial void OnR_AddChanging(string value);
+        partial void OnR_AddChanged();
+        partial void OnR_DelChanging(string value);
+        partial void OnR_DelChanged();
+        partial void OnR_EditChanging(string value);
+        partial void OnR_EditChanged();
+        partial void OnR_PrintChanging(string value);
+        partial void OnR_PrintChanged();
+        partial void OnR_ReadChanging(string value);
+        partial void OnR_ReadChanged();
+        partial void OnR_SearchChanging(string value);
+        partial void OnR_SearchChanged();
+        partial void OnRightsChanging(string value);
+        partial void OnRightsChanged();
+        partial void OnStatusChanging(string value);
+        partial void OnStatusChanged();
+        partial void OnUser_IdChanging(long value);
+        partial void OnUser_IdChanged();
+        partial void OnUser_Id0Changing(long value);
+        partial void OnUser_Id0Changed();
+        partial void OnUser_Id2Changing(long value);
+        partial void OnUser_Id2Changed();
+        partial void OnUser_NameChanging(string value);
+        partial void OnUser_NameChanged();
+        partial void OnUser_PreChanging(string value);
+        partial void OnUser_PreChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Userinfo"/> class.
+        /// </summary>
+        public Userinfo()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Comment' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Comment
+        {
+            get
+            {
+                return this._comment;
+            }
+            set
+            {
+                if ((this._comment != value))
+                {
+                    this.OnCommentChanging(value);
+                    this.RaiseDataMemberChanging("Comment");
+                    this.ValidateProperty("Comment", value);
+                    this._comment = value;
+                    this.RaiseDataMemberChanged("Comment");
+                    this.OnCommentChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date0
+        {
+            get
+            {
+                return this._date0;
+            }
+            set
+            {
+                if ((this._date0 != value))
+                {
+                    this.OnDate0Changing(value);
+                    this.RaiseDataMemberChanging("Date0");
+                    this.ValidateProperty("Date0", value);
+                    this._date0 = value;
+                    this.RaiseDataMemberChanged("Date0");
+                    this.OnDate0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public DateTime Date2
+        {
+            get
+            {
+                return this._date2;
+            }
+            set
+            {
+                if ((this._date2 != value))
+                {
+                    this.OnDate2Changing(value);
+                    this.RaiseDataMemberChanging("Date2");
+                    this.ValidateProperty("Date2", value);
+                    this._date2 = value;
+                    this.RaiseDataMemberChanged("Date2");
+                    this.OnDate2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Del_Yn' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Del_Yn
+        {
+            get
+            {
+                return this._del_Yn;
+            }
+            set
+            {
+                if ((this._del_Yn != value))
+                {
+                    this.OnDel_YnChanging(value);
+                    this.RaiseDataMemberChanging("Del_Yn");
+                    this.ValidateProperty("Del_Yn", value);
+                    this._del_Yn = value;
+                    this.RaiseDataMemberChanged("Del_Yn");
+                    this.OnDel_YnChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Error' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false)]
+        [ReadOnly(true)]
+        public string Error
+        {
+            get
+            {
+                return this._error;
+            }
+            set
+            {
+                if ((this._error != value))
+                {
+                    this.OnErrorChanging(value);
+                    this.ValidateProperty("Error", value);
+                    this._error = value;
+                    this.RaisePropertyChanged("Error");
+                    this.OnErrorChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Is_Admin' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public short Is_Admin
+        {
+            get
+            {
+                return this._is_Admin;
+            }
+            set
+            {
+                if ((this._is_Admin != value))
+                {
+                    this.OnIs_AdminChanging(value);
+                    this.RaiseDataMemberChanging("Is_Admin");
+                    this.ValidateProperty("Is_Admin", value);
+                    this._is_Admin = value;
+                    this.RaiseDataMemberChanged("Is_Admin");
+                    this.OnIs_AdminChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Pass' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Pass
+        {
+            get
+            {
+                return this._pass;
+            }
+            set
+            {
+                if ((this._pass != value))
+                {
+                    this.OnPassChanging(value);
+                    this.RaiseDataMemberChanging("Pass");
+                    this.ValidateProperty("Pass", value);
+                    this._pass = value;
+                    this.RaiseDataMemberChanged("Pass");
+                    this.OnPassChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'R_Access' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string R_Access
+        {
+            get
+            {
+                return this._r_Access;
+            }
+            set
+            {
+                if ((this._r_Access != value))
+                {
+                    this.OnR_AccessChanging(value);
+                    this.RaiseDataMemberChanging("R_Access");
+                    this.ValidateProperty("R_Access", value);
+                    this._r_Access = value;
+                    this.RaiseDataMemberChanged("R_Access");
+                    this.OnR_AccessChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'R_Add' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string R_Add
+        {
+            get
+            {
+                return this._r_Add;
+            }
+            set
+            {
+                if ((this._r_Add != value))
+                {
+                    this.OnR_AddChanging(value);
+                    this.RaiseDataMemberChanging("R_Add");
+                    this.ValidateProperty("R_Add", value);
+                    this._r_Add = value;
+                    this.RaiseDataMemberChanged("R_Add");
+                    this.OnR_AddChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'R_Del' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string R_Del
+        {
+            get
+            {
+                return this._r_Del;
+            }
+            set
+            {
+                if ((this._r_Del != value))
+                {
+                    this.OnR_DelChanging(value);
+                    this.RaiseDataMemberChanging("R_Del");
+                    this.ValidateProperty("R_Del", value);
+                    this._r_Del = value;
+                    this.RaiseDataMemberChanged("R_Del");
+                    this.OnR_DelChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'R_Edit' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string R_Edit
+        {
+            get
+            {
+                return this._r_Edit;
+            }
+            set
+            {
+                if ((this._r_Edit != value))
+                {
+                    this.OnR_EditChanging(value);
+                    this.RaiseDataMemberChanging("R_Edit");
+                    this.ValidateProperty("R_Edit", value);
+                    this._r_Edit = value;
+                    this.RaiseDataMemberChanged("R_Edit");
+                    this.OnR_EditChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'R_Print' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string R_Print
+        {
+            get
+            {
+                return this._r_Print;
+            }
+            set
+            {
+                if ((this._r_Print != value))
+                {
+                    this.OnR_PrintChanging(value);
+                    this.RaiseDataMemberChanging("R_Print");
+                    this.ValidateProperty("R_Print", value);
+                    this._r_Print = value;
+                    this.RaiseDataMemberChanged("R_Print");
+                    this.OnR_PrintChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'R_Read' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string R_Read
+        {
+            get
+            {
+                return this._r_Read;
+            }
+            set
+            {
+                if ((this._r_Read != value))
+                {
+                    this.OnR_ReadChanging(value);
+                    this.RaiseDataMemberChanging("R_Read");
+                    this.ValidateProperty("R_Read", value);
+                    this._r_Read = value;
+                    this.RaiseDataMemberChanged("R_Read");
+                    this.OnR_ReadChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'R_Search' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string R_Search
+        {
+            get
+            {
+                return this._r_Search;
+            }
+            set
+            {
+                if ((this._r_Search != value))
+                {
+                    this.OnR_SearchChanging(value);
+                    this.RaiseDataMemberChanging("R_Search");
+                    this.ValidateProperty("R_Search", value);
+                    this._r_Search = value;
+                    this.RaiseDataMemberChanged("R_Search");
+                    this.OnR_SearchChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Rights' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Rights
+        {
+            get
+            {
+                return this._rights;
+            }
+            set
+            {
+                if ((this._rights != value))
+                {
+                    this.OnRightsChanging(value);
+                    this.RaiseDataMemberChanging("Rights");
+                    this.ValidateProperty("Rights", value);
+                    this._rights = value;
+                    this.RaiseDataMemberChanged("Rights");
+                    this.OnRightsChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Status' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Status
+        {
+            get
+            {
+                return this._status;
+            }
+            set
+            {
+                if ((this._status != value))
+                {
+                    this.OnStatusChanging(value);
+                    this.RaiseDataMemberChanging("Status");
+                    this.ValidateProperty("Status", value);
+                    this._status = value;
+                    this.RaiseDataMemberChanged("Status");
+                    this.OnStatusChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id
+        {
+            get
+            {
+                return this._user_Id;
+            }
+            set
+            {
+                if ((this._user_Id != value))
+                {
+                    this.OnUser_IdChanging(value);
+                    this.ValidateProperty("User_Id", value);
+                    this._user_Id = value;
+                    this.RaisePropertyChanged("User_Id");
+                    this.OnUser_IdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id0
+        {
+            get
+            {
+                return this._user_Id0;
+            }
+            set
+            {
+                if ((this._user_Id0 != value))
+                {
+                    this.OnUser_Id0Changing(value);
+                    this.RaiseDataMemberChanging("User_Id0");
+                    this.ValidateProperty("User_Id0", value);
+                    this._user_Id0 = value;
+                    this.RaiseDataMemberChanged("User_Id0");
+                    this.OnUser_Id0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long User_Id2
+        {
+            get
+            {
+                return this._user_Id2;
+            }
+            set
+            {
+                if ((this._user_Id2 != value))
+                {
+                    this.OnUser_Id2Changing(value);
+                    this.RaiseDataMemberChanging("User_Id2");
+                    this.ValidateProperty("User_Id2", value);
+                    this._user_Id2 = value;
+                    this.RaiseDataMemberChanged("User_Id2");
+                    this.OnUser_Id2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Name' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string User_Name
+        {
+            get
+            {
+                return this._user_Name;
+            }
+            set
+            {
+                if ((this._user_Name != value))
+                {
+                    this.OnUser_NameChanging(value);
+                    this.RaiseDataMemberChanging("User_Name");
+                    this.ValidateProperty("User_Name", value);
+                    this._user_Name = value;
+                    this.RaiseDataMemberChanged("User_Name");
+                    this.OnUser_NameChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Pre' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string User_Pre
+        {
+            get
+            {
+                return this._user_Pre;
+            }
+            set
+            {
+                if ((this._user_Pre != value))
+                {
+                    this.OnUser_PreChanging(value);
+                    this.RaiseDataMemberChanging("User_Pre");
+                    this.ValidateProperty("User_Pre", value);
+                    this._user_Pre = value;
+                    this.RaiseDataMemberChanged("User_Pre");
+                    this.OnUser_PreChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._user_Id;
+        }
+    }
+}
+namespace MyERP.Web
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.ServiceModel;
+    using System.ServiceModel.DomainServices;
+    using System.ServiceModel.DomainServices.Client;
+    using System.ServiceModel.DomainServices.Client.ApplicationServices;
+    using System.ServiceModel.Web;
+    using MyERP.DataAccess;
+    
+    
+    /// <summary>
+    /// The DomainContext corresponding to the 'MyERPDomainService' DomainService.
+    /// </summary>
+    public sealed partial class MyERPDomainContext : DomainContext
+    {
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MyERPDomainContext"/> class.
+        /// </summary>
+        public MyERPDomainContext() : 
+                this(new WebDomainClient<IMyERPDomainServiceContract>(new Uri("MyERP-Web-MyERPDomainService.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MyERPDomainContext"/> class with the specified service URI.
+        /// </summary>
+        /// <param name="serviceUri">The MyERPDomainService service URI.</param>
+        public MyERPDomainContext(Uri serviceUri) : 
+                this(new WebDomainClient<IMyERPDomainServiceContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MyERPDomainContext"/> class with the specified <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">The DomainClient instance to use for this DomainContext.</param>
+        public MyERPDomainContext(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Ct11"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<Ct11> Ct11s
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Ct11>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Dmct"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<Dmct> Dmcts
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Dmct>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Dmdvcs"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<Dmdvcs> Dmdvcs
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Dmdvcs>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Dmkh"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<Dmkh> Dmkhs
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Dmkh>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Dmnhkh"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<Dmnhkh> Dmnhkhs
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Dmnhkh>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Dmnhvv"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<Dmnhvv> Dmnhvvs
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Dmnhvv>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Dmnt"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<Dmnt> Dmnts
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Dmnt>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Dmtd"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<Dmtd> Dmtds
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Dmtd>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Dmtk"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<Dmtk> Dmtks
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Dmtk>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Dmtt"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<Dmtt> Dmtts
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Dmtt>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Dmvv"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<Dmvv> Dmvvs
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Dmvv>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Ph11"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<Ph11> Ph11s
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Ph11>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Userinfo"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<Userinfo> Userinfos
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Userinfo>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Ct11"/> entity instances using the 'GetCt11Set' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Ct11"/> entity instances.</returns>
+        public EntityQuery<Ct11> GetCt11SetQuery()
+        {
+            this.ValidateMethod("GetCt11SetQuery", null);
+            return base.CreateQuery<Ct11>("GetCt11Set", null, false, true);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Dmct"/> entity instances using the 'GetDmctSet' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Dmct"/> entity instances.</returns>
+        public EntityQuery<Dmct> GetDmctSetQuery()
+        {
+            this.ValidateMethod("GetDmctSetQuery", null);
+            return base.CreateQuery<Dmct>("GetDmctSet", null, false, true);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Dmdvcs"/> entity instances using the 'GetDmdvcsSet' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Dmdvcs"/> entity instances.</returns>
+        public EntityQuery<Dmdvcs> GetDmdvcsSetQuery()
+        {
+            this.ValidateMethod("GetDmdvcsSetQuery", null);
+            return base.CreateQuery<Dmdvcs>("GetDmdvcsSet", null, false, true);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Dmkh"/> entity instances using the 'GetDmkhSet' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Dmkh"/> entity instances.</returns>
+        public EntityQuery<Dmkh> GetDmkhSetQuery()
+        {
+            this.ValidateMethod("GetDmkhSetQuery", null);
+            return base.CreateQuery<Dmkh>("GetDmkhSet", null, false, true);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Dmnhkh"/> entity instances using the 'GetDmnhkhSet' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Dmnhkh"/> entity instances.</returns>
+        public EntityQuery<Dmnhkh> GetDmnhkhSetQuery()
+        {
+            this.ValidateMethod("GetDmnhkhSetQuery", null);
+            return base.CreateQuery<Dmnhkh>("GetDmnhkhSet", null, false, true);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Dmnhvv"/> entity instances using the 'GetDmnhvvSet' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Dmnhvv"/> entity instances.</returns>
+        public EntityQuery<Dmnhvv> GetDmnhvvSetQuery()
+        {
+            this.ValidateMethod("GetDmnhvvSetQuery", null);
+            return base.CreateQuery<Dmnhvv>("GetDmnhvvSet", null, false, true);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Dmnt"/> entity instances using the 'GetDmntSet' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Dmnt"/> entity instances.</returns>
+        public EntityQuery<Dmnt> GetDmntSetQuery()
+        {
+            this.ValidateMethod("GetDmntSetQuery", null);
+            return base.CreateQuery<Dmnt>("GetDmntSet", null, false, true);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Dmtd"/> entity instances using the 'GetDmtdSet' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Dmtd"/> entity instances.</returns>
+        public EntityQuery<Dmtd> GetDmtdSetQuery()
+        {
+            this.ValidateMethod("GetDmtdSetQuery", null);
+            return base.CreateQuery<Dmtd>("GetDmtdSet", null, false, true);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Dmtk"/> entity instances using the 'GetDmtkSet' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Dmtk"/> entity instances.</returns>
+        public EntityQuery<Dmtk> GetDmtkSetQuery()
+        {
+            this.ValidateMethod("GetDmtkSetQuery", null);
+            return base.CreateQuery<Dmtk>("GetDmtkSet", null, false, true);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Dmtt"/> entity instances using the 'GetDmttSet' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Dmtt"/> entity instances.</returns>
+        public EntityQuery<Dmtt> GetDmttSetQuery()
+        {
+            this.ValidateMethod("GetDmttSetQuery", null);
+            return base.CreateQuery<Dmtt>("GetDmttSet", null, false, true);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Dmvv"/> entity instances using the 'GetDmvvSet' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Dmvv"/> entity instances.</returns>
+        public EntityQuery<Dmvv> GetDmvvSetQuery()
+        {
+            this.ValidateMethod("GetDmvvSetQuery", null);
+            return base.CreateQuery<Dmvv>("GetDmvvSet", null, false, true);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Ph11"/> entity instances using the 'GetPh11Set' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Ph11"/> entity instances.</returns>
+        public EntityQuery<Ph11> GetPh11SetQuery()
+        {
+            this.ValidateMethod("GetPh11SetQuery", null);
+            return base.CreateQuery<Ph11>("GetPh11Set", null, false, true);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Userinfo"/> entity instances using the 'GetUserinfoSet' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Userinfo"/> entity instances.</returns>
+        public EntityQuery<Userinfo> GetUserinfoSetQuery()
+        {
+            this.ValidateMethod("GetUserinfoSetQuery", null);
+            return base.CreateQuery<Userinfo>("GetUserinfoSet", null, false, true);
+        }
+        
+        /// <summary>
+        /// Asynchronously invokes the 'CommitChanges' method of the DomainService.
+        /// </summary>
+        /// <param name="callback">Callback to invoke when the operation completes.</param>
+        /// <param name="userState">Value to pass to the callback.  It can be <c>null</c>.</param>
+        /// <returns>An operation instance that can be used to manage the asynchronous request.</returns>
+        public InvokeOperation<bool> CommitChanges(Action<InvokeOperation<bool>> callback, object userState)
+        {
+            this.ValidateMethod("CommitChanges", null);
+            return ((InvokeOperation<bool>)(this.InvokeOperation("CommitChanges", typeof(bool), null, true, callback, userState)));
+        }
+        
+        /// <summary>
+        /// Asynchronously invokes the 'CommitChanges' method of the DomainService.
+        /// </summary>
+        /// <returns>An operation instance that can be used to manage the asynchronous request.</returns>
+        public InvokeOperation<bool> CommitChanges()
+        {
+            this.ValidateMethod("CommitChanges", null);
+            return ((InvokeOperation<bool>)(this.InvokeOperation("CommitChanges", typeof(bool), null, true, null, null)));
+        }
+        
+        /// <summary>
+        /// Asynchronously invokes the 'GetDashboardStats' method of the DomainService.
+        /// </summary>
+        /// <param name="callback">Callback to invoke when the operation completes.</param>
+        /// <param name="userState">Value to pass to the callback.  It can be <c>null</c>.</param>
+        /// <returns>An operation instance that can be used to manage the asynchronous request.</returns>
+        public InvokeOperation<DashboardStats> GetDashboardStats(Action<InvokeOperation<DashboardStats>> callback, object userState)
+        {
+            this.ValidateMethod("GetDashboardStats", null);
+            return ((InvokeOperation<DashboardStats>)(this.InvokeOperation("GetDashboardStats", typeof(DashboardStats), null, true, callback, userState)));
+        }
+        
+        /// <summary>
+        /// Asynchronously invokes the 'GetDashboardStats' method of the DomainService.
+        /// </summary>
+        /// <returns>An operation instance that can be used to manage the asynchronous request.</returns>
+        public InvokeOperation<DashboardStats> GetDashboardStats()
+        {
+            this.ValidateMethod("GetDashboardStats", null);
+            return ((InvokeOperation<DashboardStats>)(this.InvokeOperation("GetDashboardStats", typeof(DashboardStats), null, true, null, null)));
+        }
+        
+        /// <summary>
+        /// Creates a new EntityContainer for this DomainContext's EntitySets.
+        /// </summary>
+        /// <returns>A new container instance.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new MyERPDomainContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Service contract for the 'MyERPDomainService' DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface IMyERPDomainServiceContract
+        {
+            
+            /// <summary>
+            /// Asynchronously invokes the 'CommitChanges' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/CommitChangesDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/CommitChanges", ReplyAction="http://tempuri.org/MyERPDomainService/CommitChangesResponse")]
+            IAsyncResult BeginCommitChanges(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginCommitChanges'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginCommitChanges'.</param>
+            /// <returns>The 'Boolean' returned from the 'CommitChanges' operation.</returns>
+            bool EndCommitChanges(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetCt11Set' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetCt11SetDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetCt11Set", ReplyAction="http://tempuri.org/MyERPDomainService/GetCt11SetResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetCt11Set(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetCt11Set'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetCt11Set'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetCt11Set' operation.</returns>
+            QueryResult<Ct11> EndGetCt11Set(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetDashboardStats' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetDashboardStatsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetDashboardStats", ReplyAction="http://tempuri.org/MyERPDomainService/GetDashboardStatsResponse")]
+            IAsyncResult BeginGetDashboardStats(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetDashboardStats'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetDashboardStats'.</param>
+            /// <returns>The 'DashboardStats' returned from the 'GetDashboardStats' operation.</returns>
+            DashboardStats EndGetDashboardStats(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetDmctSet' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetDmctSetDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetDmctSet", ReplyAction="http://tempuri.org/MyERPDomainService/GetDmctSetResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetDmctSet(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetDmctSet'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetDmctSet'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetDmctSet' operation.</returns>
+            QueryResult<Dmct> EndGetDmctSet(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetDmdvcsSet' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetDmdvcsSetDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetDmdvcsSet", ReplyAction="http://tempuri.org/MyERPDomainService/GetDmdvcsSetResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetDmdvcsSet(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetDmdvcsSet'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetDmdvcsSet'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetDmdvcsSet' operation.</returns>
+            QueryResult<Dmdvcs> EndGetDmdvcsSet(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetDmkhSet' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetDmkhSetDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetDmkhSet", ReplyAction="http://tempuri.org/MyERPDomainService/GetDmkhSetResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetDmkhSet(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetDmkhSet'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetDmkhSet'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetDmkhSet' operation.</returns>
+            QueryResult<Dmkh> EndGetDmkhSet(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetDmnhkhSet' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetDmnhkhSetDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetDmnhkhSet", ReplyAction="http://tempuri.org/MyERPDomainService/GetDmnhkhSetResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetDmnhkhSet(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetDmnhkhSet'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetDmnhkhSet'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetDmnhkhSet' operation.</returns>
+            QueryResult<Dmnhkh> EndGetDmnhkhSet(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetDmnhvvSet' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetDmnhvvSetDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetDmnhvvSet", ReplyAction="http://tempuri.org/MyERPDomainService/GetDmnhvvSetResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetDmnhvvSet(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetDmnhvvSet'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetDmnhvvSet'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetDmnhvvSet' operation.</returns>
+            QueryResult<Dmnhvv> EndGetDmnhvvSet(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetDmntSet' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetDmntSetDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetDmntSet", ReplyAction="http://tempuri.org/MyERPDomainService/GetDmntSetResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetDmntSet(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetDmntSet'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetDmntSet'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetDmntSet' operation.</returns>
+            QueryResult<Dmnt> EndGetDmntSet(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetDmtdSet' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetDmtdSetDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetDmtdSet", ReplyAction="http://tempuri.org/MyERPDomainService/GetDmtdSetResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetDmtdSet(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetDmtdSet'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetDmtdSet'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetDmtdSet' operation.</returns>
+            QueryResult<Dmtd> EndGetDmtdSet(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetDmtkSet' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetDmtkSetDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetDmtkSet", ReplyAction="http://tempuri.org/MyERPDomainService/GetDmtkSetResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetDmtkSet(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetDmtkSet'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetDmtkSet'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetDmtkSet' operation.</returns>
+            QueryResult<Dmtk> EndGetDmtkSet(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetDmttSet' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetDmttSetDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetDmttSet", ReplyAction="http://tempuri.org/MyERPDomainService/GetDmttSetResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetDmttSet(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetDmttSet'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetDmttSet'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetDmttSet' operation.</returns>
+            QueryResult<Dmtt> EndGetDmttSet(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetDmvvSet' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetDmvvSetDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetDmvvSet", ReplyAction="http://tempuri.org/MyERPDomainService/GetDmvvSetResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetDmvvSet(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetDmvvSet'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetDmvvSet'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetDmvvSet' operation.</returns>
+            QueryResult<Dmvv> EndGetDmvvSet(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetPh11Set' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetPh11SetDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetPh11Set", ReplyAction="http://tempuri.org/MyERPDomainService/GetPh11SetResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetPh11Set(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetPh11Set'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetPh11Set'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetPh11Set' operation.</returns>
+            QueryResult<Ph11> EndGetPh11Set(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetUserinfoSet' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetUserinfoSetDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetUserinfoSet", ReplyAction="http://tempuri.org/MyERPDomainService/GetUserinfoSetResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetUserinfoSet(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetUserinfoSet'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetUserinfoSet'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetUserinfoSet' operation.</returns>
+            QueryResult<Userinfo> EndGetUserinfoSet(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'SubmitChanges' operation.
+            /// </summary>
+            /// <param name="changeSet">The change-set to submit.</param>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/SubmitChangesDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/SubmitChanges", ReplyAction="http://tempuri.org/MyERPDomainService/SubmitChangesResponse")]
+            IAsyncResult BeginSubmitChanges(IEnumerable<ChangeSetEntry> changeSet, AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginSubmitChanges'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginSubmitChanges'.</param>
+            /// <returns>The collection of change-set entry elements returned from 'SubmitChanges'.</returns>
+            IEnumerable<ChangeSetEntry> EndSubmitChanges(IAsyncResult result);
+        }
+        
+        internal sealed class MyERPDomainContextEntityContainer : EntityContainer
+        {
+            
+            public MyERPDomainContextEntityContainer()
+            {
+                this.CreateEntitySet<Ct11>(EntitySetOperations.All);
+                this.CreateEntitySet<Dmct>(EntitySetOperations.All);
+                this.CreateEntitySet<Dmdvcs>(EntitySetOperations.All);
+                this.CreateEntitySet<Dmkh>(EntitySetOperations.All);
+                this.CreateEntitySet<Dmnhkh>(EntitySetOperations.All);
+                this.CreateEntitySet<Dmnhvv>(EntitySetOperations.All);
+                this.CreateEntitySet<Dmnt>(EntitySetOperations.All);
+                this.CreateEntitySet<Dmtd>(EntitySetOperations.All);
+                this.CreateEntitySet<Dmtk>(EntitySetOperations.All);
+                this.CreateEntitySet<Dmtt>(EntitySetOperations.All);
+                this.CreateEntitySet<Dmvv>(EntitySetOperations.All);
+                this.CreateEntitySet<Ph11>(EntitySetOperations.All);
+                this.CreateEntitySet<Userinfo>(EntitySetOperations.All);
+            }
+        }
+    }
+}

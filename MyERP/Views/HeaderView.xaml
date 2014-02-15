@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="clr-namespace:MyERP.Converters;assembly=MyERP.Infrastructure"
     mc:Ignorable="d">
 
     <Grid MinWidth="430">
@@ -11,11 +12,14 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Border BorderBrush="{StaticResource AccentBrush}" Width="71" Height="82" BorderThickness="1,10,1,1" Background="Transparent">
-            <Image Source="myerp.jpg" Stretch="Fill"/>
+            <Image Stretch="Fill"/>
         </Border>
         <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="8,16,0,0" HorizontalAlignment="Left" >
+            <StackPanel.Resources>
+                <converters:ObjectToApplicationStringConverter x:Key="converter" />
+            </StackPanel.Resources>
             <TextBlock Text="MYERP" FontFamily="Segoe UI" FontSize="12" Foreground="{StaticResource BasicBrush}"/>
-            <TextBlock Text="MODULE NAME" FontFamily="Segoe UI Light" FontSize="24" Foreground="{StaticResource AccentBrush}"/>
+            <TextBlock Text="{Binding CurrentModuleName, Converter={StaticResource converter}}" FontFamily="Segoe UI Light" FontSize="24" Foreground="{StaticResource AccentBrush}"/>
         </StackPanel>
     </Grid>
 </UserControl>

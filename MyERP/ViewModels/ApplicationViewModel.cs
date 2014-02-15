@@ -25,6 +25,7 @@ namespace MyERP.ViewModels
         public ApplicationViewModel()
         {
             this.SwitchContentRegionViewCommand = new DelegateCommand<string>(SwitchContentRegionView);
+            this.CurrentModuleName = "HomeModule";
             this.CurrentViewName = "DashboardView";
         }
 

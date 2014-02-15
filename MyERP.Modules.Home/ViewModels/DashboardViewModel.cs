@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ServiceModel.DomainServices.Client;
 using System.Linq;
+using CRM.Repositories;
+using MyERP.Repositories;
 
-namespace MyERP.Modules.Dashboard.ViewModels
+namespace MyERP.Modules.Home.ViewModels
 {
     [Export]
     public class DashboardViewModel : MyERP.Infrastructure.ViewModels.NavigationAwareDataViewModel
     {
         //#region Repositories
-        //[Import]
-        //public DashboardRepository DashboardRepository { get; set; }
+        [Import]
+        public DashboardRepository DashboardRepository { get; set; }
         //#endregion
 
         #region View-visible properties
@@ -36,7 +38,7 @@ namespace MyERP.Modules.Dashboard.ViewModels
         public override void OnImportsSatisfied()
         {
             base.OnImportsSatisfied();
-            //this.Context = this.DashboardRepository.Context;
+            this.Context = this.DashboardRepository.Context;
         }
         #endregion
     }

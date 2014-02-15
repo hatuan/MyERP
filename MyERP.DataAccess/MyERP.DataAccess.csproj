@@ -46,6 +46,7 @@
     <Compile Include="Ct11.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="DashboardStats.cs" />
     <Compile Include="Dmct.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>

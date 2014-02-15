@@ -620,6 +620,33 @@ namespace MyERP.DataAccess
     }
     
     /// <summary>
+    /// The 'DashboardStats' class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class DashboardStats : ComplexObject
+    {
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DashboardStats"/> class.
+        /// </summary>
+        public DashboardStats()
+        {
+            this.OnCreated();
+        }
+    }
+    
+    /// <summary>
     /// The 'Dmct' entity class.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
@@ -7718,6 +7745,28 @@ namespace MyERP.Web
         }
         
         /// <summary>
+        /// Asynchronously invokes the 'GetDashboardStats' method of the DomainService.
+        /// </summary>
+        /// <param name="callback">Callback to invoke when the operation completes.</param>
+        /// <param name="userState">Value to pass to the callback.  It can be <c>null</c>.</param>
+        /// <returns>An operation instance that can be used to manage the asynchronous request.</returns>
+        public InvokeOperation<DashboardStats> GetDashboardStats(Action<InvokeOperation<DashboardStats>> callback, object userState)
+        {
+            this.ValidateMethod("GetDashboardStats", null);
+            return ((InvokeOperation<DashboardStats>)(this.InvokeOperation("GetDashboardStats", typeof(DashboardStats), null, true, callback, userState)));
+        }
+        
+        /// <summary>
+        /// Asynchronously invokes the 'GetDashboardStats' method of the DomainService.
+        /// </summary>
+        /// <returns>An operation instance that can be used to manage the asynchronous request.</returns>
+        public InvokeOperation<DashboardStats> GetDashboardStats()
+        {
+            this.ValidateMethod("GetDashboardStats", null);
+            return ((InvokeOperation<DashboardStats>)(this.InvokeOperation("GetDashboardStats", typeof(DashboardStats), null, true, null, null)));
+        }
+        
+        /// <summary>
         /// Creates a new EntityContainer for this DomainContext's EntitySets.
         /// </summary>
         /// <returns>A new container instance.</returns>
@@ -7767,6 +7816,23 @@ namespace MyERP.Web
             /// <param name="result">The IAsyncResult returned from 'BeginGetCt11Set'.</param>
             /// <returns>The 'QueryResult' returned from the 'GetCt11Set' operation.</returns>
             QueryResult<Ct11> EndGetCt11Set(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetDashboardStats' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetDashboardStatsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetDashboardStats", ReplyAction="http://tempuri.org/MyERPDomainService/GetDashboardStatsResponse")]
+            IAsyncResult BeginGetDashboardStats(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetDashboardStats'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetDashboardStats'.</param>
+            /// <returns>The 'DashboardStats' returned from the 'GetDashboardStats' operation.</returns>
+            DashboardStats EndGetDashboardStats(IAsyncResult result);
             
             /// <summary>
             /// Asynchronously invokes the 'GetDmctSet' operation.

@@ -16,11 +16,19 @@ namespace MyERP.Infrastructure
     /// </summary>
     public class ModuleNamesWrapper
     {
-        public static string DashboardModule
+        public static string HomeModule
         {
             get
             {
-                return ModuleNames.DashboardModule;
+                return ModuleNames.HomeModule;
+            }
+        }
+
+        public static string UserModule
+        {
+            get
+            {
+                return ModuleNames.UserModule;
             }
         }
 

@@ -7,58 +7,81 @@ using System.Diagnostics;
 using System.Text;
 
 
-namespace MyERP.Global
+namespace MyERP
 {
     public class Cryptography
     {
-        private static readonly string strDefaultKey = "65EA7902-C2A0-436E-8345-22260DC104C0";
-
-        [DebuggerStepThrough()]
-        private static byte[] GetKey(string strkey)
+        /// <summary>
+        /// Generate the key used to perform the encryption/decryption for the AES algorithm
+        /// </summary>
+        /// <param name="hashKey">Generate the keys or username+password </param>
+        /// <returns></returns>
+        internal static byte[] GetHashKey(string hashKey)
         {
-            byte[] key = Encoding.UTF8.GetBytes(strkey);
-            return key;
+            // Initialise
+            UTF8Encoding encoder = new UTF8Encoding();
+
+            // Get the salt
+            string salt = "I am a nice little salt";
+            byte[] saltBytes = encoder.GetBytes(salt);
+
+            // Setup the hasher
+            Rfc2898DeriveBytes rfc = new Rfc2898DeriveBytes(hashKey, saltBytes);
+
+            // Return the key
+            return rfc.GetBytes(16);
         }
 
-        #region Encrypt
-
-        [DebuggerStepThrough()]
-        public static string Encrypt(string str, string strkey)
+        internal static string Encrypt(byte[] key, string dataToEncrypt)
         {
-            byte[] keyBytes = strkey == null ? GetKey(strDefaultKey) : GetKey(strkey);
-            System.Security.Cryptography.HMACSHA256 sha1 = new System.Security.Cryptography.HMACSHA256(keyBytes);
+            // Initialise
+            AesManaged encryptor = new AesManaged {Key = key, IV = key};
 
-            byte[] hashBytes = sha1.ComputeHash(System.Text.Encoding.UTF8.GetBytes(str));
+            // Set the key
 
-            string hash = Convert.ToBase64String(hashBytes);
+            // create a memory stream
+            using (MemoryStream encryptionStream = new MemoryStream())
+            {
+                // Create the crypto stream
+                using (CryptoStream encrypt = new CryptoStream(encryptionStream, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                {
+                    // Encrypt
+                    byte[] utfD1 = UTF8Encoding.UTF8.GetBytes(dataToEncrypt);
+                    encrypt.Write(utfD1, 0, utfD1.Length);
+                    encrypt.FlushFinalBlock();
+                    encrypt.Close();
 
-            return hash;
+                    // Return the encrypted data
+                    return Convert.ToBase64String(encryptionStream.ToArray());
+                }
+            }
         }
 
-        #endregion
-
-        #region Decrypt
-
-        [DebuggerStepThrough()]
-        public static string Decrypt(string str, string strkey)
+        internal static string Decrypt(byte[] key, string encryptedString)
         {
-            byte[] cryptoBytes = Convert.FromBase64String(str);
-            return Decrypt(cryptoBytes, strkey);
+            // Initialise
+            AesManaged decryptor = new AesManaged {Key = key, IV = key};
+
+            // Set the key
+
+            byte[] encryptedData = Convert.FromBase64String(encryptedString);
+
+            // create a memory stream
+            using (MemoryStream decryptionStream = new MemoryStream())
+            {
+                // Create the crypto stream
+                using (CryptoStream decrypt = new CryptoStream(decryptionStream, decryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                {
+                    // Encrypt
+                    decrypt.Write(encryptedData, 0, encryptedData.Length);
+                    decrypt.Flush();
+                    decrypt.Close();
+
+                    // Return the unencrypted data
+                    byte[] decryptedData = decryptionStream.ToArray();
+                    return UTF8Encoding.UTF8.GetString(decryptedData, 0, decryptedData.Length);
+                }
+            }
         }
-
-        [DebuggerStepThrough()]
-        public static string Decrypt(byte[] str, string strkey)
-        {
-
-            byte[] keyBytes = strkey == null ? GetKey(strDefaultKey) : GetKey(strkey);
-            System.Security.Cryptography.HMACSHA256 sha1 = new System.Security.Cryptography.HMACSHA256(keyBytes);
-
-            byte[] plainBytes = sha1.ComputeHash(str);
-
-            UTF8Encoding ae = new UTF8Encoding();
-            return ae.GetString(plainBytes, 0, str.Length).Replace("\0", "");
-        }
-
-        #endregion
     }
 }

@@ -1,12 +1,26 @@
-﻿<UserControl x:Class="MyERP.Views.LoginView"
+﻿<UserControl x:Name="loginView" x:Class="MyERP.Modules.User.Views.LoginView"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-	mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480"
-	x:Name="loginView">
-	<Grid x:Name="LayoutRoot">
+	xmlns:converters="clr-namespace:MyERP.Converters;assembly=MyERP.Infrastructure"
+	mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MyERP.Theme;component/Styles/Brushes.xaml"/>
+                <ResourceDictionary Source="/MyERP.Theme;component/Styles/RadButtonStyle.xaml"/>
+                <ResourceDictionary Source="/MyERP.Theme;component/Styles/CommonStyles.xaml"/>
+                <ResourceDictionary Source="/MyERP.Theme;component/Styles/RadWindowViewStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:ObjectToUpperCaseStringConverter x:Key="ObjectToUpperCaseStringConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot">
 		
 		<Grid.ColumnDefinitions>
             <ColumnDefinition Width="0"/>
@@ -53,7 +67,7 @@
 			<RowDefinition />
         </Grid.RowDefinitions>
 
-		<telerik:RadWindow Header="Login" Grid.Column="8" Grid.ColumnSpan="7" Grid.Row="6" Grid.RowSpan="5" CanClose="False" CanMove="False" HideMaximizeButton="True" HideMinimizeButton="True" IsTopmost="True" >
+		<telerik:RadWindow Name="LoginWindow" Header="Login" Grid.Column="8" Grid.ColumnSpan="7" Grid.Row="6" Grid.RowSpan="5" CanClose="False" CanMove="False" HideMaximizeButton="True" HideMinimizeButton="True" IsTopmost="True" >
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="100"/>
@@ -70,8 +84,8 @@
 				
 				<TextBlock TextWrapping="Wrap" FontFamily="Segoe UI Semibold" FontSize="11" Foreground="{StaticResource StrongBrush}" Text="USER NAME"/>
 				<TextBlock TextWrapping="Wrap" FontFamily="Segoe UI Semibold" FontSize="11" Foreground="{StaticResource StrongBrush}" Grid.Row="1" Text="PASSWORD"/>
-				<TextBox Text="{Binding UserName}" TextWrapping="Wrap" FontFamily="Segoe UI" FontSize="14" Foreground="{StaticResource MainBrush}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Margin="0,0,0,2" />
-				<PasswordBox Password="{Binding PassWord}" FontFamily="Segoe UI" FontSize="14" Foreground="{StaticResource MainBrush}" Grid.Column="1" Margin="0,3,0,0" Grid.Row="1" Grid.ColumnSpan="2"/>
+                <TextBox Text="{Binding UserName, Mode=TwoWay, Converter={StaticResource ObjectToUpperCaseStringConverter}}" TextWrapping="Wrap" FontFamily="Segoe UI" FontSize="14" Foreground="{StaticResource MainBrush}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Margin="0,0,0,2"/>
+                <PasswordBox Password="{Binding Password, Mode=TwoWay, ValidatesOnExceptions=True, NotifyOnValidationError=True}" FontFamily="Segoe UI" FontSize="14" Foreground="{StaticResource MainBrush}" Grid.Column="1" Margin="0,3,0,0" Grid.Row="1" Grid.ColumnSpan="2"/>
 				<StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" Grid.Row="3" Width="118" Height="47" Margin="0,23,0,-26" Grid.ColumnSpan="2" Grid.Column="1">
 					<telerik:RadButton RenderTransformOrigin="0.5,0.5" Style="{StaticResource HeaderCircleButtonStyle}" Margin="0,10,40,0" Tag="LOGIN"
 						Command="{Binding LoginCommand}" Height="Auto" Width="36">

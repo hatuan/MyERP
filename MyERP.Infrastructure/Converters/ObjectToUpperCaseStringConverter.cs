@@ -16,23 +16,22 @@ namespace MyERP.Converters
                 return String.Empty;
             }
             string stringValue = value.ToString();
-            string processedValue = Regex.Replace(stringValue, "([A-Z])", " $1").Trim().ToUpper();
+            string processedValue = stringValue.ToUpper();
 
             return processedValue;
         }
 
         public object ConvertBack(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            string stringValue = value.ToString().Trim();
-            string[] splittedValues = Regex.Split(stringValue, " ");
-            StringBuilder result = new StringBuilder();
-            for (int i = 0; i < splittedValues.Length; i++)
+            if (value == null)
             {
-                char[] letters = splittedValues[i].ToCharArray();
-                letters[0] = char.ToUpper(letters[0]);
-                result.Append(letters);
+                return String.Empty;
             }
-            return result.ToString();
+
+            string stringValue = value.ToString().Trim();
+            string result = stringValue.ToUpper();
+            
+            return result;
         }
     }
 }

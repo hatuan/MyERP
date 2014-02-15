@@ -78,6 +78,11 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Resources\ApplicationStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Behaviors\AutoPopulateExportedViewsBehavior.cs" />
     <Compile Include="Behaviors\IViewRegionRegistration.cs" />
     <Compile Include="Behaviors\ViewExportAttribute.cs" />
@@ -85,10 +90,13 @@
     <Compile Include="Converters\DateTimeToRecentDaysConverter.cs" />
     <Compile Include="Converters\DateTimeToUpperStringConverter.cs" />
     <Compile Include="Converters\NavigationIntervalStringConverter.cs" />
+    <Compile Include="Converters\ObjectToApplicationStringConverter.cs" />
     <Compile Include="Converters\ObjectToUpperCaseStringConverter.cs" />
     <Compile Include="Converters\ParameterAndValueToBooleanConverter.cs" />
     <Compile Include="Converters\ParameterAndValueToVisibilityConverter.cs" />
     <Compile Include="Converters\StatusToDataTemplateConverter.cs" />
+    <Compile Include="Helpers\ResourceWrapper.cs" />
+    <Compile Include="ViewModelBase.cs" />
     <Compile Include="Extensions\IRegionExtensions.cs" />
     <Compile Include="Extensions\PresentationFrameworkCollectionExtensions.cs" />
     <Compile Include="Helpers\NormalImportanceButtonHelper.cs" />
@@ -102,6 +110,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Resources\ApplicationStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>

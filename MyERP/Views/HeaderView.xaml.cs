@@ -1,5 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System.ComponentModel.Composition;
+using System.Windows.Controls;
 using MyERP.Infrastructure;
+using MyERP.ViewModels;
 
 namespace MyERP.Views
 {
@@ -9,6 +11,19 @@ namespace MyERP.Views
         public HeaderView()
         {
             InitializeComponent();
+        }
+
+        [Import]
+        public IApplicationViewModel ViewModel
+        {
+            private get
+            {
+                return this.DataContext as IApplicationViewModel;
+            }
+            set
+            {
+                this.DataContext = value;
+            }
         }
     }
 }

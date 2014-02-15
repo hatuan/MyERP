@@ -1,28 +1,30 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows.Input;
-using MyERP.DataAccess;
 using MyERP.Infrastructure;
 using MyERP.Infrastructure.ViewModels;
-using MyERP.Repositories;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
-using Telerik.Windows.Data;
+using MyERP.Repositories;
+using MyERP.ViewModels;
 
-namespace MyERP.ViewModels
+
+namespace MyERP.Modules.User.ViewModels
 {
     [Export]
-    public class LoginViewModel : NotificationObject
+    public class LoginViewModel : ViewModelBase
     {
         public LoginViewModel()
         {
             this.LoginCommand = new DelegateCommand(this.OnLoginCommandExecuted);
         }
-        
+
         [Import]
         public UserRepository UserRepository { get; set; }
 
@@ -31,21 +33,28 @@ namespace MyERP.ViewModels
 
         public ICommand LoginCommand { get; set; }
 
+        private const string PASSWORD_ERROR = "Password is incorrect";
+        
         private void OnLoginCommandExecuted()
         {
-            bool correctUserAndPass = false;
-            UserRepository.GetUserinfoByUserNameAndPassword(UserName, PassWord, 
+            string passEncrypt = Cryptography.Encrypt(Cryptography.GetHashKey(UserName+Password), Password);
+            UserRepository.GetUserinfoByUserNameAndPassword(UserName, passEncrypt,
                 userinfo =>
                 {
-                    if (userinfo != null) correctUserAndPass = true;
+                    if (userinfo != null)
+                    {
+                        RemoveError("Password", PASSWORD_ERROR);
+                        NavigateToDashboardModule();
+                    }
+                    else
+                    {
+                        AddError("Password", PASSWORD_ERROR, false);
+                    }
+
                 });
-            if (correctUserAndPass)
-            {
-                NavigateToDashboardModule();
-            }
         }
 
-        private String _userName;
+        private String _userName = String.Empty;
         public String UserName
         {
             get
@@ -58,33 +67,32 @@ namespace MyERP.ViewModels
                 {
                     return;
                 }
-                this._userName = value;
+                this._userName = value ?? String.Empty;
                 this.RaisePropertyChanged("UserName");
             }
         }
 
-        private String _passWord;
-        public String PassWord
+        private String _password = String.Empty;
+        public String Password
         {
             get
             {
-                return this.PassWord;
+                return this._password;
             }
             set
             {
-                if (this._passWord == value)
+                if (this._password == value)
                 {
                     return;
                 }
-                this._passWord = value;
-                this.RaisePropertyChanged("PassWord");
+                this._password = value ?? String.Empty;
+                this.RaisePropertyChanged("Password");
             }
         }
 
         private void NavigateToDashboardModule()
         {
-            this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.DashboardModule);
+            this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.HomeModule);
         }
-
     }
 }

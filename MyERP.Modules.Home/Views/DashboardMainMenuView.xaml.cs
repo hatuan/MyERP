@@ -3,10 +3,10 @@ using MyERP.ViewModels;
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
 
-namespace MyERP.Views
+namespace MyERP.Modules.Home.Views
 {
     [ViewExport(RegionName = "MainMenuRegion", IsActiveByDefault=false)]
-    public partial class MainMenuView : UserControl
+    public partial class DashboardMainMenuView : UserControl
     {
         [Import]
         public IApplicationViewModel ApplicationViewModel
@@ -22,7 +22,7 @@ namespace MyERP.Views
             }
         }
 
-        public MainMenuView()
+        public DashboardMainMenuView()
         {
             InitializeComponent();
         }

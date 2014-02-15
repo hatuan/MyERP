@@ -26,7 +26,8 @@ namespace MyERP
 
         private IDictionary<string, string> ModuleDefaultViewNames = new Dictionary<string, string>()
         {
-            { ModuleNames.DashboardModule, "DashboardView" }
+            { ModuleNames.HomeModule, "DashboardView" },
+            { ModuleNames.UserModule, "UserView" }
         };
 
         private string currentUri;

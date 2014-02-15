@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="MyERP.Views.MainMenuView"
+﻿<UserControl x:Class="MyERP.Modules.Home.Views.DashboardMainMenuView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -30,8 +30,8 @@
                 <converters:ParameterAndValueToBooleanConverter x:Key="converter" />
             </StackPanel.Resources>
             <telerik:RadRadioButton Command="{Binding SwitchContentRegionViewCommand}" 
-                                    CommandParameter="{Binding DashboardModule, Source={StaticResource moduleNames}}" 
-                                    IsChecked="{Binding CurrentModuleName, Mode=TwoWay, Converter={StaticResource converter}, ConverterParameter=DashboardModule}"
+                                    CommandParameter="{Binding HomeModule, Source={StaticResource moduleNames}}" 
+                                    IsChecked="{Binding CurrentModuleName, Mode=TwoWay, Converter={StaticResource converter}, ConverterParameter=HomeModule}"
                                     Tag="dashboard" Style="{StaticResource RadRadioButtonLargeStyle}"/>
             <telerik:RadRadioButton Command="{Binding SwitchContentRegionViewCommand}" 
                                     CommandParameter="{Binding MyERPModule, Source={StaticResource moduleNames}}" 

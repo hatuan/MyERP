@@ -36,19 +36,20 @@ namespace MyERP
         public void OnImportsSatisfied()
         {
             LoadModulesInBackground();
-            //NavigateToDashboardModule();
+            NavigateToUserModule();
         }
 
-        private void NavigateToDashboardModule()
+        private void NavigateToUserModule()
         {
-            this.ViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.DashboardModule);
+            this.ViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.UserModule);
         }
 
         private void LoadModulesInBackground()
         {
             Queue<string> urls = new Queue<string>(new string[]
                                                {
-                                                   ModuleNames.DashboardModule
+                                                   ModuleNames.UserModule,
+                                                   ModuleNames.HomeModule
                                                });
 
             foreach (var url in urls)

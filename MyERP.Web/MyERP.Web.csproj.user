@@ -24,9 +24,9 @@
           <EnableENC>True</EnableENC>
           <AlwaysStartWebServerOnDebug>True</AlwaysStartWebServerOnDebug>
           <ProjectOutputReferences>
-            <Ref Project="{9B4EBF15-7ECC-4388-85E4-86CBE2CBA0A5}" Folder="ClientBin">Microsoft.CSharp.zip|MyERP.xap|System.ComponentModel.Composition.Initialization.zip|System.ComponentModel.Composition.zip|System.ComponentModel.DataAnnotations.zip|System.ServiceModel.DomainServices.Client.Web.zip|System.ServiceModel.DomainServices.Client.zip|System.Windows.Controls.zip|System.Windows.Data.zip|System.Xml.Linq.zip|Telerik.Windows.Controls.Data.zip|Telerik.Windows.Controls.DomainServices.zip|Telerik.Windows.Controls.Input.zip|Telerik.Windows.Controls.Navigation.zip|Telerik.Windows.Controls.zip|Telerik.Windows.Data.zip|Telerik.Windows.Themes.Windows8.zip</Ref>
-            <Ref Project="{2493DA95-9A90-4BDA-9D30-07A5B9B784CB}" Folder="ClientBin">MyERP.Modules.Dashboard.xap</Ref>
-            <Ref Project="{5F66D21E-ED1A-4D48-BF77-2A08474CDB62}" Folder="ClientBin">MyERP.Test.xap</Ref>
+            <Ref Project="{9B4EBF15-7ECC-4388-85E4-86CBE2CBA0A5}" Folder="ClientBin">MyERP.xap|System.ComponentModel.Composition.Initialization.zip|System.ComponentModel.Composition.zip|System.ComponentModel.DataAnnotations.zip|System.ServiceModel.DomainServices.Client.Web.zip|System.ServiceModel.DomainServices.Client.zip|System.ServiceModel.Web.Extensions.zip|System.Windows.Controls.zip|System.Windows.Data.zip|System.Xml.Linq.zip|Telerik.Windows.Controls.Input.zip|Telerik.Windows.Controls.zip|Telerik.Windows.Themes.Windows8.zip</Ref>
+            <Ref Project="{025D049E-A6C0-4D26-B48E-16758827B4B1}" Folder="ClientBin">MyERP.Modules.User.xap|System.ComponentModel.Composition.zip|System.ComponentModel.DataAnnotations.zip|System.Windows.Data.zip|Telerik.Windows.Controls.Input.zip|Telerik.Windows.Controls.Navigation.zip|Telerik.Windows.Controls.zip|Telerik.Windows.Themes.Windows8.zip</Ref>
+            <Ref Project="{2493DA95-9A90-4BDA-9D30-07A5B9B784CB}" Folder="ClientBin">MyERP.Modules.Home.xap|System.ComponentModel.Composition.zip|System.ComponentModel.DataAnnotations.zip|Telerik.Windows.Controls.Input.zip|Telerik.Windows.Controls.zip|Telerik.Windows.Themes.Windows8.zip</Ref>
           </ProjectOutputReferences>
         </WebProjectProperties>
       </FlavorProperties>
