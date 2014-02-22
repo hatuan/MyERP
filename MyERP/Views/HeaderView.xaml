@@ -18,8 +18,9 @@
             <StackPanel.Resources>
                 <converters:ObjectToApplicationStringConverter x:Key="converter" />
             </StackPanel.Resources>
-            <TextBlock Text="MYERP" FontFamily="Segoe UI" FontSize="12" Foreground="{StaticResource BasicBrush}"/>
-            <TextBlock Text="{Binding CurrentModuleName, Converter={StaticResource converter}}" FontFamily="Segoe UI Light" FontSize="24" Foreground="{StaticResource AccentBrush}"/>
+            <TextBlock Text="ERP VIET NAM COMPANY" FontFamily="Segoe UI" FontSize="12" Foreground="{StaticResource BasicBrush}"/>
+            <!-- <TextBlock Text="{Binding CurrentModuleName, Converter={StaticResource converter}}" FontFamily="Segoe UI Light" FontSize="24" Foreground="{StaticResource AccentBrush}"/> -->
+            <TextBlock Text="MYERP" FontFamily="Segoe UI Light" FontSize="24" Foreground="{StaticResource AccentBrush}"/>
         </StackPanel>
     </Grid>
 </UserControl>

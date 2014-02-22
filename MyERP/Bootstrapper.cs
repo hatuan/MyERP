@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Windows;
 using MyERP.Infrastructure;
@@ -57,5 +58,12 @@ namespace MyERP
         //    //rm.RequestNavigate("ContentRegion", "CompaniesView");
         //    rm.RequestNavigate("ContentRegion", "DashboardView");
         //}
+
+        protected override CompositionContainer CreateContainer()
+        {
+            var container = base.CreateContainer();
+            container.ComposeExportedValue(container);
+            return container;
+        }
     }
 }

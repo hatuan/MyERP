@@ -78,6 +78,9 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedCode\RadWindowShowEvent.cs">
+      <Link>RadWindowShowEvent.cs</Link>
+    </Compile>
     <Compile Include="Assets\Resources\ApplicationStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -96,6 +99,8 @@
     <Compile Include="Converters\ParameterAndValueToVisibilityConverter.cs" />
     <Compile Include="Converters\StatusToDataTemplateConverter.cs" />
     <Compile Include="Helpers\ResourceWrapper.cs" />
+    <Compile Include="ICloseable.cs" />
+    <Compile Include="IView.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="Extensions\IRegionExtensions.cs" />
     <Compile Include="Extensions\PresentationFrameworkCollectionExtensions.cs" />

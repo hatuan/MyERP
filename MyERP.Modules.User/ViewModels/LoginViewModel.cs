@@ -3,22 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
+using Microsoft.Practices.Prism;
+using Microsoft.Practices.ServiceLocation;
 using MyERP.Infrastructure;
 using MyERP.Infrastructure.ViewModels;
-using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
 using MyERP.Repositories;
 using MyERP.ViewModels;
+using Telerik.Windows.Controls;
+using DelegateCommand = Microsoft.Practices.Prism.Commands.DelegateCommand;
+using ViewModelBase = MyERP.Infrastructure.ViewModelBase;
 
 
 namespace MyERP.Modules.User.ViewModels
 {
     [Export]
-    public class LoginViewModel : ViewModelBase
+    public class LoginViewModel : ViewModelBase, ICloseable
     {
         public LoginViewModel()
         {
@@ -30,6 +35,10 @@ namespace MyERP.Modules.User.ViewModels
 
         [Import]
         public IApplicationViewModel ApplicationViewModel { get; set; }
+
+
+        [Import]
+        public IRegionManager RegionManager { get; set; }
 
         public ICommand LoginCommand { get; set; }
 
@@ -44,7 +53,7 @@ namespace MyERP.Modules.User.ViewModels
                     if (userinfo != null)
                     {
                         RemoveError("Password", PASSWORD_ERROR);
-                        NavigateToDashboardModule();
+                        LoginSuccessfully();
                     }
                     else
                     {
@@ -90,9 +99,19 @@ namespace MyERP.Modules.User.ViewModels
             }
         }
 
-        private void NavigateToDashboardModule()
+        private void LoginSuccessfully()
         {
+
+            //Close LoginView
+            if (this.RequestClose != null)
+            {
+                this.RequestClose(null, EventArgs.Empty);
+            }
+
+            //Open HomeModule
             this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.HomeModule);
         }
+
+        public event EventHandler<EventArgs> RequestClose;
     }
 }

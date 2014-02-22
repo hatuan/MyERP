@@ -8,7 +8,5 @@
     {
         public const string HomeModule = "HomeModule";
         public const string UserModule = "UserModule";
-        public const string MyERPModule = "MyERPModule";
-        public const string SettingModule = "SettingModule";
     }
 }

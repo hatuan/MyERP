@@ -1,20 +1,27 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Linq;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using MyERP.Infrastructure;
-using MyERP.Infrastructure.Extensions;
-using MyERP.Modules.Home.ViewModels;
-using MyERP.ViewModels;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
+using MyERP.Infrastructure;
+using MyERP.ViewModels;
 using Telerik.Windows.Controls;
 
 namespace MyERP.Modules.Home.Views
 {
-    [ViewExport(RegionName = RegionNames.HomeWindowRegion)]
-    public partial class DashboardView : UserControl, INavigationAware
+    [ViewExport(RegionName = RegionNames.HomeWindowRegion, IsActiveByDefault = false)]
+    public partial class ModulesView : INavigationAware
     {
-        public DashboardView()
+        public ModulesView()
         {
             InitializeComponent();
             Loaded += (sender, args) =>
@@ -35,22 +42,10 @@ namespace MyERP.Modules.Home.Views
         [Import]
         public IEventAggregator EventAggregator { get; set; }
 
-        [Import]
-        public DashboardViewModel ViewModel
-        {
-            private get
-            {
-                return this.DataContext as DashboardViewModel;
-            }
-            set
-            {
-                this.DataContext = value;
-            }
-        }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            this.RegionManager.RequestNavigate(RegionNames.MainMenuRegion, "HomeMainMenuView");
+            
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -60,7 +55,7 @@ namespace MyERP.Modules.Home.Views
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            
+
         }
     }
 }

@@ -5,9 +5,10 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/MyERP.Theme;component/Styles/Brushes.xaml"/>
-                <ResourceDictionary Source="/MyERP.Theme;component/Styles/RadButtonStyle.xaml"/>
-                <ResourceDictionary Source="/MyERP.Theme;component/Styles/CommonStyles.xaml"/>
+                <ResourceDictionary Source="/MyERP.Theme;component/Styles/Generic.xaml"/>
+                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/System.Windows.xaml"/>
+                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.xaml"/>
+                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.Input.xaml"/>
                 <ResourceDictionary>
                     <helpers:ResourceWrapper x:Key="ResourceWrapper" />
                 </ResourceDictionary>

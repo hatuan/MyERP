@@ -7,7 +7,7 @@
     xmlns:prismBehaviours="clr-namespace:Microsoft.Practices.Prism.Regions.Behaviors;assembly=Microsoft.Practices.Prism"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     xmlns:telerikTransitions="clr-namespace:Telerik.Windows.Controls.TransitionEffects;assembly=Telerik.Windows.Controls"
-    mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="768" FontFamily="Segoe UI"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600" FontFamily="Segoe UI"
     >
 
     <Grid x:Name="LayoutRoot">
@@ -40,17 +40,11 @@
         <Rectangle Grid.Row="1" Fill="{StaticResource AccentBrush}" Height="4" />
 
         <!--Content-->
-        <!--<telerik:RadTransitionControl Grid.Row="2" prism:RegionManager.RegionName="ContentRegion" x:Name="ContentRegionPlaceholder" Duration="0:0:0.3" Margin="48,0,16,16">
-			<telerik:RadTransitionControl.Transition>
-				<telerikTransitions:FadeTransition />
-			</telerik:RadTransitionControl.Transition>
-			<telerik:RadTransitionControl.Easing>
-				<SineEase  EasingMode="EaseInOut" />
-			</telerik:RadTransitionControl.Easing>
-		</telerik:RadTransitionControl>-->
-        <ContentControl Grid.Row="2" prism:RegionManager.RegionName="ContentRegion" x:Name="ContentRegionPlaceholder" Margin="48,0,16,16"
+        
+        <ContentControl Grid.Row="2" prism:RegionManager.RegionName="ContentRegion" x:Name="ContentRegionPlaceholder" Margin="6,6,6,16"
                         HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
         </ContentControl>
+        
         
         <telerik:RadBusyIndicator x:Name="busyIndicator" 
 								  Grid.RowSpan="4" 
@@ -58,10 +52,6 @@
 								  IsBusy="{Binding IsBusy}" 
 								  ProgressValue="{Binding ProgressPercentage}" 
 								  telerik:AnimationManager.IsAnimationEnabled="False" DisplayAfter="0:0:0.2" />
-
-        <ContentControl x:Name="AllRegions" 
-						Grid.RowSpan="4"
-						prism:RegionManager.RegionName="AllRegions" Canvas.ZIndex="100" />
 
         <Rectangle Fill="#FF000000" Height="6" Opacity="0.3" HorizontalAlignment="Stretch" Grid.Row="3"/>
         

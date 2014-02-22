@@ -8,6 +8,7 @@ namespace MyERP.Infrastructure
         public const String HeaderRegion = "HeaderRegion";
         public const String MainMenuRegion = "MainMenuRegion";
         public const String SubMenuRegion = "SubMenuRegion";
-        public const String AllRegions = "AllRegions";
+        public const String UserWindowRegion = "UserWindowRegion";
+        public const String HomeWindowRegion = "HomeWindowRegion";
     }
 }

@@ -31,21 +31,5 @@ namespace MyERP.Infrastructure
                 return ModuleNames.UserModule;
             }
         }
-
-        public static string MyERPModule
-        {
-            get
-            {
-                return ModuleNames.MyERPModule;
-            }
-        }
-
-        public static string SettingModule
-        {
-            get
-            {
-                return ModuleNames.SettingModule;
-            }
-        }
     }
 }

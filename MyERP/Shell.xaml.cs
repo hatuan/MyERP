@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
+using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.Regions;
 using MyERP.Infrastructure;
 using MyERP.ViewModels;
+using MyERP.Views;
+using Telerik.Windows.Controls;
 
 namespace MyERP
 {
@@ -26,20 +31,24 @@ namespace MyERP
         }
 
         [Import]
-        public ApplicationNavigator ApplicationNavigator;
+        public IEventAggregator Aggregator;
+
+        [Import]
+        public IRegionManager RegionManager { get; set; }
 
         public Shell()
         {
             InitializeComponent();
+            
         }
 
         public void OnImportsSatisfied()
         {
             LoadModulesInBackground();
-            NavigateToUserModule();
+            NavigateToLoginModule();
         }
 
-        private void NavigateToUserModule()
+        private void NavigateToLoginModule()
         {
             this.ViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.UserModule);
         }

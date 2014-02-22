@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.ViewModel;
+using Telerik.Windows.Controls;
 
 namespace MyERP.ViewModels
 {
@@ -25,11 +26,12 @@ namespace MyERP.ViewModels
         public ApplicationViewModel()
         {
             this.SwitchContentRegionViewCommand = new DelegateCommand<string>(SwitchContentRegionView);
-            this.CurrentModuleName = "HomeModule";
-            this.CurrentViewName = "DashboardView";
+            this.SwitchModuleCommand = new DelegateCommand<string>(SwitchToModule);
         }
 
+
         public ICommand SwitchContentRegionViewCommand { get; private set; }
+        public ICommand SwitchModuleCommand { get; private set; }
 
         public string CurrentModuleName
         {
@@ -128,6 +130,25 @@ namespace MyERP.ViewModels
 
             this.isLoadingModule = true;
             this.ApplicationNavigator.NavigateToModule(moduleName,
+                (progress) =>
+                {
+                    this.ProgressPercentage = progress;
+                },
+                () =>
+                {
+                    this.isLoadingModule = false;
+                    // we want to show indeterminate indication after first load
+                    this.BusyIndicatorIsIndeterminate = true;
+                });
+        }
+
+
+        private void SwitchToModule(string moduleName)
+        {
+            this.CurrentModuleName = moduleName;
+
+            this.isLoadingModule = true;
+            this.ApplicationNavigator.SwitchToModule(moduleName,
                 (progress) =>
                 {
                     this.ProgressPercentage = progress;

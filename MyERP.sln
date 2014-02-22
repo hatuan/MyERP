@@ -35,6 +35,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedCode", "SharedCode", "{81BE53CB-3357-4C2F-9EEB-1A139F412240}"
 	ProjectSection(SolutionItems) = preProject
 		SharedCode\Cryptography.cs = SharedCode\Cryptography.cs
+		SharedCode\EntityClickedEvents.cs = SharedCode\EntityClickedEvents.cs
+		SharedCode\RadWindowShowEvent.cs = SharedCode\RadWindowShowEvent.cs
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.Modules.User", "MyERP.Modules.User\MyERP.Modules.User.csproj", "{025D049E-A6C0-4D26-B48E-16758827B4B1}"

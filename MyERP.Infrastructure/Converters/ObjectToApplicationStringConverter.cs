@@ -10,6 +10,11 @@ namespace MyERP.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null)
+            {
+                return String.Empty;
+            }
+
             string str = value.ToString();
 
             return ApplicationStrings.ResourceManager.GetString(str, culture);

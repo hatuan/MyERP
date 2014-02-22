@@ -6,8 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d">
 
-    <telerik:Windows8Theme x:Key="Theme" />
-
 	<!--MAIN UI BRUSHES-->
     <SolidColorBrush x:Key="AccentBrush" telerik:Windows8Colors.Color="Accent" />
     <SolidColorBrush x:Key="BasicBrush" telerik:Windows8Colors.Color="Basic" />
@@ -15,16 +13,5 @@
     <SolidColorBrush x:Key="MainBrush" telerik:Windows8Colors.Color="Main" />
     <SolidColorBrush x:Key="MarkerBrush" telerik:Windows8Colors.Color="Marker" />
     <SolidColorBrush x:Key="ValidationBrush" telerik:Windows8Colors.Color="Validation" />
-	
-	<!--CATHEGORY BRUSHES-->
-	<SolidColorBrush x:Key="MailBrush" Color="#FF25A0DA" />
-	<SolidColorBrush x:Key="CallBrush" Color="#FFED1691" />
-	<SolidColorBrush x:Key="MeetBrush" Color="#FFDAA125" />
-	
-	<!--STATUS / PRIORITY BRUSHES-->
-	<SolidColorBrush x:Key="RedBrush" Color="#FFE61E26" />
-	<SolidColorBrush x:Key="YellowBrush" Color="#FFDAA125" />
-	<SolidColorBrush x:Key="GreenBrush" Color="#FF679700" />
-	<ControlTemplate x:Key="RadMaskedInputBaseControlTemplate" TargetType="telerik:RadMaskedInputBase"/>
 
 </ResourceDictionary>

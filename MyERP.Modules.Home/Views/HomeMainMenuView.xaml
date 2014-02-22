@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="MyERP.Modules.Home.Views.HomeMainMenuView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+	xmlns:modules="clr-namespace:MyERP.Infrastructure;assembly=MyERP.Infrastructure"
+	xmlns:converters="clr-namespace:MyERP.Converters;assembly=MyERP.Infrastructure"
+	xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MyERP.Theme;component/Styles/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <StackPanel.Resources>
+                <modules:ModuleNamesWrapper x:Key="moduleNames" />
+                <converters:ParameterAndValueToBooleanConverter x:Key="converter" />
+            </StackPanel.Resources>
+            <telerik:RadRadioButton Content="dashboard" Command="{Binding SwitchToHomeWindowRegionCommand}" CommandParameter="DashboardView" Style="{StaticResource RadRadioButtonLargeStyle}" IsChecked="True"/>
+            <telerik:RadRadioButton Content="modules" Command="{Binding SwitchToHomeWindowRegionCommand}" CommandParameter="ModulesView" Style="{StaticResource RadRadioButtonLargeStyle}" />
+        </StackPanel>
+        <Rectangle Fill="{StaticResource AccentBrush}" Height="1" HorizontalAlignment="Stretch" Grid.Row="1"/>
+
+    </Grid>
+
+</UserControl>

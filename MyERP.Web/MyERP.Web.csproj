@@ -14,7 +14,7 @@
     <RootNamespace>MyERP.Web</RootNamespace>
     <AssemblyName>MyERP.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -103,15 +103,17 @@
       <LastGenOutput>MyERPDomainService.generated.cs</LastGenOutput>
     </Content>
     <Content Include="ClientBin\System.Xml.Linq.zip" />
-    <Content Include="ClientBin\System.Windows.Data.zip" />
-    <Content Include="ClientBin\Telerik.Windows.Controls.Navigation.zip" />
     <Content Include="ClientBin\System.ComponentModel.DataAnnotations.zip" />
-    <Content Include="ClientBin\Telerik.Windows.Controls.zip" />
-    <Content Include="ClientBin\Telerik.Windows.Controls.Input.zip" />
-    <Content Include="ClientBin\Telerik.Windows.Themes.Windows8.zip" />
     <Content Include="ClientBin\System.ServiceModel.DomainServices.Client.zip" />
     <Content Include="ClientBin\System.ServiceModel.DomainServices.Client.Web.zip" />
     <Content Include="ClientBin\System.ServiceModel.Web.Extensions.zip" />
+    <Content Include="ClientBin\System.Windows.Data.zip" />
+    <Content Include="ClientBin\Telerik.Windows.Controls.zip" />
+    <Content Include="ClientBin\Telerik.Windows.Controls.Input.zip" />
+    <Content Include="ClientBin\Telerik.Windows.Controls.Navigation.zip" />
+    <Content Include="ClientBin\Telerik.Windows.Themes.Windows8.zip" />
+    <Content Include="ClientBin\Telerik.Windows.Controls.Docking.zip" />
+    <Content Include="ClientBin\Telerik.Windows.Data.zip" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -174,7 +176,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1602</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/MyERP.Web</IISUrl>
+          <IISUrl>http://localhost:1602/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

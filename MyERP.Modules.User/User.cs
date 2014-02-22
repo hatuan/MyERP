@@ -4,7 +4,7 @@ using MyERP.Infrastructure;
 
 namespace MyERP.Modules.User
 {
-    [ModuleExport(ModuleNames.UserModule, typeof(UserModule), InitializationMode = InitializationMode.WhenAvailable)]
+    [ModuleExport(ModuleNames.UserModule, typeof(UserModule), InitializationMode = InitializationMode.OnDemand)]
     public class UserModule : IModule
     {
         public void Initialize()

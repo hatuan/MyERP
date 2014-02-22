@@ -6,18 +6,200 @@
     xmlns:local="clr-namespace:MyERP.Converters;assembly=MyERP.Infrastructure"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     mc:Ignorable="d"
-    d:DesignHeight="300" d:DesignWidth="400">
+    d:DesignHeight="600" d:DesignWidth="800" Width="800" Height="600">
 
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/MyERP.Theme;component/Styles/Brushes.xaml"/>
-                <ResourceDictionary Source="/MyERP.Theme;component/Styles/CommonStyles.xaml"/>
+                <ResourceDictionary Source="/MyERP.Theme;component/Styles/Generic.xaml"/>
+                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/System.Windows.xaml"/>
+                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.xaml"/>
+                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.Input.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     
     <Grid x:Name="LayoutRoot">
+        <Grid.Resources>
+            <local:DateTimeToRecentDaysConverter x:Key="dateToHumanFormatConverter"/>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--HEADER-->
+        <Grid MinHeight="20" Margin="0,0,0,5">
+        </Grid>
 
+        <telerik:RadUniformGrid Grid.Row="1" Rows="4" Columns="2" Margin="0,24,0,0">
+            <Grid x:Name="activitiesGrid" MinHeight="120" Margin="0,8,24,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="39"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Rectangle Fill="{StaticResource StrongBrush}" Height="1" HorizontalAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Top" d:LayoutOverrides="Height, GridBox"/>
+                <Border Background="{StaticResource AccentBrush}" MinWidth="44" HorizontalAlignment="Left" Margin="0,0,0,-1" Width="44">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="19" Opacity="0.2"/>
+                    </Border.Effect>
+                    <TextBlock Text="{Binding ActivitiesCount}" FontFamily="Segoe UI Light" 
+            			HorizontalAlignment="Center"
+            			FontSize="36" Foreground="{StaticResource MainBrush}" Margin="4,-6,4,-2"/>
+                </Border>
+                <TextBlock Text="ACTIVITIES" Foreground="{StaticResource BasicBrush}" HorizontalAlignment="Left"
+            		FontFamily="Segoe UI Semibold" FontSize="11" VerticalAlignment="Top" Margin="48,0,0,0" d:LayoutOverrides="HorizontalAlignment"/>
+                <TextBlock Grid.Column="2" Text="activities" FontFamily="Segoe UI Light" FontSize="36" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
+                <!--ItemsControl-->
+                
+            </Grid>
+            <Grid x:Name="todosGrid" Margin="24,0,0,8" MinHeight="120">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="39"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Rectangle Fill="{StaticResource StrongBrush}" Height="1" HorizontalAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Top" d:LayoutOverrides="Height, GridBox"/>
+                <Border Background="{StaticResource AccentBrush}" MinWidth="44" HorizontalAlignment="Left" Margin="0,0,0,-1" Width="44">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="19" Opacity="0.2"/>
+                    </Border.Effect>
+                    <TextBlock Text="{Binding TodosCount}" FontFamily="Segoe UI Light" 
+            			HorizontalAlignment="Center"
+            			FontSize="36" Foreground="{StaticResource MainBrush}" Margin="4,-6,4,-2"/>
+                </Border>
+                <StackPanel HorizontalAlignment="Left" Margin="48,0,0,0" Orientation="Vertical" VerticalAlignment="Top">
+                    <TextBlock Text="TODOS" Foreground="{StaticResource BasicBrush}" HorizontalAlignment="Left"
+            			FontFamily="Segoe UI Semibold" FontSize="11"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding OverdueTodosCount}" Foreground="{StaticResource ValidationBrush}" HorizontalAlignment="Left"
+            				FontFamily="Segoe UI Semibold" FontSize="11" VerticalAlignment="Top"/>
+                        <TextBlock Text=" OVERDUE" Foreground="{StaticResource ValidationBrush}" HorizontalAlignment="Left"
+            				FontFamily="Segoe UI Semibold" FontSize="11" VerticalAlignment="Top"/>
+                    </StackPanel>
+                </StackPanel>
+                <TextBlock Grid.Column="2" Text="todos" FontFamily="Segoe UI Light" FontSize="36" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
+
+                <!--ItemsControl-->
+
+            </Grid>
+
+
+            <Grid x:Name="contactsGrid" Margin="0,8,24,0"  MinHeight="120">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="39"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Rectangle Fill="{StaticResource StrongBrush}" Height="1" HorizontalAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Top" d:LayoutOverrides="Height, GridBox"/>
+                <Border Background="{StaticResource AccentBrush}" MinWidth="44" HorizontalAlignment="Left" Margin="0,0,0,-1" Width="44">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="19" Opacity="0.2"/>
+                    </Border.Effect>
+                    <TextBlock Text="{Binding RecentContactsCount}" FontFamily="Segoe UI Light" 
+            			HorizontalAlignment="Center"
+            			FontSize="36" Foreground="{StaticResource MainBrush}" Margin="4,-6,4,-2"/>
+                </Border>
+                <TextBlock Grid.Column="1" Text="RECENT" Foreground="{StaticResource BasicBrush}" HorizontalAlignment="Left"
+                       FontFamily="Segoe UI Semibold" FontSize="11" VerticalAlignment="Top" Margin="4,0,0,0"/>
+                <TextBlock Grid.Column="2" Text="contacts" FontFamily="Segoe UI Light" FontSize="36" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
+
+                <!--ItemsControl-->
+
+            </Grid>
+
+            <Grid x:Name="messagesGrid" Margin="24,8,0,0"  MinHeight="120">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="39"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Rectangle Fill="{StaticResource StrongBrush}" Height="1" HorizontalAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Top" d:LayoutOverrides="Height, GridBox"/>
+                <Border Background="{StaticResource AccentBrush}" MinWidth="44" HorizontalAlignment="Left" Margin="0,0,0,-1" Width="44">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="19" Opacity="0.2"/>
+                    </Border.Effect>
+                    <TextBlock Text="{Binding RecentMessagesCount}" FontFamily="Segoe UI Light" 
+            			HorizontalAlignment="Center"
+            			FontSize="36" Foreground="{StaticResource MainBrush}" Margin="4,-6,4,-2"/>
+                </Border>
+                <StackPanel HorizontalAlignment="Left" Margin="48,0,0,0" Orientation="Vertical" VerticalAlignment="Top">
+                    <TextBlock Text="MESSAGES" Foreground="{StaticResource BasicBrush}" HorizontalAlignment="Left"
+            			FontFamily="Segoe UI Semibold" FontSize="11"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding NewMessagesCount}" Foreground="{StaticResource ValidationBrush}" HorizontalAlignment="Left"
+            				FontFamily="Segoe UI Semibold" FontSize="11" VerticalAlignment="Top"/>
+                        <TextBlock Text=" NEW" Foreground="{StaticResource ValidationBrush}" HorizontalAlignment="Left"
+            				FontFamily="Segoe UI Semibold" FontSize="11" VerticalAlignment="Top"/>
+                    </StackPanel>
+                </StackPanel>
+                <TextBlock Grid.Column="2" Text="messages" FontFamily="Segoe UI Light" FontSize="36" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
+
+                <!--ItemsControl-->
+
+            </Grid>
+
+
+            <Grid x:Name="opportunitiesGrid" Margin="0,8,24,0"  MinHeight="120">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="39"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Rectangle Fill="{StaticResource StrongBrush}" Height="1" HorizontalAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Top" d:LayoutOverrides="Height, GridBox"/>
+                <Border Background="{StaticResource AccentBrush}" MinWidth="44" HorizontalAlignment="Left" Margin="0,0,0,-1" Width="44">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="19" Opacity="0.2"/>
+                    </Border.Effect>
+                    <TextBlock Text="{Binding OpenOpportunitiesCount}" FontFamily="Segoe UI Light" 
+            			HorizontalAlignment="Center"
+            			FontSize="36" Foreground="{StaticResource MainBrush}" Margin="4,-6,4,-2"/>
+                </Border>
+                <StackPanel HorizontalAlignment="Left" Margin="48,0,0,0" Orientation="Vertical" VerticalAlignment="Top">
+                    <TextBlock Text="OPEN" Foreground="{StaticResource BasicBrush}" HorizontalAlignment="Left"
+            			FontFamily="Segoe UI Semibold" FontSize="11"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding OverdueOpportunitiesCount}" Foreground="{StaticResource ValidationBrush}" HorizontalAlignment="Left"
+            				FontFamily="Segoe UI Semibold" FontSize="11" VerticalAlignment="Top"/>
+                        <TextBlock Text=" OVERDUE" Foreground="{StaticResource ValidationBrush}" HorizontalAlignment="Left"
+            				FontFamily="Segoe UI Semibold" FontSize="11" VerticalAlignment="Top"/>
+                    </StackPanel>
+                </StackPanel>
+                <TextBlock Grid.Column="2" Text="opportunities" FontFamily="Segoe UI Light" FontSize="36" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
+
+                <!--ItemsControl-->
+
+            </Grid>
+        </telerik:RadUniformGrid>
     </Grid>
 </UserControl>

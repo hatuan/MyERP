@@ -32,6 +32,55 @@ namespace MyERP.Modules.Home.ViewModels
                 this.RaisePropertyChanged("IsStatsLoading");
             }
         }
+
+        public int RecentContactsCount
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public int RecentMessagesCount
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public int ActivitiesCount
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public int OpenOpportunitiesCount
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public int OverdueOpportunitiesCount
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public int TodosCount
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
         #endregion
 
         #region NavigationAwareDataViewModel overrides

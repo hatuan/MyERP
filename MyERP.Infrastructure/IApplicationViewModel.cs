@@ -5,8 +5,10 @@ namespace MyERP.ViewModels
     public interface IApplicationViewModel
     {
         ICommand SwitchContentRegionViewCommand { get; }
+        ICommand SwitchModuleCommand { get; }
         string CurrentModuleName { get; }
         string CurrentViewName { get; }
         bool IsLoadingData { get; set; }
+        
     }
 }

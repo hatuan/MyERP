@@ -1,28 +1,28 @@
 ﻿using MyERP.Infrastructure;
+using MyERP.Modules.Home.ViewModels;
 using MyERP.ViewModels;
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
 
 namespace MyERP.Modules.Home.Views
 {
-    [ViewExport(RegionName = "MainMenuRegion", IsActiveByDefault=false)]
-    public partial class DashboardMainMenuView : UserControl
+    [ViewExport(RegionName = RegionNames.MainMenuRegion, IsActiveByDefault = false)]
+    public partial class HomeMainMenuView : UserControl
     {
         [Import]
-        public IApplicationViewModel ApplicationViewModel
+        public HomeViewModel ViewModel
         {
-            private get
+            get
             {
-                return this.DataContext as IApplicationViewModel;
+                return this.DataContext as HomeViewModel;
             }
-
             set
             {
                 this.DataContext = value;
             }
         }
 
-        public DashboardMainMenuView()
+        public HomeMainMenuView()
         {
             InitializeComponent();
         }

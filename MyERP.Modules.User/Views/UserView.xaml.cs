@@ -1,6 +1,7 @@
-﻿using System;
+﻿using System.Windows;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.ServiceLocation;
 using MyERP.Infrastructure;
 using MyERP.Modules.User.ViewModels;
 using MyERP.ViewModels;
@@ -10,22 +11,13 @@ using Telerik.Windows.Controls;
 
 namespace MyERP.Modules.User.Views
 {
-    [ViewExport(RegionName = RegionNames.UserWindowRegion, IsActiveByDefault = true)]
-    public partial class LoginView : UserControl, INavigationAware, IPartImportsSatisfiedNotification
+    [Export("UserView", typeof(IView))]
+    public partial class UserView : UserControl, IView, IPartImportsSatisfiedNotification, INavigationAware
 	{
-		public LoginView()
+        public UserView()
 		{
 			// Required to initialize variables
 			InitializeComponent();
-		    Loaded += (sender, args) =>
-		    {
-                UserWindow win = this.ParentOfType<UserWindow>();
-		        win.HideMaximizeButton = true;
-		        win.HideMinimizeButton = true;
-                win.ResizeMode = ResizeMode.NoResize;
-                win.UserWindowRegionPlaceholder.Width = this.Width;
-                win.UserWindowRegionPlaceholder.Height = this.Height;
-		    };
 		}
 
         [Import]
@@ -53,7 +45,7 @@ namespace MyERP.Modules.User.Views
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            
+
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -68,16 +60,8 @@ namespace MyERP.Modules.User.Views
 
         public void OnImportsSatisfied()
         {
-            if (DataContext is ICloseable)
-            {
-                (DataContext as ICloseable).RequestClose += (_, __) =>
-                {
-                    RadWindow window = this.ParentOfType<RadWindow>();
-                    window.Close();
-
-                };
-            }
-
+            IRegionManager regionManager = ServiceLocator.Current.GetInstance<IRegionManager>();
+            this.SetValue(Microsoft.Practices.Prism.Regions.RegionManager.RegionManagerProperty, regionManager);
 
         }
 	}
