@@ -10,5 +10,6 @@ namespace MyERP.Infrastructure
         public const String SubMenuRegion = "SubMenuRegion";
         public const String UserWindowRegion = "UserWindowRegion";
         public const String HomeWindowRegion = "HomeWindowRegion";
+        public const String FinancialWindowRegion = "FinancialWindowRegion";
     }
 }

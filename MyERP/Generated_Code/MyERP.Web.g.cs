@@ -6014,6 +6014,288 @@ namespace MyERP.DataAccess
     }
     
     /// <summary>
+    /// The 'Module' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class Module : Entity
+    {
+        
+        private string _description;
+        
+        private string _error;
+        
+        private string _group;
+        
+        private long _id;
+        
+        private ModuleName _idAsName;
+        
+        private string _name;
+        
+        private string[] _openAccessGenerated;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnDescriptionChanging(string value);
+        partial void OnDescriptionChanged();
+        partial void OnErrorChanging(string value);
+        partial void OnErrorChanged();
+        partial void OnGroupChanging(string value);
+        partial void OnGroupChanged();
+        partial void OnIdChanging(long value);
+        partial void OnIdChanged();
+        partial void OnIdAsNameChanging(ModuleName value);
+        partial void OnIdAsNameChanged();
+        partial void OnNameChanging(string value);
+        partial void OnNameChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Module"/> class.
+        /// </summary>
+        public Module()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Description' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Description
+        {
+            get
+            {
+                return this._description;
+            }
+            set
+            {
+                if ((this._description != value))
+                {
+                    this.OnDescriptionChanging(value);
+                    this.RaiseDataMemberChanging("Description");
+                    this.ValidateProperty("Description", value);
+                    this._description = value;
+                    this.RaiseDataMemberChanged("Description");
+                    this.OnDescriptionChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Error' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false)]
+        [ReadOnly(true)]
+        public string Error
+        {
+            get
+            {
+                return this._error;
+            }
+            set
+            {
+                if ((this._error != value))
+                {
+                    this.OnErrorChanging(value);
+                    this.ValidateProperty("Error", value);
+                    this._error = value;
+                    this.RaisePropertyChanged("Error");
+                    this.OnErrorChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Group' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Group
+        {
+            get
+            {
+                return this._group;
+            }
+            set
+            {
+                if ((this._group != value))
+                {
+                    this.OnGroupChanging(value);
+                    this.RaiseDataMemberChanging("Group");
+                    this.ValidateProperty("Group", value);
+                    this._group = value;
+                    this.RaiseDataMemberChanged("Group");
+                    this.OnGroupChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Id' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [Required()]
+        [RoundtripOriginal()]
+        public long Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'IdAsName' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false)]
+        [ReadOnly(true)]
+        public ModuleName IdAsName
+        {
+            get
+            {
+                return this._idAsName;
+            }
+            set
+            {
+                if ((this._idAsName != value))
+                {
+                    this.OnIdAsNameChanging(value);
+                    this.ValidateProperty("IdAsName", value);
+                    this._idAsName = value;
+                    this.RaisePropertyChanged("IdAsName");
+                    this.OnIdAsNameChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Name' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Required()]
+        [RoundtripOriginal()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                if ((this._name != value))
+                {
+                    this.OnNameChanging(value);
+                    this.RaiseDataMemberChanging("Name");
+                    this.ValidateProperty("Name", value);
+                    this._name = value;
+                    this.RaiseDataMemberChanged("Name");
+                    this.OnNameChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+    
+    public enum ModuleName
+    {
+        
+        GeneralLeaderJournals = 1000,
+        
+        GeneralLeaderReportsAccountActivity = 2000,
+        
+        GeneralLeaderReportsTrialBalance = 3000,
+        
+        GeneralLeaderReportsAccountTFormSummary = 4000,
+        
+        GeneralLeaderReportsTransactionList = 5000,
+        
+        GeneralLeaderSetupAccountOpeningBalances = 6000,
+        
+        GeneralLeaderSetupChartOfAccounts = 7000,
+        
+        GeneralLeaderSetupPeriod = 8000,
+        
+        CashJournalsReceipt = 10000,
+        
+        CashJournalsPayment = 12000,
+        
+        CashReportsBook = 13000,
+        
+        CashReportsReceiptJournal = 14000,
+        
+        CashReportsPaymentJournal = 15000,
+        
+        CashSetupBank = 16000,
+    }
+    
+    /// <summary>
     /// The 'Ph11' entity class.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
@@ -7628,6 +7910,17 @@ namespace MyERP.Web
         }
         
         /// <summary>
+        /// Gets the set of <see cref="Module"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<Module> Modules
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Module>();
+            }
+        }
+        
+        /// <summary>
         /// Gets the set of <see cref="Ph11"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
         /// </summary>
         public EntitySet<Ph11> Ph11s
@@ -7757,6 +8050,16 @@ namespace MyERP.Web
         {
             this.ValidateMethod("GetDmvvSetQuery", null);
             return base.CreateQuery<Dmvv>("GetDmvvSet", null, false, true);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="Module"/> entity instances using the 'GetModuleSet' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Module"/> entity instances.</returns>
+        public EntityQuery<Module> GetModuleSetQuery()
+        {
+            this.ValidateMethod("GetModuleSetQuery", null);
+            return base.CreateQuery<Module>("GetModuleSet", null, false, true);
         }
         
         /// <summary>
@@ -8072,6 +8375,24 @@ namespace MyERP.Web
             QueryResult<Dmvv> EndGetDmvvSet(IAsyncResult result);
             
             /// <summary>
+            /// Asynchronously invokes the 'GetModuleSet' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetModuleSetDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetModuleSet", ReplyAction="http://tempuri.org/MyERPDomainService/GetModuleSetResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetModuleSet(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetModuleSet'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetModuleSet'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetModuleSet' operation.</returns>
+            QueryResult<Module> EndGetModuleSet(IAsyncResult result);
+            
+            /// <summary>
             /// Asynchronously invokes the 'GetPh11Set' operation.
             /// </summary>
             /// <param name="callback">Callback to invoke on completion.</param>
@@ -8142,6 +8463,7 @@ namespace MyERP.Web
                 this.CreateEntitySet<Dmtk>(EntitySetOperations.All);
                 this.CreateEntitySet<Dmtt>(EntitySetOperations.All);
                 this.CreateEntitySet<Dmvv>(EntitySetOperations.All);
+                this.CreateEntitySet<Module>(EntitySetOperations.All);
                 this.CreateEntitySet<Ph11>(EntitySetOperations.All);
                 this.CreateEntitySet<Userinfo>(EntitySetOperations.All);
             }

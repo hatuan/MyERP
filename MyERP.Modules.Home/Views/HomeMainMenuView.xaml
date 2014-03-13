@@ -27,8 +27,8 @@
                 <modules:ModuleNamesWrapper x:Key="moduleNames" />
                 <converters:ParameterAndValueToBooleanConverter x:Key="converter" />
             </StackPanel.Resources>
-            <telerik:RadRadioButton Content="dashboard" Command="{Binding SwitchToHomeWindowRegionCommand}" CommandParameter="DashboardView" Style="{StaticResource RadRadioButtonLargeStyle}" IsChecked="True"/>
-            <telerik:RadRadioButton Content="modules" Command="{Binding SwitchToHomeWindowRegionCommand}" CommandParameter="ModulesView" Style="{StaticResource RadRadioButtonLargeStyle}" />
+            <!--<telerik:RadRadioButton Content="dashboard" Command="{Binding SwitchToHomeWindowRegionCommand}" CommandParameter="DashboardView" Style="{StaticResource RadRadioButtonLargeStyle}" IsChecked="True"/>-->
+            <telerik:RadRadioButton Content="modules" Command="{Binding SwitchToHomeWindowRegionCommand}" CommandParameter="ModulesView" Style="{StaticResource RadRadioButtonLargeStyle}" IsChecked="True"/>
         </StackPanel>
         <Rectangle Fill="{StaticResource AccentBrush}" Height="1" HorizontalAlignment="Stretch" Grid.Row="1"/>
 

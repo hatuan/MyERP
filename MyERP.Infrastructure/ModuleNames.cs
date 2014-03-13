@@ -8,5 +8,6 @@
     {
         public const string HomeModule = "HomeModule";
         public const string UserModule = "UserModule";
+        public const string FinancialModule = "FinancialModule";
     }
 }

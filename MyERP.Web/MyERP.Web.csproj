@@ -19,7 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <SilverlightApplicationList>{9B4EBF15-7ECC-4388-85E4-86CBE2CBA0A5}|..\MyERP\MyERP.csproj|ClientBin|False,{025D049E-A6C0-4D26-B48E-16758827B4B1}|..\MyERP.Modules.User\MyERP.Modules.User.csproj|ClientBin|False,{2493DA95-9A90-4BDA-9D30-07A5B9B784CB}|..\MyERP.Modules.Home\MyERP.Modules.Home.csproj|ClientBin|False</SilverlightApplicationList>
+    <SilverlightApplicationList>{9B4EBF15-7ECC-4388-85E4-86CBE2CBA0A5}|..\MyERP\MyERP.csproj|ClientBin|False,{025D049E-A6C0-4D26-B48E-16758827B4B1}|..\MyERP.Modules.User\MyERP.Modules.User.csproj|ClientBin|False,{2493DA95-9A90-4BDA-9D30-07A5B9B784CB}|..\MyERP.Modules.Home\MyERP.Modules.Home.csproj|ClientBin|False,{68435AFF-4995-40C4-87B0-9B781766E6B3}|..\MyERP.Modules.Financial\MyERP.Modules.Financial.csproj|ClientBin|False</SilverlightApplicationList>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -43,18 +43,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Data.OData, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.OData.5.6.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Data.Services, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.Services.5.6.0\lib\net40\Microsoft.Data.Services.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Data.Services.Client, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.Services.Client.5.6.0\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System.Data.Entity" />
@@ -63,9 +51,6 @@
     <Reference Include="System.ServiceModel.DomainServices.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.ServiceModel.DomainServices.Server, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.ServiceModel.Web" />
-    <Reference Include="System.Spatial, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Spatial.5.6.0\lib\net40\System.Spatial.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -88,25 +73,20 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClientBin\MyERP.Modules.Financial.xap" />
     <Content Include="ClientBin\MyERP.Modules.Home.xap" />
     <Content Include="ClientBin\MyERP.Modules.User.xap" />
     <Content Include="ClientBin\MyERP.xap" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
-    <Content Include="MyERPDataService.svc" />
     <Content Include="packages.config" />
     <Content Include="ClientBin\System.ComponentModel.Composition.zip" />
-    <Content Include="ClientBin\System.Windows.Controls.zip" />
-    <Content Include="ClientBin\System.ComponentModel.Composition.Initialization.zip" />
     <Content Include="MyERPDomainService.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MyERPDomainService.generated.cs</LastGenOutput>
     </Content>
     <Content Include="ClientBin\System.Xml.Linq.zip" />
     <Content Include="ClientBin\System.ComponentModel.DataAnnotations.zip" />
-    <Content Include="ClientBin\System.ServiceModel.DomainServices.Client.zip" />
-    <Content Include="ClientBin\System.ServiceModel.DomainServices.Client.Web.zip" />
-    <Content Include="ClientBin\System.ServiceModel.Web.Extensions.zip" />
     <Content Include="ClientBin\System.Windows.Data.zip" />
     <Content Include="ClientBin\Telerik.Windows.Controls.zip" />
     <Content Include="ClientBin\Telerik.Windows.Controls.Input.zip" />
@@ -114,6 +94,17 @@
     <Content Include="ClientBin\Telerik.Windows.Themes.Windows8.zip" />
     <Content Include="ClientBin\Telerik.Windows.Controls.Docking.zip" />
     <Content Include="ClientBin\Telerik.Windows.Data.zip" />
+    <Content Include="ClientBin\System.Windows.Controls.Pivot.zip" />
+    <Content Include="ClientBin\System.Xml.Serialization.zip" />
+    <Content Include="ClientBin\Telerik.Windows.Controls.DomainServices.zip" />
+    <Content Include="ClientBin\Telerik.Windows.Controls.GridView.zip" />
+    <Content Include="ClientBin\Telerik.Windows.Controls.Data.zip" />
+    <Content Include="ClientBin\Microsoft.CSharp.zip" />
+    <Content Include="ClientBin\System.ComponentModel.Composition.Initialization.zip" />
+    <Content Include="ClientBin\System.ServiceModel.DomainServices.Client.zip" />
+    <Content Include="ClientBin\System.ServiceModel.DomainServices.Client.Web.zip" />
+    <Content Include="ClientBin\System.ServiceModel.Web.Extensions.zip" />
+    <Content Include="ClientBin\System.Windows.Controls.zip" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -127,9 +118,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyERPDataService.svc.cs">
-      <DependentUpon>MyERPDataService.svc</DependentUpon>
-    </Compile>
     <Compile Include="MyERPDomainService.cs" />
     <Compile Include="MyERPDomainService.generated.cs">
       <AutoGen>True</AutoGen>
@@ -137,11 +125,6 @@
       <DependentUpon>MyERPDomainService.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Telerik.OpenAccess.DataServices\IOpenAccessMetadataProvider.cs" />
-    <Compile Include="Telerik.OpenAccess.DataServices\OpenAccessDataService.cs" />
-    <Compile Include="Telerik.OpenAccess.DataServices\OpenAccessMetadataProvider.cs" />
-    <Compile Include="Telerik.OpenAccess.DataServices\OpenAccessQueryProvider.cs" />
-    <Compile Include="Telerik.OpenAccess.DataServices\OpenAccessUpdateProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ClientBin\Images\" />

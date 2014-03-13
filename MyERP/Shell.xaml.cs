@@ -58,7 +58,8 @@ namespace MyERP
             Queue<string> urls = new Queue<string>(new string[]
                                                {
                                                    ModuleNames.UserModule,
-                                                   ModuleNames.HomeModule
+                                                   ModuleNames.HomeModule,
+                                                   ModuleNames.FinancialModule
                                                });
 
             foreach (var url in urls)

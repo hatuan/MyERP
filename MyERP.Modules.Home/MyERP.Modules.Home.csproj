@@ -33,6 +33,7 @@
     <LinkedServerProject>..\MyERP.Web\MyERP.Web.csproj</LinkedServerProject>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <ExpressionBlendVersion>12.0.41212.0</ExpressionBlendVersion>
   </PropertyGroup>
   <!-- This property group is only here to support building this project using the 
        MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
@@ -110,18 +111,28 @@
     </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Windows.Controls, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Pivot" />
     <Reference Include="System.Windows.Interactivity, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.4.1.0.0\lib\SL5\System.Windows.Interactivity.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Windows.Browser" />
+    <Reference Include="System.Xml.Serialization" />
     <Reference Include="Telerik.Windows.Controls, Version=2013.3.1016.1050, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
       <HintPath>C:\Program Files (x86)\Telerik\RadControls for Silverlight Q3 2013\Binaries\Silverlight\Telerik.Windows.Controls.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Docking, Version=2013.3.1016.1050, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
       <HintPath>D:\Program Files\Telerik\RadControls for Silverlight Q3 2013\Binaries\Silverlight\Telerik.Windows.Controls.Docking.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.DomainServices, Version=2013.3.1016.1050, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>D:\Program Files\Telerik\RadControls for Silverlight Q3 2013\Binaries\Silverlight\Telerik.Windows.Controls.DomainServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView, Version=2013.3.1016.1050, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>D:\Program Files\Telerik\RadControls for Silverlight Q3 2013\Binaries\Silverlight\Telerik.Windows.Controls.GridView.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Input, Version=2013.3.1016.1050, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
@@ -148,10 +159,7 @@
       <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="ViewModels\DashboardViewModel.cs" />
-    <Compile Include="Views\DashboardView.xaml.cs">
-      <DependentUpon>DashboardView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ViewModels\ModulesViewModel.cs" />
     <Compile Include="Views\HomeMainMenuView.xaml.cs">
       <DependentUpon>HomeMainMenuView.xaml</DependentUpon>
     </Compile>
@@ -186,10 +194,6 @@
     <Page Include="HomeWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\DashboardView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomeMainMenuView.xaml">
       <Generator>MSBuild:Compile</Generator>

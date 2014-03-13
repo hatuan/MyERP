@@ -76,9 +76,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DashboardRepository.cs" />
+    <Compile Include="ModulesRepository.cs" />
     <Compile Include="RepositoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>

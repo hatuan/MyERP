@@ -37,7 +37,8 @@ namespace MyERP
         private IDictionary<string, string> ModuleDefaultViewNames = new Dictionary<string, string>()
         {
             { ModuleNames.HomeModule, "HomeWindow" },
-            { ModuleNames.UserModule, "UserWindow" }
+            { ModuleNames.UserModule, "UserWindow" },
+            { ModuleNames.FinancialModule, "FinancialWindow" },
         };
 
         private string currentUri;
@@ -157,8 +158,8 @@ namespace MyERP
 
                     var win = Container.GetExportedValue<RadWindow>(viewName);
 
-                    SetRestrictedAreaMarginToRadWindow(win);
-                    win.IsRestricted = true;
+                    //SetRestrictedAreaMarginToRadWindow(win);
+                    //win.IsRestricted = true;
                     win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                     win.Show();
                 }

@@ -262,6 +262,24 @@ namespace MyERP.Web
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
+		public IQueryable<Module> GetModuleSet()
+		{ 
+			return this.DataContext.ModuleSet;
+		}       
+		public void DeleteModuleSet(Module module)
+		{
+			// This is a callback method. The actual Delete is performed internally.
+		}
+
+		public void UpdateModuleSet(Module module)
+		{
+			// This is a callback method. The actual Update is performed internally.
+		}
+
+		public void InsertModuleSet(Module module)
+		{
+			// This is a callback method. The actual Insert is performed internally.
+		} 
 	}
 }
 

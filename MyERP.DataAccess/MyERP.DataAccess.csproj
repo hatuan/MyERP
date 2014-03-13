@@ -77,6 +77,11 @@
     <Compile Include="Dmvv.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="Module.generated.cs">
+      <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="Module\Module.cs" />
+    <Compile Include="Module\ModuleName.cs" />
     <Compile Include="MyERPDataModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

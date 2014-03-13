@@ -18,18 +18,17 @@ namespace MyERP.Infrastructure
     {
         public static string HomeModule
         {
-            get
-            {
-                return ModuleNames.HomeModule;
-            }
+            get { return ModuleNames.HomeModule; }
         }
 
         public static string UserModule
         {
-            get
-            {
-                return ModuleNames.UserModule;
-            }
+            get { return ModuleNames.UserModule; }
+        }
+
+        public static string FinancialModule
+        {
+            get { return ModuleNames.FinancialModule; }
         }
     }
 }

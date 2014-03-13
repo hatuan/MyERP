@@ -52,10 +52,6 @@ namespace MyERP.Repositories
             where T : Entity
         {
             var key = this.GenerateKeyForObject<T>(query, typeof(T));
-            if (this.IsContextLoadingForObject(key))
-            {
-                return;
-            }
 
             EventHandler onCompleted = null;
             onCompleted = (s, args) =>
@@ -63,11 +59,9 @@ namespace MyERP.Repositories
                 var lo = s as LoadOperation<T>;
                 callback(lo.Entities);
                 lo.Completed -= onCompleted;
-                this.EntityLoadingOperations[key] = false;
                 System.Diagnostics.Debug.WriteLine("Loaded query for {0}", key);
             };
 
-            this.EntityLoadingOperations[key] = true;
             var loadOperation = this.Context.Load<T>(query);
             loadOperation.Completed += onCompleted;
         }
@@ -89,20 +83,6 @@ namespace MyERP.Repositories
             this.LoadQuery<T>(query, innerCallback);
         }
 
-        protected bool IsContextLoadingForObject(object obj)
-        {
-            if (this.EntityLoadingOperations.Keys.Contains(obj))
-            {
-                System.Diagnostics.Debug.WriteLine("Testing {0} for loading - {1}", obj, this.EntityLoadingOperations[obj]);
-                return this.EntityLoadingOperations[obj];
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("Testing {0} for loading - {1}", obj, "ELSE - false");
-                this.EntityLoadingOperations.Add(obj, false);
-                return false;
-            }
-        }
 
         private object GenerateKeyForObject<T>(EntityQuery<T> query, Type t)
             where T : Entity

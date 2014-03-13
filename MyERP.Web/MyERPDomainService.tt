@@ -78,11 +78,11 @@ for (int i = 0; i < queriableTypes.Length; i++)
 string fileName = "MyERPDomainService";
 string contextTypeName = "EntitiesModel";
 string contextNamespaceName = "MyERP.Web";
-string queriableTypesInput = "Ct11;Dmct;Dmdvcs;Dmkh;Dmnhkh;Dmnhvv;Dmnt;Dmtd;Dmtk;Dmtt;Dmvv;Ph11;Userinfo;";
-string queriableClassNamesInput = "Ct11Set;DmctSet;DmdvcsSet;DmkhSet;DmnhkhSet;DmnhvvSet;DmntSet;DmtdSet;DmtkSet;DmttSet;DmvvSet;Ph11Set;UserinfoSet;";
+string queriableTypesInput = "Ct11;Dmct;Dmdvcs;Dmkh;Dmnhkh;Dmnhvv;Dmnt;Dmtd;Dmtk;Dmtt;Dmvv;Ph11;Userinfo;Module";
+string queriableClassNamesInput = "Ct11Set;DmctSet;DmdvcsSet;DmkhSet;DmnhkhSet;DmnhvvSet;DmntSet;DmtdSet;DmtkSet;DmttSet;DmvvSet;Ph11Set;UserinfoSet;ModuleSet";
 string[] queriableTypes = null;
 string[] queriableClassNames = null;
-string editableEndPoints = ";Ct11;Dmct;Dmdvcs;Dmkh;Dmnhkh;Dmnhvv;Dmnt;Dmtd;Dmtk;Dmtt;Dmvv;Ph11;Userinfo";
+string editableEndPoints = ";Ct11;Dmct;Dmdvcs;Dmkh;Dmnhkh;Dmnhvv;Dmnt;Dmtd;Dmtk;Dmtt;Dmvv;Ph11;Userinfo;Module";
 
 void GeneratePerEntityDomainServiceCRUDOperations(string className, string classType)
 {

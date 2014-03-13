@@ -41,7 +41,7 @@ namespace MyERP.Modules.Home
             activeHandler += (sender, args) =>
             {
                 this.Activated -= activeHandler;
-                this.RegionManager.RequestNavigate("HomeWindowRegion", "DashboardView");
+                this.RegionManager.RequestNavigate("HomeWindowRegion", "ModulesView");
             };
             this.Activated += activeHandler;
         }

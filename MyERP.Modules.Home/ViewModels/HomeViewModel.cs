@@ -4,7 +4,6 @@ using System.ComponentModel.Composition;
 using System.ServiceModel.DomainServices.Client;
 using System.Linq;
 using System.Windows.Input;
-using CRM.Repositories;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
 using MyERP.Infrastructure;

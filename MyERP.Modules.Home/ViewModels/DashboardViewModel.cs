@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ServiceModel.DomainServices.Client;
 using System.Linq;
-using CRM.Repositories;
 using MyERP.Repositories;
 
 namespace MyERP.Modules.Home.ViewModels
@@ -18,20 +17,6 @@ namespace MyERP.Modules.Home.ViewModels
 
         #region View-visible properties
         public DomainContext Context { get; set; }
-
-        private bool isStatsLoading;
-        public bool IsStatsLoading
-        {
-            get
-            {
-                return isStatsLoading;
-            }
-            set
-            {
-                isStatsLoading = value;
-                this.RaisePropertyChanged("IsStatsLoading");
-            }
-        }
 
         public int RecentContactsCount
         {

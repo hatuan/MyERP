@@ -2,9 +2,8 @@
 using System.Linq;
 using System.ComponentModel.Composition;
 using MyERP.DataAccess;
-using MyERP.Repositories;
 
-namespace CRM.Repositories
+namespace MyERP.Repositories
 {
     [Export]
     public class DashboardRepository : RepositoryBase

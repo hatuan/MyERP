@@ -155,6 +155,14 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		public IQueryable<Module> ModuleSet 
+		{
+			get
+			{
+				return this.GetAll<Module>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -217,6 +225,10 @@ namespace MyERP.DataAccess
 			get;
 		}
 		IQueryable<Dmct> DmctSet
+		{
+			get;
+		}
+		IQueryable<Module> ModuleSet
 		{
 			get;
 		}

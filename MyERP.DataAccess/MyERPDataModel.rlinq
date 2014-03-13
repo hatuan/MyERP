@@ -865,6 +865,24 @@
           <orm:column name="ct_nxt" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
       </orm:class>
+      <orm:class name="Module" uniqueId="263924aa-e620-4c21-b6f8-431c0679acd4">
+        <orm:table name="module" />
+        <orm:identity>
+          <orm:single-field field-name="_id" />
+        </orm:identity>
+        <orm:field name="_id" property="Id" uniqueId="c319b880-7e91-491b-8abf-ef047734c952" type="System.Int64">
+          <orm:column name="id" sql-type="int8" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        </orm:field>
+        <orm:field name="_description" property="Description" uniqueId="47809135-2ef7-45ac-aba3-a440ce3ee81d" type="System.String">
+          <orm:column name="description" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_group" property="Group" uniqueId="58890323-4d4e-4b3e-8e38-2384819fc3d0" type="System.String">
+          <orm:column name="group" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="25274d28-22ec-467b-90b9-a8407913eba1" type="System.String">
+          <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="">
       <orm:table name="userinfo">
@@ -1088,6 +1106,12 @@
         <orm:column name="ma_td" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+      </orm:table>
+      <orm:table name="module">
+        <orm:column name="id" sql-type="int8" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="group" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="description" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
       </orm:table>
     </orm:schema>
     <orm:relational-naming-settings>
@@ -1805,6 +1829,12 @@
       <Property Id="aed096c4-2730-4529-98fd-c49bb9621b09" name="User_Id0" type="Int64" label="User_Id0 : Int64" kind="Persistent" fieldName="_user_id0" />
       <Property Id="be41e505-edd0-4405-ac5e-b9d104cc825d" name="User_Id2" type="Int64" label="User_Id2 : Int64" kind="Persistent" fieldName="_user_id2" />
     </DomainClass>
+    <DomainClass Id="263924aa-e620-4c21-b6f8-431c0679acd4" name="Module" namespace="MyERP.DataAccess" showPropertiesCompartment="true" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="c319b880-7e91-491b-8abf-ef047734c952" name="Id" type="System.Int64" label="Id : System.Int64" identity="true" fieldName="_id" />
+      <Property Id="47809135-2ef7-45ac-aba3-a440ce3ee81d" name="Description" label="Description : String" fieldName="_description" />
+      <Property Id="58890323-4d4e-4b3e-8e38-2384819fc3d0" name="Group" label="Group : String" fieldName="_group" />
+      <Property Id="25274d28-22ec-467b-90b9-a8407913eba1" name="Name" label="Name : String" kind="Persistent" fieldName="_name" />
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="d7bd6e8c-e34a-47be-a590-3f03f86938da">
@@ -1822,6 +1852,7 @@
         <entitySetProperty name="DmdvcsSet" namespace="MyERP.DataAccess" type="Dmdvcs" label="DmdvcsSet : IQueryable&lt;MyERP.DataAccess.Dmdvcs&gt;" />
         <entitySetProperty name="DmtdSet" namespace="MyERP.DataAccess" type="Dmtd" label="DmtdSet : IQueryable&lt;MyERP.DataAccess.Dmtd&gt;" />
         <entitySetProperty name="DmctSet" namespace="MyERP.DataAccess" type="Dmct" label="DmctSet : IQueryable&lt;MyERP.DataAccess.Dmct&gt;" />
+        <entitySetProperty name="ModuleSet" namespace="MyERP.DataAccess" type="Module" label="ModuleSet : IQueryable&lt;MyERP.DataAccess.Module&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

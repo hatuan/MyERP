@@ -98,6 +98,7 @@
     <Compile Include="Converters\ParameterAndValueToBooleanConverter.cs" />
     <Compile Include="Converters\ParameterAndValueToVisibilityConverter.cs" />
     <Compile Include="Converters\StatusToDataTemplateConverter.cs" />
+    <Compile Include="Helpers\EntityClickedEvents.cs" />
     <Compile Include="Helpers\ResourceWrapper.cs" />
     <Compile Include="ICloseable.cs" />
     <Compile Include="IView.cs" />

@@ -17,13 +17,13 @@ namespace MyERP.Modules.Home.Views
         public DashboardView()
         {
             InitializeComponent();
-            Loaded += (sender, args) =>
-            {
-                HomeWindow win = this.ParentOfType<HomeWindow>();
-                win.CanClose = false;
-                win.HomeWindowRegionPlaceholder.Width = this.Width;
-                win.HomeWindowRegionPlaceholder.Height = this.Height;
-            };
+            //Loaded += (sender, args) =>
+            //{
+            //    HomeWindow win = this.ParentOfType<HomeWindow>();
+            //    win.CanClose = false;
+            //    win.HomeWindowRegionPlaceholder.Width = this.Width;
+            //    win.HomeWindowRegionPlaceholder.Height = this.Height;
+            //};
         }
 
         [Import]
@@ -51,6 +51,10 @@ namespace MyERP.Modules.Home.Views
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             this.RegionManager.RequestNavigate(RegionNames.MainMenuRegion, "HomeMainMenuView");
+            HomeWindow win = this.ParentOfType<HomeWindow>();
+            win.CanClose = false;
+            win.Width = 800;
+            win.Height = 600;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
