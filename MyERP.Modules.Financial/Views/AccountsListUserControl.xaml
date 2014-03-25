@@ -31,7 +31,7 @@
     <Grid x:Name="LayoutRoot">
 
 
-        <telerik:RadGridView x:Name="gridView" ItemsSource="{Binding DataView, ElementName=accountsDataSource}" ColumnWidth="*"
+        <telerik:RadGridView x:Name="gridView" ItemsSource="{Binding Accounts}" ColumnWidth="*"
                              IsBusy="{Binding IsBusy, ElementName=accountsDataSource}"
 							 SelectedItem="{Binding SelectedAccount, Mode=TwoWay}" AutoGenerateColumns="False" ShowGroupPanel="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
 

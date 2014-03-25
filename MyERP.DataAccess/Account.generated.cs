@@ -57,10 +57,10 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Guid _currencyId;
+		private Guid? _currencyId;
 		[Column("currency_id", IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid")]
 		[Storage("_currencyId")]
-		public virtual Guid CurrencyId
+		public virtual Guid? CurrencyId
 		{
 			get
 			{
@@ -87,10 +87,10 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Guid _parentAccountId;
+		private Guid? _parentAccountId;
 		[Column("parent_account_id", IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid")]
 		[Storage("_parentAccountId")]
-		public virtual Guid ParentAccountId
+		public virtual Guid? ParentAccountId
 		{
 			get
 			{

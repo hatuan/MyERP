@@ -34,7 +34,7 @@ namespace MyERP.DataAccess
         
         private EntityRef<Currency> _currency;
         
-        private Guid _currencyId;
+        private Nullable<Guid> _currencyId;
         
         private bool _detail;
         
@@ -48,7 +48,7 @@ namespace MyERP.DataAccess
         
         private EntityRef<Account> _parentAccount;
         
-        private Guid _parentAccountId;
+        private Nullable<Guid> _parentAccountId;
         
         private DateTime _recCreated;
         
@@ -75,7 +75,7 @@ namespace MyERP.DataAccess
         partial void OnArApChanged();
         partial void OnCodeChanging(string value);
         partial void OnCodeChanged();
-        partial void OnCurrencyIdChanging(Guid value);
+        partial void OnCurrencyIdChanging(Nullable<Guid> value);
         partial void OnCurrencyIdChanged();
         partial void OnDetailChanging(bool value);
         partial void OnDetailChanged();
@@ -87,7 +87,7 @@ namespace MyERP.DataAccess
         partial void OnNameChanged();
         partial void OnOpenAccessGeneratedChanging(string[] value);
         partial void OnOpenAccessGeneratedChanged();
-        partial void OnParentAccountIdChanging(Guid value);
+        partial void OnParentAccountIdChanging(Nullable<Guid> value);
         partial void OnParentAccountIdChanged();
         partial void OnRecCreatedChanging(DateTime value);
         partial void OnRecCreatedChanged();
@@ -196,7 +196,7 @@ namespace MyERP.DataAccess
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public Guid CurrencyId
+        public Nullable<Guid> CurrencyId
         {
             get
             {
@@ -375,7 +375,7 @@ namespace MyERP.DataAccess
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public Guid ParentAccountId
+        public Nullable<Guid> ParentAccountId
         {
             get
             {

@@ -23,50 +23,50 @@ namespace MyERP.Web
         [Invoke]
         public void LoadDemoData()
         {
-            List<User> users = this.DataContext.Users.ToList();
-            this.DataContext.Delete(users);
-            this.DataContext.SaveChanges();
+            //List<User> users = this.DataContext.Users.ToList();
+            //this.DataContext.Delete(users);
+            //this.DataContext.SaveChanges();
 
-            users = new List<User>()
-            {
-                new User()
-                {
-                    Id = new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef"),
-                    Administrator = true,
-                    Comment = "",
-                    FullName = "Administrator",
-                    Name = "ADMIN",
-                    Password = "GUnbLXEWFUTZgEVPsnDoyg==",
-                    RightAccess = "",
-                    RightAdd = "",
-                    RightDel = "",
-                    RightEdit = "",
-                    RightPrint = "",
-                    RightRead = "",
-                    RightSearch = "",
-                    Status = (Byte)UserStatusType.Active
-                },
-                new User()
-                {
-                    Id = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
-                    Administrator = true,
-                    Comment = "",
-                    FullName = "Demo User",
-                    Name = "DEMO",
-                    Password = "WAZN81PC/QcCl2dCsMYdjw==",
-                    RightAccess = "",
-                    RightAdd = "",
-                    RightDel = "",
-                    RightEdit = "",
-                    RightPrint = "",
-                    RightRead = "",
-                    RightSearch = "",
-                    Status = (Byte)UserStatusType.Active
-                }
-            };
+            //users = new List<User>()
+            //{
+            //    new User()
+            //    {
+            //        Id = new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef"),
+            //        Administrator = true,
+            //        Comment = "",
+            //        FullName = "Administrator",
+            //        Name = "ADMIN",
+            //        Password = "GUnbLXEWFUTZgEVPsnDoyg==",
+            //        RightAccess = "",
+            //        RightAdd = "",
+            //        RightDel = "",
+            //        RightEdit = "",
+            //        RightPrint = "",
+            //        RightRead = "",
+            //        RightSearch = "",
+            //        Status = (Byte)UserStatusType.Active
+            //    },
+            //    new User()
+            //    {
+            //        Id = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+            //        Administrator = true,
+            //        Comment = "",
+            //        FullName = "Demo User",
+            //        Name = "DEMO",
+            //        Password = "WAZN81PC/QcCl2dCsMYdjw==",
+            //        RightAccess = "",
+            //        RightAdd = "",
+            //        RightDel = "",
+            //        RightEdit = "",
+            //        RightPrint = "",
+            //        RightRead = "",
+            //        RightSearch = "",
+            //        Status = (Byte)UserStatusType.Active
+            //    }
+            //};
             
-            this.DataContext.Add(users);
-            this.DataContext.SaveChanges();
+            //this.DataContext.Add(users);
+            //this.DataContext.SaveChanges();
         }
 
         [Invoke]

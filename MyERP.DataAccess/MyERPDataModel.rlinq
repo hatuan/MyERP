@@ -19,13 +19,13 @@
         <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="b5ea29c0-b4ce-4a1d-bfd5-83abd4c14eea" type="System.String">
           <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_currencyId" property="CurrencyId" behavior="readwrite" uniqueId="29788ee2-2b0d-492f-809e-2ffdd40e1958" type="System.Guid">
+        <orm:field name="_currencyId" property="CurrencyId" behavior="readwrite" uniqueId="29788ee2-2b0d-492f-809e-2ffdd40e1958" type="System.Nullable`1[[System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="currency_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_detail" property="Detail" behavior="readwrite" uniqueId="bd4c79f5-ba9f-4971-bd04-5b9f675f41c5" type="System.Boolean">
           <orm:column name="detail" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_parentAccountId" property="ParentAccountId" behavior="readwrite" uniqueId="6917e972-319f-48ff-8113-74f988f8f207" type="System.Guid">
+        <orm:field name="_parentAccountId" property="ParentAccountId" behavior="readwrite" uniqueId="6917e972-319f-48ff-8113-74f988f8f207" type="System.Nullable`1[[System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="parent_account_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_level" property="Level" behavior="readwrite" uniqueId="4479f3d5-2c52-420f-b4aa-854f3522673a" type="System.Int16">
@@ -1152,7 +1152,6 @@
     <SchemaUpdateSettings>
       <DeploymentProject>MyERP.DataAccess</DeploymentProject>
       <DeploymentDirectory>Script\</DeploymentDirectory>
-      <UpdateDatabaseOperation>Migrate</UpdateDatabaseOperation>
       <ShowAllTables>true</ShowAllTables>
     </SchemaUpdateSettings>
     <BackendConfigurationSettings>
@@ -1173,11 +1172,11 @@
       <Property Id="b195e850-7f51-4985-8d77-0caa89229611" name="RecModified" type="DateTime" label="RecModified : DateTime" kind="Persistent" fieldName="_recModified" />
       <Property Id="fc891926-702d-4fae-bda7-9a3b3a1930ce" name="RecCreated" type="DateTime" label="RecCreated : DateTime" kind="Persistent" fieldName="_recCreated" />
       <Property Id="bd4c79f5-ba9f-4971-bd04-5b9f675f41c5" name="Detail" type="Boolean" label="Detail : Boolean" kind="Persistent" fieldName="_detail" />
-      <Property Id="29788ee2-2b0d-492f-809e-2ffdd40e1958" name="CurrencyId" type="Guid" label="CurrencyId : Guid" kind="Persistent" fieldName="_currencyId" />
+      <Property Id="29788ee2-2b0d-492f-809e-2ffdd40e1958" name="CurrencyId" type="Guid" label="CurrencyId : Guid" nullable="true" kind="Persistent" fieldName="_currencyId" />
       <Property Id="566c75e1-121f-4b7f-8faa-7c6c7f5b3626" name="Status" type="Byte" label="Status : Byte" kind="Persistent" fieldName="_status" />
       <Property Id="b5ea29c0-b4ce-4a1d-bfd5-83abd4c14eea" name="Name" label="Name : String" kind="Persistent" fieldName="_name" />
       <Property Id="e00c6586-0a6a-4383-ac9a-f6edb8f25ffe" name="ArAp" type="Boolean" label="ArAp : Boolean" kind="Persistent" fieldName="_arAp" />
-      <Property Id="6917e972-319f-48ff-8113-74f988f8f207" name="ParentAccountId" type="Guid" label="ParentAccountId : Guid" kind="Persistent" fieldName="_parentAccountId" />
+      <Property Id="6917e972-319f-48ff-8113-74f988f8f207" name="ParentAccountId" type="Guid" label="ParentAccountId : Guid" nullable="true" kind="Persistent" fieldName="_parentAccountId" />
       <Property Id="b2400957-7187-4b47-a8bb-9c3e896f861f" name="RecCreatedById" type="Guid" label="RecCreatedById : Guid" kind="Persistent" fieldName="_recCreatedById" />
       <Property Id="814a2a82-f889-4130-a895-c13cb4cf2f72" name="RecModifiedById" type="Guid" label="RecModifiedById : Guid" kind="Persistent" fieldName="_recModifiedById" />
       <Property Id="d9d04203-63e7-4b61-8cf4-6aee7c1aba97" name="Version" type="Int64" label="Version : Int64" kind="Persistent" fieldName="_version" />

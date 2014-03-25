@@ -148,13 +148,16 @@
 		
 		<telerik:RadBusyIndicator IsBusy="{Binding IsBusy, ElementName=accountsDataSource}">
 			<telerik:RadDataForm x:Name="dataForm" 
-				ItemsSource="{Binding DataView, ElementName=accountsDataSource}" 
+				ItemsSource="{Binding Accounts}" 
 				CurrentItemChanged="OnDataFormCurrentItemChanged" 
 				ReadOnlyTemplate="{StaticResource AccountReadOnlyTemplate}" 
 				NewItemTemplate="{StaticResource AccountEditTemplate}" 
 				EditTemplate="{StaticResource AccountEditTemplate}" 
 				AutoGenerateFields="False" Background="Transparent"
-				VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" AddedNewItem="dataForm_AddedNewItem" EditEnded="dataForm_EditEnded"/>
+				VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" 
+				AddedNewItem="dataForm_AddedNewItem" 
+				CommandButtonsVisibility="Navigation" 
+				AutoCommit="True" AutoEdit="True"/>
 		</telerik:RadBusyIndicator>
 	</Grid>
 </UserControl>

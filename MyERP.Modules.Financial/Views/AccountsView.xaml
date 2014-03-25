@@ -113,6 +113,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </telerik:RadDomainDataSource>
+        
         <telerik:RadTabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
         	<telerik:RadTabItem x:Name="radTabItemAccountsOverview" Header="OVERVIEW">
         		<Grid>

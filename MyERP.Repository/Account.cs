@@ -7,7 +7,6 @@ namespace MyERP.DataAccess
         protected override void OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
-            this.RecModified = DateTime.Now;
         }
 
         partial void OnCreated()
