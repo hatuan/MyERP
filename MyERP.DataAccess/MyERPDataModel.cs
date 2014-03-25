@@ -51,115 +51,115 @@ namespace MyERP.DataAccess
 			:base(connection, backendConfiguration, metadataSource)
 		{ }
 			
-		public IQueryable<Dmtk> DmtkSet 
+		public IQueryable<Account> Accounts 
 		{
 			get
 			{
-				return this.GetAll<Dmtk>();
+				return this.GetAll<Account>();
 			}
 		}
 		
-		public IQueryable<Userinfo> UserinfoSet 
+		public IQueryable<User> Users 
 		{
 			get
 			{
-				return this.GetAll<Userinfo>();
+				return this.GetAll<User>();
 			}
 		}
 		
-		public IQueryable<Dmnt> DmntSet 
+		public IQueryable<Currency> Currencies 
 		{
 			get
 			{
-				return this.GetAll<Dmnt>();
+				return this.GetAll<Currency>();
 			}
 		}
 		
-		public IQueryable<Dmkh> DmkhSet 
+		public IQueryable<BusinessPartner> BusinessPartners 
 		{
 			get
 			{
-				return this.GetAll<Dmkh>();
+				return this.GetAll<BusinessPartner>();
 			}
 		}
 		
-		public IQueryable<Dmnhkh> DmnhkhSet 
+		public IQueryable<BusinessPartnerGroup> BusinessPartnerGroups 
 		{
 			get
 			{
-				return this.GetAll<Dmnhkh>();
+				return this.GetAll<BusinessPartnerGroup>();
 			}
 		}
 		
-		public IQueryable<Dmtt> DmttSet 
+		public IQueryable<PaymentTerm> PaymentTerms 
 		{
 			get
 			{
-				return this.GetAll<Dmtt>();
+				return this.GetAll<PaymentTerm>();
 			}
 		}
 		
-		public IQueryable<Dmvv> DmvvSet 
+		public IQueryable<Job> Jobs 
 		{
 			get
 			{
-				return this.GetAll<Dmvv>();
+				return this.GetAll<Job>();
 			}
 		}
 		
-		public IQueryable<Dmnhvv> DmnhvvSet 
+		public IQueryable<JobGroup> JobGroups 
 		{
 			get
 			{
-				return this.GetAll<Dmnhvv>();
+				return this.GetAll<JobGroup>();
 			}
 		}
 		
-		public IQueryable<Ph11> Ph11Set 
+		public IQueryable<TransactionDocument> TransactionDocuments 
 		{
 			get
 			{
-				return this.GetAll<Ph11>();
+				return this.GetAll<TransactionDocument>();
 			}
 		}
 		
-		public IQueryable<Ct11> Ct11Set 
+		public IQueryable<TransactionLine> TransactionLines 
 		{
 			get
 			{
-				return this.GetAll<Ct11>();
+				return this.GetAll<TransactionLine>();
 			}
 		}
 		
-		public IQueryable<Dmdvcs> DmdvcsSet 
+		public IQueryable<Organization> Organizations 
 		{
 			get
 			{
-				return this.GetAll<Dmdvcs>();
+				return this.GetAll<Organization>();
 			}
 		}
 		
-		public IQueryable<Dmtd> DmtdSet 
+		public IQueryable<TransactionType> TransactionTypes 
 		{
 			get
 			{
-				return this.GetAll<Dmtd>();
+				return this.GetAll<TransactionType>();
 			}
 		}
 		
-		public IQueryable<Dmct> DmctSet 
-		{
-			get
-			{
-				return this.GetAll<Dmct>();
-			}
-		}
-		
-		public IQueryable<Module> ModuleSet 
+		public IQueryable<Module> Modules 
 		{
 			get
 			{
 				return this.GetAll<Module>();
+			}
+		}
+		
+		public IQueryable<Session> Sessions 
+		{
+			get
+			{
+				return this.GetAll<Session>();
 			}
 		}
 		
@@ -170,65 +170,75 @@ namespace MyERP.DataAccess
 			backend.ProviderName = "Npgsql";
 			backend.Logging.LogEventsToSysOut = true;
 			backend.Logging.MetricStoreSnapshotInterval = 0;
+		
+			CustomizeBackendConfiguration(ref backend);
+		
 			return backend;
 		}
+		
+		/// <summary>
+		/// Allows you to customize the BackendConfiguration of EntitiesModel.
+		/// </summary>
+		/// <param name="config">The BackendConfiguration of EntitiesModel.</param>
+		static partial void CustomizeBackendConfiguration(ref BackendConfiguration config);
+		
 	}
 	
 	public interface IEntitiesModelUnitOfWork : IUnitOfWork
 	{
-		IQueryable<Dmtk> DmtkSet
+		IQueryable<Account> Accounts
 		{
 			get;
 		}
-		IQueryable<Userinfo> UserinfoSet
+		IQueryable<User> Users
 		{
 			get;
 		}
-		IQueryable<Dmnt> DmntSet
+		IQueryable<Currency> Currencies
 		{
 			get;
 		}
-		IQueryable<Dmkh> DmkhSet
+		IQueryable<BusinessPartner> BusinessPartners
 		{
 			get;
 		}
-		IQueryable<Dmnhkh> DmnhkhSet
+		IQueryable<BusinessPartnerGroup> BusinessPartnerGroups
 		{
 			get;
 		}
-		IQueryable<Dmtt> DmttSet
+		IQueryable<PaymentTerm> PaymentTerms
 		{
 			get;
 		}
-		IQueryable<Dmvv> DmvvSet
+		IQueryable<Job> Jobs
 		{
 			get;
 		}
-		IQueryable<Dmnhvv> DmnhvvSet
+		IQueryable<JobGroup> JobGroups
 		{
 			get;
 		}
-		IQueryable<Ph11> Ph11Set
+		IQueryable<TransactionDocument> TransactionDocuments
 		{
 			get;
 		}
-		IQueryable<Ct11> Ct11Set
+		IQueryable<TransactionLine> TransactionLines
 		{
 			get;
 		}
-		IQueryable<Dmdvcs> DmdvcsSet
+		IQueryable<Organization> Organizations
 		{
 			get;
 		}
-		IQueryable<Dmtd> DmtdSet
+		IQueryable<TransactionType> TransactionTypes
 		{
 			get;
 		}
-		IQueryable<Dmct> DmctSet
+		IQueryable<Module> Modules
 		{
 			get;
 		}
-		IQueryable<Module> ModuleSet
+		IQueryable<Session> Sessions
 		{
 			get;
 		}

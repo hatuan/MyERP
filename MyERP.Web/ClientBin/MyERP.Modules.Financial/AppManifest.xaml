@@ -5,11 +5,14 @@
   <Deployment.ExternalParts>
     <ExtensionPart Source="System.ComponentModel.Composition.zip" />
     <ExtensionPart Source="System.ComponentModel.DataAnnotations.zip" />
+    <ExtensionPart Source="System.Windows.Controls.zip" />
     <ExtensionPart Source="Telerik.Windows.Controls.Data.zip" />
     <ExtensionPart Source="Telerik.Windows.Controls.zip" />
     <ExtensionPart Source="Telerik.Windows.Controls.DomainServices.zip" />
+    <ExtensionPart Source="Telerik.Windows.Controls.GridView.zip" />
     <ExtensionPart Source="Telerik.Windows.Controls.Input.zip" />
     <ExtensionPart Source="Telerik.Windows.Controls.Navigation.zip" />
+    <ExtensionPart Source="Telerik.Windows.Controls.RibbonView.zip" />
     <ExtensionPart Source="Telerik.Windows.Data.zip" />
     <ExtensionPart Source="Telerik.Windows.Themes.Windows8.zip" />
     <ExtensionPart Source="System.Windows.Data.zip" />

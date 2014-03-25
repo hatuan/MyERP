@@ -29,6 +29,8 @@
             </StackPanel.Resources>
             <!--<telerik:RadRadioButton Content="dashboard" Command="{Binding SwitchToHomeWindowRegionCommand}" CommandParameter="DashboardView" Style="{StaticResource RadRadioButtonLargeStyle}" IsChecked="True"/>-->
             <telerik:RadRadioButton Content="modules" Command="{Binding SwitchToHomeWindowRegionCommand}" CommandParameter="ModulesView" Style="{StaticResource RadRadioButtonLargeStyle}" IsChecked="True"/>
+            <Rectangle Width="4" />
+            <telerik:RadButton Content="logoff" Command="{Binding LogoffCommand}" Style="{StaticResource RadButtonLargeStyle}"/>
         </StackPanel>
         <Rectangle Fill="{StaticResource AccentBrush}" Height="1" HorizontalAlignment="Stretch" Grid.Row="1"/>
 

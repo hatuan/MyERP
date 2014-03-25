@@ -39,14 +39,13 @@ namespace MyERP.Modules.Financial
 
         public void OnImportsSatisfied()
         {
-            //IRegionManager regionManager = ServiceLocator.Current.GetInstance<IRegionManager>();
             this.SetValue(Microsoft.Practices.Prism.Regions.RegionManager.RegionManagerProperty, RegionManager);
             this.EventAggregator.GetEvent<AccountClickedEvent>().Subscribe(OnAccountClickedEvent);
         }
 
         public void OnAccountClickedEvent(object args)
         {
-            System.Diagnostics.Debug.WriteLine("AccountClickedEvent");
+            this.RegionManager.RequestNavigate("FinancialWindowRegion", "AccountsView");
         }
     }
 }

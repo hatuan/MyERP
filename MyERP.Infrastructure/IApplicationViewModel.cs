@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MyERP.ViewModels
 {
@@ -9,6 +11,6 @@ namespace MyERP.ViewModels
         string CurrentModuleName { get; }
         string CurrentViewName { get; }
         bool IsLoadingData { get; set; }
-        
+        Guid SessionId { get; }
     }
 }

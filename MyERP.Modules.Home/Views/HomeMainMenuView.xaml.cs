@@ -3,6 +3,7 @@ using MyERP.Modules.Home.ViewModels;
 using MyERP.ViewModels;
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
+using Telerik.Windows.Controls;
 
 namespace MyERP.Modules.Home.Views
 {

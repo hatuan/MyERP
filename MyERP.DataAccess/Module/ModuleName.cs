@@ -8,6 +8,7 @@ namespace MyERP.DataAccess
 {
     public enum ModuleName
     {
+        Default = 0,
         GeneralLeaderJournals = 1000,
         GeneralLeaderReportsAccountActivity = 2000,
         GeneralLeaderReportsTrialBalance = 3000,
@@ -17,11 +18,11 @@ namespace MyERP.DataAccess
         GeneralLeaderSetupChartOfAccounts = 7000,
         GeneralLeaderSetupPeriod = 8000,
         CashJournalsReceipt = 10000,
-        CashJournalsPayment = 12000,
-        CashReportsBook = 13000,
-        CashReportsReceiptJournal = 14000,
-        CashReportsPaymentJournal = 15000,
-        CashSetupBank = 16000
+        CashJournalsPayment = 11000,
+        CashReportsBook = 12000,
+        CashReportsReceiptJournal = 13000,
+        CashReportsPaymentJournal = 14000,
+        CashSetupBank = 15000
     }
    
 }

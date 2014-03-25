@@ -12,7 +12,7 @@ namespace MyERP.Repositories
         public void GetGeneralLeaderJournals(Action<IEnumerable<Module>> callback)
         {
             EntityQuery<Module> query =
-                this.Context.GetModuleSetQuery().Where(u => u.Group == "GeneralLeaderJournals");
+                this.Context.GetModulesQuery().Where(u => u.Group == "GeneralLeaderJournals");
 
             this.LoadQuery<Module>(query, callback);
         }
@@ -20,7 +20,7 @@ namespace MyERP.Repositories
         public void GetGeneralLeaderReports(Action<IEnumerable<Module>> callback)
         {
             EntityQuery<Module> query =
-                this.Context.GetModuleSetQuery().Where(u => u.Group == "GeneralLeaderReports");
+                this.Context.GetModulesQuery().Where(u => u.Group == "GeneralLeaderReports");
 
             this.LoadQuery<Module>(query, callback);
         }
@@ -28,7 +28,7 @@ namespace MyERP.Repositories
         public void GetGeneralLeaderSetup(Action<IEnumerable<Module>> callback)
         {
             EntityQuery<Module> query =
-                this.Context.GetModuleSetQuery().Where(u => u.Group == "GeneralLeaderSetup");
+                this.Context.GetModulesQuery().Where(u => u.Group == "GeneralLeaderSetup");
 
             this.LoadQuery<Module>(query, callback);
         }

@@ -28,255 +28,255 @@ namespace MyERP.Web
 		public MyERPDomainService() : base()
 		{
 		}
-		public IQueryable<Ct11> GetCt11Set()
+		public IQueryable<Account> GetAccounts()
 		{ 
-			return this.DataContext.Ct11Set;
+			return this.DataContext.Accounts;
 		}       
-		public void DeleteCt11Set(Ct11 ct11)
+		public void DeleteAccounts(Account account)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdateCt11Set(Ct11 ct11)
+		public void UpdateAccounts(Account account)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertCt11Set(Ct11 ct11)
+		public void InsertAccounts(Account account)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<Dmct> GetDmctSet()
+		public IQueryable<BusinessPartnerGroup> GetBusinessPartnerGroups()
 		{ 
-			return this.DataContext.DmctSet;
+			return this.DataContext.BusinessPartnerGroups;
 		}       
-		public void DeleteDmctSet(Dmct dmct)
+		public void DeleteBusinessPartnerGroups(BusinessPartnerGroup businessPartnerGroup)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdateDmctSet(Dmct dmct)
+		public void UpdateBusinessPartnerGroups(BusinessPartnerGroup businessPartnerGroup)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertDmctSet(Dmct dmct)
+		public void InsertBusinessPartnerGroups(BusinessPartnerGroup businessPartnerGroup)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<Dmdvcs> GetDmdvcsSet()
+		public IQueryable<BusinessPartner> GetBusinessPartners()
 		{ 
-			return this.DataContext.DmdvcsSet;
+			return this.DataContext.BusinessPartners;
 		}       
-		public void DeleteDmdvcsSet(Dmdvcs dmdvcs)
+		public void DeleteBusinessPartners(BusinessPartner businessPartner)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdateDmdvcsSet(Dmdvcs dmdvcs)
+		public void UpdateBusinessPartners(BusinessPartner businessPartner)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertDmdvcsSet(Dmdvcs dmdvcs)
+		public void InsertBusinessPartners(BusinessPartner businessPartner)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<Dmkh> GetDmkhSet()
+		public IQueryable<Currency> GetCurrencies()
 		{ 
-			return this.DataContext.DmkhSet;
+			return this.DataContext.Currencies;
 		}       
-		public void DeleteDmkhSet(Dmkh dmkh)
+		public void DeleteCurrencies(Currency currency)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdateDmkhSet(Dmkh dmkh)
+		public void UpdateCurrencies(Currency currency)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertDmkhSet(Dmkh dmkh)
+		public void InsertCurrencies(Currency currency)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<Dmnhkh> GetDmnhkhSet()
+		public IQueryable<JobGroup> GetJobGroups()
 		{ 
-			return this.DataContext.DmnhkhSet;
+			return this.DataContext.JobGroups;
 		}       
-		public void DeleteDmnhkhSet(Dmnhkh dmnhkh)
+		public void DeleteJobGroups(JobGroup jobGroup)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdateDmnhkhSet(Dmnhkh dmnhkh)
+		public void UpdateJobGroups(JobGroup jobGroup)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertDmnhkhSet(Dmnhkh dmnhkh)
+		public void InsertJobGroups(JobGroup jobGroup)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<Dmnhvv> GetDmnhvvSet()
+		public IQueryable<Job> GetJobs()
 		{ 
-			return this.DataContext.DmnhvvSet;
+			return this.DataContext.Jobs;
 		}       
-		public void DeleteDmnhvvSet(Dmnhvv dmnhvv)
+		public void DeleteJobs(Job job)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdateDmnhvvSet(Dmnhvv dmnhvv)
+		public void UpdateJobs(Job job)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertDmnhvvSet(Dmnhvv dmnhvv)
+		public void InsertJobs(Job job)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<Dmnt> GetDmntSet()
+		public IQueryable<Module> GetModules()
 		{ 
-			return this.DataContext.DmntSet;
+			return this.DataContext.Modules;
 		}       
-		public void DeleteDmntSet(Dmnt dmnt)
+		public void DeleteModules(Module module)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdateDmntSet(Dmnt dmnt)
+		public void UpdateModules(Module module)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertDmntSet(Dmnt dmnt)
+		public void InsertModules(Module module)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<Dmtd> GetDmtdSet()
+		public IQueryable<Organization> GetOrganizations()
 		{ 
-			return this.DataContext.DmtdSet;
+			return this.DataContext.Organizations;
 		}       
-		public void DeleteDmtdSet(Dmtd dmtd)
+		public void DeleteOrganizations(Organization organization)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdateDmtdSet(Dmtd dmtd)
+		public void UpdateOrganizations(Organization organization)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertDmtdSet(Dmtd dmtd)
+		public void InsertOrganizations(Organization organization)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<Dmtk> GetDmtkSet()
+		public IQueryable<PaymentTerm> GetPaymentTerms()
 		{ 
-			return this.DataContext.DmtkSet;
+			return this.DataContext.PaymentTerms;
 		}       
-		public void DeleteDmtkSet(Dmtk dmtk)
+		public void DeletePaymentTerms(PaymentTerm paymentTerm)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdateDmtkSet(Dmtk dmtk)
+		public void UpdatePaymentTerms(PaymentTerm paymentTerm)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertDmtkSet(Dmtk dmtk)
+		public void InsertPaymentTerms(PaymentTerm paymentTerm)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<Dmtt> GetDmttSet()
+		public IQueryable<Session> GetSessions()
 		{ 
-			return this.DataContext.DmttSet;
+			return this.DataContext.Sessions;
 		}       
-		public void DeleteDmttSet(Dmtt dmtt)
+		public void DeleteSessions(Session session)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdateDmttSet(Dmtt dmtt)
+		public void UpdateSessions(Session session)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertDmttSet(Dmtt dmtt)
+		public void InsertSessions(Session session)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<Dmvv> GetDmvvSet()
+		public IQueryable<TransactionDocument> GetTransactionDocuments()
 		{ 
-			return this.DataContext.DmvvSet;
+			return this.DataContext.TransactionDocuments;
 		}       
-		public void DeleteDmvvSet(Dmvv dmvv)
+		public void DeleteTransactionDocuments(TransactionDocument transactionDocument)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdateDmvvSet(Dmvv dmvv)
+		public void UpdateTransactionDocuments(TransactionDocument transactionDocument)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertDmvvSet(Dmvv dmvv)
+		public void InsertTransactionDocuments(TransactionDocument transactionDocument)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<Ph11> GetPh11Set()
+		public IQueryable<TransactionLine> GetTransactionLines()
 		{ 
-			return this.DataContext.Ph11Set;
+			return this.DataContext.TransactionLines;
 		}       
-		public void DeletePh11Set(Ph11 ph11)
+		public void DeleteTransactionLines(TransactionLine transactionLine)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdatePh11Set(Ph11 ph11)
+		public void UpdateTransactionLines(TransactionLine transactionLine)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertPh11Set(Ph11 ph11)
+		public void InsertTransactionLines(TransactionLine transactionLine)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<Userinfo> GetUserinfoSet()
+		public IQueryable<TransactionType> GetTransactionTypes()
 		{ 
-			return this.DataContext.UserinfoSet;
+			return this.DataContext.TransactionTypes;
 		}       
-		public void DeleteUserinfoSet(Userinfo userinfo)
+		public void DeleteTransactionTypes(TransactionType transactionType)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdateUserinfoSet(Userinfo userinfo)
+		public void UpdateTransactionTypes(TransactionType transactionType)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertUserinfoSet(Userinfo userinfo)
+		public void InsertTransactionTypes(TransactionType transactionType)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<Module> GetModuleSet()
+		public IQueryable<User> GetUsers()
 		{ 
-			return this.DataContext.ModuleSet;
+			return this.DataContext.Users;
 		}       
-		public void DeleteModuleSet(Module module)
+		public void DeleteUsers(User user)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdateModuleSet(Module module)
+		public void UpdateUsers(User user)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertModuleSet(Module module)
+		public void InsertUsers(User user)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 

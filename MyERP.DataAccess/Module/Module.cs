@@ -11,6 +11,7 @@ namespace MyERP.DataAccess
             {
                 return (ModuleName)this.Id;
             }
+            set { }
         }
     }
 }

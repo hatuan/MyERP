@@ -13,6 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using MyERP;
 using MyERP.Helpers;
+using MyERP.Web;
 using Telerik.Windows.Controls;
 
 namespace MyERP
@@ -27,13 +28,22 @@ namespace MyERP
             this.UnhandledException += this.Application_UnhandledException;
 
             InitializeComponent();
+
+            
         }
 
         private void Application_Startup(object sender, StartupEventArgs e) 
         {
+
             LocalizationManager.DefaultCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentCulture = LocalizationManager.DefaultCulture;
             Thread.CurrentThread.CurrentUICulture = LocalizationManager.DefaultCulture;
+
+            var context = new MyERPDomainContext();
+            context.UpdateSchema();
+
+            context.LoadModuleData();
+            context.LoadDemoData();
 
             AssemblyCache.Initialize();
             var bootstrapper = new Bootstrapper();

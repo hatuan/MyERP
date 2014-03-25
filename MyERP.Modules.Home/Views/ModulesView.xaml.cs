@@ -53,7 +53,7 @@ namespace MyERP.Modules.Home.Views
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            this.RegionManager.RequestNavigate(RegionNames.MainMenuRegion, "HomeMainMenuView");
+            //this.RegionManager.RequestNavigate(RegionNames.MainMenuRegion, "HomeMainMenuView");
             var win = this.ParentOfType<HomeWindow>();
             
             win.CanClose = false;

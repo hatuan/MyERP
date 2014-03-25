@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.ViewModel;
@@ -27,6 +28,7 @@ namespace MyERP.ViewModels
         {
             this.SwitchContentRegionViewCommand = new DelegateCommand<string>(SwitchContentRegionView);
             this.SwitchModuleCommand = new DelegateCommand<string>(SwitchToModule);
+            this.SessionId = Guid.NewGuid();
         }
 
 
@@ -66,6 +68,8 @@ namespace MyERP.ViewModels
                 this.RaisePropertyChanged("IsBusy");
             }
         }
+
+        public Guid SessionId { get; private set; }
 
         public bool IsLoadingModule
         {

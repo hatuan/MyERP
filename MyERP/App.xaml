@@ -1,6 +1,8 @@
 ﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:helpers="clr-namespace:MyERP.Infrastructure.Helpers;assembly=MyERP.Infrastructure"
+             xmlns:myErp="clr-namespace:MyERP"
+             xmlns:applicationServices="clr-namespace:System.ServiceModel.DomainServices.Client.ApplicationServices;assembly=System.ServiceModel.DomainServices.Client.Web"
              x:Class="MyERP.App">
     <Application.Resources>
         <ResourceDictionary>

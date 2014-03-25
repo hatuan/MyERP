@@ -10,17 +10,17 @@ namespace MyERP.Repositories
     [Export]
     public class UserRepository : RepositoryBase
     {
-        public void GetUserinfos(Action<IEnumerable<Userinfo>> callback)
+        public void GetUserinfos(Action<IEnumerable<User>> callback)
         {
-            this.LoadQuery<Userinfo>(this.Context.GetUserinfoSetQuery(), callback);
+            this.LoadQuery<User>(this.Context.GetUsersQuery(), callback);
         }
 
-        public void GetUserinfoByUserNameAndPassword(String userName, String pass, Action<Userinfo> callback)
+        public void GetUserinfoByUserNameAndPassword(String userName, String pass, Action<User> callback)
         {
-            EntityQuery<Userinfo> query =
-                this.Context.GetUserinfoSetQuery().Where(u => u.User_Name == userName && u.Pass == pass);
+            EntityQuery<User> query =
+                this.Context.GetUsersQuery().Where(u => u.Name == userName && u.Password == pass);
 
-            this.LoadQuery<Userinfo>(query, callback);
+            this.LoadQuery<User>(query, callback);
         }
     }
 }

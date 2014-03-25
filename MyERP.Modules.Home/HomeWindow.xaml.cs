@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.ServiceLocation;
+using MyERP.Infrastructure;
 using Telerik.Windows.Controls;
 
 namespace MyERP.Modules.Home
@@ -40,8 +41,8 @@ namespace MyERP.Modules.Home
             EventHandler activeHandler = null;
             activeHandler += (sender, args) =>
             {
-                this.Activated -= activeHandler;
-                this.RegionManager.RequestNavigate("HomeWindowRegion", "ModulesView");
+                this.RegionManager.RequestNavigate(RegionNames.MainMenuRegion, "HomeMainMenuView");
+                this.RegionManager.RequestNavigate(RegionNames.HomeWindowRegion, "ModulesView");
             };
             this.Activated += activeHandler;
         }

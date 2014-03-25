@@ -67,10 +67,16 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="Telerik.OpenAccess, Version=2013.3.1211.3, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.OpenAccess.35.Extensions, Version=2013.3.1211.3, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.OpenAccess.Ria.Extensions, Version=2013.3.1211.3, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
     <Reference Include="WindowsBase" />
+    <Reference Include="Telerik.OpenAccess, Version=2014.1.225.2, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342">
+      <HintPath>D:\Program Files\Telerik\Data Access\bin\Telerik.OpenAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.OpenAccess.35.Extensions, Version=2014.1.225.2, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342">
+      <HintPath>D:\Program Files\Telerik\Data Access\bin\Telerik.OpenAccess.35.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.OpenAccess.Ria.Extensions, Version=2014.1.225.2, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342">
+      <HintPath>D:\Program Files\Telerik\Data Access\bin\Telerik.OpenAccess.Ria.Extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientBin\MyERP.Modules.Financial.xap" />
@@ -81,10 +87,6 @@
     <Content Include="favicon.ico" />
     <Content Include="packages.config" />
     <Content Include="ClientBin\System.ComponentModel.Composition.zip" />
-    <Content Include="MyERPDomainService.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MyERPDomainService.generated.cs</LastGenOutput>
-    </Content>
     <Content Include="ClientBin\System.Xml.Linq.zip" />
     <Content Include="ClientBin\System.ComponentModel.DataAnnotations.zip" />
     <Content Include="ClientBin\System.Windows.Data.zip" />
@@ -105,6 +107,11 @@
     <Content Include="ClientBin\System.ServiceModel.DomainServices.Client.Web.zip" />
     <Content Include="ClientBin\System.ServiceModel.Web.Extensions.zip" />
     <Content Include="ClientBin\System.Windows.Controls.zip" />
+    <Content Include="ClientBin\Telerik.Windows.Controls.RibbonView.zip" />
+    <Content Include="MyERPDomainService.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MyERPDomainService.generated.cs</LastGenOutput>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

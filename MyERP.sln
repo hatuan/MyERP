@@ -18,6 +18,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1BCFFF
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.Infrastructure", "MyERP.Infrastructure\MyERP.Infrastructure.csproj", "{6A8F28DD-145C-44A7-9C26-BC34C743119E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AB9E4713-11C7-4903-9D30-D7F5C4FCC1DF} = {AB9E4713-11C7-4903-9D30-D7F5C4FCC1DF}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.Theme", "MyERP.Theme\MyERP.Theme.csproj", "{20AC33D9-E8EB-4D60-83DE-069C101A4B54}"
 EndProject

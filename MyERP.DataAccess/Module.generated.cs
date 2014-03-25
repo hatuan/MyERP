@@ -18,19 +18,15 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 
 namespace MyERP.DataAccess	
 {
 	[Table("module")]
-	public partial class Module : IDataErrorInfo, INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Module
 	{
 		private long _id;
 		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "int8")]
 		[Storage("_id")]
-		[Required()]
-		[Key()]
 		public virtual long Id
 		{
 			get
@@ -39,19 +35,13 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				if(this._id != value)
-				{
-					this.OnPropertyChanging("Id");
-					this._id = value;
-					this.OnPropertyChanged("Id");
-				}
+				this._id = value;
 			}
 		}
 		
 		private string _description;
 		[Column("description", Length = 0, Scale = 0, SqlType = "text")]
 		[Storage("_description")]
-		[Required()]
 		public virtual string Description
 		{
 			get
@@ -60,19 +50,13 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				if(this._description != value)
-				{
-					this.OnPropertyChanging("Description");
-					this._description = value;
-					this.OnPropertyChanged("Description");
-				}
+				this._description = value;
 			}
 		}
 		
 		private string _group;
 		[Column("group", Length = 0, Scale = 0, SqlType = "text")]
 		[Storage("_group")]
-		[Required()]
 		public virtual string Group
 		{
 			get
@@ -81,19 +65,13 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				if(this._group != value)
-				{
-					this.OnPropertyChanging("Group");
-					this._group = value;
-					this.OnPropertyChanged("Group");
-				}
+				this._group = value;
 			}
 		}
 		
 		private string _name;
 		[Column("name", Length = 0, Scale = 0, SqlType = "text")]
 		[Storage("_name")]
-		[Required()]
 		public virtual string Name
 		{
 			get
@@ -102,76 +80,9 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				if(this._name != value)
-				{
-					this.OnPropertyChanging("Name");
-					this._name = value;
-					this.OnPropertyChanged("Name");
-				}
+				this._name = value;
 			}
 		}
-		
-		#region IDataErrorInfo members
-		
-		[Transient()]
-		private string error = string.Empty;
-		[Transient()]
-		public string Error
-		{
-			get
-			{
-				return this.error;
-			}
-		}
-		
-		[Transient()]
-		public string this[string propertyName]
-		{
-			get
-			{
-				this.ValidatePropertyInternal(propertyName, ref this.error);
-		
-				return this.error;
-			}
-		}
-		
-		protected virtual void ValidatePropertyInternal(string propertyName, ref string error)
-		{
-		    this.ValidateProperty(propertyName, ref error);
-		}
-		
-		// Please implement this method in a partial class in order to provide the error message depending on each of the properties.
-		partial void ValidateProperty(string propertyName, ref string error);
-		
-		#endregion
-		
-		#region INotifyPropertyChanging members
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		protected virtual void OnPropertyChanging(string propertyName)
-		{
-			if(this.PropertyChanging != null)
-			{
-				this.PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
-			}
-		}
-		
-		#endregion
-		
-		#region INotifyPropertyChanged members
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void OnPropertyChanged(string propertyName)
-		{
-			if(this.PropertyChanged != null)
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		#endregion
 		
 	}
 }

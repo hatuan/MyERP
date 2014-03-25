@@ -12,6 +12,25 @@
         <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.Input.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
+    <Style TargetType="telerik:RadButton" x:Key="RadButtonLargeStyle" BasedOn="{StaticResource RadButtonStyle}">
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Margin" Value="26,0,0,0"/>
+    </Style>
+
+    <Style TargetType="telerik:RadButton" x:Key="RadButtonSmallStyle" BasedOn="{StaticResource RadButtonStyle}">
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Margin" Value="30,0,0,0"/>
+    </Style>
 
     <Style TargetType="telerik:RadRadioButton" x:Key="RadRadioButtonLargeStyle" BasedOn="{StaticResource RadRadioButtonStyle}">
         <Setter Property="BorderBrush" Value="Transparent" />
