@@ -62,6 +62,8 @@
     <Compile Include="Currency.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="Currency\Currency.cs" />
+    <Compile Include="Currency\CurrencyStatusType.cs" />
     <Compile Include="DashboardStats.cs" />
     <Compile Include="MyERPDataModel.partial.cs" />
     <Compile Include="Job.generated.cs">

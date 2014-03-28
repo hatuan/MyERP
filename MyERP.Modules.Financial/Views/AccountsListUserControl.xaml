@@ -8,6 +8,7 @@
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
 	xmlns:cv="clr-namespace:MyERP.Converters;assembly=MyERP.Infrastructure"
 	xmlns:system="clr-namespace:System;assembly=mscorlib"
+	xmlns:controls="clr-namespace:MyERP.Controls;assembly=MyERP.Infrastructure"
 	mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="400">
 
@@ -25,21 +26,60 @@
                     <system:String>ACTIVE</system:String>
                 </cv:EnumConverter.Items>
             </cv:EnumConverter>
+            <cv:IdNullToGuidConverter x:Key="MapIdNullToGuidConverter"/>
+            
         </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot">
-
+        <telerik:RadDomainDataSource DomainContext="{Binding AccountRepository.Context}" QueryName="GetCurrencies" x:Name="currenciesDataSource" AutoLoad="True">
+            <telerik:RadDomainDataSource.SortDescriptors>
+                <telerik:SortDescriptor Member="Code"/>
+            </telerik:RadDomainDataSource.SortDescriptors>
+        </telerik:RadDomainDataSource>
+        <telerik:RadDomainDataSource DomainContext="{Binding AccountRepository.Context}" QueryName="GetAccounts" x:Name="accountsDataSource" AutoLoad="True">
+            <telerik:RadDomainDataSource.SortDescriptors>
+                <telerik:SortDescriptor Member="Code"/>
+            </telerik:RadDomainDataSource.SortDescriptors>
+        </telerik:RadDomainDataSource>
+        
 
         <telerik:RadGridView x:Name="gridView" ItemsSource="{Binding Accounts}" ColumnWidth="*"
-                             IsBusy="{Binding IsBusy, ElementName=accountsDataSource}"
-							 SelectedItem="{Binding SelectedAccount, Mode=TwoWay}" AutoGenerateColumns="False" ShowGroupPanel="False" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                             IsBusy="{Binding IsBusy}"
+							 SelectedItem="{Binding SelectedAccount, Mode=TwoWay}" AutoGenerateColumns="False" 
+                             ShowGroupPanel="False" 
+                             ScrollViewer.HorizontalScrollBarVisibility="Visible" 
+                             ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                             AddingNewDataItem="gridView_AddingNewDataItem">
 
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn Header="ACCOUNT" DataMemberBinding="{Binding Code, Mode=TwoWay}" />
                 <telerik:GridViewDataColumn Header="NAME" DataMemberBinding="{Binding Name, Mode=TwoWay}"/>
-                <telerik:GridViewDataColumn Header="CURRENCY" DataMemberBinding="{Binding Currency.Code, Mode=TwoWay}"/>
-                <telerik:GridViewDataColumn Header="PARENT" DataMemberBinding="{Binding ParentAccount.Code, Mode=TwoWay}"/>
+                <telerik:GridViewDataColumn Header="CURRENCY" DataMemberBinding="{Binding Currency.Code}">
+                    <telerik:GridViewDataColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Currency.Code}" />
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellTemplate>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <controls:LookupCurrencyControl Id="{Binding CurrencyId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}"></controls:LookupCurrencyControl>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="PARENT" DataMemberBinding="{Binding ParentAccount.Code}">
+                    <telerik:GridViewDataColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ParentAccount.Code}" />
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellTemplate>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox SelectedValue="{Binding ParentAccountId, Mode=TwoWay}" SelectedValuePath="Id" DisplayMemberPath="Code" IsEditable="True" ItemsSource="{Binding DataView, ElementName=accountsDataSource}">
+                            </telerik:RadComboBox>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
                 <telerik:GridViewDataColumn Header="AR/AP" DataMemberBinding="{Binding ArAp}" TextAlignment="Center"/>
 				<telerik:GridViewDataColumn Header="STATUS" DataMemberBinding="{Binding Status, Mode=TwoWay}">
                     <telerik:GridViewDataColumn.CellTemplate>

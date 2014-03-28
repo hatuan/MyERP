@@ -23,50 +23,144 @@ namespace MyERP.Web
         [Invoke]
         public void LoadDemoData()
         {
-            //List<User> users = this.DataContext.Users.ToList();
-            //this.DataContext.Delete(users);
-            //this.DataContext.SaveChanges();
+            User user = this.DataContext.Users.FirstOrDefault(i => i.Id == new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef"));
+            if (user == null)
+            {
+                User newUser = new User()
+                {
+                    Id = new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef"),
+                    Administrator = true,
+                    Comment = "",
+                    FullName = "Administrator",
+                    Name = "ADMIN",
+                    Password = "GUnbLXEWFUTZgEVPsnDoyg==",
+                    RightAccess = "",
+                    RightAdd = "",
+                    RightDel = "",
+                    RightEdit = "",
+                    RightPrint = "",
+                    RightRead = "",
+                    RightSearch = "",
+                    Status = (Byte)UserStatusType.Active
+                };
+                this.DataContext.Add(newUser);
+            }
 
-            //users = new List<User>()
-            //{
-            //    new User()
-            //    {
-            //        Id = new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef"),
-            //        Administrator = true,
-            //        Comment = "",
-            //        FullName = "Administrator",
-            //        Name = "ADMIN",
-            //        Password = "GUnbLXEWFUTZgEVPsnDoyg==",
-            //        RightAccess = "",
-            //        RightAdd = "",
-            //        RightDel = "",
-            //        RightEdit = "",
-            //        RightPrint = "",
-            //        RightRead = "",
-            //        RightSearch = "",
-            //        Status = (Byte)UserStatusType.Active
-            //    },
-            //    new User()
-            //    {
-            //        Id = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
-            //        Administrator = true,
-            //        Comment = "",
-            //        FullName = "Demo User",
-            //        Name = "DEMO",
-            //        Password = "WAZN81PC/QcCl2dCsMYdjw==",
-            //        RightAccess = "",
-            //        RightAdd = "",
-            //        RightDel = "",
-            //        RightEdit = "",
-            //        RightPrint = "",
-            //        RightRead = "",
-            //        RightSearch = "",
-            //        Status = (Byte)UserStatusType.Active
-            //    }
-            //};
-            
-            //this.DataContext.Add(users);
-            //this.DataContext.SaveChanges();
+            user = this.DataContext.Users.FirstOrDefault(i => i.Id == new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"));
+            if (user == null)
+            {
+                User newUser = new User()
+                {
+                    Id = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    Administrator = true,
+                    Comment = "",
+                    FullName = "Demo User",
+                    Name = "DEMO",
+                    Password = "WAZN81PC/QcCl2dCsMYdjw==",
+                    RightAccess = "",
+                    RightAdd = "",
+                    RightDel = "",
+                    RightEdit = "",
+                    RightPrint = "",
+                    RightRead = "",
+                    RightSearch = "",
+                    Status = (Byte)UserStatusType.Active
+                };
+                this.DataContext.Add(newUser);
+            }
+
+            Currency currency =
+                this.DataContext.Currencies.FirstOrDefault(c => c.Id == new Guid("3AD409C2-7859-468E-8FC3-C41C6C9A9587"));
+            if (currency == null)
+            {
+                Currency newCurrency = new Currency()
+                {
+                    Id = new Guid("3AD409C2-7859-468E-8FC3-C41C6C9A9587"),
+                    Code = "VND",
+                    Name = "Đồng Việt Nam",
+                    RecCreated = DateTime.Now,
+                    RecCreatedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    RecModified = DateTime.Now,
+                    RecModifiedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    Status = (byte)CurrencyStatusType.Active
+                };
+                this.DataContext.Add(newCurrency);
+            }
+
+            currency =
+                this.DataContext.Currencies.FirstOrDefault(c => c.Id == new Guid("15971519-42A3-4514-A053-1EDB5D32E1E4"));
+            if (currency == null)
+            {
+                Currency newCurrency = new Currency()
+                {
+                    Id = new Guid("15971519-42A3-4514-A053-1EDB5D32E1E4"),
+                    Code = "USD",
+                    Name = "USD Dolar",
+                    RecCreated = DateTime.Now,
+                    RecCreatedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    RecModified = DateTime.Now,
+                    RecModifiedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    Status = (byte)CurrencyStatusType.Active
+                };
+                this.DataContext.Add(newCurrency);
+            }
+
+            currency =
+                this.DataContext.Currencies.FirstOrDefault(c => c.Id == new Guid("A5362238-0EED-46F3-98DE-58729906E8ED"));
+            if (currency == null)
+            {
+                Currency newCurrency = new Currency()
+                {
+                    Id = new Guid("A5362238-0EED-46F3-98DE-58729906E8ED"),
+                    Code = "EUR",
+                    Name = "EURO",
+                    RecCreated = DateTime.Now,
+                    RecCreatedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    RecModified = DateTime.Now,
+                    RecModifiedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    Status = (byte)CurrencyStatusType.Active
+                };
+                this.DataContext.Add(newCurrency);
+            }
+
+            currency =
+                this.DataContext.Currencies.FirstOrDefault(c => c.Id == new Guid("1D05CD23-E928-4E24-ACBE-3EB1A676434B"));
+            if (currency == null)
+            {
+                Currency newCurrency = new Currency()
+                {
+                    Id = new Guid("1D05CD23-E928-4E24-ACBE-3EB1A676434B"),
+                    Code = "JPY",
+                    Name = "Yên",
+                    RecCreated = DateTime.Now,
+                    RecCreatedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    RecModified = DateTime.Now,
+                    RecModifiedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    Status = (byte)CurrencyStatusType.Active
+                };
+                this.DataContext.Add(newCurrency);
+            }
+
+            currency =
+                this.DataContext.Currencies.FirstOrDefault(c => c.Id == new Guid("B1F21473-8FA0-4C1E-BC19-B36E1827F8F1"));
+            if (currency == null)
+            {
+                Currency newCurrency = new Currency()
+                {
+                    Id = new Guid("B1F21473-8FA0-4C1E-BC19-B36E1827F8F1"),
+                    Code = "CNY",
+                    Name = "Nhân dân tệ",
+                    RecCreated = DateTime.Now,
+                    RecCreatedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    RecModified = DateTime.Now,
+                    RecModifiedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    Status = (byte)CurrencyStatusType.Active
+                };
+                this.DataContext.Add(newCurrency);
+            }
+
+            this.DataContext.SaveChanges();
+
         }
 
         [Invoke]

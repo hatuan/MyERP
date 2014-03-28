@@ -50,7 +50,9 @@
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
-			<telerik:RadRibbonView VerticalAlignment="Top" ApplicationButtonVisibility="Collapsed" MinimizeButtonVisibility="Visible" TitleBarVisibility="Collapsed">
+            
+            <telerik:RadRibbonView VerticalAlignment="Top" ApplicationButtonVisibility="Collapsed" MinimizeButtonVisibility="Visible" 
+                                    TitleBarVisibility="Collapsed" telerik:KeyTipService.IsKeyTipsEnabled="True">
 			
 				<telerik:RadRibbonTab Header="HOME" IsSelected="True">
 					<telerik:RadRibbonGroup Header="CHANGES">
@@ -61,19 +63,22 @@
 							<telerik:GroupVariant Priority="0" Variant="Large"/>
 						</telerik:RadRibbonGroup.Variants>
 
-						<telerik:RadRibbonButton Text="NEW" Size="Large" LargeImage="/MyERP.Theme;component/Images/new.png"/>
+						<telerik:RadRibbonButton Text="NEW" Size="Large" LargeImage="/MyERP.Theme;component/Images/new.png" 
+                                                    telerik:KeyTipService.AccessKey="Ctrl+F2"
+                                                    Command="{Binding AddNewCommand}"/>
 					
 						<telerik:RadRibbonButton Text="EDIT" Size="Large" LargeImage="/MyERP.Theme;component/Images/edit.png"/>
 						<!--
 						<telerik:RadRibbonButton Text="SAVE" Size="Large" LargeImage="/MyERP.Theme;component/Images/save.png"/>
 						-->
-                        <telerik:RadRibbonSplitButton Text="SAVE" Size="Large" LargeImage="/MyERP.Theme;component/Images/save.png" 
-                                                      Command="{Binding SubmitChangesCommand, ElementName=accountsDataSource}"
-                                                      CommandTarget="{Binding ElementName=accountsDataSource}">
+                        <telerik:RadRibbonSplitButton Text="SAVE" Size="Large" LargeImage="/MyERP.Theme;component/Images/save.png"
+                                                        telerik:KeyTipService.AccessKey="Alt+S"
+                                                        Command="{Binding SubmitChangesCommand}">
 							<telerik:RadRibbonSplitButton.DropDownContent>
 								<StackPanel>
-                                    <telerik:RadMenuItem Header="UNDO" Command="{Binding RejectChangesCommand, ElementName=accountsDataSource}"
-                                                         CommandTarget="{Binding ElementName=accountsDataSource}">
+                                    <telerik:RadMenuItem Header="UNDO"
+                                                            telerik:KeyTipService.AccessKey="Alt+U"
+                                                            Command="{Binding RejectChangesCommand}">
 										<telerik:RadMenuItem.Icon>
 											<Image Source="/MyERP.Theme;component/Images/undo.png" />
 										</telerik:RadMenuItem.Icon>
@@ -83,36 +88,31 @@
 						</telerik:RadRibbonSplitButton>
 
 						<telerik:RadOrderedWrapPanel>
-							<telerik:RadRibbonButton Text="DELETE" LargeImage="/MyERP.Theme;component/Images/delete.png"/>
-							<telerik:RadRibbonButton Text="CHANGE" LargeImage="/MyERP.Theme;component/Images/change.png"/>
+							<telerik:RadRibbonButton Text="DELETE" LargeImage="/MyERP.Theme;component/Images/delete.png"
+                                                        telerik:KeyTipService.AccessKey="Alt+D"
+                                                        Command="{Binding DeleteCommand}"/>
+							<telerik:RadRibbonButton Text="CHANGE" LargeImage="/MyERP.Theme;component/Images/change.png"
+                                                        Command="{Binding ChangeCodeCommand}"/>
 						</telerik:RadOrderedWrapPanel>
 						
 						
 					
 					</telerik:RadRibbonGroup>
 
-					<telerik:RadRibbonGroup Header="">
-						<telerik:RadRibbonButton Text="CLOSE" Size="Large" LargeImage="/MyERP.Theme;component/Images/exit.png"/>
+                    <telerik:RadRibbonGroup Header="">
+                        <telerik:RadRibbonButton Text="REFRESH" Size="Large" LargeImage="/MyERP.Theme;component/Images/refresh.png"
+                                                    Command="{Binding RefreshCommand}"/>
+                    </telerik:RadRibbonGroup>
+                    
+                    <telerik:RadRibbonGroup Header="">
+						<telerik:RadRibbonButton Text="CLOSE" Size="Large" LargeImage="/MyERP.Theme;component/Images/exit.png"
+                                                    Command="{Binding CloseWindowCommand}"/>
 					</telerik:RadRibbonGroup>
 				</telerik:RadRibbonTab>
 
 			</telerik:RadRibbonView>
-
-			<Rectangle Grid.Row="1" Fill="{StaticResource AccentBrush}" Height="1" HorizontalAlignment="Stretch"/>
+            <Rectangle Grid.Row="1" Fill="{StaticResource AccentBrush}" Height="1" HorizontalAlignment="Stretch"/>
 		</Grid>
-
-        <telerik:RadDomainDataSource x:Name="accountsDataSource" QueryName="GetAccounts" AutoLoad="True" DomainContext="{Binding AccountRepository.Context}">
-            <telerik:RadDomainDataSource.SortDescriptors>
-                <telerik:SortDescriptor Member="Code"></telerik:SortDescriptor>
-            </telerik:RadDomainDataSource.SortDescriptors>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="LoadedData">
-                    <ei:ChangePropertyAction TargetObject="{Binding .}" 
-															 PropertyName="Accounts" 
-															 Value="{Binding DataView.SourceCollection, ElementName=accountsDataSource}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </telerik:RadDomainDataSource>
         
         <telerik:RadTabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
         	<telerik:RadTabItem x:Name="radTabItemAccountsOverview" Header="OVERVIEW">

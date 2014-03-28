@@ -1,0 +1,71 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:myControl="clr-namespace:MyERP.Controls"
+    xmlns:converters="clr-namespace:MyERP.Converters"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:web="clr-namespace:MyERP.Web;assembly=MyERP.Repository"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.GridView.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+    <!--<converters:CurrencyConverter x:Key="CurrencyConverter" />-->
+        
+    <Style TargetType="myControl:LookupCurrencyControl">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="myControl:LookupCurrencyControl">
+                    <Grid x:Name="PART_LayoutRoot">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.DataContext>
+                            <myControl:LookupCurrencyViewModel />
+                        </Grid.DataContext>
+                        
+                        <telerik:RadAutoCompleteBox  FontFamily="Segoe UI" FontSize="14" Grid.Column="0" x:Name="textBox"
+                                                     ItemsSource="{Binding Currencies}"
+                                                     SelectedItem="{Binding SelectedCurrency, Mode=TwoWay}"
+                                                     AutoCompleteMode="Append"
+                                                     SelectionMode="Single"
+                                                     TextSearchPath="Code"
+                                                     DisplayMemberPath="Code" IsTabStop="True"
+                                                     >
+                            
+                        </telerik:RadAutoCompleteBox>
+
+                        <telerik:RadDropDownButton x:Name="dropDownButton"
+                                                   Grid.Column="1" IsTabStop="False">
+                            <telerik:RadDropDownButton.DropDownContent>
+                                <Grid  Margin="-100,0,0,0">
+                                    <telerik:RadGridView x:Name="dropDownGrid" IsReadOnly="True"
+                                                         AutoGenerateColumns="False" ShowGroupPanel="False" 
+                                                         ItemsSource="{Binding Currencies}"
+                                                         SelectedItem="{Binding SelectedCurrency, Mode=TwoWay}"
+                                                         CurrentItem="{Binding SelectedCurrency, Mode=TwoWay}"
+                                                         IsSynchronizedWithCurrentItem="True">
+                                        <telerik:RadGridView.Columns>
+                                            <telerik:GridViewDataColumn Header="Code" Width="100"
+													    DataMemberBinding="{Binding Code}" />
+                                            <telerik:GridViewDataColumn Header="Name" Width="200"
+													    DataMemberBinding="{Binding Name}" />
+                                        </telerik:RadGridView.Columns>
+                                    </telerik:RadGridView>
+                                </Grid>
+                            </telerik:RadDropDownButton.DropDownContent>
+                            
+                        </telerik:RadDropDownButton>
+                    </Grid>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

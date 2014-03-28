@@ -111,9 +111,13 @@ namespace MyERP.DataAccess
         
         private Guid _recCreatedById;
         
+        private EntityRef<User> _recCreatedByUser;
+        
         private DateTime _recModified;
         
         private Guid _recModifiedById;
+        
+        private EntityRef<User> _recModifiedByUser;
         
         private byte _status;
         
@@ -503,6 +507,32 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the associated <see cref="User"/> entity.
+        /// </summary>
+        [Association("Account-user-created-association", "RecCreatedById", "Id")]
+        public User RecCreatedByUser
+        {
+            get
+            {
+                if ((this._recCreatedByUser == null))
+                {
+                    this._recCreatedByUser = new EntityRef<User>(this, "RecCreatedByUser", this.FilterRecCreatedByUser);
+                }
+                return this._recCreatedByUser.Entity;
+            }
+            set
+            {
+                User previous = this.RecCreatedByUser;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("RecCreatedByUser", value);
+                    this._recCreatedByUser.Entity = value;
+                    this.RaisePropertyChanged("RecCreatedByUser");
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'RecModified' value.
         /// </summary>
         [DataMember()]
@@ -548,6 +578,32 @@ namespace MyERP.DataAccess
                     this._recModifiedById = value;
                     this.RaiseDataMemberChanged("RecModifiedById");
                     this.OnRecModifiedByIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="User"/> entity.
+        /// </summary>
+        [Association("Account-user-modified-association", "RecModifiedById", "Id")]
+        public User RecModifiedByUser
+        {
+            get
+            {
+                if ((this._recModifiedByUser == null))
+                {
+                    this._recModifiedByUser = new EntityRef<User>(this, "RecModifiedByUser", this.FilterRecModifiedByUser);
+                }
+                return this._recModifiedByUser.Entity;
+            }
+            set
+            {
+                User previous = this.RecModifiedByUser;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("RecModifiedByUser", value);
+                    this._recModifiedByUser.Entity = value;
+                    this.RaisePropertyChanged("RecModifiedByUser");
                 }
             }
         }
@@ -635,6 +691,16 @@ namespace MyERP.DataAccess
         private bool FilterParentAccount(Account entity)
         {
             return (entity.Id == this.ParentAccountId);
+        }
+        
+        private bool FilterRecCreatedByUser(User entity)
+        {
+            return (entity.Id == this.RecCreatedById);
+        }
+        
+        private bool FilterRecModifiedByUser(User entity)
+        {
+            return (entity.Id == this.RecModifiedById);
         }
         
         /// <summary>
@@ -1949,6 +2015,8 @@ namespace MyERP.DataAccess
         
         private byte _status;
         
+        private CurrencyStatusType _statusType;
+        
         private long _version;
         
         #region Extensibility Method Definitions
@@ -1976,6 +2044,8 @@ namespace MyERP.DataAccess
         partial void OnRecModifiedByIdChanged();
         partial void OnStatusChanging(byte value);
         partial void OnStatusChanged();
+        partial void OnStatusTypeChanging(CurrencyStatusType value);
+        partial void OnStatusTypeChanged();
         partial void OnVersionChanging(long value);
         partial void OnVersionChanged();
 
@@ -2219,6 +2289,30 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'StatusType' value.
+        /// </summary>
+        [DataMember()]
+        public CurrencyStatusType StatusType
+        {
+            get
+            {
+                return this._statusType;
+            }
+            set
+            {
+                if ((this._statusType != value))
+                {
+                    this.OnStatusTypeChanging(value);
+                    this.RaiseDataMemberChanging("StatusType");
+                    this.ValidateProperty("StatusType", value);
+                    this._statusType = value;
+                    this.RaiseDataMemberChanged("StatusType");
+                    this.OnStatusTypeChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Version' value.
         /// </summary>
         [ConcurrencyCheck()]
@@ -2252,6 +2346,14 @@ namespace MyERP.DataAccess
         {
             return this._id;
         }
+    }
+    
+    public enum CurrencyStatusType
+    {
+        
+        Inactive = 0,
+        
+        Active = 1,
     }
     
     /// <summary>
