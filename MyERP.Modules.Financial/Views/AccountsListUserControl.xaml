@@ -37,7 +37,7 @@
                 <telerik:SortDescriptor Member="Code"/>
             </telerik:RadDomainDataSource.SortDescriptors>
         </telerik:RadDomainDataSource>
-        <telerik:RadDomainDataSource DomainContext="{Binding AccountRepository.Context}" QueryName="GetAccounts" x:Name="accountsDataSource" AutoLoad="True">
+        <telerik:RadDomainDataSource DomainContext="{Binding AccountRepository.Context}" QueryName="GetCurrencies" x:Name="accountsDataSource" AutoLoad="True">
             <telerik:RadDomainDataSource.SortDescriptors>
                 <telerik:SortDescriptor Member="Code"/>
             </telerik:RadDomainDataSource.SortDescriptors>
@@ -75,8 +75,7 @@
                     </telerik:GridViewDataColumn.CellTemplate>
                     <telerik:GridViewDataColumn.CellEditTemplate>
                         <DataTemplate>
-                            <telerik:RadComboBox SelectedValue="{Binding ParentAccountId, Mode=TwoWay}" SelectedValuePath="Id" DisplayMemberPath="Code" IsEditable="True" ItemsSource="{Binding DataView, ElementName=accountsDataSource}">
-                            </telerik:RadComboBox>
+                            <controls:LookupAccountControl Id="{Binding ParentAccountId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}"></controls:LookupAccountControl>
                         </DataTemplate>
                     </telerik:GridViewDataColumn.CellEditTemplate>
                 </telerik:GridViewDataColumn>

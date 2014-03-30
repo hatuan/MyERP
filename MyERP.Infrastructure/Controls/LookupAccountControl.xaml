@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="MyERP.Controls.LookupAccountControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    mc:Ignorable="d"
+    d:DesignHeight="50" d:DesignWidth="400">
+    
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <telerik:RadAutoCompleteBox  FontFamily="Segoe UI" FontSize="14" Grid.Column="0" x:Name="textBox"
+                                                     ItemsSource="{Binding Accounts}"
+                                                     SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"
+                                                     AutoCompleteMode="Append"
+                                                     SelectionMode="Single"
+                                                     TextSearchPath="Code"
+                                                     DisplayMemberPath="Code" IsTabStop="True">
+        </telerik:RadAutoCompleteBox>
+
+        <telerik:RadDropDownButton x:Name="dropDownButton"
+                                   Grid.Column="1" IsTabStop="False"
+                                   DropDownMaxHeight="300">
+            <telerik:RadDropDownButton.DropDownContent>
+                <Grid>
+                    <telerik:RadGridView x:Name="dropDownGrid" IsReadOnly="True"
+                                         AutoGenerateColumns="False" ShowGroupPanel="False" 
+                                         ItemsSource="{Binding Accounts}"
+                                         SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"
+                                         CurrentItem="{Binding SelectedAccount, Mode=TwoWay}"
+                                         IsSynchronizedWithCurrentItem="True"
+                                         ScrollViewer.HorizontalScrollBarVisibility="Visible" 
+                                         ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <telerik:RadGridView.Columns>
+                            <telerik:GridViewDataColumn Header="Code" Width="100"
+													    DataMemberBinding="{Binding Code}" />
+                            <telerik:GridViewDataColumn Header="Name" Width="200"
+													    DataMemberBinding="{Binding Name}" />
+                        </telerik:RadGridView.Columns>
+                    </telerik:RadGridView>
+                </Grid>
+            </telerik:RadDropDownButton.DropDownContent>
+
+        </telerik:RadDropDownButton>
+    </Grid>
+</UserControl>

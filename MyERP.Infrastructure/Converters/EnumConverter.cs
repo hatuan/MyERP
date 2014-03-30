@@ -25,11 +25,11 @@ namespace MyERP.Converters
      ///            mc:Ignorable="d" x:Class="SilverlightPlayground.MyApplication.Shell" d:DesignWidth="456">
      ///   <UserControl.Resources>
      ///       <cv:EnumConverter x:Key="mapTypeToBrush">
-     ///          <cv:EnumConverter.Items>
+     ///          <cv:EnumConverter.Currencies>
      ///              <SolidColorBrush Color="#00000000" />
      ///              <SolidColorBrush Color="#FFFF9900" />
      ///              <SolidColorBrush Color="#FFFF0000" />
-     ///          </cv:EnumConverter.Items>
+     ///          </cv:EnumConverter.Currencies>
      ///       </cv:EnumConverter>
      ///   </UserControl.Resources>
      ///   <Grid x:Name="LayoutRoot">
@@ -38,10 +38,10 @@ namespace MyERP.Converters
      /// </UserControl>
      /// 
      /// <cv:EnumConverter x:Key="bool2Visibility">
-     ///     <cv:EnumConverter.Items>
+     ///     <cv:EnumConverter.Currencies>
      ///         <Visibility>Collapsed</Visibility>
      ///         <Visibility>Visible</Visibility>
-     ///      </cv:EnumConverter.Items>
+     ///      </cv:EnumConverter.Currencies>
      /// </cv:EnumConverter>
      /// </summary>
     public class EnumConverter : IValueConverter

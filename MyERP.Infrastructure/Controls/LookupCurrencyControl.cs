@@ -14,7 +14,7 @@ using Telerik.Windows.Data;
 
 namespace MyERP.Controls
 {
-    public class LookupCurrencyControl : Control, INotifyPropertyChanged
+    public class LookupCurrencyControl : Control
     {
         private bool _isTemplateApplied;
         private RadAutoCompleteBox textBox;
@@ -27,6 +27,8 @@ namespace MyERP.Controls
         {
             _isTemplateApplied = false;
             DefaultStyleKey = typeof (LookupCurrencyControl);
+            
+            this.Unloaded += this.OnLookupCurrencyControlUnloaded;
         }
 
         public static readonly DependencyProperty IdProperty = DependencyProperty.Register(
@@ -49,8 +51,14 @@ namespace MyERP.Controls
 
         public Guid Id
         {
-            get { return (Guid)GetValue(IdProperty); }
-            set { SetValue(IdProperty, value); }
+            get
+            {
+                return (Guid)GetValue(IdProperty);
+            }
+            set
+            {
+                SetValue(IdProperty, value);
+            }
         }
 
 
@@ -63,12 +71,14 @@ namespace MyERP.Controls
             dropDownGrid = GetTemplateChild("dropDownGrid") as RadGridView;
             rootPanel = GetTemplateChild("PART_LayoutRoot") as Panel;
 
+            this.rootPanel.DataContext = new LookupCurrencyViewModel();
             this.innerViewModel = this.rootPanel.DataContext as LookupCurrencyViewModel;
             this.innerViewModel.UpdateDate(this.Id);
             this.textBox.SelectedItem = this.innerViewModel.SelectedCurrency;
             this.dropDownGrid.SelectedItem = this.innerViewModel.SelectedCurrency;
             this.innerViewModel.PropertyChanged += this.OnViewModelPropertyChanged;
-            
+
+            this.dropDownButton.PopupPlacementTarget = this.textBox;
             base.OnApplyTemplate();
 
             _isTemplateApplied = true; 
@@ -88,14 +98,6 @@ namespace MyERP.Controls
                     ? (sender as LookupCurrencyViewModel).SelectedCurrency.Id
                     : Guid.Empty;
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 
@@ -120,6 +122,8 @@ namespace MyERP.Controls
             }
             set
             {
+                if (_selectedCurrency == value)
+                    return;
                 this._selectedCurrency = value;
                 this.OnPropertyChanged("SelectedCurrency");
             }

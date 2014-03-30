@@ -106,12 +106,11 @@
     <Compile Include="Behaviors\IViewRegionRegistration.cs" />
     <Compile Include="Behaviors\ViewExportAttribute.cs" />
     <Compile Include="Controls\DateTimePickerControl.cs" />
-    <Compile Include="Controls\LookupCurrencyControl.cs">
-      <SubType>Code</SubType>
+    <Compile Include="Controls\LookupCurrencyControl.xaml.cs">
+      <DependentUpon>LookupCurrencyControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LookupCurrencyControlTemp.xaml.cs">
-      <DependentUpon>LookupCurrencyControlTemp.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="Controls\LookupAccountControl.xaml.cs">
+      <DependentUpon>LookupAccountControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\CurrencyConverter.cs" />
     <Compile Include="Converters\DateTimeToRecentDaysConverter.cs" />
@@ -151,11 +150,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\LookupCurrencyControlTemp.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Controls\LookupCurrencyControl.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\generic.xaml">
+    <Page Include="Controls\LookupAccountControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,6 +164,9 @@
       <Project>{d50d0a5b-2d82-4786-a834-a2579754ea12}</Project>
       <Name>MyERP.Repository</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Themes\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>

@@ -26,9 +26,9 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Grid.DataContext>
+                        <!--<Grid.DataContext>
                             <myControl:LookupCurrencyViewModel />
-                        </Grid.DataContext>
+                        </Grid.DataContext>-->
                         
                         <telerik:RadAutoCompleteBox  FontFamily="Segoe UI" FontSize="14" Grid.Column="0" x:Name="textBox"
                                                      ItemsSource="{Binding Currencies}"
@@ -36,21 +36,23 @@
                                                      AutoCompleteMode="Append"
                                                      SelectionMode="Single"
                                                      TextSearchPath="Code"
-                                                     DisplayMemberPath="Code" IsTabStop="True"
-                                                     >
+                                                     DisplayMemberPath="Code" IsTabStop="True">
                             
                         </telerik:RadAutoCompleteBox>
 
                         <telerik:RadDropDownButton x:Name="dropDownButton"
-                                                   Grid.Column="1" IsTabStop="False">
+                                                   Grid.Column="1" IsTabStop="False"
+                                                   DropDownMaxHeight="300">
                             <telerik:RadDropDownButton.DropDownContent>
-                                <Grid  Margin="-100,0,0,0">
+                                <Grid>
                                     <telerik:RadGridView x:Name="dropDownGrid" IsReadOnly="True"
                                                          AutoGenerateColumns="False" ShowGroupPanel="False" 
                                                          ItemsSource="{Binding Currencies}"
                                                          SelectedItem="{Binding SelectedCurrency, Mode=TwoWay}"
                                                          CurrentItem="{Binding SelectedCurrency, Mode=TwoWay}"
-                                                         IsSynchronizedWithCurrentItem="True">
+                                                         IsSynchronizedWithCurrentItem="True"
+                                                         ScrollViewer.HorizontalScrollBarVisibility="Visible" 
+                                                         ScrollViewer.VerticalScrollBarVisibility="Visible">
                                         <telerik:RadGridView.Columns>
                                             <telerik:GridViewDataColumn Header="Code" Width="100"
 													    DataMemberBinding="{Binding Code}" />
