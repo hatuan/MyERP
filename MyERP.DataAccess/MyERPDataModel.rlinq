@@ -131,7 +131,7 @@
           <orm:column name="full_name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
       </orm:class>
-      <orm:class name="Currency" uniqueId="9d8598ff-424c-4d4a-bac3-97f1835b25b3">
+      <orm:class name="Currency" update-schema="true" uniqueId="9d8598ff-424c-4d4a-bac3-97f1835b25b3">
         <orm:table name="currency" />
         <orm:identity>
           <orm:key-generator name="guid">
@@ -180,7 +180,7 @@
           </orm:reference>
         </orm:field>
       </orm:class>
-      <orm:class name="BusinessPartner" uniqueId="e5450aef-1d4d-4529-afab-ed799b140a9b">
+      <orm:class name="BusinessPartner" update-schema="true" uniqueId="e5450aef-1d4d-4529-afab-ed799b140a9b">
         <orm:table name="business_partner" />
         <orm:identity>
           <orm:single-field field-name="_code" />
@@ -248,8 +248,8 @@
         <orm:field name="_userId2" property="UserId2" behavior="readwrite" uniqueId="38f2bfcc-6b2e-408b-90b2-aeaf66f90c1e" type="System.Guid">
           <orm:column name="user_id2" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_paymentTermCode" property="PaymentTermCode" behavior="readwrite" uniqueId="26b210e4-c0f7-49c7-aa7e-0b211a44cb3d" type="System.String">
-          <orm:column name="payment_term_code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_paymentTermId" property="PaymentTermId" behavior="readwrite" uniqueId="26b210e4-c0f7-49c7-aa7e-0b211a44cb3d" type="System.Guid">
+          <orm:column name="payment_term_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_isCustomer" property="IsCustomer" behavior="readwrite" uniqueId="cd412faf-9873-40fb-9877-a6fc1c2db011" type="System.Boolean">
           <orm:column name="is_customer" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
@@ -300,11 +300,6 @@
             <orm:sharedfield name="_businessPartnerGroupCode3" target-class="MyERP.DataAccess.BusinessPartnerGroup" target-field="_code" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_paymentTerm" property="PaymentTerm" behavior="readwrite" uniqueId="f72b6dff-fd80-4e47-9f70-200af9bd898c" type="MyERP.DataAccess.PaymentTerm">
-          <orm:reference uniqueId="bab23a19-ce7b-4953-88cf-999afbc304e2" association-name="BusinessPartnerHasPaymentTerm">
-            <orm:sharedfield name="_paymentTermCode" target-class="MyERP.DataAccess.PaymentTerm" target-field="_code" />
-          </orm:reference>
-        </orm:field>
         <orm:field name="_employeeAccount" property="EmployeeAccount" behavior="readwrite" uniqueId="453216c0-c4f7-4570-bfb0-236b03957604" type="MyERP.DataAccess.Account">
           <orm:reference uniqueId="79bd3038-4073-4c52-bf4d-dc84d849109e" association-name="BusinessPartnerEmployeeHasAccount">
             <orm:sharedfield name="_employeeAccountId" target-class="MyERP.DataAccess.Account" target-field="_id" />
@@ -320,8 +315,13 @@
             <orm:sharedfield name="_customerAccountId" target-class="MyERP.DataAccess.Account" target-field="_id" />
           </orm:reference>
         </orm:field>
+        <orm:field name="_paymentTerm" property="PaymentTerm" behavior="readwrite" uniqueId="f72b6dff-fd80-4e47-9f70-200af9bd898c" type="MyERP.DataAccess.PaymentTerm">
+          <orm:reference uniqueId="bab23a19-ce7b-4953-88cf-999afbc304e2" association-name="BusinessPartnerHasPaymentTerm">
+            <orm:sharedfield name="_paymentTermId" target-class="MyERP.DataAccess.PaymentTerm" target-field="_id" />
+          </orm:reference>
+        </orm:field>
       </orm:class>
-      <orm:class name="BusinessPartnerGroup" uniqueId="f2451eb6-4641-45a3-bcdf-230e9f344ef2">
+      <orm:class name="BusinessPartnerGroup" update-schema="true" uniqueId="f2451eb6-4641-45a3-bcdf-230e9f344ef2">
         <orm:table name="business_partner_group" />
         <orm:identity>
           <orm:single-field field-name="_code" />
@@ -369,16 +369,16 @@
           <orm:collection element-class="MyERP.DataAccess.BusinessPartner" inverse-field="_businessPartnerGroup3" order-by="" uniqueId="7d1337b8-4f28-4167-ad98-da3144edd038" />
         </orm:field>
       </orm:class>
-      <orm:class name="PaymentTerm" uniqueId="b0ff094e-1f92-4ae4-86c5-45512a524e98">
+      <orm:class name="PaymentTerm" update-schema="true" uniqueId="b0ff094e-1f92-4ae4-86c5-45512a524e98">
         <orm:table name="payment_term" />
         <orm:identity>
-          <orm:single-field field-name="_code" />
+          <orm:single-field field-name="_id" />
         </orm:identity>
         <orm:concurrency strategy="version" field-name="_version">
           <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         </orm:concurrency>
         <orm:field name="_code" property="Code" behavior="readwrite" uniqueId="0e0ff67f-9bed-4525-917e-22c5e8ce05a6" type="System.String">
-          <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+          <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="65829b43-f1af-483c-a7f8-3b535c695e74" type="System.String">
           <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
@@ -407,21 +407,21 @@
         <orm:field name="_status" property="Status" behavior="readwrite" uniqueId="ae70066e-d99c-4df0-9972-ccdee0f0fde9" type="System.Byte">
           <orm:column name="status" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_rowguid" property="Rowguid" behavior="readwrite" uniqueId="6130ccc8-e217-402f-a4cc-dd1fa599983d" type="System.Guid">
-          <orm:column name="rowguid" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_id" property="Id" behavior="readwrite" uniqueId="6130ccc8-e217-402f-a4cc-dd1fa599983d" type="System.Guid">
+          <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         </orm:field>
         <orm:field name="_version" property="Version" behavior="readwrite" uniqueId="2f665198-11fb-4edb-8dad-6c25cae0794e" type="System.Int64">
           <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         </orm:field>
       </orm:class>
-      <orm:class name="Job" uniqueId="295c1357-df0e-4eef-b13d-68e20e43c403">
+      <orm:class name="Job" update-schema="true" uniqueId="295c1357-df0e-4eef-b13d-68e20e43c403">
         <orm:table name="job" />
         <orm:identity>
           <orm:single-field field-name="_ma_vv" />
         </orm:identity>
         <orm:concurrency strategy="changed" />
-        <orm:field name="_ma_vv" property="Ma_Vv" behavior="readwrite" uniqueId="f5ec11cf-95ce-4da4-a64b-85ded41e39ea" type="System.String">
-          <orm:column name="ma_vv" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:field name="_ma_vv" property="Code" behavior="readwrite" uniqueId="f5ec11cf-95ce-4da4-a64b-85ded41e39ea" type="System.String">
+          <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         </orm:field>
         <orm:field name="_ten_vv" property="Ten_Vv" behavior="readwrite" uniqueId="a3b7a577-c36b-433b-a8f1-80ef160b0f00" type="System.String">
           <orm:column name="ten_vv" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
@@ -513,7 +513,7 @@
           </orm:reference>
         </orm:field>
       </orm:class>
-      <orm:class name="JobGroup" uniqueId="c1a07b37-fa4e-428b-9e73-2fc9b5b4056a">
+      <orm:class name="JobGroup" update-schema="true" uniqueId="c1a07b37-fa4e-428b-9e73-2fc9b5b4056a">
         <orm:table name="job_group" />
         <orm:identity>
           <orm:single-field field-name="_ma_nh" />
@@ -522,8 +522,8 @@
         <orm:field name="_loai_nh" property="Loai_Nh" behavior="readwrite" uniqueId="556773db-3da4-45bd-85f4-d7bc0c9b1e1f" type="System.Int16">
           <orm:column name="loai_nh" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_ma_nh" property="Ma_Nh" behavior="readwrite" uniqueId="4e3355de-c10d-4597-a3a0-ee12423f186a" type="System.String">
-          <orm:column name="ma_nh" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:field name="_ma_nh" property="Code" behavior="readwrite" uniqueId="4e3355de-c10d-4597-a3a0-ee12423f186a" type="System.String">
+          <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         </orm:field>
         <orm:field name="_ten_nh" property="Ten_Nh" behavior="readwrite" uniqueId="f8fc0a8c-a47b-4918-969e-93859b9a31e5" type="System.String">
           <orm:column name="ten_nh" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
@@ -575,8 +575,8 @@
         <orm:field name="_Stt_Rec" property="Stt_Rec" behavior="readwrite" uniqueId="376a7929-e44d-405f-ad35-08fb5e223650" type="System.String">
           <orm:column name="stt_rec" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         </orm:field>
-        <orm:field name="_Ma_Dvcs" property="Ma_Dvcs" behavior="readwrite" uniqueId="22911a3f-3f64-420e-a3fa-47cfc308425a" type="System.String">
-          <orm:column name="ma_dvcs" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_Ma_Dvcs" property="Ma_Dvcs" behavior="readwrite" uniqueId="22911a3f-3f64-420e-a3fa-47cfc308425a" type="System.Guid">
+          <orm:column name="ma_dvcs" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_Ma_Ct" property="Ma_Ct" behavior="readwrite" uniqueId="b583a43f-9d2a-4212-ac1f-d1b214be78b2" type="System.String">
           <orm:column name="ma_ct" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
@@ -631,11 +631,6 @@
         </orm:field>
         <orm:field name="_User_Id2" property="User_Id2" behavior="readwrite" uniqueId="5887119d-78b4-4e4c-a9af-d953970bb1e5" type="System.Guid">
           <orm:column name="user_id2" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
-        </orm:field>
-        <orm:field name="_dmdvcs" property="Organization" behavior="readwrite" uniqueId="2c957833-144d-42e4-be8c-33dfca7a18d1" type="MyERP.DataAccess.Organization">
-          <orm:reference uniqueId="b2bed1d6-aa0b-4e12-b54a-8c77b7ca5faf" association-name="TransactionDocumentHasOrganization">
-            <orm:sharedfield name="_Ma_Dvcs" target-class="MyERP.DataAccess.Organization" target-field="_code" />
-          </orm:reference>
         </orm:field>
         <orm:field name="_dmnt" property="Currency" behavior="readwrite" uniqueId="e130c8de-7b7d-4c7d-ae79-5163dd85c6ec" type="MyERP.DataAccess.Currency">
           <orm:reference uniqueId="0cb22bb7-2d7d-4db3-80ce-b9fcfdf36e34" association-name="Ph11HasDmnt">
@@ -729,16 +724,19 @@
           </orm:reference>
         </orm:field>
       </orm:class>
-      <orm:class name="Organization" uniqueId="97b688dd-facf-4bf5-9c2f-4d63ce988854">
+      <orm:class name="Organization" update-schema="true" uniqueId="97b688dd-facf-4bf5-9c2f-4d63ce988854">
         <orm:table name="organization" />
         <orm:identity>
-          <orm:single-field field-name="_code" />
+          <orm:key-generator name="guid">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="_id" />
         </orm:identity>
         <orm:concurrency strategy="version" field-name="_version">
           <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         </orm:concurrency>
         <orm:field name="_code" property="Code" behavior="readwrite" uniqueId="fe952f33-f611-4733-bc22-7165b8c4c528" type="System.String">
-          <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+          <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="4b5af097-14de-48d3-8db9-ea849445fb4c" type="System.String">
           <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
@@ -761,8 +759,8 @@
         <orm:field name="_m_ws_id" property="M_Ws_Id" behavior="readwrite" uniqueId="ad77c6b6-0826-4537-b39a-7b586f2b8b0f" type="System.String">
           <orm:column name="m_ws_id" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_rowguid" property="Rowguid" behavior="readwrite" uniqueId="6cc4d3a2-4f88-43e5-b56d-2e1d008d5a17" type="System.Guid">
-          <orm:column name="rowguid" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_id" property="Id" behavior="readwrite" uniqueId="6cc4d3a2-4f88-43e5-b56d-2e1d008d5a17" type="System.Guid">
+          <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         </orm:field>
         <orm:field name="_version" property="Version" behavior="readwrite" uniqueId="a759a6fc-b8eb-4bdd-a544-562473c76a1a" type="System.Int64">
           <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
@@ -959,7 +957,7 @@
         <orm:column name="user_id0" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="user_id2" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="payment_term_code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="payment_term_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="is_customer" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="is_vendor" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="is_employee" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
@@ -982,7 +980,7 @@
         <orm:column name="rowguid" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
       </orm:table>
       <orm:table name="payment_term">
-        <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="han_tt" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="han_tt_gg" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
@@ -993,10 +991,10 @@
         <orm:column name="user_id2" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="status" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
-        <orm:column name="rowguid" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
       </orm:table>
       <orm:table name="job">
-        <orm:column name="ma_vv" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         <orm:column name="ten_vv" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="ten_vv2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="ma_kh" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
@@ -1018,7 +1016,7 @@
       </orm:table>
       <orm:table name="job_group">
         <orm:column name="loai_nh" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="ma_nh" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         <orm:column name="ten_nh" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="ten_nh2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
@@ -1029,7 +1027,7 @@
       </orm:table>
       <orm:table name="transaction_document">
         <orm:column name="stt_rec" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
-        <orm:column name="ma_dvcs" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ma_dvcs" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="ma_ct" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="ngay_ct" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="ngay_lct" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
@@ -1050,7 +1048,7 @@
         <orm:column name="user_id2" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
       </orm:table>
       <orm:table name="organization">
-        <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="user_id0" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
@@ -1059,7 +1057,7 @@
         <orm:column name="status" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="m_ws_id" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
-        <orm:column name="rowguid" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
       </orm:table>
       <orm:table name="transaction_line">
         <orm:column name="stt_rec" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
@@ -1152,6 +1150,7 @@
     <SchemaUpdateSettings>
       <DeploymentProject>MyERP.DataAccess</DeploymentProject>
       <DeploymentDirectory>Script\</DeploymentDirectory>
+      <UpdateDatabaseOperation>Migrate</UpdateDatabaseOperation>
       <ShowAllTables>true</ShowAllTables>
     </SchemaUpdateSettings>
     <BackendConfigurationSettings>
@@ -1159,8 +1158,10 @@
         <Backend>PostgreSql</Backend>
         <ProviderName>Npgsql</ProviderName>
         <Logging>
-          <LogToConsole>True</LogToConsole>
-          <MetricStoreSnapshotInterval>0</MetricStoreSnapshotInterval>
+          <LogLevel>Normal</LogLevel>
+          <ShowStackTrace>True</ShowStackTrace>
+          <EventStoreCapacity>10000</EventStoreCapacity>
+          <MetricStoreCapacity>3600</MetricStoreCapacity>
         </Logging>
       </BackendConfiguration>
     </BackendConfigurationSettings>
@@ -1254,7 +1255,7 @@
       <Property Id="6ae63020-9951-458b-8e73-ed65d7804f92" name="Name" label="Name : String" kind="Persistent" fieldName="_name" />
       <Property Id="393c1728-a3c1-49b2-a4f1-f0c515598eef" name="FullName" label="FullName : String" kind="Persistent" fieldName="_fullName" />
     </DomainClass>
-    <DomainClass Id="9d8598ff-424c-4d4a-bac3-97f1835b25b3" name="Currency" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+    <DomainClass Id="9d8598ff-424c-4d4a-bac3-97f1835b25b3" name="Currency" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
       <Property Id="efd62e43-197b-4369-acac-e213606c2517" name="Id" type="Guid" label="Id : Guid" kind="Persistent" identity="true" fieldName="_id" />
       <Property Id="310d5722-6515-41f0-86c0-db94a491a637" name="RecCreated" type="DateTime" label="RecCreated : DateTime" kind="Persistent" fieldName="_recCreated" />
       <Property Id="4285a20c-477a-4f21-a8c8-9f76ff97b472" name="RecModified" type="DateTime" label="RecModified : DateTime" kind="Persistent" fieldName="_recModified" />
@@ -1291,7 +1292,7 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="e5450aef-1d4d-4529-afab-ed799b140a9b" name="BusinessPartner" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Version" concurrencyMember="Version" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="e5450aef-1d4d-4529-afab-ed799b140a9b" name="BusinessPartner" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true">
       <Property Id="0f11fb69-72e9-4b0f-badd-59611caee9fd" name="Code" label="Code : String" kind="Persistent" identity="true" fieldName="_code" />
       <Property Id="cb1833d2-e863-49aa-b4fc-3086f79adff3" name="IsVendor" type="Boolean" label="IsVendor : Boolean" kind="Persistent" fieldName="_isVendor" />
       <Property Id="0c5a86db-29b4-43d2-a101-5bca88ea1bc2" name="Date0" type="DateTime" label="Date0 : DateTime" kind="Persistent" fieldName="_date0" />
@@ -1305,7 +1306,7 @@
       <Property Id="11111f51-46ab-49a8-a88a-075b4bbbf05c" name="HomePage" label="HomePage : String" kind="Persistent" fieldName="_homePage" />
       <Property Id="cd412faf-9873-40fb-9877-a6fc1c2db011" name="IsCustomer" type="Boolean" label="IsCustomer : Boolean" kind="Persistent" fieldName="_isCustomer" />
       <Property Id="77b9d0e7-62bc-4d04-9474-37a24657b39f" name="VatCode" label="VatCode : String" kind="Persistent" fieldName="_vatCode" />
-      <Property Id="26b210e4-c0f7-49c7-aa7e-0b211a44cb3d" name="PaymentTermCode" label="PaymentTermCode : String" kind="Persistent" fieldName="_paymentTermCode" />
+      <Property Id="26b210e4-c0f7-49c7-aa7e-0b211a44cb3d" name="PaymentTermId" type="Guid" label="PaymentTermId : Guid" kind="Persistent" fieldName="_paymentTermId" />
       <Property Id="c573f019-bbd0-44b0-ac0c-371423259210" name="BusinessPartnerGroupCode1" label="BusinessPartnerGroupCode1 : String" kind="Persistent" fieldName="_businessPartnerGroupCode1" />
       <Property Id="d213780a-b613-4029-8b8a-72c1846d2de0" name="BusinessPartnerGroupCode2" label="BusinessPartnerGroupCode2 : String" kind="Persistent" fieldName="_businessPartnerGroupCode2" />
       <Property Id="0a0e6c4f-541b-4e5a-abfc-b3ccc64d6fde" name="BusinessPartnerGroupCode3" label="BusinessPartnerGroupCode3 : String" kind="Persistent" fieldName="_businessPartnerGroupCode3" />
@@ -1440,7 +1441,7 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="f2451eb6-4641-45a3-bcdf-230e9f344ef2" name="BusinessPartnerGroup" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Version" concurrencyMember="Version" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="f2451eb6-4641-45a3-bcdf-230e9f344ef2" name="BusinessPartnerGroup" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true">
       <Property Id="42010cbf-48ba-4309-844f-155498b0ddd6" name="Code" label="Code : String" kind="Persistent" identity="true" fieldName="_code" />
       <Property Id="00edf15b-3172-46b2-acc5-41e736324121" name="Date0" type="DateTime" label="Date0 : DateTime" kind="Persistent" fieldName="_date0" />
       <Property Id="3780b134-9e0b-43e1-b6ef-5cc77e2cd1dd" name="Date2" type="DateTime" label="Date2 : DateTime" kind="Persistent" fieldName="_date2" />
@@ -1463,8 +1464,8 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="b0ff094e-1f92-4ae4-86c5-45512a524e98" name="PaymentTerm" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Version" concurrencyMember="Version" showNavigationCompartment="true" showImplementationCompartment="true">
-      <Property Id="0e0ff67f-9bed-4525-917e-22c5e8ce05a6" name="Code" label="Code : String" kind="Persistent" identity="true" fieldName="_code" />
+    <DomainClass Id="b0ff094e-1f92-4ae4-86c5-45512a524e98" name="PaymentTerm" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="0e0ff67f-9bed-4525-917e-22c5e8ce05a6" name="Code" label="Code : String" kind="Persistent" fieldName="_code" />
       <Property Id="9175b1db-6b73-48bd-ace4-12381407a5a3" name="Date0" type="DateTime" label="Date0 : DateTime" kind="Persistent" fieldName="_date0" />
       <Property Id="23db19d5-5e55-43de-8f05-21c6b606fcbc" name="Date2" type="DateTime" label="Date2 : DateTime" kind="Persistent" fieldName="_date2" />
       <Property Id="0680a919-4bfc-405b-894b-d3499b44379e" name="Han_Tt" type="Int16" label="Han_Tt : Int16" kind="Persistent" fieldName="_han_tt" />
@@ -1474,11 +1475,11 @@
       <Property Id="65829b43-f1af-483c-a7f8-3b535c695e74" name="Name" label="Name : String" kind="Persistent" fieldName="_name" />
       <Property Id="31b31c92-f0af-48a1-a066-bd0a1ea2bafd" name="UserId0" type="Guid" label="UserId0 : Guid" kind="Persistent" fieldName="_userId0" />
       <Property Id="67c598f4-89c8-44b2-a85e-31a41ad0db03" name="UserId2" type="Guid" label="UserId2 : Guid" kind="Persistent" fieldName="_userId2" />
-      <Property Id="6130ccc8-e217-402f-a4cc-dd1fa599983d" name="Rowguid" type="Guid" label="Rowguid : Guid" kind="Persistent" fieldName="_rowguid" />
+      <Property Id="6130ccc8-e217-402f-a4cc-dd1fa599983d" name="Id" type="Guid" label="Id : Guid" kind="Persistent" identity="true" fieldName="_id" />
       <Property Id="2f665198-11fb-4edb-8dad-6c25cae0794e" name="Version" type="Int64" label="Version : Int64" kind="Persistent" fieldName="_version" />
     </DomainClass>
-    <DomainClass Id="295c1357-df0e-4eef-b13d-68e20e43c403" name="Job" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
-      <Property Id="f5ec11cf-95ce-4da4-a64b-85ded41e39ea" name="Ma_Vv" label="Ma_Vv : String" kind="Persistent" identity="true" fieldName="_ma_vv" />
+    <DomainClass Id="295c1357-df0e-4eef-b13d-68e20e43c403" name="Job" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Changed" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="f5ec11cf-95ce-4da4-a64b-85ded41e39ea" name="Code" label="Code : String" kind="Persistent" identity="true" fieldName="_ma_vv" />
       <Property Id="4fd8ddbd-506d-4153-993e-ae4e886557a6" name="Date0" type="DateTime" label="Date0 : DateTime" kind="Persistent" fieldName="_date0" />
       <Property Id="a9192fa7-1770-4d1a-beb6-2636d02a3381" name="Date2" type="DateTime" label="Date2 : DateTime" kind="Persistent" fieldName="_date2" />
       <Property Id="ed9bf5aa-8b4f-46dc-b94f-476b44afa95b" name="Ghi_Chu" label="Ghi_Chu : String" kind="Persistent" fieldName="_ghi_chu" />
@@ -1594,8 +1595,8 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="c1a07b37-fa4e-428b-9e73-2fc9b5b4056a" name="JobGroup" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
-      <Property Id="4e3355de-c10d-4597-a3a0-ee12423f186a" name="Ma_Nh" label="Ma_Nh : String" kind="Persistent" identity="true" fieldName="_ma_nh" />
+    <DomainClass Id="c1a07b37-fa4e-428b-9e73-2fc9b5b4056a" name="JobGroup" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Changed" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="4e3355de-c10d-4597-a3a0-ee12423f186a" name="Code" label="Code : String" kind="Persistent" identity="true" fieldName="_ma_nh" />
       <Property Id="a2f5eb4d-c532-4e91-9795-ca7253370c53" name="Date0" type="DateTime" label="Date0 : DateTime" kind="Persistent" fieldName="_date0" />
       <Property Id="018f67f1-c083-48c8-b2a7-7d9d30098643" name="Date2" type="DateTime" label="Date2 : DateTime" kind="Persistent" fieldName="_date2" />
       <Property Id="556773db-3da4-45bd-85f4-d7bc0c9b1e1f" name="Loai_Nh" type="Int16" label="Loai_Nh : Int16" kind="Persistent" fieldName="_loai_nh" />
@@ -1645,7 +1646,7 @@
       <Property Id="df0f946d-fc6d-48c0-b261-e310317555ab" name="Date0" type="DateTime" label="Date0 : DateTime" kind="Persistent" fieldName="_Date0" />
       <Property Id="333e1865-9ed7-48c2-aafe-dc3acc6b38f0" name="Date2" type="DateTime" label="Date2 : DateTime" kind="Persistent" fieldName="_Date2" />
       <Property Id="b583a43f-9d2a-4212-ac1f-d1b214be78b2" name="Ma_Ct" label="Ma_Ct : String" kind="Persistent" fieldName="_Ma_Ct" />
-      <Property Id="22911a3f-3f64-420e-a3fa-47cfc308425a" name="Ma_Dvcs" label="Ma_Dvcs : String" kind="Persistent" fieldName="_Ma_Dvcs" />
+      <Property Id="22911a3f-3f64-420e-a3fa-47cfc308425a" name="Ma_Dvcs" type="Guid" label="Ma_Dvcs : Guid" kind="Persistent" fieldName="_Ma_Dvcs" />
       <Property Id="ee648f37-c994-4c4d-8025-7b0c243de72d" name="Ma_Gd" type="Int16" label="Ma_Gd : Int16" kind="Persistent" fieldName="_Ma_Gd" />
       <Property Id="6230b7f9-a896-4e64-b72f-692819793b06" name="Ma_Nk" label="Ma_Nk : String" kind="Persistent" fieldName="_Ma_Nk" />
       <Property Id="9a4e721e-a388-4085-94ee-5883e850b67c" name="Ma_Nt" type="Guid" label="Ma_Nt : Guid" kind="Persistent" fieldName="_Ma_Nt" />
@@ -1667,14 +1668,6 @@
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="43b852b0-fa59-41b2-a0c5-0582dac08f09">
               <NavigationalPropertyMoniker name="/EntitiesModel/TransactionDocument/Currency" />
-            </associationDefinesSourceProperty>
-          </sourceNavigationalProperty>
-        </Association>
-        <Association Id="b2bed1d6-aa0b-4e12-b54a-8c77b7ca5faf" SourceMultiplicity="ZeroOne" name="TransactionDocumentHasOrganization">
-          <DomainClassMoniker name="/EntitiesModel/Organization" />
-          <sourceNavigationalProperty>
-            <associationDefinesSourceProperty Id="76e33f11-96ff-47db-9243-7ff25817fdec">
-              <NavigationalPropertyMoniker name="/EntitiesModel/TransactionDocument/Organization" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
@@ -1701,9 +1694,6 @@
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="cb193c8a-209b-4848-9ceb-bfd396a17517">
           <NavigationalProperty Id="e130c8de-7b7d-4c7d-ae79-5163dd85c6ec" name="Currency" type="Currency" label="Currency : Currency" nullable="true" kind="Persistent" fieldName="_dmnt" isDependent="false" isManaged="false" />
-        </classHasNavigationalProperties>
-        <classHasNavigationalProperties Id="e686d228-b41b-4213-9404-020d757d3903">
-          <NavigationalProperty Id="2c957833-144d-42e4-be8c-33dfca7a18d1" name="Organization" type="Organization" label="Organization : Organization" nullable="true" kind="Persistent" fieldName="_dmdvcs" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="6d4c1842-be81-44d0-afaa-6c8b8079f0ea">
           <NavigationalProperty Id="ad71934f-c342-46fa-9eef-597c22fd3b1e" name="User0" type="User" label="User0 : User" nullable="true" kind="Persistent" fieldName="_userinfo" isDependent="false" isManaged="false" />
@@ -1773,8 +1763,8 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="97b688dd-facf-4bf5-9c2f-4d63ce988854" name="Organization" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Version" concurrencyMember="Version" showNavigationCompartment="true" showImplementationCompartment="true">
-      <Property Id="fe952f33-f611-4733-bc22-7165b8c4c528" name="Code" label="Code : String" kind="Persistent" identity="true" fieldName="_code" />
+    <DomainClass Id="97b688dd-facf-4bf5-9c2f-4d63ce988854" name="Organization" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="fe952f33-f611-4733-bc22-7165b8c4c528" name="Code" label="Code : String" kind="Persistent" fieldName="_code" />
       <Property Id="4276a5e1-583e-4381-b830-7a77196140b8" name="Date0" type="DateTime" label="Date0 : DateTime" kind="Persistent" fieldName="_date0" />
       <Property Id="8c552b56-8740-4114-a2fb-98c9eb47263d" name="Date2" type="DateTime" label="Date2 : DateTime" kind="Persistent" fieldName="_date2" />
       <Property Id="ad77c6b6-0826-4537-b39a-7b586f2b8b0f" name="M_Ws_Id" label="M_Ws_Id : String" kind="Persistent" fieldName="_m_ws_id" />
@@ -1782,7 +1772,7 @@
       <Property Id="4b5af097-14de-48d3-8db9-ea849445fb4c" name="Name" label="Name : String" kind="Persistent" fieldName="_name" />
       <Property Id="e0206719-089e-44fe-a6d8-29513e70bb0d" name="UserId0" type="Guid" label="UserId0 : Guid" kind="Persistent" fieldName="_userId0" />
       <Property Id="4ace2386-c7f5-4863-bf86-6e328aeb46dd" name="UserId2" type="Guid" label="UserId2 : Guid" kind="Persistent" fieldName="_userId2" />
-      <Property Id="6cc4d3a2-4f88-43e5-b56d-2e1d008d5a17" name="Rowguid" type="Guid" label="Rowguid : Guid" kind="Persistent" fieldName="_rowguid" />
+      <Property Id="6cc4d3a2-4f88-43e5-b56d-2e1d008d5a17" name="Id" type="Guid" label="Id : Guid" kind="Persistent" identity="true" fieldName="_id" />
       <Property Id="a759a6fc-b8eb-4bdd-a544-562473c76a1a" name="Version" type="Int64" label="Version : Int64" kind="Persistent" fieldName="_version" />
       <AssociationTargets>
         <Association Id="6cf46b87-f996-4e0e-850a-2ba457350c37" SourceMultiplicity="ZeroOne" name="DmdvcsHasUserinfo0">

@@ -21,20 +21,7 @@ namespace MyERP.Modules.Financial.ViewModels
     {
         public AccountsViewModel()
         {
-            MyERPDomainContext context = new MyERPDomainContext();
-            EntityQuery<Account> getAccountsQuery = context.GetAccountsQuery().OrderBy(c => c.Code);
-            this._accounts = new QueryableDomainServiceCollectionView<Account>(context, getAccountsQuery);
-            this._accounts.AutoLoad = true;
-            this._accounts.LoadedData += _accounts_LoadedData;
-            this._accounts.PropertyChanged += _accounts_PropertyChanged;
-            this._accounts.SubmittedChanges += _accounts_SubmittedChanges;
-
-            this._codeSortDescriptor = new SortDescriptor() {Member = "Code"};
             
-            this.AddNewCommand = new DelegateCommand(this.OnAddNewCommandExecuted);
-            this.SubmitChangesCommand = new DelegateCommand(OnSubmitChangesExcuted, SubmitChangesCommandCanExecute);
-            this.RejectChangesCommand = new DelegateCommand(OnRejectChangesExcuted, SubmitChangesCommandCanExecute);
-            this.RefreshCommand = new DelegateCommand(OnRefreshExcuted, RefreshCommandCanExecute);
         }
 
         [Import]
@@ -89,13 +76,24 @@ namespace MyERP.Modules.Financial.ViewModels
             }
         }
 
-        private readonly QueryableDomainServiceCollectionView<Account> _accounts;
-        public ICollectionView Accounts
+        private QueryableDomainServiceCollectionView<Account> _accounts;
+        public QueryableDomainServiceCollectionView<Account> Accounts
+        {
+            get { return this._accounts; }
+            set { _accounts = value; }
+        }
+
+        private ICollectionView currencies = null;
+        public ICollectionView Currencies
         {
             get
             {
-              
-                return this._accounts;
+                return this.currencies;
+            }
+            set
+            {
+                this.currencies = value;
+                this.RaisePropertyChanged("Currencies");
             }
         }
 
@@ -104,7 +102,7 @@ namespace MyERP.Modules.Financial.ViewModels
             get { return this._accounts.IsBusy; }
         }
 
-        private readonly SortDescriptor _codeSortDescriptor;
+        public SortDescriptor _codeSortDescriptor { get; set; }
 
         void _accounts_LoadedData(object sender, Telerik.Windows.Controls.DomainServices.LoadedDataEventArgs e)
         {
@@ -174,13 +172,28 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnRefreshExcuted()
         {
-            this._accounts.Load();
+            this._accounts.Load(true);
         }
 
         #region NavigationAwareDataViewModel overrides
         public override void OnImportsSatisfied()
         {
             base.OnImportsSatisfied();
+
+            MyERPDomainContext context = AccountRepository.Context;
+            EntityQuery<Account> getAccountsQuery = context.GetAccountsQuery().OrderBy(c => c.Code);
+            this._accounts = new QueryableDomainServiceCollectionView<Account>(context, getAccountsQuery);
+            this._accounts.AutoLoad = true;
+            this._accounts.LoadedData += _accounts_LoadedData;
+            this._accounts.PropertyChanged += _accounts_PropertyChanged;
+            this._accounts.SubmittedChanges += _accounts_SubmittedChanges;
+
+            this._codeSortDescriptor = new SortDescriptor() { Member = "Code" };
+
+            this.AddNewCommand = new DelegateCommand(this.OnAddNewCommandExecuted);
+            this.SubmitChangesCommand = new DelegateCommand(OnSubmitChangesExcuted, SubmitChangesCommandCanExecute);
+            this.RejectChangesCommand = new DelegateCommand(OnRejectChangesExcuted, SubmitChangesCommandCanExecute);
+            this.RefreshCommand = new DelegateCommand(OnRefreshExcuted, RefreshCommandCanExecute);
         }
         #endregion
     }

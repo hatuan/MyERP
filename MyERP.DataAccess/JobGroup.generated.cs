@@ -22,7 +22,7 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("job_group")]
+	[Table("job_group", UpdateSchema = true)]
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Changed)]
 	public partial class JobGroup
 	{
@@ -42,9 +42,9 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _ma_nh;
-		[Column("ma_nh", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "text")]
+		[Column("code", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "text")]
 		[Storage("_ma_nh")]
-		public virtual string Ma_Nh
+		public virtual string Code
 		{
 			get
 			{

@@ -22,14 +22,14 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("job")]
+	[Table("job", UpdateSchema = true)]
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Changed)]
 	public partial class Job
 	{
 		private string _ma_vv;
-		[Column("ma_vv", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "text")]
+		[Column("code", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "text")]
 		[Storage("_ma_vv")]
-		public virtual string Ma_Vv
+		public virtual string Code
 		{
 			get
 			{
@@ -357,7 +357,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private JobGroup _dmnhvv;
-		[ForeignKeyAssociation(SharedFields = "Nh_Vv1", TargetFields = "Ma_Nh")]
+		[ForeignKeyAssociation(SharedFields = "Nh_Vv1", TargetFields = "Code")]
 		[Storage("_dmnhvv")]
 		public virtual JobGroup Dmnhvv1
 		{
@@ -372,7 +372,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private JobGroup _dmnhvv1;
-		[ForeignKeyAssociation(SharedFields = "Nh_Vv2", TargetFields = "Ma_Nh")]
+		[ForeignKeyAssociation(SharedFields = "Nh_Vv2", TargetFields = "Code")]
 		[Storage("_dmnhvv1")]
 		public virtual JobGroup Dmnhvv2
 		{
@@ -387,7 +387,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private JobGroup _dmnhvv2;
-		[ForeignKeyAssociation(SharedFields = "Nh_Vv3", TargetFields = "Ma_Nh")]
+		[ForeignKeyAssociation(SharedFields = "Nh_Vv3", TargetFields = "Code")]
 		[Storage("_dmnhvv2")]
 		public virtual JobGroup Dmnhvv3
 		{

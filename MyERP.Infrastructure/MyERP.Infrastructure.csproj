@@ -106,11 +106,12 @@
     <Compile Include="Behaviors\IViewRegionRegistration.cs" />
     <Compile Include="Behaviors\ViewExportAttribute.cs" />
     <Compile Include="Controls\DateTimePickerControl.cs" />
-    <Compile Include="Controls\LookupCurrencyControl.xaml.cs">
-      <DependentUpon>LookupCurrencyControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\LookupAccountControl.xaml.cs">
       <DependentUpon>LookupAccountControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LookupCurrencyControl.xaml.cs">
+      <DependentUpon>LookupCurrencyControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\CurrencyConverter.cs" />
     <Compile Include="Converters\DateTimeToRecentDaysConverter.cs" />
@@ -150,11 +151,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\LookupCurrencyControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\LookupAccountControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LookupCurrencyControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

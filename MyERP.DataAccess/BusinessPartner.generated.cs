@@ -22,7 +22,7 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("business_partner")]
+	[Table("business_partner", UpdateSchema = true)]
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
 	public partial class BusinessPartner
 	{
@@ -326,18 +326,18 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private string _paymentTermCode;
-		[Column("payment_term_code", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_paymentTermCode")]
-		public virtual string PaymentTermCode
+		private Guid _paymentTermId;
+		[Column("payment_term_id", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_paymentTermId")]
+		public virtual Guid PaymentTermId
 		{
 			get
 			{
-				return this._paymentTermCode;
+				return this._paymentTermId;
 			}
 			set
 			{
-				this._paymentTermCode = value;
+				this._paymentTermId = value;
 			}
 		}
 		
@@ -536,21 +536,6 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private PaymentTerm _paymentTerm;
-		[ForeignKeyAssociation(SharedFields = "PaymentTermCode", TargetFields = "Code")]
-		[Storage("_paymentTerm")]
-		public virtual PaymentTerm PaymentTerm
-		{
-			get
-			{
-				return this._paymentTerm;
-			}
-			set
-			{
-				this._paymentTerm = value;
-			}
-		}
-		
 		private Account _employeeAccount;
 		[ForeignKeyAssociation(SharedFields = "EmployeeAccountId", TargetFields = "Id")]
 		[Storage("_employeeAccount")]
@@ -593,6 +578,21 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._account1 = value;
+			}
+		}
+		
+		private PaymentTerm _paymentTerm;
+		[ForeignKeyAssociation(SharedFields = "PaymentTermId", TargetFields = "Id")]
+		[Storage("_paymentTerm")]
+		public virtual PaymentTerm PaymentTerm
+		{
+			get
+			{
+				return this._paymentTerm;
+			}
+			set
+			{
+				this._paymentTerm = value;
 			}
 		}
 		

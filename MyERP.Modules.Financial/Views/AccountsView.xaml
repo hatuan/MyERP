@@ -19,7 +19,8 @@
                 <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.RibbonView.xaml"/>
 				<ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.GridView.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
-		</ResourceDictionary>
+
+        </ResourceDictionary>
 	</UserControl.Resources>
 
 	<Grid x:Name="LayoutRoot">
@@ -113,6 +114,18 @@
 			</telerik:RadRibbonView>
             <Rectangle Grid.Row="1" Fill="{StaticResource AccentBrush}" Height="1" HorizontalAlignment="Stretch"/>
 		</Grid>
+
+        <!--<telerik:RadDomainDataSource x:Name="currenciesDataSource" QueryName="GetCurrencies" AutoLoad="True" DomainContext="{Binding AccountRepository.Context}">
+            
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="LoadedData">
+                    <ei:ChangePropertyAction TargetObject="{Binding .}" 
+															 PropertyName="Currencies" 
+															 Value="{Binding DataView.SourceCollection, ElementName=currenciesDataSource}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            
+        </telerik:RadDomainDataSource>-->
         
         <telerik:RadTabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
         	<telerik:RadTabItem x:Name="radTabItemAccountsOverview" Header="OVERVIEW">

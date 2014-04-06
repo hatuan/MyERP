@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
@@ -6,6 +8,8 @@ using System.Linq;
 using System.ServiceModel.DomainServices.Client;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using MyERP.Infrastructure.Annotations;
 using MyERP.Web;
 using MyERP.DataAccess;
 using Telerik.Windows.Controls;
@@ -13,32 +17,14 @@ using Telerik.Windows.Data;
 
 namespace MyERP.Controls
 {
-    public partial class LookupCurrencyControl : UserControl
+    public partial class LookupCurrencyControl : UserControl, INotifyPropertyChanged
     {
         public LookupCurrencyControl()
         {
             InitializeComponent();
-
-            this.Loaded += OnLookupControlLoaded;
+            LayoutRoot.DataContext = this;
         }
 
-        void OnLookupControlLoaded(object sender, RoutedEventArgs e)
-        {
-            this.Loaded -= OnLookupControlLoaded;
-
-            this.innerViewModel = new LookupCurrencyControlViewModel();
-            this.LayoutRoot.DataContext = this.innerViewModel;
-            this.innerViewModel.UpdateDate(this.Id);
-            this.textBox.SelectedItem = this.innerViewModel.SelectedCurrency;
-            this.dropDownGrid.SelectedItem = this.innerViewModel.SelectedCurrency;
-            this.innerViewModel.PropertyChanged += this.OnInnerViewModelPropertyChanged;
-
-            this.dropDownButton.PopupPlacementTarget = this.textBox;
-        }
-
-
-        private LookupCurrencyControlViewModel innerViewModel;
-        
         public Guid Id
         {
             get
@@ -58,27 +44,77 @@ namespace MyERP.Controls
         {
             var newGuid = (Guid)e.NewValue;
             var lookupControl = d as LookupCurrencyControl;
-
-            if (lookupControl.innerViewModel != null)
+            if (lookupControl != null)
             {
-                lookupControl.innerViewModel.PropertyChanged -= lookupControl.OnInnerViewModelPropertyChanged;
-                lookupControl.innerViewModel.UpdateDate(newGuid);
-                lookupControl.textBox.SelectedItem = lookupControl.innerViewModel.SelectedCurrency;
-                lookupControl.dropDownGrid.SelectedItem = lookupControl.innerViewModel.SelectedCurrency;
-                lookupControl.innerViewModel.PropertyChanged += lookupControl.OnInnerViewModelPropertyChanged;
             }
         }
 
-        
-        private void OnInnerViewModelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        public IEnumerable<Currency> Currencies
         {
-            if (e.PropertyName == "SelectedCurrency")
+            get
             {
-                var selectedItem = (sender as LookupCurrencyControlViewModel).SelectedCurrency;
-                this.Id = selectedItem != null
-                    ? (sender as LookupCurrencyControlViewModel).SelectedCurrency.Id
-                    : Guid.Empty;
+                return (IEnumerable<Currency>)GetValue(CurrenciesProperty);
             }
+            set
+            {
+                SetValue(CurrenciesProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty CurrenciesProperty = DependencyProperty.Register(
+            "Currencies", typeof(IEnumerable), typeof(LookupCurrencyControl), new PropertyMetadata(Enumerable.Empty<Currency>()));
+
+        //private Currency _selectedCurrency;
+
+        //public Currency SelectedCurrency
+        //{
+        //    get
+        //    {
+        //        return _selectedCurrency;
+        //    }
+        //    set
+        //    {
+        //        _selectedCurrency = value;
+        //        Id = _selectedCurrency != null ? _selectedCurrency.Id : Guid.Empty;
+        //        OnPropertyChanged("Id");
+        //    }
+        //}
+
+
+        public Currency SelectedCurrency
+        {
+            get
+            {
+                return (Currency)GetValue(SelectedCurrencyProperty);
+            }
+            set
+            {
+                SetValue(SelectedCurrencyProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty SelectedCurrencyProperty = DependencyProperty.Register(
+           "SelectedCurrency", typeof(Currency), typeof(LookupCurrencyControl), new PropertyMetadata(null, OnSelectedCurrencyChanged));
+
+        private static void OnSelectedCurrencyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var newCurrency = (Currency)e.NewValue;
+            var lookupControl = d as LookupCurrencyControl;
+
+            if (lookupControl != null)
+            {
+                lookupControl.textBox.SelectedItem = newCurrency;
+                lookupControl.dropDownGrid.SelectedItem = newCurrency;
+                lookupControl.Id = newCurrency == null ? Guid.Empty : newCurrency.Id;
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 
@@ -92,7 +128,7 @@ namespace MyERP.Controls
 
             this._currencies = new QueryableDomainServiceCollectionView<Currency>(context, getCurrenciesQuery);
             this._currencies.AutoLoad = true;
-            this._currencies.LoadedData += CurrenciesLoadedData;
+            this._currencies.LoadedData += this.CurrenciesLoadedData;
         }
 
         private Currency _selectedCurrency = null;

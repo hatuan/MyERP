@@ -713,7 +713,7 @@ namespace MyERP.DataAccess
         
         private string[] _openAccessGenerated;
         
-        private string _paymentTermCode;
+        private Guid _paymentTermId;
         
         private Guid _rowguid;
         
@@ -780,8 +780,8 @@ namespace MyERP.DataAccess
         partial void OnNameChanged();
         partial void OnOpenAccessGeneratedChanging(string[] value);
         partial void OnOpenAccessGeneratedChanged();
-        partial void OnPaymentTermCodeChanging(string value);
-        partial void OnPaymentTermCodeChanged();
+        partial void OnPaymentTermIdChanging(Guid value);
+        partial void OnPaymentTermIdChanged();
         partial void OnRowguidChanging(Guid value);
         partial void OnRowguidChanged();
         partial void OnStatusChanging(byte value);
@@ -1339,26 +1339,26 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
-        /// Gets or sets the 'PaymentTermCode' value.
+        /// Gets or sets the 'PaymentTermId' value.
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public string PaymentTermCode
+        public Guid PaymentTermId
         {
             get
             {
-                return this._paymentTermCode;
+                return this._paymentTermId;
             }
             set
             {
-                if ((this._paymentTermCode != value))
+                if ((this._paymentTermId != value))
                 {
-                    this.OnPaymentTermCodeChanging(value);
-                    this.RaiseDataMemberChanging("PaymentTermCode");
-                    this.ValidateProperty("PaymentTermCode", value);
-                    this._paymentTermCode = value;
-                    this.RaiseDataMemberChanged("PaymentTermCode");
-                    this.OnPaymentTermCodeChanged();
+                    this.OnPaymentTermIdChanging(value);
+                    this.RaiseDataMemberChanging("PaymentTermId");
+                    this.ValidateProperty("PaymentTermId", value);
+                    this._paymentTermId = value;
+                    this.RaiseDataMemberChanged("PaymentTermId");
+                    this.OnPaymentTermIdChanged();
                 }
             }
         }
@@ -2333,6 +2333,8 @@ namespace MyERP.DataAccess
     public sealed partial class Job : Entity
     {
         
+        private string _code;
+        
         private DateTime _date0;
         
         private DateTime _date2;
@@ -2342,8 +2344,6 @@ namespace MyERP.DataAccess
         private string _ma_Kh;
         
         private Guid _ma_Nt;
-        
-        private string _ma_Vv;
         
         private DateTime _ngay_Vv1;
         
@@ -2380,6 +2380,8 @@ namespace MyERP.DataAccess
         /// can be used for further object setup.
         /// </summary>
         partial void OnCreated();
+        partial void OnCodeChanging(string value);
+        partial void OnCodeChanged();
         partial void OnDate0Changing(DateTime value);
         partial void OnDate0Changed();
         partial void OnDate2Changing(DateTime value);
@@ -2390,8 +2392,6 @@ namespace MyERP.DataAccess
         partial void OnMa_KhChanged();
         partial void OnMa_NtChanging(Guid value);
         partial void OnMa_NtChanged();
-        partial void OnMa_VvChanging(string value);
-        partial void OnMa_VvChanged();
         partial void OnNgay_Vv1Changing(DateTime value);
         partial void OnNgay_Vv1Changed();
         partial void OnNgay_Vv2Changing(DateTime value);
@@ -2430,6 +2430,33 @@ namespace MyERP.DataAccess
         public Job()
         {
             this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Code' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public string Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                if ((this._code != value))
+                {
+                    this.OnCodeChanging(value);
+                    this.ValidateProperty("Code", value);
+                    this._code = value;
+                    this.RaisePropertyChanged("Code");
+                    this.OnCodeChanged();
+                }
+            }
         }
         
         /// <summary>
@@ -2558,33 +2585,6 @@ namespace MyERP.DataAccess
                     this._ma_Nt = value;
                     this.RaiseDataMemberChanged("Ma_Nt");
                     this.OnMa_NtChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'Ma_Vv' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [Editable(false, AllowInitialValue=true)]
-        [Key()]
-        [RoundtripOriginal()]
-        public string Ma_Vv
-        {
-            get
-            {
-                return this._ma_Vv;
-            }
-            set
-            {
-                if ((this._ma_Vv != value))
-                {
-                    this.OnMa_VvChanging(value);
-                    this.ValidateProperty("Ma_Vv", value);
-                    this._ma_Vv = value;
-                    this.RaisePropertyChanged("Ma_Vv");
-                    this.OnMa_VvChanged();
                 }
             }
         }
@@ -2960,7 +2960,7 @@ namespace MyERP.DataAccess
         /// <returns>An object instance that uniquely identifies this entity instance.</returns>
         public override object GetIdentity()
         {
-            return this._ma_Vv;
+            return this._code;
         }
     }
     
@@ -2971,13 +2971,13 @@ namespace MyERP.DataAccess
     public sealed partial class JobGroup : Entity
     {
         
+        private string _code;
+        
         private DateTime _date0;
         
         private DateTime _date2;
         
         private short _loai_Nh;
-        
-        private string _ma_Nh;
         
         private string[] _openAccessGenerated;
         
@@ -2998,14 +2998,14 @@ namespace MyERP.DataAccess
         /// can be used for further object setup.
         /// </summary>
         partial void OnCreated();
+        partial void OnCodeChanging(string value);
+        partial void OnCodeChanged();
         partial void OnDate0Changing(DateTime value);
         partial void OnDate0Changed();
         partial void OnDate2Changing(DateTime value);
         partial void OnDate2Changed();
         partial void OnLoai_NhChanging(short value);
         partial void OnLoai_NhChanged();
-        partial void OnMa_NhChanging(string value);
-        partial void OnMa_NhChanged();
         partial void OnOpenAccessGeneratedChanging(string[] value);
         partial void OnOpenAccessGeneratedChanged();
         partial void OnStatusChanging(byte value);
@@ -3028,6 +3028,33 @@ namespace MyERP.DataAccess
         public JobGroup()
         {
             this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Code' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public string Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                if ((this._code != value))
+                {
+                    this.OnCodeChanging(value);
+                    this.ValidateProperty("Code", value);
+                    this._code = value;
+                    this.RaisePropertyChanged("Code");
+                    this.OnCodeChanged();
+                }
+            }
         }
         
         /// <summary>
@@ -3104,33 +3131,6 @@ namespace MyERP.DataAccess
                     this._loai_Nh = value;
                     this.RaiseDataMemberChanged("Loai_Nh");
                     this.OnLoai_NhChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'Ma_Nh' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [Editable(false, AllowInitialValue=true)]
-        [Key()]
-        [RoundtripOriginal()]
-        public string Ma_Nh
-        {
-            get
-            {
-                return this._ma_Nh;
-            }
-            set
-            {
-                if ((this._ma_Nh != value))
-                {
-                    this.OnMa_NhChanging(value);
-                    this.ValidateProperty("Ma_Nh", value);
-                    this._ma_Nh = value;
-                    this.RaisePropertyChanged("Ma_Nh");
-                    this.OnMa_NhChanged();
                 }
             }
         }
@@ -3298,7 +3298,7 @@ namespace MyERP.DataAccess
         /// <returns>An object instance that uniquely identifies this entity instance.</returns>
         public override object GetIdentity()
         {
-            return this._ma_Nh;
+            return this._code;
         }
     }
     
@@ -3565,13 +3565,13 @@ namespace MyERP.DataAccess
         
         private DateTime _date2;
         
+        private Guid _id;
+        
         private string _m_Ws_Id;
         
         private string _name;
         
         private string[] _openAccessGenerated;
-        
-        private Guid _rowguid;
         
         private byte _status;
         
@@ -3594,14 +3594,14 @@ namespace MyERP.DataAccess
         partial void OnDate0Changed();
         partial void OnDate2Changing(DateTime value);
         partial void OnDate2Changed();
+        partial void OnIdChanging(Guid value);
+        partial void OnIdChanged();
         partial void OnM_Ws_IdChanging(string value);
         partial void OnM_Ws_IdChanged();
         partial void OnNameChanging(string value);
         partial void OnNameChanged();
         partial void OnOpenAccessGeneratedChanging(string[] value);
         partial void OnOpenAccessGeneratedChanged();
-        partial void OnRowguidChanging(Guid value);
-        partial void OnRowguidChanged();
         partial void OnStatusChanging(byte value);
         partial void OnStatusChanged();
         partial void OnUserId0Changing(Guid value);
@@ -3626,8 +3626,6 @@ namespace MyERP.DataAccess
         /// Gets or sets the 'Code' value.
         /// </summary>
         [DataMember()]
-        [Editable(false, AllowInitialValue=true)]
-        [Key()]
         [RoundtripOriginal()]
         public string Code
         {
@@ -3640,9 +3638,10 @@ namespace MyERP.DataAccess
                 if ((this._code != value))
                 {
                     this.OnCodeChanging(value);
+                    this.RaiseDataMemberChanging("Code");
                     this.ValidateProperty("Code", value);
                     this._code = value;
-                    this.RaisePropertyChanged("Code");
+                    this.RaiseDataMemberChanged("Code");
                     this.OnCodeChanged();
                 }
             }
@@ -3694,6 +3693,32 @@ namespace MyERP.DataAccess
                     this._date2 = value;
                     this.RaiseDataMemberChanged("Date2");
                     this.OnDate2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Id' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
                 }
             }
         }
@@ -3771,31 +3796,6 @@ namespace MyERP.DataAccess
                     this._openAccessGenerated = value;
                     this.RaisePropertyChanged("OpenAccessGenerated");
                     this.OnOpenAccessGeneratedChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'Rowguid' value.
-        /// </summary>
-        [DataMember()]
-        [RoundtripOriginal()]
-        public Guid Rowguid
-        {
-            get
-            {
-                return this._rowguid;
-            }
-            set
-            {
-                if ((this._rowguid != value))
-                {
-                    this.OnRowguidChanging(value);
-                    this.RaiseDataMemberChanging("Rowguid");
-                    this.ValidateProperty("Rowguid", value);
-                    this._rowguid = value;
-                    this.RaiseDataMemberChanged("Rowguid");
-                    this.OnRowguidChanged();
                 }
             }
         }
@@ -3907,7 +3907,7 @@ namespace MyERP.DataAccess
         /// <returns>An object instance that uniquely identifies this entity instance.</returns>
         public override object GetIdentity()
         {
-            return this._code;
+            return this._id;
         }
     }
     
@@ -3928,13 +3928,13 @@ namespace MyERP.DataAccess
         
         private short _han_Tt_Gg;
         
+        private Guid _id;
+        
         private string _name;
         
         private string[] _openAccessGenerated;
         
         private decimal _pt_Gg;
-        
-        private Guid _rowguid;
         
         private byte _status;
         
@@ -3961,14 +3961,14 @@ namespace MyERP.DataAccess
         partial void OnHan_TtChanged();
         partial void OnHan_Tt_GgChanging(short value);
         partial void OnHan_Tt_GgChanged();
+        partial void OnIdChanging(Guid value);
+        partial void OnIdChanged();
         partial void OnNameChanging(string value);
         partial void OnNameChanged();
         partial void OnOpenAccessGeneratedChanging(string[] value);
         partial void OnOpenAccessGeneratedChanged();
         partial void OnPt_GgChanging(decimal value);
         partial void OnPt_GgChanged();
-        partial void OnRowguidChanging(Guid value);
-        partial void OnRowguidChanged();
         partial void OnStatusChanging(byte value);
         partial void OnStatusChanged();
         partial void OnUserId0Changing(Guid value);
@@ -3993,8 +3993,6 @@ namespace MyERP.DataAccess
         /// Gets or sets the 'Code' value.
         /// </summary>
         [DataMember()]
-        [Editable(false, AllowInitialValue=true)]
-        [Key()]
         [RoundtripOriginal()]
         public string Code
         {
@@ -4007,9 +4005,10 @@ namespace MyERP.DataAccess
                 if ((this._code != value))
                 {
                     this.OnCodeChanging(value);
+                    this.RaiseDataMemberChanging("Code");
                     this.ValidateProperty("Code", value);
                     this._code = value;
-                    this.RaisePropertyChanged("Code");
+                    this.RaiseDataMemberChanged("Code");
                     this.OnCodeChanged();
                 }
             }
@@ -4116,6 +4115,32 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'Id' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Name' value.
         /// </summary>
         [DataMember()]
@@ -4188,31 +4213,6 @@ namespace MyERP.DataAccess
                     this._pt_Gg = value;
                     this.RaiseDataMemberChanged("Pt_Gg");
                     this.OnPt_GgChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'Rowguid' value.
-        /// </summary>
-        [DataMember()]
-        [RoundtripOriginal()]
-        public Guid Rowguid
-        {
-            get
-            {
-                return this._rowguid;
-            }
-            set
-            {
-                if ((this._rowguid != value))
-                {
-                    this.OnRowguidChanging(value);
-                    this.RaiseDataMemberChanging("Rowguid");
-                    this.ValidateProperty("Rowguid", value);
-                    this._rowguid = value;
-                    this.RaiseDataMemberChanged("Rowguid");
-                    this.OnRowguidChanged();
                 }
             }
         }
@@ -4324,7 +4324,7 @@ namespace MyERP.DataAccess
         /// <returns>An object instance that uniquely identifies this entity instance.</returns>
         public override object GetIdentity()
         {
-            return this._code;
+            return this._id;
         }
     }
     
@@ -4619,7 +4619,7 @@ namespace MyERP.DataAccess
         
         private string _ma_Ct;
         
-        private string _ma_Dvcs;
+        private Guid _ma_Dvcs;
         
         private short _ma_Gd;
         
@@ -4668,7 +4668,7 @@ namespace MyERP.DataAccess
         partial void OnDate2Changed();
         partial void OnMa_CtChanging(string value);
         partial void OnMa_CtChanged();
-        partial void OnMa_DvcsChanging(string value);
+        partial void OnMa_DvcsChanging(Guid value);
         partial void OnMa_DvcsChanged();
         partial void OnMa_GdChanging(short value);
         partial void OnMa_GdChanged();
@@ -4800,7 +4800,7 @@ namespace MyERP.DataAccess
         [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
-        public string Ma_Dvcs
+        public Guid Ma_Dvcs
         {
             get
             {

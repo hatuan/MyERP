@@ -282,7 +282,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private Job _dmvv;
-		[ForeignKeyAssociation(SharedFields = "Ma_Vv_I", TargetFields = "Ma_Vv")]
+		[ForeignKeyAssociation(SharedFields = "Ma_Vv_I", TargetFields = "Code")]
 		[Storage("_dmvv")]
 		public virtual Job Job
 		{

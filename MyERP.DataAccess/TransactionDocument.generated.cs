@@ -41,10 +41,10 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private string _Ma_Dvcs;
-		[Column("ma_dvcs", Length = 0, Scale = 0, SqlType = "text")]
+		private Guid _Ma_Dvcs;
+		[Column("ma_dvcs", Length = 0, Scale = 0, SqlType = "uuid")]
 		[Storage("_Ma_Dvcs")]
-		public virtual string Ma_Dvcs
+		public virtual Guid Ma_Dvcs
 		{
 			get
 			{
@@ -323,21 +323,6 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._User_Id2 = value;
-			}
-		}
-		
-		private Organization _dmdvcs;
-		[ForeignKeyAssociation(SharedFields = "Ma_Dvcs", TargetFields = "Code")]
-		[Storage("_dmdvcs")]
-		public virtual Organization Organization
-		{
-			get
-			{
-				return this._dmdvcs;
-			}
-			set
-			{
-				this._dmdvcs = value;
 			}
 		}
 		

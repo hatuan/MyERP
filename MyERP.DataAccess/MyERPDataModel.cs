@@ -168,8 +168,10 @@ namespace MyERP.DataAccess
 			BackendConfiguration backend = new BackendConfiguration();
 			backend.Backend = "PostgreSql";
 			backend.ProviderName = "Npgsql";
-			backend.Logging.LogEventsToSysOut = true;
-			backend.Logging.MetricStoreSnapshotInterval = 0;
+			backend.Logging.LogEvents = LoggingLevel.Normal;
+			backend.Logging.StackTrace = true;
+			backend.Logging.EventStoreCapacity = 10000;
+			backend.Logging.MetricStoreCapacity = 3600;
 		
 			CustomizeBackendConfiguration(ref backend);
 		

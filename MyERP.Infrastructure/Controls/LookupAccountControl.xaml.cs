@@ -24,8 +24,6 @@ namespace MyERP.Controls
 
         void OnLookupAccountControlLoaded(object sender, RoutedEventArgs e)
         {
-            this.Loaded -= OnLookupAccountControlLoaded;
-
             this.innerViewModel = new LookupAccountControlViewModel();
             this.LayoutRoot.DataContext = this.innerViewModel;
             this.innerViewModel.UpdateDate(this.Id);
@@ -72,7 +70,7 @@ namespace MyERP.Controls
         
         private void OnInnerViewModelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "SelectedCurrency")
+            if (e.PropertyName == "SelectedAccount")
             {
                 var selectedItem = (sender as LookupAccountControlViewModel).SelectedAccount;
                 this.Id = selectedItem != null
@@ -105,7 +103,7 @@ namespace MyERP.Controls
             set
             {
                 this._selectedAccount = value;
-                this.OnPropertyChanged("SelectedCurrency");
+                this.OnPropertyChanged("SelectedAccount");
             }
         }
 
@@ -139,7 +137,7 @@ namespace MyERP.Controls
                 MessageBox.Show(e.Error.ToString(), "Load Error", MessageBoxButton.OK);
                 e.MarkErrorAsHandled();
             }
-            OnPropertyChanged("Currencies");
+            OnPropertyChanged("Accounts");
             UpdateDate(Id);
         }
 

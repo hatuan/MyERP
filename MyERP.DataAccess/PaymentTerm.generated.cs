@@ -21,12 +21,12 @@ using Telerik.OpenAccess.Metadata.Fluent.Advanced;
 
 namespace MyERP.DataAccess	
 {
-	[Table("payment_term")]
+	[Table("payment_term", UpdateSchema = true)]
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
 	public partial class PaymentTerm
 	{
 		private string _code;
-		[Column("code", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "text")]
+		[Column("code", Length = 0, Scale = 0, SqlType = "text")]
 		[Storage("_code")]
 		public virtual string Code
 		{
@@ -175,18 +175,18 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Guid _rowguid;
-		[Column("rowguid", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_rowguid")]
-		public virtual Guid Rowguid
+		private Guid _id;
+		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_id")]
+		public virtual Guid Id
 		{
 			get
 			{
-				return this._rowguid;
+				return this._id;
 			}
 			set
 			{
-				this._rowguid = value;
+				this._id = value;
 			}
 		}
 		

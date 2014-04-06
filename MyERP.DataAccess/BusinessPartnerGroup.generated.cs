@@ -22,7 +22,7 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("business_partner_group")]
+	[Table("business_partner_group", UpdateSchema = true)]
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
 	public partial class BusinessPartnerGroup
 	{

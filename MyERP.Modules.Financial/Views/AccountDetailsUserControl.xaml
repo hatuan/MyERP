@@ -26,7 +26,19 @@
             
             <cv:IdNullToGuidConverter x:Key="MapIdNullToGuidConverter"/>
 
-        	<DataTemplate x:Key="AccountReadOnlyTemplate">
+            <telerik:RadDomainDataSource DomainContext="{Binding AccountRepository.Context}" QueryName="GetCurrencies" x:Name="currenciesDataSource" AutoLoad="True">
+                <telerik:RadDomainDataSource.SortDescriptors>
+                    <telerik:SortDescriptor Member="Code"/>
+                </telerik:RadDomainDataSource.SortDescriptors>
+            </telerik:RadDomainDataSource>
+
+            <telerik:RadDomainDataSource DomainContext="{Binding AccountRepository.Context}" QueryName="GetCurrencies" x:Name="accountsDataSource" AutoLoad="True">
+                <telerik:RadDomainDataSource.SortDescriptors>
+                    <telerik:SortDescriptor Member="Code"/>
+                </telerik:RadDomainDataSource.SortDescriptors>
+            </telerik:RadDomainDataSource>
+
+            <DataTemplate x:Key="AccountReadOnlyTemplate">
         		<Grid d:DesignWidth="464" d:DesignHeight="448">
         			<Grid.RowDefinitions>
         				<RowDefinition Height="Auto"/>
@@ -131,9 +143,16 @@
 						
         				<TextBox Text="{Binding Code, Mode=TwoWay}" TextWrapping="Wrap" FontFamily="Segoe UI" FontSize="14" Grid.Column="1" Margin="15,3,0,0" />                				
         				<TextBox Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" FontFamily="Segoe UI" FontSize="14" Grid.Row="1" Grid.Column="1" Margin="15,3,0,0" />
-                        <myControl:LookupCurrencyControl Grid.Row="2" Grid.Column="1" Margin="15,3,0,0" Id="{Binding CurrencyId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}"></myControl:LookupCurrencyControl>
+                        <myControl:LookupCurrencyControl Grid.Row="2" Grid.Column="1" Margin="15,3,0,0" 
+                                                         Id="{Binding CurrencyId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}"
+                                                         SelectedCurrency="{Binding Currency, Mode=TwoWay}"
+                                                         Currencies="{Binding Source={StaticResource currenciesDataSource}, Path=DataView.SourceCollection}">
+                        </myControl:LookupCurrencyControl>
                         
-                        <myControl:LookupAccountControl Grid.Row="3" Grid.Column="1" Margin="15,3,0,0" Id="{Binding ParentAccountId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}"></myControl:LookupAccountControl>
+                        <myControl:LookupAccountControl Grid.Row="3" Grid.Column="1" Margin="15,3,0,0" 
+                                                        Id="{Binding ParentAccountId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}">
+                            
+                        </myControl:LookupAccountControl>
                         
         				<CheckBox IsChecked="{Binding ArAp, Mode=TwoWay}" Grid.Row="4" Grid.Column="1" FontFamily="Segoe UI" FontSize="14" Margin="15,3,0,0" />
         				<TextBlock Text="{Binding Status}" TextWrapping="Wrap" Grid.Row="5" Grid.Column="1" FontFamily="Segoe UI" FontSize="14" Margin="15,3,0,0" />
@@ -150,17 +169,6 @@
     
     <Grid x:Name="LayoutRoot">
     
-        <telerik:RadDomainDataSource DomainContext="{Binding AccountRepository.Context}" QueryName="GetCurrencies" x:Name="currenciesDataSource" AutoLoad="True">
-            <telerik:RadDomainDataSource.SortDescriptors>
-                <telerik:SortDescriptor Member="Code"/>
-            </telerik:RadDomainDataSource.SortDescriptors>
-        </telerik:RadDomainDataSource>
-        <telerik:RadDomainDataSource DomainContext="{Binding AccountRepository.Context}" QueryName="GetCurrencies" x:Name="accountsDataSource" AutoLoad="True">
-            <telerik:RadDomainDataSource.SortDescriptors>
-                <telerik:SortDescriptor Member="Code"/>
-            </telerik:RadDomainDataSource.SortDescriptors>
-        </telerik:RadDomainDataSource>
-        
         <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}">
 			<telerik:RadDataForm x:Name="dataForm" 
 				ItemsSource="{Binding Accounts}" 

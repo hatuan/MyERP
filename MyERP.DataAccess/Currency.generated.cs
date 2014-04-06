@@ -22,7 +22,7 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("currency")]
+	[Table("currency", UpdateSchema = true)]
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
 	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class Currency
