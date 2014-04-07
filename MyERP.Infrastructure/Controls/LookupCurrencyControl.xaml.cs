@@ -17,7 +17,7 @@ using Telerik.Windows.Data;
 
 namespace MyERP.Controls
 {
-    public partial class LookupCurrencyControl : UserControl, INotifyPropertyChanged
+    public partial class LookupCurrencyControl : UserControl
     {
         public LookupCurrencyControl()
         {
@@ -64,22 +64,6 @@ namespace MyERP.Controls
         public static readonly DependencyProperty CurrenciesProperty = DependencyProperty.Register(
             "Currencies", typeof(IEnumerable), typeof(LookupCurrencyControl), new PropertyMetadata(Enumerable.Empty<Currency>()));
 
-        //private Currency _selectedCurrency;
-
-        //public Currency SelectedCurrency
-        //{
-        //    get
-        //    {
-        //        return _selectedCurrency;
-        //    }
-        //    set
-        //    {
-        //        _selectedCurrency = value;
-        //        Id = _selectedCurrency != null ? _selectedCurrency.Id : Guid.Empty;
-        //        OnPropertyChanged("Id");
-        //    }
-        //}
-
 
         public Currency SelectedCurrency
         {
@@ -108,88 +92,5 @@ namespace MyERP.Controls
                 lookupControl.Id = newCurrency == null ? Guid.Empty : newCurrency.Id;
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-
-
-    public class LookupCurrencyControlViewModel : INotifyPropertyChanged
-    {
-        public LookupCurrencyControlViewModel()
-        {
-            MyERPDomainContext context = new MyERPDomainContext();
-            EntityQuery<Currency> getCurrenciesQuery = context.GetCurrenciesQuery().OrderBy(c => c.Code);
-
-            this._currencies = new QueryableDomainServiceCollectionView<Currency>(context, getCurrenciesQuery);
-            this._currencies.AutoLoad = true;
-            this._currencies.LoadedData += this.CurrenciesLoadedData;
-        }
-
-        private Currency _selectedCurrency = null;
-        public Currency SelectedCurrency 
-        {
-            get
-            {
-                return this._selectedCurrency;
-            }
-            set
-            {
-                this._selectedCurrency = value;
-                this.OnPropertyChanged("SelectedCurrency");
-            }
-        }
-
-        private Guid _id = Guid.Empty;
-
-        public Guid Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
-
-        private readonly QueryableDomainServiceCollectionView<Currency> _currencies = null;
-        public ICollectionView Currencies
-        {
-            get
-            {
-                return this._currencies;
-            }
-        }
-
-        internal void UpdateDate(Guid id)
-        {
-            this.Id = id;
-            this.SelectedCurrency = id == Guid.Empty ? null : this.Currencies.AsQueryable().Cast<Currency>().FirstOrDefault(c => c.Id == id);
-        }
-
-        void CurrenciesLoadedData(object sender, Telerik.Windows.Controls.DomainServices.LoadedDataEventArgs e)
-        {
-            if (e.HasError)
-            {
-                MessageBox.Show(e.Error.ToString(), "Load Error", MessageBoxButton.OK);
-                e.MarkErrorAsHandled();
-            }
-            OnPropertyChanged("Currencies");
-            UpdateDate(Id);
-        }
-
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion
-
     }
 }

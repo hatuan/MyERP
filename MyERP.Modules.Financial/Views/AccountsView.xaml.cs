@@ -40,6 +40,16 @@ namespace MyERP.Modules.Financial.Views
             win.CanClose = false;
             win.Width = 1210;
             win.Height = 700;
+
+            if (DataContext is ICloseable)
+            {
+                (DataContext as ICloseable).RequestClose += (_, __) =>
+                {
+                    RadWindow window = this.ParentOfType<FinancialWindow>();
+                    window.Close();
+                };
+            }
+
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

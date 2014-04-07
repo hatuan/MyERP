@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
 using MyERP.DataAccess;
+using MyERP.Infrastructure;
 using MyERP.Infrastructure.ViewModels;
 using MyERP.Repositories;
 using MyERP.ViewModels;
@@ -17,7 +18,7 @@ using Telerik.Windows.Data;
 namespace MyERP.Modules.Financial.ViewModels
 {
     [Export]
-    public class AccountsViewModel : NavigationAwareDataViewModel
+    public class AccountsViewModel : NavigationAwareDataViewModel, ICloseable
     {
         public AccountsViewModel()
         {
@@ -34,6 +35,7 @@ namespace MyERP.Modules.Financial.ViewModels
         public ICommand DeleteCommand { get; set; }
         public ICommand ChangeCodeCommand { get; set; }
         public ICommand CloseWindowCommand { get; set; }
+
         [Import]
         public IRegionManager RegionManager { get; set; }
 
@@ -73,6 +75,8 @@ namespace MyERP.Modules.Financial.ViewModels
                 }
                 this._selectedAccount = value;
                 this.RaisePropertyChanged("SelectedAccount");
+
+                ((DelegateCommand)DeleteCommand).RaiseCanExecuteChanged();
             }
         }
 
@@ -94,6 +98,7 @@ namespace MyERP.Modules.Financial.ViewModels
             {
                 this.currencies = value;
                 this.RaisePropertyChanged("Currencies");
+                
             }
         }
 
@@ -134,6 +139,7 @@ namespace MyERP.Modules.Financial.ViewModels
                     RaisePropertyChanged(e.PropertyName);
                     break;
                 case "HasChanges":
+                    ((DelegateCommand)CloseWindowCommand).RaiseCanExecuteChanged();
                     ((DelegateCommand)SubmitChangesCommand).RaiseCanExecuteChanged();
                     ((DelegateCommand)RejectChangesCommand).RaiseCanExecuteChanged();
                     break;
@@ -172,7 +178,41 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnRefreshExcuted()
         {
-            this._accounts.Load(true);
+            this._accounts.Load();
+        }
+
+        private bool DeleteCommandCanExecute()
+        {
+            if(SelectedAccount == null)
+                return false;
+
+            return true;
+        }
+
+        private void OnDeleteExcuted()
+        {
+            if(SelectedAccount != null)
+                this.Accounts.Remove(SelectedAccount);
+        }
+
+        private bool CloseWindowCanExecute()
+        {
+            if (this.RequestClose == null)
+                return false;
+            
+            //Neu co thay doi thi khong cho dong cua so, bat buoc phai luu hay undo
+            if(this._accounts.HasChanges)
+                return false;
+
+            return true;
+        }
+
+        private void OnCloseWindowExcuted()
+        {
+            if (this.RequestClose != null)
+            {
+                this.RequestClose(null, EventArgs.Empty);
+            }
         }
 
         #region NavigationAwareDataViewModel overrides
@@ -187,6 +227,7 @@ namespace MyERP.Modules.Financial.ViewModels
             this._accounts.LoadedData += _accounts_LoadedData;
             this._accounts.PropertyChanged += _accounts_PropertyChanged;
             this._accounts.SubmittedChanges += _accounts_SubmittedChanges;
+            //this._accounts.SubmittingChanges += _accounts_SubmittingChanges;
 
             this._codeSortDescriptor = new SortDescriptor() { Member = "Code" };
 
@@ -194,7 +235,23 @@ namespace MyERP.Modules.Financial.ViewModels
             this.SubmitChangesCommand = new DelegateCommand(OnSubmitChangesExcuted, SubmitChangesCommandCanExecute);
             this.RejectChangesCommand = new DelegateCommand(OnRejectChangesExcuted, SubmitChangesCommandCanExecute);
             this.RefreshCommand = new DelegateCommand(OnRefreshExcuted, RefreshCommandCanExecute);
+            this.DeleteCommand = new DelegateCommand(OnDeleteExcuted, DeleteCommandCanExecute);
+            this.CloseWindowCommand = new DelegateCommand(OnCloseWindowExcuted, CloseWindowCanExecute);
         }
+       
         #endregion
+
+        public event EventHandler<EventArgs> RequestClose;
+
+        void _accounts_SubmittingChanges(object sender, Telerik.Windows.Controls.DomainServices.DomainServiceSubmittingChangesEventArgs e)
+        {
+            foreach (Account modified in e.ChangeSet.ModifiedEntities)
+            {
+                modified.RecModified = DateTime.Now;
+                Session currentSession = AccountRepository.Context.Sessions.First(c => c.Id == ApplicationViewModel.SessionId);
+                modified.RecModifiedById = currentSession.UserId;
+            }
+
+        }
     }
 }

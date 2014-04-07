@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
@@ -18,25 +20,9 @@ namespace MyERP.Controls
         public LookupAccountControl()
         {
             InitializeComponent();
-
-            this.Loaded += OnLookupAccountControlLoaded;
+            LayoutRoot.DataContext = this;
         }
-
-        void OnLookupAccountControlLoaded(object sender, RoutedEventArgs e)
-        {
-            this.innerViewModel = new LookupAccountControlViewModel();
-            this.LayoutRoot.DataContext = this.innerViewModel;
-            this.innerViewModel.UpdateDate(this.Id);
-            this.textBox.SelectedItem = this.innerViewModel.SelectedAccount;
-            this.dropDownGrid.SelectedItem = this.innerViewModel.SelectedAccount;
-            this.innerViewModel.PropertyChanged += this.OnInnerViewModelPropertyChanged;
-
-            this.dropDownButton.PopupPlacementTarget = this.textBox;
-        }
-
-
-        private LookupAccountControlViewModel innerViewModel;
-        
+      
         public Guid Id
         {
             get
@@ -57,101 +43,53 @@ namespace MyERP.Controls
             var newGuid = (Guid)e.NewValue;
             var lookupControl = d as LookupAccountControl;
 
-            if (lookupControl.innerViewModel != null)
+            if (lookupControl != null)
             {
-                lookupControl.innerViewModel.PropertyChanged -= lookupControl.OnInnerViewModelPropertyChanged;
-                lookupControl.innerViewModel.UpdateDate(newGuid);
-                lookupControl.textBox.SelectedItem = lookupControl.innerViewModel.SelectedAccount;
-                lookupControl.dropDownGrid.SelectedItem = lookupControl.innerViewModel.SelectedAccount;
-                lookupControl.innerViewModel.PropertyChanged += lookupControl.OnInnerViewModelPropertyChanged;
             }
         }
 
-        
-        private void OnInnerViewModelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "SelectedAccount")
-            {
-                var selectedItem = (sender as LookupAccountControlViewModel).SelectedAccount;
-                this.Id = selectedItem != null
-                    ? (sender as LookupAccountControlViewModel).SelectedAccount.Id
-                    : Guid.Empty;
-            }
-        }
-    }
-
-
-    public class LookupAccountControlViewModel : INotifyPropertyChanged
-    {
-        public LookupAccountControlViewModel()
-        {
-            MyERPDomainContext context = new MyERPDomainContext();
-            EntityQuery<Account> getAccountsQuery = context.GetAccountsQuery().OrderBy(c => c.Code);
-
-            this._accounts = new QueryableDomainServiceCollectionView<Account>(context, getAccountsQuery);
-            this._accounts.AutoLoad = true;
-            this._accounts.LoadedData += AccountsLoadedData;
-        }
-
-        private Account _selectedAccount = null;
-        public Account SelectedAccount 
+        public IEnumerable<Account> Accounts
         {
             get
             {
-                return this._selectedAccount;
+                return (IEnumerable<Account>)GetValue(AccountsProperty);
             }
             set
             {
-                this._selectedAccount = value;
-                this.OnPropertyChanged("SelectedAccount");
+                SetValue(AccountsProperty, value);
             }
         }
 
-        private Guid _id = Guid.Empty;
+        public static readonly DependencyProperty AccountsProperty = DependencyProperty.Register(
+            "Accounts", typeof(IEnumerable), typeof(LookupAccountControl), new PropertyMetadata(Enumerable.Empty<Account>()));
 
-        public Guid Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
-
-        private readonly QueryableDomainServiceCollectionView<Account> _accounts = null;
-        public ICollectionView Accounts
+        public Account SelectedAccount
         {
             get
             {
-                return this._accounts;
+                return (Account)GetValue(SelectedAccountProperty);
             }
-        }
-
-        internal void UpdateDate(Guid id)
-        {
-            this.Id = id;
-            this.SelectedAccount = id == Guid.Empty ? null : this.Accounts.AsQueryable().Cast<Account>().FirstOrDefault(c => c.Id == id);
-        }
-
-        void AccountsLoadedData(object sender, Telerik.Windows.Controls.DomainServices.LoadedDataEventArgs e)
-        {
-            if (e.HasError)
+            set
             {
-                MessageBox.Show(e.Error.ToString(), "Load Error", MessageBoxButton.OK);
-                e.MarkErrorAsHandled();
+                SetValue(SelectedAccountProperty, value);
             }
-            OnPropertyChanged("Accounts");
-            UpdateDate(Id);
         }
 
-        #region INotifyPropertyChanged Members
+        public static readonly DependencyProperty SelectedAccountProperty = DependencyProperty.Register(
+           "SelectedAccount", typeof(Account), typeof(LookupAccountControl), new PropertyMetadata(null, OnSelectedAccountChanged));
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
+        private static void OnSelectedAccountChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            var newAccount = (Account)e.NewValue;
+            var lookupControl = d as LookupAccountControl;
+
+            if (lookupControl != null)
+            {
+                lookupControl.textBox.SelectedItem = newAccount;
+                lookupControl.dropDownGrid.SelectedItem = newAccount;
+                lookupControl.Id = newAccount == null ? Guid.Empty : newAccount.Id;
+            }
         }
-
-        #endregion
-
     }
+
 }

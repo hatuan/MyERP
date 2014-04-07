@@ -25,6 +25,7 @@
 
         <telerik:RadDropDownButton x:Name="dropDownButton"
                                    Grid.Column="1" IsTabStop="False"
+                                   PopupPlacementTarget="{Binding ElementName=textBox}"
                                    DropDownMaxHeight="300">
             <telerik:RadDropDownButton.DropDownContent>
                 <Grid>
