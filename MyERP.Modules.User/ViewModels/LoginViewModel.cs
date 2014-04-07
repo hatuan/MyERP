@@ -53,57 +53,57 @@ namespace MyERP.Modules.User.ViewModels
         {
             string passEncrypt = Cryptography.Encrypt(Cryptography.GetHashKey(UserName + Password), Password);
 
-            //LoginOperation lop = WebContext.Current.Authentication.Login((new LoginParameters(UserName, passEncrypt, true, null)));
-            //lop.Completed += (Authsender, args) =>
-            //{
-            //    if (!lop.HasError)
-            //    {
-            //        if (lop.LoginSuccess)
-            //        {
-            //            RemoveError("Password", PASSWORD_ERROR);
-            //            LoginSuccessfully();
-            //        }
-            //        else
-            //        {
-            //            AddError("Password", PASSWORD_ERROR, false);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        AddError("Password", lop.Error.Message, false);
-            //        lop.MarkErrorAsHandled();
-            //    }
-            //};
-
-
-            UserRepository.GetUserinfoByUserNameAndPassword(UserName, passEncrypt,
-                user =>
+            LoginOperation lop = MyERP.Repositories.WebContext.Current.Authentication.Login((new LoginParameters(UserName, passEncrypt, true, null)));
+            lop.Completed += (Authsender, args) =>
+            {
+                if (!lop.HasError)
                 {
-                    if (user != null)
+                    if (lop.LoginSuccess)
                     {
                         RemoveError("Password", PASSWORD_ERROR);
-
-                        //Insert UserId To Session table
-                        Session session = new Session()
-                        {
-                            Id = ApplicationViewModel.SessionId,
-                            UserId = user.Id,
-                            WorkingDate = DateTime.Today,
-                            LastTime = DateTime.Now,
-                            Expire = false
-                        };
-
-                        SessionRepository.Context.Sessions.Add(session);
-                        SessionRepository.SaveOrUpdateEntities();
-
                         LoginSuccessfully();
                     }
                     else
                     {
                         AddError("Password", PASSWORD_ERROR, false);
                     }
+                }
+                else
+                {
+                    AddError("Password", lop.Error.Message, false);
+                    lop.MarkErrorAsHandled();
+                }
+            };
 
-                });
+
+            //UserRepository.GetUserinfoByUserNameAndPassword(UserName, passEncrypt,
+            //    user =>
+            //    {
+            //        if (user != null)
+            //        {
+            //            RemoveError("Password", PASSWORD_ERROR);
+
+            //            //Insert UserId To Session table
+            //            Session session = new Session()
+            //            {
+            //                Id = ApplicationViewModel.SessionId,
+            //                UserId = user.Id,
+            //                WorkingDate = DateTime.Today,
+            //                LastTime = DateTime.Now,
+            //                Expire = false
+            //            };
+
+            //            SessionRepository.Context.Sessions.Add(session);
+            //            SessionRepository.SaveOrUpdateEntities();
+
+            //            LoginSuccessfully();
+            //        }
+            //        else
+            //        {
+            //            AddError("Password", PASSWORD_ERROR, false);
+            //        }
+
+            //    });
         }
 
         private String _userName = String.Empty;

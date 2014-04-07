@@ -127,9 +127,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication.cs" />
+    <Compile Include="CustomMembershipProvider.cs" />
+    <Compile Include="CustomRoleProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MyERPAuthenticationDomainService.cs" />
     <Compile Include="MyERPDomainService.cs" />
     <Compile Include="MyERPDomainService.generated.cs">
       <AutoGen>True</AutoGen>

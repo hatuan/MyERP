@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.ServiceModel.DomainServices.Client.ApplicationServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,7 +30,14 @@ namespace MyERP
 
             InitializeComponent();
 
-            
+            // Create a WebContext and add it to the ApplicationLifetimeObjects
+            // collection.  This will then be available as WebContext.Current.
+            MyERP.Repositories.WebContext webContext = new MyERP.Repositories.WebContext();
+            webContext.Authentication = new FormsAuthentication()
+            {
+                DomainContext = new MyERPAuthenticationDomainContext()
+            };
+            this.ApplicationLifetimeObjects.Add(webContext);
         }
 
         private void Application_Startup(object sender, StartupEventArgs e) 
@@ -39,11 +47,11 @@ namespace MyERP
             Thread.CurrentThread.CurrentCulture = LocalizationManager.DefaultCulture;
             Thread.CurrentThread.CurrentUICulture = LocalizationManager.DefaultCulture;
 
-            var context = new MyERPDomainContext();
-            context.UpdateSchema();
+            //var context = new MyERPDomainContext();
+            //context.UpdateSchema();
 
-            context.LoadModuleData();
-            context.LoadDemoData();
+            //context.LoadModuleData();
+            //context.LoadDemoData();
 
             AssemblyCache.Initialize();
             var bootstrapper = new Bootstrapper();

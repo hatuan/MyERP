@@ -18,6 +18,7 @@ namespace MyERP.Modules.User
     using System.ServiceModel.DomainServices;
     using System.ServiceModel.DomainServices.Client;
     using System.ServiceModel.DomainServices.Client.ApplicationServices;
+    using MyERP.Web;
     
     
     /// <summary>
@@ -61,6 +62,17 @@ namespace MyERP.Modules.User
             get
             {
                 return ((WebContext)(WebContextBase.Current));
+            }
+        }
+        
+        /// <summary>
+        /// Gets a user representing the authenticated identity.
+        /// </summary>
+        public new AuthUser User
+        {
+            get
+            {
+                return ((AuthUser)(base.User));
             }
         }
     }

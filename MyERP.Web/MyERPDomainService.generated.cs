@@ -12,7 +12,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
+using System.Security.Principal;
 using System.ServiceModel.DomainServices.Hosting;
 using System.ServiceModel.DomainServices.Server;
 using Telerik.OpenAccess;
@@ -21,13 +23,22 @@ using MyERP.DataAccess;
 #pragma warning disable 1591
 
 namespace MyERP.Web	
-{    
+{
+    [RequiresAuthentication]
     [EnableClientAccess()]
     public partial class MyERPDomainService : OpenAccessDomainService<EntitiesModel>
 	{
 		public MyERPDomainService() : base()
 		{
 		}
+
+        private IPrincipal _User;
+        public override void Initialize(DomainServiceContext context)
+        {
+            base.Initialize(context);
+            Debug.WriteLine(context.User.Identity.Name);
+            _User = context.User;
+        }
 		public IQueryable<Account> GetAccounts()
 		{ 
 			return this.DataContext.Accounts;

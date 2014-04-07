@@ -7056,6 +7056,7 @@ namespace MyERP.Web
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Runtime.Serialization;
     using System.ServiceModel;
     using System.ServiceModel.DomainServices;
     using System.ServiceModel.DomainServices.Client;
@@ -7063,6 +7064,353 @@ namespace MyERP.Web
     using System.ServiceModel.Web;
     using MyERP.DataAccess;
     
+    
+    /// <summary>
+    /// The 'AuthUser' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.Web")]
+    public sealed partial class AuthUser : Entity, global::System.Security.Principal.IIdentity, global::System.Security.Principal.IPrincipal
+    {
+        
+        private string _name = string.Empty;
+        
+        private IEnumerable<string> _roles;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnNameChanging(string value);
+        partial void OnNameChanged();
+        partial void OnRolesChanging(IEnumerable<string> value);
+        partial void OnRolesChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AuthUser"/> class.
+        /// </summary>
+        public AuthUser()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Name' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                if ((this._name != value))
+                {
+                    this.OnNameChanging(value);
+                    this.ValidateProperty("Name", value);
+                    this._name = value;
+                    this.RaisePropertyChanged("Name");
+                    this.OnNameChanged();
+                    this.RaisePropertyChanged("IsAuthenticated");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Roles' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false)]
+        public IEnumerable<string> Roles
+        {
+            get
+            {
+                return this._roles;
+            }
+            set
+            {
+                if ((this._roles != value))
+                {
+                    this.OnRolesChanging(value);
+                    this.ValidateProperty("Roles", value);
+                    this._roles = value;
+                    this.RaisePropertyChanged("Roles");
+                    this.OnRolesChanged();
+                }
+            }
+        }
+        
+        string global::System.Security.Principal.IIdentity.AuthenticationType
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
+        
+        /// <summary>
+        /// Gets a value indicating whether the identity is authenticated.
+        /// </summary>
+        /// <remarks>
+        /// This value is <c>true</c> if <see cref="Name"/> is not <c>null</c> or empty.
+        /// </remarks>
+        public bool IsAuthenticated
+        {
+            get
+            {
+                return (true != string.IsNullOrEmpty(this.Name));
+            }
+        }
+        
+        string global::System.Security.Principal.IIdentity.Name
+        {
+            get
+            {
+                return this.Name;
+            }
+        }
+        
+        global::System.Security.Principal.IIdentity global::System.Security.Principal.IPrincipal.Identity
+        {
+            get
+            {
+                return this;
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._name;
+        }
+        
+        /// <summary>
+        /// Return whether the principal is in the role.
+        /// </summary>
+        /// <remarks>
+        /// Returns whether the specified role is contained in the roles.
+        /// This implementation is case sensitive.
+        /// </remarks>
+        /// <param name="role">The name of the role for which to check membership.</param>
+        /// <returns>Whether the principal is in the role.</returns>
+        public bool IsInRole(string role)
+        {
+            if ((this.Roles == null))
+            {
+                return false;
+            }
+            return global::System.Linq.Enumerable.Contains(this.Roles, role);
+        }
+    }
+    
+    /// <summary>
+    /// The DomainContext corresponding to the 'MyERPAuthenticationDomainService' DomainService.
+    /// </summary>
+    public sealed partial class MyERPAuthenticationDomainContext : global::System.ServiceModel.DomainServices.Client.ApplicationServices.AuthenticationDomainContextBase
+    {
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MyERPAuthenticationDomainContext"/> class.
+        /// </summary>
+        public MyERPAuthenticationDomainContext() : 
+                this(new WebDomainClient<IMyERPAuthenticationDomainServiceContract>(new Uri("MyERP-Web-MyERPAuthenticationDomainService.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MyERPAuthenticationDomainContext"/> class with the specified service URI.
+        /// </summary>
+        /// <param name="serviceUri">The MyERPAuthenticationDomainService service URI.</param>
+        public MyERPAuthenticationDomainContext(Uri serviceUri) : 
+                this(new WebDomainClient<IMyERPAuthenticationDomainServiceContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MyERPAuthenticationDomainContext"/> class with the specified <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">The DomainClient instance to use for this DomainContext.</param>
+        public MyERPAuthenticationDomainContext(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="AuthUser"/> entity instances that have been loaded into this <see cref="MyERPAuthenticationDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<AuthUser> AuthUsers
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<AuthUser>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="AuthUser"/> entity instances using the 'GetUser' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="AuthUser"/> entity instances.</returns>
+        public EntityQuery<AuthUser> GetUserQuery()
+        {
+            this.ValidateMethod("GetUserQuery", null);
+            return base.CreateQuery<AuthUser>("GetUser", null, false, false);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="AuthUser"/> entity instances using the 'Login' query.
+        /// </summary>
+        /// <param name="userName">The value for the 'userName' parameter of the query.</param>
+        /// <param name="password">The value for the 'password' parameter of the query.</param>
+        /// <param name="isPersistent">The value for the 'isPersistent' parameter of the query.</param>
+        /// <param name="customData">The value for the 'customData' parameter of the query.</param>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="AuthUser"/> entity instances.</returns>
+        public EntityQuery<AuthUser> LoginQuery(string userName, string password, bool isPersistent, string customData)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("userName", userName);
+            parameters.Add("password", password);
+            parameters.Add("isPersistent", isPersistent);
+            parameters.Add("customData", customData);
+            this.ValidateMethod("LoginQuery", parameters);
+            return base.CreateQuery<AuthUser>("Login", parameters, true, false);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="AuthUser"/> entity instances using the 'Logout' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="AuthUser"/> entity instances.</returns>
+        public EntityQuery<AuthUser> LogoutQuery()
+        {
+            this.ValidateMethod("LogoutQuery", null);
+            return base.CreateQuery<AuthUser>("Logout", null, true, false);
+        }
+        
+        /// <summary>
+        /// Creates a new EntityContainer for this DomainContext's EntitySets.
+        /// </summary>
+        /// <returns>A new container instance.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new MyERPAuthenticationDomainContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Service contract for the 'MyERPAuthenticationDomainService' DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface IMyERPAuthenticationDomainServiceContract
+        {
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetUser' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPAuthenticationDomainService/GetUserDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPAuthenticationDomainService/GetUser", ReplyAction="http://tempuri.org/MyERPAuthenticationDomainService/GetUserResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetUser(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetUser'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetUser'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetUser' operation.</returns>
+            QueryResult<AuthUser> EndGetUser(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'Login' operation.
+            /// </summary>
+            /// <param name="userName">The value for the 'userName' parameter of this action.</param>
+            /// <param name="password">The value for the 'password' parameter of this action.</param>
+            /// <param name="isPersistent">The value for the 'isPersistent' parameter of this action.</param>
+            /// <param name="customData">The value for the 'customData' parameter of this action.</param>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPAuthenticationDomainService/LoginDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPAuthenticationDomainService/Login", ReplyAction="http://tempuri.org/MyERPAuthenticationDomainService/LoginResponse")]
+            IAsyncResult BeginLogin(string userName, string password, bool isPersistent, string customData, AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginLogin'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginLogin'.</param>
+            /// <returns>The 'QueryResult' returned from the 'Login' operation.</returns>
+            QueryResult<AuthUser> EndLogin(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'Logout' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPAuthenticationDomainService/LogoutDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPAuthenticationDomainService/Logout", ReplyAction="http://tempuri.org/MyERPAuthenticationDomainService/LogoutResponse")]
+            IAsyncResult BeginLogout(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginLogout'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginLogout'.</param>
+            /// <returns>The 'QueryResult' returned from the 'Logout' operation.</returns>
+            QueryResult<AuthUser> EndLogout(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'SubmitChanges' operation.
+            /// </summary>
+            /// <param name="changeSet">The change-set to submit.</param>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPAuthenticationDomainService/SubmitChangesDomainServiceFau" +
+                "lt", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPAuthenticationDomainService/SubmitChanges", ReplyAction="http://tempuri.org/MyERPAuthenticationDomainService/SubmitChangesResponse")]
+            IAsyncResult BeginSubmitChanges(IEnumerable<ChangeSetEntry> changeSet, AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginSubmitChanges'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginSubmitChanges'.</param>
+            /// <returns>The collection of change-set entry elements returned from 'SubmitChanges'.</returns>
+            IEnumerable<ChangeSetEntry> EndSubmitChanges(IAsyncResult result);
+        }
+        
+        internal sealed class MyERPAuthenticationDomainContextEntityContainer : EntityContainer
+        {
+            
+            public MyERPAuthenticationDomainContextEntityContainer()
+            {
+                this.CreateEntitySet<AuthUser>(EntitySetOperations.Edit);
+            }
+        }
+    }
     
     /// <summary>
     /// The DomainContext corresponding to the 'MyERPDomainService' DomainService.
