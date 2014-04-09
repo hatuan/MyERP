@@ -114,6 +114,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MyERPDomainService.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="MyERPOtherDomainService.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MyERPOtherDomainService.generated.cs</LastGenOutput>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -139,6 +143,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MyERPDomainService.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MyERPOtherDomainService.cs" />
+    <Compile Include="MyERPOtherDomainService.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyERPOtherDomainService.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

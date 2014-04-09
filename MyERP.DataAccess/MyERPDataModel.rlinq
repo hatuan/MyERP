@@ -100,35 +100,41 @@
         <orm:field name="_comment" property="Comment" behavior="readwrite" uniqueId="0df610ae-aa0b-4637-887b-7f5773153de8" type="System.String">
           <orm:column name="comment" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_administrator" property="Administrator" behavior="readwrite" uniqueId="a5458d89-c31c-43a6-92a0-73918937ca74" type="System.Boolean">
-          <orm:column name="administrator" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
-        </orm:field>
-        <orm:field name="_rightAccess" property="RightAccess" behavior="readwrite" uniqueId="488f1b84-d91e-4095-afd8-c3b0eb409252" type="System.String">
-          <orm:column name="r_access" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        </orm:field>
-        <orm:field name="_rightAdd" property="RightAdd" behavior="readwrite" uniqueId="793af9aa-3f83-41c8-89b2-fb63c7a7d13b" type="System.String">
-          <orm:column name="r_add" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        </orm:field>
-        <orm:field name="_r_edit" property="RightEdit" behavior="readwrite" uniqueId="5105fc27-8a90-4f9f-9730-8c5e3474aa3b" type="System.String">
-          <orm:column name="r_edit" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        </orm:field>
-        <orm:field name="_rightDel" property="RightDel" behavior="readwrite" uniqueId="3a33e58a-2af1-489c-941b-bb6042d025e6" type="System.String">
-          <orm:column name="r_del" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        </orm:field>
-        <orm:field name="_r_print" property="RightPrint" behavior="readwrite" uniqueId="2e2b3fc1-6d0d-4488-bea0-8dd1cb9766a0" type="System.String">
-          <orm:column name="r_print" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        </orm:field>
-        <orm:field name="_r_read" property="RightRead" behavior="readwrite" uniqueId="b6548582-2a8a-4074-be7d-2f4af96362be" type="System.String">
-          <orm:column name="r_read" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        </orm:field>
-        <orm:field name="_status" property="Status" behavior="readwrite" uniqueId="daf42c0e-9011-4140-8ecc-2bd7cf035cfe" type="System.Byte">
-          <orm:column name="status" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
-        </orm:field>
-        <orm:field name="_r_search" property="RightSearch" behavior="readwrite" uniqueId="31853449-8600-474a-9304-925c581530b9" type="System.String">
-          <orm:column name="r_search" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        </orm:field>
         <orm:field name="_fullName" property="FullName" behavior="readwrite" uniqueId="393c1728-a3c1-49b2-a4f1-f0c515598eef" type="System.String">
           <orm:column name="full_name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_passwordAnswer" property="PasswordAnswer" behavior="readwrite" uniqueId="bad52e24-12c5-4b8e-8c47-12740485fc31" type="System.String">
+          <orm:column name="password_answer" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_passwordQuestion" property="PasswordQuestion" behavior="readwrite" uniqueId="d419ec26-5745-4d2e-b314-52c967acb672" type="System.String">
+          <orm:column name="password_question" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_email" property="Email" behavior="readwrite" uniqueId="95578eb7-d8ed-4016-9d00-ee8d5c165bcd" type="System.String">
+          <orm:column name="email" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_createdDate" property="CreatedDate" behavior="readwrite" uniqueId="110a1bbf-06fb-4876-a919-563fe1a8e78b" type="System.DateTime">
+          <orm:column name="created_date" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_isActivated" property="IsActivated" behavior="readwrite" uniqueId="e8fb8e07-9af1-473e-a550-e83ebdb89833" type="System.Boolean">
+          <orm:column name="is_activated" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_isLockedOut" property="IsLockedOut" behavior="readwrite" uniqueId="7974e332-2bb7-4fa9-ae12-51c3df8e6312" type="System.Boolean">
+          <orm:column name="is_locked_out" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_lastLockedOutDate" property="LastLockedOutDate" behavior="readwrite" uniqueId="e2cd0ef3-7f27-4ab5-8fc5-7ae89bb8dd9d" type="System.DateTime">
+          <orm:column name="last_locked_out_date" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_lastLockedOutReason" property="LastLockedOutReason" behavior="readwrite" uniqueId="ab8a9012-d432-41da-904d-7202ff2db5b4" type="System.String">
+          <orm:column name="last_locked_out_reason" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_lastLoginDate" property="LastLoginDate" behavior="readwrite" uniqueId="7277c4ca-eb2c-4b6a-9095-cfa3fec19c0d" type="System.DateTime">
+          <orm:column name="last_login_date" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_lastLoginIp" property="LastLoginIp" behavior="readwrite" uniqueId="59ac5fd6-701e-45a7-a309-f9aff502d194" type="System.String">
+          <orm:column name="last_login_ip" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_lastModifiedDate" property="LastModifiedDate" behavior="readwrite" uniqueId="4252d7d2-a137-4bf3-acd0-2e3a06ee3501" type="System.DateTime">
+          <orm:column name="last_modified_date" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
       </orm:class>
       <orm:class name="Currency" update-schema="true" uniqueId="9d8598ff-424c-4d4a-bac3-97f1835b25b3">
@@ -898,16 +904,18 @@
         <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="password" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="comment" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="administrator" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="r_access" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="r_add" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="r_edit" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="r_del" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="r_print" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="r_read" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="status" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="r_search" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="full_name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="last_modified_date" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="last_login_ip" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="last_login_date" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="last_locked_out_reason" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="last_locked_out_date" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="is_locked_out" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="is_activated" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="created_date" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="email" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="password_question" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="password_answer" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
       </orm:table>
       <orm:table name="account">
         <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
@@ -1242,18 +1250,20 @@
     <DomainClass Id="6ac6097f-bd1d-4391-ae80-67131f49d19f" name="User" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Changed" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
       <Property Id="022c9ba3-96ec-44f2-9646-99dc0465bf3f" name="Id" type="Guid" label="Id : Guid" kind="Persistent" identity="true" fieldName="_id" />
       <Property Id="0df610ae-aa0b-4637-887b-7f5773153de8" name="Comment" label="Comment : String" kind="Persistent" fieldName="_comment" />
-      <Property Id="a5458d89-c31c-43a6-92a0-73918937ca74" name="Administrator" type="Boolean" label="Administrator : Boolean" kind="Persistent" fieldName="_administrator" />
       <Property Id="23aee6ac-aa1b-43a4-a54e-2a144eae16fc" name="Password" label="Password : String" kind="Persistent" fieldName="_password" />
-      <Property Id="488f1b84-d91e-4095-afd8-c3b0eb409252" name="RightAccess" label="RightAccess : String" kind="Persistent" fieldName="_rightAccess" />
-      <Property Id="793af9aa-3f83-41c8-89b2-fb63c7a7d13b" name="RightAdd" label="RightAdd : String" kind="Persistent" fieldName="_rightAdd" />
-      <Property Id="3a33e58a-2af1-489c-941b-bb6042d025e6" name="RightDel" label="RightDel : String" kind="Persistent" fieldName="_rightDel" />
-      <Property Id="5105fc27-8a90-4f9f-9730-8c5e3474aa3b" name="RightEdit" label="RightEdit : String" kind="Persistent" fieldName="_r_edit" />
-      <Property Id="2e2b3fc1-6d0d-4488-bea0-8dd1cb9766a0" name="RightPrint" label="RightPrint : String" kind="Persistent" fieldName="_r_print" />
-      <Property Id="b6548582-2a8a-4074-be7d-2f4af96362be" name="RightRead" label="RightRead : String" kind="Persistent" fieldName="_r_read" />
-      <Property Id="31853449-8600-474a-9304-925c581530b9" name="RightSearch" label="RightSearch : String" kind="Persistent" fieldName="_r_search" />
-      <Property Id="daf42c0e-9011-4140-8ecc-2bd7cf035cfe" name="Status" type="Byte" label="Status : Byte" kind="Persistent" fieldName="_status" />
       <Property Id="6ae63020-9951-458b-8e73-ed65d7804f92" name="Name" label="Name : String" kind="Persistent" fieldName="_name" />
       <Property Id="393c1728-a3c1-49b2-a4f1-f0c515598eef" name="FullName" label="FullName : String" kind="Persistent" fieldName="_fullName" />
+      <Property Id="bad52e24-12c5-4b8e-8c47-12740485fc31" name="PasswordAnswer" label="PasswordAnswer : String" kind="Persistent" fieldName="_passwordAnswer" />
+      <Property Id="d419ec26-5745-4d2e-b314-52c967acb672" name="PasswordQuestion" label="PasswordQuestion : String" kind="Persistent" fieldName="_passwordQuestion" />
+      <Property Id="95578eb7-d8ed-4016-9d00-ee8d5c165bcd" name="Email" label="Email : String" kind="Persistent" fieldName="_email" />
+      <Property Id="110a1bbf-06fb-4876-a919-563fe1a8e78b" name="CreatedDate" type="DateTime" label="CreatedDate : DateTime" kind="Persistent" fieldName="_createdDate" />
+      <Property Id="e8fb8e07-9af1-473e-a550-e83ebdb89833" name="IsActivated" type="Boolean" label="IsActivated : Boolean" kind="Persistent" fieldName="_isActivated" />
+      <Property Id="7974e332-2bb7-4fa9-ae12-51c3df8e6312" name="IsLockedOut" type="Boolean" label="IsLockedOut : Boolean" kind="Persistent" fieldName="_isLockedOut" />
+      <Property Id="e2cd0ef3-7f27-4ab5-8fc5-7ae89bb8dd9d" name="LastLockedOutDate" type="DateTime" label="LastLockedOutDate : DateTime" kind="Persistent" fieldName="_lastLockedOutDate" />
+      <Property Id="ab8a9012-d432-41da-904d-7202ff2db5b4" name="LastLockedOutReason" label="LastLockedOutReason : String" kind="Persistent" fieldName="_lastLockedOutReason" />
+      <Property Id="7277c4ca-eb2c-4b6a-9095-cfa3fec19c0d" name="LastLoginDate" type="DateTime" label="LastLoginDate : DateTime" kind="Persistent" fieldName="_lastLoginDate" />
+      <Property Id="59ac5fd6-701e-45a7-a309-f9aff502d194" name="LastLoginIp" label="LastLoginIp : String" kind="Persistent" fieldName="_lastLoginIp" />
+      <Property Id="4252d7d2-a137-4bf3-acd0-2e3a06ee3501" name="LastModifiedDate" type="DateTime" label="LastModifiedDate : DateTime" kind="Persistent" fieldName="_lastModifiedDate" />
     </DomainClass>
     <DomainClass Id="9d8598ff-424c-4d4a-bac3-97f1835b25b3" name="Currency" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
       <Property Id="efd62e43-197b-4369-acac-e213606c2517" name="Id" type="Guid" label="Id : Guid" kind="Persistent" identity="true" fieldName="_id" />

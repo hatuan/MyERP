@@ -86,141 +86,6 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private bool _administrator;
-		[Column("administrator", Length = 0, Scale = 0, SqlType = "bool")]
-		[Storage("_administrator")]
-		public virtual bool Administrator
-		{
-			get
-			{
-				return this._administrator;
-			}
-			set
-			{
-				this._administrator = value;
-			}
-		}
-		
-		private string _rightAccess;
-		[Column("r_access", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_rightAccess")]
-		public virtual string RightAccess
-		{
-			get
-			{
-				return this._rightAccess;
-			}
-			set
-			{
-				this._rightAccess = value;
-			}
-		}
-		
-		private string _rightAdd;
-		[Column("r_add", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_rightAdd")]
-		public virtual string RightAdd
-		{
-			get
-			{
-				return this._rightAdd;
-			}
-			set
-			{
-				this._rightAdd = value;
-			}
-		}
-		
-		private string _r_edit;
-		[Column("r_edit", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_r_edit")]
-		public virtual string RightEdit
-		{
-			get
-			{
-				return this._r_edit;
-			}
-			set
-			{
-				this._r_edit = value;
-			}
-		}
-		
-		private string _rightDel;
-		[Column("r_del", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_rightDel")]
-		public virtual string RightDel
-		{
-			get
-			{
-				return this._rightDel;
-			}
-			set
-			{
-				this._rightDel = value;
-			}
-		}
-		
-		private string _r_print;
-		[Column("r_print", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_r_print")]
-		public virtual string RightPrint
-		{
-			get
-			{
-				return this._r_print;
-			}
-			set
-			{
-				this._r_print = value;
-			}
-		}
-		
-		private string _r_read;
-		[Column("r_read", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_r_read")]
-		public virtual string RightRead
-		{
-			get
-			{
-				return this._r_read;
-			}
-			set
-			{
-				this._r_read = value;
-			}
-		}
-		
-		private byte _status;
-		[Column("status", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_status")]
-		public virtual byte Status
-		{
-			get
-			{
-				return this._status;
-			}
-			set
-			{
-				this._status = value;
-			}
-		}
-		
-		private string _r_search;
-		[Column("r_search", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_r_search")]
-		public virtual string RightSearch
-		{
-			get
-			{
-				return this._r_search;
-			}
-			set
-			{
-				this._r_search = value;
-			}
-		}
-		
 		private string _fullName;
 		[Column("full_name", Length = 0, Scale = 0, SqlType = "text")]
 		[Storage("_fullName")]
@@ -233,6 +98,171 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._fullName = value;
+			}
+		}
+		
+		private string _passwordAnswer;
+		[Column("password_answer", Length = 0, Scale = 0, SqlType = "text")]
+		[Storage("_passwordAnswer")]
+		public virtual string PasswordAnswer
+		{
+			get
+			{
+				return this._passwordAnswer;
+			}
+			set
+			{
+				this._passwordAnswer = value;
+			}
+		}
+		
+		private string _passwordQuestion;
+		[Column("password_question", Length = 0, Scale = 0, SqlType = "text")]
+		[Storage("_passwordQuestion")]
+		public virtual string PasswordQuestion
+		{
+			get
+			{
+				return this._passwordQuestion;
+			}
+			set
+			{
+				this._passwordQuestion = value;
+			}
+		}
+		
+		private string _email;
+		[Column("email", Length = 0, Scale = 0, SqlType = "text")]
+		[Storage("_email")]
+		public virtual string Email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				this._email = value;
+			}
+		}
+		
+		private DateTime _createdDate;
+		[Column("created_date", Length = 0, Scale = 0, SqlType = "timestamp")]
+		[Storage("_createdDate")]
+		public virtual DateTime CreatedDate
+		{
+			get
+			{
+				return this._createdDate;
+			}
+			set
+			{
+				this._createdDate = value;
+			}
+		}
+		
+		private bool _isActivated;
+		[Column("is_activated", Length = 0, Scale = 0, SqlType = "bool")]
+		[Storage("_isActivated")]
+		public virtual bool IsActivated
+		{
+			get
+			{
+				return this._isActivated;
+			}
+			set
+			{
+				this._isActivated = value;
+			}
+		}
+		
+		private bool _isLockedOut;
+		[Column("is_locked_out", Length = 0, Scale = 0, SqlType = "bool")]
+		[Storage("_isLockedOut")]
+		public virtual bool IsLockedOut
+		{
+			get
+			{
+				return this._isLockedOut;
+			}
+			set
+			{
+				this._isLockedOut = value;
+			}
+		}
+		
+		private DateTime _lastLockedOutDate;
+		[Column("last_locked_out_date", Length = 0, Scale = 0, SqlType = "timestamp")]
+		[Storage("_lastLockedOutDate")]
+		public virtual DateTime LastLockedOutDate
+		{
+			get
+			{
+				return this._lastLockedOutDate;
+			}
+			set
+			{
+				this._lastLockedOutDate = value;
+			}
+		}
+		
+		private string _lastLockedOutReason;
+		[Column("last_locked_out_reason", Length = 0, Scale = 0, SqlType = "text")]
+		[Storage("_lastLockedOutReason")]
+		public virtual string LastLockedOutReason
+		{
+			get
+			{
+				return this._lastLockedOutReason;
+			}
+			set
+			{
+				this._lastLockedOutReason = value;
+			}
+		}
+		
+		private DateTime _lastLoginDate;
+		[Column("last_login_date", Length = 0, Scale = 0, SqlType = "timestamp")]
+		[Storage("_lastLoginDate")]
+		public virtual DateTime LastLoginDate
+		{
+			get
+			{
+				return this._lastLoginDate;
+			}
+			set
+			{
+				this._lastLoginDate = value;
+			}
+		}
+		
+		private string _lastLoginIp;
+		[Column("last_login_ip", Length = 0, Scale = 0, SqlType = "text")]
+		[Storage("_lastLoginIp")]
+		public virtual string LastLoginIp
+		{
+			get
+			{
+				return this._lastLoginIp;
+			}
+			set
+			{
+				this._lastLoginIp = value;
+			}
+		}
+		
+		private DateTime _lastModifiedDate;
+		[Column("last_modified_date", Length = 0, Scale = 0, SqlType = "timestamp")]
+		[Storage("_lastModifiedDate")]
+		public virtual DateTime LastModifiedDate
+		{
+			get
+			{
+				return this._lastModifiedDate;
+			}
+			set
+			{
+				this._lastModifiedDate = value;
 			}
 		}
 		

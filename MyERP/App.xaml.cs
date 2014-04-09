@@ -46,12 +46,11 @@ namespace MyERP
             LocalizationManager.DefaultCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentCulture = LocalizationManager.DefaultCulture;
             Thread.CurrentThread.CurrentUICulture = LocalizationManager.DefaultCulture;
-
-            //var context = new MyERPDomainContext();
-            //context.UpdateSchema();
-
-            //context.LoadModuleData();
-            //context.LoadDemoData();
+            
+            var otherContext = new MyERPOtherDomainContext();
+            otherContext.UpdateSchema();
+            otherContext.LoadModuleData();
+            otherContext.LoadDemoData();
 
             AssemblyCache.Initialize();
             var bootstrapper = new Bootstrapper();

@@ -47,6 +47,14 @@ namespace MyERP.DataAccess
             metaTableUser.Indexes.Add(metaIndexNameOfTableUser);
             metadataContainer.Indexes.Add(metaIndexNameOfTableUser);
 
+            MetaIndex metaIndexEmailOfTableUser = new MetaIndex("idx_user_email", metaTableUser);
+            MetaColumn metaColumnEmailOfTableUser = metaTableUser.Columns.First(c => c.Name.Equals("email"));
+            metaIndexEmailOfTableUser.Columns.Add(new MetaIndexColumnMapping("Email", metaColumnEmailOfTableUser, 1, SortOrder.Ascending));
+            metaIndexEmailOfTableUser.Clustered = true;
+            metaIndexEmailOfTableUser.Unique = true;
+            metaTableUser.Indexes.Add(metaIndexEmailOfTableUser);
+            metadataContainer.Indexes.Add(metaIndexEmailOfTableUser);
+
             MetaTable metaTableBusinessPartner = metadataContainer.Tables.First(t => t.Name.Equals("business_partner"));
             MetaIndex metaIndexNameOfTableBusinessPartner = new MetaIndex("idx_business_partner_code", metaTableBusinessPartner);
             MetaColumn metaColumnCodeOfTableBusinessPartner = metaTableBusinessPartner.Columns.First(c => c.Name.Equals("code"));

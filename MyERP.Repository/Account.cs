@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.ServiceModel.DomainServices.Client;
-using MyERP.Repositories;
 
 namespace MyERP.DataAccess
 {
@@ -17,8 +16,8 @@ namespace MyERP.DataAccess
             this.ArAp = false;
             this.Detail = false;
             this.Level = 0;
-            this.RecCreated = DateTime.Now;
-            this.RecModified = DateTime.Now;
+            this.RecModifiedById = this.RecCreatedById = MyERP.Repositories.WebContext.Current.User.Id;
+            this.RecModified = this.RecCreated = DateTime.Now;
             this.Status = (int)AccountStatusType.Active;
             this.Version = 1;
         }

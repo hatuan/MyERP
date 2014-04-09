@@ -149,10 +149,6 @@ namespace MyERP.Modules.Financial.ViewModels
         private void OnAddNewCommandExecuted()
         {
             Account newAccount = new Account();
-            Session currentSession =
-                AccountRepository.Context.Sessions.First(c => c.Id == ApplicationViewModel.SessionId);
-            newAccount.RecCreatedById = newAccount.RecModifiedById = currentSession.UserId;
-
             _accounts.AddNew(newAccount);
         }
         

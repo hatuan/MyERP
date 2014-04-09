@@ -30,7 +30,7 @@ namespace MyERP.Modules.User.ViewModels
     {
         public LoginViewModel()
         {
-            this.LoginCommand = new DelegateCommand(this.OnLoginCommandExecuted);
+            this.LoginCommand = new DelegateCommand(OnLoginCommandExecuted, LoginCommandCanExecute);
         }
 
         [Import]
@@ -49,10 +49,27 @@ namespace MyERP.Modules.User.ViewModels
 
         private const string PASSWORD_ERROR = "Password is incorrect";
 
+        private bool _isBusyLogin = false;
+        public bool IsBusyLogin {
+            get { return _isBusyLogin; }
+            set
+            {
+                _isBusyLogin = value;
+                ((DelegateCommand)LoginCommand).RaiseCanExecuteChanged();
+            } 
+        }
+
+        private bool LoginCommandCanExecute()
+        {
+            return !IsBusyLogin;
+        }
+
         private void OnLoginCommandExecuted()
         {
             string passEncrypt = Cryptography.Encrypt(Cryptography.GetHashKey(UserName + Password), Password);
-
+            
+            IsBusyLogin = true;
+            
             LoginOperation lop = MyERP.Repositories.WebContext.Current.Authentication.Login((new LoginParameters(UserName, passEncrypt, true, null)));
             lop.Completed += (Authsender, args) =>
             {
@@ -61,49 +78,40 @@ namespace MyERP.Modules.User.ViewModels
                     if (lop.LoginSuccess)
                     {
                         RemoveError("Password", PASSWORD_ERROR);
-                        LoginSuccessfully();
+
+                        UserRepository.GetUserByUserName(UserName,
+                            user =>
+                            {
+                                //Insert UserId To Session table
+                                Session session = new Session()
+                                {
+                                    Id = ApplicationViewModel.SessionId,
+                                    UserId = user.Id,
+                                    WorkingDate = DateTime.Today,
+                                    LastTime = DateTime.Now,
+                                    Expire = false
+                                };
+
+                                SessionRepository.Context.Sessions.Add(session);
+                                SessionRepository.SaveOrUpdateEntities();
+
+                                LoginSuccessfully();
+                            });
                     }
                     else
                     {
                         AddError("Password", PASSWORD_ERROR, false);
                     }
+                  
                 }
                 else
                 {
                     AddError("Password", lop.Error.Message, false);
                     lop.MarkErrorAsHandled();
                 }
+
+                IsBusyLogin = false;
             };
-
-
-            //UserRepository.GetUserinfoByUserNameAndPassword(UserName, passEncrypt,
-            //    user =>
-            //    {
-            //        if (user != null)
-            //        {
-            //            RemoveError("Password", PASSWORD_ERROR);
-
-            //            //Insert UserId To Session table
-            //            Session session = new Session()
-            //            {
-            //                Id = ApplicationViewModel.SessionId,
-            //                UserId = user.Id,
-            //                WorkingDate = DateTime.Today,
-            //                LastTime = DateTime.Now,
-            //                Expire = false
-            //            };
-
-            //            SessionRepository.Context.Sessions.Add(session);
-            //            SessionRepository.SaveOrUpdateEntities();
-
-            //            LoginSuccessfully();
-            //        }
-            //        else
-            //        {
-            //            AddError("Password", PASSWORD_ERROR, false);
-            //        }
-
-            //    });
         }
 
         private String _userName = String.Empty;
@@ -144,7 +152,6 @@ namespace MyERP.Modules.User.ViewModels
 
         private void LoginSuccessfully()
         {
-
             //Close LoginView
             if (this.RequestClose != null)
             {

@@ -14,7 +14,7 @@ namespace MyERP.Web
         {
             using (EntitiesModel context = new EntitiesModel())
             {
-                var user = context.Users.Where(u => u.Name == username && u.Password == password).FirstOrDefault();
+                var user = context.Users.FirstOrDefault(u => u.Name == username && u.Password == password);
                 return user != null;
             }
         }
@@ -89,17 +89,33 @@ namespace MyERP.Web
 
         public override MembershipUser GetUser(string username, bool userIsOnline)
         {
-            throw new NotImplementedException();
+            using (var context = new EntitiesModel())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Name == username);
+                return new MembershipUser("myCustomProvider", user.Name, user.Id, user.Email, user.PasswordQuestion,
+                    user.Comment, user.IsActivated, user.IsLockedOut, user.CreatedDate, user.LastLoginDate,
+                    user.LastLoginDate, user.LastModifiedDate, user.LastLockedOutDate);
+            }
         }
 
         public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)
         {
-            throw new NotImplementedException();
+            using (var context = new EntitiesModel())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Id == (Guid)providerUserKey);
+                return new MembershipUser("myCustomProvider", user.Name, user.Id, user.Email, user.PasswordQuestion,
+                    user.Comment, user.IsActivated, user.IsLockedOut, user.CreatedDate, user.LastLoginDate,
+                    user.LastLoginDate, user.LastModifiedDate, user.LastLockedOutDate);
+            }
         }
 
         public override string GetUserNameByEmail(string email)
         {
-            throw new NotImplementedException();
+            using (var context = new EntitiesModel())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email == email);
+                return user.Name;
+            }
         }
 
         public override int MaxInvalidPasswordAttempts

@@ -35,12 +35,8 @@ namespace MyERP.Modules.Financial.Views
         private void gridView_AddingNewDataItem(object sender, Telerik.Windows.Controls.GridView.GridViewAddingNewEventArgs e)
         {
             Account newAccount = new Account();
-            Session currentSession =
-                ViewModel.AccountRepository.Context.Sessions.First(c => c.Id == ApplicationViewModel.SessionId);
-            newAccount.RecCreatedById = newAccount.RecModifiedById = currentSession.UserId;
 
             e.NewObject = newAccount;
-            
         }
     }
 }

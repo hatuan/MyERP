@@ -104,8 +104,6 @@
     <Compile Include="User.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
-    <Compile Include="User\User.cs" />
-    <Compile Include="User\UserStatusType.cs" />
   </ItemGroup>
   <ItemGroup>
     <OpenAccessDeploy Include="MyERPDataModel.rlinq">

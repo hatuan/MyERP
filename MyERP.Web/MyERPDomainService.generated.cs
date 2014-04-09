@@ -31,14 +31,7 @@ namespace MyERP.Web
 		public MyERPDomainService() : base()
 		{
 		}
-
-        private IPrincipal _User;
-        public override void Initialize(DomainServiceContext context)
-        {
-            base.Initialize(context);
-            Debug.WriteLine(context.User.Identity.Name);
-            _User = context.User;
-        }
+        
 		public IQueryable<Account> GetAccounts()
 		{ 
 			return this.DataContext.Accounts;

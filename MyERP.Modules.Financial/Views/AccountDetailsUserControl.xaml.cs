@@ -43,9 +43,7 @@ namespace MyERP.Modules.Financial.Views
         private void dataForm_AddedNewItem(object sender, Telerik.Windows.Controls.Data.DataForm.AddedNewItemEventArgs e)
         {
             Account newAccount = e.NewItem as Account;
-            Session currentSession =
-                ViewModel.AccountRepository.Context.Sessions.First(c => c.Id == ApplicationViewModel.SessionId);
-            newAccount.RecCreatedById = newAccount.RecModifiedById = currentSession.UserId;
+           
         }
 
         private void dataForm_EditEnded(object sender, Telerik.Windows.Controls.Data.DataForm.EditEndedEventArgs e)
