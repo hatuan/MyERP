@@ -57,63 +57,63 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private DateTime _date0;
-		[Column("date0", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date0")]
-		public virtual DateTime Date0
+		private DateTime _recCreated;
+		[Column("rec_created", Length = 0, Scale = 0, SqlType = "timestamp")]
+		[Storage("_recCreated")]
+		public virtual DateTime RecCreated
 		{
 			get
 			{
-				return this._date0;
+				return this._recCreated;
 			}
 			set
 			{
-				this._date0 = value;
+				this._recCreated = value;
 			}
 		}
 		
-		private Guid _userId0;
-		[Column("user_id0", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_userId0")]
-		public virtual Guid UserId0
+		private Guid _recCreatedById;
+		[Column("rec_created_by", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_recCreatedById")]
+		public virtual Guid RecCreatedById
 		{
 			get
 			{
-				return this._userId0;
+				return this._recCreatedById;
 			}
 			set
 			{
-				this._userId0 = value;
+				this._recCreatedById = value;
 			}
 		}
 		
-		private DateTime _date2;
-		[Column("date2", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date2")]
-		public virtual DateTime Date2
+		private DateTime _recModified;
+		[Column("rec_modified", Length = 0, Scale = 0, SqlType = "timestamp")]
+		[Storage("_recModified")]
+		public virtual DateTime RecModified
 		{
 			get
 			{
-				return this._date2;
+				return this._recModified;
 			}
 			set
 			{
-				this._date2 = value;
+				this._recModified = value;
 			}
 		}
 		
-		private Guid _userId2;
-		[Column("user_id2", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_userId2")]
-		public virtual Guid UserId2
+		private Guid _recModifiedById;
+		[Column("rec_modified_by", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_recModifiedById")]
+		public virtual Guid RecModifiedById
 		{
 			get
 			{
-				return this._userId2;
+				return this._recModifiedById;
 			}
 			set
 			{
-				this._userId2 = value;
+				this._recModifiedById = value;
 			}
 		}
 		
@@ -129,21 +129,6 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._status = value;
-			}
-		}
-		
-		private string _m_ws_id;
-		[Column("m_ws_id", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_m_ws_id")]
-		public virtual string M_Ws_Id
-		{
-			get
-			{
-				return this._m_ws_id;
-			}
-			set
-			{
-				this._m_ws_id = value;
 			}
 		}
 		
@@ -177,33 +162,48 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private User _user0;
-		[ForeignKeyAssociation(SharedFields = "UserId0", TargetFields = "Id")]
-		[Storage("_user0")]
-		public virtual User User0
+		private Guid _clientId;
+		[Column("client_id", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
+		[Storage("_clientId")]
+		public virtual Guid ClientId
 		{
 			get
 			{
-				return this._user0;
+				return this._clientId;
 			}
 			set
 			{
-				this._user0 = value;
+				this._clientId = value;
 			}
 		}
 		
-		private User _user2;
-		[ForeignKeyAssociation(SharedFields = "UserId2", TargetFields = "Id")]
-		[Storage("_user2")]
-		public virtual User User2
+		private User _recCreatedByUser;
+		[ForeignKeyAssociation(SharedFields = "RecCreatedById", TargetFields = "Id")]
+		[Storage("_recCreatedByUser")]
+		public virtual User RecCreatedByUser
 		{
 			get
 			{
-				return this._user2;
+				return this._recCreatedByUser;
 			}
 			set
 			{
-				this._user2 = value;
+				this._recCreatedByUser = value;
+			}
+		}
+		
+		private User _recModifiedByUser;
+		[ForeignKeyAssociation(SharedFields = "RecModifiedById", TargetFields = "Id")]
+		[Storage("_recModifiedByUser")]
+		public virtual User RecModifiedByUser
+		{
+			get
+			{
+				return this._recModifiedByUser;
+			}
+			set
+			{
+				this._recModifiedByUser = value;
 			}
 		}
 		

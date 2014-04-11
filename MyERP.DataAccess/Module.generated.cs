@@ -21,7 +21,7 @@ using Telerik.OpenAccess.Metadata.Fluent.Advanced;
 
 namespace MyERP.DataAccess	
 {
-	[Table("module")]
+	[Table("module", UpdateSchema = true)]
 	public partial class Module
 	{
 		private long _id;

@@ -15,8 +15,8 @@ namespace MyERP.DataAccess
             MetaIndex metaIndexNameOfTableOrganization = new MetaIndex("idx_organization_code", metaTableOrganization);
             MetaColumn metaColumnCodeOfTableOrganization = metaTableOrganization.Columns.First(c => c.Name.Equals("code"));
             metaIndexNameOfTableOrganization.Columns.Add(new MetaIndexColumnMapping("Code", metaColumnCodeOfTableOrganization, 1, SortOrder.Ascending));
-            metaIndexNameOfTableOrganization.Clustered = true;
-            metaIndexNameOfTableOrganization.Unique = true;
+            //metaIndexNameOfTableOrganization.Clustered = true;
+            //metaIndexNameOfTableOrganization.Unique = true;
             metaTableOrganization.Indexes.Add(metaIndexNameOfTableOrganization);
             metadataContainer.Indexes.Add(metaIndexNameOfTableOrganization);
 

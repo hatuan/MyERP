@@ -20,8 +20,9 @@ namespace MyERP.Web
         {
             AuthUser user = base.GetAuthenticatedUser(principal);  //here will pass windows authentication        
 
-            var memUser = Membership.GetUser(principal.Identity.Name, true);
-            user.Id = (Guid)memUser.ProviderUserKey;
+            var memUser = (MyERPMembershipUser) Membership.GetUser(principal.Identity.Name, true);
+            user.Id = (Guid) memUser.ProviderUserKey;
+            user.ClientId = (Guid) memUser.ClientId;
             return user;
 
         }
@@ -31,5 +32,8 @@ namespace MyERP.Web
     {
         [ProfileUsage(IsExcluded = true)] ///NEEDED FOR WINDOWS/ACTIVE DIRECTORY LOGON
         public Guid Id { get; set; }
+
+        [ProfileUsage(IsExcluded = true)] ///NEEDED FOR WINDOWS/ACTIVE DIRECTORY LOGON
+        public Guid ClientId { get; set; }
     }
 }

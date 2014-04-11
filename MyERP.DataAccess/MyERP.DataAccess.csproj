@@ -59,6 +59,9 @@
     <Compile Include="BusinessPartnerGroup.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="Client.generated.cs">
+      <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
+    </Compile>
     <Compile Include="Currency.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
@@ -85,6 +88,8 @@
     <Compile Include="Organization.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="Organization\Organization.cs" />
+    <Compile Include="Organization\OrganizationStatusType.cs" />
     <Compile Include="PaymentTerm.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>

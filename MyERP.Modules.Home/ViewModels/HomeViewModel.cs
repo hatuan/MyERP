@@ -54,6 +54,7 @@ namespace MyERP.Modules.Home.ViewModels
             this.RegionManager.Regions[RegionNames.MainMenuRegion].ClearActiveViews();
 
             ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.UserModule);
+            this.RegionManager.RequestNavigate(RegionNames.UserWindowRegion, "LoginView");
         }
 
         private void OnSwitchToHomeWindowRegion(string viewName)

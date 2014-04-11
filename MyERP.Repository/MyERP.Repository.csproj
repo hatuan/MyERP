@@ -76,6 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
+    <Compile Include="ClientRepository.cs" />
+    <Compile Include="OrganizationRepository.cs" />
     <Compile Include="AccountRepository.cs" />
     <Compile Include="CurrencyRepository.cs" />
     <Compile Include="DashboardRepository.cs" />

@@ -92,9 +92,9 @@ namespace MyERP.Web
             using (var context = new EntitiesModel())
             {
                 var user = context.Users.FirstOrDefault(u => u.Name == username);
-                return new MembershipUser("myCustomProvider", user.Name, user.Id, user.Email, user.PasswordQuestion,
+                return new MyERPMembershipUser("myCustomProvider", user.Name, user.Id, user.Email, user.PasswordQuestion,
                     user.Comment, user.IsActivated, user.IsLockedOut, user.CreatedDate, user.LastLoginDate,
-                    user.LastLoginDate, user.LastModifiedDate, user.LastLockedOutDate);
+                    user.LastLoginDate, user.LastModifiedDate, user.LastLockedOutDate, user.ClientId);
             }
         }
 
@@ -103,9 +103,9 @@ namespace MyERP.Web
             using (var context = new EntitiesModel())
             {
                 var user = context.Users.FirstOrDefault(u => u.Id == (Guid)providerUserKey);
-                return new MembershipUser("myCustomProvider", user.Name, user.Id, user.Email, user.PasswordQuestion,
+                return new MyERPMembershipUser("myCustomProvider", user.Name, user.Id, user.Email, user.PasswordQuestion,
                     user.Comment, user.IsActivated, user.IsLockedOut, user.CreatedDate, user.LastLoginDate,
-                    user.LastLoginDate, user.LastModifiedDate, user.LastLockedOutDate);
+                    user.LastLoginDate, user.LastModifiedDate, user.LastLockedOutDate, user.ClientId);
             }
         }
 
@@ -173,6 +173,43 @@ namespace MyERP.Web
             throw new NotImplementedException();
         }
         #endregion
+
+    }
+
+    public class MyERPMembershipUser : MembershipUser
+    {
+        public Guid? ClientId { get; set; }
+
+        public MyERPMembershipUser(string providername,
+                                  string username,
+                                  object providerUserKey,
+                                  string email,
+                                  string passwordQuestion,
+                                  string comment,
+                                  bool isApproved,
+                                  bool isLockedOut,
+                                  DateTime creationDate,
+                                  DateTime lastLoginDate,
+                                  DateTime lastActivityDate,
+                                  DateTime lastPasswordChangedDate,
+                                  DateTime lastLockedOutDate,
+                                  Guid? clientId) :
+                                  base(providername,
+                                       username,
+                                       providerUserKey,
+                                       email,
+                                       passwordQuestion,
+                                       comment,
+                                       isApproved,
+                                       isLockedOut,
+                                       creationDate,
+                                       lastLoginDate,
+                                       lastActivityDate,
+                                       lastPasswordChangedDate,
+                                       lastLockedOutDate)
+        {
+            this.ClientId = clientId ?? Guid.Empty;
+        }
 
     }
 }

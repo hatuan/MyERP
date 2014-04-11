@@ -163,6 +163,14 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		public IQueryable<Client> Clients 
+		{
+			get
+			{
+				return this.GetAll<Client>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -241,6 +249,10 @@ namespace MyERP.DataAccess
 			get;
 		}
 		IQueryable<Session> Sessions
+		{
+			get;
+		}
+		IQueryable<Client> Clients
 		{
 			get;
 		}

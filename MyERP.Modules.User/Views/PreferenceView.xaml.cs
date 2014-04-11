@@ -1,39 +1,41 @@
 ﻿using System;
-using Microsoft.Practices.Prism.Events;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Linq;
+using System.Net;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 using Microsoft.Practices.Prism.Regions;
 using MyERP.Infrastructure;
 using MyERP.Modules.User.ViewModels;
 using MyERP.ViewModels;
-using System.ComponentModel.Composition;
-using System.Windows.Controls;
 using Telerik.Windows.Controls;
+using Telerik.Windows.Data;
 
 namespace MyERP.Modules.User.Views
 {
-    [ViewExport(RegionName = RegionNames.UserWindowRegion, IsActiveByDefault = true)]
-    public partial class LoginView : UserControl, INavigationAware, IPartImportsSatisfiedNotification
-	{
-		public LoginView()
-		{
-			// Required to initialize variables
-			InitializeComponent();
-		}
+    [ViewExport(RegionName = RegionNames.UserWindowRegion, IsActiveByDefault = false)]
+    public partial class PreferenceView : UserControl, INavigationAware, IPartImportsSatisfiedNotification
+    {
+        public PreferenceView()
+        {
+            InitializeComponent();
+        }
 
         [Import]
         public IRegionManager RegionManager { get; set; }
 
         [Import]
-        public IApplicationViewModel ApplicationViewModel { get; set; }
-
-        [Import]
-        public IEventAggregator EventAggregator { get; set; }
-
-        [Import]
-        public LoginViewModel ViewModel
+        public PreferenceViewModel ViewModel
         {
             private get
             {
-                return this.DataContext as LoginViewModel;
+                return this.DataContext as PreferenceViewModel;
             }
 
             set
@@ -55,6 +57,7 @@ namespace MyERP.Modules.User.Views
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
             return true;
+            
         }
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
@@ -72,6 +75,7 @@ namespace MyERP.Modules.User.Views
                     window.Close();
                 };
             }
+
         }
-	}
+    }
 }

@@ -21,7 +21,7 @@ using Telerik.OpenAccess.Metadata.Fluent.Advanced;
 
 namespace MyERP.DataAccess	
 {
-	[Table("transaction_code")]
+	[Table("transaction_code", UpdateSchema = true)]
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Changed)]
 	public partial class TransactionType
 	{

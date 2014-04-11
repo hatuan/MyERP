@@ -30,8 +30,7 @@ namespace MyERP.ViewModels
             this.SwitchModuleCommand = new DelegateCommand<string>(SwitchToModule);
             this.SessionId = Guid.NewGuid();
         }
-
-
+        
         public ICommand SwitchContentRegionViewCommand { get; private set; }
         public ICommand SwitchModuleCommand { get; private set; }
 
@@ -70,6 +69,8 @@ namespace MyERP.ViewModels
         }
 
         public Guid SessionId { get; private set; }
+        public Guid OrganizationId { get; set; }
+        public DateTime WorkingDate { get; set; }
 
         public bool IsLoadingModule
         {

@@ -18,6 +18,7 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
+using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
@@ -263,6 +264,66 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._lastModifiedDate = value;
+			}
+		}
+		
+		private Guid? _clientId;
+		[Column("client_id", OpenAccessType = OpenAccessType.Guid, IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
+		[Storage("_clientId")]
+		public virtual Guid? ClientId
+		{
+			get
+			{
+				return this._clientId;
+			}
+			set
+			{
+				this._clientId = value;
+			}
+		}
+		
+		private Guid? _organizationId;
+		[Column("organization_id", OpenAccessType = OpenAccessType.Guid, IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
+		[Storage("_organizationId")]
+		public virtual Guid? OrganizationId
+		{
+			get
+			{
+				return this._organizationId;
+			}
+			set
+			{
+				this._organizationId = value;
+			}
+		}
+		
+		private Client _client;
+		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "Id")]
+		[Storage("_client")]
+		public virtual Client Client
+		{
+			get
+			{
+				return this._client;
+			}
+			set
+			{
+				this._client = value;
+			}
+		}
+		
+		private Organization _organization;
+		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
+		[Storage("_organization")]
+		public virtual Organization Organization
+		{
+			get
+			{
+				return this._organization;
+			}
+			set
+			{
+				this._organization = value;
 			}
 		}
 		

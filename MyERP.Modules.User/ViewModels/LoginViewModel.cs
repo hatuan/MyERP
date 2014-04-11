@@ -153,13 +153,17 @@ namespace MyERP.Modules.User.ViewModels
         private void LoginSuccessfully()
         {
             //Close LoginView
-            if (this.RequestClose != null)
-            {
-                this.RequestClose(null, EventArgs.Empty);
-            }
+            //if (this.RequestClose != null)
+            //{
+            //    this.RequestClose(null, EventArgs.Empty);
+            //}
             
             //Open HomeModule
-            this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.HomeModule);
+            //this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.HomeModule);
+
+            //Navigate to PreferenceView
+            var region = this.RegionManager.Regions[RegionNames.UserWindowRegion];
+            region.RequestNavigate("PreferenceView");
             
         }
 

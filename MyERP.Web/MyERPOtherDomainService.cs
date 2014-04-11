@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel.DomainServices.Server;
 using System.Web;
 using MyERP.DataAccess;
+using Telerik.OpenAccess;
 
 namespace MyERP.Web
 {
@@ -18,10 +19,11 @@ namespace MyERP.Web
         [Invoke]
         public void LoadDemoData()
         {
-            User user = this.DataContext.Users.FirstOrDefault(i => i.Id == new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef"));
-            if (user == null)
+            
+            User adminUser = this.DataContext.Users.FirstOrDefault(i => i.Id == new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef"));
+            if (adminUser == null)
             {
-                User newUser = new User()
+                adminUser = new User()
                 {
                     Id = new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef"),
                     Comment = "",
@@ -40,13 +42,13 @@ namespace MyERP.Web
                     PasswordAnswer = "",
                     PasswordQuestion = ""
                 };
-                this.DataContext.Add(newUser);
+                this.DataContext.Add(adminUser);
             }
 
-            user = this.DataContext.Users.FirstOrDefault(i => i.Id == new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"));
-            if (user == null)
+            User demoUser = this.DataContext.Users.FirstOrDefault(i => i.Id == new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"));
+            if (demoUser == null)
             {
-                User newUser = new User()
+                demoUser = new User()
                 {
                     Id = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
                     Comment = "",
@@ -65,22 +67,86 @@ namespace MyERP.Web
                     PasswordAnswer = "",
                     PasswordQuestion = ""
                 };
-                this.DataContext.Add(newUser);
+                this.DataContext.Add(demoUser);
             }
 
+            Client client = this.DataContext.Clients.FirstOrDefault(i => i.Id == new Guid("28CC612C-807D-458D-91E7-F759080B0E40"));
+            if (client == null)
+            {
+                client = new Client()
+                {
+                    Id = new Guid("28CC612C-807D-458D-91E7-F759080B0E40"),
+                    Name = "Demo Company",
+                    IsActivated = true,
+                    RecCreated = DateTime.Now,
+                    RecCreatedById = new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef")
+                };
+                this.DataContext.Add(client);
+            }
+
+            Organization allOrganization =
+                this.DataContext.Organizations.FirstOrDefault(
+                    i => i.Id == new Guid("4336fecf-8c21-4531-afe6-76d34603ea34"));
+            if (allOrganization == null)
+            {
+                allOrganization = new Organization()
+                {
+                    Id = new Guid("4336fecf-8c21-4531-afe6-76d34603ea34"),
+                    ClientId = new Guid("28CC612C-807D-458D-91E7-F759080B0E40"),
+                    Code = "*",
+                    Name = "All Organization",
+                    RecCreated = DateTime.Now,
+                    RecCreatedById = new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef"),
+                    RecModified = DateTime.Now,
+                    RecModifiedById = new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef"),
+                    Status = 1
+                };
+                this.DataContext.Add(allOrganization);
+            }
+
+            Organization HQOrganization =
+                this.DataContext.Organizations.FirstOrDefault(
+                    i => i.Id == new Guid("876A2286-4907-4A7F-B841-5CF7FD4C1288"));
+            if (HQOrganization == null)
+            {
+                HQOrganization = new Organization()
+                {
+                    Id = new Guid("876A2286-4907-4A7F-B841-5CF7FD4C1288"),
+                    ClientId = new Guid("28CC612C-807D-458D-91E7-F759080B0E40"),
+                    Code = "0",
+                    Name = "HQ Organization",
+                    RecCreated = DateTime.Now,
+                    RecCreatedById = new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef"),
+                    RecModified = DateTime.Now,
+                    RecModifiedById = new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef"),
+                    Status = 1
+                };
+                this.DataContext.Add(HQOrganization);
+            }
+
+            adminUser.Client = client;
+            adminUser.Organization = allOrganization;
+            this.DataContext.Refresh(RefreshMode.OverwriteChangesFromStore, adminUser);
+
+            demoUser.Client = client;
+            demoUser.Organization = allOrganization;
+            this.DataContext.Refresh(RefreshMode.OverwriteChangesFromStore, demoUser);
+            
             Currency currency =
                 this.DataContext.Currencies.FirstOrDefault(c => c.Id == new Guid("3AD409C2-7859-468E-8FC3-C41C6C9A9587"));
             if (currency == null)
             {
                 Currency newCurrency = new Currency()
                 {
+                    Client = client,
+                    Organization = allOrganization,
                     Id = new Guid("3AD409C2-7859-468E-8FC3-C41C6C9A9587"),
                     Code = "VND",
                     Name = "Đồng Việt Nam",
                     RecCreated = DateTime.Now,
-                    RecCreatedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    RecCreatedByUser = adminUser,
                     RecModified = DateTime.Now,
-                    RecModifiedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    RecModifiedByUser = adminUser,
                     Status = (byte)CurrencyStatusType.Active
                 };
                 this.DataContext.Add(newCurrency);
@@ -92,13 +158,15 @@ namespace MyERP.Web
             {
                 Currency newCurrency = new Currency()
                 {
+                    Client = client,
+                    Organization = allOrganization,
                     Id = new Guid("15971519-42A3-4514-A053-1EDB5D32E1E4"),
                     Code = "USD",
                     Name = "USD Dolar",
                     RecCreated = DateTime.Now,
-                    RecCreatedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    RecCreatedByUser = adminUser,
                     RecModified = DateTime.Now,
-                    RecModifiedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    RecModifiedByUser = adminUser,
                     Status = (byte)CurrencyStatusType.Active
                 };
                 this.DataContext.Add(newCurrency);
@@ -110,13 +178,15 @@ namespace MyERP.Web
             {
                 Currency newCurrency = new Currency()
                 {
+                    Client = client,
+                    Organization = allOrganization,
                     Id = new Guid("A5362238-0EED-46F3-98DE-58729906E8ED"),
                     Code = "EUR",
                     Name = "EURO",
                     RecCreated = DateTime.Now,
-                    RecCreatedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    RecCreatedByUser = adminUser,
                     RecModified = DateTime.Now,
-                    RecModifiedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    RecModifiedByUser = adminUser,
                     Status = (byte)CurrencyStatusType.Active
                 };
                 this.DataContext.Add(newCurrency);
@@ -128,13 +198,15 @@ namespace MyERP.Web
             {
                 Currency newCurrency = new Currency()
                 {
+                    Client = client,
+                    Organization = allOrganization,
                     Id = new Guid("1D05CD23-E928-4E24-ACBE-3EB1A676434B"),
                     Code = "JPY",
                     Name = "Yên",
                     RecCreated = DateTime.Now,
-                    RecCreatedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    RecCreatedByUser = adminUser,
                     RecModified = DateTime.Now,
-                    RecModifiedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    RecModifiedByUser = adminUser,
                     Status = (byte)CurrencyStatusType.Active
                 };
                 this.DataContext.Add(newCurrency);
@@ -146,16 +218,52 @@ namespace MyERP.Web
             {
                 Currency newCurrency = new Currency()
                 {
+                    Client = client,
+                    Organization = allOrganization,
                     Id = new Guid("B1F21473-8FA0-4C1E-BC19-B36E1827F8F1"),
                     Code = "CNY",
                     Name = "Nhân dân tệ",
                     RecCreated = DateTime.Now,
-                    RecCreatedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    RecCreatedByUser = adminUser,
                     RecModified = DateTime.Now,
-                    RecModifiedById = new Guid("5e6af2aa-e21a-4afd-815e-0cc3dbefa08a"),
+                    RecModifiedByUser = adminUser,
                     Status = (byte)CurrencyStatusType.Active
                 };
                 this.DataContext.Add(newCurrency);
+            }
+
+            Client otherClient = this.DataContext.Clients.FirstOrDefault(i => i.Id == new Guid("EA084FC9-B630-4016-97E2-021A2B120879"));
+            if (otherClient == null)
+            {
+                otherClient = new Client()
+                {
+                    Id = new Guid("EA084FC9-B630-4016-97E2-021A2B120879"),
+                    Name = "Demo Company",
+                    IsActivated = true,
+                    RecCreated = DateTime.Now,
+                    RecCreatedById = new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef")
+                };
+                this.DataContext.Add(otherClient);
+            }
+
+            Organization allOrganizationOfOtherClient =
+                this.DataContext.Organizations.FirstOrDefault(
+                    i => i.Id == new Guid("E1744F1E-1959-4F05-99A8-6ABEDF134E6F"));
+            if (allOrganizationOfOtherClient == null)
+            {
+                allOrganizationOfOtherClient = new Organization()
+                {
+                    Id = new Guid("E1744F1E-1959-4F05-99A8-6ABEDF134E6F"),
+                    ClientId = new Guid("EA084FC9-B630-4016-97E2-021A2B120879"),
+                    Code = "*",
+                    Name = "All Organization",
+                    RecCreated = DateTime.Now,
+                    RecCreatedById = new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef"),
+                    RecModified = DateTime.Now,
+                    RecModifiedById = new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef"),
+                    Status = 1
+                };
+                this.DataContext.Add(allOrganizationOfOtherClient);
             }
 
             this.DataContext.SaveChanges();

@@ -12,5 +12,7 @@ namespace MyERP.ViewModels
         string CurrentViewName { get; }
         bool IsLoadingData { get; set; }
         Guid SessionId { get; }
+        Guid OrganizationId { get; set; }
+        DateTime WorkingDate { get; set; }
     }
 }

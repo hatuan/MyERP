@@ -12,9 +12,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
-using System.Security.Principal;
 using System.ServiceModel.DomainServices.Hosting;
 using System.ServiceModel.DomainServices.Server;
 using Telerik.OpenAccess;
@@ -23,15 +21,13 @@ using MyERP.DataAccess;
 #pragma warning disable 1591
 
 namespace MyERP.Web	
-{
-    [RequiresAuthentication]
+{    
     [EnableClientAccess()]
     public partial class MyERPDomainService : OpenAccessDomainService<EntitiesModel>
 	{
 		public MyERPDomainService() : base()
 		{
 		}
-        
 		public IQueryable<Account> GetAccounts()
 		{ 
 			return this.DataContext.Accounts;
@@ -101,6 +97,24 @@ namespace MyERP.Web
 		}
 
 		public void InsertCurrencies(Currency currency)
+		{
+			// This is a callback method. The actual Insert is performed internally.
+		} 
+		public IQueryable<Client> GetClients()
+		{ 
+			return this.DataContext.Clients;
+		}       
+		public void DeleteClients(Client client)
+		{
+			// This is a callback method. The actual Delete is performed internally.
+		}
+
+		public void UpdateClients(Client client)
+		{
+			// This is a callback method. The actual Update is performed internally.
+		}
+
+		public void InsertClients(Client client)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 

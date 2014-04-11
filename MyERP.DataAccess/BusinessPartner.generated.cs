@@ -266,63 +266,63 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private DateTime _date0;
-		[Column("date0", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date0")]
-		public virtual DateTime Date0
+		private DateTime _recCreated;
+		[Column("rec_created", Length = 0, Scale = 0, SqlType = "timestamp")]
+		[Storage("_recCreated")]
+		public virtual DateTime RecCreated
 		{
 			get
 			{
-				return this._date0;
+				return this._recCreated;
 			}
 			set
 			{
-				this._date0 = value;
+				this._recCreated = value;
 			}
 		}
 		
-		private Guid _userId0;
-		[Column("user_id0", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_userId0")]
-		public virtual Guid UserId0
+		private Guid _recCreatedBy;
+		[Column("rec_created_by", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_recCreatedBy")]
+		public virtual Guid RecCreatedBy
 		{
 			get
 			{
-				return this._userId0;
+				return this._recCreatedBy;
 			}
 			set
 			{
-				this._userId0 = value;
+				this._recCreatedBy = value;
 			}
 		}
 		
-		private DateTime _date2;
-		[Column("date2", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date2")]
-		public virtual DateTime Date2
+		private DateTime _recModified;
+		[Column("rec_modified", Length = 0, Scale = 0, SqlType = "timestamp")]
+		[Storage("_recModified")]
+		public virtual DateTime RecModified
 		{
 			get
 			{
-				return this._date2;
+				return this._recModified;
 			}
 			set
 			{
-				this._date2 = value;
+				this._recModified = value;
 			}
 		}
 		
-		private Guid _userId2;
-		[Column("user_id2", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_userId2")]
-		public virtual Guid UserId2
+		private Guid _recModifiedBy;
+		[Column("rec_modified_by", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_recModifiedBy")]
+		public virtual Guid RecModifiedBy
 		{
 			get
 			{
-				return this._userId2;
+				return this._recModifiedBy;
 			}
 			set
 			{
-				this._userId2 = value;
+				this._recModifiedBy = value;
 			}
 		}
 		
@@ -461,6 +461,36 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		private Guid _clientId;
+		[Column("client_id", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
+		[Storage("_clientId")]
+		public virtual Guid ClientId
+		{
+			get
+			{
+				return this._clientId;
+			}
+			set
+			{
+				this._clientId = value;
+			}
+		}
+		
+		private Guid _organizationId;
+		[Column("organization_id", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
+		[Storage("_organizationId")]
+		public virtual Guid OrganizationId
+		{
+			get
+			{
+				return this._organizationId;
+			}
+			set
+			{
+				this._organizationId = value;
+			}
+		}
+		
 		private BusinessPartnerGroup _businessPartnerGroup2;
 		[ForeignKeyAssociation(SharedFields = "BusinessPartnerGroupCode2", TargetFields = "Code")]
 		[Storage("_businessPartnerGroup2")]
@@ -488,36 +518,6 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._businessPartnerGroup1 = value;
-			}
-		}
-		
-		private User _user0;
-		[ForeignKeyAssociation(SharedFields = "UserId0", TargetFields = "Id")]
-		[Storage("_user0")]
-		public virtual User User0
-		{
-			get
-			{
-				return this._user0;
-			}
-			set
-			{
-				this._user0 = value;
-			}
-		}
-		
-		private User _user2;
-		[ForeignKeyAssociation(SharedFields = "UserId2", TargetFields = "Id")]
-		[Storage("_user2")]
-		public virtual User User2
-		{
-			get
-			{
-				return this._user2;
-			}
-			set
-			{
-				this._user2 = value;
 			}
 		}
 		
@@ -593,6 +593,66 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._paymentTerm = value;
+			}
+		}
+		
+		private Client _client;
+		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "Id")]
+		[Storage("_client")]
+		public virtual Client Client
+		{
+			get
+			{
+				return this._client;
+			}
+			set
+			{
+				this._client = value;
+			}
+		}
+		
+		private Organization _organization;
+		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
+		[Storage("_organization")]
+		public virtual Organization Organization
+		{
+			get
+			{
+				return this._organization;
+			}
+			set
+			{
+				this._organization = value;
+			}
+		}
+		
+		private User _user0;
+		[ForeignKeyAssociation(SharedFields = "RecCreatedBy", TargetFields = "Id")]
+		[Storage("_user0")]
+		public virtual User RecCreatedByUser
+		{
+			get
+			{
+				return this._user0;
+			}
+			set
+			{
+				this._user0 = value;
+			}
+		}
+		
+		private User _user2;
+		[ForeignKeyAssociation(SharedFields = "RecModifiedBy", TargetFields = "Id")]
+		[Storage("_user2")]
+		public virtual User RecModifiedByUser
+		{
+			get
+			{
+				return this._user2;
+			}
+			set
+			{
+				this._user2 = value;
 			}
 		}
 		
