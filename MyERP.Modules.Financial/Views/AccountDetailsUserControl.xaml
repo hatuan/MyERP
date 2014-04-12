@@ -5,9 +5,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
 	xmlns:cv="clr-namespace:MyERP.Converters;assembly=MyERP.Infrastructure"
-    xmlns:myControl="clr-namespace:MyERP.Controls;assembly=MyERP.Infrastructure"
-	xmlns:system="clr-namespace:System;assembly=mscorlib"
-    mc:Ignorable="d"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+	xmlns:controls="clr-namespace:MyERP.Controls;assembly=MyERP.Controls"
+	mc:Ignorable="d"
     d:DesignHeight="600" d:DesignWidth="540">
 
     <UserControl.Resources>
@@ -147,17 +147,17 @@
                         
                         <TextBox Text="{Binding Code, Mode=TwoWay}" TextWrapping="Wrap" FontFamily="Segoe UI" FontSize="14" Grid.Column="1" Margin="15,3,0,0" />                				
         				<TextBox Text="{Binding Name, Mode=TwoWay}" TextWrapping="Wrap" FontFamily="Segoe UI" FontSize="14" Grid.Row="1" Grid.Column="1" Margin="15,3,0,0" />
-                        <myControl:LookupCurrencyControl Grid.Row="2" Grid.Column="1" Margin="15,3,0,0" 
+                        <controls:LookupCurrencyControl Grid.Row="2" Grid.Column="1" Margin="15,3,0,0" 
                                                          Id="{Binding CurrencyId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}"
                                                          SelectedCurrency="{Binding Currency, Mode=TwoWay}"
                                                          Currencies="{Binding Source={StaticResource currenciesDataSource}, Path=DataView.SourceCollection}">
-                        </myControl:LookupCurrencyControl>
+                        </controls:LookupCurrencyControl>
                         
-                        <myControl:LookupAccountControl Grid.Row="3" Grid.Column="1" Margin="15,3,0,0" 
+                        <controls:LookupAccountControl Grid.Row="3" Grid.Column="1" Margin="15,3,0,0" 
                                                         Id="{Binding ParentAccountId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}"
                                                         SelectedAccount="{Binding ParentAccount, Mode=TwoWay}"
                                                         Accounts="{Binding Source={StaticResource accountsDataSource}, Path=DataView.SourceCollection}">
-                        </myControl:LookupAccountControl>
+                        </controls:LookupAccountControl>
                         
         				<CheckBox IsChecked="{Binding ArAp, Mode=TwoWay}" Grid.Row="4" Grid.Column="1" FontFamily="Segoe UI" FontSize="14" Margin="15,3,0,0" />
         				<TextBlock Text="{Binding Status}" TextWrapping="Wrap" Grid.Row="5" Grid.Column="1" FontFamily="Segoe UI" FontSize="14" Margin="15,3,0,0" />

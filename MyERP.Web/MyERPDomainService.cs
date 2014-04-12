@@ -27,7 +27,7 @@ namespace MyERP.Web
             var organizations = this.DataContext.Organizations.ToList().Where(a => a.ClientId == clientId && a.Status == (int)OrganizationStatusType.Active);
             return organizations.AsQueryable();
         }
-
+        
         #region Dashboard services
         public DashboardStats GetDashboardStats()
         {

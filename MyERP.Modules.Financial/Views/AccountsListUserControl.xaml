@@ -8,7 +8,8 @@
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
 	xmlns:cv="clr-namespace:MyERP.Converters;assembly=MyERP.Infrastructure"
 	xmlns:system="clr-namespace:System;assembly=mscorlib"
-	xmlns:controls="clr-namespace:MyERP.Controls;assembly=MyERP.Infrastructure"
+	xmlns:controls="clr-namespace:MyERP.Controls;assembly=MyERP.Controls"
+	xmlns:behaviors="clr-namespace:MyERP.Infrastructure.Behaviors;assembly=MyERP.Infrastructure"
 	mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="400">
 
@@ -54,7 +55,11 @@
                              ScrollViewer.HorizontalScrollBarVisibility="Visible" 
                              ScrollViewer.VerticalScrollBarVisibility="Visible" 
                              AddingNewDataItem="gridView_AddingNewDataItem">
-
+            
+            <i:Interaction.Behaviors>
+                <behaviors:ScrollIntoViewBehavior/>
+            </i:Interaction.Behaviors>
+            
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn Header="ACCOUNT" DataMemberBinding="{Binding Code, Mode=TwoWay}" Width="100"/>
                 <telerik:GridViewDataColumn Header="NAME" DataMemberBinding="{Binding Name, Mode=TwoWay}"/>

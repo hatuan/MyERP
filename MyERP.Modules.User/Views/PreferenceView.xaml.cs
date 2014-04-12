@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Practices.Prism.Regions;
+using MyERP.DataAccess;
 using MyERP.Infrastructure;
 using MyERP.Modules.User.ViewModels;
 using MyERP.ViewModels;
@@ -52,6 +53,13 @@ namespace MyERP.Modules.User.Views
             win.ResizeMode = ResizeMode.NoResize;
             win.UserWindowRegionPlaceholder.Width = this.Width;
             win.UserWindowRegionPlaceholder.Height = this.Height;
+
+            ViewModel.ApplicationViewModel.IsLoadingData = true;
+            ViewModel.OrganizationRepository.GetOrganizationsByClientId(MyERP.Repositories.WebContext.Current.User.ClientId, items =>
+            {
+                ViewModel.ApplicationViewModel.IsLoadingData = false;
+                ViewModel.Organizations = new QueryableCollectionView(new List<Organization>(items));
+            });
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

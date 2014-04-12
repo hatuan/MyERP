@@ -1,20 +1,24 @@
-﻿<UserControl x:Class="MyERP.Controls.LookupAccountControl"
+﻿<UserControl x:Class="MyERP.Controls.LookupCurrencyControl" x:Name="parent"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:controls="clr-namespace:MyERP.Controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviors="clr-namespace:MyERP.Infrastructure.Behaviors;assembly=MyERP.Infrastructure"
     mc:Ignorable="d"
     d:DesignHeight="50" d:DesignWidth="400">
-    
+
     <Grid x:Name="LayoutRoot">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
+        
         <telerik:RadAutoCompleteBox  FontFamily="Segoe UI" FontSize="14" Grid.Column="0" x:Name="textBox"
-                                                     ItemsSource="{Binding Accounts}"
-                                                     SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"
+                                                     ItemsSource="{Binding Currencies}"
+                                                     SelectedItem="{Binding SelectedCurrency, Mode=TwoWay}"
                                                      AutoCompleteMode="Append"
                                                      SelectionMode="Single"
                                                      TextSearchPath="Code"
@@ -29,12 +33,17 @@
                 <Grid>
                     <telerik:RadGridView x:Name="dropDownGrid" IsReadOnly="True"
                                          AutoGenerateColumns="False" ShowGroupPanel="False" 
-                                         ItemsSource="{Binding Accounts}"
-                                         SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"
-                                         CurrentItem="{Binding SelectedAccount, Mode=TwoWay}"
+                                         ItemsSource="{Binding Currencies}"
+                                         SelectedItem="{Binding SelectedCurrency, Mode=TwoWay}"
+                                         CurrentItem="{Binding SelectedCurrency, Mode=TwoWay}"
                                          IsSynchronizedWithCurrentItem="True"
                                          ScrollViewer.HorizontalScrollBarVisibility="Visible" 
                                          ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        
+                        <i:Interaction.Behaviors>
+                            <behaviors:ScrollIntoViewBehavior/>
+                        </i:Interaction.Behaviors>
+                        
                         <telerik:RadGridView.Columns>
                             <telerik:GridViewDataColumn Header="Code" Width="100"
 													    DataMemberBinding="{Binding Code}" />

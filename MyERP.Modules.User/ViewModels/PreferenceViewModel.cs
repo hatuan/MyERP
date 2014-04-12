@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel.DomainServices.Client;
@@ -28,7 +29,7 @@ using ViewModelBase = MyERP.Infrastructure.ViewModelBase;
 namespace MyERP.Modules.User.ViewModels
 {
     [Export]
-    public class PreferenceViewModel : NavigationAwareDataViewModel, ICloseable
+    public class PreferenceViewModel : ViewModelBase, ICloseable
     {
         public PreferenceViewModel()
         {
@@ -40,10 +41,7 @@ namespace MyERP.Modules.User.ViewModels
 
         [Import]
         public IApplicationViewModel ApplicationViewModel { get; set; }
-
-        [Import]
-        public SessionRepository SessionRepository { get; set; }
-
+        
         [Import]
         public IRegionManager RegionManager { get; set; }
 
@@ -72,41 +70,52 @@ namespace MyERP.Modules.User.ViewModels
             return true;
         }
 
+        private Organization _organization;
+        [Required]
+        public Organization Organization
+        {
+            get { return _organization; }
+            set
+            {
+                _organization = value;
+                RaisePropertyChanged("Organization");
+            }
+        }
+
+        private DateTime _workingDate = DateTime.Now;
+        [Required]
+        public DateTime WorkingDate
+        {
+            get { return _workingDate; }
+            set
+            {
+                _workingDate = value;
+                RaisePropertyChanged("WorkingDate");
+            }
+        }
+
         private void OnNextCommandExecuted()
         {
+            RemoveError("Organization", "Require");
+            if (Organization == null)
+            {
+                AddError("Organization", "Require", false);
+                return;
+            }
+
+            SessionManager.Session.Add("Organization", Organization);
+            SessionManager.Session.Add("WorkingDate", WorkingDate);
+
             //Close PreferenceView
             if (this.RequestClose != null)
             {
                 this.RequestClose(null, EventArgs.Empty);
             }
-
+            
             //Open HomeModule
             this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.HomeModule);
         }
 
         public event EventHandler<EventArgs> RequestClose;
-
-        #region NavigationAwareDataViewModel overrides
-        public override void OnImportsSatisfied()
-        {
-            base.OnImportsSatisfied();
-
-        }
-
-        public override void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            base.OnNavigatedTo(navigationContext);
-
-            this.ApplicationViewModel.IsLoadingData = true;
-            this.OrganizationRepository.GetOrganizationsByClientId(MyERP.Repositories.WebContext.Current.User.ClientId, items =>
-            {
-                this.ApplicationViewModel.IsLoadingData = false;
-                this._organizations = new QueryableCollectionView(new List<Organization>(items));
-
-                this.RaisePropertyChanged("Organizations");
-            });
-        }
-
-        #endregion
     }
 }

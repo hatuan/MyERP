@@ -150,6 +150,7 @@ namespace MyERP.Modules.Financial.ViewModels
         {
             Account newAccount = new Account();
             _accounts.AddNew(newAccount);
+
         }
         
         private bool SubmitChangesCommandCanExecute()
@@ -238,16 +239,5 @@ namespace MyERP.Modules.Financial.ViewModels
         #endregion
 
         public event EventHandler<EventArgs> RequestClose;
-
-        void _accounts_SubmittingChanges(object sender, Telerik.Windows.Controls.DomainServices.DomainServiceSubmittingChangesEventArgs e)
-        {
-            foreach (Account modified in e.ChangeSet.ModifiedEntities)
-            {
-                modified.RecModified = DateTime.Now;
-                Session currentSession = AccountRepository.Context.Sessions.First(c => c.Id == ApplicationViewModel.SessionId);
-                modified.RecModifiedById = currentSession.UserId;
-            }
-
-        }
     }
 }

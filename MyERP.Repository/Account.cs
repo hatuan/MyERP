@@ -1,13 +1,19 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.ServiceModel.DomainServices.Client;
+using MyERP.Infrastructure;
+using MyERP.ViewModels;
 
 namespace MyERP.DataAccess
 {
     public partial class Account
     {
+
         partial void OnCreated()
         {
+            this.OrganizationId = (SessionManager.Session["Organization"] as Organization).Id;
+            this.ClientId = MyERP.Repositories.WebContext.Current.User.ClientId;
             this.Id = Guid.NewGuid();
             this.Code = "";
             this.Name = "";

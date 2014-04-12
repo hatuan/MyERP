@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.ComponentModel.Composition;
 using System.Linq;
-using System.ServiceModel.DomainServices.Client;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using MyERP.Infrastructure.Annotations;
-using MyERP.Web;
 using MyERP.DataAccess;
-using Telerik.Windows.Controls;
-using Telerik.Windows.Data;
 
 namespace MyERP.Controls
 {

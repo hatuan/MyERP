@@ -42,7 +42,7 @@ namespace MyERP.Modules.Home.ViewModels
         private void OnLogoff()
         {
             Session currentSession =
-                SessionRepository.Context.Sessions.First(e => e.Id == ApplicationViewModel.SessionId);
+                SessionRepository.Context.Sessions.First(e => e.Id == (Guid)SessionManager.Session["SessionId"]);
             if (currentSession != null)
             {
                 SessionRepository.Context.Sessions.Remove(currentSession);

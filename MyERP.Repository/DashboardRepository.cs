@@ -17,6 +17,7 @@ namespace MyERP.Repositories
                 return;
             }
             isLoading = true;
+            
             this.Context.GetDashboardStats((operation) =>
                                            {
                                                isLoading = false;

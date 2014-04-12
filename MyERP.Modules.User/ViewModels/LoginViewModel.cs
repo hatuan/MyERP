@@ -78,6 +78,9 @@ namespace MyERP.Modules.User.ViewModels
                     if (lop.LoginSuccess)
                     {
                         RemoveError("Password", PASSWORD_ERROR);
+                        
+                        SessionManager.Session.Clear();
+                        SessionManager.Session.Add("SessionId", Guid.NewGuid());
 
                         UserRepository.GetUserByUserName(UserName,
                             user =>
@@ -85,7 +88,7 @@ namespace MyERP.Modules.User.ViewModels
                                 //Insert UserId To Session table
                                 Session session = new Session()
                                 {
-                                    Id = ApplicationViewModel.SessionId,
+                                    Id = (Guid) SessionManager.Session["SessionId"],
                                     UserId = user.Id,
                                     WorkingDate = DateTime.Today,
                                     LastTime = DateTime.Now,
