@@ -139,14 +139,6 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		public IQueryable<TransactionType> TransactionTypes 
-		{
-			get
-			{
-				return this.GetAll<TransactionType>();
-			}
-		}
-		
 		public IQueryable<Module> Modules 
 		{
 			get
@@ -237,10 +229,6 @@ namespace MyERP.DataAccess
 			get;
 		}
 		IQueryable<Organization> Organizations
-		{
-			get;
-		}
-		IQueryable<TransactionType> TransactionTypes
 		{
 			get;
 		}

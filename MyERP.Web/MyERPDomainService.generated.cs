@@ -30,7 +30,7 @@ namespace MyERP.Web
 		}
 		public IQueryable<Account> GetAccounts()
 		{ 
-			return this.DataContext.Accounts;
+			return this.DataContext.Accounts.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
 		public void DeleteAccounts(Account account)
 		{
@@ -48,7 +48,7 @@ namespace MyERP.Web
 		} 
 		public IQueryable<BusinessPartnerGroup> GetBusinessPartnerGroups()
 		{ 
-			return this.DataContext.BusinessPartnerGroups;
+			return this.DataContext.BusinessPartnerGroups.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
 		public void DeleteBusinessPartnerGroups(BusinessPartnerGroup businessPartnerGroup)
 		{
@@ -66,7 +66,7 @@ namespace MyERP.Web
 		} 
 		public IQueryable<BusinessPartner> GetBusinessPartners()
 		{ 
-			return this.DataContext.BusinessPartners;
+			return this.DataContext.BusinessPartners.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
 		public void DeleteBusinessPartners(BusinessPartner businessPartner)
 		{
@@ -84,7 +84,7 @@ namespace MyERP.Web
 		} 
 		public IQueryable<Currency> GetCurrencies()
 		{ 
-			return this.DataContext.Currencies;
+			return this.DataContext.Currencies.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
 		public void DeleteCurrencies(Currency currency)
 		{
@@ -120,7 +120,7 @@ namespace MyERP.Web
 		} 
 		public IQueryable<JobGroup> GetJobGroups()
 		{ 
-			return this.DataContext.JobGroups;
+			return this.DataContext.JobGroups.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
 		public void DeleteJobGroups(JobGroup jobGroup)
 		{
@@ -138,7 +138,7 @@ namespace MyERP.Web
 		} 
 		public IQueryable<Job> GetJobs()
 		{ 
-			return this.DataContext.Jobs;
+			return this.DataContext.Jobs.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
 		public void DeleteJobs(Job job)
 		{
@@ -174,7 +174,7 @@ namespace MyERP.Web
 		} 
 		public IQueryable<Organization> GetOrganizations()
 		{ 
-			return this.DataContext.Organizations;
+			return this.DataContext.Organizations.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
 		public void DeleteOrganizations(Organization organization)
 		{
@@ -192,7 +192,7 @@ namespace MyERP.Web
 		} 
 		public IQueryable<PaymentTerm> GetPaymentTerms()
 		{ 
-			return this.DataContext.PaymentTerms;
+			return this.DataContext.PaymentTerms.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
 		public void DeletePaymentTerms(PaymentTerm paymentTerm)
 		{
@@ -210,7 +210,7 @@ namespace MyERP.Web
 		} 
 		public IQueryable<Session> GetSessions()
 		{ 
-			return this.DataContext.Sessions;
+			return this.DataContext.Sessions.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
 		public void DeleteSessions(Session session)
 		{
@@ -228,7 +228,7 @@ namespace MyERP.Web
 		} 
 		public IQueryable<TransactionDocument> GetTransactionDocuments()
 		{ 
-			return this.DataContext.TransactionDocuments;
+			return this.DataContext.TransactionDocuments.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
 		public void DeleteTransactionDocuments(TransactionDocument transactionDocument)
 		{
@@ -246,7 +246,7 @@ namespace MyERP.Web
 		} 
 		public IQueryable<TransactionLine> GetTransactionLines()
 		{ 
-			return this.DataContext.TransactionLines;
+			return this.DataContext.TransactionLines.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
 		public void DeleteTransactionLines(TransactionLine transactionLine)
 		{
@@ -262,27 +262,9 @@ namespace MyERP.Web
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<TransactionType> GetTransactionTypes()
-		{ 
-			return this.DataContext.TransactionTypes;
-		}       
-		public void DeleteTransactionTypes(TransactionType transactionType)
-		{
-			// This is a callback method. The actual Delete is performed internally.
-		}
-
-		public void UpdateTransactionTypes(TransactionType transactionType)
-		{
-			// This is a callback method. The actual Update is performed internally.
-		}
-
-		public void InsertTransactionTypes(TransactionType transactionType)
-		{
-			// This is a callback method. The actual Insert is performed internally.
-		} 
 		public IQueryable<User> GetUsers()
 		{ 
-			return this.DataContext.Users;
+			return this.DataContext.Users.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
 		public void DeleteUsers(User user)
 		{

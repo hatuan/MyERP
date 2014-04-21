@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -87,18 +88,39 @@ namespace MyERP.Modules.Financial.ViewModels
             set { _accounts = value; }
         }
 
-        private ICollectionView currencies = null;
-        public ICollectionView Currencies
+        private IEnumerable<Currency> _currencies;
+        public IEnumerable<Currency> Currencies
         {
             get
             {
-                return this.currencies;
+
+                return this._currencies;
             }
             set
             {
-                this.currencies = value;
-                this.RaisePropertyChanged("Currencies");
-                
+                if (this._currencies == value)
+                    return;
+
+                _currencies = value;
+                this.RaisePropertyChanged(() => this.Currencies);
+            }
+        }
+
+        private IEnumerable<Account> _parentAccounts;
+        public IEnumerable<Account> ParentAccounts
+        {
+            get
+            {
+
+                return this._parentAccounts;
+            }
+            set
+            {
+                if (this._parentAccounts == value)
+                    return;
+
+                _parentAccounts = value;
+                this.RaisePropertyChanged(() => this.ParentAccounts);
             }
         }
 
@@ -235,7 +257,6 @@ namespace MyERP.Modules.Financial.ViewModels
             this.DeleteCommand = new DelegateCommand(OnDeleteExcuted, DeleteCommandCanExecute);
             this.CloseWindowCommand = new DelegateCommand(OnCloseWindowExcuted, CloseWindowCanExecute);
         }
-       
         #endregion
 
         public event EventHandler<EventArgs> RequestClose;

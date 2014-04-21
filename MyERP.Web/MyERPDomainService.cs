@@ -15,11 +15,11 @@ namespace MyERP.Web
 {
     public partial class MyERPDomainService
     {
-        private IPrincipal _user;
+        private MyERPMembershipUser _membershipUser;
         public override void Initialize(DomainServiceContext context)
         {
             base.Initialize(context);
-            _user = context.User;
+            _membershipUser = (MyERPMembershipUser)Membership.GetUser(context.User.Identity.Name, true);
         }
 
         public IQueryable<Organization> GetOrganizationsByClientId(Guid clientId)

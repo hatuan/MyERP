@@ -133,7 +133,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private IList<Organization> _organization = new List<Organization>();
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "Id")]
+		[Collection(InverseProperty = "Client")]
 		[Storage("_organization")]
 		public virtual IList<Organization> Organizations
 		{

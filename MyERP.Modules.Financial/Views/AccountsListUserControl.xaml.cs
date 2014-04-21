@@ -8,7 +8,7 @@ using MyERP.ViewModels;
 
 namespace MyERP.Modules.Financial.Views
 {
-     [ViewExport(RegionName = AccountsViewRegionNames.AccountsOverview)]
+    [ViewExport(RegionName = AccountsViewRegionNames.AccountsOverview)]
     public partial class AccountsListUserControl : UserControl
     {
          [Import]
@@ -30,13 +30,6 @@ namespace MyERP.Modules.Financial.Views
         public AccountsListUserControl()
         {
             InitializeComponent();
-        }
-
-        private void gridView_AddingNewDataItem(object sender, Telerik.Windows.Controls.GridView.GridViewAddingNewEventArgs e)
-        {
-            Account newAccount = new Account();
-
-            e.NewObject = newAccount;
         }
     }
 }

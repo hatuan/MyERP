@@ -7,9 +7,11 @@ namespace MyERP.Infrastructure.Behaviors
 {
     public class ScrollIntoViewBehavior : Behavior<RadGridView>
     {
+        private GridViewCellInfo currentCellInfo;
         protected override void OnAttached()
         {
             base.OnAttached();
+            currentCellInfo = (this.AssociatedObject as RadGridView).CurrentCellInfo;
             this.AssociatedObject.SelectionChanged += new EventHandler<SelectionChangeEventArgs>(AssociatedObject_SelectionChanged);
         }
 
@@ -29,7 +31,6 @@ namespace MyERP.Infrastructure.Behaviors
                             row.IsCurrent = true;
                             row.Focus();
                         }
-
                         grid.CurrentCellInfo = new GridViewCellInfo(grid.SelectedItem, grid.Columns[0]);
                     });
                 }

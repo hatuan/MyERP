@@ -12,7 +12,7 @@ namespace MyERP.DataAccess
             public OrganizationMetadata()
             {
             }
-
+            
             [Include]
             [Association("Organization-user-created-association", "RecCreatedById", "Id")]
             public User RecCreatedByUser { get; set; }

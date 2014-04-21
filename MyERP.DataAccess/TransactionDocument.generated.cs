@@ -326,6 +326,36 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		private Guid _clientId;
+		[Column("client_id", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_clientId")]
+		public virtual Guid ClientId
+		{
+			get
+			{
+				return this._clientId;
+			}
+			set
+			{
+				this._clientId = value;
+			}
+		}
+		
+		private Guid _organizaionId;
+		[Column("organizaion_id", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_organizaionId")]
+		public virtual Guid OrganizaionId
+		{
+			get
+			{
+				return this._organizaionId;
+			}
+			set
+			{
+				this._organizaionId = value;
+			}
+		}
+		
 		private Currency _dmnt;
 		[ForeignKeyAssociation(SharedFields = "Ma_Nt", TargetFields = "Id")]
 		[Storage("_dmnt")]
@@ -368,6 +398,36 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._userinfo = value;
+			}
+		}
+		
+		private Client _client;
+		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "Id")]
+		[Storage("_client")]
+		public virtual Client Client
+		{
+			get
+			{
+				return this._client;
+			}
+			set
+			{
+				this._client = value;
+			}
+		}
+		
+		private Organization _organization;
+		[ForeignKeyAssociation(SharedFields = "OrganizaionId", TargetFields = "Id")]
+		[Storage("_organization")]
+		public virtual Organization Organization
+		{
+			get
+			{
+				return this._organization;
+			}
+			set
+			{
+				this._organization = value;
 			}
 		}
 		

@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using MyERP.DataAccess;
+using Telerik.Windows.Controls;
+using WindowStartupLocation = Telerik.Windows.Controls.WindowStartupLocation;
 
 namespace MyERP.Controls
 {
@@ -13,7 +16,36 @@ namespace MyERP.Controls
         public LookupCurrencyControl()
         {
             InitializeComponent();
+
+            this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
             LayoutRoot.DataContext = this;
+        }
+
+        RadWindow searchWindow = new RadWindow();
+
+        public ICommand SearchCommand { get; set; }
+
+        private void OnSearchCommandExecuted(object obj)
+        {
+            StyleManager.SetTheme(searchWindow, new Windows8Theme());
+
+            searchWindow.Width = 600;
+            searchWindow.Height = 600;
+            var searchCurrencyControl = new SearchCurrencyControl();
+            searchCurrencyControl.SelectedCurrency = SelectedCurrency;
+            searchCurrencyControl.Currencies = Currencies;
+            searchWindow.Content = searchCurrencyControl;
+            searchWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            searchWindow.HideMinimizeButton = true;
+            searchWindow.HideMaximizeButton = true;
+            searchWindow.Closed += (sender, args) =>
+            {
+                if (searchWindow.DialogResult == true)
+                {
+                    SelectedCurrency = searchCurrencyControl.SelectedCurrency;
+                }
+            };
+            searchWindow.ShowDialog();
         }
 
         public Guid Id
@@ -79,9 +111,14 @@ namespace MyERP.Controls
             if (lookupControl != null)
             {
                 lookupControl.textBox.SelectedItem = newCurrency;
-                lookupControl.dropDownGrid.SelectedItem = newCurrency;
                 lookupControl.Id = newCurrency == null ? Guid.Empty : newCurrency.Id;
             }
+        }
+
+        private void OnAccountsButtonClicked(object sender, RoutedEventArgs e)
+        {
+            var selectedItem = (sender as Button).DataContext as Currency;
+            this.SelectedCurrency = Currencies.FirstOrDefault(c => c.Id == selectedItem.Id);
         }
     }
 }

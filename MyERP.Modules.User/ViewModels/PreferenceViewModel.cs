@@ -40,6 +40,9 @@ namespace MyERP.Modules.User.ViewModels
         public OrganizationRepository OrganizationRepository { get; set; }
 
         [Import]
+        public SessionRepository SessionRepository { get; set; }
+
+        [Import]
         public IApplicationViewModel ApplicationViewModel { get; set; }
         
         [Import]
@@ -105,6 +108,21 @@ namespace MyERP.Modules.User.ViewModels
 
             SessionManager.Session.Add("Organization", Organization);
             SessionManager.Session.Add("WorkingDate", WorkingDate);
+
+            //Insert To Session table
+            Session session = new Session()
+            {
+                ClientId = MyERP.Repositories.WebContext.Current.User.ClientId,
+                OrganizationId = (SessionManager.Session["Organization"] as Organization).Id,
+                Id = (Guid)SessionManager.Session["SessionId"],
+                UserId = MyERP.Repositories.WebContext.Current.User.Id,
+                WorkingDate = DateTime.Today,
+                LastTime = DateTime.Now,
+                Expire = false,
+            };
+
+            SessionRepository.Context.Sessions.Add(session);
+            SessionRepository.SaveOrUpdateEntities();
 
             //Close PreferenceView
             if (this.RequestClose != null)

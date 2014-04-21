@@ -203,6 +203,12 @@
   <ItemGroup>
     <Resource Include="Images\undo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ok16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ok22.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

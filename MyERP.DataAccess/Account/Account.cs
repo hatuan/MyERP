@@ -22,6 +22,14 @@ namespace MyERP.DataAccess
             public Account ParentAccount { get; set; }
 
             [Include]
+            [Association("Account-client-association", "ClientId", "Id")]
+            public Client Client { get; set; }
+
+            [Include]
+            [Association("Account-organization-association", "OrganizationId", "Id")]
+            public Organization Organization { get; set; }
+
+            [Include]
             [Association("Account-user-created-association", "RecCreatedById", "Id")]
             public User RecCreatedByUser { get; set; }
 

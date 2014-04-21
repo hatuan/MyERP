@@ -30,6 +30,8 @@
             
             <cv:IdNullToGuidConverter x:Key="MapIdNullToGuidConverter"/>
 
+            <ContentControl x:Key="contentParent" Content="{Binding}" />
+
             <telerik:RadDomainDataSource DomainContext="{Binding AccountRepository.Context}" QueryName="GetCurrencies" x:Name="currenciesDataSource" AutoLoad="True">
                 <telerik:RadDomainDataSource.SortDescriptors>
                     <telerik:SortDescriptor Member="Code"/>
@@ -53,49 +55,45 @@
 							 SelectedItem="{Binding SelectedAccount, Mode=TwoWay}" AutoGenerateColumns="False" 
                              ShowGroupPanel="False" 
                              ScrollViewer.HorizontalScrollBarVisibility="Visible" 
-                             ScrollViewer.VerticalScrollBarVisibility="Visible" 
-                             AddingNewDataItem="gridView_AddingNewDataItem">
-            
-            <i:Interaction.Behaviors>
-                <behaviors:ScrollIntoViewBehavior/>
-            </i:Interaction.Behaviors>
+                             ScrollViewer.VerticalScrollBarVisibility="Visible">
             
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn Header="ACCOUNT" DataMemberBinding="{Binding Code, Mode=TwoWay}" Width="100"/>
                 <telerik:GridViewDataColumn Header="NAME" DataMemberBinding="{Binding Name, Mode=TwoWay}"/>
                 <telerik:GridViewDataColumn Header="CURRENCY" DataMemberBinding="{Binding Currency.Code}" Width="100">
-                    <!--<telerik:GridViewDataColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Currency.Code}" />
-                        </DataTemplate>
-                    </telerik:GridViewDataColumn.CellTemplate>-->
                     <telerik:GridViewDataColumn.CellEditTemplate>
                         <DataTemplate>
-                            <!--<controls:LookupCurrencyControl Id="{Binding CurrencyId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}" 
-                                                            Currencies="{Binding Source={StaticResource currenciesDataSource}, Path=DataView.SourceCollection}">
-                                
-                            </controls:LookupCurrencyControl>-->
                             <controls:LookupCurrencyControl 
                                 Id="{Binding CurrencyId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}" 
                                 SelectedCurrency="{Binding Currency, Mode=TwoWay}" 
-                                Currencies="{Binding Source={StaticResource currenciesDataSource}, Path=DataView.SourceCollection}">
+                                Currencies="{Binding Source={StaticResource contentParent}, Path=Content.Currencies}">
                             </controls:LookupCurrencyControl>
+                            <!--<controls:LookupCurrencyControl 
+                                Id="{Binding CurrencyId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}" 
+                                SelectedCurrency="{Binding Currency, Mode=TwoWay}" 
+                                Currencies="{Binding Source={StaticResource currenciesDataSource}, Path=DataView.SourceCollection}">
+                            </controls:LookupCurrencyControl>-->
                         </DataTemplate>
                     </telerik:GridViewDataColumn.CellEditTemplate>
                 </telerik:GridViewDataColumn>
-                <telerik:GridViewDataColumn Header="PARENT" DataMemberBinding="{Binding ParentAccount.Code}" Width="100">
-                    <!--<telerik:GridViewDataColumn.CellTemplate>
+                <telerik:GridViewDataColumn Header="PARENT" DataMemberBinding="{Binding ParentAccount.Code, Mode=TwoWay}" Width="100">
+                    <telerik:GridViewDataColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding ParentAccount.Code}" />
                         </DataTemplate>
-                    </telerik:GridViewDataColumn.CellTemplate>-->
+                    </telerik:GridViewDataColumn.CellTemplate>
                     <telerik:GridViewDataColumn.CellEditTemplate>
                         <DataTemplate>
                             <controls:LookupAccountControl 
                                 Id="{Binding ParentAccountId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}"
                                 SelectedAccount="{Binding ParentAccount, Mode=TwoWay}"
-                                Accounts="{Binding Source={StaticResource accountsDataSource}, Path=DataView.SourceCollection}">
+                                Accounts="{Binding Source={StaticResource contentParent}, Path=Content.ParentAccounts}">
                             </controls:LookupAccountControl>
+                            <!--<controls:LookupAccountControl 
+                                Id="{Binding ParentAccountId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}"
+                                SelectedAccount="{Binding ParentAccount, Mode=TwoWay}"
+                                Accounts="{Binding Source={StaticResource accountsDataSource}, Path=DataView.SourceCollection}">
+                            </controls:LookupAccountControl>-->
                         </DataTemplate>
                     </telerik:GridViewDataColumn.CellEditTemplate>
                 </telerik:GridViewDataColumn>

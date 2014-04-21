@@ -115,6 +115,34 @@
 			</telerik:RadRibbonView>
             <Rectangle Grid.Row="1" Fill="{StaticResource AccentBrush}" Height="1" HorizontalAlignment="Stretch"/>
 		</Grid>
+
+
+        <telerik:RadDomainDataSource DomainContext="{Binding AccountRepository.Context}" QueryName="GetCurrencies" x:Name="currenciesDataSource" AutoLoad="True">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="LoadedData">
+                    <ei:ChangePropertyAction TargetObject="{Binding .}" 
+															 PropertyName="Currencies" 
+															 Value="{Binding DataView.SourceCollection, ElementName=currenciesDataSource}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            
+            <telerik:RadDomainDataSource.SortDescriptors>
+                <telerik:SortDescriptor Member="Code"/>
+            </telerik:RadDomainDataSource.SortDescriptors>
+        </telerik:RadDomainDataSource>
+
+        <telerik:RadDomainDataSource DomainContext="{Binding AccountRepository.Context}" QueryName="GetAccounts" x:Name="accountsDataSource" AutoLoad="True">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="LoadedData">
+                    <ei:ChangePropertyAction TargetObject="{Binding .}" 
+															 PropertyName="ParentAccounts" 
+															 Value="{Binding DataView.SourceCollection, ElementName=accountsDataSource}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <telerik:RadDomainDataSource.SortDescriptors>
+                <telerik:SortDescriptor Member="Code"/>
+            </telerik:RadDomainDataSource.SortDescriptors>
+        </telerik:RadDomainDataSource>
         
         <telerik:RadTabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
         	<telerik:RadTabItem x:Name="radTabItemAccountsOverview" Header="OVERVIEW">

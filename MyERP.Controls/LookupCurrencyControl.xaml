@@ -10,6 +10,19 @@
     mc:Ignorable="d"
     d:DesignHeight="50" d:DesignWidth="400">
 
+    <UserControl.Resources>
+        <DataTemplate x:Key="SearchAutoComplete">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="250"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Code}" />
+                <TextBlock Text="{Binding Name}" Grid.Column="1" />
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+
     <Grid x:Name="LayoutRoot">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -17,43 +30,44 @@
         </Grid.ColumnDefinitions>
         
         <telerik:RadAutoCompleteBox  FontFamily="Segoe UI" FontSize="14" Grid.Column="0" x:Name="textBox"
-                                                     ItemsSource="{Binding Currencies}"
-                                                     SelectedItem="{Binding SelectedCurrency, Mode=TwoWay}"
-                                                     AutoCompleteMode="Append"
-                                                     SelectionMode="Single"
-                                                     TextSearchPath="Code"
-                                                     DisplayMemberPath="Code" IsTabStop="True">
+                                     ItemsSource="{Binding Currencies}"
+                                     SelectedItem="{Binding SelectedCurrency, Mode=TwoWay}"
+                                     SelectionMode="Single"
+                                     TextSearchMode="Contains"
+                                     AutoCompleteMode="SuggestAppend"
+                                     TextSearchPath="Code"
+                                     DropDownItemTemplate="{StaticResource SearchAutoComplete}"
+                                     DropDownWidth="Auto"
+                                     DisplayMemberPath="Code" IsTabStop="True">
         </telerik:RadAutoCompleteBox>
-
-        <telerik:RadDropDownButton x:Name="dropDownButton"
+        <telerik:RadButton Grid.Column="1" x:Name="btnSearch" Command="{Binding SearchCommand}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/MyERP.Theme;component/Images/Find22.png"></Image>
+            </StackPanel>
+        </telerik:RadButton>
+        <!--<telerik:RadDropDownButton x:Name="dropDownButton"
                                    Grid.Column="1" IsTabStop="False"
                                    PopupPlacementTarget="{Binding ElementName=textBox}"
                                    DropDownMaxHeight="300">
             <telerik:RadDropDownButton.DropDownContent>
-                <Grid>
-                    <telerik:RadGridView x:Name="dropDownGrid" IsReadOnly="True"
-                                         AutoGenerateColumns="False" ShowGroupPanel="False" 
-                                         ItemsSource="{Binding Currencies}"
-                                         SelectedItem="{Binding SelectedCurrency, Mode=TwoWay}"
-                                         CurrentItem="{Binding SelectedCurrency, Mode=TwoWay}"
-                                         IsSynchronizedWithCurrentItem="True"
-                                         ScrollViewer.HorizontalScrollBarVisibility="Visible" 
-                                         ScrollViewer.VerticalScrollBarVisibility="Visible">
-                        
-                        <i:Interaction.Behaviors>
-                            <behaviors:ScrollIntoViewBehavior/>
-                        </i:Interaction.Behaviors>
-                        
-                        <telerik:RadGridView.Columns>
-                            <telerik:GridViewDataColumn Header="Code" Width="100"
-													    DataMemberBinding="{Binding Code}" />
-                            <telerik:GridViewDataColumn Header="Name" Width="200"
-													    DataMemberBinding="{Binding Name}" />
-                        </telerik:RadGridView.Columns>
-                    </telerik:RadGridView>
-                </Grid>
+                <ItemsControl x:Name="accountsItemsControl" ItemsSource="{Binding Accounts}" Margin="0,8,0,0" Grid.ColumnSpan="3">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="24">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Code}" FontFamily="Segoe UI" FontSize="12" Foreground="{StaticResource BasicBrush}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{Binding Name}" FontFamily="Segoe UI" FontSize="12" Foreground="{StaticResource AccentBrush}" 
+                            		HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                <Button Opacity="0" HorizontalAlignment="Stretch" Click="OnAccountsButtonClicked" VerticalAlignment="Stretch" Grid.ColumnSpan="2" Cursor="Hand" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </telerik:RadDropDownButton.DropDownContent>
 
-        </telerik:RadDropDownButton>
+        </telerik:RadDropDownButton>-->
     </Grid>
 </UserControl>

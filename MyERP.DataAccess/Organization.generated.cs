@@ -207,6 +207,21 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		private Client _client;
+		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "Id")]
+		[Storage("_client")]
+		public virtual Client Client
+		{
+			get
+			{
+				return this._client;
+			}
+			set
+			{
+				this._client = value;
+			}
+		}
+		
 	}
 }
 #pragma warning restore 1591

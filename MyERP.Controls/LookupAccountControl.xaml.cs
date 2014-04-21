@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using MyERP.DataAccess;
+using Telerik.Windows.Controls;
+using WindowStartupLocation = Telerik.Windows.Controls.WindowStartupLocation;
 
 
 namespace MyERP.Controls
@@ -14,9 +17,38 @@ namespace MyERP.Controls
         public LookupAccountControl()
         {
             InitializeComponent();
+
+            this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
             LayoutRoot.DataContext = this;
         }
-      
+
+        RadWindow searchWindow = new RadWindow();
+
+        public ICommand SearchCommand { get; set; }
+
+        private void OnSearchCommandExecuted(object obj)
+        {
+            StyleManager.SetTheme( searchWindow, new Windows8Theme());
+            
+            searchWindow.Width = 600;
+            searchWindow.Height = 600;
+            var searchAccountControl = new SearchAccountControl();
+            searchAccountControl.SelectedAccount = SelectedAccount;
+            searchAccountControl.Accounts = Accounts;
+            searchWindow.Content = searchAccountControl;
+            searchWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            searchWindow.HideMinimizeButton = true;
+            searchWindow.HideMaximizeButton = true;
+            searchWindow.Closed += (sender, args) =>
+            {
+                if (searchWindow.DialogResult == true)
+                {
+                    SelectedAccount = searchAccountControl.SelectedAccount;
+                }
+            };
+            searchWindow.ShowDialog();
+        }
+
         public Guid Id
         {
             get
@@ -70,7 +102,7 @@ namespace MyERP.Controls
         }
 
         public static readonly DependencyProperty SelectedAccountProperty = DependencyProperty.Register(
-           "SelectedAccount", typeof(Account), typeof(LookupAccountControl), new PropertyMetadata(null, OnSelectedAccountChanged));
+           "SelectedCurrency", typeof(Account), typeof(LookupAccountControl), new PropertyMetadata(null, OnSelectedAccountChanged));
 
         private static void OnSelectedAccountChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -80,9 +112,14 @@ namespace MyERP.Controls
             if (lookupControl != null)
             {
                 lookupControl.textBox.SelectedItem = newAccount;
-                lookupControl.dropDownGrid.SelectedItem = newAccount;
                 lookupControl.Id = newAccount == null ? Guid.Empty : newAccount.Id;
             }
+        }
+
+        private void OnAccountsButtonClicked(object sender, RoutedEventArgs e)
+        {
+            var account = (sender as Button).DataContext as Account;
+            this.SelectedAccount = Accounts.FirstOrDefault(c => c.Id == account.Id);
         }
     }
 

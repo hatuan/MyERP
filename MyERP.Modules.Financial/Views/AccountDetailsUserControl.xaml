@@ -26,6 +26,8 @@
             
             <cv:IdNullToGuidConverter x:Key="MapIdNullToGuidConverter"/>
 
+            <ContentControl x:Key="contentParent" Content="{Binding}" />
+
             <telerik:RadDomainDataSource DomainContext="{Binding AccountRepository.Context}" QueryName="GetCurrencies" x:Name="currenciesDataSource" AutoLoad="True">
                 <telerik:RadDomainDataSource.SortDescriptors>
                     <telerik:SortDescriptor Member="Code"/>
@@ -46,11 +48,7 @@
         				<RowDefinition Height="*"/>
         				<RowDefinition Height="Auto"/>
         			</Grid.RowDefinitions>
-					<!--
-        			<StackPanel Margin="105,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-        				<TextBlock Text="{Binding Name}" FontFamily="Segoe UI Light" FontSize="32" Foreground="{StaticResource MainBrush}" d:LayoutOverrides="Width" />
-        			</StackPanel>	
-					-->
+
         			<Grid Margin="8,8,0,0" Grid.Row="2" VerticalAlignment="Top">
         				<Grid.ColumnDefinitions>
         					<ColumnDefinition Width="90" />
@@ -110,11 +108,7 @@
         				<RowDefinition Height="*"/>
         				<RowDefinition Height="Auto"/>
         			</Grid.RowDefinitions>
-					<!--
-        			<StackPanel Margin="105,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-        				<TextBlock Text="{Binding Name}" FontFamily="Segoe UI Light" FontSize="32" Foreground="{StaticResource MainBrush}" d:LayoutOverrides="Width" />
-        			</StackPanel>	
-					-->
+
         			<Grid Margin="8,8,0,0" Grid.Row="2" VerticalAlignment="Top">
         				<Grid.ColumnDefinitions>
         					<ColumnDefinition Width="90" />
@@ -150,16 +144,27 @@
                         <controls:LookupCurrencyControl Grid.Row="2" Grid.Column="1" Margin="15,3,0,0" 
                                                          Id="{Binding CurrencyId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}"
                                                          SelectedCurrency="{Binding Currency, Mode=TwoWay}"
-                                                         Currencies="{Binding Source={StaticResource currenciesDataSource}, Path=DataView.SourceCollection}">
+                                                         Currencies="{Binding Source={StaticResource contentParent}, Path=Content.Currencies}">
                         </controls:LookupCurrencyControl>
                         
                         <controls:LookupAccountControl Grid.Row="3" Grid.Column="1" Margin="15,3,0,0" 
                                                         Id="{Binding ParentAccountId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}"
                                                         SelectedAccount="{Binding ParentAccount, Mode=TwoWay}"
-                                                        Accounts="{Binding Source={StaticResource accountsDataSource}, Path=DataView.SourceCollection}">
+                                                        Accounts="{Binding Source={StaticResource contentParent}, Path=Content.ParentAccounts}">
                         </controls:LookupAccountControl>
-                        
-        				<CheckBox IsChecked="{Binding ArAp, Mode=TwoWay}" Grid.Row="4" Grid.Column="1" FontFamily="Segoe UI" FontSize="14" Margin="15,3,0,0" />
+                        <!--<controls:LookupCurrencyControl Grid.Row="2" Grid.Column="1" Margin="15,3,0,0" 
+                                                         Id="{Binding CurrencyId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}"
+                                                         SelectedCurrency="{Binding Currency, Mode=TwoWay}"
+                                                         Currencies="{Binding Source={StaticResource currenciesDataSource}, Path=DataView.SourceCollection}">
+                        </controls:LookupCurrencyControl>
+
+                        <controls:LookupAccountControl Grid.Row="3" Grid.Column="1" Margin="15,3,0,0" 
+                                                        Id="{Binding ParentAccountId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}"
+                                                        SelectedAccount="{Binding ParentAccount, Mode=TwoWay}"
+                                                        Accounts="{Binding Source={StaticResource accountsDataSource}, Path=DataView.SourceCollection}">
+                        </controls:LookupAccountControl>-->
+
+                        <CheckBox IsChecked="{Binding ArAp, Mode=TwoWay}" Grid.Row="4" Grid.Column="1" FontFamily="Segoe UI" FontSize="14" Margin="15,3,0,0" />
         				<TextBlock Text="{Binding Status}" TextWrapping="Wrap" Grid.Row="5" Grid.Column="1" FontFamily="Segoe UI" FontSize="14" Margin="15,3,0,0" />
         				<telerik:RadComboBox SelectedIndex="{Binding Status, Mode=TwoWay}" Grid.Row="5" Grid.Column="1" FontFamily="Segoe UI" FontSize="14" Margin="15,3,0,0">
         					<telerik:RadComboBoxItem Content="INACTIVE"/>

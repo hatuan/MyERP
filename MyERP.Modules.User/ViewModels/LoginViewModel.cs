@@ -85,19 +85,6 @@ namespace MyERP.Modules.User.ViewModels
                         UserRepository.GetUserByUserName(UserName,
                             user =>
                             {
-                                //Insert UserId To Session table
-                                Session session = new Session()
-                                {
-                                    Id = (Guid) SessionManager.Session["SessionId"],
-                                    UserId = user.Id,
-                                    WorkingDate = DateTime.Today,
-                                    LastTime = DateTime.Now,
-                                    Expire = false
-                                };
-
-                                SessionRepository.Context.Sessions.Add(session);
-                                SessionRepository.SaveOrUpdateEntities();
-
                                 LoginSuccessfully();
                             });
                     }
@@ -155,15 +142,6 @@ namespace MyERP.Modules.User.ViewModels
 
         private void LoginSuccessfully()
         {
-            //Close LoginView
-            //if (this.RequestClose != null)
-            //{
-            //    this.RequestClose(null, EventArgs.Empty);
-            //}
-            
-            //Open HomeModule
-            //this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.HomeModule);
-
             //Navigate to PreferenceView
             var region = this.RegionManager.Regions[RegionNames.UserWindowRegion];
             region.RequestNavigate("PreferenceView");
