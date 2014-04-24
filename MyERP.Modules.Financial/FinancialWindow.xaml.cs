@@ -41,6 +41,12 @@ namespace MyERP.Modules.Financial
         {
             this.SetValue(Microsoft.Practices.Prism.Regions.RegionManager.RegionManagerProperty, RegionManager);
             this.EventAggregator.GetEvent<AccountClickedEvent>().Subscribe(OnAccountClickedEvent);
+            this.EventAggregator.GetEvent<GeneralLeaderJournalsClickedEvent>().Subscribe(OnGeneralLeaderJournalsClickedEvent);
+        }
+
+        public void OnGeneralLeaderJournalsClickedEvent(object obj)
+        {
+            this.RegionManager.RequestNavigate("FinancialWindowRegion", "GeneralJournalsView");
         }
 
         public void OnAccountClickedEvent(object args)

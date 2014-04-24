@@ -42,7 +42,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _code;
-		[Column("code", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "text")]
+		[Column("code", Length = 0, Scale = 0, SqlType = "text")]
 		[Storage("_code")]
 		public virtual string Code
 		{
@@ -71,63 +71,63 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private DateTime _date0;
-		[Column("date0", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date0")]
-		public virtual DateTime Date0
+		private DateTime _recCreated;
+		[Column("rec_created", Length = 0, Scale = 0, SqlType = "timestamp")]
+		[Storage("_recCreated")]
+		public virtual DateTime RecCreated
 		{
 			get
 			{
-				return this._date0;
+				return this._recCreated;
 			}
 			set
 			{
-				this._date0 = value;
+				this._recCreated = value;
 			}
 		}
 		
-		private Guid _userId0;
-		[Column("user_id0", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_userId0")]
-		public virtual Guid UserId0
+		private Guid _recCreatedBy;
+		[Column("rec_created_by", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_recCreatedBy")]
+		public virtual Guid RecCreatedBy
 		{
 			get
 			{
-				return this._userId0;
+				return this._recCreatedBy;
 			}
 			set
 			{
-				this._userId0 = value;
+				this._recCreatedBy = value;
 			}
 		}
 		
-		private DateTime _date2;
-		[Column("date2", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date2")]
-		public virtual DateTime Date2
+		private DateTime _recModified;
+		[Column("rec_modified", Length = 0, Scale = 0, SqlType = "timestamp")]
+		[Storage("_recModified")]
+		public virtual DateTime RecModified
 		{
 			get
 			{
-				return this._date2;
+				return this._recModified;
 			}
 			set
 			{
-				this._date2 = value;
+				this._recModified = value;
 			}
 		}
 		
-		private Guid _userId2;
-		[Column("user_id2", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_userId2")]
-		public virtual Guid UserId2
+		private Guid _recModifiedBy;
+		[Column("rec_modified_by", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_recModifiedBy")]
+		public virtual Guid RecModifiedBy
 		{
 			get
 			{
-				return this._userId2;
+				return this._recModifiedBy;
 			}
 			set
 			{
-				this._userId2 = value;
+				this._recModifiedBy = value;
 			}
 		}
 		
@@ -146,18 +146,18 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Guid _rowguid;
-		[Column("rowguid", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_rowguid")]
-		public virtual Guid Rowguid
+		private Guid _id;
+		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_id")]
+		public virtual Guid Id
 		{
 			get
 			{
-				return this._rowguid;
+				return this._id;
 			}
 			set
 			{
-				this._rowguid = value;
+				this._id = value;
 			}
 		}
 		
@@ -236,17 +236,6 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private IList<BusinessPartner> _businessPartner2s = new List<BusinessPartner>();
-		[Collection(InverseProperty = "BusinessPartnerGroup2")]
-		[Storage("_businessPartner2s")]
-		public virtual IList<BusinessPartner> BusinessPartner2s
-		{
-			get
-			{
-				return this._businessPartner2s;
-			}
-		}
-		
 		private IList<BusinessPartner> _businessPartner1s = new List<BusinessPartner>();
 		[Collection(InverseProperty = "BusinessPartnerGroup1")]
 		[Storage("_businessPartner1s")]
@@ -266,6 +255,17 @@ namespace MyERP.DataAccess
 			get
 			{
 				return this._businessPartner3s;
+			}
+		}
+		
+		private IList<BusinessPartner> _businessPartner2s = new List<BusinessPartner>();
+		[Collection(InverseProperty = "BusinessPartnerGroup2")]
+		[Storage("_businessPartner2s")]
+		public virtual IList<BusinessPartner> BusinessPartner2s
+		{
+			get
+			{
+				return this._businessPartner2s;
 			}
 		}
 		

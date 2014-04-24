@@ -35,7 +35,7 @@ namespace MyERP.Modules.Home.ViewModels
                 }
                 return this._generalLeaderJournals;
             }
-
+            
         }
 
         //set from the view's domaindatasource

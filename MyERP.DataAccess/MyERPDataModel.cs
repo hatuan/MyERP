@@ -51,14 +51,6 @@ namespace MyERP.DataAccess
 			:base(connection, backendConfiguration, metadataSource)
 		{ }
 			
-		public IQueryable<Account> Accounts 
-		{
-			get
-			{
-				return this.GetAll<Account>();
-			}
-		}
-		
 		public IQueryable<User> Users 
 		{
 			get
@@ -115,19 +107,19 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		public IQueryable<TransactionDocument> TransactionDocuments 
+		public IQueryable<GeneralJournalDocument> GeneralJournalDocuments 
 		{
 			get
 			{
-				return this.GetAll<TransactionDocument>();
+				return this.GetAll<GeneralJournalDocument>();
 			}
 		}
 		
-		public IQueryable<TransactionLine> TransactionLines 
+		public IQueryable<GeneralJournalLine> GeneralJournalLines 
 		{
 			get
 			{
-				return this.GetAll<TransactionLine>();
+				return this.GetAll<GeneralJournalLine>();
 			}
 		}
 		
@@ -163,6 +155,30 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		public IQueryable<NoSeries> NoSeries 
+		{
+			get
+			{
+				return this.GetAll<NoSeries>();
+			}
+		}
+		
+		public IQueryable<Account> Accounts 
+		{
+			get
+			{
+				return this.GetAll<Account>();
+			}
+		}
+		
+		public IQueryable<BaseObject> BaseObjects 
+		{
+			get
+			{
+				return this.GetAll<BaseObject>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -188,10 +204,6 @@ namespace MyERP.DataAccess
 	
 	public interface IEntitiesModelUnitOfWork : IUnitOfWork
 	{
-		IQueryable<Account> Accounts
-		{
-			get;
-		}
 		IQueryable<User> Users
 		{
 			get;
@@ -220,11 +232,11 @@ namespace MyERP.DataAccess
 		{
 			get;
 		}
-		IQueryable<TransactionDocument> TransactionDocuments
+		IQueryable<GeneralJournalDocument> GeneralJournalDocuments
 		{
 			get;
 		}
-		IQueryable<TransactionLine> TransactionLines
+		IQueryable<GeneralJournalLine> GeneralJournalLines
 		{
 			get;
 		}
@@ -241,6 +253,18 @@ namespace MyERP.DataAccess
 			get;
 		}
 		IQueryable<Client> Clients
+		{
+			get;
+		}
+		IQueryable<NoSeries> NoSeries
+		{
+			get;
+		}
+		IQueryable<Account> Accounts
+		{
+			get;
+		}
+		IQueryable<BaseObject> BaseObjects
 		{
 			get;
 		}

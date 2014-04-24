@@ -56,6 +56,7 @@
 		</telerik:RadButton>
 
         <telerik:RadGridView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="15" x:Name="gridSearch" 
+                             IsReadOnly="True"
                              Margin="0,5" ColumnWidth="*"
                              AutoGenerateColumns="False" 
                              ShowGroupPanel="False"

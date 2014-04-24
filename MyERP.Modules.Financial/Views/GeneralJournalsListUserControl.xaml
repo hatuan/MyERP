@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="MyERP.Modules.Financial.Views.GeneralJournalsListUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:controls="clr-namespace:MyERP.Controls;assembly=MyERP.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MyERP.Theme;component/Styles/Generic.xaml"/>
+                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.GridView.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot">
+        <telerik:RadGridView x:Name="gridView" ItemsSource="{Binding GeneralJournalDocuments}" ColumnWidth="*"
+                             IsBusy="{Binding IsBusy}"
+							 SelectedItem="{Binding SelectedGeneralJournalDocuments, Mode=TwoWay}" AutoGenerateColumns="False" 
+                             ShowGroupPanel="False" 
+                             ScrollViewer.HorizontalScrollBarVisibility="Visible" 
+                             ScrollViewer.VerticalScrollBarVisibility="Visible">
+
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="ORGANIZATION" DataMemberBinding="{Binding Organization.Code}" Width="150"/>
+                <telerik:GridViewDataColumn Header="NO" DataMemberBinding="{Binding DocumentNo, Mode=TwoWay}" Width="150"/>
+                <telerik:GridViewDataColumn Header="CREATED DATE" DataMemberBinding="{Binding DocumentCreated, Mode=TwoWay}" Width="150"/>
+                <telerik:GridViewDataColumn Header="POSTED DATE" DataMemberBinding="{Binding DocumentPosted, Mode=TwoWay}" Width="150"/>
+                <telerik:GridViewDataColumn Header="DESCRIPTION" DataMemberBinding="{Binding Description, Mode=TwoWay}" Width="150*"/>
+                <telerik:GridViewDataColumn Header="STATUS" DataMemberBinding="{Binding Status}" Width="150"/>
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+    </Grid>
+</UserControl>

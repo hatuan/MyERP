@@ -27,7 +27,7 @@ namespace MyERP.DataAccess
 	public partial class Job
 	{
 		private string _ma_vv;
-		[Column("code", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "text")]
+		[Column("code", Length = 0, Scale = 0, SqlType = "text")]
 		[Storage("_ma_vv")]
 		public virtual string Code
 		{
@@ -71,10 +71,10 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private string _ma_kh;
-		[Column("ma_kh", Length = 0, Scale = 0, SqlType = "text")]
+		private Guid _ma_kh;
+		[Column("business_partner_id", Length = 0, Scale = 0, SqlType = "uuid")]
 		[Storage("_ma_kh")]
-		public virtual string Ma_Kh
+		public virtual Guid Ma_Kh
 		{
 			get
 			{
@@ -341,6 +341,21 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		private Guid _id;
+		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_id")]
+		public virtual Guid Id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				this._id = value;
+			}
+		}
+		
 		private User _userinfo;
 		[ForeignKeyAssociation(SharedFields = "User_Id0", TargetFields = "Id")]
 		[Storage("_userinfo")]
@@ -368,21 +383,6 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._userinfo1 = value;
-			}
-		}
-		
-		private BusinessPartner _dmkh;
-		[ForeignKeyAssociation(SharedFields = "Ma_Kh", TargetFields = "Code")]
-		[Storage("_dmkh")]
-		public virtual BusinessPartner Dmkh
-		{
-			get
-			{
-				return this._dmkh;
-			}
-			set
-			{
-				this._dmkh = value;
 			}
 		}
 		
@@ -473,6 +473,21 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._organization = value;
+			}
+		}
+		
+		private BusinessPartner _dmkh;
+		[ForeignKeyAssociation(SharedFields = "Ma_Kh", TargetFields = "Id")]
+		[Storage("_dmkh")]
+		public virtual BusinessPartner Dmkh
+		{
+			get
+			{
+				return this._dmkh;
+			}
+			set
+			{
+				this._dmkh = value;
 			}
 		}
 		

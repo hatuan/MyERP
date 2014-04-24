@@ -99,7 +99,13 @@ namespace MyERP.Modules.Home.Views
 
         private void OnGeneralLeaderJournalsButtonClicked(object sender, System.Windows.RoutedEventArgs e)
         {
-        	// TODO: Add event handler implementation here.
+            Module setupEntity = (sender as Button).DataContext as Module;
+
+            if (setupEntity.IdAsName == ModuleName.GeneralLeaderJournals)
+            {
+                this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.FinancialModule);
+                this.EventAggregator.GetEvent<GeneralLeaderJournalsClickedEvent>().Publish(setupEntity);
+            }
         }
 
         private void OnGeneralLeaderReportsButtonClicked(object sender, System.Windows.RoutedEventArgs e)

@@ -1,0 +1,174 @@
+﻿<UserControl x:Name="generalJournalDocumentView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:regions="http://www.codeplex.com/prism"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    x:Class="MyERP.Modules.Financial.Views.GeneralJournalsView"
+    mc:Ignorable="d"
+    d:DesignHeight="600" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MyERP.Theme;component/Styles/Generic.xaml"/>
+                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.RibbonView.xaml"/>
+                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.GridView.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot">
+        <VisualStateManager.CustomVisualStateManager>
+            <ei:ExtendedVisualStateManager/>
+        </VisualStateManager.CustomVisualStateManager>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ViewStates" ei:ExtendedVisualStateManager.UseFluidLayout="True">
+                <VisualStateGroup.Transitions>
+                    <VisualTransition GeneratedDuration="0:0:0.5">
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CircleEase EasingMode="EaseOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                    </VisualTransition>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="ListState"/>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- RadRibbonView -->
+        <Grid>
+            <ContentControl regions:RegionManager.RegionName="GeneralJournalsHeader" x:Name="GeneralJournalsHeaderRegion"
+        				VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
+        </Grid>
+
+        <telerik:RadTabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
+            <telerik:RadTabItem x:Name="radTabGeneralJournalDocumentsOverview" Header="OVERVIEW">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0"/>
+                        <ColumnDefinition Width="53"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="0"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ContentControl regions:RegionManager.RegionName="GeneralJournalDocumentsOverview" x:Name="GeneralJournalDocumentsOverviewRegion" Grid.Column="1" 
+        				VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.ColumnSpan="15" Margin="1"/>
+
+                </Grid>
+            </telerik:RadTabItem>
+            <telerik:RadTabItem x:Name="radTabGeneralJournalDocumentDetails" Header="DETAIL">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0"/>
+                        <ColumnDefinition Width="53"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="0"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ContentControl regions:RegionManager.RegionName="GeneralJournalDocumentDetailsRegion" x:Name="GeneralJournalDocumentDetailsRegion" Grid.Column="1"
+        				VerticalContentAlignment="Stretch" Grid.ColumnSpan="15" HorizontalContentAlignment="Stretch" Margin="1"/>
+
+                </Grid>
+            </telerik:RadTabItem>
+        </telerik:RadTabControl>
+
+        <sdk:GridSplitter x:Name="grsplSplitter" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Height="5"/>
+
+        <telerik:RadTabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3">
+            <telerik:RadTabItem x:Name="radTabGeneralJournalLinesOverview" Header="DETAILS OVERVIEW">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0"/>
+                        <ColumnDefinition Width="53"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="0"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ContentControl regions:RegionManager.RegionName="GeneralJournalLinesOverviewRegion" x:Name="GeneralJournalLinesOverviewRegion" Grid.Column="1" 
+        				VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.ColumnSpan="15" Margin="1"/>
+
+                </Grid>
+            </telerik:RadTabItem>
+            <telerik:RadTabItem x:Name="radTabGeneralJournalLineDetail" Header="DETAIL">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0"/>
+                        <ColumnDefinition Width="53"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="0"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ContentControl regions:RegionManager.RegionName="GeneralJournalLinesDetailsRegion" x:Name="GeneralJournalLinesDetailsRegion" Grid.Column="1"
+        				VerticalContentAlignment="Stretch" Grid.ColumnSpan="15" HorizontalContentAlignment="Stretch" Margin="1"/>
+
+                </Grid>
+            </telerik:RadTabItem>
+        </telerik:RadTabControl>
+    </Grid>
+</UserControl>

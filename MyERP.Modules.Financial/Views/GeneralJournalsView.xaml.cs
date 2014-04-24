@@ -1,7 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 using Microsoft.Practices.Prism.Regions;
 using MyERP.Infrastructure;
 using MyERP.Modules.Financial.ViewModels;
@@ -10,9 +18,9 @@ using Telerik.Windows.Controls;
 namespace MyERP.Modules.Financial.Views
 {
     [ViewExport(RegionName = RegionNames.FinancialWindowRegion, IsActiveByDefault = false)]
-    public partial class AccountsView : UserControl, IPartImportsSatisfiedNotification, INavigationAware
+    public partial class GeneralJournalsView : UserControl, IPartImportsSatisfiedNotification, INavigationAware
     {
-        public AccountsView()
+        public GeneralJournalsView()
         {
             InitializeComponent();
         }
@@ -21,11 +29,11 @@ namespace MyERP.Modules.Financial.Views
         public IRegionManager RegionManager { get; set; }
 
         [Import]
-        public AccountsViewModel ViewModel
+        public GeneralJournalDocumentsViewModel ViewModel
         {
             private get
             {
-                return this.DataContext as AccountsViewModel;
+                return this.DataContext as GeneralJournalDocumentsViewModel;
             }
             set
             {
@@ -33,7 +41,14 @@ namespace MyERP.Modules.Financial.Views
             }
         }
 
-        #region INavigationAware 
+        #region IPartImportsSatisfiedNotification
+        public void OnImportsSatisfied()
+        {
+            
+        }
+        #endregion
+
+        #region INavigationAware
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             var win = this.ParentOfType<FinancialWindow>();
@@ -49,7 +64,6 @@ namespace MyERP.Modules.Financial.Views
                     window.Close();
                 };
             }
-
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -59,21 +73,7 @@ namespace MyERP.Modules.Financial.Views
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-
-        }
-        #endregion
-
-        #region IPartImportsSatisfiedNotification
-        public void OnImportsSatisfied()
-        {
-            RoutedEventHandler loadedHandler = null;
-            loadedHandler = (s, e) =>
-            {
-                this.Loaded -= loadedHandler;
-                this.ViewModel.State = AccountsViewState.List;
-            };
-
-            this.Loaded += loadedHandler;
+            
         }
         #endregion
     }

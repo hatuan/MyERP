@@ -84,6 +84,21 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		private Guid _clientId;
+		[Column("client_id", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_clientId")]
+		public virtual Guid ClientId
+		{
+			get
+			{
+				return this._clientId;
+			}
+			set
+			{
+				this._clientId = value;
+			}
+		}
+		
 	}
 }
 #pragma warning restore 1591

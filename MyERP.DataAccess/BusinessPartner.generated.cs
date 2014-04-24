@@ -27,7 +27,7 @@ namespace MyERP.DataAccess
 	public partial class BusinessPartner
 	{
 		private string _code;
-		[Column("code", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "text")]
+		[Column("code", Length = 0, Scale = 0, SqlType = "text")]
 		[Storage("_code")]
 		public virtual string Code
 		{
@@ -191,48 +191,48 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private string _businessPartnerGroupCode1;
-		[Column("business_partner_group1", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_businessPartnerGroupCode1")]
-		public virtual string BusinessPartnerGroupCode1
+		private Guid _businessPartnerGroupId1;
+		[Column("business_partner_group_id1", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_businessPartnerGroupId1")]
+		public virtual Guid BusinessPartnerGroupId1
 		{
 			get
 			{
-				return this._businessPartnerGroupCode1;
+				return this._businessPartnerGroupId1;
 			}
 			set
 			{
-				this._businessPartnerGroupCode1 = value;
+				this._businessPartnerGroupId1 = value;
 			}
 		}
 		
-		private string _businessPartnerGroupCode2;
-		[Column("business_partner_group2", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_businessPartnerGroupCode2")]
-		public virtual string BusinessPartnerGroupCode2
+		private Guid _businessPartnerGroupId2;
+		[Column("business_partner_group_id2", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_businessPartnerGroupId2")]
+		public virtual Guid BusinessPartnerGroupId2
 		{
 			get
 			{
-				return this._businessPartnerGroupCode2;
+				return this._businessPartnerGroupId2;
 			}
 			set
 			{
-				this._businessPartnerGroupCode2 = value;
+				this._businessPartnerGroupId2 = value;
 			}
 		}
 		
-		private string _businessPartnerGroupCode3;
-		[Column("business_partner_group3", Length = 0, Scale = 0, SqlType = "text")]
-		[Storage("_businessPartnerGroupCode3")]
-		public virtual string BusinessPartnerGroupCode3
+		private Guid _businessPartnerGroupId3;
+		[Column("business_partner_group_id3", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_businessPartnerGroupId3")]
+		public virtual Guid BusinessPartnerGroupId3
 		{
 			get
 			{
-				return this._businessPartnerGroupCode3;
+				return this._businessPartnerGroupId3;
 			}
 			set
 			{
-				this._businessPartnerGroupCode3 = value;
+				this._businessPartnerGroupId3 = value;
 			}
 		}
 		
@@ -416,18 +416,18 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Guid _rowguid;
-		[Column("rowguid", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_rowguid")]
-		public virtual Guid Rowguid
+		private Guid _id;
+		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_id")]
+		public virtual Guid Id
 		{
 			get
 			{
-				return this._rowguid;
+				return this._id;
 			}
 			set
 			{
-				this._rowguid = value;
+				this._id = value;
 			}
 		}
 		
@@ -488,51 +488,6 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._organizationId = value;
-			}
-		}
-		
-		private BusinessPartnerGroup _businessPartnerGroup2;
-		[ForeignKeyAssociation(SharedFields = "BusinessPartnerGroupCode2", TargetFields = "Code")]
-		[Storage("_businessPartnerGroup2")]
-		public virtual BusinessPartnerGroup BusinessPartnerGroup2
-		{
-			get
-			{
-				return this._businessPartnerGroup2;
-			}
-			set
-			{
-				this._businessPartnerGroup2 = value;
-			}
-		}
-		
-		private BusinessPartnerGroup _businessPartnerGroup1;
-		[ForeignKeyAssociation(SharedFields = "BusinessPartnerGroupCode1", TargetFields = "Code")]
-		[Storage("_businessPartnerGroup1")]
-		public virtual BusinessPartnerGroup BusinessPartnerGroup1
-		{
-			get
-			{
-				return this._businessPartnerGroup1;
-			}
-			set
-			{
-				this._businessPartnerGroup1 = value;
-			}
-		}
-		
-		private BusinessPartnerGroup _businessPartnerGroup3;
-		[ForeignKeyAssociation(SharedFields = "BusinessPartnerGroupCode3", TargetFields = "Code")]
-		[Storage("_businessPartnerGroup3")]
-		public virtual BusinessPartnerGroup BusinessPartnerGroup3
-		{
-			get
-			{
-				return this._businessPartnerGroup3;
-			}
-			set
-			{
-				this._businessPartnerGroup3 = value;
 			}
 		}
 		
@@ -653,6 +608,51 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._user2 = value;
+			}
+		}
+		
+		private BusinessPartnerGroup _businessPartnerGroup1;
+		[ForeignKeyAssociation(SharedFields = "BusinessPartnerGroupId1", TargetFields = "Id")]
+		[Storage("_businessPartnerGroup1")]
+		public virtual BusinessPartnerGroup BusinessPartnerGroup1
+		{
+			get
+			{
+				return this._businessPartnerGroup1;
+			}
+			set
+			{
+				this._businessPartnerGroup1 = value;
+			}
+		}
+		
+		private BusinessPartnerGroup _businessPartnerGroup3;
+		[ForeignKeyAssociation(SharedFields = "BusinessPartnerGroupId3", TargetFields = "Id")]
+		[Storage("_businessPartnerGroup3")]
+		public virtual BusinessPartnerGroup BusinessPartnerGroup3
+		{
+			get
+			{
+				return this._businessPartnerGroup3;
+			}
+			set
+			{
+				this._businessPartnerGroup3 = value;
+			}
+		}
+		
+		private BusinessPartnerGroup _businessPartnerGroup2;
+		[ForeignKeyAssociation(SharedFields = "BusinessPartnerGroupId2", TargetFields = "Id")]
+		[Storage("_businessPartnerGroup2")]
+		public virtual BusinessPartnerGroup BusinessPartnerGroup2
+		{
+			get
+			{
+				return this._businessPartnerGroup2;
+			}
+			set
+			{
+				this._businessPartnerGroup2 = value;
 			}
 		}
 		

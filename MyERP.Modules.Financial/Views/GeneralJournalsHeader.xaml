@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="MyERP.Modules.Financial.Views.GeneralJournalsHeader"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    mc:Ignorable="d" d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MyERP.Theme;component/Styles/Generic.xaml"/>
+                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.RibbonView.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <telerik:RadRibbonView VerticalAlignment="Top" ApplicationButtonVisibility="Collapsed" MinimizeButtonVisibility="Visible" 
+                                    TitleBarVisibility="Collapsed" telerik:KeyTipService.IsKeyTipsEnabled="True">
+
+            <telerik:RadRibbonTab Header="HOME" IsSelected="True">
+                <telerik:RadRibbonGroup Header="CHANGES">
+                    <telerik:RadRibbonGroup.Variants>
+                        <telerik:GroupVariant Priority="0" Variant="Collapsed"/>
+                        <telerik:GroupVariant Priority="0" Variant="Small"/>
+                        <telerik:GroupVariant Priority="0" Variant="Medium"/>
+                        <telerik:GroupVariant Priority="0" Variant="Large"/>
+                    </telerik:RadRibbonGroup.Variants>
+
+                    <telerik:RadRibbonButton Text="NEW" Size="Large" LargeImage="/MyERP.Theme;component/Images/new.png" 
+                                                    telerik:KeyTipService.AccessKey="Ctrl+F2"
+                                                    Command="{Binding AddNewCommand}"/>
+
+                    <telerik:RadRibbonSplitButton Text="SAVE" Size="Large" LargeImage="/MyERP.Theme;component/Images/save.png"
+                                                        telerik:KeyTipService.AccessKey="Alt+S"
+                                                        Command="{Binding SubmitChangesCommand}">
+                    </telerik:RadRibbonSplitButton>
+
+                    <telerik:RadOrderedWrapPanel>
+                        <telerik:RadRibbonButton Text="DELETE" LargeImage="/MyERP.Theme;component/Images/delete.png"
+                                                        telerik:KeyTipService.AccessKey="Alt+D"
+                                                        Command="{Binding DeleteCommand}"/>
+                        <telerik:RadRibbonButton Text="UNDO" LargeImage="/MyERP.Theme;component/Images/undo.png"
+                                                     telerik:KeyTipService.AccessKey="Alt+U"
+                                                     Command="{Binding RejectChangesCommand}"/>
+                    </telerik:RadOrderedWrapPanel>
+
+                </telerik:RadRibbonGroup>
+
+                <telerik:RadRibbonGroup Header="">
+                    <telerik:RadRibbonButton Text="REFRESH" Size="Large" LargeImage="/MyERP.Theme;component/Images/refresh.png"
+                                                    Command="{Binding RefreshCommand}"/>
+                </telerik:RadRibbonGroup>
+
+                <telerik:RadRibbonGroup Header="">
+                    <telerik:RadRibbonButton Text="CLOSE" Size="Large" LargeImage="/MyERP.Theme;component/Images/exit.png"
+                                                    Command="{Binding CloseWindowCommand}"/>
+                </telerik:RadRibbonGroup>
+            </telerik:RadRibbonTab>
+
+        </telerik:RadRibbonView>
+        <Rectangle Grid.Row="1" Fill="{StaticResource AccentBrush}" Height="1" HorizontalAlignment="Stretch"/>
+    </Grid>
+</UserControl>

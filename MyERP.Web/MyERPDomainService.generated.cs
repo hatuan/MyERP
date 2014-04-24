@@ -156,7 +156,7 @@ namespace MyERP.Web
 		} 
 		public IQueryable<Module> GetModules()
 		{ 
-			return this.DataContext.Modules;
+			return this.DataContext.Modules.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
 		public void DeleteModules(Module module)
 		{
@@ -226,39 +226,39 @@ namespace MyERP.Web
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<TransactionDocument> GetTransactionDocuments()
+		public IQueryable<GeneralJournalDocument> GetGeneralJournalDocuments()
 		{ 
-			return this.DataContext.TransactionDocuments.Where(c => c.ClientId == _membershipUser.ClientId);
+			return this.DataContext.GeneralJournalDocuments.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
-		public void DeleteTransactionDocuments(TransactionDocument transactionDocument)
+		public void DeleteGeneralJournalDocuments(GeneralJournalDocument generalJournalDocument)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdateTransactionDocuments(TransactionDocument transactionDocument)
+		public void UpdateGeneralJournalDocuments(GeneralJournalDocument generalJournalDocument)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertTransactionDocuments(TransactionDocument transactionDocument)
+		public void InsertGeneralJournalDocuments(GeneralJournalDocument generalJournalDocument)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<TransactionLine> GetTransactionLines()
+		public IQueryable<GeneralJournalLine> GetGeneralJournalLines()
 		{ 
-			return this.DataContext.TransactionLines.Where(c => c.ClientId == _membershipUser.ClientId);
+			return this.DataContext.GeneralJournalLines.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
-		public void DeleteTransactionLines(TransactionLine transactionLine)
+		public void DeleteGeneralJournalLines(GeneralJournalLine generalJournalLine)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdateTransactionLines(TransactionLine transactionLine)
+		public void UpdateGeneralJournalLines(GeneralJournalLine generalJournalLine)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertTransactionLines(TransactionLine transactionLine)
+		public void InsertGeneralJournalLines(GeneralJournalLine generalJournalLine)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
@@ -277,6 +277,24 @@ namespace MyERP.Web
 		}
 
 		public void InsertUsers(User user)
+		{
+			// This is a callback method. The actual Insert is performed internally.
+		} 
+		public IQueryable<NoSeries> GetNoSeries()
+		{ 
+			return this.DataContext.NoSeries.Where(c => c.ClientId == _membershipUser.ClientId);
+		}       
+		public void DeleteNoSeries(NoSeries noSeries)
+		{
+			// This is a callback method. The actual Delete is performed internally.
+		}
+
+		public void UpdateNoSeries(NoSeries noSeries)
+		{
+			// This is a callback method. The actual Update is performed internally.
+		}
+
+		public void InsertNoSeries(NoSeries noSeries)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 

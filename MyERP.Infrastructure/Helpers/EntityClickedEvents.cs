@@ -2,6 +2,10 @@
 
 namespace MyERP.Infrastructure
 {
+    public class GeneralLeaderJournalsClickedEvent : CompositePresentationEvent<object>
+    {
+
+    }
     public class AccountClickedEvent : CompositePresentationEvent<object>
     {
 
