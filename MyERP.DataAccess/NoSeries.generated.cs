@@ -57,7 +57,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _code;
-		[Column("Code", OpenAccessType = OpenAccessType.Varchar, IsNullable = true, Length = 255, Scale = 0, SqlType = "varchar", Converter = "OpenAccessRuntime.Data.VariableLengthStringConverter")]
+		[Column("code", OpenAccessType = OpenAccessType.Varchar, IsNullable = true, Length = 255, Scale = 0, SqlType = "varchar", Converter = "OpenAccessRuntime.Data.VariableLengthStringConverter")]
 		[Storage("_code")]
 		public virtual string Code
 		{
@@ -102,7 +102,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _formatNo;
-		[Column("format_no", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("format_no", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_formatNo")]
 		public virtual string FormatNo
 		{
@@ -147,7 +147,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _name;
-		[Column("name", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("name", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_name")]
 		public virtual string Name
 		{
@@ -162,7 +162,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _noSeqName;
-		[Column("no_seq_name", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("no_seq_name", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_noSeqName")]
 		public virtual string NoSeqName
 		{

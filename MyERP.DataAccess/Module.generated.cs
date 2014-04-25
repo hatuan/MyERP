@@ -40,7 +40,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _description;
-		[Column("description", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("description", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_description")]
 		public virtual string Description
 		{
@@ -55,7 +55,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _group;
-		[Column("group", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("group", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_group")]
 		public virtual string Group
 		{
@@ -70,7 +70,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _name;
-		[Column("name", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("name", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_name")]
 		public virtual string Name
 		{

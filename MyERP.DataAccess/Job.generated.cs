@@ -27,7 +27,7 @@ namespace MyERP.DataAccess
 	public partial class Job
 	{
 		private string _ma_vv;
-		[Column("code", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("code", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_ma_vv")]
 		public virtual string Code
 		{
@@ -42,7 +42,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _ten_vv;
-		[Column("ten_vv", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("ten_vv", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_ten_vv")]
 		public virtual string Ten_Vv
 		{
@@ -57,7 +57,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _ten_vv2;
-		[Column("ten_vv2", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("ten_vv2", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_ten_vv2")]
 		public virtual string Ten_Vv2
 		{
@@ -87,7 +87,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _nh_vv1;
-		[Column("nh_vv1", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("nh_vv1", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_nh_vv1")]
 		public virtual string Nh_Vv1
 		{
@@ -102,7 +102,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _nh_vv2;
-		[Column("nh_vv2", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("nh_vv2", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_nh_vv2")]
 		public virtual string Nh_Vv2
 		{
@@ -117,7 +117,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _nh_vv3;
-		[Column("nh_vv3", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("nh_vv3", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_nh_vv3")]
 		public virtual string Nh_Vv3
 		{
@@ -207,7 +207,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _ghi_chu;
-		[Column("ghi_chu", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("ghi_chu", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_ghi_chu")]
 		public virtual string Ghi_Chu
 		{

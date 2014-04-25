@@ -28,7 +28,7 @@ namespace MyERP.DataAccess
 	public partial class Organization
 	{
 		private string _code;
-		[Column("code", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("code", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_code")]
 		public virtual string Code
 		{
@@ -43,7 +43,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _name;
-		[Column("name", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("name", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_name")]
 		public virtual string Name
 		{

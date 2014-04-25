@@ -27,7 +27,7 @@ namespace MyERP.DataAccess
 	public partial class BusinessPartner
 	{
 		private string _code;
-		[Column("code", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("code", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_code")]
 		public virtual string Code
 		{
@@ -42,7 +42,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _name;
-		[Column("name", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("name", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_name")]
 		public virtual string Name
 		{
@@ -57,7 +57,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _vatCode;
-		[Column("vat_code", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("vat_code", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_vatCode")]
 		public virtual string VatCode
 		{
@@ -72,7 +72,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _address;
-		[Column("address", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("address", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_address")]
 		public virtual string Address
 		{
@@ -87,7 +87,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _telephone;
-		[Column("telephone", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("telephone", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_telephone")]
 		public virtual string Telephone
 		{
@@ -102,7 +102,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _fax;
-		[Column("fax", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("fax", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_fax")]
 		public virtual string Fax
 		{
@@ -117,7 +117,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _mail;
-		[Column("e_mail", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("e_mail", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_mail")]
 		public virtual string Mail
 		{
@@ -132,7 +132,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _homePage;
-		[Column("home_page", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("home_page", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_homePage")]
 		public virtual string HomePage
 		{
@@ -147,7 +147,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _contactName;
-		[Column("contact_name", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("contact_name", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_contactName")]
 		public virtual string ContactName
 		{
@@ -162,7 +162,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _comment;
-		[Column("comment", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("comment", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_comment")]
 		public virtual string Comment
 		{

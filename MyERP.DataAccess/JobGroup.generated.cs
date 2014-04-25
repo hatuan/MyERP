@@ -42,7 +42,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _ma_nh;
-		[Column("code", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "text")]
+		[Column("code", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_ma_nh")]
 		public virtual string Code
 		{
@@ -57,7 +57,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _ten_nh;
-		[Column("ten_nh", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("ten_nh", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_ten_nh")]
 		public virtual string Ten_Nh
 		{
@@ -72,7 +72,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _ten_nh2;
-		[Column("ten_nh2", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("ten_nh2", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_ten_nh2")]
 		public virtual string Ten_Nh2
 		{

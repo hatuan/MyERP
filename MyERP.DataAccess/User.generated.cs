@@ -43,7 +43,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _name;
-		[Column("name", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("name", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_name")]
 		public virtual string Name
 		{
@@ -58,7 +58,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _password;
-		[Column("password", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("password", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_password")]
 		public virtual string Password
 		{
@@ -73,7 +73,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _comment;
-		[Column("comment", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("comment", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_comment")]
 		public virtual string Comment
 		{
@@ -88,7 +88,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _fullName;
-		[Column("full_name", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("full_name", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_fullName")]
 		public virtual string FullName
 		{
@@ -103,7 +103,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _passwordAnswer;
-		[Column("password_answer", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("password_answer", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_passwordAnswer")]
 		public virtual string PasswordAnswer
 		{
@@ -118,7 +118,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _passwordQuestion;
-		[Column("password_question", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("password_question", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_passwordQuestion")]
 		public virtual string PasswordQuestion
 		{
@@ -133,7 +133,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _email;
-		[Column("email", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("email", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_email")]
 		public virtual string Email
 		{
@@ -208,7 +208,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _lastLockedOutReason;
-		[Column("last_locked_out_reason", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("last_locked_out_reason", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_lastLockedOutReason")]
 		public virtual string LastLockedOutReason
 		{
@@ -238,7 +238,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _lastLoginIp;
-		[Column("last_login_ip", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("last_login_ip", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_lastLoginIp")]
 		public virtual string LastLoginIp
 		{

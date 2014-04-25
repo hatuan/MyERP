@@ -132,7 +132,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _documentNo;
-		[Column("document_no", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("document_no", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_documentNo")]
 		public virtual string DocumentNo
 		{
@@ -162,7 +162,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _documentType;
-		[Column("document_type", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("document_type", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_documentType")]
 		public virtual string DocumentType
 		{
@@ -342,7 +342,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _description;
-		[Column("description", Length = 0, Scale = 0, SqlType = "text")]
+		[Column("description", Length = 0, Scale = 0, SqlType = "varchar")]
 		[Storage("_description")]
 		public virtual string Description
 		{

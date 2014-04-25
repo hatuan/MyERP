@@ -14,10 +14,10 @@
           <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         </orm:concurrency>
         <orm:field name="_code" property="Code" behavior="readwrite" uniqueId="1bca08b6-06ed-403b-b789-1b0d0792338d" type="System.String">
-          <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="b5ea29c0-b4ce-4a1d-bfd5-83abd4c14eea" type="System.String">
-          <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_currencyId" property="CurrencyId" behavior="readwrite" uniqueId="29788ee2-2b0d-492f-809e-2ffdd40e1958" type="System.Nullable`1[[System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="currency_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
@@ -108,25 +108,25 @@
           <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         </orm:field>
         <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="6ae63020-9951-458b-8e73-ed65d7804f92" type="System.String">
-          <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_password" property="Password" behavior="readwrite" uniqueId="23aee6ac-aa1b-43a4-a54e-2a144eae16fc" type="System.String">
-          <orm:column name="password" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="password" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_comment" property="Comment" behavior="readwrite" uniqueId="0df610ae-aa0b-4637-887b-7f5773153de8" type="System.String">
-          <orm:column name="comment" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="comment" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_fullName" property="FullName" behavior="readwrite" uniqueId="393c1728-a3c1-49b2-a4f1-f0c515598eef" type="System.String">
-          <orm:column name="full_name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="full_name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_passwordAnswer" property="PasswordAnswer" behavior="readwrite" uniqueId="bad52e24-12c5-4b8e-8c47-12740485fc31" type="System.String">
-          <orm:column name="password_answer" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="password_answer" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_passwordQuestion" property="PasswordQuestion" behavior="readwrite" uniqueId="d419ec26-5745-4d2e-b314-52c967acb672" type="System.String">
-          <orm:column name="password_question" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="password_question" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_email" property="Email" behavior="readwrite" uniqueId="95578eb7-d8ed-4016-9d00-ee8d5c165bcd" type="System.String">
-          <orm:column name="email" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="email" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_createdDate" property="CreatedDate" behavior="readwrite" uniqueId="110a1bbf-06fb-4876-a919-563fe1a8e78b" type="System.DateTime">
           <orm:column name="created_date" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
@@ -141,13 +141,13 @@
           <orm:column name="last_locked_out_date" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_lastLockedOutReason" property="LastLockedOutReason" behavior="readwrite" uniqueId="ab8a9012-d432-41da-904d-7202ff2db5b4" type="System.String">
-          <orm:column name="last_locked_out_reason" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="last_locked_out_reason" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_lastLoginDate" property="LastLoginDate" behavior="readwrite" uniqueId="7277c4ca-eb2c-4b6a-9095-cfa3fec19c0d" type="System.DateTime">
           <orm:column name="last_login_date" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_lastLoginIp" property="LastLoginIp" behavior="readwrite" uniqueId="59ac5fd6-701e-45a7-a309-f9aff502d194" type="System.String">
-          <orm:column name="last_login_ip" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="last_login_ip" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_lastModifiedDate" property="LastModifiedDate" behavior="readwrite" uniqueId="4252d7d2-a137-4bf3-acd0-2e3a06ee3501" type="System.DateTime">
           <orm:column name="last_modified_date" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
@@ -184,7 +184,7 @@
           <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         </orm:field>
         <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="5153ee1e-7f0f-46a4-9ef4-0826242f6bf5" type="System.String">
-          <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_recCreated" property="RecCreated" behavior="readwrite" uniqueId="310d5722-6515-41f0-86c0-db94a491a637" type="System.DateTime">
           <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
@@ -205,7 +205,7 @@
           <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         </orm:field>
         <orm:field name="_code" property="Code" behavior="readwrite" uniqueId="d90248f2-037a-49cf-a299-0081694cb5da" type="System.String">
-          <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_clientId" property="ClientId" uniqueId="20a98ef1-3b4d-4bd7-9ffc-9d517981e47f" type="System.Guid">
           <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
@@ -243,34 +243,34 @@
           <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         </orm:concurrency>
         <orm:field name="_code" property="Code" behavior="readwrite" uniqueId="0f11fb69-72e9-4b0f-badd-59611caee9fd" type="System.String">
-          <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="da861d07-fe52-4189-91b4-f143d124f93e" type="System.String">
-          <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_vatCode" property="VatCode" behavior="readwrite" uniqueId="77b9d0e7-62bc-4d04-9474-37a24657b39f" type="System.String">
-          <orm:column name="vat_code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="vat_code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_address" property="Address" behavior="readwrite" uniqueId="6036d69d-8761-439c-add6-5182985f786d" type="System.String">
-          <orm:column name="address" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="address" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_telephone" property="Telephone" behavior="readwrite" uniqueId="7e1d6de7-d68b-4417-8d87-ec38952ee0b2" type="System.String">
-          <orm:column name="telephone" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="telephone" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_fax" property="Fax" behavior="readwrite" uniqueId="447024bd-3e3f-4caf-b94f-fd41e302006b" type="System.String">
-          <orm:column name="fax" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="fax" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_mail" property="Mail" behavior="readwrite" uniqueId="6b59f4b3-e517-406b-b84b-66f497dbf983" type="System.String">
-          <orm:column name="e_mail" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="e_mail" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_homePage" property="HomePage" behavior="readwrite" uniqueId="11111f51-46ab-49a8-a88a-075b4bbbf05c" type="System.String">
-          <orm:column name="home_page" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="home_page" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_contactName" property="ContactName" behavior="readwrite" uniqueId="e123c7da-fa58-4aab-9136-f1b71109ad43" type="System.String">
-          <orm:column name="contact_name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="contact_name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_comment" property="Comment" behavior="readwrite" uniqueId="1131484d-5d15-4e6b-92d4-8f45af9fad71" type="System.String">
-          <orm:column name="comment" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="comment" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_employeeAccountId" property="EmployeeAccountId" behavior="readwrite" uniqueId="4a359004-7e62-4e84-ac55-1246711f6d28" type="System.Guid">
           <orm:column name="employee_account_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
@@ -403,10 +403,10 @@
           <orm:column name="level" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_code" property="Code" behavior="readwrite" uniqueId="42010cbf-48ba-4309-844f-155498b0ddd6" type="System.String">
-          <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="95fe9fbd-2959-4d84-bdec-d4e6c1d3406f" type="System.String">
-          <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_recCreated" property="RecCreated" behavior="readwrite" uniqueId="00edf15b-3172-46b2-acc5-41e736324121" type="System.DateTime">
           <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
@@ -464,10 +464,10 @@
           <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         </orm:concurrency>
         <orm:field name="_code" property="Code" behavior="readwrite" uniqueId="0e0ff67f-9bed-4525-917e-22c5e8ce05a6" type="System.String">
-          <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="65829b43-f1af-483c-a7f8-3b535c695e74" type="System.String">
-          <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_han_tt" property="Han_Tt" behavior="readwrite" uniqueId="0680a919-4bfc-405b-894b-d3499b44379e" type="System.Int16">
           <orm:column name="han_tt" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
@@ -523,25 +523,25 @@
         </orm:identity>
         <orm:concurrency strategy="changed" />
         <orm:field name="_ma_vv" property="Code" behavior="readwrite" uniqueId="f5ec11cf-95ce-4da4-a64b-85ded41e39ea" type="System.String">
-          <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_ten_vv" property="Ten_Vv" behavior="readwrite" uniqueId="a3b7a577-c36b-433b-a8f1-80ef160b0f00" type="System.String">
-          <orm:column name="ten_vv" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="ten_vv" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_ten_vv2" property="Ten_Vv2" behavior="readwrite" uniqueId="ea68ac13-3d62-4a09-9145-2615b0586d7c" type="System.String">
-          <orm:column name="ten_vv2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="ten_vv2" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_ma_kh" property="Ma_Kh" behavior="readwrite" uniqueId="d5f85a8d-43ba-42c6-a932-271e0a952c91" type="System.Guid">
           <orm:column name="business_partner_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_nh_vv1" property="Nh_Vv1" behavior="readwrite" uniqueId="3614177a-a906-4835-a652-0b23c7d39576" type="System.String">
-          <orm:column name="nh_vv1" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="nh_vv1" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_nh_vv2" property="Nh_Vv2" behavior="readwrite" uniqueId="b137becf-e416-4b4a-a178-ecba99feba3e" type="System.String">
-          <orm:column name="nh_vv2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="nh_vv2" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_nh_vv3" property="Nh_Vv3" behavior="readwrite" uniqueId="919c27e1-78b7-4a84-899c-b51862a39189" type="System.String">
-          <orm:column name="nh_vv3" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="nh_vv3" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_ngay_vv1" property="Ngay_Vv1" behavior="readwrite" uniqueId="8008ba90-9603-4e69-979c-81bb8c3be707" type="System.DateTime">
           <orm:column name="ngay_vv1" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
@@ -559,7 +559,7 @@
           <orm:column name="tien" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         </orm:field>
         <orm:field name="_ghi_chu" property="Ghi_Chu" behavior="readwrite" uniqueId="ed9bf5aa-8b4f-46dc-b94f-476b44afa95b" type="System.String">
-          <orm:column name="ghi_chu" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="ghi_chu" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_date0" property="Date0" behavior="readwrite" uniqueId="4fd8ddbd-506d-4153-993e-ae4e886557a6" type="System.DateTime">
           <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
@@ -644,13 +644,13 @@
           <orm:column name="loai_nh" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_ma_nh" property="Code" behavior="readwrite" uniqueId="4e3355de-c10d-4597-a3a0-ee12423f186a" type="System.String">
-          <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+          <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         </orm:field>
         <orm:field name="_ten_nh" property="Ten_Nh" behavior="readwrite" uniqueId="f8fc0a8c-a47b-4918-969e-93859b9a31e5" type="System.String">
-          <orm:column name="ten_nh" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="ten_nh" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_ten_nh2" property="Ten_Nh2" behavior="readwrite" uniqueId="13b75a7a-3919-4407-b85d-827b9d67405e" type="System.String">
-          <orm:column name="ten_nh2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="ten_nh2" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_date0" property="Date0" behavior="readwrite" uniqueId="a2f5eb4d-c532-4e91-9795-ca7253370c53" type="System.DateTime">
           <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
@@ -733,13 +733,13 @@
           <orm:column name="document_created_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_documentNo" property="DocumentNo" behavior="readwrite" uniqueId="0a73aeed-f3b5-46f9-9f4c-284b25322b20" type="System.String">
-          <orm:column name="document_no" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="document_no" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_documentPosted" property="DocumentPosted" behavior="readwrite" uniqueId="23934bb9-8ff1-4bdb-9c70-cc27e6dbffec" type="System.DateTime">
           <orm:column name="document_posted_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_documentType" property="DocumentType" behavior="readwrite" uniqueId="b6fd40f4-c188-472d-b30d-233a71037993" type="System.String">
-          <orm:column name="document_type" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="document_type" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_recCreated" property="RecCreated" behavior="readwrite" uniqueId="b154f837-0559-4b95-8aff-ad898dc420d9" type="System.DateTime">
           <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
@@ -775,7 +775,7 @@
           <orm:column name="currency_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_description" property="Description" behavior="readwrite" uniqueId="9ba4dc12-b1f7-4a0f-92df-547a2a8aea25" type="System.String">
-          <orm:column name="description" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="description" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="6efc28df-900c-406b-b8c2-07b39932ac28" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="1bb14f80-ef9c-4541-9c01-68db0a18ea9d" association-name="TransactionDocumentHasClient">
@@ -829,10 +829,10 @@
           <orm:column name="account_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_description" property="Description" behavior="readwrite" uniqueId="f71c5a51-c976-4ab9-aafb-056026dbb4ba" type="System.String">
-          <orm:column name="description" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="description" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_accountType" property="AccountType" behavior="readwrite" uniqueId="9769048a-6458-45a1-b27a-541663316f20" type="System.String">
-          <orm:column name="account_type" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="account_type" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_debitAmount" property="DebitAmount" behavior="readwrite" uniqueId="7f74c9b7-d033-4dd7-bc64-00349a96d0ca" type="System.Decimal">
           <orm:column name="debit_amount" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
@@ -847,7 +847,7 @@
           <orm:column name="credit_amount" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         </orm:field>
         <orm:field name="_corAccountType" property="CorAccountType" behavior="readwrite" uniqueId="f8b6478c-a8f5-4fb9-bbd0-d19dfa00ef43" type="System.String">
-          <orm:column name="cor_account_type" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="cor_account_type" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_businessPartnerId" property="BusinessPartnerId" behavior="readwrite" uniqueId="9c36f9d9-c23c-40f7-bc55-e749de0bedf1" type="System.Guid">
           <orm:column name="business_partner_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
@@ -880,13 +880,13 @@
           <orm:column name="document_created_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_documentNo" property="DocumentNo" behavior="readwrite" uniqueId="c636107f-4ec0-41e8-83ca-b9cfa8f99d01" type="System.String">
-          <orm:column name="document_no" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="document_no" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_documentPosted" property="DocumentPosted" behavior="readwrite" uniqueId="701a55f6-4c7a-4164-8462-c04008a24292" type="System.DateTime">
           <orm:column name="document_posted_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_documentType" property="DocumentType" behavior="readwrite" uniqueId="f38e1cdf-99bb-449e-9648-d8d4f04c9deb" type="System.String">
-          <orm:column name="document_type" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="document_type" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_recCreated" property="RecCreated" behavior="readwrite" uniqueId="75bf6134-444e-4779-961b-eb9fa3cf7abf" type="System.DateTime">
           <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
@@ -951,10 +951,10 @@
           <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         </orm:concurrency>
         <orm:field name="_code" property="Code" behavior="readwrite" uniqueId="fe952f33-f611-4733-bc22-7165b8c4c528" type="System.String">
-          <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="4b5af097-14de-48d3-8db9-ea849445fb4c" type="System.String">
-          <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_recCreated" property="RecCreated" behavior="readwrite" uniqueId="4276a5e1-583e-4381-b830-7a77196140b8" type="System.DateTime">
           <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
@@ -1005,13 +1005,13 @@
           <orm:column name="id" sql-type="int8" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         </orm:field>
         <orm:field name="_description" property="Description" uniqueId="47809135-2ef7-45ac-aba3-a440ce3ee81d" type="System.String">
-          <orm:column name="description" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="description" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_group" property="Group" uniqueId="58890323-4d4e-4b3e-8e38-2384819fc3d0" type="System.String">
-          <orm:column name="group" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="group" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="25274d28-22ec-467b-90b9-a8407913eba1" type="System.String">
-          <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_clientId" property="ClientId" behavior="readwrite" uniqueId="3db54c2e-9245-44a8-b553-dbc51c63d929" type="System.Guid">
           <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
@@ -1110,7 +1110,7 @@
           <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         </orm:field>
         <orm:field name="_code" property="Code" behavior="readwrite" uniqueId="f46b0fea-d207-409a-a08e-da673613e23d" type="System.String">
-          <orm:column name="Code" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthStringConverter" ado-type="Varchar" />
+          <orm:column name="code" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthStringConverter" ado-type="Varchar" />
         </orm:field>
         <orm:field name="_currentNo" property="CurrentNo" behavior="readwrite" uniqueId="67041a85-cc41-4562-8e7d-b9364928bfb3" type="System.Int32">
           <orm:column name="current_no" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
@@ -1119,7 +1119,7 @@
           <orm:column name="ending_no" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_formatNo" property="FormatNo" behavior="readwrite" uniqueId="a8347e54-bce7-4eb1-a535-b875fa05106c" type="System.String">
-          <orm:column name="format_no" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="format_no" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_isDefault" property="IsDefault" behavior="readwrite" uniqueId="330c7eb2-cd0f-4daa-b8d4-7b878c0b58c3" type="System.Boolean">
           <orm:column name="is_default" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
@@ -1128,10 +1128,10 @@
           <orm:column name="manual" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="12309a4a-4f19-4866-b8a7-0f985b7ad9df" type="System.String">
-          <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_noSeqName" property="NoSeqName" behavior="readwrite" uniqueId="eb82dc56-0961-4d23-af75-747640984659" type="System.String">
-          <orm:column name="no_seq_name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="no_seq_name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_organizationId" property="OrganizationId" behavior="readwrite" uniqueId="eebf92b2-8f58-45e8-8db9-066d7d125432" type="System.Guid">
           <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
@@ -1182,27 +1182,27 @@
     <orm:schema schema="">
       <orm:table name="user">
         <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
-        <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="password" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="comment" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="full_name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="password" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="comment" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="full_name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="last_modified_date" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="last_login_ip" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="last_login_ip" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="last_login_date" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="last_locked_out_reason" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="last_locked_out_reason" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="last_locked_out_date" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="is_locked_out" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="is_activated" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="created_date" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="email" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="password_question" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="password_answer" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="email" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="password_question" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="password_answer" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="organization_id" sql-type="uuid" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         <orm:column name="client_id" sql-type="uuid" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
       </orm:table>
       <orm:table name="account">
-        <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="currency_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         <orm:column name="detail" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="parent_account_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
@@ -1220,28 +1220,28 @@
       </orm:table>
       <orm:table name="currency">
         <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
-        <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_modified_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="status" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
-        <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
       </orm:table>
       <orm:table name="business_partner">
-        <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="vat_code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="address" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="telephone" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="fax" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="e_mail" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="home_page" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="contact_name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="comment" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="vat_code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="address" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="telephone" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="fax" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="e_mail" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="home_page" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="contact_name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="comment" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="employee_account_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="business_partner_group_id1" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="business_partner_group_id2" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
@@ -1266,8 +1266,8 @@
       </orm:table>
       <orm:table name="business_partner_group">
         <orm:column name="level" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
@@ -1279,8 +1279,8 @@
         <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
       </orm:table>
       <orm:table name="payment_term">
-        <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="han_tt" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="han_tt_gg" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="pt_gg" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
@@ -1295,19 +1295,19 @@
         <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
       </orm:table>
       <orm:table name="job">
-        <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="ten_vv" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="ten_vv2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ten_vv" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ten_vv2" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="business_partner_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="nh_vv1" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="nh_vv2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="nh_vv3" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="nh_vv1" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="nh_vv2" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="nh_vv3" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="ngay_vv1" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="ngay_vv2" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="ma_nt" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="tien_nt" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         <orm:column name="tien" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
-        <orm:column name="ghi_chu" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ghi_chu" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="user_id0" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
@@ -1320,9 +1320,9 @@
       </orm:table>
       <orm:table name="job_group">
         <orm:column name="loai_nh" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
-        <orm:column name="ten_nh" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="ten_nh2" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="ten_nh" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="ten_nh2" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="user_id0" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="status" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
@@ -1347,17 +1347,17 @@
         <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="document_type" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="document_type" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="document_posted_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="document_no" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="document_no" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="document_created_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="currency_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="currency_exchange_rate" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
-        <orm:column name="description" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="description" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
       </orm:table>
       <orm:table name="organization">
-        <orm:column name="code" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
@@ -1371,13 +1371,13 @@
         <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         <orm:column name="cor_account_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="account_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="description" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="account_type" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="description" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="account_type" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="debit_amount" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         <orm:column name="credit_amount_lcy" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         <orm:column name="debit_amount_lcy" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         <orm:column name="credit_amount" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
-        <orm:column name="cor_account_type" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="cor_account_type" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="business_partner_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="job_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="lineno" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
@@ -1390,18 +1390,18 @@
         <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="document_type" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="document_type" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="document_posted_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="document_no" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="document_no" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="document_created_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="currency_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="currency_exchange_rate" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
       </orm:table>
       <orm:table name="module">
         <orm:column name="id" sql-type="int8" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
-        <orm:column name="group" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="description" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="group" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="description" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
       </orm:table>
       <orm:table name="session">
@@ -1427,11 +1427,11 @@
         <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         <orm:column name="current_no" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="ending_no" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="format_no" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="format_no" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="is_default" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="manual" sql-type="bool" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="no_seq_name" sql-type="text" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="no_seq_name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="starting_no" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
@@ -1440,7 +1440,7 @@
         <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="Code" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthStringConverter" ado-type="Varchar" />
+        <orm:column name="code" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthStringConverter" ado-type="Varchar" />
       </orm:table>
     </orm:schema>
     <orm:relational-naming-settings>
@@ -1477,7 +1477,6 @@
     <SchemaUpdateSettings>
       <DeploymentProject>MyERP.DataAccess</DeploymentProject>
       <DeploymentDirectory>Script\</DeploymentDirectory>
-      <UpdateDatabaseOperation>Migrate</UpdateDatabaseOperation>
       <ShowAllTables>true</ShowAllTables>
     </SchemaUpdateSettings>
     <BackendConfigurationSettings>
