@@ -1178,18 +1178,6 @@
           </orm:reference>
         </orm:field>
       </orm:class>
-      <orm:class name="BaseObject" uniqueId="c823b451-26c8-421d-94d3-9fa014dd1220">
-        <orm:table name="base_object" />
-        <orm:identity>
-          <orm:single-field field-name="_id" />
-        </orm:identity>
-        <orm:field name="_id" property="Id" uniqueId="ea1af77d-bc90-40f6-a48a-8ed84e004af6" type="System.Guid">
-          <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
-        </orm:field>
-        <orm:field name="_type" property="Type" uniqueId="1d7b4188-28f4-412e-82d7-492eb8a101ea" type="System.String">
-          <orm:column name="type" sql-type="text" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.VariableLengthStringConverter" ado-type="Varchar" />
-        </orm:field>
-      </orm:class>
     </orm:namespace>
     <orm:schema schema="">
       <orm:table name="user">
@@ -1453,10 +1441,6 @@
         <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="Code" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthStringConverter" ado-type="Varchar" />
-      </orm:table>
-      <orm:table name="base_object">
-        <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
-        <orm:column name="type" sql-type="text" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.VariableLengthStringConverter" ado-type="Varchar" />
       </orm:table>
     </orm:schema>
     <orm:relational-naming-settings>
@@ -2593,10 +2577,6 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="c823b451-26c8-421d-94d3-9fa014dd1220" name="BaseObject" namespace="MyERP.DataAccess" showPropertiesCompartment="true" showNavigationCompartment="true" showImplementationCompartment="true">
-      <Property Id="ea1af77d-bc90-40f6-a48a-8ed84e004af6" name="Id" type="Guid" label="Id : Guid" identity="true" fieldName="_id" />
-      <Property Id="1d7b4188-28f4-412e-82d7-492eb8a101ea" name="Type" label="Type : String" fieldName="_type" />
-    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="d7bd6e8c-e34a-47be-a590-3f03f86938da">
@@ -2616,7 +2596,6 @@
         <entitySetProperty name="Clients" namespace="MyERP.DataAccess" type="Client" label="Clients : IQueryable&lt;MyERP.DataAccess.Client&gt;" />
         <entitySetProperty name="NoSeries" namespace="MyERP.DataAccess" type="NoSeries" label="NoSeries : IQueryable&lt;MyERP.DataAccess.NoSeries&gt;" />
         <entitySetProperty name="Accounts" namespace="MyERP.DataAccess" type="Account" label="Accounts : IQueryable&lt;MyERP.DataAccess.Account&gt;" />
-        <entitySetProperty name="BaseObjects" namespace="MyERP.DataAccess" type="BaseObject" label="BaseObjects : IQueryable&lt;MyERP.DataAccess.BaseObject&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

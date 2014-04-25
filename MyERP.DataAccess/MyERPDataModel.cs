@@ -171,14 +171,6 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		public IQueryable<BaseObject> BaseObjects 
-		{
-			get
-			{
-				return this.GetAll<BaseObject>();
-			}
-		}
-		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -261,10 +253,6 @@ namespace MyERP.DataAccess
 			get;
 		}
 		IQueryable<Account> Accounts
-		{
-			get;
-		}
-		IQueryable<BaseObject> BaseObjects
 		{
 			get;
 		}

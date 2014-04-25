@@ -54,9 +54,6 @@
     </Compile>
     <Compile Include="Account\Account.cs" />
     <Compile Include="Account\AccountStatusType.cs" />
-    <Compile Include="BaseObject.generated.cs">
-      <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
-    </Compile>
     <Compile Include="BusinessPartner.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
