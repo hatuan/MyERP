@@ -118,7 +118,7 @@ namespace MyERP.Modules.User.ViewModels
                     return;
                 }
                 this._userName = value ?? String.Empty;
-                this.RaisePropertyChanged("UserName");
+                this.OnPropertyChanged("UserName");
             }
         }
 
@@ -136,7 +136,7 @@ namespace MyERP.Modules.User.ViewModels
                     return;
                 }
                 this._password = value ?? String.Empty;
-                this.RaisePropertyChanged("Password");
+                this.OnPropertyChanged("Password");
             }
         }
 

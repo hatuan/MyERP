@@ -62,7 +62,7 @@ namespace MyERP.Modules.User.ViewModels
                     return;
 
                 _organizations = value;
-                this.RaisePropertyChanged("Organizations");
+                OnPropertyChanged("Organizations");
             }
         }
         
@@ -81,7 +81,7 @@ namespace MyERP.Modules.User.ViewModels
             set
             {
                 _organization = value;
-                RaisePropertyChanged("Organization");
+                OnPropertyChanged("Organization");
             }
         }
 
@@ -93,7 +93,7 @@ namespace MyERP.Modules.User.ViewModels
             set
             {
                 _workingDate = value;
-                RaisePropertyChanged("WorkingDate");
+                OnPropertyChanged("WorkingDate");
             }
         }
 

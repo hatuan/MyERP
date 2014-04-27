@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     mc:Ignorable="d"
-    d:DesignHeight="300" d:DesignWidth="400">
+    d:DesignHeight="300" d:DesignWidth="800">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -25,12 +25,18 @@
                              ScrollViewer.VerticalScrollBarVisibility="Visible">
 
             <telerik:RadGridView.Columns>
-                <telerik:GridViewDataColumn Header="ORGANIZATION" DataMemberBinding="{Binding Organization.Code}" Width="150"/>
-                <telerik:GridViewDataColumn Header="NO" DataMemberBinding="{Binding DocumentNo, Mode=TwoWay}" Width="150"/>
-                <telerik:GridViewDataColumn Header="CREATED DATE" DataMemberBinding="{Binding DocumentCreated, Mode=TwoWay}" Width="150"/>
-                <telerik:GridViewDataColumn Header="POSTED DATE" DataMemberBinding="{Binding DocumentPosted, Mode=TwoWay}" Width="150"/>
-                <telerik:GridViewDataColumn Header="DESCRIPTION" DataMemberBinding="{Binding Description, Mode=TwoWay}" Width="150*"/>
-                <telerik:GridViewDataColumn Header="STATUS" DataMemberBinding="{Binding Status}" Width="150"/>
+                <telerik:GridViewDataColumn Header="ACCOUNT" DataMemberBinding="{Binding Account.Code}" Width="80"/>
+                <telerik:GridViewDataColumn Header="COR ACCOUNT" DataMemberBinding="{Binding CorAccount.Code}" Width="80"/>
+                <telerik:GridViewDataColumn Header="DEBIT" DataMemberBinding="{Binding DebitAmount, Mode=TwoWay}" Width="100"/>
+                <telerik:GridViewDataColumn Header="CREDIT" DataMemberBinding="{Binding CreditAmount, Mode=TwoWay}" Width="100"/>
+                <telerik:GridViewDataColumn Header="CURRENCY" DataMemberBinding="{Binding Currency.Code, Mode=TwoWay}" Width="80"/>
+                <telerik:GridViewDataColumn Header="EX RATE" DataMemberBinding="{Binding CurrencyExchangeRate, Mode=TwoWay}" Width="100"/>
+                <telerik:GridViewDataColumn Header="DEBIT LCY" DataMemberBinding="{Binding CreditAmount, Mode=TwoWay}" Width="100"/>
+                <telerik:GridViewDataColumn Header="CREDIT LCY" DataMemberBinding="{Binding Currency.Code, Mode=TwoWay}" Width="100"/>
+                <telerik:GridViewDataColumn Header="DESCRIPTION" DataMemberBinding="{Binding Description, Mode=TwoWay}" Width="200"/>
+                <telerik:GridViewDataColumn Header="BUS PARTNER" DataMemberBinding="{Binding BusinessPartner.Code}" Width="80"/>
+                <telerik:GridViewDataColumn Header="JOB" DataMemberBinding="{Binding Job.Code}" Width="80"/>
+                <telerik:GridViewDataColumn Header="FIXASSET" DataMemberBinding="{Binding FixAsset.Code}" Width="80"/>
             </telerik:RadGridView.Columns>
         </telerik:RadGridView>
     </Grid>

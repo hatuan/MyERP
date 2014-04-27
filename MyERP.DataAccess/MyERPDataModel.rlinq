@@ -831,9 +831,6 @@
         <orm:field name="_description" property="Description" behavior="readwrite" uniqueId="f71c5a51-c976-4ab9-aafb-056026dbb4ba" type="System.String">
           <orm:column name="description" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_accountType" property="AccountType" behavior="readwrite" uniqueId="9769048a-6458-45a1-b27a-541663316f20" type="System.String">
-          <orm:column name="account_type" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
-        </orm:field>
         <orm:field name="_debitAmount" property="DebitAmount" behavior="readwrite" uniqueId="7f74c9b7-d033-4dd7-bc64-00349a96d0ca" type="System.Decimal">
           <orm:column name="debit_amount" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         </orm:field>
@@ -846,14 +843,11 @@
         <orm:field name="_creditAmount" property="CreditAmount" behavior="readwrite" uniqueId="62bb2580-e943-43c1-bf7c-a9957882a03a" type="System.Decimal">
           <orm:column name="credit_amount" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         </orm:field>
-        <orm:field name="_corAccountType" property="CorAccountType" behavior="readwrite" uniqueId="f8b6478c-a8f5-4fb9-bbd0-d19dfa00ef43" type="System.String">
-          <orm:column name="cor_account_type" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
-        </orm:field>
         <orm:field name="_businessPartnerId" property="BusinessPartnerId" behavior="readwrite" uniqueId="9c36f9d9-c23c-40f7-bc55-e749de0bedf1" type="System.Guid">
-          <orm:column name="business_partner_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="business_partner_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_jobId" property="JobId" behavior="readwrite" uniqueId="7bf2150d-b5a5-4e2f-a3e9-f1c54ab63723" type="System.Guid">
-          <orm:column name="job_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="job_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_lineNo" property="LineNo" behavior="readwrite" uniqueId="6b7ea4e4-fd50-44ad-a51a-8bc5584e8e5b" type="System.Int64">
           <orm:column name="lineno" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
@@ -903,6 +897,9 @@
         <orm:field name="_transactionType" property="TransactionType" behavior="readwrite" uniqueId="35ec6a41-712a-4ec5-8f9c-8e8fa8eb2269" type="System.Int32">
           <orm:column name="transaction_type" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
+        <orm:field name="_fixAssetId" property="FixAssetId" uniqueId="cee6ff8c-fb93-48a5-9610-4c051f4a6af3" type="System.Guid">
+          <orm:column name="fix_asset_id" sql-type="uuid" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="c828356a-8cdf-4c6a-93a4-1fe35054a4d2" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="a7921349-074d-47e5-a187-124ac185440b" association-name="TransactionLineHasClient">
             <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
@@ -936,6 +933,16 @@
         <orm:field name="_user" property="RecCreatedByUser" behavior="readwrite" uniqueId="5782bf17-2ffa-4be3-9ab3-8689180654cb" type="MyERP.DataAccess.User">
           <orm:reference uniqueId="5335c4ed-4e17-459a-b1db-bb8e6fd743b9" association-name="GeneralJournalLineHasCreatedBy">
             <orm:sharedfield name="_recCreatedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_account" property="Account" behavior="readwrite" uniqueId="70b71d85-ea00-4522-8f2a-ea99dbbd883d" type="MyERP.DataAccess.Account">
+          <orm:reference uniqueId="2b80f9ea-99ff-4e18-8cb5-51ca42fb63a5" association-name="GeneralJournalLineHasAccount">
+            <orm:sharedfield name="_accountId" target-class="MyERP.DataAccess.Account" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_account1" property="CorAccount" behavior="readwrite" uniqueId="6defb92f-9d57-4cf1-8858-5d4a9fbddd19" type="MyERP.DataAccess.Account">
+          <orm:reference uniqueId="0a0f8a90-d208-48e4-bd07-e5ed329350ee" association-name="GeneralJournalLineHasCorAccount">
+            <orm:sharedfield name="_corAccountId" target-class="MyERP.DataAccess.Account" target-field="_id" />
           </orm:reference>
         </orm:field>
       </orm:class>
@@ -1110,7 +1117,7 @@
           <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         </orm:field>
         <orm:field name="_code" property="Code" behavior="readwrite" uniqueId="f46b0fea-d207-409a-a08e-da673613e23d" type="System.String">
-          <orm:column name="code" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthStringConverter" ado-type="Varchar" />
+          <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.VariableLengthStringConverter" ado-type="Varchar" />
         </orm:field>
         <orm:field name="_currentNo" property="CurrentNo" behavior="readwrite" uniqueId="67041a85-cc41-4562-8e7d-b9364928bfb3" type="System.Int32">
           <orm:column name="current_no" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
@@ -1372,14 +1379,12 @@
         <orm:column name="cor_account_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="account_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="description" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="account_type" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="debit_amount" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         <orm:column name="credit_amount_lcy" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         <orm:column name="debit_amount_lcy" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         <orm:column name="credit_amount" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
-        <orm:column name="cor_account_type" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="business_partner_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="job_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="business_partner_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
+        <orm:column name="job_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         <orm:column name="lineno" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
@@ -1396,6 +1401,7 @@
         <orm:column name="document_created_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="currency_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="currency_exchange_rate" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="fix_asset_id" sql-type="uuid" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
       </orm:table>
       <orm:table name="module">
         <orm:column name="id" sql-type="int8" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
@@ -1440,7 +1446,7 @@
         <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="code" sql-type="varchar" nullable="true" length="255" scale="0" converter="OpenAccessRuntime.Data.VariableLengthStringConverter" ado-type="Varchar" />
+        <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.VariableLengthStringConverter" ado-type="Varchar" />
       </orm:table>
     </orm:schema>
     <orm:relational-naming-settings>
@@ -1477,6 +1483,7 @@
     <SchemaUpdateSettings>
       <DeploymentProject>MyERP.DataAccess</DeploymentProject>
       <DeploymentDirectory>Script\</DeploymentDirectory>
+      <UpdateDatabaseOperation>Migrate</UpdateDatabaseOperation>
       <ShowAllTables>true</ShowAllTables>
     </SchemaUpdateSettings>
     <BackendConfigurationSettings>
@@ -2276,13 +2283,11 @@
       <Property Id="9c36f9d9-c23c-40f7-bc55-e749de0bedf1" name="BusinessPartnerId" type="Guid" label="BusinessPartnerId : Guid" kind="Persistent" fieldName="_businessPartnerId" />
       <Property Id="7bf2150d-b5a5-4e2f-a3e9-f1c54ab63723" name="JobId" type="Guid" label="JobId : Guid" kind="Persistent" fieldName="_jobId" />
       <Property Id="806fda7d-e5f2-4626-b5be-9aa4c7d8a9fe" name="CorAccountId" type="Guid" label="CorAccountId : Guid" kind="Persistent" fieldName="_corAccountId" />
-      <Property Id="f8b6478c-a8f5-4fb9-bbd0-d19dfa00ef43" name="CorAccountType" label="CorAccountType : String" kind="Persistent" fieldName="_corAccountType" />
       <Property Id="62bb2580-e943-43c1-bf7c-a9957882a03a" name="CreditAmount" type="Decimal" label="CreditAmount : Decimal" kind="Persistent" fieldName="_creditAmount" />
       <Property Id="c786bea9-7e2e-4ada-8d3e-8ce759cff9bf" name="CreditAmountLcy" type="Decimal" label="CreditAmountLcy : Decimal" kind="Persistent" fieldName="_creditAmountLcy" />
       <Property Id="a6da2cca-c3b0-4da4-a7ea-3d99874a1a7a" name="DebitAmountLcy" type="Decimal" label="DebitAmountLcy : Decimal" kind="Persistent" fieldName="_debitAmountLcy" />
       <Property Id="7f74c9b7-d033-4dd7-bc64-00349a96d0ca" name="DebitAmount" type="Decimal" label="DebitAmount : Decimal" kind="Persistent" fieldName="_debitAmount" />
       <Property Id="a0255897-38d4-40e8-93e5-3bb83e62aef2" name="AccountId" type="Guid" label="AccountId : Guid" kind="Persistent" fieldName="_accountId" />
-      <Property Id="9769048a-6458-45a1-b27a-541663316f20" name="AccountType" label="AccountType : String" kind="Persistent" fieldName="_accountType" />
       <Property Id="34a21919-4181-4bbb-ab4b-5eca78922d1c" name="ClientId" type="Guid" label="ClientId : Guid" kind="Persistent" fieldName="_clientId" />
       <Property Id="c8f6a118-6366-4e3c-bde2-88c5b6c74a6c" name="OrganizationId" type="Guid" label="OrganizationId : Guid" kind="Persistent" fieldName="_organizationId" />
       <Property Id="c0bf62f4-68d7-4686-bb7c-083b89e7a03a" name="Version" type="Int64" label="Version : Int64" kind="Persistent" fieldName="_version" />
@@ -2298,6 +2303,7 @@
       <Property Id="91f2445b-b222-4b98-bd78-c2649cd19ec3" name="RecModified" type="DateTime" label="RecModified : DateTime" kind="Persistent" fieldName="_recModified" />
       <Property Id="4f4ee44c-4962-4757-855e-e2b7bbe4f577" name="RecModifiedBy" type="Guid" label="RecModifiedBy : Guid" kind="Persistent" fieldName="_recModifiedBy" />
       <Property Id="35ec6a41-712a-4ec5-8f9c-8e8fa8eb2269" name="TransactionType" type="Int32" label="TransactionType : Int32" kind="Persistent" fieldName="_transactionType" />
+      <Property Id="cee6ff8c-fb93-48a5-9610-4c051f4a6af3" name="FixAssetId" type="Guid" label="FixAssetId : Guid" fieldName="_fixAssetId" />
       <AssociationTargets>
         <Association Id="5685b103-b6b7-44cb-a08e-f3278fc9a835" SourceMultiplicity="ZeroOne" name="Ct11HasPh11">
           <DomainClassMoniker name="/EntitiesModel/GeneralJournalDocument" />
@@ -2360,6 +2366,22 @@
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
+        <Association Id="2b80f9ea-99ff-4e18-8cb5-51ca42fb63a5" SourceMultiplicity="ZeroOne" name="GeneralJournalLineHasAccount">
+          <DomainClassMoniker name="/EntitiesModel/Account" />
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="0609ffe6-bf33-4c67-bc83-8ceff32d1f50">
+              <NavigationalPropertyMoniker name="/EntitiesModel/GeneralJournalLine/Account" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="0a0f8a90-d208-48e4-bd07-e5ed329350ee" SourceMultiplicity="ZeroOne" name="GeneralJournalLineHasCorAccount">
+          <DomainClassMoniker name="/EntitiesModel/Account" />
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="1e510ec4-eb5b-47c6-b68f-4f2cc13f494e">
+              <NavigationalPropertyMoniker name="/EntitiesModel/GeneralJournalLine/CorAccount" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
       </AssociationTargets>
       <navigationalProperties>
         <classHasNavigationalProperties Id="f7e47e64-371d-4627-88d6-72bfc2fe50e9">
@@ -2382,6 +2404,12 @@
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="1c81f7d3-344b-4f6c-b4f6-5524ce56bceb">
           <NavigationalProperty Id="5a93ed1b-ddbe-4c9c-a1a5-2d755453cafb" name="RecModifiedByUser" type="User" label="RecModifiedByUser : User" nullable="true" kind="Persistent" fieldName="_user1" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="a6ae8e5d-40fd-427e-9302-dd420e245a9f">
+          <NavigationalProperty Id="70b71d85-ea00-4522-8f2a-ea99dbbd883d" name="Account" type="Account" label="Account : Account" nullable="true" kind="Persistent" fieldName="_account" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="a7ed29dd-177e-4788-be6b-e29b531025b5">
+          <NavigationalProperty Id="6defb92f-9d57-4cf1-8858-5d4a9fbddd19" name="CorAccount" type="Account" label="CorAccount : Account" nullable="true" kind="Persistent" fieldName="_account1" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>

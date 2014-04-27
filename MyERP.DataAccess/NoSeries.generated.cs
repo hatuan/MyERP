@@ -57,7 +57,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _code;
-		[Column("code", OpenAccessType = OpenAccessType.Varchar, IsNullable = true, Length = 255, Scale = 0, SqlType = "varchar", Converter = "OpenAccessRuntime.Data.VariableLengthStringConverter")]
+		[Column("code", OpenAccessType = OpenAccessType.Varchar, Length = 0, Scale = 0, SqlType = "varchar", Converter = "OpenAccessRuntime.Data.VariableLengthStringConverter")]
 		[Storage("_code")]
 		public virtual string Code
 		{

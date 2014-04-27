@@ -83,7 +83,7 @@
 
                 </Grid>
             </telerik:RadTabItem>
-            <telerik:RadTabItem x:Name="radTabGeneralJournalDocumentDetails" Header="DETAIL">
+            <telerik:RadTabItem x:Name="radTabGeneralJournalDocumentDetails" Header="GENERAL">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0"/>
@@ -115,7 +115,7 @@
         <sdk:GridSplitter x:Name="grsplSplitter" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Height="5"/>
 
         <telerik:RadTabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3">
-            <telerik:RadTabItem x:Name="radTabGeneralJournalLinesOverview" Header="DETAILS OVERVIEW">
+            <telerik:RadTabItem x:Name="radTabGeneralJournalLinesOverview" Header="LINES">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0"/>
@@ -137,12 +137,12 @@
                         <ColumnDefinition Width="0"/>
                     </Grid.ColumnDefinitions>
 
-                    <ContentControl regions:RegionManager.RegionName="GeneralJournalLinesOverviewRegion" x:Name="GeneralJournalLinesOverviewRegion" Grid.Column="1" 
+                    <ContentControl regions:RegionManager.RegionName="GeneralJournalLinesOverview" x:Name="GeneralJournalLinesOverviewRegion" Grid.Column="1" 
         				VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.ColumnSpan="15" Margin="1"/>
 
                 </Grid>
             </telerik:RadTabItem>
-            <telerik:RadTabItem x:Name="radTabGeneralJournalLineDetail" Header="DETAIL">
+            <telerik:RadTabItem x:Name="radTabGeneralJournalLineDetail" Header="GENERAL">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0"/>
@@ -164,11 +164,15 @@
                         <ColumnDefinition Width="0"/>
                     </Grid.ColumnDefinitions>
 
-                    <ContentControl regions:RegionManager.RegionName="GeneralJournalLinesDetailsRegion" x:Name="GeneralJournalLinesDetailsRegion" Grid.Column="1"
+                    <ContentControl regions:RegionManager.RegionName="GeneralJournalLineGeneral" x:Name="GeneralJournalLineGeneralRegion" Grid.Column="1"
         				VerticalContentAlignment="Stretch" Grid.ColumnSpan="15" HorizontalContentAlignment="Stretch" Margin="1"/>
 
                 </Grid>
             </telerik:RadTabItem>
         </telerik:RadTabControl>
+
+        <ContentControl regions:RegionManager.RegionName="GeneralJournalsAll" x:Name="GeneralJournalsAllRegion" 
+                        Grid.Row="1" Grid.RowSpan="3"
+        				VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
     </Grid>
 </UserControl>

@@ -9,9 +9,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using MyERP.Infrastructure;
 
 namespace MyERP.Modules.Financial.Views
 {
+    [ViewExport(RegionName = "GeneralJournalLinesOverview")]
     public partial class GeneralJournalLinesListUserControl : UserControl
     {
         public GeneralJournalLinesListUserControl()

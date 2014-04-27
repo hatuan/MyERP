@@ -32,6 +32,7 @@
         <telerik:RadAutoCompleteBox  FontFamily="Segoe UI" FontSize="14" x:Name="textBox"
                                      ItemsSource="{Binding Accounts}"
                                      SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"
+                                     SearchTextChanged="TextBox_OnSearchTextChanged"
                                      SelectionMode="Single"
                                      TextSearchMode="Contains"
                                      AutoCompleteMode="SuggestAppend"
@@ -41,7 +42,7 @@
                                      DisplayMemberPath="Code" IsTabStop="True">
         </telerik:RadAutoCompleteBox>
         <telerik:RadButton Grid.Column="1" x:Name="btnSearch"  Command="{Binding SearchCommand}">
-            <StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <Image Source="/MyERP.Theme;component/Images/Find22.png"></Image>
             </StackPanel>
         </telerik:RadButton>

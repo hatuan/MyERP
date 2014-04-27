@@ -86,21 +86,6 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private string _accountType;
-		[Column("account_type", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_accountType")]
-		public virtual string AccountType
-		{
-			get
-			{
-				return this._accountType;
-			}
-			set
-			{
-				this._accountType = value;
-			}
-		}
-		
 		private decimal _debitAmount;
 		[Column("debit_amount", Length = 38, Scale = 20, SqlType = "numeric")]
 		[Storage("_debitAmount")]
@@ -161,23 +146,8 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private string _corAccountType;
-		[Column("cor_account_type", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_corAccountType")]
-		public virtual string CorAccountType
-		{
-			get
-			{
-				return this._corAccountType;
-			}
-			set
-			{
-				this._corAccountType = value;
-			}
-		}
-		
 		private Guid _businessPartnerId;
-		[Column("business_partner_id", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Column("business_partner_id", IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid")]
 		[Storage("_businessPartnerId")]
 		public virtual Guid BusinessPartnerId
 		{
@@ -192,7 +162,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _jobId;
-		[Column("job_id", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Column("job_id", IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid")]
 		[Storage("_jobId")]
 		public virtual Guid JobId
 		{
@@ -446,6 +416,21 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		private Guid _fixAssetId;
+		[Column("fix_asset_id", OpenAccessType = OpenAccessType.Guid, IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
+		[Storage("_fixAssetId")]
+		public virtual Guid FixAssetId
+		{
+			get
+			{
+				return this._fixAssetId;
+			}
+			set
+			{
+				this._fixAssetId = value;
+			}
+		}
+		
 		private Client _client;
 		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "Id")]
 		[Storage("_client")]
@@ -548,6 +533,36 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._user = value;
+			}
+		}
+		
+		private Account _account;
+		[ForeignKeyAssociation(SharedFields = "AccountId", TargetFields = "Id")]
+		[Storage("_account")]
+		public virtual Account Account
+		{
+			get
+			{
+				return this._account;
+			}
+			set
+			{
+				this._account = value;
+			}
+		}
+		
+		private Account _account1;
+		[ForeignKeyAssociation(SharedFields = "CorAccountId", TargetFields = "Id")]
+		[Storage("_account1")]
+		public virtual Account CorAccount
+		{
+			get
+			{
+				return this._account1;
+			}
+			set
+			{
+				this._account1 = value;
 			}
 		}
 		

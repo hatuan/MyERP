@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Microsoft.Practices.Prism.ViewModel;
+using System.Diagnostics.CodeAnalysis;
+using MyERP.Infrastructure.Annotations;
 
 
 namespace MyERP.Infrastructure
 {
-    public class ViewModelBase : NotificationObject, INotifyDataErrorInfo
+    public class ViewModelBase : INotifyPropertyChanged, INotifyDataErrorInfo
     {
         private Dictionary<String, List<String>> errors =
             new Dictionary<string, List<string>>();
@@ -63,5 +64,57 @@ namespace MyERP.Infrastructure
         }
 
         #endregion
+
+        #region INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
+        private static bool? _isInDesignMode;
+
+        public static bool IsInDesignModeStatic
+        {
+            get
+            {
+                if (!_isInDesignMode.HasValue)
+                {
+#if SILVERLIGHT
+                    _isInDesignMode = DesignerProperties.IsInDesignTool;
+#else
+            var prop = DesignerProperties.IsInDesignModeProperty;
+            _isInDesignMode
+                = (bool)DependencyPropertyDescriptor
+                .FromProperty(prop, typeof(FrameworkElement))
+                .Metadata.DefaultValue;
+#endif
+                }
+
+                return _isInDesignMode.Value;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the control is in design mode (running under Blend
+        /// or Visual Studio).
+        /// </summary>
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "Non static member needed for data binding")]
+        public bool IsInDesignMode
+        {
+            get
+            {
+                return IsInDesignModeStatic;
+            }
+        }
+
+       
     }
 }

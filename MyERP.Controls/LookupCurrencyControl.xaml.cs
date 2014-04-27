@@ -1,51 +1,102 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.ServiceModel.DomainServices.Client;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using MyERP.DataAccess;
+using MyERP.Infrastructure.Annotations;
+using MyERP.Repositories;
+using MyERP.Web;
 using Telerik.Windows.Controls;
+using Telerik.Windows.Data;
 using WindowStartupLocation = Telerik.Windows.Controls.WindowStartupLocation;
 
 namespace MyERP.Controls
 {
-    public partial class LookupCurrencyControl : UserControl
+    public partial class LookupCurrencyControl : UserControl, INotifyPropertyChanged
     {
         public LookupCurrencyControl()
         {
             InitializeComponent();
 
-            this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
-            LayoutRoot.DataContext = this;
+            if (!MyERP.Infrastructure.ViewModelBase.IsInDesignModeStatic)
+            {
+                this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
+                LayoutRoot.DataContext = this;
+
+                this._loadTimer = new DispatcherTimer();
+                // You can control the load delay between typing in the textbox and going to the server.
+                this._loadTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+                this._loadTimer.Tick += this.OnLoadTimerTick;
+
+            }
         }
 
-        RadWindow searchWindow = new RadWindow();
+        private readonly DispatcherTimer _loadTimer;
+
+        private void OnLoadTimerTick(object sender, EventArgs e)
+        {
+            if (this._loadTimer.IsEnabled)
+            {
+                this._loadTimer.Stop();
+            }
+
+            IsBusy = true;
+            _currencyRepository.GetCurrenciesByLookupValue(textBox.SearchText, currencies =>
+            {
+                Currencies = currencies;
+                IsBusy = false;
+            });
+        }
+
+        private readonly CurrencyRepository _currencyRepository = new CurrencyRepository();
+
+        readonly RadWindow _searchWindow = new RadWindow();
+
+        private void TextBox_OnSearchTextChanged(object sender, EventArgs e)
+        {
+            if (this._loadTimer.IsEnabled)
+            {
+                this._loadTimer.Stop();
+            }
+
+            this._loadTimer.Start();
+        }
+
+        public bool IsBusy { get; set; }
 
         public ICommand SearchCommand { get; set; }
 
         private void OnSearchCommandExecuted(object obj)
         {
-            StyleManager.SetTheme(searchWindow, new Windows8Theme());
+            StyleManager.SetTheme(_searchWindow, new Windows8Theme());
 
-            searchWindow.Width = 600;
-            searchWindow.Height = 600;
-            var searchCurrencyControl = new SearchCurrencyControl();
-            searchCurrencyControl.SelectedCurrency = SelectedCurrency;
-            searchCurrencyControl.Currencies = Currencies;
-            searchWindow.Content = searchCurrencyControl;
-            searchWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            searchWindow.HideMinimizeButton = true;
-            searchWindow.HideMaximizeButton = true;
-            searchWindow.Closed += (sender, args) =>
+            _searchWindow.Width = 600;
+            _searchWindow.Height = 600;
+            var searchCurrencyControl = new SearchCurrencyControl
             {
-                if (searchWindow.DialogResult == true)
+                searchValue = {Text = textBox.SearchText},
+                SelectedCurrency = SelectedCurrency,
+                Currencies = Currencies
+            };
+            _searchWindow.Content = searchCurrencyControl;
+            _searchWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            _searchWindow.HideMinimizeButton = true;
+            _searchWindow.HideMaximizeButton = true;
+            _searchWindow.Closed += (sender, args) =>
+            {
+                if (_searchWindow.DialogResult == true)
                 {
+                    Currencies = searchCurrencyControl.Currencies;
                     SelectedCurrency = searchCurrencyControl.SelectedCurrency;
                 }
             };
-            searchWindow.ShowDialog();
+            _searchWindow.ShowDialog();
         }
 
         public Guid Id
@@ -72,21 +123,16 @@ namespace MyERP.Controls
             }
         }
 
+        private IEnumerable<Currency> _currencies;
         public IEnumerable<Currency> Currencies
         {
-            get
-            {
-                return (IEnumerable<Currency>)GetValue(CurrenciesProperty);
-            }
+            get { return _currencies; }
             set
             {
-                SetValue(CurrenciesProperty, value);
+                _currencies = value;
+                OnPropertyChanged("Currencies");
             }
         }
-
-        public static readonly DependencyProperty CurrenciesProperty = DependencyProperty.Register(
-            "Currencies", typeof(IEnumerable), typeof(LookupCurrencyControl), new PropertyMetadata(Enumerable.Empty<Currency>()));
-
 
         public Currency SelectedCurrency
         {
@@ -115,10 +161,16 @@ namespace MyERP.Controls
             }
         }
 
-        private void OnAccountsButtonClicked(object sender, RoutedEventArgs e)
+        #region INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged(string propertyName)
         {
-            var selectedItem = (sender as Button).DataContext as Currency;
-            this.SelectedCurrency = Currencies.FirstOrDefault(c => c.Id == selectedItem.Id);
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
+
     }
 }

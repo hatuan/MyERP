@@ -32,6 +32,7 @@
         <telerik:RadAutoCompleteBox  FontFamily="Segoe UI" FontSize="14" Grid.Column="0" x:Name="textBox"
                                      ItemsSource="{Binding Currencies}"
                                      SelectedItem="{Binding SelectedCurrency, Mode=TwoWay}"
+                                     SearchTextChanged="TextBox_OnSearchTextChanged"
                                      SelectionMode="Single"
                                      TextSearchMode="Contains"
                                      AutoCompleteMode="SuggestAppend"

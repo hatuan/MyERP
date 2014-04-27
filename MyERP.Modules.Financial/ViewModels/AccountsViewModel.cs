@@ -168,6 +168,12 @@ namespace MyERP.Modules.Financial.ViewModels
             }
         }
 
+        void _accounts_CurrentChanging(object sender, CurrentChangingEventArgs e)
+        {
+            if (_accounts.HasChanges)
+                _accounts.SubmitChanges();
+        }
+
         private void OnAddNewCommandExecuted()
         {
             Account newAccount = new Account();
@@ -246,7 +252,7 @@ namespace MyERP.Modules.Financial.ViewModels
             this._accounts.LoadedData += _accounts_LoadedData;
             this._accounts.PropertyChanged += _accounts_PropertyChanged;
             this._accounts.SubmittedChanges += _accounts_SubmittedChanges;
-            //this._accounts.SubmittingChanges += _accounts_SubmittingChanges;
+            this._accounts.CurrentChanging += _accounts_CurrentChanging;
 
             this._codeSortDescriptor = new SortDescriptor() { Member = "Code" };
 
@@ -257,6 +263,8 @@ namespace MyERP.Modules.Financial.ViewModels
             this.DeleteCommand = new DelegateCommand(OnDeleteExcuted, DeleteCommandCanExecute);
             this.CloseWindowCommand = new DelegateCommand(OnCloseWindowExcuted, CloseWindowCanExecute);
         }
+
+        
         #endregion
 
         public event EventHandler<EventArgs> RequestClose;

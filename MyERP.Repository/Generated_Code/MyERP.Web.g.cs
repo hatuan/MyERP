@@ -25,10 +25,14 @@ namespace MyERP.DataAccess
     /// The 'Account' entity class.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
-    public sealed partial class Account : BaseObject
+    public sealed partial class Account : Entity
     {
         
         private bool _arAp;
+        
+        private EntityRef<Client> _client;
+        
+        private Guid _clientId;
         
         private string _code;
         
@@ -38,17 +42,39 @@ namespace MyERP.DataAccess
         
         private bool _detail;
         
+        private Guid _id;
+        
         private short _level;
         
         private string _name;
+        
+        private string[] _openAccessGenerated;
+        
+        private EntityRef<Organization> _organization;
+        
+        private Guid _organizationId;
         
         private EntityRef<Account> _parentAccount;
         
         private Nullable<Guid> _parentAccountId;
         
+        private DateTime _recCreated;
+        
+        private Guid _recCreatedById;
+        
+        private EntityRef<User> _recCreatedByUser;
+        
+        private DateTime _recModified;
+        
+        private Guid _recModifiedById;
+        
+        private EntityRef<User> _recModifiedByUser;
+        
         private byte _status;
         
         private AccountStatusType _statusType;
+        
+        private long _version;
         
         #region Extensibility Method Definitions
 
@@ -59,22 +85,40 @@ namespace MyERP.DataAccess
         partial void OnCreated();
         partial void OnArApChanging(bool value);
         partial void OnArApChanged();
+        partial void OnClientIdChanging(Guid value);
+        partial void OnClientIdChanged();
         partial void OnCodeChanging(string value);
         partial void OnCodeChanged();
         partial void OnCurrencyIdChanging(Nullable<Guid> value);
         partial void OnCurrencyIdChanged();
         partial void OnDetailChanging(bool value);
         partial void OnDetailChanged();
+        partial void OnIdChanging(Guid value);
+        partial void OnIdChanged();
         partial void OnLevelChanging(short value);
         partial void OnLevelChanged();
         partial void OnNameChanging(string value);
         partial void OnNameChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnOrganizationIdChanging(Guid value);
+        partial void OnOrganizationIdChanged();
         partial void OnParentAccountIdChanging(Nullable<Guid> value);
         partial void OnParentAccountIdChanged();
+        partial void OnRecCreatedChanging(DateTime value);
+        partial void OnRecCreatedChanged();
+        partial void OnRecCreatedByIdChanging(Guid value);
+        partial void OnRecCreatedByIdChanged();
+        partial void OnRecModifiedChanging(DateTime value);
+        partial void OnRecModifiedChanged();
+        partial void OnRecModifiedByIdChanging(Guid value);
+        partial void OnRecModifiedByIdChanged();
         partial void OnStatusChanging(byte value);
         partial void OnStatusChanged();
         partial void OnStatusTypeChanging(AccountStatusType value);
         partial void OnStatusTypeChanged();
+        partial void OnVersionChanging(long value);
+        partial void OnVersionChanged();
 
         #endregion
         
@@ -90,7 +134,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'ArAp' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public bool ArAp
@@ -114,9 +157,59 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the associated <see cref="Client"/> entity.
+        /// </summary>
+        [Association("Account-client-association", "ClientId", "Id")]
+        public Client Client
+        {
+            get
+            {
+                if ((this._client == null))
+                {
+                    this._client = new EntityRef<Client>(this, "Client", this.FilterClient);
+                }
+                return this._client.Entity;
+            }
+            set
+            {
+                Client previous = this.Client;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Client", value);
+                    this._client.Entity = value;
+                    this.RaisePropertyChanged("Client");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'ClientId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid ClientId
+        {
+            get
+            {
+                return this._clientId;
+            }
+            set
+            {
+                if ((this._clientId != value))
+                {
+                    this.OnClientIdChanging(value);
+                    this.RaiseDataMemberChanging("ClientId");
+                    this.ValidateProperty("ClientId", value);
+                    this._clientId = value;
+                    this.RaiseDataMemberChanged("ClientId");
+                    this.OnClientIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Code' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string Code
@@ -168,7 +261,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'CurrencyId' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Nullable<Guid> CurrencyId
@@ -194,7 +286,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Detail' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public bool Detail
@@ -218,9 +309,34 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'Id' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Level' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public short Level
@@ -246,7 +362,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Name' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string Name
@@ -265,6 +380,84 @@ namespace MyERP.DataAccess
                     this._name = value;
                     this.RaiseDataMemberChanged("Name");
                     this.OnNameChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="Organization"/> entity.
+        /// </summary>
+        [Association("Account-organization-association", "OrganizationId", "Id")]
+        public Organization Organization
+        {
+            get
+            {
+                if ((this._organization == null))
+                {
+                    this._organization = new EntityRef<Organization>(this, "Organization", this.FilterOrganization);
+                }
+                return this._organization.Entity;
+            }
+            set
+            {
+                Organization previous = this.Organization;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Organization", value);
+                    this._organization.Entity = value;
+                    this.RaisePropertyChanged("Organization");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OrganizationId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid OrganizationId
+        {
+            get
+            {
+                return this._organizationId;
+            }
+            set
+            {
+                if ((this._organizationId != value))
+                {
+                    this.OnOrganizationIdChanging(value);
+                    this.RaiseDataMemberChanging("OrganizationId");
+                    this.ValidateProperty("OrganizationId", value);
+                    this._organizationId = value;
+                    this.RaiseDataMemberChanged("OrganizationId");
+                    this.OnOrganizationIdChanged();
                 }
             }
         }
@@ -298,7 +491,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'ParentAccountId' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Nullable<Guid> ParentAccountId
@@ -322,9 +514,160 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'RecCreated' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime RecCreated
+        {
+            get
+            {
+                return this._recCreated;
+            }
+            set
+            {
+                if ((this._recCreated != value))
+                {
+                    this.OnRecCreatedChanging(value);
+                    this.RaiseDataMemberChanging("RecCreated");
+                    this.ValidateProperty("RecCreated", value);
+                    this._recCreated = value;
+                    this.RaiseDataMemberChanged("RecCreated");
+                    this.OnRecCreatedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecCreatedById' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid RecCreatedById
+        {
+            get
+            {
+                return this._recCreatedById;
+            }
+            set
+            {
+                if ((this._recCreatedById != value))
+                {
+                    this.OnRecCreatedByIdChanging(value);
+                    this.RaiseDataMemberChanging("RecCreatedById");
+                    this.ValidateProperty("RecCreatedById", value);
+                    this._recCreatedById = value;
+                    this.RaiseDataMemberChanged("RecCreatedById");
+                    this.OnRecCreatedByIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="User"/> entity.
+        /// </summary>
+        [Association("Account-user-created-association", "RecCreatedById", "Id")]
+        public User RecCreatedByUser
+        {
+            get
+            {
+                if ((this._recCreatedByUser == null))
+                {
+                    this._recCreatedByUser = new EntityRef<User>(this, "RecCreatedByUser", this.FilterRecCreatedByUser);
+                }
+                return this._recCreatedByUser.Entity;
+            }
+            set
+            {
+                User previous = this.RecCreatedByUser;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("RecCreatedByUser", value);
+                    this._recCreatedByUser.Entity = value;
+                    this.RaisePropertyChanged("RecCreatedByUser");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecModified' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime RecModified
+        {
+            get
+            {
+                return this._recModified;
+            }
+            set
+            {
+                if ((this._recModified != value))
+                {
+                    this.OnRecModifiedChanging(value);
+                    this.RaiseDataMemberChanging("RecModified");
+                    this.ValidateProperty("RecModified", value);
+                    this._recModified = value;
+                    this.RaiseDataMemberChanged("RecModified");
+                    this.OnRecModifiedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecModifiedById' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid RecModifiedById
+        {
+            get
+            {
+                return this._recModifiedById;
+            }
+            set
+            {
+                if ((this._recModifiedById != value))
+                {
+                    this.OnRecModifiedByIdChanging(value);
+                    this.RaiseDataMemberChanging("RecModifiedById");
+                    this.ValidateProperty("RecModifiedById", value);
+                    this._recModifiedById = value;
+                    this.RaiseDataMemberChanged("RecModifiedById");
+                    this.OnRecModifiedByIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="User"/> entity.
+        /// </summary>
+        [Association("Account-user-modified-association", "RecModifiedById", "Id")]
+        public User RecModifiedByUser
+        {
+            get
+            {
+                if ((this._recModifiedByUser == null))
+                {
+                    this._recModifiedByUser = new EntityRef<User>(this, "RecModifiedByUser", this.FilterRecModifiedByUser);
+                }
+                return this._recModifiedByUser.Entity;
+            }
+            set
+            {
+                User previous = this.RecModifiedByUser;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("RecModifiedByUser", value);
+                    this._recModifiedByUser.Entity = value;
+                    this.RaisePropertyChanged("RecModifiedByUser");
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Status' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public byte Status
@@ -371,14 +714,69 @@ namespace MyERP.DataAccess
             }
         }
         
+        /// <summary>
+        /// Gets or sets the 'Version' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                if ((this._version != value))
+                {
+                    this.OnVersionChanging(value);
+                    this.RaiseDataMemberChanging("Version");
+                    this.ValidateProperty("Version", value);
+                    this._version = value;
+                    this.RaiseDataMemberChanged("Version");
+                    this.OnVersionChanged();
+                }
+            }
+        }
+        
+        private bool FilterClient(Client entity)
+        {
+            return (entity.Id == this.ClientId);
+        }
+        
         private bool FilterCurrency(Currency entity)
         {
             return (entity.Id == this.CurrencyId);
         }
         
+        private bool FilterOrganization(Organization entity)
+        {
+            return (entity.Id == this.OrganizationId);
+        }
+        
         private bool FilterParentAccount(Account entity)
         {
             return (entity.Id == this.ParentAccountId);
+        }
+        
+        private bool FilterRecCreatedByUser(User entity)
+        {
+            return (entity.Id == this.RecCreatedById);
+        }
+        
+        private bool FilterRecModifiedByUser(User entity)
+        {
+            return (entity.Id == this.RecModifiedById);
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
         }
     }
     
@@ -391,25 +789,989 @@ namespace MyERP.DataAccess
     }
     
     /// <summary>
-    /// The 'BaseObject' entity class.
+    /// The 'BusinessPartner' entity class.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
-    [KnownType(typeof(Account))]
-    [KnownType(typeof(BusinessPartner))]
-    [KnownType(typeof(BusinessPartnerGroup))]
-    [KnownType(typeof(Currency))]
-    [KnownType(typeof(GeneralJournalDocument))]
-    [KnownType(typeof(GeneralJournalLine))]
-    [KnownType(typeof(Job))]
-    [KnownType(typeof(JobGroup))]
-    [KnownType(typeof(NoSeries))]
-    [KnownType(typeof(PaymentTerm))]
-    public abstract partial class BaseObject : Entity
+    public sealed partial class BusinessPartner : Entity
+    {
+        
+        private string _address;
+        
+        private decimal _amountLimit;
+        
+        private Guid _businessPartnerGroupId1;
+        
+        private Guid _businessPartnerGroupId2;
+        
+        private Guid _businessPartnerGroupId3;
+        
+        private Guid _clientId;
+        
+        private string _code;
+        
+        private string _comment;
+        
+        private string _contactName;
+        
+        private decimal _creditLimit;
+        
+        private Guid _customerAccountId;
+        
+        private Guid _employeeAccountId;
+        
+        private string _fax;
+        
+        private string _homePage;
+        
+        private Guid _id;
+        
+        private bool _isCustomer;
+        
+        private bool _isEmployee;
+        
+        private bool _isVendor;
+        
+        private string _mail;
+        
+        private string _name;
+        
+        private string[] _openAccessGenerated;
+        
+        private Guid _organizationId;
+        
+        private Guid _paymentTermId;
+        
+        private DateTime _recCreated;
+        
+        private Guid _recCreatedBy;
+        
+        private DateTime _recModified;
+        
+        private Guid _recModifiedBy;
+        
+        private byte _status;
+        
+        private string _telephone;
+        
+        private string _vatCode;
+        
+        private Guid _vendorAccountId;
+        
+        private long _version;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnAddressChanging(string value);
+        partial void OnAddressChanged();
+        partial void OnAmountLimitChanging(decimal value);
+        partial void OnAmountLimitChanged();
+        partial void OnBusinessPartnerGroupId1Changing(Guid value);
+        partial void OnBusinessPartnerGroupId1Changed();
+        partial void OnBusinessPartnerGroupId2Changing(Guid value);
+        partial void OnBusinessPartnerGroupId2Changed();
+        partial void OnBusinessPartnerGroupId3Changing(Guid value);
+        partial void OnBusinessPartnerGroupId3Changed();
+        partial void OnClientIdChanging(Guid value);
+        partial void OnClientIdChanged();
+        partial void OnCodeChanging(string value);
+        partial void OnCodeChanged();
+        partial void OnCommentChanging(string value);
+        partial void OnCommentChanged();
+        partial void OnContactNameChanging(string value);
+        partial void OnContactNameChanged();
+        partial void OnCreditLimitChanging(decimal value);
+        partial void OnCreditLimitChanged();
+        partial void OnCustomerAccountIdChanging(Guid value);
+        partial void OnCustomerAccountIdChanged();
+        partial void OnEmployeeAccountIdChanging(Guid value);
+        partial void OnEmployeeAccountIdChanged();
+        partial void OnFaxChanging(string value);
+        partial void OnFaxChanged();
+        partial void OnHomePageChanging(string value);
+        partial void OnHomePageChanged();
+        partial void OnIdChanging(Guid value);
+        partial void OnIdChanged();
+        partial void OnIsCustomerChanging(bool value);
+        partial void OnIsCustomerChanged();
+        partial void OnIsEmployeeChanging(bool value);
+        partial void OnIsEmployeeChanged();
+        partial void OnIsVendorChanging(bool value);
+        partial void OnIsVendorChanged();
+        partial void OnMailChanging(string value);
+        partial void OnMailChanged();
+        partial void OnNameChanging(string value);
+        partial void OnNameChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnOrganizationIdChanging(Guid value);
+        partial void OnOrganizationIdChanged();
+        partial void OnPaymentTermIdChanging(Guid value);
+        partial void OnPaymentTermIdChanged();
+        partial void OnRecCreatedChanging(DateTime value);
+        partial void OnRecCreatedChanged();
+        partial void OnRecCreatedByChanging(Guid value);
+        partial void OnRecCreatedByChanged();
+        partial void OnRecModifiedChanging(DateTime value);
+        partial void OnRecModifiedChanged();
+        partial void OnRecModifiedByChanging(Guid value);
+        partial void OnRecModifiedByChanged();
+        partial void OnStatusChanging(byte value);
+        partial void OnStatusChanged();
+        partial void OnTelephoneChanging(string value);
+        partial void OnTelephoneChanged();
+        partial void OnVatCodeChanging(string value);
+        partial void OnVatCodeChanged();
+        partial void OnVendorAccountIdChanging(Guid value);
+        partial void OnVendorAccountIdChanged();
+        partial void OnVersionChanging(long value);
+        partial void OnVersionChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BusinessPartner"/> class.
+        /// </summary>
+        public BusinessPartner()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Address' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public string Address
+        {
+            get
+            {
+                return this._address;
+            }
+            set
+            {
+                if ((this._address != value))
+                {
+                    this.OnAddressChanging(value);
+                    this.RaiseDataMemberChanging("Address");
+                    this.ValidateProperty("Address", value);
+                    this._address = value;
+                    this.RaiseDataMemberChanged("Address");
+                    this.OnAddressChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'AmountLimit' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public decimal AmountLimit
+        {
+            get
+            {
+                return this._amountLimit;
+            }
+            set
+            {
+                if ((this._amountLimit != value))
+                {
+                    this.OnAmountLimitChanging(value);
+                    this.RaiseDataMemberChanging("AmountLimit");
+                    this.ValidateProperty("AmountLimit", value);
+                    this._amountLimit = value;
+                    this.RaiseDataMemberChanged("AmountLimit");
+                    this.OnAmountLimitChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'BusinessPartnerGroupId1' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid BusinessPartnerGroupId1
+        {
+            get
+            {
+                return this._businessPartnerGroupId1;
+            }
+            set
+            {
+                if ((this._businessPartnerGroupId1 != value))
+                {
+                    this.OnBusinessPartnerGroupId1Changing(value);
+                    this.RaiseDataMemberChanging("BusinessPartnerGroupId1");
+                    this.ValidateProperty("BusinessPartnerGroupId1", value);
+                    this._businessPartnerGroupId1 = value;
+                    this.RaiseDataMemberChanged("BusinessPartnerGroupId1");
+                    this.OnBusinessPartnerGroupId1Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'BusinessPartnerGroupId2' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid BusinessPartnerGroupId2
+        {
+            get
+            {
+                return this._businessPartnerGroupId2;
+            }
+            set
+            {
+                if ((this._businessPartnerGroupId2 != value))
+                {
+                    this.OnBusinessPartnerGroupId2Changing(value);
+                    this.RaiseDataMemberChanging("BusinessPartnerGroupId2");
+                    this.ValidateProperty("BusinessPartnerGroupId2", value);
+                    this._businessPartnerGroupId2 = value;
+                    this.RaiseDataMemberChanged("BusinessPartnerGroupId2");
+                    this.OnBusinessPartnerGroupId2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'BusinessPartnerGroupId3' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid BusinessPartnerGroupId3
+        {
+            get
+            {
+                return this._businessPartnerGroupId3;
+            }
+            set
+            {
+                if ((this._businessPartnerGroupId3 != value))
+                {
+                    this.OnBusinessPartnerGroupId3Changing(value);
+                    this.RaiseDataMemberChanging("BusinessPartnerGroupId3");
+                    this.ValidateProperty("BusinessPartnerGroupId3", value);
+                    this._businessPartnerGroupId3 = value;
+                    this.RaiseDataMemberChanged("BusinessPartnerGroupId3");
+                    this.OnBusinessPartnerGroupId3Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'ClientId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid ClientId
+        {
+            get
+            {
+                return this._clientId;
+            }
+            set
+            {
+                if ((this._clientId != value))
+                {
+                    this.OnClientIdChanging(value);
+                    this.RaiseDataMemberChanging("ClientId");
+                    this.ValidateProperty("ClientId", value);
+                    this._clientId = value;
+                    this.RaiseDataMemberChanged("ClientId");
+                    this.OnClientIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Code' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public string Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                if ((this._code != value))
+                {
+                    this.OnCodeChanging(value);
+                    this.RaiseDataMemberChanging("Code");
+                    this.ValidateProperty("Code", value);
+                    this._code = value;
+                    this.RaiseDataMemberChanged("Code");
+                    this.OnCodeChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Comment' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public string Comment
+        {
+            get
+            {
+                return this._comment;
+            }
+            set
+            {
+                if ((this._comment != value))
+                {
+                    this.OnCommentChanging(value);
+                    this.RaiseDataMemberChanging("Comment");
+                    this.ValidateProperty("Comment", value);
+                    this._comment = value;
+                    this.RaiseDataMemberChanged("Comment");
+                    this.OnCommentChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'ContactName' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public string ContactName
+        {
+            get
+            {
+                return this._contactName;
+            }
+            set
+            {
+                if ((this._contactName != value))
+                {
+                    this.OnContactNameChanging(value);
+                    this.RaiseDataMemberChanging("ContactName");
+                    this.ValidateProperty("ContactName", value);
+                    this._contactName = value;
+                    this.RaiseDataMemberChanged("ContactName");
+                    this.OnContactNameChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'CreditLimit' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public decimal CreditLimit
+        {
+            get
+            {
+                return this._creditLimit;
+            }
+            set
+            {
+                if ((this._creditLimit != value))
+                {
+                    this.OnCreditLimitChanging(value);
+                    this.RaiseDataMemberChanging("CreditLimit");
+                    this.ValidateProperty("CreditLimit", value);
+                    this._creditLimit = value;
+                    this.RaiseDataMemberChanged("CreditLimit");
+                    this.OnCreditLimitChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'CustomerAccountId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid CustomerAccountId
+        {
+            get
+            {
+                return this._customerAccountId;
+            }
+            set
+            {
+                if ((this._customerAccountId != value))
+                {
+                    this.OnCustomerAccountIdChanging(value);
+                    this.RaiseDataMemberChanging("CustomerAccountId");
+                    this.ValidateProperty("CustomerAccountId", value);
+                    this._customerAccountId = value;
+                    this.RaiseDataMemberChanged("CustomerAccountId");
+                    this.OnCustomerAccountIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'EmployeeAccountId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid EmployeeAccountId
+        {
+            get
+            {
+                return this._employeeAccountId;
+            }
+            set
+            {
+                if ((this._employeeAccountId != value))
+                {
+                    this.OnEmployeeAccountIdChanging(value);
+                    this.RaiseDataMemberChanging("EmployeeAccountId");
+                    this.ValidateProperty("EmployeeAccountId", value);
+                    this._employeeAccountId = value;
+                    this.RaiseDataMemberChanged("EmployeeAccountId");
+                    this.OnEmployeeAccountIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Fax' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public string Fax
+        {
+            get
+            {
+                return this._fax;
+            }
+            set
+            {
+                if ((this._fax != value))
+                {
+                    this.OnFaxChanging(value);
+                    this.RaiseDataMemberChanging("Fax");
+                    this.ValidateProperty("Fax", value);
+                    this._fax = value;
+                    this.RaiseDataMemberChanged("Fax");
+                    this.OnFaxChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'HomePage' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public string HomePage
+        {
+            get
+            {
+                return this._homePage;
+            }
+            set
+            {
+                if ((this._homePage != value))
+                {
+                    this.OnHomePageChanging(value);
+                    this.RaiseDataMemberChanging("HomePage");
+                    this.ValidateProperty("HomePage", value);
+                    this._homePage = value;
+                    this.RaiseDataMemberChanged("HomePage");
+                    this.OnHomePageChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Id' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'IsCustomer' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public bool IsCustomer
+        {
+            get
+            {
+                return this._isCustomer;
+            }
+            set
+            {
+                if ((this._isCustomer != value))
+                {
+                    this.OnIsCustomerChanging(value);
+                    this.RaiseDataMemberChanging("IsCustomer");
+                    this.ValidateProperty("IsCustomer", value);
+                    this._isCustomer = value;
+                    this.RaiseDataMemberChanged("IsCustomer");
+                    this.OnIsCustomerChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'IsEmployee' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public bool IsEmployee
+        {
+            get
+            {
+                return this._isEmployee;
+            }
+            set
+            {
+                if ((this._isEmployee != value))
+                {
+                    this.OnIsEmployeeChanging(value);
+                    this.RaiseDataMemberChanging("IsEmployee");
+                    this.ValidateProperty("IsEmployee", value);
+                    this._isEmployee = value;
+                    this.RaiseDataMemberChanged("IsEmployee");
+                    this.OnIsEmployeeChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'IsVendor' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public bool IsVendor
+        {
+            get
+            {
+                return this._isVendor;
+            }
+            set
+            {
+                if ((this._isVendor != value))
+                {
+                    this.OnIsVendorChanging(value);
+                    this.RaiseDataMemberChanging("IsVendor");
+                    this.ValidateProperty("IsVendor", value);
+                    this._isVendor = value;
+                    this.RaiseDataMemberChanged("IsVendor");
+                    this.OnIsVendorChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Mail' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public string Mail
+        {
+            get
+            {
+                return this._mail;
+            }
+            set
+            {
+                if ((this._mail != value))
+                {
+                    this.OnMailChanging(value);
+                    this.RaiseDataMemberChanging("Mail");
+                    this.ValidateProperty("Mail", value);
+                    this._mail = value;
+                    this.RaiseDataMemberChanged("Mail");
+                    this.OnMailChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Name' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                if ((this._name != value))
+                {
+                    this.OnNameChanging(value);
+                    this.RaiseDataMemberChanging("Name");
+                    this.ValidateProperty("Name", value);
+                    this._name = value;
+                    this.RaiseDataMemberChanged("Name");
+                    this.OnNameChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OrganizationId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid OrganizationId
+        {
+            get
+            {
+                return this._organizationId;
+            }
+            set
+            {
+                if ((this._organizationId != value))
+                {
+                    this.OnOrganizationIdChanging(value);
+                    this.RaiseDataMemberChanging("OrganizationId");
+                    this.ValidateProperty("OrganizationId", value);
+                    this._organizationId = value;
+                    this.RaiseDataMemberChanged("OrganizationId");
+                    this.OnOrganizationIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'PaymentTermId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid PaymentTermId
+        {
+            get
+            {
+                return this._paymentTermId;
+            }
+            set
+            {
+                if ((this._paymentTermId != value))
+                {
+                    this.OnPaymentTermIdChanging(value);
+                    this.RaiseDataMemberChanging("PaymentTermId");
+                    this.ValidateProperty("PaymentTermId", value);
+                    this._paymentTermId = value;
+                    this.RaiseDataMemberChanged("PaymentTermId");
+                    this.OnPaymentTermIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecCreated' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime RecCreated
+        {
+            get
+            {
+                return this._recCreated;
+            }
+            set
+            {
+                if ((this._recCreated != value))
+                {
+                    this.OnRecCreatedChanging(value);
+                    this.RaiseDataMemberChanging("RecCreated");
+                    this.ValidateProperty("RecCreated", value);
+                    this._recCreated = value;
+                    this.RaiseDataMemberChanged("RecCreated");
+                    this.OnRecCreatedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecCreatedBy' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid RecCreatedBy
+        {
+            get
+            {
+                return this._recCreatedBy;
+            }
+            set
+            {
+                if ((this._recCreatedBy != value))
+                {
+                    this.OnRecCreatedByChanging(value);
+                    this.RaiseDataMemberChanging("RecCreatedBy");
+                    this.ValidateProperty("RecCreatedBy", value);
+                    this._recCreatedBy = value;
+                    this.RaiseDataMemberChanged("RecCreatedBy");
+                    this.OnRecCreatedByChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecModified' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime RecModified
+        {
+            get
+            {
+                return this._recModified;
+            }
+            set
+            {
+                if ((this._recModified != value))
+                {
+                    this.OnRecModifiedChanging(value);
+                    this.RaiseDataMemberChanging("RecModified");
+                    this.ValidateProperty("RecModified", value);
+                    this._recModified = value;
+                    this.RaiseDataMemberChanged("RecModified");
+                    this.OnRecModifiedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecModifiedBy' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid RecModifiedBy
+        {
+            get
+            {
+                return this._recModifiedBy;
+            }
+            set
+            {
+                if ((this._recModifiedBy != value))
+                {
+                    this.OnRecModifiedByChanging(value);
+                    this.RaiseDataMemberChanging("RecModifiedBy");
+                    this.ValidateProperty("RecModifiedBy", value);
+                    this._recModifiedBy = value;
+                    this.RaiseDataMemberChanged("RecModifiedBy");
+                    this.OnRecModifiedByChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Status' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public byte Status
+        {
+            get
+            {
+                return this._status;
+            }
+            set
+            {
+                if ((this._status != value))
+                {
+                    this.OnStatusChanging(value);
+                    this.RaiseDataMemberChanging("Status");
+                    this.ValidateProperty("Status", value);
+                    this._status = value;
+                    this.RaiseDataMemberChanged("Status");
+                    this.OnStatusChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Telephone' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public string Telephone
+        {
+            get
+            {
+                return this._telephone;
+            }
+            set
+            {
+                if ((this._telephone != value))
+                {
+                    this.OnTelephoneChanging(value);
+                    this.RaiseDataMemberChanging("Telephone");
+                    this.ValidateProperty("Telephone", value);
+                    this._telephone = value;
+                    this.RaiseDataMemberChanged("Telephone");
+                    this.OnTelephoneChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'VatCode' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public string VatCode
+        {
+            get
+            {
+                return this._vatCode;
+            }
+            set
+            {
+                if ((this._vatCode != value))
+                {
+                    this.OnVatCodeChanging(value);
+                    this.RaiseDataMemberChanging("VatCode");
+                    this.ValidateProperty("VatCode", value);
+                    this._vatCode = value;
+                    this.RaiseDataMemberChanged("VatCode");
+                    this.OnVatCodeChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'VendorAccountId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid VendorAccountId
+        {
+            get
+            {
+                return this._vendorAccountId;
+            }
+            set
+            {
+                if ((this._vendorAccountId != value))
+                {
+                    this.OnVendorAccountIdChanging(value);
+                    this.RaiseDataMemberChanging("VendorAccountId");
+                    this.ValidateProperty("VendorAccountId", value);
+                    this._vendorAccountId = value;
+                    this.RaiseDataMemberChanged("VendorAccountId");
+                    this.OnVendorAccountIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Version' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                if ((this._version != value))
+                {
+                    this.OnVersionChanging(value);
+                    this.RaiseDataMemberChanging("Version");
+                    this.ValidateProperty("Version", value);
+                    this._version = value;
+                    this.RaiseDataMemberChanged("Version");
+                    this.OnVersionChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+    
+    /// <summary>
+    /// The 'BusinessPartnerGroup' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class BusinessPartnerGroup : Entity
     {
         
         private Guid _clientId;
         
+        private string _code;
+        
         private Guid _id;
+        
+        private short _level;
+        
+        private string _name;
         
         private string[] _openAccessGenerated;
         
@@ -417,13 +1779,13 @@ namespace MyERP.DataAccess
         
         private DateTime _recCreated;
         
-        private Guid _recCreatedById;
+        private Guid _recCreatedBy;
         
         private DateTime _recModified;
         
-        private Guid _recModifiedById;
+        private Guid _recModifiedBy;
         
-        private int _type;
+        private byte _status;
         
         private long _version;
         
@@ -436,22 +1798,28 @@ namespace MyERP.DataAccess
         partial void OnCreated();
         partial void OnClientIdChanging(Guid value);
         partial void OnClientIdChanged();
+        partial void OnCodeChanging(string value);
+        partial void OnCodeChanged();
         partial void OnIdChanging(Guid value);
         partial void OnIdChanged();
+        partial void OnLevelChanging(short value);
+        partial void OnLevelChanged();
+        partial void OnNameChanging(string value);
+        partial void OnNameChanged();
         partial void OnOpenAccessGeneratedChanging(string[] value);
         partial void OnOpenAccessGeneratedChanged();
         partial void OnOrganizationIdChanging(Guid value);
         partial void OnOrganizationIdChanged();
         partial void OnRecCreatedChanging(DateTime value);
         partial void OnRecCreatedChanged();
-        partial void OnRecCreatedByIdChanging(Guid value);
-        partial void OnRecCreatedByIdChanged();
+        partial void OnRecCreatedByChanging(Guid value);
+        partial void OnRecCreatedByChanged();
         partial void OnRecModifiedChanging(DateTime value);
         partial void OnRecModifiedChanged();
-        partial void OnRecModifiedByIdChanging(Guid value);
-        partial void OnRecModifiedByIdChanged();
-        partial void OnTypeChanging(int value);
-        partial void OnTypeChanged();
+        partial void OnRecModifiedByChanging(Guid value);
+        partial void OnRecModifiedByChanged();
+        partial void OnStatusChanging(byte value);
+        partial void OnStatusChanged();
         partial void OnVersionChanging(long value);
         partial void OnVersionChanged();
 
@@ -459,9 +1827,9 @@ namespace MyERP.DataAccess
         
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseObject"/> class.
+        /// Initializes a new instance of the <see cref="BusinessPartnerGroup"/> class.
         /// </summary>
-        protected BaseObject()
+        public BusinessPartnerGroup()
         {
             this.OnCreated();
         }
@@ -492,6 +1860,31 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'Code' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public string Code
+        {
+            get
+            {
+                return this._code;
+            }
+            set
+            {
+                if ((this._code != value))
+                {
+                    this.OnCodeChanging(value);
+                    this.RaiseDataMemberChanging("Code");
+                    this.ValidateProperty("Code", value);
+                    this._code = value;
+                    this.RaiseDataMemberChanged("Code");
+                    this.OnCodeChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Id' value.
         /// </summary>
         [DataMember()]
@@ -513,6 +1906,56 @@ namespace MyERP.DataAccess
                     this._id = value;
                     this.RaisePropertyChanged("Id");
                     this.OnIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Level' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public short Level
+        {
+            get
+            {
+                return this._level;
+            }
+            set
+            {
+                if ((this._level != value))
+                {
+                    this.OnLevelChanging(value);
+                    this.RaiseDataMemberChanging("Level");
+                    this.ValidateProperty("Level", value);
+                    this._level = value;
+                    this.RaiseDataMemberChanged("Level");
+                    this.OnLevelChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Name' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                if ((this._name != value))
+                {
+                    this.OnNameChanging(value);
+                    this.RaiseDataMemberChanging("Name");
+                    this.ValidateProperty("Name", value);
+                    this._name = value;
+                    this.RaiseDataMemberChanged("Name");
+                    this.OnNameChanged();
                 }
             }
         }
@@ -595,26 +2038,26 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
-        /// Gets or sets the 'RecCreatedById' value.
+        /// Gets or sets the 'RecCreatedBy' value.
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public Guid RecCreatedById
+        public Guid RecCreatedBy
         {
             get
             {
-                return this._recCreatedById;
+                return this._recCreatedBy;
             }
             set
             {
-                if ((this._recCreatedById != value))
+                if ((this._recCreatedBy != value))
                 {
-                    this.OnRecCreatedByIdChanging(value);
-                    this.RaiseDataMemberChanging("RecCreatedById");
-                    this.ValidateProperty("RecCreatedById", value);
-                    this._recCreatedById = value;
-                    this.RaiseDataMemberChanged("RecCreatedById");
-                    this.OnRecCreatedByIdChanged();
+                    this.OnRecCreatedByChanging(value);
+                    this.RaiseDataMemberChanging("RecCreatedBy");
+                    this.ValidateProperty("RecCreatedBy", value);
+                    this._recCreatedBy = value;
+                    this.RaiseDataMemberChanged("RecCreatedBy");
+                    this.OnRecCreatedByChanged();
                 }
             }
         }
@@ -645,51 +2088,51 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
-        /// Gets or sets the 'RecModifiedById' value.
+        /// Gets or sets the 'RecModifiedBy' value.
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public Guid RecModifiedById
+        public Guid RecModifiedBy
         {
             get
             {
-                return this._recModifiedById;
+                return this._recModifiedBy;
             }
             set
             {
-                if ((this._recModifiedById != value))
+                if ((this._recModifiedBy != value))
                 {
-                    this.OnRecModifiedByIdChanging(value);
-                    this.RaiseDataMemberChanging("RecModifiedById");
-                    this.ValidateProperty("RecModifiedById", value);
-                    this._recModifiedById = value;
-                    this.RaiseDataMemberChanged("RecModifiedById");
-                    this.OnRecModifiedByIdChanged();
+                    this.OnRecModifiedByChanging(value);
+                    this.RaiseDataMemberChanging("RecModifiedBy");
+                    this.ValidateProperty("RecModifiedBy", value);
+                    this._recModifiedBy = value;
+                    this.RaiseDataMemberChanged("RecModifiedBy");
+                    this.OnRecModifiedByChanged();
                 }
             }
         }
         
         /// <summary>
-        /// Gets or sets the 'Type' value.
+        /// Gets or sets the 'Status' value.
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public int Type
+        public byte Status
         {
             get
             {
-                return this._type;
+                return this._status;
             }
             set
             {
-                if ((this._type != value))
+                if ((this._status != value))
                 {
-                    this.OnTypeChanging(value);
-                    this.RaiseDataMemberChanging("Type");
-                    this.ValidateProperty("Type", value);
-                    this._type = value;
-                    this.RaiseDataMemberChanged("Type");
-                    this.OnTypeChanged();
+                    this.OnStatusChanging(value);
+                    this.RaiseDataMemberChanging("Status");
+                    this.ValidateProperty("Status", value);
+                    this._status = value;
+                    this.RaiseDataMemberChanged("Status");
+                    this.OnStatusChanged();
                 }
             }
         }
@@ -731,877 +2174,13 @@ namespace MyERP.DataAccess
     }
     
     /// <summary>
-    /// The 'BusinessPartner' entity class.
-    /// </summary>
-    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
-    public sealed partial class BusinessPartner : BaseObject
-    {
-        
-        private string _address;
-        
-        private decimal _amountLimit;
-        
-        private Guid _businessPartnerGroupId1;
-        
-        private Guid _businessPartnerGroupId2;
-        
-        private Guid _businessPartnerGroupId3;
-        
-        private string _code;
-        
-        private string _comment;
-        
-        private string _contactName;
-        
-        private decimal _creditLimit;
-        
-        private Guid _customerAccountId;
-        
-        private Guid _employeeAccountId;
-        
-        private string _fax;
-        
-        private string _homePage;
-        
-        private bool _isCustomer;
-        
-        private bool _isEmployee;
-        
-        private bool _isVendor;
-        
-        private string _mail;
-        
-        private string _name;
-        
-        private Guid _paymentTermId;
-        
-        private byte _status;
-        
-        private string _telephone;
-        
-        private string _vatCode;
-        
-        private Guid _vendorAccountId;
-        
-        #region Extensibility Method Definitions
-
-        /// <summary>
-        /// This method is invoked from the constructor once initialization is complete and
-        /// can be used for further object setup.
-        /// </summary>
-        partial void OnCreated();
-        partial void OnAddressChanging(string value);
-        partial void OnAddressChanged();
-        partial void OnAmountLimitChanging(decimal value);
-        partial void OnAmountLimitChanged();
-        partial void OnBusinessPartnerGroupId1Changing(Guid value);
-        partial void OnBusinessPartnerGroupId1Changed();
-        partial void OnBusinessPartnerGroupId2Changing(Guid value);
-        partial void OnBusinessPartnerGroupId2Changed();
-        partial void OnBusinessPartnerGroupId3Changing(Guid value);
-        partial void OnBusinessPartnerGroupId3Changed();
-        partial void OnCodeChanging(string value);
-        partial void OnCodeChanged();
-        partial void OnCommentChanging(string value);
-        partial void OnCommentChanged();
-        partial void OnContactNameChanging(string value);
-        partial void OnContactNameChanged();
-        partial void OnCreditLimitChanging(decimal value);
-        partial void OnCreditLimitChanged();
-        partial void OnCustomerAccountIdChanging(Guid value);
-        partial void OnCustomerAccountIdChanged();
-        partial void OnEmployeeAccountIdChanging(Guid value);
-        partial void OnEmployeeAccountIdChanged();
-        partial void OnFaxChanging(string value);
-        partial void OnFaxChanged();
-        partial void OnHomePageChanging(string value);
-        partial void OnHomePageChanged();
-        partial void OnIsCustomerChanging(bool value);
-        partial void OnIsCustomerChanged();
-        partial void OnIsEmployeeChanging(bool value);
-        partial void OnIsEmployeeChanged();
-        partial void OnIsVendorChanging(bool value);
-        partial void OnIsVendorChanged();
-        partial void OnMailChanging(string value);
-        partial void OnMailChanged();
-        partial void OnNameChanging(string value);
-        partial void OnNameChanged();
-        partial void OnPaymentTermIdChanging(Guid value);
-        partial void OnPaymentTermIdChanged();
-        partial void OnStatusChanging(byte value);
-        partial void OnStatusChanged();
-        partial void OnTelephoneChanging(string value);
-        partial void OnTelephoneChanged();
-        partial void OnVatCodeChanging(string value);
-        partial void OnVatCodeChanged();
-        partial void OnVendorAccountIdChanging(Guid value);
-        partial void OnVendorAccountIdChanged();
-
-        #endregion
-        
-        
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BusinessPartner"/> class.
-        /// </summary>
-        public BusinessPartner()
-        {
-            this.OnCreated();
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'Address' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public string Address
-        {
-            get
-            {
-                return this._address;
-            }
-            set
-            {
-                if ((this._address != value))
-                {
-                    this.OnAddressChanging(value);
-                    this.RaiseDataMemberChanging("Address");
-                    this.ValidateProperty("Address", value);
-                    this._address = value;
-                    this.RaiseDataMemberChanged("Address");
-                    this.OnAddressChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'AmountLimit' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public decimal AmountLimit
-        {
-            get
-            {
-                return this._amountLimit;
-            }
-            set
-            {
-                if ((this._amountLimit != value))
-                {
-                    this.OnAmountLimitChanging(value);
-                    this.RaiseDataMemberChanging("AmountLimit");
-                    this.ValidateProperty("AmountLimit", value);
-                    this._amountLimit = value;
-                    this.RaiseDataMemberChanged("AmountLimit");
-                    this.OnAmountLimitChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'BusinessPartnerGroupId1' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public Guid BusinessPartnerGroupId1
-        {
-            get
-            {
-                return this._businessPartnerGroupId1;
-            }
-            set
-            {
-                if ((this._businessPartnerGroupId1 != value))
-                {
-                    this.OnBusinessPartnerGroupId1Changing(value);
-                    this.RaiseDataMemberChanging("BusinessPartnerGroupId1");
-                    this.ValidateProperty("BusinessPartnerGroupId1", value);
-                    this._businessPartnerGroupId1 = value;
-                    this.RaiseDataMemberChanged("BusinessPartnerGroupId1");
-                    this.OnBusinessPartnerGroupId1Changed();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'BusinessPartnerGroupId2' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public Guid BusinessPartnerGroupId2
-        {
-            get
-            {
-                return this._businessPartnerGroupId2;
-            }
-            set
-            {
-                if ((this._businessPartnerGroupId2 != value))
-                {
-                    this.OnBusinessPartnerGroupId2Changing(value);
-                    this.RaiseDataMemberChanging("BusinessPartnerGroupId2");
-                    this.ValidateProperty("BusinessPartnerGroupId2", value);
-                    this._businessPartnerGroupId2 = value;
-                    this.RaiseDataMemberChanged("BusinessPartnerGroupId2");
-                    this.OnBusinessPartnerGroupId2Changed();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'BusinessPartnerGroupId3' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public Guid BusinessPartnerGroupId3
-        {
-            get
-            {
-                return this._businessPartnerGroupId3;
-            }
-            set
-            {
-                if ((this._businessPartnerGroupId3 != value))
-                {
-                    this.OnBusinessPartnerGroupId3Changing(value);
-                    this.RaiseDataMemberChanging("BusinessPartnerGroupId3");
-                    this.ValidateProperty("BusinessPartnerGroupId3", value);
-                    this._businessPartnerGroupId3 = value;
-                    this.RaiseDataMemberChanged("BusinessPartnerGroupId3");
-                    this.OnBusinessPartnerGroupId3Changed();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'Code' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public string Code
-        {
-            get
-            {
-                return this._code;
-            }
-            set
-            {
-                if ((this._code != value))
-                {
-                    this.OnCodeChanging(value);
-                    this.RaiseDataMemberChanging("Code");
-                    this.ValidateProperty("Code", value);
-                    this._code = value;
-                    this.RaiseDataMemberChanged("Code");
-                    this.OnCodeChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'Comment' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public string Comment
-        {
-            get
-            {
-                return this._comment;
-            }
-            set
-            {
-                if ((this._comment != value))
-                {
-                    this.OnCommentChanging(value);
-                    this.RaiseDataMemberChanging("Comment");
-                    this.ValidateProperty("Comment", value);
-                    this._comment = value;
-                    this.RaiseDataMemberChanged("Comment");
-                    this.OnCommentChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'ContactName' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public string ContactName
-        {
-            get
-            {
-                return this._contactName;
-            }
-            set
-            {
-                if ((this._contactName != value))
-                {
-                    this.OnContactNameChanging(value);
-                    this.RaiseDataMemberChanging("ContactName");
-                    this.ValidateProperty("ContactName", value);
-                    this._contactName = value;
-                    this.RaiseDataMemberChanged("ContactName");
-                    this.OnContactNameChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'CreditLimit' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public decimal CreditLimit
-        {
-            get
-            {
-                return this._creditLimit;
-            }
-            set
-            {
-                if ((this._creditLimit != value))
-                {
-                    this.OnCreditLimitChanging(value);
-                    this.RaiseDataMemberChanging("CreditLimit");
-                    this.ValidateProperty("CreditLimit", value);
-                    this._creditLimit = value;
-                    this.RaiseDataMemberChanged("CreditLimit");
-                    this.OnCreditLimitChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'CustomerAccountId' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public Guid CustomerAccountId
-        {
-            get
-            {
-                return this._customerAccountId;
-            }
-            set
-            {
-                if ((this._customerAccountId != value))
-                {
-                    this.OnCustomerAccountIdChanging(value);
-                    this.RaiseDataMemberChanging("CustomerAccountId");
-                    this.ValidateProperty("CustomerAccountId", value);
-                    this._customerAccountId = value;
-                    this.RaiseDataMemberChanged("CustomerAccountId");
-                    this.OnCustomerAccountIdChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'EmployeeAccountId' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public Guid EmployeeAccountId
-        {
-            get
-            {
-                return this._employeeAccountId;
-            }
-            set
-            {
-                if ((this._employeeAccountId != value))
-                {
-                    this.OnEmployeeAccountIdChanging(value);
-                    this.RaiseDataMemberChanging("EmployeeAccountId");
-                    this.ValidateProperty("EmployeeAccountId", value);
-                    this._employeeAccountId = value;
-                    this.RaiseDataMemberChanged("EmployeeAccountId");
-                    this.OnEmployeeAccountIdChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'Fax' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public string Fax
-        {
-            get
-            {
-                return this._fax;
-            }
-            set
-            {
-                if ((this._fax != value))
-                {
-                    this.OnFaxChanging(value);
-                    this.RaiseDataMemberChanging("Fax");
-                    this.ValidateProperty("Fax", value);
-                    this._fax = value;
-                    this.RaiseDataMemberChanged("Fax");
-                    this.OnFaxChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'HomePage' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public string HomePage
-        {
-            get
-            {
-                return this._homePage;
-            }
-            set
-            {
-                if ((this._homePage != value))
-                {
-                    this.OnHomePageChanging(value);
-                    this.RaiseDataMemberChanging("HomePage");
-                    this.ValidateProperty("HomePage", value);
-                    this._homePage = value;
-                    this.RaiseDataMemberChanged("HomePage");
-                    this.OnHomePageChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'IsCustomer' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public bool IsCustomer
-        {
-            get
-            {
-                return this._isCustomer;
-            }
-            set
-            {
-                if ((this._isCustomer != value))
-                {
-                    this.OnIsCustomerChanging(value);
-                    this.RaiseDataMemberChanging("IsCustomer");
-                    this.ValidateProperty("IsCustomer", value);
-                    this._isCustomer = value;
-                    this.RaiseDataMemberChanged("IsCustomer");
-                    this.OnIsCustomerChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'IsEmployee' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public bool IsEmployee
-        {
-            get
-            {
-                return this._isEmployee;
-            }
-            set
-            {
-                if ((this._isEmployee != value))
-                {
-                    this.OnIsEmployeeChanging(value);
-                    this.RaiseDataMemberChanging("IsEmployee");
-                    this.ValidateProperty("IsEmployee", value);
-                    this._isEmployee = value;
-                    this.RaiseDataMemberChanged("IsEmployee");
-                    this.OnIsEmployeeChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'IsVendor' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public bool IsVendor
-        {
-            get
-            {
-                return this._isVendor;
-            }
-            set
-            {
-                if ((this._isVendor != value))
-                {
-                    this.OnIsVendorChanging(value);
-                    this.RaiseDataMemberChanging("IsVendor");
-                    this.ValidateProperty("IsVendor", value);
-                    this._isVendor = value;
-                    this.RaiseDataMemberChanged("IsVendor");
-                    this.OnIsVendorChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'Mail' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public string Mail
-        {
-            get
-            {
-                return this._mail;
-            }
-            set
-            {
-                if ((this._mail != value))
-                {
-                    this.OnMailChanging(value);
-                    this.RaiseDataMemberChanging("Mail");
-                    this.ValidateProperty("Mail", value);
-                    this._mail = value;
-                    this.RaiseDataMemberChanged("Mail");
-                    this.OnMailChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'Name' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                if ((this._name != value))
-                {
-                    this.OnNameChanging(value);
-                    this.RaiseDataMemberChanging("Name");
-                    this.ValidateProperty("Name", value);
-                    this._name = value;
-                    this.RaiseDataMemberChanged("Name");
-                    this.OnNameChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'PaymentTermId' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public Guid PaymentTermId
-        {
-            get
-            {
-                return this._paymentTermId;
-            }
-            set
-            {
-                if ((this._paymentTermId != value))
-                {
-                    this.OnPaymentTermIdChanging(value);
-                    this.RaiseDataMemberChanging("PaymentTermId");
-                    this.ValidateProperty("PaymentTermId", value);
-                    this._paymentTermId = value;
-                    this.RaiseDataMemberChanged("PaymentTermId");
-                    this.OnPaymentTermIdChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'Status' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public byte Status
-        {
-            get
-            {
-                return this._status;
-            }
-            set
-            {
-                if ((this._status != value))
-                {
-                    this.OnStatusChanging(value);
-                    this.RaiseDataMemberChanging("Status");
-                    this.ValidateProperty("Status", value);
-                    this._status = value;
-                    this.RaiseDataMemberChanged("Status");
-                    this.OnStatusChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'Telephone' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public string Telephone
-        {
-            get
-            {
-                return this._telephone;
-            }
-            set
-            {
-                if ((this._telephone != value))
-                {
-                    this.OnTelephoneChanging(value);
-                    this.RaiseDataMemberChanging("Telephone");
-                    this.ValidateProperty("Telephone", value);
-                    this._telephone = value;
-                    this.RaiseDataMemberChanged("Telephone");
-                    this.OnTelephoneChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'VatCode' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public string VatCode
-        {
-            get
-            {
-                return this._vatCode;
-            }
-            set
-            {
-                if ((this._vatCode != value))
-                {
-                    this.OnVatCodeChanging(value);
-                    this.RaiseDataMemberChanging("VatCode");
-                    this.ValidateProperty("VatCode", value);
-                    this._vatCode = value;
-                    this.RaiseDataMemberChanged("VatCode");
-                    this.OnVatCodeChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'VendorAccountId' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public Guid VendorAccountId
-        {
-            get
-            {
-                return this._vendorAccountId;
-            }
-            set
-            {
-                if ((this._vendorAccountId != value))
-                {
-                    this.OnVendorAccountIdChanging(value);
-                    this.RaiseDataMemberChanging("VendorAccountId");
-                    this.ValidateProperty("VendorAccountId", value);
-                    this._vendorAccountId = value;
-                    this.RaiseDataMemberChanged("VendorAccountId");
-                    this.OnVendorAccountIdChanged();
-                }
-            }
-        }
-    }
-    
-    /// <summary>
-    /// The 'BusinessPartnerGroup' entity class.
-    /// </summary>
-    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
-    public sealed partial class BusinessPartnerGroup : BaseObject
-    {
-        
-        private string _code;
-        
-        private short _level;
-        
-        private string _name;
-        
-        private byte _status;
-        
-        #region Extensibility Method Definitions
-
-        /// <summary>
-        /// This method is invoked from the constructor once initialization is complete and
-        /// can be used for further object setup.
-        /// </summary>
-        partial void OnCreated();
-        partial void OnCodeChanging(string value);
-        partial void OnCodeChanged();
-        partial void OnLevelChanging(short value);
-        partial void OnLevelChanged();
-        partial void OnNameChanging(string value);
-        partial void OnNameChanged();
-        partial void OnStatusChanging(byte value);
-        partial void OnStatusChanged();
-
-        #endregion
-        
-        
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BusinessPartnerGroup"/> class.
-        /// </summary>
-        public BusinessPartnerGroup()
-        {
-            this.OnCreated();
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'Code' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public string Code
-        {
-            get
-            {
-                return this._code;
-            }
-            set
-            {
-                if ((this._code != value))
-                {
-                    this.OnCodeChanging(value);
-                    this.RaiseDataMemberChanging("Code");
-                    this.ValidateProperty("Code", value);
-                    this._code = value;
-                    this.RaiseDataMemberChanged("Code");
-                    this.OnCodeChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'Level' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public short Level
-        {
-            get
-            {
-                return this._level;
-            }
-            set
-            {
-                if ((this._level != value))
-                {
-                    this.OnLevelChanging(value);
-                    this.RaiseDataMemberChanging("Level");
-                    this.ValidateProperty("Level", value);
-                    this._level = value;
-                    this.RaiseDataMemberChanged("Level");
-                    this.OnLevelChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'Name' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                if ((this._name != value))
-                {
-                    this.OnNameChanging(value);
-                    this.RaiseDataMemberChanging("Name");
-                    this.ValidateProperty("Name", value);
-                    this._name = value;
-                    this.RaiseDataMemberChanged("Name");
-                    this.OnNameChanged();
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'Status' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public byte Status
-        {
-            get
-            {
-                return this._status;
-            }
-            set
-            {
-                if ((this._status != value))
-                {
-                    this.OnStatusChanging(value);
-                    this.RaiseDataMemberChanging("Status");
-                    this.ValidateProperty("Status", value);
-                    this._status = value;
-                    this.RaiseDataMemberChanged("Status");
-                    this.OnStatusChanged();
-                }
-            }
-        }
-    }
-    
-    /// <summary>
     /// The 'Client' entity class.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
     public sealed partial class Client : Entity
     {
         
-        private Guid _clientId;
+        private Guid _id;
         
         private bool _isActivated;
         
@@ -1622,8 +2201,8 @@ namespace MyERP.DataAccess
         /// can be used for further object setup.
         /// </summary>
         partial void OnCreated();
-        partial void OnClientIdChanging(Guid value);
-        partial void OnClientIdChanged();
+        partial void OnIdChanging(Guid value);
+        partial void OnIdChanged();
         partial void OnIsActivatedChanging(bool value);
         partial void OnIsActivatedChanged();
         partial void OnNameChanging(string value);
@@ -1649,27 +2228,27 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
-        /// Gets or sets the 'ClientId' value.
+        /// Gets or sets the 'Id' value.
         /// </summary>
         [DataMember()]
         [Editable(false, AllowInitialValue=true)]
         [Key()]
         [RoundtripOriginal()]
-        public Guid ClientId
+        public Guid Id
         {
             get
             {
-                return this._clientId;
+                return this._id;
             }
             set
             {
-                if ((this._clientId != value))
+                if ((this._id != value))
                 {
-                    this.OnClientIdChanging(value);
-                    this.ValidateProperty("ClientId", value);
-                    this._clientId = value;
-                    this.RaisePropertyChanged("ClientId");
-                    this.OnClientIdChanged();
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
                 }
             }
         }
@@ -1833,7 +2412,7 @@ namespace MyERP.DataAccess
         /// <returns>An object instance that uniquely identifies this entity instance.</returns>
         public override object GetIdentity()
         {
-            return this._clientId;
+            return this._id;
         }
     }
     
@@ -1841,16 +2420,42 @@ namespace MyERP.DataAccess
     /// The 'Currency' entity class.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
-    public sealed partial class Currency : BaseObject
+    public sealed partial class Currency : Entity
     {
+        
+        private EntityRef<Client> _client;
+        
+        private Guid _clientId;
         
         private string _code;
         
+        private Guid _id;
+        
         private string _name;
+        
+        private string[] _openAccessGenerated;
+        
+        private EntityRef<Organization> _organization;
+        
+        private Guid _organizationId;
+        
+        private DateTime _recCreated;
+        
+        private Guid _recCreatedById;
+        
+        private EntityRef<User> _recCreatedByUser;
+        
+        private DateTime _recModified;
+        
+        private Guid _recModifiedById;
+        
+        private EntityRef<User> _recModifiedByUser;
         
         private byte _status;
         
         private CurrencyStatusType _statusType;
+        
+        private long _version;
         
         #region Extensibility Method Definitions
 
@@ -1859,14 +2464,32 @@ namespace MyERP.DataAccess
         /// can be used for further object setup.
         /// </summary>
         partial void OnCreated();
+        partial void OnClientIdChanging(Guid value);
+        partial void OnClientIdChanged();
         partial void OnCodeChanging(string value);
         partial void OnCodeChanged();
+        partial void OnIdChanging(Guid value);
+        partial void OnIdChanged();
         partial void OnNameChanging(string value);
         partial void OnNameChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnOrganizationIdChanging(Guid value);
+        partial void OnOrganizationIdChanged();
+        partial void OnRecCreatedChanging(DateTime value);
+        partial void OnRecCreatedChanged();
+        partial void OnRecCreatedByIdChanging(Guid value);
+        partial void OnRecCreatedByIdChanged();
+        partial void OnRecModifiedChanging(DateTime value);
+        partial void OnRecModifiedChanged();
+        partial void OnRecModifiedByIdChanging(Guid value);
+        partial void OnRecModifiedByIdChanged();
         partial void OnStatusChanging(byte value);
         partial void OnStatusChanged();
         partial void OnStatusTypeChanging(CurrencyStatusType value);
         partial void OnStatusTypeChanged();
+        partial void OnVersionChanging(long value);
+        partial void OnVersionChanged();
 
         #endregion
         
@@ -1880,9 +2503,59 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the associated <see cref="Client"/> entity.
+        /// </summary>
+        [Association("Currency-client-association", "ClientId", "Id")]
+        public Client Client
+        {
+            get
+            {
+                if ((this._client == null))
+                {
+                    this._client = new EntityRef<Client>(this, "Client", this.FilterClient);
+                }
+                return this._client.Entity;
+            }
+            set
+            {
+                Client previous = this.Client;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Client", value);
+                    this._client.Entity = value;
+                    this.RaisePropertyChanged("Client");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'ClientId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid ClientId
+        {
+            get
+            {
+                return this._clientId;
+            }
+            set
+            {
+                if ((this._clientId != value))
+                {
+                    this.OnClientIdChanging(value);
+                    this.RaiseDataMemberChanging("ClientId");
+                    this.ValidateProperty("ClientId", value);
+                    this._clientId = value;
+                    this.RaiseDataMemberChanged("ClientId");
+                    this.OnClientIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Code' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string Code
@@ -1906,9 +2579,34 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'Id' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Name' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string Name
@@ -1932,9 +2630,238 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="Organization"/> entity.
+        /// </summary>
+        [Association("Currency-organization-association", "OrganizationId", "Id")]
+        public Organization Organization
+        {
+            get
+            {
+                if ((this._organization == null))
+                {
+                    this._organization = new EntityRef<Organization>(this, "Organization", this.FilterOrganization);
+                }
+                return this._organization.Entity;
+            }
+            set
+            {
+                Organization previous = this.Organization;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Organization", value);
+                    this._organization.Entity = value;
+                    this.RaisePropertyChanged("Organization");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OrganizationId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid OrganizationId
+        {
+            get
+            {
+                return this._organizationId;
+            }
+            set
+            {
+                if ((this._organizationId != value))
+                {
+                    this.OnOrganizationIdChanging(value);
+                    this.RaiseDataMemberChanging("OrganizationId");
+                    this.ValidateProperty("OrganizationId", value);
+                    this._organizationId = value;
+                    this.RaiseDataMemberChanged("OrganizationId");
+                    this.OnOrganizationIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecCreated' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime RecCreated
+        {
+            get
+            {
+                return this._recCreated;
+            }
+            set
+            {
+                if ((this._recCreated != value))
+                {
+                    this.OnRecCreatedChanging(value);
+                    this.RaiseDataMemberChanging("RecCreated");
+                    this.ValidateProperty("RecCreated", value);
+                    this._recCreated = value;
+                    this.RaiseDataMemberChanged("RecCreated");
+                    this.OnRecCreatedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecCreatedById' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid RecCreatedById
+        {
+            get
+            {
+                return this._recCreatedById;
+            }
+            set
+            {
+                if ((this._recCreatedById != value))
+                {
+                    this.OnRecCreatedByIdChanging(value);
+                    this.RaiseDataMemberChanging("RecCreatedById");
+                    this.ValidateProperty("RecCreatedById", value);
+                    this._recCreatedById = value;
+                    this.RaiseDataMemberChanged("RecCreatedById");
+                    this.OnRecCreatedByIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="User"/> entity.
+        /// </summary>
+        [Association("Account-user-created-association", "RecCreatedById", "Id")]
+        public User RecCreatedByUser
+        {
+            get
+            {
+                if ((this._recCreatedByUser == null))
+                {
+                    this._recCreatedByUser = new EntityRef<User>(this, "RecCreatedByUser", this.FilterRecCreatedByUser);
+                }
+                return this._recCreatedByUser.Entity;
+            }
+            set
+            {
+                User previous = this.RecCreatedByUser;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("RecCreatedByUser", value);
+                    this._recCreatedByUser.Entity = value;
+                    this.RaisePropertyChanged("RecCreatedByUser");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecModified' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime RecModified
+        {
+            get
+            {
+                return this._recModified;
+            }
+            set
+            {
+                if ((this._recModified != value))
+                {
+                    this.OnRecModifiedChanging(value);
+                    this.RaiseDataMemberChanging("RecModified");
+                    this.ValidateProperty("RecModified", value);
+                    this._recModified = value;
+                    this.RaiseDataMemberChanged("RecModified");
+                    this.OnRecModifiedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecModifiedById' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid RecModifiedById
+        {
+            get
+            {
+                return this._recModifiedById;
+            }
+            set
+            {
+                if ((this._recModifiedById != value))
+                {
+                    this.OnRecModifiedByIdChanging(value);
+                    this.RaiseDataMemberChanging("RecModifiedById");
+                    this.ValidateProperty("RecModifiedById", value);
+                    this._recModifiedById = value;
+                    this.RaiseDataMemberChanged("RecModifiedById");
+                    this.OnRecModifiedByIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="User"/> entity.
+        /// </summary>
+        [Association("Account-user-modified-association", "RecModifiedById", "Id")]
+        public User RecModifiedByUser
+        {
+            get
+            {
+                if ((this._recModifiedByUser == null))
+                {
+                    this._recModifiedByUser = new EntityRef<User>(this, "RecModifiedByUser", this.FilterRecModifiedByUser);
+                }
+                return this._recModifiedByUser.Entity;
+            }
+            set
+            {
+                User previous = this.RecModifiedByUser;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("RecModifiedByUser", value);
+                    this._recModifiedByUser.Entity = value;
+                    this.RaisePropertyChanged("RecModifiedByUser");
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Status' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public byte Status
@@ -1980,6 +2907,61 @@ namespace MyERP.DataAccess
                 }
             }
         }
+        
+        /// <summary>
+        /// Gets or sets the 'Version' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                if ((this._version != value))
+                {
+                    this.OnVersionChanging(value);
+                    this.RaiseDataMemberChanging("Version");
+                    this.ValidateProperty("Version", value);
+                    this._version = value;
+                    this.RaiseDataMemberChanged("Version");
+                    this.OnVersionChanged();
+                }
+            }
+        }
+        
+        private bool FilterClient(Client entity)
+        {
+            return (entity.Id == this.ClientId);
+        }
+        
+        private bool FilterOrganization(Organization entity)
+        {
+            return (entity.Id == this.OrganizationId);
+        }
+        
+        private bool FilterRecCreatedByUser(User entity)
+        {
+            return (entity.Id == this.RecCreatedById);
+        }
+        
+        private bool FilterRecModifiedByUser(User entity)
+        {
+            return (entity.Id == this.RecModifiedById);
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
     }
     
     public enum CurrencyStatusType
@@ -2021,8 +3003,10 @@ namespace MyERP.DataAccess
     /// The 'GeneralJournalDocument' entity class.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
-    public sealed partial class GeneralJournalDocument : BaseObject
+    public sealed partial class GeneralJournalDocument : Entity
     {
+        
+        private Guid _clientId;
         
         private int _currencyExchangeRate;
         
@@ -2038,7 +3022,21 @@ namespace MyERP.DataAccess
         
         private string _documentType;
         
+        private Guid _id;
+        
         private Guid _noSeriesId;
+        
+        private string[] _openAccessGenerated;
+        
+        private Guid _organizaionId;
+        
+        private DateTime _recCreated;
+        
+        private Guid _recCreatedBy;
+        
+        private DateTime _recModified;
+        
+        private Guid _recModifiedBy;
         
         private int _status;
         
@@ -2052,6 +3050,8 @@ namespace MyERP.DataAccess
         
         private int _transactionType;
         
+        private long _version;
+        
         #region Extensibility Method Definitions
 
         /// <summary>
@@ -2059,6 +3059,8 @@ namespace MyERP.DataAccess
         /// can be used for further object setup.
         /// </summary>
         partial void OnCreated();
+        partial void OnClientIdChanging(Guid value);
+        partial void OnClientIdChanged();
         partial void OnCurrencyExchangeRateChanging(int value);
         partial void OnCurrencyExchangeRateChanged();
         partial void OnCurrencyIdChanging(Guid value);
@@ -2073,8 +3075,22 @@ namespace MyERP.DataAccess
         partial void OnDocumentPostedChanged();
         partial void OnDocumentTypeChanging(string value);
         partial void OnDocumentTypeChanged();
+        partial void OnIdChanging(Guid value);
+        partial void OnIdChanged();
         partial void OnNoSeriesIdChanging(Guid value);
         partial void OnNoSeriesIdChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnOrganizaionIdChanging(Guid value);
+        partial void OnOrganizaionIdChanged();
+        partial void OnRecCreatedChanging(DateTime value);
+        partial void OnRecCreatedChanged();
+        partial void OnRecCreatedByChanging(Guid value);
+        partial void OnRecCreatedByChanged();
+        partial void OnRecModifiedChanging(DateTime value);
+        partial void OnRecModifiedChanged();
+        partial void OnRecModifiedByChanging(Guid value);
+        partial void OnRecModifiedByChanged();
         partial void OnStatusChanging(int value);
         partial void OnStatusChanged();
         partial void OnTotalCreditAmountChanging(decimal value);
@@ -2087,6 +3103,8 @@ namespace MyERP.DataAccess
         partial void OnTotalDebitAmountLcyChanged();
         partial void OnTransactionTypeChanging(int value);
         partial void OnTransactionTypeChanged();
+        partial void OnVersionChanging(long value);
+        partial void OnVersionChanged();
 
         #endregion
         
@@ -2100,9 +3118,33 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'ClientId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid ClientId
+        {
+            get
+            {
+                return this._clientId;
+            }
+            set
+            {
+                if ((this._clientId != value))
+                {
+                    this.OnClientIdChanging(value);
+                    this.RaiseDataMemberChanging("ClientId");
+                    this.ValidateProperty("ClientId", value);
+                    this._clientId = value;
+                    this.RaiseDataMemberChanged("ClientId");
+                    this.OnClientIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'CurrencyExchangeRate' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public int CurrencyExchangeRate
@@ -2128,7 +3170,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'CurrencyId' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid CurrencyId
@@ -2154,7 +3195,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Description' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string Description
@@ -2180,7 +3220,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'DocumentCreated' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public DateTime DocumentCreated
@@ -2206,7 +3245,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'DocumentNo' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string DocumentNo
@@ -2232,7 +3270,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'DocumentPosted' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public DateTime DocumentPosted
@@ -2258,7 +3295,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'DocumentType' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string DocumentType
@@ -2282,9 +3318,34 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'Id' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'NoSeriesId' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid NoSeriesId
@@ -2308,9 +3369,160 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OrganizaionId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid OrganizaionId
+        {
+            get
+            {
+                return this._organizaionId;
+            }
+            set
+            {
+                if ((this._organizaionId != value))
+                {
+                    this.OnOrganizaionIdChanging(value);
+                    this.RaiseDataMemberChanging("OrganizaionId");
+                    this.ValidateProperty("OrganizaionId", value);
+                    this._organizaionId = value;
+                    this.RaiseDataMemberChanged("OrganizaionId");
+                    this.OnOrganizaionIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecCreated' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime RecCreated
+        {
+            get
+            {
+                return this._recCreated;
+            }
+            set
+            {
+                if ((this._recCreated != value))
+                {
+                    this.OnRecCreatedChanging(value);
+                    this.RaiseDataMemberChanging("RecCreated");
+                    this.ValidateProperty("RecCreated", value);
+                    this._recCreated = value;
+                    this.RaiseDataMemberChanged("RecCreated");
+                    this.OnRecCreatedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecCreatedBy' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid RecCreatedBy
+        {
+            get
+            {
+                return this._recCreatedBy;
+            }
+            set
+            {
+                if ((this._recCreatedBy != value))
+                {
+                    this.OnRecCreatedByChanging(value);
+                    this.RaiseDataMemberChanging("RecCreatedBy");
+                    this.ValidateProperty("RecCreatedBy", value);
+                    this._recCreatedBy = value;
+                    this.RaiseDataMemberChanged("RecCreatedBy");
+                    this.OnRecCreatedByChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecModified' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime RecModified
+        {
+            get
+            {
+                return this._recModified;
+            }
+            set
+            {
+                if ((this._recModified != value))
+                {
+                    this.OnRecModifiedChanging(value);
+                    this.RaiseDataMemberChanging("RecModified");
+                    this.ValidateProperty("RecModified", value);
+                    this._recModified = value;
+                    this.RaiseDataMemberChanged("RecModified");
+                    this.OnRecModifiedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecModifiedBy' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid RecModifiedBy
+        {
+            get
+            {
+                return this._recModifiedBy;
+            }
+            set
+            {
+                if ((this._recModifiedBy != value))
+                {
+                    this.OnRecModifiedByChanging(value);
+                    this.RaiseDataMemberChanging("RecModifiedBy");
+                    this.ValidateProperty("RecModifiedBy", value);
+                    this._recModifiedBy = value;
+                    this.RaiseDataMemberChanged("RecModifiedBy");
+                    this.OnRecModifiedByChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Status' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public int Status
@@ -2336,7 +3548,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'TotalCreditAmount' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public decimal TotalCreditAmount
@@ -2362,7 +3573,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'TotalCreditAmountLcy' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public decimal TotalCreditAmountLcy
@@ -2388,7 +3598,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'TotalDebitAmount' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public decimal TotalDebitAmount
@@ -2414,7 +3623,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'TotalDebitAmountLcy' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public decimal TotalDebitAmountLcy
@@ -2440,7 +3648,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'TransactionType' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public int TransactionType
@@ -2462,24 +3669,57 @@ namespace MyERP.DataAccess
                 }
             }
         }
+        
+        /// <summary>
+        /// Gets or sets the 'Version' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                if ((this._version != value))
+                {
+                    this.OnVersionChanging(value);
+                    this.RaiseDataMemberChanging("Version");
+                    this.ValidateProperty("Version", value);
+                    this._version = value;
+                    this.RaiseDataMemberChanged("Version");
+                    this.OnVersionChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
     }
     
     /// <summary>
     /// The 'GeneralJournalLine' entity class.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
-    public sealed partial class GeneralJournalLine : BaseObject
+    public sealed partial class GeneralJournalLine : Entity
     {
         
         private Guid _accountId;
         
-        private int _accountType;
-        
         private Guid _businessPartnerId;
         
-        private Guid _corAccountId;
+        private Guid _clientId;
         
-        private string _corAccountType;
+        private Guid _corAccountId;
         
         private decimal _creditAmount;
         
@@ -2503,13 +3743,31 @@ namespace MyERP.DataAccess
         
         private string _documentType;
         
+        private Guid _fixAssetId;
+        
         private Guid _generalJournalDocumentId;
+        
+        private Guid _id;
         
         private Guid _jobId;
         
         private long _lineNo;
         
+        private string[] _openAccessGenerated;
+        
+        private Guid _organizationId;
+        
+        private DateTime _recCreated;
+        
+        private Guid _recCreatedBy;
+        
+        private DateTime _recModified;
+        
+        private Guid _recModifiedBy;
+        
         private int _transactionType;
+        
+        private long _version;
         
         #region Extensibility Method Definitions
 
@@ -2520,14 +3778,12 @@ namespace MyERP.DataAccess
         partial void OnCreated();
         partial void OnAccountIdChanging(Guid value);
         partial void OnAccountIdChanged();
-        partial void OnAccountTypeChanging(int value);
-        partial void OnAccountTypeChanged();
         partial void OnBusinessPartnerIdChanging(Guid value);
         partial void OnBusinessPartnerIdChanged();
+        partial void OnClientIdChanging(Guid value);
+        partial void OnClientIdChanged();
         partial void OnCorAccountIdChanging(Guid value);
         partial void OnCorAccountIdChanged();
-        partial void OnCorAccountTypeChanging(string value);
-        partial void OnCorAccountTypeChanged();
         partial void OnCreditAmountChanging(decimal value);
         partial void OnCreditAmountChanged();
         partial void OnCreditAmountLcyChanging(decimal value);
@@ -2550,14 +3806,32 @@ namespace MyERP.DataAccess
         partial void OnDocumentPostedChanged();
         partial void OnDocumentTypeChanging(string value);
         partial void OnDocumentTypeChanged();
+        partial void OnFixAssetIdChanging(Guid value);
+        partial void OnFixAssetIdChanged();
         partial void OnGeneralJournalDocumentIdChanging(Guid value);
         partial void OnGeneralJournalDocumentIdChanged();
+        partial void OnIdChanging(Guid value);
+        partial void OnIdChanged();
         partial void OnJobIdChanging(Guid value);
         partial void OnJobIdChanged();
         partial void OnLineNoChanging(long value);
         partial void OnLineNoChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnOrganizationIdChanging(Guid value);
+        partial void OnOrganizationIdChanged();
+        partial void OnRecCreatedChanging(DateTime value);
+        partial void OnRecCreatedChanged();
+        partial void OnRecCreatedByChanging(Guid value);
+        partial void OnRecCreatedByChanged();
+        partial void OnRecModifiedChanging(DateTime value);
+        partial void OnRecModifiedChanged();
+        partial void OnRecModifiedByChanging(Guid value);
+        partial void OnRecModifiedByChanged();
         partial void OnTransactionTypeChanging(int value);
         partial void OnTransactionTypeChanged();
+        partial void OnVersionChanging(long value);
+        partial void OnVersionChanged();
 
         #endregion
         
@@ -2573,7 +3847,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'AccountId' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid AccountId
@@ -2597,35 +3870,8 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
-        /// Gets or sets the 'AccountType' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public int AccountType
-        {
-            get
-            {
-                return this._accountType;
-            }
-            set
-            {
-                if ((this._accountType != value))
-                {
-                    this.OnAccountTypeChanging(value);
-                    this.RaiseDataMemberChanging("AccountType");
-                    this.ValidateProperty("AccountType", value);
-                    this._accountType = value;
-                    this.RaiseDataMemberChanged("AccountType");
-                    this.OnAccountTypeChanged();
-                }
-            }
-        }
-        
-        /// <summary>
         /// Gets or sets the 'BusinessPartnerId' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid BusinessPartnerId
@@ -2649,9 +3895,33 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'ClientId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid ClientId
+        {
+            get
+            {
+                return this._clientId;
+            }
+            set
+            {
+                if ((this._clientId != value))
+                {
+                    this.OnClientIdChanging(value);
+                    this.RaiseDataMemberChanging("ClientId");
+                    this.ValidateProperty("ClientId", value);
+                    this._clientId = value;
+                    this.RaiseDataMemberChanged("ClientId");
+                    this.OnClientIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'CorAccountId' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid CorAccountId
@@ -2675,35 +3945,8 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
-        /// Gets or sets the 'CorAccountType' value.
-        /// </summary>
-        [ConcurrencyCheck()]
-        [DataMember()]
-        [RoundtripOriginal()]
-        public string CorAccountType
-        {
-            get
-            {
-                return this._corAccountType;
-            }
-            set
-            {
-                if ((this._corAccountType != value))
-                {
-                    this.OnCorAccountTypeChanging(value);
-                    this.RaiseDataMemberChanging("CorAccountType");
-                    this.ValidateProperty("CorAccountType", value);
-                    this._corAccountType = value;
-                    this.RaiseDataMemberChanged("CorAccountType");
-                    this.OnCorAccountTypeChanged();
-                }
-            }
-        }
-        
-        /// <summary>
         /// Gets or sets the 'CreditAmount' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public decimal CreditAmount
@@ -2729,7 +3972,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'CreditAmountLcy' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public decimal CreditAmountLcy
@@ -2755,7 +3997,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'CurrencyExchangeRate' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public decimal CurrencyExchangeRate
@@ -2781,7 +4022,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'CurrencyId' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid CurrencyId
@@ -2807,7 +4047,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'DebitAmount' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public decimal DebitAmount
@@ -2833,7 +4072,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'DebitAmountLcy' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public decimal DebitAmountLcy
@@ -2859,7 +4097,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Description' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string Description
@@ -2885,7 +4122,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'DocumentCreated' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public DateTime DocumentCreated
@@ -2911,7 +4147,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'DocumentNo' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string DocumentNo
@@ -2937,7 +4172,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'DocumentPosted' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public DateTime DocumentPosted
@@ -2963,7 +4197,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'DocumentType' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string DocumentType
@@ -2987,9 +4220,33 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'FixAssetId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid FixAssetId
+        {
+            get
+            {
+                return this._fixAssetId;
+            }
+            set
+            {
+                if ((this._fixAssetId != value))
+                {
+                    this.OnFixAssetIdChanging(value);
+                    this.RaiseDataMemberChanging("FixAssetId");
+                    this.ValidateProperty("FixAssetId", value);
+                    this._fixAssetId = value;
+                    this.RaiseDataMemberChanged("FixAssetId");
+                    this.OnFixAssetIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'GeneralJournalDocumentId' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid GeneralJournalDocumentId
@@ -3013,9 +4270,34 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'Id' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'JobId' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid JobId
@@ -3041,7 +4323,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'LineNo' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public long LineNo
@@ -3065,9 +4346,160 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OrganizationId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid OrganizationId
+        {
+            get
+            {
+                return this._organizationId;
+            }
+            set
+            {
+                if ((this._organizationId != value))
+                {
+                    this.OnOrganizationIdChanging(value);
+                    this.RaiseDataMemberChanging("OrganizationId");
+                    this.ValidateProperty("OrganizationId", value);
+                    this._organizationId = value;
+                    this.RaiseDataMemberChanged("OrganizationId");
+                    this.OnOrganizationIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecCreated' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime RecCreated
+        {
+            get
+            {
+                return this._recCreated;
+            }
+            set
+            {
+                if ((this._recCreated != value))
+                {
+                    this.OnRecCreatedChanging(value);
+                    this.RaiseDataMemberChanging("RecCreated");
+                    this.ValidateProperty("RecCreated", value);
+                    this._recCreated = value;
+                    this.RaiseDataMemberChanged("RecCreated");
+                    this.OnRecCreatedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecCreatedBy' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid RecCreatedBy
+        {
+            get
+            {
+                return this._recCreatedBy;
+            }
+            set
+            {
+                if ((this._recCreatedBy != value))
+                {
+                    this.OnRecCreatedByChanging(value);
+                    this.RaiseDataMemberChanging("RecCreatedBy");
+                    this.ValidateProperty("RecCreatedBy", value);
+                    this._recCreatedBy = value;
+                    this.RaiseDataMemberChanged("RecCreatedBy");
+                    this.OnRecCreatedByChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecModified' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime RecModified
+        {
+            get
+            {
+                return this._recModified;
+            }
+            set
+            {
+                if ((this._recModified != value))
+                {
+                    this.OnRecModifiedChanging(value);
+                    this.RaiseDataMemberChanging("RecModified");
+                    this.ValidateProperty("RecModified", value);
+                    this._recModified = value;
+                    this.RaiseDataMemberChanged("RecModified");
+                    this.OnRecModifiedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecModifiedBy' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid RecModifiedBy
+        {
+            get
+            {
+                return this._recModifiedBy;
+            }
+            set
+            {
+                if ((this._recModifiedBy != value))
+                {
+                    this.OnRecModifiedByChanging(value);
+                    this.RaiseDataMemberChanging("RecModifiedBy");
+                    this.ValidateProperty("RecModifiedBy", value);
+                    this._recModifiedBy = value;
+                    this.RaiseDataMemberChanged("RecModifiedBy");
+                    this.OnRecModifiedByChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'TransactionType' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public int TransactionType
@@ -3089,18 +4521,61 @@ namespace MyERP.DataAccess
                 }
             }
         }
+        
+        /// <summary>
+        /// Gets or sets the 'Version' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                if ((this._version != value))
+                {
+                    this.OnVersionChanging(value);
+                    this.RaiseDataMemberChanging("Version");
+                    this.ValidateProperty("Version", value);
+                    this._version = value;
+                    this.RaiseDataMemberChanged("Version");
+                    this.OnVersionChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
     }
     
     /// <summary>
     /// The 'Job' entity class.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
-    public sealed partial class Job : BaseObject
+    public sealed partial class Job : Entity
     {
+        
+        private Guid _clientId;
         
         private string _code;
         
+        private DateTime _date0;
+        
+        private DateTime _date2;
+        
         private string _ghi_Chu;
+        
+        private Guid _id;
         
         private Guid _ma_Kh;
         
@@ -3116,6 +4591,10 @@ namespace MyERP.DataAccess
         
         private string _nh_Vv3;
         
+        private string[] _openAccessGenerated;
+        
+        private Guid _organizationId;
+        
         private byte _status;
         
         private string _ten_Vv;
@@ -3128,6 +4607,10 @@ namespace MyERP.DataAccess
         
         private Guid _tk;
         
+        private Guid _user_Id0;
+        
+        private Guid _user_Id2;
+        
         #region Extensibility Method Definitions
 
         /// <summary>
@@ -3135,10 +4618,18 @@ namespace MyERP.DataAccess
         /// can be used for further object setup.
         /// </summary>
         partial void OnCreated();
+        partial void OnClientIdChanging(Guid value);
+        partial void OnClientIdChanged();
         partial void OnCodeChanging(string value);
         partial void OnCodeChanged();
+        partial void OnDate0Changing(DateTime value);
+        partial void OnDate0Changed();
+        partial void OnDate2Changing(DateTime value);
+        partial void OnDate2Changed();
         partial void OnGhi_ChuChanging(string value);
         partial void OnGhi_ChuChanged();
+        partial void OnIdChanging(Guid value);
+        partial void OnIdChanged();
         partial void OnMa_KhChanging(Guid value);
         partial void OnMa_KhChanged();
         partial void OnMa_NtChanging(Guid value);
@@ -3153,6 +4644,10 @@ namespace MyERP.DataAccess
         partial void OnNh_Vv2Changed();
         partial void OnNh_Vv3Changing(string value);
         partial void OnNh_Vv3Changed();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnOrganizationIdChanging(Guid value);
+        partial void OnOrganizationIdChanged();
         partial void OnStatusChanging(byte value);
         partial void OnStatusChanged();
         partial void OnTen_VvChanging(string value);
@@ -3165,6 +4660,10 @@ namespace MyERP.DataAccess
         partial void OnTien_NtChanged();
         partial void OnTkChanging(Guid value);
         partial void OnTkChanged();
+        partial void OnUser_Id0Changing(Guid value);
+        partial void OnUser_Id0Changed();
+        partial void OnUser_Id2Changing(Guid value);
+        partial void OnUser_Id2Changed();
 
         #endregion
         
@@ -3175,6 +4674,32 @@ namespace MyERP.DataAccess
         public Job()
         {
             this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'ClientId' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid ClientId
+        {
+            get
+            {
+                return this._clientId;
+            }
+            set
+            {
+                if ((this._clientId != value))
+                {
+                    this.OnClientIdChanging(value);
+                    this.RaiseDataMemberChanging("ClientId");
+                    this.ValidateProperty("ClientId", value);
+                    this._clientId = value;
+                    this.RaiseDataMemberChanged("ClientId");
+                    this.OnClientIdChanged();
+                }
+            }
         }
         
         /// <summary>
@@ -3204,6 +4729,58 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'Date0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime Date0
+        {
+            get
+            {
+                return this._date0;
+            }
+            set
+            {
+                if ((this._date0 != value))
+                {
+                    this.OnDate0Changing(value);
+                    this.RaiseDataMemberChanging("Date0");
+                    this.ValidateProperty("Date0", value);
+                    this._date0 = value;
+                    this.RaiseDataMemberChanged("Date0");
+                    this.OnDate0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime Date2
+        {
+            get
+            {
+                return this._date2;
+            }
+            set
+            {
+                if ((this._date2 != value))
+                {
+                    this.OnDate2Changing(value);
+                    this.RaiseDataMemberChanging("Date2");
+                    this.ValidateProperty("Date2", value);
+                    this._date2 = value;
+                    this.RaiseDataMemberChanged("Date2");
+                    this.OnDate2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Ghi_Chu' value.
         /// </summary>
         [ConcurrencyCheck()]
@@ -3225,6 +4802,33 @@ namespace MyERP.DataAccess
                     this._ghi_Chu = value;
                     this.RaiseDataMemberChanged("Ghi_Chu");
                     this.OnGhi_ChuChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Id' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
                 }
             }
         }
@@ -3412,6 +5016,59 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OrganizationId' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid OrganizationId
+        {
+            get
+            {
+                return this._organizationId;
+            }
+            set
+            {
+                if ((this._organizationId != value))
+                {
+                    this.OnOrganizationIdChanging(value);
+                    this.RaiseDataMemberChanging("OrganizationId");
+                    this.ValidateProperty("OrganizationId", value);
+                    this._organizationId = value;
+                    this.RaiseDataMemberChanged("OrganizationId");
+                    this.OnOrganizationIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Status' value.
         /// </summary>
         [ConcurrencyCheck()]
@@ -3566,24 +5223,99 @@ namespace MyERP.DataAccess
                 }
             }
         }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid User_Id0
+        {
+            get
+            {
+                return this._user_Id0;
+            }
+            set
+            {
+                if ((this._user_Id0 != value))
+                {
+                    this.OnUser_Id0Changing(value);
+                    this.RaiseDataMemberChanging("User_Id0");
+                    this.ValidateProperty("User_Id0", value);
+                    this._user_Id0 = value;
+                    this.RaiseDataMemberChanged("User_Id0");
+                    this.OnUser_Id0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid User_Id2
+        {
+            get
+            {
+                return this._user_Id2;
+            }
+            set
+            {
+                if ((this._user_Id2 != value))
+                {
+                    this.OnUser_Id2Changing(value);
+                    this.RaiseDataMemberChanging("User_Id2");
+                    this.ValidateProperty("User_Id2", value);
+                    this._user_Id2 = value;
+                    this.RaiseDataMemberChanged("User_Id2");
+                    this.OnUser_Id2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
     }
     
     /// <summary>
     /// The 'JobGroup' entity class.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
-    public sealed partial class JobGroup : BaseObject
+    public sealed partial class JobGroup : Entity
     {
+        
+        private Guid _clientId;
         
         private string _code;
         
+        private DateTime _date0;
+        
+        private DateTime _date2;
+        
         private short _loai_Nh;
+        
+        private string[] _openAccessGenerated;
+        
+        private Guid _organizationId;
         
         private byte _status;
         
         private string _ten_Nh;
         
         private string _ten_Nh2;
+        
+        private Guid _user_Id0;
+        
+        private Guid _user_Id2;
         
         #region Extensibility Method Definitions
 
@@ -3592,16 +5324,30 @@ namespace MyERP.DataAccess
         /// can be used for further object setup.
         /// </summary>
         partial void OnCreated();
+        partial void OnClientIdChanging(Guid value);
+        partial void OnClientIdChanged();
         partial void OnCodeChanging(string value);
         partial void OnCodeChanged();
+        partial void OnDate0Changing(DateTime value);
+        partial void OnDate0Changed();
+        partial void OnDate2Changing(DateTime value);
+        partial void OnDate2Changed();
         partial void OnLoai_NhChanging(short value);
         partial void OnLoai_NhChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnOrganizationIdChanging(Guid value);
+        partial void OnOrganizationIdChanged();
         partial void OnStatusChanging(byte value);
         partial void OnStatusChanged();
         partial void OnTen_NhChanging(string value);
         partial void OnTen_NhChanged();
         partial void OnTen_Nh2Changing(string value);
         partial void OnTen_Nh2Changed();
+        partial void OnUser_Id0Changing(Guid value);
+        partial void OnUser_Id0Changed();
+        partial void OnUser_Id2Changing(Guid value);
+        partial void OnUser_Id2Changed();
 
         #endregion
         
@@ -3615,10 +5361,38 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'ClientId' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid ClientId
+        {
+            get
+            {
+                return this._clientId;
+            }
+            set
+            {
+                if ((this._clientId != value))
+                {
+                    this.OnClientIdChanging(value);
+                    this.RaiseDataMemberChanging("ClientId");
+                    this.ValidateProperty("ClientId", value);
+                    this._clientId = value;
+                    this.RaiseDataMemberChanged("ClientId");
+                    this.OnClientIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Code' value.
         /// </summary>
         [ConcurrencyCheck()]
         [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
         [RoundtripOriginal()]
         public string Code
         {
@@ -3631,11 +5405,62 @@ namespace MyERP.DataAccess
                 if ((this._code != value))
                 {
                     this.OnCodeChanging(value);
-                    this.RaiseDataMemberChanging("Code");
                     this.ValidateProperty("Code", value);
                     this._code = value;
-                    this.RaiseDataMemberChanged("Code");
+                    this.RaisePropertyChanged("Code");
                     this.OnCodeChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime Date0
+        {
+            get
+            {
+                return this._date0;
+            }
+            set
+            {
+                if ((this._date0 != value))
+                {
+                    this.OnDate0Changing(value);
+                    this.RaiseDataMemberChanging("Date0");
+                    this.ValidateProperty("Date0", value);
+                    this._date0 = value;
+                    this.RaiseDataMemberChanged("Date0");
+                    this.OnDate0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime Date2
+        {
+            get
+            {
+                return this._date2;
+            }
+            set
+            {
+                if ((this._date2 != value))
+                {
+                    this.OnDate2Changing(value);
+                    this.RaiseDataMemberChanging("Date2");
+                    this.ValidateProperty("Date2", value);
+                    this._date2 = value;
+                    this.RaiseDataMemberChanged("Date2");
+                    this.OnDate2Changed();
                 }
             }
         }
@@ -3662,6 +5487,59 @@ namespace MyERP.DataAccess
                     this._loai_Nh = value;
                     this.RaiseDataMemberChanged("Loai_Nh");
                     this.OnLoai_NhChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OrganizationId' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid OrganizationId
+        {
+            get
+            {
+                return this._organizationId;
+            }
+            set
+            {
+                if ((this._organizationId != value))
+                {
+                    this.OnOrganizationIdChanging(value);
+                    this.RaiseDataMemberChanging("OrganizationId");
+                    this.ValidateProperty("OrganizationId", value);
+                    this._organizationId = value;
+                    this.RaiseDataMemberChanged("OrganizationId");
+                    this.OnOrganizationIdChanged();
                 }
             }
         }
@@ -3742,6 +5620,67 @@ namespace MyERP.DataAccess
                     this.OnTen_Nh2Changed();
                 }
             }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id0' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid User_Id0
+        {
+            get
+            {
+                return this._user_Id0;
+            }
+            set
+            {
+                if ((this._user_Id0 != value))
+                {
+                    this.OnUser_Id0Changing(value);
+                    this.RaiseDataMemberChanging("User_Id0");
+                    this.ValidateProperty("User_Id0", value);
+                    this._user_Id0 = value;
+                    this.RaiseDataMemberChanged("User_Id0");
+                    this.OnUser_Id0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'User_Id2' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid User_Id2
+        {
+            get
+            {
+                return this._user_Id2;
+            }
+            set
+            {
+                if ((this._user_Id2 != value))
+                {
+                    this.OnUser_Id2Changing(value);
+                    this.RaiseDataMemberChanging("User_Id2");
+                    this.ValidateProperty("User_Id2", value);
+                    this._user_Id2 = value;
+                    this.RaiseDataMemberChanged("User_Id2");
+                    this.OnUser_Id2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._code;
         }
     }
     
@@ -4029,8 +5968,10 @@ namespace MyERP.DataAccess
     /// The 'NoSeries' entity class.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
-    public sealed partial class NoSeries : BaseObject
+    public sealed partial class NoSeries : Entity
     {
+        
+        private Guid _clientId;
         
         private string _code;
         
@@ -4040,6 +5981,8 @@ namespace MyERP.DataAccess
         
         private string _formatNo;
         
+        private Guid _id;
+        
         private bool _isDefault;
         
         private bool _manual;
@@ -4048,9 +5991,23 @@ namespace MyERP.DataAccess
         
         private string _noSeqName;
         
+        private string[] _openAccessGenerated;
+        
+        private Guid _organizationId;
+        
+        private DateTime _recCreated;
+        
+        private Guid _recCreatedBy;
+        
+        private DateTime _recModified;
+        
+        private Guid _recModifiedBy;
+        
         private int _startingNo;
         
         private short _status;
+        
+        private long _version;
         
         #region Extensibility Method Definitions
 
@@ -4059,6 +6016,8 @@ namespace MyERP.DataAccess
         /// can be used for further object setup.
         /// </summary>
         partial void OnCreated();
+        partial void OnClientIdChanging(Guid value);
+        partial void OnClientIdChanged();
         partial void OnCodeChanging(string value);
         partial void OnCodeChanged();
         partial void OnCurrentNoChanging(int value);
@@ -4067,6 +6026,8 @@ namespace MyERP.DataAccess
         partial void OnEndingNoChanged();
         partial void OnFormatNoChanging(string value);
         partial void OnFormatNoChanged();
+        partial void OnIdChanging(Guid value);
+        partial void OnIdChanged();
         partial void OnIsDefaultChanging(bool value);
         partial void OnIsDefaultChanged();
         partial void OnManualChanging(bool value);
@@ -4075,10 +6036,24 @@ namespace MyERP.DataAccess
         partial void OnNameChanged();
         partial void OnNoSeqNameChanging(string value);
         partial void OnNoSeqNameChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnOrganizationIdChanging(Guid value);
+        partial void OnOrganizationIdChanged();
+        partial void OnRecCreatedChanging(DateTime value);
+        partial void OnRecCreatedChanged();
+        partial void OnRecCreatedByChanging(Guid value);
+        partial void OnRecCreatedByChanged();
+        partial void OnRecModifiedChanging(DateTime value);
+        partial void OnRecModifiedChanged();
+        partial void OnRecModifiedByChanging(Guid value);
+        partial void OnRecModifiedByChanged();
         partial void OnStartingNoChanging(int value);
         partial void OnStartingNoChanged();
         partial void OnStatusChanging(short value);
         partial void OnStatusChanged();
+        partial void OnVersionChanging(long value);
+        partial void OnVersionChanged();
 
         #endregion
         
@@ -4092,12 +6067,35 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
-        /// Gets or sets the 'Code' value.
+        /// Gets or sets the 'ClientId' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
-        [StringLength(255)]
+        public Guid ClientId
+        {
+            get
+            {
+                return this._clientId;
+            }
+            set
+            {
+                if ((this._clientId != value))
+                {
+                    this.OnClientIdChanging(value);
+                    this.RaiseDataMemberChanging("ClientId");
+                    this.ValidateProperty("ClientId", value);
+                    this._clientId = value;
+                    this.RaiseDataMemberChanged("ClientId");
+                    this.OnClientIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Code' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
         public string Code
         {
             get
@@ -4121,7 +6119,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'CurrentNo' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public int CurrentNo
@@ -4147,7 +6144,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'EndingNo' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public int EndingNo
@@ -4173,7 +6169,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'FormatNo' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string FormatNo
@@ -4197,9 +6192,34 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'Id' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'IsDefault' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public bool IsDefault
@@ -4225,7 +6245,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Manual' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public bool Manual
@@ -4251,7 +6270,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Name' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string Name
@@ -4277,7 +6295,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'NoSeqName' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string NoSeqName
@@ -4301,9 +6318,160 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OrganizationId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid OrganizationId
+        {
+            get
+            {
+                return this._organizationId;
+            }
+            set
+            {
+                if ((this._organizationId != value))
+                {
+                    this.OnOrganizationIdChanging(value);
+                    this.RaiseDataMemberChanging("OrganizationId");
+                    this.ValidateProperty("OrganizationId", value);
+                    this._organizationId = value;
+                    this.RaiseDataMemberChanged("OrganizationId");
+                    this.OnOrganizationIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecCreated' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime RecCreated
+        {
+            get
+            {
+                return this._recCreated;
+            }
+            set
+            {
+                if ((this._recCreated != value))
+                {
+                    this.OnRecCreatedChanging(value);
+                    this.RaiseDataMemberChanging("RecCreated");
+                    this.ValidateProperty("RecCreated", value);
+                    this._recCreated = value;
+                    this.RaiseDataMemberChanged("RecCreated");
+                    this.OnRecCreatedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecCreatedBy' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid RecCreatedBy
+        {
+            get
+            {
+                return this._recCreatedBy;
+            }
+            set
+            {
+                if ((this._recCreatedBy != value))
+                {
+                    this.OnRecCreatedByChanging(value);
+                    this.RaiseDataMemberChanging("RecCreatedBy");
+                    this.ValidateProperty("RecCreatedBy", value);
+                    this._recCreatedBy = value;
+                    this.RaiseDataMemberChanged("RecCreatedBy");
+                    this.OnRecCreatedByChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecModified' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime RecModified
+        {
+            get
+            {
+                return this._recModified;
+            }
+            set
+            {
+                if ((this._recModified != value))
+                {
+                    this.OnRecModifiedChanging(value);
+                    this.RaiseDataMemberChanging("RecModified");
+                    this.ValidateProperty("RecModified", value);
+                    this._recModified = value;
+                    this.RaiseDataMemberChanged("RecModified");
+                    this.OnRecModifiedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecModifiedBy' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid RecModifiedBy
+        {
+            get
+            {
+                return this._recModifiedBy;
+            }
+            set
+            {
+                if ((this._recModifiedBy != value))
+                {
+                    this.OnRecModifiedByChanging(value);
+                    this.RaiseDataMemberChanging("RecModifiedBy");
+                    this.ValidateProperty("RecModifiedBy", value);
+                    this._recModifiedBy = value;
+                    this.RaiseDataMemberChanged("RecModifiedBy");
+                    this.OnRecModifiedByChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'StartingNo' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public int StartingNo
@@ -4329,7 +6497,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Status' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public short Status
@@ -4350,6 +6517,41 @@ namespace MyERP.DataAccess
                     this.OnStatusChanged();
                 }
             }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Version' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                if ((this._version != value))
+                {
+                    this.OnVersionChanging(value);
+                    this.RaiseDataMemberChanging("Version");
+                    this.ValidateProperty("Version", value);
+                    this._version = value;
+                    this.RaiseDataMemberChanged("Version");
+                    this.OnVersionChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
         }
     }
     
@@ -4818,20 +7020,38 @@ namespace MyERP.DataAccess
     /// The 'PaymentTerm' entity class.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
-    public sealed partial class PaymentTerm : BaseObject
+    public sealed partial class PaymentTerm : Entity
     {
         
+        private Guid _clientId;
+        
         private string _code;
+        
+        private DateTime _date0;
+        
+        private DateTime _date2;
         
         private short _han_Tt;
         
         private short _han_Tt_Gg;
         
+        private Guid _id;
+        
         private string _name;
+        
+        private string[] _openAccessGenerated;
+        
+        private Guid _organizationId;
         
         private decimal _pt_Gg;
         
         private byte _status;
+        
+        private Guid _userId0;
+        
+        private Guid _userId2;
+        
+        private long _version;
         
         #region Extensibility Method Definitions
 
@@ -4840,18 +7060,36 @@ namespace MyERP.DataAccess
         /// can be used for further object setup.
         /// </summary>
         partial void OnCreated();
+        partial void OnClientIdChanging(Guid value);
+        partial void OnClientIdChanged();
         partial void OnCodeChanging(string value);
         partial void OnCodeChanged();
+        partial void OnDate0Changing(DateTime value);
+        partial void OnDate0Changed();
+        partial void OnDate2Changing(DateTime value);
+        partial void OnDate2Changed();
         partial void OnHan_TtChanging(short value);
         partial void OnHan_TtChanged();
         partial void OnHan_Tt_GgChanging(short value);
         partial void OnHan_Tt_GgChanged();
+        partial void OnIdChanging(Guid value);
+        partial void OnIdChanged();
         partial void OnNameChanging(string value);
         partial void OnNameChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnOrganizationIdChanging(Guid value);
+        partial void OnOrganizationIdChanged();
         partial void OnPt_GgChanging(decimal value);
         partial void OnPt_GgChanged();
         partial void OnStatusChanging(byte value);
         partial void OnStatusChanged();
+        partial void OnUserId0Changing(Guid value);
+        partial void OnUserId0Changed();
+        partial void OnUserId2Changing(Guid value);
+        partial void OnUserId2Changed();
+        partial void OnVersionChanging(long value);
+        partial void OnVersionChanged();
 
         #endregion
         
@@ -4865,9 +7103,33 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'ClientId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid ClientId
+        {
+            get
+            {
+                return this._clientId;
+            }
+            set
+            {
+                if ((this._clientId != value))
+                {
+                    this.OnClientIdChanging(value);
+                    this.RaiseDataMemberChanging("ClientId");
+                    this.ValidateProperty("ClientId", value);
+                    this._clientId = value;
+                    this.RaiseDataMemberChanged("ClientId");
+                    this.OnClientIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Code' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string Code
@@ -4891,9 +7153,58 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'Date0' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime Date0
+        {
+            get
+            {
+                return this._date0;
+            }
+            set
+            {
+                if ((this._date0 != value))
+                {
+                    this.OnDate0Changing(value);
+                    this.RaiseDataMemberChanging("Date0");
+                    this.ValidateProperty("Date0", value);
+                    this._date0 = value;
+                    this.RaiseDataMemberChanged("Date0");
+                    this.OnDate0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Date2' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime Date2
+        {
+            get
+            {
+                return this._date2;
+            }
+            set
+            {
+                if ((this._date2 != value))
+                {
+                    this.OnDate2Changing(value);
+                    this.RaiseDataMemberChanging("Date2");
+                    this.ValidateProperty("Date2", value);
+                    this._date2 = value;
+                    this.RaiseDataMemberChanged("Date2");
+                    this.OnDate2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Han_Tt' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public short Han_Tt
@@ -4919,7 +7230,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Han_Tt_Gg' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public short Han_Tt_Gg
@@ -4943,9 +7253,34 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'Id' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Name' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string Name
@@ -4969,9 +7304,60 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OrganizationId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid OrganizationId
+        {
+            get
+            {
+                return this._organizationId;
+            }
+            set
+            {
+                if ((this._organizationId != value))
+                {
+                    this.OnOrganizationIdChanging(value);
+                    this.RaiseDataMemberChanging("OrganizationId");
+                    this.ValidateProperty("OrganizationId", value);
+                    this._organizationId = value;
+                    this.RaiseDataMemberChanged("OrganizationId");
+                    this.OnOrganizationIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Pt_Gg' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public decimal Pt_Gg
@@ -4997,7 +7383,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Status' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public byte Status
@@ -5018,6 +7403,91 @@ namespace MyERP.DataAccess
                     this.OnStatusChanged();
                 }
             }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'UserId0' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid UserId0
+        {
+            get
+            {
+                return this._userId0;
+            }
+            set
+            {
+                if ((this._userId0 != value))
+                {
+                    this.OnUserId0Changing(value);
+                    this.RaiseDataMemberChanging("UserId0");
+                    this.ValidateProperty("UserId0", value);
+                    this._userId0 = value;
+                    this.RaiseDataMemberChanged("UserId0");
+                    this.OnUserId0Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'UserId2' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid UserId2
+        {
+            get
+            {
+                return this._userId2;
+            }
+            set
+            {
+                if ((this._userId2 != value))
+                {
+                    this.OnUserId2Changing(value);
+                    this.RaiseDataMemberChanging("UserId2");
+                    this.ValidateProperty("UserId2", value);
+                    this._userId2 = value;
+                    this.RaiseDataMemberChanged("UserId2");
+                    this.OnUserId2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Version' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                if ((this._version != value))
+                {
+                    this.OnVersionChanging(value);
+                    this.RaiseDataMemberChanging("Version");
+                    this.ValidateProperty("Version", value);
+                    this._version = value;
+                    this.RaiseDataMemberChanged("Version");
+                    this.OnVersionChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
         }
     }
     
@@ -6401,13 +8871,35 @@ namespace MyERP.Web
         }
         
         /// <summary>
-        /// Gets the set of <see cref="BaseObject"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// Gets the set of <see cref="Account"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
         /// </summary>
-        public EntitySet<BaseObject> BaseObjects
+        public EntitySet<Account> Accounts
         {
             get
             {
-                return base.EntityContainer.GetEntitySet<BaseObject>();
+                return base.EntityContainer.GetEntitySet<Account>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="BusinessPartnerGroup"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<BusinessPartnerGroup> BusinessPartnerGroups
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<BusinessPartnerGroup>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="BusinessPartner"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<BusinessPartner> BusinessPartners
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<BusinessPartner>();
             }
         }
         
@@ -6423,6 +8915,61 @@ namespace MyERP.Web
         }
         
         /// <summary>
+        /// Gets the set of <see cref="Currency"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<Currency> Currencies
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Currency>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="GeneralJournalDocument"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<GeneralJournalDocument> GeneralJournalDocuments
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<GeneralJournalDocument>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="GeneralJournalLine"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<GeneralJournalLine> GeneralJournalLines
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<GeneralJournalLine>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="JobGroup"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<JobGroup> JobGroups
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<JobGroup>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="Job"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<Job> Jobs
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<Job>();
+            }
+        }
+        
+        /// <summary>
         /// Gets the set of <see cref="Module"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
         /// </summary>
         public EntitySet<Module> Modules
@@ -6434,6 +8981,17 @@ namespace MyERP.Web
         }
         
         /// <summary>
+        /// Gets the set of <see cref="NoSeries"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<NoSeries> NoSeries
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<NoSeries>();
+            }
+        }
+        
+        /// <summary>
         /// Gets the set of <see cref="Organization"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
         /// </summary>
         public EntitySet<Organization> Organizations
@@ -6441,6 +8999,17 @@ namespace MyERP.Web
             get
             {
                 return base.EntityContainer.GetEntitySet<Organization>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="PaymentTerm"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<PaymentTerm> PaymentTerms
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<PaymentTerm>();
             }
         }
         
@@ -6474,16 +9043,6 @@ namespace MyERP.Web
         {
             this.ValidateMethod("GetAccountsQuery", null);
             return base.CreateQuery<Account>("GetAccounts", null, false, true);
-        }
-        
-        /// <summary>
-        /// Gets an EntityQuery instance that can be used to load <see cref="BaseObject"/> entity instances using the 'GetBaseObjects' query.
-        /// </summary>
-        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="BaseObject"/> entity instances.</returns>
-        public EntityQuery<BaseObject> GetBaseObjectsQuery()
-        {
-            this.ValidateMethod("GetBaseObjectsQuery", null);
-            return base.CreateQuery<BaseObject>("GetBaseObjects", null, false, true);
         }
         
         /// <summary>
@@ -6733,24 +9292,6 @@ namespace MyERP.Web
             /// <param name="result">The IAsyncResult returned from 'BeginGetAccounts'.</param>
             /// <returns>The 'QueryResult' returned from the 'GetAccounts' operation.</returns>
             QueryResult<Account> EndGetAccounts(IAsyncResult result);
-            
-            /// <summary>
-            /// Asynchronously invokes the 'GetBaseObjects' operation.
-            /// </summary>
-            /// <param name="callback">Callback to invoke on completion.</param>
-            /// <param name="asyncState">Optional state object.</param>
-            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
-            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetBaseObjectsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
-            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetBaseObjects", ReplyAction="http://tempuri.org/MyERPDomainService/GetBaseObjectsResponse")]
-            [WebGet()]
-            IAsyncResult BeginGetBaseObjects(AsyncCallback callback, object asyncState);
-            
-            /// <summary>
-            /// Completes the asynchronous operation begun by 'BeginGetBaseObjects'.
-            /// </summary>
-            /// <param name="result">The IAsyncResult returned from 'BeginGetBaseObjects'.</param>
-            /// <returns>The 'QueryResult' returned from the 'GetBaseObjects' operation.</returns>
-            QueryResult<BaseObject> EndGetBaseObjects(IAsyncResult result);
             
             /// <summary>
             /// Asynchronously invokes the 'GetBusinessPartnerGroups' operation.
@@ -7066,10 +9607,19 @@ namespace MyERP.Web
             
             public MyERPDomainContextEntityContainer()
             {
-                this.CreateEntitySet<BaseObject>(EntitySetOperations.All);
+                this.CreateEntitySet<Account>(EntitySetOperations.All);
+                this.CreateEntitySet<BusinessPartner>(EntitySetOperations.All);
+                this.CreateEntitySet<BusinessPartnerGroup>(EntitySetOperations.All);
                 this.CreateEntitySet<Client>(EntitySetOperations.All);
+                this.CreateEntitySet<Currency>(EntitySetOperations.All);
+                this.CreateEntitySet<GeneralJournalDocument>(EntitySetOperations.All);
+                this.CreateEntitySet<GeneralJournalLine>(EntitySetOperations.All);
+                this.CreateEntitySet<Job>(EntitySetOperations.All);
+                this.CreateEntitySet<JobGroup>(EntitySetOperations.All);
                 this.CreateEntitySet<Module>(EntitySetOperations.All);
+                this.CreateEntitySet<NoSeries>(EntitySetOperations.All);
                 this.CreateEntitySet<Organization>(EntitySetOperations.All);
+                this.CreateEntitySet<PaymentTerm>(EntitySetOperations.All);
                 this.CreateEntitySet<Session>(EntitySetOperations.All);
                 this.CreateEntitySet<User>(EntitySetOperations.All);
             }

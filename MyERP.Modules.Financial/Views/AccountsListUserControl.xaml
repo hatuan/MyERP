@@ -65,14 +65,8 @@
                         <DataTemplate>
                             <controls:LookupCurrencyControl 
                                 Id="{Binding CurrencyId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}" 
-                                SelectedCurrency="{Binding Currency, Mode=TwoWay}" 
-                                Currencies="{Binding Source={StaticResource contentParent}, Path=Content.Currencies}">
+                                SelectedCurrency="{Binding Currency, Mode=TwoWay}">
                             </controls:LookupCurrencyControl>
-                            <!--<controls:LookupCurrencyControl 
-                                Id="{Binding CurrencyId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}" 
-                                SelectedCurrency="{Binding Currency, Mode=TwoWay}" 
-                                Currencies="{Binding Source={StaticResource currenciesDataSource}, Path=DataView.SourceCollection}">
-                            </controls:LookupCurrencyControl>-->
                         </DataTemplate>
                     </telerik:GridViewDataColumn.CellEditTemplate>
                 </telerik:GridViewDataColumn>
@@ -86,14 +80,8 @@
                         <DataTemplate>
                             <controls:LookupAccountControl 
                                 Id="{Binding ParentAccountId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}"
-                                SelectedAccount="{Binding ParentAccount, Mode=TwoWay}"
-                                Accounts="{Binding Source={StaticResource contentParent}, Path=Content.ParentAccounts}">
+                                SelectedAccount="{Binding ParentAccount, Mode=TwoWay}">
                             </controls:LookupAccountControl>
-                            <!--<controls:LookupAccountControl 
-                                Id="{Binding ParentAccountId, Converter={StaticResource MapIdNullToGuidConverter}, Mode=TwoWay}"
-                                SelectedAccount="{Binding ParentAccount, Mode=TwoWay}"
-                                Accounts="{Binding Source={StaticResource accountsDataSource}, Path=DataView.SourceCollection}">
-                            </controls:LookupAccountControl>-->
                         </DataTemplate>
                     </telerik:GridViewDataColumn.CellEditTemplate>
                 </telerik:GridViewDataColumn>

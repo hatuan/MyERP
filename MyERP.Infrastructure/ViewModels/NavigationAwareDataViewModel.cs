@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
 
@@ -31,7 +33,8 @@ namespace MyERP.Infrastructure.ViewModels
         {
 
         }
-
+        
+        #region IPartImportsSatisfiedNotification
         /// <summary>
         /// Callback when all MEF imports are satisfied.
         /// Subclasses implement this if they need to perform some actions after the viewmodel is completely loaded.
@@ -41,6 +44,7 @@ namespace MyERP.Infrastructure.ViewModels
         {
 
         }
+        #endregion
 
         /// <summary>
         /// The condition that is checked when TriggerConditionalDataUpdate is called.
@@ -98,6 +102,7 @@ namespace MyERP.Infrastructure.ViewModels
             }
         }
 
+        #region INavigationAware
         /// <summary>
         /// Inherited from INavigationAware.
         /// Default implementation sets HasViewLoadedOnce to true.
@@ -130,6 +135,46 @@ namespace MyERP.Infrastructure.ViewModels
         public virtual void OnNavigatedFrom(NavigationContext navigationContext)
         {
 
+        }
+        #endregion
+
+        private static bool? _isInDesignMode;
+
+        public static bool IsInDesignModeStatic
+        {
+            get
+            {
+                if (!_isInDesignMode.HasValue)
+                {
+#if SILVERLIGHT
+                    _isInDesignMode = DesignerProperties.IsInDesignTool;
+#else
+            var prop = DesignerProperties.IsInDesignModeProperty;
+            _isInDesignMode
+                = (bool)DependencyPropertyDescriptor
+                .FromProperty(prop, typeof(FrameworkElement))
+                .Metadata.DefaultValue;
+#endif
+                }
+
+                return _isInDesignMode.Value;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the control is in design mode (running under Blend
+        /// or Visual Studio).
+        /// </summary>
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "Non static member needed for data binding")]
+        public bool IsInDesignMode
+        {
+            get
+            {
+                return IsInDesignModeStatic;
+            }
         }
     }
 }

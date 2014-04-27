@@ -1,52 +1,101 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.ServiceModel.DomainServices.Client;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 using MyERP.DataAccess;
+using MyERP.Infrastructure.Annotations;
+using MyERP.Repositories;
+using MyERP.Web;
 using Telerik.Windows.Controls;
+using Telerik.Windows.Data;
 using WindowStartupLocation = Telerik.Windows.Controls.WindowStartupLocation;
 
 
 namespace MyERP.Controls
 {
-    public partial class LookupAccountControl : UserControl
+    public partial class LookupAccountControl : UserControl, INotifyPropertyChanged
     {
         public LookupAccountControl()
         {
             InitializeComponent();
 
-            this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
-            LayoutRoot.DataContext = this;
+            if (!MyERP.Infrastructure.ViewModelBase.IsInDesignModeStatic)
+            {
+                this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
+                LayoutRoot.DataContext = this;
+                
+                this.loadTimer = new DispatcherTimer();
+                // You can control the load delay between typing in the textbox and going to the server.
+                this.loadTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+                this.loadTimer.Tick += this.OnLoadTimerTick;
+            }
         }
 
-        RadWindow searchWindow = new RadWindow();
+        private readonly DispatcherTimer loadTimer;
+
+        private void OnLoadTimerTick(object sender, EventArgs e)
+        {
+            if (this.loadTimer.IsEnabled)
+            {
+                this.loadTimer.Stop();
+            }
+            IsBusy = true;
+            _accountRepository.GetAccountsByLookupValue(textBox.SearchText, accounts =>
+            {
+                Accounts = accounts;
+                IsBusy = false;
+            });
+        }
+
+        private readonly AccountRepository _accountRepository = new AccountRepository();
+
+        readonly RadWindow _searchWindow = new RadWindow();
+
+        private void TextBox_OnSearchTextChanged(object sender, EventArgs e)
+        {
+            if (this.loadTimer.IsEnabled)
+            {
+                this.loadTimer.Stop();
+            }
+
+            this.loadTimer.Start();
+        }
+
+        public bool IsBusy { get; set; }
 
         public ICommand SearchCommand { get; set; }
 
         private void OnSearchCommandExecuted(object obj)
         {
-            StyleManager.SetTheme( searchWindow, new Windows8Theme());
+            StyleManager.SetTheme( _searchWindow, new Windows8Theme());
             
-            searchWindow.Width = 600;
-            searchWindow.Height = 600;
-            var searchAccountControl = new SearchAccountControl();
-            searchAccountControl.SelectedAccount = SelectedAccount;
-            searchAccountControl.Accounts = Accounts;
-            searchWindow.Content = searchAccountControl;
-            searchWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            searchWindow.HideMinimizeButton = true;
-            searchWindow.HideMaximizeButton = true;
-            searchWindow.Closed += (sender, args) =>
+            _searchWindow.Width = 600;
+            _searchWindow.Height = 600;
+            var searchAccountControl = new SearchAccountControl
             {
-                if (searchWindow.DialogResult == true)
+                searchValue = {Text = textBox.SearchText},
+                SelectedAccount = SelectedAccount,
+                Accounts = Accounts
+            };
+            _searchWindow.Content = searchAccountControl;
+            _searchWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            _searchWindow.HideMinimizeButton = true;
+            _searchWindow.HideMaximizeButton = true;
+            _searchWindow.Closed += (sender, args) =>
+            {
+                if (_searchWindow.DialogResult == true)
                 {
+                    Accounts = searchAccountControl.Accounts;
                     SelectedAccount = searchAccountControl.SelectedAccount;
                 }
             };
-            searchWindow.ShowDialog();
+            _searchWindow.ShowDialog();
         }
 
         public Guid Id
@@ -74,20 +123,16 @@ namespace MyERP.Controls
             }
         }
 
+        private IEnumerable<Account> _accounts;
         public IEnumerable<Account> Accounts
         {
-            get
-            {
-                return (IEnumerable<Account>)GetValue(AccountsProperty);
-            }
+            get { return _accounts; }
             set
             {
-                SetValue(AccountsProperty, value);
+                _accounts = value;
+                OnPropertyChanged("Accounts");
             }
         }
-
-        public static readonly DependencyProperty AccountsProperty = DependencyProperty.Register(
-            "Accounts", typeof(IEnumerable), typeof(LookupAccountControl), new PropertyMetadata(Enumerable.Empty<Account>()));
 
         public Account SelectedAccount
         {
@@ -102,7 +147,7 @@ namespace MyERP.Controls
         }
 
         public static readonly DependencyProperty SelectedAccountProperty = DependencyProperty.Register(
-           "SelectedCurrency", typeof(Account), typeof(LookupAccountControl), new PropertyMetadata(null, OnSelectedAccountChanged));
+           "SelectedAccount", typeof(Account), typeof(LookupAccountControl), new PropertyMetadata(null, OnSelectedAccountChanged));
 
         private static void OnSelectedAccountChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -116,11 +161,18 @@ namespace MyERP.Controls
             }
         }
 
-        private void OnAccountsButtonClicked(object sender, RoutedEventArgs e)
+
+        #region INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged(string propertyName)
         {
-            var account = (sender as Button).DataContext as Account;
-            this.SelectedAccount = Accounts.FirstOrDefault(c => c.Id == account.Id);
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
+
     }
 
 }
