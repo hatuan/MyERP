@@ -56,6 +56,10 @@
                              ShowGroupPanel="False" 
                              ScrollViewer.HorizontalScrollBarVisibility="Visible" 
                              ScrollViewer.VerticalScrollBarVisibility="Visible">
+
+            <i:Interaction.Behaviors>
+                <behaviors:ScrollIntoViewBehavior/>
+            </i:Interaction.Behaviors>
             
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn Header="ACCOUNT" DataMemberBinding="{Binding Code, Mode=TwoWay}" Width="100"/>

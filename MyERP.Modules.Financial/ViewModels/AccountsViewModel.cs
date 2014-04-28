@@ -129,8 +129,6 @@ namespace MyERP.Modules.Financial.ViewModels
             get { return this._accounts.IsBusy; }
         }
 
-        public SortDescriptor _codeSortDescriptor { get; set; }
-
         void _accounts_LoadedData(object sender, Telerik.Windows.Controls.DomainServices.LoadedDataEventArgs e)
         {
             if (e.HasError)
@@ -161,6 +159,7 @@ namespace MyERP.Modules.Financial.ViewModels
                     RaisePropertyChanged(e.PropertyName);
                     break;
                 case "HasChanges":
+                    ((DelegateCommand)AddNewCommand).RaiseCanExecuteChanged();
                     ((DelegateCommand)CloseWindowCommand).RaiseCanExecuteChanged();
                     ((DelegateCommand)SubmitChangesCommand).RaiseCanExecuteChanged();
                     ((DelegateCommand)RejectChangesCommand).RaiseCanExecuteChanged();
@@ -168,6 +167,7 @@ namespace MyERP.Modules.Financial.ViewModels
             }
         }
 
+        //Update khi thay doi sang dong moi
         void _accounts_CurrentChanging(object sender, CurrentChangingEventArgs e)
         {
             if (_accounts.HasChanges)
@@ -176,11 +176,16 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnAddNewCommandExecuted()
         {
-            Account newAccount = new Account();
-            _accounts.AddNew(newAccount);
+            _accounts.AddNew();
 
         }
-        
+
+        private bool AddNewCommandCanExecute()
+        {
+            return !_accounts.HasChanges;
+        }
+
+
         private bool SubmitChangesCommandCanExecute()
         {
             return this._accounts.HasChanges;
@@ -252,19 +257,16 @@ namespace MyERP.Modules.Financial.ViewModels
             this._accounts.LoadedData += _accounts_LoadedData;
             this._accounts.PropertyChanged += _accounts_PropertyChanged;
             this._accounts.SubmittedChanges += _accounts_SubmittedChanges;
-            this._accounts.CurrentChanging += _accounts_CurrentChanging;
+            //this._accounts.CurrentChanging += _accounts_CurrentChanging;
 
-            this._codeSortDescriptor = new SortDescriptor() { Member = "Code" };
-
-            this.AddNewCommand = new DelegateCommand(this.OnAddNewCommandExecuted);
+            this.AddNewCommand = new DelegateCommand(OnAddNewCommandExecuted, AddNewCommandCanExecute);
             this.SubmitChangesCommand = new DelegateCommand(OnSubmitChangesExcuted, SubmitChangesCommandCanExecute);
             this.RejectChangesCommand = new DelegateCommand(OnRejectChangesExcuted, SubmitChangesCommandCanExecute);
             this.RefreshCommand = new DelegateCommand(OnRefreshExcuted, RefreshCommandCanExecute);
             this.DeleteCommand = new DelegateCommand(OnDeleteExcuted, DeleteCommandCanExecute);
             this.CloseWindowCommand = new DelegateCommand(OnCloseWindowExcuted, CloseWindowCanExecute);
         }
-
-        
+       
         #endregion
 
         public event EventHandler<EventArgs> RequestClose;

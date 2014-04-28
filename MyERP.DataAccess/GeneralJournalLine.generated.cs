@@ -177,7 +177,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private long _lineNo;
-		[Column("lineno", Length = 0, Scale = 0, SqlType = "int8")]
+		[Column("line_no", Length = 0, Scale = 0, SqlType = "int8")]
 		[Storage("_lineNo")]
 		public virtual long LineNo
 		{

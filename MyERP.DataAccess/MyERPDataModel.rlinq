@@ -850,7 +850,7 @@
           <orm:column name="job_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_lineNo" property="LineNo" behavior="readwrite" uniqueId="6b7ea4e4-fd50-44ad-a51a-8bc5584e8e5b" type="System.Int64">
-          <orm:column name="lineno" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+          <orm:column name="line_no" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_clientId" property="ClientId" behavior="readwrite" uniqueId="34a21919-4181-4bbb-ab4b-5eca78922d1c" type="System.Guid">
           <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
@@ -1385,7 +1385,7 @@
         <orm:column name="credit_amount" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         <orm:column name="business_partner_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         <orm:column name="job_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
-        <orm:column name="lineno" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="line_no" sql-type="int8" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />

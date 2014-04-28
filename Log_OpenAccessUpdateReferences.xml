@@ -61,6 +61,10 @@
     <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Modules.Financial\packages.config" Message="Render Extensions" />
     <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Modules.Financial\packages.config" Message="packages.config" />
     <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Modules.Financial\MyERP.Modules.Financial.csproj" Message="MyERP.Modules.Financial" />
+    <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Controls\MyERP.Controls.csproj" Message="Assembly References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Controls\MyERP.Controls.csproj" Message="Project References" />
+    <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Controls\MyERP.Controls.csproj" Message="Import Directives" />
+    <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Controls\MyERP.Controls.csproj" Message="MyERP.Controls" />
     <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.DataAccess\MyERP.DataAccess.csproj" Message="Assembly References" />
     <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.DataAccess\MyERP.DataAccess.csproj" Message="Project References" />
     <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.DataAccess\MyERP.DataAccess.csproj" Message="Import Directives" />

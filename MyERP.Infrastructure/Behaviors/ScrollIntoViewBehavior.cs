@@ -5,6 +5,14 @@ using Telerik.Windows.Controls.GridView;
 
 namespace MyERP.Infrastructure.Behaviors
 {
+    /// <summary>
+    /// Use : 
+    /// <sdk:DataGrid AutoGenerateColumns="true" ItemsSource="{Binding ObjectList}" SelectedItem="{Binding SelectedObject, Mode=TwoWay}" Name="dataGridObjects">
+    ///     <i:Interaction.Behaviors>
+    ///         <behaviors:ScrollIntoViewBehavior/>
+    ///     </i:Interaction.Behaviors>
+    /// </sdk:DataGrid>
+    /// </summary>
     public class ScrollIntoViewBehavior : Behavior<RadGridView>
     {
         private GridViewCellInfo currentCellInfo;
@@ -27,11 +35,7 @@ namespace MyERP.Infrastructure.Behaviors
                         var row = r as GridViewRow;
 
                         if (row != null)
-                        {
-                            row.IsCurrent = true;
-                            row.Focus();
-                        }
-                        grid.CurrentCellInfo = new GridViewCellInfo(grid.SelectedItem, grid.Columns[0]);
+                            row.IsSelected = true;
                     });
                 }
             }
