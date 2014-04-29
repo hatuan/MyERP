@@ -99,35 +99,93 @@ namespace MyERP.Modules.Home.Views
 
         private void OnGeneralLeaderJournalsButtonClicked(object sender, System.Windows.RoutedEventArgs e)
         {
-            Module setupEntity = (sender as Button).DataContext as Module;
+            Module clickEntity = (sender as Button).DataContext as Module;
 
-            if (setupEntity.IdAsName == ModuleName.GeneralLeaderJournals)
+            switch (clickEntity.IdAsName)
             {
-                this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.FinancialModule);
-                this.EventAggregator.GetEvent<GeneralLeaderJournalsClickedEvent>().Publish(setupEntity);
+                case ModuleName.GeneralLeaderJournals:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.FinancialModule);
+                    this.EventAggregator.GetEvent<GeneralLeaderJournalsClickedEvent>().Publish(clickEntity);
+                    break;
             }
         }
 
         private void OnGeneralLeaderReportsButtonClicked(object sender, System.Windows.RoutedEventArgs e)
         {
         	// TODO: Add event handler implementation here.
+            Module clickEntity = (sender as Button).DataContext as Module;
+
+            switch (clickEntity.IdAsName)
+            {
+            }
         }
 
         private void OnGeneralLeaderSetupsButtonClicked(object sender, System.Windows.RoutedEventArgs e)
         {
-            Module setupEntity = (sender as Button).DataContext as Module;
+             Module clickEntity = (sender as Button).DataContext as Module;
 
-            if (setupEntity.IdAsName == ModuleName.GeneralLeaderSetupChartOfAccounts)
+            switch (clickEntity.IdAsName)
             {
-                this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.FinancialModule);
-                this.EventAggregator.GetEvent<AccountClickedEvent>().Publish(setupEntity);
+                case ModuleName.GeneralLeaderSetupAccountOpeningBalances:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.FinancialModule);
+                    this.EventAggregator.GetEvent<GeneralLeaderSetupAccountsOpeningBalanceClickedEvent>().Publish(clickEntity);
+                    break;
+                
+                case ModuleName.GeneralLeaderSetupChartOfAccounts:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.FinancialModule);
+                    this.EventAggregator.GetEvent<GeneralLeaderSetupChartOfAccountsClickedEvent>().Publish(clickEntity);
+                    break;
+
+                case ModuleName.GeneralLeaderSetup:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.FinancialModule);
+                    this.EventAggregator.GetEvent<GeneralLeaderSetupClickedEvent>().Publish(clickEntity);
+                    break;
             }
         }
 
         private void OnSetupsButtonClicked(object sender, System.Windows.RoutedEventArgs e)
         {
-            Module setupEntity = (sender as Button).DataContext as Module;
+            Module clickEntity = (sender as Button).DataContext as Module;
 
+            switch (clickEntity.IdAsName)
+            {
+                case ModuleName.SetupCurencies:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.SetupModule);
+                    this.EventAggregator.GetEvent<SetupCurenciesClickedEvent>().Publish(clickEntity);
+                    break;
+
+                case ModuleName.SetupCurenciesExchangeRate:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.SetupModule);
+                    this.EventAggregator.GetEvent<SetupCurenciesExchangeRateClickedEvent>().Publish(clickEntity);
+                    break;
+
+                case ModuleName.SetupClientInformation:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.SetupModule);
+                    this.EventAggregator.GetEvent<SetupClientInformationClickedEvent>().Publish(clickEntity);
+                    break;
+
+                case ModuleName.SetupOrganizations:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.SetupModule);
+                    this.EventAggregator.GetEvent<SetupOrganizationsClickedEvent>().Publish(clickEntity);
+                    break;
+
+                case ModuleName.SetupUsers:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.SetupModule);
+                    this.EventAggregator.GetEvent<SetupUsersClickedEvent>().Publish(clickEntity);
+                    break;
+                    
+                case ModuleName.SetupNoSeries:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.SetupModule);
+                    this.EventAggregator.GetEvent<SetupNoSeriesClickedEvent>().Publish(clickEntity);
+                    break;
+
+                case ModuleName.SetupPeriod:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.SetupModule);
+                    this.EventAggregator.GetEvent<SetupPeriodClickedEvent>().Publish(clickEntity);
+                    break;
+                    
+            }
+            
         }
     }
 }

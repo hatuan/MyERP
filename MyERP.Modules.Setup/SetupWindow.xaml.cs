@@ -11,43 +11,30 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.ServiceLocation;
-using MyERP.Infrastructure;
 using Telerik.Windows.Controls;
 
-namespace MyERP.Modules.User
+namespace MyERP.Modules.Setup
 {
     /// <summary>
     /// Interaction logic for UserWindow.xaml
     /// </summary>
-    [Export("UserWindow", typeof(RadWindow))]
-    public partial class UserWindow : IPartImportsSatisfiedNotification
+    [Export("SetupWindow", typeof(RadWindow))]
+    public partial class SetupWindow : IPartImportsSatisfiedNotification
     {
         [Import]
         public IRegionManager RegionManager { get; set; }
 
-        [Import]
-        public IEventAggregator EventAggregator { get; set; }
-
-        public UserWindow()
+        public SetupWindow()
         {
             InitializeComponent();
-            
         }
 
         public void OnImportsSatisfied()
         {
             //IRegionManager regionManager = ServiceLocator.Current.GetInstance<IRegionManager>();
             this.SetValue(Microsoft.Practices.Prism.Regions.RegionManager.RegionManagerProperty, RegionManager);
-
-            this.EventAggregator.GetEvent<ShowUserLoginProcessEvent>().Subscribe(OnShowUserLoginProcessEvent);
-        }
-
-        public void OnShowUserLoginProcessEvent(object obj)
-        {
-            this.RegionManager.RequestNavigate("UserWindowRegion", "LoginView");
         }
     }
 }

@@ -40,7 +40,7 @@ namespace MyERP.Modules.Financial
         public void OnImportsSatisfied()
         {
             this.SetValue(Microsoft.Practices.Prism.Regions.RegionManager.RegionManagerProperty, RegionManager);
-            this.EventAggregator.GetEvent<AccountClickedEvent>().Subscribe(OnAccountClickedEvent);
+            this.EventAggregator.GetEvent<GeneralLeaderSetupChartOfAccountsClickedEvent>().Subscribe(OnAccountClickedEvent);
             this.EventAggregator.GetEvent<GeneralLeaderJournalsClickedEvent>().Subscribe(OnGeneralLeaderJournalsClickedEvent);
         }
 

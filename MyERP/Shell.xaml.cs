@@ -51,6 +51,9 @@ namespace MyERP
         private void NavigateToLoginModule()
         {
             this.ViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.UserModule);
+            this.Aggregator.GetEvent<ShowUserLoginProcessEvent>().Publish(null);
+
+            //this.ViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.UserModule);
         }
 
         private void LoadModulesInBackground()
@@ -59,7 +62,8 @@ namespace MyERP
                                                {
                                                    ModuleNames.UserModule,
                                                    ModuleNames.HomeModule,
-                                                   ModuleNames.FinancialModule
+                                                   ModuleNames.FinancialModule,
+                                                   ModuleNames.SetupModule
                                                });
 
             foreach (var url in urls)
