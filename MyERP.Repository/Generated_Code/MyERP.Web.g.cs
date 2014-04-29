@@ -5935,6 +5935,20 @@ namespace MyERP.DataAccess
         
         Default = 0,
         
+        SetupCurencies = 10,
+        
+        SetupCurenciesExchangeRate = 11,
+        
+        SetupClientInformation = 100,
+        
+        SetupOrganizations = 101,
+        
+        SetupUsers = 102,
+        
+        SetupNoSeries = 200,
+        
+        SetupPeriod = 210,
+        
         GeneralLeaderJournals = 1000,
         
         GeneralLeaderReportsAccountActivity = 2000,
@@ -5949,7 +5963,7 @@ namespace MyERP.DataAccess
         
         GeneralLeaderSetupChartOfAccounts = 7000,
         
-        GeneralLeaderSetupPeriod = 8000,
+        GeneralLeaderSetup = 8000,
         
         CashJournalsReceipt = 10000,
         

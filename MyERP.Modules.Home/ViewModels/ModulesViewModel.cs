@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.ServiceModel.DomainServices.Client;
 using MyERP.Infrastructure.ViewModels;
 using MyERP.Repositories;
@@ -20,7 +21,7 @@ namespace MyERP.Modules.Home.ViewModels
         public DomainContext Context { get; set; }
 
         //set from the view's domaindatasource
-        private IEnumerable<Module> _generalLeaderJournals = null;
+        private IEnumerable<Module> _generalLeaderJournals;
         public IEnumerable<Module> GeneralLeaderJournals
         {
             get
@@ -39,7 +40,7 @@ namespace MyERP.Modules.Home.ViewModels
         }
 
         //set from the view's domaindatasource
-        private IEnumerable<Module> _generalLeaderSetup = null;
+        private IEnumerable<Module> _generalLeaderSetup;
         public IEnumerable<Module> GeneralLeaderSetup
         {
             get
@@ -57,7 +58,7 @@ namespace MyERP.Modules.Home.ViewModels
         }
 
         //set from the view's domaindatasource
-        private IEnumerable<Module> _generalLeaderReports = null;
+        private IEnumerable<Module> _generalLeaderReports;
         public IEnumerable<Module> GeneralLeaderReports
         {
             get
@@ -71,6 +72,24 @@ namespace MyERP.Modules.Home.ViewModels
                     });
                 }
                 return this._generalLeaderReports;
+            }
+        }
+
+        //set from the view's domaindatasource
+        private IEnumerable<Module> _setups;
+        public IEnumerable<Module> Setups
+        {
+            get
+            {
+                if (this._setups == null)
+                {
+                    this.ModulesRepository.GetSetups((results) =>
+                    {
+                        this._setups = results;
+                        this.RaisePropertyChanged(() => this.Setups);
+                    });
+                }
+                return this._setups;
             }
         }
 

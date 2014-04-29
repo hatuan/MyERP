@@ -123,5 +123,11 @@ namespace MyERP.Modules.Home.Views
                 this.EventAggregator.GetEvent<AccountClickedEvent>().Publish(setupEntity);
             }
         }
+
+        private void OnSetupsButtonClicked(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Module setupEntity = (sender as Button).DataContext as Module;
+
+        }
     }
 }

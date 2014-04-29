@@ -32,5 +32,13 @@ namespace MyERP.Repositories
 
             this.LoadQuery<Module>(query, callback);
         }
+
+        public void GetSetups(Action<IEnumerable<Module>> callback)
+        {
+            EntityQuery<Module> query =
+              this.Context.GetModulesQuery().Where(u => u.Group == "Setups");
+
+            this.LoadQuery<Module>(query, callback);
+        }
     }
 }

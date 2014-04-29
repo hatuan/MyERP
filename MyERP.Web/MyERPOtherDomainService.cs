@@ -281,6 +281,55 @@ namespace MyERP.Web
             {
                 new Module(){
                     ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
+                    Name = ModuleName.SetupCurencies.ToString(),
+                    Id = (int)ModuleName.SetupCurencies,
+                    Group = "Setups",
+                    Description = "Currencies"
+                },
+                 new Module(){
+                    ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
+                    Name = ModuleName.SetupCurenciesExchangeRate.ToString(),
+                    Id = (int)ModuleName.SetupCurenciesExchangeRate,
+                    Group = "Setups",
+                    Description = "Currencies Exchange Rate"
+                },
+                 new Module(){
+                    ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
+                    Name = ModuleName.SetupClientInformation.ToString(),
+                    Id = (int)ModuleName.SetupClientInformation,
+                    Group = "Setups",
+                    Description = "Client Information"
+                },
+                 new Module(){
+                    ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
+                    Name = ModuleName.SetupOrganizations.ToString(),
+                    Id = (int)ModuleName.SetupOrganizations,
+                    Group = "Setups",
+                    Description = "Organizations"
+                },
+                 new Module(){
+                    ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
+                    Name = ModuleName.SetupUsers.ToString(),
+                    Id = (int)ModuleName.SetupUsers,
+                    Group = "Setups",
+                    Description = "Users"
+                },
+                 new Module(){
+                    ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
+                    Name = ModuleName.SetupNoSeries.ToString(),
+                    Id = (int)ModuleName.SetupNoSeries,
+                    Group = "Setups",
+                    Description = "Number Order Series"
+                },
+                 new Module(){
+                    ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
+                    Name = ModuleName.SetupPeriod.ToString(),
+                    Id = (int)ModuleName.SetupPeriod,
+                    Group = "Setups",
+                    Description = "Period"
+                },
+                new Module(){
+                    ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
                     Name = ModuleName.GeneralLeaderJournals.ToString(),
                     Id = (int)ModuleName.GeneralLeaderJournals,
                     Group = "GeneralLeaderJournals",
@@ -330,10 +379,10 @@ namespace MyERP.Web
                 },
                 new Module(){
                     ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
-                    Name = ModuleName.GeneralLeaderSetupPeriod.ToString(),
-                    Id = (int)ModuleName.GeneralLeaderSetupPeriod,
+                    Name = ModuleName.GeneralLeaderSetup.ToString(),
+                    Id = (int)ModuleName.GeneralLeaderSetup,
                     Group = "GeneralLeaderSetup",
-                    Description = "Period"
+                    Description = "Setup"
                 },
                 new Module(){
                     ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),

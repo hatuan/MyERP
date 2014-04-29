@@ -462,7 +462,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private GeneralJournalDocument _transactionDocument;
-		[ForeignKeyAssociation(SharedFields = "GeneralJournalDocumentId", TargetFields = "Id")]
+		[ForeignKeyAssociation(SharedFields = "GeneralJournalDocumentId", TargetFields = "Id", Depend = true, IsManaged = true)]
 		[Storage("_transactionDocument")]
 		public virtual GeneralJournalDocument TransactionDocument
 		{
@@ -506,33 +506,33 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private User _user1;
+		private User _recModifiedByUser;
 		[ForeignKeyAssociation(SharedFields = "RecModifiedBy", TargetFields = "Id")]
-		[Storage("_user1")]
+		[Storage("_recModifiedByUser")]
 		public virtual User RecModifiedByUser
 		{
 			get
 			{
-				return this._user1;
+				return this._recModifiedByUser;
 			}
 			set
 			{
-				this._user1 = value;
+				this._recModifiedByUser = value;
 			}
 		}
 		
-		private User _user;
+		private User _recCreatedByUser;
 		[ForeignKeyAssociation(SharedFields = "RecCreatedBy", TargetFields = "Id")]
-		[Storage("_user")]
+		[Storage("_recCreatedByUser")]
 		public virtual User RecCreatedByUser
 		{
 			get
 			{
-				return this._user;
+				return this._recCreatedByUser;
 			}
 			set
 			{
-				this._user = value;
+				this._recCreatedByUser = value;
 			}
 		}
 		
@@ -551,18 +551,18 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Account _account1;
+		private Account _corAccount;
 		[ForeignKeyAssociation(SharedFields = "CorAccountId", TargetFields = "Id")]
-		[Storage("_account1")]
+		[Storage("_corAccount")]
 		public virtual Account CorAccount
 		{
 			get
 			{
-				return this._account1;
+				return this._corAccount;
 			}
 			set
 			{
-				this._account1 = value;
+				this._corAccount = value;
 			}
 		}
 		

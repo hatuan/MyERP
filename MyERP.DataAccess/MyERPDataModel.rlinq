@@ -787,17 +787,17 @@
             <orm:sharedfield name="_organizaionId" target-class="MyERP.DataAccess.Organization" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_userinfo" property="RecCreatedByUser" behavior="readwrite" uniqueId="ad71934f-c342-46fa-9eef-597c22fd3b1e" type="MyERP.DataAccess.User">
+        <orm:field name="_recCreatedByUser" property="RecCreatedByUser" behavior="readwrite" uniqueId="ad71934f-c342-46fa-9eef-597c22fd3b1e" type="MyERP.DataAccess.User">
           <orm:reference uniqueId="040d4b9b-a76f-4286-9053-f12ab5b5a49a" association-name="GeneralJournalDocumentHasCreatedBy">
             <orm:sharedfield name="_recCreatedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_userinfo1" property="RecModifiedByUser" behavior="readwrite" uniqueId="b229fc60-d7e8-422c-bc67-cb627d60c821" type="MyERP.DataAccess.User">
+        <orm:field name="_recModifiedByUser" property="RecModifiedByUser" behavior="readwrite" uniqueId="b229fc60-d7e8-422c-bc67-cb627d60c821" type="MyERP.DataAccess.User">
           <orm:reference uniqueId="8561c739-3079-44e6-8083-14e5134e45d1" association-name="GeneralJournalDocumentHasModifiedBy">
             <orm:sharedfield name="_recModifiedBy" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_dmnt" property="Currency" behavior="readwrite" uniqueId="e130c8de-7b7d-4c7d-ae79-5163dd85c6ec" type="MyERP.DataAccess.Currency">
+        <orm:field name="_currency" property="Currency" behavior="readwrite" uniqueId="e130c8de-7b7d-4c7d-ae79-5163dd85c6ec" type="MyERP.DataAccess.Currency">
           <orm:reference uniqueId="0cb22bb7-2d7d-4db3-80ce-b9fcfdf36e34" association-name="GeneralJournalDocumentHasCurrency">
             <orm:sharedfield name="_currencyId" target-class="MyERP.DataAccess.Currency" target-field="_id" />
           </orm:reference>
@@ -807,8 +807,8 @@
             <orm:sharedfield name="_noSeriesId" target-class="MyERP.DataAccess.NoSeries" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_ct11" property="TransactionLines" behavior="readwrite" uniqueId="07ec2603-84e3-4c8d-a52d-e32cfad2f54a" type="MyERP.DataAccess.GeneralJournalLine">
-          <orm:collection element-class="MyERP.DataAccess.GeneralJournalLine" inverse-field="_transactionDocument" order-by="" uniqueId="5685b103-b6b7-44cb-a08e-f3278fc9a835" />
+        <orm:field name="_transactionLines" property="TransactionLines" behavior="readwrite" uniqueId="07ec2603-84e3-4c8d-a52d-e32cfad2f54a" type="MyERP.DataAccess.GeneralJournalLine">
+          <orm:collection element-class="MyERP.DataAccess.GeneralJournalLine" inverse-field="_transactionDocument" managed="true" order-by="" uniqueId="5685b103-b6b7-44cb-a08e-f3278fc9a835" />
         </orm:field>
       </orm:class>
       <orm:class name="GeneralJournalLine" update-schema="true" uniqueId="8481a6cc-b6ad-4206-8b61-08181d982446">
@@ -910,8 +910,8 @@
             <orm:sharedfield name="_organizationId" target-class="MyERP.DataAccess.Organization" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_transactionDocument" property="TransactionDocument" behavior="readwrite" uniqueId="b8f7d741-5a37-4b6f-af00-3e93ea88eaba" type="MyERP.DataAccess.GeneralJournalDocument">
-          <orm:reference uniqueId="5685b103-b6b7-44cb-a08e-f3278fc9a835" association-name="Ct11HasPh11">
+        <orm:field name="_transactionDocument" property="TransactionDocument" behavior="readwrite" uniqueId="b8f7d741-5a37-4b6f-af00-3e93ea88eaba" type="MyERP.DataAccess.GeneralJournalDocument" dependent="true">
+          <orm:reference uniqueId="5685b103-b6b7-44cb-a08e-f3278fc9a835" association-name="GeneralJournalLinesHasGeneralJournalDocument">
             <orm:sharedfield name="_generalJournalDocumentId" target-class="MyERP.DataAccess.GeneralJournalDocument" target-field="_Stt_Rec" />
           </orm:reference>
         </orm:field>
@@ -925,12 +925,12 @@
             <orm:sharedfield name="_jobId" target-class="MyERP.DataAccess.Job" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_user1" property="RecModifiedByUser" behavior="readwrite" uniqueId="5a93ed1b-ddbe-4c9c-a1a5-2d755453cafb" type="MyERP.DataAccess.User">
+        <orm:field name="_recModifiedByUser" property="RecModifiedByUser" behavior="readwrite" uniqueId="5a93ed1b-ddbe-4c9c-a1a5-2d755453cafb" type="MyERP.DataAccess.User">
           <orm:reference uniqueId="fa21315e-fec9-4413-a7dd-20791e8e6dd9" association-name="GeneralJournalLineHasModifiedBy">
             <orm:sharedfield name="_recModifiedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_user" property="RecCreatedByUser" behavior="readwrite" uniqueId="5782bf17-2ffa-4be3-9ab3-8689180654cb" type="MyERP.DataAccess.User">
+        <orm:field name="_recCreatedByUser" property="RecCreatedByUser" behavior="readwrite" uniqueId="5782bf17-2ffa-4be3-9ab3-8689180654cb" type="MyERP.DataAccess.User">
           <orm:reference uniqueId="5335c4ed-4e17-459a-b1db-bb8e6fd743b9" association-name="GeneralJournalLineHasCreatedBy">
             <orm:sharedfield name="_recCreatedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
           </orm:reference>
@@ -940,7 +940,7 @@
             <orm:sharedfield name="_accountId" target-class="MyERP.DataAccess.Account" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_account1" property="CorAccount" behavior="readwrite" uniqueId="6defb92f-9d57-4cf1-8858-5d4a9fbddd19" type="MyERP.DataAccess.Account">
+        <orm:field name="_corAccount" property="CorAccount" behavior="readwrite" uniqueId="6defb92f-9d57-4cf1-8858-5d4a9fbddd19" type="MyERP.DataAccess.Account">
           <orm:reference uniqueId="0a0f8a90-d208-48e4-bd07-e5ed329350ee" association-name="GeneralJournalLineHasCorAccount">
             <orm:sharedfield name="_corAccountId" target-class="MyERP.DataAccess.Account" target-field="_id" />
           </orm:reference>
@@ -1182,6 +1182,78 @@
         <orm:field name="_user1" property="RecCreatedByUser" behavior="readwrite" uniqueId="148cb9e5-7531-4ee1-89c2-1eff5da23cae" type="MyERP.DataAccess.User">
           <orm:reference uniqueId="6570db1b-864d-442e-abdf-5f6fc4abb270" association-name="NoSeriesHasCreated">
             <orm:sharedfield name="_recCreatedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+      </orm:class>
+      <orm:class name="GeneralJournalSetup" uniqueId="40dea681-ce87-4fae-ab27-9417a8cd55d4">
+        <orm:table name="general_journal_setup" />
+        <orm:identity>
+          <orm:single-field field-name="_id" />
+        </orm:identity>
+        <orm:concurrency strategy="version" field-name="_version">
+          <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
+        </orm:concurrency>
+        <orm:field name="_id" property="Id" uniqueId="404c77ca-ec56-4519-abcb-a3df4f1b7d27" type="System.Guid">
+          <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_organizationId" property="OrganizationId" uniqueId="1cbdb220-ef99-493d-8de3-5b6e57853fa4" type="System.Guid">
+          <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_clientId" property="ClientId" uniqueId="0d6a0d16-021a-4f17-b036-c2131c0124b5" type="System.Guid">
+          <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_localCurrencyId" property="LocalCurrencyId" uniqueId="fd033ac3-8ade-4131-9d97-78e03450cc7f" type="System.Guid">
+          <orm:column name="local_currency_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_lcyExchangeRateUnit" property="LcyExchangeRateUnit" uniqueId="39195ca8-9042-4918-b597-8c44067b7d8b" type="System.Int32">
+          <orm:column name="lcy_exchange_rate_unit" sql-type="int4" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_defaultDocumentType1NoId" property="DefaultDocumentType1NoId" uniqueId="a5ef0666-545c-43c4-be6e-2bafa4a3c198" type="System.Guid">
+          <orm:column name="default_document_type_1_no_id" sql-type="uuid" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_recCreated" property="RecCreated" uniqueId="2d3fe498-f35d-4dc0-b73a-7ca669687cbc" type="System.DateTime">
+          <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="6" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_recModified" property="RecModified" uniqueId="138957a8-270b-48bd-9d01-2d80b6896765" type="System.DateTime">
+          <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="6" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_recCreatedBy" property="RecCreatedBy" uniqueId="03c07a79-da31-409c-ac55-f822219e2777" type="System.Guid">
+          <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_recModifiedBy" property="RecModifiedBy" uniqueId="0361cd1d-76c5-428e-9b66-912dfffe4483" type="System.Guid">
+          <orm:column name="rec_modified_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_version" property="Version" uniqueId="cb84b123-c52e-4d31-88e6-bc13ce59f61b" type="System.Int64">
+          <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_user" property="RecCreatedByUser" behavior="readwrite" uniqueId="d4287fc8-38a7-471e-9ab3-6c587b13a9e9" type="MyERP.DataAccess.User">
+          <orm:reference uniqueId="ee671ba6-853a-440f-8dd2-ae771e0b4488" association-name="GeneralJournalSetupHasCreated">
+            <orm:sharedfield name="_recCreatedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_user1" property="RecModifiedByUser" behavior="readwrite" uniqueId="4b1d448d-a5c6-404a-a6e8-6607315e7fdf" type="MyERP.DataAccess.User">
+          <orm:reference uniqueId="512d65a1-4ff8-4abe-8c81-eb84b7e661b1" association-name="GeneralJournalSetupHasModified">
+            <orm:sharedfield name="_recModifiedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_currency" property="Currency" behavior="readwrite" uniqueId="30201d66-4f3c-4246-b17e-28d9da12fe2f" type="MyERP.DataAccess.Currency">
+          <orm:reference uniqueId="1b5b8c67-ffef-49c6-9a82-1947f4621f90" association-name="GeneralJournalSetupHasLCY">
+            <orm:sharedfield name="_localCurrencyId" target-class="MyERP.DataAccess.Currency" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_organization" property="Organization" behavior="readwrite" uniqueId="dd32d88b-bec5-4260-8bbc-2dabc6f18e69" type="MyERP.DataAccess.Organization">
+          <orm:reference uniqueId="246b74b4-e6e6-4f31-923f-a3490ad5f0f1" association-name="GeneralJournalSetupHasOrganization">
+            <orm:sharedfield name="_organizationId" target-class="MyERP.DataAccess.Organization" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_noSeries" property="DefaultDocumentType1No" behavior="readwrite" uniqueId="4f8b118b-b1e7-407a-bb03-dfac077c635c" type="MyERP.DataAccess.NoSeries">
+          <orm:reference uniqueId="8adf31d1-b290-4400-b3c8-37a92a9d9855" association-name="GeneralJournalSetupHasDocumentType1No">
+            <orm:sharedfield name="_defaultDocumentType1NoId" target-class="MyERP.DataAccess.NoSeries" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="4439a70d-8356-48ac-8450-852c8e5f45ea" type="MyERP.DataAccess.Client">
+          <orm:reference uniqueId="7f8ef986-c721-4489-aacd-caa801390d7a" association-name="GeneralJournalSetupHasClient">
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
           </orm:reference>
         </orm:field>
       </orm:class>
@@ -1447,6 +1519,37 @@
         <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.VariableLengthStringConverter" ado-type="Varchar" />
+      </orm:table>
+      <orm:table name="general_journal_setup">
+        <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:column name="lcy_exchange_rate_unit" sql-type="int4" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
+        <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="6" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
+        <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="6" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
+        <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
+        <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:column name="rec_modified_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:column name="local_currency_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:column name="default_document_type_1_no_id" sql-type="uuid" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:constraint name="ref_GeneralJournalSetup_client" destination-table="client">
+          <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:constraint>
+        <orm:constraint name="ref_GneralJournalSetup_currency" destination-table="currency">
+          <orm:column name="local_currency_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:constraint>
+        <orm:constraint name="ref_GnralJournalSetup_no_series" destination-table="no_series">
+          <orm:column name="default_document_type_1_no_id" sql-type="uuid" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:constraint>
+        <orm:constraint name="ref_GnrlJrnalSetup_organization" destination-table="organization">
+          <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:constraint>
+        <orm:constraint name="ref_GeneralJournalSetup_user" destination-table="user">
+          <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:constraint>
+        <orm:constraint name="ref_GeneralJournalSetup_user2" destination-table="user">
+          <orm:column name="rec_modified_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:constraint>
       </orm:table>
     </orm:schema>
     <orm:relational-naming-settings>
@@ -2254,16 +2357,16 @@
       </AssociationTargets>
       <navigationalProperties>
         <classHasNavigationalProperties Id="7900e546-e7d3-4024-b430-ab80ca6515ad">
-          <NavigationalProperty Id="07ec2603-84e3-4c8d-a52d-e32cfad2f54a" name="TransactionLines" type="IList&lt;GeneralJournalLine&gt;" label="TransactionLines : IList&lt;GeneralJournalLine&gt;" nullable="true" kind="Persistent" fieldName="_ct11" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="07ec2603-84e3-4c8d-a52d-e32cfad2f54a" name="TransactionLines" type="IList&lt;GeneralJournalLine&gt;" label="TransactionLines : IList&lt;GeneralJournalLine&gt;" nullable="true" kind="Persistent" fieldName="_transactionLines" isDependent="false" isManaged="true" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="cb193c8a-209b-4848-9ceb-bfd396a17517">
-          <NavigationalProperty Id="e130c8de-7b7d-4c7d-ae79-5163dd85c6ec" name="Currency" type="Currency" label="Currency : Currency" nullable="true" kind="Persistent" fieldName="_dmnt" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="e130c8de-7b7d-4c7d-ae79-5163dd85c6ec" name="Currency" type="Currency" label="Currency : Currency" nullable="true" kind="Persistent" fieldName="_currency" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="6d4c1842-be81-44d0-afaa-6c8b8079f0ea">
-          <NavigationalProperty Id="ad71934f-c342-46fa-9eef-597c22fd3b1e" name="RecCreatedByUser" type="User" label="RecCreatedByUser : User" nullable="true" kind="Persistent" fieldName="_userinfo" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="ad71934f-c342-46fa-9eef-597c22fd3b1e" name="RecCreatedByUser" type="User" label="RecCreatedByUser : User" nullable="true" kind="Persistent" fieldName="_recCreatedByUser" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="79913893-3de6-4fa1-ad6e-01e7c7cfa365">
-          <NavigationalProperty Id="b229fc60-d7e8-422c-bc67-cb627d60c821" name="RecModifiedByUser" type="User" label="RecModifiedByUser : User" nullable="true" kind="Persistent" fieldName="_userinfo1" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="b229fc60-d7e8-422c-bc67-cb627d60c821" name="RecModifiedByUser" type="User" label="RecModifiedByUser : User" nullable="true" kind="Persistent" fieldName="_recModifiedByUser" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="11ea4765-d6c8-4c6b-b8c6-b6c0eb075628">
           <NavigationalProperty Id="6efc28df-900c-406b-b8c2-07b39932ac28" name="Client" type="Client" label="Client : Client" nullable="true" kind="Persistent" fieldName="_client" isDependent="false" isManaged="false" />
@@ -2305,7 +2408,7 @@
       <Property Id="35ec6a41-712a-4ec5-8f9c-8e8fa8eb2269" name="TransactionType" type="Int32" label="TransactionType : Int32" kind="Persistent" fieldName="_transactionType" />
       <Property Id="cee6ff8c-fb93-48a5-9610-4c051f4a6af3" name="FixAssetId" type="Guid" label="FixAssetId : Guid" fieldName="_fixAssetId" />
       <AssociationTargets>
-        <Association Id="5685b103-b6b7-44cb-a08e-f3278fc9a835" SourceMultiplicity="ZeroOne" name="Ct11HasPh11">
+        <Association Id="5685b103-b6b7-44cb-a08e-f3278fc9a835" SourceMultiplicity="ZeroOne" name="GeneralJournalLinesHasGeneralJournalDocument">
           <DomainClassMoniker name="/EntitiesModel/GeneralJournalDocument" />
           <targetNavigationalProperty>
             <associationDefinesTargetProperty Id="8cf6c8ae-4efb-4a67-b7e8-0b0f1319fea8">
@@ -2385,7 +2488,7 @@
       </AssociationTargets>
       <navigationalProperties>
         <classHasNavigationalProperties Id="f7e47e64-371d-4627-88d6-72bfc2fe50e9">
-          <NavigationalProperty Id="b8f7d741-5a37-4b6f-af00-3e93ea88eaba" name="TransactionDocument" type="GeneralJournalDocument" label="TransactionDocument : GeneralJournalDocument" nullable="true" kind="Persistent" fieldName="_transactionDocument" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="b8f7d741-5a37-4b6f-af00-3e93ea88eaba" name="TransactionDocument" type="GeneralJournalDocument" label="TransactionDocument : GeneralJournalDocument" nullable="true" kind="Persistent" fieldName="_transactionDocument" isDependent="true" isManaged="true" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="26a5e52a-5b3a-48d2-9e29-e6de73e7b182">
           <NavigationalProperty Id="eff5976f-30c7-49d8-925e-b9453a644108" name="BusinessPartner" type="BusinessPartner" label="BusinessPartner : BusinessPartner" nullable="true" kind="Persistent" fieldName="_businessPartner" isDependent="false" isManaged="false" />
@@ -2400,16 +2503,16 @@
           <NavigationalProperty Id="db463443-1e15-4d09-a078-518972efac0f" name="Organization" type="Organization" label="Organization : Organization" nullable="true" kind="Persistent" fieldName="_organization" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="c75128a9-110f-4d5e-980f-de4fd8707f74">
-          <NavigationalProperty Id="5782bf17-2ffa-4be3-9ab3-8689180654cb" name="RecCreatedByUser" type="User" label="RecCreatedByUser : User" nullable="true" kind="Persistent" fieldName="_user" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="5782bf17-2ffa-4be3-9ab3-8689180654cb" name="RecCreatedByUser" type="User" label="RecCreatedByUser : User" nullable="true" kind="Persistent" fieldName="_recCreatedByUser" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="1c81f7d3-344b-4f6c-b4f6-5524ce56bceb">
-          <NavigationalProperty Id="5a93ed1b-ddbe-4c9c-a1a5-2d755453cafb" name="RecModifiedByUser" type="User" label="RecModifiedByUser : User" nullable="true" kind="Persistent" fieldName="_user1" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="5a93ed1b-ddbe-4c9c-a1a5-2d755453cafb" name="RecModifiedByUser" type="User" label="RecModifiedByUser : User" nullable="true" kind="Persistent" fieldName="_recModifiedByUser" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="a6ae8e5d-40fd-427e-9302-dd420e245a9f">
           <NavigationalProperty Id="70b71d85-ea00-4522-8f2a-ea99dbbd883d" name="Account" type="Account" label="Account : Account" nullable="true" kind="Persistent" fieldName="_account" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="a7ed29dd-177e-4788-be6b-e29b531025b5">
-          <NavigationalProperty Id="6defb92f-9d57-4cf1-8858-5d4a9fbddd19" name="CorAccount" type="Account" label="CorAccount : Account" nullable="true" kind="Persistent" fieldName="_account1" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="6defb92f-9d57-4cf1-8858-5d4a9fbddd19" name="CorAccount" type="Account" label="CorAccount : Account" nullable="true" kind="Persistent" fieldName="_corAccount" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
@@ -2604,6 +2707,89 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
+    <DomainClass Id="40dea681-ce87-4fae-ab27-9417a8cd55d4" name="GeneralJournalSetup" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Version" concurrencyMember="Version" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="404c77ca-ec56-4519-abcb-a3df4f1b7d27" name="Id" type="Guid" label="Id : Guid" identity="true" fieldName="_id" />
+      <Property Id="1cbdb220-ef99-493d-8de3-5b6e57853fa4" name="OrganizationId" type="Guid" label="OrganizationId : Guid" fieldName="_organizationId" />
+      <Property Id="0d6a0d16-021a-4f17-b036-c2131c0124b5" name="ClientId" type="Guid" label="ClientId : Guid" fieldName="_clientId" />
+      <Property Id="fd033ac3-8ade-4131-9d97-78e03450cc7f" name="LocalCurrencyId" type="Guid" label="LocalCurrencyId : Guid" fieldName="_localCurrencyId" />
+      <Property Id="39195ca8-9042-4918-b597-8c44067b7d8b" name="LcyExchangeRateUnit" type="Int32" label="LcyExchangeRateUnit : Int32" fieldName="_lcyExchangeRateUnit" />
+      <Property Id="a5ef0666-545c-43c4-be6e-2bafa4a3c198" name="DefaultDocumentType1NoId" type="Guid" label="DefaultDocumentType1NoId : Guid" fieldName="_defaultDocumentType1NoId" />
+      <Property Id="2d3fe498-f35d-4dc0-b73a-7ca669687cbc" name="RecCreated" type="DateTime" label="RecCreated : DateTime" fieldName="_recCreated" />
+      <Property Id="138957a8-270b-48bd-9d01-2d80b6896765" name="RecModified" type="DateTime" label="RecModified : DateTime" fieldName="_recModified" />
+      <Property Id="03c07a79-da31-409c-ac55-f822219e2777" name="RecCreatedBy" type="Guid" label="RecCreatedBy : Guid" fieldName="_recCreatedBy" />
+      <Property Id="0361cd1d-76c5-428e-9b66-912dfffe4483" name="RecModifiedBy" type="Guid" label="RecModifiedBy : Guid" fieldName="_recModifiedBy" />
+      <Property Id="cb84b123-c52e-4d31-88e6-bc13ce59f61b" name="Version" type="Int64" label="Version : Int64" fieldName="_version" />
+      <AssociationTargets>
+        <Association Id="ee671ba6-853a-440f-8dd2-ae771e0b4488" SourceMultiplicity="ZeroOne" name="GeneralJournalSetupHasCreated">
+          <DomainClassMoniker name="/EntitiesModel/User" />
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="477bca30-44ef-4d49-a56f-59c4c1d73c2e">
+              <NavigationalPropertyMoniker name="/EntitiesModel/GeneralJournalSetup/RecCreatedByUser" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="512d65a1-4ff8-4abe-8c81-eb84b7e661b1" SourceMultiplicity="ZeroOne" name="GeneralJournalSetupHasModified">
+          <DomainClassMoniker name="/EntitiesModel/User" />
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="e907aefd-5ecb-4293-ac88-dd2ee6aff685">
+              <NavigationalPropertyMoniker name="/EntitiesModel/GeneralJournalSetup/RecModifiedByUser" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="1b5b8c67-ffef-49c6-9a82-1947f4621f90" SourceMultiplicity="ZeroOne" name="GeneralJournalSetupHasLCY">
+          <DomainClassMoniker name="/EntitiesModel/Currency" />
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="fd595630-acf1-4d3b-80d7-594aae3a732f">
+              <NavigationalPropertyMoniker name="/EntitiesModel/GeneralJournalSetup/Currency" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="246b74b4-e6e6-4f31-923f-a3490ad5f0f1" SourceMultiplicity="ZeroOne" name="GeneralJournalSetupHasOrganization">
+          <DomainClassMoniker name="/EntitiesModel/Organization" />
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="e5861e00-f2a8-4dd7-9760-358c1e00c2c4">
+              <NavigationalPropertyMoniker name="/EntitiesModel/GeneralJournalSetup/Organization" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="7f8ef986-c721-4489-aacd-caa801390d7a" SourceMultiplicity="ZeroOne" name="GeneralJournalSetupHasClient">
+          <DomainClassMoniker name="/EntitiesModel/Client" />
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="0b7eb5d5-bbca-427b-abf7-223683071a43">
+              <NavigationalPropertyMoniker name="/EntitiesModel/GeneralJournalSetup/Client" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="8adf31d1-b290-4400-b3c8-37a92a9d9855" SourceMultiplicity="ZeroOne" name="GeneralJournalSetupHasDocumentType1No">
+          <DomainClassMoniker name="/EntitiesModel/NoSeries" />
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="0056fe15-9082-43d5-b223-007106bf75a0">
+              <NavigationalPropertyMoniker name="/EntitiesModel/GeneralJournalSetup/DefaultDocumentType1No" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="5776c15c-1ab4-4001-91fe-f6b6a4b2c5c0">
+          <NavigationalProperty Id="d4287fc8-38a7-471e-9ab3-6c587b13a9e9" name="RecCreatedByUser" type="User" label="RecCreatedByUser : User" nullable="true" kind="Persistent" fieldName="_user" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="9cd2bdb7-f8f7-483c-b9ba-53cbca52578f">
+          <NavigationalProperty Id="4b1d448d-a5c6-404a-a6e8-6607315e7fdf" name="RecModifiedByUser" type="User" label="RecModifiedByUser : User" nullable="true" kind="Persistent" fieldName="_user1" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="55116875-9ee9-4c60-84cf-54da5de71a9f">
+          <NavigationalProperty Id="30201d66-4f3c-4246-b17e-28d9da12fe2f" name="Currency" type="Currency" label="Currency : Currency" nullable="true" kind="Persistent" fieldName="_currency" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="5dc54230-0ed1-42e3-9a5a-bc6a37b5ed18">
+          <NavigationalProperty Id="dd32d88b-bec5-4260-8bbc-2dabc6f18e69" name="Organization" type="Organization" label="Organization : Organization" nullable="true" kind="Persistent" fieldName="_organization" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="488e88fa-684c-403b-8d77-1d4341fb0575">
+          <NavigationalProperty Id="4439a70d-8356-48ac-8450-852c8e5f45ea" name="Client" type="Client" label="Client : Client" nullable="true" kind="Persistent" fieldName="_client" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="b87338a1-6c22-4d03-a40c-017739632e14">
+          <NavigationalProperty Id="4f8b118b-b1e7-407a-bb03-dfac077c635c" name="DefaultDocumentType1No" type="NoSeries" label="DefaultDocumentType1No : NoSeries" nullable="true" kind="Persistent" fieldName="_noSeries" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="d7bd6e8c-e34a-47be-a590-3f03f86938da">
@@ -2623,6 +2809,7 @@
         <entitySetProperty name="Clients" namespace="MyERP.DataAccess" type="Client" label="Clients : IQueryable&lt;MyERP.DataAccess.Client&gt;" />
         <entitySetProperty name="NoSeries" namespace="MyERP.DataAccess" type="NoSeries" label="NoSeries : IQueryable&lt;MyERP.DataAccess.NoSeries&gt;" />
         <entitySetProperty name="Accounts" namespace="MyERP.DataAccess" type="Account" label="Accounts : IQueryable&lt;MyERP.DataAccess.Account&gt;" />
+        <entitySetProperty name="GeneralJournalSetups" namespace="MyERP.DataAccess" type="GeneralJournalSetup" label="GeneralJournalSetups : IQueryable&lt;MyERP.DataAccess.GeneralJournalSetup&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

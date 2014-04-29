@@ -386,48 +386,48 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private User _userinfo;
+		private User _recCreatedByUser;
 		[ForeignKeyAssociation(SharedFields = "RecCreatedBy", TargetFields = "Id")]
-		[Storage("_userinfo")]
+		[Storage("_recCreatedByUser")]
 		public virtual User RecCreatedByUser
 		{
 			get
 			{
-				return this._userinfo;
+				return this._recCreatedByUser;
 			}
 			set
 			{
-				this._userinfo = value;
+				this._recCreatedByUser = value;
 			}
 		}
 		
-		private User _userinfo1;
+		private User _recModifiedByUser;
 		[ForeignKeyAssociation(SharedFields = "RecModifiedBy")]
-		[Storage("_userinfo1")]
+		[Storage("_recModifiedByUser")]
 		public virtual User RecModifiedByUser
 		{
 			get
 			{
-				return this._userinfo1;
+				return this._recModifiedByUser;
 			}
 			set
 			{
-				this._userinfo1 = value;
+				this._recModifiedByUser = value;
 			}
 		}
 		
-		private Currency _dmnt;
+		private Currency _currency;
 		[ForeignKeyAssociation(SharedFields = "CurrencyId", TargetFields = "Id")]
-		[Storage("_dmnt")]
+		[Storage("_currency")]
 		public virtual Currency Currency
 		{
 			get
 			{
-				return this._dmnt;
+				return this._currency;
 			}
 			set
 			{
-				this._dmnt = value;
+				this._currency = value;
 			}
 		}
 		
@@ -446,14 +446,14 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private IList<GeneralJournalLine> _ct11 = new List<GeneralJournalLine>();
-		[Collection(InverseProperty = "TransactionDocument")]
-		[Storage("_ct11")]
+		private IList<GeneralJournalLine> _transactionLines = new List<GeneralJournalLine>();
+		[Collection(InverseProperty = "TransactionDocument", IsManaged = true)]
+		[Storage("_transactionLines")]
 		public virtual IList<GeneralJournalLine> TransactionLines
 		{
 			get
 			{
-				return this._ct11;
+				return this._transactionLines;
 			}
 		}
 		

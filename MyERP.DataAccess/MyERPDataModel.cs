@@ -171,6 +171,14 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		public IQueryable<GeneralJournalSetup> GeneralJournalSetups 
+		{
+			get
+			{
+				return this.GetAll<GeneralJournalSetup>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -253,6 +261,10 @@ namespace MyERP.DataAccess
 			get;
 		}
 		IQueryable<Account> Accounts
+		{
+			get;
+		}
+		IQueryable<GeneralJournalSetup> GeneralJournalSetups
 		{
 			get;
 		}
