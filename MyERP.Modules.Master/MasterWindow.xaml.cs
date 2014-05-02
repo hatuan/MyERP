@@ -11,30 +11,41 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.ServiceLocation;
+using MyERP.Infrastructure;
 using Telerik.Windows.Controls;
 
-namespace MyERP.Modules.Setup
+namespace MyERP.Modules.Master
 {
     /// <summary>
     /// Interaction logic for UserWindow.xaml
     /// </summary>
-    [Export("SetupWindow", typeof(RadWindow))]
-    public partial class SetupWindow : IPartImportsSatisfiedNotification
+    [Export("MasterWindow", typeof(RadWindow))]
+    public partial class MasterWindow : IPartImportsSatisfiedNotification
     {
         [Import]
         public IRegionManager RegionManager { get; set; }
 
-        public SetupWindow()
+        [Import]
+        public IEventAggregator EventAggregator { get; set; }
+
+        public MasterWindow()
         {
             InitializeComponent();
         }
 
         public void OnImportsSatisfied()
         {
-            //IRegionManager regionManager = ServiceLocator.Current.GetInstance<IRegionManager>();
             this.SetValue(Microsoft.Practices.Prism.Regions.RegionManager.RegionManagerProperty, RegionManager);
+
+            this.EventAggregator.GetEvent<NoSeriesClickedEvent>().Subscribe(OnNoSeriesClickedEvent);
+        }
+
+        public void OnNoSeriesClickedEvent(object obj)
+        {
+            this.RegionManager.RequestNavigate("MasterWindowRegion", "NoSeriesView");
         }
     }
 }

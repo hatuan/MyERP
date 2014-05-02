@@ -1174,14 +1174,14 @@
             <orm:sharedfield name="_organizationId" target-class="MyERP.DataAccess.Organization" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_user" property="RecModidiedByUser" behavior="readwrite" uniqueId="a797860a-b611-4c50-b33d-af99157a1d58" type="MyERP.DataAccess.User">
-          <orm:reference uniqueId="e8114fc7-e7ee-49c5-bdaa-0974393f37ca" association-name="NoSeriesHasModified">
-            <orm:sharedfield name="_recModifiedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
-          </orm:reference>
-        </orm:field>
         <orm:field name="_user1" property="RecCreatedByUser" behavior="readwrite" uniqueId="148cb9e5-7531-4ee1-89c2-1eff5da23cae" type="MyERP.DataAccess.User">
           <orm:reference uniqueId="6570db1b-864d-442e-abdf-5f6fc4abb270" association-name="NoSeriesHasCreated">
             <orm:sharedfield name="_recCreatedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_user" property="RecModifiedByUser" behavior="readwrite" uniqueId="a797860a-b611-4c50-b33d-af99157a1d58" type="MyERP.DataAccess.User">
+          <orm:reference uniqueId="e8114fc7-e7ee-49c5-bdaa-0974393f37ca" association-name="NoSeriesHasModified">
+            <orm:sharedfield name="_recModifiedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
           </orm:reference>
         </orm:field>
       </orm:class>
@@ -2679,7 +2679,7 @@
           <DomainClassMoniker name="/EntitiesModel/User" />
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="744ad254-b286-4d1e-8d3b-2f8cdc2e76b6">
-              <NavigationalPropertyMoniker name="/EntitiesModel/NoSeries/RecModidiedByUser" />
+              <NavigationalPropertyMoniker name="/EntitiesModel/NoSeries/RecModifiedByUser" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
@@ -2700,7 +2700,7 @@
           <NavigationalProperty Id="e4c75381-1562-43df-a26d-eabb6b29a2c3" name="Organization" type="Organization" label="Organization : Organization" nullable="true" kind="Persistent" fieldName="_organization" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="ebb282ee-4d29-465c-bc98-fa38125c0742">
-          <NavigationalProperty Id="a797860a-b611-4c50-b33d-af99157a1d58" name="RecModidiedByUser" type="User" label="RecModidiedByUser : User" nullable="true" kind="Persistent" fieldName="_user" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="a797860a-b611-4c50-b33d-af99157a1d58" name="RecModifiedByUser" type="User" label="RecModifiedByUser : User" nullable="true" kind="Persistent" fieldName="_user" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="fd176302-d3e1-4355-86ee-7bc68669d238">
           <NavigationalProperty Id="148cb9e5-7531-4ee1-89c2-1eff5da23cae" name="RecCreatedByUser" type="User" label="RecCreatedByUser : User" nullable="true" kind="Persistent" fieldName="_user1" isDependent="false" isManaged="false" />

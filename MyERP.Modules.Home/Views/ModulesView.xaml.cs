@@ -149,39 +149,39 @@ namespace MyERP.Modules.Home.Views
 
             switch (clickEntity.IdAsName)
             {
-                case ModuleName.SetupCurencies:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.SetupModule);
-                    this.EventAggregator.GetEvent<SetupCurenciesClickedEvent>().Publish(clickEntity);
+                case ModuleName.MasterCurencies:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
+                    this.EventAggregator.GetEvent<CurenciesClickedEvent>().Publish(clickEntity);
                     break;
 
-                case ModuleName.SetupCurenciesExchangeRate:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.SetupModule);
-                    this.EventAggregator.GetEvent<SetupCurenciesExchangeRateClickedEvent>().Publish(clickEntity);
+                case ModuleName.MasterCurenciesExchangeRate:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
+                    this.EventAggregator.GetEvent<CurenciesExchangeRateClickedEvent>().Publish(clickEntity);
                     break;
 
-                case ModuleName.SetupClientInformation:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.SetupModule);
-                    this.EventAggregator.GetEvent<SetupClientInformationClickedEvent>().Publish(clickEntity);
+                case ModuleName.MasterClientInformation:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
+                    this.EventAggregator.GetEvent<ClientInformationClickedEvent>().Publish(clickEntity);
                     break;
 
-                case ModuleName.SetupOrganizations:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.SetupModule);
-                    this.EventAggregator.GetEvent<SetupOrganizationsClickedEvent>().Publish(clickEntity);
+                case ModuleName.MasterOrganizations:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
+                    this.EventAggregator.GetEvent<OrganizationsClickedEvent>().Publish(clickEntity);
                     break;
 
-                case ModuleName.SetupUsers:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.SetupModule);
-                    this.EventAggregator.GetEvent<SetupUsersClickedEvent>().Publish(clickEntity);
+                case ModuleName.MasterUsers:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
+                    this.EventAggregator.GetEvent<UsersClickedEvent>().Publish(clickEntity);
                     break;
                     
-                case ModuleName.SetupNoSeries:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.SetupModule);
-                    this.EventAggregator.GetEvent<SetupNoSeriesClickedEvent>().Publish(clickEntity);
+                case ModuleName.MasterNoSeries:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
+                    this.EventAggregator.GetEvent<NoSeriesClickedEvent>().Publish(clickEntity);
                     break;
 
-                case ModuleName.SetupPeriod:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.SetupModule);
-                    this.EventAggregator.GetEvent<SetupPeriodClickedEvent>().Publish(clickEntity);
+                case ModuleName.MasterPeriod:
+                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
+                    this.EventAggregator.GetEvent<PeriodClickedEvent>().Publish(clickEntity);
                     break;
                     
             }

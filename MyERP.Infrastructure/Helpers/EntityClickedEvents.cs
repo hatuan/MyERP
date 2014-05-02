@@ -7,36 +7,36 @@ namespace MyERP.Infrastructure
 
     }
 
-    public class SetupCurenciesClickedEvent : CompositePresentationEvent<object>
+    public class CurenciesClickedEvent : CompositePresentationEvent<object>
     {
 
     }
-    public class SetupCurenciesExchangeRateClickedEvent : CompositePresentationEvent<object>
-    {
-
-    }
-
-    public class SetupClientInformationClickedEvent : CompositePresentationEvent<object>
+    public class CurenciesExchangeRateClickedEvent : CompositePresentationEvent<object>
     {
 
     }
 
-    public class SetupOrganizationsClickedEvent : CompositePresentationEvent<object>
+    public class ClientInformationClickedEvent : CompositePresentationEvent<object>
     {
 
     }
 
-    public class SetupUsersClickedEvent : CompositePresentationEvent<object>
+    public class OrganizationsClickedEvent : CompositePresentationEvent<object>
     {
 
     }
 
-    public class SetupNoSeriesClickedEvent : CompositePresentationEvent<object>
+    public class UsersClickedEvent : CompositePresentationEvent<object>
     {
 
     }
 
-    public class SetupPeriodClickedEvent : CompositePresentationEvent<object>
+    public class NoSeriesClickedEvent : CompositePresentationEvent<object>
+    {
+
+    }
+
+    public class PeriodClickedEvent : CompositePresentationEvent<object>
     {
 
     }

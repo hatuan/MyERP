@@ -9,13 +9,13 @@ namespace MyERP.DataAccess
     public enum ModuleName
     {
         Default = 0,
-        SetupCurencies = 10, //Tien te
-        SetupCurenciesExchangeRate = 11, //Ty gia
-        SetupClientInformation = 100, //Thong tin cong ty
-        SetupOrganizations = 101, //Danh sach cac chi nhanh su dung cua cong ty
-        SetupUsers = 102, //Danh sach nguoi dung
-        SetupNoSeries = 200, //Quan ly so tu dong
-        SetupPeriod = 210, //Ky cap nhat so lieu
+        MasterCurencies = 10, //Tien te
+        MasterCurenciesExchangeRate = 11, //Ty gia
+        MasterPeriod = 12, //Ky cap nhat so lieu
+        MasterClientInformation = 100, //Thong tin cong ty
+        MasterOrganizations = 101, //Danh sach cac chi nhanh su dung cua cong ty
+        MasterUsers = 102, //Danh sach nguoi dung
+        MasterNoSeries = 200, //Quan ly so tu dong
         GeneralLeaderJournals = 1000, //Phieu ke toan
         GeneralLeaderReportsAccountActivity = 2000, //Bao cao
         GeneralLeaderReportsTrialBalance = 3000, //Bao cao

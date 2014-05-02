@@ -19,6 +19,7 @@ namespace MyERP.DataAccess
     using System.ServiceModel.DomainServices;
     using System.ServiceModel.DomainServices.Client;
     using System.ServiceModel.DomainServices.Client.ApplicationServices;
+    using MyERP.DataAccess.Resources;
     
     
     /// <summary>
@@ -211,6 +212,7 @@ namespace MyERP.DataAccess
         /// Gets or sets the 'Code' value.
         /// </summary>
         [DataMember()]
+        [Required(ErrorMessageResourceName="ValidationErrorRequiredField", ErrorMessageResourceType=typeof(ValidationErrorResources))]
         [RoundtripOriginal()]
         public string Code
         {
@@ -363,6 +365,7 @@ namespace MyERP.DataAccess
         /// Gets or sets the 'Name' value.
         /// </summary>
         [DataMember()]
+        [Required(ErrorMessageResourceName="ValidationErrorRequiredField", ErrorMessageResourceType=typeof(ValidationErrorResources))]
         [RoundtripOriginal()]
         public string Name
         {
@@ -5935,19 +5938,19 @@ namespace MyERP.DataAccess
         
         Default = 0,
         
-        SetupCurencies = 10,
+        MasterCurencies = 10,
         
-        SetupCurenciesExchangeRate = 11,
+        MasterCurenciesExchangeRate = 11,
         
-        SetupClientInformation = 100,
+        MasterPeriod = 12,
         
-        SetupOrganizations = 101,
+        MasterClientInformation = 100,
         
-        SetupUsers = 102,
+        MasterOrganizations = 101,
         
-        SetupNoSeries = 200,
+        MasterUsers = 102,
         
-        SetupPeriod = 210,
+        MasterNoSeries = 200,
         
         GeneralLeaderJournals = 1000,
         
@@ -5985,6 +5988,8 @@ namespace MyERP.DataAccess
     public sealed partial class NoSeries : Entity
     {
         
+        private EntityRef<Client> _client;
+        
         private Guid _clientId;
         
         private string _code;
@@ -6007,19 +6012,27 @@ namespace MyERP.DataAccess
         
         private string[] _openAccessGenerated;
         
+        private EntityRef<Organization> _organization;
+        
         private Guid _organizationId;
         
         private DateTime _recCreated;
         
         private Guid _recCreatedBy;
         
+        private EntityRef<User> _recCreatedByUser;
+        
         private DateTime _recModified;
         
         private Guid _recModifiedBy;
         
+        private EntityRef<User> _recModifiedByUser;
+        
         private int _startingNo;
         
         private short _status;
+        
+        private NoSeriesStatusType _statusType;
         
         private long _version;
         
@@ -6066,6 +6079,8 @@ namespace MyERP.DataAccess
         partial void OnStartingNoChanged();
         partial void OnStatusChanging(short value);
         partial void OnStatusChanged();
+        partial void OnStatusTypeChanging(NoSeriesStatusType value);
+        partial void OnStatusTypeChanged();
         partial void OnVersionChanging(long value);
         partial void OnVersionChanged();
 
@@ -6078,6 +6093,32 @@ namespace MyERP.DataAccess
         public NoSeries()
         {
             this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="Client"/> entity.
+        /// </summary>
+        [Association("NoSeries-client-association", "ClientId", "Id")]
+        public Client Client
+        {
+            get
+            {
+                if ((this._client == null))
+                {
+                    this._client = new EntityRef<Client>(this, "Client", this.FilterClient);
+                }
+                return this._client.Entity;
+            }
+            set
+            {
+                Client previous = this.Client;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Client", value);
+                    this._client.Entity = value;
+                    this.RaisePropertyChanged("Client");
+                }
+            }
         }
         
         /// <summary>
@@ -6109,6 +6150,7 @@ namespace MyERP.DataAccess
         /// Gets or sets the 'Code' value.
         /// </summary>
         [DataMember()]
+        [Required(ErrorMessageResourceName="ValidationErrorRequiredField", ErrorMessageResourceType=typeof(ValidationErrorResources))]
         [RoundtripOriginal()]
         public string Code
         {
@@ -6285,6 +6327,7 @@ namespace MyERP.DataAccess
         /// Gets or sets the 'Name' value.
         /// </summary>
         [DataMember()]
+        [Required(ErrorMessageResourceName="ValidationErrorRequiredField", ErrorMessageResourceType=typeof(ValidationErrorResources))]
         [RoundtripOriginal()]
         public string Name
         {
@@ -6354,6 +6397,32 @@ namespace MyERP.DataAccess
                     this._openAccessGenerated = value;
                     this.RaisePropertyChanged("OpenAccessGenerated");
                     this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="Organization"/> entity.
+        /// </summary>
+        [Association("NoSeries-organization-association", "OrganizationId", "Id")]
+        public Organization Organization
+        {
+            get
+            {
+                if ((this._organization == null))
+                {
+                    this._organization = new EntityRef<Organization>(this, "Organization", this.FilterOrganization);
+                }
+                return this._organization.Entity;
+            }
+            set
+            {
+                Organization previous = this.Organization;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Organization", value);
+                    this._organization.Entity = value;
+                    this.RaisePropertyChanged("Organization");
                 }
             }
         }
@@ -6434,6 +6503,32 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the associated <see cref="User"/> entity.
+        /// </summary>
+        [Association("NoSeries-user-created-association", "RecCreatedBy", "Id")]
+        public User RecCreatedByUser
+        {
+            get
+            {
+                if ((this._recCreatedByUser == null))
+                {
+                    this._recCreatedByUser = new EntityRef<User>(this, "RecCreatedByUser", this.FilterRecCreatedByUser);
+                }
+                return this._recCreatedByUser.Entity;
+            }
+            set
+            {
+                User previous = this.RecCreatedByUser;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("RecCreatedByUser", value);
+                    this._recCreatedByUser.Entity = value;
+                    this.RaisePropertyChanged("RecCreatedByUser");
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'RecModified' value.
         /// </summary>
         [DataMember()]
@@ -6479,6 +6574,32 @@ namespace MyERP.DataAccess
                     this._recModifiedBy = value;
                     this.RaiseDataMemberChanged("RecModifiedBy");
                     this.OnRecModifiedByChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="User"/> entity.
+        /// </summary>
+        [Association("NoSeries-user-modified-association", "RecModifiedBy", "Id")]
+        public User RecModifiedByUser
+        {
+            get
+            {
+                if ((this._recModifiedByUser == null))
+                {
+                    this._recModifiedByUser = new EntityRef<User>(this, "RecModifiedByUser", this.FilterRecModifiedByUser);
+                }
+                return this._recModifiedByUser.Entity;
+            }
+            set
+            {
+                User previous = this.RecModifiedByUser;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("RecModifiedByUser", value);
+                    this._recModifiedByUser.Entity = value;
+                    this.RaisePropertyChanged("RecModifiedByUser");
                 }
             }
         }
@@ -6534,6 +6655,30 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'StatusType' value.
+        /// </summary>
+        [DataMember()]
+        public NoSeriesStatusType StatusType
+        {
+            get
+            {
+                return this._statusType;
+            }
+            set
+            {
+                if ((this._statusType != value))
+                {
+                    this.OnStatusTypeChanging(value);
+                    this.RaiseDataMemberChanging("StatusType");
+                    this.ValidateProperty("StatusType", value);
+                    this._statusType = value;
+                    this.RaiseDataMemberChanged("StatusType");
+                    this.OnStatusTypeChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'Version' value.
         /// </summary>
         [ConcurrencyCheck()]
@@ -6559,6 +6704,26 @@ namespace MyERP.DataAccess
             }
         }
         
+        private bool FilterClient(Client entity)
+        {
+            return (entity.Id == this.ClientId);
+        }
+        
+        private bool FilterOrganization(Organization entity)
+        {
+            return (entity.Id == this.OrganizationId);
+        }
+        
+        private bool FilterRecCreatedByUser(User entity)
+        {
+            return (entity.Id == this.RecCreatedBy);
+        }
+        
+        private bool FilterRecModifiedByUser(User entity)
+        {
+            return (entity.Id == this.RecModifiedBy);
+        }
+        
         /// <summary>
         /// Computes a value from the key fields that uniquely identifies this entity instance.
         /// </summary>
@@ -6567,6 +6732,14 @@ namespace MyERP.DataAccess
         {
             return this._id;
         }
+    }
+    
+    public enum NoSeriesStatusType
+    {
+        
+        Inactive = 0,
+        
+        Active = 1,
     }
     
     /// <summary>

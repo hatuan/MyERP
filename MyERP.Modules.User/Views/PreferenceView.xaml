@@ -7,19 +7,6 @@
     mc:Ignorable="d"
     d:DesignHeight="100" d:DesignWidth="400" Width="400" Height="100">
 
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/MyERP.Theme;component/Styles/Generic.xaml"/>
-                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/System.Windows.xaml"/>
-                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.xaml"/>
-                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.Input.xaml"/>
-                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.Navigation.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-
-        </ResourceDictionary>
-    </UserControl.Resources>
-
     <Grid x:Name="LayoutRoot">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

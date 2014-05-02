@@ -76,20 +76,56 @@ namespace MyERP.Modules.Home.ViewModels
         }
 
         //set from the view's domaindatasource
-        private IEnumerable<Module> _setups;
-        public IEnumerable<Module> Setups
+        private IEnumerable<Module> _masterSystem;
+        public IEnumerable<Module> MasterSystem
         {
             get
             {
-                if (this._setups == null)
+                if (this._masterSystem == null)
                 {
-                    this.ModulesRepository.GetSetups((results) =>
+                    this.ModulesRepository.GetMasterSystem((results) =>
                     {
-                        this._setups = results;
-                        this.RaisePropertyChanged(() => this.Setups);
+                        this._masterSystem = results;
+                        this.RaisePropertyChanged(() => this.MasterSystem);
                     });
                 }
-                return this._setups;
+                return this._masterSystem;
+            }
+        }
+
+        //set from the view's domaindatasource
+        private IEnumerable<Module> _masterCompany;
+        public IEnumerable<Module> MasterCompany
+        {
+            get
+            {
+                if (this._masterCompany == null)
+                {
+                    this.ModulesRepository.GetMasterCompany((results) =>
+                    {
+                        this._masterCompany = results;
+                        this.RaisePropertyChanged(() => this.MasterCompany);
+                    });
+                }
+                return this._masterCompany;
+            }
+        }
+
+        //set from the view's domaindatasource
+        private IEnumerable<Module> _masterBasic;
+        public IEnumerable<Module> MasterBasic
+        {
+            get
+            {
+                if (this._masterBasic == null)
+                {
+                    this.ModulesRepository.GetMasterBasic((results) =>
+                    {
+                        this._masterBasic = results;
+                        this.RaisePropertyChanged(() => this.MasterBasic);
+                    });
+                }
+                return this._masterBasic;
             }
         }
 

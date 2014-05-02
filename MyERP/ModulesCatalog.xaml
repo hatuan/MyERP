@@ -6,7 +6,7 @@
     <Modularity:ModuleInfo  Ref="MyERP.Modules.User.xap" InitializationMode="OnDemand" ModuleName="UserModule" />
     <Modularity:ModuleInfo  Ref="MyERP.Modules.Home.xap" InitializationMode="OnDemand" ModuleName="HomeModule" />
     <Modularity:ModuleInfo  Ref="MyERP.Modules.Financial.xap" InitializationMode="OnDemand" ModuleName="FinancialModule" />
-    <Modularity:ModuleInfo  Ref="MyERP.Modules.Setup.xap" InitializationMode="OnDemand" ModuleName="SetupModule" />
+    <Modularity:ModuleInfo  Ref="MyERP.Modules.Master.xap" InitializationMode="OnDemand" ModuleName="MasterModule" />
     
     
 </Modularity:ModuleCatalog>

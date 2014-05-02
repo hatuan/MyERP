@@ -6,15 +6,7 @@
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     mc:Ignorable="d" d:DesignWidth="400">
 
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/MyERP.Theme;component/Styles/Generic.xaml"/>
-                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.RibbonView.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
-    
+   
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

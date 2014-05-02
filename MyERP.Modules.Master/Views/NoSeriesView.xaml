@@ -1,0 +1,126 @@
+﻿<UserControl x:Class="MyERP.Modules.Master.Views.NoSeriesView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:regions="http://www.codeplex.com/prism"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="400">
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <telerik:RadRibbonView VerticalAlignment="Top" ApplicationButtonVisibility="Collapsed" MinimizeButtonVisibility="Visible" 
+                                    TitleBarVisibility="Collapsed" telerik:KeyTipService.IsKeyTipsEnabled="True">
+
+                <telerik:RadRibbonTab Header="HOME" IsSelected="True">
+                    <telerik:RadRibbonGroup Header="CHANGES">
+                        <telerik:RadRibbonGroup.Variants>
+                            <telerik:GroupVariant Priority="0" Variant="Collapsed"/>
+                            <telerik:GroupVariant Priority="0" Variant="Small"/>
+                            <telerik:GroupVariant Priority="0" Variant="Medium"/>
+                            <telerik:GroupVariant Priority="0" Variant="Large"/>
+                        </telerik:RadRibbonGroup.Variants>
+
+                        <telerik:RadRibbonButton Text="NEW" Size="Large" LargeImage="/MyERP.Theme;component/Images/new.png" 
+                                                    telerik:KeyTipService.AccessKey="Ctrl+F2"
+                                                    Command="{Binding AddNewCommand}"/>
+
+                        <telerik:RadRibbonButton Text="SAVE" Size="Large" LargeImage="/MyERP.Theme;component/Images/save.png"
+                                                        telerik:KeyTipService.AccessKey="Alt+S"
+                                                        Command="{Binding SubmitChangesCommand}"/>
+
+                        <telerik:RadOrderedWrapPanel>
+                            <telerik:RadRibbonButton Text="DELETE" LargeImage="/MyERP.Theme;component/Images/delete.png"
+                                                        telerik:KeyTipService.AccessKey="Alt+D"
+                                                        Command="{Binding DeleteCommand}"/>
+                            <telerik:RadRibbonButton Text="UNDO" LargeImage="/MyERP.Theme;component/Images/undo.png"
+                                                     telerik:KeyTipService.AccessKey="Alt+U"
+                                                     Command="{Binding RejectChangesCommand}"/>
+                        </telerik:RadOrderedWrapPanel>
+
+                    </telerik:RadRibbonGroup>
+
+                    <telerik:RadRibbonGroup Header="">
+                        <telerik:RadRibbonButton Text="REFRESH" Size="Large" LargeImage="/MyERP.Theme;component/Images/refresh.png"
+                                                    Command="{Binding RefreshCommand}"/>
+                    </telerik:RadRibbonGroup>
+
+                    <telerik:RadRibbonGroup Header="">
+                        <telerik:RadRibbonButton Text="CLOSE" Size="Large" LargeImage="/MyERP.Theme;component/Images/exit.png"
+                                                    Command="{Binding CloseWindowCommand}"/>
+                    </telerik:RadRibbonGroup>
+                </telerik:RadRibbonTab>
+
+            </telerik:RadRibbonView>
+            <Rectangle Grid.Row="1" Fill="{StaticResource AccentBrush}" Height="1" HorizontalAlignment="Stretch"/>
+        </Grid>
+
+        <telerik:RadTabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
+            <telerik:RadTabItem x:Name="radTabItemNoSeriesOverview" Header="OVERVIEW">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="0"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ContentControl regions:RegionManager.RegionName="NoSeriesOverviewRegion" x:Name="NoSeriesOverviewRegion" Grid.Column="1" 
+        				VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.ColumnSpan="15" Margin="1"/>
+
+                </Grid>
+            </telerik:RadTabItem>
+            <telerik:RadTabItem x:Name="radTabItemNoGeneral" Header="GENERAL">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="0"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ContentControl regions:RegionManager.RegionName="NoSeriesGeneralRegion" x:Name="NoSeriesGeneralRegion" Grid.Column="1"
+        				VerticalContentAlignment="Stretch" Grid.ColumnSpan="15" HorizontalContentAlignment="Stretch" Margin="1"/>
+
+                </Grid>
+            </telerik:RadTabItem>
+        </telerik:RadTabControl>
+    </Grid>
+</UserControl>

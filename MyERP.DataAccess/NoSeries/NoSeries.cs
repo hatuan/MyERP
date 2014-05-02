@@ -1,57 +1,55 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.ServiceModel.DomainServices.Server;
+using System.Text;
+using System.Threading.Tasks;
 using MyERP.DataAccess.Resources;
-
 
 namespace MyERP.DataAccess
 {
-    [System.ComponentModel.DataAnnotations.MetadataTypeAttribute(typeof(Account.AccountMetadata))]
-    public partial class Account
+    [System.ComponentModel.DataAnnotations.MetadataTypeAttribute(typeof(NoSeries.NoSeriesMetadata))]
+    public partial class NoSeries
     {
-        internal sealed class AccountMetadata
+        internal sealed class NoSeriesMetadata
         {
-            public AccountMetadata()
-            {
-            }
 
             [Required(ErrorMessageResourceName = "ValidationErrorRequiredField", ErrorMessageResourceType = typeof(ValidationErrorResources))]
             public String Code { get; set; }
 
             [Required(ErrorMessageResourceName = "ValidationErrorRequiredField", ErrorMessageResourceType = typeof(ValidationErrorResources))]
             public String Name { get; set; }
-
+            
             [Include]
-            [Association("Account-currency-association", "CurrencyId", "Id")]
-            public Currency Currency { get; set; }
-
-            [Include]
-            [Association("Account-account-parent-association", "ParentAccountId", "Id")]
-            public Account ParentAccount { get; set; }
-
-            [Include]
-            [Association("Account-client-association", "ClientId", "Id")]
+            [Association("NoSeries-client-association", "ClientId", "Id")]
             public Client Client { get; set; }
 
             [Include]
-            [Association("Account-organization-association", "OrganizationId", "Id")]
+            [Association("NoSeries-organization-association", "OrganizationId", "Id")]
             public Organization Organization { get; set; }
 
             [Include]
-            [Association("Account-user-created-association", "RecCreatedById", "Id")]
+            [Association("NoSeries-user-created-association", "RecCreatedBy", "Id")]
             public User RecCreatedByUser { get; set; }
 
             [Include]
-            [Association("Account-user-modified-association", "RecModifiedById", "Id")]
+            [Association("NoSeries-user-modified-association", "RecModifiedBy", "Id")]
             public User RecModifiedByUser { get; set; }
         }
-        public AccountStatusType StatusType
+        public NoSeriesStatusType StatusType
         {
-            get { return (AccountStatusType) Status; }
+            get { return (NoSeriesStatusType)Status; }
             set
             {
                 //intentionally empty
             }
         }
+    }
+
+    public enum NoSeriesStatusType
+    {
+        Inactive = 0,
+        Active = 1
     }
 }

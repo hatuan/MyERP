@@ -326,21 +326,6 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private User _user;
-		[ForeignKeyAssociation(SharedFields = "RecModifiedBy", TargetFields = "Id")]
-		[Storage("_user")]
-		public virtual User RecModidiedByUser
-		{
-			get
-			{
-				return this._user;
-			}
-			set
-			{
-				this._user = value;
-			}
-		}
-		
 		private User _user1;
 		[ForeignKeyAssociation(SharedFields = "RecCreatedBy", TargetFields = "Id")]
 		[Storage("_user1")]
@@ -353,6 +338,21 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._user1 = value;
+			}
+		}
+		
+		private User _user;
+		[ForeignKeyAssociation(SharedFields = "RecModifiedBy", TargetFields = "Id")]
+		[Storage("_user")]
+		public virtual User RecModifiedByUser
+		{
+			get
+			{
+				return this._user;
+			}
+			set
+			{
+				this._user = value;
 			}
 		}
 		

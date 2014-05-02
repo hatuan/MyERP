@@ -281,52 +281,52 @@ namespace MyERP.Web
             {
                 new Module(){
                     ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
-                    Name = ModuleName.SetupCurencies.ToString(),
-                    Id = (int)ModuleName.SetupCurencies,
-                    Group = "Setups",
+                    Name = ModuleName.MasterCurencies.ToString(),
+                    Id = (int)ModuleName.MasterCurencies,
+                    Group = "MasterSystem",
                     Description = "Currencies"
                 },
                  new Module(){
                     ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
-                    Name = ModuleName.SetupCurenciesExchangeRate.ToString(),
-                    Id = (int)ModuleName.SetupCurenciesExchangeRate,
-                    Group = "Setups",
+                    Name = ModuleName.MasterCurenciesExchangeRate.ToString(),
+                    Id = (int)ModuleName.MasterCurenciesExchangeRate,
+                    Group = "MasterSystem",
                     Description = "Currencies Exchange Rate"
                 },
-                 new Module(){
+                new Module(){
                     ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
-                    Name = ModuleName.SetupClientInformation.ToString(),
-                    Id = (int)ModuleName.SetupClientInformation,
-                    Group = "Setups",
+                    Name = ModuleName.MasterPeriod.ToString(),
+                    Id = (int)ModuleName.MasterPeriod,
+                    Group = "MasterSystem",
+                    Description = "Period"
+                },
+                new Module(){
+                    ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
+                    Name = ModuleName.MasterClientInformation.ToString(),
+                    Id = (int)ModuleName.MasterClientInformation,
+                    Group = "MasterCompany",
                     Description = "Client Information"
                 },
-                 new Module(){
+                new Module(){
                     ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
-                    Name = ModuleName.SetupOrganizations.ToString(),
-                    Id = (int)ModuleName.SetupOrganizations,
-                    Group = "Setups",
+                    Name = ModuleName.MasterOrganizations.ToString(),
+                    Id = (int)ModuleName.MasterOrganizations,
+                    Group = "MasterCompany",
                     Description = "Organizations"
                 },
-                 new Module(){
+                new Module(){
                     ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
-                    Name = ModuleName.SetupUsers.ToString(),
-                    Id = (int)ModuleName.SetupUsers,
-                    Group = "Setups",
+                    Name = ModuleName.MasterUsers.ToString(),
+                    Id = (int)ModuleName.MasterUsers,
+                    Group = "MasterCompany",
                     Description = "Users"
                 },
-                 new Module(){
+                new Module(){
                     ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
-                    Name = ModuleName.SetupNoSeries.ToString(),
-                    Id = (int)ModuleName.SetupNoSeries,
-                    Group = "Setups",
+                    Name = ModuleName.MasterNoSeries.ToString(),
+                    Id = (int)ModuleName.MasterNoSeries,
+                    Group = "MasterBasic",
                     Description = "Number Order Series"
-                },
-                 new Module(){
-                    ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),
-                    Name = ModuleName.SetupPeriod.ToString(),
-                    Id = (int)ModuleName.SetupPeriod,
-                    Group = "Setups",
-                    Description = "Period"
                 },
                 new Module(){
                     ClientId = new Guid("{28cc612c-807d-458d-91e7-f759080b0e40}"),

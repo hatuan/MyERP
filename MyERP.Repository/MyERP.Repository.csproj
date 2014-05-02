@@ -75,7 +75,15 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\MyERP.DataAccess\Resources\ValidationErrorResources.Designer.cs">
+      <Link>ValidationErrorResources.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValidationErrorResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Account.cs" />
+    <Compile Include="NoSeries.cs" />
+    <Compile Include="NoSeriesRepository.cs" />
     <Compile Include="ClientRepository.cs" />
     <Compile Include="GeneralJournalLineRepository.cs" />
     <Compile Include="GeneralJournalRepository.cs" />
@@ -99,6 +107,15 @@
       <Name>MyERP.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\MyERP.DataAccess\Resources\ValidationErrorResources.resx">
+      <Link>ValidationErrorResources.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValidationErrorResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>MyERP.DataAccess.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

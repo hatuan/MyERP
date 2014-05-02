@@ -33,12 +33,29 @@ namespace MyERP.Repositories
             this.LoadQuery<Module>(query, callback);
         }
 
-        public void GetSetups(Action<IEnumerable<Module>> callback)
+        public void GetMasterSystem(Action<IEnumerable<Module>> callback)
         {
             EntityQuery<Module> query =
-              this.Context.GetModulesQuery().Where(u => u.Group == "Setups");
+              this.Context.GetModulesQuery().Where(u => u.Group == "MasterSystem");
 
             this.LoadQuery<Module>(query, callback);
         }
+
+        public void GetMasterCompany(Action<IEnumerable<Module>> callback)
+        {
+            EntityQuery<Module> query =
+              this.Context.GetModulesQuery().Where(u => u.Group == "MasterCompany");
+
+            this.LoadQuery<Module>(query, callback);
+        }
+
+        public void GetMasterBasic(Action<IEnumerable<Module>> callback)
+        {
+            EntityQuery<Module> query =
+              this.Context.GetModulesQuery().Where(u => u.Group == "MasterBasic");
+
+            this.LoadQuery<Module>(query, callback);
+        }
+
     }
 }

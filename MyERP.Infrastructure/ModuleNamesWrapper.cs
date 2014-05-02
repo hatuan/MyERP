@@ -30,9 +30,9 @@ namespace MyERP.Infrastructure
         {
             get { return ModuleNames.FinancialModule; }
         }
-        public static string SetupModule
+        public static string MasterModule
         {
-            get { return ModuleNames.SetupModule; }
+            get { return ModuleNames.MasterModule; }
         }
     }
 }

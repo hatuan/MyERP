@@ -8,7 +8,7 @@
     {
         public const string HomeModule = "HomeModule";
         public const string UserModule = "UserModule";
-        public const string SetupModule = "SetupModule";
+        public const string MasterModule = "MasterModule";
         public const string FinancialModule = "FinancialModule";
     }
 }

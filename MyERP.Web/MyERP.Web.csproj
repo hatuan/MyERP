@@ -19,7 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <SilverlightApplicationList>{9B4EBF15-7ECC-4388-85E4-86CBE2CBA0A5}|..\MyERP\MyERP.csproj|ClientBin|False,{025D049E-A6C0-4D26-B48E-16758827B4B1}|..\MyERP.Modules.User\MyERP.Modules.User.csproj|ClientBin|False,{2493DA95-9A90-4BDA-9D30-07A5B9B784CB}|..\MyERP.Modules.Home\MyERP.Modules.Home.csproj|ClientBin|False,{68435AFF-4995-40C4-87B0-9B781766E6B3}|..\MyERP.Modules.Financial\MyERP.Modules.Financial.csproj|ClientBin|False,{D502661D-A8E0-45DD-9A2F-D14135B48459}|..\MyERP.Modules.Setup\MyERP.Modules.Setup.csproj|ClientBin|False</SilverlightApplicationList>
+    <SilverlightApplicationList>{9B4EBF15-7ECC-4388-85E4-86CBE2CBA0A5}|..\MyERP\MyERP.csproj|ClientBin|False,{025D049E-A6C0-4D26-B48E-16758827B4B1}|..\MyERP.Modules.User\MyERP.Modules.User.csproj|ClientBin|False,{2493DA95-9A90-4BDA-9D30-07A5B9B784CB}|..\MyERP.Modules.Home\MyERP.Modules.Home.csproj|ClientBin|False,{68435AFF-4995-40C4-87B0-9B781766E6B3}|..\MyERP.Modules.Financial\MyERP.Modules.Financial.csproj|ClientBin|False,{D502661D-A8E0-45DD-9A2F-D14135B48459}|..\MyERP.Modules.Master\MyERP.Modules.Master.csproj|ClientBin|False</SilverlightApplicationList>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -111,14 +111,12 @@
   <ItemGroup>
     <Content Include="ClientBin\MyERP.Modules.Financial.xap" />
     <Content Include="ClientBin\MyERP.Modules.Home.xap" />
-    <Content Include="ClientBin\MyERP.Modules.Setup.xap" />
+    <Content Include="ClientBin\MyERP.Modules.Master.xap" />
     <Content Include="ClientBin\MyERP.Modules.User.xap" />
     <Content Include="ClientBin\MyERP.xap" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="MyERP.Modules.SetupTestPage.aspx" />
-    <Content Include="MyERP.Modules.SetupTestPage.html" />
     <Content Include="packages.config" />
     <Content Include="ClientBin\System.ComponentModel.Composition.zip" />
     <Content Include="ClientBin\System.Xml.Linq.zip" />

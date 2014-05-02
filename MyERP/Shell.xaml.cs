@@ -45,15 +45,6 @@ namespace MyERP
         public void OnImportsSatisfied()
         {
             LoadModulesInBackground();
-            NavigateToLoginModule();
-        }
-
-        private void NavigateToLoginModule()
-        {
-            this.ViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.UserModule);
-            this.Aggregator.GetEvent<ShowUserLoginProcessEvent>().Publish(null);
-
-            //this.ViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.UserModule);
         }
 
         private void LoadModulesInBackground()
@@ -63,7 +54,7 @@ namespace MyERP
                                                    ModuleNames.UserModule,
                                                    ModuleNames.HomeModule,
                                                    ModuleNames.FinancialModule,
-                                                   ModuleNames.SetupModule
+                                                   ModuleNames.MasterModule
                                                });
 
             foreach (var url in urls)
@@ -72,6 +63,17 @@ namespace MyERP
             }
 
             ModuleLoader.ProcessQueueAsync();
+
+            ModuleLoader.PriorityOperationProgressChanged += ModuleLoader_PriorityOperationProgressChanged;
+        }
+
+        void ModuleLoader_PriorityOperationProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            if (ModuleLoader.IsModuleLoaded(ModuleNames.UserModule))
+            {
+                this.ViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.UserModule);
+                this.Aggregator.GetEvent<ShowUserLoginProcessEvent>().Publish(null);
+            }
         }
     }
 }

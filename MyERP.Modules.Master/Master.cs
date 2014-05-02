@@ -2,10 +2,10 @@
 using Microsoft.Practices.Prism.Modularity;
 using MyERP.Infrastructure;
 
-namespace MyERP.Modules.Setup
+namespace MyERP.Modules.Master
 {
-    [ModuleExport(ModuleNames.SetupModule, typeof(SetupModule), InitializationMode = InitializationMode.OnDemand)]
-    public class SetupModule : IModule
+    [ModuleExport(ModuleNames.MasterModule, typeof(MasterModule), InitializationMode = InitializationMode.OnDemand)]
+    public class MasterModule : IModule
     {
         public void Initialize()
         {

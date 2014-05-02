@@ -7,15 +7,6 @@
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="800">
 
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/MyERP.Theme;component/Styles/Generic.xaml"/>
-                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.GridView.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
-    
     <Grid x:Name="LayoutRoot">
         <telerik:RadGridView x:Name="gridView" ItemsSource="{Binding GeneralJournalLines}" ColumnWidth="*"
                              IsBusy="{Binding IsBusy}"

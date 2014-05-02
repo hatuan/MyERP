@@ -10,7 +10,7 @@ using Telerik.Windows.Controls;
 
 namespace MyERP.Modules.User.Views
 {
-    [ViewExport(RegionName = RegionNames.UserWindowRegion, IsActiveByDefault = true)]
+    [ViewExport(RegionName = RegionNames.UserWindowRegion, IsActiveByDefault = false)]
     public partial class LoginView : UserControl, INavigationAware, IPartImportsSatisfiedNotification
 	{
 		public LoginView()

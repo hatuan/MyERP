@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Linq;
 using System.ServiceModel.DomainServices.Client;
 using System.Windows;
 using System.Windows.Input;
@@ -16,18 +14,18 @@ using MyERP.ViewModels;
 using MyERP.Web;
 using Telerik.Windows.Data;
 
-namespace MyERP.Modules.Financial.ViewModels
+namespace MyERP.Modules.Master.ViewModels
 {
     [Export]
-    public class AccountsViewModel : NavigationAwareDataViewModel, ICloseable
+    public class NoSeriesViewModel : NavigationAwareDataViewModel, ICloseable
     {
-        public AccountsViewModel()
+        public NoSeriesViewModel()
         {
             
         }
 
         [Import]
-        public AccountRepository AccountRepository { get; set; }
+        public NoSeriesRepository NoSeriesRepository { get; set; }
 
         public ICommand AddNewCommand { get; set; }
         public ICommand SubmitChangesCommand { get; set; }
@@ -43,57 +41,39 @@ namespace MyERP.Modules.Financial.ViewModels
         [Import]
         public IApplicationViewModel ApplicationViewModel { get; set; }
 
-        private AccountsViewState _state;
-        public AccountsViewState State
+        private NoSeries _selectedNo;
+        public NoSeries SelectedNo
         {
             get
             {
-                return this._state;
+                return this._selectedNo;
             }
             set
             {
-                if (this._state == value)
+                if (this._selectedNo == value)
                 {
                     return;
                 }
-                this._state = value;
-                this.RaisePropertyChanged("State");
-            }
-        }
-
-        private Account _selectedAccount;
-        public Account SelectedAccount
-        {
-            get
-            {
-                return this._selectedAccount;
-            }
-            set
-            {
-                if (this._selectedAccount == value)
-                {
-                    return;
-                }
-                this._selectedAccount = value;
-                this.RaisePropertyChanged("SelectedAccount");
+                this._selectedNo = value;
+                this.RaisePropertyChanged("SelectedNo");
 
                 ((DelegateCommand)DeleteCommand).RaiseCanExecuteChanged();
             }
         }
 
-        private QueryableDomainServiceCollectionView<Account> _accounts;
-        public QueryableDomainServiceCollectionView<Account> Accounts
+        private QueryableDomainServiceCollectionView<NoSeries> _noSeries;
+        public QueryableDomainServiceCollectionView<NoSeries> NoSeries
         {
-            get { return this._accounts; }
-            set { _accounts = value; }
+            get { return this._noSeries; }
+            set { _noSeries = value; }
         }
         
         public bool IsBusy
         {
-            get { return this._accounts.IsBusy; }
+            get { return this._noSeries.IsBusy; }
         }
 
-        void _accounts_LoadedData(object sender, Telerik.Windows.Controls.DomainServices.LoadedDataEventArgs e)
+        void _noSeries_LoadedData(object sender, Telerik.Windows.Controls.DomainServices.LoadedDataEventArgs e)
         {
             if (e.HasError)
             {
@@ -103,7 +83,7 @@ namespace MyERP.Modules.Financial.ViewModels
         }
         
 
-        void _accounts_SubmittedChanges(object sender, Telerik.Windows.Controls.DomainServices.DomainServiceSubmittedChangesEventArgs e)
+        void _noSeries_SubmittedChanges(object sender, Telerik.Windows.Controls.DomainServices.DomainServiceSubmittedChangesEventArgs e)
         {
             if (e.HasError)
             {
@@ -112,7 +92,7 @@ namespace MyERP.Modules.Financial.ViewModels
             }
         }
 
-        void _accounts_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        void _noSeries_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -132,52 +112,51 @@ namespace MyERP.Modules.Financial.ViewModels
         }
 
         //Update khi thay doi sang dong moi
-        void _accounts_CurrentChanging(object sender, CurrentChangingEventArgs e)
+        void _noSeries_CurrentChanging(object sender, CurrentChangingEventArgs e)
         {
-            if (_accounts.HasChanges)
-                _accounts.SubmitChanges();
+            if (_noSeries.HasChanges)
+                _noSeries.SubmitChanges();
         }
 
         private void OnAddNewCommandExecuted()
         {
-            _accounts.AddNew();
+            _noSeries.AddNew();
 
         }
 
         private bool AddNewCommandCanExecute()
         {
-            return !_accounts.HasChanges;
+            return !_noSeries.HasChanges;
         }
-
+        
+        private void OnSubmitChangesExcuted()
+        {
+            this._noSeries.SubmitChanges();
+        }
 
         private bool SubmitChangesCommandCanExecute()
         {
-            return this._accounts.HasChanges;
+            return this._noSeries.HasChanges;
         }
 
         private void OnRejectChangesExcuted()
         {
-            this._accounts.RejectChanges();
-        }
-
-        private void OnSubmitChangesExcuted()
-        {
-            this._accounts.SubmitChanges();
+            this._noSeries.RejectChanges();
         }
 
         private bool RefreshCommandCanExecute()
         {
-            return this._accounts.CanLoad;
+            return this._noSeries.CanLoad;
         }
 
         private void OnRefreshExcuted()
         {
-            this._accounts.Load();
+            this._noSeries.Load();
         }
 
         private bool DeleteCommandCanExecute()
         {
-            if(SelectedAccount == null)
+            if(SelectedNo == null)
                 return false;
 
             return true;
@@ -185,8 +164,8 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnDeleteExcuted()
         {
-            if(SelectedAccount != null)
-                this.Accounts.Remove(SelectedAccount);
+            if (SelectedNo != null)
+                this.NoSeries.Remove(SelectedNo);
         }
 
         private bool CloseWindowCanExecute()
@@ -195,7 +174,7 @@ namespace MyERP.Modules.Financial.ViewModels
                 return false;
             
             //Neu co thay doi thi khong cho dong cua so, bat buoc phai luu hay undo
-            if(this._accounts.HasChanges)
+            if(this._noSeries.HasChanges)
                 return false;
 
             return true;
@@ -214,14 +193,14 @@ namespace MyERP.Modules.Financial.ViewModels
         {
             base.OnImportsSatisfied();
 
-            MyERPDomainContext context = AccountRepository.Context;
-            EntityQuery<Account> getAccountsQuery = context.GetAccountsQuery().OrderBy(c => c.Code);
-            this._accounts = new QueryableDomainServiceCollectionView<Account>(context, getAccountsQuery);
-            this._accounts.AutoLoad = true;
-            this._accounts.LoadedData += _accounts_LoadedData;
-            this._accounts.PropertyChanged += _accounts_PropertyChanged;
-            this._accounts.SubmittedChanges += _accounts_SubmittedChanges;
-            //this._accounts.CurrentChanging += _accounts_CurrentChanging;
+            MyERPDomainContext context = NoSeriesRepository.Context;
+            EntityQuery<NoSeries> getNoSeriesQuery = context.GetNoSeriesQuery().OrderBy(c => c.Code);
+            this._noSeries = new QueryableDomainServiceCollectionView<NoSeries>(context, getNoSeriesQuery);
+            this._noSeries.AutoLoad = true;
+            this._noSeries.LoadedData += _noSeries_LoadedData;
+            this._noSeries.PropertyChanged += _noSeries_PropertyChanged;
+            this._noSeries.SubmittedChanges += _noSeries_SubmittedChanges;
+            //this._noSeries.CurrentChanging += _noSeries_CurrentChanging;
 
             this.AddNewCommand = new DelegateCommand(OnAddNewCommandExecuted, AddNewCommandCanExecute);
             this.SubmitChangesCommand = new DelegateCommand(OnSubmitChangesExcuted, SubmitChangesCommandCanExecute);

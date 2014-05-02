@@ -29,21 +29,6 @@
             </cv:EnumConverter>
             
             <cv:IdNullToGuidConverter x:Key="MapIdNullToGuidConverter"/>
-
-            <ContentControl x:Key="contentParent" Content="{Binding}" />
-
-            <telerik:RadDomainDataSource DomainContext="{Binding AccountRepository.Context}" QueryName="GetCurrencies" x:Name="currenciesDataSource" AutoLoad="True">
-                <telerik:RadDomainDataSource.SortDescriptors>
-                    <telerik:SortDescriptor Member="Code"/>
-                </telerik:RadDomainDataSource.SortDescriptors>
-            </telerik:RadDomainDataSource>
-
-            <telerik:RadDomainDataSource DomainContext="{Binding AccountRepository.Context}" QueryName="GetAccounts" x:Name="accountsDataSource" AutoLoad="True">
-                <telerik:RadDomainDataSource.SortDescriptors>
-                    <telerik:SortDescriptor Member="Code"/>
-                </telerik:RadDomainDataSource.SortDescriptors>
-            </telerik:RadDomainDataSource>
-            
         </ResourceDictionary>
         
     </UserControl.Resources>
@@ -62,8 +47,20 @@
             </i:Interaction.Behaviors>
             
             <telerik:RadGridView.Columns>
-                <telerik:GridViewDataColumn Header="ACCOUNT" DataMemberBinding="{Binding Code, Mode=TwoWay}" Width="100"/>
-                <telerik:GridViewDataColumn Header="NAME" DataMemberBinding="{Binding Name, Mode=TwoWay}"/>
+                <telerik:GridViewDataColumn Header="ACCOUNT" DataMemberBinding="{Binding Code, Mode=TwoWay}" Width="100">
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" FontFamily="Segoe UI" FontSize="14"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="NAME" DataMemberBinding="{Binding Name, Mode=TwoWay}">
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" FontFamily="Segoe UI" FontSize="14"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
                 <telerik:GridViewDataColumn Header="CURRENCY" DataMemberBinding="{Binding Currency.Code}" Width="100">
                     <telerik:GridViewDataColumn.CellEditTemplate>
                         <DataTemplate>
@@ -89,7 +86,18 @@
                         </DataTemplate>
                     </telerik:GridViewDataColumn.CellEditTemplate>
                 </telerik:GridViewDataColumn>
-                <telerik:GridViewDataColumn Header="AR/AP" DataMemberBinding="{Binding ArAp}" TextAlignment="Center" Width="100"/>
+                <telerik:GridViewDataColumn Header="AR/AP" DataMemberBinding="{Binding ArAp, Mode=TwoWay}" TextAlignment="Center" Width="100">
+                    <telerik:GridViewDataColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding ArAp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="Segoe UI" FontSize="14"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellTemplate>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding ArAp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="Segoe UI" FontSize="14"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
                 <telerik:GridViewDataColumn Header="STATUS" DataMemberBinding="{Binding Status, Mode=TwoWay}" Width="100">
                     <telerik:GridViewDataColumn.CellTemplate>
                         <DataTemplate>
@@ -98,7 +106,7 @@
                     </telerik:GridViewDataColumn.CellTemplate>
 					<telerik:GridViewDataColumn.CellEditTemplate>
 						<DataTemplate>
-							<telerik:RadComboBox SelectedIndex="{Binding Status, Mode=TwoWay}">
+                            <telerik:RadComboBox SelectedIndex="{Binding Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         						<telerik:RadComboBoxItem Content="INACTIVE"/>
 								<telerik:RadComboBoxItem Content="ACTIVE"/>
         					</telerik:RadComboBox>

@@ -59,7 +59,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.Modules.Financial", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.Controls", "MyERP.Controls\MyERP.Controls.csproj", "{067F3193-C00E-4DDF-B6C5-33FEAF5E14B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.Modules.Setup", "MyERP.Modules.Setup\MyERP.Modules.Setup.csproj", "{D502661D-A8E0-45DD-9A2F-D14135B48459}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.Modules.Master", "MyERP.Modules.Master\MyERP.Modules.Master.csproj", "{D502661D-A8E0-45DD-9A2F-D14135B48459}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -39,6 +39,7 @@ namespace MyERP
             { ModuleNames.HomeModule, "HomeWindow" },
             { ModuleNames.UserModule, "UserWindow" },
             { ModuleNames.FinancialModule, "FinancialWindow" },
+            {ModuleNames.MasterModule, "MasterWindow"}
         };
 
         private string currentUri;

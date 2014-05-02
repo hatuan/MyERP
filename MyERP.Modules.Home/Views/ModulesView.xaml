@@ -10,13 +10,6 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/MyERP.Theme;component/Styles/Generic.xaml"/>
-                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/System.Windows.xaml"/>
-                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.xaml"/>
-                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.Input.xaml"/>
-                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.Navigation.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
 
 			<DataTemplate x:Key="FinancialRadFluidLargeContentDataTemplate">
 				<Grid>
@@ -1425,7 +1418,7 @@
         		</Grid>
         	</DataTemplate>
 
-            <DataTemplate x:Key="SetupsRadFluidLargeContentDataTemplate">
+            <DataTemplate x:Key="MasterRadFluidLargeContentDataTemplate">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -1433,7 +1426,7 @@
                     <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                         <StackPanel Orientation="Horizontal">
 
-                            <!-- Setups -->
+                            <!-- MASTERS -->
                             <Grid MinWidth="800">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="0"/>
@@ -1442,7 +1435,8 @@
                                 </Grid.RowDefinitions>
 
                                 <telerik:RadUniformGrid Rows="1" Columns="3" Grid.Row="2">
-                                    <Grid x:Name="setupsGrid" MinHeight="150" Margin="8,8,0,0">
+                                    <!-- SYSTEM -->
+                                    <Grid x:Name="systemGrid" MinHeight="150" Margin="8,8,0,0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
@@ -1456,9 +1450,9 @@
 
                                         <Rectangle Fill="{StaticResource StrongBrush}" Height="1" HorizontalAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Top" d:LayoutOverrides="Height, GridBox"/>
 
-                                        <TextBlock Grid.Column="2" Text="Setups" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
+                                        <TextBlock Grid.Column="2" Text="System" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
                                         <!--ItemsControl -->
-                                        <ItemsControl x:Name="setupsItemsControl" ItemsSource="{Binding Setups}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+                                        <ItemsControl x:Name="systemsItemsControl" ItemsSource="{Binding MasterSystem}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
                                                     <Grid x:Name="grid" Margin="0" Height="24">
@@ -1503,6 +1497,133 @@
                                         </ItemsControl>
 
                                     </Grid>
+
+                                    <!-- COMPANY -->
+                                    <Grid x:Name="companyGrid" MinHeight="150" Margin="8,8,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="25"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <Rectangle Fill="{StaticResource StrongBrush}" Height="1" HorizontalAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Top" d:LayoutOverrides="Height, GridBox"/>
+
+                                        <TextBlock Grid.Column="2" Text="Company" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
+                                        <!--ItemsControl -->
+                                        <ItemsControl x:Name="companysItemsControl" ItemsSource="{Binding MasterCompany}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid x:Name="grid" Margin="0" Height="24">
+                                                        <i:Interaction.Triggers>
+                                                            <i:EventTrigger EventName="MouseEnter">
+                                                                <ei:GoToStateAction StateName="MouseOver"/>
+                                                            </i:EventTrigger>
+                                                            <i:EventTrigger EventName="MouseLeave">
+                                                                <ei:GoToStateAction StateName="Normal"/>
+                                                            </i:EventTrigger>
+                                                        </i:Interaction.Triggers>
+                                                        <VisualStateManager.VisualStateGroups>
+                                                            <VisualStateGroup x:Name="VisualStateGroup">
+                                                                <VisualStateGroup.Transitions>
+                                                                    <VisualTransition GeneratedDuration="0:0:0.3">
+                                                                        <VisualTransition.GeneratedEasingFunction>
+                                                                            <CircleEase EasingMode="EaseOut"/>
+                                                                        </VisualTransition.GeneratedEasingFunction>
+                                                                    </VisualTransition>
+                                                                </VisualStateGroup.Transitions>
+                                                                <VisualState x:Name="Normal"/>
+                                                                <VisualState x:Name="MouseOver">
+                                                                    <Storyboard>
+                                                                        <DoubleAnimation Duration="0" To="0.2" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle" d:IsOptimized="True"/>
+                                                                    </Storyboard>
+                                                                </VisualState>
+                                                            </VisualStateGroup>
+                                                        </VisualStateManager.VisualStateGroups>
+                                                        <VisualStateManager.CustomVisualStateManager>
+                                                            <ei:ExtendedVisualStateManager/>
+                                                        </VisualStateManager.CustomVisualStateManager>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Rectangle x:Name="rectangle" Fill="{StaticResource MarkerBrush}" Opacity="0" Grid.ColumnSpan="2"/>
+                                                        <TextBlock Text="{Binding Description}" FontFamily="Segoe UI" FontSize="12" Foreground="{StaticResource AccentBrush}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                                        <Button Opacity="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="OnSetupsButtonClicked"  Grid.ColumnSpan="2" Cursor="Hand" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+
+                                    </Grid>
+
+                                    <!-- BASIC -->
+                                    <Grid x:Name="basicGrid" MinHeight="150" Margin="8,8,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="25"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <Rectangle Fill="{StaticResource StrongBrush}" Height="1" HorizontalAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Top" d:LayoutOverrides="Height, GridBox"/>
+
+                                        <TextBlock Grid.Column="2" Text="Basic" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
+                                        <!--ItemsControl -->
+                                        <ItemsControl x:Name="basicsItemsControl" ItemsSource="{Binding MasterBasic}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid x:Name="grid" Margin="0" Height="24">
+                                                        <i:Interaction.Triggers>
+                                                            <i:EventTrigger EventName="MouseEnter">
+                                                                <ei:GoToStateAction StateName="MouseOver"/>
+                                                            </i:EventTrigger>
+                                                            <i:EventTrigger EventName="MouseLeave">
+                                                                <ei:GoToStateAction StateName="Normal"/>
+                                                            </i:EventTrigger>
+                                                        </i:Interaction.Triggers>
+                                                        <VisualStateManager.VisualStateGroups>
+                                                            <VisualStateGroup x:Name="VisualStateGroup">
+                                                                <VisualStateGroup.Transitions>
+                                                                    <VisualTransition GeneratedDuration="0:0:0.3">
+                                                                        <VisualTransition.GeneratedEasingFunction>
+                                                                            <CircleEase EasingMode="EaseOut"/>
+                                                                        </VisualTransition.GeneratedEasingFunction>
+                                                                    </VisualTransition>
+                                                                </VisualStateGroup.Transitions>
+                                                                <VisualState x:Name="Normal"/>
+                                                                <VisualState x:Name="MouseOver">
+                                                                    <Storyboard>
+                                                                        <DoubleAnimation Duration="0" To="0.2" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle" d:IsOptimized="True"/>
+                                                                    </Storyboard>
+                                                                </VisualState>
+                                                            </VisualStateGroup>
+                                                        </VisualStateManager.VisualStateGroups>
+                                                        <VisualStateManager.CustomVisualStateManager>
+                                                            <ei:ExtendedVisualStateManager/>
+                                                        </VisualStateManager.CustomVisualStateManager>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Rectangle x:Name="rectangle" Fill="{StaticResource MarkerBrush}" Opacity="0" Grid.ColumnSpan="2"/>
+                                                        <TextBlock Text="{Binding Description}" FontFamily="Segoe UI" FontSize="12" Foreground="{StaticResource AccentBrush}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                                        <Button Opacity="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="OnSetupsButtonClicked"  Grid.ColumnSpan="2" Cursor="Hand" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+
+                                    </Grid>
+                                    
                                 </telerik:RadUniformGrid>
                             </Grid>
                         </StackPanel>
@@ -1616,13 +1737,13 @@
 						<Grid/>
 				</telerik:RadFluidContentControl>
 			</telerik:RadTileViewItem>
-            <telerik:RadTileViewItem x:Name="Setups" Header="SETUPS">
+            <telerik:RadTileViewItem x:Name="Masters" Header="MASTERS">
                 <telerik:RadFluidContentControl ContentChangeMode="Manual" State="Normal">
                     <telerik:RadFluidContentControl.SmallContent>
                         <Grid/>
                     </telerik:RadFluidContentControl.SmallContent>
                     <telerik:RadFluidContentControl.LargeContent>
-                        <ContentControl Content="{Binding}"  ContentTemplate="{StaticResource SetupsRadFluidLargeContentDataTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+                        <ContentControl Content="{Binding}"  ContentTemplate="{StaticResource MasterRadFluidLargeContentDataTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
                     </telerik:RadFluidContentControl.LargeContent>
                     <Grid/>
                 </telerik:RadFluidContentControl>

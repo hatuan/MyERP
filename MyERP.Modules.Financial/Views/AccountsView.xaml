@@ -12,17 +12,6 @@
     mc:Ignorable="d"
     d:DesignHeight="600" d:DesignWidth="800">
 	
-	<UserControl.Resources>
-		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="/MyERP.Theme;component/Styles/Generic.xaml"/>
-                <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.RibbonView.xaml"/>
-				<ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.GridView.xaml"/>
-			</ResourceDictionary.MergedDictionaries>
-
-        </ResourceDictionary>
-	</UserControl.Resources>
-
 	<Grid x:Name="LayoutRoot">
         <VisualStateManager.CustomVisualStateManager>
             <ei:ExtendedVisualStateManager/>
@@ -68,27 +57,9 @@
                                                     telerik:KeyTipService.AccessKey="Ctrl+F2"
                                                     Command="{Binding AddNewCommand}"/>
 
-                        <!--
-                        <telerik:RadRibbonButton Text="EDIT" Size="Large" LargeImage="/MyERP.Theme;component/Images/edit.png"/>
-						
-						<telerik:RadRibbonButton Text="SAVE" Size="Large" LargeImage="/MyERP.Theme;component/Images/save.png"/>
-						-->
-                        
-                        <telerik:RadRibbonSplitButton Text="SAVE" Size="Large" LargeImage="/MyERP.Theme;component/Images/save.png"
+                        <telerik:RadRibbonButton Text="SAVE" Size="Large" LargeImage="/MyERP.Theme;component/Images/save.png"
                                                         telerik:KeyTipService.AccessKey="Alt+S"
-                                                        Command="{Binding SubmitChangesCommand}">
-							<!--<telerik:RadRibbonSplitButton.DropDownContent>
-								<StackPanel>
-                                    <telerik:RadMenuItem Header="UNDO"
-                                                            telerik:KeyTipService.AccessKey="Alt+U"
-                                                            Command="{Binding RejectChangesCommand}">
-										<telerik:RadMenuItem.Icon>
-											<Image Source="/MyERP.Theme;component/Images/undo.png" />
-										</telerik:RadMenuItem.Icon>
-									</telerik:RadMenuItem>
-								</StackPanel>
-							</telerik:RadRibbonSplitButton.DropDownContent>-->
-						</telerik:RadRibbonSplitButton>
+                                                        Command="{Binding SubmitChangesCommand}"/>
 
 						<telerik:RadOrderedWrapPanel>
 							<telerik:RadRibbonButton Text="DELETE" LargeImage="/MyERP.Theme;component/Images/delete.png"
@@ -115,41 +86,13 @@
 			</telerik:RadRibbonView>
             <Rectangle Grid.Row="1" Fill="{StaticResource AccentBrush}" Height="1" HorizontalAlignment="Stretch"/>
 		</Grid>
-
-
-        <telerik:RadDomainDataSource DomainContext="{Binding AccountRepository.Context}" QueryName="GetCurrencies" x:Name="currenciesDataSource" AutoLoad="True">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="LoadedData">
-                    <ei:ChangePropertyAction TargetObject="{Binding .}" 
-															 PropertyName="Currencies" 
-															 Value="{Binding DataView.SourceCollection, ElementName=currenciesDataSource}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            
-            <telerik:RadDomainDataSource.SortDescriptors>
-                <telerik:SortDescriptor Member="Code"/>
-            </telerik:RadDomainDataSource.SortDescriptors>
-        </telerik:RadDomainDataSource>
-
-        <telerik:RadDomainDataSource DomainContext="{Binding AccountRepository.Context}" QueryName="GetAccounts" x:Name="accountsDataSource" AutoLoad="True">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="LoadedData">
-                    <ei:ChangePropertyAction TargetObject="{Binding .}" 
-															 PropertyName="ParentAccounts" 
-															 Value="{Binding DataView.SourceCollection, ElementName=accountsDataSource}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <telerik:RadDomainDataSource.SortDescriptors>
-                <telerik:SortDescriptor Member="Code"/>
-            </telerik:RadDomainDataSource.SortDescriptors>
-        </telerik:RadDomainDataSource>
         
         <telerik:RadTabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
         	<telerik:RadTabItem x:Name="radTabItemAccountsOverview" Header="OVERVIEW">
         		<Grid>
         			<Grid.ColumnDefinitions>
         				<ColumnDefinition Width="0"/>
-        				<ColumnDefinition Width="53"/>
+        				<ColumnDefinition Width="53*"/>
         				<ColumnDefinition Width="53*"/>
         				<ColumnDefinition Width="53*"/>
         				<ColumnDefinition Width="53*"/>
