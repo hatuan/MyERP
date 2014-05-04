@@ -3,7 +3,7 @@
 namespace MyERP.Repositories
 {
     [Export]
-    public class GeneralJournalRepository : RepositoryBase
+    public class GeneralJournalDocumentRepository : RepositoryBase
     {
 
     }

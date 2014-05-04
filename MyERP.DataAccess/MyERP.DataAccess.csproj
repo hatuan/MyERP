@@ -68,18 +68,25 @@
     <Compile Include="Currency.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="CurrencyConvertRate.generated.cs">
+      <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
+    </Compile>
     <Compile Include="Currency\Currency.cs" />
     <Compile Include="Currency\CurrencyStatusType.cs" />
     <Compile Include="DashboardStats.cs" />
     <Compile Include="GeneralJournalDocument.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="GeneralJournalDocument\GeneralJournalDocument.cs" />
+    <Compile Include="GeneralJournalDocument\GeneralJournalDocumentStatusType.cs" />
     <Compile Include="GeneralJournalLine.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="GeneralJournalLine\GeneralJournalLine.cs" />
     <Compile Include="GeneralJournalSetup.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="GeneralJournalSetup\GeneralJournalSetup.cs" />
     <Compile Include="MyERPDataModel.partial.cs" />
     <Compile Include="Job.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>

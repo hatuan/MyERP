@@ -8,7 +8,7 @@
 <#@ import namespace="System.IO"#>
 <#@ import namespace="System.Text"#>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating"#>
-<#@ Assembly Name="Telerik.OpenAccess, Version=2014.1.225.2, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342" #>
+<#@ Assembly Name="Telerik.OpenAccess, Version=2014.1.403.2, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342" #>
 <#@ import namespace="Telerik.OpenAccess"#>
 <#@ import namespace="System.Diagnostics" #>
 //------------------------------------------------------------------------------

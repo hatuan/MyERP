@@ -18,7 +18,6 @@ using System.ServiceModel.DomainServices.Server;
 using Telerik.OpenAccess;
 using MyERP.DataAccess;
 
-
 #pragma warning disable 1591
 
 namespace MyERP.Web	
@@ -103,7 +102,7 @@ namespace MyERP.Web
 		} 
 		public IQueryable<Client> GetClients()
 		{ 
-			return this.DataContext.Clients;
+			return this.DataContext.Clients.Where(c => c.Id == _membershipUser.ClientId);
 		}       
 		public void DeleteClients(Client client)
 		{
@@ -263,6 +262,24 @@ namespace MyERP.Web
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
+		public IQueryable<GeneralJournalSetup> GetGeneralJournalSetups()
+		{ 
+			return this.DataContext.GeneralJournalSetups.Where(c => c.ClientId == _membershipUser.ClientId);
+		}       
+		public void DeleteGeneralJournalSetups(GeneralJournalSetup generalJournalSetup)
+		{
+			// This is a callback method. The actual Delete is performed internally.
+		}
+
+		public void UpdateGeneralJournalSetups(GeneralJournalSetup generalJournalSetup)
+		{
+			// This is a callback method. The actual Update is performed internally.
+		}
+
+		public void InsertGeneralJournalSetups(GeneralJournalSetup generalJournalSetup)
+		{
+			// This is a callback method. The actual Insert is performed internally.
+		} 
 		public IQueryable<User> GetUsers()
 		{ 
 			return this.DataContext.Users.Where(c => c.ClientId == _membershipUser.ClientId);
@@ -285,20 +302,6 @@ namespace MyERP.Web
 		{ 
 			return this.DataContext.NoSeries.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
-		public void DeleteNoSeries(NoSeries noSeries)
-		{
-			// This is a callback method. The actual Delete is performed internally.
-		}
-
-		public void UpdateNoSeries(NoSeries noSeries)
-		{
-			// This is a callback method. The actual Update is performed internally.
-		}
-
-		public void InsertNoSeries(NoSeries noSeries)
-		{
-			// This is a callback method. The actual Insert is performed internally.
-		} 
 	}
 }
 

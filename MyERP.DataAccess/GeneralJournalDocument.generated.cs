@@ -56,18 +56,18 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Guid _organizaionId;
-		[Column("organizaion_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_organizaionId")]
-		public virtual Guid OrganizaionId
+		private Guid _organizationId;
+		[Column("organization_id", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_organizationId")]
+		public virtual Guid OrganizationId
 		{
 			get
 			{
-				return this._organizaionId;
+				return this._organizationId;
 			}
 			set
 			{
-				this._organizaionId = value;
+				this._organizationId = value;
 			}
 		}
 		
@@ -372,7 +372,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizaionId", TargetFields = "Id")]
+		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
 		[Storage("_organization")]
 		public virtual Organization Organization
 		{
@@ -447,9 +447,9 @@ namespace MyERP.DataAccess
 		}
 		
 		private IList<GeneralJournalLine> _transactionLines = new List<GeneralJournalLine>();
-		[Collection(InverseProperty = "TransactionDocument", IsManaged = true)]
+		[Collection(InverseProperty = "GeneralJournalDocument")]
 		[Storage("_transactionLines")]
-		public virtual IList<GeneralJournalLine> TransactionLines
+		public virtual IList<GeneralJournalLine> GeneralJournalLines
 		{
 			get
 			{

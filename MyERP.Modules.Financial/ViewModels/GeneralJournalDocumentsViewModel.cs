@@ -27,7 +27,7 @@ namespace MyERP.Modules.Financial.ViewModels
 
         #region Repositories
         [Import]
-        public GeneralJournalRepository GeneralJournalRepository { get; set; }
+        public GeneralJournalDocumentRepository GeneralJournalDocumentRepository { get; set; }
         #endregion
 
         #region View-visible properties
@@ -80,7 +80,7 @@ namespace MyERP.Modules.Financial.ViewModels
         public override void OnImportsSatisfied()
         {
             base.OnImportsSatisfied();
-            this.Context = this.GeneralJournalRepository.Context;
+            this.Context = this.GeneralJournalDocumentRepository.Context;
 
             EntityQuery<GeneralJournalDocument> getGeneralJournalDocumentsQuery = Context.GetGeneralJournalDocumentsQuery().OrderBy(c => c.DocumentNo);
             GeneralJournalDocuments = new QueryableDomainServiceCollectionView<GeneralJournalDocument>(Context,

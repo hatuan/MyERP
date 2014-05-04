@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace MyERP.Web
         {
             base.Initialize(context);
             _membershipUser = (MyERPMembershipUser)Membership.GetUser(context.User.Identity.Name, true);
+
         }
 
         public IQueryable<Organization> GetOrganizationsByClientId(Guid clientId)
@@ -27,7 +29,34 @@ namespace MyERP.Web
             var organizations = this.DataContext.Organizations.ToList().Where(a => a.ClientId == clientId && a.Status == (int)OrganizationStatusType.Active);
             return organizations.AsQueryable();
         }
-        
+
+        #region NoSeries
+        public void DeleteNoSeries(NoSeries noSeries)
+        {
+            // This is a callback method. The actual Delete is performed internally.
+        }
+
+        public void UpdateNoSeiess(NoSeries noSeries)
+        {
+            // This is a callback method. The actual Update is performed internally.
+        }
+
+        public void InsertNoSeries(NoSeries noSeries)
+        {
+            string SqlQuery = String.Format("CREATE SEQUENCE {0} MINVALUE {1} MAXVALUE {2} START {3}", new object[] {noSeries.NoSeqName, noSeries.StartingNo, noSeries.EndingNo, noSeries.CurrentNo});
+            using (var connection = this.DataContext.Connection)
+            {
+                // 3. Create a new instance of the OACommand class.
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = SqlQuery;
+                    command.ExecuteNonQuery();
+                }
+            }
+
+        } 
+        #endregion
+
         #region Dashboard services
         public DashboardStats GetDashboardStats()
         {

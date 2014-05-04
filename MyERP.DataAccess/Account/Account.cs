@@ -44,6 +44,7 @@ namespace MyERP.DataAccess
             [Include]
             [Association("Account-user-modified-association", "RecModifiedById", "Id")]
             public User RecModifiedByUser { get; set; }
+
         }
         public AccountStatusType StatusType
         {

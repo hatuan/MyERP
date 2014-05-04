@@ -82,11 +82,13 @@
       <DependentUpon>ValidationErrorResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Account.cs" />
+    <Compile Include="GeneralJournalDocument.cs" />
+    <Compile Include="GeneralJournalSetup.cs" />
     <Compile Include="NoSeries.cs" />
     <Compile Include="NoSeriesRepository.cs" />
     <Compile Include="ClientRepository.cs" />
     <Compile Include="GeneralJournalLineRepository.cs" />
-    <Compile Include="GeneralJournalRepository.cs" />
+    <Compile Include="GeneralJournalDocumentRepository.cs" />
     <Compile Include="OrganizationRepository.cs" />
     <Compile Include="AccountRepository.cs" />
     <Compile Include="CurrencyRepository.cs" />
@@ -115,7 +117,6 @@
       <CustomToolNamespace>MyERP.DataAccess.Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

@@ -25,8 +25,8 @@ namespace MyERP.Modules.Financial.Views
 
         [Import]
         public GeneralJournalDocumentsViewModel ViewModel
-        {
-            private get
+       {
+             private get
             {
                 return this.DataContext as GeneralJournalDocumentsViewModel;
             }

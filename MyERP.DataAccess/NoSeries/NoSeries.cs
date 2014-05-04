@@ -20,7 +20,7 @@ namespace MyERP.DataAccess
 
             [Required(ErrorMessageResourceName = "ValidationErrorRequiredField", ErrorMessageResourceType = typeof(ValidationErrorResources))]
             public String Name { get; set; }
-            
+
             [Include]
             [Association("NoSeries-client-association", "ClientId", "Id")]
             public Client Client { get; set; }

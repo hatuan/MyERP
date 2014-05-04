@@ -461,21 +461,6 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private GeneralJournalDocument _transactionDocument;
-		[ForeignKeyAssociation(SharedFields = "GeneralJournalDocumentId", TargetFields = "Id", Depend = true, IsManaged = true)]
-		[Storage("_transactionDocument")]
-		public virtual GeneralJournalDocument TransactionDocument
-		{
-			get
-			{
-				return this._transactionDocument;
-			}
-			set
-			{
-				this._transactionDocument = value;
-			}
-		}
-		
 		private BusinessPartner _businessPartner;
 		[ForeignKeyAssociation(SharedFields = "BusinessPartnerId", TargetFields = "Id")]
 		[Storage("_businessPartner")]
@@ -563,6 +548,21 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._corAccount = value;
+			}
+		}
+		
+		private GeneralJournalDocument _transactionDocument;
+		[ForeignKeyAssociation(SharedFields = "GeneralJournalDocumentId", TargetFields = "Id")]
+		[Storage("_transactionDocument")]
+		public virtual GeneralJournalDocument GeneralJournalDocument
+		{
+			get
+			{
+				return this._transactionDocument;
+			}
+			set
+			{
+				this._transactionDocument = value;
 			}
 		}
 		

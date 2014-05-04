@@ -179,6 +179,14 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		public IQueryable<CurrencyConvertRate> CurrencyConvertRates 
+		{
+			get
+			{
+				return this.GetAll<CurrencyConvertRate>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -265,6 +273,10 @@ namespace MyERP.DataAccess
 			get;
 		}
 		IQueryable<GeneralJournalSetup> GeneralJournalSetups
+		{
+			get;
+		}
+		IQueryable<CurrencyConvertRate> CurrencyConvertRates
 		{
 			get;
 		}

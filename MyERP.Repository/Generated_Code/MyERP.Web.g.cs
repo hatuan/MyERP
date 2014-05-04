@@ -3009,6 +3009,8 @@ namespace MyERP.DataAccess
     public sealed partial class GeneralJournalDocument : Entity
     {
         
+        private EntityRef<Client> _client;
+        
         private Guid _clientId;
         
         private int _currencyExchangeRate;
@@ -3023,7 +3025,11 @@ namespace MyERP.DataAccess
         
         private DateTime _documentPosted;
         
+        private GeneralJournalDocumentStatusType _documentStatusType;
+        
         private string _documentType;
+        
+        private EntityCollection<GeneralJournalLine> _generalJournalLines;
         
         private Guid _id;
         
@@ -3031,15 +3037,21 @@ namespace MyERP.DataAccess
         
         private string[] _openAccessGenerated;
         
-        private Guid _organizaionId;
+        private EntityRef<Organization> _organization;
+        
+        private Guid _organizationId;
         
         private DateTime _recCreated;
         
         private Guid _recCreatedBy;
         
+        private EntityRef<User> _recCreatedByUser;
+        
         private DateTime _recModified;
         
         private Guid _recModifiedBy;
+        
+        private EntityRef<User> _recModifiedByUser;
         
         private int _status;
         
@@ -3076,6 +3088,8 @@ namespace MyERP.DataAccess
         partial void OnDocumentNoChanged();
         partial void OnDocumentPostedChanging(DateTime value);
         partial void OnDocumentPostedChanged();
+        partial void OnDocumentStatusTypeChanging(GeneralJournalDocumentStatusType value);
+        partial void OnDocumentStatusTypeChanged();
         partial void OnDocumentTypeChanging(string value);
         partial void OnDocumentTypeChanged();
         partial void OnIdChanging(Guid value);
@@ -3084,8 +3098,8 @@ namespace MyERP.DataAccess
         partial void OnNoSeriesIdChanged();
         partial void OnOpenAccessGeneratedChanging(string[] value);
         partial void OnOpenAccessGeneratedChanged();
-        partial void OnOrganizaionIdChanging(Guid value);
-        partial void OnOrganizaionIdChanged();
+        partial void OnOrganizationIdChanging(Guid value);
+        partial void OnOrganizationIdChanged();
         partial void OnRecCreatedChanging(DateTime value);
         partial void OnRecCreatedChanged();
         partial void OnRecCreatedByChanging(Guid value);
@@ -3118,6 +3132,32 @@ namespace MyERP.DataAccess
         public GeneralJournalDocument()
         {
             this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="Client"/> entity.
+        /// </summary>
+        [Association("gldocument-client-association", "ClientId", "Id")]
+        public Client Client
+        {
+            get
+            {
+                if ((this._client == null))
+                {
+                    this._client = new EntityRef<Client>(this, "Client", this.FilterClient);
+                }
+                return this._client.Entity;
+            }
+            set
+            {
+                Client previous = this.Client;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Client", value);
+                    this._client.Entity = value;
+                    this.RaisePropertyChanged("Client");
+                }
+            }
         }
         
         /// <summary>
@@ -3296,6 +3336,30 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the 'DocumentStatusType' value.
+        /// </summary>
+        [DataMember()]
+        public GeneralJournalDocumentStatusType DocumentStatusType
+        {
+            get
+            {
+                return this._documentStatusType;
+            }
+            set
+            {
+                if ((this._documentStatusType != value))
+                {
+                    this.OnDocumentStatusTypeChanging(value);
+                    this.RaiseDataMemberChanging("DocumentStatusType");
+                    this.ValidateProperty("DocumentStatusType", value);
+                    this._documentStatusType = value;
+                    this.RaiseDataMemberChanged("DocumentStatusType");
+                    this.OnDocumentStatusTypeChanged();
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'DocumentType' value.
         /// </summary>
         [DataMember()]
@@ -3317,6 +3381,25 @@ namespace MyERP.DataAccess
                     this.RaiseDataMemberChanged("DocumentType");
                     this.OnDocumentTypeChanged();
                 }
+            }
+        }
+        
+        /// <summary>
+        /// Gets the collection of associated <see cref="GeneralJournalLine"/> entity instances.
+        /// </summary>
+        [Association("gldocument-line-association", "Id", "GeneralJournalDocumentId")]
+        [Composition()]
+        [Editable(false)]
+        [ReadOnly(true)]
+        public EntityCollection<GeneralJournalLine> GeneralJournalLines
+        {
+            get
+            {
+                if ((this._generalJournalLines == null))
+                {
+                    this._generalJournalLines = new EntityCollection<GeneralJournalLine>(this, "GeneralJournalLines", this.FilterGeneralJournalLines);
+                }
+                return this._generalJournalLines;
             }
         }
         
@@ -3399,26 +3482,52 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
-        /// Gets or sets the 'OrganizaionId' value.
+        /// Gets or sets the associated <see cref="Organization"/> entity.
         /// </summary>
-        [DataMember()]
-        [RoundtripOriginal()]
-        public Guid OrganizaionId
+        [Association("gldocument-organization-association", "OrganizationId", "Id")]
+        public Organization Organization
         {
             get
             {
-                return this._organizaionId;
+                if ((this._organization == null))
+                {
+                    this._organization = new EntityRef<Organization>(this, "Organization", this.FilterOrganization);
+                }
+                return this._organization.Entity;
             }
             set
             {
-                if ((this._organizaionId != value))
+                Organization previous = this.Organization;
+                if ((previous != value))
                 {
-                    this.OnOrganizaionIdChanging(value);
-                    this.RaiseDataMemberChanging("OrganizaionId");
-                    this.ValidateProperty("OrganizaionId", value);
-                    this._organizaionId = value;
-                    this.RaiseDataMemberChanged("OrganizaionId");
-                    this.OnOrganizaionIdChanged();
+                    this.ValidateProperty("Organization", value);
+                    this._organization.Entity = value;
+                    this.RaisePropertyChanged("Organization");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OrganizationId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid OrganizationId
+        {
+            get
+            {
+                return this._organizationId;
+            }
+            set
+            {
+                if ((this._organizationId != value))
+                {
+                    this.OnOrganizationIdChanging(value);
+                    this.RaiseDataMemberChanging("OrganizationId");
+                    this.ValidateProperty("OrganizationId", value);
+                    this._organizationId = value;
+                    this.RaiseDataMemberChanged("OrganizationId");
+                    this.OnOrganizationIdChanged();
                 }
             }
         }
@@ -3474,6 +3583,32 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the associated <see cref="User"/> entity.
+        /// </summary>
+        [Association("gldocument-user-created-association", "RecCreatedBy", "Id")]
+        public User RecCreatedByUser
+        {
+            get
+            {
+                if ((this._recCreatedByUser == null))
+                {
+                    this._recCreatedByUser = new EntityRef<User>(this, "RecCreatedByUser", this.FilterRecCreatedByUser);
+                }
+                return this._recCreatedByUser.Entity;
+            }
+            set
+            {
+                User previous = this.RecCreatedByUser;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("RecCreatedByUser", value);
+                    this._recCreatedByUser.Entity = value;
+                    this.RaisePropertyChanged("RecCreatedByUser");
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'RecModified' value.
         /// </summary>
         [DataMember()]
@@ -3519,6 +3654,32 @@ namespace MyERP.DataAccess
                     this._recModifiedBy = value;
                     this.RaiseDataMemberChanged("RecModifiedBy");
                     this.OnRecModifiedByChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="User"/> entity.
+        /// </summary>
+        [Association("gldocument-user-modified-association", "RecModifiedBy", "Id")]
+        public User RecModifiedByUser
+        {
+            get
+            {
+                if ((this._recModifiedByUser == null))
+                {
+                    this._recModifiedByUser = new EntityRef<User>(this, "RecModifiedByUser", this.FilterRecModifiedByUser);
+                }
+                return this._recModifiedByUser.Entity;
+            }
+            set
+            {
+                User previous = this.RecModifiedByUser;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("RecModifiedByUser", value);
+                    this._recModifiedByUser.Entity = value;
+                    this.RaisePropertyChanged("RecModifiedByUser");
                 }
             }
         }
@@ -3699,6 +3860,31 @@ namespace MyERP.DataAccess
             }
         }
         
+        private bool FilterClient(Client entity)
+        {
+            return (entity.Id == this.ClientId);
+        }
+        
+        private bool FilterGeneralJournalLines(GeneralJournalLine entity)
+        {
+            return (entity.GeneralJournalDocumentId == this.Id);
+        }
+        
+        private bool FilterOrganization(Organization entity)
+        {
+            return (entity.Id == this.OrganizationId);
+        }
+        
+        private bool FilterRecCreatedByUser(User entity)
+        {
+            return (entity.Id == this.RecCreatedBy);
+        }
+        
+        private bool FilterRecModifiedByUser(User entity)
+        {
+            return (entity.Id == this.RecModifiedBy);
+        }
+        
         /// <summary>
         /// Computes a value from the key fields that uniquely identifies this entity instance.
         /// </summary>
@@ -3707,6 +3893,14 @@ namespace MyERP.DataAccess
         {
             return this._id;
         }
+    }
+    
+    public enum GeneralJournalDocumentStatusType
+    {
+        
+        Draft = 0,
+        
+        Posted = 1,
     }
     
     /// <summary>
@@ -3719,6 +3913,8 @@ namespace MyERP.DataAccess
         private Guid _accountId;
         
         private Guid _businessPartnerId;
+        
+        private EntityRef<Client> _client;
         
         private Guid _clientId;
         
@@ -3748,6 +3944,8 @@ namespace MyERP.DataAccess
         
         private Guid _fixAssetId;
         
+        private EntityRef<GeneralJournalDocument> _generalJournalDocument;
+        
         private Guid _generalJournalDocumentId;
         
         private Guid _id;
@@ -3758,15 +3956,21 @@ namespace MyERP.DataAccess
         
         private string[] _openAccessGenerated;
         
+        private EntityRef<Organization> _organization;
+        
         private Guid _organizationId;
         
         private DateTime _recCreated;
         
         private Guid _recCreatedBy;
         
+        private EntityRef<User> _recCreatedByUser;
+        
         private DateTime _recModified;
         
         private Guid _recModifiedBy;
+        
+        private EntityRef<User> _recModifiedByUser;
         
         private int _transactionType;
         
@@ -3893,6 +4097,32 @@ namespace MyERP.DataAccess
                     this._businessPartnerId = value;
                     this.RaiseDataMemberChanged("BusinessPartnerId");
                     this.OnBusinessPartnerIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="Client"/> entity.
+        /// </summary>
+        [Association("glline-client-association", "ClientId", "Id")]
+        public Client Client
+        {
+            get
+            {
+                if ((this._client == null))
+                {
+                    this._client = new EntityRef<Client>(this, "Client", this.FilterClient);
+                }
+                return this._client.Entity;
+            }
+            set
+            {
+                Client previous = this.Client;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Client", value);
+                    this._client.Entity = value;
+                    this.RaisePropertyChanged("Client");
                 }
             }
         }
@@ -4248,6 +4478,32 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the associated <see cref="GeneralJournalDocument"/> entity.
+        /// </summary>
+        [Association("glline-document-association", "GeneralJournalDocumentId", "Id")]
+        public GeneralJournalDocument GeneralJournalDocument
+        {
+            get
+            {
+                if ((this._generalJournalDocument == null))
+                {
+                    this._generalJournalDocument = new EntityRef<GeneralJournalDocument>(this, "GeneralJournalDocument", this.FilterGeneralJournalDocument);
+                }
+                return this._generalJournalDocument.Entity;
+            }
+            set
+            {
+                GeneralJournalDocument previous = this.GeneralJournalDocument;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("GeneralJournalDocument", value);
+                    this._generalJournalDocument.Entity = value;
+                    this.RaisePropertyChanged("GeneralJournalDocument");
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'GeneralJournalDocumentId' value.
         /// </summary>
         [DataMember()]
@@ -4376,6 +4632,32 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the associated <see cref="Organization"/> entity.
+        /// </summary>
+        [Association("glline-organization-association", "OrganizationId", "Id")]
+        public Organization Organization
+        {
+            get
+            {
+                if ((this._organization == null))
+                {
+                    this._organization = new EntityRef<Organization>(this, "Organization", this.FilterOrganization);
+                }
+                return this._organization.Entity;
+            }
+            set
+            {
+                Organization previous = this.Organization;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Organization", value);
+                    this._organization.Entity = value;
+                    this.RaisePropertyChanged("Organization");
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'OrganizationId' value.
         /// </summary>
         [DataMember()]
@@ -4451,6 +4733,32 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the associated <see cref="User"/> entity.
+        /// </summary>
+        [Association("glline-user-created-association", "RecCreatedBy", "Id")]
+        public User RecCreatedByUser
+        {
+            get
+            {
+                if ((this._recCreatedByUser == null))
+                {
+                    this._recCreatedByUser = new EntityRef<User>(this, "RecCreatedByUser", this.FilterRecCreatedByUser);
+                }
+                return this._recCreatedByUser.Entity;
+            }
+            set
+            {
+                User previous = this.RecCreatedByUser;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("RecCreatedByUser", value);
+                    this._recCreatedByUser.Entity = value;
+                    this.RaisePropertyChanged("RecCreatedByUser");
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'RecModified' value.
         /// </summary>
         [DataMember()]
@@ -4496,6 +4804,32 @@ namespace MyERP.DataAccess
                     this._recModifiedBy = value;
                     this.RaiseDataMemberChanged("RecModifiedBy");
                     this.OnRecModifiedByChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="User"/> entity.
+        /// </summary>
+        [Association("glline-user-modified-association", "RecModifiedBy", "Id")]
+        public User RecModifiedByUser
+        {
+            get
+            {
+                if ((this._recModifiedByUser == null))
+                {
+                    this._recModifiedByUser = new EntityRef<User>(this, "RecModifiedByUser", this.FilterRecModifiedByUser);
+                }
+                return this._recModifiedByUser.Entity;
+            }
+            set
+            {
+                User previous = this.RecModifiedByUser;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("RecModifiedByUser", value);
+                    this._recModifiedByUser.Entity = value;
+                    this.RaisePropertyChanged("RecModifiedByUser");
                 }
             }
         }
@@ -4549,6 +4883,617 @@ namespace MyERP.DataAccess
                     this.OnVersionChanged();
                 }
             }
+        }
+        
+        private bool FilterClient(Client entity)
+        {
+            return (entity.Id == this.ClientId);
+        }
+        
+        private bool FilterGeneralJournalDocument(GeneralJournalDocument entity)
+        {
+            return (entity.Id == this.GeneralJournalDocumentId);
+        }
+        
+        private bool FilterOrganization(Organization entity)
+        {
+            return (entity.Id == this.OrganizationId);
+        }
+        
+        private bool FilterRecCreatedByUser(User entity)
+        {
+            return (entity.Id == this.RecCreatedBy);
+        }
+        
+        private bool FilterRecModifiedByUser(User entity)
+        {
+            return (entity.Id == this.RecModifiedBy);
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+    
+    /// <summary>
+    /// The 'GeneralJournalSetup' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class GeneralJournalSetup : Entity
+    {
+        
+        private EntityRef<Client> _client;
+        
+        private Guid _clientId;
+        
+        private EntityRef<Currency> _currency;
+        
+        private EntityRef<NoSeries> _defaultDocumentType1No;
+        
+        private Guid _defaultDocumentType1NoId;
+        
+        private Guid _id;
+        
+        private int _lcyExchangeRateUnit;
+        
+        private Guid _localCurrencyId;
+        
+        private string[] _openAccessGenerated;
+        
+        private EntityRef<Organization> _organization;
+        
+        private Guid _organizationId;
+        
+        private DateTime _recCreated;
+        
+        private Guid _recCreatedBy;
+        
+        private EntityRef<User> _recCreatedByUser;
+        
+        private DateTime _recModified;
+        
+        private Guid _recModifiedBy;
+        
+        private EntityRef<User> _recModifiedByUser;
+        
+        private long _version;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnClientIdChanging(Guid value);
+        partial void OnClientIdChanged();
+        partial void OnDefaultDocumentType1NoIdChanging(Guid value);
+        partial void OnDefaultDocumentType1NoIdChanged();
+        partial void OnIdChanging(Guid value);
+        partial void OnIdChanged();
+        partial void OnLcyExchangeRateUnitChanging(int value);
+        partial void OnLcyExchangeRateUnitChanged();
+        partial void OnLocalCurrencyIdChanging(Guid value);
+        partial void OnLocalCurrencyIdChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnOrganizationIdChanging(Guid value);
+        partial void OnOrganizationIdChanged();
+        partial void OnRecCreatedChanging(DateTime value);
+        partial void OnRecCreatedChanged();
+        partial void OnRecCreatedByChanging(Guid value);
+        partial void OnRecCreatedByChanged();
+        partial void OnRecModifiedChanging(DateTime value);
+        partial void OnRecModifiedChanged();
+        partial void OnRecModifiedByChanging(Guid value);
+        partial void OnRecModifiedByChanged();
+        partial void OnVersionChanging(long value);
+        partial void OnVersionChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GeneralJournalSetup"/> class.
+        /// </summary>
+        public GeneralJournalSetup()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="Client"/> entity.
+        /// </summary>
+        [Association("glsetup-client-association", "ClientId", "Id")]
+        public Client Client
+        {
+            get
+            {
+                if ((this._client == null))
+                {
+                    this._client = new EntityRef<Client>(this, "Client", this.FilterClient);
+                }
+                return this._client.Entity;
+            }
+            set
+            {
+                Client previous = this.Client;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Client", value);
+                    this._client.Entity = value;
+                    this.RaisePropertyChanged("Client");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'ClientId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid ClientId
+        {
+            get
+            {
+                return this._clientId;
+            }
+            set
+            {
+                if ((this._clientId != value))
+                {
+                    this.OnClientIdChanging(value);
+                    this.RaiseDataMemberChanging("ClientId");
+                    this.ValidateProperty("ClientId", value);
+                    this._clientId = value;
+                    this.RaiseDataMemberChanged("ClientId");
+                    this.OnClientIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="Currency"/> entity.
+        /// </summary>
+        [Association("glsetup-lcy-currency-association", "LocalCurrencyId", "Id")]
+        public Currency Currency
+        {
+            get
+            {
+                if ((this._currency == null))
+                {
+                    this._currency = new EntityRef<Currency>(this, "Currency", this.FilterCurrency);
+                }
+                return this._currency.Entity;
+            }
+            set
+            {
+                Currency previous = this.Currency;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Currency", value);
+                    this._currency.Entity = value;
+                    this.RaisePropertyChanged("Currency");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="NoSeries"/> entity.
+        /// </summary>
+        [Association("glsetup-type1-noseries-association", "DefaultDocumentType1NoId", "Id")]
+        public NoSeries DefaultDocumentType1No
+        {
+            get
+            {
+                if ((this._defaultDocumentType1No == null))
+                {
+                    this._defaultDocumentType1No = new EntityRef<NoSeries>(this, "DefaultDocumentType1No", this.FilterDefaultDocumentType1No);
+                }
+                return this._defaultDocumentType1No.Entity;
+            }
+            set
+            {
+                NoSeries previous = this.DefaultDocumentType1No;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("DefaultDocumentType1No", value);
+                    this._defaultDocumentType1No.Entity = value;
+                    this.RaisePropertyChanged("DefaultDocumentType1No");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'DefaultDocumentType1NoId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid DefaultDocumentType1NoId
+        {
+            get
+            {
+                return this._defaultDocumentType1NoId;
+            }
+            set
+            {
+                if ((this._defaultDocumentType1NoId != value))
+                {
+                    this.OnDefaultDocumentType1NoIdChanging(value);
+                    this.RaiseDataMemberChanging("DefaultDocumentType1NoId");
+                    this.ValidateProperty("DefaultDocumentType1NoId", value);
+                    this._defaultDocumentType1NoId = value;
+                    this.RaiseDataMemberChanged("DefaultDocumentType1NoId");
+                    this.OnDefaultDocumentType1NoIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Id' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'LcyExchangeRateUnit' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public int LcyExchangeRateUnit
+        {
+            get
+            {
+                return this._lcyExchangeRateUnit;
+            }
+            set
+            {
+                if ((this._lcyExchangeRateUnit != value))
+                {
+                    this.OnLcyExchangeRateUnitChanging(value);
+                    this.RaiseDataMemberChanging("LcyExchangeRateUnit");
+                    this.ValidateProperty("LcyExchangeRateUnit", value);
+                    this._lcyExchangeRateUnit = value;
+                    this.RaiseDataMemberChanged("LcyExchangeRateUnit");
+                    this.OnLcyExchangeRateUnitChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'LocalCurrencyId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid LocalCurrencyId
+        {
+            get
+            {
+                return this._localCurrencyId;
+            }
+            set
+            {
+                if ((this._localCurrencyId != value))
+                {
+                    this.OnLocalCurrencyIdChanging(value);
+                    this.RaiseDataMemberChanging("LocalCurrencyId");
+                    this.ValidateProperty("LocalCurrencyId", value);
+                    this._localCurrencyId = value;
+                    this.RaiseDataMemberChanged("LocalCurrencyId");
+                    this.OnLocalCurrencyIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="Organization"/> entity.
+        /// </summary>
+        [Association("glsetup-organization-association", "OrganizationId", "Id")]
+        public Organization Organization
+        {
+            get
+            {
+                if ((this._organization == null))
+                {
+                    this._organization = new EntityRef<Organization>(this, "Organization", this.FilterOrganization);
+                }
+                return this._organization.Entity;
+            }
+            set
+            {
+                Organization previous = this.Organization;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Organization", value);
+                    this._organization.Entity = value;
+                    this.RaisePropertyChanged("Organization");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OrganizationId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid OrganizationId
+        {
+            get
+            {
+                return this._organizationId;
+            }
+            set
+            {
+                if ((this._organizationId != value))
+                {
+                    this.OnOrganizationIdChanging(value);
+                    this.RaiseDataMemberChanging("OrganizationId");
+                    this.ValidateProperty("OrganizationId", value);
+                    this._organizationId = value;
+                    this.RaiseDataMemberChanged("OrganizationId");
+                    this.OnOrganizationIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecCreated' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime RecCreated
+        {
+            get
+            {
+                return this._recCreated;
+            }
+            set
+            {
+                if ((this._recCreated != value))
+                {
+                    this.OnRecCreatedChanging(value);
+                    this.RaiseDataMemberChanging("RecCreated");
+                    this.ValidateProperty("RecCreated", value);
+                    this._recCreated = value;
+                    this.RaiseDataMemberChanged("RecCreated");
+                    this.OnRecCreatedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecCreatedBy' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid RecCreatedBy
+        {
+            get
+            {
+                return this._recCreatedBy;
+            }
+            set
+            {
+                if ((this._recCreatedBy != value))
+                {
+                    this.OnRecCreatedByChanging(value);
+                    this.RaiseDataMemberChanging("RecCreatedBy");
+                    this.ValidateProperty("RecCreatedBy", value);
+                    this._recCreatedBy = value;
+                    this.RaiseDataMemberChanged("RecCreatedBy");
+                    this.OnRecCreatedByChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="User"/> entity.
+        /// </summary>
+        [Association("glsetup-user-created-association", "RecCreatedBy", "Id")]
+        public User RecCreatedByUser
+        {
+            get
+            {
+                if ((this._recCreatedByUser == null))
+                {
+                    this._recCreatedByUser = new EntityRef<User>(this, "RecCreatedByUser", this.FilterRecCreatedByUser);
+                }
+                return this._recCreatedByUser.Entity;
+            }
+            set
+            {
+                User previous = this.RecCreatedByUser;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("RecCreatedByUser", value);
+                    this._recCreatedByUser.Entity = value;
+                    this.RaisePropertyChanged("RecCreatedByUser");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecModified' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime RecModified
+        {
+            get
+            {
+                return this._recModified;
+            }
+            set
+            {
+                if ((this._recModified != value))
+                {
+                    this.OnRecModifiedChanging(value);
+                    this.RaiseDataMemberChanging("RecModified");
+                    this.ValidateProperty("RecModified", value);
+                    this._recModified = value;
+                    this.RaiseDataMemberChanged("RecModified");
+                    this.OnRecModifiedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecModifiedBy' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid RecModifiedBy
+        {
+            get
+            {
+                return this._recModifiedBy;
+            }
+            set
+            {
+                if ((this._recModifiedBy != value))
+                {
+                    this.OnRecModifiedByChanging(value);
+                    this.RaiseDataMemberChanging("RecModifiedBy");
+                    this.ValidateProperty("RecModifiedBy", value);
+                    this._recModifiedBy = value;
+                    this.RaiseDataMemberChanged("RecModifiedBy");
+                    this.OnRecModifiedByChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="User"/> entity.
+        /// </summary>
+        [Association("glsetup-user-modified-association", "RecModifiedBy", "Id")]
+        public User RecModifiedByUser
+        {
+            get
+            {
+                if ((this._recModifiedByUser == null))
+                {
+                    this._recModifiedByUser = new EntityRef<User>(this, "RecModifiedByUser", this.FilterRecModifiedByUser);
+                }
+                return this._recModifiedByUser.Entity;
+            }
+            set
+            {
+                User previous = this.RecModifiedByUser;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("RecModifiedByUser", value);
+                    this._recModifiedByUser.Entity = value;
+                    this.RaisePropertyChanged("RecModifiedByUser");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Version' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                if ((this._version != value))
+                {
+                    this.OnVersionChanging(value);
+                    this.RaiseDataMemberChanging("Version");
+                    this.ValidateProperty("Version", value);
+                    this._version = value;
+                    this.RaiseDataMemberChanged("Version");
+                    this.OnVersionChanged();
+                }
+            }
+        }
+        
+        private bool FilterClient(Client entity)
+        {
+            return (entity.Id == this.ClientId);
+        }
+        
+        private bool FilterCurrency(Currency entity)
+        {
+            return (entity.Id == this.LocalCurrencyId);
+        }
+        
+        private bool FilterDefaultDocumentType1No(NoSeries entity)
+        {
+            return (entity.Id == this.DefaultDocumentType1NoId);
+        }
+        
+        private bool FilterOrganization(Organization entity)
+        {
+            return (entity.Id == this.OrganizationId);
+        }
+        
+        private bool FilterRecCreatedByUser(User entity)
+        {
+            return (entity.Id == this.RecCreatedBy);
+        }
+        
+        private bool FilterRecModifiedByUser(User entity)
+        {
+            return (entity.Id == this.RecModifiedBy);
         }
         
         /// <summary>
@@ -9124,13 +10069,13 @@ namespace MyERP.Web
         }
         
         /// <summary>
-        /// Gets the set of <see cref="GeneralJournalLine"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// Gets the set of <see cref="GeneralJournalSetup"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
         /// </summary>
-        public EntitySet<GeneralJournalLine> GeneralJournalLines
+        public EntitySet<GeneralJournalSetup> GeneralJournalSetups
         {
             get
             {
-                return base.EntityContainer.GetEntitySet<GeneralJournalLine>();
+                return base.EntityContainer.GetEntitySet<GeneralJournalSetup>();
             }
         }
         
@@ -9290,6 +10235,16 @@ namespace MyERP.Web
         {
             this.ValidateMethod("GetGeneralJournalLinesQuery", null);
             return base.CreateQuery<GeneralJournalLine>("GetGeneralJournalLines", null, false, true);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="GeneralJournalSetup"/> entity instances using the 'GetGeneralJournalSetups' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="GeneralJournalSetup"/> entity instances.</returns>
+        public EntityQuery<GeneralJournalSetup> GetGeneralJournalSetupsQuery()
+        {
+            this.ValidateMethod("GetGeneralJournalSetupsQuery", null);
+            return base.CreateQuery<GeneralJournalSetup>("GetGeneralJournalSetups", null, false, true);
         }
         
         /// <summary>
@@ -9607,6 +10562,24 @@ namespace MyERP.Web
             QueryResult<GeneralJournalLine> EndGetGeneralJournalLines(IAsyncResult result);
             
             /// <summary>
+            /// Asynchronously invokes the 'GetGeneralJournalSetups' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetGeneralJournalSetupsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetGeneralJournalSetups", ReplyAction="http://tempuri.org/MyERPDomainService/GetGeneralJournalSetupsResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetGeneralJournalSetups(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetGeneralJournalSetups'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetGeneralJournalSetups'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetGeneralJournalSetups' operation.</returns>
+            QueryResult<GeneralJournalSetup> EndGetGeneralJournalSetups(IAsyncResult result);
+            
+            /// <summary>
             /// Asynchronously invokes the 'GetJobGroups' operation.
             /// </summary>
             /// <param name="callback">Callback to invoke on completion.</param>
@@ -9801,6 +10774,7 @@ namespace MyERP.Web
                 this.CreateEntitySet<Currency>(EntitySetOperations.All);
                 this.CreateEntitySet<GeneralJournalDocument>(EntitySetOperations.All);
                 this.CreateEntitySet<GeneralJournalLine>(EntitySetOperations.All);
+                this.CreateEntitySet<GeneralJournalSetup>(EntitySetOperations.All);
                 this.CreateEntitySet<Job>(EntitySetOperations.All);
                 this.CreateEntitySet<JobGroup>(EntitySetOperations.All);
                 this.CreateEntitySet<Module>(EntitySetOperations.All);

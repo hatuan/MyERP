@@ -22,7 +22,7 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("general_journal_setup")]
+	[Table("general_journal_setup", UpdateSchema = true)]
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
 	public partial class GeneralJournalSetup
 	{
@@ -102,7 +102,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _defaultDocumentType1NoId;
-		[Column("default_document_type_1_no_id", OpenAccessType = OpenAccessType.Guid, IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
+		[Column("default_document_type_1_no_id", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
 		[Storage("_defaultDocumentType1NoId")]
 		public virtual Guid DefaultDocumentType1NoId
 		{
@@ -117,7 +117,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _recCreated;
-		[Column("rec_created", OpenAccessType = OpenAccessType.DateTime, Length = 6, Scale = 0, SqlType = "timestamp", Converter = "OpenAccessRuntime.Data.PostgresTimestampTZConverter")]
+		[Column("rec_created", OpenAccessType = OpenAccessType.DateTime, Length = 0, Scale = 0, SqlType = "timestamp", Converter = "OpenAccessRuntime.Data.PostgresTimestampTZConverter")]
 		[Storage("_recCreated")]
 		public virtual DateTime RecCreated
 		{
@@ -132,7 +132,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _recModified;
-		[Column("rec_modified", OpenAccessType = OpenAccessType.DateTime, Length = 6, Scale = 0, SqlType = "timestamp", Converter = "OpenAccessRuntime.Data.PostgresTimestampTZConverter")]
+		[Column("rec_modified", OpenAccessType = OpenAccessType.DateTime, Length = 0, Scale = 0, SqlType = "timestamp", Converter = "OpenAccessRuntime.Data.PostgresTimestampTZConverter")]
 		[Storage("_recModified")]
 		public virtual DateTime RecModified
 		{
@@ -251,18 +251,18 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private NoSeries _noSeries;
+		private NoSeries _defaultDocumentType1No;
 		[ForeignKeyAssociation(SharedFields = "DefaultDocumentType1NoId", TargetFields = "Id")]
-		[Storage("_noSeries")]
+		[Storage("_defaultDocumentType1No")]
 		public virtual NoSeries DefaultDocumentType1No
 		{
 			get
 			{
-				return this._noSeries;
+				return this._defaultDocumentType1No;
 			}
 			set
 			{
-				this._noSeries = value;
+				this._defaultDocumentType1No = value;
 			}
 		}
 		
