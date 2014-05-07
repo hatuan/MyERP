@@ -27,18 +27,18 @@ namespace MyERP.DataAccess
 	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class Client
 	{
-		private Guid _id;
+		private Guid _clientId;
 		[Column("id", OpenAccessType = OpenAccessType.Guid, IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_id")]
-		public virtual Guid Id
+		[Storage("_clientId")]
+		public virtual Guid ClientId
 		{
 			get
 			{
-				return this._id;
+				return this._clientId;
 			}
 			set
 			{
-				this._id = value;
+				this._clientId = value;
 			}
 		}
 		

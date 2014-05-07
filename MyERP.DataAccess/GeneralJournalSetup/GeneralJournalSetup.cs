@@ -18,7 +18,7 @@ namespace MyERP.DataAccess
             public Currency Currency { get; set; }
 
             [Include]
-            [Association("glsetup-client-association", "ClientId", "Id")]
+            [Association("glsetup-client-association", "ClientId", "ClientId")]
             public Client Client { get; set; }
 
             [Include]

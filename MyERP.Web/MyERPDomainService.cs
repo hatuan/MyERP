@@ -10,6 +10,7 @@ using System.ServiceModel.DomainServices.Server.ApplicationServices;
 using System.Web.ApplicationServices;
 using System.Web.Security;
 using MyERP.DataAccess;
+using MyERP.DataAccess.Shared;
 using Telerik.OpenAccess;
 
 namespace MyERP.Web
@@ -22,12 +23,6 @@ namespace MyERP.Web
             base.Initialize(context);
             _membershipUser = (MyERPMembershipUser)Membership.GetUser(context.User.Identity.Name, true);
 
-        }
-
-        public IQueryable<Organization> GetOrganizationsByClientId(Guid clientId)
-        {
-            var organizations = this.DataContext.Organizations.ToList().Where(a => a.ClientId == clientId && a.Status == (int)OrganizationStatusType.Active);
-            return organizations.AsQueryable();
         }
 
         #region NoSeries
@@ -55,6 +50,54 @@ namespace MyERP.Web
             }
 
         } 
+        #endregion
+
+        #region GeneralJournalDocument
+        [Invoke]
+        public GeneralJournalDocument GetGeneralJournalDocumentNos(GeneralJournalDocument generalJournalDocument)
+        {
+            //lay NoSeries cua GeneralJournalSetup
+            var generalJournalSetup = GetGeneralJournalSetupOfOrganization(generalJournalDocument.OrganizationId);
+            //generalJournalDocument.NoSeriesId = generalJournalSetup.DefaultDocumentType1NoId;
+            //generalJournalDocument.NoSeries = GetNoSeries()
+            //    .FirstOrDefault(c => c.Id == generalJournalDocument.NoSeriesId);
+            generalJournalDocument.NoSeries = generalJournalSetup.DefaultDocumentType1No;
+
+            var documentNo = generalJournalDocument.NoSeries.FormatNo;
+            NoSeriesLib.NextNo(generalJournalDocument.NoSeries.NoSeqName, ref documentNo);
+            generalJournalDocument.DocumentNo = documentNo;
+
+            return generalJournalDocument;
+        }
+        #endregion
+
+        #region GeneralJournalSetup
+
+        public GeneralJournalSetup GetGeneralJournalSetupOfOrganization(Guid organizationId)
+        {
+            Organization allOrganization = GetOrganizations().FirstOrDefault(c => c.Code == "*");
+
+            GeneralJournalSetup generalJournalSetup =
+               GetGeneralJournalSetups().FirstOrDefault(c => c.OrganizationId == organizationId) ??
+               GetGeneralJournalSetups().FirstOrDefault(c => c.OrganizationId == allOrganization.Id);
+
+            return generalJournalSetup;
+        }
+        #endregion
+
+        #region Sequence service
+        public int SequenceNextVal(string sequenceName)
+        {
+            string SqlQuery = String.Format("SELECT nextval('{0}')", new object[] { sequenceName });
+            using (var connection = this.DataContext.Connection)
+            {
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = SqlQuery;
+                    return (int)command.ExecuteScalar();
+                }
+            }
+        }
         #endregion
 
         #region Dashboard services

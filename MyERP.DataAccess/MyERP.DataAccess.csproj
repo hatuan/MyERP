@@ -107,6 +107,7 @@
     <Compile Include="NoSeries.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="NoSeries\NoSeriesStatusType.cs" />
     <Compile Include="NoSeries\NoSeries.cs" />
     <Compile Include="Organization.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
@@ -125,6 +126,7 @@
     <Compile Include="Session.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="Shared\NoSeriesLib.shared.cs" />
     <Compile Include="User.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>

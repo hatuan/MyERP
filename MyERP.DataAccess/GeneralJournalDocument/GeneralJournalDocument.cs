@@ -19,7 +19,7 @@ namespace MyERP.DataAccess
             public IList<GeneralJournalLine> GeneralJournalLines { get; set; }
 
             [Include]
-            [Association("gldocument-client-association", "ClientId", "Id")]
+            [Association("gldocument-client-association", "ClientId", "ClientId")]
             public Client Client { get; set; }
 
             [Include]
@@ -34,6 +34,13 @@ namespace MyERP.DataAccess
             [Association("gldocument-user-modified-association", "RecModifiedBy", "Id")]
             public User RecModifiedByUser { get; set; }
         }
+
+        public bool Locked
+        {
+            get { return DocumentStatusType == GeneralJournalDocumentStatusType.Posted; }
+            set { }
+        }
+
         public GeneralJournalDocumentStatusType DocumentStatusType
         {
             get { return (GeneralJournalDocumentStatusType)Status; }

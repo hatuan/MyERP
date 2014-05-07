@@ -26,7 +26,7 @@ namespace MyERP.Repositories
             System.Diagnostics.Debug.WriteLine("Request for SaveOrUpdateEntities()");
             if (this.Context.IsSubmitting)
             {
-                System.Diagnostics.Debug.WriteLine("FAIL: Context is submitting. SaveOrUpdateEntities do not run");
+                System.Diagnostics.Debug.WriteLine("================> FAIL: Context is submitting. SaveOrUpdateEntities do not run <================");
                 return;
             }
             System.Diagnostics.Debug.WriteLine("this.Context.SubmitChanges()");

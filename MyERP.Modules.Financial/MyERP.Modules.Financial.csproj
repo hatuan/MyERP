@@ -169,8 +169,8 @@
     <Compile Include="Views\GeneralJournalsHeader.xaml.cs">
       <DependentUpon>GeneralJournalsHeader.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\GeneralJournalsListUserControl.xaml.cs">
-      <DependentUpon>GeneralJournalsListUserControl.xaml</DependentUpon>
+    <Compile Include="Views\GeneralJournalDocumentsListUserControl.xaml.cs">
+      <DependentUpon>GeneralJournalDocumentsListUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GeneralJournalsView.xaml.cs">
       <DependentUpon>GeneralJournalsView.xaml</DependentUpon>
@@ -230,7 +230,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\GeneralJournalsListUserControl.xaml">
+    <Page Include="Views\GeneralJournalDocumentsListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

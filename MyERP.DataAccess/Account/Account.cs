@@ -30,7 +30,7 @@ namespace MyERP.DataAccess
             public Account ParentAccount { get; set; }
 
             [Include]
-            [Association("Account-client-association", "ClientId", "Id")]
+            [Association("Account-client-association", "ClientId", "ClientId")]
             public Client Client { get; set; }
 
             [Include]

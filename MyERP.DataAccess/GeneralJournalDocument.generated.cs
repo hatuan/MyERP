@@ -357,7 +357,7 @@ namespace MyERP.DataAccess
 		}
 		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "Id")]
+		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
 		[Storage("_client")]
 		public virtual Client Client
 		{

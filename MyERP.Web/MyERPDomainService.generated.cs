@@ -100,9 +100,27 @@ namespace MyERP.Web
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
+		public IQueryable<CurrencyConvertRate> GetCurrencyConvertRates()
+		{ 
+			return this.DataContext.CurrencyConvertRates.Where(c => c.ClientId == _membershipUser.ClientId);
+		}       
+		public void DeleteCurrencyConvertRates(CurrencyConvertRate currencyConvertRate)
+		{
+			// This is a callback method. The actual Delete is performed internally.
+		}
+
+		public void UpdateCurrencyConvertRates(CurrencyConvertRate currencyConvertRate)
+		{
+			// This is a callback method. The actual Update is performed internally.
+		}
+
+		public void InsertCurrencyConvertRates(CurrencyConvertRate currencyConvertRate)
+		{
+			// This is a callback method. The actual Insert is performed internally.
+		} 
 		public IQueryable<Client> GetClients()
 		{ 
-			return this.DataContext.Clients.Where(c => c.Id == _membershipUser.ClientId);
+			return this.DataContext.Clients.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
 		public void DeleteClients(Client client)
 		{

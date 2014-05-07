@@ -15,15 +15,5 @@ namespace MyERP.Repositories
         {
             this.LoadQuery<Organization>(this.Context.GetOrganizationsQuery(), callback);
         }
-
-        public void GetOrganizationsByClientId(Guid clientId, Action<IEnumerable<Organization>> callback)
-        {
-            if (clientId == Guid.Empty)
-            {
-                callback(Enumerable.Empty<Organization>());
-                return;
-            }
-            this.LoadQuery(this.Context.GetOrganizationsByClientIdQuery(clientId), callback);
-        }
     }
 }

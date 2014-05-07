@@ -39,16 +39,16 @@ namespace MyERP.Repositories
                 return;
             }
 
-            EntityQuery<Currency> query = this.Context.GetCurrenciesQuery().Where(c => c.ClientId == client.Id && c.OrganizationId == organization.Id).OrderBy(c => c.Code);
+            EntityQuery<Currency> query = this.Context.GetCurrenciesQuery().Where(c => c.ClientId == client.ClientId && c.OrganizationId == organization.Id).OrderBy(c => c.Code);
             if (organization.Code != "*")
             {
                 Organization defaultOrganization =
-                    this.Context.Organizations.FirstOrDefault(c => c.ClientId == client.Id && c.Code == "*");
+                    this.Context.Organizations.FirstOrDefault(c => c.ClientId == client.ClientId && c.Code == "*");
 
                 query = this.Context.GetCurrenciesQuery()
                         .Where(
                             c =>
-                                c.ClientId == client.Id &&
+                                c.ClientId == client.ClientId &&
                                 (c.OrganizationId == organization.Id || c.OrganizationId == defaultOrganization.Id)).OrderBy(c => c.Code);
             }
 

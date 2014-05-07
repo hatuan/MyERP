@@ -14,7 +14,7 @@ namespace MyERP.DataAccess
             public GeneralJournalDocument GeneralJournalDocument { get; set; }
             
             [Include]
-            [Association("glline-client-association", "ClientId", "Id")]
+            [Association("glline-client-association", "ClientId", "ClientId")]
             public Client Client { get; set; }
 
             [Include]

@@ -73,7 +73,6 @@ namespace MyERP.Modules.Financial.ViewModels
             get { return this.GeneralJournalDocuments.IsBusy; }
         }
 
-
         #endregion
 
         #region NavigationAwareDataViewModel overrides
@@ -81,7 +80,7 @@ namespace MyERP.Modules.Financial.ViewModels
         {
             base.OnImportsSatisfied();
             this.Context = this.GeneralJournalDocumentRepository.Context;
-
+            
             EntityQuery<GeneralJournalDocument> getGeneralJournalDocumentsQuery = Context.GetGeneralJournalDocumentsQuery().OrderBy(c => c.DocumentNo);
             GeneralJournalDocuments = new QueryableDomainServiceCollectionView<GeneralJournalDocument>(Context,
                 getGeneralJournalDocumentsQuery);
@@ -93,7 +92,6 @@ namespace MyERP.Modules.Financial.ViewModels
                 {
                     MessageBox.Show(args.Error.ToString(), "Load Error", MessageBoxButton.OK);
                     args.MarkErrorAsHandled();
-                    return;
                 }
             };
             GeneralJournalDocuments.PropertyChanged += GeneralJournalDocuments_PropertyChanged;
@@ -153,7 +151,12 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnAddNewCommandExecuted()
         {
-
+            GeneralJournalDocument generalJournalDocument = new GeneralJournalDocument();
+            GeneralJournalDocumentRepository.SetGeneralJournalDocumentNo(generalJournalDocument, document =>
+            {
+                generalJournalDocument = document;
+                GeneralJournalDocuments.AddNew(generalJournalDocument);
+            });
         }
 
         private bool SubmitChangesCommandCanExecute()

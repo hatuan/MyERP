@@ -18,7 +18,7 @@ namespace MyERP.DataAccess
             }
 
             [Include]
-            [Association("Currency-client-association", "ClientId", "Id")]
+            [Association("Currency-client-association", "ClientId", "ClientId")]
             public Client Client { get; set; }
 
             [Include]

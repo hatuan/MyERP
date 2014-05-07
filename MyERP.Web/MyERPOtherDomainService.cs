@@ -108,12 +108,12 @@ namespace MyERP.Web
 
         void LoadDemoClientAndOrganization()
         {
-            Client client = this.DataContext.Clients.FirstOrDefault(i => i.Id == new Guid("28CC612C-807D-458D-91E7-F759080B0E40"));
+            Client client = this.DataContext.Clients.FirstOrDefault(i => i.ClientId == new Guid("28CC612C-807D-458D-91E7-F759080B0E40"));
             if (client == null)
             {
                 client = new Client()
                 {
-                    Id = new Guid("28CC612C-807D-458D-91E7-F759080B0E40"),
+                    ClientId = new Guid("28CC612C-807D-458D-91E7-F759080B0E40"),
                     Name = "Demo Company",
                     IsActivated = true,
                     RecCreated = DateTime.Now,
@@ -153,7 +153,7 @@ namespace MyERP.Web
                 {
                     Id = new Guid("876A2286-4907-4A7F-B841-5CF7FD4C1288"),
                     ClientId = new Guid("28CC612C-807D-458D-91E7-F759080B0E40"),
-                    Code = "0",
+                    Code = "HQ",
                     Name = "HQ Organization",
                     RecCreated = DateTime.Now,
                     RecCreatedById = new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef"),
@@ -166,13 +166,13 @@ namespace MyERP.Web
             }
             this.hqOrganization = HQOrganization;
 
-            Client otherClient = this.DataContext.Clients.FirstOrDefault(i => i.Id == new Guid("EA084FC9-B630-4016-97E2-021A2B120879"));
+            Client otherClient = this.DataContext.Clients.FirstOrDefault(i => i.ClientId == new Guid("EA084FC9-B630-4016-97E2-021A2B120879"));
             if (otherClient == null)
             {
                 otherClient = new Client()
                 {
-                    Id = new Guid("EA084FC9-B630-4016-97E2-021A2B120879"),
-                    Name = "Demo Company",
+                    ClientId = new Guid("EA084FC9-B630-4016-97E2-021A2B120879"),
+                    Name = "Other Company",
                     IsActivated = true,
                     RecCreated = DateTime.Now,
                     RecCreatedById = new Guid("4e7739e3-939a-4181-b468-c35bdbf7a7ef")

@@ -22,7 +22,7 @@ namespace MyERP.DataAccess
             public String Name { get; set; }
 
             [Include]
-            [Association("NoSeries-client-association", "ClientId", "Id")]
+            [Association("NoSeries-client-association", "ClientId", "ClientId")]
             public Client Client { get; set; }
 
             [Include]
@@ -37,6 +37,9 @@ namespace MyERP.DataAccess
             [Association("NoSeries-user-modified-association", "RecModifiedBy", "Id")]
             public User RecModifiedByUser { get; set; }
         }
+
+        
+
         public NoSeriesStatusType StatusType
         {
             get { return (NoSeriesStatusType)Status; }
@@ -47,9 +50,4 @@ namespace MyERP.DataAccess
         }
     }
 
-    public enum NoSeriesStatusType
-    {
-        Inactive = 0,
-        Active = 1
-    }
 }

@@ -83,7 +83,7 @@
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="8d2c59e7-d00a-468c-9860-68e339a48e5b" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="78639bc4-7122-4621-af63-d743702c96e4" association-name="AccountHasClient">
-            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
         <orm:field name="_organization" property="Organization" behavior="readwrite" uniqueId="f4f38914-4181-4d8f-9ba4-fa62dbbaf9cf" type="MyERP.DataAccess.Organization">
@@ -160,7 +160,7 @@
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="cfed19e0-76d8-4033-90b1-29fdba8055de" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="4dd714b7-0bc1-438c-a208-2e5c44cf3134" association-name="UserHasClient">
-            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
         <orm:field name="_organization" property="Organization" behavior="readwrite" uniqueId="c731e213-9f33-4fad-9564-d272701cf8e5" type="MyERP.DataAccess.Organization">
@@ -225,7 +225,7 @@
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="c5da0a8c-0548-4b3f-ac2b-99bb932943ce" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="20666b30-e108-4408-b8c0-6887d5994d8c" association-name="CurrencyHasClient">
-            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
         <orm:field name="_organization" property="Organization" behavior="readwrite" uniqueId="5d62b1f0-1b46-4835-b4a9-9e3a1da6a527" type="MyERP.DataAccess.Organization">
@@ -357,7 +357,7 @@
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="45887477-d296-40a3-b4b5-25c7a7c77ee4" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="9ab8197b-23ca-4a6c-ab6c-312e6b097df7" association-name="BusinessPartnerHasClient">
-            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
         <orm:field name="_organization" property="Organization" behavior="readwrite" uniqueId="ac4d5b9d-6226-406f-987c-36ea1d91c6e0" type="MyERP.DataAccess.Organization">
@@ -437,7 +437,7 @@
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="9e75f758-c421-465f-9b43-1351234a4c9a" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="8b6066f9-070a-4235-8129-7dc852884b50" association-name="BusinessPartnerGroupHasClient">
-            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
         <orm:field name="_organization" property="Organization" behavior="readwrite" uniqueId="a376f329-7dad-4f1e-96d2-2b3a8f8a6e42" type="MyERP.DataAccess.Organization">
@@ -507,7 +507,7 @@
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="32460fd9-97c9-4e65-b045-d2b7b7ab9c06" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="c361a4ab-061f-4109-98d0-cce867a050af" association-name="PaymentTermHasClient">
-            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
         <orm:field name="_organization" property="Organization" behavior="readwrite" uniqueId="e08a1dfd-9916-4c0b-8075-a3698f0f8fe6" type="MyERP.DataAccess.Organization">
@@ -620,7 +620,7 @@
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="d755e1a5-3040-45a0-8c15-afb77e53c575" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="1a56eb78-8d6d-46b2-9139-19634d23abbb" association-name="JobHasClient">
-            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
         <orm:field name="_organization" property="Organization" behavior="readwrite" uniqueId="4863c9b6-1159-4d60-ba98-e200ffa474b4" type="MyERP.DataAccess.Organization">
@@ -685,7 +685,7 @@
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="1a028d41-39d4-489b-bc63-1dd0b5d1c914" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="2f04b4a9-0439-46d4-b905-3b5001ef5079" association-name="JobGroupHasClient">
-            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
         <orm:field name="_organization" property="Organization" behavior="readwrite" uniqueId="fd577169-7e57-4724-be52-d4db79951e05" type="MyERP.DataAccess.Organization">
@@ -779,7 +779,7 @@
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="6efc28df-900c-406b-b8c2-07b39932ac28" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="1bb14f80-ef9c-4541-9c01-68db0a18ea9d" association-name="TransactionDocumentHasClient">
-            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
         <orm:field name="_organization" property="Organization" behavior="readwrite" uniqueId="f48fd463-b377-4e6a-9f4c-83fafc94bd2f" type="MyERP.DataAccess.Organization">
@@ -902,7 +902,7 @@
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="c828356a-8cdf-4c6a-93a4-1fe35054a4d2" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="a7921349-074d-47e5-a187-124ac185440b" association-name="TransactionLineHasClient">
-            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
         <orm:field name="_organization" property="Organization" behavior="readwrite" uniqueId="db463443-1e15-4d09-a078-518972efac0f" type="MyERP.DataAccess.Organization">
@@ -999,7 +999,7 @@
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="f7309224-160b-4a7d-b354-859c696e2ff4" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="696e2216-63f8-4cbf-b083-15702ae040dc" association-name="OrganizationHasClient">
-            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
       </orm:class>
@@ -1055,7 +1055,7 @@
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="301e8092-eeee-4b30-99e9-0f381c9eeab2" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="9a0ae9a3-271e-4663-b49a-da1cf05b6160" association-name="SessionHasClient">
-            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
         <orm:field name="_organization" property="Organization" behavior="readwrite" uniqueId="3392ed8b-2116-4fed-b5c1-4795b78e9253" type="MyERP.DataAccess.Organization">
@@ -1068,14 +1068,14 @@
         <orm:table name="client" />
         <orm:identity>
           <orm:key-generator name="guid">
-            <orm:key-generator-member property-name="Id" />
+            <orm:key-generator-member property-name="ClientId" />
           </orm:key-generator>
-          <orm:single-field field-name="_id" />
+          <orm:single-field field-name="_clientId" />
         </orm:identity>
         <orm:concurrency strategy="version" field-name="_version">
           <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
         </orm:concurrency>
-        <orm:field name="_id" property="Id" uniqueId="704446a3-a959-451d-a7dd-74b7bb464716" type="System.Guid">
+        <orm:field name="_clientId" property="ClientId" uniqueId="704446a3-a959-451d-a7dd-74b7bb464716" type="System.Guid">
           <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         </orm:field>
         <orm:field name="_name" property="Name" uniqueId="20956f95-8f1a-4977-9f2a-b554b34377bf" type="System.String">
@@ -1166,7 +1166,7 @@
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="a75e4d58-d113-46f9-977a-7527f0c5bf71" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="6e47e2ea-4d45-4843-bb6a-dc48d470aeab" association-name="NoSeriesHasClient">
-            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
         <orm:field name="_organization" property="Organization" behavior="readwrite" uniqueId="e4c75381-1562-43df-a26d-eabb6b29a2c3" type="MyERP.DataAccess.Organization">
@@ -1253,7 +1253,7 @@
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="4439a70d-8356-48ac-8450-852c8e5f45ea" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="7f8ef986-c721-4489-aacd-caa801390d7a" association-name="GeneralJournalSetupHasClient">
-            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
       </orm:class>
@@ -1315,7 +1315,7 @@
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="9ee25815-aa7f-4b40-a4e9-622660ad8c67" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="0d9603d7-aa24-465e-b9aa-7adfbef01071" association-name="CurrencyConvertRateHasClient">
-            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_id" />
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
         <orm:field name="_user" property="RecCreatedByUser" behavior="readwrite" uniqueId="1276f83c-2e97-4667-9af6-c19bc68286ac" type="MyERP.DataAccess.User">
@@ -2736,8 +2736,8 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="0e5a0aed-1d29-4e52-a023-4a9c23dbd847" name="Client" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
-      <Property Id="704446a3-a959-451d-a7dd-74b7bb464716" name="Id" type="Guid" label="Id : Guid" identity="true" fieldName="_id" />
+    <DomainClass Id="0e5a0aed-1d29-4e52-a023-4a9c23dbd847" name="Client" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="ClientId">
+      <Property Id="704446a3-a959-451d-a7dd-74b7bb464716" name="ClientId" type="Guid" label="ClientId : Guid" identity="true" fieldName="_clientId" />
       <Property Id="20956f95-8f1a-4977-9f2a-b554b34377bf" name="Name" label="Name : String" fieldName="_name" />
       <Property Id="3fc305d5-9892-4292-9216-4f8ec8ae02ea" name="Version" type="Int64" label="Version : Int64" fieldName="_version" />
       <Property Id="4c3b213f-546d-4b90-9f14-44c67973b9e6" name="IsActivated" type="Boolean" label="IsActivated : Boolean" fieldName="_isActivated" />

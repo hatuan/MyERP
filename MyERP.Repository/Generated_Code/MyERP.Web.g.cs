@@ -160,7 +160,7 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the associated <see cref="Client"/> entity.
         /// </summary>
-        [Association("Account-client-association", "ClientId", "Id")]
+        [Association("Account-client-association", "ClientId", "ClientId")]
         public Client Client
         {
             get
@@ -745,7 +745,7 @@ namespace MyERP.DataAccess
         
         private bool FilterClient(Client entity)
         {
-            return (entity.Id == this.ClientId);
+            return (entity.ClientId == this.ClientId);
         }
         
         private bool FilterCurrency(Currency entity)
@@ -2183,7 +2183,7 @@ namespace MyERP.DataAccess
     public sealed partial class Client : Entity
     {
         
-        private Guid _id;
+        private Guid _clientId;
         
         private bool _isActivated;
         
@@ -2204,8 +2204,8 @@ namespace MyERP.DataAccess
         /// can be used for further object setup.
         /// </summary>
         partial void OnCreated();
-        partial void OnIdChanging(Guid value);
-        partial void OnIdChanged();
+        partial void OnClientIdChanging(Guid value);
+        partial void OnClientIdChanged();
         partial void OnIsActivatedChanging(bool value);
         partial void OnIsActivatedChanged();
         partial void OnNameChanging(string value);
@@ -2231,27 +2231,27 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
-        /// Gets or sets the 'Id' value.
+        /// Gets or sets the 'ClientId' value.
         /// </summary>
         [DataMember()]
         [Editable(false, AllowInitialValue=true)]
         [Key()]
         [RoundtripOriginal()]
-        public Guid Id
+        public Guid ClientId
         {
             get
             {
-                return this._id;
+                return this._clientId;
             }
             set
             {
-                if ((this._id != value))
+                if ((this._clientId != value))
                 {
-                    this.OnIdChanging(value);
-                    this.ValidateProperty("Id", value);
-                    this._id = value;
-                    this.RaisePropertyChanged("Id");
-                    this.OnIdChanged();
+                    this.OnClientIdChanging(value);
+                    this.ValidateProperty("ClientId", value);
+                    this._clientId = value;
+                    this.RaisePropertyChanged("ClientId");
+                    this.OnClientIdChanged();
                 }
             }
         }
@@ -2415,7 +2415,7 @@ namespace MyERP.DataAccess
         /// <returns>An object instance that uniquely identifies this entity instance.</returns>
         public override object GetIdentity()
         {
-            return this._id;
+            return this._clientId;
         }
     }
     
@@ -2508,7 +2508,7 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the associated <see cref="Client"/> entity.
         /// </summary>
-        [Association("Currency-client-association", "ClientId", "Id")]
+        [Association("Currency-client-association", "ClientId", "ClientId")]
         public Client Client
         {
             get
@@ -2939,7 +2939,7 @@ namespace MyERP.DataAccess
         
         private bool FilterClient(Client entity)
         {
-            return (entity.Id == this.ClientId);
+            return (entity.ClientId == this.ClientId);
         }
         
         private bool FilterOrganization(Organization entity)
@@ -2955,6 +2955,539 @@ namespace MyERP.DataAccess
         private bool FilterRecModifiedByUser(User entity)
         {
             return (entity.Id == this.RecModifiedById);
+        }
+        
+        /// <summary>
+        /// Computes a value from the key fields that uniquely identifies this entity instance.
+        /// </summary>
+        /// <returns>An object instance that uniquely identifies this entity instance.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+    
+    /// <summary>
+    /// The 'CurrencyConvertRate' entity class.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
+    public sealed partial class CurrencyConvertRate : Entity
+    {
+        
+        private Guid _clientId;
+        
+        private byte _conversionRateType;
+        
+        private Guid _currencyId;
+        
+        private Guid _currencyIdTo;
+        
+        private int _divideRate;
+        
+        private Guid _id;
+        
+        private int _multiplyRate;
+        
+        private string[] _openAccessGenerated;
+        
+        private Guid _organizationId;
+        
+        private DateTime _recCreated;
+        
+        private Guid _recCreatedBy;
+        
+        private DateTime _recModified;
+        
+        private Guid _recModifiedBy;
+        
+        private byte _status;
+        
+        private DateTime _validFrom;
+        
+        private DateTime _validTo;
+        
+        private long _version;
+        
+        #region Extensibility Method Definitions
+
+        /// <summary>
+        /// This method is invoked from the constructor once initialization is complete and
+        /// can be used for further object setup.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnClientIdChanging(Guid value);
+        partial void OnClientIdChanged();
+        partial void OnConversionRateTypeChanging(byte value);
+        partial void OnConversionRateTypeChanged();
+        partial void OnCurrencyIdChanging(Guid value);
+        partial void OnCurrencyIdChanged();
+        partial void OnCurrencyIdToChanging(Guid value);
+        partial void OnCurrencyIdToChanged();
+        partial void OnDivideRateChanging(int value);
+        partial void OnDivideRateChanged();
+        partial void OnIdChanging(Guid value);
+        partial void OnIdChanged();
+        partial void OnMultiplyRateChanging(int value);
+        partial void OnMultiplyRateChanged();
+        partial void OnOpenAccessGeneratedChanging(string[] value);
+        partial void OnOpenAccessGeneratedChanged();
+        partial void OnOrganizationIdChanging(Guid value);
+        partial void OnOrganizationIdChanged();
+        partial void OnRecCreatedChanging(DateTime value);
+        partial void OnRecCreatedChanged();
+        partial void OnRecCreatedByChanging(Guid value);
+        partial void OnRecCreatedByChanged();
+        partial void OnRecModifiedChanging(DateTime value);
+        partial void OnRecModifiedChanged();
+        partial void OnRecModifiedByChanging(Guid value);
+        partial void OnRecModifiedByChanged();
+        partial void OnStatusChanging(byte value);
+        partial void OnStatusChanged();
+        partial void OnValidFromChanging(DateTime value);
+        partial void OnValidFromChanged();
+        partial void OnValidToChanging(DateTime value);
+        partial void OnValidToChanged();
+        partial void OnVersionChanging(long value);
+        partial void OnVersionChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CurrencyConvertRate"/> class.
+        /// </summary>
+        public CurrencyConvertRate()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'ClientId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid ClientId
+        {
+            get
+            {
+                return this._clientId;
+            }
+            set
+            {
+                if ((this._clientId != value))
+                {
+                    this.OnClientIdChanging(value);
+                    this.RaiseDataMemberChanging("ClientId");
+                    this.ValidateProperty("ClientId", value);
+                    this._clientId = value;
+                    this.RaiseDataMemberChanged("ClientId");
+                    this.OnClientIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'ConversionRateType' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public byte ConversionRateType
+        {
+            get
+            {
+                return this._conversionRateType;
+            }
+            set
+            {
+                if ((this._conversionRateType != value))
+                {
+                    this.OnConversionRateTypeChanging(value);
+                    this.RaiseDataMemberChanging("ConversionRateType");
+                    this.ValidateProperty("ConversionRateType", value);
+                    this._conversionRateType = value;
+                    this.RaiseDataMemberChanged("ConversionRateType");
+                    this.OnConversionRateTypeChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'CurrencyId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid CurrencyId
+        {
+            get
+            {
+                return this._currencyId;
+            }
+            set
+            {
+                if ((this._currencyId != value))
+                {
+                    this.OnCurrencyIdChanging(value);
+                    this.RaiseDataMemberChanging("CurrencyId");
+                    this.ValidateProperty("CurrencyId", value);
+                    this._currencyId = value;
+                    this.RaiseDataMemberChanged("CurrencyId");
+                    this.OnCurrencyIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'CurrencyIdTo' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid CurrencyIdTo
+        {
+            get
+            {
+                return this._currencyIdTo;
+            }
+            set
+            {
+                if ((this._currencyIdTo != value))
+                {
+                    this.OnCurrencyIdToChanging(value);
+                    this.RaiseDataMemberChanging("CurrencyIdTo");
+                    this.ValidateProperty("CurrencyIdTo", value);
+                    this._currencyIdTo = value;
+                    this.RaiseDataMemberChanged("CurrencyIdTo");
+                    this.OnCurrencyIdToChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'DivideRate' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public int DivideRate
+        {
+            get
+            {
+                return this._divideRate;
+            }
+            set
+            {
+                if ((this._divideRate != value))
+                {
+                    this.OnDivideRateChanging(value);
+                    this.RaiseDataMemberChanging("DivideRate");
+                    this.ValidateProperty("DivideRate", value);
+                    this._divideRate = value;
+                    this.RaiseDataMemberChanged("DivideRate");
+                    this.OnDivideRateChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Id' value.
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.ValidateProperty("Id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("Id");
+                    this.OnIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'MultiplyRate' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public int MultiplyRate
+        {
+            get
+            {
+                return this._multiplyRate;
+            }
+            set
+            {
+                if ((this._multiplyRate != value))
+                {
+                    this.OnMultiplyRateChanging(value);
+                    this.RaiseDataMemberChanging("MultiplyRate");
+                    this.ValidateProperty("MultiplyRate", value);
+                    this._multiplyRate = value;
+                    this.RaiseDataMemberChanged("MultiplyRate");
+                    this.OnMultiplyRateChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OpenAccessGenerated' value.
+        /// </summary>
+        [DataMember()]
+        [Display(AutoGenerateField=false, AutoGenerateFilter=false, Description="OpenAccess Key", Name="-ID-")]
+        [Editable(false)]
+        [ReadOnly(true)]
+        [RoundtripOriginal()]
+        public string[] OpenAccessGenerated
+        {
+            get
+            {
+                return this._openAccessGenerated;
+            }
+            set
+            {
+                if ((this._openAccessGenerated != value))
+                {
+                    this.OnOpenAccessGeneratedChanging(value);
+                    this.ValidateProperty("OpenAccessGenerated", value);
+                    this._openAccessGenerated = value;
+                    this.RaisePropertyChanged("OpenAccessGenerated");
+                    this.OnOpenAccessGeneratedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'OrganizationId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid OrganizationId
+        {
+            get
+            {
+                return this._organizationId;
+            }
+            set
+            {
+                if ((this._organizationId != value))
+                {
+                    this.OnOrganizationIdChanging(value);
+                    this.RaiseDataMemberChanging("OrganizationId");
+                    this.ValidateProperty("OrganizationId", value);
+                    this._organizationId = value;
+                    this.RaiseDataMemberChanged("OrganizationId");
+                    this.OnOrganizationIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecCreated' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime RecCreated
+        {
+            get
+            {
+                return this._recCreated;
+            }
+            set
+            {
+                if ((this._recCreated != value))
+                {
+                    this.OnRecCreatedChanging(value);
+                    this.RaiseDataMemberChanging("RecCreated");
+                    this.ValidateProperty("RecCreated", value);
+                    this._recCreated = value;
+                    this.RaiseDataMemberChanged("RecCreated");
+                    this.OnRecCreatedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecCreatedBy' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid RecCreatedBy
+        {
+            get
+            {
+                return this._recCreatedBy;
+            }
+            set
+            {
+                if ((this._recCreatedBy != value))
+                {
+                    this.OnRecCreatedByChanging(value);
+                    this.RaiseDataMemberChanging("RecCreatedBy");
+                    this.ValidateProperty("RecCreatedBy", value);
+                    this._recCreatedBy = value;
+                    this.RaiseDataMemberChanged("RecCreatedBy");
+                    this.OnRecCreatedByChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecModified' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime RecModified
+        {
+            get
+            {
+                return this._recModified;
+            }
+            set
+            {
+                if ((this._recModified != value))
+                {
+                    this.OnRecModifiedChanging(value);
+                    this.RaiseDataMemberChanging("RecModified");
+                    this.ValidateProperty("RecModified", value);
+                    this._recModified = value;
+                    this.RaiseDataMemberChanged("RecModified");
+                    this.OnRecModifiedChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'RecModifiedBy' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid RecModifiedBy
+        {
+            get
+            {
+                return this._recModifiedBy;
+            }
+            set
+            {
+                if ((this._recModifiedBy != value))
+                {
+                    this.OnRecModifiedByChanging(value);
+                    this.RaiseDataMemberChanging("RecModifiedBy");
+                    this.ValidateProperty("RecModifiedBy", value);
+                    this._recModifiedBy = value;
+                    this.RaiseDataMemberChanged("RecModifiedBy");
+                    this.OnRecModifiedByChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Status' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public byte Status
+        {
+            get
+            {
+                return this._status;
+            }
+            set
+            {
+                if ((this._status != value))
+                {
+                    this.OnStatusChanging(value);
+                    this.RaiseDataMemberChanging("Status");
+                    this.ValidateProperty("Status", value);
+                    this._status = value;
+                    this.RaiseDataMemberChanged("Status");
+                    this.OnStatusChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'ValidFrom' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime ValidFrom
+        {
+            get
+            {
+                return this._validFrom;
+            }
+            set
+            {
+                if ((this._validFrom != value))
+                {
+                    this.OnValidFromChanging(value);
+                    this.RaiseDataMemberChanging("ValidFrom");
+                    this.ValidateProperty("ValidFrom", value);
+                    this._validFrom = value;
+                    this.RaiseDataMemberChanged("ValidFrom");
+                    this.OnValidFromChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'ValidTo' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public DateTime ValidTo
+        {
+            get
+            {
+                return this._validTo;
+            }
+            set
+            {
+                if ((this._validTo != value))
+                {
+                    this.OnValidToChanging(value);
+                    this.RaiseDataMemberChanging("ValidTo");
+                    this.ValidateProperty("ValidTo", value);
+                    this._validTo = value;
+                    this.RaiseDataMemberChanged("ValidTo");
+                    this.OnValidToChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Version' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                if ((this._version != value))
+                {
+                    this.OnVersionChanging(value);
+                    this.RaiseDataMemberChanging("Version");
+                    this.ValidateProperty("Version", value);
+                    this._version = value;
+                    this.RaiseDataMemberChanged("Version");
+                    this.OnVersionChanged();
+                }
+            }
         }
         
         /// <summary>
@@ -3033,6 +3566,8 @@ namespace MyERP.DataAccess
         
         private Guid _id;
         
+        private bool _locked;
+        
         private Guid _noSeriesId;
         
         private string[] _openAccessGenerated;
@@ -3094,6 +3629,8 @@ namespace MyERP.DataAccess
         partial void OnDocumentTypeChanged();
         partial void OnIdChanging(Guid value);
         partial void OnIdChanged();
+        partial void OnLockedChanging(bool value);
+        partial void OnLockedChanged();
         partial void OnNoSeriesIdChanging(Guid value);
         partial void OnNoSeriesIdChanged();
         partial void OnOpenAccessGeneratedChanging(string[] value);
@@ -3137,7 +3674,7 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the associated <see cref="Client"/> entity.
         /// </summary>
-        [Association("gldocument-client-association", "ClientId", "Id")]
+        [Association("gldocument-client-association", "ClientId", "ClientId")]
         public Client Client
         {
             get
@@ -3425,6 +3962,30 @@ namespace MyERP.DataAccess
                     this._id = value;
                     this.RaisePropertyChanged("Id");
                     this.OnIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Locked' value.
+        /// </summary>
+        [DataMember()]
+        public bool Locked
+        {
+            get
+            {
+                return this._locked;
+            }
+            set
+            {
+                if ((this._locked != value))
+                {
+                    this.OnLockedChanging(value);
+                    this.RaiseDataMemberChanging("Locked");
+                    this.ValidateProperty("Locked", value);
+                    this._locked = value;
+                    this.RaiseDataMemberChanged("Locked");
+                    this.OnLockedChanged();
                 }
             }
         }
@@ -3862,7 +4423,7 @@ namespace MyERP.DataAccess
         
         private bool FilterClient(Client entity)
         {
-            return (entity.Id == this.ClientId);
+            return (entity.ClientId == this.ClientId);
         }
         
         private bool FilterGeneralJournalLines(GeneralJournalLine entity)
@@ -4104,7 +4665,7 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the associated <see cref="Client"/> entity.
         /// </summary>
-        [Association("glline-client-association", "ClientId", "Id")]
+        [Association("glline-client-association", "ClientId", "ClientId")]
         public Client Client
         {
             get
@@ -4887,7 +5448,7 @@ namespace MyERP.DataAccess
         
         private bool FilterClient(Client entity)
         {
-            return (entity.Id == this.ClientId);
+            return (entity.ClientId == this.ClientId);
         }
         
         private bool FilterGeneralJournalDocument(GeneralJournalDocument entity)
@@ -5009,7 +5570,7 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the associated <see cref="Client"/> entity.
         /// </summary>
-        [Association("glsetup-client-association", "ClientId", "Id")]
+        [Association("glsetup-client-association", "ClientId", "ClientId")]
         public Client Client
         {
             get
@@ -5468,7 +6029,7 @@ namespace MyERP.DataAccess
         
         private bool FilterClient(Client entity)
         {
-            return (entity.Id == this.ClientId);
+            return (entity.ClientId == this.ClientId);
         }
         
         private bool FilterCurrency(Currency entity)
@@ -7043,7 +7604,7 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the associated <see cref="Client"/> entity.
         /// </summary>
-        [Association("NoSeries-client-association", "ClientId", "Id")]
+        [Association("NoSeries-client-association", "ClientId", "ClientId")]
         public Client Client
         {
             get
@@ -7651,7 +8212,7 @@ namespace MyERP.DataAccess
         
         private bool FilterClient(Client entity)
         {
-            return (entity.Id == this.ClientId);
+            return (entity.ClientId == this.ClientId);
         }
         
         private bool FilterOrganization(Organization entity)
@@ -7693,6 +8254,8 @@ namespace MyERP.DataAccess
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
     public sealed partial class Organization : Entity
     {
+        
+        private EntityRef<Client> _client;
         
         private Guid _clientId;
         
@@ -7763,6 +8326,32 @@ namespace MyERP.DataAccess
         public Organization()
         {
             this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="Client"/> entity.
+        /// </summary>
+        [Association("Organization-client-association", "ClientId", "ClientId")]
+        public Client Client
+        {
+            get
+            {
+                if ((this._client == null))
+                {
+                    this._client = new EntityRef<Client>(this, "Client", this.FilterClient);
+                }
+                return this._client.Entity;
+            }
+            set
+            {
+                Client previous = this.Client;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Client", value);
+                    this._client.Entity = value;
+                    this.RaisePropertyChanged("Client");
+                }
+            }
         }
         
         /// <summary>
@@ -8118,6 +8707,11 @@ namespace MyERP.DataAccess
                     this.OnVersionChanged();
                 }
             }
+        }
+        
+        private bool FilterClient(Client entity)
+        {
+            return (entity.ClientId == this.ClientId);
         }
         
         private bool FilterRecCreatedByUser(User entity)
@@ -10058,6 +10652,17 @@ namespace MyERP.Web
         }
         
         /// <summary>
+        /// Gets the set of <see cref="CurrencyConvertRate"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<CurrencyConvertRate> CurrencyConvertRates
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<CurrencyConvertRate>();
+            }
+        }
+        
+        /// <summary>
         /// Gets the set of <see cref="GeneralJournalDocument"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
         /// </summary>
         public EntitySet<GeneralJournalDocument> GeneralJournalDocuments
@@ -10218,6 +10823,16 @@ namespace MyERP.Web
         }
         
         /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="CurrencyConvertRate"/> entity instances using the 'GetCurrencyConvertRates' query.
+        /// </summary>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="CurrencyConvertRate"/> entity instances.</returns>
+        public EntityQuery<CurrencyConvertRate> GetCurrencyConvertRatesQuery()
+        {
+            this.ValidateMethod("GetCurrencyConvertRatesQuery", null);
+            return base.CreateQuery<CurrencyConvertRate>("GetCurrencyConvertRates", null, false, true);
+        }
+        
+        /// <summary>
         /// Gets an EntityQuery instance that can be used to load <see cref="GeneralJournalDocument"/> entity instances using the 'GetGeneralJournalDocuments' query.
         /// </summary>
         /// <returns>An EntityQuery that can be loaded to retrieve <see cref="GeneralJournalDocument"/> entity instances.</returns>
@@ -10235,6 +10850,19 @@ namespace MyERP.Web
         {
             this.ValidateMethod("GetGeneralJournalLinesQuery", null);
             return base.CreateQuery<GeneralJournalLine>("GetGeneralJournalLines", null, false, true);
+        }
+        
+        /// <summary>
+        /// Gets an EntityQuery instance that can be used to load <see cref="GeneralJournalSetup"/> entity instances using the 'GetGeneralJournalSetupOfOrganization' query.
+        /// </summary>
+        /// <param name="organizationId">The value for the 'organizationId' parameter of the query.</param>
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="GeneralJournalSetup"/> entity instances.</returns>
+        public EntityQuery<GeneralJournalSetup> GetGeneralJournalSetupOfOrganizationQuery(Guid organizationId)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("organizationId", organizationId);
+            this.ValidateMethod("GetGeneralJournalSetupOfOrganizationQuery", parameters);
+            return base.CreateQuery<GeneralJournalSetup>("GetGeneralJournalSetupOfOrganization", parameters, false, false);
         }
         
         /// <summary>
@@ -10295,19 +10923,6 @@ namespace MyERP.Web
         {
             this.ValidateMethod("GetOrganizationsQuery", null);
             return base.CreateQuery<Organization>("GetOrganizations", null, false, true);
-        }
-        
-        /// <summary>
-        /// Gets an EntityQuery instance that can be used to load <see cref="Organization"/> entity instances using the 'GetOrganizationsByClientId' query.
-        /// </summary>
-        /// <param name="clientId">The value for the 'clientId' parameter of the query.</param>
-        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="Organization"/> entity instances.</returns>
-        public EntityQuery<Organization> GetOrganizationsByClientIdQuery(Guid clientId)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>();
-            parameters.Add("clientId", clientId);
-            this.ValidateMethod("GetOrganizationsByClientIdQuery", parameters);
-            return base.CreateQuery<Organization>("GetOrganizationsByClientId", parameters, false, true);
         }
         
         /// <summary>
@@ -10382,6 +10997,62 @@ namespace MyERP.Web
         {
             this.ValidateMethod("GetDashboardStats", null);
             return ((InvokeOperation<DashboardStats>)(this.InvokeOperation("GetDashboardStats", typeof(DashboardStats), null, true, null, null)));
+        }
+        
+        /// <summary>
+        /// Asynchronously invokes the 'GetGeneralJournalDocumentNos' method of the DomainService.
+        /// </summary>
+        /// <param name="generalJournalDocument">The value for the 'generalJournalDocument' parameter of this action.</param>
+        /// <param name="callback">Callback to invoke when the operation completes.</param>
+        /// <param name="userState">Value to pass to the callback.  It can be <c>null</c>.</param>
+        /// <returns>An operation instance that can be used to manage the asynchronous request.</returns>
+        public InvokeOperation<GeneralJournalDocument> GetGeneralJournalDocumentNos(GeneralJournalDocument generalJournalDocument, Action<InvokeOperation<GeneralJournalDocument>> callback, object userState)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("generalJournalDocument", generalJournalDocument);
+            this.ValidateMethod("GetGeneralJournalDocumentNos", parameters);
+            return ((InvokeOperation<GeneralJournalDocument>)(this.InvokeOperation("GetGeneralJournalDocumentNos", typeof(GeneralJournalDocument), parameters, true, callback, userState)));
+        }
+        
+        /// <summary>
+        /// Asynchronously invokes the 'GetGeneralJournalDocumentNos' method of the DomainService.
+        /// </summary>
+        /// <param name="generalJournalDocument">The value for the 'generalJournalDocument' parameter of this action.</param>
+        /// <returns>An operation instance that can be used to manage the asynchronous request.</returns>
+        public InvokeOperation<GeneralJournalDocument> GetGeneralJournalDocumentNos(GeneralJournalDocument generalJournalDocument)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("generalJournalDocument", generalJournalDocument);
+            this.ValidateMethod("GetGeneralJournalDocumentNos", parameters);
+            return ((InvokeOperation<GeneralJournalDocument>)(this.InvokeOperation("GetGeneralJournalDocumentNos", typeof(GeneralJournalDocument), parameters, true, null, null)));
+        }
+        
+        /// <summary>
+        /// Asynchronously invokes the 'SequenceNextVal' method of the DomainService.
+        /// </summary>
+        /// <param name="sequenceName">The value for the 'sequenceName' parameter of this action.</param>
+        /// <param name="callback">Callback to invoke when the operation completes.</param>
+        /// <param name="userState">Value to pass to the callback.  It can be <c>null</c>.</param>
+        /// <returns>An operation instance that can be used to manage the asynchronous request.</returns>
+        public InvokeOperation<int> SequenceNextVal(string sequenceName, Action<InvokeOperation<int>> callback, object userState)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("sequenceName", sequenceName);
+            this.ValidateMethod("SequenceNextVal", parameters);
+            return ((InvokeOperation<int>)(this.InvokeOperation("SequenceNextVal", typeof(int), parameters, true, callback, userState)));
+        }
+        
+        /// <summary>
+        /// Asynchronously invokes the 'SequenceNextVal' method of the DomainService.
+        /// </summary>
+        /// <param name="sequenceName">The value for the 'sequenceName' parameter of this action.</param>
+        /// <returns>An operation instance that can be used to manage the asynchronous request.</returns>
+        public InvokeOperation<int> SequenceNextVal(string sequenceName)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("sequenceName", sequenceName);
+            this.ValidateMethod("SequenceNextVal", parameters);
+            return ((InvokeOperation<int>)(this.InvokeOperation("SequenceNextVal", typeof(int), parameters, true, null, null)));
         }
         
         /// <summary>
@@ -10508,6 +11179,24 @@ namespace MyERP.Web
             QueryResult<Currency> EndGetCurrencies(IAsyncResult result);
             
             /// <summary>
+            /// Asynchronously invokes the 'GetCurrencyConvertRates' operation.
+            /// </summary>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetCurrencyConvertRatesDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetCurrencyConvertRates", ReplyAction="http://tempuri.org/MyERPDomainService/GetCurrencyConvertRatesResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetCurrencyConvertRates(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetCurrencyConvertRates'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetCurrencyConvertRates'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetCurrencyConvertRates' operation.</returns>
+            QueryResult<CurrencyConvertRate> EndGetCurrencyConvertRates(IAsyncResult result);
+            
+            /// <summary>
             /// Asynchronously invokes the 'GetDashboardStats' operation.
             /// </summary>
             /// <param name="callback">Callback to invoke on completion.</param>
@@ -10523,6 +11212,25 @@ namespace MyERP.Web
             /// <param name="result">The IAsyncResult returned from 'BeginGetDashboardStats'.</param>
             /// <returns>The 'DashboardStats' returned from the 'GetDashboardStats' operation.</returns>
             DashboardStats EndGetDashboardStats(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetGeneralJournalDocumentNos' operation.
+            /// </summary>
+            /// <param name="generalJournalDocument">The value for the 'generalJournalDocument' parameter of this action.</param>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetGeneralJournalDocumentNosDomainServiceFa" +
+                "ult", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetGeneralJournalDocumentNos", ReplyAction="http://tempuri.org/MyERPDomainService/GetGeneralJournalDocumentNosResponse")]
+            IAsyncResult BeginGetGeneralJournalDocumentNos(GeneralJournalDocument generalJournalDocument, AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetGeneralJournalDocumentNos'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetGeneralJournalDocumentNos'.</param>
+            /// <returns>The 'GeneralJournalDocument' returned from the 'GetGeneralJournalDocumentNos' operation.</returns>
+            GeneralJournalDocument EndGetGeneralJournalDocumentNos(IAsyncResult result);
             
             /// <summary>
             /// Asynchronously invokes the 'GetGeneralJournalDocuments' operation.
@@ -10560,6 +11268,27 @@ namespace MyERP.Web
             /// <param name="result">The IAsyncResult returned from 'BeginGetGeneralJournalLines'.</param>
             /// <returns>The 'QueryResult' returned from the 'GetGeneralJournalLines' operation.</returns>
             QueryResult<GeneralJournalLine> EndGetGeneralJournalLines(IAsyncResult result);
+            
+            /// <summary>
+            /// Asynchronously invokes the 'GetGeneralJournalSetupOfOrganization' operation.
+            /// </summary>
+            /// <param name="organizationId">The value for the 'organizationId' parameter of this action.</param>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetGeneralJournalSetupOfOrganizationDomainS" +
+                "erviceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetGeneralJournalSetupOfOrganization", ReplyAction="http://tempuri.org/MyERPDomainService/GetGeneralJournalSetupOfOrganizationRespons" +
+                "e")]
+            [WebGet()]
+            IAsyncResult BeginGetGeneralJournalSetupOfOrganization(Guid organizationId, AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginGetGeneralJournalSetupOfOrganization'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginGetGeneralJournalSetupOfOrganization'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetGeneralJournalSetupOfOrganization' operation.</returns>
+            QueryResult<GeneralJournalSetup> EndGetGeneralJournalSetupOfOrganization(IAsyncResult result);
             
             /// <summary>
             /// Asynchronously invokes the 'GetGeneralJournalSetups' operation.
@@ -10670,26 +11399,6 @@ namespace MyERP.Web
             QueryResult<Organization> EndGetOrganizations(IAsyncResult result);
             
             /// <summary>
-            /// Asynchronously invokes the 'GetOrganizationsByClientId' operation.
-            /// </summary>
-            /// <param name="clientId">The value for the 'clientId' parameter of this action.</param>
-            /// <param name="callback">Callback to invoke on completion.</param>
-            /// <param name="asyncState">Optional state object.</param>
-            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
-            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetOrganizationsByClientIdDomainServiceFaul" +
-                "t", Name="DomainServiceFault", Namespace="DomainServices")]
-            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetOrganizationsByClientId", ReplyAction="http://tempuri.org/MyERPDomainService/GetOrganizationsByClientIdResponse")]
-            [WebGet()]
-            IAsyncResult BeginGetOrganizationsByClientId(Guid clientId, AsyncCallback callback, object asyncState);
-            
-            /// <summary>
-            /// Completes the asynchronous operation begun by 'BeginGetOrganizationsByClientId'.
-            /// </summary>
-            /// <param name="result">The IAsyncResult returned from 'BeginGetOrganizationsByClientId'.</param>
-            /// <returns>The 'QueryResult' returned from the 'GetOrganizationsByClientId' operation.</returns>
-            QueryResult<Organization> EndGetOrganizationsByClientId(IAsyncResult result);
-            
-            /// <summary>
             /// Asynchronously invokes the 'GetPaymentTerms' operation.
             /// </summary>
             /// <param name="callback">Callback to invoke on completion.</param>
@@ -10744,6 +11453,24 @@ namespace MyERP.Web
             QueryResult<User> EndGetUsers(IAsyncResult result);
             
             /// <summary>
+            /// Asynchronously invokes the 'SequenceNextVal' operation.
+            /// </summary>
+            /// <param name="sequenceName">The value for the 'sequenceName' parameter of this action.</param>
+            /// <param name="callback">Callback to invoke on completion.</param>
+            /// <param name="asyncState">Optional state object.</param>
+            /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/SequenceNextValDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/SequenceNextVal", ReplyAction="http://tempuri.org/MyERPDomainService/SequenceNextValResponse")]
+            IAsyncResult BeginSequenceNextVal(string sequenceName, AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Completes the asynchronous operation begun by 'BeginSequenceNextVal'.
+            /// </summary>
+            /// <param name="result">The IAsyncResult returned from 'BeginSequenceNextVal'.</param>
+            /// <returns>The 'Int32' returned from the 'SequenceNextVal' operation.</returns>
+            int EndSequenceNextVal(IAsyncResult result);
+            
+            /// <summary>
             /// Asynchronously invokes the 'SubmitChanges' operation.
             /// </summary>
             /// <param name="changeSet">The change-set to submit.</param>
@@ -10772,6 +11499,7 @@ namespace MyERP.Web
                 this.CreateEntitySet<BusinessPartnerGroup>(EntitySetOperations.All);
                 this.CreateEntitySet<Client>(EntitySetOperations.All);
                 this.CreateEntitySet<Currency>(EntitySetOperations.All);
+                this.CreateEntitySet<CurrencyConvertRate>(EntitySetOperations.All);
                 this.CreateEntitySet<GeneralJournalDocument>(EntitySetOperations.All);
                 this.CreateEntitySet<GeneralJournalLine>(EntitySetOperations.All);
                 this.CreateEntitySet<GeneralJournalSetup>(EntitySetOperations.All);
