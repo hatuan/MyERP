@@ -83,9 +83,10 @@
     </Compile>
     <Compile Include="Account.cs" />
     <Compile Include="GeneralJournalDocument.cs" />
+    <Compile Include="GeneralJournalSetupRepository.cs" />
     <Compile Include="GeneralJournalSetup.cs" />
-    <Compile Include="NoSeries.cs" />
-    <Compile Include="NoSeriesRepository.cs" />
+    <Compile Include="NumberSequence.cs" />
+    <Compile Include="NumberSequenceRepository.cs" />
     <Compile Include="ClientRepository.cs" />
     <Compile Include="GeneralJournalLineRepository.cs" />
     <Compile Include="GeneralJournalDocumentRepository.cs" />

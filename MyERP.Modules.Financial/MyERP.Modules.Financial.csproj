@@ -150,10 +150,12 @@
     </Compile>
     <Compile Include="Infrastructure\AccountsViewRegionNames.cs" />
     <Compile Include="Infrastructure\AccountsViewState.cs" />
+    <Compile Include="Infrastructure\EntityClickedEvents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AccountsViewModel.cs" />
     <Compile Include="ViewModels\GeneralJournalLinesViewModel.cs" />
     <Compile Include="ViewModels\GeneralJournalDocumentsViewModel.cs" />
+    <Compile Include="ViewModels\GeneralJournalsViewModel.cs" />
     <Compile Include="Views\AccountDetailsUserControl.xaml.cs">
       <DependentUpon>AccountDetailsUserControl.xaml</DependentUpon>
     </Compile>
@@ -166,8 +168,8 @@
     <Compile Include="Views\GeneralJournalLinesListUserControl.xaml.cs">
       <DependentUpon>GeneralJournalLinesListUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\GeneralJournalsHeader.xaml.cs">
-      <DependentUpon>GeneralJournalsHeader.xaml</DependentUpon>
+    <Compile Include="Views\GeneralJournalsHeaderUserControl.xaml.cs">
+      <DependentUpon>GeneralJournalsHeaderUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GeneralJournalDocumentsListUserControl.xaml.cs">
       <DependentUpon>GeneralJournalDocumentsListUserControl.xaml</DependentUpon>
@@ -226,7 +228,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\GeneralJournalsHeader.xaml">
+    <Page Include="Views\GeneralJournalsHeaderUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

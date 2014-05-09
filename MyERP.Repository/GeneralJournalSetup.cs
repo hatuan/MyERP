@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using MyERP.Infrastructure;
 
-namespace MyERP.Repositories
+namespace MyERP.DataAccess
 {
-    [Export]
-    public class GeneralJournalSetupRepository : RepositoryBase
+    public partial class GeneralJournalSetup
     {
 
     }

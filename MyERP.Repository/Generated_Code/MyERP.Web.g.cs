@@ -3535,6 +3535,24 @@ namespace MyERP.DataAccess
         }
     }
     
+    public enum DocumentType
+    {
+        
+        None = 0,
+        
+        GeneralJournal = 100,
+        
+        CashReceipt = 200,
+        
+        CashPayment = 300,
+        
+        BankCheck = 400,
+        
+        BankDeposit = 500,
+        
+        AssetJournal = 600,
+    }
+    
     /// <summary>
     /// The 'GeneralJournalDocument' entity class.
     /// </summary>
@@ -3548,7 +3566,7 @@ namespace MyERP.DataAccess
         
         private int _currencyExchangeRate;
         
-        private Guid _currencyId;
+        private Nullable<Guid> _currencyId;
         
         private string _description;
         
@@ -3560,7 +3578,7 @@ namespace MyERP.DataAccess
         
         private GeneralJournalDocumentStatusType _documentStatusType;
         
-        private string _documentType;
+        private DocumentType _documentType;
         
         private EntityCollection<GeneralJournalLine> _generalJournalLines;
         
@@ -3568,7 +3586,9 @@ namespace MyERP.DataAccess
         
         private bool _locked;
         
-        private Guid _noSeriesId;
+        private EntityRef<NumberSequence> _numberSequence;
+        
+        private Guid _numberSequenceId;
         
         private string[] _openAccessGenerated;
         
@@ -3598,7 +3618,7 @@ namespace MyERP.DataAccess
         
         private decimal _totalDebitAmountLcy;
         
-        private int _transactionType;
+        private TransactionType _transactionType;
         
         private long _version;
         
@@ -3613,7 +3633,7 @@ namespace MyERP.DataAccess
         partial void OnClientIdChanged();
         partial void OnCurrencyExchangeRateChanging(int value);
         partial void OnCurrencyExchangeRateChanged();
-        partial void OnCurrencyIdChanging(Guid value);
+        partial void OnCurrencyIdChanging(Nullable<Guid> value);
         partial void OnCurrencyIdChanged();
         partial void OnDescriptionChanging(string value);
         partial void OnDescriptionChanged();
@@ -3625,14 +3645,14 @@ namespace MyERP.DataAccess
         partial void OnDocumentPostedChanged();
         partial void OnDocumentStatusTypeChanging(GeneralJournalDocumentStatusType value);
         partial void OnDocumentStatusTypeChanged();
-        partial void OnDocumentTypeChanging(string value);
+        partial void OnDocumentTypeChanging(DocumentType value);
         partial void OnDocumentTypeChanged();
         partial void OnIdChanging(Guid value);
         partial void OnIdChanged();
         partial void OnLockedChanging(bool value);
         partial void OnLockedChanged();
-        partial void OnNoSeriesIdChanging(Guid value);
-        partial void OnNoSeriesIdChanged();
+        partial void OnNumberSequenceIdChanging(Guid value);
+        partial void OnNumberSequenceIdChanged();
         partial void OnOpenAccessGeneratedChanging(string[] value);
         partial void OnOpenAccessGeneratedChanged();
         partial void OnOrganizationIdChanging(Guid value);
@@ -3655,7 +3675,7 @@ namespace MyERP.DataAccess
         partial void OnTotalDebitAmountChanged();
         partial void OnTotalDebitAmountLcyChanging(decimal value);
         partial void OnTotalDebitAmountLcyChanged();
-        partial void OnTransactionTypeChanging(int value);
+        partial void OnTransactionTypeChanging(TransactionType value);
         partial void OnTransactionTypeChanged();
         partial void OnVersionChanging(long value);
         partial void OnVersionChanged();
@@ -3752,7 +3772,7 @@ namespace MyERP.DataAccess
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public Guid CurrencyId
+        public Nullable<Guid> CurrencyId
         {
             get
             {
@@ -3901,7 +3921,7 @@ namespace MyERP.DataAccess
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public string DocumentType
+        public DocumentType DocumentType
         {
             get
             {
@@ -3991,26 +4011,52 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
-        /// Gets or sets the 'NoSeriesId' value.
+        /// Gets or sets the associated <see cref="NumberSequence"/> entity.
         /// </summary>
-        [DataMember()]
-        [RoundtripOriginal()]
-        public Guid NoSeriesId
+        [Association("gldocument-number-sequence-association", "NumberSequenceId", "Id")]
+        public NumberSequence NumberSequence
         {
             get
             {
-                return this._noSeriesId;
+                if ((this._numberSequence == null))
+                {
+                    this._numberSequence = new EntityRef<NumberSequence>(this, "NumberSequence", this.FilterNumberSequence);
+                }
+                return this._numberSequence.Entity;
             }
             set
             {
-                if ((this._noSeriesId != value))
+                NumberSequence previous = this.NumberSequence;
+                if ((previous != value))
                 {
-                    this.OnNoSeriesIdChanging(value);
-                    this.RaiseDataMemberChanging("NoSeriesId");
-                    this.ValidateProperty("NoSeriesId", value);
-                    this._noSeriesId = value;
-                    this.RaiseDataMemberChanged("NoSeriesId");
-                    this.OnNoSeriesIdChanged();
+                    this.ValidateProperty("NumberSequence", value);
+                    this._numberSequence.Entity = value;
+                    this.RaisePropertyChanged("NumberSequence");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'NumberSequenceId' value.
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Guid NumberSequenceId
+        {
+            get
+            {
+                return this._numberSequenceId;
+            }
+            set
+            {
+                if ((this._numberSequenceId != value))
+                {
+                    this.OnNumberSequenceIdChanging(value);
+                    this.RaiseDataMemberChanging("NumberSequenceId");
+                    this.ValidateProperty("NumberSequenceId", value);
+                    this._numberSequenceId = value;
+                    this.RaiseDataMemberChanged("NumberSequenceId");
+                    this.OnNumberSequenceIdChanged();
                 }
             }
         }
@@ -4375,7 +4421,7 @@ namespace MyERP.DataAccess
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public int TransactionType
+        public TransactionType TransactionType
         {
             get
             {
@@ -4429,6 +4475,11 @@ namespace MyERP.DataAccess
         private bool FilterGeneralJournalLines(GeneralJournalLine entity)
         {
             return (entity.GeneralJournalDocumentId == this.Id);
+        }
+        
+        private bool FilterNumberSequence(NumberSequence entity)
+        {
+            return (entity.Id == this.NumberSequenceId);
         }
         
         private bool FilterOrganization(Organization entity)
@@ -4485,9 +4536,9 @@ namespace MyERP.DataAccess
         
         private decimal _creditAmountLcy;
         
-        private decimal _currencyExchangeRate;
+        private Nullable<decimal> _currencyExchangeRate;
         
-        private Guid _currencyId;
+        private Nullable<Guid> _currencyId;
         
         private decimal _debitAmount;
         
@@ -4501,7 +4552,7 @@ namespace MyERP.DataAccess
         
         private DateTime _documentPosted;
         
-        private string _documentType;
+        private DocumentType _documentType;
         
         private Guid _fixAssetId;
         
@@ -4533,7 +4584,7 @@ namespace MyERP.DataAccess
         
         private EntityRef<User> _recModifiedByUser;
         
-        private int _transactionType;
+        private TransactionType _transactionType;
         
         private long _version;
         
@@ -4556,9 +4607,9 @@ namespace MyERP.DataAccess
         partial void OnCreditAmountChanged();
         partial void OnCreditAmountLcyChanging(decimal value);
         partial void OnCreditAmountLcyChanged();
-        partial void OnCurrencyExchangeRateChanging(decimal value);
+        partial void OnCurrencyExchangeRateChanging(Nullable<decimal> value);
         partial void OnCurrencyExchangeRateChanged();
-        partial void OnCurrencyIdChanging(Guid value);
+        partial void OnCurrencyIdChanging(Nullable<Guid> value);
         partial void OnCurrencyIdChanged();
         partial void OnDebitAmountChanging(decimal value);
         partial void OnDebitAmountChanged();
@@ -4572,7 +4623,7 @@ namespace MyERP.DataAccess
         partial void OnDocumentNoChanged();
         partial void OnDocumentPostedChanging(DateTime value);
         partial void OnDocumentPostedChanged();
-        partial void OnDocumentTypeChanging(string value);
+        partial void OnDocumentTypeChanging(DocumentType value);
         partial void OnDocumentTypeChanged();
         partial void OnFixAssetIdChanging(Guid value);
         partial void OnFixAssetIdChanged();
@@ -4596,7 +4647,7 @@ namespace MyERP.DataAccess
         partial void OnRecModifiedChanged();
         partial void OnRecModifiedByChanging(Guid value);
         partial void OnRecModifiedByChanged();
-        partial void OnTransactionTypeChanging(int value);
+        partial void OnTransactionTypeChanging(TransactionType value);
         partial void OnTransactionTypeChanged();
         partial void OnVersionChanging(long value);
         partial void OnVersionChanged();
@@ -4793,7 +4844,7 @@ namespace MyERP.DataAccess
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public decimal CurrencyExchangeRate
+        public Nullable<decimal> CurrencyExchangeRate
         {
             get
             {
@@ -4818,7 +4869,7 @@ namespace MyERP.DataAccess
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public Guid CurrencyId
+        public Nullable<Guid> CurrencyId
         {
             get
             {
@@ -4993,7 +5044,7 @@ namespace MyERP.DataAccess
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public string DocumentType
+        public DocumentType DocumentType
         {
             get
             {
@@ -5400,7 +5451,7 @@ namespace MyERP.DataAccess
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public int TransactionType
+        public TransactionType TransactionType
         {
             get
             {
@@ -5492,15 +5543,15 @@ namespace MyERP.DataAccess
         
         private Guid _clientId;
         
-        private EntityRef<Currency> _currency;
+        private EntityRef<NumberSequence> _generalJournalNumberSequence;
         
-        private EntityRef<NoSeries> _defaultDocumentType1No;
-        
-        private Guid _defaultDocumentType1NoId;
+        private Guid _generalJournalNumberSequenceId;
         
         private Guid _id;
         
         private int _lcyExchangeRateUnit;
+        
+        private EntityRef<Currency> _localCurrency;
         
         private Guid _localCurrencyId;
         
@@ -5533,8 +5584,8 @@ namespace MyERP.DataAccess
         partial void OnCreated();
         partial void OnClientIdChanging(Guid value);
         partial void OnClientIdChanged();
-        partial void OnDefaultDocumentType1NoIdChanging(Guid value);
-        partial void OnDefaultDocumentType1NoIdChanged();
+        partial void OnGeneralJournalNumberSequenceIdChanging(Guid value);
+        partial void OnGeneralJournalNumberSequenceIdChanged();
         partial void OnIdChanging(Guid value);
         partial void OnIdChanged();
         partial void OnLcyExchangeRateUnitChanging(int value);
@@ -5619,78 +5670,52 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
-        /// Gets or sets the associated <see cref="Currency"/> entity.
+        /// Gets or sets the associated <see cref="NumberSequence"/> entity.
         /// </summary>
-        [Association("glsetup-lcy-currency-association", "LocalCurrencyId", "Id")]
-        public Currency Currency
+        [Association("glsetup-general-journal-numbersequence-association", "GeneralJournalNumberSequenceId", "Id")]
+        public NumberSequence GeneralJournalNumberSequence
         {
             get
             {
-                if ((this._currency == null))
+                if ((this._generalJournalNumberSequence == null))
                 {
-                    this._currency = new EntityRef<Currency>(this, "Currency", this.FilterCurrency);
+                    this._generalJournalNumberSequence = new EntityRef<NumberSequence>(this, "GeneralJournalNumberSequence", this.FilterGeneralJournalNumberSequence);
                 }
-                return this._currency.Entity;
+                return this._generalJournalNumberSequence.Entity;
             }
             set
             {
-                Currency previous = this.Currency;
+                NumberSequence previous = this.GeneralJournalNumberSequence;
                 if ((previous != value))
                 {
-                    this.ValidateProperty("Currency", value);
-                    this._currency.Entity = value;
-                    this.RaisePropertyChanged("Currency");
+                    this.ValidateProperty("GeneralJournalNumberSequence", value);
+                    this._generalJournalNumberSequence.Entity = value;
+                    this.RaisePropertyChanged("GeneralJournalNumberSequence");
                 }
             }
         }
         
         /// <summary>
-        /// Gets or sets the associated <see cref="NoSeries"/> entity.
-        /// </summary>
-        [Association("glsetup-type1-noseries-association", "DefaultDocumentType1NoId", "Id")]
-        public NoSeries DefaultDocumentType1No
-        {
-            get
-            {
-                if ((this._defaultDocumentType1No == null))
-                {
-                    this._defaultDocumentType1No = new EntityRef<NoSeries>(this, "DefaultDocumentType1No", this.FilterDefaultDocumentType1No);
-                }
-                return this._defaultDocumentType1No.Entity;
-            }
-            set
-            {
-                NoSeries previous = this.DefaultDocumentType1No;
-                if ((previous != value))
-                {
-                    this.ValidateProperty("DefaultDocumentType1No", value);
-                    this._defaultDocumentType1No.Entity = value;
-                    this.RaisePropertyChanged("DefaultDocumentType1No");
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Gets or sets the 'DefaultDocumentType1NoId' value.
+        /// Gets or sets the 'GeneralJournalNumberSequenceId' value.
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public Guid DefaultDocumentType1NoId
+        public Guid GeneralJournalNumberSequenceId
         {
             get
             {
-                return this._defaultDocumentType1NoId;
+                return this._generalJournalNumberSequenceId;
             }
             set
             {
-                if ((this._defaultDocumentType1NoId != value))
+                if ((this._generalJournalNumberSequenceId != value))
                 {
-                    this.OnDefaultDocumentType1NoIdChanging(value);
-                    this.RaiseDataMemberChanging("DefaultDocumentType1NoId");
-                    this.ValidateProperty("DefaultDocumentType1NoId", value);
-                    this._defaultDocumentType1NoId = value;
-                    this.RaiseDataMemberChanged("DefaultDocumentType1NoId");
-                    this.OnDefaultDocumentType1NoIdChanged();
+                    this.OnGeneralJournalNumberSequenceIdChanging(value);
+                    this.RaiseDataMemberChanging("GeneralJournalNumberSequenceId");
+                    this.ValidateProperty("GeneralJournalNumberSequenceId", value);
+                    this._generalJournalNumberSequenceId = value;
+                    this.RaiseDataMemberChanged("GeneralJournalNumberSequenceId");
+                    this.OnGeneralJournalNumberSequenceIdChanged();
                 }
             }
         }
@@ -5742,6 +5767,32 @@ namespace MyERP.DataAccess
                     this._lcyExchangeRateUnit = value;
                     this.RaiseDataMemberChanged("LcyExchangeRateUnit");
                     this.OnLcyExchangeRateUnitChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="Currency"/> entity.
+        /// </summary>
+        [Association("glsetup-lcy-currency-association", "LocalCurrencyId", "Id")]
+        public Currency LocalCurrency
+        {
+            get
+            {
+                if ((this._localCurrency == null))
+                {
+                    this._localCurrency = new EntityRef<Currency>(this, "LocalCurrency", this.FilterLocalCurrency);
+                }
+                return this._localCurrency.Entity;
+            }
+            set
+            {
+                Currency previous = this.LocalCurrency;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("LocalCurrency", value);
+                    this._localCurrency.Entity = value;
+                    this.RaisePropertyChanged("LocalCurrency");
                 }
             }
         }
@@ -6032,14 +6083,14 @@ namespace MyERP.DataAccess
             return (entity.ClientId == this.ClientId);
         }
         
-        private bool FilterCurrency(Currency entity)
+        private bool FilterGeneralJournalNumberSequence(NumberSequence entity)
         {
-            return (entity.Id == this.LocalCurrencyId);
+            return (entity.Id == this.GeneralJournalNumberSequenceId);
         }
         
-        private bool FilterDefaultDocumentType1No(NoSeries entity)
+        private bool FilterLocalCurrency(Currency entity)
         {
-            return (entity.Id == this.DefaultDocumentType1NoId);
+            return (entity.Id == this.LocalCurrencyId);
         }
         
         private bool FilterOrganization(Organization entity)
@@ -6120,6 +6171,8 @@ namespace MyERP.DataAccess
         
         private Guid _user_Id2;
         
+        private long _version;
+        
         #region Extensibility Method Definitions
 
         /// <summary>
@@ -6173,6 +6226,8 @@ namespace MyERP.DataAccess
         partial void OnUser_Id0Changed();
         partial void OnUser_Id2Changing(Guid value);
         partial void OnUser_Id2Changed();
+        partial void OnVersionChanging(long value);
+        partial void OnVersionChanged();
 
         #endregion
         
@@ -6188,7 +6243,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'ClientId' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid ClientId
@@ -6214,7 +6268,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Code' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string Code
@@ -6240,7 +6293,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Date0' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public DateTime Date0
@@ -6266,7 +6318,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Date2' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public DateTime Date2
@@ -6292,7 +6343,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Ghi_Chu' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string Ghi_Chu
@@ -6318,7 +6368,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Id' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [Editable(false, AllowInitialValue=true)]
         [Key()]
@@ -6345,7 +6394,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Ma_Kh' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid Ma_Kh
@@ -6371,7 +6419,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Ma_Nt' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid Ma_Nt
@@ -6397,7 +6444,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Ngay_Vv1' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public DateTime Ngay_Vv1
@@ -6423,7 +6469,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Ngay_Vv2' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public DateTime Ngay_Vv2
@@ -6449,7 +6494,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Nh_Vv1' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string Nh_Vv1
@@ -6475,7 +6519,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Nh_Vv2' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string Nh_Vv2
@@ -6501,7 +6544,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Nh_Vv3' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string Nh_Vv3
@@ -6554,7 +6596,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'OrganizationId' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid OrganizationId
@@ -6580,7 +6621,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Status' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public byte Status
@@ -6606,7 +6646,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Ten_Vv' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string Ten_Vv
@@ -6632,7 +6671,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Ten_Vv2' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public string Ten_Vv2
@@ -6658,7 +6696,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Tien' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public decimal Tien
@@ -6684,7 +6721,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Tien_Nt' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public decimal Tien_Nt
@@ -6710,7 +6746,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'Tk' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid Tk
@@ -6736,7 +6771,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'User_Id0' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid User_Id0
@@ -6762,7 +6796,6 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'User_Id2' value.
         /// </summary>
-        [ConcurrencyCheck()]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid User_Id2
@@ -6781,6 +6814,32 @@ namespace MyERP.DataAccess
                     this._user_Id2 = value;
                     this.RaiseDataMemberChanged("User_Id2");
                     this.OnUser_Id2Changed();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the 'Version' value.
+        /// </summary>
+        [ConcurrencyCheck()]
+        [DataMember()]
+        [RoundtripOriginal()]
+        public long Version
+        {
+            get
+            {
+                return this._version;
+            }
+            set
+            {
+                if ((this._version != value))
+                {
+                    this.OnVersionChanging(value);
+                    this.RaiseDataMemberChanging("Version");
+                    this.ValidateProperty("Version", value);
+                    this._version = value;
+                    this.RaiseDataMemberChanged("Version");
+                    this.OnVersionChanged();
                 }
             }
         }
@@ -7488,10 +7547,10 @@ namespace MyERP.DataAccess
     }
     
     /// <summary>
-    /// The 'NoSeries' entity class.
+    /// The 'NumberSequence' entity class.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MyERP.DataAccess")]
-    public sealed partial class NoSeries : Entity
+    public sealed partial class NumberSequence : Entity
     {
         
         private EntityRef<Client> _client;
@@ -7538,7 +7597,7 @@ namespace MyERP.DataAccess
         
         private short _status;
         
-        private NoSeriesStatusType _statusType;
+        private NumberSequenceStatusType _statusType;
         
         private long _version;
         
@@ -7585,7 +7644,7 @@ namespace MyERP.DataAccess
         partial void OnStartingNoChanged();
         partial void OnStatusChanging(short value);
         partial void OnStatusChanged();
-        partial void OnStatusTypeChanging(NoSeriesStatusType value);
+        partial void OnStatusTypeChanging(NumberSequenceStatusType value);
         partial void OnStatusTypeChanged();
         partial void OnVersionChanging(long value);
         partial void OnVersionChanged();
@@ -7594,9 +7653,9 @@ namespace MyERP.DataAccess
         
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="NoSeries"/> class.
+        /// Initializes a new instance of the <see cref="NumberSequence"/> class.
         /// </summary>
-        public NoSeries()
+        public NumberSequence()
         {
             this.OnCreated();
         }
@@ -7604,7 +7663,7 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the associated <see cref="Client"/> entity.
         /// </summary>
-        [Association("NoSeries-client-association", "ClientId", "ClientId")]
+        [Association("NumberSequence-client-association", "ClientId", "ClientId")]
         public Client Client
         {
             get
@@ -7910,7 +7969,7 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the associated <see cref="Organization"/> entity.
         /// </summary>
-        [Association("NoSeries-organization-association", "OrganizationId", "Id")]
+        [Association("NumberSequence-organization-association", "OrganizationId", "Id")]
         public Organization Organization
         {
             get
@@ -8011,7 +8070,7 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the associated <see cref="User"/> entity.
         /// </summary>
-        [Association("NoSeries-user-created-association", "RecCreatedBy", "Id")]
+        [Association("NumberSequence-user-created-association", "RecCreatedBy", "Id")]
         public User RecCreatedByUser
         {
             get
@@ -8087,7 +8146,7 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the associated <see cref="User"/> entity.
         /// </summary>
-        [Association("NoSeries-user-modified-association", "RecModifiedBy", "Id")]
+        [Association("NumberSequence-user-modified-association", "RecModifiedBy", "Id")]
         public User RecModifiedByUser
         {
             get
@@ -8164,7 +8223,7 @@ namespace MyERP.DataAccess
         /// Gets or sets the 'StatusType' value.
         /// </summary>
         [DataMember()]
-        public NoSeriesStatusType StatusType
+        public NumberSequenceStatusType StatusType
         {
             get
             {
@@ -8240,7 +8299,7 @@ namespace MyERP.DataAccess
         }
     }
     
-    public enum NoSeriesStatusType
+    public enum NumberSequenceStatusType
     {
         
         Inactive = 0,
@@ -9525,6 +9584,24 @@ namespace MyERP.DataAccess
         }
     }
     
+    public enum TransactionType
+    {
+        
+        Comment = 0,
+        
+        GeneralJournal = 100,
+        
+        CashReceipt = 200,
+        
+        CashPayment = 300,
+        
+        BankCheck = 400,
+        
+        BankDeposit = 500,
+        
+        AssetJournalDepreciation = 600,
+    }
+    
     /// <summary>
     /// The 'User' entity class.
     /// </summary>
@@ -10718,13 +10795,13 @@ namespace MyERP.Web
         }
         
         /// <summary>
-        /// Gets the set of <see cref="NoSeries"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// Gets the set of <see cref="NumberSequence"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
         /// </summary>
-        public EntitySet<NoSeries> NoSeries
+        public EntitySet<NumberSequence> NumberSequences
         {
             get
             {
-                return base.EntityContainer.GetEntitySet<NoSeries>();
+                return base.EntityContainer.GetEntitySet<NumberSequence>();
             }
         }
         
@@ -10853,19 +10930,6 @@ namespace MyERP.Web
         }
         
         /// <summary>
-        /// Gets an EntityQuery instance that can be used to load <see cref="GeneralJournalSetup"/> entity instances using the 'GetGeneralJournalSetupOfOrganization' query.
-        /// </summary>
-        /// <param name="organizationId">The value for the 'organizationId' parameter of the query.</param>
-        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="GeneralJournalSetup"/> entity instances.</returns>
-        public EntityQuery<GeneralJournalSetup> GetGeneralJournalSetupOfOrganizationQuery(Guid organizationId)
-        {
-            Dictionary<string, object> parameters = new Dictionary<string, object>();
-            parameters.Add("organizationId", organizationId);
-            this.ValidateMethod("GetGeneralJournalSetupOfOrganizationQuery", parameters);
-            return base.CreateQuery<GeneralJournalSetup>("GetGeneralJournalSetupOfOrganization", parameters, false, false);
-        }
-        
-        /// <summary>
         /// Gets an EntityQuery instance that can be used to load <see cref="GeneralJournalSetup"/> entity instances using the 'GetGeneralJournalSetups' query.
         /// </summary>
         /// <returns>An EntityQuery that can be loaded to retrieve <see cref="GeneralJournalSetup"/> entity instances.</returns>
@@ -10906,13 +10970,13 @@ namespace MyERP.Web
         }
         
         /// <summary>
-        /// Gets an EntityQuery instance that can be used to load <see cref="NoSeries"/> entity instances using the 'GetNoSeries' query.
+        /// Gets an EntityQuery instance that can be used to load <see cref="NumberSequence"/> entity instances using the 'GetNumberSequences' query.
         /// </summary>
-        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="NoSeries"/> entity instances.</returns>
-        public EntityQuery<NoSeries> GetNoSeriesQuery()
+        /// <returns>An EntityQuery that can be loaded to retrieve <see cref="NumberSequence"/> entity instances.</returns>
+        public EntityQuery<NumberSequence> GetNumberSequencesQuery()
         {
-            this.ValidateMethod("GetNoSeriesQuery", null);
-            return base.CreateQuery<NoSeries>("GetNoSeries", null, false, true);
+            this.ValidateMethod("GetNumberSequencesQuery", null);
+            return base.CreateQuery<NumberSequence>("GetNumberSequences", null, false, true);
         }
         
         /// <summary>
@@ -11025,6 +11089,34 @@ namespace MyERP.Web
             parameters.Add("generalJournalDocument", generalJournalDocument);
             this.ValidateMethod("GetGeneralJournalDocumentNos", parameters);
             return ((InvokeOperation<GeneralJournalDocument>)(this.InvokeOperation("GetGeneralJournalDocumentNos", typeof(GeneralJournalDocument), parameters, true, null, null)));
+        }
+        
+        /// <summary>
+        /// Asynchronously invokes the 'GetGeneralJournalSetupOfOrganization' method of the DomainService.
+        /// </summary>
+        /// <param name="organizationId">The value for the 'organizationId' parameter of this action.</param>
+        /// <param name="callback">Callback to invoke when the operation completes.</param>
+        /// <param name="userState">Value to pass to the callback.  It can be <c>null</c>.</param>
+        /// <returns>An operation instance that can be used to manage the asynchronous request.</returns>
+        public InvokeOperation<GeneralJournalSetup> GetGeneralJournalSetupOfOrganization(Guid organizationId, Action<InvokeOperation<GeneralJournalSetup>> callback, object userState)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("organizationId", organizationId);
+            this.ValidateMethod("GetGeneralJournalSetupOfOrganization", parameters);
+            return ((InvokeOperation<GeneralJournalSetup>)(this.InvokeOperation("GetGeneralJournalSetupOfOrganization", typeof(GeneralJournalSetup), parameters, true, callback, userState)));
+        }
+        
+        /// <summary>
+        /// Asynchronously invokes the 'GetGeneralJournalSetupOfOrganization' method of the DomainService.
+        /// </summary>
+        /// <param name="organizationId">The value for the 'organizationId' parameter of this action.</param>
+        /// <returns>An operation instance that can be used to manage the asynchronous request.</returns>
+        public InvokeOperation<GeneralJournalSetup> GetGeneralJournalSetupOfOrganization(Guid organizationId)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("organizationId", organizationId);
+            this.ValidateMethod("GetGeneralJournalSetupOfOrganization", parameters);
+            return ((InvokeOperation<GeneralJournalSetup>)(this.InvokeOperation("GetGeneralJournalSetupOfOrganization", typeof(GeneralJournalSetup), parameters, true, null, null)));
         }
         
         /// <summary>
@@ -11280,15 +11372,14 @@ namespace MyERP.Web
                 "erviceFault", Name="DomainServiceFault", Namespace="DomainServices")]
             [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetGeneralJournalSetupOfOrganization", ReplyAction="http://tempuri.org/MyERPDomainService/GetGeneralJournalSetupOfOrganizationRespons" +
                 "e")]
-            [WebGet()]
             IAsyncResult BeginGetGeneralJournalSetupOfOrganization(Guid organizationId, AsyncCallback callback, object asyncState);
             
             /// <summary>
             /// Completes the asynchronous operation begun by 'BeginGetGeneralJournalSetupOfOrganization'.
             /// </summary>
             /// <param name="result">The IAsyncResult returned from 'BeginGetGeneralJournalSetupOfOrganization'.</param>
-            /// <returns>The 'QueryResult' returned from the 'GetGeneralJournalSetupOfOrganization' operation.</returns>
-            QueryResult<GeneralJournalSetup> EndGetGeneralJournalSetupOfOrganization(IAsyncResult result);
+            /// <returns>The 'GeneralJournalSetup' returned from the 'GetGeneralJournalSetupOfOrganization' operation.</returns>
+            GeneralJournalSetup EndGetGeneralJournalSetupOfOrganization(IAsyncResult result);
             
             /// <summary>
             /// Asynchronously invokes the 'GetGeneralJournalSetups' operation.
@@ -11363,22 +11454,22 @@ namespace MyERP.Web
             QueryResult<Module> EndGetModules(IAsyncResult result);
             
             /// <summary>
-            /// Asynchronously invokes the 'GetNoSeries' operation.
+            /// Asynchronously invokes the 'GetNumberSequences' operation.
             /// </summary>
             /// <param name="callback">Callback to invoke on completion.</param>
             /// <param name="asyncState">Optional state object.</param>
             /// <returns>An IAsyncResult that can be used to monitor the request.</returns>
-            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetNoSeriesDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
-            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetNoSeries", ReplyAction="http://tempuri.org/MyERPDomainService/GetNoSeriesResponse")]
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MyERPDomainService/GetNumberSequencesDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MyERPDomainService/GetNumberSequences", ReplyAction="http://tempuri.org/MyERPDomainService/GetNumberSequencesResponse")]
             [WebGet()]
-            IAsyncResult BeginGetNoSeries(AsyncCallback callback, object asyncState);
+            IAsyncResult BeginGetNumberSequences(AsyncCallback callback, object asyncState);
             
             /// <summary>
-            /// Completes the asynchronous operation begun by 'BeginGetNoSeries'.
+            /// Completes the asynchronous operation begun by 'BeginGetNumberSequences'.
             /// </summary>
-            /// <param name="result">The IAsyncResult returned from 'BeginGetNoSeries'.</param>
-            /// <returns>The 'QueryResult' returned from the 'GetNoSeries' operation.</returns>
-            QueryResult<NoSeries> EndGetNoSeries(IAsyncResult result);
+            /// <param name="result">The IAsyncResult returned from 'BeginGetNumberSequences'.</param>
+            /// <returns>The 'QueryResult' returned from the 'GetNumberSequences' operation.</returns>
+            QueryResult<NumberSequence> EndGetNumberSequences(IAsyncResult result);
             
             /// <summary>
             /// Asynchronously invokes the 'GetOrganizations' operation.
@@ -11506,7 +11597,7 @@ namespace MyERP.Web
                 this.CreateEntitySet<Job>(EntitySetOperations.All);
                 this.CreateEntitySet<JobGroup>(EntitySetOperations.All);
                 this.CreateEntitySet<Module>(EntitySetOperations.All);
-                this.CreateEntitySet<NoSeries>(EntitySetOperations.All);
+                this.CreateEntitySet<NumberSequence>(EntitySetOperations.All);
                 this.CreateEntitySet<Organization>(EntitySetOperations.All);
                 this.CreateEntitySet<PaymentTerm>(EntitySetOperations.All);
                 this.CreateEntitySet<Session>(EntitySetOperations.All);

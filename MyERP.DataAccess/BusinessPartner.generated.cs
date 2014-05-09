@@ -24,6 +24,7 @@ namespace MyERP.DataAccess
 {
 	[Table("business_partner", UpdateSchema = true)]
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
+	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class BusinessPartner
 	{
 		private string _code;

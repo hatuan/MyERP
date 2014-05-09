@@ -307,10 +307,10 @@ namespace MyERP.Web
 
         void LoadDemoGeneralJournal()
         {
-            NoSeries gl0001 = this.DataContext.NoSeries.FirstOrDefault(i => i.Id == new Guid("ce85bfdb-9c42-473b-8c04-d050448f8009"));
+            NumberSequence gl0001 = this.DataContext.NumberSequences.FirstOrDefault(i => i.Id == new Guid("ce85bfdb-9c42-473b-8c04-d050448f8009"));
             if (gl0001 == null)
             {
-                gl0001 = new MyERP.DataAccess.NoSeries()
+                gl0001 = new MyERP.DataAccess.NumberSequence()
                 {
                     Client = client,
                     Organization = allOrganization,
@@ -328,7 +328,7 @@ namespace MyERP.Web
                     RecCreatedByUser = adminUser,
                     RecModified = DateTime.Now,
                     RecModifiedByUser = adminUser,
-                    Status = (int)NoSeriesStatusType.Active
+                    Status = (int)NumberSequenceStatusType.Active
                 };
                 this.DataContext.Add(demoUser);
 
@@ -352,9 +352,9 @@ namespace MyERP.Web
                     Client = client,
                     Organization = allOrganization,
                     Id = new Guid("40D9FDCE-DDEA-4932-A747-A3B7734ADAEF"),
-                    Currency = currencyDefault,
+                    LocalCurrency = currencyDefault,
                     LcyExchangeRateUnit = 1000,
-                    DefaultDocumentType1No = gl0001,
+                    GeneralJournalNumberSequence = gl0001,
                     RecCreated = DateTime.Now,
                     RecCreatedByUser = adminUser,
                     RecModified = DateTime.Now,

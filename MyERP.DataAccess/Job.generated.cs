@@ -23,7 +23,8 @@ using MyERP.DataAccess;
 namespace MyERP.DataAccess	
 {
 	[Table("job", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Changed)]
+	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
+	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class Job
 	{
 		private string _ma_vv;
@@ -353,6 +354,21 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._id = value;
+			}
+		}
+		
+		private long _version;
+		[Column("version", IsVersion = true, IsBackendVersion = true, Length = 0, Scale = 0, SqlType = "int8")]
+		[Storage("_version")]
+		public virtual long Version
+		{
+			get
+			{
+				return this._version;
+			}
+			set
+			{
+				this._version = value;
 			}
 		}
 		

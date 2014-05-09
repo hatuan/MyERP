@@ -3,12 +3,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
     xmlns:controls="clr-namespace:MyERP.Controls;assembly=MyERP.Controls"
     xmlns:converters="clr-namespace:MyERP.Converters;assembly=MyERP.Infrastructure"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
-    mc:Ignorable="d"
+    mc:Ignorable="d" IsTabStop="True"
     d:DesignHeight="300" d:DesignWidth="400">
+
+	<i:Interaction.Triggers>
+        <i:EventTrigger EventName="GotFocus">
+            <ei:CallMethodAction MethodName="GotFocusChanged"
+                                 TargetObject="{Binding}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -28,7 +37,7 @@
         <telerik:RadGridView x:Name="gridView" ItemsSource="{Binding GeneralJournalDocuments}" ColumnWidth="*"
                              IsBusy="{Binding IsBusy}"
                              IsReadOnlyBinding="{Binding Locked}"
-							 SelectedItem="{Binding SelectedGeneralJournalDocuments, Mode=TwoWay}" AutoGenerateColumns="False" 
+							 SelectedItem="{Binding SelectedGeneralJournalDocument, Mode=TwoWay}" AutoGenerateColumns="False" 
                              ShowGroupPanel="False" 
                              ScrollViewer.HorizontalScrollBarVisibility="Visible" 
                              ScrollViewer.VerticalScrollBarVisibility="Visible">

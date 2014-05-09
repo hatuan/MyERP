@@ -25,7 +25,7 @@ namespace MyERP.Modules.Master.ViewModels
         }
 
         [Import]
-        public NoSeriesRepository NoSeriesRepository { get; set; }
+        public NumberSequenceRepository NumberSequenceRepository { get; set; }
 
         public ICommand AddNewCommand { get; set; }
         public ICommand SubmitChangesCommand { get; set; }
@@ -41,8 +41,8 @@ namespace MyERP.Modules.Master.ViewModels
         [Import]
         public IApplicationViewModel ApplicationViewModel { get; set; }
 
-        private NoSeries _selectedNo;
-        public NoSeries SelectedNo
+        private NumberSequence _selectedNo;
+        public NumberSequence SelectedNo
         {
             get
             {
@@ -61,8 +61,8 @@ namespace MyERP.Modules.Master.ViewModels
             }
         }
 
-        private QueryableDomainServiceCollectionView<NoSeries> _noSeries;
-        public QueryableDomainServiceCollectionView<NoSeries> NoSeries
+        private QueryableDomainServiceCollectionView<NumberSequence> _noSeries;
+        public QueryableDomainServiceCollectionView<NumberSequence> NoSeries
         {
             get { return this._noSeries; }
             set { _noSeries = value; }
@@ -193,9 +193,9 @@ namespace MyERP.Modules.Master.ViewModels
         {
             base.OnImportsSatisfied();
 
-            MyERPDomainContext context = NoSeriesRepository.Context;
-            EntityQuery<NoSeries> getNoSeriesQuery = context.GetNoSeriesQuery().OrderBy(c => c.Code);
-            this._noSeries = new QueryableDomainServiceCollectionView<NoSeries>(context, getNoSeriesQuery);
+            MyERPDomainContext context = NumberSequenceRepository.Context;
+            EntityQuery<NumberSequence> getNoSeriesQuery = context.GetNumberSequencesQuery().OrderBy(c => c.Code);
+            this._noSeries = new QueryableDomainServiceCollectionView<NumberSequence>(context, getNoSeriesQuery);
             this._noSeries.AutoLoad = true;
             this._noSeries.LoadedData += _noSeries_LoadedData;
             this._noSeries.PropertyChanged += _noSeries_PropertyChanged;

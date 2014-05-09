@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using MyERP.DataAccess;
 using MyERP.Infrastructure;
 using MyERP.Infrastructure.ViewModels;
@@ -31,6 +32,9 @@ namespace MyERP.Modules.Financial.ViewModels
         #endregion
 
         #region View-visible properties
+        [Import]
+        public IEventAggregator EventAggregator { get; set; }
+
         public MyERPDomainContext Context { get; set; }
 
         public ICommand AddNewCommand { get; set; }
@@ -38,7 +42,6 @@ namespace MyERP.Modules.Financial.ViewModels
         public ICommand RejectChangesCommand { get; set; }
         public ICommand RefreshCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-        public ICommand ChangeCodeCommand { get; set; }
         public ICommand CloseWindowCommand { get; set; }
 
         private QueryableDomainServiceCollectionView<GeneralJournalDocument> _generalJournalDocuments;
@@ -94,6 +97,7 @@ namespace MyERP.Modules.Financial.ViewModels
                     args.MarkErrorAsHandled();
                 }
             };
+            GeneralJournalDocuments.SubmittedChanges += _generalJournalDocuments_SubmittedChanges;
             GeneralJournalDocuments.PropertyChanged += GeneralJournalDocuments_PropertyChanged;
 
             this.AddNewCommand = new DelegateCommand(this.OnAddNewCommandExecuted, AddNewCommandCanExecuted);
@@ -104,7 +108,17 @@ namespace MyERP.Modules.Financial.ViewModels
             this.CloseWindowCommand = new DelegateCommand(OnCloseWindowExcuted, CloseWindowCanExecute);
 
         }
+
         #endregion
+
+        void _generalJournalDocuments_SubmittedChanges(object sender, Telerik.Windows.Controls.DomainServices.DomainServiceSubmittedChangesEventArgs e)
+        {
+            if (e.HasError)
+            {
+                MessageBox.Show(e.Error.ToString(), "Submit Error", MessageBoxButton.OK);
+                e.MarkErrorAsHandled();
+            }
+        }
 
         void GeneralJournalDocuments_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -117,24 +131,7 @@ namespace MyERP.Modules.Financial.ViewModels
                     RaisePropertyChanged(() => IsBusy);
                     break;
                 case "HasChanges":
-                    ((DelegateCommand)CloseWindowCommand).RaiseCanExecuteChanged();
-                    ((DelegateCommand)SubmitChangesCommand).RaiseCanExecuteChanged();
-                    ((DelegateCommand)RejectChangesCommand).RaiseCanExecuteChanged();
-                    break;
-            }
-        }
-
-        void GeneralJournalLines_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "CanLoad":
-                    ((DelegateCommand)RefreshCommand).RaiseCanExecuteChanged();
-                    break;
-                case "IsBusy":
-                    RaisePropertyChanged(() => IsBusy);
-                    break;
-                case "HasChanges":
+                    ((DelegateCommand)AddNewCommand).RaiseCanExecuteChanged();
                     ((DelegateCommand)CloseWindowCommand).RaiseCanExecuteChanged();
                     ((DelegateCommand)SubmitChangesCommand).RaiseCanExecuteChanged();
                     ((DelegateCommand)RejectChangesCommand).RaiseCanExecuteChanged();
@@ -152,11 +149,7 @@ namespace MyERP.Modules.Financial.ViewModels
         private void OnAddNewCommandExecuted()
         {
             GeneralJournalDocument generalJournalDocument = new GeneralJournalDocument();
-            GeneralJournalDocumentRepository.SetGeneralJournalDocumentNo(generalJournalDocument, document =>
-            {
-                generalJournalDocument = document;
-                GeneralJournalDocuments.AddNew(generalJournalDocument);
-            });
+            GeneralJournalDocuments.AddNew(generalJournalDocument);
         }
 
         private bool SubmitChangesCommandCanExecute()
@@ -166,32 +159,36 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnRejectChangesExcuted()
         {
-            
+            this.GeneralJournalDocuments.RejectChanges();
         }
 
         private void OnSubmitChangesExcuted()
         {
-            
+            this.GeneralJournalDocuments.SubmitChanges();
         }
 
         private bool RefreshCommandCanExecute()
         {
-            return true;
+            return this.GeneralJournalDocuments.CanLoad;
         }
 
         private void OnRefreshExcuted()
         {
-            
+            this.GeneralJournalDocuments.Load();
         }
 
         private bool DeleteCommandCanExecute()
         {
-           return true;
+            if (SelectedGeneralJournalDocument == null)
+                return false;
+
+            return true;
         }
 
         private void OnDeleteExcuted()
         {
-            
+            if (SelectedGeneralJournalDocument != null)
+                this.GeneralJournalDocuments.Remove(SelectedGeneralJournalDocument);
         }
 
         private bool CloseWindowCanExecute()
@@ -213,5 +210,11 @@ namespace MyERP.Modules.Financial.ViewModels
                 this.RequestClose(null, EventArgs.Empty);
             }
         }
+
+        public void GotFocusChanged(object sender, RoutedEventArgs e)
+        {
+            this.EventAggregator.GetEvent<GeneralJournalsHeaderSwitchEvent>().Publish(sender);
+        }
+
     }
 }

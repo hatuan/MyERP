@@ -24,6 +24,7 @@ namespace MyERP.DataAccess
 {
 	[Table("general_journal_line", UpdateSchema = true)]
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
+	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class GeneralJournalLine
 	{
 		private Guid _id;
@@ -251,10 +252,10 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private decimal _currencyExchangeRate;
-		[Column("currency_exchange_rate", Length = 38, Scale = 20, SqlType = "numeric")]
+		private decimal? _currencyExchangeRate;
+		[Column("currency_exchange_rate", IsNullable = true, Length = 38, Scale = 20, SqlType = "numeric")]
 		[Storage("_currencyExchangeRate")]
-		public virtual decimal CurrencyExchangeRate
+		public virtual decimal? CurrencyExchangeRate
 		{
 			get
 			{
@@ -266,10 +267,10 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Guid _currencyId;
-		[Column("currency_id", Length = 0, Scale = 0, SqlType = "uuid")]
+		private Guid? _currencyId;
+		[Column("currency_id", IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid")]
 		[Storage("_currencyId")]
-		public virtual Guid CurrencyId
+		public virtual Guid? CurrencyId
 		{
 			get
 			{
@@ -326,10 +327,10 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private string _documentType;
-		[Column("document_type", Length = 0, Scale = 0, SqlType = "varchar")]
+		private DocumentType _documentType;
+		[Column("document_type", Length = 0, Scale = 0, SqlType = "int4")]
 		[Storage("_documentType")]
-		public virtual string DocumentType
+		public virtual DocumentType DocumentType
 		{
 			get
 			{
@@ -401,10 +402,10 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private int _transactionType;
+		private TransactionType _transactionType;
 		[Column("transaction_type", Length = 0, Scale = 0, SqlType = "int4")]
 		[Storage("_transactionType")]
-		public virtual int TransactionType
+		public virtual TransactionType TransactionType
 		{
 			get
 			{

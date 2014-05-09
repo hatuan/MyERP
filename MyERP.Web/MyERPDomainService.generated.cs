@@ -316,9 +316,9 @@ namespace MyERP.Web
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<NoSeries> GetNoSeries()
+		public IQueryable<NumberSequence> GetNumberSequences()
 		{ 
-			return this.DataContext.NoSeries.Where(c => c.ClientId == _membershipUser.ClientId);
+			return this.DataContext.NumberSequences.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
 	}
 }

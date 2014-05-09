@@ -28,7 +28,7 @@
         				VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
         </Grid>
 
-        <telerik:RadTabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
+        <telerik:RadTabControl x:Name="radTabGeneralJournalDocuments" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
             <telerik:RadTabItem x:Name="radTabGeneralJournalDocumentsOverview" Header="OVERVIEW">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -87,7 +87,7 @@
 
         <sdk:GridSplitter x:Name="grsplSplitter" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Height="5"/>
 
-        <telerik:RadTabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3">
+        <telerik:RadTabControl x:Name="radTabGeneralJournalLines" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3">
             <telerik:RadTabItem x:Name="radTabGeneralJournalLinesOverview" Header="LINES">
                 <Grid>
                     <Grid.ColumnDefinitions>

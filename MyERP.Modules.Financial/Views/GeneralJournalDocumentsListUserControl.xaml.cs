@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -10,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using MyERP.Infrastructure;
+using MyERP.Modules.Financial.ViewModels;
 
 namespace MyERP.Modules.Financial.Views
 {
@@ -19,6 +21,19 @@ namespace MyERP.Modules.Financial.Views
         public GeneralJournalDocumentsListUserControl()
         {
             InitializeComponent();
+        }
+
+        [Import]
+        public GeneralJournalDocumentsViewModel ViewModel
+        {
+            private get
+            {
+                return this.DataContext as GeneralJournalDocumentsViewModel;
+            }
+            set
+            {
+                this.DataContext = value;
+            }
         }
     }
 }

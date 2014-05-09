@@ -23,6 +23,7 @@ using MyERP.DataAccess;
 namespace MyERP.DataAccess	
 {
 	[Table("session")]
+	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class Session
 	{
 		private Guid _id;

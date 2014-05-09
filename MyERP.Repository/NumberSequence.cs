@@ -3,7 +3,7 @@ using MyERP.Infrastructure;
 
 namespace MyERP.DataAccess
 {
-    public partial class NoSeries
+    public partial class NumberSequence
     {
         partial void OnCreated()
         {
@@ -19,7 +19,7 @@ namespace MyERP.DataAccess
             this.CurrentNo = 0;
             this.RecModifiedBy = this.RecCreatedBy = MyERP.Repositories.WebContext.Current.User.Id;
             this.RecModified = this.RecCreated = DateTime.Now;
-            this.Status = (int)NoSeriesStatusType.Active;
+            this.Status = (int)NumberSequenceStatusType.Active;
             this.Version = 1;
         }
     }

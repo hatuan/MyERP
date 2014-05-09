@@ -14,6 +14,10 @@ namespace MyERP.DataAccess
         internal sealed class GeneralJournalDocumentMetadata
         {
             [Include]
+            [Association("gldocument-number-sequence-association", "NumberSequenceId", "Id")]
+            public NumberSequence NumberSequence { get; set; }
+
+            [Include]
             [Composition]
             [Association("gldocument-line-association", "Id", "GeneralJournalDocumentId")]
             public IList<GeneralJournalLine> GeneralJournalLines { get; set; }

@@ -24,6 +24,7 @@ namespace MyERP.DataAccess
 {
 	[Table("currency_convert_rate", UpdateSchema = true)]
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
+	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class CurrencyConvertRate
 	{
 		private Guid _id;

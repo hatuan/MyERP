@@ -10,12 +10,12 @@ namespace MyERP.DataAccess
         internal sealed class GeneralJournalSetupMetadata
         {
             [Include]
-            [Association("glsetup-type1-noseries-association", "DefaultDocumentType1NoId", "Id")]
-            public NoSeries DefaultDocumentType1No { get; set; }
+            [Association("glsetup-general-journal-numbersequence-association", "GeneralJournalNumberSequenceId", "Id")]
+            public NumberSequence GeneralJournalNumberSequence { get; set; }
 
             [Include]
             [Association("glsetup-lcy-currency-association", "LocalCurrencyId", "Id")]
-            public Currency Currency { get; set; }
+            public Currency LocalCurrency { get; set; }
 
             [Include]
             [Association("glsetup-client-association", "ClientId", "ClientId")]

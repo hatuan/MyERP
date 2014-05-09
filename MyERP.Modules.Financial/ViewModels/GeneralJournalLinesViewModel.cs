@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using MyERP.DataAccess;
 using MyERP.Infrastructure;
 using MyERP.Infrastructure.ViewModels;
@@ -31,6 +32,9 @@ namespace MyERP.Modules.Financial.ViewModels
         #endregion
 
         #region View-visible properties
+        [Import]
+        public IEventAggregator EventAggregator { get; set; }
+
         public MyERPDomainContext Context { get; set; }
 
         public ICommand AddNewCommand { get; set; }
@@ -38,7 +42,6 @@ namespace MyERP.Modules.Financial.ViewModels
         public ICommand RejectChangesCommand { get; set; }
         public ICommand RefreshCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-        public ICommand ChangeCodeCommand { get; set; }
         public ICommand CloseWindowCommand { get; set; }
 
 
@@ -47,6 +50,26 @@ namespace MyERP.Modules.Financial.ViewModels
         {
             get { return this._generalJournalLines; }
             set { _generalJournalLines = value; }
+        }
+
+        private GeneralJournalLine _selectedGeneralJournalLine;
+        public GeneralJournalLine SelectedGeneralJournalLine
+        {
+            get
+            {
+                return this._selectedGeneralJournalLine;
+            }
+            set
+            {
+                if (this._selectedGeneralJournalLine == value)
+                {
+                    return;
+                }
+                this._selectedGeneralJournalLine = value;
+                this.RaisePropertyChanged("SelectedGeneralJournalLine");
+
+                ((DelegateCommand)DeleteCommand).RaiseCanExecuteChanged();
+            }
         }
 
         public bool IsBusy
@@ -97,6 +120,7 @@ namespace MyERP.Modules.Financial.ViewModels
                     RaisePropertyChanged(() => IsBusy);
                     break;
                 case "HasChanges":
+                    ((DelegateCommand)AddNewCommand).RaiseCanExecuteChanged();
                     ((DelegateCommand)CloseWindowCommand).RaiseCanExecuteChanged();
                     ((DelegateCommand)SubmitChangesCommand).RaiseCanExecuteChanged();
                     ((DelegateCommand)RejectChangesCommand).RaiseCanExecuteChanged();
@@ -113,7 +137,8 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnAddNewCommandExecuted()
         {
-
+            GeneralJournalLine generalJournalLine = new GeneralJournalLine();
+            GeneralJournalLines.AddNew(generalJournalLine);
         }
 
         private bool SubmitChangesCommandCanExecute()
@@ -123,32 +148,33 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnRejectChangesExcuted()
         {
-            
+            this.GeneralJournalLines.RejectChanges();
         }
 
         private void OnSubmitChangesExcuted()
         {
-            
+            this.GeneralJournalLines.SubmitChanges();
         }
 
         private bool RefreshCommandCanExecute()
         {
-            return true;
+            return this.GeneralJournalLines.CanLoad;
         }
 
         private void OnRefreshExcuted()
         {
-            
+            this.GeneralJournalLines.Load();
         }
 
         private bool DeleteCommandCanExecute()
         {
-           return true;
+            return SelectedGeneralJournalLine != null;
         }
 
         private void OnDeleteExcuted()
         {
-            
+            if (SelectedGeneralJournalLine != null)
+                this.GeneralJournalLines.Remove(SelectedGeneralJournalLine);
         }
 
         private bool CloseWindowCanExecute()
@@ -169,6 +195,11 @@ namespace MyERP.Modules.Financial.ViewModels
             {
                 this.RequestClose(null, EventArgs.Empty);
             }
+        }
+
+        public void GotFocusChanged(object sender, RoutedEventArgs e)
+        {
+            this.EventAggregator.GetEvent<GeneralJournalsHeaderSwitchEvent>().Publish(sender);
         }
     }
 }

@@ -155,11 +155,11 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		public IQueryable<NoSeries> NoSeries 
+		public IQueryable<NumberSequence> NumberSequences 
 		{
 			get
 			{
-				return this.GetAll<NoSeries>();
+				return this.GetAll<NumberSequence>();
 			}
 		}
 		
@@ -264,7 +264,7 @@ namespace MyERP.DataAccess
 		{
 			get;
 		}
-		IQueryable<NoSeries> NoSeries
+		IQueryable<NumberSequence> NumberSequences
 		{
 			get;
 		}

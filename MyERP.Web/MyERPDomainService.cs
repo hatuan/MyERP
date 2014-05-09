@@ -26,19 +26,19 @@ namespace MyERP.Web
         }
 
         #region NoSeries
-        public void DeleteNoSeries(NoSeries noSeries)
+        public void DeleteNoSeries(NumberSequence numberSequence)
         {
             // This is a callback method. The actual Delete is performed internally.
         }
 
-        public void UpdateNoSeiess(NoSeries noSeries)
+        public void UpdateNoSeiess(NumberSequence numberSequence)
         {
             // This is a callback method. The actual Update is performed internally.
         }
 
-        public void InsertNoSeries(NoSeries noSeries)
+        public void InsertNoSeries(NumberSequence numberSequence)
         {
-            string SqlQuery = String.Format("CREATE SEQUENCE {0} MINVALUE {1} MAXVALUE {2} START {3}", new object[] {noSeries.NoSeqName, noSeries.StartingNo, noSeries.EndingNo, noSeries.CurrentNo});
+            string SqlQuery = String.Format("CREATE SEQUENCE {0} MINVALUE {1} MAXVALUE {2} START {3}", new object[] { numberSequence.NoSeqName, numberSequence.StartingNo, numberSequence.EndingNo, numberSequence.CurrentNo });
             using (var connection = this.DataContext.Connection)
             {
                 // 3. Create a new instance of the OACommand class.
@@ -58,21 +58,18 @@ namespace MyERP.Web
         {
             //lay NoSeries cua GeneralJournalSetup
             var generalJournalSetup = GetGeneralJournalSetupOfOrganization(generalJournalDocument.OrganizationId);
-            //generalJournalDocument.NoSeriesId = generalJournalSetup.DefaultDocumentType1NoId;
-            //generalJournalDocument.NoSeries = GetNoSeries()
-            //    .FirstOrDefault(c => c.Id == generalJournalDocument.NoSeriesId);
-            generalJournalDocument.NoSeries = generalJournalSetup.DefaultDocumentType1No;
+            generalJournalDocument.NumberSequenceId = generalJournalSetup.GeneralJournalNumberSequenceId;
 
-            var documentNo = generalJournalDocument.NoSeries.FormatNo;
-            NoSeriesLib.NextNo(generalJournalDocument.NoSeries.NoSeqName, ref documentNo);
-            generalJournalDocument.DocumentNo = documentNo;
+            generalJournalDocument.DocumentNo =
+                NoSeriesLib.NextNo(generalJournalSetup.GeneralJournalNumberSequence.NoSeqName,
+                    generalJournalSetup.GeneralJournalNumberSequence.FormatNo);
 
             return generalJournalDocument;
         }
         #endregion
 
         #region GeneralJournalSetup
-
+        [Invoke]
         public GeneralJournalSetup GetGeneralJournalSetupOfOrganization(Guid organizationId)
         {
             Organization allOrganization = GetOrganizations().FirstOrDefault(c => c.Code == "*");
@@ -94,7 +91,7 @@ namespace MyERP.Web
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = SqlQuery;
-                    return (int)command.ExecuteScalar();
+                    return Convert.ToInt32(command.ExecuteScalar());
                 }
             }
         }

@@ -22,9 +22,10 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("no_series", UpdateSchema = true)]
+	[Table("number_sequence", UpdateSchema = true)]
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
-	public partial class NoSeries
+	[KeyGenerator(KeyGenerator.Guid)]
+	public partial class NumberSequence
 	{
 		private Guid _id;
 		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]

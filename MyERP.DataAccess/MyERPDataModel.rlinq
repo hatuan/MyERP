@@ -237,6 +237,9 @@
       <orm:class name="BusinessPartner" update-schema="true" uniqueId="e5450aef-1d4d-4529-afab-ed799b140a9b">
         <orm:table name="business_partner" />
         <orm:identity>
+          <orm:key-generator name="guid">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
           <orm:single-field field-name="_id" />
         </orm:identity>
         <orm:concurrency strategy="version" field-name="_version">
@@ -394,6 +397,9 @@
       <orm:class name="BusinessPartnerGroup" update-schema="true" uniqueId="f2451eb6-4641-45a3-bcdf-230e9f344ef2">
         <orm:table name="business_partner_group" />
         <orm:identity>
+          <orm:key-generator name="guid">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
           <orm:single-field field-name="_id" />
         </orm:identity>
         <orm:concurrency strategy="version" field-name="_version">
@@ -458,6 +464,9 @@
       <orm:class name="PaymentTerm" update-schema="true" uniqueId="b0ff094e-1f92-4ae4-86c5-45512a524e98">
         <orm:table name="payment_term" />
         <orm:identity>
+          <orm:key-generator name="guid">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
           <orm:single-field field-name="_id" />
         </orm:identity>
         <orm:concurrency strategy="version" field-name="_version">
@@ -519,9 +528,14 @@
       <orm:class name="Job" update-schema="true" uniqueId="295c1357-df0e-4eef-b13d-68e20e43c403">
         <orm:table name="job" />
         <orm:identity>
+          <orm:key-generator name="guid">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
           <orm:single-field field-name="_id" />
         </orm:identity>
-        <orm:concurrency strategy="changed" />
+        <orm:concurrency strategy="version" field-name="_version">
+          <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
+        </orm:concurrency>
         <orm:field name="_ma_vv" property="Code" behavior="readwrite" uniqueId="f5ec11cf-95ce-4da4-a64b-85ded41e39ea" type="System.String">
           <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
@@ -587,6 +601,9 @@
         </orm:field>
         <orm:field name="_id" property="Id" behavior="readwrite" uniqueId="0bf0c19f-da2e-47e3-8fa4-43d87735e239" type="System.Guid">
           <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        </orm:field>
+        <orm:field name="_version" property="Version" behavior="readwrite" uniqueId="b6d0dfd1-afb6-4a1b-824d-94f17271402b" type="System.Int64">
+          <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         </orm:field>
         <orm:field name="_userinfo" property="Userinfo0" behavior="readwrite" uniqueId="b34456a4-426f-4645-ac3a-af953ee752e7" type="MyERP.DataAccess.User">
           <orm:reference uniqueId="edcaaadd-f6e4-49b5-8a14-dc1bba9c585f" association-name="DmvvHasUserinfo0">
@@ -706,12 +723,15 @@
       <orm:class name="GeneralJournalDocument" update-schema="true" uniqueId="4e5c85f4-102a-4953-b79a-16aace7a5d6d">
         <orm:table name="general_journal_document" />
         <orm:identity>
-          <orm:single-field field-name="_Stt_Rec" />
+          <orm:key-generator name="guid">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="_id" />
         </orm:identity>
         <orm:concurrency strategy="version" field-name="_version">
           <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         </orm:concurrency>
-        <orm:field name="_Stt_Rec" property="Id" behavior="readwrite" uniqueId="376a7929-e44d-405f-ad35-08fb5e223650" type="System.Guid">
+        <orm:field name="_id" property="Id" behavior="readwrite" uniqueId="376a7929-e44d-405f-ad35-08fb5e223650" type="System.Guid">
           <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         </orm:field>
         <orm:field name="_clientId" property="ClientId" behavior="readwrite" uniqueId="eb97963b-29ab-49ac-ae7f-bfe4d0075527" type="System.Guid">
@@ -726,8 +746,8 @@
         <orm:field name="_totalCreditAmountLcy" property="TotalCreditAmountLcy" behavior="readwrite" uniqueId="a98d5772-e03e-4c36-8654-3e48550f7e75" type="System.Decimal">
           <orm:column name="total_credit_amount_lcy" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         </orm:field>
-        <orm:field name="_noSeriesId" property="NoSeriesId" behavior="readwrite" uniqueId="d0af3c49-6eb2-4b8a-a0fe-8f3078039b7c" type="System.Guid">
-          <orm:column name="noseries_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_numberSequenceId" property="NumberSequenceId" behavior="readwrite" uniqueId="d0af3c49-6eb2-4b8a-a0fe-8f3078039b7c" type="System.Guid">
+          <orm:column name="number_sequence_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_documentCreated" property="DocumentCreated" behavior="readwrite" uniqueId="ff98bd64-d18b-478e-b597-acfc9cee8731" type="System.DateTime">
           <orm:column name="document_created_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
@@ -738,8 +758,8 @@
         <orm:field name="_documentPosted" property="DocumentPosted" behavior="readwrite" uniqueId="23934bb9-8ff1-4bdb-9c70-cc27e6dbffec" type="System.DateTime">
           <orm:column name="document_posted_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_documentType" property="DocumentType" behavior="readwrite" uniqueId="b6fd40f4-c188-472d-b30d-233a71037993" type="System.String">
-          <orm:column name="document_type" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_documentType" property="DocumentType" behavior="readwrite" uniqueId="b6fd40f4-c188-472d-b30d-233a71037993" type="DocumentType">
+          <orm:column name="document_type" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_recCreated" property="RecCreated" behavior="readwrite" uniqueId="b154f837-0559-4b95-8aff-ad898dc420d9" type="System.DateTime">
           <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
@@ -765,14 +785,14 @@
         <orm:field name="_totalDebitAmountLcy" property="TotalDebitAmountLcy" behavior="readwrite" uniqueId="b781c8b4-72e0-4af1-8fff-5cc2c1292e0b" type="System.Decimal">
           <orm:column name="total_debit_amount_lcy" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         </orm:field>
-        <orm:field name="_transactionType" property="TransactionType" behavior="readwrite" uniqueId="d8824da7-0b51-4fc8-b77b-4abe61a5dff5" type="System.Int32">
+        <orm:field name="_transactionType" property="TransactionType" behavior="readwrite" uniqueId="d8824da7-0b51-4fc8-b77b-4abe61a5dff5" type="TransactionType">
           <orm:column name="transaction_type" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_currencyExchangeRate" property="CurrencyExchangeRate" behavior="readwrite" uniqueId="caccca09-0645-4ec6-a09b-e68d47214791" type="System.Int32">
           <orm:column name="currency_exchange_rate" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         </orm:field>
-        <orm:field name="_currencyId" property="CurrencyId" behavior="readwrite" uniqueId="cbcdb9d4-ee20-450a-bbea-77b8dce97ea1" type="System.Guid">
-          <orm:column name="currency_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_currencyId" property="CurrencyId" behavior="readwrite" uniqueId="cbcdb9d4-ee20-450a-bbea-77b8dce97ea1" type="System.Nullable`1[[System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="currency_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_description" property="Description" behavior="readwrite" uniqueId="9ba4dc12-b1f7-4a0f-92df-547a2a8aea25" type="System.String">
           <orm:column name="description" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
@@ -802,18 +822,21 @@
             <orm:sharedfield name="_currencyId" target-class="MyERP.DataAccess.Currency" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_noSeries" property="NoSeries" behavior="readwrite" uniqueId="921a9cba-5f07-4cf8-a568-310b820567c1" type="MyERP.DataAccess.NoSeries">
-          <orm:reference uniqueId="2ee81fc6-8f3b-4023-9aaf-d83a032df599" association-name="GeneralJournalDocumentHasNoSeries">
-            <orm:sharedfield name="_noSeriesId" target-class="MyERP.DataAccess.NoSeries" target-field="_id" />
-          </orm:reference>
-        </orm:field>
         <orm:field name="_transactionLines" property="GeneralJournalLines" behavior="readwrite" uniqueId="07ec2603-84e3-4c8d-a52d-e32cfad2f54a" type="MyERP.DataAccess.GeneralJournalLine">
           <orm:collection element-class="MyERP.DataAccess.GeneralJournalLine" inverse-field="_transactionDocument" order-by="" uniqueId="5685b103-b6b7-44cb-a08e-f3278fc9a835" />
+        </orm:field>
+        <orm:field name="_noSeries" property="NumberSequence" behavior="readwrite" uniqueId="921a9cba-5f07-4cf8-a568-310b820567c1" type="MyERP.DataAccess.NumberSequence">
+          <orm:reference uniqueId="2ee81fc6-8f3b-4023-9aaf-d83a032df599" association-name="GeneralJournalDocumentHasNoSeries">
+            <orm:sharedfield name="_numberSequenceId" target-class="MyERP.DataAccess.NumberSequence" target-field="_id" />
+          </orm:reference>
         </orm:field>
       </orm:class>
       <orm:class name="GeneralJournalLine" update-schema="true" uniqueId="8481a6cc-b6ad-4206-8b61-08181d982446">
         <orm:table name="general_journal_line" />
         <orm:identity>
+          <orm:key-generator name="guid">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
           <orm:single-field field-name="_id" />
         </orm:identity>
         <orm:concurrency strategy="version" field-name="_version">
@@ -864,11 +887,11 @@
         <orm:field name="_generalJournalDocumentId" property="GeneralJournalDocumentId" behavior="readwrite" uniqueId="2520aaa1-05a0-4ea5-8369-0821aa99d2c2" type="System.Guid">
           <orm:column name="general_journal_document_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_currencyExchangeRate" property="CurrencyExchangeRate" behavior="readwrite" uniqueId="a8389af6-176d-4dba-927a-09068799df7c" type="System.Decimal">
-          <orm:column name="currency_exchange_rate" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:field name="_currencyExchangeRate" property="CurrencyExchangeRate" behavior="readwrite" uniqueId="a8389af6-176d-4dba-927a-09068799df7c" type="System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="currency_exchange_rate" sql-type="numeric" nullable="true" length="38" scale="20" ado-type="" />
         </orm:field>
-        <orm:field name="_currencyId" property="CurrencyId" behavior="readwrite" uniqueId="0a81f2ac-31d1-4393-beda-4bb9004d3e36" type="System.Guid">
-          <orm:column name="currency_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_currencyId" property="CurrencyId" behavior="readwrite" uniqueId="0a81f2ac-31d1-4393-beda-4bb9004d3e36" type="System.Nullable`1[[System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="currency_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_documentCreated" property="DocumentCreated" behavior="readwrite" uniqueId="528901f8-b8a2-46e0-82d7-158e7424d741" type="System.DateTime">
           <orm:column name="document_created_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
@@ -879,8 +902,8 @@
         <orm:field name="_documentPosted" property="DocumentPosted" behavior="readwrite" uniqueId="701a55f6-4c7a-4164-8462-c04008a24292" type="System.DateTime">
           <orm:column name="document_posted_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_documentType" property="DocumentType" behavior="readwrite" uniqueId="f38e1cdf-99bb-449e-9648-d8d4f04c9deb" type="System.String">
-          <orm:column name="document_type" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_documentType" property="DocumentType" behavior="readwrite" uniqueId="f38e1cdf-99bb-449e-9648-d8d4f04c9deb" type="DocumentType">
+          <orm:column name="document_type" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_recCreated" property="RecCreated" behavior="readwrite" uniqueId="75bf6134-444e-4779-961b-eb9fa3cf7abf" type="System.DateTime">
           <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
@@ -894,7 +917,7 @@
         <orm:field name="_recModifiedBy" property="RecModifiedBy" behavior="readwrite" uniqueId="4f4ee44c-4962-4757-855e-e2b7bbe4f577" type="System.Guid">
           <orm:column name="rec_modified_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_transactionType" property="TransactionType" behavior="readwrite" uniqueId="35ec6a41-712a-4ec5-8f9c-8e8fa8eb2269" type="System.Int32">
+        <orm:field name="_transactionType" property="TransactionType" behavior="readwrite" uniqueId="35ec6a41-712a-4ec5-8f9c-8e8fa8eb2269" type="TransactionType">
           <orm:column name="transaction_type" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_fixAssetId" property="FixAssetId" uniqueId="cee6ff8c-fb93-48a5-9610-4c051f4a6af3" type="System.Guid">
@@ -942,7 +965,7 @@
         </orm:field>
         <orm:field name="_transactionDocument" property="GeneralJournalDocument" behavior="readwrite" uniqueId="b8f7d741-5a37-4b6f-af00-3e93ea88eaba" type="MyERP.DataAccess.GeneralJournalDocument">
           <orm:reference uniqueId="5685b103-b6b7-44cb-a08e-f3278fc9a835" association-name="GeneralJournalLinesHasGeneralJournalDocument">
-            <orm:sharedfield name="_generalJournalDocumentId" target-class="MyERP.DataAccess.GeneralJournalDocument" target-field="_Stt_Rec" />
+            <orm:sharedfield name="_generalJournalDocumentId" target-class="MyERP.DataAccess.GeneralJournalDocument" target-field="_id" />
           </orm:reference>
         </orm:field>
       </orm:class>
@@ -1027,6 +1050,9 @@
       <orm:class name="Session" uniqueId="d21e23af-f466-48aa-952b-64ca1c4729c9">
         <orm:table name="session" />
         <orm:identity>
+          <orm:key-generator name="guid">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
           <orm:single-field field-name="_id" />
         </orm:identity>
         <orm:field name="_id" property="Id" uniqueId="924eabc9-a727-4f9c-aff4-4cf9ffb6658b" type="System.Guid">
@@ -1102,9 +1128,12 @@
           <orm:collection element-class="MyERP.DataAccess.Organization" inverse-field="_client" order-by="" uniqueId="696e2216-63f8-4cbf-b083-15702ae040dc" />
         </orm:field>
       </orm:class>
-      <orm:class name="NoSeries" update-schema="true" uniqueId="c70d8460-aa9c-4b2c-843a-b78560b3a579">
-        <orm:table name="no_series" />
+      <orm:class name="NumberSequence" update-schema="true" uniqueId="c70d8460-aa9c-4b2c-843a-b78560b3a579">
+        <orm:table name="number_sequence" />
         <orm:identity>
+          <orm:key-generator name="guid">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
           <orm:single-field field-name="_id" />
         </orm:identity>
         <orm:concurrency strategy="version" field-name="_version">
@@ -1188,6 +1217,9 @@
       <orm:class name="GeneralJournalSetup" update-schema="true" uniqueId="40dea681-ce87-4fae-ab27-9417a8cd55d4">
         <orm:table name="general_journal_setup" />
         <orm:identity>
+          <orm:key-generator name="guid">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
           <orm:single-field field-name="_id" />
         </orm:identity>
         <orm:concurrency strategy="version" field-name="_version">
@@ -1208,8 +1240,8 @@
         <orm:field name="_lcyExchangeRateUnit" property="LcyExchangeRateUnit" uniqueId="39195ca8-9042-4918-b597-8c44067b7d8b" type="System.Int32">
           <orm:column name="lcy_exchange_rate_unit" sql-type="int4" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
         </orm:field>
-        <orm:field name="_defaultDocumentType1NoId" property="DefaultDocumentType1NoId" uniqueId="a5ef0666-545c-43c4-be6e-2bafa4a3c198" type="System.Guid">
-          <orm:column name="default_document_type_1_no_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:field name="_generalJournalNumberSequenceId" property="GeneralJournalNumberSequenceId" uniqueId="a5ef0666-545c-43c4-be6e-2bafa4a3c198" type="System.Guid">
+          <orm:column name="general_journal_number_sequence_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         </orm:field>
         <orm:field name="_recCreated" property="RecCreated" uniqueId="2d3fe498-f35d-4dc0-b73a-7ca669687cbc" type="System.DateTime">
           <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
@@ -1236,19 +1268,9 @@
             <orm:sharedfield name="_recModifiedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_currency" property="Currency" behavior="readwrite" uniqueId="30201d66-4f3c-4246-b17e-28d9da12fe2f" type="MyERP.DataAccess.Currency">
-          <orm:reference uniqueId="1b5b8c67-ffef-49c6-9a82-1947f4621f90" association-name="GeneralJournalSetupHasLCY">
-            <orm:sharedfield name="_localCurrencyId" target-class="MyERP.DataAccess.Currency" target-field="_id" />
-          </orm:reference>
-        </orm:field>
         <orm:field name="_organization" property="Organization" behavior="readwrite" uniqueId="dd32d88b-bec5-4260-8bbc-2dabc6f18e69" type="MyERP.DataAccess.Organization">
           <orm:reference uniqueId="246b74b4-e6e6-4f31-923f-a3490ad5f0f1" association-name="GeneralJournalSetupHasOrganization">
             <orm:sharedfield name="_organizationId" target-class="MyERP.DataAccess.Organization" target-field="_id" />
-          </orm:reference>
-        </orm:field>
-        <orm:field name="_defaultDocumentType1No" property="DefaultDocumentType1No" behavior="readwrite" uniqueId="4f8b118b-b1e7-407a-bb03-dfac077c635c" type="MyERP.DataAccess.NoSeries">
-          <orm:reference uniqueId="8adf31d1-b290-4400-b3c8-37a92a9d9855" association-name="GeneralJournalSetupHasDocumentType1No">
-            <orm:sharedfield name="_defaultDocumentType1NoId" target-class="MyERP.DataAccess.NoSeries" target-field="_id" />
           </orm:reference>
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="4439a70d-8356-48ac-8450-852c8e5f45ea" type="MyERP.DataAccess.Client">
@@ -1256,10 +1278,23 @@
             <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
+        <orm:field name="_currency" property="LocalCurrency" behavior="readwrite" uniqueId="30201d66-4f3c-4246-b17e-28d9da12fe2f" type="MyERP.DataAccess.Currency">
+          <orm:reference uniqueId="1b5b8c67-ffef-49c6-9a82-1947f4621f90" association-name="GeneralJournalSetupHasLCY">
+            <orm:sharedfield name="_localCurrencyId" target-class="MyERP.DataAccess.Currency" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_defaultDocumentType1No" property="GeneralJournalNumberSequence" behavior="readwrite" uniqueId="4f8b118b-b1e7-407a-bb03-dfac077c635c" type="MyERP.DataAccess.NumberSequence">
+          <orm:reference uniqueId="8adf31d1-b290-4400-b3c8-37a92a9d9855" association-name="GeneralJournalSetupHasGeneralJournalNumberSeq">
+            <orm:sharedfield name="_generalJournalNumberSequenceId" target-class="MyERP.DataAccess.NumberSequence" target-field="_id" />
+          </orm:reference>
+        </orm:field>
       </orm:class>
       <orm:class name="CurrencyConvertRate" update-schema="true" uniqueId="307850ff-c670-4b04-b074-ad11c922fb5c">
         <orm:table name="currency_convert_rate" />
         <orm:identity>
+          <orm:key-generator name="guid">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
           <orm:single-field field-name="_id" />
         </orm:identity>
         <orm:concurrency strategy="version" field-name="_version">
@@ -1483,6 +1518,7 @@
         <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
       </orm:table>
       <orm:table name="job_group">
         <orm:column name="loai_nh" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
@@ -1503,7 +1539,7 @@
         <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         <orm:column name="total_credit_amount_lcy" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
-        <orm:column name="noseries_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="number_sequence_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="transaction_type" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="total_debit_amount_lcy" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         <orm:column name="total_debit_amount" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
@@ -1513,11 +1549,11 @@
         <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="document_type" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="document_type" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="document_posted_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="document_no" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="document_created_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="currency_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="currency_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         <orm:column name="currency_exchange_rate" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         <orm:column name="description" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
       </orm:table>
@@ -1554,12 +1590,12 @@
         <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="document_type" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="document_type" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="document_posted_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="document_no" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="document_created_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="currency_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="currency_exchange_rate" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="currency_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
+        <orm:column name="currency_exchange_rate" sql-type="numeric" nullable="true" length="38" scale="20" ado-type="" />
         <orm:column name="fix_asset_id" sql-type="uuid" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
       </orm:table>
       <orm:table name="module">
@@ -1587,7 +1623,7 @@
         <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="6" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
       </orm:table>
-      <orm:table name="no_series">
+      <orm:table name="number_sequence">
         <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         <orm:column name="current_no" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
@@ -1617,7 +1653,7 @@
         <orm:column name="rec_modified_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         <orm:column name="local_currency_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
-        <orm:column name="default_document_type_1_no_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:column name="general_journal_number_sequence_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         <orm:constraint name="ref_GeneralJournalSetup_client" destination-table="client">
           <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
@@ -1625,8 +1661,8 @@
         <orm:constraint name="ref_GneralJournalSetup_currency" destination-table="currency">
           <orm:column name="local_currency_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         </orm:constraint>
-        <orm:constraint name="ref_GnralJournalSetup_no_series" destination-table="no_series">
-          <orm:column name="default_document_type_1_no_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:constraint name="ref_GnralJournalSetup_no_series" destination-table="number_sequence">
+          <orm:column name="general_journal_number_sequence_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         </orm:constraint>
         <orm:constraint name="ref_GnrlJrnalSetup_organization" destination-table="organization">
           <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
@@ -1929,7 +1965,7 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="e5450aef-1d4d-4529-afab-ed799b140a9b" name="BusinessPartner" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="e5450aef-1d4d-4529-afab-ed799b140a9b" name="BusinessPartner" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
       <Property Id="0f11fb69-72e9-4b0f-badd-59611caee9fd" name="Code" label="Code : String" kind="Persistent" fieldName="_code" />
       <Property Id="cb1833d2-e863-49aa-b4fc-3086f79adff3" name="IsVendor" type="Boolean" label="IsVendor : Boolean" kind="Persistent" fieldName="_isVendor" />
       <Property Id="0c5a86db-29b4-43d2-a101-5bca88ea1bc2" name="RecCreated" type="DateTime" label="RecCreated : DateTime" kind="Persistent" fieldName="_recCreated" />
@@ -2102,7 +2138,7 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="f2451eb6-4641-45a3-bcdf-230e9f344ef2" name="BusinessPartnerGroup" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="f2451eb6-4641-45a3-bcdf-230e9f344ef2" name="BusinessPartnerGroup" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
       <Property Id="42010cbf-48ba-4309-844f-155498b0ddd6" name="Code" label="Code : String" kind="Persistent" fieldName="_code" />
       <Property Id="00edf15b-3172-46b2-acc5-41e736324121" name="RecCreated" type="DateTime" label="RecCreated : DateTime" kind="Persistent" fieldName="_recCreated" />
       <Property Id="3780b134-9e0b-43e1-b6ef-5cc77e2cd1dd" name="RecModified" type="DateTime" label="RecModified : DateTime" kind="Persistent" fieldName="_recModified" />
@@ -2151,7 +2187,7 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="b0ff094e-1f92-4ae4-86c5-45512a524e98" name="PaymentTerm" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="b0ff094e-1f92-4ae4-86c5-45512a524e98" name="PaymentTerm" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
       <Property Id="0e0ff67f-9bed-4525-917e-22c5e8ce05a6" name="Code" label="Code : String" kind="Persistent" fieldName="_code" />
       <Property Id="9175b1db-6b73-48bd-ace4-12381407a5a3" name="Date0" type="DateTime" label="Date0 : DateTime" kind="Persistent" fieldName="_date0" />
       <Property Id="23db19d5-5e55-43de-8f05-21c6b606fcbc" name="Date2" type="DateTime" label="Date2 : DateTime" kind="Persistent" fieldName="_date2" />
@@ -2193,7 +2229,7 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="295c1357-df0e-4eef-b13d-68e20e43c403" name="Job" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Changed" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="295c1357-df0e-4eef-b13d-68e20e43c403" name="Job" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
       <Property Id="f5ec11cf-95ce-4da4-a64b-85ded41e39ea" name="Code" label="Code : String" kind="Persistent" fieldName="_ma_vv" />
       <Property Id="4fd8ddbd-506d-4153-993e-ae4e886557a6" name="Date0" type="DateTime" label="Date0 : DateTime" kind="Persistent" fieldName="_date0" />
       <Property Id="a9192fa7-1770-4d1a-beb6-2636d02a3381" name="Date2" type="DateTime" label="Date2 : DateTime" kind="Persistent" fieldName="_date2" />
@@ -2216,6 +2252,7 @@
       <Property Id="a806c796-f45e-46a7-9b6b-7378585b0c89" name="ClientId" type="Guid" label="ClientId : Guid" kind="Persistent" fieldName="_clientId" />
       <Property Id="9a1552a8-f73c-40a8-bc4c-4c01f54d9060" name="OrganizationId" type="Guid" label="OrganizationId : Guid" kind="Persistent" fieldName="_organizationId" />
       <Property Id="0bf0c19f-da2e-47e3-8fa4-43d87735e239" name="Id" type="Guid" label="Id : Guid" kind="Persistent" identity="true" fieldName="_id" />
+      <Property Id="b6d0dfd1-afb6-4a1b-824d-94f17271402b" name="Version" type="Int64" label="Version : Int64" kind="Persistent" fieldName="_version" />
       <AssociationTargets>
         <Association Id="6f7ad5d3-9b0b-4f88-b70f-349ec13259c5" SourceMultiplicity="ZeroOne" name="DmvvHasDmtk">
           <DomainClassMoniker name="/EntitiesModel/Account" />
@@ -2405,17 +2442,17 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="4e5c85f4-102a-4953-b79a-16aace7a5d6d" name="GeneralJournalDocument" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true">
-      <Property Id="376a7929-e44d-405f-ad35-08fb5e223650" name="Id" type="Guid" label="Id : Guid" kind="Persistent" identity="true" fieldName="_Stt_Rec" />
+    <DomainClass Id="4e5c85f4-102a-4953-b79a-16aace7a5d6d" name="GeneralJournalDocument" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="376a7929-e44d-405f-ad35-08fb5e223650" name="Id" type="Guid" label="Id : Guid" kind="Persistent" identity="true" fieldName="_id" />
       <Property Id="eb97963b-29ab-49ac-ae7f-bfe4d0075527" name="ClientId" type="Guid" label="ClientId : Guid" kind="Persistent" fieldName="_clientId" />
       <Property Id="7ba4ca40-9e04-4897-9078-f5c7592b5d8f" name="OrganizationId" type="Guid" label="OrganizationId : Guid" kind="Persistent" fieldName="_organizationId" />
       <Property Id="c39ae2a4-01ca-4c8b-84de-4fa9b334a38c" name="Version" type="Int64" label="Version : Int64" kind="Persistent" fieldName="_version" />
       <Property Id="a98d5772-e03e-4c36-8654-3e48550f7e75" name="TotalCreditAmountLcy" type="Decimal" label="TotalCreditAmountLcy : Decimal" kind="Persistent" fieldName="_totalCreditAmountLcy" />
-      <Property Id="d0af3c49-6eb2-4b8a-a0fe-8f3078039b7c" name="NoSeriesId" type="Guid" label="NoSeriesId : Guid" kind="Persistent" fieldName="_noSeriesId" />
+      <Property Id="d0af3c49-6eb2-4b8a-a0fe-8f3078039b7c" name="NumberSequenceId" type="Guid" label="NumberSequenceId : Guid" kind="Persistent" fieldName="_numberSequenceId" />
       <Property Id="ff98bd64-d18b-478e-b597-acfc9cee8731" name="DocumentCreated" type="DateTime" label="DocumentCreated : DateTime" kind="Persistent" fieldName="_documentCreated" />
       <Property Id="0a73aeed-f3b5-46f9-9f4c-284b25322b20" name="DocumentNo" label="DocumentNo : String" kind="Persistent" fieldName="_documentNo" />
       <Property Id="23934bb9-8ff1-4bdb-9c70-cc27e6dbffec" name="DocumentPosted" type="DateTime" label="DocumentPosted : DateTime" kind="Persistent" fieldName="_documentPosted" />
-      <Property Id="b6fd40f4-c188-472d-b30d-233a71037993" name="DocumentType" label="DocumentType : String" kind="Persistent" fieldName="_documentType" />
+      <Property Id="b6fd40f4-c188-472d-b30d-233a71037993" name="DocumentType" type="DocumentType" label="DocumentType : DocumentType" kind="Persistent" fieldName="_documentType" />
       <Property Id="b154f837-0559-4b95-8aff-ad898dc420d9" name="RecCreated" type="DateTime" label="RecCreated : DateTime" kind="Persistent" fieldName="_recCreated" />
       <Property Id="6dcc6395-ad61-40a5-8ad4-eba0729aee13" name="RecCreatedBy" type="Guid" label="RecCreatedBy : Guid" kind="Persistent" fieldName="_recCreatedBy" />
       <Property Id="bec1249c-3150-445a-af0c-35d31684cd4f" name="RecModified" type="DateTime" label="RecModified : DateTime" kind="Persistent" fieldName="_recModified" />
@@ -2424,9 +2461,9 @@
       <Property Id="83e27b34-7e13-4c0c-a740-524623f7765e" name="TotalCreditAmount" type="Decimal" label="TotalCreditAmount : Decimal" kind="Persistent" fieldName="_totalCreditAmount" />
       <Property Id="7facadce-e9d3-438b-88b3-da332ebd8c7a" name="TotalDebitAmount" type="Decimal" label="TotalDebitAmount : Decimal" kind="Persistent" fieldName="_totalDebitAmount" />
       <Property Id="b781c8b4-72e0-4af1-8fff-5cc2c1292e0b" name="TotalDebitAmountLcy" type="Decimal" label="TotalDebitAmountLcy : Decimal" kind="Persistent" fieldName="_totalDebitAmountLcy" />
-      <Property Id="d8824da7-0b51-4fc8-b77b-4abe61a5dff5" name="TransactionType" type="Int32" label="TransactionType : Int32" kind="Persistent" fieldName="_transactionType" />
+      <Property Id="d8824da7-0b51-4fc8-b77b-4abe61a5dff5" name="TransactionType" type="TransactionType" label="TransactionType : TransactionType" kind="Persistent" fieldName="_transactionType" />
       <Property Id="caccca09-0645-4ec6-a09b-e68d47214791" name="CurrencyExchangeRate" type="Int32" label="CurrencyExchangeRate : Int32" kind="Persistent" fieldName="_currencyExchangeRate" />
-      <Property Id="cbcdb9d4-ee20-450a-bbea-77b8dce97ea1" name="CurrencyId" type="Guid" label="CurrencyId : Guid" kind="Persistent" fieldName="_currencyId" />
+      <Property Id="cbcdb9d4-ee20-450a-bbea-77b8dce97ea1" name="CurrencyId" type="Guid" label="CurrencyId : Guid" nullable="true" kind="Persistent" fieldName="_currencyId" />
       <Property Id="9ba4dc12-b1f7-4a0f-92df-547a2a8aea25" name="Description" label="Description : String" kind="Persistent" fieldName="_description" />
       <AssociationTargets>
         <Association Id="0cb22bb7-2d7d-4db3-80ce-b9fcfdf36e34" SourceMultiplicity="ZeroOne" name="GeneralJournalDocumentHasCurrency">
@@ -2470,10 +2507,10 @@
           </sourceNavigationalProperty>
         </Association>
         <Association Id="2ee81fc6-8f3b-4023-9aaf-d83a032df599" SourceMultiplicity="ZeroOne" name="GeneralJournalDocumentHasNoSeries">
-          <DomainClassMoniker name="/EntitiesModel/NoSeries" />
+          <DomainClassMoniker name="/EntitiesModel/NumberSequence" />
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="48ab54e5-d8d0-4504-a882-305bc77757f7">
-              <NavigationalPropertyMoniker name="/EntitiesModel/GeneralJournalDocument/NoSeries" />
+              <NavigationalPropertyMoniker name="/EntitiesModel/GeneralJournalDocument/NumberSequence" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
@@ -2498,11 +2535,11 @@
           <NavigationalProperty Id="f48fd463-b377-4e6a-9f4c-83fafc94bd2f" name="Organization" type="Organization" label="Organization : Organization" nullable="true" kind="Persistent" fieldName="_organization" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="74177a20-8da0-49df-94d8-02e50027b314">
-          <NavigationalProperty Id="921a9cba-5f07-4cf8-a568-310b820567c1" name="NoSeries" type="NoSeries" label="NoSeries : NoSeries" nullable="true" kind="Persistent" fieldName="_noSeries" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="921a9cba-5f07-4cf8-a568-310b820567c1" name="NumberSequence" type="NumberSequence" label="NumberSequence : NumberSequence" nullable="true" kind="Persistent" fieldName="_noSeries" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="8481a6cc-b6ad-4206-8b61-08181d982446" name="GeneralJournalLine" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="8481a6cc-b6ad-4206-8b61-08181d982446" name="GeneralJournalLine" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
       <Property Id="25cd9e95-1e3e-4b5b-b3fb-0c06856d0d6e" name="Id" type="Guid" label="Id : Guid" kind="Persistent" identity="true" fieldName="_id" />
       <Property Id="f71c5a51-c976-4ab9-aafb-056026dbb4ba" name="Description" label="Description : String" kind="Persistent" fieldName="_description" />
       <Property Id="6b7ea4e4-fd50-44ad-a51a-8bc5584e8e5b" name="LineNo" type="Int64" label="LineNo : Int64" kind="Persistent" fieldName="_lineNo" />
@@ -2518,17 +2555,17 @@
       <Property Id="c8f6a118-6366-4e3c-bde2-88c5b6c74a6c" name="OrganizationId" type="Guid" label="OrganizationId : Guid" kind="Persistent" fieldName="_organizationId" />
       <Property Id="c0bf62f4-68d7-4686-bb7c-083b89e7a03a" name="Version" type="Int64" label="Version : Int64" kind="Persistent" fieldName="_version" />
       <Property Id="2520aaa1-05a0-4ea5-8369-0821aa99d2c2" name="GeneralJournalDocumentId" type="Guid" label="GeneralJournalDocumentId : Guid" kind="Persistent" fieldName="_generalJournalDocumentId" />
-      <Property Id="a8389af6-176d-4dba-927a-09068799df7c" name="CurrencyExchangeRate" type="Decimal" label="CurrencyExchangeRate : Decimal" kind="Persistent" fieldName="_currencyExchangeRate" />
-      <Property Id="0a81f2ac-31d1-4393-beda-4bb9004d3e36" name="CurrencyId" type="Guid" label="CurrencyId : Guid" kind="Persistent" fieldName="_currencyId" />
+      <Property Id="a8389af6-176d-4dba-927a-09068799df7c" name="CurrencyExchangeRate" type="Decimal" label="CurrencyExchangeRate : Decimal" nullable="true" kind="Persistent" fieldName="_currencyExchangeRate" />
+      <Property Id="0a81f2ac-31d1-4393-beda-4bb9004d3e36" name="CurrencyId" type="Guid" label="CurrencyId : Guid" nullable="true" kind="Persistent" fieldName="_currencyId" />
       <Property Id="528901f8-b8a2-46e0-82d7-158e7424d741" name="DocumentCreated" type="DateTime" label="DocumentCreated : DateTime" kind="Persistent" fieldName="_documentCreated" />
       <Property Id="c636107f-4ec0-41e8-83ca-b9cfa8f99d01" name="DocumentNo" label="DocumentNo : String" kind="Persistent" fieldName="_documentNo" />
       <Property Id="701a55f6-4c7a-4164-8462-c04008a24292" name="DocumentPosted" type="DateTime" label="DocumentPosted : DateTime" kind="Persistent" fieldName="_documentPosted" />
-      <Property Id="f38e1cdf-99bb-449e-9648-d8d4f04c9deb" name="DocumentType" label="DocumentType : String" kind="Persistent" fieldName="_documentType" />
+      <Property Id="f38e1cdf-99bb-449e-9648-d8d4f04c9deb" name="DocumentType" type="DocumentType" label="DocumentType : DocumentType" kind="Persistent" fieldName="_documentType" />
       <Property Id="75bf6134-444e-4779-961b-eb9fa3cf7abf" name="RecCreated" type="DateTime" label="RecCreated : DateTime" kind="Persistent" fieldName="_recCreated" />
       <Property Id="502a39a6-2de9-455f-887e-014475618fed" name="RecCreatedBy" type="Guid" label="RecCreatedBy : Guid" kind="Persistent" fieldName="_recCreatedBy" />
       <Property Id="91f2445b-b222-4b98-bd78-c2649cd19ec3" name="RecModified" type="DateTime" label="RecModified : DateTime" kind="Persistent" fieldName="_recModified" />
       <Property Id="4f4ee44c-4962-4757-855e-e2b7bbe4f577" name="RecModifiedBy" type="Guid" label="RecModifiedBy : Guid" kind="Persistent" fieldName="_recModifiedBy" />
-      <Property Id="35ec6a41-712a-4ec5-8f9c-8e8fa8eb2269" name="TransactionType" type="Int32" label="TransactionType : Int32" kind="Persistent" fieldName="_transactionType" />
+      <Property Id="35ec6a41-712a-4ec5-8f9c-8e8fa8eb2269" name="TransactionType" type="TransactionType" label="TransactionType : TransactionType" kind="Persistent" fieldName="_transactionType" />
       <Property Id="cee6ff8c-fb93-48a5-9610-4c051f4a6af3" name="FixAssetId" type="Guid" label="FixAssetId : Guid" fieldName="_fixAssetId" />
       <AssociationTargets>
         <Association Id="5685b103-b6b7-44cb-a08e-f3278fc9a835" SourceMultiplicity="ZeroOne" name="GeneralJournalLinesHasGeneralJournalDocument">
@@ -2700,7 +2737,7 @@
       <Property Id="25274d28-22ec-467b-90b9-a8407913eba1" name="Name" label="Name : String" kind="Persistent" fieldName="_name" />
       <Property Id="3db54c2e-9245-44a8-b553-dbc51c63d929" name="ClientId" type="Guid" label="ClientId : Guid" kind="Persistent" fieldName="_clientId" />
     </DomainClass>
-    <DomainClass Id="d21e23af-f466-48aa-952b-64ca1c4729c9" name="Session" namespace="MyERP.DataAccess" showPropertiesCompartment="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+    <DomainClass Id="d21e23af-f466-48aa-952b-64ca1c4729c9" name="Session" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
       <Property Id="924eabc9-a727-4f9c-aff4-4cf9ffb6658b" name="Id" type="Guid" label="Id : Guid" identity="true" fieldName="_id" />
       <Property Id="e0e0737f-7888-4e66-82f1-454fee7819a6" name="UserId" type="Guid" label="UserId : Guid" fieldName="_userId" />
       <Property Id="a2988709-4fb6-4dbd-b620-4e233809ea00" name="Expire" type="Boolean" label="Expire : Boolean" fieldName="_expire" />
@@ -2762,7 +2799,7 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="c70d8460-aa9c-4b2c-843a-b78560b3a579" name="NoSeries" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="c70d8460-aa9c-4b2c-843a-b78560b3a579" name="NumberSequence" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
       <Property Id="4d8280e4-e115-44ad-8441-1f5dff93c35c" name="Id" type="Guid" label="Id : Guid" kind="Persistent" identity="true" fieldName="_id" />
       <Property Id="aed04115-874e-473b-b063-7dc20720e2ef" name="ClientId" type="Guid" label="ClientId : Guid" kind="Persistent" fieldName="_clientId" />
       <Property Id="f46b0fea-d207-409a-a08e-da673613e23d" name="Code" label="Code : String" kind="Persistent" fieldName="_code" />
@@ -2786,7 +2823,7 @@
           <DomainClassMoniker name="/EntitiesModel/Client" />
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="2c6cdf77-1e08-43d0-8a69-d9f74380625e">
-              <NavigationalPropertyMoniker name="/EntitiesModel/NoSeries/Client" />
+              <NavigationalPropertyMoniker name="/EntitiesModel/NumberSequence/Client" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
@@ -2794,7 +2831,7 @@
           <DomainClassMoniker name="/EntitiesModel/Organization" />
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="5361fdf5-63c2-4565-909f-3cc22ff43c5c">
-              <NavigationalPropertyMoniker name="/EntitiesModel/NoSeries/Organization" />
+              <NavigationalPropertyMoniker name="/EntitiesModel/NumberSequence/Organization" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
@@ -2802,7 +2839,7 @@
           <DomainClassMoniker name="/EntitiesModel/User" />
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="744ad254-b286-4d1e-8d3b-2f8cdc2e76b6">
-              <NavigationalPropertyMoniker name="/EntitiesModel/NoSeries/RecModifiedByUser" />
+              <NavigationalPropertyMoniker name="/EntitiesModel/NumberSequence/RecModifiedByUser" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
@@ -2810,7 +2847,7 @@
           <DomainClassMoniker name="/EntitiesModel/User" />
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="05967efa-61e0-4e46-a512-0b6217b9646d">
-              <NavigationalPropertyMoniker name="/EntitiesModel/NoSeries/RecCreatedByUser" />
+              <NavigationalPropertyMoniker name="/EntitiesModel/NumberSequence/RecCreatedByUser" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
@@ -2830,13 +2867,13 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="40dea681-ce87-4fae-ab27-9417a8cd55d4" name="GeneralJournalSetup" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="40dea681-ce87-4fae-ab27-9417a8cd55d4" name="GeneralJournalSetup" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
       <Property Id="404c77ca-ec56-4519-abcb-a3df4f1b7d27" name="Id" type="Guid" label="Id : Guid" identity="true" fieldName="_id" />
       <Property Id="1cbdb220-ef99-493d-8de3-5b6e57853fa4" name="OrganizationId" type="Guid" label="OrganizationId : Guid" fieldName="_organizationId" />
       <Property Id="0d6a0d16-021a-4f17-b036-c2131c0124b5" name="ClientId" type="Guid" label="ClientId : Guid" fieldName="_clientId" />
       <Property Id="fd033ac3-8ade-4131-9d97-78e03450cc7f" name="LocalCurrencyId" type="Guid" label="LocalCurrencyId : Guid" fieldName="_localCurrencyId" />
       <Property Id="39195ca8-9042-4918-b597-8c44067b7d8b" name="LcyExchangeRateUnit" type="Int32" label="LcyExchangeRateUnit : Int32" fieldName="_lcyExchangeRateUnit" />
-      <Property Id="a5ef0666-545c-43c4-be6e-2bafa4a3c198" name="DefaultDocumentType1NoId" type="Guid" label="DefaultDocumentType1NoId : Guid" fieldName="_defaultDocumentType1NoId" />
+      <Property Id="a5ef0666-545c-43c4-be6e-2bafa4a3c198" name="GeneralJournalNumberSequenceId" type="Guid" label="GeneralJournalNumberSequenceId : Guid" fieldName="_generalJournalNumberSequenceId" />
       <Property Id="2d3fe498-f35d-4dc0-b73a-7ca669687cbc" name="RecCreated" type="DateTime" label="RecCreated : DateTime" fieldName="_recCreated" />
       <Property Id="138957a8-270b-48bd-9d01-2d80b6896765" name="RecModified" type="DateTime" label="RecModified : DateTime" fieldName="_recModified" />
       <Property Id="03c07a79-da31-409c-ac55-f822219e2777" name="RecCreatedBy" type="Guid" label="RecCreatedBy : Guid" fieldName="_recCreatedBy" />
@@ -2863,7 +2900,7 @@
           <DomainClassMoniker name="/EntitiesModel/Currency" />
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="fd595630-acf1-4d3b-80d7-594aae3a732f">
-              <NavigationalPropertyMoniker name="/EntitiesModel/GeneralJournalSetup/Currency" />
+              <NavigationalPropertyMoniker name="/EntitiesModel/GeneralJournalSetup/LocalCurrency" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
@@ -2883,11 +2920,11 @@
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
-        <Association Id="8adf31d1-b290-4400-b3c8-37a92a9d9855" SourceMultiplicity="ZeroOne" name="GeneralJournalSetupHasDocumentType1No">
-          <DomainClassMoniker name="/EntitiesModel/NoSeries" />
+        <Association Id="8adf31d1-b290-4400-b3c8-37a92a9d9855" SourceMultiplicity="ZeroOne" name="GeneralJournalSetupHasGeneralJournalNumberSeq">
+          <DomainClassMoniker name="/EntitiesModel/NumberSequence" />
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="0056fe15-9082-43d5-b223-007106bf75a0">
-              <NavigationalPropertyMoniker name="/EntitiesModel/GeneralJournalSetup/DefaultDocumentType1No" />
+              <NavigationalPropertyMoniker name="/EntitiesModel/GeneralJournalSetup/GeneralJournalNumberSequence" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
@@ -2900,7 +2937,7 @@
           <NavigationalProperty Id="4b1d448d-a5c6-404a-a6e8-6607315e7fdf" name="RecModifiedByUser" type="User" label="RecModifiedByUser : User" nullable="true" kind="Persistent" fieldName="_user1" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="55116875-9ee9-4c60-84cf-54da5de71a9f">
-          <NavigationalProperty Id="30201d66-4f3c-4246-b17e-28d9da12fe2f" name="Currency" type="Currency" label="Currency : Currency" nullable="true" kind="Persistent" fieldName="_currency" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="30201d66-4f3c-4246-b17e-28d9da12fe2f" name="LocalCurrency" type="Currency" label="LocalCurrency : Currency" nullable="true" kind="Persistent" fieldName="_currency" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="5dc54230-0ed1-42e3-9a5a-bc6a37b5ed18">
           <NavigationalProperty Id="dd32d88b-bec5-4260-8bbc-2dabc6f18e69" name="Organization" type="Organization" label="Organization : Organization" nullable="true" kind="Persistent" fieldName="_organization" isDependent="false" isManaged="false" />
@@ -2909,11 +2946,11 @@
           <NavigationalProperty Id="4439a70d-8356-48ac-8450-852c8e5f45ea" name="Client" type="Client" label="Client : Client" nullable="true" kind="Persistent" fieldName="_client" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="b87338a1-6c22-4d03-a40c-017739632e14">
-          <NavigationalProperty Id="4f8b118b-b1e7-407a-bb03-dfac077c635c" name="DefaultDocumentType1No" type="NoSeries" label="DefaultDocumentType1No : NoSeries" nullable="true" kind="Persistent" fieldName="_defaultDocumentType1No" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="4f8b118b-b1e7-407a-bb03-dfac077c635c" name="GeneralJournalNumberSequence" type="NumberSequence" label="GeneralJournalNumberSequence : NumberSequence" nullable="true" kind="Persistent" fieldName="_defaultDocumentType1No" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="307850ff-c670-4b04-b074-ad11c922fb5c" name="CurrencyConvertRate" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true">
+    <DomainClass Id="307850ff-c670-4b04-b074-ad11c922fb5c" name="CurrencyConvertRate" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
       <Property Id="7520c7a3-5924-4efd-a970-aa78a4708564" name="Id" type="Guid" label="Id : Guid" identity="true" fieldName="_id" />
       <Property Id="5c269942-f160-480f-a272-d45ea6578de1" name="RecCreated" type="DateTime" label="RecCreated : DateTime" fieldName="_recCreated" />
       <Property Id="79a33c1e-516c-4271-9395-b19ee3a128dd" name="RecCreatedBy" type="Guid" label="RecCreatedBy : Guid" fieldName="_recCreatedBy" />
@@ -3018,7 +3055,7 @@
         <entitySetProperty name="Modules" namespace="MyERP.DataAccess" type="Module" label="Modules : IQueryable&lt;MyERP.DataAccess.Module&gt;" />
         <entitySetProperty name="Sessions" namespace="MyERP.DataAccess" type="Session" label="Sessions : IQueryable&lt;MyERP.DataAccess.Session&gt;" />
         <entitySetProperty name="Clients" namespace="MyERP.DataAccess" type="Client" label="Clients : IQueryable&lt;MyERP.DataAccess.Client&gt;" />
-        <entitySetProperty name="NoSeries" namespace="MyERP.DataAccess" type="NoSeries" label="NoSeries : IQueryable&lt;MyERP.DataAccess.NoSeries&gt;" />
+        <entitySetProperty name="NumberSequences" namespace="MyERP.DataAccess" type="NumberSequence" label="NumberSequences : IQueryable&lt;MyERP.DataAccess.NumberSequence&gt;" />
         <entitySetProperty name="Accounts" namespace="MyERP.DataAccess" type="Account" label="Accounts : IQueryable&lt;MyERP.DataAccess.Account&gt;" />
         <entitySetProperty name="GeneralJournalSetups" namespace="MyERP.DataAccess" type="GeneralJournalSetup" label="GeneralJournalSetups : IQueryable&lt;MyERP.DataAccess.GeneralJournalSetup&gt;" />
         <entitySetProperty name="CurrencyConvertRates" namespace="MyERP.DataAccess" type="CurrencyConvertRate" label="CurrencyConvertRates : IQueryable&lt;MyERP.DataAccess.CurrencyConvertRate&gt;" />

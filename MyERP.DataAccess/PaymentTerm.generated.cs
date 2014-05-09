@@ -24,6 +24,7 @@ namespace MyERP.DataAccess
 {
 	[Table("payment_term", UpdateSchema = true)]
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
+	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class PaymentTerm
 	{
 		private string _code;

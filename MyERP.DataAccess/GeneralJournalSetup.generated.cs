@@ -24,6 +24,7 @@ namespace MyERP.DataAccess
 {
 	[Table("general_journal_setup", UpdateSchema = true)]
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
+	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class GeneralJournalSetup
 	{
 		private Guid _id;
@@ -101,18 +102,18 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Guid _defaultDocumentType1NoId;
-		[Column("default_document_type_1_no_id", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_defaultDocumentType1NoId")]
-		public virtual Guid DefaultDocumentType1NoId
+		private Guid _generalJournalNumberSequenceId;
+		[Column("general_journal_number_sequence_id", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
+		[Storage("_generalJournalNumberSequenceId")]
+		public virtual Guid GeneralJournalNumberSequenceId
 		{
 			get
 			{
-				return this._defaultDocumentType1NoId;
+				return this._generalJournalNumberSequenceId;
 			}
 			set
 			{
-				this._defaultDocumentType1NoId = value;
+				this._generalJournalNumberSequenceId = value;
 			}
 		}
 		
@@ -221,21 +222,6 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Currency _currency;
-		[ForeignKeyAssociation(SharedFields = "LocalCurrencyId", TargetFields = "Id")]
-		[Storage("_currency")]
-		public virtual Currency Currency
-		{
-			get
-			{
-				return this._currency;
-			}
-			set
-			{
-				this._currency = value;
-			}
-		}
-		
 		private Organization _organization;
 		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
 		[Storage("_organization")]
@@ -251,21 +237,6 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private NoSeries _defaultDocumentType1No;
-		[ForeignKeyAssociation(SharedFields = "DefaultDocumentType1NoId", TargetFields = "Id")]
-		[Storage("_defaultDocumentType1No")]
-		public virtual NoSeries DefaultDocumentType1No
-		{
-			get
-			{
-				return this._defaultDocumentType1No;
-			}
-			set
-			{
-				this._defaultDocumentType1No = value;
-			}
-		}
-		
 		private Client _client;
 		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
 		[Storage("_client")]
@@ -278,6 +249,36 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._client = value;
+			}
+		}
+		
+		private Currency _currency;
+		[ForeignKeyAssociation(SharedFields = "LocalCurrencyId", TargetFields = "Id")]
+		[Storage("_currency")]
+		public virtual Currency LocalCurrency
+		{
+			get
+			{
+				return this._currency;
+			}
+			set
+			{
+				this._currency = value;
+			}
+		}
+		
+		private NumberSequence _defaultDocumentType1No;
+		[ForeignKeyAssociation(SharedFields = "GeneralJournalNumberSequenceId", TargetFields = "Id")]
+		[Storage("_defaultDocumentType1No")]
+		public virtual NumberSequence GeneralJournalNumberSequence
+		{
+			get
+			{
+				return this._defaultDocumentType1No;
+			}
+			set
+			{
+				this._defaultDocumentType1No = value;
 			}
 		}
 		

@@ -24,20 +24,21 @@ namespace MyERP.DataAccess
 {
 	[Table("general_journal_document", UpdateSchema = true)]
 	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
+	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class GeneralJournalDocument
 	{
-		private Guid _Stt_Rec;
+		private Guid _id;
 		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_Stt_Rec")]
+		[Storage("_id")]
 		public virtual Guid Id
 		{
 			get
 			{
-				return this._Stt_Rec;
+				return this._id;
 			}
 			set
 			{
-				this._Stt_Rec = value;
+				this._id = value;
 			}
 		}
 		
@@ -101,18 +102,18 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Guid _noSeriesId;
-		[Column("noseries_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_noSeriesId")]
-		public virtual Guid NoSeriesId
+		private Guid _numberSequenceId;
+		[Column("number_sequence_id", Length = 0, Scale = 0, SqlType = "uuid")]
+		[Storage("_numberSequenceId")]
+		public virtual Guid NumberSequenceId
 		{
 			get
 			{
-				return this._noSeriesId;
+				return this._numberSequenceId;
 			}
 			set
 			{
-				this._noSeriesId = value;
+				this._numberSequenceId = value;
 			}
 		}
 		
@@ -161,10 +162,10 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private string _documentType;
-		[Column("document_type", Length = 0, Scale = 0, SqlType = "varchar")]
+		private DocumentType _documentType;
+		[Column("document_type", Length = 0, Scale = 0, SqlType = "int4")]
 		[Storage("_documentType")]
-		public virtual string DocumentType
+		public virtual DocumentType DocumentType
 		{
 			get
 			{
@@ -296,10 +297,10 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private int _transactionType;
+		private TransactionType _transactionType;
 		[Column("transaction_type", Length = 0, Scale = 0, SqlType = "int4")]
 		[Storage("_transactionType")]
-		public virtual int TransactionType
+		public virtual TransactionType TransactionType
 		{
 			get
 			{
@@ -326,10 +327,10 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Guid _currencyId;
-		[Column("currency_id", Length = 0, Scale = 0, SqlType = "uuid")]
+		private Guid? _currencyId;
+		[Column("currency_id", IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid")]
 		[Storage("_currencyId")]
-		public virtual Guid CurrencyId
+		public virtual Guid? CurrencyId
 		{
 			get
 			{
@@ -431,10 +432,10 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private NoSeries _noSeries;
-		[ForeignKeyAssociation(SharedFields = "NoSeriesId", TargetFields = "Id")]
+		private NumberSequence _noSeries;
+		[ForeignKeyAssociation(SharedFields = "NumberSequenceId", TargetFields = "Id")]
 		[Storage("_noSeries")]
-		public virtual NoSeries NoSeries
+		public virtual NumberSequence NumberSequence
 		{
 			get
 			{

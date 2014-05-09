@@ -29,11 +29,11 @@ namespace MyERP.Modules.Financial.Views
         public IRegionManager RegionManager { get; set; }
 
         [Import]
-        public GeneralJournalDocumentsViewModel ViewModel
+        public GeneralJournalsViewModel ViewModel
         {
             private get
             {
-                return this.DataContext as GeneralJournalDocumentsViewModel;
+                return this.DataContext as GeneralJournalsViewModel;
             }
             set
             {

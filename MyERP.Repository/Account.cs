@@ -13,7 +13,6 @@ namespace MyERP.DataAccess
         {
             this.OrganizationId = (SessionManager.Session["Organization"] as Organization).Id;
             this.ClientId = MyERP.Repositories.WebContext.Current.User.ClientId;
-            //this.Id = Guid.NewGuid(); de tu dong tao boi OpenAccess
             this.Code = "";
             this.Name = "";
             this.ParentAccountId = null;

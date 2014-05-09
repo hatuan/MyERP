@@ -4,19 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#if SILVERLIGHT
+using MyERP.Repositories;
+#endif
 namespace MyERP.DataAccess.Shared
 {
     public class NoSeriesLib
     {
-        public static void NextNo(string NoSeqName, ref string No)
-        {
-            var newNo = 0;
 #if !SILVERLIGHT
+        public static string NextNo(string noSeqName, string noFormat)
+#else
+        public static void NextNo(string noSeqName, string noFormat, Action<String> callback)
+#endif
+        {
+            int startPos = 0;
+            int endPos = 0;
+#if !SILVERLIGHT
+            var newNo = 0;
             using (var dbContext = new EntitiesModel())
             {
                 using (var connection = dbContext.Connection)
                 {
-                    string SqlQuery = String.Format("SELECT nextval('{0}')", new object[] { NoSeqName });
+                    string SqlQuery = String.Format("SELECT nextval('{0}')", new object[] { noSeqName });
 
                     using (var command = connection.CreateCommand())
                     {
@@ -25,13 +34,38 @@ namespace MyERP.DataAccess.Shared
                     }
                 }
             }
-            int startPos = 0;
-            int endPos = 0;
-            NoSeriesLib.GetIntegerPos(No, ref startPos, ref endPos);
-            NoSeriesLib.ReplaceNoText(ref No, newNo, 0, startPos, endPos);
+           
+            NoSeriesLib.GetIntegerPos(noFormat, ref startPos, ref endPos);
+            return NoSeriesLib.ReplaceNoText(noFormat, newNo, 0, startPos, endPos);
+#else
+            NumberSequenceRepository NumberSequenceRepository = new NumberSequenceRepository();
+            NumberSequenceRepository.SequenceNextVal(noSeqName, newNo => 
+            {
+                bool IsDigit = false;
+                int i;
+
+                if (noFormat != "")
+                {
+                    i = noFormat.Length - 1;
+                    do
+                    {
+                        IsDigit = noFormat[i] == '0' ? true : false;
+                        if (IsDigit)
+                        {
+                            if (endPos == 0)
+                                endPos = i;
+                            startPos = i;
+                        }
+                        i--;
+                    }
+                    while ((i >= 0) && !(startPos != 0 && !IsDigit));
+                }
+
+                callback(NoSeriesLib.ReplaceNoText(noFormat, newNo, 0, startPos, endPos));
+            });
 #endif
         }
-        public static void ReplaceNoText(ref string No, int NewNo, int FixedLength, int StartPos, int EndPos)
+        public static string ReplaceNoText(string No, int NewNo, int FixedLength, int StartPos, int EndPos)
         {
             string StartNo = "";
             string EndNo = "";
@@ -59,7 +93,7 @@ namespace MyERP.DataAccess.Shared
                 
 #endif
             }
-            No = StartNo + ZeroNo + NewNo + EndNo;
+            return StartNo + ZeroNo + NewNo + EndNo;
         }
 
         public static void GetIntegerPos(string No, ref int StartPos, ref int EndPos)

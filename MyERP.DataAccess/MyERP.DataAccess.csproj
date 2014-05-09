@@ -104,11 +104,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
-    <Compile Include="NoSeries.generated.cs">
+    <Compile Include="NumberSequence\NumberSequenceStatusType.cs" />
+    <Compile Include="NumberSequence\NumberSequence.cs" />
+    <Compile Include="NumberSequence.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
-    <Compile Include="NoSeries\NoSeriesStatusType.cs" />
-    <Compile Include="NoSeries\NoSeries.cs" />
     <Compile Include="Organization.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
@@ -126,7 +126,9 @@
     <Compile Include="Session.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="Shared\DocumentType.cs" />
     <Compile Include="Shared\NoSeriesLib.shared.cs" />
+    <Compile Include="Shared\TransactionType.cs" />
     <Compile Include="User.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
