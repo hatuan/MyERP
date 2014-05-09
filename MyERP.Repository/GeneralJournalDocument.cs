@@ -17,12 +17,12 @@ namespace MyERP.DataAccess
             this.DocumentNo = "";
             GeneralJournalSetupRepository.GetGeneralJournalSetupOfOrganization(OrganizationId, setup =>
             {
-                this.NumberSequence = setup.GeneralJournalNumberSequence;
+                //this.NumberSequence = setup.GeneralJournalNumberSequence;
                 this.NumberSequenceId = setup.GeneralJournalNumberSequenceId;
                 
-                String formatNo = this.NumberSequence.FormatNo;
+                //String formatNo = this.NumberSequence.FormatNo;
 
-                NoSeriesLib.NextNo(NumberSequence.NoSeqName, formatNo, result => this.DocumentNo = result);
+                //NoSeriesLib.NextNo(NumberSequence.NoSeqName, formatNo, result => this.DocumentNo = result);
             });
 
             this.DocumentCreated = Convert.ToDateTime(SessionManager.Session["WorkingDate"]);
@@ -42,6 +42,15 @@ namespace MyERP.DataAccess
             this.RecModifiedBy = MyERP.Repositories.WebContext.Current.User.Id;
             this.Status = (int)GeneralJournalDocumentStatusType.Draft;
             this.Version = 1;
+        }
+
+        partial void OnNumberSequenceIdChanged()
+        {
+            System.Diagnostics.Debug.WriteLine(String.Format("IsDeserializing = {0}", this.IsDeserializing));
+            if (!this.IsDeserializing)
+            {
+                NoSeriesLib.NextNo(NumberSequence.NoSeqName, NumberSequence.FormatNo, result => this.DocumentNo = result);
+            }
         }
     }
 }
