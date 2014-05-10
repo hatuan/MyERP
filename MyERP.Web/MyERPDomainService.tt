@@ -78,11 +78,11 @@ for (int i = 0; i < queriableTypes.Length; i++)
 string fileName = "MyERPDomainService";
 string contextTypeName = "EntitiesModel";
 string contextNamespaceName = "MyERP.Web";
-string queriableTypesInput = "Account;BusinessPartnerGroup;BusinessPartner;Currency;CurrencyConvertRate;Client;JobGroup;Job;Module;Organization;PaymentTerm;Session;GeneralJournalDocument;GeneralJournalLine;GeneralJournalSetup;User;NumberSequence;";
-string queriableClassNamesInput = "Accounts;BusinessPartnerGroups;BusinessPartners;Currencies;CurrencyConvertRates;Clients;JobGroups;Jobs;Modules;Organizations;PaymentTerms;Sessions;GeneralJournalDocuments;GeneralJournalLines;GeneralJournalSetups;Users;NumberSequences;";
+string queriableTypesInput = "Account;BusinessPartnerGroup;BusinessPartner;Client;Currency;CurrencyConvertRate;GeneralJournalDocument;GeneralJournalLine;GeneralJournalSetup;JobGroup;Job;Module;NumberSequence;Organization;PaymentTerm;Session;User;";
+string queriableClassNamesInput = "Accounts;BusinessPartnerGroups;BusinessPartners;Clients;Currencies;CurrencyConvertRates;GeneralJournalDocuments;GeneralJournalLines;GeneralJournalSetups;JobGroups;Jobs;Modules;NumberSequences;Organizations;PaymentTerms;Sessions;Users;";
 string[] queriableTypes = null;
 string[] queriableClassNames = null;
-string editableEndPoints = ";Account;BusinessPartnerGroup;BusinessPartner;Currency;CurrencyConvertRate;Client;JobGroup;Job;Module;Organization;PaymentTerm;Session;GeneralJournalDocument;GeneralJournalLine;GeneralJournalSetup;User";
+string editableEndPoints = ";Account;BusinessPartnerGroup;BusinessPartner;Client;Currency;CurrencyConvertRate;GeneralJournalDocument;GeneralJournalLine;GeneralJournalSetup;JobGroup;Job;Module;NumberSequence;Organization;PaymentTerm;Session;User";
 
 void GeneratePerEntityDomainServiceCRUDOperations(string className, string classType)
 {

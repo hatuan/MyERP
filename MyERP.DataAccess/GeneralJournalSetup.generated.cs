@@ -192,33 +192,33 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private User _user;
+		private User _recCreatedByUser;
 		[ForeignKeyAssociation(SharedFields = "RecCreatedBy", TargetFields = "Id")]
-		[Storage("_user")]
+		[Storage("_recCreatedByUser")]
 		public virtual User RecCreatedByUser
 		{
 			get
 			{
-				return this._user;
+				return this._recCreatedByUser;
 			}
 			set
 			{
-				this._user = value;
+				this._recCreatedByUser = value;
 			}
 		}
 		
-		private User _user1;
+		private User _recModifiedByUser;
 		[ForeignKeyAssociation(SharedFields = "RecModifiedBy", TargetFields = "Id")]
-		[Storage("_user1")]
+		[Storage("_recModifiedByUser")]
 		public virtual User RecModifiedByUser
 		{
 			get
 			{
-				return this._user1;
+				return this._recModifiedByUser;
 			}
 			set
 			{
-				this._user1 = value;
+				this._recModifiedByUser = value;
 			}
 		}
 		
@@ -252,33 +252,33 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Currency _currency;
+		private Currency _localCurrency;
 		[ForeignKeyAssociation(SharedFields = "LocalCurrencyId", TargetFields = "Id")]
-		[Storage("_currency")]
+		[Storage("_localCurrency")]
 		public virtual Currency LocalCurrency
 		{
 			get
 			{
-				return this._currency;
+				return this._localCurrency;
 			}
 			set
 			{
-				this._currency = value;
+				this._localCurrency = value;
 			}
 		}
 		
-		private NumberSequence _defaultDocumentType1No;
+		private NumberSequence _generalJournalNumberSequence;
 		[ForeignKeyAssociation(SharedFields = "GeneralJournalNumberSequenceId", TargetFields = "Id")]
-		[Storage("_defaultDocumentType1No")]
+		[Storage("_generalJournalNumberSequence")]
 		public virtual NumberSequence GeneralJournalNumberSequence
 		{
 			get
 			{
-				return this._defaultDocumentType1No;
+				return this._generalJournalNumberSequence;
 			}
 			set
 			{
-				this._defaultDocumentType1No = value;
+				this._generalJournalNumberSequence = value;
 			}
 		}
 		

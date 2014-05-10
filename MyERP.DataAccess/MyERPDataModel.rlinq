@@ -822,13 +822,13 @@
             <orm:sharedfield name="_currencyId" target-class="MyERP.DataAccess.Currency" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_transactionLines" property="GeneralJournalLines" behavior="readwrite" uniqueId="07ec2603-84e3-4c8d-a52d-e32cfad2f54a" type="MyERP.DataAccess.GeneralJournalLine">
-          <orm:collection element-class="MyERP.DataAccess.GeneralJournalLine" inverse-field="_transactionDocument" order-by="" uniqueId="5685b103-b6b7-44cb-a08e-f3278fc9a835" />
-        </orm:field>
-        <orm:field name="_noSeries" property="NumberSequence" behavior="readwrite" uniqueId="921a9cba-5f07-4cf8-a568-310b820567c1" type="MyERP.DataAccess.NumberSequence">
+        <orm:field name="_numberSequence" property="NumberSequence" behavior="readwrite" uniqueId="921a9cba-5f07-4cf8-a568-310b820567c1" type="MyERP.DataAccess.NumberSequence">
           <orm:reference uniqueId="2ee81fc6-8f3b-4023-9aaf-d83a032df599" association-name="GeneralJournalDocumentHasNoSeries">
             <orm:sharedfield name="_numberSequenceId" target-class="MyERP.DataAccess.NumberSequence" target-field="_id" />
           </orm:reference>
+        </orm:field>
+        <orm:field name="_generalJournalLines" property="GeneralJournalLines" behavior="readwrite" uniqueId="07ec2603-84e3-4c8d-a52d-e32cfad2f54a" type="MyERP.DataAccess.GeneralJournalLine">
+          <orm:collection element-class="MyERP.DataAccess.GeneralJournalLine" inverse-field="_transactionDocument" order-by="" uniqueId="5685b103-b6b7-44cb-a08e-f3278fc9a835" />
         </orm:field>
       </orm:class>
       <orm:class name="GeneralJournalLine" update-schema="true" uniqueId="8481a6cc-b6ad-4206-8b61-08181d982446">
@@ -1258,12 +1258,12 @@
         <orm:field name="_version" property="Version" uniqueId="cb84b123-c52e-4d31-88e6-bc13ce59f61b" type="System.Int64">
           <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
         </orm:field>
-        <orm:field name="_user" property="RecCreatedByUser" behavior="readwrite" uniqueId="d4287fc8-38a7-471e-9ab3-6c587b13a9e9" type="MyERP.DataAccess.User">
+        <orm:field name="_recCreatedByUser" property="RecCreatedByUser" behavior="readwrite" uniqueId="d4287fc8-38a7-471e-9ab3-6c587b13a9e9" type="MyERP.DataAccess.User">
           <orm:reference uniqueId="ee671ba6-853a-440f-8dd2-ae771e0b4488" association-name="GeneralJournalSetupHasCreated">
             <orm:sharedfield name="_recCreatedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_user1" property="RecModifiedByUser" behavior="readwrite" uniqueId="4b1d448d-a5c6-404a-a6e8-6607315e7fdf" type="MyERP.DataAccess.User">
+        <orm:field name="_recModifiedByUser" property="RecModifiedByUser" behavior="readwrite" uniqueId="4b1d448d-a5c6-404a-a6e8-6607315e7fdf" type="MyERP.DataAccess.User">
           <orm:reference uniqueId="512d65a1-4ff8-4abe-8c81-eb84b7e661b1" association-name="GeneralJournalSetupHasModified">
             <orm:sharedfield name="_recModifiedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
           </orm:reference>
@@ -1278,12 +1278,12 @@
             <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_currency" property="LocalCurrency" behavior="readwrite" uniqueId="30201d66-4f3c-4246-b17e-28d9da12fe2f" type="MyERP.DataAccess.Currency">
+        <orm:field name="_localCurrency" property="LocalCurrency" behavior="readwrite" uniqueId="30201d66-4f3c-4246-b17e-28d9da12fe2f" type="MyERP.DataAccess.Currency">
           <orm:reference uniqueId="1b5b8c67-ffef-49c6-9a82-1947f4621f90" association-name="GeneralJournalSetupHasLCY">
             <orm:sharedfield name="_localCurrencyId" target-class="MyERP.DataAccess.Currency" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_defaultDocumentType1No" property="GeneralJournalNumberSequence" behavior="readwrite" uniqueId="4f8b118b-b1e7-407a-bb03-dfac077c635c" type="MyERP.DataAccess.NumberSequence">
+        <orm:field name="_generalJournalNumberSequence" property="GeneralJournalNumberSequence" behavior="readwrite" uniqueId="4f8b118b-b1e7-407a-bb03-dfac077c635c" type="MyERP.DataAccess.NumberSequence">
           <orm:reference uniqueId="8adf31d1-b290-4400-b3c8-37a92a9d9855" association-name="GeneralJournalSetupHasGeneralJournalNumberSeq">
             <orm:sharedfield name="_generalJournalNumberSequenceId" target-class="MyERP.DataAccess.NumberSequence" target-field="_id" />
           </orm:reference>
@@ -2517,7 +2517,7 @@
       </AssociationTargets>
       <navigationalProperties>
         <classHasNavigationalProperties Id="7900e546-e7d3-4024-b430-ab80ca6515ad">
-          <NavigationalProperty Id="07ec2603-84e3-4c8d-a52d-e32cfad2f54a" name="GeneralJournalLines" type="IList&lt;GeneralJournalLine&gt;" label="GeneralJournalLines : IList&lt;GeneralJournalLine&gt;" nullable="true" kind="Persistent" fieldName="_transactionLines" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="07ec2603-84e3-4c8d-a52d-e32cfad2f54a" name="GeneralJournalLines" type="IList&lt;GeneralJournalLine&gt;" label="GeneralJournalLines : IList&lt;GeneralJournalLine&gt;" nullable="true" kind="Persistent" fieldName="_generalJournalLines" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="cb193c8a-209b-4848-9ceb-bfd396a17517">
           <NavigationalProperty Id="e130c8de-7b7d-4c7d-ae79-5163dd85c6ec" name="Currency" type="Currency" label="Currency : Currency" nullable="true" kind="Persistent" fieldName="_currency" isDependent="false" isManaged="false" />
@@ -2535,7 +2535,7 @@
           <NavigationalProperty Id="f48fd463-b377-4e6a-9f4c-83fafc94bd2f" name="Organization" type="Organization" label="Organization : Organization" nullable="true" kind="Persistent" fieldName="_organization" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="74177a20-8da0-49df-94d8-02e50027b314">
-          <NavigationalProperty Id="921a9cba-5f07-4cf8-a568-310b820567c1" name="NumberSequence" type="NumberSequence" label="NumberSequence : NumberSequence" nullable="true" kind="Persistent" fieldName="_noSeries" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="921a9cba-5f07-4cf8-a568-310b820567c1" name="NumberSequence" type="NumberSequence" label="NumberSequence : NumberSequence" nullable="true" kind="Persistent" fieldName="_numberSequence" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
@@ -2931,13 +2931,13 @@
       </AssociationTargets>
       <navigationalProperties>
         <classHasNavigationalProperties Id="5776c15c-1ab4-4001-91fe-f6b6a4b2c5c0">
-          <NavigationalProperty Id="d4287fc8-38a7-471e-9ab3-6c587b13a9e9" name="RecCreatedByUser" type="User" label="RecCreatedByUser : User" nullable="true" kind="Persistent" fieldName="_user" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="d4287fc8-38a7-471e-9ab3-6c587b13a9e9" name="RecCreatedByUser" type="User" label="RecCreatedByUser : User" nullable="true" kind="Persistent" fieldName="_recCreatedByUser" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="9cd2bdb7-f8f7-483c-b9ba-53cbca52578f">
-          <NavigationalProperty Id="4b1d448d-a5c6-404a-a6e8-6607315e7fdf" name="RecModifiedByUser" type="User" label="RecModifiedByUser : User" nullable="true" kind="Persistent" fieldName="_user1" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="4b1d448d-a5c6-404a-a6e8-6607315e7fdf" name="RecModifiedByUser" type="User" label="RecModifiedByUser : User" nullable="true" kind="Persistent" fieldName="_recModifiedByUser" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="55116875-9ee9-4c60-84cf-54da5de71a9f">
-          <NavigationalProperty Id="30201d66-4f3c-4246-b17e-28d9da12fe2f" name="LocalCurrency" type="Currency" label="LocalCurrency : Currency" nullable="true" kind="Persistent" fieldName="_currency" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="30201d66-4f3c-4246-b17e-28d9da12fe2f" name="LocalCurrency" type="Currency" label="LocalCurrency : Currency" nullable="true" kind="Persistent" fieldName="_localCurrency" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="5dc54230-0ed1-42e3-9a5a-bc6a37b5ed18">
           <NavigationalProperty Id="dd32d88b-bec5-4260-8bbc-2dabc6f18e69" name="Organization" type="Organization" label="Organization : Organization" nullable="true" kind="Persistent" fieldName="_organization" isDependent="false" isManaged="false" />
@@ -2946,7 +2946,7 @@
           <NavigationalProperty Id="4439a70d-8356-48ac-8450-852c8e5f45ea" name="Client" type="Client" label="Client : Client" nullable="true" kind="Persistent" fieldName="_client" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="b87338a1-6c22-4d03-a40c-017739632e14">
-          <NavigationalProperty Id="4f8b118b-b1e7-407a-bb03-dfac077c635c" name="GeneralJournalNumberSequence" type="NumberSequence" label="GeneralJournalNumberSequence : NumberSequence" nullable="true" kind="Persistent" fieldName="_defaultDocumentType1No" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="4f8b118b-b1e7-407a-bb03-dfac077c635c" name="GeneralJournalNumberSequence" type="NumberSequence" label="GeneralJournalNumberSequence : NumberSequence" nullable="true" kind="Persistent" fieldName="_generalJournalNumberSequence" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>

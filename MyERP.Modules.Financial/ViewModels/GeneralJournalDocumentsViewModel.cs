@@ -148,8 +148,7 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnAddNewCommandExecuted()
         {
-            GeneralJournalDocument generalJournalDocument = new GeneralJournalDocument();
-            GeneralJournalDocuments.AddNew(generalJournalDocument);
+            GeneralJournalDocuments.AddNew();
         }
 
         private bool SubmitChangesCommandCanExecute()

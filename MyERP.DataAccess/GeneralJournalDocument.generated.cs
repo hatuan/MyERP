@@ -432,29 +432,29 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private NumberSequence _noSeries;
+		private NumberSequence _numberSequence;
 		[ForeignKeyAssociation(SharedFields = "NumberSequenceId", TargetFields = "Id")]
-		[Storage("_noSeries")]
+		[Storage("_numberSequence")]
 		public virtual NumberSequence NumberSequence
 		{
 			get
 			{
-				return this._noSeries;
+				return this._numberSequence;
 			}
 			set
 			{
-				this._noSeries = value;
+				this._numberSequence = value;
 			}
 		}
 		
-		private IList<GeneralJournalLine> _transactionLines = new List<GeneralJournalLine>();
+		private IList<GeneralJournalLine> _generalJournalLines = new List<GeneralJournalLine>();
 		[Collection(InverseProperty = "GeneralJournalDocument")]
-		[Storage("_transactionLines")]
+		[Storage("_generalJournalLines")]
 		public virtual IList<GeneralJournalLine> GeneralJournalLines
 		{
 			get
 			{
-				return this._transactionLines;
+				return this._generalJournalLines;
 			}
 		}
 		

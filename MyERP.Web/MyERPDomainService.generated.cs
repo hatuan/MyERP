@@ -82,6 +82,24 @@ namespace MyERP.Web
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
+		public IQueryable<Client> GetClients()
+		{ 
+			return this.DataContext.Clients.Where(c => c.ClientId == _membershipUser.ClientId);
+		}       
+		public void DeleteClients(Client client)
+		{
+			// This is a callback method. The actual Delete is performed internally.
+		}
+
+		public void UpdateClients(Client client)
+		{
+			// This is a callback method. The actual Update is performed internally.
+		}
+
+		public void InsertClients(Client client)
+		{
+			// This is a callback method. The actual Insert is performed internally.
+		} 
 		public IQueryable<Currency> GetCurrencies()
 		{ 
 			return this.DataContext.Currencies.Where(c => c.ClientId == _membershipUser.ClientId);
@@ -118,21 +136,57 @@ namespace MyERP.Web
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<Client> GetClients()
+		public IQueryable<GeneralJournalDocument> GetGeneralJournalDocuments()
 		{ 
-			return this.DataContext.Clients.Where(c => c.ClientId == _membershipUser.ClientId);
+			return this.DataContext.GeneralJournalDocuments.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
-		public void DeleteClients(Client client)
+		public void DeleteGeneralJournalDocuments(GeneralJournalDocument generalJournalDocument)
 		{
 			// This is a callback method. The actual Delete is performed internally.
 		}
 
-		public void UpdateClients(Client client)
+		public void UpdateGeneralJournalDocuments(GeneralJournalDocument generalJournalDocument)
 		{
 			// This is a callback method. The actual Update is performed internally.
 		}
 
-		public void InsertClients(Client client)
+		public void InsertGeneralJournalDocuments(GeneralJournalDocument generalJournalDocument)
+		{
+			// This is a callback method. The actual Insert is performed internally.
+		} 
+		public IQueryable<GeneralJournalLine> GetGeneralJournalLines()
+		{ 
+			return this.DataContext.GeneralJournalLines.Where(c => c.ClientId == _membershipUser.ClientId);
+		}       
+		public void DeleteGeneralJournalLines(GeneralJournalLine generalJournalLine)
+		{
+			// This is a callback method. The actual Delete is performed internally.
+		}
+
+		public void UpdateGeneralJournalLines(GeneralJournalLine generalJournalLine)
+		{
+			// This is a callback method. The actual Update is performed internally.
+		}
+
+		public void InsertGeneralJournalLines(GeneralJournalLine generalJournalLine)
+		{
+			// This is a callback method. The actual Insert is performed internally.
+		} 
+		public IQueryable<GeneralJournalSetup> GetGeneralJournalSetups()
+		{ 
+			return this.DataContext.GeneralJournalSetups.Where(c => c.ClientId == _membershipUser.ClientId);
+		}       
+		public void DeleteGeneralJournalSetups(GeneralJournalSetup generalJournalSetup)
+		{
+			// This is a callback method. The actual Delete is performed internally.
+		}
+
+		public void UpdateGeneralJournalSetups(GeneralJournalSetup generalJournalSetup)
+		{
+			// This is a callback method. The actual Update is performed internally.
+		}
+
+		public void InsertGeneralJournalSetups(GeneralJournalSetup generalJournalSetup)
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
@@ -190,6 +244,10 @@ namespace MyERP.Web
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
+		public IQueryable<NumberSequence> GetNumberSequences()
+		{ 
+			return this.DataContext.NumberSequences.Where(c => c.ClientId == _membershipUser.ClientId);
+		}       
 		public IQueryable<Organization> GetOrganizations()
 		{ 
 			return this.DataContext.Organizations.Where(c => c.ClientId == _membershipUser.ClientId);
@@ -244,60 +302,6 @@ namespace MyERP.Web
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<GeneralJournalDocument> GetGeneralJournalDocuments()
-		{ 
-			return this.DataContext.GeneralJournalDocuments.Where(c => c.ClientId == _membershipUser.ClientId);
-		}       
-		public void DeleteGeneralJournalDocuments(GeneralJournalDocument generalJournalDocument)
-		{
-			// This is a callback method. The actual Delete is performed internally.
-		}
-
-		public void UpdateGeneralJournalDocuments(GeneralJournalDocument generalJournalDocument)
-		{
-			// This is a callback method. The actual Update is performed internally.
-		}
-
-		public void InsertGeneralJournalDocuments(GeneralJournalDocument generalJournalDocument)
-		{
-			// This is a callback method. The actual Insert is performed internally.
-		} 
-		public IQueryable<GeneralJournalLine> GetGeneralJournalLines()
-		{ 
-			return this.DataContext.GeneralJournalLines.Where(c => c.ClientId == _membershipUser.ClientId);
-		}       
-		public void DeleteGeneralJournalLines(GeneralJournalLine generalJournalLine)
-		{
-			// This is a callback method. The actual Delete is performed internally.
-		}
-
-		public void UpdateGeneralJournalLines(GeneralJournalLine generalJournalLine)
-		{
-			// This is a callback method. The actual Update is performed internally.
-		}
-
-		public void InsertGeneralJournalLines(GeneralJournalLine generalJournalLine)
-		{
-			// This is a callback method. The actual Insert is performed internally.
-		} 
-		public IQueryable<GeneralJournalSetup> GetGeneralJournalSetups()
-		{
-		    return this.DataContext.GeneralJournalSetups.Where(c => c.ClientId == _membershipUser.ClientId);
-		}       
-		public void DeleteGeneralJournalSetups(GeneralJournalSetup generalJournalSetup)
-		{
-			// This is a callback method. The actual Delete is performed internally.
-		}
-
-		public void UpdateGeneralJournalSetups(GeneralJournalSetup generalJournalSetup)
-		{
-			// This is a callback method. The actual Update is performed internally.
-		}
-
-		public void InsertGeneralJournalSetups(GeneralJournalSetup generalJournalSetup)
-		{
-			// This is a callback method. The actual Insert is performed internally.
-		} 
 		public IQueryable<User> GetUsers()
 		{ 
 			return this.DataContext.Users.Where(c => c.ClientId == _membershipUser.ClientId);
@@ -316,10 +320,6 @@ namespace MyERP.Web
 		{
 			// This is a callback method. The actual Insert is performed internally.
 		} 
-		public IQueryable<NumberSequence> GetNumberSequences()
-		{ 
-			return this.DataContext.NumberSequences.Where(c => c.ClientId == _membershipUser.ClientId);
-		}       
 	}
 }
 

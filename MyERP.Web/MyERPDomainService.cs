@@ -25,18 +25,18 @@ namespace MyERP.Web
 
         }
 
-        #region NoSeries
-        public void DeleteNoSeries(NumberSequence numberSequence)
+        #region NumberSequences
+        public void DeleteNumberSequences(NumberSequence numberSequence)
         {
             // This is a callback method. The actual Delete is performed internally.
         }
 
-        public void UpdateNoSeiess(NumberSequence numberSequence)
+        public void UpdateNumberSequences(NumberSequence numberSequence)
         {
             // This is a callback method. The actual Update is performed internally.
         }
 
-        public void InsertNoSeries(NumberSequence numberSequence)
+        public void InsertNumberSequences(NumberSequence numberSequence)
         {
             string SqlQuery = String.Format("CREATE SEQUENCE {0} MINVALUE {1} MAXVALUE {2} START {3}", new object[] { numberSequence.NoSeqName, numberSequence.StartingNo, numberSequence.EndingNo, numberSequence.CurrentNo });
             using (var connection = this.DataContext.Connection)

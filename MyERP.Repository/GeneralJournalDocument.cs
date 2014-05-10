@@ -1,13 +1,14 @@
 ﻿using System;
+using MyERP.DataAccess.Shared;
 using MyERP.Infrastructure;
 using MyERP.Repositories;
-using MyERP.DataAccess.Shared;
 
 namespace MyERP.DataAccess
 {
     public partial class GeneralJournalDocument
     {
-        GeneralJournalSetupRepository GeneralJournalSetupRepository = new GeneralJournalSetupRepository();
+        
+        public GeneralJournalSetupRepository GeneralJournalSetupRepository = new GeneralJournalSetupRepository();
 
         partial void OnCreated()
         {
@@ -44,7 +45,7 @@ namespace MyERP.DataAccess
         {
             if (!this.IsDeserializing)
             {
-                    NoSeriesLib.NextNo(NumberSequence.NoSeqName, NumberSequence.FormatNo, result => this.DocumentNo = result);
+                NoSeriesLib.NextNo(NumberSequence.NoSeqName, NumberSequence.FormatNo, result => this.DocumentNo = result);
             }
         }
     }

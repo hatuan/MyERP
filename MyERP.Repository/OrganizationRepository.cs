@@ -15,5 +15,6 @@ namespace MyERP.Repositories
         {
             this.LoadQuery<Organization>(this.Context.GetOrganizationsQuery(), callback);
         }
+
     }
 }

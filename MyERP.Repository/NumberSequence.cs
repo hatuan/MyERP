@@ -9,7 +9,6 @@ namespace MyERP.DataAccess
         {
             this.OrganizationId = (SessionManager.Session["Organization"] as Organization).Id;
             this.ClientId = MyERP.Repositories.WebContext.Current.User.ClientId;
-            this.Id = Guid.NewGuid();
             this.Code = "";
             this.Name = "";
             this.NoSeqName = String.Format("seq_no_series_{0}", Id.ToString().Replace("-", "_"));
