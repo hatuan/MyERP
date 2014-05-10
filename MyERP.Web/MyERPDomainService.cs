@@ -74,7 +74,7 @@ namespace MyERP.Web
         {
             Organization allOrganization = GetOrganizations().FirstOrDefault(c => c.Code == "*");
 
-            GeneralJournalSetup generalJournalSetup =
+            GeneralJournalSetup generalJournalSetup = 
                GetGeneralJournalSetups().FirstOrDefault(c => c.OrganizationId == organizationId) ??
                GetGeneralJournalSetups().FirstOrDefault(c => c.OrganizationId == allOrganization.Id);
 

@@ -78,7 +78,7 @@
                         <ColumnDefinition Width="0"/>
                     </Grid.ColumnDefinitions>
 
-                    <ContentControl regions:RegionManager.RegionName="GeneralJournalDocumentDetailsRegion" x:Name="GeneralJournalDocumentDetailsRegion" Grid.Column="1"
+                    <ContentControl regions:RegionManager.RegionName="GeneralJournalDocumentDetails" x:Name="GeneralJournalDocumentDetailsRegion" Grid.Column="1"
         				VerticalContentAlignment="Stretch" Grid.ColumnSpan="15" HorizontalContentAlignment="Stretch" Margin="1"/>
 
                 </Grid>

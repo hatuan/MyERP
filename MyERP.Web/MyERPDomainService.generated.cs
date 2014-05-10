@@ -281,8 +281,8 @@ namespace MyERP.Web
 			// This is a callback method. The actual Insert is performed internally.
 		} 
 		public IQueryable<GeneralJournalSetup> GetGeneralJournalSetups()
-		{ 
-			return this.DataContext.GeneralJournalSetups.Where(c => c.ClientId == _membershipUser.ClientId);
+		{
+		    return this.DataContext.GeneralJournalSetups.Where(c => c.ClientId == _membershipUser.ClientId);
 		}       
 		public void DeleteGeneralJournalSetups(GeneralJournalSetup generalJournalSetup)
 		{

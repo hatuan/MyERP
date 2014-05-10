@@ -9609,6 +9609,8 @@ namespace MyERP.DataAccess
     public sealed partial class User : Entity
     {
         
+        private EntityRef<Client> _client;
+        
         private Nullable<Guid> _clientId;
         
         private string _comment;
@@ -9638,6 +9640,8 @@ namespace MyERP.DataAccess
         private string _name;
         
         private string[] _openAccessGenerated;
+        
+        private EntityRef<Organization> _organization;
         
         private Nullable<Guid> _organizationId;
         
@@ -9702,6 +9706,32 @@ namespace MyERP.DataAccess
         public User()
         {
             this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="Client"/> entity.
+        /// </summary>
+        [Association("User-client-association", "ClientId", "ClientId")]
+        public Client Client
+        {
+            get
+            {
+                if ((this._client == null))
+                {
+                    this._client = new EntityRef<Client>(this, "Client", this.FilterClient);
+                }
+                return this._client.Entity;
+            }
+            set
+            {
+                Client previous = this.Client;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Client", value);
+                    this._client.Entity = value;
+                    this.RaisePropertyChanged("Client");
+                }
+            }
         }
         
         /// <summary>
@@ -10048,6 +10078,7 @@ namespace MyERP.DataAccess
         /// </summary>
         [ConcurrencyCheck()]
         [DataMember()]
+        [Required(ErrorMessageResourceName="ValidationErrorRequiredField", ErrorMessageResourceType=typeof(ValidationErrorResources))]
         [RoundtripOriginal()]
         public string Name
         {
@@ -10097,6 +10128,32 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the associated <see cref="Organization"/> entity.
+        /// </summary>
+        [Association("User-organization-association", "OrganizationId", "Id")]
+        public Organization Organization
+        {
+            get
+            {
+                if ((this._organization == null))
+                {
+                    this._organization = new EntityRef<Organization>(this, "Organization", this.FilterOrganization);
+                }
+                return this._organization.Entity;
+            }
+            set
+            {
+                Organization previous = this.Organization;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Organization", value);
+                    this._organization.Entity = value;
+                    this.RaisePropertyChanged("Organization");
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'OrganizationId' value.
         /// </summary>
         [ConcurrencyCheck()]
@@ -10127,6 +10184,7 @@ namespace MyERP.DataAccess
         /// </summary>
         [ConcurrencyCheck()]
         [DataMember()]
+        [Required(ErrorMessageResourceName="ValidationErrorRequiredField", ErrorMessageResourceType=typeof(ValidationErrorResources))]
         [RoundtripOriginal()]
         public string Password
         {
@@ -10198,6 +10256,16 @@ namespace MyERP.DataAccess
                     this.OnPasswordQuestionChanged();
                 }
             }
+        }
+        
+        private bool FilterClient(Client entity)
+        {
+            return (entity.ClientId == this.ClientId);
+        }
+        
+        private bool FilterOrganization(Organization entity)
+        {
+            return (entity.Id == this.OrganizationId);
         }
         
         /// <summary>

@@ -64,6 +64,10 @@ namespace MyERP.Modules.Financial.Views
                     window.Close();
                 };
             }
+
+            //this.RegionManager.RequestNavigate(GeneralJournalsViewRegionNames.GeneralJournalsHeader, "GeneralJournalsHeaderUserControl");
+            //this.RegionManager.RequestNavigate("FinancialWindowRegion", "GeneralJournalsView");
+            //this.RegionManager.RequestNavigate("FinancialWindowRegion", "GeneralJournalsView");
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

@@ -8,7 +8,7 @@ using MyERP.Modules.Financial.ViewModels;
 
 namespace MyERP.Modules.Financial.Views
 {
-    [ViewExport(RegionName = "GeneralJournalsHeader")]
+    [ViewExport(RegionName = GeneralJournalsViewRegionNames.GeneralJournalsHeader)]
     public partial class GeneralJournalsHeaderUserControl : UserControl, IPartImportsSatisfiedNotification
     {
         public GeneralJournalsHeaderUserControl()
@@ -32,7 +32,25 @@ namespace MyERP.Modules.Financial.Views
         public void OnImportsSatisfied()
         {
             this.EventAggregator.GetEvent<GeneralJournalsHeaderSwitchEvent>().Subscribe(OnGeneralJournalsHeaderSwitch);
+            
         }
+        #endregion
+        
+        #region INavigationAware
+        //public void OnNavigatedTo(NavigationContext navigationContext)
+        //{
+        //    this.DataContext = null;
+        //}
+
+        //public bool IsNavigationTarget(NavigationContext navigationContext)
+        //{
+        //    return true;
+        //}
+
+        //public void OnNavigatedFrom(NavigationContext navigationContext)
+        //{
+
+        //}
         #endregion
 
         public void OnGeneralJournalsHeaderSwitch(object obj)
@@ -40,5 +58,6 @@ namespace MyERP.Modules.Financial.Views
             System.Diagnostics.Debug.WriteLine(String.Format("GeneralJournalsHeaderSwitchEvent {0}", obj));
             this.DataContext = (obj as UserControl).DataContext;
         }
+
     }
 }
