@@ -8,8 +8,8 @@ using MyERP.Modules.Financial.ViewModels;
 
 namespace MyERP.Modules.Financial.Views
 {
-    [ViewExport(RegionName = GeneralJournalsViewRegionNames.GeneralJournalsHeader)]
-    public partial class GeneralJournalsHeaderUserControl : UserControl, IPartImportsSatisfiedNotification
+    [ViewExport(RegionName = GeneralJournalsViewRegionNames.GeneralJournalsHeader, IsActiveByDefault = false)]
+    public partial class GeneralJournalsHeaderUserControl : UserControl, INavigationAware, IPartImportsSatisfiedNotification
     {
         public GeneralJournalsHeaderUserControl()
         {
@@ -37,20 +37,20 @@ namespace MyERP.Modules.Financial.Views
         #endregion
         
         #region INavigationAware
-        //public void OnNavigatedTo(NavigationContext navigationContext)
-        //{
-        //    this.DataContext = null;
-        //}
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            this.DataContext = GeneralJournalDocumentsViewModel;
+        }
 
-        //public bool IsNavigationTarget(NavigationContext navigationContext)
-        //{
-        //    return true;
-        //}
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
 
-        //public void OnNavigatedFrom(NavigationContext navigationContext)
-        //{
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
 
-        //}
+        }
         #endregion
 
         public void OnGeneralJournalsHeaderSwitch(object obj)

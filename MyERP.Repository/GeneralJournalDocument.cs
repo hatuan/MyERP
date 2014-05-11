@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel.DomainServices.Client;
 using MyERP.DataAccess.Shared;
 using MyERP.Infrastructure;
 using MyERP.Repositories;
@@ -43,9 +44,9 @@ namespace MyERP.DataAccess
 
         partial void OnNumberSequenceIdChanged()
         {
-            if (!this.IsDeserializing)
+            if (this.EntityState==EntityState.Modified  || this.EntityState == EntityState.New)
             {
-                NoSeriesLib.NextNo(NumberSequence.NoSeqName, NumberSequence.FormatNo, result => this.DocumentNo = result);
+                NoSeriesLib.NextNo(this.NumberSequence.NoSeqName, this.NumberSequence.FormatNo, result => this.DocumentNo = result);
             }
         }
     }

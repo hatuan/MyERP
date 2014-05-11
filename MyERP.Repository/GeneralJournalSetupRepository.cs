@@ -23,7 +23,6 @@ namespace MyERP.Repositories
                 else
                     callback(generalJournalSetupOfCurrentOrganization);
             });
-
         }
 
         public void GetGeneralJournalSetupOfAllOrganization(Action<GeneralJournalSetup> callback)

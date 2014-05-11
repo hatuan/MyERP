@@ -65,9 +65,9 @@ namespace MyERP.Modules.Financial.Views
                 };
             }
 
-            //this.RegionManager.RequestNavigate(GeneralJournalsViewRegionNames.GeneralJournalsHeader, "GeneralJournalsHeaderUserControl");
-            //this.RegionManager.RequestNavigate("FinancialWindowRegion", "GeneralJournalsView");
-            //this.RegionManager.RequestNavigate("FinancialWindowRegion", "GeneralJournalsView");
+            //Su dung RequestNaviage de dua GeneralJournalsHeaderUserControl vao GeneralJournalsViewRegionNames.GeneralJournalsHeader
+            //va chay thu tuc OnNavigatedTo trong GeneralJournalsHeaderUserControl
+            this.RegionManager.RequestNavigate(GeneralJournalsViewRegionNames.GeneralJournalsHeader, "GeneralJournalsHeaderUserControl");
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

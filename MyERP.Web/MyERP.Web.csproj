@@ -14,7 +14,7 @@
     <RootNamespace>MyERP.Web</RootNamespace>
     <AssemblyName>MyERP.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -215,7 +215,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1602</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1602/</IISUrl>
+          <IISUrl>http://localhost/MyERP.Web</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
