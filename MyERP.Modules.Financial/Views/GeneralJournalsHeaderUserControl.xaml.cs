@@ -3,8 +3,10 @@ using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
+using MyERP.DataAccess;
 using MyERP.Infrastructure;
 using MyERP.Modules.Financial.ViewModels;
+using Telerik.Windows.Controls;
 
 namespace MyERP.Modules.Financial.Views
 {
@@ -32,7 +34,15 @@ namespace MyERP.Modules.Financial.Views
         public void OnImportsSatisfied()
         {
             this.EventAggregator.GetEvent<GeneralJournalsHeaderSwitchEvent>().Subscribe(OnGeneralJournalsHeaderSwitch);
-            
+            this.GeneralJournalDocumentsViewModel.PropertyChanged +=
+                (sender, args) =>
+                {
+                    if (args.PropertyName == "SelectedGeneralJournalDocument" 
+                        && GeneralJournalDocumentsViewModel.SelectedGeneralJournalDocument != null)
+                        
+                        GeneralJournalLinesViewModel.GeneralJournalDocument = GeneralJournalDocumentsViewModel.SelectedGeneralJournalDocument;
+                };
+
         }
         #endregion
         
@@ -40,6 +50,15 @@ namespace MyERP.Modules.Financial.Views
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             this.DataContext = GeneralJournalDocumentsViewModel;
+
+            if (DataContext is ICloseable)
+            {
+                (DataContext as ICloseable).RequestClose += (_, __) =>
+                {
+                    RadWindow window = this.ParentOfType<FinancialWindow>();
+                    window.Close();
+                };
+            }
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -55,8 +74,16 @@ namespace MyERP.Modules.Financial.Views
 
         public void OnGeneralJournalsHeaderSwitch(object obj)
         {
-            System.Diagnostics.Debug.WriteLine(String.Format("GeneralJournalsHeaderSwitchEvent {0}", obj));
             this.DataContext = (obj as UserControl).DataContext;
+
+            if (DataContext is ICloseable)
+            {
+                (DataContext as ICloseable).RequestClose += (_, __) =>
+                {
+                    RadWindow window = this.ParentOfType<FinancialWindow>();
+                    window.Close();
+                };
+            }
         }
 
     }

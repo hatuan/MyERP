@@ -82,6 +82,7 @@
       <DependentUpon>ValidationErrorResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Account.cs" />
+    <Compile Include="GeneralJournalLine.cs" />
     <Compile Include="GeneralJournalDocument.cs" />
     <Compile Include="GeneralJournalSetupRepository.cs" />
     <Compile Include="GeneralJournalSetup.cs" />

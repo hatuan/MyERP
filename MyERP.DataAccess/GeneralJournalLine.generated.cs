@@ -147,10 +147,10 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Guid _businessPartnerId;
+		private Guid? _businessPartnerId;
 		[Column("business_partner_id", IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid")]
 		[Storage("_businessPartnerId")]
-		public virtual Guid BusinessPartnerId
+		public virtual Guid? BusinessPartnerId
 		{
 			get
 			{
@@ -162,10 +162,10 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Guid _jobId;
+		private Guid? _jobId;
 		[Column("job_id", IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid")]
 		[Storage("_jobId")]
-		public virtual Guid JobId
+		public virtual Guid? JobId
 		{
 			get
 			{
@@ -417,10 +417,10 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Guid _fixAssetId;
+		private Guid? _fixAssetId;
 		[Column("fix_asset_id", OpenAccessType = OpenAccessType.Guid, IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
 		[Storage("_fixAssetId")]
-		public virtual Guid FixAssetId
+		public virtual Guid? FixAssetId
 		{
 			get
 			{
@@ -564,6 +564,21 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._transactionDocument = value;
+			}
+		}
+		
+		private Currency _currency;
+		[ForeignKeyAssociation(SharedFields = "CurrencyId", TargetFields = "Id")]
+		[Storage("_currency")]
+		public virtual Currency Currency
+		{
+			get
+			{
+				return this._currency;
+			}
+			set
+			{
+				this._currency = value;
 			}
 		}
 		

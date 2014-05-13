@@ -866,10 +866,10 @@
         <orm:field name="_creditAmount" property="CreditAmount" behavior="readwrite" uniqueId="62bb2580-e943-43c1-bf7c-a9957882a03a" type="System.Decimal">
           <orm:column name="credit_amount" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         </orm:field>
-        <orm:field name="_businessPartnerId" property="BusinessPartnerId" behavior="readwrite" uniqueId="9c36f9d9-c23c-40f7-bc55-e749de0bedf1" type="System.Guid">
+        <orm:field name="_businessPartnerId" property="BusinessPartnerId" behavior="readwrite" uniqueId="9c36f9d9-c23c-40f7-bc55-e749de0bedf1" type="System.Nullable`1[[System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="business_partner_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_jobId" property="JobId" behavior="readwrite" uniqueId="7bf2150d-b5a5-4e2f-a3e9-f1c54ab63723" type="System.Guid">
+        <orm:field name="_jobId" property="JobId" behavior="readwrite" uniqueId="7bf2150d-b5a5-4e2f-a3e9-f1c54ab63723" type="System.Nullable`1[[System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="job_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_lineNo" property="LineNo" behavior="readwrite" uniqueId="6b7ea4e4-fd50-44ad-a51a-8bc5584e8e5b" type="System.Int64">
@@ -920,7 +920,7 @@
         <orm:field name="_transactionType" property="TransactionType" behavior="readwrite" uniqueId="35ec6a41-712a-4ec5-8f9c-8e8fa8eb2269" type="TransactionType">
           <orm:column name="transaction_type" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_fixAssetId" property="FixAssetId" uniqueId="cee6ff8c-fb93-48a5-9610-4c051f4a6af3" type="System.Guid">
+        <orm:field name="_fixAssetId" property="FixAssetId" uniqueId="cee6ff8c-fb93-48a5-9610-4c051f4a6af3" type="System.Nullable`1[[System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="fix_asset_id" sql-type="uuid" nullable="true" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="c828356a-8cdf-4c6a-93a4-1fe35054a4d2" type="MyERP.DataAccess.Client">
@@ -966,6 +966,11 @@
         <orm:field name="_transactionDocument" property="GeneralJournalDocument" behavior="readwrite" uniqueId="b8f7d741-5a37-4b6f-af00-3e93ea88eaba" type="MyERP.DataAccess.GeneralJournalDocument">
           <orm:reference uniqueId="5685b103-b6b7-44cb-a08e-f3278fc9a835" association-name="GeneralJournalLinesHasGeneralJournalDocument">
             <orm:sharedfield name="_generalJournalDocumentId" target-class="MyERP.DataAccess.GeneralJournalDocument" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_currency" property="Currency" behavior="readwrite" uniqueId="0fca2b26-47ab-4fd8-9586-be4566fa2dc8" type="MyERP.DataAccess.Currency">
+          <orm:reference uniqueId="1a348988-50b9-49c1-83ea-e3ec12bb35d4" association-name="GeneralJournalLineHasCurrency">
+            <orm:sharedfield name="_currencyId" target-class="MyERP.DataAccess.Currency" target-field="_id" />
           </orm:reference>
         </orm:field>
       </orm:class>
@@ -2543,8 +2548,8 @@
       <Property Id="25cd9e95-1e3e-4b5b-b3fb-0c06856d0d6e" name="Id" type="Guid" label="Id : Guid" kind="Persistent" identity="true" fieldName="_id" />
       <Property Id="f71c5a51-c976-4ab9-aafb-056026dbb4ba" name="Description" label="Description : String" kind="Persistent" fieldName="_description" />
       <Property Id="6b7ea4e4-fd50-44ad-a51a-8bc5584e8e5b" name="LineNo" type="Int64" label="LineNo : Int64" kind="Persistent" fieldName="_lineNo" />
-      <Property Id="9c36f9d9-c23c-40f7-bc55-e749de0bedf1" name="BusinessPartnerId" type="Guid" label="BusinessPartnerId : Guid" kind="Persistent" fieldName="_businessPartnerId" />
-      <Property Id="7bf2150d-b5a5-4e2f-a3e9-f1c54ab63723" name="JobId" type="Guid" label="JobId : Guid" kind="Persistent" fieldName="_jobId" />
+      <Property Id="9c36f9d9-c23c-40f7-bc55-e749de0bedf1" name="BusinessPartnerId" type="Guid" label="BusinessPartnerId : Guid" nullable="true" kind="Persistent" fieldName="_businessPartnerId" />
+      <Property Id="7bf2150d-b5a5-4e2f-a3e9-f1c54ab63723" name="JobId" type="Guid" label="JobId : Guid" nullable="true" kind="Persistent" fieldName="_jobId" />
       <Property Id="806fda7d-e5f2-4626-b5be-9aa4c7d8a9fe" name="CorAccountId" type="Guid" label="CorAccountId : Guid" kind="Persistent" fieldName="_corAccountId" />
       <Property Id="62bb2580-e943-43c1-bf7c-a9957882a03a" name="CreditAmount" type="Decimal" label="CreditAmount : Decimal" kind="Persistent" fieldName="_creditAmount" />
       <Property Id="c786bea9-7e2e-4ada-8d3e-8ce759cff9bf" name="CreditAmountLcy" type="Decimal" label="CreditAmountLcy : Decimal" kind="Persistent" fieldName="_creditAmountLcy" />
@@ -2566,7 +2571,7 @@
       <Property Id="91f2445b-b222-4b98-bd78-c2649cd19ec3" name="RecModified" type="DateTime" label="RecModified : DateTime" kind="Persistent" fieldName="_recModified" />
       <Property Id="4f4ee44c-4962-4757-855e-e2b7bbe4f577" name="RecModifiedBy" type="Guid" label="RecModifiedBy : Guid" kind="Persistent" fieldName="_recModifiedBy" />
       <Property Id="35ec6a41-712a-4ec5-8f9c-8e8fa8eb2269" name="TransactionType" type="TransactionType" label="TransactionType : TransactionType" kind="Persistent" fieldName="_transactionType" />
-      <Property Id="cee6ff8c-fb93-48a5-9610-4c051f4a6af3" name="FixAssetId" type="Guid" label="FixAssetId : Guid" fieldName="_fixAssetId" />
+      <Property Id="cee6ff8c-fb93-48a5-9610-4c051f4a6af3" name="FixAssetId" type="Guid" label="FixAssetId : Guid" nullable="true" fieldName="_fixAssetId" />
       <AssociationTargets>
         <Association Id="5685b103-b6b7-44cb-a08e-f3278fc9a835" SourceMultiplicity="ZeroOne" name="GeneralJournalLinesHasGeneralJournalDocument">
           <DomainClassMoniker name="/EntitiesModel/GeneralJournalDocument" />
@@ -2645,6 +2650,14 @@
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
+        <Association Id="1a348988-50b9-49c1-83ea-e3ec12bb35d4" SourceMultiplicity="ZeroOne" name="GeneralJournalLineHasCurrency">
+          <DomainClassMoniker name="/EntitiesModel/Currency" />
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="05f892b1-f4a7-49ad-b1f1-ff9ec78d1930">
+              <NavigationalPropertyMoniker name="/EntitiesModel/GeneralJournalLine/Currency" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
       </AssociationTargets>
       <navigationalProperties>
         <classHasNavigationalProperties Id="f7e47e64-371d-4627-88d6-72bfc2fe50e9">
@@ -2673,6 +2686,9 @@
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="a7ed29dd-177e-4788-be6b-e29b531025b5">
           <NavigationalProperty Id="6defb92f-9d57-4cf1-8858-5d4a9fbddd19" name="CorAccount" type="Account" label="CorAccount : Account" nullable="true" kind="Persistent" fieldName="_corAccount" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="39379af5-70f9-47ab-85e9-4c49c8091fe4">
+          <NavigationalProperty Id="0fca2b26-47ab-4fd8-9586-be4566fa2dc8" name="Currency" type="Currency" label="Currency : Currency" nullable="true" kind="Persistent" fieldName="_currency" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>

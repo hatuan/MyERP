@@ -18,9 +18,8 @@ namespace MyERP.DataAccess
             public NumberSequence NumberSequence { get; set; }
 
             [Include]
-            [Composition]
             [Association("gldocument-line-association", "Id", "GeneralJournalDocumentId")]
-            public IList<GeneralJournalLine> GeneralJournalLines { get; set; }
+            public ICollection<GeneralJournalLine> GeneralJournalLines { get; set; }
 
             [Include]
             [Association("gldocument-client-association", "ClientId", "ClientId")]

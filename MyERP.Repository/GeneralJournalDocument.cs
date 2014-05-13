@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel.DomainServices.Client;
 using MyERP.DataAccess.Shared;
 using MyERP.Infrastructure;
@@ -49,5 +51,40 @@ namespace MyERP.DataAccess
                 NoSeriesLib.NextNo(this.NumberSequence.NoSeqName, this.NumberSequence.FormatNo, result => this.DocumentNo = result);
             }
         }
+
+        partial void OnDocumentNoChanged()
+        {
+            if (this.EntityState == EntityState.Modified || this.EntityState == EntityState.New)
+            {
+                foreach (var generalJournalLine in this.GeneralJournalLines)
+                {
+                    generalJournalLine.DocumentNo = this.DocumentNo;
+                }
+
+            }
+        }
+
+        partial void OnDocumentCreatedChanged()
+        {
+            if (this.EntityState == EntityState.Modified || this.EntityState == EntityState.New)
+            {
+                foreach (var generalJournalLine in this.GeneralJournalLines)
+                {
+                    generalJournalLine.DocumentCreated = this.DocumentCreated;
+                }
+            }
+        }
+
+        partial void OnDocumentPostedChanged()
+        {
+            if (this.EntityState == EntityState.Modified || this.EntityState == EntityState.New)
+            {
+                foreach (var generalJournalLine in this.GeneralJournalLines)
+                {
+                    generalJournalLine.DocumentPosted = this.DocumentPosted;
+                }
+            }
+        }
+
     }
 }

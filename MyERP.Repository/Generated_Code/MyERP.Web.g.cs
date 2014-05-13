@@ -3945,7 +3945,6 @@ namespace MyERP.DataAccess
         /// Gets the collection of associated <see cref="GeneralJournalLine"/> entity instances.
         /// </summary>
         [Association("gldocument-line-association", "Id", "GeneralJournalDocumentId")]
-        [Composition()]
         [Editable(false)]
         [ReadOnly(true)]
         public EntityCollection<GeneralJournalLine> GeneralJournalLines
@@ -4522,19 +4521,27 @@ namespace MyERP.DataAccess
     public sealed partial class GeneralJournalLine : Entity
     {
         
+        private EntityRef<Account> _account;
+        
         private Guid _accountId;
         
-        private Guid _businessPartnerId;
+        private EntityRef<BusinessPartner> _businessPartner;
+        
+        private Nullable<Guid> _businessPartnerId;
         
         private EntityRef<Client> _client;
         
         private Guid _clientId;
+        
+        private EntityRef<Account> _corAccount;
         
         private Guid _corAccountId;
         
         private decimal _creditAmount;
         
         private decimal _creditAmountLcy;
+        
+        private EntityRef<Currency> _currency;
         
         private Nullable<decimal> _currencyExchangeRate;
         
@@ -4554,7 +4561,7 @@ namespace MyERP.DataAccess
         
         private DocumentType _documentType;
         
-        private Guid _fixAssetId;
+        private Nullable<Guid> _fixAssetId;
         
         private EntityRef<GeneralJournalDocument> _generalJournalDocument;
         
@@ -4562,7 +4569,9 @@ namespace MyERP.DataAccess
         
         private Guid _id;
         
-        private Guid _jobId;
+        private EntityRef<Job> _job;
+        
+        private Nullable<Guid> _jobId;
         
         private long _lineNo;
         
@@ -4597,7 +4606,7 @@ namespace MyERP.DataAccess
         partial void OnCreated();
         partial void OnAccountIdChanging(Guid value);
         partial void OnAccountIdChanged();
-        partial void OnBusinessPartnerIdChanging(Guid value);
+        partial void OnBusinessPartnerIdChanging(Nullable<Guid> value);
         partial void OnBusinessPartnerIdChanged();
         partial void OnClientIdChanging(Guid value);
         partial void OnClientIdChanged();
@@ -4625,13 +4634,13 @@ namespace MyERP.DataAccess
         partial void OnDocumentPostedChanged();
         partial void OnDocumentTypeChanging(DocumentType value);
         partial void OnDocumentTypeChanged();
-        partial void OnFixAssetIdChanging(Guid value);
+        partial void OnFixAssetIdChanging(Nullable<Guid> value);
         partial void OnFixAssetIdChanged();
         partial void OnGeneralJournalDocumentIdChanging(Guid value);
         partial void OnGeneralJournalDocumentIdChanged();
         partial void OnIdChanging(Guid value);
         partial void OnIdChanged();
-        partial void OnJobIdChanging(Guid value);
+        partial void OnJobIdChanging(Nullable<Guid> value);
         partial void OnJobIdChanged();
         partial void OnLineNoChanging(long value);
         partial void OnLineNoChanged();
@@ -4664,6 +4673,32 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the associated <see cref="Account"/> entity.
+        /// </summary>
+        [Association("glline-account-association", "AccountId", "Id")]
+        public Account Account
+        {
+            get
+            {
+                if ((this._account == null))
+                {
+                    this._account = new EntityRef<Account>(this, "Account", this.FilterAccount);
+                }
+                return this._account.Entity;
+            }
+            set
+            {
+                Account previous = this.Account;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Account", value);
+                    this._account.Entity = value;
+                    this.RaisePropertyChanged("Account");
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'AccountId' value.
         /// </summary>
         [DataMember()]
@@ -4689,11 +4724,37 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the associated <see cref="BusinessPartner"/> entity.
+        /// </summary>
+        [Association("glline-business-association", "BusinessPartnerId", "Id")]
+        public BusinessPartner BusinessPartner
+        {
+            get
+            {
+                if ((this._businessPartner == null))
+                {
+                    this._businessPartner = new EntityRef<BusinessPartner>(this, "BusinessPartner", this.FilterBusinessPartner);
+                }
+                return this._businessPartner.Entity;
+            }
+            set
+            {
+                BusinessPartner previous = this.BusinessPartner;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("BusinessPartner", value);
+                    this._businessPartner.Entity = value;
+                    this.RaisePropertyChanged("BusinessPartner");
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'BusinessPartnerId' value.
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public Guid BusinessPartnerId
+        public Nullable<Guid> BusinessPartnerId
         {
             get
             {
@@ -4760,6 +4821,32 @@ namespace MyERP.DataAccess
                     this._clientId = value;
                     this.RaiseDataMemberChanged("ClientId");
                     this.OnClientIdChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="Account"/> entity.
+        /// </summary>
+        [Association("glline-coraccount-association", "CorAccountId", "Id")]
+        public Account CorAccount
+        {
+            get
+            {
+                if ((this._corAccount == null))
+                {
+                    this._corAccount = new EntityRef<Account>(this, "CorAccount", this.FilterCorAccount);
+                }
+                return this._corAccount.Entity;
+            }
+            set
+            {
+                Account previous = this.CorAccount;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("CorAccount", value);
+                    this._corAccount.Entity = value;
+                    this.RaisePropertyChanged("CorAccount");
                 }
             }
         }
@@ -4835,6 +4922,32 @@ namespace MyERP.DataAccess
                     this._creditAmountLcy = value;
                     this.RaiseDataMemberChanged("CreditAmountLcy");
                     this.OnCreditAmountLcyChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the associated <see cref="Currency"/> entity.
+        /// </summary>
+        [Association("glline-currency-association", "CurrencyId", "Id")]
+        public Currency Currency
+        {
+            get
+            {
+                if ((this._currency == null))
+                {
+                    this._currency = new EntityRef<Currency>(this, "Currency", this.FilterCurrency);
+                }
+                return this._currency.Entity;
+            }
+            set
+            {
+                Currency previous = this.Currency;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Currency", value);
+                    this._currency.Entity = value;
+                    this.RaisePropertyChanged("Currency");
                 }
             }
         }
@@ -5069,7 +5182,7 @@ namespace MyERP.DataAccess
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public Guid FixAssetId
+        public Nullable<Guid> FixAssetId
         {
             get
             {
@@ -5167,11 +5280,37 @@ namespace MyERP.DataAccess
         }
         
         /// <summary>
+        /// Gets or sets the associated <see cref="Job"/> entity.
+        /// </summary>
+        [Association("glline-job-association", "JobId", "Id")]
+        public Job Job
+        {
+            get
+            {
+                if ((this._job == null))
+                {
+                    this._job = new EntityRef<Job>(this, "Job", this.FilterJob);
+                }
+                return this._job.Entity;
+            }
+            set
+            {
+                Job previous = this.Job;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("Job", value);
+                    this._job.Entity = value;
+                    this.RaisePropertyChanged("Job");
+                }
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets the 'JobId' value.
         /// </summary>
         [DataMember()]
         [RoundtripOriginal()]
-        public Guid JobId
+        public Nullable<Guid> JobId
         {
             get
             {
@@ -5497,14 +5636,39 @@ namespace MyERP.DataAccess
             }
         }
         
+        private bool FilterAccount(Account entity)
+        {
+            return (entity.Id == this.AccountId);
+        }
+        
+        private bool FilterBusinessPartner(BusinessPartner entity)
+        {
+            return (entity.Id == this.BusinessPartnerId);
+        }
+        
         private bool FilterClient(Client entity)
         {
             return (entity.ClientId == this.ClientId);
         }
         
+        private bool FilterCorAccount(Account entity)
+        {
+            return (entity.Id == this.CorAccountId);
+        }
+        
+        private bool FilterCurrency(Currency entity)
+        {
+            return (entity.Id == this.CurrencyId);
+        }
+        
         private bool FilterGeneralJournalDocument(GeneralJournalDocument entity)
         {
             return (entity.Id == this.GeneralJournalDocumentId);
+        }
+        
+        private bool FilterJob(Job entity)
+        {
+            return (entity.Id == this.JobId);
         }
         
         private bool FilterOrganization(Organization entity)
@@ -10815,6 +10979,17 @@ namespace MyERP.Web
             get
             {
                 return base.EntityContainer.GetEntitySet<GeneralJournalDocument>();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the set of <see cref="GeneralJournalLine"/> entity instances that have been loaded into this <see cref="MyERPDomainContext"/> instance.
+        /// </summary>
+        public EntitySet<GeneralJournalLine> GeneralJournalLines
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<GeneralJournalLine>();
             }
         }
         

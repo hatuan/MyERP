@@ -44,6 +44,19 @@ namespace MyERP.Modules.Financial.ViewModels
         public ICommand DeleteCommand { get; set; }
         public ICommand CloseWindowCommand { get; set; }
 
+        private GeneralJournalDocument _generalJournalDocument;
+        public GeneralJournalDocument GeneralJournalDocument {
+            get { return _generalJournalDocument; }
+            set
+            {
+                if (value == null)
+                    return;
+
+                _generalJournalDocument = value;
+                filterGeneralJournalDocument.Value = value.Id ;
+                GeneralJournalLines.AutoLoad = true;
+            }
+        }
 
         private QueryableDomainServiceCollectionView<GeneralJournalLine> _generalJournalLines;
         public QueryableDomainServiceCollectionView<GeneralJournalLine> GeneralJournalLines
@@ -77,6 +90,9 @@ namespace MyERP.Modules.Financial.ViewModels
             get { return this.GeneralJournalLines.IsBusy; }
         }
 
+        private FilterDescriptor filterGeneralJournalDocument = new FilterDescriptor("GeneralJournalDocumentId",
+            FilterOperator.IsEqualTo, FilterDescriptor.UnsetValue);
+
         #endregion
 
         #region NavigationAwareDataViewModel overrides
@@ -98,9 +114,11 @@ namespace MyERP.Modules.Financial.ViewModels
                     return;
                 }
             };
+            GeneralJournalLines.SubmittedChanges += GeneralJournalLines_SubmittedChanges;
             GeneralJournalLines.PropertyChanged += GeneralJournalLines_PropertyChanged;
+            this.GeneralJournalLines.FilterDescriptors.Add(filterGeneralJournalDocument);
 
-            this.AddNewCommand = new DelegateCommand(this.OnAddNewCommandExecuted, AddNewCommandCanExecuted);
+            this.AddNewCommand = new DelegateCommand(OnAddNewCommandExecuted, AddNewCommandCanExecuted);
             this.SubmitChangesCommand = new DelegateCommand(OnSubmitChangesExcuted, SubmitChangesCommandCanExecute);
             this.RejectChangesCommand = new DelegateCommand(OnRejectChangesExcuted, SubmitChangesCommandCanExecute);
             this.RefreshCommand = new DelegateCommand(OnRefreshExcuted, RefreshCommandCanExecute);
@@ -108,6 +126,16 @@ namespace MyERP.Modules.Financial.ViewModels
             this.CloseWindowCommand = new DelegateCommand(OnCloseWindowExcuted, CloseWindowCanExecute);
         }
         #endregion
+
+        void GeneralJournalLines_SubmittedChanges(object sender, Telerik.Windows.Controls.DomainServices.DomainServiceSubmittedChangesEventArgs e)
+        {
+            if (e.HasError)
+            {
+                MessageBox.Show(e.Error.ToString(), "Submit Error", MessageBoxButton.OK);
+                e.MarkErrorAsHandled();
+            }
+        }
+
 
         void GeneralJournalLines_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -138,7 +166,10 @@ namespace MyERP.Modules.Financial.ViewModels
         private void OnAddNewCommandExecuted()
         {
             GeneralJournalLine generalJournalLine = new GeneralJournalLine();
-            GeneralJournalLines.AddNew(generalJournalLine);
+            this.GeneralJournalLines.AddNew(generalJournalLine);
+
+            generalJournalLine.GeneralJournalDocumentId = GeneralJournalDocument.Id;
+            this.GeneralJournalDocument.GeneralJournalLines.Add(generalJournalLine);
         }
 
         private bool SubmitChangesCommandCanExecute()
