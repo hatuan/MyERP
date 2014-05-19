@@ -170,6 +170,9 @@ namespace MyERP.Modules.Financial.ViewModels
 
             generalJournalLine.GeneralJournalDocumentId = GeneralJournalDocument.Id;
             this.GeneralJournalDocument.GeneralJournalLines.Add(generalJournalLine);
+
+            filterGeneralJournalDocument.Value = FilterDescriptor.UnsetValue;
+            filterGeneralJournalDocument.Value = GeneralJournalDocument.Id;
         }
 
         private bool SubmitChangesCommandCanExecute()
