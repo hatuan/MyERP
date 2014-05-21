@@ -17,8 +17,17 @@ namespace MyERP.DataAccess
             [Association("gldocument-number-sequence-association", "NumberSequenceId", "Id")]
             public NumberSequence NumberSequence { get; set; }
 
+            [Required]
+            public String DocumentNo { get; set; }
+
+            [Required]
+            public DateTime DocumentCreated { get; set; }
+
+            [Required]
+            public DateTime DocumentPosted { get; set; }
+
             [Include]
-            [Association("gldocument-line-association", "Id", "GeneralJournalDocumentId")]
+            [Association("gldocument-line-association", "Id", "GeneralJournalDocumentId", IsForeignKey = false)]
             public ICollection<GeneralJournalLine> GeneralJournalLines { get; set; }
 
             [Include]

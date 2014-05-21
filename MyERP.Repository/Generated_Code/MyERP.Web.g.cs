@@ -20,6 +20,7 @@ namespace MyERP.DataAccess
     using System.ServiceModel.DomainServices.Client;
     using System.ServiceModel.DomainServices.Client.ApplicationServices;
     using MyERP.DataAccess.Resources;
+    using MyERP.DataAccess.RudeValidation;
     
     
     /// <summary>
@@ -3821,6 +3822,7 @@ namespace MyERP.DataAccess
         /// Gets or sets the 'DocumentCreated' value.
         /// </summary>
         [DataMember()]
+        [Required()]
         [RoundtripOriginal()]
         public DateTime DocumentCreated
         {
@@ -3846,6 +3848,7 @@ namespace MyERP.DataAccess
         /// Gets or sets the 'DocumentNo' value.
         /// </summary>
         [DataMember()]
+        [Required()]
         [RoundtripOriginal()]
         public string DocumentNo
         {
@@ -3871,6 +3874,7 @@ namespace MyERP.DataAccess
         /// Gets or sets the 'DocumentPosted' value.
         /// </summary>
         [DataMember()]
+        [Required()]
         [RoundtripOriginal()]
         public DateTime DocumentPosted
         {
@@ -4701,6 +4705,7 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'AccountId' value.
         /// </summary>
+        [CustomValidation(typeof(NotNullValidators), "GuidNotNull")]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid AccountId
@@ -4854,6 +4859,7 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the 'CorAccountId' value.
         /// </summary>
+        [CustomValidation(typeof(NotNullValidators), "GuidNotNull")]
         [DataMember()]
         [RoundtripOriginal()]
         public Guid CorAccountId
@@ -5205,7 +5211,7 @@ namespace MyERP.DataAccess
         /// <summary>
         /// Gets or sets the associated <see cref="GeneralJournalDocument"/> entity.
         /// </summary>
-        [Association("glline-document-association", "GeneralJournalDocumentId", "Id")]
+        [Association("glline-document-association", "GeneralJournalDocumentId", "Id", IsForeignKey=true)]
         public GeneralJournalDocument GeneralJournalDocument
         {
             get
@@ -5222,6 +5228,14 @@ namespace MyERP.DataAccess
                 if ((previous != value))
                 {
                     this.ValidateProperty("GeneralJournalDocument", value);
+                    if ((value != null))
+                    {
+                        this.GeneralJournalDocumentId = value.Id;
+                    }
+                    else
+                    {
+                        this.GeneralJournalDocumentId = default(Guid);
+                    }
                     this._generalJournalDocument.Entity = value;
                     this.RaisePropertyChanged("GeneralJournalDocument");
                 }

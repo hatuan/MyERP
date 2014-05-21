@@ -69,7 +69,7 @@
                 </telerik:GridViewDataColumn>
 				<telerik:GridViewDataColumn Header="EX RATE" DataMemberBinding="{Binding CurrencyExchangeRate, Mode=TwoWay}" Width="100"/>
 				<telerik:GridViewDataColumn Header="DEBIT LCY" DataMemberBinding="{Binding DebitAmountLcy, Mode=TwoWay}" Width="100"/>
-                <telerik:GridViewDataColumn Header="CREDIT LCY" DataMemberBinding="{Binding CreditAmountLcy.Code, Mode=TwoWay}" Width="100"/>
+                <telerik:GridViewDataColumn Header="CREDIT LCY" DataMemberBinding="{Binding CreditAmountLcy, Mode=TwoWay}" Width="100"/>
 				<telerik:GridViewDataColumn Header="DESCRIPTION" DataMemberBinding="{Binding Description, Mode=TwoWay}" Width="200"/>
 				<telerik:GridViewDataColumn Header="BUS PARTNER" DataMemberBinding="{Binding BusinessPartner.Code}" Width="100"/>
 				<telerik:GridViewDataColumn Header="JOB" DataMemberBinding="{Binding Job.Code}" Width="100"/>

@@ -128,6 +128,7 @@
     </Compile>
     <Compile Include="Shared\DocumentType.cs" />
     <Compile Include="Shared\NoSeriesLib.shared.cs" />
+    <Compile Include="Shared\RudeValidation.shared.cs" />
     <Compile Include="Shared\TransactionType.cs" />
     <Compile Include="User.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>

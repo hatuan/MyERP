@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Net;
 using System.ServiceModel.DomainServices.Client;
@@ -60,14 +61,18 @@ namespace MyERP.Modules.Financial.ViewModels
             }
             set
             {
-                if (this._selectedGeneralJournalDocument == value)
-                {
+                if (value == null || this._selectedGeneralJournalDocument == value)
                     return;
-                }
+
+                if (this._selectedGeneralJournalDocument != null)
+                    (this._selectedGeneralJournalDocument as IEditableObject).EndEdit();
+                
                 this._selectedGeneralJournalDocument = value;
                 this.RaisePropertyChanged("SelectedGeneralJournalDocument");
 
                 ((DelegateCommand)DeleteCommand).RaiseCanExecuteChanged();
+
+                this._selectedGeneralJournalDocument.PropertyChanged += _selectedGeneralJournalDocument_PropertyChanged;
             }
         }
 
@@ -97,6 +102,7 @@ namespace MyERP.Modules.Financial.ViewModels
                     args.MarkErrorAsHandled();
                 }
             };
+            GeneralJournalDocuments.SubmittingChanges += GeneralJournalDocuments_SubmittingChanges;
             GeneralJournalDocuments.SubmittedChanges += _generalJournalDocuments_SubmittedChanges;
             GeneralJournalDocuments.PropertyChanged += GeneralJournalDocuments_PropertyChanged;
 
@@ -111,6 +117,25 @@ namespace MyERP.Modules.Financial.ViewModels
 
         #endregion
 
+        private void GeneralJournalDocuments_SubmittingChanges(object sender,
+            Telerik.Windows.Controls.DomainServices.DomainServiceSubmittingChangesEventArgs e)
+        {
+            EntityChangeSet cs = e.ChangeSet;
+
+            System.Diagnostics.Debug.WriteLine(String.Format("Added Count = {0}", cs.AddedEntities.Count));
+            foreach (var entity in cs.AddedEntities)
+                System.Diagnostics.Debug.WriteLine(String.Format("Added = {0} - {1}", entity, entity.GetIdentity()));
+
+            System.Diagnostics.Debug.WriteLine(String.Format("Modified Count = {0}", cs.ModifiedEntities.Count));
+            foreach (var entity in cs.ModifiedEntities)
+                System.Diagnostics.Debug.WriteLine(String.Format("Modified = {0} - {1}", entity, entity.GetIdentity()));
+
+            System.Diagnostics.Debug.WriteLine(String.Format("Removed Count = {0}", cs.RemovedEntities.Count));
+            foreach (var entity in cs.RemovedEntities)
+                System.Diagnostics.Debug.WriteLine(String.Format("Removed = {0} - {1}", entity, entity.GetIdentity()));
+
+        }
+
         void _generalJournalDocuments_SubmittedChanges(object sender, Telerik.Windows.Controls.DomainServices.DomainServiceSubmittedChangesEventArgs e)
         {
             if (e.HasError)
@@ -118,6 +143,24 @@ namespace MyERP.Modules.Financial.ViewModels
                 MessageBox.Show(e.Error.ToString(), "Submit Error", MessageBoxButton.OK);
                 e.MarkErrorAsHandled();
             }
+        }
+        
+        void _selectedGeneralJournalDocument_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var generalJournalDocument = sender as GeneralJournalDocument;
+            
+            if (e.PropertyName == "HasChanges" && !GeneralJournalDocumentRepository.Context.IsSubmitting)
+            {
+                (sender as IEditableObject).EndEdit();
+                GeneralJournalDocumentRepository.SaveOrUpdateEntities();
+            }
+
+            //if (generalJournalDocument.EntityState == EntityState.New
+            //    && !GeneralJournalDocumentRepository.Context.IsSubmitting)
+            //{
+            //    (generalJournalDocument as IEditableObject).EndEdit();
+            //    GeneralJournalDocumentRepository.Context.CommitChanges();
+            //}
         }
 
         void GeneralJournalDocuments_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -148,7 +191,13 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnAddNewCommandExecuted()
         {
-            GeneralJournalDocuments.AddNew();
+            if (SelectedGeneralJournalDocument != null)
+                (SelectedGeneralJournalDocument as IEditableObject).EndEdit();
+
+            var generalJournalDocuments = new GeneralJournalDocument();
+            this.GeneralJournalDocuments.AddNew(generalJournalDocuments);
+
+            this.GeneralJournalDocuments.CommitNew();
         }
 
         private bool SubmitChangesCommandCanExecute()
@@ -163,6 +212,9 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnSubmitChangesExcuted()
         {
+            if (SelectedGeneralJournalDocument != null)
+                (SelectedGeneralJournalDocument as IEditableObject).EndEdit();
+
             this.GeneralJournalDocuments.SubmitChanges();
         }
 
@@ -188,6 +240,8 @@ namespace MyERP.Modules.Financial.ViewModels
         {
             if (SelectedGeneralJournalDocument != null)
                 this.GeneralJournalDocuments.Remove(SelectedGeneralJournalDocument);
+
+            RaisePropertyChanged(()=>this.SelectedGeneralJournalDocument);
         }
 
         private bool CloseWindowCanExecute()

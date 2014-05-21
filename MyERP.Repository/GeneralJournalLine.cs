@@ -45,9 +45,12 @@ namespace MyERP.DataAccess
         {
             if (this.EntityState == EntityState.New)
             {
-                int _numberOfGeneralJournalLineOfDocument =
-                    GeneralJournalDocument.GeneralJournalLines.Where(c => c.LineNo%10000 == 0).ToList().Count;
-                this.LineNo = _numberOfGeneralJournalLineOfDocument*10000 + 10000;
+                if(GeneralJournalDocument.GeneralJournalLines.Count == 0)
+                    this.LineNo = 10000;
+                else
+                {
+                    this.LineNo = GeneralJournalDocument.GeneralJournalLines.Where(c => c.LineNo % 10000 == 0).Max(m => m.LineNo) +10000;
+                }
             }
         }
     }

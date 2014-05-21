@@ -52,39 +52,39 @@ namespace MyERP.DataAccess
             }
         }
 
-        partial void OnDocumentNoChanged()
-        {
-            if (this.EntityState == EntityState.Modified || this.EntityState == EntityState.New)
-            {
-                foreach (var generalJournalLine in this.GeneralJournalLines)
-                {
-                    generalJournalLine.DocumentNo = this.DocumentNo;
-                }
+        //partial void OnDocumentNoChanged()
+        //{
+        //    if ((this.EntityState == EntityState.Modified || this.EntityState == EntityState.New) && !this.HasValidationErrors)
+        //    {
+        //        foreach (var generalJournalLine in this.GeneralJournalLines)
+        //        {
+        //            generalJournalLine.DocumentNo = this.DocumentNo;
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
-        partial void OnDocumentCreatedChanged()
-        {
-            if (this.EntityState == EntityState.Modified || this.EntityState == EntityState.New)
-            {
-                foreach (var generalJournalLine in this.GeneralJournalLines)
-                {
-                    generalJournalLine.DocumentCreated = this.DocumentCreated;
-                }
-            }
-        }
+        //partial void OnDocumentCreatedChanged()
+        //{
+        //    if ((this.EntityState == EntityState.Modified || this.EntityState == EntityState.New) && !this.HasValidationErrors)
+        //    {
+        //        foreach (var generalJournalLine in this.GeneralJournalLines)
+        //        {
+        //            generalJournalLine.DocumentCreated = this.DocumentCreated;
+        //        }
+        //    }
+        //}
 
-        partial void OnDocumentPostedChanged()
-        {
-            if (this.EntityState == EntityState.Modified || this.EntityState == EntityState.New)
-            {
-                foreach (var generalJournalLine in this.GeneralJournalLines)
-                {
-                    generalJournalLine.DocumentPosted = this.DocumentPosted;
-                }
-            }
-        }
+        //partial void OnDocumentPostedChanged()
+        //{
+        //    if ((this.EntityState == EntityState.Modified || this.EntityState == EntityState.New) && !this.HasValidationErrors)
+        //    {
+        //        foreach (var generalJournalLine in this.GeneralJournalLines)
+        //        {
+        //            generalJournalLine.DocumentPosted = this.DocumentPosted;
+        //        }
+        //    }
+        //}
 
     }
 }

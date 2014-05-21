@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
+using System.Data;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Principal;

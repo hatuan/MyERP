@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ServiceModel.DomainServices.Server;
+using MyERP.DataAccess.RudeValidation;
 
 
 namespace MyERP.DataAccess
@@ -18,12 +20,19 @@ namespace MyERP.DataAccess
             public Organization Organization { get; set; }
 
             [Include]
-            [Association("glline-document-association", "GeneralJournalDocumentId", "Id")]
+            [Association("glline-document-association", "GeneralJournalDocumentId", "Id", IsForeignKey = true)]
             public GeneralJournalDocument GeneralJournalDocument { get; set; }
+
+            [CustomValidation(typeof(NotNullValidators), "GuidNotNull")]
+            public Guid AccountId { get; set; }
 
             [Include]
             [Association("glline-account-association", "AccountId", "Id")]
             public Account Account { get; set; }
+
+            [CustomValidation(typeof(NotNullValidators), "GuidNotNull")]
+            public Guid CorAccountId { get; set; }
+
 
             [Include]
             [Association("glline-coraccount-association", "CorAccountId", "Id")]
