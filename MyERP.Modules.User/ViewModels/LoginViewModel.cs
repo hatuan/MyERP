@@ -1,24 +1,10 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
-using System.Linq;
-using System.ServiceModel.DomainServices.Client;
-using System.ServiceModel.DomainServices.Client.ApplicationServices;
 using System.Windows.Input;
-using Microsoft.Practices.Prism;
-using Microsoft.Practices.ServiceLocation;
-using MyERP.DataAccess;
 using MyERP.Infrastructure;
-using MyERP.Infrastructure.ViewModels;
-using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.Prism.ViewModel;
 using MyERP.Repositories;
 using MyERP.ViewModels;
-using Telerik.Windows.Controls;
 using DelegateCommand = Microsoft.Practices.Prism.Commands.DelegateCommand;
 using ViewModelBase = MyERP.Infrastructure.ViewModelBase;
 
@@ -69,39 +55,41 @@ namespace MyERP.Modules.User.ViewModels
             string passEncrypt = Cryptography.Encrypt(Cryptography.GetHashKey(UserName + Password), Password);
             
             IsBusyLogin = true;
-            
-            LoginOperation lop = MyERP.Repositories.WebContext.Current.Authentication.Login((new LoginParameters(UserName, passEncrypt, true, null)));
-            lop.Completed += (Authsender, args) =>
-            {
-                if (!lop.HasError)
-                {
-                    if (lop.LoginSuccess)
-                    {
-                        RemoveError("Password", PASSWORD_ERROR);
+
+            UserRepository.GetUserByUserNameAndPassword(UserName, passEncrypt);
+
+            //LoginOperation lop = MyERP.Repositories.WebContext.Current.Authentication.Login((new LoginParameters(UserName, passEncrypt, true, null)));
+            //lop.Completed += (Authsender, args) =>
+            //{
+            //    if (!lop.HasError)
+            //    {
+            //        if (lop.LoginSuccess)
+            //        {
+            //            RemoveError("Password", PASSWORD_ERROR);
                         
-                        SessionManager.Session.Clear();
-                        SessionManager.Session.Add("SessionId", Guid.NewGuid());
+            //            SessionManager.Session.Clear();
+            //            SessionManager.Session.Add("SessionId", Guid.NewGuid());
 
-                        UserRepository.GetUserByUserName(UserName,
-                            user =>
-                            {
-                                LoginSuccessfully();
-                            });
-                    }
-                    else
-                    {
-                        AddError("Password", PASSWORD_ERROR, false);
-                    }
+            //            UserRepository.GetUserByUserName(UserName,
+            //                user =>
+            //                {
+            //                    LoginSuccessfully();
+            //                });
+            //        }
+            //        else
+            //        {
+            //            AddError("Password", PASSWORD_ERROR, false);
+            //        }
                   
-                }
-                else
-                {
-                    AddError("Password", lop.Error.Message, false);
-                    lop.MarkErrorAsHandled();
-                }
+            //    }
+            //    else
+            //    {
+            //        AddError("Password", lop.Error.Message, false);
+            //        lop.MarkErrorAsHandled();
+            //    }
 
-                IsBusyLogin = false;
-            };
+            //    IsBusyLogin = false;
+            //};
         }
 
         private String _userName = String.Empty;

@@ -22,14 +22,9 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("client", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
-	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class Client
 	{
 		private Guid _clientId;
-		[Column("id", OpenAccessType = OpenAccessType.Guid, IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get
@@ -43,8 +38,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _name;
-		[Column("name", OpenAccessType = OpenAccessType.Varchar, Length = 0, Scale = 0, SqlType = "varchar", Converter = "OpenAccessRuntime.Data.VariableLengthStringConverter")]
-		[Storage("_name")]
 		public virtual string Name
 		{
 			get
@@ -58,8 +51,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private long _version;
-		[Column("version", OpenAccessType = OpenAccessType.Int64, IsVersion = true, Length = 0, Scale = 0, SqlType = "int8", Converter = "OpenAccessRuntime.Data.BigIntConverter")]
-		[Storage("_version")]
 		public virtual long Version
 		{
 			get
@@ -73,8 +64,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private bool _isActivated;
-		[Column("is_activated", OpenAccessType = OpenAccessType.Bit, Length = 0, Scale = 0, SqlType = "bool", Converter = "OpenAccessRuntime.Data.BooleanConverter")]
-		[Storage("_isActivated")]
 		public virtual bool IsActivated
 		{
 			get
@@ -88,8 +77,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _recCreatedById;
-		[Column("rec_created_by", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_recCreatedById")]
 		public virtual Guid RecCreatedById
 		{
 			get
@@ -103,8 +90,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _recCreated;
-		[Column("rec_created", OpenAccessType = OpenAccessType.DateTime, Length = 6, Scale = 0, SqlType = "timestamp", Converter = "OpenAccessRuntime.Data.PostgresTimestampTZConverter")]
-		[Storage("_recCreated")]
 		public virtual DateTime RecCreated
 		{
 			get
@@ -118,8 +103,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private User _user;
-		[ForeignKeyAssociation(SharedFields = "RecCreatedById", TargetFields = "Id")]
-		[Storage("_user")]
 		public virtual User RecCreatedByUser
 		{
 			get
@@ -133,8 +116,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private IList<Organization> _organization = new List<Organization>();
-		[Collection(InverseProperty = "Client")]
-		[Storage("_organization")]
 		public virtual IList<Organization> Organizations
 		{
 			get

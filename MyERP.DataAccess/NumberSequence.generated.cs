@@ -22,14 +22,9 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("number_sequence", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
-	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class NumberSequence
 	{
 		private Guid _id;
-		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_id")]
 		public virtual Guid Id
 		{
 			get
@@ -43,8 +38,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private long _version;
-		[Column("version", IsVersion = true, IsBackendVersion = true, Length = 0, Scale = 0, SqlType = "int8")]
-		[Storage("_version")]
 		public virtual long Version
 		{
 			get
@@ -58,8 +51,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _code;
-		[Column("code", OpenAccessType = OpenAccessType.Varchar, Length = 0, Scale = 0, SqlType = "varchar", Converter = "OpenAccessRuntime.Data.VariableLengthStringConverter")]
-		[Storage("_code")]
 		public virtual string Code
 		{
 			get
@@ -73,8 +64,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private int _currentNo;
-		[Column("current_no", Length = 0, Scale = 0, SqlType = "int4")]
-		[Storage("_currentNo")]
 		public virtual int CurrentNo
 		{
 			get
@@ -88,8 +77,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private int _endingNo;
-		[Column("ending_no", Length = 0, Scale = 0, SqlType = "int4")]
-		[Storage("_endingNo")]
 		public virtual int EndingNo
 		{
 			get
@@ -103,8 +90,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _formatNo;
-		[Column("format_no", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_formatNo")]
 		public virtual string FormatNo
 		{
 			get
@@ -118,8 +103,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private bool _isDefault;
-		[Column("is_default", Length = 0, Scale = 0, SqlType = "bool")]
-		[Storage("_isDefault")]
 		public virtual bool IsDefault
 		{
 			get
@@ -133,8 +116,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private bool _manual;
-		[Column("manual", Length = 0, Scale = 0, SqlType = "bool")]
-		[Storage("_manual")]
 		public virtual bool Manual
 		{
 			get
@@ -148,8 +129,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _name;
-		[Column("name", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_name")]
 		public virtual string Name
 		{
 			get
@@ -163,8 +142,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _noSeqName;
-		[Column("no_seq_name", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_noSeqName")]
 		public virtual string NoSeqName
 		{
 			get
@@ -178,8 +155,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _organizationId;
-		[Column("organization_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_organizationId")]
 		public virtual Guid OrganizationId
 		{
 			get
@@ -193,8 +168,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _clientId;
-		[Column("client_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get
@@ -208,8 +181,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private int _startingNo;
-		[Column("starting_no", Length = 0, Scale = 0, SqlType = "int4")]
-		[Storage("_startingNo")]
 		public virtual int StartingNo
 		{
 			get
@@ -223,8 +194,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private short _status;
-		[Column("status", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_status")]
 		public virtual short Status
 		{
 			get
@@ -238,8 +207,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _recModifiedBy;
-		[Column("rec_modified_by", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_recModifiedBy")]
 		public virtual Guid RecModifiedBy
 		{
 			get
@@ -253,8 +220,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _recCreated;
-		[Column("rec_created", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_recCreated")]
 		public virtual DateTime RecCreated
 		{
 			get
@@ -268,8 +233,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _recCreatedBy;
-		[Column("rec_created_by", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_recCreatedBy")]
 		public virtual Guid RecCreatedBy
 		{
 			get
@@ -283,8 +246,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _recModified;
-		[Column("rec_modified", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_recModified")]
 		public virtual DateTime RecModified
 		{
 			get
@@ -298,8 +259,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
-		[Storage("_client")]
 		public virtual Client Client
 		{
 			get
@@ -313,8 +272,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
-		[Storage("_organization")]
 		public virtual Organization Organization
 		{
 			get
@@ -328,8 +285,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private User _user1;
-		[ForeignKeyAssociation(SharedFields = "RecCreatedBy", TargetFields = "Id")]
-		[Storage("_user1")]
 		public virtual User RecCreatedByUser
 		{
 			get
@@ -343,8 +298,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private User _user;
-		[ForeignKeyAssociation(SharedFields = "RecModifiedBy", TargetFields = "Id")]
-		[Storage("_user")]
 		public virtual User RecModifiedByUser
 		{
 			get

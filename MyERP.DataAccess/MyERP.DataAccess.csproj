@@ -35,7 +35,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel.DomainServices.Server, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -87,7 +86,6 @@
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="GeneralJournalSetup\GeneralJournalSetup.cs" />
-    <Compile Include="MyERPDataModel.partial.cs" />
     <Compile Include="Job.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
@@ -97,6 +95,7 @@
     <Compile Include="Module.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="MyERPDataModel.partial.cs" />
     <Compile Include="Module\Module.cs" />
     <Compile Include="Module\ModuleName.cs" />
     <Compile Include="MyERPDataModel.cs">
@@ -104,11 +103,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
-    <Compile Include="NumberSequence\NumberSequenceStatusType.cs" />
-    <Compile Include="NumberSequence\NumberSequence.cs" />
     <Compile Include="NumberSequence.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="NumberSequence\NumberSequenceStatusType.cs" />
+    <Compile Include="NumberSequence\NumberSequence.cs" />
     <Compile Include="Organization.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
@@ -142,19 +141,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="CodeGenerationTemplates\DefaultTemplateCS.tt" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\AttributesGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\ClassGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\ContextGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\DocumentationGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\DomainMethodsGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\Engine.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\FluentMappingGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\InterfacesGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\NamespacesGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\PropertiesGenerator.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\Template.ttinclude" />
-    <None Include="CodeGenerationTemplates\Includes_ver.2\UsingsGenerator.ttinclude" />
     <None Include="MyERPDataModel.rlinq.diagram">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </None>

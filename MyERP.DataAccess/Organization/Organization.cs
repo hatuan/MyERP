@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ServiceModel.DomainServices;
-using System.ServiceModel.DomainServices.Server;
 
 namespace MyERP.DataAccess
 {
@@ -13,15 +11,12 @@ namespace MyERP.DataAccess
             {
             }
 
-            [Include]
             [Association("Organization-client-association", "ClientId", "ClientId")]
             public Client Client { get; set; }
 
-            [Include]
             [Association("Organization-user-created-association", "RecCreatedById", "Id")]
             public User RecCreatedByUser { get; set; }
 
-            [Include]
             [Association("Organization-user-modified-association", "RecModifiedById", "Id")]
             public User RecModifiedByUser { get; set; }
         }

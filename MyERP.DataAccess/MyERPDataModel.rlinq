@@ -539,59 +539,56 @@
         <orm:field name="_ma_vv" property="Code" behavior="readwrite" uniqueId="f5ec11cf-95ce-4da4-a64b-85ded41e39ea" type="System.String">
           <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_ten_vv" property="Ten_Vv" behavior="readwrite" uniqueId="a3b7a577-c36b-433b-a8f1-80ef160b0f00" type="System.String">
-          <orm:column name="ten_vv" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="a3b7a577-c36b-433b-a8f1-80ef160b0f00" type="System.String">
+          <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_ten_vv2" property="Ten_Vv2" behavior="readwrite" uniqueId="ea68ac13-3d62-4a09-9145-2615b0586d7c" type="System.String">
-          <orm:column name="ten_vv2" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
-        </orm:field>
-        <orm:field name="_ma_kh" property="Ma_Kh" behavior="readwrite" uniqueId="d5f85a8d-43ba-42c6-a932-271e0a952c91" type="System.Guid">
+        <orm:field name="_businessPartnerId" property="BusinessPartnerId" behavior="readwrite" uniqueId="d5f85a8d-43ba-42c6-a932-271e0a952c91" type="System.Guid">
           <orm:column name="business_partner_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_nh_vv1" property="Nh_Vv1" behavior="readwrite" uniqueId="3614177a-a906-4835-a652-0b23c7d39576" type="System.String">
-          <orm:column name="nh_vv1" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_jobGroupId1" property="JobGroupId1" behavior="readwrite" uniqueId="3614177a-a906-4835-a652-0b23c7d39576" type="System.Guid">
+          <orm:column name="job_group_id1" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_nh_vv2" property="Nh_Vv2" behavior="readwrite" uniqueId="b137becf-e416-4b4a-a178-ecba99feba3e" type="System.String">
-          <orm:column name="nh_vv2" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_jobGroupId2" property="JobGroupId2" behavior="readwrite" uniqueId="b137becf-e416-4b4a-a178-ecba99feba3e" type="System.Guid">
+          <orm:column name="job_group_id2" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_nh_vv3" property="Nh_Vv3" behavior="readwrite" uniqueId="919c27e1-78b7-4a84-899c-b51862a39189" type="System.String">
-          <orm:column name="nh_vv3" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_jobGroupId3" property="JobGroupId3" behavior="readwrite" uniqueId="919c27e1-78b7-4a84-899c-b51862a39189" type="System.Guid">
+          <orm:column name="job_group_id3" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_ngay_vv1" property="Ngay_Vv1" behavior="readwrite" uniqueId="8008ba90-9603-4e69-979c-81bb8c3be707" type="System.DateTime">
-          <orm:column name="ngay_vv1" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_jobStart" property="JobStart" behavior="readwrite" uniqueId="8008ba90-9603-4e69-979c-81bb8c3be707" type="System.DateTime">
+          <orm:column name="job_start" sql-type="date" nullable="true" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_ngay_vv2" property="Ngay_Vv2" behavior="readwrite" uniqueId="e25ec3b9-de9f-479b-8316-901db8c24cf1" type="System.DateTime">
-          <orm:column name="ngay_vv2" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_jobEnd" property="JobEnd" behavior="readwrite" uniqueId="e25ec3b9-de9f-479b-8316-901db8c24cf1" type="System.DateTime">
+          <orm:column name="job_end" sql-type="date" nullable="true" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_ma_nt" property="Ma_Nt" behavior="readwrite" uniqueId="bc0e7671-92ff-4805-8c4b-87134830a877" type="System.Guid">
-          <orm:column name="ma_nt" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_currencyId" property="CurrencyId" behavior="readwrite" uniqueId="bc0e7671-92ff-4805-8c4b-87134830a877" type="System.Guid">
+          <orm:column name="currency_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_tien_nt" property="Tien_Nt" behavior="readwrite" uniqueId="293b25e8-35f2-4100-afde-a7de663e51c4" type="System.Decimal">
-          <orm:column name="tien_nt" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:field name="_amount" property="Amount" behavior="readwrite" uniqueId="293b25e8-35f2-4100-afde-a7de663e51c4" type="System.Decimal">
+          <orm:column name="amount" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         </orm:field>
-        <orm:field name="_tien" property="Tien" behavior="readwrite" uniqueId="230b8eb7-20ec-457a-9776-f4ac9ef7b8d1" type="System.Decimal">
-          <orm:column name="tien" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:field name="_amountLcy" property="AmountLcy" behavior="readwrite" uniqueId="230b8eb7-20ec-457a-9776-f4ac9ef7b8d1" type="System.Decimal">
+          <orm:column name="amount_lcy" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         </orm:field>
-        <orm:field name="_ghi_chu" property="Ghi_Chu" behavior="readwrite" uniqueId="ed9bf5aa-8b4f-46dc-b94f-476b44afa95b" type="System.String">
-          <orm:column name="ghi_chu" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_comment" property="Comment" behavior="readwrite" uniqueId="ed9bf5aa-8b4f-46dc-b94f-476b44afa95b" type="System.String">
+          <orm:column name="comment" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_date0" property="Date0" behavior="readwrite" uniqueId="4fd8ddbd-506d-4153-993e-ae4e886557a6" type="System.DateTime">
-          <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_recCreated" property="RecCreated" behavior="readwrite" uniqueId="4fd8ddbd-506d-4153-993e-ae4e886557a6" type="System.DateTime">
+          <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_user_id0" property="User_Id0" behavior="readwrite" uniqueId="8153d3a8-1acf-4144-b6c3-2eba140d8e82" type="System.Guid">
-          <orm:column name="user_id0" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_recCreatedBy" property="RecCreatedBy" behavior="readwrite" uniqueId="8153d3a8-1acf-4144-b6c3-2eba140d8e82" type="System.Guid">
+          <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_date2" property="Date2" behavior="readwrite" uniqueId="a9192fa7-1770-4d1a-beb6-2636d02a3381" type="System.DateTime">
-          <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_recModified" property="RecModified" behavior="readwrite" uniqueId="a9192fa7-1770-4d1a-beb6-2636d02a3381" type="System.DateTime">
+          <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_user_id2" property="User_Id2" behavior="readwrite" uniqueId="b3e95d81-7025-41ff-9dad-fd5d66e336cb" type="System.Guid">
-          <orm:column name="user_id2" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_recModifiedBy" property="RecModifiedBy" behavior="readwrite" uniqueId="b3e95d81-7025-41ff-9dad-fd5d66e336cb" type="System.Guid">
+          <orm:column name="rec_modified_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_status" property="Status" behavior="readwrite" uniqueId="dcb96b01-9c50-44cc-b258-45b1397c2e3c" type="System.Byte">
           <orm:column name="status" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_tk" property="Tk" behavior="readwrite" uniqueId="54fc89be-738e-4ef4-a873-66f0b3a4d229" type="System.Guid">
-          <orm:column name="tk" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_accountId" property="AccountId" behavior="readwrite" uniqueId="54fc89be-738e-4ef4-a873-66f0b3a4d229" type="System.Guid">
+          <orm:column name="account_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_clientId" property="ClientId" behavior="readwrite" uniqueId="a806c796-f45e-46a7-9b6b-7378585b0c89" type="System.Guid">
           <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
@@ -605,36 +602,6 @@
         <orm:field name="_version" property="Version" behavior="readwrite" uniqueId="b6d0dfd1-afb6-4a1b-824d-94f17271402b" type="System.Int64">
           <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         </orm:field>
-        <orm:field name="_userinfo" property="Userinfo0" behavior="readwrite" uniqueId="b34456a4-426f-4645-ac3a-af953ee752e7" type="MyERP.DataAccess.User">
-          <orm:reference uniqueId="edcaaadd-f6e4-49b5-8a14-dc1bba9c585f" association-name="DmvvHasUserinfo0">
-            <orm:sharedfield name="_user_id0" target-class="MyERP.DataAccess.User" target-field="_id" />
-          </orm:reference>
-        </orm:field>
-        <orm:field name="_userinfo1" property="Userinfo2" behavior="readwrite" uniqueId="e0b3e145-8ae0-4761-b05b-0c289d595fdc" type="MyERP.DataAccess.User">
-          <orm:reference uniqueId="f85a3b7a-dbd6-454e-9061-abd94d221a9b" association-name="DmvvHasUserinfo2">
-            <orm:sharedfield name="_user_id2" target-class="MyERP.DataAccess.User" target-field="_id" />
-          </orm:reference>
-        </orm:field>
-        <orm:field name="_dmnhvv" property="Dmnhvv1" behavior="readwrite" uniqueId="01dcf7c2-6e8b-4391-bcdc-abbcf7367880" type="MyERP.DataAccess.JobGroup">
-          <orm:reference uniqueId="7b8610d2-8f19-4712-b021-7b5e24db29e4" association-name="DmvvHasDmnhvv1">
-            <orm:sharedfield name="_nh_vv1" target-class="MyERP.DataAccess.JobGroup" target-field="_ma_nh" />
-          </orm:reference>
-        </orm:field>
-        <orm:field name="_dmnhvv1" property="Dmnhvv2" behavior="readwrite" uniqueId="9a7a53c6-642a-4297-a94e-dace6bec87a9" type="MyERP.DataAccess.JobGroup">
-          <orm:reference uniqueId="ca8b2278-6ddb-47ed-b36d-602244181c19" association-name="DmvvHasDmnhvv2">
-            <orm:sharedfield name="_nh_vv2" target-class="MyERP.DataAccess.JobGroup" target-field="_ma_nh" />
-          </orm:reference>
-        </orm:field>
-        <orm:field name="_dmnhvv2" property="Dmnhvv3" behavior="readwrite" uniqueId="f7bd3ee8-da0f-404d-9653-0486a54f360e" type="MyERP.DataAccess.JobGroup">
-          <orm:reference uniqueId="9c7c4f44-3eba-4e22-b0c3-882f92b9af05" association-name="DmvvHasDmnhvv3">
-            <orm:sharedfield name="_nh_vv3" target-class="MyERP.DataAccess.JobGroup" target-field="_ma_nh" />
-          </orm:reference>
-        </orm:field>
-        <orm:field name="_dmtk" property="Dmtk" behavior="readwrite" uniqueId="25447f82-93f6-4607-bf61-5d26c3c73bf9" type="MyERP.DataAccess.Account">
-          <orm:reference uniqueId="6f7ad5d3-9b0b-4f88-b70f-349ec13259c5" association-name="DmvvHasDmtk">
-            <orm:sharedfield name="_tk" target-class="MyERP.DataAccess.Account" target-field="_id" />
-          </orm:reference>
-        </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="d755e1a5-3040-45a0-8c15-afb77e53c575" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="1a56eb78-8d6d-46b2-9139-19634d23abbb" association-name="JobHasClient">
             <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
@@ -645,44 +612,76 @@
             <orm:sharedfield name="_organizationId" target-class="MyERP.DataAccess.Organization" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_dmkh" property="Dmkh" behavior="readwrite" uniqueId="55ebbb5b-7452-4be0-9a0e-83f5f254d1be" type="MyERP.DataAccess.BusinessPartner">
-          <orm:reference uniqueId="a526526d-ac1e-47f0-ae03-ff7841e87699" association-name="DmvvHasDmkh">
-            <orm:sharedfield name="_ma_kh" target-class="MyERP.DataAccess.BusinessPartner" target-field="_id" />
+        <orm:field name="_userinfo" property="RecCreatedByUser" behavior="readwrite" uniqueId="b34456a4-426f-4645-ac3a-af953ee752e7" type="MyERP.DataAccess.User">
+          <orm:reference uniqueId="edcaaadd-f6e4-49b5-8a14-dc1bba9c585f" association-name="DmvvHasCreatedBy">
+            <orm:sharedfield name="_recCreatedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_userinfo1" property="RecModifiedByUser" behavior="readwrite" uniqueId="e0b3e145-8ae0-4761-b05b-0c289d595fdc" type="MyERP.DataAccess.User">
+          <orm:reference uniqueId="f85a3b7a-dbd6-454e-9061-abd94d221a9b" association-name="DmvvHasModifiedBy">
+            <orm:sharedfield name="_recModifiedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_dmkh" property="BusinessPartner" behavior="readwrite" uniqueId="55ebbb5b-7452-4be0-9a0e-83f5f254d1be" type="MyERP.DataAccess.BusinessPartner">
+          <orm:reference uniqueId="a526526d-ac1e-47f0-ae03-ff7841e87699" association-name="DmvvHasBusinessPartner">
+            <orm:sharedfield name="_businessPartnerId" target-class="MyERP.DataAccess.BusinessPartner" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_dmtk" property="Account" behavior="readwrite" uniqueId="25447f82-93f6-4607-bf61-5d26c3c73bf9" type="MyERP.DataAccess.Account">
+          <orm:reference uniqueId="6f7ad5d3-9b0b-4f88-b70f-349ec13259c5" association-name="DmvvHasAccount">
+            <orm:sharedfield name="_accountId" target-class="MyERP.DataAccess.Account" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_jobGroup" property="JobGroup1" behavior="readwrite" uniqueId="0697a6a3-32f8-4586-96a8-9856ada246ab" type="MyERP.DataAccess.JobGroup">
+          <orm:reference uniqueId="77b0de25-1da4-4bca-9ce6-14b5080d049b" association-name="JobHasJobGroup1">
+            <orm:sharedfield name="_jobGroupId1" target-class="MyERP.DataAccess.JobGroup" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_jobGroup1" property="JobGroup2" behavior="readwrite" uniqueId="0b7f7e98-0f02-4320-a3a0-82fdf6f9548b" type="MyERP.DataAccess.JobGroup">
+          <orm:reference uniqueId="c26d5579-b266-40ce-983d-f282a5fd5d31" association-name="JobHasJobGroup2">
+            <orm:sharedfield name="_jobGroupId2" target-class="MyERP.DataAccess.JobGroup" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_jobGroup2" property="JobGroup3" behavior="readwrite" uniqueId="cb7eb71a-eb58-4690-9c40-030aa1236e1e" type="MyERP.DataAccess.JobGroup">
+          <orm:reference uniqueId="820506d2-cb7f-4fed-a4f0-4f51916fd37e" association-name="JobHasJobGroup3">
+            <orm:sharedfield name="_jobGroupId3" target-class="MyERP.DataAccess.JobGroup" target-field="_id" />
           </orm:reference>
         </orm:field>
       </orm:class>
       <orm:class name="JobGroup" update-schema="true" uniqueId="c1a07b37-fa4e-428b-9e73-2fc9b5b4056a">
         <orm:table name="job_group" />
         <orm:identity>
-          <orm:single-field field-name="_ma_nh" />
+          <orm:key-generator name="guid">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="_id" />
         </orm:identity>
-        <orm:concurrency strategy="changed" />
-        <orm:field name="_loai_nh" property="Loai_Nh" behavior="readwrite" uniqueId="556773db-3da4-45bd-85f4-d7bc0c9b1e1f" type="System.Int16">
-          <orm:column name="loai_nh" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:concurrency strategy="version" field-name="_version">
+          <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
+        </orm:concurrency>
+        <orm:field name="_level" property="Level" behavior="readwrite" uniqueId="556773db-3da4-45bd-85f4-d7bc0c9b1e1f" type="System.Int16">
+          <orm:column name="level" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_ma_nh" property="Code" behavior="readwrite" uniqueId="4e3355de-c10d-4597-a3a0-ee12423f186a" type="System.String">
-          <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:field name="_code" property="Code" behavior="readwrite" uniqueId="4e3355de-c10d-4597-a3a0-ee12423f186a" type="System.String">
+          <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_ten_nh" property="Ten_Nh" behavior="readwrite" uniqueId="f8fc0a8c-a47b-4918-969e-93859b9a31e5" type="System.String">
-          <orm:column name="ten_nh" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="f8fc0a8c-a47b-4918-969e-93859b9a31e5" type="System.String">
+          <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_ten_nh2" property="Ten_Nh2" behavior="readwrite" uniqueId="13b75a7a-3919-4407-b85d-827b9d67405e" type="System.String">
-          <orm:column name="ten_nh2" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_recCreated" property="RecCreated" behavior="readwrite" uniqueId="a2f5eb4d-c532-4e91-9795-ca7253370c53" type="System.DateTime">
+          <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_date0" property="Date0" behavior="readwrite" uniqueId="a2f5eb4d-c532-4e91-9795-ca7253370c53" type="System.DateTime">
-          <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
-        </orm:field>
-        <orm:field name="_user_id0" property="User_Id0" behavior="readwrite" uniqueId="919915f0-a7d0-47c1-bb6c-7f88674599eb" type="System.Guid">
-          <orm:column name="user_id0" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_recCreateBy" property="RecCreateBy" behavior="readwrite" uniqueId="919915f0-a7d0-47c1-bb6c-7f88674599eb" type="System.Guid">
+          <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_status" property="Status" behavior="readwrite" uniqueId="da21f8a7-4981-4494-98be-63cba3ed1ffd" type="System.Byte">
           <orm:column name="status" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_date2" property="Date2" behavior="readwrite" uniqueId="018f67f1-c083-48c8-b2a7-7d9d30098643" type="System.DateTime">
-          <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_recModified" property="RecModified" behavior="readwrite" uniqueId="018f67f1-c083-48c8-b2a7-7d9d30098643" type="System.DateTime">
+          <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_user_id2" property="User_Id2" behavior="readwrite" uniqueId="3067e54b-f476-4b38-9a06-2ef534696a8e" type="System.Guid">
-          <orm:column name="user_id2" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:field name="_recModifiedBy" property="RecModifiedBy" behavior="readwrite" uniqueId="3067e54b-f476-4b38-9a06-2ef534696a8e" type="System.Guid">
+          <orm:column name="rec_modified_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_clientId" property="ClientId" behavior="readwrite" uniqueId="b4929831-c417-413a-ac60-ca17631e33ee" type="System.Guid">
           <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
@@ -690,15 +689,11 @@
         <orm:field name="_organizationId" property="OrganizationId" behavior="readwrite" uniqueId="25fc9b8b-65b1-4f3a-b24e-c3cc41a8379a" type="System.Guid">
           <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_userinfo" property="Userinfo0" behavior="readwrite" uniqueId="6e942301-9b08-445e-b8e2-aacc59d3e317" type="MyERP.DataAccess.User">
-          <orm:reference uniqueId="b30b38b4-6ec3-454f-92bd-45c508927068" association-name="DmnhvvHasUserinfo0">
-            <orm:sharedfield name="_user_id0" target-class="MyERP.DataAccess.User" target-field="_id" />
-          </orm:reference>
+        <orm:field name="_id" property="Id" uniqueId="529ea20b-3bb4-4417-a087-692ba1284e0c" type="System.Guid">
+          <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         </orm:field>
-        <orm:field name="_userinfo1" property="Userinfo2" behavior="readwrite" uniqueId="247a6428-0084-484c-8f1d-dbc99861cac1" type="MyERP.DataAccess.User">
-          <orm:reference uniqueId="43788f0a-acb5-4501-af4b-874a63fe05df" association-name="DmnhvvHasUserinfo2">
-            <orm:sharedfield name="_user_id2" target-class="MyERP.DataAccess.User" target-field="_id" />
-          </orm:reference>
+        <orm:field name="_version" property="Version" behavior="readwrite" uniqueId="d37d398b-55b9-463b-b760-8b870bc20977" type="System.Int64">
+          <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="1a028d41-39d4-489b-bc63-1dd0b5d1c914" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="2f04b4a9-0439-46d4-b905-3b5001ef5079" association-name="JobGroupHasClient">
@@ -710,14 +705,24 @@
             <orm:sharedfield name="_organizationId" target-class="MyERP.DataAccess.Organization" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_dmvvs" property="Dmvv1s" behavior="readwrite" uniqueId="5ded7457-b33a-46e0-b008-e38d96f1ca9d" type="MyERP.DataAccess.Job">
-          <orm:collection element-class="MyERP.DataAccess.Job" inverse-field="_dmnhvv" order-by="" uniqueId="7b8610d2-8f19-4712-b021-7b5e24db29e4" />
+        <orm:field name="_userinfo" property="RecCreatedByUser" behavior="readwrite" uniqueId="6e942301-9b08-445e-b8e2-aacc59d3e317" type="MyERP.DataAccess.User">
+          <orm:reference uniqueId="b30b38b4-6ec3-454f-92bd-45c508927068" association-name="JobGroupHasCreateBy">
+            <orm:sharedfield name="_recCreateBy" target-class="MyERP.DataAccess.User" target-field="_id" />
+          </orm:reference>
         </orm:field>
-        <orm:field name="_dmvvs1" property="Dmvv2s" behavior="readwrite" uniqueId="14496fb5-d08a-4cc0-9f87-09950d03c57e" type="MyERP.DataAccess.Job">
-          <orm:collection element-class="MyERP.DataAccess.Job" inverse-field="_dmnhvv1" order-by="" uniqueId="ca8b2278-6ddb-47ed-b36d-602244181c19" />
+        <orm:field name="_userinfo1" property="RecModifiedByUser" behavior="readwrite" uniqueId="247a6428-0084-484c-8f1d-dbc99861cac1" type="MyERP.DataAccess.User">
+          <orm:reference uniqueId="43788f0a-acb5-4501-af4b-874a63fe05df" association-name="JobGroupHasModifiedBy">
+            <orm:sharedfield name="_recModifiedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
+          </orm:reference>
         </orm:field>
-        <orm:field name="_dmvvs2" property="Dmvv3s" behavior="readwrite" uniqueId="c4f2f62d-93b2-453b-bb6b-c60c93f22c74" type="MyERP.DataAccess.Job">
-          <orm:collection element-class="MyERP.DataAccess.Job" inverse-field="_dmnhvv2" order-by="" uniqueId="9c7c4f44-3eba-4e22-b0c3-882f92b9af05" />
+        <orm:field name="_job" property="Job1s" behavior="readwrite" uniqueId="dcfc5ff1-9e3f-45ef-9ccc-fdc3a24e3960" type="MyERP.DataAccess.Job">
+          <orm:collection element-class="MyERP.DataAccess.Job" inverse-field="_jobGroup" order-by="" uniqueId="77b0de25-1da4-4bca-9ce6-14b5080d049b" />
+        </orm:field>
+        <orm:field name="_job1" property="Job2s" behavior="readwrite" uniqueId="dccd000d-d046-4e72-af9c-8b5f86740f26" type="MyERP.DataAccess.Job">
+          <orm:collection element-class="MyERP.DataAccess.Job" inverse-field="_jobGroup1" order-by="" uniqueId="c26d5579-b266-40ce-983d-f282a5fd5d31" />
+        </orm:field>
+        <orm:field name="_job2" property="Job3s" behavior="readwrite" uniqueId="1431c8a1-4fbc-4591-a75b-9b249f8b85ec" type="MyERP.DataAccess.Job">
+          <orm:collection element-class="MyERP.DataAccess.Job" inverse-field="_jobGroup2" order-by="" uniqueId="820506d2-cb7f-4fed-a4f0-4f51916fd37e" />
         </orm:field>
       </orm:class>
       <orm:class name="GeneralJournalDocument" update-schema="true" uniqueId="4e5c85f4-102a-4953-b79a-16aace7a5d6d">
@@ -1278,11 +1283,6 @@
             <orm:sharedfield name="_organizationId" target-class="MyERP.DataAccess.Organization" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="4439a70d-8356-48ac-8450-852c8e5f45ea" type="MyERP.DataAccess.Client">
-          <orm:reference uniqueId="7f8ef986-c721-4489-aacd-caa801390d7a" association-name="GeneralJournalSetupHasClient">
-            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
-          </orm:reference>
-        </orm:field>
         <orm:field name="_localCurrency" property="LocalCurrency" behavior="readwrite" uniqueId="30201d66-4f3c-4246-b17e-28d9da12fe2f" type="MyERP.DataAccess.Currency">
           <orm:reference uniqueId="1b5b8c67-ffef-49c6-9a82-1947f4621f90" association-name="GeneralJournalSetupHasLCY">
             <orm:sharedfield name="_localCurrencyId" target-class="MyERP.DataAccess.Currency" target-field="_id" />
@@ -1291,6 +1291,11 @@
         <orm:field name="_generalJournalNumberSequence" property="GeneralJournalNumberSequence" behavior="readwrite" uniqueId="4f8b118b-b1e7-407a-bb03-dfac077c635c" type="MyERP.DataAccess.NumberSequence">
           <orm:reference uniqueId="8adf31d1-b290-4400-b3c8-37a92a9d9855" association-name="GeneralJournalSetupHasGeneralJournalNumberSeq">
             <orm:sharedfield name="_generalJournalNumberSequenceId" target-class="MyERP.DataAccess.NumberSequence" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="4439a70d-8356-48ac-8450-852c8e5f45ea" type="MyERP.DataAccess.Client">
+          <orm:reference uniqueId="7f8ef986-c721-4489-aacd-caa801390d7a" association-name="GeneralJournalSetupHasClient">
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
           </orm:reference>
         </orm:field>
       </orm:class>
@@ -1502,41 +1507,41 @@
       </orm:table>
       <orm:table name="job">
         <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="ten_vv" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="ten_vv2" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="business_partner_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="nh_vv1" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="nh_vv2" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="nh_vv3" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="ngay_vv1" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="ngay_vv2" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="ma_nt" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="tien_nt" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
-        <orm:column name="tien" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
-        <orm:column name="ghi_chu" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="user_id0" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="user_id2" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="job_group_id1" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
+        <orm:column name="job_group_id2" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
+        <orm:column name="job_group_id3" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
+        <orm:column name="job_start" sql-type="date" nullable="true" length="0" scale="0" ado-type="" />
+        <orm:column name="job_end" sql-type="date" nullable="true" length="0" scale="0" ado-type="" />
+        <orm:column name="currency_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="amount" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="amount_lcy" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="comment" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="rec_modified_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="status" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="tk" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="account_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
       </orm:table>
       <orm:table name="job_group">
-        <orm:column name="loai_nh" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
-        <orm:column name="ten_nh" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="ten_nh2" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="date0" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="user_id0" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="level" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="status" sql-type="int2" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="date2" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
-        <orm:column name="user_id2" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="rec_modified_by" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
+        <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
       </orm:table>
       <orm:table name="general_journal_document">
         <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
@@ -1724,7 +1729,7 @@
   </orm:orm>
   <ModelSettings xmlns="">
     <AppConfigConnectionPropertyName>Connection</AppConfigConnectionPropertyName>
-    <AppConfigConnectionString>server=127.0.0.1;port=5433;database=myerp;userid=postgres;password=postgres</AppConfigConnectionString>
+    <AppConfigConnectionString>server=127.0.0.1;port=5432;database=myerp;userid=postgres;password=postgres</AppConfigConnectionString>
     <NamingSettings>
       <ClassRules>
         <CaseMode>PascalCase</CaseMode>
@@ -1745,7 +1750,7 @@
       </NavigationPropertyRules>
     </NamingSettings>
     <CodeGenerationSettings>
-      <MappingDefinitionType>Attributes</MappingDefinitionType>
+      <MappingDefinitionType>Xml</MappingDefinitionType>
     </CodeGenerationSettings>
     <SchemaUpdateSettings>
       <DeploymentProject>MyERP.DataAccess</DeploymentProject>
@@ -2236,97 +2241,57 @@
     </DomainClass>
     <DomainClass Id="295c1357-df0e-4eef-b13d-68e20e43c403" name="Job" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
       <Property Id="f5ec11cf-95ce-4da4-a64b-85ded41e39ea" name="Code" label="Code : String" kind="Persistent" fieldName="_ma_vv" />
-      <Property Id="4fd8ddbd-506d-4153-993e-ae4e886557a6" name="Date0" type="DateTime" label="Date0 : DateTime" kind="Persistent" fieldName="_date0" />
-      <Property Id="a9192fa7-1770-4d1a-beb6-2636d02a3381" name="Date2" type="DateTime" label="Date2 : DateTime" kind="Persistent" fieldName="_date2" />
-      <Property Id="ed9bf5aa-8b4f-46dc-b94f-476b44afa95b" name="Ghi_Chu" label="Ghi_Chu : String" kind="Persistent" fieldName="_ghi_chu" />
-      <Property Id="d5f85a8d-43ba-42c6-a932-271e0a952c91" name="Ma_Kh" type="Guid" label="Ma_Kh : Guid" kind="Persistent" fieldName="_ma_kh" />
-      <Property Id="bc0e7671-92ff-4805-8c4b-87134830a877" name="Ma_Nt" type="Guid" label="Ma_Nt : Guid" kind="Persistent" fieldName="_ma_nt" />
-      <Property Id="8008ba90-9603-4e69-979c-81bb8c3be707" name="Ngay_Vv1" type="DateTime" label="Ngay_Vv1 : DateTime" kind="Persistent" fieldName="_ngay_vv1" />
-      <Property Id="e25ec3b9-de9f-479b-8316-901db8c24cf1" name="Ngay_Vv2" type="DateTime" label="Ngay_Vv2 : DateTime" kind="Persistent" fieldName="_ngay_vv2" />
-      <Property Id="3614177a-a906-4835-a652-0b23c7d39576" name="Nh_Vv1" label="Nh_Vv1 : String" kind="Persistent" fieldName="_nh_vv1" />
-      <Property Id="b137becf-e416-4b4a-a178-ecba99feba3e" name="Nh_Vv2" label="Nh_Vv2 : String" kind="Persistent" fieldName="_nh_vv2" />
-      <Property Id="919c27e1-78b7-4a84-899c-b51862a39189" name="Nh_Vv3" label="Nh_Vv3 : String" kind="Persistent" fieldName="_nh_vv3" />
+      <Property Id="4fd8ddbd-506d-4153-993e-ae4e886557a6" name="RecCreated" type="DateTime" label="RecCreated : DateTime" kind="Persistent" fieldName="_recCreated" />
+      <Property Id="a9192fa7-1770-4d1a-beb6-2636d02a3381" name="RecModified" type="DateTime" label="RecModified : DateTime" kind="Persistent" fieldName="_recModified" />
+      <Property Id="ed9bf5aa-8b4f-46dc-b94f-476b44afa95b" name="Comment" label="Comment : String" kind="Persistent" fieldName="_comment" />
+      <Property Id="d5f85a8d-43ba-42c6-a932-271e0a952c91" name="BusinessPartnerId" type="Guid" label="BusinessPartnerId : Guid" kind="Persistent" fieldName="_businessPartnerId" />
+      <Property Id="bc0e7671-92ff-4805-8c4b-87134830a877" name="CurrencyId" type="Guid" label="CurrencyId : Guid" kind="Persistent" fieldName="_currencyId" />
+      <Property Id="8008ba90-9603-4e69-979c-81bb8c3be707" name="JobStart" type="DateTime" label="JobStart : DateTime" kind="Persistent" fieldName="_jobStart" />
+      <Property Id="e25ec3b9-de9f-479b-8316-901db8c24cf1" name="JobEnd" type="DateTime" label="JobEnd : DateTime" kind="Persistent" fieldName="_jobEnd" />
+      <Property Id="3614177a-a906-4835-a652-0b23c7d39576" name="JobGroupId1" type="Guid" label="JobGroupId1 : Guid" kind="Persistent" fieldName="_jobGroupId1" />
+      <Property Id="b137becf-e416-4b4a-a178-ecba99feba3e" name="JobGroupId2" type="Guid" label="JobGroupId2 : Guid" kind="Persistent" fieldName="_jobGroupId2" />
+      <Property Id="919c27e1-78b7-4a84-899c-b51862a39189" name="JobGroupId3" type="Guid" label="JobGroupId3 : Guid" kind="Persistent" fieldName="_jobGroupId3" />
       <Property Id="dcb96b01-9c50-44cc-b258-45b1397c2e3c" name="Status" type="Byte" label="Status : Byte" kind="Persistent" fieldName="_status" />
-      <Property Id="a3b7a577-c36b-433b-a8f1-80ef160b0f00" name="Ten_Vv" label="Ten_Vv : String" kind="Persistent" fieldName="_ten_vv" />
-      <Property Id="ea68ac13-3d62-4a09-9145-2615b0586d7c" name="Ten_Vv2" label="Ten_Vv2 : String" kind="Persistent" fieldName="_ten_vv2" />
-      <Property Id="230b8eb7-20ec-457a-9776-f4ac9ef7b8d1" name="Tien" type="Decimal" label="Tien : Decimal" kind="Persistent" fieldName="_tien" />
-      <Property Id="293b25e8-35f2-4100-afde-a7de663e51c4" name="Tien_Nt" type="Decimal" label="Tien_Nt : Decimal" kind="Persistent" fieldName="_tien_nt" />
-      <Property Id="54fc89be-738e-4ef4-a873-66f0b3a4d229" name="Tk" type="Guid" label="Tk : Guid" kind="Persistent" fieldName="_tk" />
-      <Property Id="8153d3a8-1acf-4144-b6c3-2eba140d8e82" name="User_Id0" type="Guid" label="User_Id0 : Guid" kind="Persistent" fieldName="_user_id0" />
-      <Property Id="b3e95d81-7025-41ff-9dad-fd5d66e336cb" name="User_Id2" type="Guid" label="User_Id2 : Guid" kind="Persistent" fieldName="_user_id2" />
+      <Property Id="a3b7a577-c36b-433b-a8f1-80ef160b0f00" name="Name" label="Name : String" kind="Persistent" fieldName="_name" />
+      <Property Id="230b8eb7-20ec-457a-9776-f4ac9ef7b8d1" name="AmountLcy" type="Decimal" label="AmountLcy : Decimal" kind="Persistent" fieldName="_amountLcy" />
+      <Property Id="293b25e8-35f2-4100-afde-a7de663e51c4" name="Amount" type="Decimal" label="Amount : Decimal" kind="Persistent" fieldName="_amount" />
+      <Property Id="54fc89be-738e-4ef4-a873-66f0b3a4d229" name="AccountId" type="Guid" label="AccountId : Guid" kind="Persistent" fieldName="_accountId" />
+      <Property Id="8153d3a8-1acf-4144-b6c3-2eba140d8e82" name="RecCreatedBy" type="Guid" label="RecCreatedBy : Guid" kind="Persistent" fieldName="_recCreatedBy" />
+      <Property Id="b3e95d81-7025-41ff-9dad-fd5d66e336cb" name="RecModifiedBy" type="Guid" label="RecModifiedBy : Guid" kind="Persistent" fieldName="_recModifiedBy" />
       <Property Id="a806c796-f45e-46a7-9b6b-7378585b0c89" name="ClientId" type="Guid" label="ClientId : Guid" kind="Persistent" fieldName="_clientId" />
       <Property Id="9a1552a8-f73c-40a8-bc4c-4c01f54d9060" name="OrganizationId" type="Guid" label="OrganizationId : Guid" kind="Persistent" fieldName="_organizationId" />
       <Property Id="0bf0c19f-da2e-47e3-8fa4-43d87735e239" name="Id" type="Guid" label="Id : Guid" kind="Persistent" identity="true" fieldName="_id" />
       <Property Id="b6d0dfd1-afb6-4a1b-824d-94f17271402b" name="Version" type="Int64" label="Version : Int64" kind="Persistent" fieldName="_version" />
       <AssociationTargets>
-        <Association Id="6f7ad5d3-9b0b-4f88-b70f-349ec13259c5" SourceMultiplicity="ZeroOne" name="DmvvHasDmtk">
+        <Association Id="6f7ad5d3-9b0b-4f88-b70f-349ec13259c5" SourceMultiplicity="ZeroOne" name="DmvvHasAccount">
           <DomainClassMoniker name="/EntitiesModel/Account" />
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="bf13b5aa-7df9-4244-a9f2-a74535e62f19">
-              <NavigationalPropertyMoniker name="/EntitiesModel/Job/Dmtk" />
+              <NavigationalPropertyMoniker name="/EntitiesModel/Job/Account" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
-        <Association Id="edcaaadd-f6e4-49b5-8a14-dc1bba9c585f" SourceMultiplicity="ZeroOne" name="DmvvHasUserinfo0">
+        <Association Id="edcaaadd-f6e4-49b5-8a14-dc1bba9c585f" SourceMultiplicity="ZeroOne" name="DmvvHasCreatedBy">
           <DomainClassMoniker name="/EntitiesModel/User" />
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="1c3173e7-7297-4fd3-ad92-e77a20d78aaa">
-              <NavigationalPropertyMoniker name="/EntitiesModel/Job/Userinfo0" />
+              <NavigationalPropertyMoniker name="/EntitiesModel/Job/RecCreatedByUser" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
-        <Association Id="f85a3b7a-dbd6-454e-9061-abd94d221a9b" SourceMultiplicity="ZeroOne" name="DmvvHasUserinfo2">
+        <Association Id="f85a3b7a-dbd6-454e-9061-abd94d221a9b" SourceMultiplicity="ZeroOne" name="DmvvHasModifiedBy">
           <DomainClassMoniker name="/EntitiesModel/User" />
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="83f036f2-6871-422f-a87e-e60cde74685b">
-              <NavigationalPropertyMoniker name="/EntitiesModel/Job/Userinfo2" />
+              <NavigationalPropertyMoniker name="/EntitiesModel/Job/RecModifiedByUser" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
-        <Association Id="a526526d-ac1e-47f0-ae03-ff7841e87699" SourceMultiplicity="ZeroOne" name="DmvvHasDmkh">
+        <Association Id="a526526d-ac1e-47f0-ae03-ff7841e87699" SourceMultiplicity="ZeroOne" name="DmvvHasBusinessPartner">
           <DomainClassMoniker name="/EntitiesModel/BusinessPartner" />
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="e740404b-bc92-497a-ac93-f4d63762a956">
-              <NavigationalPropertyMoniker name="/EntitiesModel/Job/Dmkh" />
-            </associationDefinesSourceProperty>
-          </sourceNavigationalProperty>
-        </Association>
-        <Association Id="7b8610d2-8f19-4712-b021-7b5e24db29e4" SourceMultiplicity="ZeroOne" name="DmvvHasDmnhvv1">
-          <DomainClassMoniker name="/EntitiesModel/JobGroup" />
-          <targetNavigationalProperty>
-            <associationDefinesTargetProperty Id="726dca4d-3983-45af-8a59-0add60352b32">
-              <NavigationalPropertyMoniker name="/EntitiesModel/JobGroup/Dmvv1s" />
-            </associationDefinesTargetProperty>
-          </targetNavigationalProperty>
-          <sourceNavigationalProperty>
-            <associationDefinesSourceProperty Id="97cea3da-66d2-4f54-9ab2-f1b38fc65262">
-              <NavigationalPropertyMoniker name="/EntitiesModel/Job/Dmnhvv1" />
-            </associationDefinesSourceProperty>
-          </sourceNavigationalProperty>
-        </Association>
-        <Association Id="ca8b2278-6ddb-47ed-b36d-602244181c19" SourceMultiplicity="ZeroOne" name="DmvvHasDmnhvv2">
-          <DomainClassMoniker name="/EntitiesModel/JobGroup" />
-          <targetNavigationalProperty>
-            <associationDefinesTargetProperty Id="814354e0-6962-472e-9514-2aa5b3f02e42">
-              <NavigationalPropertyMoniker name="/EntitiesModel/JobGroup/Dmvv2s" />
-            </associationDefinesTargetProperty>
-          </targetNavigationalProperty>
-          <sourceNavigationalProperty>
-            <associationDefinesSourceProperty Id="535a1ed9-0622-474d-806b-bc58d9ec949f">
-              <NavigationalPropertyMoniker name="/EntitiesModel/Job/Dmnhvv2" />
-            </associationDefinesSourceProperty>
-          </sourceNavigationalProperty>
-        </Association>
-        <Association Id="9c7c4f44-3eba-4e22-b0c3-882f92b9af05" SourceMultiplicity="ZeroOne" name="DmvvHasDmnhvv3">
-          <DomainClassMoniker name="/EntitiesModel/JobGroup" />
-          <targetNavigationalProperty>
-            <associationDefinesTargetProperty Id="6d9c9e58-2cd3-4377-a45d-c3a2e83efc4e">
-              <NavigationalPropertyMoniker name="/EntitiesModel/JobGroup/Dmvv3s" />
-            </associationDefinesTargetProperty>
-          </targetNavigationalProperty>
-          <sourceNavigationalProperty>
-            <associationDefinesSourceProperty Id="b06500cd-4af5-48c1-892f-cf460bcd9ff9">
-              <NavigationalPropertyMoniker name="/EntitiesModel/Job/Dmnhvv3" />
+              <NavigationalPropertyMoniker name="/EntitiesModel/Job/BusinessPartner" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
@@ -2346,28 +2311,58 @@
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
+        <Association Id="77b0de25-1da4-4bca-9ce6-14b5080d049b" SourceMultiplicity="ZeroOne" name="JobHasJobGroup1">
+          <DomainClassMoniker name="/EntitiesModel/JobGroup" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="1a7daae6-e95f-4d0a-8dff-7205d4ad3f83">
+              <NavigationalPropertyMoniker name="/EntitiesModel/JobGroup/Job1s" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="ecb919cb-a35b-47c5-823a-2ca9349cee77">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Job/JobGroup1" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="c26d5579-b266-40ce-983d-f282a5fd5d31" SourceMultiplicity="ZeroOne" name="JobHasJobGroup2">
+          <DomainClassMoniker name="/EntitiesModel/JobGroup" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="c555aaaa-f8f0-4f95-8f6b-ec08aa75d940">
+              <NavigationalPropertyMoniker name="/EntitiesModel/JobGroup/Job2s" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="3ad0f790-b182-46e1-ac72-7ec93544859d">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Job/JobGroup2" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="820506d2-cb7f-4fed-a4f0-4f51916fd37e" SourceMultiplicity="ZeroOne" name="JobHasJobGroup3">
+          <DomainClassMoniker name="/EntitiesModel/JobGroup" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="377b25f0-334b-465b-ac0d-5522eda6bd7e">
+              <NavigationalPropertyMoniker name="/EntitiesModel/JobGroup/Job3s" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="4f2f25f1-71a7-4dfd-a9e4-321a033842ac">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Job/JobGroup3" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
       </AssociationTargets>
       <navigationalProperties>
         <classHasNavigationalProperties Id="b9567c88-8e47-4605-b915-eec9fb46651e">
-          <NavigationalProperty Id="25447f82-93f6-4607-bf61-5d26c3c73bf9" name="Dmtk" type="Account" label="Dmtk : Account" nullable="true" kind="Persistent" fieldName="_dmtk" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="25447f82-93f6-4607-bf61-5d26c3c73bf9" name="Account" type="Account" label="Account : Account" nullable="true" kind="Persistent" fieldName="_dmtk" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="be51588a-b42a-4c60-86b2-da2567f5f21e">
-          <NavigationalProperty Id="b34456a4-426f-4645-ac3a-af953ee752e7" name="Userinfo0" type="Userinfo" label="Userinfo0 : Userinfo" nullable="true" kind="Persistent" fieldName="_userinfo" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="b34456a4-426f-4645-ac3a-af953ee752e7" name="RecCreatedByUser" type="User" label="RecCreatedByUser : User" nullable="true" kind="Persistent" fieldName="_userinfo" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="9334176b-6af6-440b-8797-f34bbab4bbb1">
-          <NavigationalProperty Id="e0b3e145-8ae0-4761-b05b-0c289d595fdc" name="Userinfo2" type="Userinfo" label="Userinfo2 : Userinfo" nullable="true" kind="Persistent" fieldName="_userinfo1" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="e0b3e145-8ae0-4761-b05b-0c289d595fdc" name="RecModifiedByUser" type="User" label="RecModifiedByUser : User" nullable="true" kind="Persistent" fieldName="_userinfo1" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="b6d161e0-2a5e-48f0-8a2e-26d47b8e7f7f">
-          <NavigationalProperty Id="55ebbb5b-7452-4be0-9a0e-83f5f254d1be" name="Dmkh" type="BusinessPartner" label="Dmkh : BusinessPartner" nullable="true" kind="Persistent" fieldName="_dmkh" isDependent="false" isManaged="false" />
-        </classHasNavigationalProperties>
-        <classHasNavigationalProperties Id="d44b60f3-2bcc-492e-a956-ebb45cd354cf">
-          <NavigationalProperty Id="01dcf7c2-6e8b-4391-bcdc-abbcf7367880" name="Dmnhvv1" type="Dmnhvv" label="Dmnhvv1 : Dmnhvv" nullable="true" kind="Persistent" fieldName="_dmnhvv" isDependent="false" isManaged="false" />
-        </classHasNavigationalProperties>
-        <classHasNavigationalProperties Id="fe8851ed-a354-4ceb-ac0e-c6c49972e14f">
-          <NavigationalProperty Id="9a7a53c6-642a-4297-a94e-dace6bec87a9" name="Dmnhvv2" type="Dmnhvv" label="Dmnhvv2 : Dmnhvv" nullable="true" kind="Persistent" fieldName="_dmnhvv1" isDependent="false" isManaged="false" />
-        </classHasNavigationalProperties>
-        <classHasNavigationalProperties Id="dbaa462e-884b-41e5-b87b-f885b3783712">
-          <NavigationalProperty Id="f7bd3ee8-da0f-404d-9653-0486a54f360e" name="Dmnhvv3" type="Dmnhvv" label="Dmnhvv3 : Dmnhvv" nullable="true" kind="Persistent" fieldName="_dmnhvv2" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="55ebbb5b-7452-4be0-9a0e-83f5f254d1be" name="BusinessPartner" type="BusinessPartner" label="BusinessPartner : BusinessPartner" nullable="true" kind="Persistent" fieldName="_dmkh" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="c0e009d3-430a-4d89-a12b-da45d6a7985b">
           <NavigationalProperty Id="d755e1a5-3040-45a0-8c15-afb77e53c575" name="Client" type="Client" label="Client : Client" nullable="true" kind="Persistent" fieldName="_client" isDependent="false" isManaged="false" />
@@ -2375,34 +2370,44 @@
         <classHasNavigationalProperties Id="cf0615b6-4243-46eb-bfde-681e7b42628d">
           <NavigationalProperty Id="4863c9b6-1159-4d60-ba98-e200ffa474b4" name="Organization" type="Organization" label="Organization : Organization" nullable="true" kind="Persistent" fieldName="_organization" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="26c0c3b0-6978-43f9-8f4d-60abd2a60ed6">
+          <NavigationalProperty Id="0697a6a3-32f8-4586-96a8-9856ada246ab" name="JobGroup1" type="JobGroup" label="JobGroup1 : JobGroup" nullable="true" kind="Persistent" fieldName="_jobGroup" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="27f2be0c-8f2d-4b18-a3c8-fb690da0b9fc">
+          <NavigationalProperty Id="0b7f7e98-0f02-4320-a3a0-82fdf6f9548b" name="JobGroup2" type="JobGroup" label="JobGroup2 : JobGroup" nullable="true" kind="Persistent" fieldName="_jobGroup1" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="d1872c68-968a-4826-93c0-ed67dcb47110">
+          <NavigationalProperty Id="cb7eb71a-eb58-4690-9c40-030aa1236e1e" name="JobGroup3" type="JobGroup" label="JobGroup3 : JobGroup" nullable="true" kind="Persistent" fieldName="_jobGroup2" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
-    <DomainClass Id="c1a07b37-fa4e-428b-9e73-2fc9b5b4056a" name="JobGroup" namespace="MyERP.DataAccess" showPropertiesCompartment="true" concurrencyMode="Changed" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true">
-      <Property Id="4e3355de-c10d-4597-a3a0-ee12423f186a" name="Code" label="Code : String" kind="Persistent" identity="true" fieldName="_ma_nh" />
-      <Property Id="a2f5eb4d-c532-4e91-9795-ca7253370c53" name="Date0" type="DateTime" label="Date0 : DateTime" kind="Persistent" fieldName="_date0" />
-      <Property Id="018f67f1-c083-48c8-b2a7-7d9d30098643" name="Date2" type="DateTime" label="Date2 : DateTime" kind="Persistent" fieldName="_date2" />
-      <Property Id="556773db-3da4-45bd-85f4-d7bc0c9b1e1f" name="Loai_Nh" type="Int16" label="Loai_Nh : Int16" kind="Persistent" fieldName="_loai_nh" />
+    <DomainClass Id="c1a07b37-fa4e-428b-9e73-2fc9b5b4056a" name="JobGroup" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="4e3355de-c10d-4597-a3a0-ee12423f186a" name="Code" label="Code : String" kind="Persistent" fieldName="_code" />
+      <Property Id="a2f5eb4d-c532-4e91-9795-ca7253370c53" name="RecCreated" type="DateTime" label="RecCreated : DateTime" kind="Persistent" fieldName="_recCreated" />
+      <Property Id="018f67f1-c083-48c8-b2a7-7d9d30098643" name="RecModified" type="DateTime" label="RecModified : DateTime" kind="Persistent" fieldName="_recModified" />
+      <Property Id="556773db-3da4-45bd-85f4-d7bc0c9b1e1f" name="Level" type="Int16" label="Level : Int16" kind="Persistent" fieldName="_level" />
       <Property Id="da21f8a7-4981-4494-98be-63cba3ed1ffd" name="Status" type="Byte" label="Status : Byte" kind="Persistent" fieldName="_status" />
-      <Property Id="f8fc0a8c-a47b-4918-969e-93859b9a31e5" name="Ten_Nh" label="Ten_Nh : String" kind="Persistent" fieldName="_ten_nh" />
-      <Property Id="13b75a7a-3919-4407-b85d-827b9d67405e" name="Ten_Nh2" label="Ten_Nh2 : String" kind="Persistent" fieldName="_ten_nh2" />
-      <Property Id="919915f0-a7d0-47c1-bb6c-7f88674599eb" name="User_Id0" type="Guid" label="User_Id0 : Guid" kind="Persistent" fieldName="_user_id0" />
-      <Property Id="3067e54b-f476-4b38-9a06-2ef534696a8e" name="User_Id2" type="Guid" label="User_Id2 : Guid" kind="Persistent" fieldName="_user_id2" />
+      <Property Id="f8fc0a8c-a47b-4918-969e-93859b9a31e5" name="Name" label="Name : String" kind="Persistent" fieldName="_name" />
+      <Property Id="919915f0-a7d0-47c1-bb6c-7f88674599eb" name="RecCreateBy" type="Guid" label="RecCreateBy : Guid" kind="Persistent" fieldName="_recCreateBy" />
+      <Property Id="3067e54b-f476-4b38-9a06-2ef534696a8e" name="RecModifiedBy" type="Guid" label="RecModifiedBy : Guid" kind="Persistent" fieldName="_recModifiedBy" />
       <Property Id="b4929831-c417-413a-ac60-ca17631e33ee" name="ClientId" type="Guid" label="ClientId : Guid" kind="Persistent" fieldName="_clientId" />
       <Property Id="25fc9b8b-65b1-4f3a-b24e-c3cc41a8379a" name="OrganizationId" type="Guid" label="OrganizationId : Guid" kind="Persistent" fieldName="_organizationId" />
+      <Property Id="529ea20b-3bb4-4417-a087-692ba1284e0c" name="Id" type="Guid" label="Id : Guid" identity="true" fieldName="_id" />
+      <Property Id="d37d398b-55b9-463b-b760-8b870bc20977" name="Version" type="Int64" label="Version : Int64" kind="Persistent" fieldName="_version" />
       <AssociationTargets>
-        <Association Id="b30b38b4-6ec3-454f-92bd-45c508927068" SourceMultiplicity="ZeroOne" name="DmnhvvHasUserinfo0">
+        <Association Id="b30b38b4-6ec3-454f-92bd-45c508927068" SourceMultiplicity="ZeroOne" name="JobGroupHasCreateBy">
           <DomainClassMoniker name="/EntitiesModel/User" />
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="b9e555ec-8df1-4a07-92c1-97aab48d7063">
-              <NavigationalPropertyMoniker name="/EntitiesModel/JobGroup/Userinfo0" />
+              <NavigationalPropertyMoniker name="/EntitiesModel/JobGroup/RecCreatedByUser" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
-        <Association Id="43788f0a-acb5-4501-af4b-874a63fe05df" SourceMultiplicity="ZeroOne" name="DmnhvvHasUserinfo2">
+        <Association Id="43788f0a-acb5-4501-af4b-874a63fe05df" SourceMultiplicity="ZeroOne" name="JobGroupHasModifiedBy">
           <DomainClassMoniker name="/EntitiesModel/User" />
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="4aa8f076-784b-4dcb-8f45-96fd79c6fdce">
-              <NavigationalPropertyMoniker name="/EntitiesModel/JobGroup/Userinfo2" />
+              <NavigationalPropertyMoniker name="/EntitiesModel/JobGroup/RecModifiedByUser" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
@@ -2425,25 +2430,25 @@
       </AssociationTargets>
       <navigationalProperties>
         <classHasNavigationalProperties Id="52f7b71d-4ca2-46fa-8a2c-d8c742f957c0">
-          <NavigationalProperty Id="6e942301-9b08-445e-b8e2-aacc59d3e317" name="Userinfo0" type="Userinfo" label="Userinfo0 : Userinfo" nullable="true" kind="Persistent" fieldName="_userinfo" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="6e942301-9b08-445e-b8e2-aacc59d3e317" name="RecCreatedByUser" type="User" label="RecCreatedByUser : User" nullable="true" kind="Persistent" fieldName="_userinfo" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="42c07364-9354-453e-bdaf-7390cdd5e282">
-          <NavigationalProperty Id="247a6428-0084-484c-8f1d-dbc99861cac1" name="Userinfo2" type="Userinfo" label="Userinfo2 : Userinfo" nullable="true" kind="Persistent" fieldName="_userinfo1" isDependent="false" isManaged="false" />
-        </classHasNavigationalProperties>
-        <classHasNavigationalProperties Id="a4cad273-2956-40d8-8228-fbb96606878a">
-          <NavigationalProperty Id="5ded7457-b33a-46e0-b008-e38d96f1ca9d" name="Dmvv1s" type="IList&lt;Dmvv&gt;" label="Dmvv1s : IList&lt;Dmvv&gt;" nullable="true" kind="Persistent" fieldName="_dmvvs" isDependent="false" isManaged="false" />
-        </classHasNavigationalProperties>
-        <classHasNavigationalProperties Id="010b7c18-636b-43b0-b860-e577470d4322">
-          <NavigationalProperty Id="14496fb5-d08a-4cc0-9f87-09950d03c57e" name="Dmvv2s" type="IList&lt;Dmvv&gt;" label="Dmvv2s : IList&lt;Dmvv&gt;" nullable="true" kind="Persistent" fieldName="_dmvvs1" isDependent="false" isManaged="false" />
-        </classHasNavigationalProperties>
-        <classHasNavigationalProperties Id="f404042e-19c5-49b8-8be3-8edcd63b309c">
-          <NavigationalProperty Id="c4f2f62d-93b2-453b-bb6b-c60c93f22c74" name="Dmvv3s" type="IList&lt;Dmvv&gt;" label="Dmvv3s : IList&lt;Dmvv&gt;" nullable="true" kind="Persistent" fieldName="_dmvvs2" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="247a6428-0084-484c-8f1d-dbc99861cac1" name="RecModifiedByUser" type="User" label="RecModifiedByUser : User" nullable="true" kind="Persistent" fieldName="_userinfo1" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="7f7ec7e2-91b2-4963-8ca2-7f4a77fbc064">
           <NavigationalProperty Id="1a028d41-39d4-489b-bc63-1dd0b5d1c914" name="Client" type="Client" label="Client : Client" nullable="true" kind="Persistent" fieldName="_client" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="7b4faff7-784b-4d82-9114-930e20d45ee6">
           <NavigationalProperty Id="fd577169-7e57-4724-be52-d4db79951e05" name="Organization" type="Organization" label="Organization : Organization" nullable="true" kind="Persistent" fieldName="_organization" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="7932b206-ed68-431e-a19b-aa461d35810e">
+          <NavigationalProperty Id="dcfc5ff1-9e3f-45ef-9ccc-fdc3a24e3960" name="Job1s" type="IList&lt;Job&gt;" label="Job1s : IList&lt;Job&gt;" nullable="true" kind="Persistent" fieldName="_job" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="0d881ef9-009e-42ca-91b2-f1f093650a95">
+          <NavigationalProperty Id="dccd000d-d046-4e72-af9c-8b5f86740f26" name="Job2s" type="IList&lt;Job&gt;" label="Job2s : IList&lt;Job&gt;" nullable="true" kind="Persistent" fieldName="_job1" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="0541f9f1-a4e3-49d5-b8f0-3164eb133fbe">
+          <NavigationalProperty Id="1431c8a1-4fbc-4591-a75b-9b249f8b85ec" name="Job3s" type="IList&lt;Job&gt;" label="Job3s : IList&lt;Job&gt;" nullable="true" kind="Persistent" fieldName="_job2" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>

@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.ServiceModel.DomainServices.Client;
 using MyERP.Infrastructure.ViewModels;
 using MyERP.Repositories;
-using MyERP.DataAccess;
+using MyERP.Repository.MyERPService;
 
 namespace MyERP.Modules.Home.ViewModels
 {
@@ -18,8 +15,6 @@ namespace MyERP.Modules.Home.ViewModels
         #endregion
 
         #region View-visible properties
-        public DomainContext Context { get; set; }
-
         //set from the view's domaindatasource
         private IEnumerable<Module> _generalLeaderJournals;
         public IEnumerable<Module> GeneralLeaderJournals
@@ -28,11 +23,11 @@ namespace MyERP.Modules.Home.ViewModels
             {
                 if (this._generalLeaderJournals == null)
                 {
-                    this.ModulesRepository.GetGeneralLeaderJournals((results) =>
-                    {
-                        this._generalLeaderJournals = results;
-                        this.RaisePropertyChanged(() => this.GeneralLeaderJournals);
-                    });
+                    //this.ModulesRepository.GetGeneralLeaderJournals((results) =>
+                    //{
+                    //    this._generalLeaderJournals = results;
+                    //    this.RaisePropertyChanged(() => this.GeneralLeaderJournals);
+                    //});
                 }
                 return this._generalLeaderJournals;
             }
@@ -47,11 +42,11 @@ namespace MyERP.Modules.Home.ViewModels
             {
                 if (this._generalLeaderSetup == null)
                 {
-                    this.ModulesRepository.GetGeneralLeaderSetup((results) =>
-                    {
-                        this._generalLeaderSetup = results;
-                        this.RaisePropertyChanged(() => this.GeneralLeaderSetup);
-                    });
+                    //this.ModulesRepository.GetGeneralLeaderSetup((results) =>
+                    //{
+                    //    this._generalLeaderSetup = results;
+                    //    this.RaisePropertyChanged(() => this.GeneralLeaderSetup);
+                    //});
                 }
                 return this._generalLeaderSetup;
             }
@@ -65,11 +60,11 @@ namespace MyERP.Modules.Home.ViewModels
             {
                 if (this._generalLeaderReports == null)
                 {
-                    this.ModulesRepository.GetGeneralLeaderReports((results) =>
-                    {
-                        this._generalLeaderReports = results;
-                        this.RaisePropertyChanged(() => this.GeneralLeaderReports);
-                    });
+                    //this.ModulesRepository.GetGeneralLeaderReports((results) =>
+                    //{
+                    //    this._generalLeaderReports = results;
+                    //    this.RaisePropertyChanged(() => this.GeneralLeaderReports);
+                    //});
                 }
                 return this._generalLeaderReports;
             }
@@ -83,11 +78,11 @@ namespace MyERP.Modules.Home.ViewModels
             {
                 if (this._masterSystem == null)
                 {
-                    this.ModulesRepository.GetMasterSystem((results) =>
-                    {
-                        this._masterSystem = results;
-                        this.RaisePropertyChanged(() => this.MasterSystem);
-                    });
+                    //this.ModulesRepository.GetMasterSystem((results) =>
+                    //{
+                    //    this._masterSystem = results;
+                    //    this.RaisePropertyChanged(() => this.MasterSystem);
+                    //});
                 }
                 return this._masterSystem;
             }
@@ -101,11 +96,11 @@ namespace MyERP.Modules.Home.ViewModels
             {
                 if (this._masterCompany == null)
                 {
-                    this.ModulesRepository.GetMasterCompany((results) =>
-                    {
-                        this._masterCompany = results;
-                        this.RaisePropertyChanged(() => this.MasterCompany);
-                    });
+                    //this.ModulesRepository.GetMasterCompany((results) =>
+                    //{
+                    //    this._masterCompany = results;
+                    //    this.RaisePropertyChanged(() => this.MasterCompany);
+                    //});
                 }
                 return this._masterCompany;
             }
@@ -119,11 +114,11 @@ namespace MyERP.Modules.Home.ViewModels
             {
                 if (this._masterBasic == null)
                 {
-                    this.ModulesRepository.GetMasterBasic((results) =>
-                    {
-                        this._masterBasic = results;
-                        this.RaisePropertyChanged(() => this.MasterBasic);
-                    });
+                    //this.ModulesRepository.GetMasterBasic((results) =>
+                    //{
+                    //    this._masterBasic = results;
+                    //    this.RaisePropertyChanged(() => this.MasterBasic);
+                    //});
                 }
                 return this._masterBasic;
             }
@@ -135,7 +130,6 @@ namespace MyERP.Modules.Home.ViewModels
         public override void OnImportsSatisfied()
         {
             base.OnImportsSatisfied();
-            this.Context = this.ModulesRepository.Context;
         }
         #endregion
     }

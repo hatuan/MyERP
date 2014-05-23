@@ -22,14 +22,9 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("general_journal_document", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
-	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class GeneralJournalDocument
 	{
 		private Guid _id;
-		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_id")]
 		public virtual Guid Id
 		{
 			get
@@ -43,8 +38,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _clientId;
-		[Column("client_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get
@@ -58,8 +51,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _organizationId;
-		[Column("organization_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_organizationId")]
 		public virtual Guid OrganizationId
 		{
 			get
@@ -73,8 +64,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private long _version;
-		[Column("version", IsVersion = true, IsBackendVersion = true, Length = 0, Scale = 0, SqlType = "int8")]
-		[Storage("_version")]
 		public virtual long Version
 		{
 			get
@@ -88,8 +77,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private decimal _totalCreditAmountLcy;
-		[Column("total_credit_amount_lcy", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_totalCreditAmountLcy")]
 		public virtual decimal TotalCreditAmountLcy
 		{
 			get
@@ -103,8 +90,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _numberSequenceId;
-		[Column("number_sequence_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_numberSequenceId")]
 		public virtual Guid NumberSequenceId
 		{
 			get
@@ -118,8 +103,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _documentCreated;
-		[Column("document_created_date", Length = 0, Scale = 0, SqlType = "date")]
-		[Storage("_documentCreated")]
 		public virtual DateTime DocumentCreated
 		{
 			get
@@ -133,8 +116,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _documentNo;
-		[Column("document_no", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_documentNo")]
 		public virtual string DocumentNo
 		{
 			get
@@ -148,8 +129,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _documentPosted;
-		[Column("document_posted_date", Length = 0, Scale = 0, SqlType = "date")]
-		[Storage("_documentPosted")]
 		public virtual DateTime DocumentPosted
 		{
 			get
@@ -163,8 +142,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DocumentType _documentType;
-		[Column("document_type", Length = 0, Scale = 0, SqlType = "int4")]
-		[Storage("_documentType")]
 		public virtual DocumentType DocumentType
 		{
 			get
@@ -178,8 +155,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _recCreated;
-		[Column("rec_created", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_recCreated")]
 		public virtual DateTime RecCreated
 		{
 			get
@@ -193,8 +168,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _recCreatedBy;
-		[Column("rec_created_by", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_recCreatedBy")]
 		public virtual Guid RecCreatedBy
 		{
 			get
@@ -208,8 +181,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _recModified;
-		[Column("rec_modified", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_recModified")]
 		public virtual DateTime RecModified
 		{
 			get
@@ -223,8 +194,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _recModifiedBy;
-		[Column("rec_modified_by", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_recModifiedBy")]
 		public virtual Guid RecModifiedBy
 		{
 			get
@@ -238,8 +207,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private int _status;
-		[Column("status", Length = 0, Scale = 0, SqlType = "int4")]
-		[Storage("_status")]
 		public virtual int Status
 		{
 			get
@@ -253,8 +220,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private decimal _totalCreditAmount;
-		[Column("total_credit_amount", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_totalCreditAmount")]
 		public virtual decimal TotalCreditAmount
 		{
 			get
@@ -268,8 +233,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private decimal _totalDebitAmount;
-		[Column("total_debit_amount", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_totalDebitAmount")]
 		public virtual decimal TotalDebitAmount
 		{
 			get
@@ -283,8 +246,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private decimal _totalDebitAmountLcy;
-		[Column("total_debit_amount_lcy", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_totalDebitAmountLcy")]
 		public virtual decimal TotalDebitAmountLcy
 		{
 			get
@@ -298,8 +259,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private TransactionType _transactionType;
-		[Column("transaction_type", Length = 0, Scale = 0, SqlType = "int4")]
-		[Storage("_transactionType")]
 		public virtual TransactionType TransactionType
 		{
 			get
@@ -313,8 +272,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private int _currencyExchangeRate;
-		[Column("currency_exchange_rate", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_currencyExchangeRate")]
 		public virtual int CurrencyExchangeRate
 		{
 			get
@@ -328,8 +285,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid? _currencyId;
-		[Column("currency_id", IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_currencyId")]
 		public virtual Guid? CurrencyId
 		{
 			get
@@ -343,8 +298,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _description;
-		[Column("description", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_description")]
 		public virtual string Description
 		{
 			get
@@ -358,8 +311,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
-		[Storage("_client")]
 		public virtual Client Client
 		{
 			get
@@ -373,8 +324,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
-		[Storage("_organization")]
 		public virtual Organization Organization
 		{
 			get
@@ -388,8 +337,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private User _recCreatedByUser;
-		[ForeignKeyAssociation(SharedFields = "RecCreatedBy", TargetFields = "Id")]
-		[Storage("_recCreatedByUser")]
 		public virtual User RecCreatedByUser
 		{
 			get
@@ -403,8 +350,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private User _recModifiedByUser;
-		[ForeignKeyAssociation(SharedFields = "RecModifiedBy")]
-		[Storage("_recModifiedByUser")]
 		public virtual User RecModifiedByUser
 		{
 			get
@@ -418,8 +363,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Currency _currency;
-		[ForeignKeyAssociation(SharedFields = "CurrencyId", TargetFields = "Id")]
-		[Storage("_currency")]
 		public virtual Currency Currency
 		{
 			get
@@ -433,8 +376,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private NumberSequence _numberSequence;
-		[ForeignKeyAssociation(SharedFields = "NumberSequenceId", TargetFields = "Id")]
-		[Storage("_numberSequence")]
 		public virtual NumberSequence NumberSequence
 		{
 			get
@@ -448,8 +389,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private IList<GeneralJournalLine> _generalJournalLines = new List<GeneralJournalLine>();
-		[Collection(InverseProperty = "GeneralJournalDocument")]
-		[Storage("_generalJournalLines")]
 		public virtual IList<GeneralJournalLine> GeneralJournalLines
 		{
 			get

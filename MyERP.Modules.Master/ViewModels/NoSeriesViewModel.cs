@@ -1,17 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.ServiceModel.DomainServices.Client;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
-using MyERP.DataAccess;
 using MyERP.Infrastructure;
 using MyERP.Infrastructure.ViewModels;
 using MyERP.Repositories;
+using MyERP.Repository.MyERPService;
 using MyERP.ViewModels;
-using MyERP.Web;
 using Telerik.Windows.Data;
 
 namespace MyERP.Modules.Master.ViewModels
@@ -61,8 +59,8 @@ namespace MyERP.Modules.Master.ViewModels
             }
         }
 
-        private QueryableDomainServiceCollectionView<NumberSequence> _noSeries;
-        public QueryableDomainServiceCollectionView<NumberSequence> NoSeries
+        private ObservableItemCollection<NumberSequence> _noSeries;
+        public ObservableItemCollection<NumberSequence> NoSeries
         {
             get { return this._noSeries; }
             set { _noSeries = value; }
@@ -70,7 +68,7 @@ namespace MyERP.Modules.Master.ViewModels
         
         public bool IsBusy
         {
-            get { return this._noSeries.IsBusy; }
+            get { return true; }
         }
 
         void _noSeries_LoadedData(object sender, Telerik.Windows.Controls.DomainServices.LoadedDataEventArgs e)
@@ -111,47 +109,36 @@ namespace MyERP.Modules.Master.ViewModels
             }
         }
 
-        //Update khi thay doi sang dong moi
-        void _noSeries_CurrentChanging(object sender, CurrentChangingEventArgs e)
-        {
-            if (_noSeries.HasChanges)
-                _noSeries.SubmitChanges();
-        }
-
         private void OnAddNewCommandExecuted()
         {
-            _noSeries.AddNew();
 
         }
 
         private bool AddNewCommandCanExecute()
         {
-            return !_noSeries.HasChanges;
+            return true;
         }
         
         private void OnSubmitChangesExcuted()
         {
-            this._noSeries.SubmitChanges();
         }
 
         private bool SubmitChangesCommandCanExecute()
         {
-            return this._noSeries.HasChanges;
+            return true;
         }
 
         private void OnRejectChangesExcuted()
         {
-            this._noSeries.RejectChanges();
         }
 
         private bool RefreshCommandCanExecute()
         {
-            return this._noSeries.CanLoad;
+            return true;
         }
 
         private void OnRefreshExcuted()
         {
-            this._noSeries.Load();
         }
 
         private bool DeleteCommandCanExecute()
@@ -174,8 +161,8 @@ namespace MyERP.Modules.Master.ViewModels
                 return false;
             
             //Neu co thay doi thi khong cho dong cua so, bat buoc phai luu hay undo
-            if(this._noSeries.HasChanges)
-                return false;
+            //if(this._noSeries.HasChanges)
+            //    return false;
 
             return true;
         }
@@ -192,16 +179,7 @@ namespace MyERP.Modules.Master.ViewModels
         public override void OnImportsSatisfied()
         {
             base.OnImportsSatisfied();
-
-            MyERPDomainContext context = NumberSequenceRepository.Context;
-            EntityQuery<NumberSequence> getNoSeriesQuery = context.GetNumberSequencesQuery().OrderBy(c => c.Code);
-            this._noSeries = new QueryableDomainServiceCollectionView<NumberSequence>(context, getNoSeriesQuery);
-            this._noSeries.AutoLoad = true;
-            this._noSeries.LoadedData += _noSeries_LoadedData;
-            this._noSeries.PropertyChanged += _noSeries_PropertyChanged;
-            this._noSeries.SubmittedChanges += _noSeries_SubmittedChanges;
-            //this._noSeries.CurrentChanging += _noSeries_CurrentChanging;
-
+            
             this.AddNewCommand = new DelegateCommand(OnAddNewCommandExecuted, AddNewCommandCanExecute);
             this.SubmitChangesCommand = new DelegateCommand(OnSubmitChangesExcuted, SubmitChangesCommandCanExecute);
             this.RejectChangesCommand = new DelegateCommand(OnRejectChangesExcuted, SubmitChangesCommandCanExecute);

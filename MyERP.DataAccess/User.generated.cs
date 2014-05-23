@@ -22,14 +22,9 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("user", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Changed)]
-	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class User
 	{
 		private Guid _id;
-		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_id")]
 		public virtual Guid Id
 		{
 			get
@@ -43,8 +38,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _name;
-		[Column("name", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_name")]
 		public virtual string Name
 		{
 			get
@@ -58,8 +51,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _password;
-		[Column("password", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_password")]
 		public virtual string Password
 		{
 			get
@@ -73,8 +64,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _comment;
-		[Column("comment", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_comment")]
 		public virtual string Comment
 		{
 			get
@@ -88,8 +77,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _fullName;
-		[Column("full_name", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_fullName")]
 		public virtual string FullName
 		{
 			get
@@ -103,8 +90,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _passwordAnswer;
-		[Column("password_answer", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_passwordAnswer")]
 		public virtual string PasswordAnswer
 		{
 			get
@@ -118,8 +103,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _passwordQuestion;
-		[Column("password_question", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_passwordQuestion")]
 		public virtual string PasswordQuestion
 		{
 			get
@@ -133,8 +116,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _email;
-		[Column("email", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_email")]
 		public virtual string Email
 		{
 			get
@@ -148,8 +129,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _createdDate;
-		[Column("created_date", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_createdDate")]
 		public virtual DateTime CreatedDate
 		{
 			get
@@ -163,8 +142,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private bool _isActivated;
-		[Column("is_activated", Length = 0, Scale = 0, SqlType = "bool")]
-		[Storage("_isActivated")]
 		public virtual bool IsActivated
 		{
 			get
@@ -178,8 +155,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private bool _isLockedOut;
-		[Column("is_locked_out", Length = 0, Scale = 0, SqlType = "bool")]
-		[Storage("_isLockedOut")]
 		public virtual bool IsLockedOut
 		{
 			get
@@ -193,8 +168,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _lastLockedOutDate;
-		[Column("last_locked_out_date", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_lastLockedOutDate")]
 		public virtual DateTime LastLockedOutDate
 		{
 			get
@@ -208,8 +181,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _lastLockedOutReason;
-		[Column("last_locked_out_reason", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_lastLockedOutReason")]
 		public virtual string LastLockedOutReason
 		{
 			get
@@ -223,8 +194,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _lastLoginDate;
-		[Column("last_login_date", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_lastLoginDate")]
 		public virtual DateTime LastLoginDate
 		{
 			get
@@ -238,8 +207,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _lastLoginIp;
-		[Column("last_login_ip", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_lastLoginIp")]
 		public virtual string LastLoginIp
 		{
 			get
@@ -253,8 +220,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _lastModifiedDate;
-		[Column("last_modified_date", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_lastModifiedDate")]
 		public virtual DateTime LastModifiedDate
 		{
 			get
@@ -268,8 +233,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid? _clientId;
-		[Column("client_id", OpenAccessType = OpenAccessType.Guid, IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_clientId")]
 		public virtual Guid? ClientId
 		{
 			get
@@ -283,8 +246,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid? _organizationId;
-		[Column("organization_id", OpenAccessType = OpenAccessType.Guid, IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_organizationId")]
 		public virtual Guid? OrganizationId
 		{
 			get
@@ -298,8 +259,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
-		[Storage("_client")]
 		public virtual Client Client
 		{
 			get
@@ -313,8 +272,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
-		[Storage("_organization")]
 		public virtual Organization Organization
 		{
 			get

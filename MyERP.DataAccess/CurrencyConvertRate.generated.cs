@@ -22,14 +22,9 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("currency_convert_rate", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
-	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class CurrencyConvertRate
 	{
 		private Guid _id;
-		[Column("id", OpenAccessType = OpenAccessType.Guid, IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_id")]
 		public virtual Guid Id
 		{
 			get
@@ -43,8 +38,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _recCreated;
-		[Column("rec_created", OpenAccessType = OpenAccessType.DateTime, Length = 0, Scale = 0, SqlType = "timestamp", Converter = "OpenAccessRuntime.Data.PostgresTimestampTZConverter")]
-		[Storage("_recCreated")]
 		public virtual DateTime RecCreated
 		{
 			get
@@ -58,8 +51,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _recCreatedBy;
-		[Column("rec_created_by", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_recCreatedBy")]
 		public virtual Guid RecCreatedBy
 		{
 			get
@@ -73,8 +64,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _recModified;
-		[Column("rec_modified", OpenAccessType = OpenAccessType.DateTime, Length = 0, Scale = 0, SqlType = "timestamp", Converter = "OpenAccessRuntime.Data.PostgresTimestampTZConverter")]
-		[Storage("_recModified")]
 		public virtual DateTime RecModified
 		{
 			get
@@ -88,8 +77,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _recModifiedBy;
-		[Column("rec_modified_by", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_recModifiedBy")]
 		public virtual Guid RecModifiedBy
 		{
 			get
@@ -103,8 +90,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _clientId;
-		[Column("client_id", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get
@@ -118,8 +103,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _organizationId;
-		[Column("organization_id", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_organizationId")]
 		public virtual Guid OrganizationId
 		{
 			get
@@ -133,8 +116,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private long _version;
-		[Column("version", OpenAccessType = OpenAccessType.Int64, IsVersion = true, Length = 0, Scale = 0, SqlType = "int8", Converter = "OpenAccessRuntime.Data.BigIntConverter")]
-		[Storage("_version")]
 		public virtual long Version
 		{
 			get
@@ -148,8 +129,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _currencyId;
-		[Column("currency_id", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_currencyId")]
 		public virtual Guid CurrencyId
 		{
 			get
@@ -163,8 +142,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _currencyIdTo;
-		[Column("currency_id_to", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_currencyIdTo")]
 		public virtual Guid CurrencyIdTo
 		{
 			get
@@ -178,8 +155,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _validFrom;
-		[Column("valid_from", OpenAccessType = OpenAccessType.DateTime, Length = 0, Scale = 0, SqlType = "date", Converter = "OpenAccessRuntime.Data.PostgresTimestampTZConverter")]
-		[Storage("_validFrom")]
 		public virtual DateTime ValidFrom
 		{
 			get
@@ -193,8 +168,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _validTo;
-		[Column("valid_to", OpenAccessType = OpenAccessType.DateTime, Length = 0, Scale = 0, SqlType = "date", Converter = "OpenAccessRuntime.Data.PostgresTimestampTZConverter")]
-		[Storage("_validTo")]
 		public virtual DateTime ValidTo
 		{
 			get
@@ -208,8 +181,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private int _multiplyRate;
-		[Column("multiply_rate", OpenAccessType = OpenAccessType.Int32, Length = 0, Scale = 0, SqlType = "int4", Converter = "OpenAccessRuntime.Data.IntConverter")]
-		[Storage("_multiplyRate")]
 		public virtual int MultiplyRate
 		{
 			get
@@ -223,8 +194,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private int _divideRate;
-		[Column("divide_rate", OpenAccessType = OpenAccessType.Int32, Length = 0, Scale = 0, SqlType = "int4", Converter = "OpenAccessRuntime.Data.IntConverter")]
-		[Storage("_divideRate")]
 		public virtual int DivideRate
 		{
 			get
@@ -238,8 +207,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private byte _status;
-		[Column("status", OpenAccessType = OpenAccessType.Int16, Length = 0, Scale = 0, SqlType = "int2", Converter = "OpenAccessRuntime.Data.TinyInt2UByteConverter")]
-		[Storage("_status")]
 		public virtual byte Status
 		{
 			get
@@ -253,8 +220,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private byte _conversionRateType;
-		[Column("conversion_rate_type", OpenAccessType = OpenAccessType.Int16, Length = 0, Scale = 0, SqlType = "int2", Converter = "OpenAccessRuntime.Data.TinyInt2UByteConverter")]
-		[Storage("_conversionRateType")]
 		public virtual byte ConversionRateType
 		{
 			get
@@ -268,8 +233,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
-		[Storage("_client")]
 		public virtual Client Client
 		{
 			get
@@ -283,8 +246,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private User _user;
-		[ForeignKeyAssociation(SharedFields = "RecCreatedBy", TargetFields = "Id")]
-		[Storage("_user")]
 		public virtual User RecCreatedByUser
 		{
 			get
@@ -298,8 +259,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private User _user1;
-		[ForeignKeyAssociation(SharedFields = "RecModifiedBy", TargetFields = "Id")]
-		[Storage("_user1")]
 		public virtual User RecModifiedByUser
 		{
 			get
@@ -313,8 +272,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
-		[Storage("_organization")]
 		public virtual Organization Organization
 		{
 			get
@@ -328,8 +285,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Currency _currency;
-		[ForeignKeyAssociation(SharedFields = "CurrencyId", TargetFields = "Id")]
-		[Storage("_currency")]
 		public virtual Currency Currency
 		{
 			get
@@ -343,8 +298,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Currency _currency1;
-		[ForeignKeyAssociation(SharedFields = "CurrencyIdTo", TargetFields = "Id")]
-		[Storage("_currency1")]
 		public virtual Currency CurrencyTo
 		{
 			get

@@ -2,13 +2,17 @@
   <Deployment.Parts>
     <AssemblyPart x:Name="MyERP.Modules.User" Source="MyERP.Modules.User.dll" />
     <AssemblyPart x:Name="MyERP.Repository" Source="MyERP.Repository.dll" />
-    <AssemblyPart x:Name="Telerik.Windows.Controls.GridView" Source="Telerik.Windows.Controls.GridView.dll" />
+    <AssemblyPart x:Name="System.Spatial.SL" Source="System.Spatial.SL.dll" />
+    <AssemblyPart x:Name="Microsoft.Data.Services.Client.SL" Source="Microsoft.Data.Services.Client.SL.dll" />
+    <AssemblyPart x:Name="Microsoft.Data.Edm.SL" Source="Microsoft.Data.Edm.SL.dll" />
+    <AssemblyPart x:Name="Microsoft.Data.OData.SL" Source="Microsoft.Data.OData.SL.dll" />
   </Deployment.Parts>
   <Deployment.ExternalParts>
     <ExtensionPart Source="System.ComponentModel.Composition.zip" />
     <ExtensionPart Source="System.ComponentModel.DataAnnotations.zip" />
     <ExtensionPart Source="System.Windows.Controls.zip" />
     <ExtensionPart Source="System.Windows.Data.zip" />
+    <ExtensionPart Source="System.Xml.Linq.zip" />
     <ExtensionPart Source="Telerik.Windows.Controls.Data.zip" />
     <ExtensionPart Source="Telerik.Windows.Controls.zip" />
     <ExtensionPart Source="Telerik.Windows.Controls.Docking.zip" />
@@ -18,6 +22,6 @@
     <ExtensionPart Source="Telerik.Windows.Data.zip" />
     <ExtensionPart Source="Telerik.Windows.Themes.Windows8.zip" />
     <ExtensionPart Source="Microsoft.CSharp.zip" />
-    <ExtensionPart Source="System.Xml.Linq.zip" />
+    <ExtensionPart Source="System.ServiceModel.DomainServices.Client.zip" />
   </Deployment.ExternalParts>
 </Deployment>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 
-
 namespace MyERP.Repositories
 {
     [Export]
@@ -9,7 +8,7 @@ namespace MyERP.Repositories
     {
         public void SequenceNextVal(string sequenceName, Action<int> callback)
         {
-            this.Context.SequenceNextVal(sequenceName, operation => callback(operation.Value), null);
+
         }
     }
 }

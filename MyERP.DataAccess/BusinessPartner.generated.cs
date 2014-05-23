@@ -22,14 +22,9 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("business_partner", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
-	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class BusinessPartner
 	{
 		private string _code;
-		[Column("code", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_code")]
 		public virtual string Code
 		{
 			get
@@ -43,8 +38,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _name;
-		[Column("name", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_name")]
 		public virtual string Name
 		{
 			get
@@ -58,8 +51,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _vatCode;
-		[Column("vat_code", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_vatCode")]
 		public virtual string VatCode
 		{
 			get
@@ -73,8 +64,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _address;
-		[Column("address", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_address")]
 		public virtual string Address
 		{
 			get
@@ -88,8 +77,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _telephone;
-		[Column("telephone", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_telephone")]
 		public virtual string Telephone
 		{
 			get
@@ -103,8 +90,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _fax;
-		[Column("fax", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_fax")]
 		public virtual string Fax
 		{
 			get
@@ -118,8 +103,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _mail;
-		[Column("e_mail", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_mail")]
 		public virtual string Mail
 		{
 			get
@@ -133,8 +116,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _homePage;
-		[Column("home_page", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_homePage")]
 		public virtual string HomePage
 		{
 			get
@@ -148,8 +129,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _contactName;
-		[Column("contact_name", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_contactName")]
 		public virtual string ContactName
 		{
 			get
@@ -163,8 +142,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _comment;
-		[Column("comment", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_comment")]
 		public virtual string Comment
 		{
 			get
@@ -178,8 +155,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _employeeAccountId;
-		[Column("employee_account_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_employeeAccountId")]
 		public virtual Guid EmployeeAccountId
 		{
 			get
@@ -193,8 +168,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _businessPartnerGroupId1;
-		[Column("business_partner_group_id1", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_businessPartnerGroupId1")]
 		public virtual Guid BusinessPartnerGroupId1
 		{
 			get
@@ -208,8 +181,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _businessPartnerGroupId2;
-		[Column("business_partner_group_id2", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_businessPartnerGroupId2")]
 		public virtual Guid BusinessPartnerGroupId2
 		{
 			get
@@ -223,8 +194,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _businessPartnerGroupId3;
-		[Column("business_partner_group_id3", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_businessPartnerGroupId3")]
 		public virtual Guid BusinessPartnerGroupId3
 		{
 			get
@@ -238,8 +207,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private decimal _creditLimit;
-		[Column("credit_limit", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_creditLimit")]
 		public virtual decimal CreditLimit
 		{
 			get
@@ -253,8 +220,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private decimal _amountLimit;
-		[Column("amount_limit", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_amountLimit")]
 		public virtual decimal AmountLimit
 		{
 			get
@@ -268,8 +233,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _recCreated;
-		[Column("rec_created", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_recCreated")]
 		public virtual DateTime RecCreated
 		{
 			get
@@ -283,8 +246,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _recCreatedBy;
-		[Column("rec_created_by", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_recCreatedBy")]
 		public virtual Guid RecCreatedBy
 		{
 			get
@@ -298,8 +259,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _recModified;
-		[Column("rec_modified", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_recModified")]
 		public virtual DateTime RecModified
 		{
 			get
@@ -313,8 +272,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _recModifiedBy;
-		[Column("rec_modified_by", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_recModifiedBy")]
 		public virtual Guid RecModifiedBy
 		{
 			get
@@ -328,8 +285,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _paymentTermId;
-		[Column("payment_term_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_paymentTermId")]
 		public virtual Guid PaymentTermId
 		{
 			get
@@ -343,8 +298,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private bool _isCustomer;
-		[Column("is_customer", Length = 0, Scale = 0, SqlType = "bool")]
-		[Storage("_isCustomer")]
 		public virtual bool IsCustomer
 		{
 			get
@@ -358,8 +311,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private bool _isVendor;
-		[Column("is_vendor", Length = 0, Scale = 0, SqlType = "bool")]
-		[Storage("_isVendor")]
 		public virtual bool IsVendor
 		{
 			get
@@ -373,8 +324,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private bool _isEmployee;
-		[Column("is_employee", Length = 0, Scale = 0, SqlType = "bool")]
-		[Storage("_isEmployee")]
 		public virtual bool IsEmployee
 		{
 			get
@@ -388,8 +337,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _customerAccountId;
-		[Column("customer_account_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_customerAccountId")]
 		public virtual Guid CustomerAccountId
 		{
 			get
@@ -403,8 +350,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _vendorAccountId;
-		[Column("vendor_account_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_vendorAccountId")]
 		public virtual Guid VendorAccountId
 		{
 			get
@@ -418,8 +363,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _id;
-		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_id")]
 		public virtual Guid Id
 		{
 			get
@@ -433,8 +376,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private long _version;
-		[Column("version", IsVersion = true, IsBackendVersion = true, Length = 0, Scale = 0, SqlType = "int8")]
-		[Storage("_version")]
 		public virtual long Version
 		{
 			get
@@ -448,8 +389,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private byte _status;
-		[Column("status", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_status")]
 		public virtual byte Status
 		{
 			get
@@ -463,8 +402,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _clientId;
-		[Column("client_id", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get
@@ -478,8 +415,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _organizationId;
-		[Column("organization_id", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_organizationId")]
 		public virtual Guid OrganizationId
 		{
 			get
@@ -493,8 +428,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Account _employeeAccount;
-		[ForeignKeyAssociation(SharedFields = "EmployeeAccountId", TargetFields = "Id")]
-		[Storage("_employeeAccount")]
 		public virtual Account EmployeeAccount
 		{
 			get
@@ -508,8 +441,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Account _vendorAccount;
-		[ForeignKeyAssociation(SharedFields = "VendorAccountId", TargetFields = "Id")]
-		[Storage("_vendorAccount")]
 		public virtual Account VendorAccount
 		{
 			get
@@ -523,8 +454,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Account _account1;
-		[ForeignKeyAssociation(SharedFields = "CustomerAccountId", TargetFields = "Id")]
-		[Storage("_account1")]
 		public virtual Account CustomerAccount
 		{
 			get
@@ -538,8 +467,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private PaymentTerm _paymentTerm;
-		[ForeignKeyAssociation(SharedFields = "PaymentTermId", TargetFields = "Id")]
-		[Storage("_paymentTerm")]
 		public virtual PaymentTerm PaymentTerm
 		{
 			get
@@ -553,8 +480,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
-		[Storage("_client")]
 		public virtual Client Client
 		{
 			get
@@ -568,8 +493,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
-		[Storage("_organization")]
 		public virtual Organization Organization
 		{
 			get
@@ -583,8 +506,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private User _user0;
-		[ForeignKeyAssociation(SharedFields = "RecCreatedBy", TargetFields = "Id")]
-		[Storage("_user0")]
 		public virtual User RecCreatedByUser
 		{
 			get
@@ -598,8 +519,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private User _user2;
-		[ForeignKeyAssociation(SharedFields = "RecModifiedBy", TargetFields = "Id")]
-		[Storage("_user2")]
 		public virtual User RecModifiedByUser
 		{
 			get
@@ -613,8 +532,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private BusinessPartnerGroup _businessPartnerGroup1;
-		[ForeignKeyAssociation(SharedFields = "BusinessPartnerGroupId1", TargetFields = "Id")]
-		[Storage("_businessPartnerGroup1")]
 		public virtual BusinessPartnerGroup BusinessPartnerGroup1
 		{
 			get
@@ -628,8 +545,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private BusinessPartnerGroup _businessPartnerGroup3;
-		[ForeignKeyAssociation(SharedFields = "BusinessPartnerGroupId3", TargetFields = "Id")]
-		[Storage("_businessPartnerGroup3")]
 		public virtual BusinessPartnerGroup BusinessPartnerGroup3
 		{
 			get
@@ -643,8 +558,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private BusinessPartnerGroup _businessPartnerGroup2;
-		[ForeignKeyAssociation(SharedFields = "BusinessPartnerGroupId2", TargetFields = "Id")]
-		[Storage("_businessPartnerGroup2")]
 		public virtual BusinessPartnerGroup BusinessPartnerGroup2
 		{
 			get

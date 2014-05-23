@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.ServiceModel.DomainServices.Client;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
-using MyERP.DataAccess;
 using MyERP.Infrastructure.Annotations;
 using MyERP.Repositories;
-using MyERP.Web;
+using MyERP.Repository.MyERPService;
 using Telerik.Windows.Controls;
-using Telerik.Windows.Data;
 using WindowStartupLocation = Telerik.Windows.Controls.WindowStartupLocation;
 
 namespace MyERP.Controls
@@ -47,11 +42,11 @@ namespace MyERP.Controls
             }
 
             IsBusy = true;
-            _currencyRepository.GetCurrenciesByLookupValue(textBox.SearchText, currencies =>
-            {
-                Currencies = currencies;
-                IsBusy = false;
-            });
+            //_currencyRepository.GetCurrenciesByLookupValue(textBox.SearchText, currencies =>
+            //{
+            //    Currencies = currencies;
+            //    IsBusy = false;
+            //});
         }
 
         private readonly CurrencyRepository _currencyRepository = new CurrencyRepository();

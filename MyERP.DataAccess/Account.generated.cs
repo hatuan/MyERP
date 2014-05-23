@@ -22,14 +22,9 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("account", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
-	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class Account
 	{
 		private string _code;
-		[Column("code", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_code")]
 		public virtual string Code
 		{
 			get
@@ -43,8 +38,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _name;
-		[Column("name", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_name")]
 		public virtual string Name
 		{
 			get
@@ -58,8 +51,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid? _currencyId;
-		[Column("currency_id", IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_currencyId")]
 		public virtual Guid? CurrencyId
 		{
 			get
@@ -73,8 +64,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private bool _detail;
-		[Column("detail", Length = 0, Scale = 0, SqlType = "bool")]
-		[Storage("_detail")]
 		public virtual bool Detail
 		{
 			get
@@ -88,8 +77,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid? _parentAccountId;
-		[Column("parent_account_id", IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_parentAccountId")]
 		public virtual Guid? ParentAccountId
 		{
 			get
@@ -103,8 +90,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private short _level;
-		[Column("level", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_level")]
 		public virtual short Level
 		{
 			get
@@ -118,8 +103,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private bool _arAp;
-		[Column("ar_ap", Length = 0, Scale = 0, SqlType = "bool")]
-		[Storage("_arAp")]
 		public virtual bool ArAp
 		{
 			get
@@ -133,8 +116,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _recModified;
-		[Column("rec_created", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_recModified")]
 		public virtual DateTime RecModified
 		{
 			get
@@ -148,8 +129,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _recCreatedById;
-		[Column("rec_created_by", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_recCreatedById")]
 		public virtual Guid RecCreatedById
 		{
 			get
@@ -163,8 +142,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _recCreated;
-		[Column("rec_modified", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_recCreated")]
 		public virtual DateTime RecCreated
 		{
 			get
@@ -178,8 +155,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _recModifiedById;
-		[Column("rec_modified_by", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_recModifiedById")]
 		public virtual Guid RecModifiedById
 		{
 			get
@@ -193,8 +168,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private byte _status;
-		[Column("status", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_status")]
 		public virtual byte Status
 		{
 			get
@@ -208,8 +181,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private long _version;
-		[Column("version", IsVersion = true, IsBackendVersion = true, Length = 0, Scale = 0, SqlType = "int8")]
-		[Storage("_version")]
 		public virtual long Version
 		{
 			get
@@ -223,8 +194,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _id;
-		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_id")]
 		public virtual Guid Id
 		{
 			get
@@ -238,8 +207,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _clientId;
-		[Column("client_id", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get
@@ -253,8 +220,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _organizationId;
-		[Column("organization_id", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_organizationId")]
 		public virtual Guid OrganizationId
 		{
 			get
@@ -268,8 +233,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Currency _currency;
-		[ForeignKeyAssociation(SharedFields = "CurrencyId", TargetFields = "Id")]
-		[Storage("_currency")]
 		public virtual Currency Currency
 		{
 			get
@@ -283,8 +246,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Account _parentAccount;
-		[ForeignKeyAssociation(SharedFields = "ParentAccountId", TargetFields = "Id")]
-		[Storage("_parentAccount")]
 		public virtual Account ParentAccount
 		{
 			get
@@ -298,8 +259,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private User _user2;
-		[ForeignKeyAssociation(SharedFields = "RecModifiedById", TargetFields = "Id")]
-		[Storage("_user2")]
 		public virtual User RecModifiedByUser
 		{
 			get
@@ -313,8 +272,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private User _user0;
-		[ForeignKeyAssociation(SharedFields = "RecCreatedById", TargetFields = "Id")]
-		[Storage("_user0")]
 		public virtual User RecCreatedByUser
 		{
 			get
@@ -328,8 +285,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
-		[Storage("_client")]
 		public virtual Client Client
 		{
 			get
@@ -343,8 +298,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
-		[Storage("_organization")]
 		public virtual Organization Organization
 		{
 			get
@@ -358,8 +311,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private IList<Account> _childAccounts = new List<Account>();
-		[Collection(InverseProperty = "ParentAccount")]
-		[Storage("_childAccounts")]
 		public virtual IList<Account> ChildAccounts
 		{
 			get

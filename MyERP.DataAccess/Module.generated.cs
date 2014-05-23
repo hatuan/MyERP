@@ -21,12 +21,9 @@ using Telerik.OpenAccess.Metadata.Fluent.Advanced;
 
 namespace MyERP.DataAccess	
 {
-	[Table("module", UpdateSchema = true)]
 	public partial class Module
 	{
 		private long _id;
-		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "int8")]
-		[Storage("_id")]
 		public virtual long Id
 		{
 			get
@@ -40,8 +37,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _description;
-		[Column("description", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_description")]
 		public virtual string Description
 		{
 			get
@@ -55,8 +50,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _group;
-		[Column("group", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_group")]
 		public virtual string Group
 		{
 			get
@@ -70,8 +63,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _name;
-		[Column("name", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_name")]
 		public virtual string Name
 		{
 			get
@@ -85,8 +76,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _clientId;
-		[Column("client_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get

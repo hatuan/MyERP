@@ -22,14 +22,9 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("payment_term", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
-	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class PaymentTerm
 	{
 		private string _code;
-		[Column("code", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_code")]
 		public virtual string Code
 		{
 			get
@@ -43,8 +38,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private string _name;
-		[Column("name", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_name")]
 		public virtual string Name
 		{
 			get
@@ -58,8 +51,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private short _han_tt;
-		[Column("han_tt", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_han_tt")]
 		public virtual short Han_Tt
 		{
 			get
@@ -73,8 +64,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private short _han_tt_gg;
-		[Column("han_tt_gg", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_han_tt_gg")]
 		public virtual short Han_Tt_Gg
 		{
 			get
@@ -88,8 +77,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private decimal _pt_gg;
-		[Column("pt_gg", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_pt_gg")]
 		public virtual decimal Pt_Gg
 		{
 			get
@@ -103,8 +90,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _date0;
-		[Column("date0", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date0")]
 		public virtual DateTime Date0
 		{
 			get
@@ -118,8 +103,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _userId0;
-		[Column("user_id0", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_userId0")]
 		public virtual Guid UserId0
 		{
 			get
@@ -133,8 +116,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _date2;
-		[Column("date2", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date2")]
 		public virtual DateTime Date2
 		{
 			get
@@ -148,8 +129,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _userId2;
-		[Column("user_id2", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_userId2")]
 		public virtual Guid UserId2
 		{
 			get
@@ -163,8 +142,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private byte _status;
-		[Column("status", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_status")]
 		public virtual byte Status
 		{
 			get
@@ -178,8 +155,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _id;
-		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_id")]
 		public virtual Guid Id
 		{
 			get
@@ -193,8 +168,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private long _version;
-		[Column("version", IsVersion = true, IsBackendVersion = true, Length = 0, Scale = 0, SqlType = "int8")]
-		[Storage("_version")]
 		public virtual long Version
 		{
 			get
@@ -208,8 +181,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _clientId;
-		[Column("client_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get
@@ -223,8 +194,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _organizationId;
-		[Column("organization_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_organizationId")]
 		public virtual Guid OrganizationId
 		{
 			get
@@ -238,8 +207,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
-		[Storage("_client")]
 		public virtual Client Client
 		{
 			get
@@ -253,8 +220,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
-		[Storage("_organization")]
 		public virtual Organization Organization
 		{
 			get

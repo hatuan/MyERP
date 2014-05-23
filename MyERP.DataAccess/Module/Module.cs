@@ -1,7 +1,4 @@
-﻿using System;
-using Telerik.OpenAccess;
-
-namespace MyERP.DataAccess
+﻿namespace MyERP.DataAccess
 {
     public partial class Module
     {

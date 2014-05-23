@@ -13,8 +13,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using MyERP.Infrastructure.Annotations;
 using MyERP.Repositories;
-using MyERP.Web;
 using MyERP.DataAccess;
+using MyERP.Repository.MyERPService;
 using Telerik.Windows.Controls;
 using Telerik.Windows.Data;
 
@@ -71,11 +71,11 @@ namespace MyERP.Controls
         {
 
             IsBusy = true;
-            _accountRepository.GetAccountsByLookupValue(searchValue.Text, accounts =>
-            {
-                Accounts = accounts;
-                IsBusy = false;
-            });
+            //_accountRepository.GetAccountsByLookupValue(searchValue.Text, accounts =>
+            //{
+            //    Accounts = accounts;
+            //    IsBusy = false;
+            //});
         }
 
         #region INotifyPropertyChanged

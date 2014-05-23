@@ -22,14 +22,9 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("job", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
-	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class Job
 	{
 		private string _ma_vv;
-		[Column("code", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_ma_vv")]
 		public virtual string Code
 		{
 			get
@@ -42,249 +37,202 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private string _ten_vv;
-		[Column("ten_vv", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_ten_vv")]
-		public virtual string Ten_Vv
+		private string _name;
+		public virtual string Name
 		{
 			get
 			{
-				return this._ten_vv;
+				return this._name;
 			}
 			set
 			{
-				this._ten_vv = value;
+				this._name = value;
 			}
 		}
 		
-		private string _ten_vv2;
-		[Column("ten_vv2", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_ten_vv2")]
-		public virtual string Ten_Vv2
+		private Guid _businessPartnerId;
+		public virtual Guid BusinessPartnerId
 		{
 			get
 			{
-				return this._ten_vv2;
+				return this._businessPartnerId;
 			}
 			set
 			{
-				this._ten_vv2 = value;
+				this._businessPartnerId = value;
 			}
 		}
 		
-		private Guid _ma_kh;
-		[Column("business_partner_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_ma_kh")]
-		public virtual Guid Ma_Kh
+		private Guid _jobGroupId1;
+		public virtual Guid JobGroupId1
 		{
 			get
 			{
-				return this._ma_kh;
+				return this._jobGroupId1;
 			}
 			set
 			{
-				this._ma_kh = value;
+				this._jobGroupId1 = value;
 			}
 		}
 		
-		private string _nh_vv1;
-		[Column("nh_vv1", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_nh_vv1")]
-		public virtual string Nh_Vv1
+		private Guid _jobGroupId2;
+		public virtual Guid JobGroupId2
 		{
 			get
 			{
-				return this._nh_vv1;
+				return this._jobGroupId2;
 			}
 			set
 			{
-				this._nh_vv1 = value;
+				this._jobGroupId2 = value;
 			}
 		}
 		
-		private string _nh_vv2;
-		[Column("nh_vv2", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_nh_vv2")]
-		public virtual string Nh_Vv2
+		private Guid _jobGroupId3;
+		public virtual Guid JobGroupId3
 		{
 			get
 			{
-				return this._nh_vv2;
+				return this._jobGroupId3;
 			}
 			set
 			{
-				this._nh_vv2 = value;
+				this._jobGroupId3 = value;
 			}
 		}
 		
-		private string _nh_vv3;
-		[Column("nh_vv3", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_nh_vv3")]
-		public virtual string Nh_Vv3
+		private DateTime _jobStart;
+		public virtual DateTime JobStart
 		{
 			get
 			{
-				return this._nh_vv3;
+				return this._jobStart;
 			}
 			set
 			{
-				this._nh_vv3 = value;
+				this._jobStart = value;
 			}
 		}
 		
-		private DateTime _ngay_vv1;
-		[Column("ngay_vv1", Length = 0, Scale = 0, SqlType = "date")]
-		[Storage("_ngay_vv1")]
-		public virtual DateTime Ngay_Vv1
+		private DateTime _jobEnd;
+		public virtual DateTime JobEnd
 		{
 			get
 			{
-				return this._ngay_vv1;
+				return this._jobEnd;
 			}
 			set
 			{
-				this._ngay_vv1 = value;
+				this._jobEnd = value;
 			}
 		}
 		
-		private DateTime _ngay_vv2;
-		[Column("ngay_vv2", Length = 0, Scale = 0, SqlType = "date")]
-		[Storage("_ngay_vv2")]
-		public virtual DateTime Ngay_Vv2
+		private Guid _currencyId;
+		public virtual Guid CurrencyId
 		{
 			get
 			{
-				return this._ngay_vv2;
+				return this._currencyId;
 			}
 			set
 			{
-				this._ngay_vv2 = value;
+				this._currencyId = value;
 			}
 		}
 		
-		private Guid _ma_nt;
-		[Column("ma_nt", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_ma_nt")]
-		public virtual Guid Ma_Nt
+		private decimal _amount;
+		public virtual decimal Amount
 		{
 			get
 			{
-				return this._ma_nt;
+				return this._amount;
 			}
 			set
 			{
-				this._ma_nt = value;
+				this._amount = value;
 			}
 		}
 		
-		private decimal _tien_nt;
-		[Column("tien_nt", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_tien_nt")]
-		public virtual decimal Tien_Nt
+		private decimal _amountLcy;
+		public virtual decimal AmountLcy
 		{
 			get
 			{
-				return this._tien_nt;
+				return this._amountLcy;
 			}
 			set
 			{
-				this._tien_nt = value;
+				this._amountLcy = value;
 			}
 		}
 		
-		private decimal _tien;
-		[Column("tien", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_tien")]
-		public virtual decimal Tien
+		private string _comment;
+		public virtual string Comment
 		{
 			get
 			{
-				return this._tien;
+				return this._comment;
 			}
 			set
 			{
-				this._tien = value;
+				this._comment = value;
 			}
 		}
 		
-		private string _ghi_chu;
-		[Column("ghi_chu", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_ghi_chu")]
-		public virtual string Ghi_Chu
+		private DateTime _recCreated;
+		public virtual DateTime RecCreated
 		{
 			get
 			{
-				return this._ghi_chu;
+				return this._recCreated;
 			}
 			set
 			{
-				this._ghi_chu = value;
+				this._recCreated = value;
 			}
 		}
 		
-		private DateTime _date0;
-		[Column("date0", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date0")]
-		public virtual DateTime Date0
+		private Guid _recCreatedBy;
+		public virtual Guid RecCreatedBy
 		{
 			get
 			{
-				return this._date0;
+				return this._recCreatedBy;
 			}
 			set
 			{
-				this._date0 = value;
+				this._recCreatedBy = value;
 			}
 		}
 		
-		private Guid _user_id0;
-		[Column("user_id0", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_user_id0")]
-		public virtual Guid User_Id0
+		private DateTime _recModified;
+		public virtual DateTime RecModified
 		{
 			get
 			{
-				return this._user_id0;
+				return this._recModified;
 			}
 			set
 			{
-				this._user_id0 = value;
+				this._recModified = value;
 			}
 		}
 		
-		private DateTime _date2;
-		[Column("date2", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date2")]
-		public virtual DateTime Date2
+		private Guid _recModifiedBy;
+		public virtual Guid RecModifiedBy
 		{
 			get
 			{
-				return this._date2;
+				return this._recModifiedBy;
 			}
 			set
 			{
-				this._date2 = value;
-			}
-		}
-		
-		private Guid _user_id2;
-		[Column("user_id2", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_user_id2")]
-		public virtual Guid User_Id2
-		{
-			get
-			{
-				return this._user_id2;
-			}
-			set
-			{
-				this._user_id2 = value;
+				this._recModifiedBy = value;
 			}
 		}
 		
 		private byte _status;
-		[Column("status", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_status")]
 		public virtual byte Status
 		{
 			get
@@ -297,24 +245,20 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Guid _tk;
-		[Column("tk", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_tk")]
-		public virtual Guid Tk
+		private Guid _accountId;
+		public virtual Guid AccountId
 		{
 			get
 			{
-				return this._tk;
+				return this._accountId;
 			}
 			set
 			{
-				this._tk = value;
+				this._accountId = value;
 			}
 		}
 		
 		private Guid _clientId;
-		[Column("client_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get
@@ -328,8 +272,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _organizationId;
-		[Column("organization_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_organizationId")]
 		public virtual Guid OrganizationId
 		{
 			get
@@ -343,8 +285,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _id;
-		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_id")]
 		public virtual Guid Id
 		{
 			get
@@ -358,8 +298,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private long _version;
-		[Column("version", IsVersion = true, IsBackendVersion = true, Length = 0, Scale = 0, SqlType = "int8")]
-		[Storage("_version")]
 		public virtual long Version
 		{
 			get
@@ -372,99 +310,7 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private User _userinfo;
-		[ForeignKeyAssociation(SharedFields = "User_Id0", TargetFields = "Id")]
-		[Storage("_userinfo")]
-		public virtual User Userinfo0
-		{
-			get
-			{
-				return this._userinfo;
-			}
-			set
-			{
-				this._userinfo = value;
-			}
-		}
-		
-		private User _userinfo1;
-		[ForeignKeyAssociation(SharedFields = "User_Id2", TargetFields = "Id")]
-		[Storage("_userinfo1")]
-		public virtual User Userinfo2
-		{
-			get
-			{
-				return this._userinfo1;
-			}
-			set
-			{
-				this._userinfo1 = value;
-			}
-		}
-		
-		private JobGroup _dmnhvv;
-		[ForeignKeyAssociation(SharedFields = "Nh_Vv1", TargetFields = "Code")]
-		[Storage("_dmnhvv")]
-		public virtual JobGroup Dmnhvv1
-		{
-			get
-			{
-				return this._dmnhvv;
-			}
-			set
-			{
-				this._dmnhvv = value;
-			}
-		}
-		
-		private JobGroup _dmnhvv1;
-		[ForeignKeyAssociation(SharedFields = "Nh_Vv2", TargetFields = "Code")]
-		[Storage("_dmnhvv1")]
-		public virtual JobGroup Dmnhvv2
-		{
-			get
-			{
-				return this._dmnhvv1;
-			}
-			set
-			{
-				this._dmnhvv1 = value;
-			}
-		}
-		
-		private JobGroup _dmnhvv2;
-		[ForeignKeyAssociation(SharedFields = "Nh_Vv3", TargetFields = "Code")]
-		[Storage("_dmnhvv2")]
-		public virtual JobGroup Dmnhvv3
-		{
-			get
-			{
-				return this._dmnhvv2;
-			}
-			set
-			{
-				this._dmnhvv2 = value;
-			}
-		}
-		
-		private Account _dmtk;
-		[ForeignKeyAssociation(SharedFields = "Tk", TargetFields = "Id")]
-		[Storage("_dmtk")]
-		public virtual Account Dmtk
-		{
-			get
-			{
-				return this._dmtk;
-			}
-			set
-			{
-				this._dmtk = value;
-			}
-		}
-		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
-		[Storage("_client")]
 		public virtual Client Client
 		{
 			get
@@ -478,8 +324,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
-		[Storage("_organization")]
 		public virtual Organization Organization
 		{
 			get
@@ -492,10 +336,34 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		private User _userinfo;
+		public virtual User RecCreatedByUser
+		{
+			get
+			{
+				return this._userinfo;
+			}
+			set
+			{
+				this._userinfo = value;
+			}
+		}
+		
+		private User _userinfo1;
+		public virtual User RecModifiedByUser
+		{
+			get
+			{
+				return this._userinfo1;
+			}
+			set
+			{
+				this._userinfo1 = value;
+			}
+		}
+		
 		private BusinessPartner _dmkh;
-		[ForeignKeyAssociation(SharedFields = "Ma_Kh", TargetFields = "Id")]
-		[Storage("_dmkh")]
-		public virtual BusinessPartner Dmkh
+		public virtual BusinessPartner BusinessPartner
 		{
 			get
 			{
@@ -504,6 +372,58 @@ namespace MyERP.DataAccess
 			set
 			{
 				this._dmkh = value;
+			}
+		}
+		
+		private Account _dmtk;
+		public virtual Account Account
+		{
+			get
+			{
+				return this._dmtk;
+			}
+			set
+			{
+				this._dmtk = value;
+			}
+		}
+		
+		private JobGroup _jobGroup;
+		public virtual JobGroup JobGroup1
+		{
+			get
+			{
+				return this._jobGroup;
+			}
+			set
+			{
+				this._jobGroup = value;
+			}
+		}
+		
+		private JobGroup _jobGroup1;
+		public virtual JobGroup JobGroup2
+		{
+			get
+			{
+				return this._jobGroup1;
+			}
+			set
+			{
+				this._jobGroup1 = value;
+			}
+		}
+		
+		private JobGroup _jobGroup2;
+		public virtual JobGroup JobGroup3
+		{
+			get
+			{
+				return this._jobGroup2;
+			}
+			set
+			{
+				this._jobGroup2 = value;
 			}
 		}
 		

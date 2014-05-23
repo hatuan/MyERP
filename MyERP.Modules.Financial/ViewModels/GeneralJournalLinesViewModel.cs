@@ -1,22 +1,14 @@
 ﻿using System;
 using System.ComponentModel.Composition;
-using System.Net;
-using System.ServiceModel.DomainServices.Client;
+using System.Data.Services.Client;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
-using MyERP.DataAccess;
 using MyERP.Infrastructure;
 using MyERP.Infrastructure.ViewModels;
 using MyERP.Repositories;
-using MyERP.Web;
+using MyERP.Repository.MyERPService;
 using Telerik.Windows.Data;
 
 namespace MyERP.Modules.Financial.ViewModels
@@ -35,8 +27,6 @@ namespace MyERP.Modules.Financial.ViewModels
         [Import]
         public IEventAggregator EventAggregator { get; set; }
 
-        public MyERPDomainContext Context { get; set; }
-
         public ICommand AddNewCommand { get; set; }
         public ICommand SubmitChangesCommand { get; set; }
         public ICommand RejectChangesCommand { get; set; }
@@ -54,12 +44,11 @@ namespace MyERP.Modules.Financial.ViewModels
 
                 _generalJournalDocument = value;
                 filterGeneralJournalDocument.Value = value.Id ;
-                GeneralJournalLines.AutoLoad = true;
             }
         }
 
-        private QueryableDomainServiceCollectionView<GeneralJournalLine> _generalJournalLines;
-        public QueryableDomainServiceCollectionView<GeneralJournalLine> GeneralJournalLines
+        private ObservableItemCollection<GeneralJournalLine> _generalJournalLines;
+        public ObservableItemCollection<GeneralJournalLine> GeneralJournalLines
         {
             get { return this._generalJournalLines; }
             set { _generalJournalLines = value; }
@@ -87,7 +76,7 @@ namespace MyERP.Modules.Financial.ViewModels
 
         public bool IsBusy
         {
-            get { return this.GeneralJournalLines.IsBusy; }
+            get { return false; }
         }
 
         private FilterDescriptor filterGeneralJournalDocument = new FilterDescriptor("GeneralJournalDocumentId",
@@ -99,24 +88,6 @@ namespace MyERP.Modules.Financial.ViewModels
         public override void OnImportsSatisfied()
         {
             base.OnImportsSatisfied();
-            this.Context = this.GeneralJournalLineRepository.Context;
-
-            EntityQuery<GeneralJournalLine> getGeneralJournalLinesQuery = Context.GetGeneralJournalLinesQuery().OrderBy(c => c.GeneralJournalDocumentId).ThenBy(c=>c.LineNo);
-            GeneralJournalLines = new QueryableDomainServiceCollectionView<GeneralJournalLine>(Context,
-                getGeneralJournalLinesQuery);
-            GeneralJournalLines.AutoLoad = false;
-            GeneralJournalLines.LoadedData += (sender, args) =>
-            {
-                if (args.HasError)
-                {
-                    MessageBox.Show(args.Error.ToString(), "Load Error", MessageBoxButton.OK);
-                    args.MarkErrorAsHandled();
-                    return;
-                }
-            };
-            GeneralJournalLines.SubmittedChanges += GeneralJournalLines_SubmittedChanges;
-            GeneralJournalLines.PropertyChanged += GeneralJournalLines_PropertyChanged;
-            this.GeneralJournalLines.FilterDescriptors.Add(filterGeneralJournalDocument);
 
             this.AddNewCommand = new DelegateCommand(OnAddNewCommandExecuted, AddNewCommandCanExecuted);
             this.SubmitChangesCommand = new DelegateCommand(OnSubmitChangesExcuted, SubmitChangesCommandCanExecute);
@@ -127,7 +98,7 @@ namespace MyERP.Modules.Financial.ViewModels
         }
         #endregion
 
-        void GeneralJournalLines_SubmittedChanges(object sender, Telerik.Windows.Controls.DomainServices.DomainServiceSubmittedChangesEventArgs e)
+        void GeneralJournalLines_SubmittedChanges(object sender, Telerik.Windows.Controls.DataServices.DataServiceSubmittedChangesEventArgs e)
         {
             if (e.HasError)
             {
@@ -160,41 +131,37 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private bool AddNewCommandCanExecuted()
         {
-            return !this.GeneralJournalLines.HasChanges;
+            return true;
         }
 
         private void OnAddNewCommandExecuted()
         {
-            GeneralJournalLine generalJournalLine = new GeneralJournalLine();
-            this.GeneralJournalLines.AddNew(generalJournalLine);
 
-            generalJournalLine.GeneralJournalDocumentId = GeneralJournalDocument.Id;
-            this.GeneralJournalDocument.GeneralJournalLines.Add(generalJournalLine);
         }
 
         private bool SubmitChangesCommandCanExecute()
         {
-            return this.GeneralJournalLines.HasChanges;
+            return true;
         }
 
         private void OnRejectChangesExcuted()
         {
-            this.GeneralJournalLines.RejectChanges();
+            
         }
 
         private void OnSubmitChangesExcuted()
         {
-            this.GeneralJournalLines.SubmitChanges();
+            
         }
 
         private bool RefreshCommandCanExecute()
         {
-            return this.GeneralJournalLines.CanLoad;
+            return true;
         }
 
         private void OnRefreshExcuted()
         {
-            this.GeneralJournalLines.Load();
+            
         }
 
         private bool DeleteCommandCanExecute()
@@ -214,8 +181,8 @@ namespace MyERP.Modules.Financial.ViewModels
                 return false;
 
             //Neu co thay doi thi khong cho dong cua so, bat buoc phai luu hay undo
-            if (this.GeneralJournalLines.HasChanges)
-                return false;
+            //if (this.GeneralJournalLines.HasChanges)
+            //    return false;
 
             return true;
         }

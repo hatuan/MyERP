@@ -11,7 +11,7 @@ using System.Windows.Threading;
 using MyERP.DataAccess;
 using MyERP.Infrastructure.Annotations;
 using MyERP.Repositories;
-using MyERP.Web;
+using MyERP.Repository.MyERPService;
 using Telerik.Windows.Controls;
 using Telerik.Windows.Data;
 using WindowStartupLocation = Telerik.Windows.Controls.WindowStartupLocation;
@@ -46,11 +46,11 @@ namespace MyERP.Controls
                 this.loadTimer.Stop();
             }
             IsBusy = true;
-            _accountRepository.GetAccountsByLookupValue(textBox.SearchText, accounts =>
-            {
-                Accounts = accounts;
-                IsBusy = false;
-            });
+            //_accountRepository.GetAccountsByLookupValue(textBox.SearchText, accounts =>
+            //{
+            //    Accounts = accounts;
+            //    IsBusy = false;
+            //});
         }
 
         private readonly AccountRepository _accountRepository = new AccountRepository();

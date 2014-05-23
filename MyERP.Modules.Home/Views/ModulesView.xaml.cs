@@ -15,6 +15,7 @@ using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
 using MyERP.Infrastructure;
 using MyERP.Modules.Home.ViewModels;
+using MyERP.Repository.MyERPService;
 using MyERP.ViewModels;
 using MyERP.DataAccess;
 using Telerik.Windows.Controls;
@@ -99,15 +100,15 @@ namespace MyERP.Modules.Home.Views
 
         private void OnGeneralLeaderJournalsButtonClicked(object sender, System.Windows.RoutedEventArgs e)
         {
-            Module clickEntity = (sender as Button).DataContext as Module;
+            //Module clickEntity = (sender as Button).DataContext as Module;
 
-            switch (clickEntity.IdAsName)
-            {
-                case ModuleName.GeneralLeaderJournals:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.FinancialModule);
-                    this.EventAggregator.GetEvent<GeneralLeaderJournalsClickedEvent>().Publish(clickEntity);
-                    break;
-            }
+            //switch (clickEntity.IdAsName)
+            //{
+            //    case ModuleName.GeneralLeaderJournals:
+            //        this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.FinancialModule);
+            //        this.EventAggregator.GetEvent<GeneralLeaderJournalsClickedEvent>().Publish(clickEntity);
+            //        break;
+            //}
         }
 
         private void OnGeneralLeaderReportsButtonClicked(object sender, System.Windows.RoutedEventArgs e)
@@ -126,20 +127,20 @@ namespace MyERP.Modules.Home.Views
 
             switch (clickEntity.IdAsName)
             {
-                case ModuleName.GeneralLeaderSetupAccountOpeningBalances:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.FinancialModule);
-                    this.EventAggregator.GetEvent<GeneralLeaderSetupAccountsOpeningBalanceClickedEvent>().Publish(clickEntity);
-                    break;
+                //case ModuleName.GeneralLeaderSetupAccountOpeningBalances:
+                //    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.FinancialModule);
+                //    this.EventAggregator.GetEvent<GeneralLeaderSetupAccountsOpeningBalanceClickedEvent>().Publish(clickEntity);
+                //    break;
                 
-                case ModuleName.GeneralLeaderSetupChartOfAccounts:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.FinancialModule);
-                    this.EventAggregator.GetEvent<GeneralLeaderSetupChartOfAccountsClickedEvent>().Publish(clickEntity);
-                    break;
+                //case ModuleName.GeneralLeaderSetupChartOfAccounts:
+                //    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.FinancialModule);
+                //    this.EventAggregator.GetEvent<GeneralLeaderSetupChartOfAccountsClickedEvent>().Publish(clickEntity);
+                //    break;
 
-                case ModuleName.GeneralLeaderSetup:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.FinancialModule);
-                    this.EventAggregator.GetEvent<GeneralLeaderSetupClickedEvent>().Publish(clickEntity);
-                    break;
+                //case ModuleName.GeneralLeaderSetup:
+                //    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.FinancialModule);
+                //    this.EventAggregator.GetEvent<GeneralLeaderSetupClickedEvent>().Publish(clickEntity);
+                //    break;
             }
         }
 
@@ -149,40 +150,40 @@ namespace MyERP.Modules.Home.Views
 
             switch (clickEntity.IdAsName)
             {
-                case ModuleName.MasterCurencies:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
-                    this.EventAggregator.GetEvent<CurenciesClickedEvent>().Publish(clickEntity);
-                    break;
+                //case ModuleName.MasterCurencies:
+                //    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
+                //    this.EventAggregator.GetEvent<CurenciesClickedEvent>().Publish(clickEntity);
+                //    break;
 
-                case ModuleName.MasterCurenciesExchangeRate:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
-                    this.EventAggregator.GetEvent<CurenciesExchangeRateClickedEvent>().Publish(clickEntity);
-                    break;
+                //case ModuleName.MasterCurenciesExchangeRate:
+                //    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
+                //    this.EventAggregator.GetEvent<CurenciesExchangeRateClickedEvent>().Publish(clickEntity);
+                //    break;
 
-                case ModuleName.MasterClientInformation:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
-                    this.EventAggregator.GetEvent<ClientInformationClickedEvent>().Publish(clickEntity);
-                    break;
+                //case ModuleName.MasterClientInformation:
+                //    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
+                //    this.EventAggregator.GetEvent<ClientInformationClickedEvent>().Publish(clickEntity);
+                //    break;
 
-                case ModuleName.MasterOrganizations:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
-                    this.EventAggregator.GetEvent<OrganizationsClickedEvent>().Publish(clickEntity);
-                    break;
+                //case ModuleName.MasterOrganizations:
+                //    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
+                //    this.EventAggregator.GetEvent<OrganizationsClickedEvent>().Publish(clickEntity);
+                //    break;
 
-                case ModuleName.MasterUsers:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
-                    this.EventAggregator.GetEvent<UsersClickedEvent>().Publish(clickEntity);
-                    break;
+                //case ModuleName.MasterUsers:
+                //    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
+                //    this.EventAggregator.GetEvent<UsersClickedEvent>().Publish(clickEntity);
+                //    break;
                     
-                case ModuleName.MasterNoSeries:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
-                    this.EventAggregator.GetEvent<NoSeriesClickedEvent>().Publish(clickEntity);
-                    break;
+                //case ModuleName.MasterNoSeries:
+                //    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
+                //    this.EventAggregator.GetEvent<NoSeriesClickedEvent>().Publish(clickEntity);
+                //    break;
 
-                case ModuleName.MasterPeriod:
-                    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
-                    this.EventAggregator.GetEvent<PeriodClickedEvent>().Publish(clickEntity);
-                    break;
+                //case ModuleName.MasterPeriod:
+                //    this.ApplicationViewModel.SwitchContentRegionViewCommand.Execute(ModuleNames.MasterModule);
+                //    this.EventAggregator.GetEvent<PeriodClickedEvent>().Publish(clickEntity);
+                //    break;
                     
             }
             

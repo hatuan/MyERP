@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.ServiceModel.DomainServices.Server;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MyERP.DataAccess
 {
@@ -13,27 +9,20 @@ namespace MyERP.DataAccess
     {
         internal sealed class GeneralJournalDocumentMetadata
         {
-            [Include]
             [Association("gldocument-number-sequence-association", "NumberSequenceId", "Id")]
             public NumberSequence NumberSequence { get; set; }
 
-            [Include]
             [Association("gldocument-line-association", "Id", "GeneralJournalDocumentId")]
             public ICollection<GeneralJournalLine> GeneralJournalLines { get; set; }
 
-            [Include]
             [Association("gldocument-client-association", "ClientId", "ClientId")]
             public Client Client { get; set; }
-
-            [Include]
             [Association("gldocument-organization-association", "OrganizationId", "Id")]
             public Organization Organization { get; set; }
 
-            [Include]
             [Association("gldocument-user-created-association", "RecCreatedBy", "Id")]
             public User RecCreatedByUser { get; set; }
 
-            [Include]
             [Association("gldocument-user-modified-association", "RecModifiedBy", "Id")]
             public User RecModifiedByUser { get; set; }
         }

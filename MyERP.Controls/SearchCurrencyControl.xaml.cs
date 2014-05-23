@@ -1,22 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Net;
-using System.ServiceModel.DomainServices.Client;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using MyERP.Infrastructure.Annotations;
 using MyERP.Repositories;
-using MyERP.Web;
-using MyERP.DataAccess;
+using MyERP.Repository.MyERPService;
 using Telerik.Windows.Controls;
-using Telerik.Windows.Data;
 
 namespace MyERP.Controls
 {
@@ -70,11 +60,11 @@ namespace MyERP.Controls
         private void OnSearchCommandExecuted(object obj)
         {
             IsBusy = true;
-            _currencyRepository.GetCurrenciesByLookupValue(searchValue.Text, currencies =>
-            {
-                Currencies = currencies;
-                IsBusy = false;
-            });
+            //_currencyRepository.GetCurrenciesByLookupValue(searchValue.Text, currencies =>
+            //{
+            //    Currencies = currencies;
+            //    IsBusy = false;
+            //});
         }
         
         #region INotifyPropertyChanged

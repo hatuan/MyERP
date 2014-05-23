@@ -22,103 +22,74 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("job_group", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Changed)]
 	public partial class JobGroup
 	{
-		private short _loai_nh;
-		[Column("loai_nh", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_loai_nh")]
-		public virtual short Loai_Nh
+		private short _level;
+		public virtual short Level
 		{
 			get
 			{
-				return this._loai_nh;
+				return this._level;
 			}
 			set
 			{
-				this._loai_nh = value;
+				this._level = value;
 			}
 		}
 		
-		private string _ma_nh;
-		[Column("code", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_ma_nh")]
+		private string _code;
 		public virtual string Code
 		{
 			get
 			{
-				return this._ma_nh;
+				return this._code;
 			}
 			set
 			{
-				this._ma_nh = value;
+				this._code = value;
 			}
 		}
 		
-		private string _ten_nh;
-		[Column("ten_nh", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_ten_nh")]
-		public virtual string Ten_Nh
+		private string _name;
+		public virtual string Name
 		{
 			get
 			{
-				return this._ten_nh;
+				return this._name;
 			}
 			set
 			{
-				this._ten_nh = value;
+				this._name = value;
 			}
 		}
 		
-		private string _ten_nh2;
-		[Column("ten_nh2", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_ten_nh2")]
-		public virtual string Ten_Nh2
+		private DateTime _recCreated;
+		public virtual DateTime RecCreated
 		{
 			get
 			{
-				return this._ten_nh2;
+				return this._recCreated;
 			}
 			set
 			{
-				this._ten_nh2 = value;
+				this._recCreated = value;
 			}
 		}
 		
-		private DateTime _date0;
-		[Column("date0", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date0")]
-		public virtual DateTime Date0
+		private Guid _recCreateBy;
+		public virtual Guid RecCreateBy
 		{
 			get
 			{
-				return this._date0;
+				return this._recCreateBy;
 			}
 			set
 			{
-				this._date0 = value;
-			}
-		}
-		
-		private Guid _user_id0;
-		[Column("user_id0", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_user_id0")]
-		public virtual Guid User_Id0
-		{
-			get
-			{
-				return this._user_id0;
-			}
-			set
-			{
-				this._user_id0 = value;
+				this._recCreateBy = value;
 			}
 		}
 		
 		private byte _status;
-		[Column("status", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_status")]
 		public virtual byte Status
 		{
 			get
@@ -131,39 +102,33 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private DateTime _date2;
-		[Column("date2", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date2")]
-		public virtual DateTime Date2
+		private DateTime _recModified;
+		public virtual DateTime RecModified
 		{
 			get
 			{
-				return this._date2;
+				return this._recModified;
 			}
 			set
 			{
-				this._date2 = value;
+				this._recModified = value;
 			}
 		}
 		
-		private Guid _user_id2;
-		[Column("user_id2", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_user_id2")]
-		public virtual Guid User_Id2
+		private Guid _recModifiedBy;
+		public virtual Guid RecModifiedBy
 		{
 			get
 			{
-				return this._user_id2;
+				return this._recModifiedBy;
 			}
 			set
 			{
-				this._user_id2 = value;
+				this._recModifiedBy = value;
 			}
 		}
 		
 		private Guid _clientId;
-		[Column("client_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get
@@ -177,8 +142,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _organizationId;
-		[Column("organization_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_organizationId")]
 		public virtual Guid OrganizationId
 		{
 			get
@@ -191,39 +154,33 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private User _userinfo;
-		[ForeignKeyAssociation(SharedFields = "User_Id0", TargetFields = "Id")]
-		[Storage("_userinfo")]
-		public virtual User Userinfo0
+		private Guid _id;
+		public virtual Guid Id
 		{
 			get
 			{
-				return this._userinfo;
+				return this._id;
 			}
 			set
 			{
-				this._userinfo = value;
+				this._id = value;
 			}
 		}
 		
-		private User _userinfo1;
-		[ForeignKeyAssociation(SharedFields = "User_Id2", TargetFields = "Id")]
-		[Storage("_userinfo1")]
-		public virtual User Userinfo2
+		private long _version;
+		public virtual long Version
 		{
 			get
 			{
-				return this._userinfo1;
+				return this._version;
 			}
 			set
 			{
-				this._userinfo1 = value;
+				this._version = value;
 			}
 		}
 		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
-		[Storage("_client")]
 		public virtual Client Client
 		{
 			get
@@ -237,8 +194,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
-		[Storage("_organization")]
 		public virtual Organization Organization
 		{
 			get
@@ -251,36 +206,56 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private IList<Job> _dmvvs = new List<Job>();
-		[Collection(InverseProperty = "Dmnhvv1")]
-		[Storage("_dmvvs")]
-		public virtual IList<Job> Dmvv1s
+		private User _userinfo;
+		public virtual User RecCreatedByUser
 		{
 			get
 			{
-				return this._dmvvs;
+				return this._userinfo;
+			}
+			set
+			{
+				this._userinfo = value;
 			}
 		}
 		
-		private IList<Job> _dmvvs1 = new List<Job>();
-		[Collection(InverseProperty = "Dmnhvv2")]
-		[Storage("_dmvvs1")]
-		public virtual IList<Job> Dmvv2s
+		private User _userinfo1;
+		public virtual User RecModifiedByUser
 		{
 			get
 			{
-				return this._dmvvs1;
+				return this._userinfo1;
+			}
+			set
+			{
+				this._userinfo1 = value;
 			}
 		}
 		
-		private IList<Job> _dmvvs2 = new List<Job>();
-		[Collection(InverseProperty = "Dmnhvv3")]
-		[Storage("_dmvvs2")]
-		public virtual IList<Job> Dmvv3s
+		private IList<Job> _job = new List<Job>();
+		public virtual IList<Job> Job1s
 		{
 			get
 			{
-				return this._dmvvs2;
+				return this._job;
+			}
+		}
+		
+		private IList<Job> _job1 = new List<Job>();
+		public virtual IList<Job> Job2s
+		{
+			get
+			{
+				return this._job1;
+			}
+		}
+		
+		private IList<Job> _job2 = new List<Job>();
+		public virtual IList<Job> Job3s
+		{
+			get
+			{
+				return this._job2;
 			}
 		}
 		

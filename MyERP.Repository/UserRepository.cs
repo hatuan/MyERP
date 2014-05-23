@@ -1,34 +1,55 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.ServiceModel.DomainServices.Client;
-using MyERP.DataAccess;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+
 
 namespace MyERP.Repositories
 {
     [Export]
     public class UserRepository : RepositoryBase
     {
-        public void GetUsers(Action<IEnumerable<User>> callback)
+        public void GetUsers()
         {
-            this.LoadQuery<User>(this.Context.GetUsersQuery(), callback);
+
         }
 
-        public void GetUserByUserNameAndPassword(String userName, String pass, Action<User> callback)
+        public void GetUserByUserNameAndPassword(String userName, String pass)
         {
-            EntityQuery<User> query =
-                this.Context.GetUsersQuery().Where(u => u.Name == userName && u.Password == pass);
+            //using (HttpClientHandler handler = new HttpClientHandler())
+            //{
+            //    handler.Credentials = new NetworkCredential("username", "password");
 
-            this.LoadQuery<User>(query, callback);
+            //    HttpClient client = new HttpClient(handler);
+            //    Container.Credentials = new NetworkCredential(userName, pass);
+            //    var task = client.GetAsync("https://localhost:44300/api/values");
+            //    if (task.Result.StatusCode == HttpStatusCode.Unauthorized)
+            //    {
+            //        Console.WriteLine("wrong credentials");
+            //    }
+            //    else
+            //    {
+            //        task.Result.EnsureSuccessStatusCode();
+            //        Console.WriteLine(task.Result.Content.ReadAsAsync<string>().Result);
+            //    }
+
+            //    Container.Credentials = new NetworkCredential(userName, pass);
+            //    var task = Container.Users.Where(u => u.Name == userName);
+
+            //}
+
+            
+            Container.Credentials = new NetworkCredential(userName, pass);
+            var task = Container.Users.Where(u => u.Name == userName);
         }
 
-        public void GetUserByUserName(String userName, Action<User> callback)
+        public void GetUserByUserName(String userName)
         {
-            EntityQuery<User> query =
-                this.Context.GetUsersQuery().Where(u => u.Name == userName);
 
-            this.LoadQuery<User>(query, callback);
         }
     }
 }

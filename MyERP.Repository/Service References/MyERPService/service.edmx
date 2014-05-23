@@ -1,0 +1,1161 @@
+﻿<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <edmx:DataServices m:DataServiceVersion="3.0" m:MaxDataServiceVersion="3.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+    <Schema Namespace="MyERP.DataAccess" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <EntityType Name="Account">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="CurrencyId" Type="Edm.Guid" />
+        <Property Name="Detail" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="ParentAccountId" Type="Edm.Guid" />
+        <Property Name="Level" Type="Edm.Int16" Nullable="false" />
+        <Property Name="ArAp" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="RecModified" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecCreatedById" Type="Edm.Guid" Nullable="false" />
+        <Property Name="RecCreated" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecModifiedById" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Status" Type="Edm.Byte" Nullable="false" />
+        <Property Name="Version" Type="Edm.Int64" Nullable="false" />
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="OrganizationId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="StatusType" Type="Edm.String" Nullable="false" />
+        <NavigationProperty Name="Currency" Relationship="MyERP.DataAccess.MyERP_DataAccess_Account_Currency_MyERP_DataAccess_Currency_CurrencyPartner" ToRole="Currency" FromRole="CurrencyPartner" />
+        <NavigationProperty Name="ParentAccount" Relationship="MyERP.DataAccess.MyERP_DataAccess_Account_ParentAccount_MyERP_DataAccess_Account_ParentAccountPartner" ToRole="ParentAccount" FromRole="ParentAccountPartner" />
+        <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_Account_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner" ToRole="RecModifiedByUser" FromRole="RecModifiedByUserPartner" />
+        <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_Account_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" ToRole="RecCreatedByUser" FromRole="RecCreatedByUserPartner" />
+        <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_Account_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
+        <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_Account_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
+        <NavigationProperty Name="ChildAccounts" Relationship="MyERP.DataAccess.MyERP_DataAccess_Account_ChildAccounts_MyERP_DataAccess_Account_ChildAccountsPartner" ToRole="ChildAccounts" FromRole="ChildAccountsPartner" />
+      </EntityType>
+      <EntityType Name="BusinessPartnerGroup">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Level" Type="Edm.Int16" Nullable="false" />
+        <Property Name="Code" Type="Edm.String" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="RecCreated" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecCreatedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="RecModified" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecModifiedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Status" Type="Edm.Byte" Nullable="false" />
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Version" Type="Edm.Int64" Nullable="false" />
+        <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="OrganizationId" Type="Edm.Guid" Nullable="false" />
+        <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_BusinessPartnerGroup_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
+        <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_BusinessPartnerGroup_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
+        <NavigationProperty Name="BusinessPartner1s" Relationship="MyERP.DataAccess.MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner1s_MyERP_DataAccess_BusinessPartner_BusinessPartner1sPartner" ToRole="BusinessPartner1s" FromRole="BusinessPartner1sPartner" />
+        <NavigationProperty Name="BusinessPartner3s" Relationship="MyERP.DataAccess.MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner3s_MyERP_DataAccess_BusinessPartner_BusinessPartner3sPartner" ToRole="BusinessPartner3s" FromRole="BusinessPartner3sPartner" />
+        <NavigationProperty Name="BusinessPartner2s" Relationship="MyERP.DataAccess.MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner2s_MyERP_DataAccess_BusinessPartner_BusinessPartner2sPartner" ToRole="BusinessPartner2s" FromRole="BusinessPartner2sPartner" />
+      </EntityType>
+      <EntityType Name="BusinessPartner">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="VatCode" Type="Edm.String" />
+        <Property Name="Address" Type="Edm.String" />
+        <Property Name="Telephone" Type="Edm.String" />
+        <Property Name="Fax" Type="Edm.String" />
+        <Property Name="Mail" Type="Edm.String" />
+        <Property Name="HomePage" Type="Edm.String" />
+        <Property Name="ContactName" Type="Edm.String" />
+        <Property Name="Comment" Type="Edm.String" />
+        <Property Name="EmployeeAccountId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="BusinessPartnerGroupId1" Type="Edm.Guid" Nullable="false" />
+        <Property Name="BusinessPartnerGroupId2" Type="Edm.Guid" Nullable="false" />
+        <Property Name="BusinessPartnerGroupId3" Type="Edm.Guid" Nullable="false" />
+        <Property Name="CreditLimit" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="AmountLimit" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="RecCreated" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecCreatedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="RecModified" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecModifiedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="PaymentTermId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="IsCustomer" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="IsVendor" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="IsEmployee" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="CustomerAccountId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="VendorAccountId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Version" Type="Edm.Int64" Nullable="false" />
+        <Property Name="Status" Type="Edm.Byte" Nullable="false" />
+        <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="OrganizationId" Type="Edm.Guid" Nullable="false" />
+        <NavigationProperty Name="EmployeeAccount" Relationship="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_EmployeeAccount_MyERP_DataAccess_Account_EmployeeAccountPartner" ToRole="EmployeeAccount" FromRole="EmployeeAccountPartner" />
+        <NavigationProperty Name="VendorAccount" Relationship="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_VendorAccount_MyERP_DataAccess_Account_VendorAccountPartner" ToRole="VendorAccount" FromRole="VendorAccountPartner" />
+        <NavigationProperty Name="CustomerAccount" Relationship="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_CustomerAccount_MyERP_DataAccess_Account_CustomerAccountPartner" ToRole="CustomerAccount" FromRole="CustomerAccountPartner" />
+        <NavigationProperty Name="PaymentTerm" Relationship="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_PaymentTerm_MyERP_DataAccess_PaymentTerm_PaymentTermPartner" ToRole="PaymentTerm" FromRole="PaymentTermPartner" />
+        <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
+        <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
+        <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" ToRole="RecCreatedByUser" FromRole="RecCreatedByUserPartner" />
+        <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner" ToRole="RecModifiedByUser" FromRole="RecModifiedByUserPartner" />
+        <NavigationProperty Name="BusinessPartnerGroup1" Relationship="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup1_MyERP_DataAccess_BusinessPartnerGroup_BusinessPartnerGroup1Partner" ToRole="BusinessPartnerGroup1" FromRole="BusinessPartnerGroup1Partner" />
+        <NavigationProperty Name="BusinessPartnerGroup3" Relationship="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup3_MyERP_DataAccess_BusinessPartnerGroup_BusinessPartnerGroup3Partner" ToRole="BusinessPartnerGroup3" FromRole="BusinessPartnerGroup3Partner" />
+        <NavigationProperty Name="BusinessPartnerGroup2" Relationship="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup2_MyERP_DataAccess_BusinessPartnerGroup_BusinessPartnerGroup2Partner" ToRole="BusinessPartnerGroup2" FromRole="BusinessPartnerGroup2Partner" />
+      </EntityType>
+      <EntityType Name="Client">
+        <Key>
+          <PropertyRef Name="ClientId" />
+        </Key>
+        <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="Version" Type="Edm.Int64" Nullable="false" />
+        <Property Name="IsActivated" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="RecCreatedById" Type="Edm.Guid" Nullable="false" />
+        <Property Name="RecCreated" Type="Edm.DateTime" Nullable="false" />
+        <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_Client_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" ToRole="RecCreatedByUser" FromRole="RecCreatedByUserPartner" />
+        <NavigationProperty Name="Organizations" Relationship="MyERP.DataAccess.MyERP_DataAccess_Client_Organizations_MyERP_DataAccess_Organization_OrganizationsPartner" ToRole="Organizations" FromRole="OrganizationsPartner" />
+      </EntityType>
+      <EntityType Name="Currency">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="RecCreated" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecCreatedById" Type="Edm.Guid" Nullable="false" />
+        <Property Name="RecModified" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecModifiedById" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Status" Type="Edm.Byte" Nullable="false" />
+        <Property Name="Version" Type="Edm.Int64" Nullable="false" />
+        <Property Name="Code" Type="Edm.String" />
+        <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="OrganizationId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="StatusType" Type="Edm.String" Nullable="false" />
+        <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_Currency_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner" ToRole="RecModifiedByUser" FromRole="RecModifiedByUserPartner" />
+        <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_Currency_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" ToRole="RecCreatedByUser" FromRole="RecCreatedByUserPartner" />
+        <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_Currency_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
+        <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_Currency_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
+      </EntityType>
+      <EntityType Name="CurrencyConvertRate">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="RecCreated" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecCreatedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="RecModified" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecModifiedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="OrganizationId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Version" Type="Edm.Int64" Nullable="false" />
+        <Property Name="CurrencyId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="CurrencyIdTo" Type="Edm.Guid" Nullable="false" />
+        <Property Name="ValidFrom" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="ValidTo" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="MultiplyRate" Type="Edm.Int32" Nullable="false" />
+        <Property Name="DivideRate" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Status" Type="Edm.Byte" Nullable="false" />
+        <Property Name="ConversionRateType" Type="Edm.Byte" Nullable="false" />
+        <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRate_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
+        <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRate_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" ToRole="RecCreatedByUser" FromRole="RecCreatedByUserPartner" />
+        <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRate_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner" ToRole="RecModifiedByUser" FromRole="RecModifiedByUserPartner" />
+        <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRate_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
+        <NavigationProperty Name="Currency" Relationship="MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRate_Currency_MyERP_DataAccess_Currency_CurrencyPartner" ToRole="Currency" FromRole="CurrencyPartner" />
+        <NavigationProperty Name="CurrencyTo" Relationship="MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRate_CurrencyTo_MyERP_DataAccess_Currency_CurrencyToPartner" ToRole="CurrencyTo" FromRole="CurrencyToPartner" />
+      </EntityType>
+      <EntityType Name="GeneralJournalDocument">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="OrganizationId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Version" Type="Edm.Int64" Nullable="false" />
+        <Property Name="TotalCreditAmountLcy" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="NumberSequenceId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="DocumentCreated" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="DocumentNo" Type="Edm.String" />
+        <Property Name="DocumentPosted" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="DocumentType" Type="Edm.String" Nullable="false" />
+        <Property Name="RecCreated" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecCreatedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="RecModified" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecModifiedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Status" Type="Edm.Int32" Nullable="false" />
+        <Property Name="TotalCreditAmount" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="TotalDebitAmount" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="TotalDebitAmountLcy" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="TransactionType" Type="Edm.String" Nullable="false" />
+        <Property Name="CurrencyExchangeRate" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CurrencyId" Type="Edm.Guid" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Locked" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="DocumentStatusType" Type="Edm.String" Nullable="false" />
+        <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
+        <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
+        <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" ToRole="RecCreatedByUser" FromRole="RecCreatedByUserPartner" />
+        <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner" ToRole="RecModifiedByUser" FromRole="RecModifiedByUserPartner" />
+        <NavigationProperty Name="Currency" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_Currency_MyERP_DataAccess_Currency_CurrencyPartner" ToRole="Currency" FromRole="CurrencyPartner" />
+        <NavigationProperty Name="NumberSequence" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_NumberSequence_MyERP_DataAccess_NumberSequence_NumberSequencePartner" ToRole="NumberSequence" FromRole="NumberSequencePartner" />
+        <NavigationProperty Name="GeneralJournalLines" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_GeneralJournalLines_MyERP_DataAccess_GeneralJournalLine_GeneralJournalLinesPartner" ToRole="GeneralJournalLines" FromRole="GeneralJournalLinesPartner" />
+      </EntityType>
+      <EntityType Name="GeneralJournalLine">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="CorAccountId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="AccountId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="DebitAmount" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="CreditAmountLcy" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="DebitAmountLcy" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="CreditAmount" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="BusinessPartnerId" Type="Edm.Guid" />
+        <Property Name="JobId" Type="Edm.Guid" />
+        <Property Name="LineNo" Type="Edm.Int64" Nullable="false" />
+        <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="OrganizationId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Version" Type="Edm.Int64" Nullable="false" />
+        <Property Name="GeneralJournalDocumentId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="CurrencyExchangeRate" Type="Edm.Decimal" />
+        <Property Name="CurrencyId" Type="Edm.Guid" />
+        <Property Name="DocumentCreated" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="DocumentNo" Type="Edm.String" />
+        <Property Name="DocumentPosted" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="DocumentType" Type="Edm.String" Nullable="false" />
+        <Property Name="RecCreated" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecCreatedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="RecModified" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecModifiedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="TransactionType" Type="Edm.String" Nullable="false" />
+        <Property Name="FixAssetId" Type="Edm.Guid" />
+        <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
+        <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
+        <NavigationProperty Name="BusinessPartner" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_BusinessPartner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartner" ToRole="BusinessPartner" FromRole="BusinessPartnerPartner" />
+        <NavigationProperty Name="Job" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Job_MyERP_DataAccess_Job_JobPartner" ToRole="Job" FromRole="JobPartner" />
+        <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner" ToRole="RecModifiedByUser" FromRole="RecModifiedByUserPartner" />
+        <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" ToRole="RecCreatedByUser" FromRole="RecCreatedByUserPartner" />
+        <NavigationProperty Name="Account" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Account_MyERP_DataAccess_Account_AccountPartner" ToRole="Account" FromRole="AccountPartner" />
+        <NavigationProperty Name="CorAccount" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_CorAccount_MyERP_DataAccess_Account_CorAccountPartner" ToRole="CorAccount" FromRole="CorAccountPartner" />
+        <NavigationProperty Name="GeneralJournalDocument" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_GeneralJournalDocument_MyERP_DataAccess_GeneralJournalDocument_GeneralJournalDocumentPartner" ToRole="GeneralJournalDocument" FromRole="GeneralJournalDocumentPartner" />
+        <NavigationProperty Name="Currency" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Currency_MyERP_DataAccess_Currency_CurrencyPartner" ToRole="Currency" FromRole="CurrencyPartner" />
+      </EntityType>
+      <EntityType Name="GeneralJournalSetup">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="OrganizationId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="LocalCurrencyId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="LcyExchangeRateUnit" Type="Edm.Int32" Nullable="false" />
+        <Property Name="GeneralJournalNumberSequenceId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="RecCreated" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecModified" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecCreatedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="RecModifiedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Version" Type="Edm.Int64" Nullable="false" />
+        <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" ToRole="RecCreatedByUser" FromRole="RecCreatedByUserPartner" />
+        <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner" ToRole="RecModifiedByUser" FromRole="RecModifiedByUserPartner" />
+        <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
+        <NavigationProperty Name="LocalCurrency" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_LocalCurrency_MyERP_DataAccess_Currency_LocalCurrencyPartner" ToRole="LocalCurrency" FromRole="LocalCurrencyPartner" />
+        <NavigationProperty Name="GeneralJournalNumberSequence" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_GeneralJournalNumberSequence_MyERP_DataAccess_NumberSequence_GeneralJournalNumberSequencePartner" ToRole="GeneralJournalNumberSequence" FromRole="GeneralJournalNumberSequencePartner" />
+        <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
+      </EntityType>
+      <EntityType Name="JobGroup">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Level" Type="Edm.Int16" Nullable="false" />
+        <Property Name="Code" Type="Edm.String" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="RecCreated" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecCreateBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Status" Type="Edm.Byte" Nullable="false" />
+        <Property Name="RecModified" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecModifiedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="OrganizationId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Version" Type="Edm.Int64" Nullable="false" />
+        <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_JobGroup_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
+        <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_JobGroup_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
+        <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_JobGroup_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" ToRole="RecCreatedByUser" FromRole="RecCreatedByUserPartner" />
+        <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_JobGroup_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner" ToRole="RecModifiedByUser" FromRole="RecModifiedByUserPartner" />
+        <NavigationProperty Name="Job1s" Relationship="MyERP.DataAccess.MyERP_DataAccess_JobGroup_Job1s_MyERP_DataAccess_Job_Job1sPartner" ToRole="Job1s" FromRole="Job1sPartner" />
+        <NavigationProperty Name="Job2s" Relationship="MyERP.DataAccess.MyERP_DataAccess_JobGroup_Job2s_MyERP_DataAccess_Job_Job2sPartner" ToRole="Job2s" FromRole="Job2sPartner" />
+        <NavigationProperty Name="Job3s" Relationship="MyERP.DataAccess.MyERP_DataAccess_JobGroup_Job3s_MyERP_DataAccess_Job_Job3sPartner" ToRole="Job3s" FromRole="Job3sPartner" />
+      </EntityType>
+      <EntityType Name="Job">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="BusinessPartnerId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="JobGroupId1" Type="Edm.Guid" Nullable="false" />
+        <Property Name="JobGroupId2" Type="Edm.Guid" Nullable="false" />
+        <Property Name="JobGroupId3" Type="Edm.Guid" Nullable="false" />
+        <Property Name="JobStart" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="JobEnd" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="CurrencyId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Amount" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="AmountLcy" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="Comment" Type="Edm.String" />
+        <Property Name="RecCreated" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecCreatedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="RecModified" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecModifiedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Status" Type="Edm.Byte" Nullable="false" />
+        <Property Name="AccountId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="OrganizationId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Version" Type="Edm.Int64" Nullable="false" />
+        <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_Job_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
+        <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_Job_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
+        <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_Job_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" ToRole="RecCreatedByUser" FromRole="RecCreatedByUserPartner" />
+        <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_Job_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner" ToRole="RecModifiedByUser" FromRole="RecModifiedByUserPartner" />
+        <NavigationProperty Name="BusinessPartner" Relationship="MyERP.DataAccess.MyERP_DataAccess_Job_BusinessPartner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartner" ToRole="BusinessPartner" FromRole="BusinessPartnerPartner" />
+        <NavigationProperty Name="Account" Relationship="MyERP.DataAccess.MyERP_DataAccess_Job_Account_MyERP_DataAccess_Account_AccountPartner" ToRole="Account" FromRole="AccountPartner" />
+        <NavigationProperty Name="JobGroup1" Relationship="MyERP.DataAccess.MyERP_DataAccess_Job_JobGroup1_MyERP_DataAccess_JobGroup_JobGroup1Partner" ToRole="JobGroup1" FromRole="JobGroup1Partner" />
+        <NavigationProperty Name="JobGroup2" Relationship="MyERP.DataAccess.MyERP_DataAccess_Job_JobGroup2_MyERP_DataAccess_JobGroup_JobGroup2Partner" ToRole="JobGroup2" FromRole="JobGroup2Partner" />
+        <NavigationProperty Name="JobGroup3" Relationship="MyERP.DataAccess.MyERP_DataAccess_Job_JobGroup3_MyERP_DataAccess_JobGroup_JobGroup3Partner" ToRole="JobGroup3" FromRole="JobGroup3Partner" />
+      </EntityType>
+      <EntityType Name="Module">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Int64" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Group" Type="Edm.String" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="IdAsName" Type="Edm.String" Nullable="false" />
+      </EntityType>
+      <EntityType Name="NumberSequence">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Version" Type="Edm.Int64" Nullable="false" />
+        <Property Name="Code" Type="Edm.String" />
+        <Property Name="CurrentNo" Type="Edm.Int32" Nullable="false" />
+        <Property Name="EndingNo" Type="Edm.Int32" Nullable="false" />
+        <Property Name="FormatNo" Type="Edm.String" />
+        <Property Name="IsDefault" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="Manual" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="NoSeqName" Type="Edm.String" />
+        <Property Name="OrganizationId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="StartingNo" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Status" Type="Edm.Int16" Nullable="false" />
+        <Property Name="RecModifiedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="RecCreated" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecCreatedBy" Type="Edm.Guid" Nullable="false" />
+        <Property Name="RecModified" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="StatusType" Type="Edm.String" Nullable="false" />
+        <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_NumberSequence_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
+        <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_NumberSequence_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
+        <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_NumberSequence_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" ToRole="RecCreatedByUser" FromRole="RecCreatedByUserPartner" />
+        <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_NumberSequence_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner" ToRole="RecModifiedByUser" FromRole="RecModifiedByUserPartner" />
+      </EntityType>
+      <EntityType Name="Organization">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="RecCreated" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecCreatedById" Type="Edm.Guid" Nullable="false" />
+        <Property Name="RecModified" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="RecModifiedById" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Status" Type="Edm.Byte" Nullable="false" />
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Version" Type="Edm.Int64" Nullable="false" />
+        <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="StatusType" Type="Edm.String" Nullable="false" />
+        <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_Organization_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" ToRole="RecCreatedByUser" FromRole="RecCreatedByUserPartner" />
+        <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_Organization_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner" ToRole="RecModifiedByUser" FromRole="RecModifiedByUserPartner" />
+        <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_Organization_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
+      </EntityType>
+      <EntityType Name="PaymentTerm">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="Han_Tt" Type="Edm.Int16" Nullable="false" />
+        <Property Name="Han_Tt_Gg" Type="Edm.Int16" Nullable="false" />
+        <Property Name="Pt_Gg" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="Date0" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="UserId0" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Date2" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="UserId2" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Status" Type="Edm.Byte" Nullable="false" />
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Version" Type="Edm.Int64" Nullable="false" />
+        <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="OrganizationId" Type="Edm.Guid" Nullable="false" />
+        <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_PaymentTerm_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
+        <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_PaymentTerm_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
+      </EntityType>
+      <EntityType Name="Session">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="UserId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Expire" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="WorkingDate" Type="Edm.DateTime" />
+        <Property Name="OrganizationId" Type="Edm.Guid" />
+        <Property Name="LastTime" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="WarehouseId" Type="Edm.Guid" />
+        <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
+        <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_Session_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
+        <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_Session_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
+      </EntityType>
+      <EntityType Name="User">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" />
+        <Property Name="Password" Type="Edm.String" />
+        <Property Name="Comment" Type="Edm.String" />
+        <Property Name="FullName" Type="Edm.String" />
+        <Property Name="PasswordAnswer" Type="Edm.String" />
+        <Property Name="PasswordQuestion" Type="Edm.String" />
+        <Property Name="Email" Type="Edm.String" />
+        <Property Name="CreatedDate" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="IsActivated" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="IsLockedOut" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="LastLockedOutDate" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="LastLockedOutReason" Type="Edm.String" />
+        <Property Name="LastLoginDate" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="LastLoginIp" Type="Edm.String" />
+        <Property Name="LastModifiedDate" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="ClientId" Type="Edm.Guid" />
+        <Property Name="OrganizationId" Type="Edm.Guid" />
+        <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_User_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
+        <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_User_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
+      </EntityType>
+      <Association Name="MyERP_DataAccess_Account_Currency_MyERP_DataAccess_Currency_CurrencyPartner">
+        <End Type="MyERP.DataAccess.Currency" Role="Currency" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Account" Role="CurrencyPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Account_ParentAccount_MyERP_DataAccess_Account_ParentAccountPartner">
+        <End Type="MyERP.DataAccess.Account" Role="ParentAccount" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Account" Role="ParentAccountPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Account_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecModifiedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Account" Role="RecModifiedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Account_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecCreatedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Account" Role="RecCreatedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Account_Client_MyERP_DataAccess_Client_ClientPartner">
+        <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Account" Role="ClientPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Account_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+        <End Type="MyERP.DataAccess.Organization" Role="Organization" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Account" Role="OrganizationPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Account_ChildAccounts_MyERP_DataAccess_Account_ChildAccountsPartner">
+        <End Type="MyERP.DataAccess.Account" Role="ChildAccounts" Multiplicity="*" />
+        <End Type="MyERP.DataAccess.Account" Role="ChildAccountsPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_BusinessPartnerGroup_Client_MyERP_DataAccess_Client_ClientPartner">
+        <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.BusinessPartnerGroup" Role="ClientPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_BusinessPartnerGroup_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+        <End Type="MyERP.DataAccess.Organization" Role="Organization" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.BusinessPartnerGroup" Role="OrganizationPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner1s_MyERP_DataAccess_BusinessPartner_BusinessPartner1sPartner">
+        <End Type="MyERP.DataAccess.BusinessPartner" Role="BusinessPartner1s" Multiplicity="*" />
+        <End Type="MyERP.DataAccess.BusinessPartnerGroup" Role="BusinessPartner1sPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner3s_MyERP_DataAccess_BusinessPartner_BusinessPartner3sPartner">
+        <End Type="MyERP.DataAccess.BusinessPartner" Role="BusinessPartner3s" Multiplicity="*" />
+        <End Type="MyERP.DataAccess.BusinessPartnerGroup" Role="BusinessPartner3sPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner2s_MyERP_DataAccess_BusinessPartner_BusinessPartner2sPartner">
+        <End Type="MyERP.DataAccess.BusinessPartner" Role="BusinessPartner2s" Multiplicity="*" />
+        <End Type="MyERP.DataAccess.BusinessPartnerGroup" Role="BusinessPartner2sPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_BusinessPartner_EmployeeAccount_MyERP_DataAccess_Account_EmployeeAccountPartner">
+        <End Type="MyERP.DataAccess.Account" Role="EmployeeAccount" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.BusinessPartner" Role="EmployeeAccountPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_BusinessPartner_VendorAccount_MyERP_DataAccess_Account_VendorAccountPartner">
+        <End Type="MyERP.DataAccess.Account" Role="VendorAccount" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.BusinessPartner" Role="VendorAccountPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_BusinessPartner_CustomerAccount_MyERP_DataAccess_Account_CustomerAccountPartner">
+        <End Type="MyERP.DataAccess.Account" Role="CustomerAccount" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.BusinessPartner" Role="CustomerAccountPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_BusinessPartner_PaymentTerm_MyERP_DataAccess_PaymentTerm_PaymentTermPartner">
+        <End Type="MyERP.DataAccess.PaymentTerm" Role="PaymentTerm" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.BusinessPartner" Role="PaymentTermPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_BusinessPartner_Client_MyERP_DataAccess_Client_ClientPartner">
+        <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.BusinessPartner" Role="ClientPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_BusinessPartner_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+        <End Type="MyERP.DataAccess.Organization" Role="Organization" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.BusinessPartner" Role="OrganizationPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_BusinessPartner_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecCreatedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.BusinessPartner" Role="RecCreatedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_BusinessPartner_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecModifiedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.BusinessPartner" Role="RecModifiedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup1_MyERP_DataAccess_BusinessPartnerGroup_BusinessPartnerGroup1Partner">
+        <End Type="MyERP.DataAccess.BusinessPartnerGroup" Role="BusinessPartnerGroup1" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.BusinessPartner" Role="BusinessPartnerGroup1Partner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup3_MyERP_DataAccess_BusinessPartnerGroup_BusinessPartnerGroup3Partner">
+        <End Type="MyERP.DataAccess.BusinessPartnerGroup" Role="BusinessPartnerGroup3" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.BusinessPartner" Role="BusinessPartnerGroup3Partner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup2_MyERP_DataAccess_BusinessPartnerGroup_BusinessPartnerGroup2Partner">
+        <End Type="MyERP.DataAccess.BusinessPartnerGroup" Role="BusinessPartnerGroup2" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.BusinessPartner" Role="BusinessPartnerGroup2Partner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Client_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecCreatedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Client" Role="RecCreatedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Client_Organizations_MyERP_DataAccess_Organization_OrganizationsPartner">
+        <End Type="MyERP.DataAccess.Organization" Role="Organizations" Multiplicity="*" />
+        <End Type="MyERP.DataAccess.Client" Role="OrganizationsPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Currency_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecModifiedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Currency" Role="RecModifiedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Currency_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecCreatedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Currency" Role="RecCreatedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Currency_Client_MyERP_DataAccess_Client_ClientPartner">
+        <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Currency" Role="ClientPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Currency_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+        <End Type="MyERP.DataAccess.Organization" Role="Organization" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Currency" Role="OrganizationPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_CurrencyConvertRate_Client_MyERP_DataAccess_Client_ClientPartner">
+        <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.CurrencyConvertRate" Role="ClientPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_CurrencyConvertRate_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecCreatedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.CurrencyConvertRate" Role="RecCreatedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_CurrencyConvertRate_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecModifiedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.CurrencyConvertRate" Role="RecModifiedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_CurrencyConvertRate_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+        <End Type="MyERP.DataAccess.Organization" Role="Organization" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.CurrencyConvertRate" Role="OrganizationPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_CurrencyConvertRate_Currency_MyERP_DataAccess_Currency_CurrencyPartner">
+        <End Type="MyERP.DataAccess.Currency" Role="Currency" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.CurrencyConvertRate" Role="CurrencyPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_CurrencyConvertRate_CurrencyTo_MyERP_DataAccess_Currency_CurrencyToPartner">
+        <End Type="MyERP.DataAccess.Currency" Role="CurrencyTo" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.CurrencyConvertRate" Role="CurrencyToPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalDocument_Client_MyERP_DataAccess_Client_ClientPartner">
+        <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalDocument" Role="ClientPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalDocument_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+        <End Type="MyERP.DataAccess.Organization" Role="Organization" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalDocument" Role="OrganizationPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalDocument_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecCreatedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalDocument" Role="RecCreatedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalDocument_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecModifiedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalDocument" Role="RecModifiedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalDocument_Currency_MyERP_DataAccess_Currency_CurrencyPartner">
+        <End Type="MyERP.DataAccess.Currency" Role="Currency" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalDocument" Role="CurrencyPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalDocument_NumberSequence_MyERP_DataAccess_NumberSequence_NumberSequencePartner">
+        <End Type="MyERP.DataAccess.NumberSequence" Role="NumberSequence" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalDocument" Role="NumberSequencePartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalDocument_GeneralJournalLines_MyERP_DataAccess_GeneralJournalLine_GeneralJournalLinesPartner">
+        <End Type="MyERP.DataAccess.GeneralJournalLine" Role="GeneralJournalLines" Multiplicity="*" />
+        <End Type="MyERP.DataAccess.GeneralJournalDocument" Role="GeneralJournalLinesPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalLine_Client_MyERP_DataAccess_Client_ClientPartner">
+        <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalLine" Role="ClientPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalLine_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+        <End Type="MyERP.DataAccess.Organization" Role="Organization" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalLine" Role="OrganizationPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalLine_BusinessPartner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartner">
+        <End Type="MyERP.DataAccess.BusinessPartner" Role="BusinessPartner" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalLine" Role="BusinessPartnerPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalLine_Job_MyERP_DataAccess_Job_JobPartner">
+        <End Type="MyERP.DataAccess.Job" Role="Job" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalLine" Role="JobPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalLine_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecModifiedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalLine" Role="RecModifiedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalLine_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecCreatedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalLine" Role="RecCreatedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalLine_Account_MyERP_DataAccess_Account_AccountPartner">
+        <End Type="MyERP.DataAccess.Account" Role="Account" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalLine" Role="AccountPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalLine_CorAccount_MyERP_DataAccess_Account_CorAccountPartner">
+        <End Type="MyERP.DataAccess.Account" Role="CorAccount" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalLine" Role="CorAccountPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalLine_GeneralJournalDocument_MyERP_DataAccess_GeneralJournalDocument_GeneralJournalDocumentPartner">
+        <End Type="MyERP.DataAccess.GeneralJournalDocument" Role="GeneralJournalDocument" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalLine" Role="GeneralJournalDocumentPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalLine_Currency_MyERP_DataAccess_Currency_CurrencyPartner">
+        <End Type="MyERP.DataAccess.Currency" Role="Currency" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalLine" Role="CurrencyPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalSetup_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecCreatedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalSetup" Role="RecCreatedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalSetup_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecModifiedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalSetup" Role="RecModifiedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalSetup_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+        <End Type="MyERP.DataAccess.Organization" Role="Organization" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalSetup" Role="OrganizationPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalSetup_LocalCurrency_MyERP_DataAccess_Currency_LocalCurrencyPartner">
+        <End Type="MyERP.DataAccess.Currency" Role="LocalCurrency" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalSetup" Role="LocalCurrencyPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalSetup_GeneralJournalNumberSequence_MyERP_DataAccess_NumberSequence_GeneralJournalNumberSequencePartner">
+        <End Type="MyERP.DataAccess.NumberSequence" Role="GeneralJournalNumberSequence" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalSetup" Role="GeneralJournalNumberSequencePartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_GeneralJournalSetup_Client_MyERP_DataAccess_Client_ClientPartner">
+        <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.GeneralJournalSetup" Role="ClientPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_JobGroup_Client_MyERP_DataAccess_Client_ClientPartner">
+        <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.JobGroup" Role="ClientPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_JobGroup_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+        <End Type="MyERP.DataAccess.Organization" Role="Organization" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.JobGroup" Role="OrganizationPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_JobGroup_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecCreatedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.JobGroup" Role="RecCreatedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_JobGroup_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecModifiedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.JobGroup" Role="RecModifiedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_JobGroup_Job1s_MyERP_DataAccess_Job_Job1sPartner">
+        <End Type="MyERP.DataAccess.Job" Role="Job1s" Multiplicity="*" />
+        <End Type="MyERP.DataAccess.JobGroup" Role="Job1sPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_JobGroup_Job2s_MyERP_DataAccess_Job_Job2sPartner">
+        <End Type="MyERP.DataAccess.Job" Role="Job2s" Multiplicity="*" />
+        <End Type="MyERP.DataAccess.JobGroup" Role="Job2sPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_JobGroup_Job3s_MyERP_DataAccess_Job_Job3sPartner">
+        <End Type="MyERP.DataAccess.Job" Role="Job3s" Multiplicity="*" />
+        <End Type="MyERP.DataAccess.JobGroup" Role="Job3sPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Job_Client_MyERP_DataAccess_Client_ClientPartner">
+        <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Job" Role="ClientPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Job_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+        <End Type="MyERP.DataAccess.Organization" Role="Organization" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Job" Role="OrganizationPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Job_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecCreatedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Job" Role="RecCreatedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Job_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecModifiedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Job" Role="RecModifiedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Job_BusinessPartner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartner">
+        <End Type="MyERP.DataAccess.BusinessPartner" Role="BusinessPartner" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Job" Role="BusinessPartnerPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Job_Account_MyERP_DataAccess_Account_AccountPartner">
+        <End Type="MyERP.DataAccess.Account" Role="Account" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Job" Role="AccountPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Job_JobGroup1_MyERP_DataAccess_JobGroup_JobGroup1Partner">
+        <End Type="MyERP.DataAccess.JobGroup" Role="JobGroup1" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Job" Role="JobGroup1Partner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Job_JobGroup2_MyERP_DataAccess_JobGroup_JobGroup2Partner">
+        <End Type="MyERP.DataAccess.JobGroup" Role="JobGroup2" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Job" Role="JobGroup2Partner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Job_JobGroup3_MyERP_DataAccess_JobGroup_JobGroup3Partner">
+        <End Type="MyERP.DataAccess.JobGroup" Role="JobGroup3" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Job" Role="JobGroup3Partner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_NumberSequence_Client_MyERP_DataAccess_Client_ClientPartner">
+        <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.NumberSequence" Role="ClientPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_NumberSequence_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+        <End Type="MyERP.DataAccess.Organization" Role="Organization" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.NumberSequence" Role="OrganizationPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_NumberSequence_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecCreatedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.NumberSequence" Role="RecCreatedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_NumberSequence_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecModifiedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.NumberSequence" Role="RecModifiedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Organization_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecCreatedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Organization" Role="RecCreatedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Organization_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+        <End Type="MyERP.DataAccess.User" Role="RecModifiedByUser" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Organization" Role="RecModifiedByUserPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Organization_Client_MyERP_DataAccess_Client_ClientPartner">
+        <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Organization" Role="ClientPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_PaymentTerm_Client_MyERP_DataAccess_Client_ClientPartner">
+        <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.PaymentTerm" Role="ClientPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_PaymentTerm_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+        <End Type="MyERP.DataAccess.Organization" Role="Organization" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.PaymentTerm" Role="OrganizationPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Session_Client_MyERP_DataAccess_Client_ClientPartner">
+        <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Session" Role="ClientPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Session_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+        <End Type="MyERP.DataAccess.Organization" Role="Organization" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Session" Role="OrganizationPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_User_Client_MyERP_DataAccess_Client_ClientPartner">
+        <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.User" Role="ClientPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_User_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+        <End Type="MyERP.DataAccess.Organization" Role="Organization" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.User" Role="OrganizationPartner" Multiplicity="0..1" />
+      </Association>
+    </Schema>
+    <Schema Namespace="Default" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <EntityContainer Name="Container" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="Accounts" EntityType="MyERP.DataAccess.Account" />
+        <EntitySet Name="BusinessPartnerGroups" EntityType="MyERP.DataAccess.BusinessPartnerGroup" />
+        <EntitySet Name="BusinessPartners" EntityType="MyERP.DataAccess.BusinessPartner" />
+        <EntitySet Name="Clients" EntityType="MyERP.DataAccess.Client" />
+        <EntitySet Name="Currencies" EntityType="MyERP.DataAccess.Currency" />
+        <EntitySet Name="CurrencyConvertRates" EntityType="MyERP.DataAccess.CurrencyConvertRate" />
+        <EntitySet Name="GeneralJournalDocuments" EntityType="MyERP.DataAccess.GeneralJournalDocument" />
+        <EntitySet Name="GeneralJournalLines" EntityType="MyERP.DataAccess.GeneralJournalLine" />
+        <EntitySet Name="GeneralJournalSetups" EntityType="MyERP.DataAccess.GeneralJournalSetup" />
+        <EntitySet Name="JobGroups" EntityType="MyERP.DataAccess.JobGroup" />
+        <EntitySet Name="Jobs" EntityType="MyERP.DataAccess.Job" />
+        <EntitySet Name="Modules" EntityType="MyERP.DataAccess.Module" />
+        <EntitySet Name="NumberSequences" EntityType="MyERP.DataAccess.NumberSequence" />
+        <EntitySet Name="Organizations" EntityType="MyERP.DataAccess.Organization" />
+        <EntitySet Name="PaymentTerms" EntityType="MyERP.DataAccess.PaymentTerm" />
+        <EntitySet Name="Sessions" EntityType="MyERP.DataAccess.Session" />
+        <EntitySet Name="Users" EntityType="MyERP.DataAccess.User" />
+        <AssociationSet Name="MyERP_DataAccess_Account_Currency_MyERP_DataAccess_Currency_CurrencyPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Account_Currency_MyERP_DataAccess_Currency_CurrencyPartner">
+          <End Role="CurrencyPartner" EntitySet="Accounts" />
+          <End Role="Currency" EntitySet="Currencies" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Account_ParentAccount_MyERP_DataAccess_Account_ParentAccountPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Account_ParentAccount_MyERP_DataAccess_Account_ParentAccountPartner">
+          <End Role="ParentAccountPartner" EntitySet="Accounts" />
+          <End Role="ParentAccount" EntitySet="Accounts" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Account_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Account_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+          <End Role="RecModifiedByUserPartner" EntitySet="Accounts" />
+          <End Role="RecModifiedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Account_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Account_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+          <End Role="RecCreatedByUserPartner" EntitySet="Accounts" />
+          <End Role="RecCreatedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Account_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Account_Client_MyERP_DataAccess_Client_ClientPartner">
+          <End Role="ClientPartner" EntitySet="Accounts" />
+          <End Role="Client" EntitySet="Clients" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Account_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Account_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+          <End Role="OrganizationPartner" EntitySet="Accounts" />
+          <End Role="Organization" EntitySet="Organizations" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Account_ChildAccounts_MyERP_DataAccess_Account_ChildAccountsPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Account_ChildAccounts_MyERP_DataAccess_Account_ChildAccountsPartner">
+          <End Role="ChildAccountsPartner" EntitySet="Accounts" />
+          <End Role="ChildAccounts" EntitySet="Accounts" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_BusinessPartnerGroup_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_BusinessPartnerGroup_Client_MyERP_DataAccess_Client_ClientPartner">
+          <End Role="ClientPartner" EntitySet="BusinessPartnerGroups" />
+          <End Role="Client" EntitySet="Clients" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_BusinessPartnerGroup_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_BusinessPartnerGroup_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+          <End Role="OrganizationPartner" EntitySet="BusinessPartnerGroups" />
+          <End Role="Organization" EntitySet="Organizations" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner1s_MyERP_DataAccess_BusinessPartner_BusinessPartner1sPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner1s_MyERP_DataAccess_BusinessPartner_BusinessPartner1sPartner">
+          <End Role="BusinessPartner1sPartner" EntitySet="BusinessPartnerGroups" />
+          <End Role="BusinessPartner1s" EntitySet="BusinessPartners" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner3s_MyERP_DataAccess_BusinessPartner_BusinessPartner3sPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner3s_MyERP_DataAccess_BusinessPartner_BusinessPartner3sPartner">
+          <End Role="BusinessPartner3sPartner" EntitySet="BusinessPartnerGroups" />
+          <End Role="BusinessPartner3s" EntitySet="BusinessPartners" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner2s_MyERP_DataAccess_BusinessPartner_BusinessPartner2sPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner2s_MyERP_DataAccess_BusinessPartner_BusinessPartner2sPartner">
+          <End Role="BusinessPartner2sPartner" EntitySet="BusinessPartnerGroups" />
+          <End Role="BusinessPartner2s" EntitySet="BusinessPartners" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_BusinessPartner_EmployeeAccount_MyERP_DataAccess_Account_EmployeeAccountPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_EmployeeAccount_MyERP_DataAccess_Account_EmployeeAccountPartner">
+          <End Role="EmployeeAccountPartner" EntitySet="BusinessPartners" />
+          <End Role="EmployeeAccount" EntitySet="Accounts" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_BusinessPartner_VendorAccount_MyERP_DataAccess_Account_VendorAccountPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_VendorAccount_MyERP_DataAccess_Account_VendorAccountPartner">
+          <End Role="VendorAccountPartner" EntitySet="BusinessPartners" />
+          <End Role="VendorAccount" EntitySet="Accounts" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_BusinessPartner_CustomerAccount_MyERP_DataAccess_Account_CustomerAccountPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_CustomerAccount_MyERP_DataAccess_Account_CustomerAccountPartner">
+          <End Role="CustomerAccountPartner" EntitySet="BusinessPartners" />
+          <End Role="CustomerAccount" EntitySet="Accounts" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_BusinessPartner_PaymentTerm_MyERP_DataAccess_PaymentTerm_PaymentTermPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_PaymentTerm_MyERP_DataAccess_PaymentTerm_PaymentTermPartner">
+          <End Role="PaymentTermPartner" EntitySet="BusinessPartners" />
+          <End Role="PaymentTerm" EntitySet="PaymentTerms" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_BusinessPartner_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_Client_MyERP_DataAccess_Client_ClientPartner">
+          <End Role="ClientPartner" EntitySet="BusinessPartners" />
+          <End Role="Client" EntitySet="Clients" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_BusinessPartner_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+          <End Role="OrganizationPartner" EntitySet="BusinessPartners" />
+          <End Role="Organization" EntitySet="Organizations" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_BusinessPartner_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+          <End Role="RecCreatedByUserPartner" EntitySet="BusinessPartners" />
+          <End Role="RecCreatedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_BusinessPartner_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+          <End Role="RecModifiedByUserPartner" EntitySet="BusinessPartners" />
+          <End Role="RecModifiedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup1_MyERP_DataAccess_BusinessPartnerGroup_BusinessPartnerGroup1PartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup1_MyERP_DataAccess_BusinessPartnerGroup_BusinessPartnerGroup1Partner">
+          <End Role="BusinessPartnerGroup1Partner" EntitySet="BusinessPartners" />
+          <End Role="BusinessPartnerGroup1" EntitySet="BusinessPartnerGroups" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup3_MyERP_DataAccess_BusinessPartnerGroup_BusinessPartnerGroup3PartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup3_MyERP_DataAccess_BusinessPartnerGroup_BusinessPartnerGroup3Partner">
+          <End Role="BusinessPartnerGroup3Partner" EntitySet="BusinessPartners" />
+          <End Role="BusinessPartnerGroup3" EntitySet="BusinessPartnerGroups" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup2_MyERP_DataAccess_BusinessPartnerGroup_BusinessPartnerGroup2PartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup2_MyERP_DataAccess_BusinessPartnerGroup_BusinessPartnerGroup2Partner">
+          <End Role="BusinessPartnerGroup2Partner" EntitySet="BusinessPartners" />
+          <End Role="BusinessPartnerGroup2" EntitySet="BusinessPartnerGroups" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Client_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Client_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+          <End Role="RecCreatedByUserPartner" EntitySet="Clients" />
+          <End Role="RecCreatedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Client_Organizations_MyERP_DataAccess_Organization_OrganizationsPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Client_Organizations_MyERP_DataAccess_Organization_OrganizationsPartner">
+          <End Role="OrganizationsPartner" EntitySet="Clients" />
+          <End Role="Organizations" EntitySet="Organizations" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Currency_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Currency_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+          <End Role="RecModifiedByUserPartner" EntitySet="Currencies" />
+          <End Role="RecModifiedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Currency_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Currency_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+          <End Role="RecCreatedByUserPartner" EntitySet="Currencies" />
+          <End Role="RecCreatedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Currency_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Currency_Client_MyERP_DataAccess_Client_ClientPartner">
+          <End Role="ClientPartner" EntitySet="Currencies" />
+          <End Role="Client" EntitySet="Clients" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Currency_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Currency_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+          <End Role="OrganizationPartner" EntitySet="Currencies" />
+          <End Role="Organization" EntitySet="Organizations" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_CurrencyConvertRate_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRate_Client_MyERP_DataAccess_Client_ClientPartner">
+          <End Role="ClientPartner" EntitySet="CurrencyConvertRates" />
+          <End Role="Client" EntitySet="Clients" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_CurrencyConvertRate_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRate_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+          <End Role="RecCreatedByUserPartner" EntitySet="CurrencyConvertRates" />
+          <End Role="RecCreatedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_CurrencyConvertRate_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRate_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+          <End Role="RecModifiedByUserPartner" EntitySet="CurrencyConvertRates" />
+          <End Role="RecModifiedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_CurrencyConvertRate_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRate_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+          <End Role="OrganizationPartner" EntitySet="CurrencyConvertRates" />
+          <End Role="Organization" EntitySet="Organizations" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_CurrencyConvertRate_Currency_MyERP_DataAccess_Currency_CurrencyPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRate_Currency_MyERP_DataAccess_Currency_CurrencyPartner">
+          <End Role="CurrencyPartner" EntitySet="CurrencyConvertRates" />
+          <End Role="Currency" EntitySet="Currencies" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_CurrencyConvertRate_CurrencyTo_MyERP_DataAccess_Currency_CurrencyToPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRate_CurrencyTo_MyERP_DataAccess_Currency_CurrencyToPartner">
+          <End Role="CurrencyToPartner" EntitySet="CurrencyConvertRates" />
+          <End Role="CurrencyTo" EntitySet="Currencies" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalDocument_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_Client_MyERP_DataAccess_Client_ClientPartner">
+          <End Role="ClientPartner" EntitySet="GeneralJournalDocuments" />
+          <End Role="Client" EntitySet="Clients" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalDocument_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+          <End Role="OrganizationPartner" EntitySet="GeneralJournalDocuments" />
+          <End Role="Organization" EntitySet="Organizations" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalDocument_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+          <End Role="RecCreatedByUserPartner" EntitySet="GeneralJournalDocuments" />
+          <End Role="RecCreatedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalDocument_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+          <End Role="RecModifiedByUserPartner" EntitySet="GeneralJournalDocuments" />
+          <End Role="RecModifiedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalDocument_Currency_MyERP_DataAccess_Currency_CurrencyPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_Currency_MyERP_DataAccess_Currency_CurrencyPartner">
+          <End Role="CurrencyPartner" EntitySet="GeneralJournalDocuments" />
+          <End Role="Currency" EntitySet="Currencies" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalDocument_NumberSequence_MyERP_DataAccess_NumberSequence_NumberSequencePartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_NumberSequence_MyERP_DataAccess_NumberSequence_NumberSequencePartner">
+          <End Role="NumberSequencePartner" EntitySet="GeneralJournalDocuments" />
+          <End Role="NumberSequence" EntitySet="NumberSequences" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalDocument_GeneralJournalLines_MyERP_DataAccess_GeneralJournalLine_GeneralJournalLinesPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_GeneralJournalLines_MyERP_DataAccess_GeneralJournalLine_GeneralJournalLinesPartner">
+          <End Role="GeneralJournalLinesPartner" EntitySet="GeneralJournalDocuments" />
+          <End Role="GeneralJournalLines" EntitySet="GeneralJournalLines" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalLine_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Client_MyERP_DataAccess_Client_ClientPartner">
+          <End Role="ClientPartner" EntitySet="GeneralJournalLines" />
+          <End Role="Client" EntitySet="Clients" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalLine_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+          <End Role="OrganizationPartner" EntitySet="GeneralJournalLines" />
+          <End Role="Organization" EntitySet="Organizations" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalLine_BusinessPartner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_BusinessPartner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartner">
+          <End Role="BusinessPartnerPartner" EntitySet="GeneralJournalLines" />
+          <End Role="BusinessPartner" EntitySet="BusinessPartners" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalLine_Job_MyERP_DataAccess_Job_JobPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Job_MyERP_DataAccess_Job_JobPartner">
+          <End Role="JobPartner" EntitySet="GeneralJournalLines" />
+          <End Role="Job" EntitySet="Jobs" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalLine_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+          <End Role="RecModifiedByUserPartner" EntitySet="GeneralJournalLines" />
+          <End Role="RecModifiedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalLine_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+          <End Role="RecCreatedByUserPartner" EntitySet="GeneralJournalLines" />
+          <End Role="RecCreatedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalLine_Account_MyERP_DataAccess_Account_AccountPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Account_MyERP_DataAccess_Account_AccountPartner">
+          <End Role="AccountPartner" EntitySet="GeneralJournalLines" />
+          <End Role="Account" EntitySet="Accounts" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalLine_CorAccount_MyERP_DataAccess_Account_CorAccountPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_CorAccount_MyERP_DataAccess_Account_CorAccountPartner">
+          <End Role="CorAccountPartner" EntitySet="GeneralJournalLines" />
+          <End Role="CorAccount" EntitySet="Accounts" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalLine_GeneralJournalDocument_MyERP_DataAccess_GeneralJournalDocument_GeneralJournalDocumentPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_GeneralJournalDocument_MyERP_DataAccess_GeneralJournalDocument_GeneralJournalDocumentPartner">
+          <End Role="GeneralJournalDocumentPartner" EntitySet="GeneralJournalLines" />
+          <End Role="GeneralJournalDocument" EntitySet="GeneralJournalDocuments" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalLine_Currency_MyERP_DataAccess_Currency_CurrencyPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Currency_MyERP_DataAccess_Currency_CurrencyPartner">
+          <End Role="CurrencyPartner" EntitySet="GeneralJournalLines" />
+          <End Role="Currency" EntitySet="Currencies" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalSetup_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+          <End Role="RecCreatedByUserPartner" EntitySet="GeneralJournalSetups" />
+          <End Role="RecCreatedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalSetup_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+          <End Role="RecModifiedByUserPartner" EntitySet="GeneralJournalSetups" />
+          <End Role="RecModifiedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalSetup_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+          <End Role="OrganizationPartner" EntitySet="GeneralJournalSetups" />
+          <End Role="Organization" EntitySet="Organizations" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalSetup_LocalCurrency_MyERP_DataAccess_Currency_LocalCurrencyPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_LocalCurrency_MyERP_DataAccess_Currency_LocalCurrencyPartner">
+          <End Role="LocalCurrencyPartner" EntitySet="GeneralJournalSetups" />
+          <End Role="LocalCurrency" EntitySet="Currencies" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalSetup_GeneralJournalNumberSequence_MyERP_DataAccess_NumberSequence_GeneralJournalNumberSequencePartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_GeneralJournalNumberSequence_MyERP_DataAccess_NumberSequence_GeneralJournalNumberSequencePartner">
+          <End Role="GeneralJournalNumberSequencePartner" EntitySet="GeneralJournalSetups" />
+          <End Role="GeneralJournalNumberSequence" EntitySet="NumberSequences" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_GeneralJournalSetup_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_Client_MyERP_DataAccess_Client_ClientPartner">
+          <End Role="ClientPartner" EntitySet="GeneralJournalSetups" />
+          <End Role="Client" EntitySet="Clients" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_JobGroup_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_JobGroup_Client_MyERP_DataAccess_Client_ClientPartner">
+          <End Role="ClientPartner" EntitySet="JobGroups" />
+          <End Role="Client" EntitySet="Clients" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_JobGroup_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_JobGroup_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+          <End Role="OrganizationPartner" EntitySet="JobGroups" />
+          <End Role="Organization" EntitySet="Organizations" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_JobGroup_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_JobGroup_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+          <End Role="RecCreatedByUserPartner" EntitySet="JobGroups" />
+          <End Role="RecCreatedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_JobGroup_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_JobGroup_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+          <End Role="RecModifiedByUserPartner" EntitySet="JobGroups" />
+          <End Role="RecModifiedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_JobGroup_Job1s_MyERP_DataAccess_Job_Job1sPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_JobGroup_Job1s_MyERP_DataAccess_Job_Job1sPartner">
+          <End Role="Job1sPartner" EntitySet="JobGroups" />
+          <End Role="Job1s" EntitySet="Jobs" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_JobGroup_Job2s_MyERP_DataAccess_Job_Job2sPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_JobGroup_Job2s_MyERP_DataAccess_Job_Job2sPartner">
+          <End Role="Job2sPartner" EntitySet="JobGroups" />
+          <End Role="Job2s" EntitySet="Jobs" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_JobGroup_Job3s_MyERP_DataAccess_Job_Job3sPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_JobGroup_Job3s_MyERP_DataAccess_Job_Job3sPartner">
+          <End Role="Job3sPartner" EntitySet="JobGroups" />
+          <End Role="Job3s" EntitySet="Jobs" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Job_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Job_Client_MyERP_DataAccess_Client_ClientPartner">
+          <End Role="ClientPartner" EntitySet="Jobs" />
+          <End Role="Client" EntitySet="Clients" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Job_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Job_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+          <End Role="OrganizationPartner" EntitySet="Jobs" />
+          <End Role="Organization" EntitySet="Organizations" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Job_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Job_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+          <End Role="RecCreatedByUserPartner" EntitySet="Jobs" />
+          <End Role="RecCreatedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Job_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Job_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+          <End Role="RecModifiedByUserPartner" EntitySet="Jobs" />
+          <End Role="RecModifiedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Job_BusinessPartner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Job_BusinessPartner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartner">
+          <End Role="BusinessPartnerPartner" EntitySet="Jobs" />
+          <End Role="BusinessPartner" EntitySet="BusinessPartners" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Job_Account_MyERP_DataAccess_Account_AccountPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Job_Account_MyERP_DataAccess_Account_AccountPartner">
+          <End Role="AccountPartner" EntitySet="Jobs" />
+          <End Role="Account" EntitySet="Accounts" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Job_JobGroup1_MyERP_DataAccess_JobGroup_JobGroup1PartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Job_JobGroup1_MyERP_DataAccess_JobGroup_JobGroup1Partner">
+          <End Role="JobGroup1Partner" EntitySet="Jobs" />
+          <End Role="JobGroup1" EntitySet="JobGroups" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Job_JobGroup2_MyERP_DataAccess_JobGroup_JobGroup2PartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Job_JobGroup2_MyERP_DataAccess_JobGroup_JobGroup2Partner">
+          <End Role="JobGroup2Partner" EntitySet="Jobs" />
+          <End Role="JobGroup2" EntitySet="JobGroups" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Job_JobGroup3_MyERP_DataAccess_JobGroup_JobGroup3PartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Job_JobGroup3_MyERP_DataAccess_JobGroup_JobGroup3Partner">
+          <End Role="JobGroup3Partner" EntitySet="Jobs" />
+          <End Role="JobGroup3" EntitySet="JobGroups" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_NumberSequence_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_NumberSequence_Client_MyERP_DataAccess_Client_ClientPartner">
+          <End Role="ClientPartner" EntitySet="NumberSequences" />
+          <End Role="Client" EntitySet="Clients" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_NumberSequence_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_NumberSequence_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+          <End Role="OrganizationPartner" EntitySet="NumberSequences" />
+          <End Role="Organization" EntitySet="Organizations" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_NumberSequence_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_NumberSequence_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+          <End Role="RecCreatedByUserPartner" EntitySet="NumberSequences" />
+          <End Role="RecCreatedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_NumberSequence_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_NumberSequence_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+          <End Role="RecModifiedByUserPartner" EntitySet="NumberSequences" />
+          <End Role="RecModifiedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Organization_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Organization_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner">
+          <End Role="RecCreatedByUserPartner" EntitySet="Organizations" />
+          <End Role="RecCreatedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Organization_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Organization_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner">
+          <End Role="RecModifiedByUserPartner" EntitySet="Organizations" />
+          <End Role="RecModifiedByUser" EntitySet="Users" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Organization_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Organization_Client_MyERP_DataAccess_Client_ClientPartner">
+          <End Role="ClientPartner" EntitySet="Organizations" />
+          <End Role="Client" EntitySet="Clients" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_PaymentTerm_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_PaymentTerm_Client_MyERP_DataAccess_Client_ClientPartner">
+          <End Role="ClientPartner" EntitySet="PaymentTerms" />
+          <End Role="Client" EntitySet="Clients" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_PaymentTerm_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_PaymentTerm_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+          <End Role="OrganizationPartner" EntitySet="PaymentTerms" />
+          <End Role="Organization" EntitySet="Organizations" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Session_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Session_Client_MyERP_DataAccess_Client_ClientPartner">
+          <End Role="ClientPartner" EntitySet="Sessions" />
+          <End Role="Client" EntitySet="Clients" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Session_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Session_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+          <End Role="OrganizationPartner" EntitySet="Sessions" />
+          <End Role="Organization" EntitySet="Organizations" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_User_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_User_Client_MyERP_DataAccess_Client_ClientPartner">
+          <End Role="ClientPartner" EntitySet="Users" />
+          <End Role="Client" EntitySet="Clients" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_User_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_User_Organization_MyERP_DataAccess_Organization_OrganizationPartner">
+          <End Role="OrganizationPartner" EntitySet="Users" />
+          <End Role="Organization" EntitySet="Organizations" />
+        </AssociationSet>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

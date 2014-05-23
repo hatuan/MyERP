@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.ServiceModel.DomainServices.Client;
-using System.Linq;
+﻿using System.ComponentModel.Composition;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
-using MyERP.DataAccess;
 using MyERP.Infrastructure;
 using MyERP.Infrastructure.Extensions;
 using MyERP.Repositories;
@@ -41,13 +36,14 @@ namespace MyERP.Modules.Home.ViewModels
 
         private void OnLogoff()
         {
-            Session currentSession =
-                SessionRepository.Context.Sessions.First(e => e.Id == (Guid)SessionManager.Session["SessionId"]);
-            if (currentSession != null)
-            {
-                SessionRepository.Context.Sessions.Remove(currentSession);
-                SessionRepository.SaveOrUpdateEntities();
-            }
+            //Session currentSession =
+            //    SessionRepository.Container.Sessions.First(e => e.Id == (Guid)SessionManager.Session["SessionId"]);
+            //if (currentSession != null)
+            //{
+            //    SessionRepository.Context.Sessions.Remove(currentSession);
+            //    SessionRepository.SaveOrUpdateEntities();
+            //}
+
             //Close all windows
             RadWindowManager.Current.CloseAllWindows();
             //Clear Main menu region

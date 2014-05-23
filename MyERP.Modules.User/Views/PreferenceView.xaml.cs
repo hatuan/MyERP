@@ -55,11 +55,11 @@ namespace MyERP.Modules.User.Views
             win.UserWindowRegionPlaceholder.Height = this.Height;
 
             ViewModel.ApplicationViewModel.IsLoadingData = true;
-            ViewModel.OrganizationRepository.GetOrganizations(items =>
-            {
-                ViewModel.ApplicationViewModel.IsLoadingData = false;
-                ViewModel.Organizations = new QueryableCollectionView(new List<Organization>(items));
-            });
+            //ViewModel.OrganizationRepository.GetOrganizations(items =>
+            //{
+            //    ViewModel.ApplicationViewModel.IsLoadingData = false;
+            //    ViewModel.Organizations = new QueryableCollectionView(new List<Organization>(items));
+            //});
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

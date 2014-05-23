@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.ServiceModel.DomainServices.Client;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
-using MyERP.DataAccess;
 using MyERP.Infrastructure;
 using MyERP.Infrastructure.ViewModels;
 using MyERP.Repositories;
+using MyERP.Repository.MyERPService;
 using MyERP.ViewModels;
-using MyERP.Web;
 using Telerik.Windows.Data;
 
 namespace MyERP.Modules.Financial.ViewModels
@@ -81,8 +77,8 @@ namespace MyERP.Modules.Financial.ViewModels
             }
         }
 
-        private QueryableDomainServiceCollectionView<Account> _accounts;
-        public QueryableDomainServiceCollectionView<Account> Accounts
+        private ObservableItemCollection<Account> _accounts;
+        public ObservableItemCollection<Account> Accounts
         {
             get { return this._accounts; }
             set { _accounts = value; }
@@ -90,28 +86,9 @@ namespace MyERP.Modules.Financial.ViewModels
         
         public bool IsBusy
         {
-            get { return this._accounts.IsBusy; }
-        }
-
-        void _accounts_LoadedData(object sender, Telerik.Windows.Controls.DomainServices.LoadedDataEventArgs e)
-        {
-            if (e.HasError)
-            {
-                MessageBox.Show(e.Error.ToString(), "Load Error", MessageBoxButton.OK);
-                e.MarkErrorAsHandled();
-            }
+            get { return false; }
         }
         
-
-        void _accounts_SubmittedChanges(object sender, Telerik.Windows.Controls.DomainServices.DomainServiceSubmittedChangesEventArgs e)
-        {
-            if (e.HasError)
-            {
-                MessageBox.Show(e.Error.ToString(), "Submit Error", MessageBoxButton.OK);
-                e.MarkErrorAsHandled();
-            }
-        }
-
         void _accounts_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -131,48 +108,38 @@ namespace MyERP.Modules.Financial.ViewModels
             }
         }
 
-        //Update khi thay doi sang dong moi
-        void _accounts_CurrentChanging(object sender, CurrentChangingEventArgs e)
-        {
-            if (_accounts.HasChanges)
-                _accounts.SubmitChanges();
-        }
 
         private void OnAddNewCommandExecuted()
         {
-            _accounts.AddNew();
 
         }
 
         private bool AddNewCommandCanExecute()
         {
-            return !_accounts.HasChanges;
+            return true;
         }
 
 
         private bool SubmitChangesCommandCanExecute()
         {
-            return this._accounts.HasChanges;
+            return true;
         }
 
         private void OnRejectChangesExcuted()
         {
-            this._accounts.RejectChanges();
         }
 
         private void OnSubmitChangesExcuted()
         {
-            this._accounts.SubmitChanges();
         }
 
         private bool RefreshCommandCanExecute()
         {
-            return this._accounts.CanLoad;
+            return true;
         }
 
         private void OnRefreshExcuted()
         {
-            this._accounts.Load();
         }
 
         private bool DeleteCommandCanExecute()
@@ -195,8 +162,8 @@ namespace MyERP.Modules.Financial.ViewModels
                 return false;
             
             //Neu co thay doi thi khong cho dong cua so, bat buoc phai luu hay undo
-            if(this._accounts.HasChanges)
-                return false;
+            //if(this._accounts.HasChanges)
+            //    return false;
 
             return true;
         }
@@ -213,15 +180,6 @@ namespace MyERP.Modules.Financial.ViewModels
         public override void OnImportsSatisfied()
         {
             base.OnImportsSatisfied();
-
-            MyERPDomainContext context = AccountRepository.Context;
-            EntityQuery<Account> getAccountsQuery = context.GetAccountsQuery().OrderBy(c => c.Code);
-            this._accounts = new QueryableDomainServiceCollectionView<Account>(context, getAccountsQuery);
-            this._accounts.AutoLoad = true;
-            this._accounts.LoadedData += _accounts_LoadedData;
-            this._accounts.PropertyChanged += _accounts_PropertyChanged;
-            this._accounts.SubmittedChanges += _accounts_SubmittedChanges;
-            //this._accounts.CurrentChanging += _accounts_CurrentChanging;
 
             this.AddNewCommand = new DelegateCommand(OnAddNewCommandExecuted, AddNewCommandCanExecute);
             this.SubmitChangesCommand = new DelegateCommand(OnSubmitChangesExcuted, SubmitChangesCommandCanExecute);

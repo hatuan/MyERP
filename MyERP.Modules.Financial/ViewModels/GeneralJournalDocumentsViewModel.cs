@@ -1,22 +1,13 @@
 ﻿using System;
 using System.ComponentModel.Composition;
-using System.Net;
-using System.ServiceModel.DomainServices.Client;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
-using MyERP.DataAccess;
 using MyERP.Infrastructure;
 using MyERP.Infrastructure.ViewModels;
 using MyERP.Repositories;
-using MyERP.Web;
+using MyERP.Repository.MyERPService;
 using Telerik.Windows.Data;
 
 namespace MyERP.Modules.Financial.ViewModels
@@ -35,8 +26,6 @@ namespace MyERP.Modules.Financial.ViewModels
         [Import]
         public IEventAggregator EventAggregator { get; set; }
 
-        public MyERPDomainContext Context { get; set; }
-
         public ICommand AddNewCommand { get; set; }
         public ICommand SubmitChangesCommand { get; set; }
         public ICommand RejectChangesCommand { get; set; }
@@ -44,8 +33,8 @@ namespace MyERP.Modules.Financial.ViewModels
         public ICommand DeleteCommand { get; set; }
         public ICommand CloseWindowCommand { get; set; }
 
-        private QueryableDomainServiceCollectionView<GeneralJournalDocument> _generalJournalDocuments;
-        public QueryableDomainServiceCollectionView<GeneralJournalDocument> GeneralJournalDocuments
+        private ObservableItemCollection<GeneralJournalDocument> _generalJournalDocuments;
+        public ObservableItemCollection<GeneralJournalDocument> GeneralJournalDocuments
         {
             get { return this._generalJournalDocuments; }
             set { _generalJournalDocuments = value; }
@@ -73,7 +62,7 @@ namespace MyERP.Modules.Financial.ViewModels
 
         public bool IsBusy
         {
-            get { return this.GeneralJournalDocuments.IsBusy; }
+            get { return false; }
         }
 
         #endregion
@@ -82,23 +71,7 @@ namespace MyERP.Modules.Financial.ViewModels
         public override void OnImportsSatisfied()
         {
             base.OnImportsSatisfied();
-            this.Context = this.GeneralJournalDocumentRepository.Context;
             
-            EntityQuery<GeneralJournalDocument> getGeneralJournalDocumentsQuery = Context.GetGeneralJournalDocumentsQuery().OrderBy(c => c.DocumentNo);
-            GeneralJournalDocuments = new QueryableDomainServiceCollectionView<GeneralJournalDocument>(Context,
-                getGeneralJournalDocumentsQuery);
-            GeneralJournalDocuments.PageSize = 10;
-            GeneralJournalDocuments.AutoLoad = true;
-            GeneralJournalDocuments.LoadedData += (sender, args) =>
-            {
-                if (args.HasError)
-                {
-                    MessageBox.Show(args.Error.ToString(), "Load Error", MessageBoxButton.OK);
-                    args.MarkErrorAsHandled();
-                }
-            };
-            GeneralJournalDocuments.SubmittedChanges += _generalJournalDocuments_SubmittedChanges;
-            GeneralJournalDocuments.PropertyChanged += GeneralJournalDocuments_PropertyChanged;
 
             this.AddNewCommand = new DelegateCommand(this.OnAddNewCommandExecuted, AddNewCommandCanExecuted);
             this.SubmitChangesCommand = new DelegateCommand(OnSubmitChangesExcuted, SubmitChangesCommandCanExecute);
@@ -111,14 +84,6 @@ namespace MyERP.Modules.Financial.ViewModels
 
         #endregion
 
-        void _generalJournalDocuments_SubmittedChanges(object sender, Telerik.Windows.Controls.DomainServices.DomainServiceSubmittedChangesEventArgs e)
-        {
-            if (e.HasError)
-            {
-                MessageBox.Show(e.Error.ToString(), "Submit Error", MessageBoxButton.OK);
-                e.MarkErrorAsHandled();
-            }
-        }
 
         void GeneralJournalDocuments_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -143,37 +108,34 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private bool AddNewCommandCanExecuted()
         {
-            return !this.GeneralJournalDocuments.HasChanges;
+            return true;
         }
 
         private void OnAddNewCommandExecuted()
         {
-            GeneralJournalDocuments.AddNew();
+            
         }
 
         private bool SubmitChangesCommandCanExecute()
         {
-            return this.GeneralJournalDocuments.HasChanges;
+            return true;
         }
 
         private void OnRejectChangesExcuted()
         {
-            this.GeneralJournalDocuments.RejectChanges();
         }
 
         private void OnSubmitChangesExcuted()
         {
-            this.GeneralJournalDocuments.SubmitChanges();
         }
 
         private bool RefreshCommandCanExecute()
         {
-            return this.GeneralJournalDocuments.CanLoad;
+            return true;
         }
 
         private void OnRefreshExcuted()
         {
-            this.GeneralJournalDocuments.Load();
         }
 
         private bool DeleteCommandCanExecute()
@@ -196,8 +158,8 @@ namespace MyERP.Modules.Financial.ViewModels
                 return false;
 
             //Neu co thay doi thi khong cho dong cua so, bat buoc phai luu hay undo
-            if (this.GeneralJournalDocuments.HasChanges)
-                return false;
+            //if (this.GeneralJournalDocuments.HasChanges)
+            //    return false;
 
             return true;
         }

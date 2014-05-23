@@ -22,14 +22,13 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[NamingSettings(SourceStrategy = NamingSourceStrategy.Property, ResolveReservedWords = true, UseDelimitedSQL = true, WordBreak = "_")]
 	public partial class EntitiesModel : OpenAccessContext, IEntitiesModelUnitOfWork
 	{
 		private static string connectionStringName = @"Connection";
 			
 		private static BackendConfiguration backend = GetBackendConfiguration();
 				
-		private static MetadataSource metadataSource = AttributesMetadataSource.FromContext(typeof(EntitiesModel));
+		private static MetadataSource metadataSource = XmlMetadataSource.FromAssemblyResource("MyERPDataModel.rlinq");
 		
 		public EntitiesModel()
 			:base(connectionStringName, backend, metadataSource)

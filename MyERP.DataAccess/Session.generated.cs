@@ -22,13 +22,9 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("session")]
-	[KeyGenerator(KeyGenerator.Guid)]
 	public partial class Session
 	{
 		private Guid _id;
-		[Column("id", OpenAccessType = OpenAccessType.Guid, IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_id")]
 		public virtual Guid Id
 		{
 			get
@@ -42,8 +38,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _userId;
-		[Column("user_id", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_userId")]
 		public virtual Guid UserId
 		{
 			get
@@ -57,8 +51,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private bool _expire;
-		[Column("expire", OpenAccessType = OpenAccessType.Bit, IsNullable = true, Length = 0, Scale = 0, SqlType = "bool", Converter = "OpenAccessRuntime.Data.BooleanConverter")]
-		[Storage("_expire")]
 		public virtual bool Expire
 		{
 			get
@@ -72,8 +64,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime? _workingDate;
-		[Column("working_date", OpenAccessType = OpenAccessType.DateTime, Length = 0, Scale = 0, SqlType = "date", Converter = "OpenAccessRuntime.Data.PostgresTimestampTZConverter")]
-		[Storage("_workingDate")]
 		public virtual DateTime? WorkingDate
 		{
 			get
@@ -87,8 +77,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid? _organizationId;
-		[Column("organization_id", OpenAccessType = OpenAccessType.Guid, IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_organizationId")]
 		public virtual Guid? OrganizationId
 		{
 			get
@@ -102,8 +90,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private DateTime _lastTime;
-		[Column("last_time", OpenAccessType = OpenAccessType.DateTime, Length = 0, Scale = 0, SqlType = "timestamp", Converter = "OpenAccessRuntime.Data.PostgresTimestampTZConverter")]
-		[Storage("_lastTime")]
 		public virtual DateTime LastTime
 		{
 			get
@@ -117,8 +103,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid? _warehouseId;
-		[Column("warehouse_id", OpenAccessType = OpenAccessType.Guid, IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_warehouseId")]
 		public virtual Guid? WarehouseId
 		{
 			get
@@ -132,8 +116,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Guid _clientId;
-		[Column("client_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get
@@ -147,8 +129,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
-		[Storage("_client")]
 		public virtual Client Client
 		{
 			get
@@ -162,8 +142,6 @@ namespace MyERP.DataAccess
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
-		[Storage("_organization")]
 		public virtual Organization Organization
 		{
 			get
