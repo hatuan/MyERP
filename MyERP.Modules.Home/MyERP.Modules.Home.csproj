@@ -149,6 +149,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\MyERP.DataAccess\Module\ModuleName.cs">
+      <Link>ModuleName.cs</Link>
+    </Compile>
     <Compile Include="Home.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HomeWindow.xaml.cs">

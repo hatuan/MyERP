@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
@@ -10,7 +10,6 @@ using MyERP.Infrastructure.ViewModels;
 using MyERP.Repositories;
 using MyERP.Repository.MyERPService;
 using MyERP.ViewModels;
-using Telerik.Windows.Data;
 
 namespace MyERP.Modules.Financial.ViewModels
 {
@@ -77,11 +76,15 @@ namespace MyERP.Modules.Financial.ViewModels
             }
         }
 
-        private ObservableItemCollection<Account> _accounts;
-        public ObservableItemCollection<Account> Accounts
+        private ObservableCollection<Account> _accounts;
+        public ObservableCollection<Account> Accounts
         {
             get { return this._accounts; }
-            set { _accounts = value; }
+            set
+            {
+                _accounts = value;
+                this.RaisePropertyChanged("Accounts");
+            }
         }
         
         public bool IsBusy
@@ -181,6 +184,8 @@ namespace MyERP.Modules.Financial.ViewModels
         {
             base.OnImportsSatisfied();
 
+            AccountRepository.GetAccounts(result => this.Accounts = new ObservableCollection<Account>(result));
+            
             this.AddNewCommand = new DelegateCommand(OnAddNewCommandExecuted, AddNewCommandCanExecute);
             this.SubmitChangesCommand = new DelegateCommand(OnSubmitChangesExcuted, SubmitChangesCommandCanExecute);
             this.RejectChangesCommand = new DelegateCommand(OnRejectChangesExcuted, SubmitChangesCommandCanExecute);

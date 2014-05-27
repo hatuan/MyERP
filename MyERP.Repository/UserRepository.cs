@@ -49,10 +49,6 @@ namespace MyERP.Repositories
             base.AuthHeader = authHeader;
         }
 
-        public void GetUserByUserNameAndPassword(String userName, String pass)
-        {
-        }
-
         public void GetUserByUserName(String name, Action<User> callback)
         {
             DataServiceQuery<User> query = (DataServiceQuery<User>) from user in Container.Users
@@ -66,12 +62,5 @@ namespace MyERP.Repositories
                 UIThread.Invoke(() =>callback(response.FirstOrDefault()));
             }, query);
         }
-
-        //private async Task GetGizmosSvcAsync()
-        //{
-        //    var gizmoService = new GizmoService();
-        //    GizmosGridView.DataSource = await gizmoService.GetGizmosAsync();
-        //    GizmosGridView.DataBind();
-        //}
     }
 }

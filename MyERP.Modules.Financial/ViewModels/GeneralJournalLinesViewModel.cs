@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.Composition;
-using System.Data.Services.Client;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;

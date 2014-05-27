@@ -6,7 +6,7 @@ namespace MyERP.Repositories
 {
     public abstract class RepositoryBase
     {
-        private static Container container = new Container(new Uri("/MyERP.Web/odata", UriKind.Relative));
+        private static readonly Container container = new Container(new Uri("/MyERP.Web/odata", UriKind.Relative));
 
         protected RepositoryBase()
         {

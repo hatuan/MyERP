@@ -161,14 +161,13 @@
     <Content Include="ClientBin\Telerik.Windows.Controls.Data.zip" />
     <Content Include="ClientBin\Microsoft.CSharp.zip" />
     <Content Include="ClientBin\System.ComponentModel.Composition.Initialization.zip" />
-    <Content Include="ClientBin\System.ServiceModel.DomainServices.Client.zip" />
-    <Content Include="ClientBin\System.ServiceModel.DomainServices.Client.Web.zip" />
     <Content Include="ClientBin\System.ServiceModel.Web.Extensions.zip" />
     <Content Include="ClientBin\System.Windows.Controls.zip" />
     <Content Include="ClientBin\Telerik.Windows.Controls.RibbonView.zip" />
     <Content Include="ClientBin\Telerik.Windows.Controls.DomainServices.zip" />
     <Content Include="ClientBin\System.Data.Services.Client.zip" />
     <Content Include="ClientBin\Telerik.Windows.Controls.DataServices.zip" />
+    <Content Include="ClientBin\System.ServiceModel.DomainServices.Client.zip" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
