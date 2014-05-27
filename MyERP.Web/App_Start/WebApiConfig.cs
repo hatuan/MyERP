@@ -12,6 +12,12 @@ namespace MyERP.Web
     {
         public static void Register(HttpConfiguration config)
         {
+            config.Routes.MapHttpRoute(
+                name: "Auth",
+                routeTemplate: "auth",
+                defaults: new { controller = "auth" }
+            );
+
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             builder.EntitySet<Account>("Accounts");
             builder.EntitySet<BusinessPartnerGroup>("BusinessPartnerGroups");
@@ -38,7 +44,8 @@ namespace MyERP.Web
             //ActionConfiguration rateProduct = builder.Entity<Product>().Action("RateProduct");
             //rateProduct.Parameter<int>("Rating");
             //rateProduct.Returns<double>();
-            
+
+            config.Filters.Add(new MembershipHttpAuthorizeAttribute());
             config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel());
             config.EnableQuerySupport();
         }

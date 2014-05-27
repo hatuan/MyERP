@@ -15,7 +15,7 @@ namespace MyERP.Web
     /// <summary>
     /// Web API Controller for Users entity defined in MyERP.DataAccess.EntitiesModel data model
     /// </summary>
-    [MembershipHttpAuthorizeAttribute]
+    
     public partial class UsersController : OpenAccessBaseApiController<MyERP.DataAccess.User, MyERP.DataAccess.EntitiesModel>
     {
         /// <summary>

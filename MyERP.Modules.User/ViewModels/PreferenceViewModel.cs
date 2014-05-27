@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Windows.Input;
 using MyERP.Infrastructure;
 using Microsoft.Practices.Prism.Regions;
@@ -34,12 +37,11 @@ namespace MyERP.Modules.User.ViewModels
         [Import]
         public IRegionManager RegionManager { get; set; }
 
-        private QueryableCollectionView _organizations;
-        public QueryableCollectionView Organizations
+        private IEnumerable<Organization> _organizations = Enumerable.Empty<Organization>();
+        public IEnumerable<Organization> Organizations
         {
             get
             {
-                
                 return this._organizations;
             }
             set

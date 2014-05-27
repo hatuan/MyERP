@@ -143,6 +143,7 @@
     <Compile Include="IView.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="SessionManager.cs" />
+    <Compile Include="UIThread.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="Extensions\IRegionExtensions.cs" />
     <Compile Include="Extensions\PresentationFrameworkCollectionExtensions.cs" />

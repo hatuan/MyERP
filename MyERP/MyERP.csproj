@@ -179,10 +179,6 @@
       <Project>{6a8f28dd-145c-44a7-9c26-bc34c743119e}</Project>
       <Name>MyERP.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MyERP.Repository\MyERP.Repository.csproj">
-      <Project>{d50d0a5b-2d82-4786-a834-a2579754ea12}</Project>
-      <Name>MyERP.Repository</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MyERP.Theme\MyERP.Theme.csproj">
       <Project>{20ac33d9-e8eb-4d60-83de-069c101a4b54}</Project>
       <Name>MyERP.Theme</Name>

@@ -17,7 +17,6 @@ namespace MyERP.Web
     /// <summary>
     /// Web API Controller for Accounts entity defined in MyERP.DataAccess.EntitiesModel data model
     /// </summary>
-    [MembershipHttpAuthorizeAttribute]
     public partial class AccountsController : OpenAccessBaseApiController<MyERP.DataAccess.Account, MyERP.DataAccess.EntitiesModel>
     {
         /// <summary>
@@ -40,14 +39,6 @@ namespace MyERP.Web
         }
 
         // Get all method is implemented in the base class
-
-        public SingleResult<Account> GetAccount([FromODataUri] Guid key)
-        {
-            //MyERP.DataAccess.EntitiesModel db = new EntitiesModel();
-            //return SingleResult.Create(db.Accounts.Where(c => c.Id == key).AsQueryable());
-
-            return SingleResult.Create(repository.GetAll().Where(c => c.Id == key).AsQueryable());
-        }
 
         /// <summary>
         /// Gets single instance by it's primary key

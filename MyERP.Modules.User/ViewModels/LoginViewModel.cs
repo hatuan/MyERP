@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using System.Text;
+using System.Windows;
 using System.Windows.Input;
 using MyERP.Infrastructure;
 using Microsoft.Practices.Prism.Regions;
@@ -56,40 +58,30 @@ namespace MyERP.Modules.User.ViewModels
             
             IsBusyLogin = true;
 
-            UserRepository.GetUserByUserNameAndPassword(UserName, passEncrypt);
+            UserRepository.Auth(UserName, passEncrypt, success =>
+            {
+                if (success)
+                {
+                    RemoveError("Password", PASSWORD_ERROR);
 
-            //LoginOperation lop = MyERP.Repositories.WebContext.Current.Authentication.Login((new LoginParameters(UserName, passEncrypt, true, null)));
-            //lop.Completed += (Authsender, args) =>
-            //{
-            //    if (!lop.HasError)
-            //    {
-            //        if (lop.LoginSuccess)
-            //        {
-            //            RemoveError("Password", PASSWORD_ERROR);
-                        
-            //            SessionManager.Session.Clear();
-            //            SessionManager.Session.Add("SessionId", Guid.NewGuid());
+                    SessionManager.Session.Clear();
+                    SessionManager.Session.Add("SessionId", Guid.NewGuid());
 
-            //            UserRepository.GetUserByUserName(UserName,
-            //                user =>
-            //                {
-            //                    LoginSuccessfully();
-            //                });
-            //        }
-            //        else
-            //        {
-            //            AddError("Password", PASSWORD_ERROR, false);
-            //        }
-                  
-            //    }
-            //    else
-            //    {
-            //        AddError("Password", lop.Error.Message, false);
-            //        lop.MarkErrorAsHandled();
-            //    }
+                    //Set AuthHeader 
+                    var buffer = Encoding.UTF8.GetBytes(String.Format("{0}:{1}", UserName, passEncrypt));
+                    UserRepository.SetAuthHeader(String.Format("Basic {0}", Convert.ToBase64String(buffer)));
+                    
+                    UserRepository.GetUserByUserName(UserName,
+                            user =>
+                            {
+                                SessionManager.Session.Add("User", user);
+                                LoginSuccessfully();
+                            });
+                }
+                else AddError("Password", PASSWORD_ERROR, false);
 
-            //    IsBusyLogin = false;
-            //};
+                IsBusyLogin = false;
+            });
         }
 
         private String _userName = String.Empty;

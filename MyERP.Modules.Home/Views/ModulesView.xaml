@@ -228,7 +228,7 @@
 								<TextBlock Text="cash" FontFamily="Segoe UI Light" FontSize="15" Foreground="{StaticResource AccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0"/>
 								<Rectangle Fill="{StaticResource StrongBrush}" Height="1" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Top" Margin="8,0"/>
 								<telerik:RadUniformGrid Rows="1" Columns="3" Grid.Row="2">
-									<Grid x:Name="generalLeaderJournalsGrid1" MinHeight="150" Margin="8,8,0,0">
+									<Grid x:Name="cashJournalsGrid" MinHeight="150" Margin="8,8,0,0">
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="Auto"/>
 											<ColumnDefinition Width="Auto"/>
@@ -244,7 +244,7 @@
 
 										<TextBlock Grid.Column="2" Text="journals" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
 										<!--ItemsControl -->
-										<ItemsControl x:Name="generalLeaderJournalsItemsControl1" ItemsSource="{Binding GeneralLeaderJournals}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+										<ItemsControl x:Name="cashJournalsItemsControl" ItemsSource="{Binding CashJournals}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
 													<Grid x:Name="grid" Margin="0" Height="24">
@@ -290,7 +290,7 @@
                         
 									</Grid>
 					
-									<Grid x:Name="generalLeaderReportsGrid1" MinHeight="150" Margin="8,8,0,0">
+									<Grid x:Name="cashReportsGrid" MinHeight="150" Margin="8,8,0,0">
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="Auto"/>
 											<ColumnDefinition Width="Auto"/>
@@ -306,7 +306,7 @@
 
 										<TextBlock Grid.Column="2" Text="reports" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
 										<!--ItemsControl -->
-										<ItemsControl x:Name="generalLeaderReportsItemsControl1" ItemsSource="{Binding GeneralLeaderReports}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+										<ItemsControl x:Name="cashReportsItemsControl" ItemsSource="{Binding CashReports}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
 													<Grid x:Name="grid" Margin="0" Height="24">
@@ -351,7 +351,7 @@
 										</ItemsControl>
 						
 									</Grid>
-									<Grid x:Name="generalLeaderSetupGrid1" MinHeight="150" Margin="8,8,8,0">
+									<Grid x:Name="cashSetupGrid" MinHeight="150" Margin="8,8,8,0">
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="Auto"/>
 											<ColumnDefinition Width="Auto"/>
@@ -367,7 +367,7 @@
 
 										<TextBlock Grid.Column="2" Text="setup" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
 										<!--ItemsControl -->
-										<ItemsControl x:Name="generalLeaderSetupItemsControl1" ItemsSource="{Binding GeneralLeaderSetup}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+										<ItemsControl x:Name="cashSetupItemsControl" ItemsSource="{Binding CashSetups}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
 													<Grid x:Name="grid" Margin="0" Height="24">
@@ -441,7 +441,7 @@
 
 										<TextBlock Grid.Column="2" Text="journals" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
 										<!--ItemsControl -->
-										<ItemsControl x:Name="generalLeaderJournalsItemsControl2" ItemsSource="{Binding GeneralLeaderJournals}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+										<ItemsControl x:Name="costJournalsItemsControl" ItemsSource="{Binding CostJournals}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
 													<Grid x:Name="grid" Margin="0" Height="24">
@@ -487,7 +487,7 @@
                         
 									</Grid>
 					
-									<Grid x:Name="generalLeaderReportsGrid2" MinHeight="150" Margin="8,8,0,0">
+									<Grid x:Name="costReportsGrid" MinHeight="150" Margin="8,8,0,0">
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="Auto"/>
 											<ColumnDefinition Width="Auto"/>
@@ -503,7 +503,7 @@
 
 										<TextBlock Grid.Column="2" Text="reports" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
 										<!--ItemsControl -->
-										<ItemsControl x:Name="generalLeaderReportsItemsControl2" ItemsSource="{Binding GeneralLeaderReports}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+										<ItemsControl x:Name="costReportsItemsControl" ItemsSource="{Binding CostReports}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
 													<Grid x:Name="grid" Margin="0" Height="24">
@@ -548,7 +548,7 @@
 										</ItemsControl>
 						
 									</Grid>
-									<Grid x:Name="generalLeaderSetupGrid2" MinHeight="150" Margin="8,8,8,0">
+									<Grid x:Name="costSetupGrid" MinHeight="150" Margin="8,8,8,0">
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="Auto"/>
 											<ColumnDefinition Width="Auto"/>
@@ -564,7 +564,7 @@
 
 										<TextBlock Grid.Column="2" Text="setup" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
 										<!--ItemsControl -->
-										<ItemsControl x:Name="generalLeaderSetupItemsControl2" ItemsSource="{Binding GeneralLeaderSetup}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+										<ItemsControl x:Name="costSetupItemsControl" ItemsSource="{Binding CostSetup}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
 													<Grid x:Name="grid" Margin="0" Height="24">
@@ -622,7 +622,7 @@
 								<TextBlock Text="fix assets" FontFamily="Segoe UI Light" FontSize="15" Foreground="{StaticResource AccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0"/>
 								<Rectangle Fill="{StaticResource StrongBrush}" Height="1" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Top" Margin="8,0,8,-1"/>
 								<telerik:RadUniformGrid Rows="1" Columns="3" Grid.Row="2">
-									<Grid x:Name="generalLeaderJournalsGrid3" MinHeight="150" Margin="8,8,0,0">
+									<Grid x:Name="fixAssetJournalsGrid" MinHeight="150" Margin="8,8,0,0">
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="Auto"/>
 											<ColumnDefinition Width="Auto"/>
@@ -638,7 +638,7 @@
 
 										<TextBlock Grid.Column="2" Text="journals" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
 										<!--ItemsControl -->
-										<ItemsControl x:Name="generalLeaderJournalsItemsControl3" ItemsSource="{Binding GeneralLeaderJournals}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+										<ItemsControl x:Name="fixassetJournalsItemsControl" ItemsSource="{Binding FixAssetJournals}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
 													<Grid x:Name="grid" Margin="0" Height="24">
@@ -684,7 +684,7 @@
                         
 									</Grid>
 					
-									<Grid x:Name="generalLeaderReportsGrid3" MinHeight="150" Margin="8,8,0,0">
+									<Grid x:Name="fixassetReportsGrid" MinHeight="150" Margin="8,8,0,0">
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="Auto"/>
 											<ColumnDefinition Width="Auto"/>
@@ -700,7 +700,7 @@
 
 										<TextBlock Grid.Column="2" Text="reports" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
 										<!--ItemsControl -->
-										<ItemsControl x:Name="generalLeaderReportsItemsControl3" ItemsSource="{Binding GeneralLeaderReports}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+										<ItemsControl x:Name="fixassetReportsItemsControl" ItemsSource="{Binding FixAssetReports}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
 													<Grid x:Name="grid" Margin="0" Height="24">
@@ -745,7 +745,7 @@
 										</ItemsControl>
 						
 									</Grid>
-									<Grid x:Name="generalLeaderSetupGrid3" MinHeight="150" Margin="8,8,8,0">
+									<Grid x:Name="fixassetSetupGrid" MinHeight="150" Margin="8,8,8,0">
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="Auto"/>
 											<ColumnDefinition Width="Auto"/>
@@ -761,7 +761,7 @@
 
 										<TextBlock Grid.Column="2" Text="setup" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
 										<!--ItemsControl -->
-										<ItemsControl x:Name="generalLeaderSetupItemsControl3" ItemsSource="{Binding GeneralLeaderSetup}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+										<ItemsControl x:Name="fixassetSetupItemsControl" ItemsSource="{Binding FixAssetSetup}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
 													<Grid x:Name="grid" Margin="0" Height="24">
@@ -813,6 +813,7 @@
 				</Grid>
 			</DataTemplate>
 
+            <!-- Dashboard -->
         	<DataTemplate x:Key="DashboardRadFluidLargeContentDataTemplate">
 				<Grid>
 					<Grid.RowDefinitions>
@@ -995,7 +996,8 @@
 					</telerik:RadUniformGrid>
 				</Grid>
         	</DataTemplate>
-
+            
+            <!-- Sale -->
         	<DataTemplate x:Key="SalesRadFluidLargeContentDataTemplate">
 				<Grid>
 					<Grid.ColumnDefinitions>
@@ -1032,7 +1034,7 @@
 
 										<TextBlock Grid.Column="2" Text="journals" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
 										<!--ItemsControl -->
-										<ItemsControl x:Name="salesJournalsItemsControl" ItemsSource="{Binding GeneralLeaderJournals}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+										<ItemsControl x:Name="salesJournalsItemsControl" ItemsSource="{Binding SaleJournals}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
 													<Grid x:Name="grid" Margin="0" Height="24">
@@ -1094,7 +1096,7 @@
 
 										<TextBlock Grid.Column="2" Text="reports" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
 										<!--ItemsControl -->
-										<ItemsControl x:Name="salesReportsItemsControl" ItemsSource="{Binding GeneralLeaderReports}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+										<ItemsControl x:Name="salesReportsItemsControl" ItemsSource="{Binding SaleReports}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
 													<Grid x:Name="grid" Margin="0" Height="24">
@@ -1155,7 +1157,7 @@
 
 										<TextBlock Grid.Column="2" Text="setup" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
 										<!--ItemsControl -->
-										<ItemsControl x:Name="salesSetupItemsControl" ItemsSource="{Binding GeneralLeaderSetup}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+										<ItemsControl x:Name="salesSetupItemsControl" ItemsSource="{Binding SaleSetup}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
 													<Grid x:Name="grid" Margin="0" Height="24">
@@ -1206,7 +1208,8 @@
 					</ScrollViewer>
 				</Grid>
         	</DataTemplate>
-            
+
+            <!-- Puschase -->
         	<DataTemplate x:Key="PuschaseRadFluidLargeContentDataTemplate">
         		<Grid>
         			<Grid.ColumnDefinitions>
@@ -1214,8 +1217,8 @@
         			</Grid.ColumnDefinitions>
         			<ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
         				<StackPanel Orientation="Horizontal">
-									
-							<!-- sales -->
+
+                            <!-- Puschase -->
         					<Grid MinWidth="800">
         						<Grid.RowDefinitions>
         							<RowDefinition Height="0"/>
@@ -1243,7 +1246,7 @@
 
         								<TextBlock Grid.Column="2" Text="journals" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
 										<!--ItemsControl -->
-        								<ItemsControl x:Name="salesJournalsItemsControl" ItemsSource="{Binding GeneralLeaderJournals}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+        								<ItemsControl x:Name="puschaseJournalsItemsControl" ItemsSource="{Binding PuschaseJournals}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
         									<ItemsControl.ItemTemplate>
         										<DataTemplate>
         											<Grid x:Name="grid" Margin="0" Height="24">
@@ -1289,7 +1292,7 @@
                         
         							</Grid>
 					
-        							<Grid x:Name="salesReportsGrid" MinHeight="150" Margin="8,8,0,0">
+        							<Grid x:Name="puschaseReportsGrid" MinHeight="150" Margin="8,8,0,0">
         								<Grid.ColumnDefinitions>
         									<ColumnDefinition Width="Auto"/>
         									<ColumnDefinition Width="Auto"/>
@@ -1305,7 +1308,7 @@
 
         								<TextBlock Grid.Column="2" Text="reports" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
 										<!--ItemsControl -->
-        								<ItemsControl x:Name="salesReportsItemsControl" ItemsSource="{Binding GeneralLeaderReports}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+        								<ItemsControl x:Name="puschaseReportsItemsControl" ItemsSource="{Binding PuschaseReports}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
         									<ItemsControl.ItemTemplate>
         										<DataTemplate>
         											<Grid x:Name="grid" Margin="0" Height="24">
@@ -1350,7 +1353,7 @@
         								</ItemsControl>
 						
         							</Grid>
-        							<Grid x:Name="salesSetupGrid" MinHeight="150" Margin="8,8,8,0">
+        							<Grid x:Name="puschaseSetupGrid" MinHeight="150" Margin="8,8,8,0">
         								<Grid.ColumnDefinitions>
         									<ColumnDefinition Width="Auto"/>
         									<ColumnDefinition Width="Auto"/>
@@ -1366,7 +1369,7 @@
 
         								<TextBlock Grid.Column="2" Text="setup" FontFamily="Segoe UI Light" FontSize="25" Foreground="{StaticResource AccentBrush}" d:LayoutOverrides="Width" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-10,0,0"/>
 										<!--ItemsControl -->
-        								<ItemsControl x:Name="salesSetupItemsControl" ItemsSource="{Binding GeneralLeaderSetup}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
+        								<ItemsControl x:Name="puschaseSetupItemsControl" ItemsSource="{Binding PuschaseSetup}" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,0">
         									<ItemsControl.ItemTemplate>
         										<DataTemplate>
         											<Grid x:Name="grid" Margin="0" Height="24">
@@ -1417,7 +1420,8 @@
         			</ScrollViewer>
         		</Grid>
         	</DataTemplate>
-
+            
+            <!-- MASTER -->
             <DataTemplate x:Key="MasterRadFluidLargeContentDataTemplate">
                 <Grid>
                     <Grid.ColumnDefinitions>

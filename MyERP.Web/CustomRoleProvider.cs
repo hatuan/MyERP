@@ -11,7 +11,7 @@ namespace MyERP.Web
         public override string[] GetRolesForUser(string username)
         {
             if (username == "demo" || username == "admin")
-                return new string[] {"Manager"};
+                return new string[] {"Manager", "All"};
             else 
                 return new string[]{};
         }

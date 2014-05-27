@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Data.Services.Client;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 using System.Text;
+using MyERP.Infrastructure;
+using MyERP.Repository.MyERPService;
 
 
 namespace MyERP.Repositories
@@ -18,38 +19,59 @@ namespace MyERP.Repositories
 
         }
 
+        public void Auth(String name, String password, Action<bool> callback)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(new Uri(String.Format("http://localhost/MyERP.Web/auth?name={0}&password={1}", name, password)));
+            request.Method = "GET";
+
+            request.BeginGetResponse(result =>
+            {
+                try
+                {
+                    HttpWebRequest _request = (HttpWebRequest) result.AsyncState;
+                    HttpWebResponse _response = (HttpWebResponse) _request.EndGetResponse(result);
+
+                    if (_response.StatusCode == HttpStatusCode.Unauthorized)
+                        UIThread.Invoke(() =>callback(false));
+                    else
+                        UIThread.Invoke(() =>callback(true));
+                }
+                catch (Exception)
+                {
+                    UIThread.Invoke(() => callback(false));
+                }
+
+            }, request);
+        }
+
+        public void SetAuthHeader(String authHeader)
+        {
+            base.AuthHeader = authHeader;
+        }
+
         public void GetUserByUserNameAndPassword(String userName, String pass)
         {
-            //using (HttpClientHandler handler = new HttpClientHandler())
-            //{
-            //    handler.Credentials = new NetworkCredential("username", "password");
-
-            //    HttpClient client = new HttpClient(handler);
-            //    Container.Credentials = new NetworkCredential(userName, pass);
-            //    var task = client.GetAsync("https://localhost:44300/api/values");
-            //    if (task.Result.StatusCode == HttpStatusCode.Unauthorized)
-            //    {
-            //        Console.WriteLine("wrong credentials");
-            //    }
-            //    else
-            //    {
-            //        task.Result.EnsureSuccessStatusCode();
-            //        Console.WriteLine(task.Result.Content.ReadAsAsync<string>().Result);
-            //    }
-
-            //    Container.Credentials = new NetworkCredential(userName, pass);
-            //    var task = Container.Users.Where(u => u.Name == userName);
-
-            //}
-
-            
-            Container.Credentials = new NetworkCredential(userName, pass);
-            var task = Container.Users.Where(u => u.Name == userName);
         }
 
-        public void GetUserByUserName(String userName)
+        public void GetUserByUserName(String name, Action<User> callback)
         {
+            DataServiceQuery<User> query = (DataServiceQuery<User>) from user in Container.Users
+                                           where user.Name == name
+                                           select user;
+            query.BeginExecute(result =>
+            {
+                var request = result.AsyncState as DataServiceQuery<User>;
+                var response = request.EndExecute(result);
 
+                UIThread.Invoke(() =>callback(response.FirstOrDefault()));
+            }, query);
         }
+
+        //private async Task GetGizmosSvcAsync()
+        //{
+        //    var gizmoService = new GizmoService();
+        //    GizmosGridView.DataSource = await gizmoService.GetGizmosAsync();
+        //    GizmosGridView.DataBind();
+        //}
     }
 }

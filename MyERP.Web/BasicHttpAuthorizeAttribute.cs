@@ -49,16 +49,16 @@ namespace MyERP.Web
         }
 
         private static bool AuthorizationDisabled(HttpActionContext actionContext)
-    {
-        //support new AllowAnonymousAttribute
-        if (!actionContext.ActionDescriptor
-            .GetCustomAttributes<AllowAnonymousAttribute>().Any())
-            return actionContext.ControllerContext
-                .ControllerDescriptor
-                .GetCustomAttributes<AllowAnonymousAttribute>().Any();
-        else
-            return true;
-    }
+        {
+            //support new AllowAnonymousAttribute
+            if (!actionContext.ActionDescriptor
+                .GetCustomAttributes<AllowAnonymousAttribute>().Any())
+                return actionContext.ControllerContext
+                    .ControllerDescriptor
+                    .GetCustomAttributes<AllowAnonymousAttribute>().Any();
+            else
+                return true;
+        }
 
         private bool AuthorizeRequest(HttpRequestMessage request)
         {
@@ -104,7 +104,7 @@ namespace MyERP.Web
 
         private string[] ParseAuthorizationHeader(string authHeader)
         {
-            string[] credentials = Encoding.ASCII.GetString(Convert
+            string[] credentials = Encoding.UTF8.GetString(Convert
                                                             .FromBase64String(authHeader))
                                                             .Split(
                                                             new[] { ':' });

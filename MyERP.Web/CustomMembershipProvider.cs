@@ -13,8 +13,15 @@ namespace MyERP.Web
         {
             using (EntitiesModel context = new EntitiesModel())
             {
-                var user = context.Users.FirstOrDefault(u => u.Name == username && u.Password == password);
-                return user != null;
+                try
+                {
+                    var user = context.Users.FirstOrDefault(u => u.Name == username && u.Password == password);
+                    return user != null;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
             }
         }
 
