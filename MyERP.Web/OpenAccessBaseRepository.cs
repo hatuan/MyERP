@@ -18,6 +18,8 @@ namespace MyERP.Web
         TEntity AddNew(TEntity entity);
         TEntity Update(TEntity entity);
         void Delete(TEntity entity);
+
+        TContext DataContext { get; }
     }
 
     public abstract partial class OpenAccessBaseRepository<TEntity, TContext> : IOpenAccessBaseRepository<TEntity, TContext>
@@ -25,6 +27,11 @@ namespace MyERP.Web
     {
         protected TContext dataContext = new TContext();
         protected FetchStrategy fetchStrategy = new FetchStrategy();
+
+        public TContext DataContext
+        {
+            get { return dataContext; }
+        }
 
         public virtual IQueryable<TEntity> GetAll()
         {

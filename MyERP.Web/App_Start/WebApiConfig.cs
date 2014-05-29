@@ -43,9 +43,10 @@ namespace MyERP.Web
             //tutorsEntitySet.EntityType.Ignore(s => s.UserName);
             //tutorsEntitySet.EntityType.Ignore(s => s.Password);
 
-            //ActionConfiguration rateProduct = builder.Entity<Product>().Action("RateProduct");
-            //rateProduct.Parameter<int>("Rating");
-            //rateProduct.Returns<double>();
+            //Declare the Action in the Entity Data Model
+            ActionConfiguration sequenceNextVal = builder.Entity<NumberSequence>().Action("SequenceNextVal");
+            sequenceNextVal.Parameter<Guid>("key");
+            sequenceNextVal.Returns<int>();
 
             config.Filters.Add(new MembershipHttpAuthorizeAttribute());
             config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel());

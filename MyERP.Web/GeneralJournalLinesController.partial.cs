@@ -6,13 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.OData;
 using MyERP.DataAccess;
 using Telerik.OpenAccess;
-using Telerik.OpenAccess.Data.Common;
 
 namespace MyERP.Web
 {
@@ -20,13 +18,12 @@ namespace MyERP.Web
     /// Web API Controller for Accounts entity defined in MyERP.DataAccess.EntitiesModel data model
     /// </summary>
 
-    public partial class NumberSequencesController 
+    public partial class GeneralJournalLinesController 
     {
-        public SingleResult<NumberSequence> GetNumberSequence([FromODataUri] Guid key)
+        public SingleResult<GeneralJournalLine> GetGeneralJournalLine([FromODataUri] Guid key)
         {
             return SingleResult.Create(repository.GetAll().Where(c => c.Id == key).AsQueryable());
         }
-
 
         /// <summary>
         /// Updates single entity.
@@ -36,7 +33,7 @@ namespace MyERP.Web
         /// <param name="entity">Entity with the new updated values</param>
         /// <returns>HttpStatusCode.BadRequest if ID parameter does not match the ID value of the entity,
         /// or HttpStatusCode.NoContent if the operation was successful</returns>
-        public IHttpActionResult PutNumberSequence([FromODataUri] Guid key, MyERP.DataAccess.NumberSequence entity)
+        public IHttpActionResult PutGeneralJournalLine([FromODataUri] Guid key, MyERP.DataAccess.GeneralJournalLine entity)
         {
             if (!ModelState.IsValid)
             {
@@ -52,14 +49,14 @@ namespace MyERP.Web
         }
 
         [AcceptVerbs("PATCH", "MERGE")]
-        public IHttpActionResult Patch([FromODataUri] Guid key, Delta<MyERP.DataAccess.NumberSequence> patch)
+        public IHttpActionResult Patch([FromODataUri] Guid key, Delta<MyERP.DataAccess.GeneralJournalLine> patch)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            NumberSequence entity = repository.GetBy(c => c.Id == key);
+            GeneralJournalLine entity = repository.GetBy(c => c.Id == key);
             if (entity == null)
             {
                 return NotFound();
@@ -91,9 +88,9 @@ namespace MyERP.Web
         /// </summary>
         /// <param name="key">ID of the entity to delete</param>
         /// <returns>Always HttpStatusCode.OK</returns>
-        public IHttpActionResult DeleteNumberSequence([FromODataUri] Guid key)
+        public IHttpActionResult DeleteGeneralJournalLine([FromODataUri] Guid key)
         {
-            MyERP.DataAccess.NumberSequence entity = repository.GetBy(m => m.Id == key);
+            MyERP.DataAccess.GeneralJournalLine entity = repository.GetBy(m => m.Id == key);
             if (entity != null)
             {
                 repository.Delete(entity);
@@ -113,54 +110,16 @@ namespace MyERP.Web
         /// - Accepted when operation is successful or 
         /// - MethodNotAllowed if the operation is disabled for this entity or
         /// - BadRequest if the provided entity is NULL</returns>
-        public IHttpActionResult PostNumberSequence(NumberSequence entity)
+        public IHttpActionResult PostGeneralJournalLine(MyERP.DataAccess.GeneralJournalLine entity)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            try
-            {
-                string SqlQuery = String.Format("CREATE SEQUENCE {0} MINVALUE {1} MAXVALUE {2} START {3}",
-                    new object[] {entity.NoSeqName, entity.StartingNo, entity.EndingNo, entity.CurrentNo});
-                // 3. Create a new instance of the OACommand class.
-                using (var command = repository.DataContext.Connection.CreateCommand())
-                {
-                    command.CommandText = SqlQuery;
-                    command.ExecuteNonQuery();
-                }
-                NumberSequence newEntity = repository.AddNew(entity);
-                return Created(newEntity);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+            MyERP.DataAccess.GeneralJournalLine newEntity = repository.AddNew(entity);
 
-        public IHttpActionResult SequenceNextVal([FromODataUri] Guid key)
-        {
-            NumberSequence numberSequence = repository.GetAll().FirstOrDefault(c => c.Id == key);
-            if (numberSequence == null)
-            {
-                return NotFound();
-            }
-
-            int sequenceNextVal = 0;
-            // 2. Initialize the sql query.
-            string SqlQuery = String.Format("SELECT nextval('{0}')", new object[] {numberSequence.NoSeqName});
-
-            // 3. Create a new instance of the OACommand class.
-            using (var command = repository.DataContext.Connection.CreateCommand())
-            {
-                command.CommandText = SqlQuery;
-
-                // 4. Execute the command and retrieve the scalar values.
-                sequenceNextVal = Convert.ToInt32(command.ExecuteScalar());
-            }
-
-            return Ok(sequenceNextVal);
+            return Created(newEntity);
         }
     }
 }

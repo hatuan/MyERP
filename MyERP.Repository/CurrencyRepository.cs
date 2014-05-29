@@ -16,6 +16,7 @@ namespace MyERP.Repositories
             DataServiceQuery<Currency> query = (DataServiceQuery<Currency>)from currency in Container.Currencies
                                                                              .Expand(c => c.RecCreatedByUser)
                                                                              .Expand(c => c.RecModifiedByUser)
+                                                                           where currency.ClientId.Equals(SessionManager.Session["ClientId"])
                                                                            orderby currency.Code
                                                                            select currency;
 
@@ -47,7 +48,8 @@ namespace MyERP.Repositories
         {
             DataServiceQuery<Currency> query = (DataServiceQuery<Currency>)from currency in Container.Currencies
                                                                            orderby currency.Code
-                                                                           where currency.Code.StartsWith(lookupValue)
+                                                                           where currency.ClientId.Equals(SessionManager.Session["ClientId"])
+                                                                            && currency.Code.StartsWith(lookupValue)
                                                                            select currency;
 
             query.BeginExecute(result =>

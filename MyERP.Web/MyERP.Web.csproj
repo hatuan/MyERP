@@ -181,6 +181,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GeneralJournalDocumentsController.partial.cs" />
+    <Compile Include="GeneralJournalLinesController.partial.cs" />
+    <Compile Include="GeneralJournalSetupsController.partial.cs" />
     <Compile Include="MethodOverrideHandler.cs" />
     <Compile Include="NumberSequencesController.partial.cs" />
     <Compile Include="AccountsController.partial.cs" />

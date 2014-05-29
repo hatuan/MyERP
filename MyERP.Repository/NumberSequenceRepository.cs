@@ -25,6 +25,7 @@ namespace MyERP.Repositories
             DataServiceQuery<NumberSequence> query = (DataServiceQuery<NumberSequence>)from numberSequence in Container.NumberSequences
                                                                                        .Expand(c => c.RecCreatedByUser)
                                                                                        .Expand(c => c.RecModifiedByUser)
+                                                                                       where numberSequence.ClientId.Equals(SessionManager.Session["ClientId"])
                                                                                        orderby numberSequence.Code
                                                                                        select numberSequence;
 
@@ -37,11 +38,18 @@ namespace MyERP.Repositories
             }, query);
         }
 
-        public void SequenceNextVal(string sequenceName, Action<int> callback)
+        public void SequenceNextVal(Guid id, Action<int> callback)
         {
+            Uri actionUri = new Uri(this.Container.BaseUri,
+                String.Format("NumberSequences(guid'{0}')/SequenceNextVal", id)
+                );
 
+            this.Container.BeginExecute<int>(actionUri, result =>
+            {
+                var response = this.Container.EndExecute<int>(result).FirstOrDefault();
+                UIThread.Invoke(() => callback(response));
+            }, this.Container);
         }
-
-
+        
     }
 }

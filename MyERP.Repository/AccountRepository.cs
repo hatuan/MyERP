@@ -19,6 +19,7 @@ namespace MyERP.Repositories
                                               .Expand(c => c.ParentAccount)
                                               .Expand(c => c.RecCreatedByUser)
                                               .Expand(c => c.RecModifiedByUser)
+                                              where account.ClientId.Equals(SessionManager.Session["ClientId"])
                                               orderby account.Code
                                               select account;
         }
@@ -30,8 +31,9 @@ namespace MyERP.Repositories
                                                                              .Expand(c => c.ParentAccount)
                                                                              .Expand(c => c.RecCreatedByUser)
                                                                              .Expand(c => c.RecModifiedByUser)
-                                                                             orderby account.Code
-                                                                             select account;
+                                                                         where account.ClientId.Equals(SessionManager.Session["ClientId"])
+                                                                         orderby account.Code
+                                                                         select account;
 
             query.BeginExecute(result =>
             {
@@ -42,7 +44,7 @@ namespace MyERP.Repositories
             }, query);
         }
 
-        public void GetCurrencyById(Guid id, Action<Account> callback)
+        public void GetAccountById(Guid id, Action<Account> callback)
         {
             DataServiceQuery<Account> query = (DataServiceQuery<Account>)from account in Container.Accounts
                                                                          where account.Id.Equals(id)
@@ -61,7 +63,8 @@ namespace MyERP.Repositories
         {
             DataServiceQuery<Account> query = (DataServiceQuery<Account>)from account in Container.Accounts
                                                                          orderby account.Code
-                                                                         where account.Code.StartsWith(lookupValue)
+                                                                         where account.ClientId.Equals(SessionManager.Session["ClientId"])
+                                                                            && account.Code.StartsWith(lookupValue)
                                                                          select account;
 
             query.BeginExecute(result =>

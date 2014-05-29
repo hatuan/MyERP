@@ -805,6 +805,10 @@
         <EntitySet Name="PaymentTerms" EntityType="MyERP.DataAccess.PaymentTerm" />
         <EntitySet Name="Sessions" EntityType="MyERP.DataAccess.Session" />
         <EntitySet Name="Users" EntityType="MyERP.DataAccess.User" />
+        <FunctionImport Name="SequenceNextVal" ReturnType="Edm.Int32" IsBindable="true" m:IsAlwaysBindable="true">
+          <Parameter Name="bindingParameter" Type="MyERP.DataAccess.NumberSequence" />
+          <Parameter Name="key" Type="Edm.Guid" Nullable="false" />
+        </FunctionImport>
         <AssociationSet Name="MyERP_DataAccess_Account_Currency_MyERP_DataAccess_Currency_CurrencyPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Account_Currency_MyERP_DataAccess_Currency_CurrencyPartner">
           <End Role="CurrencyPartner" EntitySet="Accounts" />
           <End Role="Currency" EntitySet="Currencies" />
