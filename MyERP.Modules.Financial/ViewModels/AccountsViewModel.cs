@@ -115,7 +115,8 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void AccountPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            
+            Account entity = sender as Account;
+            AccountRepository.Update(entity);
         }
         
         public bool IsBusy { get; set; }
@@ -142,7 +143,24 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnAddNewCommandExecuted()
         {
-
+            var newId = Guid.NewGuid();
+            var newEntity = new Account()
+            {
+                OrganizationId = (SessionManager.Session["Organization"] as Organization).Id,
+                ClientId = (Guid)SessionManager.Session["ClientId"],
+                Id = newId,
+                Code = "",
+                Name = "",
+                RecModifiedById = (SessionManager.Session["User"] as User).Id,
+                RecCreatedById = (SessionManager.Session["User"] as User).Id,
+                RecModified = DateTime.Now,
+                RecCreated = DateTime.Now,
+                Status = 1,
+                Version = 1
+            };
+            this.Accounts.Add(newEntity);
+            this.AccountRepository.AddNew("Accounts", newEntity);
+            this.SelectedAccount = newEntity;
         }
 
         private bool AddNewCommandCanExecute()
@@ -158,10 +176,12 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnRejectChangesExcuted()
         {
+
         }
 
         private void OnSubmitChangesExcuted()
         {
+            AccountRepository.SaveChanges();
         }
 
         private bool RefreshCommandCanExecute()
@@ -185,8 +205,11 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnDeleteExcuted()
         {
-            if(SelectedAccount != null)
+            if (SelectedAccount != null)
+            {
+                this.AccountRepository.Delete(SelectedAccount);
                 this.Accounts.Remove(SelectedAccount);
+            }
         }
 
         private bool CloseWindowCanExecute()

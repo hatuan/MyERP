@@ -21,7 +21,6 @@
         <Property Name="Id" Type="Edm.Guid" Nullable="false" />
         <Property Name="ClientId" Type="Edm.Guid" Nullable="false" />
         <Property Name="OrganizationId" Type="Edm.Guid" Nullable="false" />
-        <Property Name="StatusType" Type="Edm.String" Nullable="false" />
         <NavigationProperty Name="Currency" Relationship="MyERP.DataAccess.MyERP_DataAccess_Account_Currency_MyERP_DataAccess_Currency_CurrencyPartner" ToRole="Currency" FromRole="CurrencyPartner" />
         <NavigationProperty Name="ParentAccount" Relationship="MyERP.DataAccess.MyERP_DataAccess_Account_ParentAccount_MyERP_DataAccess_Account_ParentAccountPartner" ToRole="ParentAccount" FromRole="ParentAccountPartner" />
         <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_Account_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner" ToRole="RecModifiedByUser" FromRole="RecModifiedByUserPartner" />

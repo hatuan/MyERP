@@ -143,7 +143,8 @@ namespace MyERP.Modules.Master.ViewModels
                 Version = 1
             };
             this.NoSeries.Add(newEntity);
-            this.NumberSequenceRepository.AddNew(newEntity);
+            this.NumberSequenceRepository.AddNew("NumberSequences", newEntity);
+            this.SelectedNo = newEntity;
         }
 
         private bool AddNewCommandCanExecute()

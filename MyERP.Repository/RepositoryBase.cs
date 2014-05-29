@@ -14,7 +14,7 @@ namespace MyERP.Repositories
         {
             if (!attachedEvent)
             {
-                //container.SaveChangesDefaultOptions = SaveChangesOptions.ReplaceOnUpdate;
+                container.SaveChangesDefaultOptions = SaveChangesOptions.ReplaceOnUpdate;
                 container.SendingRequest2 += (s, e) =>
                 {
                     if (AuthHeader != null && !String.IsNullOrWhiteSpace(AuthHeader))
@@ -45,5 +45,37 @@ namespace MyERP.Repositories
             protected set{ _authHeader = value; }
         }
 
+        public virtual void SaveChanges()
+        {
+            this.Container.BeginSaveChanges(result =>
+            {
+                DataServiceResponse response = this.Container.EndSaveChanges(result);
+                foreach (ChangeOperationResponse change in response)
+                {
+                    // Get the descriptor for the entity.
+                    EntityDescriptor descriptor = change.Descriptor as EntityDescriptor;
+
+                    if (descriptor != null)
+                    {
+
+                    }
+                }
+            }, null);
+        }
+
+        public virtual void Update(object entity)
+        {
+            this.Container.UpdateObject(entity);
+        }
+
+        public virtual void Delete(object entity)
+        {
+            this.Container.DeleteObject(entity);
+        }
+
+        public virtual void AddNew(string entitySetName, object entity)
+        {
+            this.Container.AddObject(entitySetName, entity);
+        }
     }
 }

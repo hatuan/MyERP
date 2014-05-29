@@ -39,13 +39,5 @@ namespace MyERP.DataAccess
             public User RecModifiedByUser { get; set; }
 
         }
-        public AccountStatusType StatusType
-        {
-            get { return (AccountStatusType) Status; }
-            set
-            {
-                //intentionally empty
-            }
-        }
     }
 }

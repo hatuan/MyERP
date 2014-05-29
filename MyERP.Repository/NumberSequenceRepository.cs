@@ -42,28 +42,6 @@ namespace MyERP.Repositories
 
         }
 
-        public void SaveChanges()
-        {
-            this.Container.BeginSaveChanges(result =>
-            {
-                var response = this.Container.EndSaveChanges(result);
-                System.Diagnostics.Debug.WriteLine(response);
-            }, null);
-        }
 
-        public void Update(NumberSequence entity)
-        {
-            this.Container.UpdateObject(entity);
-        }
-
-        public void Delete(NumberSequence entity)
-        {
-            this.Container.DeleteObject(entity);
-        }
-
-        public void AddNew(NumberSequence entity)
-        {
-            this.Container.AddToNumberSequences(entity);
-        }
     }
 }
