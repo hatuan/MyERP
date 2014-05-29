@@ -135,10 +135,12 @@
     <Compile Include="Converters\ParameterAndValueToBooleanConverter.cs" />
     <Compile Include="Converters\ParameterAndValueToVisibilityConverter.cs" />
     <Compile Include="Converters\StatusToDataTemplateConverter.cs" />
+    <Compile Include="Extensions\ForEachExtensions.cs" />
     <Compile Include="Helpers\EntityClickedEvents.cs" />
     <Compile Include="Helpers\ResourceWrapper.cs" />
     <Compile Include="ICloseable.cs" />
     <Compile Include="IView.cs" />
+    <Compile Include="ObservableCollectionEx.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="UIThread.cs" />

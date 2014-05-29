@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
 using MyERP.Infrastructure;
+using MyERP.Infrastructure.Extensions;
 using MyERP.Infrastructure.ViewModels;
 using MyERP.Repositories;
 using MyERP.Repository.MyERPService;
@@ -18,7 +22,8 @@ namespace MyERP.Modules.Financial.ViewModels
     {
         public AccountsViewModel()
         {
-            
+            this.Accounts = new ObservableCollectionEx<Account>(true);
+
         }
 
         [Import]
@@ -76,21 +81,44 @@ namespace MyERP.Modules.Financial.ViewModels
             }
         }
 
-        private ObservableCollection<Account> _accounts;
-        public ObservableCollection<Account> Accounts
+        private ObservableCollectionEx<Account> _accounts;
+        public ObservableCollectionEx<Account> Accounts
         {
             get { return this._accounts; }
             set
             {
                 _accounts = value;
+                _accounts.CollectionChanged += AccountCollectionChanged;
                 this.RaisePropertyChanged("Accounts");
             }
         }
-        
-        public bool IsBusy
+
+        private void AccountCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            get { return false; }
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Account item in e.OldItems)
+                {
+                    //Removed items
+                    item.PropertyChanged -= AccountPropertyChanged;
+                }
+            }
+            else if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (Account item in e.NewItems)
+                {
+                    //Added items
+                    item.PropertyChanged += AccountPropertyChanged;
+                }
+            }    
         }
+
+        private void AccountPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            
+        }
+        
+        public bool IsBusy { get; set; }
         
         void _accounts_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -143,6 +171,8 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnRefreshExcuted()
         {
+            Accounts.Clear();
+            AccountRepository.GetAccounts(results => results.ForEach((item) => this.Accounts.Add(item)));
         }
 
         private bool DeleteCommandCanExecute()
@@ -183,8 +213,6 @@ namespace MyERP.Modules.Financial.ViewModels
         public override void OnImportsSatisfied()
         {
             base.OnImportsSatisfied();
-
-            AccountRepository.GetAccounts(result => this.Accounts = new ObservableCollection<Account>(result));
             
             this.AddNewCommand = new DelegateCommand(OnAddNewCommandExecuted, AddNewCommandCanExecute);
             this.SubmitChangesCommand = new DelegateCommand(OnSubmitChangesExcuted, SubmitChangesCommandCanExecute);
@@ -193,7 +221,16 @@ namespace MyERP.Modules.Financial.ViewModels
             this.DeleteCommand = new DelegateCommand(OnDeleteExcuted, DeleteCommandCanExecute);
             this.CloseWindowCommand = new DelegateCommand(OnCloseWindowExcuted, CloseWindowCanExecute);
         }
-       
+
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            base.OnNavigatedTo(navigationContext);
+            
+            Accounts.Clear();
+            AccountRepository.GetAccounts(results => results.ForEach((item) => this.Accounts.Add(item)));
+            this.RaisePropertyChanged("Accounts");
+        }
+
         #endregion
 
         public event EventHandler<EventArgs> RequestClose;

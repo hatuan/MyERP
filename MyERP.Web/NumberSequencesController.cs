@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.OData;
 using MyERP.DataAccess;
 
 namespace MyERP.Web
@@ -55,7 +56,7 @@ namespace MyERP.Web
             return entity;
         }
 
-        
+
         /// <summary>
         /// Updates single entity.
         /// </summary>
@@ -66,14 +67,14 @@ namespace MyERP.Web
         /// or HttpStatusCode.NoContent if the operation was successful</returns>
         public virtual HttpResponseMessage Put(Guid id, MyERP.DataAccess.NumberSequence entity)
         {
-                        if (entity == null ||
+            if (entity == null ||
                 id != entity.Id)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
             repository.Update(entity);
 
             return Request.CreateResponse(HttpStatusCode.NoContent);
-                    }
+        }
 
         /// <summary>
         /// Deletes an entity by it's ID

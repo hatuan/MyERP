@@ -20,7 +20,6 @@ namespace MyERP.Web
 
     public partial class AccountsController 
     {
- 
         public SingleResult<Account> GetAccount([FromODataUri] Guid key)
         {
             return SingleResult.Create(repository.GetAll().Where(c => c.Id == key).AsQueryable());

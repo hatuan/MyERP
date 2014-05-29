@@ -181,6 +181,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MethodOverrideHandler.cs" />
+    <Compile Include="NumberSequencesController.partial.cs" />
     <Compile Include="AccountsController.partial.cs" />
     <Compile Include="AccountsController.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />

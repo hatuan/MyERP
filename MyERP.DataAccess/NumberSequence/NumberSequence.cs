@@ -30,17 +30,6 @@ namespace MyERP.DataAccess
             [Association("NumberSequence-user-modified-association", "RecModifiedBy", "Id")]
             public User RecModifiedByUser { get; set; }
         }
-
-
-
-        public NumberSequenceStatusType StatusType
-        {
-            get { return (NumberSequenceStatusType)Status; }
-            set
-            {
-                //intentionally empty
-            }
-        }
     }
 
 }

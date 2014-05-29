@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Windows;
@@ -6,6 +7,7 @@ using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
 using MyERP.Infrastructure;
+using MyERP.Infrastructure.Extensions;
 using MyERP.Infrastructure.ViewModels;
 using MyERP.Repositories;
 using MyERP.Repository.MyERPService;
@@ -19,7 +21,7 @@ namespace MyERP.Modules.Master.ViewModels
     {
         public NoSeriesViewModel()
         {
-            
+            this.NoSeries = new ObservableCollectionEx<NumberSequence>(true);
         }
 
         [Import]
@@ -59,36 +61,45 @@ namespace MyERP.Modules.Master.ViewModels
             }
         }
 
-        private ObservableItemCollection<NumberSequence> _noSeries;
-        public ObservableItemCollection<NumberSequence> NoSeries
+        private ObservableCollectionEx<NumberSequence> _noSeries;
+        public ObservableCollectionEx<NumberSequence> NoSeries
         {
             get { return this._noSeries; }
-            set { _noSeries = value; }
-        }
-        
-        public bool IsBusy
-        {
-            get { return true; }
-        }
-
-        void _noSeries_LoadedData(object sender, Telerik.Windows.Controls.DomainServices.LoadedDataEventArgs e)
-        {
-            if (e.HasError)
+            set
             {
-                MessageBox.Show(e.Error.ToString(), "Load Error", MessageBoxButton.OK);
-                e.MarkErrorAsHandled();
+                _noSeries = value;
+                _noSeries.CollectionChanged += NoSeriesCollectionChanged;
+                this.RaisePropertyChanged("NoSeries");
             }
         }
-        
 
-        void _noSeries_SubmittedChanges(object sender, Telerik.Windows.Controls.DomainServices.DomainServiceSubmittedChangesEventArgs e)
+        private void NoSeriesCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (e.HasError)
+            if (e.Action == NotifyCollectionChangedAction.Remove)
             {
-                MessageBox.Show(e.Error.ToString(), "Submit Error", MessageBoxButton.OK);
-                e.MarkErrorAsHandled();
+                foreach (NumberSequence item in e.OldItems)
+                {
+                    //Removed items
+                    item.PropertyChanged -= NumberSequencePropertyChanged;
+                }
+            }
+            else if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (NumberSequence item in e.NewItems)
+                {
+                    //Added items
+                    item.PropertyChanged += NumberSequencePropertyChanged;
+                }
             }
         }
+
+        private void NumberSequencePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            NumberSequence entity = sender as NumberSequence;
+            NumberSequenceRepository.Update(entity);
+        }
+
+        public bool IsBusy { get; set; }
 
         void _noSeries_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -111,7 +122,28 @@ namespace MyERP.Modules.Master.ViewModels
 
         private void OnAddNewCommandExecuted()
         {
-
+            var newId = Guid.NewGuid();
+            var newEntity = new NumberSequence
+            {
+                OrganizationId = (SessionManager.Session["Organization"] as Organization).Id,
+                ClientId = (Guid) SessionManager.Session["ClientId"],
+                Id = newId,
+                Code = "",
+                Name = "",
+                NoSeqName = String.Format("seq_no_series_{0}", newId.ToString().Replace("-", "_")),
+                FormatNo = "",
+                StartingNo = 0,
+                EndingNo = 0,
+                CurrentNo = 0,
+                RecModifiedBy = (SessionManager.Session["User"] as User).Id,
+                RecCreatedBy = (SessionManager.Session["User"] as User).Id,
+                RecModified = DateTime.Now,
+                RecCreated = DateTime.Now,
+                Status = 1,
+                Version = 1
+            };
+            this.NoSeries.Add(newEntity);
+            this.NumberSequenceRepository.AddNew(newEntity);
         }
 
         private bool AddNewCommandCanExecute()
@@ -121,6 +153,7 @@ namespace MyERP.Modules.Master.ViewModels
         
         private void OnSubmitChangesExcuted()
         {
+            NumberSequenceRepository.SaveChanges();
         }
 
         private bool SubmitChangesCommandCanExecute()
@@ -139,6 +172,9 @@ namespace MyERP.Modules.Master.ViewModels
 
         private void OnRefreshExcuted()
         {
+            NoSeries.Clear();
+            NumberSequenceRepository.GetNumberSequences(results => results.ForEach((item) => this.NoSeries.Add(item)));
+
         }
 
         private bool DeleteCommandCanExecute()
@@ -152,7 +188,10 @@ namespace MyERP.Modules.Master.ViewModels
         private void OnDeleteExcuted()
         {
             if (SelectedNo != null)
+            {
+                this.NumberSequenceRepository.Delete(SelectedNo);
                 this.NoSeries.Remove(SelectedNo);
+            }
         }
 
         private bool CloseWindowCanExecute()
@@ -187,7 +226,14 @@ namespace MyERP.Modules.Master.ViewModels
             this.DeleteCommand = new DelegateCommand(OnDeleteExcuted, DeleteCommandCanExecute);
             this.CloseWindowCommand = new DelegateCommand(OnCloseWindowExcuted, CloseWindowCanExecute);
         }
-       
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            base.OnNavigatedTo(navigationContext);
+
+            NoSeries.Clear();
+            NumberSequenceRepository.GetNumberSequences(results => results.ForEach((item) => this.NoSeries.Add(item)));
+        }
+
         #endregion
 
         public event EventHandler<EventArgs> RequestClose;

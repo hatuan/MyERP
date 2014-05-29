@@ -15,10 +15,11 @@ namespace MyERP.Repositories
         public DataServiceQuery<Account> GetAccountsQuery()
         {
             return (DataServiceQuery<Account>)from account in Container.Accounts
-                                                                             .Expand(c => c.Currency)
-                                                                             .Expand(c => c.ParentAccount)
-                                                                             .Expand(c => c.RecCreatedByUser)
-                                                                             .Expand(c => c.RecModifiedByUser)
+                                              .Expand(c => c.Currency)
+                                              .Expand(c => c.ParentAccount)
+                                              .Expand(c => c.RecCreatedByUser)
+                                              .Expand(c => c.RecModifiedByUser)
+                                              orderby account.Code
                                               select account;
         }
 
@@ -29,7 +30,8 @@ namespace MyERP.Repositories
                                                                              .Expand(c => c.ParentAccount)
                                                                              .Expand(c => c.RecCreatedByUser)
                                                                              .Expand(c => c.RecModifiedByUser)
-                                                                       select account;
+                                                                             orderby account.Code
+                                                                             select account;
 
             query.BeginExecute(result =>
             {
@@ -40,10 +42,26 @@ namespace MyERP.Repositories
             }, query);
         }
 
+        public void GetCurrencyById(Guid id, Action<Account> callback)
+        {
+            DataServiceQuery<Account> query = (DataServiceQuery<Account>)from account in Container.Accounts
+                                                                         where account.Id.Equals(id)
+                                                                         select account;
+
+            query.BeginExecute(result =>
+            {
+                var request = result.AsyncState as DataServiceQuery<Account>;
+                var response = request.EndExecute(result);
+
+                UIThread.Invoke(() => callback(response.FirstOrDefault()));
+            }, query);
+        }
+
         public void GetAccountsByLookupValue(string lookupValue, Action<IEnumerable<Account>> callback)
         {
             DataServiceQuery<Account> query = (DataServiceQuery<Account>)from account in Container.Accounts
-                                                                         where account.Code == lookupValue
+                                                                         orderby account.Code
+                                                                         where account.Code.StartsWith(lookupValue)
                                                                          select account;
 
             query.BeginExecute(result =>

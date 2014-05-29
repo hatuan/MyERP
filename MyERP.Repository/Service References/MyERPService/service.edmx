@@ -353,7 +353,6 @@
         <Property Name="RecCreated" Type="Edm.DateTime" Nullable="false" />
         <Property Name="RecCreatedBy" Type="Edm.Guid" Nullable="false" />
         <Property Name="RecModified" Type="Edm.DateTime" Nullable="false" />
-        <Property Name="StatusType" Type="Edm.String" Nullable="false" />
         <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_NumberSequence_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
         <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_NumberSequence_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
         <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_NumberSequence_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" ToRole="RecCreatedByUser" FromRole="RecCreatedByUserPartner" />

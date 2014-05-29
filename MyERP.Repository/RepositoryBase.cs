@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Services.Client;
 using MyERP.Repository.MyERPService;
 
 
@@ -8,17 +9,24 @@ namespace MyERP.Repositories
     {
         private static readonly Container container = new Container(new Uri("/MyERP.Web/odata", UriKind.Relative));
 
+        private static bool attachedEvent = false;
         protected RepositoryBase()
         {
-            container.SendingRequest2 += (s, e) =>
+            if (!attachedEvent)
             {
-                if (AuthHeader != null && !String.IsNullOrWhiteSpace(AuthHeader))
+                //container.SaveChangesDefaultOptions = SaveChangesOptions.ReplaceOnUpdate;
+                container.SendingRequest2 += (s, e) =>
                 {
-                    e.RequestMessage.SetHeader("Authorization", AuthHeader);
-                }
-                
-                System.Diagnostics.Debug.WriteLine("{0} {1}", e.RequestMessage.Method, e.RequestMessage.Url);
-            };
+                    if (AuthHeader != null && !String.IsNullOrWhiteSpace(AuthHeader))
+                    {
+                        e.RequestMessage.SetHeader("Authorization", AuthHeader);
+                    }
+
+                    System.Diagnostics.Debug.WriteLine("{0} {1}", e.RequestMessage.Method, e.RequestMessage.Url);
+                };
+
+                attachedEvent = true;
+            }
         }
 
         public Container Container

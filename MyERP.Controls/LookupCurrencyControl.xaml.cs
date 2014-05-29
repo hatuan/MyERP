@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -42,11 +43,11 @@ namespace MyERP.Controls
             }
 
             IsBusy = true;
-            //_currencyRepository.GetCurrenciesByLookupValue(textBox.SearchText, currencies =>
-            //{
-            //    Currencies = currencies;
-            //    IsBusy = false;
-            //});
+            _currencyRepository.GetCurrenciesByLookupValue(textBox.SearchText, results =>
+            {
+                Currencies = new ObservableCollection<Currency>(results);
+                IsBusy = false;
+            });
         }
 
         private readonly CurrencyRepository _currencyRepository = new CurrencyRepository();
@@ -118,8 +119,8 @@ namespace MyERP.Controls
             }
         }
 
-        private IEnumerable<Currency> _currencies;
-        public IEnumerable<Currency> Currencies
+        private ObservableCollection<Currency> _currencies;
+        public ObservableCollection<Currency> Currencies
         {
             get { return _currencies; }
             set

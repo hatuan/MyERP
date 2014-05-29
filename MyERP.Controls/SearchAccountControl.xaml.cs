@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Net;
@@ -33,9 +34,9 @@ namespace MyERP.Controls
 
         private readonly AccountRepository _accountRepository = new AccountRepository();
 
-        private IEnumerable<Account> _accounts;
+        private ObservableCollection<Account> _accounts;
 
-        public IEnumerable<Account> Accounts
+        public ObservableCollection<Account> Accounts
         {
             get { return _accounts; }
             set
@@ -71,11 +72,11 @@ namespace MyERP.Controls
         {
 
             IsBusy = true;
-            //_accountRepository.GetAccountsByLookupValue(searchValue.Text, accounts =>
-            //{
-            //    Accounts = accounts;
-            //    IsBusy = false;
-            //});
+            _accountRepository.GetAccountsByLookupValue(searchValue.Text, results =>
+            {
+                Accounts = new ObservableCollection<Account>(results);
+                IsBusy = false;
+            });
         }
 
         #region INotifyPropertyChanged

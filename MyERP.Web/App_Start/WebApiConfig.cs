@@ -12,6 +12,8 @@ namespace MyERP.Web
     {
         public static void Register(HttpConfiguration config)
         {
+            config.MessageHandlers.Add(new MethodOverrideHandler());
+
             config.Routes.MapHttpRoute(
                 name: "Auth",
                 routeTemplate: "auth",

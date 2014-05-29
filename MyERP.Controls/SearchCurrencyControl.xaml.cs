@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -23,9 +24,9 @@ namespace MyERP.Controls
 
         private readonly CurrencyRepository _currencyRepository = new CurrencyRepository();
 
-        private IEnumerable<Currency> _currencies;
+        private ObservableCollection<Currency> _currencies;
 
-        public IEnumerable<Currency> Currencies
+        public ObservableCollection<Currency> Currencies
         {
             get { return _currencies; }
             set
@@ -60,11 +61,11 @@ namespace MyERP.Controls
         private void OnSearchCommandExecuted(object obj)
         {
             IsBusy = true;
-            //_currencyRepository.GetCurrenciesByLookupValue(searchValue.Text, currencies =>
-            //{
-            //    Currencies = currencies;
-            //    IsBusy = false;
-            //});
+            _currencyRepository.GetCurrenciesByLookupValue(searchValue.Text, results =>
+            {
+                Currencies = new ObservableCollection<Currency>(results);
+                IsBusy = false;
+            });
         }
         
         #region INotifyPropertyChanged

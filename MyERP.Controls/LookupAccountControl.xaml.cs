@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.ServiceModel.DomainServices.Client;
@@ -46,11 +47,11 @@ namespace MyERP.Controls
                 this.loadTimer.Stop();
             }
             IsBusy = true;
-            //_accountRepository.GetAccountsByLookupValue(textBox.SearchText, accounts =>
-            //{
-            //    Accounts = accounts;
-            //    IsBusy = false;
-            //});
+            _accountRepository.GetAccountsByLookupValue(textBox.SearchText, results =>
+            {
+                this.Accounts = new ObservableCollection<Account>(results);;
+                IsBusy = false;
+            });
         }
 
         private readonly AccountRepository _accountRepository = new AccountRepository();
@@ -123,8 +124,8 @@ namespace MyERP.Controls
             }
         }
 
-        private IEnumerable<Account> _accounts;
-        public IEnumerable<Account> Accounts
+        private ObservableCollection<Account> _accounts;
+        public ObservableCollection<Account> Accounts
         {
             get { return _accounts; }
             set
