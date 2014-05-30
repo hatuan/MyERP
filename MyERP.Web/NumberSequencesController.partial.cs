@@ -96,7 +96,24 @@ namespace MyERP.Web
             MyERP.DataAccess.NumberSequence entity = repository.GetBy(m => m.Id == key);
             if (entity != null)
             {
-                repository.Delete(entity);
+                try
+                {
+                    string SqlQuery = String.Format("DROP SEQUENCE {0};", new object[] { entity.NoSeqName });
+                    // 3. Create a new instance of the OACommand class.
+                    using (var command = repository.DataContext.Connection.CreateCommand())
+                    {
+                        command.CommandText = SqlQuery;
+                        command.ExecuteNonQuery();
+                    }
+
+                    repository.Delete(entity);
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                
             }
 
             // According to the HTTP specification, the DELETE method must be idempotent, 
@@ -122,7 +139,7 @@ namespace MyERP.Web
 
             try
             {
-                string SqlQuery = String.Format("CREATE SEQUENCE {0} MINVALUE {1} MAXVALUE {2} START {3}",
+                string SqlQuery = String.Format("CREATE SEQUENCE {0} MINVALUE {1} MAXVALUE {2} START {3};",
                     new object[] {entity.NoSeqName, entity.StartingNo, entity.EndingNo, entity.CurrentNo});
                 // 3. Create a new instance of the OACommand class.
                 using (var command = repository.DataContext.Connection.CreateCommand())
