@@ -136,6 +136,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\MyERP.DataAccess\Shared\DocumentType.cs">
+      <Link>DocumentType.cs</Link>
+    </Compile>
+    <Compile Include="..\MyERP.DataAccess\Shared\TransactionType.cs">
+      <Link>TransactionType.cs</Link>
+    </Compile>
     <Compile Include="Financial.cs" />
     <Compile Include="FinancialWindow.xaml.cs">
       <DependentUpon>FinancialWindow.xaml</DependentUpon>

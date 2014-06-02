@@ -91,9 +91,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ValidationErrorResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="..\MyERP.DataAccess\Shared\NoSeriesLib.shared.cs">
-      <Link>NoSeriesLib.shared.cs</Link>
-    </Compile>
     <Compile Include="Account.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="GeneralJournalLine.cs" />

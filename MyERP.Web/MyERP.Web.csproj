@@ -221,6 +221,8 @@
     <Compile Include="OrganizationsController.cs" />
     <Compile Include="PaymentTermsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\GeneralJournalLineRepository.cs" />
+    <Compile Include="Repository\GeneralJournalDocumentRepository.cs" />
     <Compile Include="Repository\NumberSequenceRepository.cs" />
     <Compile Include="Repository\AccountRepository.cs" />
     <Compile Include="SessionsController.cs" />
