@@ -9,11 +9,12 @@ namespace MyERP.Repositories
     {
         private static readonly Container container = new Container(new Uri("/MyERP.Web/odata", UriKind.Relative));
 
-        private static bool attachedEvent = false;
+        private static bool isCreated = false;
         protected RepositoryBase()
         {
-            if (!attachedEvent)
+            if (!isCreated)
             {
+                container.MergeOption = MergeOption.OverwriteChanges;
                 container.SaveChangesDefaultOptions = SaveChangesOptions.ReplaceOnUpdate;
                 container.SendingRequest2 += (s, e) =>
                 {
@@ -25,7 +26,7 @@ namespace MyERP.Repositories
                     System.Diagnostics.Debug.WriteLine("{0} {1}", e.RequestMessage.Method, e.RequestMessage.Url);
                 };
 
-                attachedEvent = true;
+                isCreated = true;
             }
         }
 

@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.Regions;
 using MyERP.Infrastructure;
+using MyERP.Infrastructure.Extensions;
 using MyERP.Infrastructure.ViewModels;
 using MyERP.Repositories;
 using MyERP.Repository.MyERPService;
@@ -15,7 +19,10 @@ namespace MyERP.Modules.Financial.ViewModels
     [Export]
     public class GeneralJournalLinesViewModel : NavigationAwareDataViewModel, ICloseable
     {
-        public GeneralJournalLinesViewModel() { }
+        public GeneralJournalLinesViewModel()
+        {
+            GeneralJournalLines = new ObservableCollectionEx<GeneralJournalLine>();
+        }
 
         #region Repositories
         [Import]
@@ -46,11 +53,42 @@ namespace MyERP.Modules.Financial.ViewModels
             }
         }
 
-        private ObservableItemCollection<GeneralJournalLine> _generalJournalLines;
-        public ObservableItemCollection<GeneralJournalLine> GeneralJournalLines
+        private ObservableCollectionEx<GeneralJournalLine> _generalJournalLines;
+        public ObservableCollectionEx<GeneralJournalLine> GeneralJournalLines
         {
             get { return this._generalJournalLines; }
-            set { _generalJournalLines = value; }
+            set
+            {
+                _generalJournalLines = value; 
+                _generalJournalLines.CollectionChanged += GeneralJournalLinesOnCollectionChanged;
+                this.RaisePropertyChanged("GeneralJournalLines");
+            }
+        }
+
+        private void GeneralJournalLinesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            if (notifyCollectionChangedEventArgs.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (GeneralJournalLine item in notifyCollectionChangedEventArgs.OldItems)
+                {
+                    //Removed items
+                    item.PropertyChanged -= GeneralJournalLinePropertyChanged;
+                }
+            }
+            else if (notifyCollectionChangedEventArgs.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (GeneralJournalLine item in notifyCollectionChangedEventArgs.NewItems)
+                {
+                    //Added items
+                    item.PropertyChanged += GeneralJournalLinePropertyChanged;
+                }
+            }    
+        }
+
+        private void GeneralJournalLinePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            GeneralJournalLine entity = sender as GeneralJournalLine;
+            GeneralJournalLineRepository.Update(entity);
         }
 
         private GeneralJournalLine _selectedGeneralJournalLine;
@@ -73,10 +111,7 @@ namespace MyERP.Modules.Financial.ViewModels
             }
         }
 
-        public bool IsBusy
-        {
-            get { return false; }
-        }
+        public bool IsBusy { get; set; }
 
         private FilterDescriptor filterGeneralJournalDocument = new FilterDescriptor("GeneralJournalDocumentId",
             FilterOperator.IsEqualTo, FilterDescriptor.UnsetValue);
@@ -95,36 +130,17 @@ namespace MyERP.Modules.Financial.ViewModels
             this.DeleteCommand = new DelegateCommand(OnDeleteExcuted, DeleteCommandCanExecute);
             this.CloseWindowCommand = new DelegateCommand(OnCloseWindowExcuted, CloseWindowCanExecute);
         }
+
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            base.OnNavigatedTo(navigationContext);
+
+            GeneralJournalLines.Clear();
+            GeneralJournalLineRepository.GetGeneralJournalLines(results => results.ForEach((item) => this.GeneralJournalLines.Add(item)));
+            this.RaisePropertyChanged("GeneralJournalLines");
+        }
+
         #endregion
-
-        void GeneralJournalLines_SubmittedChanges(object sender, Telerik.Windows.Controls.DataServices.DataServiceSubmittedChangesEventArgs e)
-        {
-            if (e.HasError)
-            {
-                MessageBox.Show(e.Error.ToString(), "Submit Error", MessageBoxButton.OK);
-                e.MarkErrorAsHandled();
-            }
-        }
-
-
-        void GeneralJournalLines_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "CanLoad":
-                    ((DelegateCommand)RefreshCommand).RaiseCanExecuteChanged();
-                    break;
-                case "IsBusy":
-                    RaisePropertyChanged(() => IsBusy);
-                    break;
-                case "HasChanges":
-                    ((DelegateCommand)AddNewCommand).RaiseCanExecuteChanged();
-                    ((DelegateCommand)CloseWindowCommand).RaiseCanExecuteChanged();
-                    ((DelegateCommand)SubmitChangesCommand).RaiseCanExecuteChanged();
-                    ((DelegateCommand)RejectChangesCommand).RaiseCanExecuteChanged();
-                    break;
-            }
-        }
 
         public event EventHandler<EventArgs> RequestClose;
 
@@ -135,7 +151,35 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnAddNewCommandExecuted()
         {
+            var newId = Guid.NewGuid();
 
+            GeneralJournalLine newEntity = new GeneralJournalLine()
+            {
+                Id = newId,
+                CorAccountId = Guid.Empty,
+                AccountId = Guid.Empty,
+                DebitAmount = 0,
+                CreditAmountLcy = 0,
+                DebitAmountLcy = 0,
+                CreditAmount = 0,
+                LineNo = 0,
+                ClientId = (Guid) SessionManager.Session["ClientId"],
+                OrganizationId = (SessionManager.Session["Organization"] as Organization).Id,
+                Version = 1,
+                GeneralJournalDocumentId = GeneralJournalDocument.Id,
+                DocumentCreated = Convert.ToDateTime(SessionManager.Session["WorkingDate"]),
+                DocumentPosted = Convert.ToDateTime(SessionManager.Session["WorkingDate"]),
+                DocumentType =  DataAccess.DocumentType.GeneralJournal.ToString(),
+                RecCreated = DateTime.Now,
+                RecCreatedBy = (SessionManager.Session["User"] as User).Id,
+                RecModified = DateTime.Now,
+                RecModifiedBy = (SessionManager.Session["User"] as User).Id,
+                TransactionType = DataAccess.TransactionType.GeneralJournal.ToString()
+            };
+
+            this.GeneralJournalLines.Add(newEntity);
+            this.GeneralJournalLineRepository.AddNew("GeneralJournalLines", newEntity);
+            this.SelectedGeneralJournalLine = newEntity;
         }
 
         private bool SubmitChangesCommandCanExecute()
@@ -150,7 +194,7 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnSubmitChangesExcuted()
         {
-            
+            GeneralJournalLineRepository.SaveChanges();
         }
 
         private bool RefreshCommandCanExecute()
@@ -160,7 +204,8 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnRefreshExcuted()
         {
-            
+            GeneralJournalLines.Clear();
+            GeneralJournalLineRepository.GetGeneralJournalLines(results => results.ForEach((item) => this.GeneralJournalLines.Add(item)));
         }
 
         private bool DeleteCommandCanExecute()
@@ -171,7 +216,10 @@ namespace MyERP.Modules.Financial.ViewModels
         private void OnDeleteExcuted()
         {
             if (SelectedGeneralJournalLine != null)
+            {
+                this.GeneralJournalLineRepository.Delete(SelectedGeneralJournalLine);
                 this.GeneralJournalLines.Remove(SelectedGeneralJournalLine);
+            }
         }
 
         private bool CloseWindowCanExecute()

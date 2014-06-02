@@ -4,12 +4,13 @@ namespace MyERP.Repository.MyERPService
 {
     public partial class GeneralJournalLine
     {
-        
+   
         partial void OnGeneralJournalDocumentIdChanged()
         {
-            int _numberOfGeneralJournalLineOfDocument =
-                GeneralJournalDocument.GeneralJournalLines.Where(c => c.LineNo%10000 == 0).ToList().Count;
-            this.LineNo = _numberOfGeneralJournalLineOfDocument*10000 + 10000;
+            if (GeneralJournalDocument.GeneralJournalLines.Count == 0)
+                this.LineNo = 10000;
+            else
+                this.LineNo = GeneralJournalDocument.GeneralJournalLines.Where(c => c.LineNo % 10000 == 0).Max(m => m.LineNo) + 10000;
         }
     }
 }

@@ -120,26 +120,6 @@ namespace MyERP.Modules.Financial.ViewModels
         }
         
         public bool IsBusy { get; set; }
-        
-        void _accounts_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "CanLoad":
-                    ((DelegateCommand)RefreshCommand).RaiseCanExecuteChanged();
-                    break;
-                case "IsBusy":
-                    RaisePropertyChanged(e.PropertyName);
-                    break;
-                case "HasChanges":
-                    ((DelegateCommand)AddNewCommand).RaiseCanExecuteChanged();
-                    ((DelegateCommand)CloseWindowCommand).RaiseCanExecuteChanged();
-                    ((DelegateCommand)SubmitChangesCommand).RaiseCanExecuteChanged();
-                    ((DelegateCommand)RejectChangesCommand).RaiseCanExecuteChanged();
-                    break;
-            }
-        }
-
 
         private void OnAddNewCommandExecuted()
         {
