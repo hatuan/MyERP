@@ -15,6 +15,8 @@ namespace MyERP.Repositories
         {
             DataServiceQuery<GeneralJournalLine> query = (DataServiceQuery<GeneralJournalLine>)from generalJournalLine in Container.GeneralJournalLines
                                                                                                .Expand(c => c.Currency)
+                                                                                               .Expand(c => c.BusinessPartner)
+                                                                                               .Expand(c => c.Job)
                                                                                                .Expand(c => c.RecCreatedByUser)
                                                                                                .Expand(c => c.RecModifiedByUser)
                                                                                                where generalJournalLine.ClientId.Equals(SessionManager.Session["ClientId"])
@@ -28,6 +30,16 @@ namespace MyERP.Repositories
 
                 UIThread.Invoke(() => callback(response));
             }, query);
+        }
+
+        public void AddNew(GeneralJournalLine generalJournalLine)
+        {
+            if (generalJournalLine.GeneralJournalDocument.GeneralJournalLines.Count == 0)
+                generalJournalLine.LineNo = 10000;
+            else
+                generalJournalLine.LineNo = generalJournalLine.GeneralJournalDocument.GeneralJournalLines.Where(c => c.LineNo % 10000 == 0).Max(m => m.LineNo) + 10000;
+
+            base.AddNew("GeneralJournalLines", generalJournalLine);
         }
     }
 }

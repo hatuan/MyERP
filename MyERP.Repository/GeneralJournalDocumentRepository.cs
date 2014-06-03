@@ -15,9 +15,11 @@ namespace MyERP.Repositories
         public void GetGeneralJournalDocumens(Action<IEnumerable<GeneralJournalDocument>> callback)
         {
             DataServiceQuery<GeneralJournalDocument> query = (DataServiceQuery<GeneralJournalDocument>)from generalJournalDocument in Container.GeneralJournalDocuments
-                                                                                               .Expand(c => c.Currency)
-                                                                                               .Expand(c => c.RecCreatedByUser)
-                                                                                               .Expand(c => c.RecModifiedByUser)
+                                                                                                       .Expand(c => c.Organization)
+                                                                                                       .Expand(c => c.Currency)
+                                                                                                       .Expand(c => c.RecCreatedByUser)
+                                                                                                       .Expand(c => c.RecModifiedByUser)
+                                                                                                       .Expand(c => c.GeneralJournalLines)
                                                                                                        where generalJournalDocument.ClientId.Equals(SessionManager.Session["ClientId"])
                                                                                                        orderby generalJournalDocument.DocumentNo, generalJournalDocument.DocumentPosted
                                                                                                        select generalJournalDocument;

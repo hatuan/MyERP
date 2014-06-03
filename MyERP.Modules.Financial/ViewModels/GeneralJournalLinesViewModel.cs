@@ -176,9 +176,9 @@ namespace MyERP.Modules.Financial.ViewModels
                 RecModifiedBy = (SessionManager.Session["User"] as User).Id,
                 TransactionType = DataAccess.TransactionType.GeneralJournal.ToString()
             };
-
+            
             this.GeneralJournalLines.Add(newEntity);
-            this.GeneralJournalLineRepository.AddNew("GeneralJournalLines", newEntity);
+            this.GeneralJournalLineRepository.AddNew(newEntity);
             this.SelectedGeneralJournalLine = newEntity;
         }
 
