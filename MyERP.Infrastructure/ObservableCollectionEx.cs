@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections;
+using System.Windows.Data;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 
 namespace MyERP.Infrastructure
 {
@@ -54,6 +45,19 @@ namespace MyERP.Infrastructure
             : base()
         {
             RangeActionsSupported = rangeActionsSupported;
+        }
+
+        private CollectionViewSource _view;
+        public CollectionViewSource View
+        {
+            get
+            {
+                if (_view == null)
+                {
+                    _view = new CollectionViewSource {Source = this};
+                }
+                return _view;
+            }
         }
     }
 }

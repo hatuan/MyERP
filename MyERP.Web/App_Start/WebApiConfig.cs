@@ -48,6 +48,14 @@ namespace MyERP.Web
             sequenceNextVal.Parameter<Guid>("key");
             sequenceNextVal.Returns<int>();
 
+            ActionConfiguration allOrganization = builder.Entity<Organization>().Action("GetAllOrganization");
+            allOrganization.Parameter<Guid>("clientKey");
+            allOrganization.ReturnsFromEntitySet<Organization>("Organizations");
+
+            ActionConfiguration generalJournalSetupOfOrganization = builder.Entity<GeneralJournalSetup>().Action("GetGeneralJournalSetupOfOrganization");
+            generalJournalSetupOfOrganization.Parameter<Guid>("organizationKey");
+            generalJournalSetupOfOrganization.ReturnsFromEntitySet<GeneralJournalSetup>("GeneralJournalSetups");
+
             config.Filters.Add(new MembershipHttpAuthorizeAttribute());
             config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel());
             config.EnableQuerySupport();

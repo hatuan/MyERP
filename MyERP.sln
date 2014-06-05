@@ -39,6 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedCode", "SharedCode", 
 	ProjectSection(SolutionItems) = preProject
 		SharedCode\Cryptography.cs = SharedCode\Cryptography.cs
 		SharedCode\EntityClickedEvents.cs = SharedCode\EntityClickedEvents.cs
+		Extensions.cs = Extensions.cs
 		SharedCode\RadWindowShowEvent.cs = SharedCode\RadWindowShowEvent.cs
 	EndProjectSection
 EndProject

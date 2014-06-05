@@ -52,8 +52,10 @@ namespace MyERP.Repositories
         public void GetUserByUserName(String name, Action<User> callback)
         {
             DataServiceQuery<User> query = (DataServiceQuery<User>) from user in Container.Users
-                                           where user.Name == name
-                                           select user;
+                                                                    .Expand(c => c.Organization)
+                                                                    .Expand(c => c.Client)
+                                                                    where user.Name == name
+                                                                    select user;
             query.BeginExecute(result =>
             {
                 var request = result.AsyncState as DataServiceQuery<User>;

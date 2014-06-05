@@ -28,5 +28,17 @@ namespace MyERP.Repositories
             }, query);
         }
 
+        public void GetAllOrganization(Guid clientId, Action<Organization> callback)
+        {
+            Uri actionUri = new Uri(this.Container.BaseUri,
+                String.Format("Organizations(guid'{0}')/GetAllOrganization", clientId)
+                );
+
+            this.Container.BeginExecute<int>(actionUri, result =>
+            {
+                var response = this.Container.EndExecute<Organization>(result).FirstOrDefault();
+                UIThread.Invoke(() => callback(response));
+            }, this.Container);
+        }
     }
 }

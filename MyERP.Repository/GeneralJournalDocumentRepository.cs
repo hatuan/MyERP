@@ -5,6 +5,7 @@ using System.Data.Services.Client;
 using System.Linq;
 using MyERP.DataAccess;
 using MyERP.Infrastructure;
+using MyERP.Infrastructure.Extensions;
 using MyERP.Repository.MyERPService;
 
 namespace MyERP.Repositories
@@ -23,7 +24,6 @@ namespace MyERP.Repositories
                                                                                                        where generalJournalDocument.ClientId.Equals(SessionManager.Session["ClientId"])
                                                                                                        orderby generalJournalDocument.DocumentNo, generalJournalDocument.DocumentPosted
                                                                                                        select generalJournalDocument;
-
             query.BeginExecute(result =>
             {
                 var request = result.AsyncState as DataServiceQuery<GeneralJournalDocument>;
@@ -31,6 +31,18 @@ namespace MyERP.Repositories
 
                 UIThread.Invoke(() => callback(response));
             }, query);
+        }
+
+        public void AddNew(GeneralJournalDocument generalJournalDocument)
+        {
+            base.AddNew("GeneralJournalDocuments", generalJournalDocument);
+        }
+
+        public override void Delete(object entity)
+        {
+            var generalJournalDocument = entity as GeneralJournalDocument;
+            generalJournalDocument.GeneralJournalLines.ForEach(e => base.Delete(e));
+            base.Delete(entity);
         }
     }
 }

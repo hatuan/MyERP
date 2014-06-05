@@ -49,7 +49,7 @@ namespace MyERP.Modules.Financial.ViewModels
                     return;
 
                 _generalJournalDocument = value;
-                filterGeneralJournalDocument.Value = value.Id ;
+                OnRefreshExcuted();
             }
         }
 
@@ -89,6 +89,7 @@ namespace MyERP.Modules.Financial.ViewModels
         {
             GeneralJournalLine entity = sender as GeneralJournalLine;
             GeneralJournalLineRepository.Update(entity);
+            IsDirty = true;
         }
 
         private GeneralJournalLine _selectedGeneralJournalLine;
@@ -111,11 +112,30 @@ namespace MyERP.Modules.Financial.ViewModels
             }
         }
 
-        public bool IsBusy { get; set; }
+        private bool _isBusy;
 
-        private FilterDescriptor filterGeneralJournalDocument = new FilterDescriptor("GeneralJournalDocumentId",
-            FilterOperator.IsEqualTo, FilterDescriptor.UnsetValue);
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                _isBusy = value;
+                RaisePropertyChanged(() => IsBusy);
+            }
+        }
 
+        private bool _isDirty;
+
+        public bool IsDirty
+        {
+            get { return _isDirty; }
+            set
+            {
+                _isDirty = value;
+                RaisePropertyChanged(() => IsDirty);
+            }
+        }
+        
         #endregion
 
         #region NavigationAwareDataViewModel overrides
@@ -135,8 +155,13 @@ namespace MyERP.Modules.Financial.ViewModels
         {
             base.OnNavigatedTo(navigationContext);
 
-            GeneralJournalLines.Clear();
-            GeneralJournalLineRepository.GetGeneralJournalLines(results => results.ForEach((item) => this.GeneralJournalLines.Add(item)));
+            IsBusy = true;
+            GeneralJournalLineRepository.GetGeneralJournalLines(GeneralJournalDocument, results =>
+            {
+                GeneralJournalLines.Clear();
+                results.ForEach((item) => this.GeneralJournalLines.Add(item));
+                IsBusy = false;
+            });
             this.RaisePropertyChanged("GeneralJournalLines");
         }
 
@@ -164,12 +189,17 @@ namespace MyERP.Modules.Financial.ViewModels
                 CreditAmount = 0,
                 LineNo = 0,
                 ClientId = (Guid) SessionManager.Session["ClientId"],
+                Client = SessionManager.Session["Client"] as Client,
                 OrganizationId = (SessionManager.Session["Organization"] as Organization).Id,
+                Organization = (SessionManager.Session["Organization"] as Organization),
                 Version = 1,
                 GeneralJournalDocumentId = GeneralJournalDocument.Id,
-                DocumentCreated = Convert.ToDateTime(SessionManager.Session["WorkingDate"]),
-                DocumentPosted = Convert.ToDateTime(SessionManager.Session["WorkingDate"]),
-                DocumentType =  DataAccess.DocumentType.GeneralJournal.ToString(),
+                GeneralJournalDocument = GeneralJournalDocument,
+                DocumentNo = GeneralJournalDocument.DocumentNo,
+                DocumentCreated = GeneralJournalDocument.DocumentCreated,
+                DocumentPosted = GeneralJournalDocument.DocumentPosted,
+                DocumentType =  GeneralJournalDocument.DocumentType,
+                Description = "",
                 RecCreated = DateTime.Now,
                 RecCreatedBy = (SessionManager.Session["User"] as User).Id,
                 RecModified = DateTime.Now,
@@ -177,14 +207,16 @@ namespace MyERP.Modules.Financial.ViewModels
                 TransactionType = DataAccess.TransactionType.GeneralJournal.ToString()
             };
             
-            this.GeneralJournalLines.Add(newEntity);
             this.GeneralJournalLineRepository.AddNew(newEntity);
+            this.GeneralJournalLines.Add(newEntity);
             this.SelectedGeneralJournalLine = newEntity;
+
+            IsDirty = true;
         }
 
         private bool SubmitChangesCommandCanExecute()
         {
-            return true;
+            return IsDirty;
         }
 
         private void OnRejectChangesExcuted()
@@ -195,6 +227,7 @@ namespace MyERP.Modules.Financial.ViewModels
         private void OnSubmitChangesExcuted()
         {
             GeneralJournalLineRepository.SaveChanges();
+            IsDirty = false;
         }
 
         private bool RefreshCommandCanExecute()
@@ -204,8 +237,13 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnRefreshExcuted()
         {
-            GeneralJournalLines.Clear();
-            GeneralJournalLineRepository.GetGeneralJournalLines(results => results.ForEach((item) => this.GeneralJournalLines.Add(item)));
+            IsBusy = true;
+            GeneralJournalLineRepository.GetGeneralJournalLines(GeneralJournalDocument, results =>
+            {
+                GeneralJournalLines.Clear();
+                results.ForEach((item) => this.GeneralJournalLines.Add(item));
+                IsBusy = false;
+            });
         }
 
         private bool DeleteCommandCanExecute()
@@ -219,6 +257,7 @@ namespace MyERP.Modules.Financial.ViewModels
             {
                 this.GeneralJournalLineRepository.Delete(SelectedGeneralJournalLine);
                 this.GeneralJournalLines.Remove(SelectedGeneralJournalLine);
+                IsDirty = true;
             }
         }
 

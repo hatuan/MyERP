@@ -809,6 +809,14 @@
           <Parameter Name="bindingParameter" Type="MyERP.DataAccess.NumberSequence" />
           <Parameter Name="key" Type="Edm.Guid" Nullable="false" />
         </FunctionImport>
+        <FunctionImport Name="GetAllOrganization" ReturnType="MyERP.DataAccess.Organization" IsBindable="true" EntitySet="Organizations" m:IsAlwaysBindable="true">
+          <Parameter Name="bindingParameter" Type="MyERP.DataAccess.Organization" />
+          <Parameter Name="clientKey" Type="Edm.Guid" Nullable="false" />
+        </FunctionImport>
+        <FunctionImport Name="GeneralJournalSetupOfOrganization" ReturnType="MyERP.DataAccess.GeneralJournalSetup" IsBindable="true" EntitySet="GeneralJournalSetups" m:IsAlwaysBindable="true">
+          <Parameter Name="bindingParameter" Type="MyERP.DataAccess.GeneralJournalSetup" />
+          <Parameter Name="organizationKey" Type="Edm.Guid" Nullable="false" />
+        </FunctionImport>
         <AssociationSet Name="MyERP_DataAccess_Account_Currency_MyERP_DataAccess_Currency_CurrencyPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Account_Currency_MyERP_DataAccess_Currency_CurrencyPartner">
           <End Role="CurrencyPartner" EntitySet="Accounts" />
           <End Role="Currency" EntitySet="Currencies" />

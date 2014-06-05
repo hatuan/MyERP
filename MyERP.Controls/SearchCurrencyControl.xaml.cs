@@ -16,13 +16,16 @@ namespace MyERP.Controls
         public SearchCurrencyControl()
         {
             InitializeComponent();
-
-            this.OkCommand = new DelegateCommand(this.OnOkCommandExecuted);
-            this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
-            LayoutRoot.DataContext = this;
+            if (!MyERP.Infrastructure.ViewModelBase.IsInDesignModeStatic)
+            {
+                _currencyRepository = new CurrencyRepository();
+                this.OkCommand = new DelegateCommand(this.OnOkCommandExecuted);
+                this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
+                LayoutRoot.DataContext = this;
+            }
         }
 
-        private readonly CurrencyRepository _currencyRepository = new CurrencyRepository();
+        private readonly CurrencyRepository _currencyRepository;
 
         private ObservableCollection<Currency> _currencies;
 

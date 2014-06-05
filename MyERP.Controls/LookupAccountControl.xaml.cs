@@ -28,6 +28,7 @@ namespace MyERP.Controls
 
             if (!MyERP.Infrastructure.ViewModelBase.IsInDesignModeStatic)
             {
+                _accountRepository = new AccountRepository();
                 this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
                 LayoutRoot.DataContext = this;
                 
@@ -54,7 +55,7 @@ namespace MyERP.Controls
             });
         }
 
-        private readonly AccountRepository _accountRepository = new AccountRepository();
+        private readonly AccountRepository _accountRepository;
 
         readonly RadWindow _searchWindow = new RadWindow();
 

@@ -77,6 +77,7 @@ namespace MyERP.Modules.Financial.ViewModels
         {
             GeneralJournalDocument entity = sender as GeneralJournalDocument;
             GeneralJournalDocumentRepository.Update(entity);
+            IsDirty = true;
         }
 
         private GeneralJournalDocument _selectedGeneralJournalDocument;
@@ -99,9 +100,28 @@ namespace MyERP.Modules.Financial.ViewModels
             }
         }
 
+        private bool _isBusy;
+
         public bool IsBusy
         {
-            get { return false; }
+            get { return _isBusy; }
+            set
+            {
+                _isBusy = value;
+                RaisePropertyChanged(()=>IsBusy);
+            }
+        }
+
+        private bool _isDirty;
+
+        public bool IsDirty
+        {
+            get { return _isDirty; }
+            set
+            {
+                _isDirty = value;
+                RaisePropertyChanged(()=>IsDirty);
+            }
         }
 
         #endregion
@@ -110,7 +130,6 @@ namespace MyERP.Modules.Financial.ViewModels
         public override void OnImportsSatisfied()
         {
             base.OnImportsSatisfied();
-            
 
             this.AddNewCommand = new DelegateCommand(this.OnAddNewCommandExecuted, AddNewCommandCanExecuted);
             this.SubmitChangesCommand = new DelegateCommand(OnSubmitChangesExcuted, SubmitChangesCommandCanExecute);
@@ -118,16 +137,18 @@ namespace MyERP.Modules.Financial.ViewModels
             this.RefreshCommand = new DelegateCommand(OnRefreshExcuted, RefreshCommandCanExecute);
             this.DeleteCommand = new DelegateCommand(OnDeleteExcuted, DeleteCommandCanExecute);
             this.CloseWindowCommand = new DelegateCommand(OnCloseWindowExcuted, CloseWindowCanExecute);
-
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
             base.OnNavigatedTo(navigationContext);
-
-            GeneralJournalDocuments.Clear();
-            GeneralJournalDocumentRepository.GetGeneralJournalDocumens(results => results.ForEach((item) => this.GeneralJournalDocuments.Add(item)));
-            this.RaisePropertyChanged("GeneralJournalDocuments");
+            IsBusy = true;
+            GeneralJournalDocumentRepository.GetGeneralJournalDocumens(results =>
+            {
+                GeneralJournalDocuments.Clear();
+                results.ForEach((item) => this.GeneralJournalDocuments.Add(item));
+                IsBusy = false;
+            });
         }
 
         #endregion
@@ -136,7 +157,7 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private bool AddNewCommandCanExecuted()
         {
-            return true;
+            return !IsDirty;
         }
 
         private void OnAddNewCommandExecuted()
@@ -147,26 +168,31 @@ namespace MyERP.Modules.Financial.ViewModels
             {
                 Id = newId,
                 ClientId = (Guid)SessionManager.Session["ClientId"],
+                Client = SessionManager.Session["Client"] as Client,
                 OrganizationId = (SessionManager.Session["Organization"] as Organization).Id,
+                Organization = (SessionManager.Session["Organization"] as Organization),
                 Version = 1,
                 DocumentCreated = Convert.ToDateTime(SessionManager.Session["WorkingDate"]),
                 DocumentPosted = Convert.ToDateTime(SessionManager.Session["WorkingDate"]),
                 DocumentType = DataAccess.DocumentType.GeneralJournal.ToString(),
+                Description = "",
                 RecCreated = DateTime.Now,
                 RecCreatedBy = (SessionManager.Session["User"] as User).Id,
                 RecModified = DateTime.Now,
                 RecModifiedBy = (SessionManager.Session["User"] as User).Id,
                 TransactionType = DataAccess.TransactionType.GeneralJournal.ToString()
             };
-
+            
+            this.GeneralJournalDocumentRepository.AddNew(newEntity);
             this.GeneralJournalDocuments.Add(newEntity);
-            this.GeneralJournalDocumentRepository.AddNew("GeneralJournalDocuments", newEntity);
             this.SelectedGeneralJournalDocument = newEntity;
+            
+            IsDirty = true;
         }
 
         private bool SubmitChangesCommandCanExecute()
         {
-            return true;
+            return IsDirty;
         }
 
         private void OnRejectChangesExcuted()
@@ -176,6 +202,7 @@ namespace MyERP.Modules.Financial.ViewModels
         private void OnSubmitChangesExcuted()
         {
             GeneralJournalDocumentRepository.SaveChanges();
+            IsDirty = false;
         }
 
         private bool RefreshCommandCanExecute()
@@ -185,8 +212,13 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnRefreshExcuted()
         {
-            GeneralJournalDocuments.Clear();
-            GeneralJournalDocumentRepository.GetGeneralJournalDocumens(results => results.ForEach((item) => this.GeneralJournalDocuments.Add(item)));
+            IsBusy = true;
+            GeneralJournalDocumentRepository.GetGeneralJournalDocumens(results =>
+            {
+                GeneralJournalDocuments.Clear();
+                results.ForEach((item) => this.GeneralJournalDocuments.Add(item));
+                IsBusy = false;
+            });
         }
 
         private bool DeleteCommandCanExecute()
@@ -203,6 +235,7 @@ namespace MyERP.Modules.Financial.ViewModels
             {
                 this.GeneralJournalDocumentRepository.Delete(SelectedGeneralJournalDocument);
                 this.GeneralJournalDocuments.Remove(SelectedGeneralJournalDocument);
+                this.IsDirty = true;
             }
         }
 

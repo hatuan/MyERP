@@ -75,8 +75,12 @@ namespace MyERP.Modules.User.ViewModels
                             user =>
                             {
                                 SessionManager.Session.Add("User", user);
+                                
                                 //Neu User khong duoc phan quyen vao client nao thi thoat
+                                //va thong bao user khong duoc phan quyen vao mot Client nao
                                 if (user.ClientId == Guid.Empty) return;
+
+                                SessionManager.Session.Add("Client", user.Client);
                                 SessionManager.Session.Add("ClientId", user.ClientId);
                                 LoginSuccessfully();
                             });

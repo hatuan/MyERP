@@ -22,6 +22,7 @@ namespace MyERP.Controls
 
             if (!MyERP.Infrastructure.ViewModelBase.IsInDesignModeStatic)
             {
+                _currencyRepository = new CurrencyRepository();
                 this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
                 LayoutRoot.DataContext = this;
 
@@ -50,7 +51,7 @@ namespace MyERP.Controls
             });
         }
 
-        private readonly CurrencyRepository _currencyRepository = new CurrencyRepository();
+        private readonly CurrencyRepository _currencyRepository;
 
         readonly RadWindow _searchWindow = new RadWindow();
 

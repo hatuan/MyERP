@@ -20,7 +20,7 @@ namespace MyERP.Web
 
     public partial class GeneralJournalSetupsController 
     {
-        public SingleResult<GeneralJournalSetup> GetAccount([FromODataUri] Guid key)
+        public SingleResult<GeneralJournalSetup> GetGeneralJournalSetup([FromODataUri] Guid key)
         {
             return SingleResult.Create(repository.GetAll().Where(c => c.Id == key).AsQueryable());
         }
@@ -88,7 +88,7 @@ namespace MyERP.Web
         /// </summary>
         /// <param name="key">ID of the entity to delete</param>
         /// <returns>Always HttpStatusCode.OK</returns>
-        public IHttpActionResult DeleteAccount([FromODataUri] Guid key)
+        public IHttpActionResult DeleteGeneralJournalSetup([FromODataUri] Guid key)
         {
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -101,9 +101,28 @@ namespace MyERP.Web
         /// - Accepted when operation is successful or 
         /// - MethodNotAllowed if the operation is disabled for this entity or
         /// - BadRequest if the provided entity is NULL</returns>
-        public IHttpActionResult PostAccount(MyERP.DataAccess.Account entity)
+        public IHttpActionResult PostGeneralJournalSetup(MyERP.DataAccess.Account entity)
         {
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+
+        public IHttpActionResult GetGeneralJournalSetupOfOrganization([FromODataUri] Guid organizationKey)
+        {
+            GeneralJournalSetup entity = repository.GetBy(c => c.OrganizationId == organizationKey);
+            if (entity == null)
+            {
+                Organization organization = repository.DataContext.Organizations.FirstOrDefault(o => o.Id == organizationKey);
+                Organization allOrganization = repository.DataContext.Organizations.FirstOrDefault(o => o.ClientId == organization.ClientId && o.Code == "*");
+
+                entity = repository.GetBy(c => c.OrganizationId == allOrganization.Id);
+            }
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(entity);
         }
     }
 }

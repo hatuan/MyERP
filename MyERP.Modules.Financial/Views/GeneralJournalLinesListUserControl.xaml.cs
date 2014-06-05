@@ -15,7 +15,7 @@ using MyERP.Modules.Financial.ViewModels;
 
 namespace MyERP.Modules.Financial.Views
 {
-    [ViewExport(RegionName = GeneralJournalsViewRegionNames.GeneralJournalLinesOverview)]
+    [ViewExport(RegionName = GeneralJournalsViewRegionNames.GeneralJournalLinesOverview, IsActiveByDefault = false)]
     public partial class GeneralJournalLinesListUserControl : UserControl
     {
         public GeneralJournalLinesListUserControl()

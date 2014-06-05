@@ -26,13 +26,16 @@ namespace MyERP.Controls
         public SearchAccountControl()
         {
             InitializeComponent();
-
-            this.OkCommand = new DelegateCommand(this.OnOkCommandExecuted);
-            this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
-            LayoutRoot.DataContext = this;
+            if (!MyERP.Infrastructure.ViewModelBase.IsInDesignModeStatic)
+            {
+                _accountRepository = new AccountRepository();
+                this.OkCommand = new DelegateCommand(this.OnOkCommandExecuted);
+                this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
+                LayoutRoot.DataContext = this;
+            }
         }
 
-        private readonly AccountRepository _accountRepository = new AccountRepository();
+        private readonly AccountRepository _accountRepository;
 
         private ObservableCollection<Account> _accounts;
 
