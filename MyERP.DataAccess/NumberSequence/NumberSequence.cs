@@ -30,6 +30,8 @@ namespace MyERP.DataAccess
             [Association("NumberSequence-user-modified-association", "RecModifiedBy", "Id")]
             public User RecModifiedByUser { get; set; }
         }
+
+        public virtual int SequenceNextVal { get; set; }
     }
 
 }

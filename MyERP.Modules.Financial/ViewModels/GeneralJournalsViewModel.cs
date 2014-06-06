@@ -166,7 +166,13 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnRefreshExcuted()
         {
-
+            if (GeneralJournalDocumentsActive)
+            {
+                GeneralJournalLinesViewModel.GeneralJournalLines.Clear();
+                GeneralJournalDocumentsViewModel.RefreshCommand.Execute(null);
+            }
+            if (GeneralJournalLinesActive)
+                GeneralJournalLinesViewModel.RefreshCommand.Execute(null);
         }
 
         private bool DeleteCommandCanExecute()

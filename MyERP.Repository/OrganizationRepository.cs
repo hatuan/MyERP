@@ -28,15 +28,25 @@ namespace MyERP.Repositories
             }, query);
         }
 
-        public void GetAllOrganization(Guid clientId, Action<Organization> callback)
+        public void AllOrganization(Guid organizationId, Action<Organization> callback)
         {
-            Uri actionUri = new Uri(this.Container.BaseUri,
-                String.Format("Organizations(guid'{0}')/GetAllOrganization", clientId)
-                );
+            Uri actionUri = new Uri(String.Format("/Organizations(guid'{0}')/AllOrganization?$expand=Client", organizationId), UriKind.Relative);
 
-            this.Container.BeginExecute<int>(actionUri, result =>
+            this.Container.BeginExecute<Organization>(actionUri, result =>
             {
                 var response = this.Container.EndExecute<Organization>(result).FirstOrDefault();
+                UIThread.Invoke(() => callback(response));
+            }, this.Container);
+        }
+
+        public void GeneralJournalSetup(Guid organizationId, Action<GeneralJournalSetup> callback)
+        {
+            Uri actionUri = new Uri(String.Format("/Organizations(guid'{0}')/GeneralJournalSetup?$expand=GeneralJournalNumberSequence,LocalCurrency", organizationId), 
+                UriKind.Relative);
+
+            this.Container.BeginExecute<GeneralJournalSetup>(actionUri, result =>
+            {
+                var response = this.Container.EndExecute<GeneralJournalSetup>(result).FirstOrDefault();
                 UIThread.Invoke(() => callback(response));
             }, this.Container);
         }

@@ -44,17 +44,17 @@ namespace MyERP.Web
             //tutorsEntitySet.EntityType.Ignore(s => s.Password);
 
             //Declare the Action in the Entity Data Model
-            ActionConfiguration sequenceNextVal = builder.Entity<NumberSequence>().Action("SequenceNextVal");
-            sequenceNextVal.Parameter<Guid>("key");
-            sequenceNextVal.Returns<int>();
+            //ActionConfiguration sequenceNextVal = builder.Entity<NumberSequence>().Action("SequenceNextVal");
+            //sequenceNextVal.Parameter<Guid>("key");
+            //sequenceNextVal.Returns<int>();
 
-            ActionConfiguration allOrganization = builder.Entity<Organization>().Action("GetAllOrganization");
-            allOrganization.Parameter<Guid>("clientKey");
-            allOrganization.ReturnsFromEntitySet<Organization>("Organizations");
+            //ActionConfiguration allOrganization = builder.Entity<Organization>().Action("AllOrganization");
+            //allOrganization.Parameter<Guid>("key");
+            //allOrganization.ReturnsFromEntitySet<Organization>("Organizations");
 
-            ActionConfiguration generalJournalSetupOfOrganization = builder.Entity<GeneralJournalSetup>().Action("GetGeneralJournalSetupOfOrganization");
-            generalJournalSetupOfOrganization.Parameter<Guid>("organizationKey");
-            generalJournalSetupOfOrganization.ReturnsFromEntitySet<GeneralJournalSetup>("GeneralJournalSetups");
+            //ActionConfiguration generalJournalSetupOfOrganization = builder.Entity<GeneralJournalSetup>().Action("GetGeneralJournalSetupOfOrganization");
+            //generalJournalSetupOfOrganization.Parameter<Guid>("organizationKey");
+            //generalJournalSetupOfOrganization.ReturnsFromEntitySet<GeneralJournalSetup>("GeneralJournalSetups");
 
             config.Filters.Add(new MembershipHttpAuthorizeAttribute());
             config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel());

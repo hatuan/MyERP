@@ -185,8 +185,7 @@
         <Property Name="CurrencyExchangeRate" Type="Edm.Int32" Nullable="false" />
         <Property Name="CurrencyId" Type="Edm.Guid" />
         <Property Name="Description" Type="Edm.String" />
-        <Property Name="Locked" Type="Edm.Boolean" Nullable="false" />
-        <Property Name="DocumentStatusType" Type="Edm.String" Nullable="false" />
+        <Property Name="Locked" Type="Edm.Boolean" />
         <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
         <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
         <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" ToRole="RecCreatedByUser" FromRole="RecCreatedByUserPartner" />
@@ -352,6 +351,7 @@
         <Property Name="RecCreated" Type="Edm.DateTime" Nullable="false" />
         <Property Name="RecCreatedBy" Type="Edm.Guid" Nullable="false" />
         <Property Name="RecModified" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="SequenceNextVal" Type="Edm.Int32" Nullable="false" />
         <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_NumberSequence_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
         <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.MyERP_DataAccess_NumberSequence_Organization_MyERP_DataAccess_Organization_OrganizationPartner" ToRole="Organization" FromRole="OrganizationPartner" />
         <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_NumberSequence_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" ToRole="RecCreatedByUser" FromRole="RecCreatedByUserPartner" />
@@ -375,6 +375,8 @@
         <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_Organization_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" ToRole="RecCreatedByUser" FromRole="RecCreatedByUserPartner" />
         <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.MyERP_DataAccess_Organization_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner" ToRole="RecModifiedByUser" FromRole="RecModifiedByUserPartner" />
         <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.MyERP_DataAccess_Organization_Client_MyERP_DataAccess_Client_ClientPartner" ToRole="Client" FromRole="ClientPartner" />
+        <NavigationProperty Name="AllOrganization" Relationship="MyERP.DataAccess.MyERP_DataAccess_Organization_AllOrganization_MyERP_DataAccess_Organization_AllOrganizationPartner" ToRole="AllOrganization" FromRole="AllOrganizationPartner" />
+        <NavigationProperty Name="GeneralJournalSetup" Relationship="MyERP.DataAccess.MyERP_DataAccess_Organization_GeneralJournalSetup_MyERP_DataAccess_GeneralJournalSetup_GeneralJournalSetupPartner" ToRole="GeneralJournalSetup" FromRole="GeneralJournalSetupPartner" />
       </EntityType>
       <EntityType Name="PaymentTerm">
         <Key>
@@ -761,6 +763,14 @@
         <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
         <End Type="MyERP.DataAccess.Organization" Role="ClientPartner" Multiplicity="0..1" />
       </Association>
+      <Association Name="MyERP_DataAccess_Organization_AllOrganization_MyERP_DataAccess_Organization_AllOrganizationPartner">
+        <End Type="MyERP.DataAccess.Organization" Role="AllOrganization" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Organization" Role="AllOrganizationPartner" Multiplicity="0..1" />
+      </Association>
+      <Association Name="MyERP_DataAccess_Organization_GeneralJournalSetup_MyERP_DataAccess_GeneralJournalSetup_GeneralJournalSetupPartner">
+        <End Type="MyERP.DataAccess.GeneralJournalSetup" Role="GeneralJournalSetup" Multiplicity="0..1" />
+        <End Type="MyERP.DataAccess.Organization" Role="GeneralJournalSetupPartner" Multiplicity="0..1" />
+      </Association>
       <Association Name="MyERP_DataAccess_PaymentTerm_Client_MyERP_DataAccess_Client_ClientPartner">
         <End Type="MyERP.DataAccess.Client" Role="Client" Multiplicity="0..1" />
         <End Type="MyERP.DataAccess.PaymentTerm" Role="ClientPartner" Multiplicity="0..1" />
@@ -805,18 +815,6 @@
         <EntitySet Name="PaymentTerms" EntityType="MyERP.DataAccess.PaymentTerm" />
         <EntitySet Name="Sessions" EntityType="MyERP.DataAccess.Session" />
         <EntitySet Name="Users" EntityType="MyERP.DataAccess.User" />
-        <FunctionImport Name="SequenceNextVal" ReturnType="Edm.Int32" IsBindable="true" m:IsAlwaysBindable="true">
-          <Parameter Name="bindingParameter" Type="MyERP.DataAccess.NumberSequence" />
-          <Parameter Name="key" Type="Edm.Guid" Nullable="false" />
-        </FunctionImport>
-        <FunctionImport Name="GetAllOrganization" ReturnType="MyERP.DataAccess.Organization" IsBindable="true" EntitySet="Organizations" m:IsAlwaysBindable="true">
-          <Parameter Name="bindingParameter" Type="MyERP.DataAccess.Organization" />
-          <Parameter Name="clientKey" Type="Edm.Guid" Nullable="false" />
-        </FunctionImport>
-        <FunctionImport Name="GeneralJournalSetupOfOrganization" ReturnType="MyERP.DataAccess.GeneralJournalSetup" IsBindable="true" EntitySet="GeneralJournalSetups" m:IsAlwaysBindable="true">
-          <Parameter Name="bindingParameter" Type="MyERP.DataAccess.GeneralJournalSetup" />
-          <Parameter Name="organizationKey" Type="Edm.Guid" Nullable="false" />
-        </FunctionImport>
         <AssociationSet Name="MyERP_DataAccess_Account_Currency_MyERP_DataAccess_Currency_CurrencyPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Account_Currency_MyERP_DataAccess_Currency_CurrencyPartner">
           <End Role="CurrencyPartner" EntitySet="Accounts" />
           <End Role="Currency" EntitySet="Currencies" />
@@ -1140,6 +1138,14 @@
         <AssociationSet Name="MyERP_DataAccess_Organization_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Organization_Client_MyERP_DataAccess_Client_ClientPartner">
           <End Role="ClientPartner" EntitySet="Organizations" />
           <End Role="Client" EntitySet="Clients" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Organization_AllOrganization_MyERP_DataAccess_Organization_AllOrganizationPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Organization_AllOrganization_MyERP_DataAccess_Organization_AllOrganizationPartner">
+          <End Role="AllOrganizationPartner" EntitySet="Organizations" />
+          <End Role="AllOrganization" EntitySet="Organizations" />
+        </AssociationSet>
+        <AssociationSet Name="MyERP_DataAccess_Organization_GeneralJournalSetup_MyERP_DataAccess_GeneralJournalSetup_GeneralJournalSetupPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_Organization_GeneralJournalSetup_MyERP_DataAccess_GeneralJournalSetup_GeneralJournalSetupPartner">
+          <End Role="GeneralJournalSetupPartner" EntitySet="Organizations" />
+          <End Role="GeneralJournalSetup" EntitySet="GeneralJournalSetups" />
         </AssociationSet>
         <AssociationSet Name="MyERP_DataAccess_PaymentTerm_Client_MyERP_DataAccess_Client_ClientPartnerSet" Association="MyERP.DataAccess.MyERP_DataAccess_PaymentTerm_Client_MyERP_DataAccess_Client_ClientPartner">
           <End Role="ClientPartner" EntitySet="PaymentTerms" />

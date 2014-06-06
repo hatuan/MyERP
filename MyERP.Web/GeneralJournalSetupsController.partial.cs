@@ -105,24 +105,5 @@ namespace MyERP.Web
         {
             return StatusCode(HttpStatusCode.NoContent);
         }
-
-
-        public IHttpActionResult GetGeneralJournalSetupOfOrganization([FromODataUri] Guid organizationKey)
-        {
-            GeneralJournalSetup entity = repository.GetBy(c => c.OrganizationId == organizationKey);
-            if (entity == null)
-            {
-                Organization organization = repository.DataContext.Organizations.FirstOrDefault(o => o.Id == organizationKey);
-                Organization allOrganization = repository.DataContext.Organizations.FirstOrDefault(o => o.ClientId == organization.ClientId && o.Code == "*");
-
-                entity = repository.GetBy(c => c.OrganizationId == allOrganization.Id);
-            }
-            if (entity == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(entity);
-        }
     }
 }

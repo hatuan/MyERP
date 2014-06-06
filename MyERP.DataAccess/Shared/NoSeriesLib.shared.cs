@@ -85,7 +85,7 @@ namespace MyERP.DataAccess.Shared
             if (EndPos < No.Length - 1)
                 EndNo = No.Substring(EndPos + 1);
             NewLength = NewNo.ToString().Length;
-            OldLength = EndPos - StartPos + 1;
+            OldLength = EndPos - StartPos;
             if (FixedLength > OldLength)
                 OldLength = FixedLength;
             if (OldLength > NewLength)

@@ -2,6 +2,7 @@
 using System;
 using System.Data.Services.Client;
 using System.Linq;
+using MyERP.DataAccess.Shared;
 using MyERP.Infrastructure.Extensions;
 using MyERP.Repositories;
 
@@ -14,49 +15,56 @@ namespace MyERP.Repository.MyERPService
 
         partial void OnNumberSequenceIdChanged()
         {
+            //var pendingEntityChanges =
+            //    GeneralJournalDocumentRepository.Container.Entities.Any(
+            //        ed => ed.State != EntityStates.Unchanged && ed.Entity.GetType() == typeof(GeneralJournalDocument));
 
+            //if (pendingEntityChanges)
+            //{
+            //    NoSeriesLib.NextNo(this.NumberSequence.Id, this.NumberSequence.FormatNo, result => this.DocumentNo = result);
+            //}
         }
 
         partial void OnDocumentNoChanged()
         {
-            var pendingEntityChanges =
-                GeneralJournalDocumentRepository.Container.Entities.Any(
-                    ed => ed.State != EntityStates.Unchanged && ed.Entity.GetType() == typeof (GeneralJournalDocument));
+            //var pendingEntityChanges =
+            //    GeneralJournalDocumentRepository.Container.Entities.Any(
+            //        ed => ed.State != EntityStates.Unchanged && ed.Entity.GetType() == typeof (GeneralJournalDocument));
 
-            if (pendingEntityChanges)
-                GeneralJournalLines.ForEach(e =>
-                {
-                    e.DocumentNo = this.DocumentNo;
-                    GeneralJournalLineRepository.Update(e);
-                });
+            //if (pendingEntityChanges)
+            //    GeneralJournalLines.ForEach(e =>
+            //    {
+            //        e.DocumentNo = this.DocumentNo;
+            //        GeneralJournalLineRepository.Update(e);
+            //    });
         }
 
         partial void OnDocumentCreatedChanged()
         {
-            var pendingEntityChanges =
-                GeneralJournalDocumentRepository.Container.Entities.Any(
-                    ed => ed.State != EntityStates.Unchanged && ed.Entity.GetType() == typeof(GeneralJournalDocument));
+            //var pendingEntityChanges =
+            //    GeneralJournalDocumentRepository.Container.Entities.Any(
+            //        ed => ed.State != EntityStates.Unchanged && ed.Entity.GetType() == typeof(GeneralJournalDocument));
 
-            if(pendingEntityChanges)
-                GeneralJournalLines.ForEach(e =>
-                {
-                    e.DocumentCreated = this.DocumentCreated;
-                    GeneralJournalLineRepository.Update(e);
-                });
+            //if(pendingEntityChanges)
+            //    GeneralJournalLines.ForEach(e =>
+            //    {
+            //        e.DocumentCreated = this.DocumentCreated;
+            //        GeneralJournalLineRepository.Update(e);
+            //    });
         }
 
         partial void OnDocumentPostedChanged()
         {
-            var pendingEntityChanges =
-                GeneralJournalDocumentRepository.Container.Entities.Any(
-                    ed => ed.State != EntityStates.Unchanged && ed.Entity.GetType() == typeof(GeneralJournalDocument));
+            //var pendingEntityChanges =
+            //    GeneralJournalDocumentRepository.Container.Entities.Any(
+            //        ed => ed.State != EntityStates.Unchanged && ed.Entity.GetType() == typeof(GeneralJournalDocument));
 
-            if(pendingEntityChanges)
-                GeneralJournalLines.ForEach(e =>
-                {
-                    e.DocumentPosted = this.DocumentPosted;
-                    GeneralJournalLineRepository.Update(e);
-                });
+            //if(pendingEntityChanges)
+            //    GeneralJournalLines.ForEach(e =>
+            //    {
+            //        e.DocumentPosted = this.DocumentPosted;
+            //        GeneralJournalLineRepository.Update(e);
+            //    });
         }
     }
 }

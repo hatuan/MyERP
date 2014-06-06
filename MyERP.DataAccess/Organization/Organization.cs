@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyERP.DataAccess
 {
@@ -29,5 +30,21 @@ namespace MyERP.DataAccess
                 //intentionally empty
             }
         }
+        
+        //Cot khong co trong CSDL. Chi dung de su lay Organization.Code = "*" cua Organization hien tai
+        //sau thu tuc GET http://localhost/MyERP.Web/odata/Organizations(guid'...')/AllOrganization
+        //Neu 
+        /// <summary>
+        /// Cot khong co trong CSDL. Chi dung de su lay Organization.Code = "*" cua Organization hien tai sau thu tuc GET http://localhost/MyERP.Web/odata/Organizations(guid'...')/AllOrganization
+        /// 
+        /// Neu khong tao cot nay thi phai dung ActionConfiguration trong WebApiConfig.cs
+        /// ActionConfiguration allOrganization = builder.Entity<Organization>().Action("AllOrganization");
+        /// allOrganization.Parameter<Guid>("key");
+        /// allOrganization.ReturnsFromEntitySet<Organization>("Organizations");
+        /// va goi POST http://localhost/MyERP.Web/odata/Organizations(guid'...')/AllOrganization
+        /// </summary>
+        public virtual Organization AllOrganization { get; set; }
+
+        public virtual GeneralJournalSetup GeneralJournalSetup { get; set; }
     }
 }

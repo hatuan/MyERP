@@ -15,17 +15,6 @@ namespace MyERP.Repository.MyERPService
 {
     public partial class Container
     {
-        public void SequenceNextVal(Guid id, Action<int> callback)
-        {
-            Uri actionUri = new Uri(this.BaseUri,
-                String.Format("NumberSequences(guid'{0}')/SequenceNextVal", id)
-                );
 
-            this.BeginExecute<int>(actionUri, result =>
-            {
-                var response = this.EndExecute<int>(result).FirstOrDefault();
-                UIThread.Invoke(() => callback(response));
-            }, this);
-        }
     }
 }

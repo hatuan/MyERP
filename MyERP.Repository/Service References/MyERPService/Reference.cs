@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 // Original file name:
-// Generation date: 6/6/2014 1:23:59 AM
+// Generation date: 6/6/2014 2:15:00 PM
 namespace MyERP.Repository.MyERPService
 {
     
@@ -691,1039 +691,1046 @@ namespace MyERP.Repository.MyERPService
                 "e=\"Edm.Decimal\" Nullable=\"false\" /><Property Name=\"TransactionType\" Type=\"Edm.St" +
                 "ring\" Nullable=\"false\" /><Property Name=\"CurrencyExchangeRate\" Type=\"Edm.Int32\" " +
                 "Nullable=\"false\" /><Property Name=\"CurrencyId\" Type=\"Edm.Guid\" /><Property Name=" +
-                "\"Description\" Type=\"Edm.String\" /><Property Name=\"Locked\" Type=\"Edm.Boolean\" Nul" +
-                "lable=\"false\" /><Property Name=\"DocumentStatusType\" Type=\"Edm.String\" Nullable=\"" +
-                "false\" /><NavigationProperty Name=\"Client\" Relationship=\"MyERP.DataAccess.MyERP_" +
-                "DataAccess_GeneralJournalDocument_Client_MyERP_DataAccess_Client_ClientPartner\" " +
-                "ToRole=\"Client\" FromRole=\"ClientPartner\" /><NavigationProperty Name=\"Organizatio" +
-                "n\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_Organi" +
-                "zation_MyERP_DataAccess_Organization_OrganizationPartner\" ToRole=\"Organization\" " +
-                "FromRole=\"OrganizationPartner\" /><NavigationProperty Name=\"RecCreatedByUser\" Rel" +
-                "ationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_RecCreatedBy" +
-                "User_MyERP_DataAccess_User_RecCreatedByUserPartner\" ToRole=\"RecCreatedByUser\" Fr" +
-                "omRole=\"RecCreatedByUserPartner\" /><NavigationProperty Name=\"RecModifiedByUser\" " +
-                "Relationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_RecModifi" +
-                "edByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\" ToRole=\"RecModifiedByUs" +
-                "er\" FromRole=\"RecModifiedByUserPartner\" /><NavigationProperty Name=\"Currency\" Re" +
-                "lationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_Currency_My" +
-                "ERP_DataAccess_Currency_CurrencyPartner\" ToRole=\"Currency\" FromRole=\"CurrencyPar" +
-                "tner\" /><NavigationProperty Name=\"NumberSequence\" Relationship=\"MyERP.DataAccess" +
-                ".MyERP_DataAccess_GeneralJournalDocument_NumberSequence_MyERP_DataAccess_NumberS" +
-                "equence_NumberSequencePartner\" ToRole=\"NumberSequence\" FromRole=\"NumberSequenceP" +
-                "artner\" /><NavigationProperty Name=\"GeneralJournalLines\" Relationship=\"MyERP.Dat" +
-                "aAccess.MyERP_DataAccess_GeneralJournalDocument_GeneralJournalLines_MyERP_DataAc" +
-                "cess_GeneralJournalLine_GeneralJournalLinesPartner\" ToRole=\"GeneralJournalLines\"" +
-                " FromRole=\"GeneralJournalLinesPartner\" /></EntityType><EntityType Name=\"GeneralJ" +
-                "ournalLine\"><Key><PropertyRef Name=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.Gu" +
-                "id\" Nullable=\"false\" /><Property Name=\"CorAccountId\" Type=\"Edm.Guid\" Nullable=\"f" +
-                "alse\" /><Property Name=\"AccountId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property " +
-                "Name=\"Description\" Type=\"Edm.String\" /><Property Name=\"DebitAmount\" Type=\"Edm.De" +
-                "cimal\" Nullable=\"false\" /><Property Name=\"CreditAmountLcy\" Type=\"Edm.Decimal\" Nu" +
-                "llable=\"false\" /><Property Name=\"DebitAmountLcy\" Type=\"Edm.Decimal\" Nullable=\"fa" +
-                "lse\" /><Property Name=\"CreditAmount\" Type=\"Edm.Decimal\" Nullable=\"false\" /><Prop" +
-                "erty Name=\"BusinessPartnerId\" Type=\"Edm.Guid\" /><Property Name=\"JobId\" Type=\"Edm" +
-                ".Guid\" /><Property Name=\"LineNo\" Type=\"Edm.Int64\" Nullable=\"false\" /><Property N" +
-                "ame=\"ClientId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"OrganizationId" +
-                "\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Version\" Type=\"Edm.Int64\" N" +
-                "ullable=\"false\" /><Property Name=\"GeneralJournalDocumentId\" Type=\"Edm.Guid\" Null" +
-                "able=\"false\" /><Property Name=\"CurrencyExchangeRate\" Type=\"Edm.Decimal\" /><Prope" +
-                "rty Name=\"CurrencyId\" Type=\"Edm.Guid\" /><Property Name=\"DocumentCreated\" Type=\"E" +
-                "dm.DateTime\" Nullable=\"false\" /><Property Name=\"DocumentNo\" Type=\"Edm.String\" />" +
-                "<Property Name=\"DocumentPosted\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property" +
-                " Name=\"DocumentType\" Type=\"Edm.String\" Nullable=\"false\" /><Property Name=\"RecCre" +
-                "ated\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property Name=\"RecCreatedBy\" Type=" +
-                "\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"RecModified\" Type=\"Edm.DateTime\" N" +
-                "ullable=\"false\" /><Property Name=\"RecModifiedBy\" Type=\"Edm.Guid\" Nullable=\"false" +
-                "\" /><Property Name=\"TransactionType\" Type=\"Edm.String\" Nullable=\"false\" /><Prope" +
-                "rty Name=\"FixAssetId\" Type=\"Edm.Guid\" /><NavigationProperty Name=\"Client\" Relati" +
-                "onship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Client_MyERP_DataAc" +
-                "cess_Client_ClientPartner\" ToRole=\"Client\" FromRole=\"ClientPartner\" /><Navigatio" +
-                "nProperty Name=\"Organization\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Ge" +
-                "neralJournalLine_Organization_MyERP_DataAccess_Organization_OrganizationPartner\"" +
-                " ToRole=\"Organization\" FromRole=\"OrganizationPartner\" /><NavigationProperty Name" +
-                "=\"BusinessPartner\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJourna" +
-                "lLine_BusinessPartner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartner\" T" +
-                "oRole=\"BusinessPartner\" FromRole=\"BusinessPartnerPartner\" /><NavigationProperty " +
-                "Name=\"Job\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Jo" +
-                "b_MyERP_DataAccess_Job_JobPartner\" ToRole=\"Job\" FromRole=\"JobPartner\" /><Navigat" +
-                "ionProperty Name=\"RecModifiedByUser\" Relationship=\"MyERP.DataAccess.MyERP_DataAc" +
-                "cess_GeneralJournalLine_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUse" +
-                "rPartner\" ToRole=\"RecModifiedByUser\" FromRole=\"RecModifiedByUserPartner\" /><Navi" +
-                "gationProperty Name=\"RecCreatedByUser\" Relationship=\"MyERP.DataAccess.MyERP_Data" +
-                "Access_GeneralJournalLine_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUse" +
-                "rPartner\" ToRole=\"RecCreatedByUser\" FromRole=\"RecCreatedByUserPartner\" /><Naviga" +
-                "tionProperty Name=\"Account\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Gene" +
-                "ralJournalLine_Account_MyERP_DataAccess_Account_AccountPartner\" ToRole=\"Account\"" +
-                " FromRole=\"AccountPartner\" /><NavigationProperty Name=\"CorAccount\" Relationship=" +
-                "\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_CorAccount_MyERP_DataAcces" +
-                "s_Account_CorAccountPartner\" ToRole=\"CorAccount\" FromRole=\"CorAccountPartner\" />" +
-                "<NavigationProperty Name=\"GeneralJournalDocument\" Relationship=\"MyERP.DataAccess" +
-                ".MyERP_DataAccess_GeneralJournalLine_GeneralJournalDocument_MyERP_DataAccess_Gen" +
-                "eralJournalDocument_GeneralJournalDocumentPartner\" ToRole=\"GeneralJournalDocumen" +
-                "t\" FromRole=\"GeneralJournalDocumentPartner\" /><NavigationProperty Name=\"Currency" +
-                "\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Currency_My" +
-                "ERP_DataAccess_Currency_CurrencyPartner\" ToRole=\"Currency\" FromRole=\"CurrencyPar" +
-                "tner\" /></EntityType><EntityType Name=\"GeneralJournalSetup\"><Key><PropertyRef Na" +
-                "me=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property" +
-                " Name=\"OrganizationId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Client" +
-                "Id\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"LocalCurrencyId\" Type=\"Ed" +
-                "m.Guid\" Nullable=\"false\" /><Property Name=\"LcyExchangeRateUnit\" Type=\"Edm.Int32\"" +
-                " Nullable=\"false\" /><Property Name=\"GeneralJournalNumberSequenceId\" Type=\"Edm.Gu" +
-                "id\" Nullable=\"false\" /><Property Name=\"RecCreated\" Type=\"Edm.DateTime\" Nullable=" +
-                "\"false\" /><Property Name=\"RecModified\" Type=\"Edm.DateTime\" Nullable=\"false\" /><P" +
-                "roperty Name=\"RecCreatedBy\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"R" +
-                "ecModifiedBy\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Version\" Type=\"" +
-                "Edm.Int64\" Nullable=\"false\" /><NavigationProperty Name=\"RecCreatedByUser\" Relati" +
-                "onship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSet";
+                "\"Description\" Type=\"Edm.String\" /><Property Name=\"Locked\" Type=\"Edm.Boolean\" /><" +
+                "NavigationProperty Name=\"Client\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess" +
+                "_GeneralJournalDocument_Client_MyERP_DataAccess_Client_ClientPartner\" ToRole=\"Cl" +
+                "ient\" FromRole=\"ClientPartner\" /><NavigationProperty Name=\"Organization\" Relatio" +
+                "nship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_Organization_MyE" +
+                "RP_DataAccess_Organization_OrganizationPartner\" ToRole=\"Organization\" FromRole=\"" +
+                "OrganizationPartner\" /><NavigationProperty Name=\"RecCreatedByUser\" Relationship=" +
+                "\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_RecCreatedByUser_MyERP" +
+                "_DataAccess_User_RecCreatedByUserPartner\" ToRole=\"RecCreatedByUser\" FromRole=\"Re" +
+                "cCreatedByUserPartner\" /><NavigationProperty Name=\"RecModifiedByUser\" Relationsh" +
+                "ip=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_RecModifiedByUser_M" +
+                "yERP_DataAccess_User_RecModifiedByUserPartner\" ToRole=\"RecModifiedByUser\" FromRo" +
+                "le=\"RecModifiedByUserPartner\" /><NavigationProperty Name=\"Currency\" Relationship" +
+                "=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_Currency_MyERP_DataAc" +
+                "cess_Currency_CurrencyPartner\" ToRole=\"Currency\" FromRole=\"CurrencyPartner\" /><N" +
+                "avigationProperty Name=\"NumberSequence\" Relationship=\"MyERP.DataAccess.MyERP_Dat" +
+                "aAccess_GeneralJournalDocument_NumberSequence_MyERP_DataAccess_NumberSequence_Nu" +
+                "mberSequencePartner\" ToRole=\"NumberSequence\" FromRole=\"NumberSequencePartner\" />" +
+                "<NavigationProperty Name=\"GeneralJournalLines\" Relationship=\"MyERP.DataAccess.My" +
+                "ERP_DataAccess_GeneralJournalDocument_GeneralJournalLines_MyERP_DataAccess_Gener" +
+                "alJournalLine_GeneralJournalLinesPartner\" ToRole=\"GeneralJournalLines\" FromRole=" +
+                "\"GeneralJournalLinesPartner\" /></EntityType><EntityType Name=\"GeneralJournalLine" +
+                "\"><Key><PropertyRef Name=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.Guid\" Nullab" +
+                "le=\"false\" /><Property Name=\"CorAccountId\" Type=\"Edm.Guid\" Nullable=\"false\" /><P" +
+                "roperty Name=\"AccountId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Desc" +
+                "ription\" Type=\"Edm.String\" /><Property Name=\"DebitAmount\" Type=\"Edm.Decimal\" Nul" +
+                "lable=\"false\" /><Property Name=\"CreditAmountLcy\" Type=\"Edm.Decimal\" Nullable=\"fa" +
+                "lse\" /><Property Name=\"DebitAmountLcy\" Type=\"Edm.Decimal\" Nullable=\"false\" /><Pr" +
+                "operty Name=\"CreditAmount\" Type=\"Edm.Decimal\" Nullable=\"false\" /><Property Name=" +
+                "\"BusinessPartnerId\" Type=\"Edm.Guid\" /><Property Name=\"JobId\" Type=\"Edm.Guid\" /><" +
+                "Property Name=\"LineNo\" Type=\"Edm.Int64\" Nullable=\"false\" /><Property Name=\"Clien" +
+                "tId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"OrganizationId\" Type=\"Ed" +
+                "m.Guid\" Nullable=\"false\" /><Property Name=\"Version\" Type=\"Edm.Int64\" Nullable=\"f" +
+                "alse\" /><Property Name=\"GeneralJournalDocumentId\" Type=\"Edm.Guid\" Nullable=\"fals" +
+                "e\" /><Property Name=\"CurrencyExchangeRate\" Type=\"Edm.Decimal\" /><Property Name=\"" +
+                "CurrencyId\" Type=\"Edm.Guid\" /><Property Name=\"DocumentCreated\" Type=\"Edm.DateTim" +
+                "e\" Nullable=\"false\" /><Property Name=\"DocumentNo\" Type=\"Edm.String\" /><Property " +
+                "Name=\"DocumentPosted\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property Name=\"Doc" +
+                "umentType\" Type=\"Edm.String\" Nullable=\"false\" /><Property Name=\"RecCreated\" Type" +
+                "=\"Edm.DateTime\" Nullable=\"false\" /><Property Name=\"RecCreatedBy\" Type=\"Edm.Guid\"" +
+                " Nullable=\"false\" /><Property Name=\"RecModified\" Type=\"Edm.DateTime\" Nullable=\"f" +
+                "alse\" /><Property Name=\"RecModifiedBy\" Type=\"Edm.Guid\" Nullable=\"false\" /><Prope" +
+                "rty Name=\"TransactionType\" Type=\"Edm.String\" Nullable=\"false\" /><Property Name=\"" +
+                "FixAssetId\" Type=\"Edm.Guid\" /><NavigationProperty Name=\"Client\" Relationship=\"My" +
+                "ERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Client_MyERP_DataAccess_Clien" +
+                "t_ClientPartner\" ToRole=\"Client\" FromRole=\"ClientPartner\" /><NavigationProperty " +
+                "Name=\"Organization\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJourn" +
+                "alLine_Organization_MyERP_DataAccess_Organization_OrganizationPartner\" ToRole=\"O" +
+                "rganization\" FromRole=\"OrganizationPartner\" /><NavigationProperty Name=\"Business" +
+                "Partner\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Busi" +
+                "nessPartner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartner\" ToRole=\"Bus" +
+                "inessPartner\" FromRole=\"BusinessPartnerPartner\" /><NavigationProperty Name=\"Job\"" +
+                " Relationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Job_MyERP_Da" +
+                "taAccess_Job_JobPartner\" ToRole=\"Job\" FromRole=\"JobPartner\" /><NavigationPropert" +
+                "y Name=\"RecModifiedByUser\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Gener" +
+                "alJournalLine_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\" " +
+                "ToRole=\"RecModifiedByUser\" FromRole=\"RecModifiedByUserPartner\" /><NavigationProp" +
+                "erty Name=\"RecCreatedByUser\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Gen" +
+                "eralJournalLine_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\" " +
+                "ToRole=\"RecCreatedByUser\" FromRole=\"RecCreatedByUserPartner\" /><NavigationProper" +
+                "ty Name=\"Account\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournal" +
+                "Line_Account_MyERP_DataAccess_Account_AccountPartner\" ToRole=\"Account\" FromRole=" +
+                "\"AccountPartner\" /><NavigationProperty Name=\"CorAccount\" Relationship=\"MyERP.Dat" +
+                "aAccess.MyERP_DataAccess_GeneralJournalLine_CorAccount_MyERP_DataAccess_Account_" +
+                "CorAccountPartner\" ToRole=\"CorAccount\" FromRole=\"CorAccountPartner\" /><Navigatio" +
+                "nProperty Name=\"GeneralJournalDocument\" Relationship=\"MyERP.DataAccess.MyERP_Dat" +
+                "aAccess_GeneralJournalLine_GeneralJournalDocument_MyERP_DataAccess_GeneralJourna" +
+                "lDocument_GeneralJournalDocumentPartner\" ToRole=\"GeneralJournalDocument\" FromRol" +
+                "e=\"GeneralJournalDocumentPartner\" /><NavigationProperty Name=\"Currency\" Relation" +
+                "ship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Currency_MyERP_DataAc" +
+                "cess_Currency_CurrencyPartner\" ToRole=\"Currency\" FromRole=\"CurrencyPartner\" /></" +
+                "EntityType><EntityType Name=\"GeneralJournalSetup\"><Key><PropertyRef Name=\"Id\" />" +
+                "</Key><Property Name=\"Id\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Org" +
+                "anizationId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"ClientId\" Type=\"" +
+                "Edm.Guid\" Nullable=\"false\" /><Property Name=\"LocalCurrencyId\" Type=\"Edm.Guid\" Nu" +
+                "llable=\"false\" /><Property Name=\"LcyExchangeRateUnit\" Type=\"Edm.Int32\" Nullable=" +
+                "\"false\" /><Property Name=\"GeneralJournalNumberSequenceId\" Type=\"Edm.Guid\" Nullab" +
+                "le=\"false\" /><Property Name=\"RecCreated\" Type=\"Edm.DateTime\" Nullable=\"false\" />" +
+                "<Property Name=\"RecModified\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property Na" +
+                "me=\"RecCreatedBy\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"RecModified" +
+                "By\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Version\" Type=\"Edm.Int64\"" +
+                " Nullable=\"false\" /><NavigationProperty Name=\"RecCreatedByUser\" Relationship=\"My" +
+                "ERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_RecCreatedByUser_MyERP_DataA" +
+                "ccess_User_RecCreatedByUserPartner\" ToRole=\"RecCreatedByUse";
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private const string ModelPart3 = "up_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\" ToRole=\"RecCre" +
-                "atedByUser\" FromRole=\"RecCreatedByUserPartner\" /><NavigationProperty Name=\"RecMo" +
-                "difiedByUser\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetu" +
-                "p_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\" ToRole=\"RecM" +
-                "odifiedByUser\" FromRole=\"RecModifiedByUserPartner\" /><NavigationProperty Name=\"O" +
-                "rganization\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup" +
-                "_Organization_MyERP_DataAccess_Organization_OrganizationPartner\" ToRole=\"Organiz" +
-                "ation\" FromRole=\"OrganizationPartner\" /><NavigationProperty Name=\"LocalCurrency\"" +
-                " Relationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_LocalCurren" +
-                "cy_MyERP_DataAccess_Currency_LocalCurrencyPartner\" ToRole=\"LocalCurrency\" FromRo" +
-                "le=\"LocalCurrencyPartner\" /><NavigationProperty Name=\"GeneralJournalNumberSequen" +
-                "ce\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_GeneralJ" +
-                "ournalNumberSequence_MyERP_DataAccess_NumberSequence_GeneralJournalNumberSequenc" +
-                "ePartner\" ToRole=\"GeneralJournalNumberSequence\" FromRole=\"GeneralJournalNumberSe" +
-                "quencePartner\" /><NavigationProperty Name=\"Client\" Relationship=\"MyERP.DataAcces" +
-                "s.MyERP_DataAccess_GeneralJournalSetup_Client_MyERP_DataAccess_Client_ClientPart" +
-                "ner\" ToRole=\"Client\" FromRole=\"ClientPartner\" /></EntityType><EntityType Name=\"J" +
-                "obGroup\"><Key><PropertyRef Name=\"Id\" /></Key><Property Name=\"Level\" Type=\"Edm.In" +
-                "t16\" Nullable=\"false\" /><Property Name=\"Code\" Type=\"Edm.String\" /><Property Name" +
-                "=\"Name\" Type=\"Edm.String\" /><Property Name=\"RecCreated\" Type=\"Edm.DateTime\" Null" +
-                "able=\"false\" /><Property Name=\"RecCreateBy\" Type=\"Edm.Guid\" Nullable=\"false\" /><" +
-                "Property Name=\"Status\" Type=\"Edm.Byte\" Nullable=\"false\" /><Property Name=\"RecMod" +
-                "ified\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property Name=\"RecModifiedBy\" Typ" +
-                "e=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"ClientId\" Type=\"Edm.Guid\" Nullab" +
-                "le=\"false\" /><Property Name=\"OrganizationId\" Type=\"Edm.Guid\" Nullable=\"false\" />" +
-                "<Property Name=\"Id\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Version\" " +
-                "Type=\"Edm.Int64\" Nullable=\"false\" /><NavigationProperty Name=\"Client\" Relationsh" +
-                "ip=\"MyERP.DataAccess.MyERP_DataAccess_JobGroup_Client_MyERP_DataAccess_Client_Cl" +
-                "ientPartner\" ToRole=\"Client\" FromRole=\"ClientPartner\" /><NavigationProperty Name" +
-                "=\"Organization\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_JobGroup_Organiz" +
-                "ation_MyERP_DataAccess_Organization_OrganizationPartner\" ToRole=\"Organization\" F" +
-                "romRole=\"OrganizationPartner\" /><NavigationProperty Name=\"RecCreatedByUser\" Rela" +
-                "tionship=\"MyERP.DataAccess.MyERP_DataAccess_JobGroup_RecCreatedByUser_MyERP_Data" +
+            private const string ModelPart3 = "r\" FromRole=\"RecCreatedByUserPartner\" /><NavigationProperty Name=\"RecModifiedByUs" +
+                "er\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_RecModif" +
+                "iedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\" ToRole=\"RecModifiedByU" +
+                "ser\" FromRole=\"RecModifiedByUserPartner\" /><NavigationProperty Name=\"Organizatio" +
+                "n\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_Organizat" +
+                "ion_MyERP_DataAccess_Organization_OrganizationPartner\" ToRole=\"Organization\" Fro" +
+                "mRole=\"OrganizationPartner\" /><NavigationProperty Name=\"LocalCurrency\" Relations" +
+                "hip=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_LocalCurrency_MyERP_D" +
+                "ataAccess_Currency_LocalCurrencyPartner\" ToRole=\"LocalCurrency\" FromRole=\"LocalC" +
+                "urrencyPartner\" /><NavigationProperty Name=\"GeneralJournalNumberSequence\" Relati" +
+                "onship=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_GeneralJournalNumb" +
+                "erSequence_MyERP_DataAccess_NumberSequence_GeneralJournalNumberSequencePartner\" " +
+                "ToRole=\"GeneralJournalNumberSequence\" FromRole=\"GeneralJournalNumberSequencePart" +
+                "ner\" /><NavigationProperty Name=\"Client\" Relationship=\"MyERP.DataAccess.MyERP_Da" +
+                "taAccess_GeneralJournalSetup_Client_MyERP_DataAccess_Client_ClientPartner\" ToRol" +
+                "e=\"Client\" FromRole=\"ClientPartner\" /></EntityType><EntityType Name=\"JobGroup\"><" +
+                "Key><PropertyRef Name=\"Id\" /></Key><Property Name=\"Level\" Type=\"Edm.Int16\" Nulla" +
+                "ble=\"false\" /><Property Name=\"Code\" Type=\"Edm.String\" /><Property Name=\"Name\" Ty" +
+                "pe=\"Edm.String\" /><Property Name=\"RecCreated\" Type=\"Edm.DateTime\" Nullable=\"fals" +
+                "e\" /><Property Name=\"RecCreateBy\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property N" +
+                "ame=\"Status\" Type=\"Edm.Byte\" Nullable=\"false\" /><Property Name=\"RecModified\" Typ" +
+                "e=\"Edm.DateTime\" Nullable=\"false\" /><Property Name=\"RecModifiedBy\" Type=\"Edm.Gui" +
+                "d\" Nullable=\"false\" /><Property Name=\"ClientId\" Type=\"Edm.Guid\" Nullable=\"false\"" +
+                " /><Property Name=\"OrganizationId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property " +
+                "Name=\"Id\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Version\" Type=\"Edm." +
+                "Int64\" Nullable=\"false\" /><NavigationProperty Name=\"Client\" Relationship=\"MyERP." +
+                "DataAccess.MyERP_DataAccess_JobGroup_Client_MyERP_DataAccess_Client_ClientPartne" +
+                "r\" ToRole=\"Client\" FromRole=\"ClientPartner\" /><NavigationProperty Name=\"Organiza" +
+                "tion\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_JobGroup_Organization_MyER" +
+                "P_DataAccess_Organization_OrganizationPartner\" ToRole=\"Organization\" FromRole=\"O" +
+                "rganizationPartner\" /><NavigationProperty Name=\"RecCreatedByUser\" Relationship=\"" +
+                "MyERP.DataAccess.MyERP_DataAccess_JobGroup_RecCreatedByUser_MyERP_DataAccess_Use" +
+                "r_RecCreatedByUserPartner\" ToRole=\"RecCreatedByUser\" FromRole=\"RecCreatedByUserP" +
+                "artner\" /><NavigationProperty Name=\"RecModifiedByUser\" Relationship=\"MyERP.DataA" +
+                "ccess.MyERP_DataAccess_JobGroup_RecModifiedByUser_MyERP_DataAccess_User_RecModif" +
+                "iedByUserPartner\" ToRole=\"RecModifiedByUser\" FromRole=\"RecModifiedByUserPartner\"" +
+                " /><NavigationProperty Name=\"Job1s\" Relationship=\"MyERP.DataAccess.MyERP_DataAcc" +
+                "ess_JobGroup_Job1s_MyERP_DataAccess_Job_Job1sPartner\" ToRole=\"Job1s\" FromRole=\"J" +
+                "ob1sPartner\" /><NavigationProperty Name=\"Job2s\" Relationship=\"MyERP.DataAccess.M" +
+                "yERP_DataAccess_JobGroup_Job2s_MyERP_DataAccess_Job_Job2sPartner\" ToRole=\"Job2s\"" +
+                " FromRole=\"Job2sPartner\" /><NavigationProperty Name=\"Job3s\" Relationship=\"MyERP." +
+                "DataAccess.MyERP_DataAccess_JobGroup_Job3s_MyERP_DataAccess_Job_Job3sPartner\" To" +
+                "Role=\"Job3s\" FromRole=\"Job3sPartner\" /></EntityType><EntityType Name=\"Job\"><Key>" +
+                "<PropertyRef Name=\"Id\" /></Key><Property Name=\"Code\" Type=\"Edm.String\" /><Proper" +
+                "ty Name=\"Name\" Type=\"Edm.String\" /><Property Name=\"BusinessPartnerId\" Type=\"Edm." +
+                "Guid\" Nullable=\"false\" /><Property Name=\"JobGroupId1\" Type=\"Edm.Guid\" Nullable=\"" +
+                "false\" /><Property Name=\"JobGroupId2\" Type=\"Edm.Guid\" Nullable=\"false\" /><Proper" +
+                "ty Name=\"JobGroupId3\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"JobStar" +
+                "t\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property Name=\"JobEnd\" Type=\"Edm.Date" +
+                "Time\" Nullable=\"false\" /><Property Name=\"CurrencyId\" Type=\"Edm.Guid\" Nullable=\"f" +
+                "alse\" /><Property Name=\"Amount\" Type=\"Edm.Decimal\" Nullable=\"false\" /><Property " +
+                "Name=\"AmountLcy\" Type=\"Edm.Decimal\" Nullable=\"false\" /><Property Name=\"Comment\" " +
+                "Type=\"Edm.String\" /><Property Name=\"RecCreated\" Type=\"Edm.DateTime\" Nullable=\"fa" +
+                "lse\" /><Property Name=\"RecCreatedBy\" Type=\"Edm.Guid\" Nullable=\"false\" /><Propert" +
+                "y Name=\"RecModified\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property Name=\"RecM" +
+                "odifiedBy\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Status\" Type=\"Edm." +
+                "Byte\" Nullable=\"false\" /><Property Name=\"AccountId\" Type=\"Edm.Guid\" Nullable=\"fa" +
+                "lse\" /><Property Name=\"ClientId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Na" +
+                "me=\"OrganizationId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Id\" Type=" +
+                "\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Version\" Type=\"Edm.Int64\" Nullable" +
+                "=\"false\" /><NavigationProperty Name=\"Client\" Relationship=\"MyERP.DataAccess.MyER" +
+                "P_DataAccess_Job_Client_MyERP_DataAccess_Client_ClientPartner\" ToRole=\"Client\" F" +
+                "romRole=\"ClientPartner\" /><NavigationProperty Name=\"Organization\" Relationship=\"" +
+                "MyERP.DataAccess.MyERP_DataAccess_Job_Organization_MyERP_DataAccess_Organization" +
+                "_OrganizationPartner\" ToRole=\"Organization\" FromRole=\"OrganizationPartner\" /><Na" +
+                "vigationProperty Name=\"RecCreatedByUser\" Relationship=\"MyERP.DataAccess.MyERP_Da" +
+                "taAccess_Job_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\" ToR" +
+                "ole=\"RecCreatedByUser\" FromRole=\"RecCreatedByUserPartner\" /><NavigationProperty " +
+                "Name=\"RecModifiedByUser\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Job_Rec" +
+                "ModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\" ToRole=\"RecModifi" +
+                "edByUser\" FromRole=\"RecModifiedByUserPartner\" /><NavigationProperty Name=\"Busine" +
+                "ssPartner\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Job_BusinessPartner_M" +
+                "yERP_DataAccess_BusinessPartner_BusinessPartnerPartner\" ToRole=\"BusinessPartner\"" +
+                " FromRole=\"BusinessPartnerPartner\" /><NavigationProperty Name=\"Account\" Relation" +
+                "ship=\"MyERP.DataAccess.MyERP_DataAccess_Job_Account_MyERP_DataAccess_Account_Acc" +
+                "ountPartner\" ToRole=\"Account\" FromRole=\"AccountPartner\" /><NavigationProperty Na" +
+                "me=\"JobGroup1\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Job_JobGroup1_MyE" +
+                "RP_DataAccess_JobGroup_JobGroup1Partner\" ToRole=\"JobGroup1\" FromRole=\"JobGroup1P" +
+                "artner\" /><NavigationProperty Name=\"JobGroup2\" Relationship=\"MyERP.DataAccess.My" +
+                "ERP_DataAccess_Job_JobGroup2_MyERP_DataAccess_JobGroup_JobGroup2Partner\" ToRole=" +
+                "\"JobGroup2\" FromRole=\"JobGroup2Partner\" /><NavigationProperty Name=\"JobGroup3\" R" +
+                "elationship=\"MyERP.DataAccess.MyERP_DataAccess_Job_JobGroup3_MyERP_DataAccess_Jo" +
+                "bGroup_JobGroup3Partner\" ToRole=\"JobGroup3\" FromRole=\"JobGroup3Partner\" /></Enti" +
+                "tyType><EntityType Name=\"Module\"><Key><PropertyRef Name=\"Id\" /></Key><Property N" +
+                "ame=\"Id\" Type=\"Edm.Int64\" Nullable=\"false\" /><Property Name=\"Description\" Type=\"" +
+                "Edm.String\" /><Property Name=\"Group\" Type=\"Edm.String\" /><Property Name=\"Name\" T" +
+                "ype=\"Edm.String\" /><Property Name=\"ClientId\" Type=\"Edm.Guid\" Nullable=\"false\" />" +
+                "<Property Name=\"IdAsName\" Type=\"Edm.String\" Nullable=\"false\" /></EntityType><Ent" +
+                "ityType Name=\"NumberSequence\"><Key><PropertyRef Name=\"Id\" /></Key><Property Name" +
+                "=\"Id\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Version\" Type=\"Edm.Int6" +
+                "4\" Nullable=\"false\" /><Property Name=\"Code\" Type=\"Edm.String\" /><Property Name=\"" +
+                "CurrentNo\" Type=\"Edm.Int32\" Nullable=\"false\" /><Property Name=\"EndingNo\" Type=\"E" +
+                "dm.Int32\" Nullable=\"false\" /><Property Name=\"FormatNo\" Type=\"Edm.String\" /><Prop" +
+                "erty Name=\"IsDefault\" Type=\"Edm.Boolean\" Nullable=\"false\" /";
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+            private const string ModelPart4 = "><Property Name=\"Manual\" Type=\"Edm.Boolean\" Nullable=\"false\" /><Property Name=\"Na" +
+                "me\" Type=\"Edm.String\" /><Property Name=\"NoSeqName\" Type=\"Edm.String\" /><Property" +
+                " Name=\"OrganizationId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Client" +
+                "Id\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"StartingNo\" Type=\"Edm.Int" +
+                "32\" Nullable=\"false\" /><Property Name=\"Status\" Type=\"Edm.Int16\" Nullable=\"false\"" +
+                " /><Property Name=\"RecModifiedBy\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property N" +
+                "ame=\"RecCreated\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property Name=\"RecCreat" +
+                "edBy\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"RecModified\" Type=\"Edm." +
+                "DateTime\" Nullable=\"false\" /><Property Name=\"SequenceNextVal\" Type=\"Edm.Int32\" N" +
+                "ullable=\"false\" /><NavigationProperty Name=\"Client\" Relationship=\"MyERP.DataAcce" +
+                "ss.MyERP_DataAccess_NumberSequence_Client_MyERP_DataAccess_Client_ClientPartner\"" +
+                " ToRole=\"Client\" FromRole=\"ClientPartner\" /><NavigationProperty Name=\"Organizati" +
+                "on\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_NumberSequence_Organization_" +
+                "MyERP_DataAccess_Organization_OrganizationPartner\" ToRole=\"Organization\" FromRol" +
+                "e=\"OrganizationPartner\" /><NavigationProperty Name=\"RecCreatedByUser\" Relationsh" +
+                "ip=\"MyERP.DataAccess.MyERP_DataAccess_NumberSequence_RecCreatedByUser_MyERP_Data" +
                 "Access_User_RecCreatedByUserPartner\" ToRole=\"RecCreatedByUser\" FromRole=\"RecCrea" +
                 "tedByUserPartner\" /><NavigationProperty Name=\"RecModifiedByUser\" Relationship=\"M" +
-                "yERP.DataAccess.MyERP_DataAccess_JobGroup_RecModifiedByUser_MyERP_DataAccess_Use" +
-                "r_RecModifiedByUserPartner\" ToRole=\"RecModifiedByUser\" FromRole=\"RecModifiedByUs" +
-                "erPartner\" /><NavigationProperty Name=\"Job1s\" Relationship=\"MyERP.DataAccess.MyE" +
-                "RP_DataAccess_JobGroup_Job1s_MyERP_DataAccess_Job_Job1sPartner\" ToRole=\"Job1s\" F" +
-                "romRole=\"Job1sPartner\" /><NavigationProperty Name=\"Job2s\" Relationship=\"MyERP.Da" +
-                "taAccess.MyERP_DataAccess_JobGroup_Job2s_MyERP_DataAccess_Job_Job2sPartner\" ToRo" +
-                "le=\"Job2s\" FromRole=\"Job2sPartner\" /><NavigationProperty Name=\"Job3s\" Relationsh" +
-                "ip=\"MyERP.DataAccess.MyERP_DataAccess_JobGroup_Job3s_MyERP_DataAccess_Job_Job3sP" +
-                "artner\" ToRole=\"Job3s\" FromRole=\"Job3sPartner\" /></EntityType><EntityType Name=\"" +
-                "Job\"><Key><PropertyRef Name=\"Id\" /></Key><Property Name=\"Code\" Type=\"Edm.String\"" +
-                " /><Property Name=\"Name\" Type=\"Edm.String\" /><Property Name=\"BusinessPartnerId\" " +
-                "Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"JobGroupId1\" Type=\"Edm.Guid\" " +
-                "Nullable=\"false\" /><Property Name=\"JobGroupId2\" Type=\"Edm.Guid\" Nullable=\"false\"" +
-                " /><Property Name=\"JobGroupId3\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Nam" +
-                "e=\"JobStart\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property Name=\"JobEnd\" Type" +
-                "=\"Edm.DateTime\" Nullable=\"false\" /><Property Name=\"CurrencyId\" Type=\"Edm.Guid\" N" +
-                "ullable=\"false\" /><Property Name=\"Amount\" Type=\"Edm.Decimal\" Nullable=\"false\" />" +
-                "<Property Name=\"AmountLcy\" Type=\"Edm.Decimal\" Nullable=\"false\" /><Property Name=" +
-                "\"Comment\" Type=\"Edm.String\" /><Property Name=\"RecCreated\" Type=\"Edm.DateTime\" Nu" +
-                "llable=\"false\" /><Property Name=\"RecCreatedBy\" Type=\"Edm.Guid\" Nullable=\"false\" " +
-                "/><Property Name=\"RecModified\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property " +
-                "Name=\"RecModifiedBy\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Status\" " +
-                "Type=\"Edm.Byte\" Nullable=\"false\" /><Property Name=\"AccountId\" Type=\"Edm.Guid\" Nu" +
-                "llable=\"false\" /><Property Name=\"ClientId\" Type=\"Edm.Guid\" Nullable=\"false\" /><P" +
-                "roperty Name=\"OrganizationId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=" +
-                "\"Id\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Version\" Type=\"Edm.Int64" +
-                "\" Nullable=\"false\" /><NavigationProperty Name=\"Client\" Relationship=\"MyERP.DataA" +
-                "ccess.MyERP_DataAccess_Job_Client_MyERP_DataAccess_Client_ClientPartner\" ToRole=" +
-                "\"Client\" FromRole=\"ClientPartner\" /><NavigationProperty Name=\"Organization\" Rela" +
-                "tionship=\"MyERP.DataAccess.MyERP_DataAccess_Job_Organization_MyERP_DataAccess_Or" +
-                "ganization_OrganizationPartner\" ToRole=\"Organization\" FromRole=\"OrganizationPart" +
-                "ner\" /><NavigationProperty Name=\"RecCreatedByUser\" Relationship=\"MyERP.DataAcces" +
-                "s.MyERP_DataAccess_Job_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPa" +
-                "rtner\" ToRole=\"RecCreatedByUser\" FromRole=\"RecCreatedByUserPartner\" /><Navigatio" +
-                "nProperty Name=\"RecModifiedByUser\" Relationship=\"MyERP.DataAccess.MyERP_DataAcce" +
-                "ss_Job_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\" ToRole=" +
-                "\"RecModifiedByUser\" FromRole=\"RecModifiedByUserPartner\" /><NavigationProperty Na" +
-                "me=\"BusinessPartner\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Job_Busines" +
-                "sPartner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartner\" ToRole=\"Busine" +
-                "ssPartner\" FromRole=\"BusinessPartnerPartner\" /><NavigationProperty Name=\"Account" +
-                "\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Job_Account_MyERP_DataAccess_A" +
-                "ccount_AccountPartner\" ToRole=\"Account\" FromRole=\"AccountPartner\" /><NavigationP" +
-                "roperty Name=\"JobGroup1\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Job_Job" +
-                "Group1_MyERP_DataAccess_JobGroup_JobGroup1Partner\" ToRole=\"JobGroup1\" FromRole=\"" +
-                "JobGroup1Partner\" /><NavigationProperty Name=\"JobGroup2\" Relationship=\"MyERP.Dat" +
-                "aAccess.MyERP_DataAccess_Job_JobGroup2_MyERP_DataAccess_JobGroup_JobGroup2Partne" +
-                "r\" ToRole=\"JobGroup2\" FromRole=\"JobGroup2Partner\" /><NavigationProperty Name=\"Jo" +
-                "bGroup3\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Job_JobGroup3_MyERP_Dat" +
-                "aAccess_JobGroup_JobGroup3Partner\" ToRole=\"JobGroup3\" FromRole=\"JobGroup3Partner" +
-                "\" /></EntityType><EntityType Name=\"Module\"><Key><PropertyRef Name=\"Id\" /></Key><" +
-                "Property Name=\"Id\" Type=\"Edm.Int64\" Nullable=\"false\" /><Property Name=\"Descripti" +
-                "on\" Type=\"Edm.String\" /><Property Name=\"Group\" Type=\"Edm.String\" /><Property Nam" +
-                "e=\"Name\" Type=\"Edm.String\" /><Property Name=\"ClientId\" Type=\"Edm.Guid\" Nullable=" +
-                "\"false\" /><Property Name=\"IdAsName\" Type=\"Edm.String\" Nullable=\"false\" /></Entit" +
-                "yType><EntityType Name=\"NumberSequence\"><Key><PropertyRef Name=\"Id\" /></Key><Pro" +
+                "yERP.DataAccess.MyERP_DataAccess_NumberSequence_RecModifiedByUser_MyERP_DataAcce" +
+                "ss_User_RecModifiedByUserPartner\" ToRole=\"RecModifiedByUser\" FromRole=\"RecModifi" +
+                "edByUserPartner\" /></EntityType><EntityType Name=\"Organization\"><Key><PropertyRe" +
+                "f Name=\"Id\" /></Key><Property Name=\"Code\" Type=\"Edm.String\" /><Property Name=\"Na" +
+                "me\" Type=\"Edm.String\" /><Property Name=\"RecCreated\" Type=\"Edm.DateTime\" Nullable" +
+                "=\"false\" /><Property Name=\"RecCreatedById\" Type=\"Edm.Guid\" Nullable=\"false\" /><P" +
+                "roperty Name=\"RecModified\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property Name" +
+                "=\"RecModifiedById\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Status\" Ty" +
+                "pe=\"Edm.Byte\" Nullable=\"false\" /><Property Name=\"Id\" Type=\"Edm.Guid\" Nullable=\"f" +
+                "alse\" /><Property Name=\"Version\" Type=\"Edm.Int64\" Nullable=\"false\" /><Property N" +
+                "ame=\"ClientId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"StatusType\" Ty" +
+                "pe=\"Edm.String\" Nullable=\"false\" /><NavigationProperty Name=\"RecCreatedByUser\" R" +
+                "elationship=\"MyERP.DataAccess.MyERP_DataAccess_Organization_RecCreatedByUser_MyE" +
+                "RP_DataAccess_User_RecCreatedByUserPartner\" ToRole=\"RecCreatedByUser\" FromRole=\"" +
+                "RecCreatedByUserPartner\" /><NavigationProperty Name=\"RecModifiedByUser\" Relation" +
+                "ship=\"MyERP.DataAccess.MyERP_DataAccess_Organization_RecModifiedByUser_MyERP_Dat" +
+                "aAccess_User_RecModifiedByUserPartner\" ToRole=\"RecModifiedByUser\" FromRole=\"RecM" +
+                "odifiedByUserPartner\" /><NavigationProperty Name=\"Client\" Relationship=\"MyERP.Da" +
+                "taAccess.MyERP_DataAccess_Organization_Client_MyERP_DataAccess_Client_ClientPart" +
+                "ner\" ToRole=\"Client\" FromRole=\"ClientPartner\" /><NavigationProperty Name=\"AllOrg" +
+                "anization\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Organization_AllOrgan" +
+                "ization_MyERP_DataAccess_Organization_AllOrganizationPartner\" ToRole=\"AllOrganiz" +
+                "ation\" FromRole=\"AllOrganizationPartner\" /><NavigationProperty Name=\"GeneralJour" +
+                "nalSetup\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Organization_GeneralJo" +
+                "urnalSetup_MyERP_DataAccess_GeneralJournalSetup_GeneralJournalSetupPartner\" ToRo" +
+                "le=\"GeneralJournalSetup\" FromRole=\"GeneralJournalSetupPartner\" /></EntityType><E" +
+                "ntityType Name=\"PaymentTerm\"><Key><PropertyRef Name=\"Id\" /></Key><Property Name=" +
+                "\"Code\" Type=\"Edm.String\" /><Property Name=\"Name\" Type=\"Edm.String\" /><Property N" +
+                "ame=\"Han_Tt\" Type=\"Edm.Int16\" Nullable=\"false\" /><Property Name=\"Han_Tt_Gg\" Type" +
+                "=\"Edm.Int16\" Nullable=\"false\" /><Property Name=\"Pt_Gg\" Type=\"Edm.Decimal\" Nullab" +
+                "le=\"false\" /><Property Name=\"Date0\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Prop" +
+                "erty Name=\"UserId0\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Date2\" Ty" +
+                "pe=\"Edm.DateTime\" Nullable=\"false\" /><Property Name=\"UserId2\" Type=\"Edm.Guid\" Nu" +
+                "llable=\"false\" /><Property Name=\"Status\" Type=\"Edm.Byte\" Nullable=\"false\" /><Pro" +
                 "perty Name=\"Id\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Version\" Type" +
-                "=\"Edm.Int64\" Nullable=\"false\" /><Property Name=\"Code\" Type=\"Edm.String\" /><Prope" +
-                "rty Name=\"CurrentNo\" Type=\"Edm.Int32\" Nullable=\"false\" /><Property Name=\"EndingN" +
-                "o\" Type=\"Edm.Int32\" Nullable=\"false\" /><Property Name=\"Form";
+                "=\"Edm.Int64\" Nullable=\"false\" /><Property Name=\"ClientId\" Type=\"Edm.Guid\" Nullab" +
+                "le=\"false\" /><Property Name=\"OrganizationId\" Type=\"Edm.Guid\" Nullable=\"false\" />" +
+                "<NavigationProperty Name=\"Client\" Relationship=\"MyERP.DataAccess.MyERP_DataAcces" +
+                "s_PaymentTerm_Client_MyERP_DataAccess_Client_ClientPartner\" ToRole=\"Client\" From" +
+                "Role=\"ClientPartner\" /><NavigationProperty Name=\"Organization\" Relationship=\"MyE" +
+                "RP.DataAccess.MyERP_DataAccess_PaymentTerm_Organization_MyERP_DataAccess_Organiz" +
+                "ation_OrganizationPartner\" ToRole=\"Organization\" FromRole=\"OrganizationPartner\" " +
+                "/></EntityType><EntityType Name=\"Session\"><Key><PropertyRef Name=\"Id\" /></Key><P" +
+                "roperty Name=\"Id\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"UserId\" Typ" +
+                "e=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Expire\" Type=\"Edm.Boolean\" Nulla" +
+                "ble=\"false\" /><Property Name=\"WorkingDate\" Type=\"Edm.DateTime\" /><Property Name=" +
+                "\"OrganizationId\" Type=\"Edm.Guid\" /><Property Name=\"LastTime\" Type=\"Edm.DateTime\"" +
+                " Nullable=\"false\" /><Property Name=\"WarehouseId\" Type=\"Edm.Guid\" /><Property Nam" +
+                "e=\"ClientId\" Type=\"Edm.Guid\" Nullable=\"false\" /><NavigationProperty Name=\"Client" +
+                "\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Session_Client_MyERP_DataAcces" +
+                "s_Client_ClientPartner\" ToRole=\"Client\" FromRole=\"ClientPartner\" /><NavigationPr" +
+                "operty Name=\"Organization\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Sessi" +
+                "on_Organization_MyERP_DataAccess_Organization_OrganizationPartner\" ToRole=\"Organ" +
+                "ization\" FromRole=\"OrganizationPartner\" /></EntityType><EntityType Name=\"User\"><" +
+                "Key><PropertyRef Name=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.Guid\" Nullable=" +
+                "\"false\" /><Property Name=\"Name\" Type=\"Edm.String\" /><Property Name=\"Password\" Ty" +
+                "pe=\"Edm.String\" /><Property Name=\"Comment\" Type=\"Edm.String\" /><Property Name=\"F" +
+                "ullName\" Type=\"Edm.String\" /><Property Name=\"PasswordAnswer\" Type=\"Edm.String\" /" +
+                "><Property Name=\"PasswordQuestion\" Type=\"Edm.String\" /><Property Name=\"Email\" Ty" +
+                "pe=\"Edm.String\" /><Property Name=\"CreatedDate\" Type=\"Edm.DateTime\" Nullable=\"fal" +
+                "se\" /><Property Name=\"IsActivated\" Type=\"Edm.Boolean\" Nullable=\"false\" /><Proper" +
+                "ty Name=\"IsLockedOut\" Type=\"Edm.Boolean\" Nullable=\"false\" /><Property Name=\"Last" +
+                "LockedOutDate\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property Name=\"LastLocked" +
+                "OutReason\" Type=\"Edm.String\" /><Property Name=\"LastLoginDate\" Type=\"Edm.DateTime" +
+                "\" Nullable=\"false\" /><Property Name=\"LastLoginIp\" Type=\"Edm.String\" /><Property " +
+                "Name=\"LastModifiedDate\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property Name=\"C" +
+                "lientId\" Type=\"Edm.Guid\" /><Property Name=\"OrganizationId\" Type=\"Edm.Guid\" /><Na" +
+                "vigationProperty Name=\"Client\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_U" +
+                "ser_Client_MyERP_DataAccess_Client_ClientPartner\" ToRole=\"Client\" FromRole=\"Clie" +
+                "ntPartner\" /><NavigationProperty Name=\"Organization\" Relationship=\"MyERP.DataAcc" +
+                "ess.MyERP_DataAccess_User_Organization_MyERP_DataAccess_Organization_Organizatio" +
+                "nPartner\" ToRole=\"Organization\" FromRole=\"OrganizationPartner\" /></EntityType><A" +
+                "ssociation Name=\"MyERP_DataAccess_Account_Currency_MyERP_DataAccess_Currency_Cur" +
+                "rencyPartner\"><End Type=\"MyERP.DataAccess.Currency\" Role=\"Currency\" Multiplicity" +
+                "=\"0..1\" /><End Type=\"MyERP.DataAccess.Account\" Role=\"CurrencyPartner\" Multiplici" +
+                "ty=\"0..1\" /></Association><Association Name=\"MyERP_DataAcce";
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private const string ModelPart4 = "atNo\" Type=\"Edm.String\" /><Property Name=\"IsDefault\" Type=\"Edm.Boolean\" Nullable=" +
-                "\"false\" /><Property Name=\"Manual\" Type=\"Edm.Boolean\" Nullable=\"false\" /><Propert" +
-                "y Name=\"Name\" Type=\"Edm.String\" /><Property Name=\"NoSeqName\" Type=\"Edm.String\" /" +
-                "><Property Name=\"OrganizationId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Na" +
-                "me=\"ClientId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"StartingNo\" Typ" +
-                "e=\"Edm.Int32\" Nullable=\"false\" /><Property Name=\"Status\" Type=\"Edm.Int16\" Nullab" +
-                "le=\"false\" /><Property Name=\"RecModifiedBy\" Type=\"Edm.Guid\" Nullable=\"false\" /><" +
-                "Property Name=\"RecCreated\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property Name" +
-                "=\"RecCreatedBy\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"RecModified\" " +
-                "Type=\"Edm.DateTime\" Nullable=\"false\" /><NavigationProperty Name=\"Client\" Relatio" +
-                "nship=\"MyERP.DataAccess.MyERP_DataAccess_NumberSequence_Client_MyERP_DataAccess_" +
-                "Client_ClientPartner\" ToRole=\"Client\" FromRole=\"ClientPartner\" /><NavigationProp" +
-                "erty Name=\"Organization\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_NumberS" +
-                "equence_Organization_MyERP_DataAccess_Organization_OrganizationPartner\" ToRole=\"" +
-                "Organization\" FromRole=\"OrganizationPartner\" /><NavigationProperty Name=\"RecCrea" +
-                "tedByUser\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_NumberSequence_RecCre" +
-                "atedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\" ToRole=\"RecCreatedByUs" +
-                "er\" FromRole=\"RecCreatedByUserPartner\" /><NavigationProperty Name=\"RecModifiedBy" +
-                "User\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_NumberSequence_RecModified" +
-                "ByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\" ToRole=\"RecModifiedByUser" +
-                "\" FromRole=\"RecModifiedByUserPartner\" /></EntityType><EntityType Name=\"Organizat" +
-                "ion\"><Key><PropertyRef Name=\"Id\" /></Key><Property Name=\"Code\" Type=\"Edm.String\"" +
-                " /><Property Name=\"Name\" Type=\"Edm.String\" /><Property Name=\"RecCreated\" Type=\"E" +
-                "dm.DateTime\" Nullable=\"false\" /><Property Name=\"RecCreatedById\" Type=\"Edm.Guid\" " +
-                "Nullable=\"false\" /><Property Name=\"RecModified\" Type=\"Edm.DateTime\" Nullable=\"fa" +
-                "lse\" /><Property Name=\"RecModifiedById\" Type=\"Edm.Guid\" Nullable=\"false\" /><Prop" +
-                "erty Name=\"Status\" Type=\"Edm.Byte\" Nullable=\"false\" /><Property Name=\"Id\" Type=\"" +
-                "Edm.Guid\" Nullable=\"false\" /><Property Name=\"Version\" Type=\"Edm.Int64\" Nullable=" +
-                "\"false\" /><Property Name=\"ClientId\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property" +
-                " Name=\"StatusType\" Type=\"Edm.String\" Nullable=\"false\" /><NavigationProperty Name" +
-                "=\"RecCreatedByUser\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Organization" +
-                "_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\" ToRole=\"RecCrea" +
-                "tedByUser\" FromRole=\"RecCreatedByUserPartner\" /><NavigationProperty Name=\"RecMod" +
-                "ifiedByUser\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Organization_RecMod" +
-                "ifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\" ToRole=\"RecModifiedB" +
-                "yUser\" FromRole=\"RecModifiedByUserPartner\" /><NavigationProperty Name=\"Client\" R" +
-                "elationship=\"MyERP.DataAccess.MyERP_DataAccess_Organization_Client_MyERP_DataAcc" +
-                "ess_Client_ClientPartner\" ToRole=\"Client\" FromRole=\"ClientPartner\" /></EntityTyp" +
-                "e><EntityType Name=\"PaymentTerm\"><Key><PropertyRef Name=\"Id\" /></Key><Property N" +
-                "ame=\"Code\" Type=\"Edm.String\" /><Property Name=\"Name\" Type=\"Edm.String\" /><Proper" +
-                "ty Name=\"Han_Tt\" Type=\"Edm.Int16\" Nullable=\"false\" /><Property Name=\"Han_Tt_Gg\" " +
-                "Type=\"Edm.Int16\" Nullable=\"false\" /><Property Name=\"Pt_Gg\" Type=\"Edm.Decimal\" Nu" +
-                "llable=\"false\" /><Property Name=\"Date0\" Type=\"Edm.DateTime\" Nullable=\"false\" /><" +
-                "Property Name=\"UserId0\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Date2" +
-                "\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property Name=\"UserId2\" Type=\"Edm.Guid" +
-                "\" Nullable=\"false\" /><Property Name=\"Status\" Type=\"Edm.Byte\" Nullable=\"false\" />" +
-                "<Property Name=\"Id\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Version\" " +
-                "Type=\"Edm.Int64\" Nullable=\"false\" /><Property Name=\"ClientId\" Type=\"Edm.Guid\" Nu" +
-                "llable=\"false\" /><Property Name=\"OrganizationId\" Type=\"Edm.Guid\" Nullable=\"false" +
-                "\" /><NavigationProperty Name=\"Client\" Relationship=\"MyERP.DataAccess.MyERP_DataA" +
-                "ccess_PaymentTerm_Client_MyERP_DataAccess_Client_ClientPartner\" ToRole=\"Client\" " +
-                "FromRole=\"ClientPartner\" /><NavigationProperty Name=\"Organization\" Relationship=" +
-                "\"MyERP.DataAccess.MyERP_DataAccess_PaymentTerm_Organization_MyERP_DataAccess_Org" +
-                "anization_OrganizationPartner\" ToRole=\"Organization\" FromRole=\"OrganizationPartn" +
-                "er\" /></EntityType><EntityType Name=\"Session\"><Key><PropertyRef Name=\"Id\" /></Ke" +
-                "y><Property Name=\"Id\" Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"UserId\"" +
-                " Type=\"Edm.Guid\" Nullable=\"false\" /><Property Name=\"Expire\" Type=\"Edm.Boolean\" N" +
-                "ullable=\"false\" /><Property Name=\"WorkingDate\" Type=\"Edm.DateTime\" /><Property N" +
-                "ame=\"OrganizationId\" Type=\"Edm.Guid\" /><Property Name=\"LastTime\" Type=\"Edm.DateT" +
-                "ime\" Nullable=\"false\" /><Property Name=\"WarehouseId\" Type=\"Edm.Guid\" /><Property" +
-                " Name=\"ClientId\" Type=\"Edm.Guid\" Nullable=\"false\" /><NavigationProperty Name=\"Cl" +
-                "ient\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_Session_Client_MyERP_DataA" +
-                "ccess_Client_ClientPartner\" ToRole=\"Client\" FromRole=\"ClientPartner\" /><Navigati" +
-                "onProperty Name=\"Organization\" Relationship=\"MyERP.DataAccess.MyERP_DataAccess_S" +
-                "ession_Organization_MyERP_DataAccess_Organization_OrganizationPartner\" ToRole=\"O" +
-                "rganization\" FromRole=\"OrganizationPartner\" /></EntityType><EntityType Name=\"Use" +
-                "r\"><Key><PropertyRef Name=\"Id\" /></Key><Property Name=\"Id\" Type=\"Edm.Guid\" Nulla" +
-                "ble=\"false\" /><Property Name=\"Name\" Type=\"Edm.String\" /><Property Name=\"Password" +
-                "\" Type=\"Edm.String\" /><Property Name=\"Comment\" Type=\"Edm.String\" /><Property Nam" +
-                "e=\"FullName\" Type=\"Edm.String\" /><Property Name=\"PasswordAnswer\" Type=\"Edm.Strin" +
-                "g\" /><Property Name=\"PasswordQuestion\" Type=\"Edm.String\" /><Property Name=\"Email" +
-                "\" Type=\"Edm.String\" /><Property Name=\"CreatedDate\" Type=\"Edm.DateTime\" Nullable=" +
-                "\"false\" /><Property Name=\"IsActivated\" Type=\"Edm.Boolean\" Nullable=\"false\" /><Pr" +
-                "operty Name=\"IsLockedOut\" Type=\"Edm.Boolean\" Nullable=\"false\" /><Property Name=\"" +
-                "LastLockedOutDate\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property Name=\"LastLo" +
-                "ckedOutReason\" Type=\"Edm.String\" /><Property Name=\"LastLoginDate\" Type=\"Edm.Date" +
-                "Time\" Nullable=\"false\" /><Property Name=\"LastLoginIp\" Type=\"Edm.String\" /><Prope" +
-                "rty Name=\"LastModifiedDate\" Type=\"Edm.DateTime\" Nullable=\"false\" /><Property Nam" +
-                "e=\"ClientId\" Type=\"Edm.Guid\" /><Property Name=\"OrganizationId\" Type=\"Edm.Guid\" /" +
-                "><NavigationProperty Name=\"Client\" Relationship=\"MyERP.DataAccess.MyERP_DataAcce" +
-                "ss_User_Client_MyERP_DataAccess_Client_ClientPartner\" ToRole=\"Client\" FromRole=\"" +
-                "ClientPartner\" /><NavigationProperty Name=\"Organization\" Relationship=\"MyERP.Dat" +
-                "aAccess.MyERP_DataAccess_User_Organization_MyERP_DataAccess_Organization_Organiz" +
-                "ationPartner\" ToRole=\"Organization\" FromRole=\"OrganizationPartner\" /></EntityTyp" +
-                "e><Association Name=\"MyERP_DataAccess_Account_Currency_MyERP_DataAccess_Currency" +
-                "_CurrencyPartner\"><End Type=\"MyERP.DataAccess.Currency\" Role=\"Currency\" Multipli" +
-                "city=\"0..1\" /><End Type=\"MyERP.DataAccess.Account\" Role=\"CurrencyPartner\" Multip" +
-                "licity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Account_Parent" +
-                "Account_MyERP_DataAccess_Account_ParentAccountPartner\"><End Type=\"MyERP.DataAcce" +
-                "ss.Account\" Role=\"ParentAccount\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAcce" +
-                "ss.Account\" Role=\"ParentAccountPartner\" Multiplicity=\"0..1\" /></Association><Ass" +
-                "ociation Name=\"MyERP_DataAccess_Account_RecModifiedByUser_MyERP_DataAccess_User_" +
-                "RecModifiedByUserPartner\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecModifiedByU" +
-                "ser\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Acco";
+            private const string ModelPart5 = "ss_Account_ParentAccount_MyERP_DataAccess_Account_ParentAccountPartner\"><End Type" +
+                "=\"MyERP.DataAccess.Account\" Role=\"ParentAccount\" Multiplicity=\"0..1\" /><End Type" +
+                "=\"MyERP.DataAccess.Account\" Role=\"ParentAccountPartner\" Multiplicity=\"0..1\" /></" +
+                "Association><Association Name=\"MyERP_DataAccess_Account_RecModifiedByUser_MyERP_" +
+                "DataAccess_User_RecModifiedByUserPartner\"><End Type=\"MyERP.DataAccess.User\" Role" +
+                "=\"RecModifiedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Account\" " +
+                "Role=\"RecModifiedByUserPartner\" Multiplicity=\"0..1\" /></Association><Association" +
+                " Name=\"MyERP_DataAccess_Account_RecCreatedByUser_MyERP_DataAccess_User_RecCreate" +
+                "dByUserPartner\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecCreatedByUser\" Multip" +
+                "licity=\"0..1\" /><End Type=\"MyERP.DataAccess.Account\" Role=\"RecCreatedByUserPartn" +
+                "er\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Acco" +
+                "unt_Client_MyERP_DataAccess_Client_ClientPartner\"><End Type=\"MyERP.DataAccess.Cl" +
+                "ient\" Role=\"Client\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Account\" R" +
+                "ole=\"ClientPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP" +
+                "_DataAccess_Account_Organization_MyERP_DataAccess_Organization_OrganizationPartn" +
+                "er\"><End Type=\"MyERP.DataAccess.Organization\" Role=\"Organization\" Multiplicity=\"" +
+                "0..1\" /><End Type=\"MyERP.DataAccess.Account\" Role=\"OrganizationPartner\" Multipli" +
+                "city=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Account_ChildAcc" +
+                "ounts_MyERP_DataAccess_Account_ChildAccountsPartner\"><End Type=\"MyERP.DataAccess" +
+                ".Account\" Role=\"ChildAccounts\" Multiplicity=\"*\" /><End Type=\"MyERP.DataAccess.Ac" +
+                "count\" Role=\"ChildAccountsPartner\" Multiplicity=\"0..1\" /></Association><Associat" +
+                "ion Name=\"MyERP_DataAccess_BusinessPartnerGroup_Client_MyERP_DataAccess_Client_C" +
+                "lientPartner\"><End Type=\"MyERP.DataAccess.Client\" Role=\"Client\" Multiplicity=\"0." +
+                ".1\" /><End Type=\"MyERP.DataAccess.BusinessPartnerGroup\" Role=\"ClientPartner\" Mul" +
+                "tiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_BusinessPar" +
+                "tnerGroup_Organization_MyERP_DataAccess_Organization_OrganizationPartner\"><End T" +
+                "ype=\"MyERP.DataAccess.Organization\" Role=\"Organization\" Multiplicity=\"0..1\" /><E" +
+                "nd Type=\"MyERP.DataAccess.BusinessPartnerGroup\" Role=\"OrganizationPartner\" Multi" +
+                "plicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_BusinessPartn" +
+                "erGroup_BusinessPartner1s_MyERP_DataAccess_BusinessPartner_BusinessPartner1sPart" +
+                "ner\"><End Type=\"MyERP.DataAccess.BusinessPartner\" Role=\"BusinessPartner1s\" Multi" +
+                "plicity=\"*\" /><End Type=\"MyERP.DataAccess.BusinessPartnerGroup\" Role=\"BusinessPa" +
+                "rtner1sPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_Dat" +
+                "aAccess_BusinessPartnerGroup_BusinessPartner3s_MyERP_DataAccess_BusinessPartner_" +
+                "BusinessPartner3sPartner\"><End Type=\"MyERP.DataAccess.BusinessPartner\" Role=\"Bus" +
+                "inessPartner3s\" Multiplicity=\"*\" /><End Type=\"MyERP.DataAccess.BusinessPartnerGr" +
+                "oup\" Role=\"BusinessPartner3sPartner\" Multiplicity=\"0..1\" /></Association><Associ" +
+                "ation Name=\"MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner2s_MyERP_DataAc" +
+                "cess_BusinessPartner_BusinessPartner2sPartner\"><End Type=\"MyERP.DataAccess.Busin" +
+                "essPartner\" Role=\"BusinessPartner2s\" Multiplicity=\"*\" /><End Type=\"MyERP.DataAcc" +
+                "ess.BusinessPartnerGroup\" Role=\"BusinessPartner2sPartner\" Multiplicity=\"0..1\" />" +
+                "</Association><Association Name=\"MyERP_DataAccess_BusinessPartner_EmployeeAccoun" +
+                "t_MyERP_DataAccess_Account_EmployeeAccountPartner\"><End Type=\"MyERP.DataAccess.A" +
+                "ccount\" Role=\"EmployeeAccount\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess" +
+                ".BusinessPartner\" Role=\"EmployeeAccountPartner\" Multiplicity=\"0..1\" /></Associat" +
+                "ion><Association Name=\"MyERP_DataAccess_BusinessPartner_VendorAccount_MyERP_Data" +
+                "Access_Account_VendorAccountPartner\"><End Type=\"MyERP.DataAccess.Account\" Role=\"" +
+                "VendorAccount\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.BusinessPartner" +
+                "\" Role=\"VendorAccountPartner\" Multiplicity=\"0..1\" /></Association><Association N" +
+                "ame=\"MyERP_DataAccess_BusinessPartner_CustomerAccount_MyERP_DataAccess_Account_C" +
+                "ustomerAccountPartner\"><End Type=\"MyERP.DataAccess.Account\" Role=\"CustomerAccoun" +
+                "t\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.BusinessPartner\" Role=\"Cust" +
+                "omerAccountPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP" +
+                "_DataAccess_BusinessPartner_PaymentTerm_MyERP_DataAccess_PaymentTerm_PaymentTerm" +
+                "Partner\"><End Type=\"MyERP.DataAccess.PaymentTerm\" Role=\"PaymentTerm\" Multiplicit" +
+                "y=\"0..1\" /><End Type=\"MyERP.DataAccess.BusinessPartner\" Role=\"PaymentTermPartner" +
+                "\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Busine" +
+                "ssPartner_Client_MyERP_DataAccess_Client_ClientPartner\"><End Type=\"MyERP.DataAcc" +
+                "ess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Busi" +
+                "nessPartner\" Role=\"ClientPartner\" Multiplicity=\"0..1\" /></Association><Associati" +
+                "on Name=\"MyERP_DataAccess_BusinessPartner_Organization_MyERP_DataAccess_Organiza" +
+                "tion_OrganizationPartner\"><End Type=\"MyERP.DataAccess.Organization\" Role=\"Organi" +
+                "zation\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.BusinessPartner\" Role=" +
+                "\"OrganizationPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyE" +
+                "RP_DataAccess_BusinessPartner_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedB" +
+                "yUserPartner\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecCreatedByUser\" Multipli" +
+                "city=\"0..1\" /><End Type=\"MyERP.DataAccess.BusinessPartner\" Role=\"RecCreatedByUse" +
+                "rPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAcces" +
+                "s_BusinessPartner_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartn" +
+                "er\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecModifiedByUser\" Multiplicity=\"0.." +
+                "1\" /><End Type=\"MyERP.DataAccess.BusinessPartner\" Role=\"RecModifiedByUserPartner" +
+                "\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Busine" +
+                "ssPartner_BusinessPartnerGroup1_MyERP_DataAccess_BusinessPartnerGroup_BusinessPa" +
+                "rtnerGroup1Partner\"><End Type=\"MyERP.DataAccess.BusinessPartnerGroup\" Role=\"Busi" +
+                "nessPartnerGroup1\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.BusinessPar" +
+                "tner\" Role=\"BusinessPartnerGroup1Partner\" Multiplicity=\"0..1\" /></Association><A" +
+                "ssociation Name=\"MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup3_MyERP_Da" +
+                "taAccess_BusinessPartnerGroup_BusinessPartnerGroup3Partner\"><End Type=\"MyERP.Dat" +
+                "aAccess.BusinessPartnerGroup\" Role=\"BusinessPartnerGroup3\" Multiplicity=\"0..1\" /" +
+                "><End Type=\"MyERP.DataAccess.BusinessPartner\" Role=\"BusinessPartnerGroup3Partner" +
+                "\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Busine" +
+                "ssPartner_BusinessPartnerGroup2_MyERP_DataAccess_BusinessPartnerGroup_BusinessPa" +
+                "rtnerGroup2Partner\"><End Type=\"MyERP.DataAccess.BusinessPartnerGroup\" Role=\"Busi" +
+                "nessPartnerGroup2\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.BusinessPar" +
+                "tner\" Role=\"BusinessPartnerGroup2Partner\" Multiplicity=\"0..1\" /></Association><A" +
+                "ssociation Name=\"MyERP_DataAccess_Client_RecCreatedByUser_MyERP_DataAccess_User_" +
+                "RecCreatedByUserPartner\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecCreatedByUse" +
+                "r\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Client\" Role=\"RecCreatedByU" +
+                "serPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAcc" +
+                "ess_Client_Organizations_MyERP_DataAccess_Organization_OrganizationsPartner\"><En" +
+                "d Type=\"MyERP.DataAccess.Organization\" Role=\"Organizations\" Multiplicity=\"*\" /><" +
+                "End Type=\"MyERP.DataAccess.Client\" Role=\"OrganizationsPartner\" Multiplicity=\"0.." +
+                "1\" /></Association><Association Name=\"MyERP_DataAccess_Currency_RecModifiedByUse" +
+                "r_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End Type";
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private const string ModelPart5 = "unt\" Role=\"RecModifiedByUserPartner\" Multiplicity=\"0..1\" /></Association><Associa" +
-                "tion Name=\"MyERP_DataAccess_Account_RecCreatedByUser_MyERP_DataAccess_User_RecCr" +
-                "eatedByUserPartner\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecCreatedByUser\" Mu" +
-                "ltiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Account\" Role=\"RecCreatedByUserP" +
-                "artner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_" +
-                "Account_Client_MyERP_DataAccess_Client_ClientPartner\"><End Type=\"MyERP.DataAcces" +
-                "s.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Accoun" +
-                "t\" Role=\"ClientPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"M" +
-                "yERP_DataAccess_Account_Organization_MyERP_DataAccess_Organization_OrganizationP" +
-                "artner\"><End Type=\"MyERP.DataAccess.Organization\" Role=\"Organization\" Multiplici" +
-                "ty=\"0..1\" /><End Type=\"MyERP.DataAccess.Account\" Role=\"OrganizationPartner\" Mult" +
-                "iplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Account_Chil" +
-                "dAccounts_MyERP_DataAccess_Account_ChildAccountsPartner\"><End Type=\"MyERP.DataAc" +
-                "cess.Account\" Role=\"ChildAccounts\" Multiplicity=\"*\" /><End Type=\"MyERP.DataAcces" +
-                "s.Account\" Role=\"ChildAccountsPartner\" Multiplicity=\"0..1\" /></Association><Asso" +
-                "ciation Name=\"MyERP_DataAccess_BusinessPartnerGroup_Client_MyERP_DataAccess_Clie" +
-                "nt_ClientPartner\"><End Type=\"MyERP.DataAccess.Client\" Role=\"Client\" Multiplicity" +
-                "=\"0..1\" /><End Type=\"MyERP.DataAccess.BusinessPartnerGroup\" Role=\"ClientPartner\"" +
-                " Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Busines" +
-                "sPartnerGroup_Organization_MyERP_DataAccess_Organization_OrganizationPartner\"><E" +
-                "nd Type=\"MyERP.DataAccess.Organization\" Role=\"Organization\" Multiplicity=\"0..1\" " +
-                "/><End Type=\"MyERP.DataAccess.BusinessPartnerGroup\" Role=\"OrganizationPartner\" M" +
-                "ultiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_BusinessP" +
-                "artnerGroup_BusinessPartner1s_MyERP_DataAccess_BusinessPartner_BusinessPartner1s" +
-                "Partner\"><End Type=\"MyERP.DataAccess.BusinessPartner\" Role=\"BusinessPartner1s\" M" +
-                "ultiplicity=\"*\" /><End Type=\"MyERP.DataAccess.BusinessPartnerGroup\" Role=\"Busine" +
-                "ssPartner1sPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP" +
-                "_DataAccess_BusinessPartnerGroup_BusinessPartner3s_MyERP_DataAccess_BusinessPart" +
-                "ner_BusinessPartner3sPartner\"><End Type=\"MyERP.DataAccess.BusinessPartner\" Role=" +
-                "\"BusinessPartner3s\" Multiplicity=\"*\" /><End Type=\"MyERP.DataAccess.BusinessPartn" +
-                "erGroup\" Role=\"BusinessPartner3sPartner\" Multiplicity=\"0..1\" /></Association><As" +
-                "sociation Name=\"MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner2s_MyERP_Da" +
-                "taAccess_BusinessPartner_BusinessPartner2sPartner\"><End Type=\"MyERP.DataAccess.B" +
-                "usinessPartner\" Role=\"BusinessPartner2s\" Multiplicity=\"*\" /><End Type=\"MyERP.Dat" +
-                "aAccess.BusinessPartnerGroup\" Role=\"BusinessPartner2sPartner\" Multiplicity=\"0..1" +
-                "\" /></Association><Association Name=\"MyERP_DataAccess_BusinessPartner_EmployeeAc" +
-                "count_MyERP_DataAccess_Account_EmployeeAccountPartner\"><End Type=\"MyERP.DataAcce" +
-                "ss.Account\" Role=\"EmployeeAccount\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAc" +
-                "cess.BusinessPartner\" Role=\"EmployeeAccountPartner\" Multiplicity=\"0..1\" /></Asso" +
-                "ciation><Association Name=\"MyERP_DataAccess_BusinessPartner_VendorAccount_MyERP_" +
-                "DataAccess_Account_VendorAccountPartner\"><End Type=\"MyERP.DataAccess.Account\" Ro" +
-                "le=\"VendorAccount\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.BusinessPar" +
-                "tner\" Role=\"VendorAccountPartner\" Multiplicity=\"0..1\" /></Association><Associati" +
-                "on Name=\"MyERP_DataAccess_BusinessPartner_CustomerAccount_MyERP_DataAccess_Accou" +
-                "nt_CustomerAccountPartner\"><End Type=\"MyERP.DataAccess.Account\" Role=\"CustomerAc" +
-                "count\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.BusinessPartner\" Role=\"" +
-                "CustomerAccountPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"M" +
-                "yERP_DataAccess_BusinessPartner_PaymentTerm_MyERP_DataAccess_PaymentTerm_Payment" +
-                "TermPartner\"><End Type=\"MyERP.DataAccess.PaymentTerm\" Role=\"PaymentTerm\" Multipl" +
-                "icity=\"0..1\" /><End Type=\"MyERP.DataAccess.BusinessPartner\" Role=\"PaymentTermPar" +
-                "tner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Bu" +
-                "sinessPartner_Client_MyERP_DataAccess_Client_ClientPartner\"><End Type=\"MyERP.Dat" +
-                "aAccess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess." +
-                "BusinessPartner\" Role=\"ClientPartner\" Multiplicity=\"0..1\" /></Association><Assoc" +
-                "iation Name=\"MyERP_DataAccess_BusinessPartner_Organization_MyERP_DataAccess_Orga" +
-                "nization_OrganizationPartner\"><End Type=\"MyERP.DataAccess.Organization\" Role=\"Or" +
-                "ganization\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.BusinessPartner\" R" +
-                "ole=\"OrganizationPartner\" Multiplicity=\"0..1\" /></Association><Association Name=" +
-                "\"MyERP_DataAccess_BusinessPartner_RecCreatedByUser_MyERP_DataAccess_User_RecCrea" +
-                "tedByUserPartner\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecCreatedByUser\" Mult" +
-                "iplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.BusinessPartner\" Role=\"RecCreatedB" +
-                "yUserPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataA" +
-                "ccess_BusinessPartner_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserP" +
-                "artner\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecModifiedByUser\" Multiplicity=" +
-                "\"0..1\" /><End Type=\"MyERP.DataAccess.BusinessPartner\" Role=\"RecModifiedByUserPar" +
-                "tner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Bu" +
-                "sinessPartner_BusinessPartnerGroup1_MyERP_DataAccess_BusinessPartnerGroup_Busine" +
-                "ssPartnerGroup1Partner\"><End Type=\"MyERP.DataAccess.BusinessPartnerGroup\" Role=\"" +
-                "BusinessPartnerGroup1\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Busines" +
-                "sPartner\" Role=\"BusinessPartnerGroup1Partner\" Multiplicity=\"0..1\" /></Associatio" +
-                "n><Association Name=\"MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup3_MyER" +
-                "P_DataAccess_BusinessPartnerGroup_BusinessPartnerGroup3Partner\"><End Type=\"MyERP" +
-                ".DataAccess.BusinessPartnerGroup\" Role=\"BusinessPartnerGroup3\" Multiplicity=\"0.." +
-                "1\" /><End Type=\"MyERP.DataAccess.BusinessPartner\" Role=\"BusinessPartnerGroup3Par" +
-                "tner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Bu" +
-                "sinessPartner_BusinessPartnerGroup2_MyERP_DataAccess_BusinessPartnerGroup_Busine" +
-                "ssPartnerGroup2Partner\"><End Type=\"MyERP.DataAccess.BusinessPartnerGroup\" Role=\"" +
-                "BusinessPartnerGroup2\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Busines" +
-                "sPartner\" Role=\"BusinessPartnerGroup2Partner\" Multiplicity=\"0..1\" /></Associatio" +
-                "n><Association Name=\"MyERP_DataAccess_Client_RecCreatedByUser_MyERP_DataAccess_U" +
-                "ser_RecCreatedByUserPartner\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecCreatedB" +
-                "yUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Client\" Role=\"RecCreate" +
-                "dByUserPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_Dat" +
-                "aAccess_Client_Organizations_MyERP_DataAccess_Organization_OrganizationsPartner\"" +
-                "><End Type=\"MyERP.DataAccess.Organization\" Role=\"Organizations\" Multiplicity=\"*\"" +
-                " /><End Type=\"MyERP.DataAccess.Client\" Role=\"OrganizationsPartner\" Multiplicity=" +
-                "\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Currency_RecModifiedB" +
-                "yUser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End Type=\"MyERP.DataAcces" +
-                "s.User\" Role=\"RecModifiedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAcce" +
-                "ss.Currency\" Role=\"RecModifiedByUserPartner\" Multiplicity=\"0..1\" /></Association" +
-                "><Association Name=\"MyERP_DataAccess_Currency_RecCreatedByUser_MyERP_DataAccess_" +
-                "User_RecCreatedByUserPartner\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecCreated" +
-                "ByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Currency\" Role=\"RecCre" +
-                "atedByUserPartner\" Multiplicity=\"0..1\" /></Association><Ass";
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private const string ModelPart6 = "ociation Name=\"MyERP_DataAccess_Currency_Client_MyERP_DataAccess_Client_ClientPar" +
-                "tner\"><End Type=\"MyERP.DataAccess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><E" +
-                "nd Type=\"MyERP.DataAccess.Currency\" Role=\"ClientPartner\" Multiplicity=\"0..1\" /><" +
-                "/Association><Association Name=\"MyERP_DataAccess_Currency_Organization_MyERP_Dat" +
-                "aAccess_Organization_OrganizationPartner\"><End Type=\"MyERP.DataAccess.Organizati" +
-                "on\" Role=\"Organization\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Curren" +
-                "cy\" Role=\"OrganizationPartner\" Multiplicity=\"0..1\" /></Association><Association " +
-                "Name=\"MyERP_DataAccess_CurrencyConvertRate_Client_MyERP_DataAccess_Client_Client" +
-                "Partner\"><End Type=\"MyERP.DataAccess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /" +
-                "><End Type=\"MyERP.DataAccess.CurrencyConvertRate\" Role=\"ClientPartner\" Multiplic" +
-                "ity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_CurrencyConvertRa" +
-                "te_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Type=\"My" +
-                "ERP.DataAccess.User\" Role=\"RecCreatedByUser\" Multiplicity=\"0..1\" /><End Type=\"My" +
-                "ERP.DataAccess.CurrencyConvertRate\" Role=\"RecCreatedByUserPartner\" Multiplicity=" +
+            private const string ModelPart6 = "=\"MyERP.DataAccess.User\" Role=\"RecModifiedByUser\" Multiplicity=\"0..1\" /><End Type" +
+                "=\"MyERP.DataAccess.Currency\" Role=\"RecModifiedByUserPartner\" Multiplicity=\"0..1\"" +
+                " /></Association><Association Name=\"MyERP_DataAccess_Currency_RecCreatedByUser_M" +
+                "yERP_DataAccess_User_RecCreatedByUserPartner\"><End Type=\"MyERP.DataAccess.User\" " +
+                "Role=\"RecCreatedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Curren" +
+                "cy\" Role=\"RecCreatedByUserPartner\" Multiplicity=\"0..1\" /></Association><Associat" +
+                "ion Name=\"MyERP_DataAccess_Currency_Client_MyERP_DataAccess_Client_ClientPartner" +
+                "\"><End Type=\"MyERP.DataAccess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><End T" +
+                "ype=\"MyERP.DataAccess.Currency\" Role=\"ClientPartner\" Multiplicity=\"0..1\" /></Ass" +
+                "ociation><Association Name=\"MyERP_DataAccess_Currency_Organization_MyERP_DataAcc" +
+                "ess_Organization_OrganizationPartner\"><End Type=\"MyERP.DataAccess.Organization\" " +
+                "Role=\"Organization\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Currency\" " +
+                "Role=\"OrganizationPartner\" Multiplicity=\"0..1\" /></Association><Association Name" +
+                "=\"MyERP_DataAccess_CurrencyConvertRate_Client_MyERP_DataAccess_Client_ClientPart" +
+                "ner\"><End Type=\"MyERP.DataAccess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><En" +
+                "d Type=\"MyERP.DataAccess.CurrencyConvertRate\" Role=\"ClientPartner\" Multiplicity=" +
                 "\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_CurrencyConvertRate_R" +
-                "ecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End Type=\"MyER" +
-                "P.DataAccess.User\" Role=\"RecModifiedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyE" +
-                "RP.DataAccess.CurrencyConvertRate\" Role=\"RecModifiedByUserPartner\" Multiplicity=" +
-                "\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_CurrencyConvertRate_O" +
-                "rganization_MyERP_DataAccess_Organization_OrganizationPartner\"><End Type=\"MyERP." +
-                "DataAccess.Organization\" Role=\"Organization\" Multiplicity=\"0..1\" /><End Type=\"My" +
-                "ERP.DataAccess.CurrencyConvertRate\" Role=\"OrganizationPartner\" Multiplicity=\"0.." +
-                "1\" /></Association><Association Name=\"MyERP_DataAccess_CurrencyConvertRate_Curre" +
-                "ncy_MyERP_DataAccess_Currency_CurrencyPartner\"><End Type=\"MyERP.DataAccess.Curre" +
-                "ncy\" Role=\"Currency\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.CurrencyC" +
-                "onvertRate\" Role=\"CurrencyPartner\" Multiplicity=\"0..1\" /></Association><Associat" +
-                "ion Name=\"MyERP_DataAccess_CurrencyConvertRate_CurrencyTo_MyERP_DataAccess_Curre" +
-                "ncy_CurrencyToPartner\"><End Type=\"MyERP.DataAccess.Currency\" Role=\"CurrencyTo\" M" +
-                "ultiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.CurrencyConvertRate\" Role=\"Curr" +
-                "encyToPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_Data" +
-                "Access_GeneralJournalDocument_Client_MyERP_DataAccess_Client_ClientPartner\"><End" +
-                " Type=\"MyERP.DataAccess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><End Type=\"M" +
-                "yERP.DataAccess.GeneralJournalDocument\" Role=\"ClientPartner\" Multiplicity=\"0..1\"" +
-                " /></Association><Association Name=\"MyERP_DataAccess_GeneralJournalDocument_Orga" +
-                "nization_MyERP_DataAccess_Organization_OrganizationPartner\"><End Type=\"MyERP.Dat" +
-                "aAccess.Organization\" Role=\"Organization\" Multiplicity=\"0..1\" /><End Type=\"MyERP" +
-                ".DataAccess.GeneralJournalDocument\" Role=\"OrganizationPartner\" Multiplicity=\"0.." +
-                "1\" /></Association><Association Name=\"MyERP_DataAccess_GeneralJournalDocument_Re" +
-                "cCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Type=\"MyERP.D" +
-                "ataAccess.User\" Role=\"RecCreatedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP.D" +
-                "ataAccess.GeneralJournalDocument\" Role=\"RecCreatedByUserPartner\" Multiplicity=\"0" +
-                "..1\" /></Association><Association Name=\"MyERP_DataAccess_GeneralJournalDocument_" +
-                "RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End Type=\"MyE" +
-                "RP.DataAccess.User\" Role=\"RecModifiedByUser\" Multiplicity=\"0..1\" /><End Type=\"My" +
-                "ERP.DataAccess.GeneralJournalDocument\" Role=\"RecModifiedByUserPartner\" Multiplic" +
-                "ity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_GeneralJournalDoc" +
-                "ument_Currency_MyERP_DataAccess_Currency_CurrencyPartner\"><End Type=\"MyERP.DataA" +
-                "ccess.Currency\" Role=\"Currency\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAcces" +
-                "s.GeneralJournalDocument\" Role=\"CurrencyPartner\" Multiplicity=\"0..1\" /></Associa" +
-                "tion><Association Name=\"MyERP_DataAccess_GeneralJournalDocument_NumberSequence_M" +
-                "yERP_DataAccess_NumberSequence_NumberSequencePartner\"><End Type=\"MyERP.DataAcces" +
-                "s.NumberSequence\" Role=\"NumberSequence\" Multiplicity=\"0..1\" /><End Type=\"MyERP.D" +
-                "ataAccess.GeneralJournalDocument\" Role=\"NumberSequencePartner\" Multiplicity=\"0.." +
-                "1\" /></Association><Association Name=\"MyERP_DataAccess_GeneralJournalDocument_Ge" +
-                "neralJournalLines_MyERP_DataAccess_GeneralJournalLine_GeneralJournalLinesPartner" +
-                "\"><End Type=\"MyERP.DataAccess.GeneralJournalLine\" Role=\"GeneralJournalLines\" Mul" +
-                "tiplicity=\"*\" /><End Type=\"MyERP.DataAccess.GeneralJournalDocument\" Role=\"Genera" +
-                "lJournalLinesPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyE" +
-                "RP_DataAccess_GeneralJournalLine_Client_MyERP_DataAccess_Client_ClientPartner\"><" +
-                "End Type=\"MyERP.DataAccess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><End Type" +
-                "=\"MyERP.DataAccess.GeneralJournalLine\" Role=\"ClientPartner\" Multiplicity=\"0..1\" " +
-                "/></Association><Association Name=\"MyERP_DataAccess_GeneralJournalLine_Organizat" +
-                "ion_MyERP_DataAccess_Organization_OrganizationPartner\"><End Type=\"MyERP.DataAcce" +
-                "ss.Organization\" Role=\"Organization\" Multiplicity=\"0..1\" /><End Type=\"MyERP.Data" +
-                "Access.GeneralJournalLine\" Role=\"OrganizationPartner\" Multiplicity=\"0..1\" /></As" +
-                "sociation><Association Name=\"MyERP_DataAccess_GeneralJournalLine_BusinessPartner" +
-                "_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartner\"><End Type=\"MyERP.DataA" +
-                "ccess.BusinessPartner\" Role=\"BusinessPartner\" Multiplicity=\"0..1\" /><End Type=\"M" +
-                "yERP.DataAccess.GeneralJournalLine\" Role=\"BusinessPartnerPartner\" Multiplicity=\"" +
-                "0..1\" /></Association><Association Name=\"MyERP_DataAccess_GeneralJournalLine_Job" +
-                "_MyERP_DataAccess_Job_JobPartner\"><End Type=\"MyERP.DataAccess.Job\" Role=\"Job\" Mu" +
-                "ltiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.GeneralJournalLine\" Role=\"JobPar" +
-                "tner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Ge" +
-                "neralJournalLine_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartne" +
-                "r\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecModifiedByUser\" Multiplicity=\"0..1" +
-                "\" /><End Type=\"MyERP.DataAccess.GeneralJournalLine\" Role=\"RecModifiedByUserPartn" +
-                "er\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Gene" +
-                "ralJournalLine_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><" +
-                "End Type=\"MyERP.DataAccess.User\" Role=\"RecCreatedByUser\" Multiplicity=\"0..1\" /><" +
-                "End Type=\"MyERP.DataAccess.GeneralJournalLine\" Role=\"RecCreatedByUserPartner\" Mu" +
-                "ltiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_GeneralJou" +
-                "rnalLine_Account_MyERP_DataAccess_Account_AccountPartner\"><End Type=\"MyERP.DataA" +
-                "ccess.Account\" Role=\"Account\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess." +
-                "GeneralJournalLine\" Role=\"AccountPartner\" Multiplicity=\"0..1\" /></Association><A" +
-                "ssociation Name=\"MyERP_DataAccess_GeneralJournalLine_CorAccount_MyERP_DataAccess" +
-                "_Account_CorAccountPartner\"><End Type=\"MyERP.DataAccess.Account\" Role=\"CorAccoun" +
-                "t\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.GeneralJournalLine\" Role=\"C" +
-                "orAccountPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_D" +
-                "ataAccess_GeneralJournalLine_GeneralJournalDocument_MyERP_DataAccess_GeneralJour" +
-                "nalDocument_GeneralJournalDocumentPartner\"><End Type=\"MyERP.DataAccess.GeneralJo" +
-                "urnalDocument\" Role=\"GeneralJournalDocument\" Multiplicity=\"0..1\" /><End Type=\"My" +
-                "ERP.DataAccess.GeneralJournalLine\" Role=\"GeneralJournalDocumentPartner\" Multipli" +
-                "city=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_GeneralJournalLi" +
-                "ne_Currency_MyERP_DataAccess_Currency_CurrencyPartner\"><End";
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private const string ModelPart7 = " Type=\"MyERP.DataAccess.Currency\" Role=\"Currency\" Multiplicity=\"0..1\" /><End Type" +
-                "=\"MyERP.DataAccess.GeneralJournalLine\" Role=\"CurrencyPartner\" Multiplicity=\"0..1" +
-                "\" /></Association><Association Name=\"MyERP_DataAccess_GeneralJournalSetup_RecCre" +
+                "ecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Type=\"MyERP." +
+                "DataAccess.User\" Role=\"RecCreatedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP." +
+                "DataAccess.CurrencyConvertRate\" Role=\"RecCreatedByUserPartner\" Multiplicity=\"0.." +
+                "1\" /></Association><Association Name=\"MyERP_DataAccess_CurrencyConvertRate_RecMo" +
+                "difiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End Type=\"MyERP.Da" +
+                "taAccess.User\" Role=\"RecModifiedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP.D" +
+                "ataAccess.CurrencyConvertRate\" Role=\"RecModifiedByUserPartner\" Multiplicity=\"0.." +
+                "1\" /></Association><Association Name=\"MyERP_DataAccess_CurrencyConvertRate_Organ" +
+                "ization_MyERP_DataAccess_Organization_OrganizationPartner\"><End Type=\"MyERP.Data" +
+                "Access.Organization\" Role=\"Organization\" Multiplicity=\"0..1\" /><End Type=\"MyERP." +
+                "DataAccess.CurrencyConvertRate\" Role=\"OrganizationPartner\" Multiplicity=\"0..1\" /" +
+                "></Association><Association Name=\"MyERP_DataAccess_CurrencyConvertRate_Currency_" +
+                "MyERP_DataAccess_Currency_CurrencyPartner\"><End Type=\"MyERP.DataAccess.Currency\"" +
+                " Role=\"Currency\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.CurrencyConve" +
+                "rtRate\" Role=\"CurrencyPartner\" Multiplicity=\"0..1\" /></Association><Association " +
+                "Name=\"MyERP_DataAccess_CurrencyConvertRate_CurrencyTo_MyERP_DataAccess_Currency_" +
+                "CurrencyToPartner\"><End Type=\"MyERP.DataAccess.Currency\" Role=\"CurrencyTo\" Multi" +
+                "plicity=\"0..1\" /><End Type=\"MyERP.DataAccess.CurrencyConvertRate\" Role=\"Currency" +
+                "ToPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAcce" +
+                "ss_GeneralJournalDocument_Client_MyERP_DataAccess_Client_ClientPartner\"><End Typ" +
+                "e=\"MyERP.DataAccess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><End Type=\"MyERP" +
+                ".DataAccess.GeneralJournalDocument\" Role=\"ClientPartner\" Multiplicity=\"0..1\" /><" +
+                "/Association><Association Name=\"MyERP_DataAccess_GeneralJournalDocument_Organiza" +
+                "tion_MyERP_DataAccess_Organization_OrganizationPartner\"><End Type=\"MyERP.DataAcc" +
+                "ess.Organization\" Role=\"Organization\" Multiplicity=\"0..1\" /><End Type=\"MyERP.Dat" +
+                "aAccess.GeneralJournalDocument\" Role=\"OrganizationPartner\" Multiplicity=\"0..1\" /" +
+                "></Association><Association Name=\"MyERP_DataAccess_GeneralJournalDocument_RecCre" +
                 "atedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Type=\"MyERP.DataA" +
                 "ccess.User\" Role=\"RecCreatedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataA" +
-                "ccess.GeneralJournalSetup\" Role=\"RecCreatedByUserPartner\" Multiplicity=\"0..1\" />" +
-                "</Association><Association Name=\"MyERP_DataAccess_GeneralJournalSetup_RecModifie" +
-                "dByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End Type=\"MyERP.DataAcc" +
-                "ess.User\" Role=\"RecModifiedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAc" +
-                "cess.GeneralJournalSetup\" Role=\"RecModifiedByUserPartner\" Multiplicity=\"0..1\" />" +
-                "</Association><Association Name=\"MyERP_DataAccess_GeneralJournalSetup_Organizati" +
-                "on_MyERP_DataAccess_Organization_OrganizationPartner\"><End Type=\"MyERP.DataAcces" +
-                "s.Organization\" Role=\"Organization\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataA" +
-                "ccess.GeneralJournalSetup\" Role=\"OrganizationPartner\" Multiplicity=\"0..1\" /></As" +
-                "sociation><Association Name=\"MyERP_DataAccess_GeneralJournalSetup_LocalCurrency_" +
-                "MyERP_DataAccess_Currency_LocalCurrencyPartner\"><End Type=\"MyERP.DataAccess.Curr" +
-                "ency\" Role=\"LocalCurrency\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Gen" +
-                "eralJournalSetup\" Role=\"LocalCurrencyPartner\" Multiplicity=\"0..1\" /></Associatio" +
-                "n><Association Name=\"MyERP_DataAccess_GeneralJournalSetup_GeneralJournalNumberSe" +
-                "quence_MyERP_DataAccess_NumberSequence_GeneralJournalNumberSequencePartner\"><End" +
-                " Type=\"MyERP.DataAccess.NumberSequence\" Role=\"GeneralJournalNumberSequence\" Mult" +
-                "iplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.GeneralJournalSetup\" Role=\"General" +
-                "JournalNumberSequencePartner\" Multiplicity=\"0..1\" /></Association><Association N" +
-                "ame=\"MyERP_DataAccess_GeneralJournalSetup_Client_MyERP_DataAccess_Client_ClientP" +
-                "artner\"><End Type=\"MyERP.DataAccess.Client\" Role=\"Client\" Multiplicity=\"0..1\" />" +
-                "<End Type=\"MyERP.DataAccess.GeneralJournalSetup\" Role=\"ClientPartner\" Multiplici" +
-                "ty=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_JobGroup_Client_My" +
-                "ERP_DataAccess_Client_ClientPartner\"><End Type=\"MyERP.DataAccess.Client\" Role=\"C" +
-                "lient\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.JobGroup\" Role=\"ClientP" +
+                "ccess.GeneralJournalDocument\" Role=\"RecCreatedByUserPartner\" Multiplicity=\"0..1\"" +
+                " /></Association><Association Name=\"MyERP_DataAccess_GeneralJournalDocument_RecM" +
+                "odifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End Type=\"MyERP.D" +
+                "ataAccess.User\" Role=\"RecModifiedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP." +
+                "DataAccess.GeneralJournalDocument\" Role=\"RecModifiedByUserPartner\" Multiplicity=" +
+                "\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_GeneralJournalDocumen" +
+                "t_Currency_MyERP_DataAccess_Currency_CurrencyPartner\"><End Type=\"MyERP.DataAcces" +
+                "s.Currency\" Role=\"Currency\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Ge" +
+                "neralJournalDocument\" Role=\"CurrencyPartner\" Multiplicity=\"0..1\" /></Association" +
+                "><Association Name=\"MyERP_DataAccess_GeneralJournalDocument_NumberSequence_MyERP" +
+                "_DataAccess_NumberSequence_NumberSequencePartner\"><End Type=\"MyERP.DataAccess.Nu" +
+                "mberSequence\" Role=\"NumberSequence\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataA" +
+                "ccess.GeneralJournalDocument\" Role=\"NumberSequencePartner\" Multiplicity=\"0..1\" /" +
+                "></Association><Association Name=\"MyERP_DataAccess_GeneralJournalDocument_Genera" +
+                "lJournalLines_MyERP_DataAccess_GeneralJournalLine_GeneralJournalLinesPartner\"><E" +
+                "nd Type=\"MyERP.DataAccess.GeneralJournalLine\" Role=\"GeneralJournalLines\" Multipl" +
+                "icity=\"*\" /><End Type=\"MyERP.DataAccess.GeneralJournalDocument\" Role=\"GeneralJou" +
+                "rnalLinesPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_D" +
+                "ataAccess_GeneralJournalLine_Client_MyERP_DataAccess_Client_ClientPartner\"><End " +
+                "Type=\"MyERP.DataAccess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><End Type=\"My" +
+                "ERP.DataAccess.GeneralJournalLine\" Role=\"ClientPartner\" Multiplicity=\"0..1\" /></" +
+                "Association><Association Name=\"MyERP_DataAccess_GeneralJournalLine_Organization_" +
+                "MyERP_DataAccess_Organization_OrganizationPartner\"><End Type=\"MyERP.DataAccess.O" +
+                "rganization\" Role=\"Organization\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAcce" +
+                "ss.GeneralJournalLine\" Role=\"OrganizationPartner\" Multiplicity=\"0..1\" /></Associ" +
+                "ation><Association Name=\"MyERP_DataAccess_GeneralJournalLine_BusinessPartner_MyE" +
+                "RP_DataAccess_BusinessPartner_BusinessPartnerPartner\"><End Type=\"MyERP.DataAcces" +
+                "s.BusinessPartner\" Role=\"BusinessPartner\" Multiplicity=\"0..1\" /><End Type=\"MyERP" +
+                ".DataAccess.GeneralJournalLine\" Role=\"BusinessPartnerPartner\" Multiplicity=\"0..1" +
+                "\" /></Association><Association Name=\"MyERP_DataAccess_GeneralJournalLine_Job_MyE" +
+                "RP_DataAccess_Job_JobPartner\"><End Type=\"MyERP.DataAccess.Job\" Role=\"Job\" Multip" +
+                "licity=\"0..1\" /><End Type=\"MyERP.DataAccess.GeneralJournalLine\" Role=\"JobPartner" +
+                "\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Genera" +
+                "lJournalLine_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><" +
+                "End Type=\"MyERP.DataAccess.User\" Role=\"RecModifiedByUser\" Multiplicity=\"0..1\" />" +
+                "<End Type=\"MyERP.DataAccess.GeneralJournalLine\" Role=\"RecModifiedByUserPartner\" " +
+                "Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_GeneralJ" +
+                "ournalLine_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><End " +
+                "Type=\"MyERP.DataAccess.User\" Role=\"RecCreatedByUser\" Multiplicity=\"0..1\" /><End " +
+                "Type=\"MyERP.DataAccess.GeneralJournalLine\" Role=\"RecCreatedByUserPartner\" Multip" +
+                "licity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_GeneralJournal" +
+                "Line_Account_MyERP_DataAccess_Account_AccountPartner\"><End Type=\"MyERP.DataAcces" +
+                "s.Account\" Role=\"Account\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Gene" +
+                "ralJournalLine\" Role=\"AccountPartner\" Multiplicity=\"0..1\" /></Association><Assoc" +
+                "iation Name=\"MyERP_DataAccess_GeneralJournalLine_CorAccount_MyERP_DataAccess_Acc" +
+                "ount_CorAccountPartner\"><End Type=\"MyERP.DataAccess.Account\" Role=\"CorAccount\" M" +
+                "ultiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.GeneralJournalLine\" Role=\"CorAc" +
+                "countPartner\" Multiplicity=\"0..1\" /></Association><Associat";
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+            private const string ModelPart7 = "ion Name=\"MyERP_DataAccess_GeneralJournalLine_GeneralJournalDocument_MyERP_DataAc" +
+                "cess_GeneralJournalDocument_GeneralJournalDocumentPartner\"><End Type=\"MyERP.Data" +
+                "Access.GeneralJournalDocument\" Role=\"GeneralJournalDocument\" Multiplicity=\"0..1\"" +
+                " /><End Type=\"MyERP.DataAccess.GeneralJournalLine\" Role=\"GeneralJournalDocumentP" +
                 "artner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_" +
-                "JobGroup_Organization_MyERP_DataAccess_Organization_OrganizationPartner\"><End Ty" +
-                "pe=\"MyERP.DataAccess.Organization\" Role=\"Organization\" Multiplicity=\"0..1\" /><En" +
-                "d Type=\"MyERP.DataAccess.JobGroup\" Role=\"OrganizationPartner\" Multiplicity=\"0..1" +
-                "\" /></Association><Association Name=\"MyERP_DataAccess_JobGroup_RecCreatedByUser_" +
-                "MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Type=\"MyERP.DataAccess.User\"" +
-                " Role=\"RecCreatedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.JobGr" +
-                "oup\" Role=\"RecCreatedByUserPartner\" Multiplicity=\"0..1\" /></Association><Associa" +
-                "tion Name=\"MyERP_DataAccess_JobGroup_RecModifiedByUser_MyERP_DataAccess_User_Rec" +
+                "GeneralJournalLine_Currency_MyERP_DataAccess_Currency_CurrencyPartner\"><End Type" +
+                "=\"MyERP.DataAccess.Currency\" Role=\"Currency\" Multiplicity=\"0..1\" /><End Type=\"My" +
+                "ERP.DataAccess.GeneralJournalLine\" Role=\"CurrencyPartner\" Multiplicity=\"0..1\" />" +
+                "</Association><Association Name=\"MyERP_DataAccess_GeneralJournalSetup_RecCreated" +
+                "ByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Type=\"MyERP.DataAcces" +
+                "s.User\" Role=\"RecCreatedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAcces" +
+                "s.GeneralJournalSetup\" Role=\"RecCreatedByUserPartner\" Multiplicity=\"0..1\" /></As" +
+                "sociation><Association Name=\"MyERP_DataAccess_GeneralJournalSetup_RecModifiedByU" +
+                "ser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End Type=\"MyERP.DataAccess." +
+                "User\" Role=\"RecModifiedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess" +
+                ".GeneralJournalSetup\" Role=\"RecModifiedByUserPartner\" Multiplicity=\"0..1\" /></As" +
+                "sociation><Association Name=\"MyERP_DataAccess_GeneralJournalSetup_Organization_M" +
+                "yERP_DataAccess_Organization_OrganizationPartner\"><End Type=\"MyERP.DataAccess.Or" +
+                "ganization\" Role=\"Organization\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAcces" +
+                "s.GeneralJournalSetup\" Role=\"OrganizationPartner\" Multiplicity=\"0..1\" /></Associ" +
+                "ation><Association Name=\"MyERP_DataAccess_GeneralJournalSetup_LocalCurrency_MyER" +
+                "P_DataAccess_Currency_LocalCurrencyPartner\"><End Type=\"MyERP.DataAccess.Currency" +
+                "\" Role=\"LocalCurrency\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.General" +
+                "JournalSetup\" Role=\"LocalCurrencyPartner\" Multiplicity=\"0..1\" /></Association><A" +
+                "ssociation Name=\"MyERP_DataAccess_GeneralJournalSetup_GeneralJournalNumberSequen" +
+                "ce_MyERP_DataAccess_NumberSequence_GeneralJournalNumberSequencePartner\"><End Typ" +
+                "e=\"MyERP.DataAccess.NumberSequence\" Role=\"GeneralJournalNumberSequence\" Multipli" +
+                "city=\"0..1\" /><End Type=\"MyERP.DataAccess.GeneralJournalSetup\" Role=\"GeneralJour" +
+                "nalNumberSequencePartner\" Multiplicity=\"0..1\" /></Association><Association Name=" +
+                "\"MyERP_DataAccess_GeneralJournalSetup_Client_MyERP_DataAccess_Client_ClientPartn" +
+                "er\"><End Type=\"MyERP.DataAccess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><End" +
+                " Type=\"MyERP.DataAccess.GeneralJournalSetup\" Role=\"ClientPartner\" Multiplicity=\"" +
+                "0..1\" /></Association><Association Name=\"MyERP_DataAccess_JobGroup_Client_MyERP_" +
+                "DataAccess_Client_ClientPartner\"><End Type=\"MyERP.DataAccess.Client\" Role=\"Clien" +
+                "t\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.JobGroup\" Role=\"ClientPartn" +
+                "er\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_JobG" +
+                "roup_Organization_MyERP_DataAccess_Organization_OrganizationPartner\"><End Type=\"" +
+                "MyERP.DataAccess.Organization\" Role=\"Organization\" Multiplicity=\"0..1\" /><End Ty" +
+                "pe=\"MyERP.DataAccess.JobGroup\" Role=\"OrganizationPartner\" Multiplicity=\"0..1\" />" +
+                "</Association><Association Name=\"MyERP_DataAccess_JobGroup_RecCreatedByUser_MyER" +
+                "P_DataAccess_User_RecCreatedByUserPartner\"><End Type=\"MyERP.DataAccess.User\" Rol" +
+                "e=\"RecCreatedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.JobGroup\"" +
+                " Role=\"RecCreatedByUserPartner\" Multiplicity=\"0..1\" /></Association><Association" +
+                " Name=\"MyERP_DataAccess_JobGroup_RecModifiedByUser_MyERP_DataAccess_User_RecModi" +
+                "fiedByUserPartner\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecModifiedByUser\" Mu" +
+                "ltiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.JobGroup\" Role=\"RecModifiedByUse" +
+                "rPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAcces" +
+                "s_JobGroup_Job1s_MyERP_DataAccess_Job_Job1sPartner\"><End Type=\"MyERP.DataAccess." +
+                "Job\" Role=\"Job1s\" Multiplicity=\"*\" /><End Type=\"MyERP.DataAccess.JobGroup\" Role=" +
+                "\"Job1sPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_Data" +
+                "Access_JobGroup_Job2s_MyERP_DataAccess_Job_Job2sPartner\"><End Type=\"MyERP.DataAc" +
+                "cess.Job\" Role=\"Job2s\" Multiplicity=\"*\" /><End Type=\"MyERP.DataAccess.JobGroup\" " +
+                "Role=\"Job2sPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP" +
+                "_DataAccess_JobGroup_Job3s_MyERP_DataAccess_Job_Job3sPartner\"><End Type=\"MyERP.D" +
+                "ataAccess.Job\" Role=\"Job3s\" Multiplicity=\"*\" /><End Type=\"MyERP.DataAccess.JobGr" +
+                "oup\" Role=\"Job3sPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"" +
+                "MyERP_DataAccess_Job_Client_MyERP_DataAccess_Client_ClientPartner\"><End Type=\"My" +
+                "ERP.DataAccess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><End Type=\"MyERP.Data" +
+                "Access.Job\" Role=\"ClientPartner\" Multiplicity=\"0..1\" /></Association><Associatio" +
+                "n Name=\"MyERP_DataAccess_Job_Organization_MyERP_DataAccess_Organization_Organiza" +
+                "tionPartner\"><End Type=\"MyERP.DataAccess.Organization\" Role=\"Organization\" Multi" +
+                "plicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Job\" Role=\"OrganizationPartner\" Mul" +
+                "tiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Job_RecCrea" +
+                "tedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Type=\"MyERP.DataAc" +
+                "cess.User\" Role=\"RecCreatedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAc" +
+                "cess.Job\" Role=\"RecCreatedByUserPartner\" Multiplicity=\"0..1\" /></Association><As" +
+                "sociation Name=\"MyERP_DataAccess_Job_RecModifiedByUser_MyERP_DataAccess_User_Rec" +
                 "ModifiedByUserPartner\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecModifiedByUser" +
-                "\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.JobGroup\" Role=\"RecModifiedB" +
-                "yUserPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataA" +
-                "ccess_JobGroup_Job1s_MyERP_DataAccess_Job_Job1sPartner\"><End Type=\"MyERP.DataAcc" +
-                "ess.Job\" Role=\"Job1s\" Multiplicity=\"*\" /><End Type=\"MyERP.DataAccess.JobGroup\" R" +
-                "ole=\"Job1sPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_" +
-                "DataAccess_JobGroup_Job2s_MyERP_DataAccess_Job_Job2sPartner\"><End Type=\"MyERP.Da" +
-                "taAccess.Job\" Role=\"Job2s\" Multiplicity=\"*\" /><End Type=\"MyERP.DataAccess.JobGro" +
-                "up\" Role=\"Job2sPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"M" +
-                "yERP_DataAccess_JobGroup_Job3s_MyERP_DataAccess_Job_Job3sPartner\"><End Type=\"MyE" +
-                "RP.DataAccess.Job\" Role=\"Job3s\" Multiplicity=\"*\" /><End Type=\"MyERP.DataAccess.J" +
-                "obGroup\" Role=\"Job3sPartner\" Multiplicity=\"0..1\" /></Association><Association Na" +
-                "me=\"MyERP_DataAccess_Job_Client_MyERP_DataAccess_Client_ClientPartner\"><End Type" +
+                "\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Job\" Role=\"RecModifiedByUser" +
+                "Partner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess" +
+                "_Job_BusinessPartner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartner\"><E" +
+                "nd Type=\"MyERP.DataAccess.BusinessPartner\" Role=\"BusinessPartner\" Multiplicity=\"" +
+                "0..1\" /><End Type=\"MyERP.DataAccess.Job\" Role=\"BusinessPartnerPartner\" Multiplic" +
+                "ity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Job_Account_MyERP" +
+                "_DataAccess_Account_AccountPartner\"><End Type=\"MyERP.DataAccess.Account\" Role=\"A" +
+                "ccount\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Job\" Role=\"AccountPart" +
+                "ner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Job" +
+                "_JobGroup1_MyERP_DataAccess_JobGroup_JobGroup1Partner\"><End Type=\"MyERP.DataAcce" +
+                "ss.JobGroup\" Role=\"JobGroup1\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess." +
+                "Job\" Role=\"JobGroup1Partner\" Multiplicity=\"0..1\" /></Association><Association Na" +
+                "me=\"MyERP_DataAccess_Job_JobGroup2_MyERP_DataAccess_JobGroup_JobGroup2Partner\"><" +
+                "End Type=\"MyERP.DataAccess.JobGroup\" Role=\"JobGroup2\" Multiplicity=\"0..1\" /><End" +
+                " Type=\"MyERP.DataAccess.Job\" Role=\"JobGroup2Partner\" Multiplicity=\"0..1\" /></Ass" +
+                "ociation><Association Name=\"MyERP_DataAccess_Job_JobGroup3_MyERP_DataAccess_JobG" +
+                "roup_JobGroup3Partner\"><End Type=\"MyERP.DataAccess.JobGroup\" Role=\"JobGroup3\" Mu" +
+                "ltiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Job\" Role=\"JobGroup3Partner\" Mul" +
+                "tiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_NumberSeque" +
+                "nce_Client_MyERP_DataAccess_Client_ClientPartner\"><End Type=\"MyERP.DataAccess.Cl" +
+                "ient\" Role=\"Client\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.NumberSequ" +
+                "ence\" Role=\"ClientPartner\" Multiplicity=\"0..1\" /></Association><Association Name" +
+                "=\"MyERP_DataAccess_NumberSequence_Organization_MyERP_DataAccess_Organization_Org" +
+                "anizationPartner\"><End Type=\"MyERP.DataAccess.Organization\" Role=\"Organization\" " +
+                "Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.NumberSequence\" Role=\"Organiza" +
+                "tionPartner\" Multiplicity=\"0..1\" /></Association><Associati";
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+            private const string ModelPart8 = "on Name=\"MyERP_DataAccess_NumberSequence_RecCreatedByUser_MyERP_DataAccess_User_R" +
+                "ecCreatedByUserPartner\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecCreatedByUser" +
+                "\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.NumberSequence\" Role=\"RecCre" +
+                "atedByUserPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_" +
+                "DataAccess_NumberSequence_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByU" +
+                "serPartner\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecModifiedByUser\" Multiplic" +
+                "ity=\"0..1\" /><End Type=\"MyERP.DataAccess.NumberSequence\" Role=\"RecModifiedByUser" +
+                "Partner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess" +
+                "_Organization_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><E" +
+                "nd Type=\"MyERP.DataAccess.User\" Role=\"RecCreatedByUser\" Multiplicity=\"0..1\" /><E" +
+                "nd Type=\"MyERP.DataAccess.Organization\" Role=\"RecCreatedByUserPartner\" Multiplic" +
+                "ity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Organization_RecM" +
+                "odifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End Type=\"MyERP.D" +
+                "ataAccess.User\" Role=\"RecModifiedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP." +
+                "DataAccess.Organization\" Role=\"RecModifiedByUserPartner\" Multiplicity=\"0..1\" /><" +
+                "/Association><Association Name=\"MyERP_DataAccess_Organization_Client_MyERP_DataA" +
+                "ccess_Client_ClientPartner\"><End Type=\"MyERP.DataAccess.Client\" Role=\"Client\" Mu" +
+                "ltiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Organization\" Role=\"ClientPartne" +
+                "r\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Organ" +
+                "ization_AllOrganization_MyERP_DataAccess_Organization_AllOrganizationPartner\"><E" +
+                "nd Type=\"MyERP.DataAccess.Organization\" Role=\"AllOrganization\" Multiplicity=\"0.." +
+                "1\" /><End Type=\"MyERP.DataAccess.Organization\" Role=\"AllOrganizationPartner\" Mul" +
+                "tiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Organizatio" +
+                "n_GeneralJournalSetup_MyERP_DataAccess_GeneralJournalSetup_GeneralJournalSetupPa" +
+                "rtner\"><End Type=\"MyERP.DataAccess.GeneralJournalSetup\" Role=\"GeneralJournalSetu" +
+                "p\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Organization\" Role=\"General" +
+                "JournalSetupPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyER" +
+                "P_DataAccess_PaymentTerm_Client_MyERP_DataAccess_Client_ClientPartner\"><End Type" +
                 "=\"MyERP.DataAccess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><End Type=\"MyERP." +
-                "DataAccess.Job\" Role=\"ClientPartner\" Multiplicity=\"0..1\" /></Association><Associ" +
-                "ation Name=\"MyERP_DataAccess_Job_Organization_MyERP_DataAccess_Organization_Orga" +
-                "nizationPartner\"><End Type=\"MyERP.DataAccess.Organization\" Role=\"Organization\" M" +
-                "ultiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Job\" Role=\"OrganizationPartner\"" +
-                " Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Job_Rec" +
-                "CreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Type=\"MyERP.Da" +
-                "taAccess.User\" Role=\"RecCreatedByUser\" Multiplicity=\"0..1\" /><End Type=\"MyERP.Da" +
-                "taAccess.Job\" Role=\"RecCreatedByUserPartner\" Multiplicity=\"0..1\" /></Association" +
-                "><Association Name=\"MyERP_DataAccess_Job_RecModifiedByUser_MyERP_DataAccess_User" +
-                "_RecModifiedByUserPartner\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecModifiedBy" +
-                "User\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Job\" Role=\"RecModifiedBy" +
-                "UserPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAc" +
-                "cess_Job_BusinessPartner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartner" +
-                "\"><End Type=\"MyERP.DataAccess.BusinessPartner\" Role=\"BusinessPartner\" Multiplici" +
-                "ty=\"0..1\" /><End Type=\"MyERP.DataAccess.Job\" Role=\"BusinessPartnerPartner\" Multi" +
-                "plicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Job_Account_M" +
-                "yERP_DataAccess_Account_AccountPartner\"><End Type=\"MyERP.DataAccess.Account\" Rol" +
-                "e=\"Account\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Job\" Role=\"Account" +
-                "Partner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess" +
-                "_Job_JobGroup1_MyERP_DataAccess_JobGroup_JobGroup1Partner\"><End Type=\"MyERP.Data" +
-                "Access.JobGroup\" Role=\"JobGroup1\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAcc" +
-                "ess.Job\" Role=\"JobGroup1Partner\" Multiplicity=\"0..1\" /></Association><Associatio" +
-                "n Name=\"MyERP_DataAccess_Job_JobGroup2_MyERP_DataAccess_JobGroup_JobGroup2Partne" +
-                "r\"><End Type=\"MyERP.DataAccess.JobGroup\" Role=\"JobGroup2\" Multiplicity=\"0..1\" />" +
-                "<End Type=\"MyERP.DataAccess.Job\" Role=\"JobGroup2Partner\" Multiplicity=\"0..1\" /><" +
-                "/Association><Association Name=\"MyERP_DataAccess_Job_JobGroup3_MyERP_DataAccess_" +
-                "JobGroup_JobGroup3Partner\"><End Type=\"MyERP.DataAccess.JobGroup\" Role=\"JobGroup3" +
-                "\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Job\" Role=\"JobGroup3Partner\"" +
-                " Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_NumberS" +
-                "equence_Client_MyERP_DataAccess_Client_ClientPartner\"><End Type=\"MyERP.DataAcces" +
-                "s.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Number" +
-                "Sequence\" Role=\"ClientPartner\" Multiplicity=\"0..1\" /></Association><Association " +
-                "Name=\"MyERP_DataAccess_NumberSequence_Organization_MyERP_DataAccess_Organization" +
-                "_OrganizationPartner\"><End Type=\"MyERP.DataAccess.Organization\" Role=\"Organizati" +
-                "on\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.NumberSequence\" Role=\"Orga" +
-                "nizationPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_Da" +
-                "taAccess_NumberSequence_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserP" +
-                "artner\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecCreatedByUser\" Multiplicity=\"" +
-                "0..1\" /><End Type=\"MyERP.DataAccess.NumberSequence\" Role=\"RecCreatedByUserPartne" +
-                "r\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Numbe" +
-                "rSequence_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End" +
-                " Type=\"MyERP.DataAccess.User\" Role=\"RecModifiedByUser\" Mult";
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private const string ModelPart8 = "iplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.NumberSequence\" Role=\"RecModifiedBy" +
-                "UserPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAc" +
-                "cess_Organization_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner" +
-                "\"><End Type=\"MyERP.DataAccess.User\" Role=\"RecCreatedByUser\" Multiplicity=\"0..1\" " +
-                "/><End Type=\"MyERP.DataAccess.Organization\" Role=\"RecCreatedByUserPartner\" Multi" +
-                "plicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_Organization_" +
-                "RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End Type=\"MyE" +
-                "RP.DataAccess.User\" Role=\"RecModifiedByUser\" Multiplicity=\"0..1\" /><End Type=\"My" +
-                "ERP.DataAccess.Organization\" Role=\"RecModifiedByUserPartner\" Multiplicity=\"0..1\"" +
-                " /></Association><Association Name=\"MyERP_DataAccess_Organization_Client_MyERP_D" +
-                "ataAccess_Client_ClientPartner\"><End Type=\"MyERP.DataAccess.Client\" Role=\"Client" +
-                "\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Organization\" Role=\"ClientPa" +
-                "rtner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_P" +
-                "aymentTerm_Client_MyERP_DataAccess_Client_ClientPartner\"><End Type=\"MyERP.DataAc" +
-                "cess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Pay" +
-                "mentTerm\" Role=\"ClientPartner\" Multiplicity=\"0..1\" /></Association><Association " +
-                "Name=\"MyERP_DataAccess_PaymentTerm_Organization_MyERP_DataAccess_Organization_Or" +
-                "ganizationPartner\"><End Type=\"MyERP.DataAccess.Organization\" Role=\"Organization\"" +
-                " Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.PaymentTerm\" Role=\"Organizati" +
-                "onPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAcce" +
-                "ss_Session_Client_MyERP_DataAccess_Client_ClientPartner\"><End Type=\"MyERP.DataAc" +
-                "cess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Ses" +
-                "sion\" Role=\"ClientPartner\" Multiplicity=\"0..1\" /></Association><Association Name" +
-                "=\"MyERP_DataAccess_Session_Organization_MyERP_DataAccess_Organization_Organizati" +
-                "onPartner\"><End Type=\"MyERP.DataAccess.Organization\" Role=\"Organization\" Multipl" +
-                "icity=\"0..1\" /><End Type=\"MyERP.DataAccess.Session\" Role=\"OrganizationPartner\" M" +
-                "ultiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess_User_Clie" +
-                "nt_MyERP_DataAccess_Client_ClientPartner\"><End Type=\"MyERP.DataAccess.Client\" Ro" +
-                "le=\"Client\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.User\" Role=\"Client" +
-                "Partner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAccess" +
-                "_User_Organization_MyERP_DataAccess_Organization_OrganizationPartner\"><End Type=" +
-                "\"MyERP.DataAccess.Organization\" Role=\"Organization\" Multiplicity=\"0..1\" /><End T" +
-                "ype=\"MyERP.DataAccess.User\" Role=\"OrganizationPartner\" Multiplicity=\"0..1\" /></A" +
-                "ssociation></Schema><Schema Namespace=\"Default\" xmlns=\"http://schemas.microsoft." +
-                "com/ado/2009/11/edm\"><EntityContainer Name=\"Container\" m:IsDefaultEntityContaine" +
-                "r=\"true\"><EntitySet Name=\"Accounts\" EntityType=\"MyERP.DataAccess.Account\" /><Ent" +
-                "itySet Name=\"BusinessPartnerGroups\" EntityType=\"MyERP.DataAccess.BusinessPartner" +
-                "Group\" /><EntitySet Name=\"BusinessPartners\" EntityType=\"MyERP.DataAccess.Busines" +
-                "sPartner\" /><EntitySet Name=\"Clients\" EntityType=\"MyERP.DataAccess.Client\" /><En" +
-                "titySet Name=\"Currencies\" EntityType=\"MyERP.DataAccess.Currency\" /><EntitySet Na" +
-                "me=\"CurrencyConvertRates\" EntityType=\"MyERP.DataAccess.CurrencyConvertRate\" /><E" +
-                "ntitySet Name=\"GeneralJournalDocuments\" EntityType=\"MyERP.DataAccess.GeneralJour" +
-                "nalDocument\" /><EntitySet Name=\"GeneralJournalLines\" EntityType=\"MyERP.DataAcces" +
-                "s.GeneralJournalLine\" /><EntitySet Name=\"GeneralJournalSetups\" EntityType=\"MyERP" +
-                ".DataAccess.GeneralJournalSetup\" /><EntitySet Name=\"JobGroups\" EntityType=\"MyERP" +
-                ".DataAccess.JobGroup\" /><EntitySet Name=\"Jobs\" EntityType=\"MyERP.DataAccess.Job\"" +
-                " /><EntitySet Name=\"Modules\" EntityType=\"MyERP.DataAccess.Module\" /><EntitySet N" +
-                "ame=\"NumberSequences\" EntityType=\"MyERP.DataAccess.NumberSequence\" /><EntitySet " +
-                "Name=\"Organizations\" EntityType=\"MyERP.DataAccess.Organization\" /><EntitySet Nam" +
-                "e=\"PaymentTerms\" EntityType=\"MyERP.DataAccess.PaymentTerm\" /><EntitySet Name=\"Se" +
-                "ssions\" EntityType=\"MyERP.DataAccess.Session\" /><EntitySet Name=\"Users\" EntityTy" +
-                "pe=\"MyERP.DataAccess.User\" /><FunctionImport Name=\"SequenceNextVal\" ReturnType=\"" +
-                "Edm.Int32\" IsBindable=\"true\" m:IsAlwaysBindable=\"true\"><Parameter Name=\"bindingP" +
-                "arameter\" Type=\"MyERP.DataAccess.NumberSequence\" /><Parameter Name=\"key\" Type=\"E" +
-                "dm.Guid\" Nullable=\"false\" /></FunctionImport><FunctionImport Name=\"GetAllOrganiz" +
-                "ation\" ReturnType=\"MyERP.DataAccess.Organization\" IsBindable=\"true\" EntitySet=\"O" +
-                "rganizations\" m:IsAlwaysBindable=\"true\"><Parameter Name=\"bindingParameter\" Type=" +
-                "\"MyERP.DataAccess.Organization\" /><Parameter Name=\"clientKey\" Type=\"Edm.Guid\" Nu" +
-                "llable=\"false\" /></FunctionImport><FunctionImport Name=\"GeneralJournalSetupOfOrg" +
-                "anization\" ReturnType=\"MyERP.DataAccess.GeneralJournalSetup\" IsBindable=\"true\" E" +
-                "ntitySet=\"GeneralJournalSetups\" m:IsAlwaysBindable=\"true\"><Parameter Name=\"bindi" +
-                "ngParameter\" Type=\"MyERP.DataAccess.GeneralJournalSetup\" /><Parameter Name=\"orga" +
-                "nizationKey\" Type=\"Edm.Guid\" Nullable=\"false\" /></FunctionImport><AssociationSet" +
-                " Name=\"MyERP_DataAccess_Account_Currency_MyERP_DataAccess_Currency_CurrencyPartn" +
-                "erSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Account_Currency_MyERP_Dat" +
-                "aAccess_Currency_CurrencyPartner\"><End Role=\"CurrencyPartner\" EntitySet=\"Account" +
-                "s\" /><End Role=\"Currency\" EntitySet=\"Currencies\" /></AssociationSet><Association" +
-                "Set Name=\"MyERP_DataAccess_Account_ParentAccount_MyERP_DataAccess_Account_Parent" +
-                "AccountPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Account_Parent" +
-                "Account_MyERP_DataAccess_Account_ParentAccountPartner\"><End Role=\"ParentAccountP" +
-                "artner\" EntitySet=\"Accounts\" /><End Role=\"ParentAccount\" EntitySet=\"Accounts\" />" +
-                "</AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Account_RecModifiedByUse" +
-                "r_MyERP_DataAccess_User_RecModifiedByUserPartnerSet\" Association=\"MyERP.DataAcce" +
-                "ss.MyERP_DataAccess_Account_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedB" +
-                "yUserPartner\"><End Role=\"RecModifiedByUserPartner\" EntitySet=\"Accounts\" /><End R" +
-                "ole=\"RecModifiedByUser\" EntitySet=\"Users\" /></AssociationSet><AssociationSet Nam" +
-                "e=\"MyERP_DataAccess_Account_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByU" +
-                "serPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Account_RecCreated" +
-                "ByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Role=\"RecCreatedByUse" +
-                "rPartner\" EntitySet=\"Accounts\" /><End Role=\"RecCreatedByUser\" EntitySet=\"Users\" " +
-                "/></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Account_Client_MyERP_D" +
-                "ataAccess_Client_ClientPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAcces" +
-                "s_Account_Client_MyERP_DataAccess_Client_ClientPartner\"><End Role=\"ClientPartner" +
-                "\" EntitySet=\"Accounts\" /><End Role=\"Client\" EntitySet=\"Clients\" /></AssociationS" +
-                "et><AssociationSet Name=\"MyERP_DataAccess_Account_Organization_MyERP_DataAccess_" +
-                "Organization_OrganizationPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAcc" +
-                "ess_Account_Organization_MyERP_DataAccess_Organization_OrganizationPartner\"><End" +
-                " Role=\"OrganizationPartner\" EntitySet=\"Accounts\" /><End Role=\"Organization\" Enti" +
-                "tySet=\"Organizations\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_" +
-                "Account_ChildAccounts_MyERP_DataAccess_Account_ChildAccountsPartnerSet\" Associat" +
-                "ion=\"MyERP.DataAccess.MyERP_DataAccess_Account_ChildAccounts_MyERP_DataAccess_Ac" +
-                "count_ChildAccountsPartner\"><End Role=\"ChildAccountsPartner\" EntitySet=\"Accounts" +
-                "\" /><End Role=\"ChildAccounts\" EntitySet=\"Accounts\" /></AssociationSet><Associati" +
-                "onSet Name=\"MyERP_DataAccess_BusinessPartnerGroup_Client_My";
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private const string ModelPart9 = "ERP_DataAccess_Client_ClientPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataA" +
-                "ccess_BusinessPartnerGroup_Client_MyERP_DataAccess_Client_ClientPartner\"><End Ro" +
-                "le=\"ClientPartner\" EntitySet=\"BusinessPartnerGroups\" /><End Role=\"Client\" Entity" +
-                "Set=\"Clients\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Business" +
-                "PartnerGroup_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet\" " +
-                "Association=\"MyERP.DataAccess.MyERP_DataAccess_BusinessPartnerGroup_Organization" +
-                "_MyERP_DataAccess_Organization_OrganizationPartner\"><End Role=\"OrganizationPartn" +
-                "er\" EntitySet=\"BusinessPartnerGroups\" /><End Role=\"Organization\" EntitySet=\"Orga" +
-                "nizations\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_BusinessPar" +
-                "tnerGroup_BusinessPartner1s_MyERP_DataAccess_BusinessPartner_BusinessPartner1sPa" +
-                "rtnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_BusinessPartnerGroup_Bu" +
-                "sinessPartner1s_MyERP_DataAccess_BusinessPartner_BusinessPartner1sPartner\"><End " +
-                "Role=\"BusinessPartner1sPartner\" EntitySet=\"BusinessPartnerGroups\" /><End Role=\"B" +
-                "usinessPartner1s\" EntitySet=\"BusinessPartners\" /></AssociationSet><AssociationSe" +
-                "t Name=\"MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner3s_MyERP_DataAccess" +
-                "_BusinessPartner_BusinessPartner3sPartnerSet\" Association=\"MyERP.DataAccess.MyER" +
-                "P_DataAccess_BusinessPartnerGroup_BusinessPartner3s_MyERP_DataAccess_BusinessPar" +
-                "tner_BusinessPartner3sPartner\"><End Role=\"BusinessPartner3sPartner\" EntitySet=\"B" +
-                "usinessPartnerGroups\" /><End Role=\"BusinessPartner3s\" EntitySet=\"BusinessPartner" +
-                "s\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_BusinessPartnerGrou" +
-                "p_BusinessPartner2s_MyERP_DataAccess_BusinessPartner_BusinessPartner2sPartnerSet" +
-                "\" Association=\"MyERP.DataAccess.MyERP_DataAccess_BusinessPartnerGroup_BusinessPa" +
-                "rtner2s_MyERP_DataAccess_BusinessPartner_BusinessPartner2sPartner\"><End Role=\"Bu" +
-                "sinessPartner2sPartner\" EntitySet=\"BusinessPartnerGroups\" /><End Role=\"BusinessP" +
-                "artner2s\" EntitySet=\"BusinessPartners\" /></AssociationSet><AssociationSet Name=\"" +
-                "MyERP_DataAccess_BusinessPartner_EmployeeAccount_MyERP_DataAccess_Account_Employ" +
-                "eeAccountPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_BusinessPart" +
-                "ner_EmployeeAccount_MyERP_DataAccess_Account_EmployeeAccountPartner\"><End Role=\"" +
-                "EmployeeAccountPartner\" EntitySet=\"BusinessPartners\" /><End Role=\"EmployeeAccoun" +
-                "t\" EntitySet=\"Accounts\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAcces" +
-                "s_BusinessPartner_VendorAccount_MyERP_DataAccess_Account_VendorAccountPartnerSet" +
-                "\" Association=\"MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_VendorAccount_M" +
-                "yERP_DataAccess_Account_VendorAccountPartner\"><End Role=\"VendorAccountPartner\" E" +
-                "ntitySet=\"BusinessPartners\" /><End Role=\"VendorAccount\" EntitySet=\"Accounts\" /><" +
-                "/AssociationSet><AssociationSet Name=\"MyERP_DataAccess_BusinessPartner_CustomerA" +
-                "ccount_MyERP_DataAccess_Account_CustomerAccountPartnerSet\" Association=\"MyERP.Da" +
-                "taAccess.MyERP_DataAccess_BusinessPartner_CustomerAccount_MyERP_DataAccess_Accou" +
-                "nt_CustomerAccountPartner\"><End Role=\"CustomerAccountPartner\" EntitySet=\"Busines" +
-                "sPartners\" /><End Role=\"CustomerAccount\" EntitySet=\"Accounts\" /></AssociationSet" +
-                "><AssociationSet Name=\"MyERP_DataAccess_BusinessPartner_PaymentTerm_MyERP_DataAc" +
-                "cess_PaymentTerm_PaymentTermPartnerSet\" Association=\"MyERP.DataAccess.MyERP_Data" +
-                "Access_BusinessPartner_PaymentTerm_MyERP_DataAccess_PaymentTerm_PaymentTermPartn" +
-                "er\"><End Role=\"PaymentTermPartner\" EntitySet=\"BusinessPartners\" /><End Role=\"Pay" +
-                "mentTerm\" EntitySet=\"PaymentTerms\" /></AssociationSet><AssociationSet Name=\"MyER" +
-                "P_DataAccess_BusinessPartner_Client_MyERP_DataAccess_Client_ClientPartnerSet\" As" +
-                "sociation=\"MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_Client_MyERP_DataAc" +
-                "cess_Client_ClientPartner\"><End Role=\"ClientPartner\" EntitySet=\"BusinessPartners" +
-                "\" /><End Role=\"Client\" EntitySet=\"Clients\" /></AssociationSet><AssociationSet Na" +
-                "me=\"MyERP_DataAccess_BusinessPartner_Organization_MyERP_DataAccess_Organization_" +
-                "OrganizationPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_BusinessP" +
-                "artner_Organization_MyERP_DataAccess_Organization_OrganizationPartner\"><End Role" +
-                "=\"OrganizationPartner\" EntitySet=\"BusinessPartners\" /><End Role=\"Organization\" E" +
-                "ntitySet=\"Organizations\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAcce" +
-                "ss_BusinessPartner_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartne" +
-                "rSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_RecCreatedB" +
-                "yUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Role=\"RecCreatedByUser" +
-                "Partner\" EntitySet=\"BusinessPartners\" /><End Role=\"RecCreatedByUser\" EntitySet=\"" +
-                "Users\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_BusinessPartner" +
-                "_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartnerSet\" Associatio" +
-                "n=\"MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_RecModifiedByUser_MyERP_Dat" +
-                "aAccess_User_RecModifiedByUserPartner\"><End Role=\"RecModifiedByUserPartner\" Enti" +
-                "tySet=\"BusinessPartners\" /><End Role=\"RecModifiedByUser\" EntitySet=\"Users\" /></A" +
-                "ssociationSet><AssociationSet Name=\"MyERP_DataAccess_BusinessPartner_BusinessPar" +
-                "tnerGroup1_MyERP_DataAccess_BusinessPartnerGroup_BusinessPartnerGroup1PartnerSet" +
-                "\" Association=\"MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_BusinessPartner" +
-                "Group1_MyERP_DataAccess_BusinessPartnerGroup_BusinessPartnerGroup1Partner\"><End " +
-                "Role=\"BusinessPartnerGroup1Partner\" EntitySet=\"BusinessPartners\" /><End Role=\"Bu" +
-                "sinessPartnerGroup1\" EntitySet=\"BusinessPartnerGroups\" /></AssociationSet><Assoc" +
-                "iationSet Name=\"MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup3_MyERP_Dat" +
-                "aAccess_BusinessPartnerGroup_BusinessPartnerGroup3PartnerSet\" Association=\"MyERP" +
-                ".DataAccess.MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup3_MyERP_DataAcc" +
-                "ess_BusinessPartnerGroup_BusinessPartnerGroup3Partner\"><End Role=\"BusinessPartne" +
-                "rGroup3Partner\" EntitySet=\"BusinessPartners\" /><End Role=\"BusinessPartnerGroup3\"" +
-                " EntitySet=\"BusinessPartnerGroups\" /></AssociationSet><AssociationSet Name=\"MyER" +
-                "P_DataAccess_BusinessPartner_BusinessPartnerGroup2_MyERP_DataAccess_BusinessPart" +
-                "nerGroup_BusinessPartnerGroup2PartnerSet\" Association=\"MyERP.DataAccess.MyERP_Da" +
-                "taAccess_BusinessPartner_BusinessPartnerGroup2_MyERP_DataAccess_BusinessPartnerG" +
-                "roup_BusinessPartnerGroup2Partner\"><End Role=\"BusinessPartnerGroup2Partner\" Enti" +
-                "tySet=\"BusinessPartners\" /><End Role=\"BusinessPartnerGroup2\" EntitySet=\"Business" +
-                "PartnerGroups\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Client_" +
-                "RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet\" Association=\"" +
-                "MyERP.DataAccess.MyERP_DataAccess_Client_RecCreatedByUser_MyERP_DataAccess_User_" +
-                "RecCreatedByUserPartner\"><End Role=\"RecCreatedByUserPartner\" EntitySet=\"Clients\"" +
-                " /><End Role=\"RecCreatedByUser\" EntitySet=\"Users\" /></AssociationSet><Associatio" +
-                "nSet Name=\"MyERP_DataAccess_Client_Organizations_MyERP_DataAccess_Organization_O" +
-                "rganizationsPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Client_Or" +
-                "ganizations_MyERP_DataAccess_Organization_OrganizationsPartner\"><End Role=\"Organ" +
-                "izationsPartner\" EntitySet=\"Clients\" /><End Role=\"Organizations\" EntitySet=\"Orga" +
-                "nizations\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Currency_Re" +
-                "cModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartnerSet\" Association=\"" +
-                "MyERP.DataAccess.MyERP_DataAccess_Currency_RecModifiedByUser_MyERP_DataAccess_Us" +
-                "er_RecModifiedByUserPartner\"><End Role=\"RecModifiedByUserPartner\" EntitySet=\"Cur" +
-                "rencies\" /><End Role=\"RecModifiedByUser\" EntitySet=\"Users\" /></AssociationSet><A" +
-                "ssociationSet Name=\"MyERP_DataAccess_Currency_RecCreatedByU";
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private const string ModelPart10 = "ser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet\" Association=\"MyERP.DataAcce" +
-                "ss.MyERP_DataAccess_Currency_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedBy" +
-                "UserPartner\"><End Role=\"RecCreatedByUserPartner\" EntitySet=\"Currencies\" /><End R" +
-                "ole=\"RecCreatedByUser\" EntitySet=\"Users\" /></AssociationSet><AssociationSet Name" +
-                "=\"MyERP_DataAccess_Currency_Client_MyERP_DataAccess_Client_ClientPartnerSet\" Ass" +
-                "ociation=\"MyERP.DataAccess.MyERP_DataAccess_Currency_Client_MyERP_DataAccess_Cli" +
-                "ent_ClientPartner\"><End Role=\"ClientPartner\" EntitySet=\"Currencies\" /><End Role=" +
-                "\"Client\" EntitySet=\"Clients\" /></AssociationSet><AssociationSet Name=\"MyERP_Data" +
-                "Access_Currency_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSe" +
-                "t\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Currency_Organization_MyERP_Da" +
-                "taAccess_Organization_OrganizationPartner\"><End Role=\"OrganizationPartner\" Entit" +
-                "ySet=\"Currencies\" /><End Role=\"Organization\" EntitySet=\"Organizations\" /></Assoc" +
-                "iationSet><AssociationSet Name=\"MyERP_DataAccess_CurrencyConvertRate_Client_MyER" +
-                "P_DataAccess_Client_ClientPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAc" +
-                "cess_CurrencyConvertRate_Client_MyERP_DataAccess_Client_ClientPartner\"><End Role" +
-                "=\"ClientPartner\" EntitySet=\"CurrencyConvertRates\" /><End Role=\"Client\" EntitySet" +
-                "=\"Clients\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_CurrencyCon" +
-                "vertRate_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet\" Asso" +
-                "ciation=\"MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRate_RecCreatedByUser_" +
-                "MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Role=\"RecCreatedByUserPartne" +
-                "r\" EntitySet=\"CurrencyConvertRates\" /><End Role=\"RecCreatedByUser\" EntitySet=\"Us" +
-                "ers\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_CurrencyConvertRa" +
-                "te_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartnerSet\" Associat" +
-                "ion=\"MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRate_RecModifiedByUser_MyE" +
-                "RP_DataAccess_User_RecModifiedByUserPartner\"><End Role=\"RecModifiedByUserPartner" +
-                "\" EntitySet=\"CurrencyConvertRates\" /><End Role=\"RecModifiedByUser\" EntitySet=\"Us" +
-                "ers\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_CurrencyConvertRa" +
-                "te_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet\" Associatio" +
-                "n=\"MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRate_Organization_MyERP_Data" +
-                "Access_Organization_OrganizationPartner\"><End Role=\"OrganizationPartner\" EntityS" +
-                "et=\"CurrencyConvertRates\" /><End Role=\"Organization\" EntitySet=\"Organizations\" /" +
-                "></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_CurrencyConvertRate_Cur" +
-                "rency_MyERP_DataAccess_Currency_CurrencyPartnerSet\" Association=\"MyERP.DataAcces" +
-                "s.MyERP_DataAccess_CurrencyConvertRate_Currency_MyERP_DataAccess_Currency_Curren" +
-                "cyPartner\"><End Role=\"CurrencyPartner\" EntitySet=\"CurrencyConvertRates\" /><End R" +
-                "ole=\"Currency\" EntitySet=\"Currencies\" /></AssociationSet><AssociationSet Name=\"M" +
-                "yERP_DataAccess_CurrencyConvertRate_CurrencyTo_MyERP_DataAccess_Currency_Currenc" +
-                "yToPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRat" +
-                "e_CurrencyTo_MyERP_DataAccess_Currency_CurrencyToPartner\"><End Role=\"CurrencyToP" +
-                "artner\" EntitySet=\"CurrencyConvertRates\" /><End Role=\"CurrencyTo\" EntitySet=\"Cur" +
-                "rencies\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_GeneralJourna" +
-                "lDocument_Client_MyERP_DataAccess_Client_ClientPartnerSet\" Association=\"MyERP.Da" +
-                "taAccess.MyERP_DataAccess_GeneralJournalDocument_Client_MyERP_DataAccess_Client_" +
-                "ClientPartner\"><End Role=\"ClientPartner\" EntitySet=\"GeneralJournalDocuments\" /><" +
-                "End Role=\"Client\" EntitySet=\"Clients\" /></AssociationSet><AssociationSet Name=\"M" +
-                "yERP_DataAccess_GeneralJournalDocument_Organization_MyERP_DataAccess_Organizatio" +
-                "n_OrganizationPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_General" +
-                "JournalDocument_Organization_MyERP_DataAccess_Organization_OrganizationPartner\">" +
-                "<End Role=\"OrganizationPartner\" EntitySet=\"GeneralJournalDocuments\" /><End Role=" +
-                "\"Organization\" EntitySet=\"Organizations\" /></AssociationSet><AssociationSet Name" +
-                "=\"MyERP_DataAccess_GeneralJournalDocument_RecCreatedByUser_MyERP_DataAccess_User" +
-                "_RecCreatedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Gene" +
-                "ralJournalDocument_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartne" +
-                "r\"><End Role=\"RecCreatedByUserPartner\" EntitySet=\"GeneralJournalDocuments\" /><En" +
-                "d Role=\"RecCreatedByUser\" EntitySet=\"Users\" /></AssociationSet><AssociationSet N" +
-                "ame=\"MyERP_DataAccess_GeneralJournalDocument_RecModifiedByUser_MyERP_DataAccess_" +
-                "User_RecModifiedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess" +
-                "_GeneralJournalDocument_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUse" +
-                "rPartner\"><End Role=\"RecModifiedByUserPartner\" EntitySet=\"GeneralJournalDocument" +
-                "s\" /><End Role=\"RecModifiedByUser\" EntitySet=\"Users\" /></AssociationSet><Associa" +
-                "tionSet Name=\"MyERP_DataAccess_GeneralJournalDocument_Currency_MyERP_DataAccess_" +
-                "Currency_CurrencyPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Gene" +
-                "ralJournalDocument_Currency_MyERP_DataAccess_Currency_CurrencyPartner\"><End Role" +
-                "=\"CurrencyPartner\" EntitySet=\"GeneralJournalDocuments\" /><End Role=\"Currency\" En" +
-                "titySet=\"Currencies\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_G" +
-                "eneralJournalDocument_NumberSequence_MyERP_DataAccess_NumberSequence_NumberSeque" +
-                "ncePartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocu" +
-                "ment_NumberSequence_MyERP_DataAccess_NumberSequence_NumberSequencePartner\"><End " +
-                "Role=\"NumberSequencePartner\" EntitySet=\"GeneralJournalDocuments\" /><End Role=\"Nu" +
-                "mberSequence\" EntitySet=\"NumberSequences\" /></AssociationSet><AssociationSet Nam" +
-                "e=\"MyERP_DataAccess_GeneralJournalDocument_GeneralJournalLines_MyERP_DataAccess_" +
-                "GeneralJournalLine_GeneralJournalLinesPartnerSet\" Association=\"MyERP.DataAccess." +
-                "MyERP_DataAccess_GeneralJournalDocument_GeneralJournalLines_MyERP_DataAccess_Gen" +
-                "eralJournalLine_GeneralJournalLinesPartner\"><End Role=\"GeneralJournalLinesPartne" +
-                "r\" EntitySet=\"GeneralJournalDocuments\" /><End Role=\"GeneralJournalLines\" EntityS" +
-                "et=\"GeneralJournalLines\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAcce" +
-                "ss_GeneralJournalLine_Client_MyERP_DataAccess_Client_ClientPartnerSet\" Associati" +
-                "on=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Client_MyERP_DataAccess" +
-                "_Client_ClientPartner\"><End Role=\"ClientPartner\" EntitySet=\"GeneralJournalLines\"" +
+                "DataAccess.PaymentTerm\" Role=\"ClientPartner\" Multiplicity=\"0..1\" /></Association" +
+                "><Association Name=\"MyERP_DataAccess_PaymentTerm_Organization_MyERP_DataAccess_O" +
+                "rganization_OrganizationPartner\"><End Type=\"MyERP.DataAccess.Organization\" Role=" +
+                "\"Organization\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.PaymentTerm\" Ro" +
+                "le=\"OrganizationPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"" +
+                "MyERP_DataAccess_Session_Client_MyERP_DataAccess_Client_ClientPartner\"><End Type" +
+                "=\"MyERP.DataAccess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><End Type=\"MyERP." +
+                "DataAccess.Session\" Role=\"ClientPartner\" Multiplicity=\"0..1\" /></Association><As" +
+                "sociation Name=\"MyERP_DataAccess_Session_Organization_MyERP_DataAccess_Organizat" +
+                "ion_OrganizationPartner\"><End Type=\"MyERP.DataAccess.Organization\" Role=\"Organiz" +
+                "ation\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.Session\" Role=\"Organiza" +
+                "tionPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"MyERP_DataAc" +
+                "cess_User_Client_MyERP_DataAccess_Client_ClientPartner\"><End Type=\"MyERP.DataAcc" +
+                "ess.Client\" Role=\"Client\" Multiplicity=\"0..1\" /><End Type=\"MyERP.DataAccess.User" +
+                "\" Role=\"ClientPartner\" Multiplicity=\"0..1\" /></Association><Association Name=\"My" +
+                "ERP_DataAccess_User_Organization_MyERP_DataAccess_Organization_OrganizationPartn" +
+                "er\"><End Type=\"MyERP.DataAccess.Organization\" Role=\"Organization\" Multiplicity=\"" +
+                "0..1\" /><End Type=\"MyERP.DataAccess.User\" Role=\"OrganizationPartner\" Multiplicit" +
+                "y=\"0..1\" /></Association></Schema><Schema Namespace=\"Default\" xmlns=\"http://sche" +
+                "mas.microsoft.com/ado/2009/11/edm\"><EntityContainer Name=\"Container\" m:IsDefault" +
+                "EntityContainer=\"true\"><EntitySet Name=\"Accounts\" EntityType=\"MyERP.DataAccess.A" +
+                "ccount\" /><EntitySet Name=\"BusinessPartnerGroups\" EntityType=\"MyERP.DataAccess.B" +
+                "usinessPartnerGroup\" /><EntitySet Name=\"BusinessPartners\" EntityType=\"MyERP.Data" +
+                "Access.BusinessPartner\" /><EntitySet Name=\"Clients\" EntityType=\"MyERP.DataAccess" +
+                ".Client\" /><EntitySet Name=\"Currencies\" EntityType=\"MyERP.DataAccess.Currency\" /" +
+                "><EntitySet Name=\"CurrencyConvertRates\" EntityType=\"MyERP.DataAccess.CurrencyCon" +
+                "vertRate\" /><EntitySet Name=\"GeneralJournalDocuments\" EntityType=\"MyERP.DataAcce" +
+                "ss.GeneralJournalDocument\" /><EntitySet Name=\"GeneralJournalLines\" EntityType=\"M" +
+                "yERP.DataAccess.GeneralJournalLine\" /><EntitySet Name=\"GeneralJournalSetups\" Ent" +
+                "ityType=\"MyERP.DataAccess.GeneralJournalSetup\" /><EntitySet Name=\"JobGroups\" Ent" +
+                "ityType=\"MyERP.DataAccess.JobGroup\" /><EntitySet Name=\"Jobs\" EntityType=\"MyERP.D" +
+                "ataAccess.Job\" /><EntitySet Name=\"Modules\" EntityType=\"MyERP.DataAccess.Module\" " +
+                "/><EntitySet Name=\"NumberSequences\" EntityType=\"MyERP.DataAccess.NumberSequence\"" +
+                " /><EntitySet Name=\"Organizations\" EntityType=\"MyERP.DataAccess.Organization\" />" +
+                "<EntitySet Name=\"PaymentTerms\" EntityType=\"MyERP.DataAccess.PaymentTerm\" /><Enti" +
+                "tySet Name=\"Sessions\" EntityType=\"MyERP.DataAccess.Session\" /><EntitySet Name=\"U" +
+                "sers\" EntityType=\"MyERP.DataAccess.User\" /><AssociationSet Name=\"MyERP_DataAcces" +
+                "s_Account_Currency_MyERP_DataAccess_Currency_CurrencyPartnerSet\" Association=\"My" +
+                "ERP.DataAccess.MyERP_DataAccess_Account_Currency_MyERP_DataAccess_Currency_Curre" +
+                "ncyPartner\"><End Role=\"CurrencyPartner\" EntitySet=\"Accounts\" /><End Role=\"Curren" +
+                "cy\" EntitySet=\"Currencies\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAc" +
+                "cess_Account_ParentAccount_MyERP_DataAccess_Account_ParentAccountPartnerSet\" Ass" +
+                "ociation=\"MyERP.DataAccess.MyERP_DataAccess_Account_ParentAccount_MyERP_DataAcce" +
+                "ss_Account_ParentAccountPartner\"><End Role=\"ParentAccountPartner\" EntitySet=\"Acc" +
+                "ounts\" /><End Role=\"ParentAccount\" EntitySet=\"Accounts\" /></AssociationSet><Asso" +
+                "ciationSet Name=\"MyERP_DataAccess_Account_RecModifiedByUser_MyERP_DataAccess_Use" +
+                "r_RecModifiedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Ac" +
+                "count_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End Rol" +
+                "e=\"RecModifiedByUserPartner\" EntitySet=\"Accounts\" /><End Role=\"RecModifiedByUser" +
+                "\" EntitySet=\"Users\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Ac" +
+                "count_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet\" Associa" +
+                "tion=\"MyERP.DataAccess.MyERP_DataAccess_Account_RecCreatedByUser_MyERP_DataAcces" +
+                "s_User_RecCreatedByUserPartner\"><End Role=\"RecCreatedByUserPartner\" EntitySet=\"A" +
+                "ccounts\" /><End Role=\"RecCreatedByUser\" EntitySet=\"Users\" /></AssociationSet><As" +
+                "sociationSet Name=\"MyERP_DataAccess_Account_Client_MyERP_DataAccess_Client_Clien" +
+                "tPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Account_Client_MyERP" +
+                "_DataAccess_Client_ClientPartner\"><End Role=\"ClientPartner\" EntitySet=\"Accounts\"" +
                 " /><End Role=\"Client\" EntitySet=\"Clients\" /></AssociationSet><AssociationSet Nam" +
-                "e=\"MyERP_DataAccess_GeneralJournalLine_Organization_MyERP_DataAccess_Organizatio" +
-                "n_OrganizationPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_General" +
-                "JournalLine_Organization_MyERP_DataAccess_Organization_OrganizationPartner\"><End" +
-                " Role=\"OrganizationPartner\" EntitySet=\"GeneralJournalLines\" /><End Role=\"Organiz" +
-                "ation\" EntitySet=\"Organizations\" /></AssociationSet><AssociationSet Name=\"MyERP_" +
-                "DataAccess_GeneralJournalLine_BusinessPartner_MyERP_DataAccess_BusinessPartner_B" +
-                "usinessPartnerPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_General" +
-                "JournalLine_BusinessPartner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPart" +
-                "ner\"><End Role=\"BusinessPartnerPartner\" EntitySet=\"GeneralJournalLines\" /><End R" +
-                "ole=\"BusinessPartner\" EntitySet=\"BusinessPartners\" /></AssociationSet><Associati" +
-                "onSet Name=\"MyERP_DataAccess_GeneralJournalLine_Job_MyERP_DataAccess_Job_JobPart" +
-                "nerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Job_My" +
-                "ERP_DataAccess_Job_JobPartner\"><End Role=\"JobPartner\" EntitySet=\"GeneralJournalL" +
-                "ines\" /><End Role=\"Job\" EntitySet=\"Jobs\" /></AssociationSet";
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private const string ModelPart11 = "><AssociationSet Name=\"MyERP_DataAccess_GeneralJournalLine_RecModifiedByUser_MyER" +
-                "P_DataAccess_User_RecModifiedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyE" +
-                "RP_DataAccess_GeneralJournalLine_RecModifiedByUser_MyERP_DataAccess_User_RecModi" +
-                "fiedByUserPartner\"><End Role=\"RecModifiedByUserPartner\" EntitySet=\"GeneralJourna" +
-                "lLines\" /><End Role=\"RecModifiedByUser\" EntitySet=\"Users\" /></AssociationSet><As" +
-                "sociationSet Name=\"MyERP_DataAccess_GeneralJournalLine_RecCreatedByUser_MyERP_Da" +
-                "taAccess_User_RecCreatedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP_Da" +
-                "taAccess_GeneralJournalLine_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByU" +
-                "serPartner\"><End Role=\"RecCreatedByUserPartner\" EntitySet=\"GeneralJournalLines\" " +
-                "/><End Role=\"RecCreatedByUser\" EntitySet=\"Users\" /></AssociationSet><Association" +
-                "Set Name=\"MyERP_DataAccess_GeneralJournalLine_Account_MyERP_DataAccess_Account_A" +
-                "ccountPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalL" +
-                "ine_Account_MyERP_DataAccess_Account_AccountPartner\"><End Role=\"AccountPartner\" " +
-                "EntitySet=\"GeneralJournalLines\" /><End Role=\"Account\" EntitySet=\"Accounts\" /></A" +
-                "ssociationSet><AssociationSet Name=\"MyERP_DataAccess_GeneralJournalLine_CorAccou" +
-                "nt_MyERP_DataAccess_Account_CorAccountPartnerSet\" Association=\"MyERP.DataAccess." +
-                "MyERP_DataAccess_GeneralJournalLine_CorAccount_MyERP_DataAccess_Account_CorAccou" +
-                "ntPartner\"><End Role=\"CorAccountPartner\" EntitySet=\"GeneralJournalLines\" /><End " +
-                "Role=\"CorAccount\" EntitySet=\"Accounts\" /></AssociationSet><AssociationSet Name=\"" +
-                "MyERP_DataAccess_GeneralJournalLine_GeneralJournalDocument_MyERP_DataAccess_Gene" +
-                "ralJournalDocument_GeneralJournalDocumentPartnerSet\" Association=\"MyERP.DataAcce" +
-                "ss.MyERP_DataAccess_GeneralJournalLine_GeneralJournalDocument_MyERP_DataAccess_G" +
-                "eneralJournalDocument_GeneralJournalDocumentPartner\"><End Role=\"GeneralJournalDo" +
-                "cumentPartner\" EntitySet=\"GeneralJournalLines\" /><End Role=\"GeneralJournalDocume" +
-                "nt\" EntitySet=\"GeneralJournalDocuments\" /></AssociationSet><AssociationSet Name=" +
-                "\"MyERP_DataAccess_GeneralJournalLine_Currency_MyERP_DataAccess_Currency_Currency" +
-                "PartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Cu" +
-                "rrency_MyERP_DataAccess_Currency_CurrencyPartner\"><End Role=\"CurrencyPartner\" En" +
-                "titySet=\"GeneralJournalLines\" /><End Role=\"Currency\" EntitySet=\"Currencies\" /></" +
-                "AssociationSet><AssociationSet Name=\"MyERP_DataAccess_GeneralJournalSetup_RecCre" +
-                "atedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet\" Association=\"MyERP." +
-                "DataAccess.MyERP_DataAccess_GeneralJournalSetup_RecCreatedByUser_MyERP_DataAcces" +
-                "s_User_RecCreatedByUserPartner\"><End Role=\"RecCreatedByUserPartner\" EntitySet=\"G" +
-                "eneralJournalSetups\" /><End Role=\"RecCreatedByUser\" EntitySet=\"Users\" /></Associ" +
-                "ationSet><AssociationSet Name=\"MyERP_DataAccess_GeneralJournalSetup_RecModifiedB" +
-                "yUser_MyERP_DataAccess_User_RecModifiedByUserPartnerSet\" Association=\"MyERP.Data" +
-                "Access.MyERP_DataAccess_GeneralJournalSetup_RecModifiedByUser_MyERP_DataAccess_U" +
-                "ser_RecModifiedByUserPartner\"><End Role=\"RecModifiedByUserPartner\" EntitySet=\"Ge" +
-                "neralJournalSetups\" /><End Role=\"RecModifiedByUser\" EntitySet=\"Users\" /></Associ" +
-                "ationSet><AssociationSet Name=\"MyERP_DataAccess_GeneralJournalSetup_Organization" +
-                "_MyERP_DataAccess_Organization_OrganizationPartnerSet\" Association=\"MyERP.DataAc" +
-                "cess.MyERP_DataAccess_GeneralJournalSetup_Organization_MyERP_DataAccess_Organiza" +
-                "tion_OrganizationPartner\"><End Role=\"OrganizationPartner\" EntitySet=\"GeneralJour" +
-                "nalSetups\" /><End Role=\"Organization\" EntitySet=\"Organizations\" /></AssociationS" +
-                "et><AssociationSet Name=\"MyERP_DataAccess_GeneralJournalSetup_LocalCurrency_MyER" +
-                "P_DataAccess_Currency_LocalCurrencyPartnerSet\" Association=\"MyERP.DataAccess.MyE" +
-                "RP_DataAccess_GeneralJournalSetup_LocalCurrency_MyERP_DataAccess_Currency_LocalC" +
-                "urrencyPartner\"><End Role=\"LocalCurrencyPartner\" EntitySet=\"GeneralJournalSetups" +
-                "\" /><End Role=\"LocalCurrency\" EntitySet=\"Currencies\" /></AssociationSet><Associa" +
-                "tionSet Name=\"MyERP_DataAccess_GeneralJournalSetup_GeneralJournalNumberSequence_" +
-                "MyERP_DataAccess_NumberSequence_GeneralJournalNumberSequencePartnerSet\" Associat" +
-                "ion=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup_GeneralJournalNumberS" +
-                "equence_MyERP_DataAccess_NumberSequence_GeneralJournalNumberSequencePartner\"><En" +
-                "d Role=\"GeneralJournalNumberSequencePartner\" EntitySet=\"GeneralJournalSetups\" />" +
-                "<End Role=\"GeneralJournalNumberSequence\" EntitySet=\"NumberSequences\" /></Associa" +
-                "tionSet><AssociationSet Name=\"MyERP_DataAccess_GeneralJournalSetup_Client_MyERP_" +
-                "DataAccess_Client_ClientPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAcce" +
-                "ss_GeneralJournalSetup_Client_MyERP_DataAccess_Client_ClientPartner\"><End Role=\"" +
-                "ClientPartner\" EntitySet=\"GeneralJournalSetups\" /><End Role=\"Client\" EntitySet=\"" +
-                "Clients\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_JobGroup_Clie" +
-                "nt_MyERP_DataAccess_Client_ClientPartnerSet\" Association=\"MyERP.DataAccess.MyERP" +
-                "_DataAccess_JobGroup_Client_MyERP_DataAccess_Client_ClientPartner\"><End Role=\"Cl" +
-                "ientPartner\" EntitySet=\"JobGroups\" /><End Role=\"Client\" EntitySet=\"Clients\" /></" +
-                "AssociationSet><AssociationSet Name=\"MyERP_DataAccess_JobGroup_Organization_MyER" +
-                "P_DataAccess_Organization_OrganizationPartnerSet\" Association=\"MyERP.DataAccess." +
-                "MyERP_DataAccess_JobGroup_Organization_MyERP_DataAccess_Organization_Organizatio" +
-                "nPartner\"><End Role=\"OrganizationPartner\" EntitySet=\"JobGroups\" /><End Role=\"Org" +
-                "anization\" EntitySet=\"Organizations\" /></AssociationSet><AssociationSet Name=\"My" +
-                "ERP_DataAccess_JobGroup_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserP" +
-                "artnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_JobGroup_RecCreatedByU" +
-                "ser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Role=\"RecCreatedByUserPa" +
-                "rtner\" EntitySet=\"JobGroups\" /><End Role=\"RecCreatedByUser\" EntitySet=\"Users\" />" +
-                "</AssociationSet><AssociationSet Name=\"MyERP_DataAccess_JobGroup_RecModifiedByUs" +
-                "er_MyERP_DataAccess_User_RecModifiedByUserPartnerSet\" Association=\"MyERP.DataAcc" +
-                "ess.MyERP_DataAccess_JobGroup_RecModifiedByUser_MyERP_DataAccess_User_RecModifie" +
-                "dByUserPartner\"><End Role=\"RecModifiedByUserPartner\" EntitySet=\"JobGroups\" /><En" +
-                "d Role=\"RecModifiedByUser\" EntitySet=\"Users\" /></AssociationSet><AssociationSet " +
-                "Name=\"MyERP_DataAccess_JobGroup_Job1s_MyERP_DataAccess_Job_Job1sPartnerSet\" Asso" +
-                "ciation=\"MyERP.DataAccess.MyERP_DataAccess_JobGroup_Job1s_MyERP_DataAccess_Job_J" +
-                "ob1sPartner\"><End Role=\"Job1sPartner\" EntitySet=\"JobGroups\" /><End Role=\"Job1s\" " +
-                "EntitySet=\"Jobs\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_JobGr" +
-                "oup_Job2s_MyERP_DataAccess_Job_Job2sPartnerSet\" Association=\"MyERP.DataAccess.My" +
-                "ERP_DataAccess_JobGroup_Job2s_MyERP_DataAccess_Job_Job2sPartner\"><End Role=\"Job2" +
-                "sPartner\" EntitySet=\"JobGroups\" /><End Role=\"Job2s\" EntitySet=\"Jobs\" /></Associa" +
-                "tionSet><AssociationSet Name=\"MyERP_DataAccess_JobGroup_Job3s_MyERP_DataAccess_J" +
-                "ob_Job3sPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_JobGroup_Job3" +
-                "s_MyERP_DataAccess_Job_Job3sPartner\"><End Role=\"Job3sPartner\" EntitySet=\"JobGrou" +
-                "ps\" /><End Role=\"Job3s\" EntitySet=\"Jobs\" /></AssociationSet><AssociationSet Name" +
-                "=\"MyERP_DataAccess_Job_Client_MyERP_DataAccess_Client_ClientPartnerSet\" Associat" +
-                "ion=\"MyERP.DataAccess.MyERP_DataAccess_Job_Client_MyERP_DataAccess_Client_Client" +
-                "Partner\"><End Role=\"ClientPartner\" EntitySet=\"Jobs\" /><End Role=\"Client\" EntityS" +
-                "et=\"Clients\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Job_Organ" +
-                "ization_MyERP_DataAccess_Organization_OrganizationPartnerSet\" Association=\"MyERP" +
-                ".DataAccess.MyERP_DataAccess_Job_Organization_MyERP_DataAcc";
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-            private const string ModelPart12 = "ess_Organization_OrganizationPartner\"><End Role=\"OrganizationPartner\" EntitySet=\"" +
-                "Jobs\" /><End Role=\"Organization\" EntitySet=\"Organizations\" /></AssociationSet><A" +
-                "ssociationSet Name=\"MyERP_DataAccess_Job_RecCreatedByUser_MyERP_DataAccess_User_" +
-                "RecCreatedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Job_R" +
-                "ecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Role=\"RecCre" +
-                "atedByUserPartner\" EntitySet=\"Jobs\" /><End Role=\"RecCreatedByUser\" EntitySet=\"Us" +
-                "ers\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Job_RecModifiedBy" +
-                "User_MyERP_DataAccess_User_RecModifiedByUserPartnerSet\" Association=\"MyERP.DataA" +
-                "ccess.MyERP_DataAccess_Job_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedBy" +
-                "UserPartner\"><End Role=\"RecModifiedByUserPartner\" EntitySet=\"Jobs\" /><End Role=\"" +
-                "RecModifiedByUser\" EntitySet=\"Users\" /></AssociationSet><AssociationSet Name=\"My" +
-                "ERP_DataAccess_Job_BusinessPartner_MyERP_DataAccess_BusinessPartner_BusinessPart" +
-                "nerPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Job_BusinessPartne" +
-                "r_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartner\"><End Role=\"BusinessPa" +
-                "rtnerPartner\" EntitySet=\"Jobs\" /><End Role=\"BusinessPartner\" EntitySet=\"Business" +
-                "Partners\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Job_Account_" +
-                "MyERP_DataAccess_Account_AccountPartnerSet\" Association=\"MyERP.DataAccess.MyERP_" +
-                "DataAccess_Job_Account_MyERP_DataAccess_Account_AccountPartner\"><End Role=\"Accou" +
-                "ntPartner\" EntitySet=\"Jobs\" /><End Role=\"Account\" EntitySet=\"Accounts\" /></Assoc" +
-                "iationSet><AssociationSet Name=\"MyERP_DataAccess_Job_JobGroup1_MyERP_DataAccess_" +
-                "JobGroup_JobGroup1PartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Job" +
-                "_JobGroup1_MyERP_DataAccess_JobGroup_JobGroup1Partner\"><End Role=\"JobGroup1Partn" +
-                "er\" EntitySet=\"Jobs\" /><End Role=\"JobGroup1\" EntitySet=\"JobGroups\" /></Associati" +
-                "onSet><AssociationSet Name=\"MyERP_DataAccess_Job_JobGroup2_MyERP_DataAccess_JobG" +
-                "roup_JobGroup2PartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Job_Job" +
-                "Group2_MyERP_DataAccess_JobGroup_JobGroup2Partner\"><End Role=\"JobGroup2Partner\" " +
-                "EntitySet=\"Jobs\" /><End Role=\"JobGroup2\" EntitySet=\"JobGroups\" /></AssociationSe" +
-                "t><AssociationSet Name=\"MyERP_DataAccess_Job_JobGroup3_MyERP_DataAccess_JobGroup" +
-                "_JobGroup3PartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Job_JobGrou" +
-                "p3_MyERP_DataAccess_JobGroup_JobGroup3Partner\"><End Role=\"JobGroup3Partner\" Enti" +
-                "tySet=\"Jobs\" /><End Role=\"JobGroup3\" EntitySet=\"JobGroups\" /></AssociationSet><A" +
-                "ssociationSet Name=\"MyERP_DataAccess_NumberSequence_Client_MyERP_DataAccess_Clie" +
-                "nt_ClientPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_NumberSequen" +
-                "ce_Client_MyERP_DataAccess_Client_ClientPartner\"><End Role=\"ClientPartner\" Entit" +
-                "ySet=\"NumberSequences\" /><End Role=\"Client\" EntitySet=\"Clients\" /></AssociationS" +
-                "et><AssociationSet Name=\"MyERP_DataAccess_NumberSequence_Organization_MyERP_Data" +
-                "Access_Organization_OrganizationPartnerSet\" Association=\"MyERP.DataAccess.MyERP_" +
-                "DataAccess_NumberSequence_Organization_MyERP_DataAccess_Organization_Organizatio" +
-                "nPartner\"><End Role=\"OrganizationPartner\" EntitySet=\"NumberSequences\" /><End Rol" +
-                "e=\"Organization\" EntitySet=\"Organizations\" /></AssociationSet><AssociationSet Na" +
-                "me=\"MyERP_DataAccess_NumberSequence_RecCreatedByUser_MyERP_DataAccess_User_RecCr" +
-                "eatedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_NumberSequ" +
-                "ence_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Role=\"" +
-                "RecCreatedByUserPartner\" EntitySet=\"NumberSequences\" /><End Role=\"RecCreatedByUs" +
-                "er\" EntitySet=\"Users\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_" +
-                "NumberSequence_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartnerS" +
-                "et\" Association=\"MyERP.DataAccess.MyERP_DataAccess_NumberSequence_RecModifiedByU" +
-                "ser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End Role=\"RecModifiedByUser" +
-                "Partner\" EntitySet=\"NumberSequences\" /><End Role=\"RecModifiedByUser\" EntitySet=\"" +
-                "Users\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Organization_Re" +
-                "cCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet\" Association=\"My" +
-                "ERP.DataAccess.MyERP_DataAccess_Organization_RecCreatedByUser_MyERP_DataAccess_U" +
-                "ser_RecCreatedByUserPartner\"><End Role=\"RecCreatedByUserPartner\" EntitySet=\"Orga" +
-                "nizations\" /><End Role=\"RecCreatedByUser\" EntitySet=\"Users\" /></AssociationSet><" +
-                "AssociationSet Name=\"MyERP_DataAccess_Organization_RecModifiedByUser_MyERP_DataA" +
-                "ccess_User_RecModifiedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP_Data" +
-                "Access_Organization_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPar" +
-                "tner\"><End Role=\"RecModifiedByUserPartner\" EntitySet=\"Organizations\" /><End Role" +
-                "=\"RecModifiedByUser\" EntitySet=\"Users\" /></AssociationSet><AssociationSet Name=\"" +
-                "MyERP_DataAccess_Organization_Client_MyERP_DataAccess_Client_ClientPartnerSet\" A" +
-                "ssociation=\"MyERP.DataAccess.MyERP_DataAccess_Organization_Client_MyERP_DataAcce" +
-                "ss_Client_ClientPartner\"><End Role=\"ClientPartner\" EntitySet=\"Organizations\" /><" +
-                "End Role=\"Client\" EntitySet=\"Clients\" /></AssociationSet><AssociationSet Name=\"M" +
-                "yERP_DataAccess_PaymentTerm_Client_MyERP_DataAccess_Client_ClientPartnerSet\" Ass" +
-                "ociation=\"MyERP.DataAccess.MyERP_DataAccess_PaymentTerm_Client_MyERP_DataAccess_" +
-                "Client_ClientPartner\"><End Role=\"ClientPartner\" EntitySet=\"PaymentTerms\" /><End " +
-                "Role=\"Client\" EntitySet=\"Clients\" /></AssociationSet><AssociationSet Name=\"MyERP" +
-                "_DataAccess_PaymentTerm_Organization_MyERP_DataAccess_Organization_OrganizationP" +
-                "artnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_PaymentTerm_Organizati" +
+                "e=\"MyERP_DataAccess_Account_Organization_MyERP_DataAccess_Organization_Organizat" +
+                "ionPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Account_Organizati" +
                 "on_MyERP_DataAccess_Organization_OrganizationPartner\"><End Role=\"OrganizationPar" +
-                "tner\" EntitySet=\"PaymentTerms\" /><End Role=\"Organization\" EntitySet=\"Organizatio" +
-                "ns\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Session_Client_MyE" +
-                "RP_DataAccess_Client_ClientPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataA" +
-                "ccess_Session_Client_MyERP_DataAccess_Client_ClientPartner\"><End Role=\"ClientPar" +
-                "tner\" EntitySet=\"Sessions\" /><End Role=\"Client\" EntitySet=\"Clients\" /></Associat" +
-                "ionSet><AssociationSet Name=\"MyERP_DataAccess_Session_Organization_MyERP_DataAcc" +
-                "ess_Organization_OrganizationPartnerSet\" Association=\"MyERP.DataAccess.MyERP_Dat" +
-                "aAccess_Session_Organization_MyERP_DataAccess_Organization_OrganizationPartner\">" +
-                "<End Role=\"OrganizationPartner\" EntitySet=\"Sessions\" /><End Role=\"Organization\" " +
-                "EntitySet=\"Organizations\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAcc" +
-                "ess_User_Client_MyERP_DataAccess_Client_ClientPartnerSet\" Association=\"MyERP.Dat" +
-                "aAccess.MyERP_DataAccess_User_Client_MyERP_DataAccess_Client_ClientPartner\"><End" +
-                " Role=\"ClientPartner\" EntitySet=\"Users\" /><End Role=\"Client\" EntitySet=\"Clients\"" +
-                " /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_User_Organization_MyE" +
-                "RP_DataAccess_Organization_OrganizationPartnerSet\" Association=\"MyERP.DataAccess" +
-                ".MyERP_DataAccess_User_Organization_MyERP_DataAccess_Organization_OrganizationPa" +
-                "rtner\"><End Role=\"OrganizationPartner\" EntitySet=\"Users\" /><End Role=\"Organizati" +
-                "on\" EntitySet=\"Organizations\" /></AssociationSet></EntityContainer></Schema></ed" +
-                "mx:DataServices></edmx:Edmx>";
+                "tner\" EntitySet=\"Accounts\" /><End Role=\"Organization\" EntitySet=\"Organizations\" " +
+                "/></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Account_ChildAccounts_" +
+                "MyERP_DataAccess_Account_ChildAccountsPartnerSet\" Association=\"MyERP.DataAccess." +
+                "MyERP_DataAccess_Account_ChildAccounts_MyERP_DataAccess_Acc";
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+            private const string ModelPart9 = "ount_ChildAccountsPartner\"><End Role=\"ChildAccountsPartner\" EntitySet=\"Accounts\" " +
+                "/><End Role=\"ChildAccounts\" EntitySet=\"Accounts\" /></AssociationSet><Association" +
+                "Set Name=\"MyERP_DataAccess_BusinessPartnerGroup_Client_MyERP_DataAccess_Client_C" +
+                "lientPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_BusinessPartnerG" +
+                "roup_Client_MyERP_DataAccess_Client_ClientPartner\"><End Role=\"ClientPartner\" Ent" +
+                "itySet=\"BusinessPartnerGroups\" /><End Role=\"Client\" EntitySet=\"Clients\" /></Asso" +
+                "ciationSet><AssociationSet Name=\"MyERP_DataAccess_BusinessPartnerGroup_Organizat" +
+                "ion_MyERP_DataAccess_Organization_OrganizationPartnerSet\" Association=\"MyERP.Dat" +
+                "aAccess.MyERP_DataAccess_BusinessPartnerGroup_Organization_MyERP_DataAccess_Orga" +
+                "nization_OrganizationPartner\"><End Role=\"OrganizationPartner\" EntitySet=\"Busines" +
+                "sPartnerGroups\" /><End Role=\"Organization\" EntitySet=\"Organizations\" /></Associa" +
+                "tionSet><AssociationSet Name=\"MyERP_DataAccess_BusinessPartnerGroup_BusinessPart" +
+                "ner1s_MyERP_DataAccess_BusinessPartner_BusinessPartner1sPartnerSet\" Association=" +
+                "\"MyERP.DataAccess.MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner1s_MyERP_" +
+                "DataAccess_BusinessPartner_BusinessPartner1sPartner\"><End Role=\"BusinessPartner1" +
+                "sPartner\" EntitySet=\"BusinessPartnerGroups\" /><End Role=\"BusinessPartner1s\" Enti" +
+                "tySet=\"BusinessPartners\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAcce" +
+                "ss_BusinessPartnerGroup_BusinessPartner3s_MyERP_DataAccess_BusinessPartner_Busin" +
+                "essPartner3sPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_BusinessP" +
+                "artnerGroup_BusinessPartner3s_MyERP_DataAccess_BusinessPartner_BusinessPartner3s" +
+                "Partner\"><End Role=\"BusinessPartner3sPartner\" EntitySet=\"BusinessPartnerGroups\" " +
+                "/><End Role=\"BusinessPartner3s\" EntitySet=\"BusinessPartners\" /></AssociationSet>" +
+                "<AssociationSet Name=\"MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner2s_My" +
+                "ERP_DataAccess_BusinessPartner_BusinessPartner2sPartnerSet\" Association=\"MyERP.D" +
+                "ataAccess.MyERP_DataAccess_BusinessPartnerGroup_BusinessPartner2s_MyERP_DataAcce" +
+                "ss_BusinessPartner_BusinessPartner2sPartner\"><End Role=\"BusinessPartner2sPartner" +
+                "\" EntitySet=\"BusinessPartnerGroups\" /><End Role=\"BusinessPartner2s\" EntitySet=\"B" +
+                "usinessPartners\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Busin" +
+                "essPartner_EmployeeAccount_MyERP_DataAccess_Account_EmployeeAccountPartnerSet\" A" +
+                "ssociation=\"MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_EmployeeAccount_My" +
+                "ERP_DataAccess_Account_EmployeeAccountPartner\"><End Role=\"EmployeeAccountPartner" +
+                "\" EntitySet=\"BusinessPartners\" /><End Role=\"EmployeeAccount\" EntitySet=\"Accounts" +
+                "\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_BusinessPartner_Vend" +
+                "orAccount_MyERP_DataAccess_Account_VendorAccountPartnerSet\" Association=\"MyERP.D" +
+                "ataAccess.MyERP_DataAccess_BusinessPartner_VendorAccount_MyERP_DataAccess_Accoun" +
+                "t_VendorAccountPartner\"><End Role=\"VendorAccountPartner\" EntitySet=\"BusinessPart" +
+                "ners\" /><End Role=\"VendorAccount\" EntitySet=\"Accounts\" /></AssociationSet><Assoc" +
+                "iationSet Name=\"MyERP_DataAccess_BusinessPartner_CustomerAccount_MyERP_DataAcces" +
+                "s_Account_CustomerAccountPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAcc" +
+                "ess_BusinessPartner_CustomerAccount_MyERP_DataAccess_Account_CustomerAccountPart" +
+                "ner\"><End Role=\"CustomerAccountPartner\" EntitySet=\"BusinessPartners\" /><End Role" +
+                "=\"CustomerAccount\" EntitySet=\"Accounts\" /></AssociationSet><AssociationSet Name=" +
+                "\"MyERP_DataAccess_BusinessPartner_PaymentTerm_MyERP_DataAccess_PaymentTerm_Payme" +
+                "ntTermPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_BusinessPartner" +
+                "_PaymentTerm_MyERP_DataAccess_PaymentTerm_PaymentTermPartner\"><End Role=\"Payment" +
+                "TermPartner\" EntitySet=\"BusinessPartners\" /><End Role=\"PaymentTerm\" EntitySet=\"P" +
+                "aymentTerms\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_BusinessP" +
+                "artner_Client_MyERP_DataAccess_Client_ClientPartnerSet\" Association=\"MyERP.DataA" +
+                "ccess.MyERP_DataAccess_BusinessPartner_Client_MyERP_DataAccess_Client_ClientPart" +
+                "ner\"><End Role=\"ClientPartner\" EntitySet=\"BusinessPartners\" /><End Role=\"Client\"" +
+                " EntitySet=\"Clients\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_B" +
+                "usinessPartner_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet" +
+                "\" Association=\"MyERP.DataAccess.MyERP_DataAccess_BusinessPartner_Organization_My" +
+                "ERP_DataAccess_Organization_OrganizationPartner\"><End Role=\"OrganizationPartner\"" +
+                " EntitySet=\"BusinessPartners\" /><End Role=\"Organization\" EntitySet=\"Organization" +
+                "s\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_BusinessPartner_Rec" +
+                "CreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet\" Association=\"MyE" +
+                "RP.DataAccess.MyERP_DataAccess_BusinessPartner_RecCreatedByUser_MyERP_DataAccess" +
+                "_User_RecCreatedByUserPartner\"><End Role=\"RecCreatedByUserPartner\" EntitySet=\"Bu" +
+                "sinessPartners\" /><End Role=\"RecCreatedByUser\" EntitySet=\"Users\" /></Association" +
+                "Set><AssociationSet Name=\"MyERP_DataAccess_BusinessPartner_RecModifiedByUser_MyE" +
+                "RP_DataAccess_User_RecModifiedByUserPartnerSet\" Association=\"MyERP.DataAccess.My" +
+                "ERP_DataAccess_BusinessPartner_RecModifiedByUser_MyERP_DataAccess_User_RecModifi" +
+                "edByUserPartner\"><End Role=\"RecModifiedByUserPartner\" EntitySet=\"BusinessPartner" +
+                "s\" /><End Role=\"RecModifiedByUser\" EntitySet=\"Users\" /></AssociationSet><Associa" +
+                "tionSet Name=\"MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup1_MyERP_DataA" +
+                "ccess_BusinessPartnerGroup_BusinessPartnerGroup1PartnerSet\" Association=\"MyERP.D" +
+                "ataAccess.MyERP_DataAccess_BusinessPartner_BusinessPartnerGroup1_MyERP_DataAcces" +
+                "s_BusinessPartnerGroup_BusinessPartnerGroup1Partner\"><End Role=\"BusinessPartnerG" +
+                "roup1Partner\" EntitySet=\"BusinessPartners\" /><End Role=\"BusinessPartnerGroup1\" E" +
+                "ntitySet=\"BusinessPartnerGroups\" /></AssociationSet><AssociationSet Name=\"MyERP_" +
+                "DataAccess_BusinessPartner_BusinessPartnerGroup3_MyERP_DataAccess_BusinessPartne" +
+                "rGroup_BusinessPartnerGroup3PartnerSet\" Association=\"MyERP.DataAccess.MyERP_Data" +
+                "Access_BusinessPartner_BusinessPartnerGroup3_MyERP_DataAccess_BusinessPartnerGro" +
+                "up_BusinessPartnerGroup3Partner\"><End Role=\"BusinessPartnerGroup3Partner\" Entity" +
+                "Set=\"BusinessPartners\" /><End Role=\"BusinessPartnerGroup3\" EntitySet=\"BusinessPa" +
+                "rtnerGroups\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_BusinessP" +
+                "artner_BusinessPartnerGroup2_MyERP_DataAccess_BusinessPartnerGroup_BusinessPartn" +
+                "erGroup2PartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_BusinessPartn" +
+                "er_BusinessPartnerGroup2_MyERP_DataAccess_BusinessPartnerGroup_BusinessPartnerGr" +
+                "oup2Partner\"><End Role=\"BusinessPartnerGroup2Partner\" EntitySet=\"BusinessPartner" +
+                "s\" /><End Role=\"BusinessPartnerGroup2\" EntitySet=\"BusinessPartnerGroups\" /></Ass" +
+                "ociationSet><AssociationSet Name=\"MyERP_DataAccess_Client_RecCreatedByUser_MyERP" +
+                "_DataAccess_User_RecCreatedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP" +
+                "_DataAccess_Client_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartne" +
+                "r\"><End Role=\"RecCreatedByUserPartner\" EntitySet=\"Clients\" /><End Role=\"RecCreat" +
+                "edByUser\" EntitySet=\"Users\" /></AssociationSet><AssociationSet Name=\"MyERP_DataA" +
+                "ccess_Client_Organizations_MyERP_DataAccess_Organization_OrganizationsPartnerSet" +
+                "\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Client_Organizations_MyERP_Data" +
+                "Access_Organization_OrganizationsPartner\"><End Role=\"OrganizationsPartner\" Entit" +
+                "ySet=\"Clients\" /><End Role=\"Organizations\" EntitySet=\"Organizations\" /></Associa" +
+                "tionSet><AssociationSet Name=\"MyERP_DataAccess_Currency_RecModifiedByUser_MyERP_" +
+                "DataAccess_User_RecModifiedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP" +
+                "_DataAccess_Currency_RecModifiedByUser_MyERP_DataAccess_Use";
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+            private const string ModelPart10 = "r_RecModifiedByUserPartner\"><End Role=\"RecModifiedByUserPartner\" EntitySet=\"Curre" +
+                "ncies\" /><End Role=\"RecModifiedByUser\" EntitySet=\"Users\" /></AssociationSet><Ass" +
+                "ociationSet Name=\"MyERP_DataAccess_Currency_RecCreatedByUser_MyERP_DataAccess_Us" +
+                "er_RecCreatedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Cu" +
+                "rrency_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Role" +
+                "=\"RecCreatedByUserPartner\" EntitySet=\"Currencies\" /><End Role=\"RecCreatedByUser\"" +
+                " EntitySet=\"Users\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Cur" +
+                "rency_Client_MyERP_DataAccess_Client_ClientPartnerSet\" Association=\"MyERP.DataAc" +
+                "cess.MyERP_DataAccess_Currency_Client_MyERP_DataAccess_Client_ClientPartner\"><En" +
+                "d Role=\"ClientPartner\" EntitySet=\"Currencies\" /><End Role=\"Client\" EntitySet=\"Cl" +
+                "ients\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Currency_Organi" +
+                "zation_MyERP_DataAccess_Organization_OrganizationPartnerSet\" Association=\"MyERP." +
+                "DataAccess.MyERP_DataAccess_Currency_Organization_MyERP_DataAccess_Organization_" +
+                "OrganizationPartner\"><End Role=\"OrganizationPartner\" EntitySet=\"Currencies\" /><E" +
+                "nd Role=\"Organization\" EntitySet=\"Organizations\" /></AssociationSet><Association" +
+                "Set Name=\"MyERP_DataAccess_CurrencyConvertRate_Client_MyERP_DataAccess_Client_Cl" +
+                "ientPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRa" +
+                "te_Client_MyERP_DataAccess_Client_ClientPartner\"><End Role=\"ClientPartner\" Entit" +
+                "ySet=\"CurrencyConvertRates\" /><End Role=\"Client\" EntitySet=\"Clients\" /></Associa" +
+                "tionSet><AssociationSet Name=\"MyERP_DataAccess_CurrencyConvertRate_RecCreatedByU" +
+                "ser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet\" Association=\"MyERP.DataAcc" +
+                "ess.MyERP_DataAccess_CurrencyConvertRate_RecCreatedByUser_MyERP_DataAccess_User_" +
+                "RecCreatedByUserPartner\"><End Role=\"RecCreatedByUserPartner\" EntitySet=\"Currency" +
+                "ConvertRates\" /><End Role=\"RecCreatedByUser\" EntitySet=\"Users\" /></AssociationSe" +
+                "t><AssociationSet Name=\"MyERP_DataAccess_CurrencyConvertRate_RecModifiedByUser_M" +
+                "yERP_DataAccess_User_RecModifiedByUserPartnerSet\" Association=\"MyERP.DataAccess." +
+                "MyERP_DataAccess_CurrencyConvertRate_RecModifiedByUser_MyERP_DataAccess_User_Rec" +
+                "ModifiedByUserPartner\"><End Role=\"RecModifiedByUserPartner\" EntitySet=\"CurrencyC" +
+                "onvertRates\" /><End Role=\"RecModifiedByUser\" EntitySet=\"Users\" /></AssociationSe" +
+                "t><AssociationSet Name=\"MyERP_DataAccess_CurrencyConvertRate_Organization_MyERP_" +
+                "DataAccess_Organization_OrganizationPartnerSet\" Association=\"MyERP.DataAccess.My" +
+                "ERP_DataAccess_CurrencyConvertRate_Organization_MyERP_DataAccess_Organization_Or" +
+                "ganizationPartner\"><End Role=\"OrganizationPartner\" EntitySet=\"CurrencyConvertRat" +
+                "es\" /><End Role=\"Organization\" EntitySet=\"Organizations\" /></AssociationSet><Ass" +
+                "ociationSet Name=\"MyERP_DataAccess_CurrencyConvertRate_Currency_MyERP_DataAccess" +
+                "_Currency_CurrencyPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Cur" +
+                "rencyConvertRate_Currency_MyERP_DataAccess_Currency_CurrencyPartner\"><End Role=\"" +
+                "CurrencyPartner\" EntitySet=\"CurrencyConvertRates\" /><End Role=\"Currency\" EntityS" +
+                "et=\"Currencies\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Curren" +
+                "cyConvertRate_CurrencyTo_MyERP_DataAccess_Currency_CurrencyToPartnerSet\" Associa" +
+                "tion=\"MyERP.DataAccess.MyERP_DataAccess_CurrencyConvertRate_CurrencyTo_MyERP_Dat" +
+                "aAccess_Currency_CurrencyToPartner\"><End Role=\"CurrencyToPartner\" EntitySet=\"Cur" +
+                "rencyConvertRates\" /><End Role=\"CurrencyTo\" EntitySet=\"Currencies\" /></Associati" +
+                "onSet><AssociationSet Name=\"MyERP_DataAccess_GeneralJournalDocument_Client_MyERP" +
+                "_DataAccess_Client_ClientPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAcc" +
+                "ess_GeneralJournalDocument_Client_MyERP_DataAccess_Client_ClientPartner\"><End Ro" +
+                "le=\"ClientPartner\" EntitySet=\"GeneralJournalDocuments\" /><End Role=\"Client\" Enti" +
+                "tySet=\"Clients\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Genera" +
+                "lJournalDocument_Organization_MyERP_DataAccess_Organization_OrganizationPartnerS" +
+                "et\" Association=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_Organi" +
+                "zation_MyERP_DataAccess_Organization_OrganizationPartner\"><End Role=\"Organizatio" +
+                "nPartner\" EntitySet=\"GeneralJournalDocuments\" /><End Role=\"Organization\" EntityS" +
+                "et=\"Organizations\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Gen" +
+                "eralJournalDocument_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartn" +
+                "erSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_Rec" +
+                "CreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Role=\"RecCreat" +
+                "edByUserPartner\" EntitySet=\"GeneralJournalDocuments\" /><End Role=\"RecCreatedByUs" +
+                "er\" EntitySet=\"Users\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_" +
+                "GeneralJournalDocument_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUser" +
+                "PartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocumen" +
+                "t_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End Role=\"R" +
+                "ecModifiedByUserPartner\" EntitySet=\"GeneralJournalDocuments\" /><End Role=\"RecMod" +
+                "ifiedByUser\" EntitySet=\"Users\" /></AssociationSet><AssociationSet Name=\"MyERP_Da" +
+                "taAccess_GeneralJournalDocument_Currency_MyERP_DataAccess_Currency_CurrencyPartn" +
+                "erSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_Cur" +
+                "rency_MyERP_DataAccess_Currency_CurrencyPartner\"><End Role=\"CurrencyPartner\" Ent" +
+                "itySet=\"GeneralJournalDocuments\" /><End Role=\"Currency\" EntitySet=\"Currencies\" /" +
+                "></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_GeneralJournalDocument_" +
+                "NumberSequence_MyERP_DataAccess_NumberSequence_NumberSequencePartnerSet\" Associa" +
+                "tion=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalDocument_NumberSequence_My" +
+                "ERP_DataAccess_NumberSequence_NumberSequencePartner\"><End Role=\"NumberSequencePa" +
+                "rtner\" EntitySet=\"GeneralJournalDocuments\" /><End Role=\"NumberSequence\" EntitySe" +
+                "t=\"NumberSequences\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Ge" +
+                "neralJournalDocument_GeneralJournalLines_MyERP_DataAccess_GeneralJournalLine_Gen" +
+                "eralJournalLinesPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Gener" +
+                "alJournalDocument_GeneralJournalLines_MyERP_DataAccess_GeneralJournalLine_Genera" +
+                "lJournalLinesPartner\"><End Role=\"GeneralJournalLinesPartner\" EntitySet=\"GeneralJ" +
+                "ournalDocuments\" /><End Role=\"GeneralJournalLines\" EntitySet=\"GeneralJournalLine" +
+                "s\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_GeneralJournalLine_" +
+                "Client_MyERP_DataAccess_Client_ClientPartnerSet\" Association=\"MyERP.DataAccess.M" +
+                "yERP_DataAccess_GeneralJournalLine_Client_MyERP_DataAccess_Client_ClientPartner\"" +
+                "><End Role=\"ClientPartner\" EntitySet=\"GeneralJournalLines\" /><End Role=\"Client\" " +
+                "EntitySet=\"Clients\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Ge" +
+                "neralJournalLine_Organization_MyERP_DataAccess_Organization_OrganizationPartnerS" +
+                "et\" Association=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Organizati" +
+                "on_MyERP_DataAccess_Organization_OrganizationPartner\"><End Role=\"OrganizationPar" +
+                "tner\" EntitySet=\"GeneralJournalLines\" /><End Role=\"Organization\" EntitySet=\"Orga" +
+                "nizations\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_GeneralJour" +
+                "nalLine_BusinessPartner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartnerS" +
+                "et\" Association=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_BusinessPa" +
+                "rtner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartner\"><End Role=\"Busine" +
+                "ssPartnerPartner\" EntitySet=\"GeneralJournalLines\" /><End Role=\"BusinessPartner\" " +
+                "EntitySet=\"BusinessPartners\" /></AssociationSet><AssociationSet Name=\"MyERP_Data" +
+                "Access_GeneralJournalLine_Job_MyERP_DataAccess_Job_JobPartn";
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+            private const string ModelPart11 = "erSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Job_MyER" +
+                "P_DataAccess_Job_JobPartner\"><End Role=\"JobPartner\" EntitySet=\"GeneralJournalLin" +
+                "es\" /><End Role=\"Job\" EntitySet=\"Jobs\" /></AssociationSet><AssociationSet Name=\"" +
+                "MyERP_DataAccess_GeneralJournalLine_RecModifiedByUser_MyERP_DataAccess_User_RecM" +
+                "odifiedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJ" +
+                "ournalLine_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><En" +
+                "d Role=\"RecModifiedByUserPartner\" EntitySet=\"GeneralJournalLines\" /><End Role=\"R" +
+                "ecModifiedByUser\" EntitySet=\"Users\" /></AssociationSet><AssociationSet Name=\"MyE" +
+                "RP_DataAccess_GeneralJournalLine_RecCreatedByUser_MyERP_DataAccess_User_RecCreat" +
+                "edByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJourna" +
+                "lLine_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Role=" +
+                "\"RecCreatedByUserPartner\" EntitySet=\"GeneralJournalLines\" /><End Role=\"RecCreate" +
+                "dByUser\" EntitySet=\"Users\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAc" +
+                "cess_GeneralJournalLine_Account_MyERP_DataAccess_Account_AccountPartnerSet\" Asso" +
+                "ciation=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Account_MyERP_Data" +
+                "Access_Account_AccountPartner\"><End Role=\"AccountPartner\" EntitySet=\"GeneralJour" +
+                "nalLines\" /><End Role=\"Account\" EntitySet=\"Accounts\" /></AssociationSet><Associa" +
+                "tionSet Name=\"MyERP_DataAccess_GeneralJournalLine_CorAccount_MyERP_DataAccess_Ac" +
+                "count_CorAccountPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Gener" +
+                "alJournalLine_CorAccount_MyERP_DataAccess_Account_CorAccountPartner\"><End Role=\"" +
+                "CorAccountPartner\" EntitySet=\"GeneralJournalLines\" /><End Role=\"CorAccount\" Enti" +
+                "tySet=\"Accounts\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Gener" +
+                "alJournalLine_GeneralJournalDocument_MyERP_DataAccess_GeneralJournalDocument_Gen" +
+                "eralJournalDocumentPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Ge" +
+                "neralJournalLine_GeneralJournalDocument_MyERP_DataAccess_GeneralJournalDocument_" +
+                "GeneralJournalDocumentPartner\"><End Role=\"GeneralJournalDocumentPartner\" EntityS" +
+                "et=\"GeneralJournalLines\" /><End Role=\"GeneralJournalDocument\" EntitySet=\"General" +
+                "JournalDocuments\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Gene" +
+                "ralJournalLine_Currency_MyERP_DataAccess_Currency_CurrencyPartnerSet\" Associatio" +
+                "n=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalLine_Currency_MyERP_DataAcces" +
+                "s_Currency_CurrencyPartner\"><End Role=\"CurrencyPartner\" EntitySet=\"GeneralJourna" +
+                "lLines\" /><End Role=\"Currency\" EntitySet=\"Currencies\" /></AssociationSet><Associ" +
+                "ationSet Name=\"MyERP_DataAccess_GeneralJournalSetup_RecCreatedByUser_MyERP_DataA" +
+                "ccess_User_RecCreatedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataA" +
+                "ccess_GeneralJournalSetup_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUse" +
+                "rPartner\"><End Role=\"RecCreatedByUserPartner\" EntitySet=\"GeneralJournalSetups\" /" +
+                "><End Role=\"RecCreatedByUser\" EntitySet=\"Users\" /></AssociationSet><AssociationS" +
+                "et Name=\"MyERP_DataAccess_GeneralJournalSetup_RecModifiedByUser_MyERP_DataAccess" +
+                "_User_RecModifiedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAcces" +
+                "s_GeneralJournalSetup_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserP" +
+                "artner\"><End Role=\"RecModifiedByUserPartner\" EntitySet=\"GeneralJournalSetups\" />" +
+                "<End Role=\"RecModifiedByUser\" EntitySet=\"Users\" /></AssociationSet><AssociationS" +
+                "et Name=\"MyERP_DataAccess_GeneralJournalSetup_Organization_MyERP_DataAccess_Orga" +
+                "nization_OrganizationPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_" +
+                "GeneralJournalSetup_Organization_MyERP_DataAccess_Organization_OrganizationPartn" +
+                "er\"><End Role=\"OrganizationPartner\" EntitySet=\"GeneralJournalSetups\" /><End Role" +
+                "=\"Organization\" EntitySet=\"Organizations\" /></AssociationSet><AssociationSet Nam" +
+                "e=\"MyERP_DataAccess_GeneralJournalSetup_LocalCurrency_MyERP_DataAccess_Currency_" +
+                "LocalCurrencyPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJ" +
+                "ournalSetup_LocalCurrency_MyERP_DataAccess_Currency_LocalCurrencyPartner\"><End R" +
+                "ole=\"LocalCurrencyPartner\" EntitySet=\"GeneralJournalSetups\" /><End Role=\"LocalCu" +
+                "rrency\" EntitySet=\"Currencies\" /></AssociationSet><AssociationSet Name=\"MyERP_Da" +
+                "taAccess_GeneralJournalSetup_GeneralJournalNumberSequence_MyERP_DataAccess_Numbe" +
+                "rSequence_GeneralJournalNumberSequencePartnerSet\" Association=\"MyERP.DataAccess." +
+                "MyERP_DataAccess_GeneralJournalSetup_GeneralJournalNumberSequence_MyERP_DataAcce" +
+                "ss_NumberSequence_GeneralJournalNumberSequencePartner\"><End Role=\"GeneralJournal" +
+                "NumberSequencePartner\" EntitySet=\"GeneralJournalSetups\" /><End Role=\"GeneralJour" +
+                "nalNumberSequence\" EntitySet=\"NumberSequences\" /></AssociationSet><AssociationSe" +
+                "t Name=\"MyERP_DataAccess_GeneralJournalSetup_Client_MyERP_DataAccess_Client_Clie" +
+                "ntPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_GeneralJournalSetup" +
+                "_Client_MyERP_DataAccess_Client_ClientPartner\"><End Role=\"ClientPartner\" EntityS" +
+                "et=\"GeneralJournalSetups\" /><End Role=\"Client\" EntitySet=\"Clients\" /></Associati" +
+                "onSet><AssociationSet Name=\"MyERP_DataAccess_JobGroup_Client_MyERP_DataAccess_Cl" +
+                "ient_ClientPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_JobGroup_C" +
+                "lient_MyERP_DataAccess_Client_ClientPartner\"><End Role=\"ClientPartner\" EntitySet" +
+                "=\"JobGroups\" /><End Role=\"Client\" EntitySet=\"Clients\" /></AssociationSet><Associ" +
+                "ationSet Name=\"MyERP_DataAccess_JobGroup_Organization_MyERP_DataAccess_Organizat" +
+                "ion_OrganizationPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_JobGr" +
+                "oup_Organization_MyERP_DataAccess_Organization_OrganizationPartner\"><End Role=\"O" +
+                "rganizationPartner\" EntitySet=\"JobGroups\" /><End Role=\"Organization\" EntitySet=\"" +
+                "Organizations\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_JobGrou" +
+                "p_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet\" Association" +
+                "=\"MyERP.DataAccess.MyERP_DataAccess_JobGroup_RecCreatedByUser_MyERP_DataAccess_U" +
+                "ser_RecCreatedByUserPartner\"><End Role=\"RecCreatedByUserPartner\" EntitySet=\"JobG" +
+                "roups\" /><End Role=\"RecCreatedByUser\" EntitySet=\"Users\" /></AssociationSet><Asso" +
+                "ciationSet Name=\"MyERP_DataAccess_JobGroup_RecModifiedByUser_MyERP_DataAccess_Us" +
+                "er_RecModifiedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_J" +
+                "obGroup_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End R" +
+                "ole=\"RecModifiedByUserPartner\" EntitySet=\"JobGroups\" /><End Role=\"RecModifiedByU" +
+                "ser\" EntitySet=\"Users\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess" +
+                "_JobGroup_Job1s_MyERP_DataAccess_Job_Job1sPartnerSet\" Association=\"MyERP.DataAcc" +
+                "ess.MyERP_DataAccess_JobGroup_Job1s_MyERP_DataAccess_Job_Job1sPartner\"><End Role" +
+                "=\"Job1sPartner\" EntitySet=\"JobGroups\" /><End Role=\"Job1s\" EntitySet=\"Jobs\" /></A" +
+                "ssociationSet><AssociationSet Name=\"MyERP_DataAccess_JobGroup_Job2s_MyERP_DataAc" +
+                "cess_Job_Job2sPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_JobGrou" +
+                "p_Job2s_MyERP_DataAccess_Job_Job2sPartner\"><End Role=\"Job2sPartner\" EntitySet=\"J" +
+                "obGroups\" /><End Role=\"Job2s\" EntitySet=\"Jobs\" /></AssociationSet><AssociationSe" +
+                "t Name=\"MyERP_DataAccess_JobGroup_Job3s_MyERP_DataAccess_Job_Job3sPartnerSet\" As" +
+                "sociation=\"MyERP.DataAccess.MyERP_DataAccess_JobGroup_Job3s_MyERP_DataAccess_Job" +
+                "_Job3sPartner\"><End Role=\"Job3sPartner\" EntitySet=\"JobGroups\" /><End Role=\"Job3s" +
+                "\" EntitySet=\"Jobs\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Job" +
+                "_Client_MyERP_DataAccess_Client_ClientPartnerSet\" Association=\"MyERP.DataAccess." +
+                "MyERP_DataAccess_Job_Client_MyERP_DataAccess_Client_ClientPartner\"><End Role=\"Cl" +
+                "ientPartner\" EntitySet=\"Jobs\" /><End Role=\"Client\" EntitySe";
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+            private const string ModelPart12 = "t=\"Clients\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Job_Organiz" +
+                "ation_MyERP_DataAccess_Organization_OrganizationPartnerSet\" Association=\"MyERP.D" +
+                "ataAccess.MyERP_DataAccess_Job_Organization_MyERP_DataAccess_Organization_Organi" +
+                "zationPartner\"><End Role=\"OrganizationPartner\" EntitySet=\"Jobs\" /><End Role=\"Org" +
+                "anization\" EntitySet=\"Organizations\" /></AssociationSet><AssociationSet Name=\"My" +
+                "ERP_DataAccess_Job_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartne" +
+                "rSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Job_RecCreatedByUser_MyERP_" +
+                "DataAccess_User_RecCreatedByUserPartner\"><End Role=\"RecCreatedByUserPartner\" Ent" +
+                "itySet=\"Jobs\" /><End Role=\"RecCreatedByUser\" EntitySet=\"Users\" /></AssociationSe" +
+                "t><AssociationSet Name=\"MyERP_DataAccess_Job_RecModifiedByUser_MyERP_DataAccess_" +
+                "User_RecModifiedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess" +
+                "_Job_RecModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End Role" +
+                "=\"RecModifiedByUserPartner\" EntitySet=\"Jobs\" /><End Role=\"RecModifiedByUser\" Ent" +
+                "itySet=\"Users\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Job_Bus" +
+                "inessPartner_MyERP_DataAccess_BusinessPartner_BusinessPartnerPartnerSet\" Associa" +
+                "tion=\"MyERP.DataAccess.MyERP_DataAccess_Job_BusinessPartner_MyERP_DataAccess_Bus" +
+                "inessPartner_BusinessPartnerPartner\"><End Role=\"BusinessPartnerPartner\" EntitySe" +
+                "t=\"Jobs\" /><End Role=\"BusinessPartner\" EntitySet=\"BusinessPartners\" /></Associat" +
+                "ionSet><AssociationSet Name=\"MyERP_DataAccess_Job_Account_MyERP_DataAccess_Accou" +
+                "nt_AccountPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Job_Account" +
+                "_MyERP_DataAccess_Account_AccountPartner\"><End Role=\"AccountPartner\" EntitySet=\"" +
+                "Jobs\" /><End Role=\"Account\" EntitySet=\"Accounts\" /></AssociationSet><Association" +
+                "Set Name=\"MyERP_DataAccess_Job_JobGroup1_MyERP_DataAccess_JobGroup_JobGroup1Part" +
+                "nerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Job_JobGroup1_MyERP_DataA" +
+                "ccess_JobGroup_JobGroup1Partner\"><End Role=\"JobGroup1Partner\" EntitySet=\"Jobs\" /" +
+                "><End Role=\"JobGroup1\" EntitySet=\"JobGroups\" /></AssociationSet><AssociationSet " +
+                "Name=\"MyERP_DataAccess_Job_JobGroup2_MyERP_DataAccess_JobGroup_JobGroup2PartnerS" +
+                "et\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Job_JobGroup2_MyERP_DataAcces" +
+                "s_JobGroup_JobGroup2Partner\"><End Role=\"JobGroup2Partner\" EntitySet=\"Jobs\" /><En" +
+                "d Role=\"JobGroup2\" EntitySet=\"JobGroups\" /></AssociationSet><AssociationSet Name" +
+                "=\"MyERP_DataAccess_Job_JobGroup3_MyERP_DataAccess_JobGroup_JobGroup3PartnerSet\" " +
+                "Association=\"MyERP.DataAccess.MyERP_DataAccess_Job_JobGroup3_MyERP_DataAccess_Jo" +
+                "bGroup_JobGroup3Partner\"><End Role=\"JobGroup3Partner\" EntitySet=\"Jobs\" /><End Ro" +
+                "le=\"JobGroup3\" EntitySet=\"JobGroups\" /></AssociationSet><AssociationSet Name=\"My" +
+                "ERP_DataAccess_NumberSequence_Client_MyERP_DataAccess_Client_ClientPartnerSet\" A" +
+                "ssociation=\"MyERP.DataAccess.MyERP_DataAccess_NumberSequence_Client_MyERP_DataAc" +
+                "cess_Client_ClientPartner\"><End Role=\"ClientPartner\" EntitySet=\"NumberSequences\"" +
+                " /><End Role=\"Client\" EntitySet=\"Clients\" /></AssociationSet><AssociationSet Nam" +
+                "e=\"MyERP_DataAccess_NumberSequence_Organization_MyERP_DataAccess_Organization_Or" +
+                "ganizationPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_NumberSeque" +
+                "nce_Organization_MyERP_DataAccess_Organization_OrganizationPartner\"><End Role=\"O" +
+                "rganizationPartner\" EntitySet=\"NumberSequences\" /><End Role=\"Organization\" Entit" +
+                "ySet=\"Organizations\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_N" +
+                "umberSequence_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPartnerSet\"" +
+                " Association=\"MyERP.DataAccess.MyERP_DataAccess_NumberSequence_RecCreatedByUser_" +
+                "MyERP_DataAccess_User_RecCreatedByUserPartner\"><End Role=\"RecCreatedByUserPartne" +
+                "r\" EntitySet=\"NumberSequences\" /><End Role=\"RecCreatedByUser\" EntitySet=\"Users\" " +
+                "/></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_NumberSequence_RecModi" +
+                "fiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartnerSet\" Association=\"MyERP" +
+                ".DataAccess.MyERP_DataAccess_NumberSequence_RecModifiedByUser_MyERP_DataAccess_U" +
+                "ser_RecModifiedByUserPartner\"><End Role=\"RecModifiedByUserPartner\" EntitySet=\"Nu" +
+                "mberSequences\" /><End Role=\"RecModifiedByUser\" EntitySet=\"Users\" /></Association" +
+                "Set><AssociationSet Name=\"MyERP_DataAccess_Organization_RecCreatedByUser_MyERP_D" +
+                "ataAccess_User_RecCreatedByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP_D" +
+                "ataAccess_Organization_RecCreatedByUser_MyERP_DataAccess_User_RecCreatedByUserPa" +
+                "rtner\"><End Role=\"RecCreatedByUserPartner\" EntitySet=\"Organizations\" /><End Role" +
+                "=\"RecCreatedByUser\" EntitySet=\"Users\" /></AssociationSet><AssociationSet Name=\"M" +
+                "yERP_DataAccess_Organization_RecModifiedByUser_MyERP_DataAccess_User_RecModified" +
+                "ByUserPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Organization_Re" +
+                "cModifiedByUser_MyERP_DataAccess_User_RecModifiedByUserPartner\"><End Role=\"RecMo" +
+                "difiedByUserPartner\" EntitySet=\"Organizations\" /><End Role=\"RecModifiedByUser\" E" +
+                "ntitySet=\"Users\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Organ" +
+                "ization_Client_MyERP_DataAccess_Client_ClientPartnerSet\" Association=\"MyERP.Data" +
+                "Access.MyERP_DataAccess_Organization_Client_MyERP_DataAccess_Client_ClientPartne" +
+                "r\"><End Role=\"ClientPartner\" EntitySet=\"Organizations\" /><End Role=\"Client\" Enti" +
+                "tySet=\"Clients\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Organi" +
+                "zation_AllOrganization_MyERP_DataAccess_Organization_AllOrganizationPartnerSet\" " +
+                "Association=\"MyERP.DataAccess.MyERP_DataAccess_Organization_AllOrganization_MyER" +
+                "P_DataAccess_Organization_AllOrganizationPartner\"><End Role=\"AllOrganizationPart" +
+                "ner\" EntitySet=\"Organizations\" /><End Role=\"AllOrganization\" EntitySet=\"Organiza" +
+                "tions\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Organization_Ge" +
+                "neralJournalSetup_MyERP_DataAccess_GeneralJournalSetup_GeneralJournalSetupPartne" +
+                "rSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_Organization_GeneralJournal" +
+                "Setup_MyERP_DataAccess_GeneralJournalSetup_GeneralJournalSetupPartner\"><End Role" +
+                "=\"GeneralJournalSetupPartner\" EntitySet=\"Organizations\" /><End Role=\"GeneralJour" +
+                "nalSetup\" EntitySet=\"GeneralJournalSetups\" /></AssociationSet><AssociationSet Na" +
+                "me=\"MyERP_DataAccess_PaymentTerm_Client_MyERP_DataAccess_Client_ClientPartnerSet" +
+                "\" Association=\"MyERP.DataAccess.MyERP_DataAccess_PaymentTerm_Client_MyERP_DataAc" +
+                "cess_Client_ClientPartner\"><End Role=\"ClientPartner\" EntitySet=\"PaymentTerms\" />" +
+                "<End Role=\"Client\" EntitySet=\"Clients\" /></AssociationSet><AssociationSet Name=\"" +
+                "MyERP_DataAccess_PaymentTerm_Organization_MyERP_DataAccess_Organization_Organiza" +
+                "tionPartnerSet\" Association=\"MyERP.DataAccess.MyERP_DataAccess_PaymentTerm_Organ" +
+                "ization_MyERP_DataAccess_Organization_OrganizationPartner\"><End Role=\"Organizati" +
+                "onPartner\" EntitySet=\"PaymentTerms\" /><End Role=\"Organization\" EntitySet=\"Organi" +
+                "zations\" /></AssociationSet><AssociationSet Name=\"MyERP_DataAccess_Session_Clien" +
+                "t_MyERP_DataAccess_Client_ClientPartnerSet\" Association=\"MyERP.DataAccess.MyERP_" +
+                "DataAccess_Session_Client_MyERP_DataAccess_Client_ClientPartner\"><End Role=\"Clie" +
+                "ntPartner\" EntitySet=\"Sessions\" /><End Role=\"Client\" EntitySet=\"Clients\" /></Ass" +
+                "ociationSet><AssociationSet Name=\"MyERP_DataAccess_Session_Organization_MyERP_Da" +
+                "taAccess_Organization_OrganizationPartnerSet\" Association=\"MyERP.DataAccess.MyER" +
+                "P_DataAccess_Session_Organization_MyERP_DataAccess_Organization_OrganizationPart" +
+                "ner\"><End Role=\"OrganizationPartner\" EntitySet=\"Sessions\" /><End Role=\"Organizat" +
+                "ion\" EntitySet=\"Organizations\" /></AssociationSet><AssociationSet Name=\"MyERP_Da" +
+                "taAccess_User_Client_MyERP_DataAccess_Client_ClientPartnerS";
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+            private const string ModelPart13 = @"et"" Association=""MyERP.DataAccess.MyERP_DataAccess_User_Client_MyERP_DataAccess_Client_ClientPartner""><End Role=""ClientPartner"" EntitySet=""Users"" /><End Role=""Client"" EntitySet=""Clients"" /></AssociationSet><AssociationSet Name=""MyERP_DataAccess_User_Organization_MyERP_DataAccess_Organization_OrganizationPartnerSet"" Association=""MyERP.DataAccess.MyERP_DataAccess_User_Organization_MyERP_DataAccess_Organization_OrganizationPartner""><End Role=""OrganizationPartner"" EntitySet=""Users"" /><End Role=""Organization"" EntitySet=""Organizations"" /></AssociationSet></EntityContainer></Schema></edmx:DataServices></edmx:Edmx>";
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
             private static string GetConcatenatedEdmxString()
             {
-                return string.Concat(ModelPart0, ModelPart1, ModelPart2, ModelPart3, ModelPart4, ModelPart5, ModelPart6, ModelPart7, ModelPart8, ModelPart9, ModelPart10, ModelPart11, ModelPart12);
+                return string.Concat(ModelPart0, ModelPart1, ModelPart2, ModelPart3, ModelPart4, ModelPart5, ModelPart6, ModelPart7, ModelPart8, ModelPart9, ModelPart10, ModelPart11, ModelPart12, ModelPart13);
             }
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
             public static global::Microsoft.Data.Edm.IEdmModel GetInstance()
@@ -4824,8 +4831,6 @@ namespace MyERP.Repository.MyERPService
         /// <param name="totalDebitAmountLcy">Initial value of TotalDebitAmountLcy.</param>
         /// <param name="transactionType">Initial value of TransactionType.</param>
         /// <param name="currencyExchangeRate">Initial value of CurrencyExchangeRate.</param>
-        /// <param name="locked">Initial value of Locked.</param>
-        /// <param name="documentStatusType">Initial value of DocumentStatusType.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         public static GeneralJournalDocument CreateGeneralJournalDocument(
                     global::System.Guid ID, 
@@ -4846,9 +4851,7 @@ namespace MyERP.Repository.MyERPService
                     decimal totalDebitAmount, 
                     decimal totalDebitAmountLcy, 
                     string transactionType, 
-                    int currencyExchangeRate, 
-                    bool locked, 
-                    string documentStatusType)
+                    int currencyExchangeRate)
         {
             GeneralJournalDocument generalJournalDocument = new GeneralJournalDocument();
             generalJournalDocument.Id = ID;
@@ -4870,8 +4873,6 @@ namespace MyERP.Repository.MyERPService
             generalJournalDocument.TotalDebitAmountLcy = totalDebitAmountLcy;
             generalJournalDocument.TransactionType = transactionType;
             generalJournalDocument.CurrencyExchangeRate = currencyExchangeRate;
-            generalJournalDocument.Locked = locked;
-            generalJournalDocument.DocumentStatusType = documentStatusType;
             return generalJournalDocument;
         }
         /// <summary>
@@ -5362,7 +5363,7 @@ namespace MyERP.Repository.MyERPService
         /// There are no comments for Property Locked in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public bool Locked
+        public global::System.Nullable<bool> Locked
         {
             get
             {
@@ -5377,31 +5378,9 @@ namespace MyERP.Repository.MyERPService
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        private bool _Locked;
-        partial void OnLockedChanging(bool value);
+        private global::System.Nullable<bool> _Locked;
+        partial void OnLockedChanging(global::System.Nullable<bool> value);
         partial void OnLockedChanged();
-        /// <summary>
-        /// There are no comments for Property DocumentStatusType in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public string DocumentStatusType
-        {
-            get
-            {
-                return this._DocumentStatusType;
-            }
-            set
-            {
-                this.OnDocumentStatusTypeChanging(value);
-                this._DocumentStatusType = value;
-                this.OnDocumentStatusTypeChanged();
-                this.OnPropertyChanged("DocumentStatusType");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        private string _DocumentStatusType;
-        partial void OnDocumentStatusTypeChanging(string value);
-        partial void OnDocumentStatusTypeChanged();
         /// <summary>
         /// There are no comments for Client in the schema.
         /// </summary>
@@ -8173,8 +8152,9 @@ namespace MyERP.Repository.MyERPService
         /// <param name="recCreated">Initial value of RecCreated.</param>
         /// <param name="recCreatedBy">Initial value of RecCreatedBy.</param>
         /// <param name="recModified">Initial value of RecModified.</param>
+        /// <param name="sequenceNextVal">Initial value of SequenceNextVal.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public static NumberSequence CreateNumberSequence(global::System.Guid ID, long version, int currentNo, int endingNo, bool isDefault, bool manual, global::System.Guid organizationId, global::System.Guid clientId, int startingNo, short status, global::System.Guid recModifiedBy, global::System.DateTime recCreated, global::System.Guid recCreatedBy, global::System.DateTime recModified)
+        public static NumberSequence CreateNumberSequence(global::System.Guid ID, long version, int currentNo, int endingNo, bool isDefault, bool manual, global::System.Guid organizationId, global::System.Guid clientId, int startingNo, short status, global::System.Guid recModifiedBy, global::System.DateTime recCreated, global::System.Guid recCreatedBy, global::System.DateTime recModified, int sequenceNextVal)
         {
             NumberSequence numberSequence = new NumberSequence();
             numberSequence.Id = ID;
@@ -8191,6 +8171,7 @@ namespace MyERP.Repository.MyERPService
             numberSequence.RecCreated = recCreated;
             numberSequence.RecCreatedBy = recCreatedBy;
             numberSequence.RecModified = recModified;
+            numberSequence.SequenceNextVal = sequenceNextVal;
             return numberSequence;
         }
         /// <summary>
@@ -8589,6 +8570,28 @@ namespace MyERP.Repository.MyERPService
         private global::System.DateTime _RecModified;
         partial void OnRecModifiedChanging(global::System.DateTime value);
         partial void OnRecModifiedChanged();
+        /// <summary>
+        /// There are no comments for Property SequenceNextVal in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public int SequenceNextVal
+        {
+            get
+            {
+                return this._SequenceNextVal;
+            }
+            set
+            {
+                this.OnSequenceNextValChanging(value);
+                this._SequenceNextVal = value;
+                this.OnSequenceNextValChanged();
+                this.OnPropertyChanged("SequenceNextVal");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private int _SequenceNextVal;
+        partial void OnSequenceNextValChanging(int value);
+        partial void OnSequenceNextValChanged();
         /// <summary>
         /// There are no comments for Client in the schema.
         /// </summary>
@@ -9005,6 +9008,42 @@ namespace MyERP.Repository.MyERPService
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         private Client _Client;
+        /// <summary>
+        /// There are no comments for AllOrganization in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public Organization AllOrganization
+        {
+            get
+            {
+                return this._AllOrganization;
+            }
+            set
+            {
+                this._AllOrganization = value;
+                this.OnPropertyChanged("AllOrganization");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private Organization _AllOrganization;
+        /// <summary>
+        /// There are no comments for GeneralJournalSetup in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public GeneralJournalSetup GeneralJournalSetup
+        {
+            get
+            {
+                return this._GeneralJournalSetup;
+            }
+            set
+            {
+                this._GeneralJournalSetup = value;
+                this.OnPropertyChanged("GeneralJournalSetup");
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private GeneralJournalSetup _GeneralJournalSetup;
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
         public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]

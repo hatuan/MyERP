@@ -27,19 +27,12 @@ namespace MyERP.DataAccess
             public User RecModifiedByUser { get; set; }
         }
 
-        public bool Locked
+        public bool? Locked
         {
-            get { return DocumentStatusType == GeneralJournalDocumentStatusType.Posted; }
+            get { return Status == (int) GeneralJournalDocumentStatusType.Posted; }
             set { }
         }
 
-        public GeneralJournalDocumentStatusType DocumentStatusType
-        {
-            get { return (GeneralJournalDocumentStatusType)Status; }
-            set
-            {
-                //intentionally empty
-            }
-        }
+
     }
 }

@@ -40,9 +40,7 @@ namespace MyERP.Repositories
 
         public void SequenceNextVal(Guid id, Action<int> callback)
         {
-            Uri actionUri = new Uri(this.Container.BaseUri,
-                String.Format("NumberSequences(guid'{0}')/SequenceNextVal", id)
-                );
+            Uri actionUri = new Uri(String.Format("/NumberSequences(guid'{0}')/SequenceNextVal", id), UriKind.Relative);
 
             this.Container.BeginExecute<int>(actionUri, result =>
             {

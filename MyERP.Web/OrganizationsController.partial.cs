@@ -18,15 +18,50 @@ namespace MyERP.Web
     /// </summary>
     public partial class OrganizationsController 
     {
-        public IHttpActionResult GetAllOrganization([FromODataUri] Guid clientKey)
+        public SingleResult<Organization> GetOrganization([FromODataUri] Guid key)
         {
-            Organization allOrganization = repository.GetAll().FirstOrDefault(c => c.ClientId == clientKey && c.Code == "*");
-            if (allOrganization == null)
+            return SingleResult.Create(repository.GetAll().Where(c => c.Id == key).AsQueryable());
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key">Organization 's ID of current Organization</param>
+        /// <returns></returns>
+        public Organization GetAllOrganization([FromODataUri] Guid key)
+        {
+            Organization organization = repository.GetBy(o => o.Id == key);
+            if (organization == null)
             {
-                return NotFound();
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-            
-            return Ok(allOrganization);
+            return repository.GetAll().FirstOrDefault(c => c.ClientId == organization.ClientId && c.Code == "*");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key">Organization 's ID of current Organization</param>
+        /// <returns></returns>
+        public SingleResult<GeneralJournalSetup> GetGeneralJournalSetup([FromODataUri] Guid key)
+        {
+            var generalJournalSetup = new GeneralJournalSetupRepository();
+
+            GeneralJournalSetup entity = generalJournalSetup.GetBy(c => c.OrganizationId == key);
+            if (entity == null)
+            {
+                Organization organization = repository.GetBy(o => o.Id == key);
+                Organization allOrganization = repository.GetBy(o => o.ClientId == organization.ClientId && o.Code == "*");
+
+                entity = generalJournalSetup.GetBy(c => c.OrganizationId == allOrganization.Id);
+            }
+
+            if (entity == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            return SingleResult.Create(new List<GeneralJournalSetup>(){entity}.AsQueryable());
         }
     }
 }

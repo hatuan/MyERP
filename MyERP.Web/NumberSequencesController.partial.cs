@@ -156,17 +156,18 @@ namespace MyERP.Web
             }
         }
 
-        public IHttpActionResult SequenceNextVal([FromODataUri] Guid key)
+        //[HttpPost]
+        public IHttpActionResult GetSequenceNextVal([FromODataUri] Guid key)
         {
-            NumberSequence numberSequence = repository.GetAll().FirstOrDefault(c => c.Id == key);
-            if (numberSequence == null)
+            NumberSequence entity = repository.GetAll().FirstOrDefault(c => c.Id == key);
+            if (entity == null)
             {
                 return NotFound();
             }
 
             int sequenceNextVal = 0;
             // 2. Initialize the sql query.
-            string SqlQuery = String.Format("SELECT nextval('{0}')", new object[] {numberSequence.NoSeqName});
+            string SqlQuery = String.Format("SELECT nextval('{0}')", new object[] {entity.NoSeqName});
 
             // 3. Create a new instance of the OACommand class.
             using (var command = repository.DataContext.Connection.CreateCommand())
@@ -176,6 +177,8 @@ namespace MyERP.Web
                 // 4. Execute the command and retrieve the scalar values.
                 sequenceNextVal = Convert.ToInt32(command.ExecuteScalar());
             }
+            entity.CurrentNo = sequenceNextVal;
+            repository.Update(entity);
 
             return Ok(sequenceNextVal);
         }

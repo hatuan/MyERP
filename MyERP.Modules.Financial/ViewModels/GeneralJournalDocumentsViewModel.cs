@@ -28,6 +28,9 @@ namespace MyERP.Modules.Financial.ViewModels
         #region Repositories
         [Import]
         public GeneralJournalDocumentRepository GeneralJournalDocumentRepository { get; set; }
+
+        [Import]
+        public OrganizationRepository OrganizationRepository { get; set; }
         #endregion
 
         #region View-visible properties
@@ -162,6 +165,8 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnAddNewCommandExecuted()
         {
+            IsBusy = true;
+
             var newId = Guid.NewGuid();
 
             GeneralJournalDocument newEntity = new GeneralJournalDocument()
@@ -174,6 +179,7 @@ namespace MyERP.Modules.Financial.ViewModels
                 Version = 1,
                 DocumentCreated = Convert.ToDateTime(SessionManager.Session["WorkingDate"]),
                 DocumentPosted = Convert.ToDateTime(SessionManager.Session["WorkingDate"]),
+                DocumentNo = "",
                 DocumentType = DataAccess.DocumentType.GeneralJournal.ToString(),
                 Description = "",
                 RecCreated = DateTime.Now,
@@ -184,10 +190,21 @@ namespace MyERP.Modules.Financial.ViewModels
             };
             
             this.GeneralJournalDocumentRepository.AddNew(newEntity);
-            this.GeneralJournalDocuments.Add(newEntity);
-            this.SelectedGeneralJournalDocument = newEntity;
+
+            OrganizationRepository.GeneralJournalSetup(newEntity.OrganizationId, setup =>
+            {
+                newEntity.NumberSequence = setup.GeneralJournalNumberSequence;
+                newEntity.NumberSequenceId = setup.GeneralJournalNumberSequenceId;
+                
+                this.GeneralJournalDocuments.Add(newEntity);
+                this.SelectedGeneralJournalDocument = newEntity;
+
+
+                IsBusy = false;
+                IsDirty = true;
+            });
+
             
-            IsDirty = true;
         }
 
         private bool SubmitChangesCommandCanExecute()
