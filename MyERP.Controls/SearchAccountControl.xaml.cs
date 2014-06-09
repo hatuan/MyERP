@@ -18,6 +18,7 @@ using MyERP.DataAccess;
 using MyERP.Repository.MyERPService;
 using Telerik.Windows.Controls;
 using Telerik.Windows.Data;
+using ViewModelBase = MyERP.Infrastructure.ViewModels.ViewModelBase;
 
 namespace MyERP.Controls
 {
@@ -26,7 +27,7 @@ namespace MyERP.Controls
         public SearchAccountControl()
         {
             InitializeComponent();
-            if (!MyERP.Infrastructure.ViewModelBase.IsInDesignModeStatic)
+            if (!ViewModelBase.IsInDesignModeStatic)
             {
                 _accountRepository = new AccountRepository();
                 this.OkCommand = new DelegateCommand(this.OnOkCommandExecuted);

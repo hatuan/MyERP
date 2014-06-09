@@ -1,20 +1,18 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.Text;
-using System.Windows;
 using System.Windows.Input;
 using MyERP.Infrastructure;
 using Microsoft.Practices.Prism.Regions;
 using MyERP.Repositories;
 using MyERP.ViewModels;
 using DelegateCommand = Microsoft.Practices.Prism.Commands.DelegateCommand;
-using ViewModelBase = MyERP.Infrastructure.ViewModelBase;
 
 
 namespace MyERP.Modules.User.ViewModels
 {
     [Export]
-    public class LoginViewModel : ViewModelBase, ICloseable
+    public class LoginViewModel : Infrastructure.ViewModels.ViewModelBase, ICloseable
     {
         public LoginViewModel()
         {

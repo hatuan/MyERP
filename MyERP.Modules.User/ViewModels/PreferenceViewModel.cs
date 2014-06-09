@@ -12,13 +12,13 @@ using MyERP.Repository.MyERPService;
 using MyERP.ViewModels;
 using Telerik.Windows.Data;
 using DelegateCommand = Microsoft.Practices.Prism.Commands.DelegateCommand;
-using ViewModelBase = MyERP.Infrastructure.ViewModelBase;
+using ViewModelBase = MyERP.Infrastructure.ViewModels.ViewModelBase;
 
 
 namespace MyERP.Modules.User.ViewModels
 {
     [Export]
-    public class PreferenceViewModel : ViewModelBase, ICloseable
+    public class PreferenceViewModel : Infrastructure.ViewModels.ViewModelBase, ICloseable
     {
         public PreferenceViewModel()
         {

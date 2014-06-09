@@ -144,7 +144,6 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="UIThread.cs" />
-    <Compile Include="ViewModelBase.cs" />
     <Compile Include="Extensions\IRegionExtensions.cs" />
     <Compile Include="Extensions\PresentationFrameworkCollectionExtensions.cs" />
     <Compile Include="Helpers\NormalImportanceButtonHelper.cs" />
@@ -155,6 +154,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="ViewModels\NavigationAwareDataViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

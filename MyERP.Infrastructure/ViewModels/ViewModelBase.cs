@@ -1,15 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using MyERP.Infrastructure.Annotations;
 
-
-namespace MyERP.Infrastructure
+namespace MyERP.Infrastructure.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged, INotifyDataErrorInfo
     {
-        private Dictionary<String, List<String>> errors =
+        private Dictionary<string, List<string>> errors =
             new Dictionary<string, List<string>>();
 
         // Adds the specified error to the errors collection if it is not 

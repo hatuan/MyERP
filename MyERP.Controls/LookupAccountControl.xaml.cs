@@ -15,6 +15,7 @@ using MyERP.Repositories;
 using MyERP.Repository.MyERPService;
 using Telerik.Windows.Controls;
 using Telerik.Windows.Data;
+using ViewModelBase = MyERP.Infrastructure.ViewModels.ViewModelBase;
 using WindowStartupLocation = Telerik.Windows.Controls.WindowStartupLocation;
 
 
@@ -26,7 +27,7 @@ namespace MyERP.Controls
         {
             InitializeComponent();
 
-            if (!MyERP.Infrastructure.ViewModelBase.IsInDesignModeStatic)
+            if (!ViewModelBase.IsInDesignModeStatic)
             {
                 _accountRepository = new AccountRepository();
                 this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);

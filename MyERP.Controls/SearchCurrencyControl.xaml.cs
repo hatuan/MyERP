@@ -8,6 +8,7 @@ using MyERP.Infrastructure.Annotations;
 using MyERP.Repositories;
 using MyERP.Repository.MyERPService;
 using Telerik.Windows.Controls;
+using ViewModelBase = MyERP.Infrastructure.ViewModels.ViewModelBase;
 
 namespace MyERP.Controls
 {
@@ -16,7 +17,7 @@ namespace MyERP.Controls
         public SearchCurrencyControl()
         {
             InitializeComponent();
-            if (!MyERP.Infrastructure.ViewModelBase.IsInDesignModeStatic)
+            if (!ViewModelBase.IsInDesignModeStatic)
             {
                 _currencyRepository = new CurrencyRepository();
                 this.OkCommand = new DelegateCommand(this.OnOkCommandExecuted);
