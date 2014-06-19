@@ -52,7 +52,6 @@ namespace MyERP.Web
             //generalJournalSetupOfOrganization.Parameter<Guid>("organizationKey");
             //generalJournalSetupOfOrganization.ReturnsFromEntitySet<GeneralJournalSetup>("GeneralJournalSetups");
 
-            config.Filters.Add(new MembershipHttpAuthorizeAttribute());
             config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel());
             config.EnableQuerySupport();
         }

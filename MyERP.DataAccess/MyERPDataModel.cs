@@ -186,6 +186,22 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		public IQueryable<Role> Roles 
+		{
+			get
+			{
+				return this.GetAll<Role>();
+			}
+		}
+		
+		public IQueryable<UserInRole> UserInRoles 
+		{
+			get
+			{
+				return this.GetAll<UserInRole>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -276,6 +292,14 @@ namespace MyERP.DataAccess
 			get;
 		}
 		IQueryable<CurrencyConvertRate> CurrencyConvertRates
+		{
+			get;
+		}
+		IQueryable<Role> Roles
+		{
+			get;
+		}
+		IQueryable<UserInRole> UserInRoles
 		{
 			get;
 		}

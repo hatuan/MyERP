@@ -168,6 +168,9 @@
             <orm:sharedfield name="_organizationId" target-class="MyERP.DataAccess.Organization" target-field="_id" />
           </orm:reference>
         </orm:field>
+        <orm:field name="_userInRole" property="RolesInUser" behavior="readwrite" uniqueId="8400de2f-c09f-40e1-afc7-2fbbe8687b08" type="MyERP.DataAccess.UserInRole">
+          <orm:collection element-class="MyERP.DataAccess.UserInRole" inverse-field="_user" order-by="" uniqueId="773418fa-c8a3-4bac-a935-8f399c27645f" />
+        </orm:field>
       </orm:class>
       <orm:class name="Currency" update-schema="true" uniqueId="9d8598ff-424c-4d4a-bac3-97f1835b25b3">
         <orm:table name="currency" />
@@ -1389,6 +1392,118 @@
           </orm:reference>
         </orm:field>
       </orm:class>
+      <orm:class name="Role" update-schema="true" uniqueId="a0a2ef9d-ed27-4a05-ad64-3b553892a07c">
+        <orm:table name="role" />
+        <orm:identity>
+          <orm:key-generator name="guid">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="_id" />
+        </orm:identity>
+        <orm:concurrency strategy="version" field-name="_version">
+          <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
+        </orm:concurrency>
+        <orm:field name="_id" property="Id" uniqueId="8bcf00c7-d5f4-4a44-ac76-b746ae2c5d42" type="System.Guid">
+          <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_name" property="Name" uniqueId="9e8b8b04-f214-4f7b-9b54-920765242c98" type="System.String">
+          <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.VariableLengthStringConverter" ado-type="Varchar" />
+        </orm:field>
+        <orm:field name="_clientId" property="ClientId" uniqueId="7cab8cea-20d3-42e8-a196-2c146dc84b22" type="System.Guid">
+          <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_organizationId" property="OrganizationId" uniqueId="8e4252d4-8fcf-4838-a2c2-6598a82b9cb2" type="System.Guid">
+          <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_description" property="Description" uniqueId="73628bb7-bc70-47e1-8aac-97a045652e3b" type="System.String">
+          <orm:column name="description" sql-type="varchar" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.VariableLengthStringConverter" ado-type="Varchar" />
+        </orm:field>
+        <orm:field name="_version" property="Version" uniqueId="44d9efa1-24a8-4ec7-8a3c-d5a1d352b5c8" type="System.Int64">
+          <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_status" property="Status" uniqueId="42f03b3e-2610-4303-9ab1-ddff1eebd01d" type="System.Int16">
+          <orm:column name="status" sql-type="int2" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.SmallInt2Int16Converter" ado-type="Int16" />
+        </orm:field>
+        <orm:field name="_recCreated" property="RecCreated" uniqueId="f3a5f322-8877-4baa-8c5c-565187ea7167" type="System.DateTime">
+          <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="6" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_recCreatedBy" property="RecCreatedBy" uniqueId="f5a1a4ac-683c-4b49-ab1c-88802b6c00dc" type="System.Guid">
+          <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_recModified" property="RecModified" uniqueId="559f58cf-2f09-440e-8e44-5ce94a742113" type="System.DateTime">
+          <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="6" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_recModifiedBy" property="RecModifiedBy" uniqueId="90038e94-8f42-4012-8ac4-84702bb37876" type="System.Guid">
+          <orm:column name="rec_modified_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="0f18e73a-2efd-4563-a096-3a7a09ec28f0" type="MyERP.DataAccess.Client">
+          <orm:reference uniqueId="118ff0a6-31ea-44ff-b26a-32f87fba9028" association-name="RoleHasClient">
+            <orm:sharedfield name="_clientId" target-class="MyERP.DataAccess.Client" target-field="_clientId" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_organization" property="Organization" behavior="readwrite" uniqueId="c553ca76-cf9b-4f29-8c97-a74f0d92d06f" type="MyERP.DataAccess.Organization">
+          <orm:reference uniqueId="1b5ad1e7-a2e9-4ca0-b6fc-e0ced947643b" association-name="RoleHasOrganization">
+            <orm:sharedfield name="_organizationId" target-class="MyERP.DataAccess.Organization" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_user" property="RecCreateByUser" behavior="readwrite" uniqueId="11e1252f-37f4-455b-a8e7-0b2dffb077af" type="MyERP.DataAccess.User">
+          <orm:reference uniqueId="ecc7c40f-5bcc-4b30-8a7b-3f9ca967e083" association-name="RoleHasUserCreateBy">
+            <orm:sharedfield name="_recCreatedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_user1" property="RecModifiedByUser" behavior="readwrite" uniqueId="16ff0610-ac6c-43e9-ae4c-a006b9910adf" type="MyERP.DataAccess.User">
+          <orm:reference uniqueId="d48f6bff-bcbc-4a98-80a3-0fa1072e248b" association-name="RoleHasUserModified">
+            <orm:sharedfield name="_recModifiedBy" target-class="MyERP.DataAccess.User" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_userInRole" property="UsersInRole" behavior="readwrite" uniqueId="aa1ec32f-94e1-491b-85bf-11fbe998e4cb" type="MyERP.DataAccess.UserInRole">
+          <orm:collection element-class="MyERP.DataAccess.UserInRole" inverse-field="_role" order-by="" uniqueId="611a3695-cdb4-496a-9048-a0a71799b0f9" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="UserInRole" update-schema="true" uniqueId="49b4ee28-ab54-44ba-aace-9547c307d998">
+        <orm:table name="user_in_role" />
+        <orm:identity>
+          <orm:key-generator name="guid">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="_id" />
+        </orm:identity>
+        <orm:concurrency strategy="version" field-name="_version">
+          <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
+        </orm:concurrency>
+        <orm:field name="_id" property="Id" uniqueId="e41e1742-7777-4724-8849-6ac12f37be70" type="System.Guid">
+          <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_roleId" property="RoleId" uniqueId="dc26fee2-0740-4978-942e-c6fed9d6acc0" type="System.Guid">
+          <orm:column name="role_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_version" property="Version" uniqueId="ac71c9da-0809-4077-98ae-6725c264e147" type="System.Int64">
+          <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_userId" property="UserId" uniqueId="fdcd9f19-7276-4171-b3af-d9c55579c4a8" type="System.Guid">
+          <orm:column name="user_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:field>
+        <orm:field name="_role" property="Role" behavior="readwrite" uniqueId="1ad173e8-96f1-4615-9322-1156e0a95a78" type="MyERP.DataAccess.Role">
+          <orm:reference uniqueId="611a3695-cdb4-496a-9048-a0a71799b0f9" association-name="UserInRoleHasRole">
+            <orm:sharedfield name="_roleId" target-class="MyERP.DataAccess.Role" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_user" property="User" behavior="readwrite" uniqueId="c2c49392-327c-48d1-8762-1a684b3bdc07" type="MyERP.DataAccess.User">
+          <orm:reference uniqueId="773418fa-c8a3-4bac-a935-8f399c27645f" association-name="UserInRoleHasUser">
+            <orm:sharedfield name="_userId" target-class="MyERP.DataAccess.User" target-field="_id" />
+          </orm:reference>
+        </orm:field>
+        <orm:index name="idx_UserInRole_RoleId">
+          <orm:columnMapping>
+            <orm:column name="role_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="idx_UserInRole_UserId">
+          <orm:columnMapping>
+            <orm:column name="user_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="">
       <orm:table name="user">
@@ -1720,6 +1835,53 @@
           <orm:column name="rec_modified_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         </orm:constraint>
       </orm:table>
+      <orm:table name="role">
+        <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:column name="name" sql-type="varchar" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.VariableLengthStringConverter" ado-type="Varchar" />
+        <orm:column name="description" sql-type="varchar" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.VariableLengthStringConverter" ado-type="Varchar" />
+        <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
+        <orm:column name="status" sql-type="int2" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.SmallInt2Int16Converter" ado-type="Int16" />
+        <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="6" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
+        <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="6" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
+        <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:column name="rec_modified_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:constraint name="ref_rle_client" destination-table="client">
+          <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:constraint>
+        <orm:constraint name="ref_rle_organization" destination-table="organization">
+          <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:constraint>
+        <orm:constraint name="ref_rle_user" destination-table="user">
+          <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:constraint>
+        <orm:constraint name="ref_rle_user2" destination-table="user">
+          <orm:column name="rec_modified_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="user_in_role">
+        <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
+        <orm:column name="role_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:column name="user_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:index name="idx_UserInRole_RoleId">
+          <orm:columnMapping>
+            <orm:column name="role_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="idx_UserInRole_UserId">
+          <orm:columnMapping>
+            <orm:column name="user_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:constraint name="ref_UserInRole_rle" destination-table="rle">
+          <orm:column name="role_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:constraint>
+        <orm:constraint name="ref_UserInRole_user" destination-table="user">
+          <orm:column name="user_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        </orm:constraint>
+      </orm:table>
     </orm:schema>
     <orm:relational-naming-settings>
       <orm:remove-leading-underscore>False</orm:remove-leading-underscore>
@@ -1914,6 +2076,9 @@
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="4b5cc6e0-c5b0-45c8-acfa-550206ad383a">
           <NavigationalProperty Id="c731e213-9f33-4fad-9564-d272701cf8e5" name="Organization" type="Organization" label="Organization : Organization" nullable="true" kind="Persistent" fieldName="_organization" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="f4de53cb-4548-4adb-b5c7-7d3019d4644c">
+          <NavigationalProperty Id="8400de2f-c09f-40e1-afc7-2fbbe8687b08" name="RolesInUser" type="IList&lt;UserInRole&gt;" label="RolesInUser : IList&lt;UserInRole&gt;" nullable="true" kind="Persistent" fieldName="_userInRole" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
@@ -3062,6 +3227,112 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
+    <DomainClass Id="a0a2ef9d-ed27-4a05-ad64-3b553892a07c" name="Role" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="8bcf00c7-d5f4-4a44-ac76-b746ae2c5d42" name="Id" type="Guid" label="Id : Guid" identity="true" fieldName="_id" />
+      <Property Id="9e8b8b04-f214-4f7b-9b54-920765242c98" name="Name" label="Name : String" fieldName="_name" />
+      <Property Id="7cab8cea-20d3-42e8-a196-2c146dc84b22" name="ClientId" type="Guid" label="ClientId : Guid" fieldName="_clientId" />
+      <Property Id="8e4252d4-8fcf-4838-a2c2-6598a82b9cb2" name="OrganizationId" type="Guid" label="OrganizationId : Guid" fieldName="_organizationId" />
+      <Property Id="73628bb7-bc70-47e1-8aac-97a045652e3b" name="Description" label="Description : String" fieldName="_description" />
+      <Property Id="44d9efa1-24a8-4ec7-8a3c-d5a1d352b5c8" name="Version" type="Int64" label="Version : Int64" fieldName="_version" />
+      <Property Id="42f03b3e-2610-4303-9ab1-ddff1eebd01d" name="Status" type="Int16" label="Status : Int16" fieldName="_status" />
+      <Property Id="f3a5f322-8877-4baa-8c5c-565187ea7167" name="RecCreated" type="DateTime" label="RecCreated : DateTime" fieldName="_recCreated" />
+      <Property Id="f5a1a4ac-683c-4b49-ab1c-88802b6c00dc" name="RecCreatedBy" type="Guid" label="RecCreatedBy : Guid" fieldName="_recCreatedBy" />
+      <Property Id="559f58cf-2f09-440e-8e44-5ce94a742113" name="RecModified" type="DateTime" label="RecModified : DateTime" fieldName="_recModified" />
+      <Property Id="90038e94-8f42-4012-8ac4-84702bb37876" name="RecModifiedBy" type="Guid" label="RecModifiedBy : Guid" fieldName="_recModifiedBy" />
+      <AssociationTargets>
+        <Association Id="118ff0a6-31ea-44ff-b26a-32f87fba9028" SourceMultiplicity="ZeroOne" name="RoleHasClient">
+          <DomainClassMoniker name="/EntitiesModel/Client" />
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="abfcee86-1cce-44ae-b5fc-3f3cd66a1458">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Role/Client" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="1b5ad1e7-a2e9-4ca0-b6fc-e0ced947643b" SourceMultiplicity="ZeroOne" name="RoleHasOrganization">
+          <DomainClassMoniker name="/EntitiesModel/Organization" />
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="634b6d6b-e5dd-4c8d-b1ea-3d0b855e9422">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Role/Organization" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="ecc7c40f-5bcc-4b30-8a7b-3f9ca967e083" SourceMultiplicity="ZeroOne" name="RoleHasUserCreateBy">
+          <DomainClassMoniker name="/EntitiesModel/User" />
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="cc1e8b7a-bb5d-4cb8-b888-a49d91f3b5e5">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Role/RecCreateByUser" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="d48f6bff-bcbc-4a98-80a3-0fa1072e248b" SourceMultiplicity="ZeroOne" name="RoleHasUserModified">
+          <DomainClassMoniker name="/EntitiesModel/User" />
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="ae04ee5a-0082-46c5-a66a-acf9105f8139">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Role/RecModifiedByUser" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="c716cb17-863c-4ef1-89d7-1edc1a19b8ab">
+          <NavigationalProperty Id="0f18e73a-2efd-4563-a096-3a7a09ec28f0" name="Client" type="Client" label="Client : Client" nullable="true" kind="Persistent" fieldName="_client" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="420f1ff8-e3ec-443a-9b3b-5c78268114c0">
+          <NavigationalProperty Id="c553ca76-cf9b-4f29-8c97-a74f0d92d06f" name="Organization" type="Organization" label="Organization : Organization" nullable="true" kind="Persistent" fieldName="_organization" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="972a4d76-4308-443e-9ac8-1d6469b4783a">
+          <NavigationalProperty Id="11e1252f-37f4-455b-a8e7-0b2dffb077af" name="RecCreateByUser" type="User" label="RecCreateByUser : User" nullable="true" kind="Persistent" fieldName="_user" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="dfc77930-68f6-43c7-8136-657871dc75a4">
+          <NavigationalProperty Id="16ff0610-ac6c-43e9-ae4c-a006b9910adf" name="RecModifiedByUser" type="User" label="RecModifiedByUser : User" nullable="true" kind="Persistent" fieldName="_user1" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="896e3458-95cf-4d14-aac0-a5563a28daa9">
+          <NavigationalProperty Id="aa1ec32f-94e1-491b-85bf-11fbe998e4cb" name="UsersInRole" type="IList&lt;UserInRole&gt;" label="UsersInRole : IList&lt;UserInRole&gt;" nullable="true" kind="Persistent" fieldName="_userInRole" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="49b4ee28-ab54-44ba-aace-9547c307d998" name="UserInRole" namespace="MyERP.DataAccess" showPropertiesCompartment="true" identityMechanism="Guid" concurrencyMode="Version" concurrencyMember="Version" updateSchema="true" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="e41e1742-7777-4724-8849-6ac12f37be70" name="Id" type="Guid" label="Id : Guid" identity="true" fieldName="_id" />
+      <Property Id="dc26fee2-0740-4978-942e-c6fed9d6acc0" name="RoleId" type="Guid" label="RoleId : Guid" fieldName="_roleId" />
+      <Property Id="ac71c9da-0809-4077-98ae-6725c264e147" name="Version" type="Int64" label="Version : Int64" fieldName="_version" />
+      <Property Id="fdcd9f19-7276-4171-b3af-d9c55579c4a8" name="UserId" type="Guid" label="UserId : Guid" fieldName="_userId" />
+      <AssociationTargets>
+        <Association Id="611a3695-cdb4-496a-9048-a0a71799b0f9" SourceMultiplicity="ZeroOne" name="UserInRoleHasRole">
+          <DomainClassMoniker name="/EntitiesModel/Role" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="156639c5-4e4b-41ac-92c0-5f641b45f5f1">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Role/UsersInRole" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="74900d7f-5c4c-4ccb-ae1d-dab5fbb0fccf">
+              <NavigationalPropertyMoniker name="/EntitiesModel/UserInRole/Role" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="773418fa-c8a3-4bac-a935-8f399c27645f" SourceMultiplicity="ZeroOne" name="UserInRoleHasUser">
+          <DomainClassMoniker name="/EntitiesModel/User" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="1ffcd11b-56ea-446d-b210-1b812dd28a10">
+              <NavigationalPropertyMoniker name="/EntitiesModel/User/RolesInUser" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="f04dca7a-9d6d-4824-8614-5dc2d0b72317">
+              <NavigationalPropertyMoniker name="/EntitiesModel/UserInRole/User" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="dc3c00c7-1198-48a6-98f8-11b044c50539">
+          <NavigationalProperty Id="1ad173e8-96f1-4615-9322-1156e0a95a78" name="Role" type="Role" label="Role : Role" nullable="true" kind="Persistent" fieldName="_role" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="052248c8-bf8a-4f51-849b-32acefb60f00">
+          <NavigationalProperty Id="c2c49392-327c-48d1-8762-1a684b3bdc07" name="User" type="User" label="User : User" nullable="true" kind="Persistent" fieldName="_user" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="d7bd6e8c-e34a-47be-a590-3f03f86938da">
@@ -3083,6 +3354,8 @@
         <entitySetProperty name="Accounts" namespace="MyERP.DataAccess" type="Account" label="Accounts : IQueryable&lt;MyERP.DataAccess.Account&gt;" />
         <entitySetProperty name="GeneralJournalSetups" namespace="MyERP.DataAccess" type="GeneralJournalSetup" label="GeneralJournalSetups : IQueryable&lt;MyERP.DataAccess.GeneralJournalSetup&gt;" />
         <entitySetProperty name="CurrencyConvertRates" namespace="MyERP.DataAccess" type="CurrencyConvertRate" label="CurrencyConvertRates : IQueryable&lt;MyERP.DataAccess.CurrencyConvertRate&gt;" />
+        <entitySetProperty name="Roles" namespace="MyERP.DataAccess" type="Role" label="Roles : IQueryable&lt;MyERP.DataAccess.Role&gt;" />
+        <entitySetProperty name="UserInRoles" namespace="MyERP.DataAccess" type="UserInRole" label="UserInRoles : IQueryable&lt;MyERP.DataAccess.UserInRole&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

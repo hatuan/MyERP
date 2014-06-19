@@ -9,9 +9,27 @@ namespace MyERP.Web.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        public string Index()
+        public ActionResult Index()
         {
-            return "Hello from Home";
+            return View();
+        }
+
+        //
+        //GET: /Home/About
+        public ActionResult About()
+        {
+            ViewBag.Message = "MyERP is a new Cloud ERP system";
+
+            return View();
+        }
+
+        //
+        //GET: /Home/Contact
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Please contact to :";
+
+            return View();
         }
     }
 }

@@ -122,6 +122,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Role.generated.cs">
+      <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
+    </Compile>
     <Compile Include="Session.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
@@ -129,6 +132,9 @@
     <Compile Include="Shared\NoSeriesLib.shared.cs" />
     <Compile Include="Shared\TransactionType.cs" />
     <Compile Include="User.generated.cs">
+      <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="UserInRole.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="User\User.cs" />

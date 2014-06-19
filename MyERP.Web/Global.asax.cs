@@ -18,6 +18,7 @@ namespace MyERP.Web
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configuration.MessageHandlers.Add(new MethodOverrideHandler());
             WebApiOdataConfig.Register(GlobalConfiguration.Configuration);
+            GlobalConfiguration.Configuration.Filters.Add(new MembershipHttpAuthorizeAttribute());
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

@@ -385,6 +385,15 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		private IList<UserInRole> _userInRole = new List<UserInRole>();
+		public virtual IList<UserInRole> RolesInUser
+		{
+			get
+			{
+				return this._userInRole;
+			}
+		}
+		
 		#region IDataErrorInfo members
 		
 		private string error = string.Empty;

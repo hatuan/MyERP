@@ -183,6 +183,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -228,6 +229,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -241,6 +247,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedCode\Cryptography.cs">
+      <Link>Cryptography.cs</Link>
+    </Compile>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -248,7 +257,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OpenAccessBaseController.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Models\UserViewModels.cs" />
     <Compile Include="Odata\GeneralJournalDocumentsController.partial.cs" />
     <Compile Include="Odata\GeneralJournalLinesController.partial.cs" />
     <Compile Include="Odata\GeneralJournalSetupsController.partial.cs" />
@@ -271,7 +281,7 @@
     <Compile Include="Odata\CurrencyConvertRatesController.cs" />
     <Compile Include="CustomMembershipProvider.cs" />
     <Compile Include="CustomRoleProvider.cs" />
-    <Compile Include="EntitiesModelRepositories.cs" />
+    <Compile Include="Repository\EntitiesModelRepositories.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="Odata\GeneralJournalDocumentsController.cs" />
     <Compile Include="Odata\GeneralJournalLinesController.cs" />
@@ -285,7 +295,7 @@
     <Compile Include="Odata\ModulesController.cs" />
     <Compile Include="Odata\NumberSequencesController.cs" />
     <Compile Include="Odata\OpenAccessBaseApiController.cs" />
-    <Compile Include="OpenAccessBaseRepository.cs" />
+    <Compile Include="Repository\OpenAccessBaseRepository.cs" />
     <Compile Include="Odata\OrganizationsController.partial.cs" />
     <Compile Include="Odata\OrganizationsController.cs" />
     <Compile Include="Odata\PaymentTermsController.cs" />
@@ -304,7 +314,6 @@
   <ItemGroup>
     <Folder Include="ClientBin\Images\" />
     <Folder Include="Views\Account\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="SplashScreen.xaml">

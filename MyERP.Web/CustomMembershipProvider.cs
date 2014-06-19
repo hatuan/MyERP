@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
+using System.Web.Caching;
 using System.Web.Security;
 using MyERP.DataAccess;
 
@@ -9,8 +11,29 @@ namespace MyERP.Web
 {
     public class CustomMembershipProvider : MembershipProvider
     {
+        private int _cacheTimeoutInMinutes = 30;
+
+        /// <summary>
+        /// Initialize values from web.config.
+        /// </summary>
+        /// <param name="name">The friendly name of the provider.</param>
+        /// <param name="config">A collection of the name/value pairs representing the provider-specific attributes specified in the configuration for this provider.</param>
+        public override void Initialize(string name, NameValueCollection config)
+        {
+            // Set Properties
+            int val;
+            if (!string.IsNullOrEmpty(config["cacheTimeoutInMinutes"]) && Int32.TryParse(config["cacheTimeoutInMinutes"], out val))
+                _cacheTimeoutInMinutes = val;
+
+            // Call base method
+            base.Initialize(name, config);
+        }
+
         public override bool ValidateUser(string username, string password)
         {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                return false;
+
             using (EntitiesModel context = new EntitiesModel())
             {
                 try
@@ -39,7 +62,68 @@ namespace MyERP.Web
             string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey,
             out MembershipCreateStatus status)
         {
-            throw new NotImplementedException();
+            using (var context = new EntitiesModel())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Name == username);
+                if (user != null)
+                {
+                    status = MembershipCreateStatus.DuplicateUserName;
+                    return null;
+                }
+
+                user = context.Users.FirstOrDefault(u => u.Email == email);
+                if (user != null)
+                {
+                    status = MembershipCreateStatus.DuplicateEmail;
+                    return null;
+                }
+
+                user = context.Users.FirstOrDefault(u => u.Id.CompareTo(providerUserKey) == 0);
+                if (user != null)
+                {
+                    status = MembershipCreateStatus.DuplicateProviderUserKey;
+                    return null;
+                }
+
+                user = new User()
+                {
+                    ClientId = null,
+                    Comment = "",
+                    CreatedDate = DateTime.Now,
+                    Email = email,
+                    FullName = "",
+                    IsActivated = true,
+                    IsLockedOut = false,
+                    Name = username,
+                    LastLockedOutDate = DateTime.MinValue,
+                    LastLockedOutReason = "",
+                    LastLoginDate = DateTime.Now,
+                    LastLoginIp = "0.0.0.0",
+                    LastModifiedDate = DateTime.Now,
+                    OrganizationId = null,
+                    Password = password,
+                    PasswordAnswer = passwordAnswer,
+                    PasswordQuestion = passwordQuestion
+                };
+                try
+                {
+                    context.Add(user);
+                    context.SaveChanges();
+                    status = MembershipCreateStatus.Success;
+
+                    return new MyERPMembershipUser("myCustomProvider", user.Name, user.Id, user.Email, user.PasswordQuestion,
+                        user.Comment, user.IsActivated, user.IsLockedOut, user.CreatedDate, user.LastLoginDate,
+                        user.LastLoginDate, user.LastModifiedDate, user.LastLockedOutDate, user.ClientId);
+                }
+                catch (Exception)
+                {
+                    status = MembershipCreateStatus.ProviderError;
+                    return null;
+                }
+                
+
+            }
+
         }
 
 
@@ -95,12 +179,28 @@ namespace MyERP.Web
 
         public override MembershipUser GetUser(string username, bool userIsOnline)
         {
+            var cacheKey = string.Format("UserData_{0}", username);
+            if (HttpRuntime.Cache[cacheKey] != null)
+                return (MyERPMembershipUser)HttpRuntime.Cache[cacheKey];
+
             using (var context = new EntitiesModel())
             {
                 var user = context.Users.FirstOrDefault(u => u.Name == username);
-                return new MyERPMembershipUser("myCustomProvider", user.Name, user.Id, user.Email, user.PasswordQuestion,
-                    user.Comment, user.IsActivated, user.IsLockedOut, user.CreatedDate, user.LastLoginDate,
-                    user.LastLoginDate, user.LastModifiedDate, user.LastLockedOutDate, user.ClientId);
+                if (user != null)
+                {
+                    var membershipUser = new MyERPMembershipUser(user);
+                    
+                    //Store in cache
+                    HttpRuntime.Cache.Insert(cacheKey, membershipUser, null, DateTime.Now.AddMinutes(_cacheTimeoutInMinutes), Cache.NoSlidingExpiration);
+
+                    return new MyERPMembershipUser("myCustomProvider", user.Name, user.Id, user.Email,
+                        user.PasswordQuestion,
+                        user.Comment, user.IsActivated, user.IsLockedOut, user.CreatedDate, user.LastLoginDate,
+                        user.LastLoginDate, user.LastModifiedDate, user.LastLockedOutDate, user.ClientId);
+                }
+                else
+                    return null;
+
             }
         }
 
@@ -109,9 +209,13 @@ namespace MyERP.Web
             using (var context = new EntitiesModel())
             {
                 var user = context.Users.FirstOrDefault(u => u.Id == (Guid)providerUserKey);
-                return new MyERPMembershipUser("myCustomProvider", user.Name, user.Id, user.Email, user.PasswordQuestion,
-                    user.Comment, user.IsActivated, user.IsLockedOut, user.CreatedDate, user.LastLoginDate,
-                    user.LastLoginDate, user.LastModifiedDate, user.LastLockedOutDate, user.ClientId);
+                if(user != null)
+                    return new MyERPMembershipUser("myCustomProvider", user.Name, user.Id, user.Email, user.PasswordQuestion,
+                        user.Comment, user.IsActivated, user.IsLockedOut, user.CreatedDate, user.LastLoginDate,
+                        user.LastLoginDate, user.LastModifiedDate, user.LastLockedOutDate, user.ClientId);
+                else
+                    return null;
+                
             }
         }
 
@@ -185,6 +289,23 @@ namespace MyERP.Web
     public class MyERPMembershipUser : MembershipUser
     {
         public Guid? ClientId { get; set; }
+
+        public MyERPMembershipUser(User user) : base(providerName: "myCustomProvider",
+            name:user.Name,
+            providerUserKey:user.Id,
+            email:user.Email,
+            passwordQuestion:user.PasswordQuestion,
+            comment:user.Comment,
+            isApproved:user.IsActivated,
+            isLockedOut:user.IsLockedOut,
+            creationDate:user.CreatedDate,
+            lastLoginDate:user.LastLoginDate,
+            lastActivityDate:user.LastLoginDate,
+            lastPasswordChangedDate:user.LastModifiedDate,
+            lastLockoutDate:user.LastLockedOutDate)
+        {
+            ClientId = user.ClientId ?? Guid.Empty;
+        }
 
         public MyERPMembershipUser(string providername,
                                   string username,
