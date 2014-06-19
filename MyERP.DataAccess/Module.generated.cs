@@ -18,10 +18,11 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
+using System.ComponentModel;
 
 namespace MyERP.DataAccess	
 {
-	public partial class Module
+	public partial class Module : IDataErrorInfo, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		private long _id;
 		public virtual long Id
@@ -32,7 +33,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._id = value;
+				if(this._id != value)
+				{
+					this.OnPropertyChanging("Id");
+					this._id = value;
+					this.OnPropertyChanged("Id");
+				}
 			}
 		}
 		
@@ -45,7 +51,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._description = value;
+				if(this._description != value)
+				{
+					this.OnPropertyChanging("Description");
+					this._description = value;
+					this.OnPropertyChanged("Description");
+				}
 			}
 		}
 		
@@ -58,7 +69,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._group = value;
+				if(this._group != value)
+				{
+					this.OnPropertyChanging("Group");
+					this._group = value;
+					this.OnPropertyChanged("Group");
+				}
 			}
 		}
 		
@@ -71,7 +87,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._name = value;
+				if(this._name != value)
+				{
+					this.OnPropertyChanging("Name");
+					this._name = value;
+					this.OnPropertyChanged("Name");
+				}
 			}
 		}
 		
@@ -84,9 +105,73 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._clientId = value;
+				if(this._clientId != value)
+				{
+					this.OnPropertyChanging("ClientId");
+					this._clientId = value;
+					this.OnPropertyChanged("ClientId");
+				}
 			}
 		}
+		
+		#region IDataErrorInfo members
+		
+		private string error = string.Empty;
+		public string Error
+		{
+			get
+			{
+				return this.error;
+			}
+		}
+		
+		public string this[string propertyName]
+		{
+			get
+			{
+				this.ValidatePropertyInternal(propertyName, ref this.error);
+		
+				return this.error;
+			}
+		}
+		
+		protected virtual void ValidatePropertyInternal(string propertyName, ref string error)
+		{
+		    this.ValidateProperty(propertyName, ref error);
+		}
+		
+		// Please implement this method in a partial class in order to provide the error message depending on each of the properties.
+		partial void ValidateProperty(string propertyName, ref string error);
+		
+		#endregion
+		
+		#region INotifyPropertyChanging members
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		protected virtual void OnPropertyChanging(string propertyName)
+		{
+			if(this.PropertyChanging != null)
+			{
+				this.PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
+		
+		#region INotifyPropertyChanged members
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void OnPropertyChanged(string propertyName)
+		{
+			if(this.PropertyChanged != null)
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
 		
 	}
 }

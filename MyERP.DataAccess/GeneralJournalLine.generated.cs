@@ -18,11 +18,12 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
+using System.ComponentModel;
 using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	public partial class GeneralJournalLine
+	public partial class GeneralJournalLine : IDataErrorInfo, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		private Guid _id;
 		public virtual Guid Id
@@ -33,7 +34,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._id = value;
+				if(this._id != value)
+				{
+					this.OnPropertyChanging("Id");
+					this._id = value;
+					this.OnPropertyChanged("Id");
+				}
 			}
 		}
 		
@@ -46,7 +52,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._corAccountId = value;
+				if(this._corAccountId != value)
+				{
+					this.OnPropertyChanging("CorAccountId");
+					this._corAccountId = value;
+					this.OnPropertyChanged("CorAccountId");
+				}
 			}
 		}
 		
@@ -59,7 +70,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._accountId = value;
+				if(this._accountId != value)
+				{
+					this.OnPropertyChanging("AccountId");
+					this._accountId = value;
+					this.OnPropertyChanged("AccountId");
+				}
 			}
 		}
 		
@@ -72,7 +88,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._description = value;
+				if(this._description != value)
+				{
+					this.OnPropertyChanging("Description");
+					this._description = value;
+					this.OnPropertyChanged("Description");
+				}
 			}
 		}
 		
@@ -85,7 +106,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._debitAmount = value;
+				if(this._debitAmount != value)
+				{
+					this.OnPropertyChanging("DebitAmount");
+					this._debitAmount = value;
+					this.OnPropertyChanged("DebitAmount");
+				}
 			}
 		}
 		
@@ -98,7 +124,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._creditAmountLcy = value;
+				if(this._creditAmountLcy != value)
+				{
+					this.OnPropertyChanging("CreditAmountLcy");
+					this._creditAmountLcy = value;
+					this.OnPropertyChanged("CreditAmountLcy");
+				}
 			}
 		}
 		
@@ -111,7 +142,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._debitAmountLcy = value;
+				if(this._debitAmountLcy != value)
+				{
+					this.OnPropertyChanging("DebitAmountLcy");
+					this._debitAmountLcy = value;
+					this.OnPropertyChanged("DebitAmountLcy");
+				}
 			}
 		}
 		
@@ -124,7 +160,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._creditAmount = value;
+				if(this._creditAmount != value)
+				{
+					this.OnPropertyChanging("CreditAmount");
+					this._creditAmount = value;
+					this.OnPropertyChanged("CreditAmount");
+				}
 			}
 		}
 		
@@ -137,7 +178,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._businessPartnerId = value;
+				if(this._businessPartnerId != value)
+				{
+					this.OnPropertyChanging("BusinessPartnerId");
+					this._businessPartnerId = value;
+					this.OnPropertyChanged("BusinessPartnerId");
+				}
 			}
 		}
 		
@@ -150,7 +196,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._jobId = value;
+				if(this._jobId != value)
+				{
+					this.OnPropertyChanging("JobId");
+					this._jobId = value;
+					this.OnPropertyChanged("JobId");
+				}
 			}
 		}
 		
@@ -163,7 +214,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._lineNo = value;
+				if(this._lineNo != value)
+				{
+					this.OnPropertyChanging("LineNo");
+					this._lineNo = value;
+					this.OnPropertyChanged("LineNo");
+				}
 			}
 		}
 		
@@ -176,7 +232,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._clientId = value;
+				if(this._clientId != value)
+				{
+					this.OnPropertyChanging("ClientId");
+					this._clientId = value;
+					this.OnPropertyChanged("ClientId");
+				}
 			}
 		}
 		
@@ -189,7 +250,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organizationId = value;
+				if(this._organizationId != value)
+				{
+					this.OnPropertyChanging("OrganizationId");
+					this._organizationId = value;
+					this.OnPropertyChanged("OrganizationId");
+				}
 			}
 		}
 		
@@ -202,7 +268,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._version = value;
+				if(this._version != value)
+				{
+					this.OnPropertyChanging("Version");
+					this._version = value;
+					this.OnPropertyChanged("Version");
+				}
 			}
 		}
 		
@@ -215,7 +286,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._generalJournalDocumentId = value;
+				if(this._generalJournalDocumentId != value)
+				{
+					this.OnPropertyChanging("GeneralJournalDocumentId");
+					this._generalJournalDocumentId = value;
+					this.OnPropertyChanged("GeneralJournalDocumentId");
+				}
 			}
 		}
 		
@@ -228,7 +304,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._currencyExchangeRate = value;
+				if(this._currencyExchangeRate != value)
+				{
+					this.OnPropertyChanging("CurrencyExchangeRate");
+					this._currencyExchangeRate = value;
+					this.OnPropertyChanged("CurrencyExchangeRate");
+				}
 			}
 		}
 		
@@ -241,7 +322,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._currencyId = value;
+				if(this._currencyId != value)
+				{
+					this.OnPropertyChanging("CurrencyId");
+					this._currencyId = value;
+					this.OnPropertyChanged("CurrencyId");
+				}
 			}
 		}
 		
@@ -254,7 +340,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._documentCreated = value;
+				if(this._documentCreated != value)
+				{
+					this.OnPropertyChanging("DocumentCreated");
+					this._documentCreated = value;
+					this.OnPropertyChanged("DocumentCreated");
+				}
 			}
 		}
 		
@@ -267,7 +358,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._documentNo = value;
+				if(this._documentNo != value)
+				{
+					this.OnPropertyChanging("DocumentNo");
+					this._documentNo = value;
+					this.OnPropertyChanged("DocumentNo");
+				}
 			}
 		}
 		
@@ -280,7 +376,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._documentPosted = value;
+				if(this._documentPosted != value)
+				{
+					this.OnPropertyChanging("DocumentPosted");
+					this._documentPosted = value;
+					this.OnPropertyChanged("DocumentPosted");
+				}
 			}
 		}
 		
@@ -293,7 +394,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._documentType = value;
+				if(this._documentType != value)
+				{
+					this.OnPropertyChanging("DocumentType");
+					this._documentType = value;
+					this.OnPropertyChanged("DocumentType");
+				}
 			}
 		}
 		
@@ -306,7 +412,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recCreated = value;
+				if(this._recCreated != value)
+				{
+					this.OnPropertyChanging("RecCreated");
+					this._recCreated = value;
+					this.OnPropertyChanged("RecCreated");
+				}
 			}
 		}
 		
@@ -319,7 +430,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recCreatedBy = value;
+				if(this._recCreatedBy != value)
+				{
+					this.OnPropertyChanging("RecCreatedBy");
+					this._recCreatedBy = value;
+					this.OnPropertyChanged("RecCreatedBy");
+				}
 			}
 		}
 		
@@ -332,7 +448,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recModified = value;
+				if(this._recModified != value)
+				{
+					this.OnPropertyChanging("RecModified");
+					this._recModified = value;
+					this.OnPropertyChanged("RecModified");
+				}
 			}
 		}
 		
@@ -345,7 +466,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recModifiedBy = value;
+				if(this._recModifiedBy != value)
+				{
+					this.OnPropertyChanging("RecModifiedBy");
+					this._recModifiedBy = value;
+					this.OnPropertyChanged("RecModifiedBy");
+				}
 			}
 		}
 		
@@ -358,7 +484,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._transactionType = value;
+				if(this._transactionType != value)
+				{
+					this.OnPropertyChanging("TransactionType");
+					this._transactionType = value;
+					this.OnPropertyChanged("TransactionType");
+				}
 			}
 		}
 		
@@ -371,7 +502,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._fixAssetId = value;
+				if(this._fixAssetId != value)
+				{
+					this.OnPropertyChanging("FixAssetId");
+					this._fixAssetId = value;
+					this.OnPropertyChanged("FixAssetId");
+				}
 			}
 		}
 		
@@ -384,7 +520,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._client = value;
+				if(this._client != value)
+				{
+					this.OnPropertyChanging("Client");
+					this._client = value;
+					this.OnPropertyChanged("Client");
+				}
 			}
 		}
 		
@@ -397,7 +538,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organization = value;
+				if(this._organization != value)
+				{
+					this.OnPropertyChanging("Organization");
+					this._organization = value;
+					this.OnPropertyChanged("Organization");
+				}
 			}
 		}
 		
@@ -410,7 +556,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._businessPartner = value;
+				if(this._businessPartner != value)
+				{
+					this.OnPropertyChanging("BusinessPartner");
+					this._businessPartner = value;
+					this.OnPropertyChanged("BusinessPartner");
+				}
 			}
 		}
 		
@@ -423,7 +574,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._job = value;
+				if(this._job != value)
+				{
+					this.OnPropertyChanging("Job");
+					this._job = value;
+					this.OnPropertyChanged("Job");
+				}
 			}
 		}
 		
@@ -436,7 +592,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recModifiedByUser = value;
+				if(this._recModifiedByUser != value)
+				{
+					this.OnPropertyChanging("RecModifiedByUser");
+					this._recModifiedByUser = value;
+					this.OnPropertyChanged("RecModifiedByUser");
+				}
 			}
 		}
 		
@@ -449,7 +610,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recCreatedByUser = value;
+				if(this._recCreatedByUser != value)
+				{
+					this.OnPropertyChanging("RecCreatedByUser");
+					this._recCreatedByUser = value;
+					this.OnPropertyChanged("RecCreatedByUser");
+				}
 			}
 		}
 		
@@ -462,7 +628,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._account = value;
+				if(this._account != value)
+				{
+					this.OnPropertyChanging("Account");
+					this._account = value;
+					this.OnPropertyChanged("Account");
+				}
 			}
 		}
 		
@@ -475,7 +646,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._corAccount = value;
+				if(this._corAccount != value)
+				{
+					this.OnPropertyChanging("CorAccount");
+					this._corAccount = value;
+					this.OnPropertyChanged("CorAccount");
+				}
 			}
 		}
 		
@@ -488,7 +664,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._transactionDocument = value;
+				if(this._transactionDocument != value)
+				{
+					this.OnPropertyChanging("GeneralJournalDocument");
+					this._transactionDocument = value;
+					this.OnPropertyChanged("GeneralJournalDocument");
+				}
 			}
 		}
 		
@@ -501,9 +682,73 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._currency = value;
+				if(this._currency != value)
+				{
+					this.OnPropertyChanging("Currency");
+					this._currency = value;
+					this.OnPropertyChanged("Currency");
+				}
 			}
 		}
+		
+		#region IDataErrorInfo members
+		
+		private string error = string.Empty;
+		public string Error
+		{
+			get
+			{
+				return this.error;
+			}
+		}
+		
+		public string this[string propertyName]
+		{
+			get
+			{
+				this.ValidatePropertyInternal(propertyName, ref this.error);
+		
+				return this.error;
+			}
+		}
+		
+		protected virtual void ValidatePropertyInternal(string propertyName, ref string error)
+		{
+		    this.ValidateProperty(propertyName, ref error);
+		}
+		
+		// Please implement this method in a partial class in order to provide the error message depending on each of the properties.
+		partial void ValidateProperty(string propertyName, ref string error);
+		
+		#endregion
+		
+		#region INotifyPropertyChanging members
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		protected virtual void OnPropertyChanging(string propertyName)
+		{
+			if(this.PropertyChanging != null)
+			{
+				this.PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
+		
+		#region INotifyPropertyChanged members
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void OnPropertyChanged(string propertyName)
+		{
+			if(this.PropertyChanged != null)
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
 		
 	}
 }

@@ -18,11 +18,12 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
+using System.ComponentModel;
 using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	public partial class Session
+	public partial class Session : IDataErrorInfo, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		private Guid _id;
 		public virtual Guid Id
@@ -33,7 +34,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._id = value;
+				if(this._id != value)
+				{
+					this.OnPropertyChanging("Id");
+					this._id = value;
+					this.OnPropertyChanged("Id");
+				}
 			}
 		}
 		
@@ -46,7 +52,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._userId = value;
+				if(this._userId != value)
+				{
+					this.OnPropertyChanging("UserId");
+					this._userId = value;
+					this.OnPropertyChanged("UserId");
+				}
 			}
 		}
 		
@@ -59,7 +70,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._expire = value;
+				if(this._expire != value)
+				{
+					this.OnPropertyChanging("Expire");
+					this._expire = value;
+					this.OnPropertyChanged("Expire");
+				}
 			}
 		}
 		
@@ -72,7 +88,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._workingDate = value;
+				if(this._workingDate != value)
+				{
+					this.OnPropertyChanging("WorkingDate");
+					this._workingDate = value;
+					this.OnPropertyChanged("WorkingDate");
+				}
 			}
 		}
 		
@@ -85,7 +106,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organizationId = value;
+				if(this._organizationId != value)
+				{
+					this.OnPropertyChanging("OrganizationId");
+					this._organizationId = value;
+					this.OnPropertyChanged("OrganizationId");
+				}
 			}
 		}
 		
@@ -98,7 +124,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._lastTime = value;
+				if(this._lastTime != value)
+				{
+					this.OnPropertyChanging("LastTime");
+					this._lastTime = value;
+					this.OnPropertyChanged("LastTime");
+				}
 			}
 		}
 		
@@ -111,7 +142,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._warehouseId = value;
+				if(this._warehouseId != value)
+				{
+					this.OnPropertyChanging("WarehouseId");
+					this._warehouseId = value;
+					this.OnPropertyChanged("WarehouseId");
+				}
 			}
 		}
 		
@@ -124,7 +160,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._clientId = value;
+				if(this._clientId != value)
+				{
+					this.OnPropertyChanging("ClientId");
+					this._clientId = value;
+					this.OnPropertyChanged("ClientId");
+				}
 			}
 		}
 		
@@ -137,7 +178,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._client = value;
+				if(this._client != value)
+				{
+					this.OnPropertyChanging("Client");
+					this._client = value;
+					this.OnPropertyChanged("Client");
+				}
 			}
 		}
 		
@@ -150,9 +196,73 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organization = value;
+				if(this._organization != value)
+				{
+					this.OnPropertyChanging("Organization");
+					this._organization = value;
+					this.OnPropertyChanged("Organization");
+				}
 			}
 		}
+		
+		#region IDataErrorInfo members
+		
+		private string error = string.Empty;
+		public string Error
+		{
+			get
+			{
+				return this.error;
+			}
+		}
+		
+		public string this[string propertyName]
+		{
+			get
+			{
+				this.ValidatePropertyInternal(propertyName, ref this.error);
+		
+				return this.error;
+			}
+		}
+		
+		protected virtual void ValidatePropertyInternal(string propertyName, ref string error)
+		{
+		    this.ValidateProperty(propertyName, ref error);
+		}
+		
+		// Please implement this method in a partial class in order to provide the error message depending on each of the properties.
+		partial void ValidateProperty(string propertyName, ref string error);
+		
+		#endregion
+		
+		#region INotifyPropertyChanging members
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		protected virtual void OnPropertyChanging(string propertyName)
+		{
+			if(this.PropertyChanging != null)
+			{
+				this.PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
+		
+		#region INotifyPropertyChanged members
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void OnPropertyChanged(string propertyName)
+		{
+			if(this.PropertyChanged != null)
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
 		
 	}
 }

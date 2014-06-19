@@ -152,8 +152,10 @@
     <Compile Include="Infrastructure\GeneralJournalsViewRegionNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AccountsViewModel.cs" />
+    <Compile Include="ViewModels\GeneralJournalDocumentViewModel.cs" />
     <Compile Include="ViewModels\GeneralJournalLinesViewModel.cs" />
     <Compile Include="ViewModels\GeneralJournalDocumentsViewModel.cs" />
+    <Compile Include="ViewModels\GeneralJournalLineViewModel.cs" />
     <Compile Include="ViewModels\GeneralJournalsViewModel.cs" />
     <Compile Include="Views\AccountDetailsUserControl.xaml.cs">
       <DependentUpon>AccountDetailsUserControl.xaml</DependentUpon>

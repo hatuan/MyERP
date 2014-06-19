@@ -56,33 +56,6 @@ namespace MyERP.Modules.Financial.ViewModels
             }
         }
 
-        private void GeneralJournalLinesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
-        {
-            if (notifyCollectionChangedEventArgs.Action == NotifyCollectionChangedAction.Remove)
-            {
-                foreach (GeneralJournalDocument item in notifyCollectionChangedEventArgs.OldItems)
-                {
-                    //Removed items
-                    item.PropertyChanged -= GeneralJournalDocumentPropertyChanged;
-                }
-            }
-            else if (notifyCollectionChangedEventArgs.Action == NotifyCollectionChangedAction.Add)
-            {
-                foreach (GeneralJournalDocument item in notifyCollectionChangedEventArgs.NewItems)
-                {
-                    //Added items
-                    item.PropertyChanged += GeneralJournalDocumentPropertyChanged;
-                }
-            }
-        }
-
-        private void GeneralJournalDocumentPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            GeneralJournalDocument entity = sender as GeneralJournalDocument;
-            GeneralJournalDocumentRepository.Update(entity);
-            IsDirty = true;
-        }
-
         private GeneralJournalDocument _selectedGeneralJournalDocument;
         public GeneralJournalDocument SelectedGeneralJournalDocument
         {
@@ -157,6 +130,35 @@ namespace MyERP.Modules.Financial.ViewModels
         #endregion
 
         public event EventHandler<EventArgs> RequestClose;
+
+
+        private void GeneralJournalLinesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            if (notifyCollectionChangedEventArgs.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (GeneralJournalDocument item in notifyCollectionChangedEventArgs.OldItems)
+                {
+                    //Removed items
+                    item.PropertyChanged -= GeneralJournalDocumentPropertyChanged;
+                }
+            }
+            else if (notifyCollectionChangedEventArgs.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (GeneralJournalDocument item in notifyCollectionChangedEventArgs.NewItems)
+                {
+                    //Added items
+                    item.PropertyChanged += GeneralJournalDocumentPropertyChanged;
+                }
+            }
+        }
+
+        private void GeneralJournalDocumentPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            GeneralJournalDocument entity = sender as GeneralJournalDocument;
+
+            GeneralJournalDocumentRepository.Update(entity);
+            IsDirty = true;
+        }
 
         private bool AddNewCommandCanExecuted()
         {

@@ -18,11 +18,12 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
+using System.ComponentModel;
 using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	public partial class GeneralJournalSetup
+	public partial class GeneralJournalSetup : IDataErrorInfo, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		private Guid _id;
 		public virtual Guid Id
@@ -33,7 +34,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._id = value;
+				if(this._id != value)
+				{
+					this.OnPropertyChanging("Id");
+					this._id = value;
+					this.OnPropertyChanged("Id");
+				}
 			}
 		}
 		
@@ -46,7 +52,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organizationId = value;
+				if(this._organizationId != value)
+				{
+					this.OnPropertyChanging("OrganizationId");
+					this._organizationId = value;
+					this.OnPropertyChanged("OrganizationId");
+				}
 			}
 		}
 		
@@ -59,7 +70,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._clientId = value;
+				if(this._clientId != value)
+				{
+					this.OnPropertyChanging("ClientId");
+					this._clientId = value;
+					this.OnPropertyChanged("ClientId");
+				}
 			}
 		}
 		
@@ -72,7 +88,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._localCurrencyId = value;
+				if(this._localCurrencyId != value)
+				{
+					this.OnPropertyChanging("LocalCurrencyId");
+					this._localCurrencyId = value;
+					this.OnPropertyChanged("LocalCurrencyId");
+				}
 			}
 		}
 		
@@ -85,7 +106,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._lcyExchangeRateUnit = value;
+				if(this._lcyExchangeRateUnit != value)
+				{
+					this.OnPropertyChanging("LcyExchangeRateUnit");
+					this._lcyExchangeRateUnit = value;
+					this.OnPropertyChanged("LcyExchangeRateUnit");
+				}
 			}
 		}
 		
@@ -98,7 +124,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._generalJournalNumberSequenceId = value;
+				if(this._generalJournalNumberSequenceId != value)
+				{
+					this.OnPropertyChanging("GeneralJournalNumberSequenceId");
+					this._generalJournalNumberSequenceId = value;
+					this.OnPropertyChanged("GeneralJournalNumberSequenceId");
+				}
 			}
 		}
 		
@@ -111,7 +142,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recCreated = value;
+				if(this._recCreated != value)
+				{
+					this.OnPropertyChanging("RecCreated");
+					this._recCreated = value;
+					this.OnPropertyChanged("RecCreated");
+				}
 			}
 		}
 		
@@ -124,7 +160,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recModified = value;
+				if(this._recModified != value)
+				{
+					this.OnPropertyChanging("RecModified");
+					this._recModified = value;
+					this.OnPropertyChanged("RecModified");
+				}
 			}
 		}
 		
@@ -137,7 +178,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recCreatedBy = value;
+				if(this._recCreatedBy != value)
+				{
+					this.OnPropertyChanging("RecCreatedBy");
+					this._recCreatedBy = value;
+					this.OnPropertyChanged("RecCreatedBy");
+				}
 			}
 		}
 		
@@ -150,7 +196,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recModifiedBy = value;
+				if(this._recModifiedBy != value)
+				{
+					this.OnPropertyChanging("RecModifiedBy");
+					this._recModifiedBy = value;
+					this.OnPropertyChanged("RecModifiedBy");
+				}
 			}
 		}
 		
@@ -163,7 +214,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._version = value;
+				if(this._version != value)
+				{
+					this.OnPropertyChanging("Version");
+					this._version = value;
+					this.OnPropertyChanged("Version");
+				}
 			}
 		}
 		
@@ -176,7 +232,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recCreatedByUser = value;
+				if(this._recCreatedByUser != value)
+				{
+					this.OnPropertyChanging("RecCreatedByUser");
+					this._recCreatedByUser = value;
+					this.OnPropertyChanged("RecCreatedByUser");
+				}
 			}
 		}
 		
@@ -189,7 +250,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recModifiedByUser = value;
+				if(this._recModifiedByUser != value)
+				{
+					this.OnPropertyChanging("RecModifiedByUser");
+					this._recModifiedByUser = value;
+					this.OnPropertyChanged("RecModifiedByUser");
+				}
 			}
 		}
 		
@@ -202,7 +268,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organization = value;
+				if(this._organization != value)
+				{
+					this.OnPropertyChanging("Organization");
+					this._organization = value;
+					this.OnPropertyChanged("Organization");
+				}
 			}
 		}
 		
@@ -215,7 +286,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._localCurrency = value;
+				if(this._localCurrency != value)
+				{
+					this.OnPropertyChanging("LocalCurrency");
+					this._localCurrency = value;
+					this.OnPropertyChanged("LocalCurrency");
+				}
 			}
 		}
 		
@@ -228,7 +304,12 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._generalJournalNumberSequence = value;
+				if(this._generalJournalNumberSequence != value)
+				{
+					this.OnPropertyChanging("GeneralJournalNumberSequence");
+					this._generalJournalNumberSequence = value;
+					this.OnPropertyChanged("GeneralJournalNumberSequence");
+				}
 			}
 		}
 		
@@ -241,9 +322,73 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._client = value;
+				if(this._client != value)
+				{
+					this.OnPropertyChanging("Client");
+					this._client = value;
+					this.OnPropertyChanged("Client");
+				}
 			}
 		}
+		
+		#region IDataErrorInfo members
+		
+		private string error = string.Empty;
+		public string Error
+		{
+			get
+			{
+				return this.error;
+			}
+		}
+		
+		public string this[string propertyName]
+		{
+			get
+			{
+				this.ValidatePropertyInternal(propertyName, ref this.error);
+		
+				return this.error;
+			}
+		}
+		
+		protected virtual void ValidatePropertyInternal(string propertyName, ref string error)
+		{
+		    this.ValidateProperty(propertyName, ref error);
+		}
+		
+		// Please implement this method in a partial class in order to provide the error message depending on each of the properties.
+		partial void ValidateProperty(string propertyName, ref string error);
+		
+		#endregion
+		
+		#region INotifyPropertyChanging members
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		protected virtual void OnPropertyChanging(string propertyName)
+		{
+			if(this.PropertyChanging != null)
+			{
+				this.PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
+		
+		#region INotifyPropertyChanged members
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void OnPropertyChanged(string propertyName)
+		{
+			if(this.PropertyChanged != null)
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
 		
 	}
 }

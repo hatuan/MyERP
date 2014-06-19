@@ -22,6 +22,7 @@
     <SilverlightApplicationList>{9B4EBF15-7ECC-4388-85E4-86CBE2CBA0A5}|..\MyERP\MyERP.csproj|ClientBin|False,{025D049E-A6C0-4D26-B48E-16758827B4B1}|..\MyERP.Modules.User\MyERP.Modules.User.csproj|ClientBin|False,{2493DA95-9A90-4BDA-9D30-07A5B9B784CB}|..\MyERP.Modules.Home\MyERP.Modules.Home.csproj|ClientBin|False,{68435AFF-4995-40C4-87B0-9B781766E6B3}|..\MyERP.Modules.Financial\MyERP.Modules.Financial.csproj|ClientBin|False,{D502661D-A8E0-45DD-9A2F-D14135B48459}|..\MyERP.Modules.Master\MyERP.Modules.Master.csproj|ClientBin|False</SilverlightApplicationList>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm">
       <HintPath>..\packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
@@ -75,8 +79,12 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.2\lib\portable-windows8+net40+sl5+windowsphone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -99,6 +107,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Http, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.1.2\lib\net45\System.Web.Http.dll</HintPath>
@@ -111,6 +123,29 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.1.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.1.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -118,6 +153,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Telerik.OpenAccess.40.Extensions, Version=2014.1.403.2, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342">
       <HintPath>D:\Program Files\Telerik\Data Access\bin\Telerik.OpenAccess.40.Extensions.dll</HintPath>
@@ -141,7 +179,23 @@
     <Content Include="ClientBin\MyERP.Modules.Master.xap" />
     <Content Include="ClientBin\MyERP.Modules.User.xap" />
     <Content Include="ClientBin\MyERP.xap" />
-    <Content Include="Default.aspx" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\modernizr-2.7.2.js" />
+    <Content Include="Sl.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
@@ -168,6 +222,12 @@
     <Content Include="ClientBin\System.Data.Services.Client.zip" />
     <Content Include="ClientBin\Telerik.Windows.Controls.DataServices.zip" />
     <Content Include="ClientBin\System.ServiceModel.DomainServices.Client.zip" />
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -181,46 +241,54 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeneralJournalDocumentsController.partial.cs" />
-    <Compile Include="GeneralJournalLinesController.partial.cs" />
-    <Compile Include="GeneralJournalSetupsController.partial.cs" />
+    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OpenAccessBaseController.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Odata\GeneralJournalDocumentsController.partial.cs" />
+    <Compile Include="Odata\GeneralJournalLinesController.partial.cs" />
+    <Compile Include="Odata\GeneralJournalSetupsController.partial.cs" />
     <Compile Include="MethodOverrideHandler.cs" />
-    <Compile Include="NumberSequencesController.partial.cs" />
-    <Compile Include="AccountsController.partial.cs" />
-    <Compile Include="AccountsController.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Odata\NumberSequencesController.partial.cs" />
+    <Compile Include="Odata\AccountsController.partial.cs" />
+    <Compile Include="Odata\AccountsController.cs" />
+    <Compile Include="App_Start\WebApiOdataConfig.cs" />
     <Compile Include="AuthController.cs" />
     <Compile Include="BasicHttpAuthorizeAttribute.cs" />
-    <Compile Include="BusinessPartnerGroupsController.cs" />
-    <Compile Include="BusinessPartnersController.cs" />
-    <Compile Include="ClientsController.cs" />
+    <Compile Include="Odata\BusinessPartnerGroupsController.cs" />
+    <Compile Include="Odata\BusinessPartnersController.cs" />
+    <Compile Include="Odata\ClientsController.cs" />
     <Compile Include="CommonWebApiResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CommonWebApiResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="CurrenciesController.cs" />
-    <Compile Include="CurrencyConvertRatesController.cs" />
+    <Compile Include="Odata\CurrenciesController.cs" />
+    <Compile Include="Odata\CurrencyConvertRatesController.cs" />
     <Compile Include="CustomMembershipProvider.cs" />
     <Compile Include="CustomRoleProvider.cs" />
     <Compile Include="EntitiesModelRepositories.cs" />
     <Compile Include="Error.cs" />
-    <Compile Include="GeneralJournalDocumentsController.cs" />
-    <Compile Include="GeneralJournalLinesController.cs" />
-    <Compile Include="GeneralJournalSetupsController.cs" />
+    <Compile Include="Odata\GeneralJournalDocumentsController.cs" />
+    <Compile Include="Odata\GeneralJournalLinesController.cs" />
+    <Compile Include="Odata\GeneralJournalSetupsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="JobGroupsController.cs" />
-    <Compile Include="JobsController.cs" />
+    <Compile Include="Odata\JobGroupsController.cs" />
+    <Compile Include="Odata\JobsController.cs" />
     <Compile Include="MembershipHttpAuthorizeAttribute.cs" />
-    <Compile Include="ModulesController.cs" />
-    <Compile Include="NumberSequencesController.cs" />
-    <Compile Include="OpenAccessBaseApiController.cs" />
+    <Compile Include="Odata\ModulesController.cs" />
+    <Compile Include="Odata\NumberSequencesController.cs" />
+    <Compile Include="Odata\OpenAccessBaseApiController.cs" />
     <Compile Include="OpenAccessBaseRepository.cs" />
-    <Compile Include="OrganizationsController.partial.cs" />
-    <Compile Include="OrganizationsController.cs" />
-    <Compile Include="PaymentTermsController.cs" />
+    <Compile Include="Odata\OrganizationsController.partial.cs" />
+    <Compile Include="Odata\OrganizationsController.cs" />
+    <Compile Include="Odata\PaymentTermsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\OrganizationRepository.cs" />
     <Compile Include="Repository\GeneralJournalSetupRepository.cs" />
@@ -229,12 +297,14 @@
     <Compile Include="Repository\GeneralJournalDocumentRepository.cs" />
     <Compile Include="Repository\NumberSequenceRepository.cs" />
     <Compile Include="Repository\AccountRepository.cs" />
-    <Compile Include="SessionsController.cs" />
-    <Compile Include="UsersController.partial.cs" />
-    <Compile Include="UsersController.cs" />
+    <Compile Include="Odata\SessionsController.cs" />
+    <Compile Include="Odata\UsersController.partial.cs" />
+    <Compile Include="Odata\UsersController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ClientBin\Images\" />
+    <Folder Include="Views\Account\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="SplashScreen.xaml">
