@@ -196,6 +196,10 @@
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\modernizr-2.7.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
     <Content Include="Sl.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -241,6 +245,10 @@
     <Content Include="Views\Module\Manufacturing.cshtml" />
     <Content Include="Views\Module\Warehouse.cshtml" />
     <Content Include="Views\Module\Master.cshtml" />
+    <Content Include="Views\User\Preference.cshtml" />
+    <Content Include="Views\User\Manage.cshtml" />
+    <Content Include="Views\User\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\User\_SetPasswordPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

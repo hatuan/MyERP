@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Caching;
 using System.Web.Security;
 using MyERP.DataAccess;
+using Telerik.OpenAccess;
 
 namespace MyERP.Web
 {
@@ -70,14 +71,7 @@ namespace MyERP.Web
                     status = MembershipCreateStatus.DuplicateUserName;
                     return null;
                 }
-
-                user = context.Users.FirstOrDefault(u => u.Email == email);
-                if (user != null)
-                {
-                    status = MembershipCreateStatus.DuplicateEmail;
-                    return null;
-                }
-
+                
                 user = context.Users.FirstOrDefault(u => u.Id.CompareTo(providerUserKey) == 0);
                 if (user != null)
                 {
@@ -125,16 +119,52 @@ namespace MyERP.Web
             }
 
         }
-
-
+        
         public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
-            throw new NotImplementedException();
+            using (var context = new EntitiesModel())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Name == username && u.Password == oldPassword);
+                if (user == null)
+                {
+                    return false;
+                }
+
+                try
+                {
+                    user.Password = newPassword;
+                    context.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
         }
 
         public override bool ChangePasswordQuestionAndAnswer(string username, string password, string newPasswordQuestion, string newPasswordAnswer)
         {
-            throw new NotImplementedException();
+            using (var context = new EntitiesModel())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Name == username && u.Password == password);
+                if (user == null)
+                {
+                    return false;
+                }
+
+                try
+                {
+                    user.PasswordQuestion = newPasswordQuestion;
+                    user.PasswordAnswer = newPasswordAnswer;
+                    context.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
         }
 
         public override bool DeleteUser(string username, bool deleteAllRelatedData)
@@ -174,9 +204,13 @@ namespace MyERP.Web
 
         public override string GetPassword(string username, string answer)
         {
-            throw new NotImplementedException();
+            using (var context = new EntitiesModel())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Name == username && u.PasswordAnswer == answer);
+                return user != null ? user.Password : null;
+            }
         }
-
+        
         public override MembershipUser GetUser(string username, bool userIsOnline)
         {
             var cacheKey = string.Format("UserData_{0}", username);
@@ -265,7 +299,7 @@ namespace MyERP.Web
 
         public override bool RequiresUniqueEmail
         {
-            get { throw new NotImplementedException(); }
+            get { return false; }
         }
 
         public override string ResetPassword(string username, string answer)
@@ -338,5 +372,23 @@ namespace MyERP.Web
             this.ClientId = clientId ?? Guid.Empty;
         }
 
+
+        public override string GetPassword(string passwordAnswer)
+        {
+            using (var context = new EntitiesModel())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Name == this.UserName && u.PasswordAnswer == passwordAnswer);
+                return user != null ? user.Password : null;
+            }
+        }
+
+        public override string GetPassword()
+        {
+            using (var context = new EntitiesModel())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Name == this.UserName);
+                return user != null ? user.Password : null;
+            }
+        }
     }
 }

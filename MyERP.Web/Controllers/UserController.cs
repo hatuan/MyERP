@@ -61,7 +61,7 @@ namespace MyERP.Web.Controllers
                     var user = (MyERPMembershipUser) Membership.GetUser(model.Name, true);
                     if (user != null)
                     {
-                        string[] roles = System.Web.Security.Roles.Provider.GetRolesForUser(user.UserName);
+                        string[] roles = Roles.Provider.GetRolesForUser(user.UserName);
 
                         FormsAuthentication.SetAuthCookie(model.Name, model.RememberMe);
                         return RedirectToLocal(returnUrl);
@@ -151,8 +151,144 @@ namespace MyERP.Web.Controllers
                 : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : "";
+            ViewBag.HasLocalPassword = HasPassword();
             ViewBag.ReturnUrl = Url.Action("Manage");
+            
             return View();
+        }
+
+        //
+        // POST: /Account/Manage
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Manage(ManageUserViewModel model)
+        {
+            bool hasPassword = HasPassword();
+            ViewBag.HasLocalPassword = hasPassword;
+            ViewBag.ReturnUrl = Url.Action("Manage");
+            if (hasPassword)
+            {
+                if (ModelState.IsValid)
+                {
+                    string oldPassword = Cryptography.Encrypt(Cryptography.GetHashKey(User.Identity.Name + model.OldPassword), model.OldPassword);
+                    var user = (MyERPMembershipUser) Membership.Provider.GetUser(User.Identity.Name, true);
+                    if (user == null)
+                    {
+                        ModelState.AddModelError("", "User not found");
+                    }
+                    else if (!Membership.Provider.ValidateUser(User.Identity.Name, oldPassword))
+                    {
+                        ModelState.AddModelError("OldPassword", "OldPassword is not correctly");
+                    }
+                    else
+                    {
+                        string newPassword = Cryptography.Encrypt(Cryptography.GetHashKey(User.Identity.Name + model.NewPassword), model.NewPassword);
+
+                        bool result = Membership.Provider.ChangePassword(User.Identity.Name, oldPassword, newPassword);
+
+                        if (result)
+                        {
+                            return RedirectToAction("Manage", new {Message = ManageMessageId.ChangePasswordSuccess});
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Change Password had error");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // User does not have a password so remove any validation errors caused by a missing OldPassword field
+                ModelState state = ModelState["OldPassword"];
+                if (state != null)
+                {
+                    state.Errors.Clear();
+                }
+
+                if (ModelState.IsValid)
+                {
+                    var user = (MyERPMembershipUser)Membership.Provider.GetUser(User.Identity.Name, true);
+                    if (user == null)
+                    {
+                        ModelState.AddModelError("", "User not found");
+                    }
+                    else
+                    {
+                        string oldPassword = user.GetPassword();
+                        
+                        string newPassword = Cryptography.Encrypt(Cryptography.GetHashKey(User.Identity.Name + model.NewPassword), model.NewPassword);
+                        bool result = Membership.Provider.ChangePassword(User.Identity.Name, oldPassword, newPassword);
+
+                        if (result)
+                        {
+                            return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Change Password had error");
+                        }
+                    }
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        //
+        //GET: /User/Preference
+        public ActionResult Preference()
+        {
+            var model = new PreferenceViewModel();
+            model.WorkingDate = DateTime.Now;
+            
+            var organizationRepository = new OrganizationRepository();
+            var organizations = organizationRepository.GetOrganizations(User).ToList()
+                .Select(c => new SelectListItem()
+                {
+                    Value = c.Id.ToString(),
+                    Text = c.Name
+                });
+            
+            model.Organizations = new SelectList(organizations, "Value", "Text"); ;
+            return View(model);
+        }
+
+        //
+        //POST: /User/Preference
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Preference(PreferenceViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                //TODO: Save User Preference
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            var organizationRepository = new OrganizationRepository();
+            var organizations = organizationRepository.GetOrganizations(User).ToList()
+                .Select(c => new SelectListItem()
+                {
+                    Value = c.Id.ToString(),
+                    Text = c.Name
+                });
+
+            model.Organizations = new SelectList(organizations, "Value", "Text"); ;
+            return View(model);
+        }
+
+        private bool HasPassword()
+        {
+            var user = (MyERPMembershipUser) Membership.GetUser(User.Identity.Name, true);
+            
+            if (user != null)
+            {
+                return user.GetPassword() != null;
+            }
+            return false;
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

@@ -1,11 +1,13 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - MyERP Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+
 
 </head>
 <body>
@@ -26,7 +28,7 @@
                         <li class="dropdown">
                             <a data-toggle="dropdown" href="#" id="dropdownMenu1">Modules <b class="caret"></b></a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                <li role="presentation">@Html.ActionLink("Financial Management", "Financial", "Module", routeValues: null, htmlAttributes:new { role = "menuitem", tabIndex =-1 })</li>
+                                <li role="presentation">@Html.ActionLink("Financial Management", "Financial", "Module", routeValues: null, htmlAttributes: new { role = "menuitem", tabIndex = -1 })</li>
                                 <li role="presentation">@Html.ActionLink("Sale", "Sale", "Module", routeValues: null, htmlAttributes: new { role = "menuitem", tabIndex = -1 })</li>
                                 <li role="presentation">@Html.ActionLink("Purchase", "Purchase", "Module", routeValues: null, htmlAttributes: new { role = "menuitem", tabIndex = -1 })</li>
                                 <li role="presentation">@Html.ActionLink("Contact Management", "Contact", "Module", routeValues: null, htmlAttributes: new { role = "menuitem", tabIndex = -1 })</li>
@@ -54,6 +56,11 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        $(function () {
+            $('.datepicker').datepicker({});
+        });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

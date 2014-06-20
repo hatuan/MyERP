@@ -5,9 +5,17 @@
         @Html.AntiForgeryToken()
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("User " + User.Identity.Name, "Manage", "User", routeValues: null, htmlAttributes: new {title = "Manager"})
+                @Html.ActionLink("Preference", "Preference", "User", routeValues: null, htmlAttributes: new { id = "preferenceLink", title = "Preference" })
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            <li class="dropdown">
+                <a data-toggle="dropdown" href="#" id="dropdownUser">@Html.Label(User.Identity.Name) <b class="caret"></b></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownUser">
+                    <li role="presentation">@Html.ActionLink("Manage User", "Manage", "User", routeValues: null, htmlAttributes: new { role = "menuitem", tabIndex = -1 })</li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation"><a href="javascript:document.getElementById('logoutForm').submit()" role="menuitem" tabindex=-1>Log off</a></li>
+                </ul>
+            </li>
+
         </ul>
     }
 }
@@ -15,6 +23,6 @@ else
 {
     <ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("Register", "Register", "User", routeValues : null, htmlAttributes : new {id = "registerLink"})</li>
-        <li>@Html.ActionLink("Log in", "Login", "User", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "User", routeValues: new { returnUrl = "~/User/Preference" }, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }
