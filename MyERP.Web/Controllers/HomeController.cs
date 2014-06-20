@@ -18,7 +18,7 @@ namespace MyERP.Web.Controllers
         //GET: /Home/About
         public ActionResult About()
         {
-            ViewBag.Message = "MyERP is a new Cloud ERP system";
+            ViewBag.Message = "MyERP is a new Cloud ERP system for small to medium company using HTML, CSS and JavaScript";
 
             return View();
         }

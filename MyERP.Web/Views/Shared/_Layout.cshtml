@@ -21,7 +21,22 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" href="#" id="dropdownMenu1">Modules <b class="caret"></b></a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li role="presentation">@Html.ActionLink("Financial Management", "Financial", "Module", routeValues: null, htmlAttributes:new { role = "menuitem", tabIndex =-1 })</li>
+                                <li role="presentation">@Html.ActionLink("Sale", "Sale", "Module", routeValues: null, htmlAttributes: new { role = "menuitem", tabIndex = -1 })</li>
+                                <li role="presentation">@Html.ActionLink("Purchase", "Purchase", "Module", routeValues: null, htmlAttributes: new { role = "menuitem", tabIndex = -1 })</li>
+                                <li role="presentation">@Html.ActionLink("Contact Management", "Contact", "Module", routeValues: null, htmlAttributes: new { role = "menuitem", tabIndex = -1 })</li>
+                                <li role="presentation">@Html.ActionLink("Manufacturing", "Manufacturing", "Module", routeValues: null, htmlAttributes: new { role = "menuitem", tabIndex = -1 })</li>
+                                <li role="presentation">@Html.ActionLink("Warehouse", "Warehouse", "Module", routeValues: null, htmlAttributes: new { role = "menuitem", tabIndex = -1 })</li>
+                                <li role="presentation" class="divider"></li>
+                                <li role="presentation">@Html.ActionLink("Master Setup", "Master", "Module", routeValues: null, htmlAttributes: new { role = "menuitem", tabIndex = -1 })</li>
+                            </ul>
+                        </li>
+                    }
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
