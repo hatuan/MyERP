@@ -1,0 +1,158 @@
+﻿@{
+    ViewBag.Title = "Master";
+}
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+
+<div class="row">
+    <div class="col-xs-6 col-md-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">Menu</div>
+            <div class="panel-body">
+                <ul class="nav nav-pills nav-stacked ">
+                    <li><a href="#Financial">Financial <span class="glyphicon glyphicon-chevron-right ui-li-icon-right"></span></a></li>
+                    <li><a href="#Sale">Sale <span class="glyphicon glyphicon-chevron-right ui-li-icon-right"></span></a></li>
+                    <li><a href="#Purchase">Purchase <span class="glyphicon glyphicon-chevron-right ui-li-icon-right"></span></a></li>
+                    <li><a href="#ContactManager">Contact Manager <span class="glyphicon glyphicon-chevron-right ui-li-icon-right"></span></a></li>
+                    <li><a href="#Manufacturing">Manufacturing <span class="glyphicon glyphicon-chevron-right ui-li-icon-right"></span></a></li>
+                    <li><a href="#Warehouse">Warehouse <span class="glyphicon glyphicon-chevron-right ui-li-icon-right"></span></a></li>
+                    <li><a href="#HumanResource">Human Resource <span class="glyphicon glyphicon-chevron-right ui-li-icon-right"></span></a></li>
+                    <li><a href="#System">System <span class="glyphicon glyphicon-chevron-right ui-li-icon-right"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-9">
+        <div class="panel panel-info">
+            <div class="panel-heading" id="Financial">Financial</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-4 col-md-4">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li>@Html.ActionLink("Account", "Index", "Account")</li>
+                            <li>@Html.ActionLink("Bank", "Index", "Bank")</li>
+                            <li>@Html.ActionLink("Setup", "Financial", "Setup")</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading" id="Sale">Sale</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-4 col-md-4">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Business Partner</a></li>
+                            <li><a href="#">Business Partner Group</a></li>
+                            <li><a href="#">Setup</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading" id="Purchase">Purchase</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-4 col-md-4">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Business Partner</a></li>
+                            <li><a href="#">Business Partner Group</a></li>
+                            <li><a href="#">Setup</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading" id="ContactManager">Contact Manager</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-4 col-md-4">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Setup</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading" id="Manufacturing">Manufacturing</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-4 col-md-4">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Bom</a></li>
+                            <li><a href="#">Setup</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-info">
+            <div class="panel-heading" id="Warehouse">Warehouse</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-4 col-md-4">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Item</a></li>
+                            <li><a href="#">Item Group</a></li>
+                            <li><a href="#">Setup</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading" id="HumanResource">Human Resource</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-4 col-md-4">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Setup</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading" id="System">System</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-4 col-md-4">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Currencies</a></li>
+                            <li><a href="#">Currencies Exchange Rate</a></li>
+                            <li><a href="#">Period</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-4 col-md-4">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Number Order Series</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-4 col-md-4">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Client Information</a></li>
+                            <li><a href="#">Organizations</a></li>
+                            <li><a href="#">Users</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

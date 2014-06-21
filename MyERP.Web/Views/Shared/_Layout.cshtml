@@ -35,7 +35,7 @@
                                 <li role="presentation">@Html.ActionLink("Manufacturing", "Manufacturing", "Module", routeValues: null, htmlAttributes: new { role = "menuitem", tabIndex = -1 })</li>
                                 <li role="presentation">@Html.ActionLink("Warehouse", "Warehouse", "Module", routeValues: null, htmlAttributes: new { role = "menuitem", tabIndex = -1 })</li>
                                 <li role="presentation" class="divider"></li>
-                                <li role="presentation">@Html.ActionLink("Master Setup", "Master", "Module", routeValues: null, htmlAttributes: new { role = "menuitem", tabIndex = -1 })</li>
+                                <li role="presentation">@Html.ActionLink("Master Setup", "Index", "Master", routeValues: null, htmlAttributes: new { role = "menuitem", tabIndex = -1 })</li>
                             </ul>
                         </li>
                     }
@@ -48,6 +48,8 @@
     </div>
     <div class="container body-content">
         @RenderBody()
+    </div>
+    <div class="container body-content">
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - MyERP Application</p>

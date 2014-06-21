@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace MyERP.Web.Controllers
 {
+    [Authorize]
     public class ModuleController : Controller
     {
         // GET: Module

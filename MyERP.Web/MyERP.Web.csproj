@@ -249,6 +249,8 @@
     <Content Include="Views\User\Manage.cshtml" />
     <Content Include="Views\User\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\User\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Master\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -271,9 +273,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\OpenAccessBaseController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\UserViewModels.cs" />
     <Compile Include="Odata\GeneralJournalDocumentsController.partial.cs" />
     <Compile Include="Odata\GeneralJournalLinesController.partial.cs" />
@@ -329,7 +333,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ClientBin\Images\" />
-    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="SplashScreen.xaml">

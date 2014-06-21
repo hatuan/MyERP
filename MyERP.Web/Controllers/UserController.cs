@@ -10,6 +10,7 @@ using MyERP.Web.Models;
 
 namespace MyERP.Web.Controllers
 {
+    [Authorize]
     public class UserController : OpenAccessBaseController<MyERP.DataAccess.User, MyERP.DataAccess.EntitiesModel>
     {
          /// <summary>
@@ -98,6 +99,7 @@ namespace MyERP.Web.Controllers
                 string passEncrypt = Cryptography.Encrypt(Cryptography.GetHashKey(model.Name + model.Password), model.Password);
                 MembershipUser user = Membership.CreateUser(model.Name, passEncrypt, model.Email, model.PasswordQuestion,
                     model.PasswordAnswer, true, out status);
+
                 if (status == MembershipCreateStatus.Success)
                 {
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -158,7 +160,7 @@ namespace MyERP.Web.Controllers
         }
 
         //
-        // POST: /Account/Manage
+        // POST: /User/Manage
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Manage(ManageUserViewModel model)

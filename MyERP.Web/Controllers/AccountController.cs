@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace MyERP.Web.Controllers
 {
+    [Authorize]
     public class AccountController : OpenAccessBaseController<MyERP.DataAccess.Account, MyERP.DataAccess.EntitiesModel>
     {
         /// <summary>
@@ -30,6 +31,7 @@ namespace MyERP.Web.Controllers
         // GET: Account
         public ActionResult Index()
         {
+
             return View();
         }
     }

@@ -15,3 +15,11 @@ select,
 textarea {
     max-width: 280px;    
 }
+
+/* Set icon in the right side*/
+.ui-li-icon-right {
+    float: right;
+    margin-top: 2px;
+    margin-right: -6px;
+    opacity: .25;
+}
