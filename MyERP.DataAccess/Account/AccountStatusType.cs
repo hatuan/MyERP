@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MyERP.DataAccess
 {
-    public enum AccountStatusType
+    public enum AccountStatusType : byte
     {
+        [Display(Name = "InActive")]
         Inactive = 0,
+        [Display(Name = "Active")]
         Active = 1
     }
 }

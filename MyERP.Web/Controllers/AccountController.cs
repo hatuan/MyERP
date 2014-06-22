@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyERP.Web.Models;
 
 namespace MyERP.Web.Controllers
 {
@@ -28,11 +29,28 @@ namespace MyERP.Web.Controllers
             this.repository = repository;
         }
 
-        // GET: Account
+        //
+        //GET: Account
         public ActionResult Index()
         {
 
             return View();
         }
+
+        //
+        //GET: /Account/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        //
+        //POST: /Account/Create
+        [HttpPost]
+        public ActionResult Create(AccountViewModels model)
+        {
+            return View(model);
+        }
+
     }
 }
