@@ -2,6 +2,10 @@
   <Deployment.Parts>
     <AssemblyPart x:Name="MyERP.Modules.Financial" Source="MyERP.Modules.Financial.dll" />
     <AssemblyPart x:Name="MyERP.Controls" Source="MyERP.Controls.dll" />
+    <AssemblyPart x:Name="Microsoft.Data.Services.Client.SL" Source="Microsoft.Data.Services.Client.SL.dll" />
+    <AssemblyPart x:Name="Microsoft.Data.Edm.SL" Source="Microsoft.Data.Edm.SL.dll" />
+    <AssemblyPart x:Name="Microsoft.Data.OData.SL" Source="Microsoft.Data.OData.SL.dll" />
+    <AssemblyPart x:Name="System.Spatial.SL" Source="System.Spatial.SL.dll" />
   </Deployment.Parts>
   <Deployment.ExternalParts>
     <ExtensionPart Source="System.ComponentModel.Composition.zip" />

@@ -23,3 +23,51 @@ textarea {
     margin-right: -6px;
     opacity: .25;
 }
+
+.title-bar-item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.appframe-title-bar {
+    border-bottom: 1px solid #ddd;
+}
+
+
+.appframe-iconbar {
+    border-bottom: 1px solid #ddd;
+}
+
+.iconbar {
+    padding-bottom: 20px;
+}
+
+.listview-main-section {
+    border-right: 1px solid #ddd;
+}
+
+.list-row {
+    padding: 5px 15px;
+    margin: 0px -15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.list-timestamp {
+    position: absolute;
+    right: 5px;
+    bottom: 2px;
+    font-size: 60%;
+    color: #888
+}
+
+.form-link {
+    font-weight: bold;
+    font-size: 102%;
+}
+
+.col-text-overflow {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 30px;
+    white-space: nowrap;
+}

@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
+using System.Security.Principal;
+using System.Web.Security;
 using Telerik.OpenAccess;
 using Telerik.OpenAccess.FetchOptimization;
 
@@ -14,6 +17,7 @@ namespace MyERP.Web
         where TContext : OpenAccessContext, new()
     {
         IQueryable<TEntity> GetAll();
+        IQueryable<TEntity> GetAll(IPrincipal principal);
         TEntity GetBy(Expression<Func<TEntity, bool>> filter);
         TEntity AddNew(TEntity entity);
         TEntity Update(TEntity entity);
@@ -24,6 +28,7 @@ namespace MyERP.Web
 
     public abstract partial class OpenAccessBaseRepository<TEntity, TContext> : IOpenAccessBaseRepository<TEntity, TContext>
         where TContext : OpenAccessContext, new()
+ 
     {
         protected TContext dataContext = new TContext();
         protected FetchStrategy fetchStrategy = new FetchStrategy();
@@ -40,6 +45,16 @@ namespace MyERP.Web
             List<TEntity> detachedEntities = dataContext.CreateDetachedCopy<List<TEntity>>(allEntities, fetchStrategy);
 
             return detachedEntities.AsQueryable();
+        }
+
+        /// <summary>
+        /// Get All TEntity base on principal
+        /// </summary>
+        /// <param name="principal"></param>
+        /// <returns></returns>
+        public virtual IQueryable<TEntity> GetAll(IPrincipal principal)
+        {
+            throw new ArgumentNullException("principal", "Please override this method on Repository");
         }
 
         public virtual TEntity GetBy(Expression<Func<TEntity, bool>> filter)

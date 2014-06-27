@@ -23,9 +23,13 @@ namespace MyERP.Web
                       "~/Scripts/bootstrap-datepicker.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/typeahead").Include(
+                      "~/Scripts/typeahead.bundle.js")); //typeahead.bundle.js = (bloodhound.js + typeahead.jquery.js)
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/datepicker3.css",
+                      "~/Content/typeahead.css",
                       "~/Content/site.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,

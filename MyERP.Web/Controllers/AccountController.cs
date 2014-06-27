@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using MyERP.Web.Models;
 
 namespace MyERP.Web.Controllers
@@ -13,9 +14,9 @@ namespace MyERP.Web.Controllers
         /// <summary>
         /// Constructor used by the Controller.
         /// </summary>
-        public AccountController()
+        public AccountController() : this(new AccountRepository())
         {
-            this.repository = new AccountRepository();
+            
         }
 
         /// <summary>
@@ -33,8 +34,33 @@ namespace MyERP.Web.Controllers
         //GET: Account
         public ActionResult Index()
         {
+            var accounts = repository.GetAll(User).OrderBy(c => c.Code)
+                .ToList()
+                .Select(c => new AccountViewModels()
+                {
+                    ArAp = c.ArAp,
+                    ClientId = c.ClientId,
+                    Code = c.Code,
+                    CurrencyId = c.CurrencyId ?? Guid.Empty,
+                    CurrencyCode = c.CurrencyId == null ? "" : c.Currency.Code,
+                    Detail = c.Detail,
+                    Id = c.Id,
+                    Level = c.Level,
+                    Name = c.Name,
+                    OrganizationCode = c.Organization.Code,
+                    OrganizationName = c.Organization.Name,
+                    OrganizationId = c.OrganizationId,
+                    ParentAccountCode = c.ParentAccountId == null ? "" : c.ParentAccount.Code,
+                    ParentAccountId = c.ParentAccountId ?? Guid.Empty,
+                    RecCreateBy = c.RecCreatedByUser.Name,
+                    RecCreated = c.RecCreated,
+                    RecModifiedBy = c.RecModifiedByUser.Name,
+                    RecModified = c.RecModified,
+                    Status = c.Status,
+                    Version = c.Version
+                });
 
-            return View();
+            return View(accounts);
         }
 
         //

@@ -1,0 +1,116 @@
+﻿@model MyERP.Web.Models.AccountViewModels
+
+@{
+    ViewBag.Title = "New Account";
+}
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-8">
+            <h3 class="pull-left">
+                @ViewBag.Title
+            </h3>
+        </div>
+        <div class="col-sm-4">
+            <div class="pull-right">
+                <div style="bottom: 15px; position: relative; top: 15px">
+                    <a class="btn btn-primary" href="@Url.Action("Create", "Account")" id="save-button"><span class="glyphicon glyphicon-ok"></span> Save</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Create", "Account", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form", id="create-account" }))
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="row">
+        <h4 class="col-md-12">
+            <span>1</span>. Basic Info
+        </h4>
+        <div class="col-md-12" style="height: 10px;"></div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Code, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Code, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.CurrencyCode, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.CurrencyCode, new { @class = "form-control typeahead", id = "currency-code" })
+            </div>
+            @Html.HiddenFor(m => m.CurrencyId, htmlAttributes: new { id = "currency-id" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ParentAccountCode, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ParentAccountCode, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ArAp, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.ArAp)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Status, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Status, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    
+}
+@section Scripts {
+    <script type="text/javascript">
+        $(window).load(function() {
+            var urlAutocomplete = '@Url.Action("Autocomplete", "Currency")';
+
+            var currenciesEngine = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: urlAutocomplete + '?q=%QUERY'
+                }
+            });
+            currenciesEngine.initialize();
+
+            $('#currency-code.typeahead').typeahead(null, {
+                name: 'currencies',
+                displayKey: 'name',
+                source: currenciesEngine.ttAdapter(),
+            }).blur(function () {
+                var match = false;
+                for (var i = currenciesEngine.index.datums.length - 1; i >= 0; i--) {
+                    if ($(this).val() == currenciesEngine.index.datums[i].name) {
+                        match = true;
+                    }
+                };
+                if (!match) {
+                    alert("Invalid Selection");
+                }
+            });;
+
+            $('#currency-code.typeahead').on('typeahead:selected typeahead:autocompleted', function(e, datum) {
+                if (datum.id) {
+                    $('#currency-id').val(datum.id);
+                } else {
+                    $('#currency-id').val('');
+                }
+            });
+        });
+    </script>
+}

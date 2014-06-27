@@ -16,9 +16,9 @@ namespace MyERP.Web.Controllers
          /// <summary>
         /// Constructor used by the Controller.
         /// </summary>
-        public UserController()
+        public UserController() : this (new UserRepository())
         {
-            this.repository = new UserRepository();
+            
         }
 
         /// <summary>

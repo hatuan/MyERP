@@ -23,6 +23,10 @@ namespace MyERP.Web.Models
         public String OrganizationCode { get; set; }
 
         [Required]
+        [Display(Name = "Organization Name")]
+        public String OrganizationName { get; set; }
+
+        [Required]
         [Display(Name = "Code")]
         public String Code { get; set; }
 
@@ -30,18 +34,18 @@ namespace MyERP.Web.Models
         [Display(Name = "Name")]
         public String Name { get; set; }
         
-        public Guid CurrencyId { get; set; }
+        public Guid? CurrencyId { get; set; }
 
         [Display(Name="Currency")]
-        public String Currency { get; set; }
+        public String CurrencyCode { get; set; }
 
-        public Guid ParentAccountId { get; set; }
+        public Guid? ParentAccountId { get; set; }
 
         [Display(Name = "Parent Account")]
-        public String ParentAccount { get; set; }
+        public String ParentAccountCode { get; set; }
 
         [Display(Name="Level")]
-        public Byte Level { get; set; }
+        public short Level { get; set; }
 
         [Display(Name = "Detail")]
         public Boolean Detail { get; set; }
@@ -61,6 +65,8 @@ namespace MyERP.Web.Models
         public String RecCreateBy { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:mm/dd/yyyy}")]
         [Display(Name = "Created")]
         public DateTime RecCreated { get; set; }
 
@@ -69,6 +75,8 @@ namespace MyERP.Web.Models
         public String RecModifiedBy { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:mm/dd/yyyy}")]
         [Display(Name = "Modified")]
         public DateTime RecModified { get; set; }
     }

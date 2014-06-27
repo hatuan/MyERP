@@ -3,6 +3,10 @@
     <AssemblyPart x:Name="MyERP.Modules.User" Source="MyERP.Modules.User.dll" />
     <AssemblyPart x:Name="MyERP.Repository" Source="MyERP.Repository.dll" />
     <AssemblyPart x:Name="System.Spatial.SL" Source="System.Spatial.SL.dll" />
+    <AssemblyPart x:Name="Telerik.Windows.Controls.GridView" Source="Telerik.Windows.Controls.GridView.dll" />
+    <AssemblyPart x:Name="Microsoft.Data.Services.Client.SL" Source="Microsoft.Data.Services.Client.SL.dll" />
+    <AssemblyPart x:Name="Microsoft.Data.Edm.SL" Source="Microsoft.Data.Edm.SL.dll" />
+    <AssemblyPart x:Name="Microsoft.Data.OData.SL" Source="Microsoft.Data.OData.SL.dll" />
   </Deployment.Parts>
   <Deployment.ExternalParts>
     <ExtensionPart Source="System.ComponentModel.Composition.zip" />

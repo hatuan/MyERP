@@ -1,53 +1,87 @@
-﻿@model List<MyERP.Web.Models.AccountViewModels>
+﻿@model IEnumerable<MyERP.Web.Models.AccountViewModels>
 
 @{
-    ViewBag.Title = "Account";
+    ViewBag.Title = "Account List";
 }
+
 <div class="page-header">
-    <h2>@ViewBag.Title</h2>
+        <div class="row">
+            <div class="col-sm-8">
+                <h3 class="pull-left">
+                    @ViewBag.Title
+                </h3>
+            </div>
+            <div class="col-sm-4">
+                <div class="pull-right">
+                    <div style="bottom: 15px; position: relative; top: 15px">
+                        <a class="btn btn-primary" href="@Url.Action("Create", "Account")"><span class="glyphicon glyphicon-plus"></span> New</a>
+                    </div>
+                </div>            
+            </div>
+        </div>
 </div>
+
+<div class="appframe-iconbar">
+        <div class="btn-toolbar" role="toolbar">
+            <div class="btn-group iconbar">
+                <a class="btn btn-default" role="button" href="#"><span class="glyphicon glyphicon-refresh"></span></a>
+                <a class="btn btn-default" role="button" href="@Url.Action("Create", "Account")"><span class="glyphicon glyphicon-plus"></span></a>
+                <a class="btn btn-default" role="button" href="@Url.Action("Search", "Account")"><span class="glyphicon glyphicon-search"></span></a>
+                <a class="btn btn-default" role="button" href="@Url.Action("Delete", "Account")"><span class="glyphicon glyphicon-remove"></span></a>
+                <a class="btn btn-default" role="button" href="#"><span class="glyphicon glyphicon-ok"></span></a>
+                <a class="btn btn-default" role="button" href="#"><span class="glyphicon glyphicon-question-sign"></span></a>
+            </div>
+        </div>        
+</div>
+
+
 
 @Html.ValidationSummary("", new { @class = "text-danger" })
 
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-account-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        @using (Html.BeginForm("Create", "Account", FormMethod.Post, htmlAttributes: new { @class = "navbar-form navbar-left"}))
+<div class="row">
+    <div class="col-sm-9 listview-main-section">
+        @foreach (var account in Model)
         {
-            @Html.AntiForgeryToken()
-
-            <div class="form-group">
-                @Html.TextBox("newaccount", null, htmlAttributes: new { @class = "form-control", placeholder = "New Account", type = "text" })
-                <button type="submit" class="btn btn-default" name="addnew">New</button>
+            <div class="row list-row" style="position: relative;">
+                <div class="col-sm-4">
+                    <div class="col-sm-6 col-text-overflow">
+                        @Html.CheckBox("delete-check", htmlAttributes: new { value = account.Id, type = "checkbox", style = "margin-right: 15px;" })
+                        @Html.ActionLink(account.Code, "Edit", "Account", new { id = account.Id }, new { @class = "form-link" })
+                    </div>
+                    <div class="col-sm-6 col-text-overflow">
+                        @account.OrganizationName
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="col-sm-6 col-text-overflow">
+                        <span>@account.Name</span>
+                    </div>
+                    <div class="col-sm-4">
+                        @if (account.Detail)
+                        {
+                            <span class="label label-info">Detail</span>
+                        }
+                        else
+                        {
+                            <span class="label label-default">@account.ParentAccountCode</span>
+                        }
+                        <span class="label label-default">@account.CurrencyCode</span> 
+                        @if (account.ArAp)
+                        {
+                            <span class="label label-default">AR/AP</span>
+                        }
+                        @if (account.Status != 1)
+                        {
+                            <span class="label label-warning">Disable</span>
+                        }
+                    </div>
+                </div>
+                <div class="list-timestamp">
+                    <span>@account.RecModifiedBy - @account.RecModified</span>
+                </div>
             </div>
+
         }
-
-        @*<form class="navbar-form navbar-left" >
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="New Account">
-            </div>
-            <button type="submit" class="btn btn-default" name="addNew">New</button>
-        </form>*@
-       
-        @using (Html.BeginForm("Search", "Account", FormMethod.Post, htmlAttributes: new { @class = "navbar-form navbar-right", role="search" }))
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-group">
-                @Html.TextBox("search", null, htmlAttributes: new { @class = "form-control", placeholder = "Search", type = "text" })
-                <button type="submit" class="btn btn-default" name="addnew">Search</button>
-            </div>
-        }
-
     </div>
-</nav>
-
+    <div class="col-sm-3"></div>
+</div>
