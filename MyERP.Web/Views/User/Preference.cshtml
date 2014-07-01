@@ -1,20 +1,30 @@
-﻿@using Microsoft.Ajax.Utilities
-@model MyERP.Web.Models.PreferenceViewModel
+﻿@model MyERP.Web.Models.PreferenceViewModel
 @{
     ViewBag.Title = "Preference";
 }
 
-<h2>@ViewBag.Title</h2>
+@*<h2>@ViewBag.Title</h2>*@
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-8">
+            <h3 class="pull-left">
+                @ViewBag.Title 
+            </h3>
+        </div>
+    </div>
+</div>
+
 @using (Html.BeginForm("Preference", "User", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     <h4>Set user preference</h4>
-    <hr/>
+    <br />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(m => m.OrganizationId, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.OrganizationId, Model.Organizations, "--Select Organization--", htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.OrganizationId, (IEnumerable<SelectListItem>)ViewBag.Organizations, "--Select Organization--", htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.OrganizationId, "", new { @class = "text-danger" })
         </div>
     </div>

@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.OData;
+using System.Web.Security;
 using Telerik.OpenAccess;
 
 namespace MyERP.Web.Odata
@@ -17,7 +18,7 @@ namespace MyERP.Web.Odata
 
         public virtual IQueryable<TEntity> Get()
         {
-            var allEntities = repository.GetAll();
+            var allEntities = repository.GetAll(User);
             return allEntities;
         }
 

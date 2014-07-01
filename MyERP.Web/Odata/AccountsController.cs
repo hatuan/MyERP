@@ -8,17 +8,19 @@ using System.Web.Http;
 
 namespace MyERP.Web.Odata
 {
+    
     /// <summary>
     /// Web API Controller for Accounts entity defined in MyERP.DataAccess.EntitiesModel data model
     /// </summary>
+    //[Authorize(Roles = "ADMIN")]
     public partial class AccountsController : OpenAccessBaseApiController<MyERP.DataAccess.Account, MyERP.DataAccess.EntitiesModel>
     {
         /// <summary>
         /// Constructor used by the Web API infrastructure.
         /// </summary>
-        public AccountsController()
+        public AccountsController() : this (new AccountRepository())
         {
-            this.repository = new AccountRepository();
+
         }
 
         /// <summary>

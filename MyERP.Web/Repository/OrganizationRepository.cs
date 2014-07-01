@@ -23,11 +23,11 @@ namespace MyERP.Web
         /// </summary>
         /// <param name="principal">IPrincipal of User</param>
         /// <returns></returns>
-        public IQueryable<Organization> GetOrganizations(IPrincipal principal)
+        public override IQueryable<Organization> GetAll(IPrincipal principal)
         {
             var membershipUser = (MyERPMembershipUser)Membership.GetUser(principal.Identity.Name, true);
             var allEntities = GetAll().Where(c => c.ClientId == membershipUser.ClientId);
-            
+
             return allEntities;
         }
     }

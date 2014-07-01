@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Contexts;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
@@ -246,14 +247,30 @@ namespace MyERP.Web.Controllers
             model.WorkingDate = DateTime.Now;
             
             var organizationRepository = new OrganizationRepository();
-            var organizations = organizationRepository.GetOrganizations(User).ToList()
+            var organizations = organizationRepository.GetAll(User).ToList()
                 .Select(c => new SelectListItem()
                 {
                     Value = c.Id.ToString(),
                     Text = c.Name
                 });
-            
-            model.Organizations = new SelectList(organizations, "Value", "Text"); ;
+            if (Session["Preference"] != null)
+            {
+                SelectListItem selected =
+                    organizations.FirstOrDefault(
+                        c => c.Value == (Session["Preference"] as PreferenceViewModel).OrganizationId.ToString());
+                if (selected != null)
+                {
+                    selected.Selected = true;
+                    ViewBag.Organizations = new SelectList(organizations, "Value", "Text", selected.Value);
+                }
+                else
+                {
+                    ViewBag.Organizations = new SelectList(organizations, "Value", "Text", selected.Value);
+                }
+                model.WorkingDate = (Session["Preference"] as PreferenceViewModel).WorkingDate;
+            }
+            else
+                ViewBag.Organizations = new SelectList(organizations, "Value", "Text");
             return View(model);
         }
 
@@ -266,19 +283,19 @@ namespace MyERP.Web.Controllers
             if (ModelState.IsValid)
             {
                 //TODO: Save User Preference
-
+                Session["Preference"] = model;
                 return RedirectToAction("Index", "Home");
             }
 
             var organizationRepository = new OrganizationRepository();
-            var organizations = organizationRepository.GetOrganizations(User).ToList()
+            var organizations = organizationRepository.GetAll(User).ToList()
                 .Select(c => new SelectListItem()
                 {
                     Value = c.Id.ToString(),
                     Text = c.Name
                 });
 
-            model.Organizations = new SelectList(organizations, "Value", "Text"); ;
+            ViewBag.Organizations = new SelectList(organizations, "Value", "Text"); ;
             return View(model);
         }
 

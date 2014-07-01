@@ -95,4 +95,8 @@ namespace MyERP.Web
 	
     }
 
+    public partial class RoleRepository : OpenAccessBaseRepository<MyERP.DataAccess.Role, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
 }

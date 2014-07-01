@@ -45,29 +45,30 @@ namespace MyERP.Web
         public override string[] GetRolesForUser(string username)
         {
             //Return if the user is not authenticated
-            if (!HttpContext.Current.User.Identity.IsAuthenticated)
-                return null;
+            //if (!HttpContext.Current.User.Identity.IsAuthenticated)
+            //    return null;
 
             //Return if present in Cache
             var cacheKey = string.Format("UserRoles_{0}", username);
             if (HttpRuntime.Cache[cacheKey] != null)
                 return (string[]) HttpRuntime.Cache[cacheKey];
 
-            var userRoles = new List<String>();
+            string[] userRoles;
+
             using (var context = new EntitiesModel())
             {
                 userRoles = (from userInRole in context.UserInRoles
-                             .Include(c=>c.Role)
-                             .Include(c=>c.User)
-                             where userInRole.User.Name == username
-                             select userInRole.Role.Name).ToList<String>();
+                    .Include(c => c.Role)
+                    .Include(c => c.User)
+                    where userInRole.User.Name == username
+                    select userInRole.Role.Name).ToArray();
             }
 
             //Store in cache
             HttpRuntime.Cache.Insert(cacheKey, userRoles, null, DateTime.Now.AddMinutes(_cacheTimeoutInMinutes), Cache.NoSlidingExpiration);
  
             // Return
-            return userRoles.ToArray();
+            return userRoles;
         }
 
         public override string ApplicationName

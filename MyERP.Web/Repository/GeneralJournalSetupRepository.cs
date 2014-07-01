@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
+using System.Web.Security;
 using MyERP.DataAccess;
 using Telerik.OpenAccess;
 
@@ -18,6 +20,14 @@ namespace MyERP.Web
 
             this.fetchStrategy.LoadWith<GeneralJournalSetup>(c => c.GeneralJournalNumberSequence);
             this.fetchStrategy.LoadWith<GeneralJournalSetup>(c => c.LocalCurrency);
+        }
+
+        public override IQueryable<GeneralJournalSetup> GetAll(IPrincipal principal)
+        {
+            var membershipUser = (MyERPMembershipUser)Membership.GetUser(principal.Identity.Name, true);
+            var allEntities = GetAll().Where(c => c.ClientId == membershipUser.ClientId);
+
+            return allEntities;
         }
     }
 

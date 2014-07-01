@@ -88,7 +88,7 @@ namespace MyERP.Web.Models
             set;
         }
 
-        public IEnumerable<SelectListItem> Organizations { get; set; }
+        //public IEnumerable<SelectListItem> Organizations { get; set; }
 
         [Required]
         [DataType(DataType.Date)]

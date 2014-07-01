@@ -10,9 +10,12 @@ namespace MyERP.Web
 {
     public static class WebApiOdataConfig
     {
+        public static string UrlPrefix { get { return "odata"; } }
+        public static string UrlPrefixRelative { get { return "~/odata"; } }
+
         public static void Register(HttpConfiguration config)
         {
-            //config.Routes.MapHttpRoute(name: "DefaultApi",
+            //var apiRoute =  config.Routes.MapHttpRoute(name: "DefaultApi",
             //                               routeTemplate: "api/{controller}/{id}",
             //                               defaults: new { id = RouteParameter.Optional });
 
@@ -33,7 +36,9 @@ namespace MyERP.Web
             builder.EntitySet<Organization>("Organizations");
             builder.EntitySet<PaymentTerm>("PaymentTerms");
             builder.EntitySet<Session>("Sessions");
+            builder.EntitySet<Role>("Roles");
             builder.EntitySet<User>("Users");
+            builder.EntitySet<UserInRole>("UserInRoles");
             
             //var tutorsEntitySet = builder.EntitySet<Tutor>("Tutors");
             //tutorsEntitySet.EntityType.Ignore(s => s.UserName);
@@ -52,7 +57,8 @@ namespace MyERP.Web
             //generalJournalSetupOfOrganization.Parameter<Guid>("organizationKey");
             //generalJournalSetupOfOrganization.ReturnsFromEntitySet<GeneralJournalSetup>("GeneralJournalSetups");
 
-            config.Routes.MapODataRoute("odata", "odata", builder.GetEdmModel());
+
+            config.Routes.MapODataRoute("DefaultOdata", "odata", builder.GetEdmModel());
             config.EnableQuerySupport();
         }
     }

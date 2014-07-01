@@ -14,6 +14,7 @@ namespace MyERP.Web
             principal = null;
             if (!Membership.Provider.ValidateUser(user, password))
                 return false;
+            //FormsAuthentication.SetAuthCookie(user, true);
             string[] roles = System.Web.Security.Roles.Provider.GetRolesForUser(user);
             principal = new GenericPrincipal(new GenericIdentity(user), roles);
             return true;

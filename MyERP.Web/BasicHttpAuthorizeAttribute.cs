@@ -16,13 +16,26 @@ namespace MyERP.Web
         private const string BasicAuthResponseHeader = "WWW-Authenticate";
         private const string BasicAuthResponseHeaderValue = "Basic";
 
+        
         public override void OnAuthorization(HttpActionContext actionContext)
         {
             if (actionContext == null)
                 throw Error.ArgumentNull("actionContext");
-            if (AuthorizationDisabled(actionContext)
-                || AuthorizeRequest(actionContext.ControllerContext.Request))
+            
+            if (AuthorizationDisabled(actionContext))
                 return;
+            
+            //Case that user is authenticated using forms authentication
+            //so no need to check header for basic authentication.
+            if (HttpContext.Current.User.Identity.IsAuthenticated) //If current user is authenticated 
+            {
+                var principal = HttpContext.Current.User;
+                if(CheckRoles(principal) && CheckUsers(principal))
+                    return;
+            }
+            else if (AuthorizeRequest(actionContext.ControllerContext.Request)) //Use Basic Auth information
+                return;
+            
             this.HandleUnauthorizedRequest(actionContext);
         }
 
