@@ -88,6 +88,12 @@ namespace MyERP.Web.Models
             set;
         }
 
+        public Organization Organization
+        {
+            get;
+            set;
+        }
+
         //public IEnumerable<SelectListItem> Organizations { get; set; }
 
         [Required]

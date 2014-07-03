@@ -1,4 +1,4 @@
-﻿@model MyERP.Web.Models.AccountViewModels
+﻿@model MyERP.Web.Models.AccountCreateViewModel
 
 @{
     ViewBag.Title = "New Account";
@@ -14,7 +14,7 @@
         <div class="col-sm-4">
             <div class="pull-right">
                 <div style="bottom: 15px; position: relative; top: 15px">
-                    <a class="btn btn-primary" href="@Url.Action("Create", "Account")" id="save-button"><span class="glyphicon glyphicon-ok"></span> Save</a>
+                    <a class="btn btn-primary" href="#" id="save-button" onclick="document.getElementById('create-account').submit();"><span class="glyphicon glyphicon-ok"></span> Save</a>
                 </div>
             </div>
         </div>
@@ -69,7 +69,10 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Status, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
+                @Html.EnumDropDownListFor(m => m.Status, htmlAttributes: new { @class = "form-control" })
+                @*
                 @Html.TextBoxFor(m => m.Status, new { @class = "form-control" })
+                *@
             </div>
         </div>
     </div>
@@ -77,8 +80,4 @@
 }
 @section Scripts {
     <script type="text/javascript" src="~/Scripts/myerp.autocomplete.js"></script>
-
-    <script type="text/javascript">
-        var urlBase = '@Url.Content(MyERP.Web.WebApiOdataConfig.UrlPrefixRelative)';
-    </script>
 }

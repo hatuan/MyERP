@@ -7,6 +7,7 @@ using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using MyERP.DataAccess;
 using MyERP.Web.Models;
 
 namespace MyERP.Web.Controllers
@@ -61,17 +62,29 @@ namespace MyERP.Web.Controllers
                 if (Membership.Provider.ValidateUser(model.Name, passEncrypt))
                 {
                     var user = (MyERPMembershipUser) Membership.GetUser(model.Name, true);
-                    if (user != null)
+                    if (user != null && user.ClientId != Guid.Empty)
                     {
+                        //Lay thong tin mac dinh cua user
+                        var preference = new PreferenceViewModel();
+                        preference.OrganizationId = user.OrganizationId == Guid.Empty ? "" : user.OrganizationId.ToString();
+                        preference.Organization = user.Organization;
+
+                        preference.WorkingDate = DateTime.Now;
+                        Session["Preference"] = preference;
                         string[] roles = Roles.Provider.GetRolesForUser(user.UserName);
 
                         FormsAuthentication.SetAuthCookie(model.Name, model.RememberMe);
                         return RedirectToLocal(returnUrl);
                     }
+                    if (user != null && user.ClientId == Guid.Empty)
+                    {
+                        ModelState.AddModelError("Name", "User don't have available Client - Press create new Client");
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    ModelState.AddModelError("Name", "Invalid username or password.");
+                    ModelState.AddModelError("Password", "Invalid username or password.");
                 }
             }
 
@@ -253,11 +266,18 @@ namespace MyERP.Web.Controllers
                     Value = c.Id.ToString(),
                     Text = c.Name
                 });
+
+            var defaultOrganizationId = (Membership.GetUser(User.Identity.Name, true) as MyERPMembershipUser).OrganizationId.ToString();
             if (Session["Preference"] != null)
             {
-                SelectListItem selected =
-                    organizations.FirstOrDefault(
-                        c => c.Value == (Session["Preference"] as PreferenceViewModel).OrganizationId.ToString());
+                defaultOrganizationId = (Session["Preference"] as PreferenceViewModel).OrganizationId;
+                model.WorkingDate = (Session["Preference"] as PreferenceViewModel).WorkingDate;
+            }
+
+            if (!string.IsNullOrEmpty(defaultOrganizationId) && defaultOrganizationId != Guid.Empty.ToString())
+            {
+                SelectListItem selected = organizations.FirstOrDefault(c => c.Value == defaultOrganizationId);
+                
                 if (selected != null)
                 {
                     selected.Selected = true;
@@ -265,9 +285,8 @@ namespace MyERP.Web.Controllers
                 }
                 else
                 {
-                    ViewBag.Organizations = new SelectList(organizations, "Value", "Text", selected.Value);
+                    ViewBag.Organizations = new SelectList(organizations, "Value", "Text");
                 }
-                model.WorkingDate = (Session["Preference"] as PreferenceViewModel).WorkingDate;
             }
             else
                 ViewBag.Organizations = new SelectList(organizations, "Value", "Text");
@@ -278,24 +297,32 @@ namespace MyERP.Web.Controllers
         //POST: /User/Preference
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Preference(PreferenceViewModel model)
+        public ActionResult Preference([Bind(Exclude = "Organization")] PreferenceViewModel model)
         {
+            var organizationRepository = new OrganizationRepository();
+            model.Organization = organizationRepository.GetBy(c => c.Id == new Guid(model.OrganizationId));
             if (ModelState.IsValid)
             {
-                //TODO: Save User Preference
                 Session["Preference"] = model;
-                return RedirectToAction("Index", "Home");
+
+                var userRepository = new UserRepository();
+                if (!userRepository.UpdateDefaultOrganization(User.Identity.Name, Guid.Parse(model.OrganizationId)))
+                    ModelState.AddModelError("OrganizationId", "Set default Organization of User failed ");
+                else
+                {
+
+
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
-            var organizationRepository = new OrganizationRepository();
             var organizations = organizationRepository.GetAll(User).ToList()
                 .Select(c => new SelectListItem()
                 {
                     Value = c.Id.ToString(),
                     Text = c.Name
                 });
-
-            ViewBag.Organizations = new SelectList(organizations, "Value", "Text"); ;
+            ViewBag.Organizations = model.OrganizationId != "" ? new SelectList(organizations, "Value", "Text", model.OrganizationId) : new SelectList(organizations, "Value", "Text");
             return View(model);
         }
 

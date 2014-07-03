@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using System.Web.UI.WebControls;
+using MyERP.DataAccess;
 using MyERP.Web.Models;
 
 namespace MyERP.Web.Controllers
@@ -39,7 +41,6 @@ namespace MyERP.Web.Controllers
                 .Select(c => new AccountViewModels()
                 {
                     ArAp = c.ArAp,
-                    ClientId = c.ClientId,
                     Code = c.Code,
                     CurrencyId = c.CurrencyId ?? Guid.Empty,
                     CurrencyCode = c.CurrencyId == null ? "" : c.Currency.Code,
@@ -47,16 +48,14 @@ namespace MyERP.Web.Controllers
                     Id = c.Id,
                     Level = c.Level,
                     Name = c.Name,
-                    OrganizationCode = c.Organization.Code,
                     OrganizationName = c.Organization.Name,
-                    OrganizationId = c.OrganizationId,
                     ParentAccountCode = c.ParentAccountId == null ? "" : c.ParentAccount.Code,
                     ParentAccountId = c.ParentAccountId ?? Guid.Empty,
                     RecCreateBy = c.RecCreatedByUser.Name,
                     RecCreated = c.RecCreated,
                     RecModifiedBy = c.RecModifiedByUser.Name,
                     RecModified = c.RecModified,
-                    Status = c.Status,
+                    Status = (AccountStatusType) c.Status,
                     Version = c.Version
                 });
 
@@ -67,14 +66,22 @@ namespace MyERP.Web.Controllers
         //GET: /Account/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new AccountCreateViewModel
+            {
+                Status = AccountStatusType.Active
+            };
+            return View(model);
         }
 
         //
         //POST: /Account/Create
         [HttpPost]
-        public ActionResult Create(AccountViewModels model)
+        public ActionResult Create(AccountCreateViewModel model)
         {
+            if (ModelState.IsValid)
+            {
+                
+            }
             return View(model);
         }
 

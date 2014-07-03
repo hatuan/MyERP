@@ -12,7 +12,7 @@
             autoFocus: true,
             source: function (req, resp) {
                 $.ajax({
-                    url: urlBase + "/Currencies?$filter=startswith(Code,'" + req.term + "')&$select=Id,Code,Name",
+                    url: urlBase + "/Currencies?$filter=startswith(Code,'" + req.term + "')&$select=Id,Code,Name&$orderby=Code",
                     success: function (result) {
                         resp($.map(result.value, function (item) {
                             return {
@@ -41,7 +41,7 @@
                     var currentValue = $(that).val();
 
                     $.ajax({
-                        url: urlBase + "/Currencies?$filter=Code eq '" + currentValue + "'&$select=Id,Code,Name",
+                        url: urlBase + "/Currencies?$filter=Code eq '" + currentValue + "'&$select=Id,Code,Name&$orderby=Code",
                         success: function (result) {
                             if (result.value.length == 0) {
                                 $(that).val('');
@@ -69,7 +69,7 @@
             autoFocus: true,
             source: function (req, resp) {
                 $.ajax({
-                    url: urlBase + "/Accounts?$filter=startswith(Code,'" + req.term + "')&$select=Id,Code,Name",
+                    url: urlBase + "/Accounts?$filter=startswith(Code,'" + req.term + "')&$select=Id,Code,Name&$orderby=Code",
                     success: function (result) {
                         resp($.map(result.value, function (item) {
                             return {
@@ -98,7 +98,7 @@
                     var currentValue = $(that).val();
 
                     $.ajax({
-                        url: urlBase + "/Accounts?$filter=Code eq '" + currentValue + "'&$select=Id,Code,Name",
+                        url: urlBase + "/Accounts?$filter=Code eq '" + currentValue + "'&$select=Id,Code,Name&$orderby=Code",
                         success: function (result) {
                             if (result.value.length == 0) {
                                 $(that).val('');

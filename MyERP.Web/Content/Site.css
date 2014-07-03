@@ -46,20 +46,6 @@ textarea {
     border-right: 1px solid #ddd;
 }
 
-.list-row {
-    padding: 5px 15px;
-    margin: 0px -15px;
-    border-bottom: 1px solid #ddd;
-}
-
-.list-timestamp {
-    position: absolute;
-    right: 5px;
-    bottom: 2px;
-    font-size: 60%;
-    color: #888
-}
-
 .form-link {
     font-weight: bold;
     font-size: 102%;
@@ -70,4 +56,58 @@ textarea {
     overflow: hidden;
     max-height: 30px;
     white-space: nowrap;
+}
+
+/* listing */
+
+.show_filters {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid #c7c7c7;
+}
+
+.list-row {
+	padding: 5px 15px;
+	margin: 0px -15px;
+	border-bottom: 1px solid #c7c7c7;
+}
+
+.side-panel {
+	border-bottom: 1px solid #c7c7c7;
+	margin: 0px -15px;
+	padding: 5px 15px;
+}
+
+
+/* list */
+
+.doclist-row {
+	position: relative;
+	padding-top: 5px;
+	padding-bottom: 6px;
+	/*border-bottom: 1px solid #eee;*/
+}
+
+.doclist-row .col {
+	padding-left: 7px;
+	padding-right: 7px;
+}
+
+.list-timestamp {
+	position: absolute;
+	right: 5px;
+	bottom: 2px;
+	font-size: 70%;
+	color: #888;
+}
+
+.list-doc-name {
+	position: absolute;
+	bottom: 2px;
+}
+
+.list-doc-name a {
+	font-size: 70%;
+	color: #888;
 }

@@ -105,9 +105,7 @@ namespace MyERP.Web
                     context.SaveChanges();
                     status = MembershipCreateStatus.Success;
 
-                    return new MyERPMembershipUser("myCustomProvider", user.Name, user.Id, user.Email, user.PasswordQuestion,
-                        user.Comment, user.IsActivated, user.IsLockedOut, user.CreatedDate, user.LastLoginDate,
-                        user.LastLoginDate, user.LastModifiedDate, user.LastLockedOutDate, user.ClientId);
+                    return new MyERPMembershipUser(user);
                 }
                 catch (Exception)
                 {
@@ -227,10 +225,7 @@ namespace MyERP.Web
                     //Store in cache
                     HttpRuntime.Cache.Insert(cacheKey, membershipUser, null, DateTime.Now.AddMinutes(_cacheTimeoutInMinutes), Cache.NoSlidingExpiration);
 
-                    return new MyERPMembershipUser("myCustomProvider", user.Name, user.Id, user.Email,
-                        user.PasswordQuestion,
-                        user.Comment, user.IsActivated, user.IsLockedOut, user.CreatedDate, user.LastLoginDate,
-                        user.LastLoginDate, user.LastModifiedDate, user.LastLockedOutDate, user.ClientId);
+                    return membershipUser;
                 }
                 else
                     return null;
@@ -240,16 +235,24 @@ namespace MyERP.Web
 
         public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)
         {
+            var cacheKey = string.Format("UserData_{0}", providerUserKey);
+            if (HttpRuntime.Cache[cacheKey] != null)
+                return (MyERPMembershipUser) HttpRuntime.Cache[cacheKey];
+
             using (var context = new EntitiesModel())
             {
                 var user = context.Users.FirstOrDefault(u => u.Id == (Guid)providerUserKey);
-                if(user != null)
-                    return new MyERPMembershipUser("myCustomProvider", user.Name, user.Id, user.Email, user.PasswordQuestion,
-                        user.Comment, user.IsActivated, user.IsLockedOut, user.CreatedDate, user.LastLoginDate,
-                        user.LastLoginDate, user.LastModifiedDate, user.LastLockedOutDate, user.ClientId);
+                if (user != null)
+                {
+                    var membershipUser = new MyERPMembershipUser(user);
+                    //Store in cache
+                    HttpRuntime.Cache.Insert(cacheKey, membershipUser, null, DateTime.Now.AddMinutes(_cacheTimeoutInMinutes), Cache.NoSlidingExpiration);
+
+                    return membershipUser;
+                }
                 else
                     return null;
-                
+
             }
         }
 
@@ -322,7 +325,12 @@ namespace MyERP.Web
 
     public class MyERPMembershipUser : MembershipUser
     {
+        public Client Client { get; set; }
         public Guid? ClientId { get; set; }
+        public Guid? OrganizationId { get; set; }
+
+        public Organization Organization { get; set; }
+        public string FullName { get; set; }
 
         public MyERPMembershipUser(User user) : base(providerName: "myCustomProvider",
             name:user.Name,
@@ -338,39 +346,45 @@ namespace MyERP.Web
             lastPasswordChangedDate:user.LastModifiedDate,
             lastLockoutDate:user.LastLockedOutDate)
         {
+            Client = user.Client;
             ClientId = user.ClientId ?? Guid.Empty;
+            
+            Organization = user.Organization;
+            OrganizationId = user.OrganizationId ?? Guid.Empty;
+            
+            FullName = user.FullName;
         }
 
-        public MyERPMembershipUser(string providername,
-                                  string username,
-                                  object providerUserKey,
-                                  string email,
-                                  string passwordQuestion,
-                                  string comment,
-                                  bool isApproved,
-                                  bool isLockedOut,
-                                  DateTime creationDate,
-                                  DateTime lastLoginDate,
-                                  DateTime lastActivityDate,
-                                  DateTime lastPasswordChangedDate,
-                                  DateTime lastLockedOutDate,
-                                  Guid? clientId) :
-                                  base(providername,
-                                       username,
-                                       providerUserKey,
-                                       email,
-                                       passwordQuestion,
-                                       comment,
-                                       isApproved,
-                                       isLockedOut,
-                                       creationDate,
-                                       lastLoginDate,
-                                       lastActivityDate,
-                                       lastPasswordChangedDate,
-                                       lastLockedOutDate)
-        {
-            this.ClientId = clientId ?? Guid.Empty;
-        }
+        //public MyERPMembershipUser(string providername,
+        //                          string username,
+        //                          object providerUserKey,
+        //                          string email,
+        //                          string passwordQuestion,
+        //                          string comment,
+        //                          bool isApproved,
+        //                          bool isLockedOut,
+        //                          DateTime creationDate,
+        //                          DateTime lastLoginDate,
+        //                          DateTime lastActivityDate,
+        //                          DateTime lastPasswordChangedDate,
+        //                          DateTime lastLockedOutDate,
+        //                          Guid? clientId) :
+        //                          base(providername,
+        //                               username,
+        //                               providerUserKey,
+        //                               email,
+        //                               passwordQuestion,
+        //                               comment,
+        //                               isApproved,
+        //                               isLockedOut,
+        //                               creationDate,
+        //                               lastLoginDate,
+        //                               lastActivityDate,
+        //                               lastPasswordChangedDate,
+        //                               lastLockedOutDate)
+        //{
+        //    this.ClientId = clientId ?? Guid.Empty;
+        //}
 
 
         public override string GetPassword(string passwordAnswer)

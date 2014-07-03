@@ -4,7 +4,7 @@ namespace MyERP.DataAccess
 {
     public enum AccountStatusType : byte
     {
-        [Display(Name = "InActive")]
+        [Display(Name = "Inactive")]
         Inactive = 0,
         [Display(Name = "Active")]
         Active = 1

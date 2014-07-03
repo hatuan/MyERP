@@ -23,6 +23,8 @@ namespace MyERP.Web
             
         }
 
+
+
         public override IQueryable<Account> GetAll(IPrincipal principal)
         {
             var membershipUser = (MyERPMembershipUser)Membership.GetUser(principal.Identity.Name, true);
