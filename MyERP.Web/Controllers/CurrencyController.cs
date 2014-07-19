@@ -7,7 +7,6 @@ using System.Web.Mvc;
 
 namespace MyERP.Web.Controllers
 {
-    [Authorize]
     public class CurrencyController : OpenAccessBaseController<MyERP.DataAccess.Currency, MyERP.DataAccess.EntitiesModel>
     {
          /// <summary>

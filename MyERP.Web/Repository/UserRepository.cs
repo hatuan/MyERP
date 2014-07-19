@@ -18,7 +18,13 @@ namespace MyERP.Web
             this.fetchStrategy.LoadWith<User>(c => c.RolesInUser);
           
         }
-
+        
+        /// <summary>
+        /// Update user default Organization in database and Cache with organizationId value
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="organizationId"></param>
+        /// <returns></returns>
         public bool UpdateDefaultOrganization(string name, Guid organizationId)
         {
             var user = GetBy(c => c.Name == name);
@@ -28,7 +34,7 @@ namespace MyERP.Web
                 user.OrganizationId = organizationId;
                 Update(user);
 
-                ////Store in cache
+                ////Store in cache with new membershipUser
                 var cacheKey = string.Format("UserData_{0}", name);
                 var membershipUser = new MyERPMembershipUser(user);
                 HttpRuntime.Cache[cacheKey] = membershipUser;

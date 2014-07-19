@@ -22,7 +22,6 @@ namespace MyERP.Web
         TEntity AddNew(TEntity entity);
         TEntity Update(TEntity entity);
         void Delete(TEntity entity);
-
         TContext DataContext { get; }
     }
 

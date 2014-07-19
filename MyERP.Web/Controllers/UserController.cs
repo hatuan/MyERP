@@ -12,8 +12,7 @@ using MyERP.Web.Models;
 
 namespace MyERP.Web.Controllers
 {
-    [Authorize]
-    public class UserController : OpenAccessBaseController<MyERP.DataAccess.User, MyERP.DataAccess.EntitiesModel>
+  public class UserController : OpenAccessBaseController<MyERP.DataAccess.User, MyERP.DataAccess.EntitiesModel>
     {
          /// <summary>
         /// Constructor used by the Controller.
@@ -307,11 +306,11 @@ namespace MyERP.Web.Controllers
 
                 var userRepository = new UserRepository();
                 if (!userRepository.UpdateDefaultOrganization(User.Identity.Name, Guid.Parse(model.OrganizationId)))
+                {
                     ModelState.AddModelError("OrganizationId", "Set default Organization of User failed ");
+                }
                 else
                 {
-
-
                     return RedirectToAction("Index", "Home");
                 }
             }

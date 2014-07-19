@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using MyERP.DataAccess;
 
 namespace MyERP.Web.Models
@@ -71,10 +72,14 @@ namespace MyERP.Web.Models
         public DateTime RecModified { get; set; }
     }
 
-    public class AccountCreateViewModel
+    public class AccountEditViewModel
     {
+        public Guid? Id { get; set; }
+
         [Required]
         [Display(Name = "Code")]
+        [Remote("CheckDuplicateAccount", "Validation", AdditionalFields = "Id", ErrorMessage = "Account code already exists. Please specify another one.")]
+        [RegularExpression(@"^[A-Za-z0-9]*$", ErrorMessage = "Invalid Code - only allow a-z A-Z 0-9 character")]
         public String Code { get; set; }
 
         [Required]
@@ -86,9 +91,11 @@ namespace MyERP.Web.Models
         [Display(Name = "Currency")]
         public String CurrencyCode { get; set; }
 
+        
         public Guid? ParentAccountId { get; set; }
 
         [Display(Name = "Parent Account")]
+        [Remote("CheckParentAccount", "Validation", ErrorMessage = "Parnet account had transaction. Can not create child account")]
         public String ParentAccountCode { get; set; }
 
         [Display(Name = "AR/AP Account")]
@@ -97,5 +104,7 @@ namespace MyERP.Web.Models
         [Required]
         [Display(Name = "Status")]
         public AccountStatusType Status { get; set; }
+
+        public Int64 Version { get; set; }
     }
 }

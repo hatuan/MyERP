@@ -211,6 +211,7 @@ namespace MyERP.Web
         
         public override MembershipUser GetUser(string username, bool userIsOnline)
         {
+            //Get MyERPMembershipUser from Cache if found
             var cacheKey = string.Format("UserData_{0}", username);
             if (HttpRuntime.Cache[cacheKey] != null)
                 return (MyERPMembershipUser)HttpRuntime.Cache[cacheKey];

@@ -6,7 +6,6 @@ using System.Web.Mvc;
 
 namespace MyERP.Web.Controllers
 {
-    [Authorize]
     public class MasterController : Controller
     {
         // GET: Master

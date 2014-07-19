@@ -31,7 +31,7 @@ namespace MyERP.DataAccess
             public User RecModifiedByUser { get; set; }
         }
 
-        public virtual int SequenceNextVal { get; set; }
+        public virtual int? SequenceNextVal { get; set; }
     }
 
 }

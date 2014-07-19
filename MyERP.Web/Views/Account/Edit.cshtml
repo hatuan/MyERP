@@ -1,0 +1,93 @@
+﻿@model MyERP.Web.Models.AccountEditViewModel
+
+@{
+    ViewBag.Title = "Edit Account";
+}
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-8">
+            <h3 class="pull-left">
+                @ViewBag.Title
+            </h3>
+        </div>
+        <div class="col-sm-4">
+            <div class="pull-right">
+                <div style="bottom: 15px; position: relative; top: 15px">
+                    <a class="btn btn-primary" href="#" id="save-button"><span class="glyphicon glyphicon-ok"></span> Save</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Edit", "Account", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form", id = "edit-account" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="row">
+        <h4 class="col-md-12">
+            <span>1</span>. Basic Info
+        </h4>
+        <div class="col-md-12" style="height: 10px;"></div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Code, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Code, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Code, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.CurrencyCode, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.CurrencyCode, new { @class = "form-control", id = "currency-code", data_urlbase = Url.Content(MyERP.Web.WebApiOdataConfig.UrlPrefixRelative), data_autocomplete_id = "currency-id", data_autocomplete = "currency-code" })
+            </div>
+            @Html.HiddenFor(m => m.CurrencyId, htmlAttributes: new { id = "currency-id" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ParentAccountCode, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ParentAccountCode, new { @class = "form-control", id = "parent-account-code", data_urlbase = Url.Content(MyERP.Web.WebApiOdataConfig.UrlPrefixRelative), data_autocomplete_id = "parent-account-id", data_autocomplete = "account-code" })
+                @Html.ValidationMessageFor(m => m.ParentAccountCode, "", new { @class = "text-danger" })
+            </div>
+            @Html.HiddenFor(m => m.ParentAccountId, htmlAttributes: new { id = "parent-account-id" })
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <label>
+                        <span>@Html.CheckBoxFor(m => m.ArAp)</span>
+                        <span>@Html.LabelFor(m => m.ArAp)</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Status, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(m => m.Status, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        @Html.HiddenFor(m=>m.Id)
+        @Html.HiddenFor(m => m.Version)
+    </div>
+
+}
+@section Scripts {
+    <script type="text/javascript" src="~/Scripts/myerp.autocomplete.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("#save-button").click(function() {
+                $("#edit-account").submit();
+            });
+        });
+    </script>
+}

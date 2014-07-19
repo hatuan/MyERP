@@ -199,4 +199,10 @@ Global
 		{067F3193-C00E-4DDF-B6C5-33FEAF5E14B2} = {F79FC771-EFB9-4A27-86F6-F5CBF991180A}
 		{D502661D-A8E0-45DD-9A2F-D14135B48459} = {F79FC771-EFB9-4A27-86F6-F5CBF991180A}
 	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		ShowOldMenu = False
+		IndexUsingAttrib = False
+		FetchGroupUsingAttrib = True
+		VersionFieldUsingAttrib = True
+	EndGlobalSection
 EndGlobal

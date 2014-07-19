@@ -6,8 +6,7 @@ using System.Web.Mvc;
 
 namespace MyERP.Web.Controllers
 {
-    [Authorize]
-    public class ModuleController : Controller
+  public class ModuleController : Controller
     {
         // GET: Module
         public ActionResult Index()

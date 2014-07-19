@@ -1,4 +1,6 @@
-﻿@{
+﻿@using System.Reflection
+@using MyERP.Web.Controllers
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -29,3 +31,21 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+
+@section Footer{
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4 col-md-4">
+                    <p>&copy; @DateTime.Now.Year - MyERP </p>
+                    <p>Version : @Assembly.GetAssembly(typeof(HomeController)).GetName().Version.ToString() </p>
+                </div>
+                <div class="col-xs-4 col-md-4 col-md-offset-4">
+                    <p><abbr title="Contact">Contact : </abbr> Hoang Anh Tuan</p>
+                    <p><abbr title="Phone">Phone : </abbr>0915.025.006</p>
+                    <p><abbr title="Email">Email : </abbr>tuanhoanganh@yahoo.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}

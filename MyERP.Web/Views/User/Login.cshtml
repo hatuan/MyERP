@@ -18,7 +18,7 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", autocomplete = "off" })
                         @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -32,8 +32,10 @@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                            <label>
+                                <span>@Html.CheckBoxFor(m => m.RememberMe)</span>
+                                <span>@Html.LabelFor(m => m.RememberMe)</span>
+                            </label>
                         </div>
                     </div>
                 </div>

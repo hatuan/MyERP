@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace MyERP.Web.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         // GET: Home
