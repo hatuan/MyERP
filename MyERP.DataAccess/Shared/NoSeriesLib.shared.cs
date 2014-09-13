@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 #if SILVERLIGHT
 using MyERP.Repositories;
 #endif
+using System.Security.Cryptography;
+
 namespace MyERP.DataAccess.Shared
 {
     public class NoSeriesLib
     {
 #if !SILVERLIGHT
-        public static string NextNo(string noSeqName, string noFormat)
+        public static string NextNo(Guid noSeqId, string noFormat)
 #else
-        public static void NextNo(string noSeqName, string noFormat, Action<String> callback)
+        public static void NextNo(Guid noSeqId, string noFormat, Action<String> callback)
 #endif
         {
             int startPos = 0;
@@ -25,12 +23,21 @@ namespace MyERP.DataAccess.Shared
             {
                 using (var connection = dbContext.Connection)
                 {
-                    string SqlQuery = String.Format("SELECT nextval('{0}')", new object[] { noSeqName });
+                    string noSeqName = (from numberSequence in dbContext.NumberSequences
+                        where numberSequence.Id.Equals(noSeqId)
+                        select numberSequence.NoSeqName).FirstOrDefault();
 
-                    using (var command = connection.CreateCommand())
+                    if (noSeqName == null)
+                        newNo = 0;
+                    else
                     {
-                        command.CommandText = SqlQuery;
-                        newNo = Convert.ToInt32(command.ExecuteScalar());
+                        string SqlQuery = String.Format("SELECT nextval('{0}')", new object[] {noSeqName});
+
+                        using (var command = connection.CreateCommand())
+                        {
+                            command.CommandText = SqlQuery;
+                            newNo = Convert.ToInt32(command.ExecuteScalar());
+                        }
                     }
                 }
             }
@@ -39,7 +46,7 @@ namespace MyERP.DataAccess.Shared
             return NoSeriesLib.ReplaceNoText(noFormat, newNo, 0, startPos, endPos);
 #else
             NumberSequenceRepository NumberSequenceRepository = new NumberSequenceRepository();
-            NumberSequenceRepository.SequenceNextVal(noSeqName, newNo => 
+            NumberSequenceRepository.SequenceNextVal(noSeqId, newNo => 
             {
                 bool IsDigit = false;
                 int i;
@@ -78,7 +85,7 @@ namespace MyERP.DataAccess.Shared
             if (EndPos < No.Length - 1)
                 EndNo = No.Substring(EndPos + 1);
             NewLength = NewNo.ToString().Length;
-            OldLength = EndPos - StartPos + 1;
+            OldLength = EndPos - StartPos;
             if (FixedLength > OldLength)
                 OldLength = FixedLength;
             if (OldLength > NewLength)

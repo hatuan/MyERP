@@ -18,18 +18,14 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
+using System.ComponentModel;
 using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("general_journal_line", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
-	[KeyGenerator(KeyGenerator.Guid)]
-	public partial class GeneralJournalLine
+	public partial class GeneralJournalLine : IDataErrorInfo, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		private Guid _id;
-		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_id")]
 		public virtual Guid Id
 		{
 			get
@@ -38,13 +34,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._id = value;
+				if(this._id != value)
+				{
+					this.OnPropertyChanging("Id");
+					this._id = value;
+					this.OnPropertyChanged("Id");
+				}
 			}
 		}
 		
 		private Guid _corAccountId;
-		[Column("cor_account_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_corAccountId")]
 		public virtual Guid CorAccountId
 		{
 			get
@@ -53,13 +52,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._corAccountId = value;
+				if(this._corAccountId != value)
+				{
+					this.OnPropertyChanging("CorAccountId");
+					this._corAccountId = value;
+					this.OnPropertyChanged("CorAccountId");
+				}
 			}
 		}
 		
 		private Guid _accountId;
-		[Column("account_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_accountId")]
 		public virtual Guid AccountId
 		{
 			get
@@ -68,13 +70,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._accountId = value;
+				if(this._accountId != value)
+				{
+					this.OnPropertyChanging("AccountId");
+					this._accountId = value;
+					this.OnPropertyChanged("AccountId");
+				}
 			}
 		}
 		
 		private string _description;
-		[Column("description", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_description")]
 		public virtual string Description
 		{
 			get
@@ -83,13 +88,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._description = value;
+				if(this._description != value)
+				{
+					this.OnPropertyChanging("Description");
+					this._description = value;
+					this.OnPropertyChanged("Description");
+				}
 			}
 		}
 		
 		private decimal _debitAmount;
-		[Column("debit_amount", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_debitAmount")]
 		public virtual decimal DebitAmount
 		{
 			get
@@ -98,13 +106,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._debitAmount = value;
+				if(this._debitAmount != value)
+				{
+					this.OnPropertyChanging("DebitAmount");
+					this._debitAmount = value;
+					this.OnPropertyChanged("DebitAmount");
+				}
 			}
 		}
 		
 		private decimal _creditAmountLcy;
-		[Column("credit_amount_lcy", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_creditAmountLcy")]
 		public virtual decimal CreditAmountLcy
 		{
 			get
@@ -113,13 +124,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._creditAmountLcy = value;
+				if(this._creditAmountLcy != value)
+				{
+					this.OnPropertyChanging("CreditAmountLcy");
+					this._creditAmountLcy = value;
+					this.OnPropertyChanged("CreditAmountLcy");
+				}
 			}
 		}
 		
 		private decimal _debitAmountLcy;
-		[Column("debit_amount_lcy", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_debitAmountLcy")]
 		public virtual decimal DebitAmountLcy
 		{
 			get
@@ -128,13 +142,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._debitAmountLcy = value;
+				if(this._debitAmountLcy != value)
+				{
+					this.OnPropertyChanging("DebitAmountLcy");
+					this._debitAmountLcy = value;
+					this.OnPropertyChanged("DebitAmountLcy");
+				}
 			}
 		}
 		
 		private decimal _creditAmount;
-		[Column("credit_amount", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_creditAmount")]
 		public virtual decimal CreditAmount
 		{
 			get
@@ -143,13 +160,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._creditAmount = value;
+				if(this._creditAmount != value)
+				{
+					this.OnPropertyChanging("CreditAmount");
+					this._creditAmount = value;
+					this.OnPropertyChanged("CreditAmount");
+				}
 			}
 		}
 		
 		private Guid? _businessPartnerId;
-		[Column("business_partner_id", IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_businessPartnerId")]
 		public virtual Guid? BusinessPartnerId
 		{
 			get
@@ -158,13 +178,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._businessPartnerId = value;
+				if(this._businessPartnerId != value)
+				{
+					this.OnPropertyChanging("BusinessPartnerId");
+					this._businessPartnerId = value;
+					this.OnPropertyChanged("BusinessPartnerId");
+				}
 			}
 		}
 		
 		private Guid? _jobId;
-		[Column("job_id", IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_jobId")]
 		public virtual Guid? JobId
 		{
 			get
@@ -173,13 +196,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._jobId = value;
+				if(this._jobId != value)
+				{
+					this.OnPropertyChanging("JobId");
+					this._jobId = value;
+					this.OnPropertyChanged("JobId");
+				}
 			}
 		}
 		
 		private long _lineNo;
-		[Column("line_no", Length = 0, Scale = 0, SqlType = "int8")]
-		[Storage("_lineNo")]
 		public virtual long LineNo
 		{
 			get
@@ -188,13 +214,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._lineNo = value;
+				if(this._lineNo != value)
+				{
+					this.OnPropertyChanging("LineNo");
+					this._lineNo = value;
+					this.OnPropertyChanged("LineNo");
+				}
 			}
 		}
 		
 		private Guid _clientId;
-		[Column("client_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get
@@ -203,13 +232,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._clientId = value;
+				if(this._clientId != value)
+				{
+					this.OnPropertyChanging("ClientId");
+					this._clientId = value;
+					this.OnPropertyChanged("ClientId");
+				}
 			}
 		}
 		
 		private Guid _organizationId;
-		[Column("organization_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_organizationId")]
 		public virtual Guid OrganizationId
 		{
 			get
@@ -218,13 +250,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organizationId = value;
+				if(this._organizationId != value)
+				{
+					this.OnPropertyChanging("OrganizationId");
+					this._organizationId = value;
+					this.OnPropertyChanged("OrganizationId");
+				}
 			}
 		}
 		
 		private long _version;
-		[Column("version", IsVersion = true, IsBackendVersion = true, Length = 0, Scale = 0, SqlType = "int8")]
-		[Storage("_version")]
 		public virtual long Version
 		{
 			get
@@ -233,13 +268,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._version = value;
+				if(this._version != value)
+				{
+					this.OnPropertyChanging("Version");
+					this._version = value;
+					this.OnPropertyChanged("Version");
+				}
 			}
 		}
 		
 		private Guid _generalJournalDocumentId;
-		[Column("general_journal_document_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_generalJournalDocumentId")]
 		public virtual Guid GeneralJournalDocumentId
 		{
 			get
@@ -248,13 +286,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._generalJournalDocumentId = value;
+				if(this._generalJournalDocumentId != value)
+				{
+					this.OnPropertyChanging("GeneralJournalDocumentId");
+					this._generalJournalDocumentId = value;
+					this.OnPropertyChanged("GeneralJournalDocumentId");
+				}
 			}
 		}
 		
 		private decimal? _currencyExchangeRate;
-		[Column("currency_exchange_rate", IsNullable = true, Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_currencyExchangeRate")]
 		public virtual decimal? CurrencyExchangeRate
 		{
 			get
@@ -263,13 +304,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._currencyExchangeRate = value;
+				if(this._currencyExchangeRate != value)
+				{
+					this.OnPropertyChanging("CurrencyExchangeRate");
+					this._currencyExchangeRate = value;
+					this.OnPropertyChanged("CurrencyExchangeRate");
+				}
 			}
 		}
 		
 		private Guid? _currencyId;
-		[Column("currency_id", IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_currencyId")]
 		public virtual Guid? CurrencyId
 		{
 			get
@@ -278,13 +322,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._currencyId = value;
+				if(this._currencyId != value)
+				{
+					this.OnPropertyChanging("CurrencyId");
+					this._currencyId = value;
+					this.OnPropertyChanged("CurrencyId");
+				}
 			}
 		}
 		
 		private DateTime _documentCreated;
-		[Column("document_created_date", Length = 0, Scale = 0, SqlType = "date")]
-		[Storage("_documentCreated")]
 		public virtual DateTime DocumentCreated
 		{
 			get
@@ -293,13 +340,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._documentCreated = value;
+				if(this._documentCreated != value)
+				{
+					this.OnPropertyChanging("DocumentCreated");
+					this._documentCreated = value;
+					this.OnPropertyChanged("DocumentCreated");
+				}
 			}
 		}
 		
 		private string _documentNo;
-		[Column("document_no", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_documentNo")]
 		public virtual string DocumentNo
 		{
 			get
@@ -308,13 +358,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._documentNo = value;
+				if(this._documentNo != value)
+				{
+					this.OnPropertyChanging("DocumentNo");
+					this._documentNo = value;
+					this.OnPropertyChanged("DocumentNo");
+				}
 			}
 		}
 		
 		private DateTime _documentPosted;
-		[Column("document_posted_date", Length = 0, Scale = 0, SqlType = "date")]
-		[Storage("_documentPosted")]
 		public virtual DateTime DocumentPosted
 		{
 			get
@@ -323,13 +376,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._documentPosted = value;
+				if(this._documentPosted != value)
+				{
+					this.OnPropertyChanging("DocumentPosted");
+					this._documentPosted = value;
+					this.OnPropertyChanged("DocumentPosted");
+				}
 			}
 		}
 		
 		private DocumentType _documentType;
-		[Column("document_type", Length = 0, Scale = 0, SqlType = "int4")]
-		[Storage("_documentType")]
 		public virtual DocumentType DocumentType
 		{
 			get
@@ -338,13 +394,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._documentType = value;
+				if(this._documentType != value)
+				{
+					this.OnPropertyChanging("DocumentType");
+					this._documentType = value;
+					this.OnPropertyChanged("DocumentType");
+				}
 			}
 		}
 		
 		private DateTime _recCreated;
-		[Column("rec_created", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_recCreated")]
 		public virtual DateTime RecCreated
 		{
 			get
@@ -353,13 +412,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recCreated = value;
+				if(this._recCreated != value)
+				{
+					this.OnPropertyChanging("RecCreated");
+					this._recCreated = value;
+					this.OnPropertyChanged("RecCreated");
+				}
 			}
 		}
 		
 		private Guid _recCreatedBy;
-		[Column("rec_created_by", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_recCreatedBy")]
 		public virtual Guid RecCreatedBy
 		{
 			get
@@ -368,13 +430,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recCreatedBy = value;
+				if(this._recCreatedBy != value)
+				{
+					this.OnPropertyChanging("RecCreatedBy");
+					this._recCreatedBy = value;
+					this.OnPropertyChanged("RecCreatedBy");
+				}
 			}
 		}
 		
 		private DateTime _recModified;
-		[Column("rec_modified", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_recModified")]
 		public virtual DateTime RecModified
 		{
 			get
@@ -383,13 +448,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recModified = value;
+				if(this._recModified != value)
+				{
+					this.OnPropertyChanging("RecModified");
+					this._recModified = value;
+					this.OnPropertyChanged("RecModified");
+				}
 			}
 		}
 		
 		private Guid _recModifiedBy;
-		[Column("rec_modified_by", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_recModifiedBy")]
 		public virtual Guid RecModifiedBy
 		{
 			get
@@ -398,13 +466,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recModifiedBy = value;
+				if(this._recModifiedBy != value)
+				{
+					this.OnPropertyChanging("RecModifiedBy");
+					this._recModifiedBy = value;
+					this.OnPropertyChanged("RecModifiedBy");
+				}
 			}
 		}
 		
 		private TransactionType _transactionType;
-		[Column("transaction_type", Length = 0, Scale = 0, SqlType = "int4")]
-		[Storage("_transactionType")]
 		public virtual TransactionType TransactionType
 		{
 			get
@@ -413,13 +484,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._transactionType = value;
+				if(this._transactionType != value)
+				{
+					this.OnPropertyChanging("TransactionType");
+					this._transactionType = value;
+					this.OnPropertyChanged("TransactionType");
+				}
 			}
 		}
 		
 		private Guid? _fixAssetId;
-		[Column("fix_asset_id", OpenAccessType = OpenAccessType.Guid, IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_fixAssetId")]
 		public virtual Guid? FixAssetId
 		{
 			get
@@ -428,13 +502,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._fixAssetId = value;
+				if(this._fixAssetId != value)
+				{
+					this.OnPropertyChanging("FixAssetId");
+					this._fixAssetId = value;
+					this.OnPropertyChanged("FixAssetId");
+				}
 			}
 		}
 		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
-		[Storage("_client")]
 		public virtual Client Client
 		{
 			get
@@ -443,13 +520,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._client = value;
+				if(this._client != value)
+				{
+					this.OnPropertyChanging("Client");
+					this._client = value;
+					this.OnPropertyChanged("Client");
+				}
 			}
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
-		[Storage("_organization")]
 		public virtual Organization Organization
 		{
 			get
@@ -458,13 +538,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organization = value;
+				if(this._organization != value)
+				{
+					this.OnPropertyChanging("Organization");
+					this._organization = value;
+					this.OnPropertyChanged("Organization");
+				}
 			}
 		}
 		
 		private BusinessPartner _businessPartner;
-		[ForeignKeyAssociation(SharedFields = "BusinessPartnerId", TargetFields = "Id")]
-		[Storage("_businessPartner")]
 		public virtual BusinessPartner BusinessPartner
 		{
 			get
@@ -473,13 +556,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._businessPartner = value;
+				if(this._businessPartner != value)
+				{
+					this.OnPropertyChanging("BusinessPartner");
+					this._businessPartner = value;
+					this.OnPropertyChanged("BusinessPartner");
+				}
 			}
 		}
 		
 		private Job _job;
-		[ForeignKeyAssociation(SharedFields = "JobId", TargetFields = "Id")]
-		[Storage("_job")]
 		public virtual Job Job
 		{
 			get
@@ -488,13 +574,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._job = value;
+				if(this._job != value)
+				{
+					this.OnPropertyChanging("Job");
+					this._job = value;
+					this.OnPropertyChanged("Job");
+				}
 			}
 		}
 		
 		private User _recModifiedByUser;
-		[ForeignKeyAssociation(SharedFields = "RecModifiedBy", TargetFields = "Id")]
-		[Storage("_recModifiedByUser")]
 		public virtual User RecModifiedByUser
 		{
 			get
@@ -503,13 +592,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recModifiedByUser = value;
+				if(this._recModifiedByUser != value)
+				{
+					this.OnPropertyChanging("RecModifiedByUser");
+					this._recModifiedByUser = value;
+					this.OnPropertyChanged("RecModifiedByUser");
+				}
 			}
 		}
 		
 		private User _recCreatedByUser;
-		[ForeignKeyAssociation(SharedFields = "RecCreatedBy", TargetFields = "Id")]
-		[Storage("_recCreatedByUser")]
 		public virtual User RecCreatedByUser
 		{
 			get
@@ -518,13 +610,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recCreatedByUser = value;
+				if(this._recCreatedByUser != value)
+				{
+					this.OnPropertyChanging("RecCreatedByUser");
+					this._recCreatedByUser = value;
+					this.OnPropertyChanged("RecCreatedByUser");
+				}
 			}
 		}
 		
 		private Account _account;
-		[ForeignKeyAssociation(SharedFields = "AccountId", TargetFields = "Id")]
-		[Storage("_account")]
 		public virtual Account Account
 		{
 			get
@@ -533,13 +628,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._account = value;
+				if(this._account != value)
+				{
+					this.OnPropertyChanging("Account");
+					this._account = value;
+					this.OnPropertyChanged("Account");
+				}
 			}
 		}
 		
 		private Account _corAccount;
-		[ForeignKeyAssociation(SharedFields = "CorAccountId", TargetFields = "Id")]
-		[Storage("_corAccount")]
 		public virtual Account CorAccount
 		{
 			get
@@ -548,13 +646,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._corAccount = value;
+				if(this._corAccount != value)
+				{
+					this.OnPropertyChanging("CorAccount");
+					this._corAccount = value;
+					this.OnPropertyChanged("CorAccount");
+				}
 			}
 		}
 		
 		private GeneralJournalDocument _transactionDocument;
-		[ForeignKeyAssociation(SharedFields = "GeneralJournalDocumentId", TargetFields = "Id")]
-		[Storage("_transactionDocument")]
 		public virtual GeneralJournalDocument GeneralJournalDocument
 		{
 			get
@@ -563,13 +664,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._transactionDocument = value;
+				if(this._transactionDocument != value)
+				{
+					this.OnPropertyChanging("GeneralJournalDocument");
+					this._transactionDocument = value;
+					this.OnPropertyChanged("GeneralJournalDocument");
+				}
 			}
 		}
 		
 		private Currency _currency;
-		[ForeignKeyAssociation(SharedFields = "CurrencyId", TargetFields = "Id")]
-		[Storage("_currency")]
 		public virtual Currency Currency
 		{
 			get
@@ -578,9 +682,73 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._currency = value;
+				if(this._currency != value)
+				{
+					this.OnPropertyChanging("Currency");
+					this._currency = value;
+					this.OnPropertyChanged("Currency");
+				}
 			}
 		}
+		
+		#region IDataErrorInfo members
+		
+		private string error = string.Empty;
+		public string Error
+		{
+			get
+			{
+				return this.error;
+			}
+		}
+		
+		public string this[string propertyName]
+		{
+			get
+			{
+				this.ValidatePropertyInternal(propertyName, ref this.error);
+		
+				return this.error;
+			}
+		}
+		
+		protected virtual void ValidatePropertyInternal(string propertyName, ref string error)
+		{
+		    this.ValidateProperty(propertyName, ref error);
+		}
+		
+		// Please implement this method in a partial class in order to provide the error message depending on each of the properties.
+		partial void ValidateProperty(string propertyName, ref string error);
+		
+		#endregion
+		
+		#region INotifyPropertyChanging members
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		protected virtual void OnPropertyChanging(string propertyName)
+		{
+			if(this.PropertyChanging != null)
+			{
+				this.PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
+		
+		#region INotifyPropertyChanged members
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void OnPropertyChanged(string propertyName)
+		{
+			if(this.PropertyChanged != null)
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
 		
 	}
 }

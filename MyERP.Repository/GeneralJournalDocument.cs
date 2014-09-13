@@ -1,90 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+using System;
+using System.Data.Services.Client;
 using System.Linq;
-using System.ServiceModel.DomainServices.Client;
 using MyERP.DataAccess.Shared;
-using MyERP.Infrastructure;
+using MyERP.Infrastructure.Extensions;
 using MyERP.Repositories;
 
-namespace MyERP.DataAccess
+namespace MyERP.Repository.MyERPService
 {
     public partial class GeneralJournalDocument
     {
-        
-        public GeneralJournalSetupRepository GeneralJournalSetupRepository = new GeneralJournalSetupRepository();
-
-        partial void OnCreated()
-        {
-            this.OrganizationId = (SessionManager.Session["Organization"] as Organization).Id;
-            this.ClientId = MyERP.Repositories.WebContext.Current.User.ClientId;
-
-            this.DocumentNo = "";
-            GeneralJournalSetupRepository.GetGeneralJournalSetupOfOrganization(OrganizationId,
-                setup =>
-                {
-                    this.NumberSequenceId = setup.GeneralJournalNumberSequenceId;
-                });
-            
-            this.DocumentCreated = Convert.ToDateTime(SessionManager.Session["WorkingDate"]);
-            this.DocumentPosted = Convert.ToDateTime(SessionManager.Session["WorkingDate"]);
-            this.Description = "";
-            this.TotalCreditAmount = 0;
-            this.TotalCreditAmountLcy = 0;
-            this.TotalDebitAmount = 0;
-            this.TotalDebitAmountLcy = 0;
-            this.DocumentType = DataAccess.DocumentType.GeneralJournal;
-            this.TransactionType = DataAccess.TransactionType.GeneralJournal;
-            this.CurrencyExchangeRate = 1;
-            this.CurrencyId = Guid.Empty;
-            this.RecCreated = DateTime.Now;
-            this.RecCreatedBy = MyERP.Repositories.WebContext.Current.User.Id;
-            this.RecModified = DateTime.Now;
-            this.RecModifiedBy = MyERP.Repositories.WebContext.Current.User.Id;
-            this.Status = (int)GeneralJournalDocumentStatusType.Draft;
-            this.Version = 1;
-        }
+        GeneralJournalLineRepository GeneralJournalLineRepository = new GeneralJournalLineRepository();
+        GeneralJournalDocumentRepository GeneralJournalDocumentRepository = new GeneralJournalDocumentRepository();
 
         partial void OnNumberSequenceIdChanged()
         {
-            if (this.EntityState==EntityState.Modified  || this.EntityState == EntityState.New)
-            {
-                NoSeriesLib.NextNo(this.NumberSequence.NoSeqName, this.NumberSequence.FormatNo, result => this.DocumentNo = result);
-            }
+            //var pendingEntityChanges =
+            //    GeneralJournalDocumentRepository.Container.Entities.Any(
+            //        ed => ed.State != EntityStates.Unchanged && ed.Entity.GetType() == typeof(GeneralJournalDocument));
+
+            //if (pendingEntityChanges)
+            //{
+            //    NoSeriesLib.NextNo(this.NumberSequence.Id, this.NumberSequence.FormatNo, result => this.DocumentNo = result);
+            //}
         }
 
-        //partial void OnDocumentNoChanged()
-        //{
-        //    if ((this.EntityState == EntityState.Modified || this.EntityState == EntityState.New) && !this.HasValidationErrors)
-        //    {
-        //        foreach (var generalJournalLine in this.GeneralJournalLines)
-        //        {
-        //            generalJournalLine.DocumentNo = this.DocumentNo;
-        //        }
+        partial void OnDocumentNoChanged()
+        {
+            //var pendingEntityChanges =
+            //    GeneralJournalDocumentRepository.Container.Entities.Any(
+            //        ed => ed.State != EntityStates.Unchanged && ed.Entity.GetType() == typeof (GeneralJournalDocument));
 
-        //    }
-        //}
+            //if (pendingEntityChanges)
+            //    GeneralJournalLines.ForEach(e =>
+            //    {
+            //        e.DocumentNo = this.DocumentNo;
+            //        GeneralJournalLineRepository.Update(e);
+            //    });
+        }
 
-        //partial void OnDocumentCreatedChanged()
-        //{
-        //    if ((this.EntityState == EntityState.Modified || this.EntityState == EntityState.New) && !this.HasValidationErrors)
-        //    {
-        //        foreach (var generalJournalLine in this.GeneralJournalLines)
-        //        {
-        //            generalJournalLine.DocumentCreated = this.DocumentCreated;
-        //        }
-        //    }
-        //}
+        partial void OnDocumentCreatedChanged()
+        {
+            //var pendingEntityChanges =
+            //    GeneralJournalDocumentRepository.Container.Entities.Any(
+            //        ed => ed.State != EntityStates.Unchanged && ed.Entity.GetType() == typeof(GeneralJournalDocument));
 
-        //partial void OnDocumentPostedChanged()
-        //{
-        //    if ((this.EntityState == EntityState.Modified || this.EntityState == EntityState.New) && !this.HasValidationErrors)
-        //    {
-        //        foreach (var generalJournalLine in this.GeneralJournalLines)
-        //        {
-        //            generalJournalLine.DocumentPosted = this.DocumentPosted;
-        //        }
-        //    }
-        //}
+            //if(pendingEntityChanges)
+            //    GeneralJournalLines.ForEach(e =>
+            //    {
+            //        e.DocumentCreated = this.DocumentCreated;
+            //        GeneralJournalLineRepository.Update(e);
+            //    });
+        }
 
+        partial void OnDocumentPostedChanged()
+        {
+            //var pendingEntityChanges =
+            //    GeneralJournalDocumentRepository.Container.Entities.Any(
+            //        ed => ed.State != EntityStates.Unchanged && ed.Entity.GetType() == typeof(GeneralJournalDocument));
+
+            //if(pendingEntityChanges)
+            //    GeneralJournalLines.ForEach(e =>
+            //    {
+            //        e.DocumentPosted = this.DocumentPosted;
+            //        GeneralJournalLineRepository.Update(e);
+            //    });
+        }
     }
 }

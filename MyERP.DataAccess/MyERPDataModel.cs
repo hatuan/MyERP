@@ -22,14 +22,13 @@ using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[NamingSettings(SourceStrategy = NamingSourceStrategy.Property, ResolveReservedWords = true, UseDelimitedSQL = true, WordBreak = "_")]
 	public partial class EntitiesModel : OpenAccessContext, IEntitiesModelUnitOfWork
 	{
 		private static string connectionStringName = @"Connection";
 			
 		private static BackendConfiguration backend = GetBackendConfiguration();
 				
-		private static MetadataSource metadataSource = AttributesMetadataSource.FromContext(typeof(EntitiesModel));
+		private static MetadataSource metadataSource = XmlMetadataSource.FromAssemblyResource("MyERPDataModel.rlinq");
 		
 		public EntitiesModel()
 			:base(connectionStringName, backend, metadataSource)
@@ -187,6 +186,22 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		public IQueryable<Role> Roles 
+		{
+			get
+			{
+				return this.GetAll<Role>();
+			}
+		}
+		
+		public IQueryable<UserInRole> UserInRoles 
+		{
+			get
+			{
+				return this.GetAll<UserInRole>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -277,6 +292,14 @@ namespace MyERP.DataAccess
 			get;
 		}
 		IQueryable<CurrencyConvertRate> CurrencyConvertRates
+		{
+			get;
+		}
+		IQueryable<Role> Roles
+		{
+			get;
+		}
+		IQueryable<UserInRole> UserInRoles
 		{
 			get;
 		}

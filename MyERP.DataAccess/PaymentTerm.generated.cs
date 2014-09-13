@@ -18,18 +18,14 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
+using System.ComponentModel;
 using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("payment_term", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
-	[KeyGenerator(KeyGenerator.Guid)]
-	public partial class PaymentTerm
+	public partial class PaymentTerm : IDataErrorInfo, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		private string _code;
-		[Column("code", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_code")]
 		public virtual string Code
 		{
 			get
@@ -38,13 +34,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._code = value;
+				if(this._code != value)
+				{
+					this.OnPropertyChanging("Code");
+					this._code = value;
+					this.OnPropertyChanged("Code");
+				}
 			}
 		}
 		
 		private string _name;
-		[Column("name", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_name")]
 		public virtual string Name
 		{
 			get
@@ -53,13 +52,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._name = value;
+				if(this._name != value)
+				{
+					this.OnPropertyChanging("Name");
+					this._name = value;
+					this.OnPropertyChanged("Name");
+				}
 			}
 		}
 		
 		private short _han_tt;
-		[Column("han_tt", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_han_tt")]
 		public virtual short Han_Tt
 		{
 			get
@@ -68,13 +70,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._han_tt = value;
+				if(this._han_tt != value)
+				{
+					this.OnPropertyChanging("Han_Tt");
+					this._han_tt = value;
+					this.OnPropertyChanged("Han_Tt");
+				}
 			}
 		}
 		
 		private short _han_tt_gg;
-		[Column("han_tt_gg", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_han_tt_gg")]
 		public virtual short Han_Tt_Gg
 		{
 			get
@@ -83,13 +88,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._han_tt_gg = value;
+				if(this._han_tt_gg != value)
+				{
+					this.OnPropertyChanging("Han_Tt_Gg");
+					this._han_tt_gg = value;
+					this.OnPropertyChanged("Han_Tt_Gg");
+				}
 			}
 		}
 		
 		private decimal _pt_gg;
-		[Column("pt_gg", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_pt_gg")]
 		public virtual decimal Pt_Gg
 		{
 			get
@@ -98,13 +106,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._pt_gg = value;
+				if(this._pt_gg != value)
+				{
+					this.OnPropertyChanging("Pt_Gg");
+					this._pt_gg = value;
+					this.OnPropertyChanged("Pt_Gg");
+				}
 			}
 		}
 		
 		private DateTime _date0;
-		[Column("date0", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date0")]
 		public virtual DateTime Date0
 		{
 			get
@@ -113,13 +124,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._date0 = value;
+				if(this._date0 != value)
+				{
+					this.OnPropertyChanging("Date0");
+					this._date0 = value;
+					this.OnPropertyChanged("Date0");
+				}
 			}
 		}
 		
 		private Guid _userId0;
-		[Column("user_id0", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_userId0")]
 		public virtual Guid UserId0
 		{
 			get
@@ -128,13 +142,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._userId0 = value;
+				if(this._userId0 != value)
+				{
+					this.OnPropertyChanging("UserId0");
+					this._userId0 = value;
+					this.OnPropertyChanged("UserId0");
+				}
 			}
 		}
 		
 		private DateTime _date2;
-		[Column("date2", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date2")]
 		public virtual DateTime Date2
 		{
 			get
@@ -143,13 +160,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._date2 = value;
+				if(this._date2 != value)
+				{
+					this.OnPropertyChanging("Date2");
+					this._date2 = value;
+					this.OnPropertyChanged("Date2");
+				}
 			}
 		}
 		
 		private Guid _userId2;
-		[Column("user_id2", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_userId2")]
 		public virtual Guid UserId2
 		{
 			get
@@ -158,13 +178,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._userId2 = value;
+				if(this._userId2 != value)
+				{
+					this.OnPropertyChanging("UserId2");
+					this._userId2 = value;
+					this.OnPropertyChanged("UserId2");
+				}
 			}
 		}
 		
 		private byte _status;
-		[Column("status", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_status")]
 		public virtual byte Status
 		{
 			get
@@ -173,13 +196,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._status = value;
+				if(this._status != value)
+				{
+					this.OnPropertyChanging("Status");
+					this._status = value;
+					this.OnPropertyChanged("Status");
+				}
 			}
 		}
 		
 		private Guid _id;
-		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_id")]
 		public virtual Guid Id
 		{
 			get
@@ -188,13 +214,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._id = value;
+				if(this._id != value)
+				{
+					this.OnPropertyChanging("Id");
+					this._id = value;
+					this.OnPropertyChanged("Id");
+				}
 			}
 		}
 		
 		private long _version;
-		[Column("version", IsVersion = true, IsBackendVersion = true, Length = 0, Scale = 0, SqlType = "int8")]
-		[Storage("_version")]
 		public virtual long Version
 		{
 			get
@@ -203,13 +232,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._version = value;
+				if(this._version != value)
+				{
+					this.OnPropertyChanging("Version");
+					this._version = value;
+					this.OnPropertyChanged("Version");
+				}
 			}
 		}
 		
 		private Guid _clientId;
-		[Column("client_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get
@@ -218,13 +250,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._clientId = value;
+				if(this._clientId != value)
+				{
+					this.OnPropertyChanging("ClientId");
+					this._clientId = value;
+					this.OnPropertyChanged("ClientId");
+				}
 			}
 		}
 		
 		private Guid _organizationId;
-		[Column("organization_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_organizationId")]
 		public virtual Guid OrganizationId
 		{
 			get
@@ -233,13 +268,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organizationId = value;
+				if(this._organizationId != value)
+				{
+					this.OnPropertyChanging("OrganizationId");
+					this._organizationId = value;
+					this.OnPropertyChanged("OrganizationId");
+				}
 			}
 		}
 		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
-		[Storage("_client")]
 		public virtual Client Client
 		{
 			get
@@ -248,13 +286,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._client = value;
+				if(this._client != value)
+				{
+					this.OnPropertyChanging("Client");
+					this._client = value;
+					this.OnPropertyChanged("Client");
+				}
 			}
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
-		[Storage("_organization")]
 		public virtual Organization Organization
 		{
 			get
@@ -263,9 +304,73 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organization = value;
+				if(this._organization != value)
+				{
+					this.OnPropertyChanging("Organization");
+					this._organization = value;
+					this.OnPropertyChanged("Organization");
+				}
 			}
 		}
+		
+		#region IDataErrorInfo members
+		
+		private string error = string.Empty;
+		public string Error
+		{
+			get
+			{
+				return this.error;
+			}
+		}
+		
+		public string this[string propertyName]
+		{
+			get
+			{
+				this.ValidatePropertyInternal(propertyName, ref this.error);
+		
+				return this.error;
+			}
+		}
+		
+		protected virtual void ValidatePropertyInternal(string propertyName, ref string error)
+		{
+		    this.ValidateProperty(propertyName, ref error);
+		}
+		
+		// Please implement this method in a partial class in order to provide the error message depending on each of the properties.
+		partial void ValidateProperty(string propertyName, ref string error);
+		
+		#endregion
+		
+		#region INotifyPropertyChanging members
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		protected virtual void OnPropertyChanging(string propertyName)
+		{
+			if(this.PropertyChanging != null)
+			{
+				this.PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
+		
+		#region INotifyPropertyChanged members
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void OnPropertyChanged(string propertyName)
+		{
+			if(this.PropertyChanged != null)
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
 		
 	}
 }

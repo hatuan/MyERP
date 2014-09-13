@@ -1,38 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Data.Services.Client;
 using System.Linq;
-using System.ServiceModel.DomainServices.Client;
-using MyERP.DataAccess;
+using MyERP.Infrastructure;
+using MyERP.Repository.MyERPService;
 
 namespace MyERP.Repositories
 {
     [Export]
     public class GeneralJournalSetupRepository : RepositoryBase
     {
-        public void GetGeneralJournalSetupOfOrganization(Guid organizationId, Action<GeneralJournalSetup> callback)
+        public void GetGeneralJournalSetups(Action<IEnumerable<GeneralJournalSetup>> callback)
         {
-            EntityQuery<GeneralJournalSetup> currentGeneralJournalSetup =
-                this.Context.GetGeneralJournalSetupsQuery().Where(c => c.OrganizationId == organizationId);
+            DataServiceQuery<GeneralJournalSetup> query = (DataServiceQuery<GeneralJournalSetup>)from generalJournalSetup in Container.GeneralJournalSetups
+                                                                                       .Expand(c => c.RecCreatedByUser)
+                                                                                       .Expand(c => c.RecModifiedByUser)
+                                                                                       where generalJournalSetup.ClientId.Equals(SessionManager.Session["ClientId"])
+                                                                                            && generalJournalSetup.OrganizationId.Equals((SessionManager.Session["Organization"] as Organization).Id)
+                                                                                       select generalJournalSetup;
 
-            this.LoadQuery(currentGeneralJournalSetup, (generalJournalSetupOfCurrentOrganization) =>
+            query.BeginExecute(result =>
             {
-                if (generalJournalSetupOfCurrentOrganization == null)
-                {
-                    GetGeneralJournalSetupOfAllOrganization(callback);
-                }
-                else
-                    callback(generalJournalSetupOfCurrentOrganization);
-            });
-        }
+                var request = result.AsyncState as DataServiceQuery<GeneralJournalSetup>;
+                var response = request.EndExecute(result);
 
-        public void GetGeneralJournalSetupOfAllOrganization(Action<GeneralJournalSetup> callback)
-        {
-            Organization allOrganization = this.Context.Organizations.FirstOrDefault(c => c.Code == "*");
-
-            EntityQuery<GeneralJournalSetup> allGeneralJournalSetup =
-                this.Context.GetGeneralJournalSetupsQuery().Where(c => c.OrganizationId == allOrganization.Id);
-
-            this.LoadQuery(allGeneralJournalSetup, callback);
+                UIThread.Invoke(() => callback(response));
+            }, query);
         }
     }
 }

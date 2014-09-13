@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Net;
@@ -13,10 +14,11 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using MyERP.Infrastructure.Annotations;
 using MyERP.Repositories;
-using MyERP.Web;
 using MyERP.DataAccess;
+using MyERP.Repository.MyERPService;
 using Telerik.Windows.Controls;
 using Telerik.Windows.Data;
+using ViewModelBase = MyERP.Infrastructure.ViewModels.ViewModelBase;
 
 namespace MyERP.Controls
 {
@@ -25,17 +27,20 @@ namespace MyERP.Controls
         public SearchAccountControl()
         {
             InitializeComponent();
-
-            this.OkCommand = new DelegateCommand(this.OnOkCommandExecuted);
-            this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
-            LayoutRoot.DataContext = this;
+            if (!ViewModelBase.IsInDesignModeStatic)
+            {
+                _accountRepository = new AccountRepository();
+                this.OkCommand = new DelegateCommand(this.OnOkCommandExecuted);
+                this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
+                LayoutRoot.DataContext = this;
+            }
         }
 
-        private readonly AccountRepository _accountRepository = new AccountRepository();
+        private readonly AccountRepository _accountRepository;
 
-        private IEnumerable<Account> _accounts;
+        private ObservableCollection<Account> _accounts;
 
-        public IEnumerable<Account> Accounts
+        public ObservableCollection<Account> Accounts
         {
             get { return _accounts; }
             set
@@ -71,9 +76,9 @@ namespace MyERP.Controls
         {
 
             IsBusy = true;
-            _accountRepository.GetAccountsByLookupValue(searchValue.Text, accounts =>
+            _accountRepository.GetAccountsByLookupValue(searchValue.Text, results =>
             {
-                Accounts = accounts;
+                Accounts = new ObservableCollection<Account>(results);
                 IsBusy = false;
             });
         }

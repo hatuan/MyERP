@@ -1,60 +1,120 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.ServiceModel.DomainServices.Client;
-using MyERP.DataAccess;
+using System.Data.Services.Client;
+using System.Linq;
+using MyERP.Infrastructure;
+using MyERP.Repository.MyERPService;
 
 namespace MyERP.Repositories
 {
     [Export]
     public class ModulesRepository : RepositoryBase
     {
+
+        public void GetGroupOfModule(String groupName, Action<IEnumerable<Module>> callback)
+        {
+            DataServiceQuery<Module> query = (DataServiceQuery<Module>)from module in Container.Modules
+                                                                       where module.Group == groupName
+                                                                       select module;
+
+            query.BeginExecute(result =>
+            {
+                var request = result.AsyncState as DataServiceQuery<Module>;
+                var response = request.EndExecute(result);
+
+                UIThread.Invoke(() => callback(response));
+            }, query);
+        }
+
         public void GetGeneralLeaderJournals(Action<IEnumerable<Module>> callback)
         {
-            EntityQuery<Module> query =
-                this.Context.GetModulesQuery().Where(u => u.Group == "GeneralLeaderJournals");
+            DataServiceQuery<Module> query = (DataServiceQuery<Module>) from module in Container.Modules
+                                                                        where module.Group == "GeneralLeaderJournals"
+                                                                        select module;
 
-            this.LoadQuery<Module>(query, callback);
+            query.BeginExecute(result =>
+            {
+                var request = result.AsyncState as DataServiceQuery<Module>;
+                var response = request.EndExecute(result);
+
+                UIThread.Invoke(() => callback(response));
+            }, query);
         }
 
         public void GetGeneralLeaderReports(Action<IEnumerable<Module>> callback)
         {
-            EntityQuery<Module> query =
-                this.Context.GetModulesQuery().Where(u => u.Group == "GeneralLeaderReports");
+            DataServiceQuery<Module> query = (DataServiceQuery<Module>)from module in Container.Modules
+                                                                       where module.Group == "GeneralLeaderReports"
+                                                                       select module;
 
-            this.LoadQuery<Module>(query, callback);
+            query.BeginExecute(result =>
+            {
+                var request = result.AsyncState as DataServiceQuery<Module>;
+                var response = request.EndExecute(result);
+
+                UIThread.Invoke(() => callback(response));
+            }, query);
         }
 
         public void GetGeneralLeaderSetup(Action<IEnumerable<Module>> callback)
         {
-            EntityQuery<Module> query =
-                this.Context.GetModulesQuery().Where(u => u.Group == "GeneralLeaderSetup");
+            DataServiceQuery<Module> query = (DataServiceQuery<Module>)from module in Container.Modules
+                                                                       where module.Group == "GeneralLeaderSetup"
+                                                                       select module;
 
-            this.LoadQuery<Module>(query, callback);
+            query.BeginExecute(result =>
+            {
+                var request = result.AsyncState as DataServiceQuery<Module>;
+                var response = request.EndExecute(result);
+
+                UIThread.Invoke(() => callback(response));
+            }, query);
         }
 
         public void GetMasterSystem(Action<IEnumerable<Module>> callback)
         {
-            EntityQuery<Module> query =
-              this.Context.GetModulesQuery().Where(u => u.Group == "MasterSystem");
+            DataServiceQuery<Module> query = (DataServiceQuery<Module>)from module in Container.Modules
+                                                                       where module.Group == "MasterSystem"
+                                                                       select module;
 
-            this.LoadQuery<Module>(query, callback);
+            query.BeginExecute(result =>
+            {
+                var request = result.AsyncState as DataServiceQuery<Module>;
+                var response = request.EndExecute(result);
+
+                UIThread.Invoke(() => callback(response));
+            }, query);
         }
 
         public void GetMasterCompany(Action<IEnumerable<Module>> callback)
         {
-            EntityQuery<Module> query =
-              this.Context.GetModulesQuery().Where(u => u.Group == "MasterCompany");
+            DataServiceQuery<Module> query = (DataServiceQuery<Module>)from module in Container.Modules
+                                                                       where module.Group == "MasterCompany"
+                                                                       select module;
 
-            this.LoadQuery<Module>(query, callback);
+            query.BeginExecute(result =>
+            {
+                var request = result.AsyncState as DataServiceQuery<Module>;
+                var response = request.EndExecute(result);
+
+                UIThread.Invoke(() => callback(response));
+            }, query);
         }
 
         public void GetMasterBasic(Action<IEnumerable<Module>> callback)
         {
-            EntityQuery<Module> query =
-              this.Context.GetModulesQuery().Where(u => u.Group == "MasterBasic");
+            DataServiceQuery<Module> query = (DataServiceQuery<Module>)from module in Container.Modules
+                                                                       where module.Group == "MasterBasic"
+                                                                       select module;
 
-            this.LoadQuery<Module>(query, callback);
+            query.BeginExecute(result =>
+            {
+                var request = result.AsyncState as DataServiceQuery<Module>;
+                var response = request.EndExecute(result);
+
+                UIThread.Invoke(() => callback(response));
+            }, query);
         }
 
     }

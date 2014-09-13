@@ -81,13 +81,14 @@
     <Grid x:Name="LayoutRoot">
         <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}">
             <telerik:RadDataForm x:Name="dataForm" 
-				ItemsSource="{Binding NoSeries}" 
-				NewItemTemplate="{StaticResource NoSeriesEditTemplate}" 
-				EditTemplate="{StaticResource NoSeriesEditTemplate}" 
-				AutoGenerateFields="False" Background="Transparent"
-				VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" 
-				CommandButtonsVisibility="Navigation" 
-				AutoEdit="True"/>
+                                 ItemsSource="{Binding NoSeries}" 
+                                 CurrentItem="{Binding SelectedNo, Mode=TwoWay}"
+                                 NewItemTemplate="{StaticResource NoSeriesEditTemplate}" 
+                                 EditTemplate="{StaticResource NoSeriesEditTemplate}" 
+                                 AutoGenerateFields="False" Background="Transparent"
+                                 VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" 
+                                 CommandButtonsVisibility="Navigation" 
+                                 AutoEdit="True"/>
         </telerik:RadBusyIndicator>
     </Grid>
 </UserControl>

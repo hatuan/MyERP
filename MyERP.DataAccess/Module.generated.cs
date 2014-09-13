@@ -18,15 +18,13 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
+using System.ComponentModel;
 
 namespace MyERP.DataAccess	
 {
-	[Table("module", UpdateSchema = true)]
-	public partial class Module
+	public partial class Module : IDataErrorInfo, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		private long _id;
-		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "int8")]
-		[Storage("_id")]
 		public virtual long Id
 		{
 			get
@@ -35,13 +33,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._id = value;
+				if(this._id != value)
+				{
+					this.OnPropertyChanging("Id");
+					this._id = value;
+					this.OnPropertyChanged("Id");
+				}
 			}
 		}
 		
 		private string _description;
-		[Column("description", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_description")]
 		public virtual string Description
 		{
 			get
@@ -50,13 +51,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._description = value;
+				if(this._description != value)
+				{
+					this.OnPropertyChanging("Description");
+					this._description = value;
+					this.OnPropertyChanged("Description");
+				}
 			}
 		}
 		
 		private string _group;
-		[Column("group", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_group")]
 		public virtual string Group
 		{
 			get
@@ -65,13 +69,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._group = value;
+				if(this._group != value)
+				{
+					this.OnPropertyChanging("Group");
+					this._group = value;
+					this.OnPropertyChanged("Group");
+				}
 			}
 		}
 		
 		private string _name;
-		[Column("name", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_name")]
 		public virtual string Name
 		{
 			get
@@ -80,13 +87,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._name = value;
+				if(this._name != value)
+				{
+					this.OnPropertyChanging("Name");
+					this._name = value;
+					this.OnPropertyChanged("Name");
+				}
 			}
 		}
 		
 		private Guid _clientId;
-		[Column("client_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get
@@ -95,9 +105,73 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._clientId = value;
+				if(this._clientId != value)
+				{
+					this.OnPropertyChanging("ClientId");
+					this._clientId = value;
+					this.OnPropertyChanged("ClientId");
+				}
 			}
 		}
+		
+		#region IDataErrorInfo members
+		
+		private string error = string.Empty;
+		public string Error
+		{
+			get
+			{
+				return this.error;
+			}
+		}
+		
+		public string this[string propertyName]
+		{
+			get
+			{
+				this.ValidatePropertyInternal(propertyName, ref this.error);
+		
+				return this.error;
+			}
+		}
+		
+		protected virtual void ValidatePropertyInternal(string propertyName, ref string error)
+		{
+		    this.ValidateProperty(propertyName, ref error);
+		}
+		
+		// Please implement this method in a partial class in order to provide the error message depending on each of the properties.
+		partial void ValidateProperty(string propertyName, ref string error);
+		
+		#endregion
+		
+		#region INotifyPropertyChanging members
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		protected virtual void OnPropertyChanging(string propertyName)
+		{
+			if(this.PropertyChanging != null)
+			{
+				this.PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
+		
+		#region INotifyPropertyChanged members
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void OnPropertyChanged(string propertyName)
+		{
+			if(this.PropertyChanged != null)
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
 		
 	}
 }

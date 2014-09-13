@@ -18,18 +18,14 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
+using System.ComponentModel;
 using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("account", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
-	[KeyGenerator(KeyGenerator.Guid)]
-	public partial class Account
+	public partial class Account : IDataErrorInfo, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		private string _code;
-		[Column("code", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_code")]
 		public virtual string Code
 		{
 			get
@@ -38,13 +34,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._code = value;
+				if(this._code != value)
+				{
+					this.OnPropertyChanging("Code");
+					this._code = value;
+					this.OnPropertyChanged("Code");
+				}
 			}
 		}
 		
 		private string _name;
-		[Column("name", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_name")]
 		public virtual string Name
 		{
 			get
@@ -53,13 +52,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._name = value;
+				if(this._name != value)
+				{
+					this.OnPropertyChanging("Name");
+					this._name = value;
+					this.OnPropertyChanged("Name");
+				}
 			}
 		}
 		
 		private Guid? _currencyId;
-		[Column("currency_id", IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_currencyId")]
 		public virtual Guid? CurrencyId
 		{
 			get
@@ -68,13 +70,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._currencyId = value;
+				if(this._currencyId != value)
+				{
+					this.OnPropertyChanging("CurrencyId");
+					this._currencyId = value;
+					this.OnPropertyChanged("CurrencyId");
+				}
 			}
 		}
 		
 		private bool _detail;
-		[Column("detail", Length = 0, Scale = 0, SqlType = "bool")]
-		[Storage("_detail")]
 		public virtual bool Detail
 		{
 			get
@@ -83,13 +88,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._detail = value;
+				if(this._detail != value)
+				{
+					this.OnPropertyChanging("Detail");
+					this._detail = value;
+					this.OnPropertyChanged("Detail");
+				}
 			}
 		}
 		
 		private Guid? _parentAccountId;
-		[Column("parent_account_id", IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_parentAccountId")]
 		public virtual Guid? ParentAccountId
 		{
 			get
@@ -98,13 +106,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._parentAccountId = value;
+				if(this._parentAccountId != value)
+				{
+					this.OnPropertyChanging("ParentAccountId");
+					this._parentAccountId = value;
+					this.OnPropertyChanged("ParentAccountId");
+				}
 			}
 		}
 		
 		private short _level;
-		[Column("level", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_level")]
 		public virtual short Level
 		{
 			get
@@ -113,13 +124,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._level = value;
+				if(this._level != value)
+				{
+					this.OnPropertyChanging("Level");
+					this._level = value;
+					this.OnPropertyChanged("Level");
+				}
 			}
 		}
 		
 		private bool _arAp;
-		[Column("ar_ap", Length = 0, Scale = 0, SqlType = "bool")]
-		[Storage("_arAp")]
 		public virtual bool ArAp
 		{
 			get
@@ -128,13 +142,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._arAp = value;
+				if(this._arAp != value)
+				{
+					this.OnPropertyChanging("ArAp");
+					this._arAp = value;
+					this.OnPropertyChanged("ArAp");
+				}
 			}
 		}
 		
 		private DateTime _recModified;
-		[Column("rec_created", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_recModified")]
 		public virtual DateTime RecModified
 		{
 			get
@@ -143,13 +160,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recModified = value;
+				if(this._recModified != value)
+				{
+					this.OnPropertyChanging("RecModified");
+					this._recModified = value;
+					this.OnPropertyChanged("RecModified");
+				}
 			}
 		}
 		
 		private Guid _recCreatedById;
-		[Column("rec_created_by", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_recCreatedById")]
 		public virtual Guid RecCreatedById
 		{
 			get
@@ -158,13 +178,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recCreatedById = value;
+				if(this._recCreatedById != value)
+				{
+					this.OnPropertyChanging("RecCreatedById");
+					this._recCreatedById = value;
+					this.OnPropertyChanged("RecCreatedById");
+				}
 			}
 		}
 		
 		private DateTime _recCreated;
-		[Column("rec_modified", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_recCreated")]
 		public virtual DateTime RecCreated
 		{
 			get
@@ -173,13 +196,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recCreated = value;
+				if(this._recCreated != value)
+				{
+					this.OnPropertyChanging("RecCreated");
+					this._recCreated = value;
+					this.OnPropertyChanged("RecCreated");
+				}
 			}
 		}
 		
 		private Guid _recModifiedById;
-		[Column("rec_modified_by", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_recModifiedById")]
 		public virtual Guid RecModifiedById
 		{
 			get
@@ -188,13 +214,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._recModifiedById = value;
+				if(this._recModifiedById != value)
+				{
+					this.OnPropertyChanging("RecModifiedById");
+					this._recModifiedById = value;
+					this.OnPropertyChanged("RecModifiedById");
+				}
 			}
 		}
 		
 		private byte _status;
-		[Column("status", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_status")]
 		public virtual byte Status
 		{
 			get
@@ -203,13 +232,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._status = value;
+				if(this._status != value)
+				{
+					this.OnPropertyChanging("Status");
+					this._status = value;
+					this.OnPropertyChanged("Status");
+				}
 			}
 		}
 		
 		private long _version;
-		[Column("version", IsVersion = true, IsBackendVersion = true, Length = 0, Scale = 0, SqlType = "int8")]
-		[Storage("_version")]
 		public virtual long Version
 		{
 			get
@@ -218,13 +250,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._version = value;
+				if(this._version != value)
+				{
+					this.OnPropertyChanging("Version");
+					this._version = value;
+					this.OnPropertyChanged("Version");
+				}
 			}
 		}
 		
 		private Guid _id;
-		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_id")]
 		public virtual Guid Id
 		{
 			get
@@ -233,13 +268,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._id = value;
+				if(this._id != value)
+				{
+					this.OnPropertyChanging("Id");
+					this._id = value;
+					this.OnPropertyChanged("Id");
+				}
 			}
 		}
 		
 		private Guid _clientId;
-		[Column("client_id", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get
@@ -248,13 +286,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._clientId = value;
+				if(this._clientId != value)
+				{
+					this.OnPropertyChanging("ClientId");
+					this._clientId = value;
+					this.OnPropertyChanged("ClientId");
+				}
 			}
 		}
 		
 		private Guid _organizationId;
-		[Column("organization_id", OpenAccessType = OpenAccessType.Guid, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_organizationId")]
 		public virtual Guid OrganizationId
 		{
 			get
@@ -263,13 +304,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organizationId = value;
+				if(this._organizationId != value)
+				{
+					this.OnPropertyChanging("OrganizationId");
+					this._organizationId = value;
+					this.OnPropertyChanged("OrganizationId");
+				}
 			}
 		}
 		
 		private Currency _currency;
-		[ForeignKeyAssociation(SharedFields = "CurrencyId", TargetFields = "Id")]
-		[Storage("_currency")]
 		public virtual Currency Currency
 		{
 			get
@@ -278,13 +322,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._currency = value;
+				if(this._currency != value)
+				{
+					this.OnPropertyChanging("Currency");
+					this._currency = value;
+					this.OnPropertyChanged("Currency");
+				}
 			}
 		}
 		
 		private Account _parentAccount;
-		[ForeignKeyAssociation(SharedFields = "ParentAccountId", TargetFields = "Id")]
-		[Storage("_parentAccount")]
 		public virtual Account ParentAccount
 		{
 			get
@@ -293,13 +340,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._parentAccount = value;
+				if(this._parentAccount != value)
+				{
+					this.OnPropertyChanging("ParentAccount");
+					this._parentAccount = value;
+					this.OnPropertyChanged("ParentAccount");
+				}
 			}
 		}
 		
 		private User _user2;
-		[ForeignKeyAssociation(SharedFields = "RecModifiedById", TargetFields = "Id")]
-		[Storage("_user2")]
 		public virtual User RecModifiedByUser
 		{
 			get
@@ -308,13 +358,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._user2 = value;
+				if(this._user2 != value)
+				{
+					this.OnPropertyChanging("RecModifiedByUser");
+					this._user2 = value;
+					this.OnPropertyChanged("RecModifiedByUser");
+				}
 			}
 		}
 		
 		private User _user0;
-		[ForeignKeyAssociation(SharedFields = "RecCreatedById", TargetFields = "Id")]
-		[Storage("_user0")]
 		public virtual User RecCreatedByUser
 		{
 			get
@@ -323,13 +376,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._user0 = value;
+				if(this._user0 != value)
+				{
+					this.OnPropertyChanging("RecCreatedByUser");
+					this._user0 = value;
+					this.OnPropertyChanged("RecCreatedByUser");
+				}
 			}
 		}
 		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
-		[Storage("_client")]
 		public virtual Client Client
 		{
 			get
@@ -338,13 +394,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._client = value;
+				if(this._client != value)
+				{
+					this.OnPropertyChanging("Client");
+					this._client = value;
+					this.OnPropertyChanged("Client");
+				}
 			}
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
-		[Storage("_organization")]
 		public virtual Organization Organization
 		{
 			get
@@ -353,13 +412,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organization = value;
+				if(this._organization != value)
+				{
+					this.OnPropertyChanging("Organization");
+					this._organization = value;
+					this.OnPropertyChanged("Organization");
+				}
 			}
 		}
 		
 		private IList<Account> _childAccounts = new List<Account>();
-		[Collection(InverseProperty = "ParentAccount")]
-		[Storage("_childAccounts")]
 		public virtual IList<Account> ChildAccounts
 		{
 			get
@@ -367,6 +429,65 @@ namespace MyERP.DataAccess
 				return this._childAccounts;
 			}
 		}
+		
+		#region IDataErrorInfo members
+		
+		private string error = string.Empty;
+		public string Error
+		{
+			get
+			{
+				return this.error;
+			}
+		}
+		
+		public string this[string propertyName]
+		{
+			get
+			{
+				this.ValidatePropertyInternal(propertyName, ref this.error);
+		
+				return this.error;
+			}
+		}
+		
+		protected virtual void ValidatePropertyInternal(string propertyName, ref string error)
+		{
+		    this.ValidateProperty(propertyName, ref error);
+		}
+		
+		// Please implement this method in a partial class in order to provide the error message depending on each of the properties.
+		partial void ValidateProperty(string propertyName, ref string error);
+		
+		#endregion
+		
+		#region INotifyPropertyChanging members
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		protected virtual void OnPropertyChanging(string propertyName)
+		{
+			if(this.PropertyChanging != null)
+			{
+				this.PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
+		
+		#region INotifyPropertyChanged members
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void OnPropertyChanged(string propertyName)
+		{
+			if(this.PropertyChanged != null)
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
 		
 	}
 }

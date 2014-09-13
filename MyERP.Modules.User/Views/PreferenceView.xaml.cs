@@ -55,10 +55,10 @@ namespace MyERP.Modules.User.Views
             win.UserWindowRegionPlaceholder.Height = this.Height;
 
             ViewModel.ApplicationViewModel.IsLoadingData = true;
-            ViewModel.OrganizationRepository.GetOrganizations(items =>
+            ViewModel.OrganizationRepository.GetOrganizations(organizations =>
             {
                 ViewModel.ApplicationViewModel.IsLoadingData = false;
-                ViewModel.Organizations = new QueryableCollectionView(new List<Organization>(items));
+                ViewModel.Organizations = organizations;
             });
         }
 

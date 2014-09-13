@@ -1,22 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Net;
-using System.ServiceModel.DomainServices.Client;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using MyERP.Infrastructure.Annotations;
 using MyERP.Repositories;
-using MyERP.Web;
-using MyERP.DataAccess;
+using MyERP.Repository.MyERPService;
 using Telerik.Windows.Controls;
-using Telerik.Windows.Data;
+using ViewModelBase = MyERP.Infrastructure.ViewModels.ViewModelBase;
 
 namespace MyERP.Controls
 {
@@ -25,17 +17,20 @@ namespace MyERP.Controls
         public SearchCurrencyControl()
         {
             InitializeComponent();
-
-            this.OkCommand = new DelegateCommand(this.OnOkCommandExecuted);
-            this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
-            LayoutRoot.DataContext = this;
+            if (!ViewModelBase.IsInDesignModeStatic)
+            {
+                _currencyRepository = new CurrencyRepository();
+                this.OkCommand = new DelegateCommand(this.OnOkCommandExecuted);
+                this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
+                LayoutRoot.DataContext = this;
+            }
         }
 
-        private readonly CurrencyRepository _currencyRepository = new CurrencyRepository();
+        private readonly CurrencyRepository _currencyRepository;
 
-        private IEnumerable<Currency> _currencies;
+        private ObservableCollection<Currency> _currencies;
 
-        public IEnumerable<Currency> Currencies
+        public ObservableCollection<Currency> Currencies
         {
             get { return _currencies; }
             set
@@ -70,9 +65,9 @@ namespace MyERP.Controls
         private void OnSearchCommandExecuted(object obj)
         {
             IsBusy = true;
-            _currencyRepository.GetCurrenciesByLookupValue(searchValue.Text, currencies =>
+            _currencyRepository.GetCurrenciesByLookupValue(searchValue.Text, results =>
             {
-                Currencies = currencies;
+                Currencies = new ObservableCollection<Currency>(results);
                 IsBusy = false;
             });
         }

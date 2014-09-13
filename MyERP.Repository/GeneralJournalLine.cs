@@ -1,57 +1,28 @@
-﻿using System;
-using System.Linq;
-using System.ServiceModel.DomainServices.Client;
-using MyERP.DataAccess.Shared;
-using MyERP.Infrastructure;
-using MyERP.Repositories;
+﻿using System.Linq;
 
-namespace MyERP.DataAccess
+namespace MyERP.Repository.MyERPService
 {
     public partial class GeneralJournalLine
     {
-        protected override void OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
+        partial void OnDebitAmountChanged()
         {
-            base.OnPropertyChanged(e);
+
         }
 
-        partial void OnCreated()
+        partial void OnCreditAmountChanged()
         {
-            this.OrganizationId = (SessionManager.Session["Organization"] as Organization).Id;
-            this.ClientId = MyERP.Repositories.WebContext.Current.User.ClientId;
 
-            this.DocumentNo = "";
-            this.DocumentCreated = Convert.ToDateTime(SessionManager.Session["WorkingDate"]);
-            this.DocumentPosted = Convert.ToDateTime(SessionManager.Session["WorkingDate"]);
-            this.Description = "";
-
-            this.DocumentType = DataAccess.DocumentType.GeneralJournal;
-            this.TransactionType = DataAccess.TransactionType.GeneralJournal;
-
-            this.DebitAmount = this.DebitAmountLcy = this.CreditAmount = this.CreditAmountLcy = 0;
-
-            this.CurrencyExchangeRate = 1;
-            this.CurrencyId = Guid.Empty;
-
-            this.LineNo = 0;
-
-            this.RecCreated = DateTime.Now;
-            this.RecCreatedBy = MyERP.Repositories.WebContext.Current.User.Id;
-            this.RecModified = DateTime.Now;
-            this.RecModifiedBy = MyERP.Repositories.WebContext.Current.User.Id;
-            this.Version = 1;
         }
 
-        partial void OnGeneralJournalDocumentIdChanged()
+        partial void OnDebitAmountLcyChanged()
         {
-            if (this.EntityState == EntityState.New)
-            {
-                if(GeneralJournalDocument.GeneralJournalLines.Count == 0)
-                    this.LineNo = 10000;
-                else
-                {
-                    this.LineNo = GeneralJournalDocument.GeneralJournalLines.Where(c => c.LineNo % 10000 == 0).Max(m => m.LineNo) +10000;
-                }
-            }
+
         }
+
+        partial void OnCreditAmountLcyChanged()
+        {
+
+        }
+
     }
 }

@@ -18,18 +18,14 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
+using System.ComponentModel;
 using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("job", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Version)]
-	[KeyGenerator(KeyGenerator.Guid)]
-	public partial class Job
+	public partial class Job : IDataErrorInfo, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		private string _ma_vv;
-		[Column("code", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_ma_vv")]
 		public virtual string Code
 		{
 			get
@@ -38,253 +34,286 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._ma_vv = value;
+				if(this._ma_vv != value)
+				{
+					this.OnPropertyChanging("Code");
+					this._ma_vv = value;
+					this.OnPropertyChanged("Code");
+				}
 			}
 		}
 		
-		private string _ten_vv;
-		[Column("ten_vv", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_ten_vv")]
-		public virtual string Ten_Vv
+		private string _name;
+		public virtual string Name
 		{
 			get
 			{
-				return this._ten_vv;
+				return this._name;
 			}
 			set
 			{
-				this._ten_vv = value;
+				if(this._name != value)
+				{
+					this.OnPropertyChanging("Name");
+					this._name = value;
+					this.OnPropertyChanged("Name");
+				}
 			}
 		}
 		
-		private string _ten_vv2;
-		[Column("ten_vv2", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_ten_vv2")]
-		public virtual string Ten_Vv2
+		private Guid _businessPartnerId;
+		public virtual Guid BusinessPartnerId
 		{
 			get
 			{
-				return this._ten_vv2;
+				return this._businessPartnerId;
 			}
 			set
 			{
-				this._ten_vv2 = value;
+				if(this._businessPartnerId != value)
+				{
+					this.OnPropertyChanging("BusinessPartnerId");
+					this._businessPartnerId = value;
+					this.OnPropertyChanged("BusinessPartnerId");
+				}
 			}
 		}
 		
-		private Guid _ma_kh;
-		[Column("business_partner_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_ma_kh")]
-		public virtual Guid Ma_Kh
+		private Guid _jobGroupId1;
+		public virtual Guid JobGroupId1
 		{
 			get
 			{
-				return this._ma_kh;
+				return this._jobGroupId1;
 			}
 			set
 			{
-				this._ma_kh = value;
+				if(this._jobGroupId1 != value)
+				{
+					this.OnPropertyChanging("JobGroupId1");
+					this._jobGroupId1 = value;
+					this.OnPropertyChanged("JobGroupId1");
+				}
 			}
 		}
 		
-		private string _nh_vv1;
-		[Column("nh_vv1", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_nh_vv1")]
-		public virtual string Nh_Vv1
+		private Guid _jobGroupId2;
+		public virtual Guid JobGroupId2
 		{
 			get
 			{
-				return this._nh_vv1;
+				return this._jobGroupId2;
 			}
 			set
 			{
-				this._nh_vv1 = value;
+				if(this._jobGroupId2 != value)
+				{
+					this.OnPropertyChanging("JobGroupId2");
+					this._jobGroupId2 = value;
+					this.OnPropertyChanged("JobGroupId2");
+				}
 			}
 		}
 		
-		private string _nh_vv2;
-		[Column("nh_vv2", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_nh_vv2")]
-		public virtual string Nh_Vv2
+		private Guid _jobGroupId3;
+		public virtual Guid JobGroupId3
 		{
 			get
 			{
-				return this._nh_vv2;
+				return this._jobGroupId3;
 			}
 			set
 			{
-				this._nh_vv2 = value;
+				if(this._jobGroupId3 != value)
+				{
+					this.OnPropertyChanging("JobGroupId3");
+					this._jobGroupId3 = value;
+					this.OnPropertyChanged("JobGroupId3");
+				}
 			}
 		}
 		
-		private string _nh_vv3;
-		[Column("nh_vv3", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_nh_vv3")]
-		public virtual string Nh_Vv3
+		private DateTime _jobStart;
+		public virtual DateTime JobStart
 		{
 			get
 			{
-				return this._nh_vv3;
+				return this._jobStart;
 			}
 			set
 			{
-				this._nh_vv3 = value;
+				if(this._jobStart != value)
+				{
+					this.OnPropertyChanging("JobStart");
+					this._jobStart = value;
+					this.OnPropertyChanged("JobStart");
+				}
 			}
 		}
 		
-		private DateTime _ngay_vv1;
-		[Column("ngay_vv1", Length = 0, Scale = 0, SqlType = "date")]
-		[Storage("_ngay_vv1")]
-		public virtual DateTime Ngay_Vv1
+		private DateTime _jobEnd;
+		public virtual DateTime JobEnd
 		{
 			get
 			{
-				return this._ngay_vv1;
+				return this._jobEnd;
 			}
 			set
 			{
-				this._ngay_vv1 = value;
+				if(this._jobEnd != value)
+				{
+					this.OnPropertyChanging("JobEnd");
+					this._jobEnd = value;
+					this.OnPropertyChanged("JobEnd");
+				}
 			}
 		}
 		
-		private DateTime _ngay_vv2;
-		[Column("ngay_vv2", Length = 0, Scale = 0, SqlType = "date")]
-		[Storage("_ngay_vv2")]
-		public virtual DateTime Ngay_Vv2
+		private Guid _currencyId;
+		public virtual Guid CurrencyId
 		{
 			get
 			{
-				return this._ngay_vv2;
+				return this._currencyId;
 			}
 			set
 			{
-				this._ngay_vv2 = value;
+				if(this._currencyId != value)
+				{
+					this.OnPropertyChanging("CurrencyId");
+					this._currencyId = value;
+					this.OnPropertyChanged("CurrencyId");
+				}
 			}
 		}
 		
-		private Guid _ma_nt;
-		[Column("ma_nt", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_ma_nt")]
-		public virtual Guid Ma_Nt
+		private decimal _amount;
+		public virtual decimal Amount
 		{
 			get
 			{
-				return this._ma_nt;
+				return this._amount;
 			}
 			set
 			{
-				this._ma_nt = value;
+				if(this._amount != value)
+				{
+					this.OnPropertyChanging("Amount");
+					this._amount = value;
+					this.OnPropertyChanged("Amount");
+				}
 			}
 		}
 		
-		private decimal _tien_nt;
-		[Column("tien_nt", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_tien_nt")]
-		public virtual decimal Tien_Nt
+		private decimal _amountLcy;
+		public virtual decimal AmountLcy
 		{
 			get
 			{
-				return this._tien_nt;
+				return this._amountLcy;
 			}
 			set
 			{
-				this._tien_nt = value;
+				if(this._amountLcy != value)
+				{
+					this.OnPropertyChanging("AmountLcy");
+					this._amountLcy = value;
+					this.OnPropertyChanged("AmountLcy");
+				}
 			}
 		}
 		
-		private decimal _tien;
-		[Column("tien", Length = 38, Scale = 20, SqlType = "numeric")]
-		[Storage("_tien")]
-		public virtual decimal Tien
+		private string _comment;
+		public virtual string Comment
 		{
 			get
 			{
-				return this._tien;
+				return this._comment;
 			}
 			set
 			{
-				this._tien = value;
+				if(this._comment != value)
+				{
+					this.OnPropertyChanging("Comment");
+					this._comment = value;
+					this.OnPropertyChanged("Comment");
+				}
 			}
 		}
 		
-		private string _ghi_chu;
-		[Column("ghi_chu", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_ghi_chu")]
-		public virtual string Ghi_Chu
+		private DateTime _recCreated;
+		public virtual DateTime RecCreated
 		{
 			get
 			{
-				return this._ghi_chu;
+				return this._recCreated;
 			}
 			set
 			{
-				this._ghi_chu = value;
+				if(this._recCreated != value)
+				{
+					this.OnPropertyChanging("RecCreated");
+					this._recCreated = value;
+					this.OnPropertyChanged("RecCreated");
+				}
 			}
 		}
 		
-		private DateTime _date0;
-		[Column("date0", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date0")]
-		public virtual DateTime Date0
+		private Guid _recCreatedBy;
+		public virtual Guid RecCreatedBy
 		{
 			get
 			{
-				return this._date0;
+				return this._recCreatedBy;
 			}
 			set
 			{
-				this._date0 = value;
+				if(this._recCreatedBy != value)
+				{
+					this.OnPropertyChanging("RecCreatedBy");
+					this._recCreatedBy = value;
+					this.OnPropertyChanged("RecCreatedBy");
+				}
 			}
 		}
 		
-		private Guid _user_id0;
-		[Column("user_id0", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_user_id0")]
-		public virtual Guid User_Id0
+		private DateTime _recModified;
+		public virtual DateTime RecModified
 		{
 			get
 			{
-				return this._user_id0;
+				return this._recModified;
 			}
 			set
 			{
-				this._user_id0 = value;
+				if(this._recModified != value)
+				{
+					this.OnPropertyChanging("RecModified");
+					this._recModified = value;
+					this.OnPropertyChanged("RecModified");
+				}
 			}
 		}
 		
-		private DateTime _date2;
-		[Column("date2", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date2")]
-		public virtual DateTime Date2
+		private Guid _recModifiedBy;
+		public virtual Guid RecModifiedBy
 		{
 			get
 			{
-				return this._date2;
+				return this._recModifiedBy;
 			}
 			set
 			{
-				this._date2 = value;
-			}
-		}
-		
-		private Guid _user_id2;
-		[Column("user_id2", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_user_id2")]
-		public virtual Guid User_Id2
-		{
-			get
-			{
-				return this._user_id2;
-			}
-			set
-			{
-				this._user_id2 = value;
+				if(this._recModifiedBy != value)
+				{
+					this.OnPropertyChanging("RecModifiedBy");
+					this._recModifiedBy = value;
+					this.OnPropertyChanged("RecModifiedBy");
+				}
 			}
 		}
 		
 		private byte _status;
-		[Column("status", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_status")]
 		public virtual byte Status
 		{
 			get
@@ -293,28 +322,34 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._status = value;
+				if(this._status != value)
+				{
+					this.OnPropertyChanging("Status");
+					this._status = value;
+					this.OnPropertyChanged("Status");
+				}
 			}
 		}
 		
-		private Guid _tk;
-		[Column("tk", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_tk")]
-		public virtual Guid Tk
+		private Guid _accountId;
+		public virtual Guid AccountId
 		{
 			get
 			{
-				return this._tk;
+				return this._accountId;
 			}
 			set
 			{
-				this._tk = value;
+				if(this._accountId != value)
+				{
+					this.OnPropertyChanging("AccountId");
+					this._accountId = value;
+					this.OnPropertyChanged("AccountId");
+				}
 			}
 		}
 		
 		private Guid _clientId;
-		[Column("client_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get
@@ -323,13 +358,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._clientId = value;
+				if(this._clientId != value)
+				{
+					this.OnPropertyChanging("ClientId");
+					this._clientId = value;
+					this.OnPropertyChanged("ClientId");
+				}
 			}
 		}
 		
 		private Guid _organizationId;
-		[Column("organization_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_organizationId")]
 		public virtual Guid OrganizationId
 		{
 			get
@@ -338,13 +376,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organizationId = value;
+				if(this._organizationId != value)
+				{
+					this.OnPropertyChanging("OrganizationId");
+					this._organizationId = value;
+					this.OnPropertyChanged("OrganizationId");
+				}
 			}
 		}
 		
 		private Guid _id;
-		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_id")]
 		public virtual Guid Id
 		{
 			get
@@ -353,13 +394,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._id = value;
+				if(this._id != value)
+				{
+					this.OnPropertyChanging("Id");
+					this._id = value;
+					this.OnPropertyChanged("Id");
+				}
 			}
 		}
 		
 		private long _version;
-		[Column("version", IsVersion = true, IsBackendVersion = true, Length = 0, Scale = 0, SqlType = "int8")]
-		[Storage("_version")]
 		public virtual long Version
 		{
 			get
@@ -368,103 +412,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._version = value;
-			}
-		}
-		
-		private User _userinfo;
-		[ForeignKeyAssociation(SharedFields = "User_Id0", TargetFields = "Id")]
-		[Storage("_userinfo")]
-		public virtual User Userinfo0
-		{
-			get
-			{
-				return this._userinfo;
-			}
-			set
-			{
-				this._userinfo = value;
-			}
-		}
-		
-		private User _userinfo1;
-		[ForeignKeyAssociation(SharedFields = "User_Id2", TargetFields = "Id")]
-		[Storage("_userinfo1")]
-		public virtual User Userinfo2
-		{
-			get
-			{
-				return this._userinfo1;
-			}
-			set
-			{
-				this._userinfo1 = value;
-			}
-		}
-		
-		private JobGroup _dmnhvv;
-		[ForeignKeyAssociation(SharedFields = "Nh_Vv1", TargetFields = "Code")]
-		[Storage("_dmnhvv")]
-		public virtual JobGroup Dmnhvv1
-		{
-			get
-			{
-				return this._dmnhvv;
-			}
-			set
-			{
-				this._dmnhvv = value;
-			}
-		}
-		
-		private JobGroup _dmnhvv1;
-		[ForeignKeyAssociation(SharedFields = "Nh_Vv2", TargetFields = "Code")]
-		[Storage("_dmnhvv1")]
-		public virtual JobGroup Dmnhvv2
-		{
-			get
-			{
-				return this._dmnhvv1;
-			}
-			set
-			{
-				this._dmnhvv1 = value;
-			}
-		}
-		
-		private JobGroup _dmnhvv2;
-		[ForeignKeyAssociation(SharedFields = "Nh_Vv3", TargetFields = "Code")]
-		[Storage("_dmnhvv2")]
-		public virtual JobGroup Dmnhvv3
-		{
-			get
-			{
-				return this._dmnhvv2;
-			}
-			set
-			{
-				this._dmnhvv2 = value;
-			}
-		}
-		
-		private Account _dmtk;
-		[ForeignKeyAssociation(SharedFields = "Tk", TargetFields = "Id")]
-		[Storage("_dmtk")]
-		public virtual Account Dmtk
-		{
-			get
-			{
-				return this._dmtk;
-			}
-			set
-			{
-				this._dmtk = value;
+				if(this._version != value)
+				{
+					this.OnPropertyChanging("Version");
+					this._version = value;
+					this.OnPropertyChanged("Version");
+				}
 			}
 		}
 		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
-		[Storage("_client")]
 		public virtual Client Client
 		{
 			get
@@ -473,13 +430,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._client = value;
+				if(this._client != value)
+				{
+					this.OnPropertyChanging("Client");
+					this._client = value;
+					this.OnPropertyChanged("Client");
+				}
 			}
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
-		[Storage("_organization")]
 		public virtual Organization Organization
 		{
 			get
@@ -488,14 +448,53 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organization = value;
+				if(this._organization != value)
+				{
+					this.OnPropertyChanging("Organization");
+					this._organization = value;
+					this.OnPropertyChanged("Organization");
+				}
+			}
+		}
+		
+		private User _userinfo;
+		public virtual User RecCreatedByUser
+		{
+			get
+			{
+				return this._userinfo;
+			}
+			set
+			{
+				if(this._userinfo != value)
+				{
+					this.OnPropertyChanging("RecCreatedByUser");
+					this._userinfo = value;
+					this.OnPropertyChanged("RecCreatedByUser");
+				}
+			}
+		}
+		
+		private User _userinfo1;
+		public virtual User RecModifiedByUser
+		{
+			get
+			{
+				return this._userinfo1;
+			}
+			set
+			{
+				if(this._userinfo1 != value)
+				{
+					this.OnPropertyChanging("RecModifiedByUser");
+					this._userinfo1 = value;
+					this.OnPropertyChanged("RecModifiedByUser");
+				}
 			}
 		}
 		
 		private BusinessPartner _dmkh;
-		[ForeignKeyAssociation(SharedFields = "Ma_Kh", TargetFields = "Id")]
-		[Storage("_dmkh")]
-		public virtual BusinessPartner Dmkh
+		public virtual BusinessPartner BusinessPartner
 		{
 			get
 			{
@@ -503,9 +502,145 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._dmkh = value;
+				if(this._dmkh != value)
+				{
+					this.OnPropertyChanging("BusinessPartner");
+					this._dmkh = value;
+					this.OnPropertyChanged("BusinessPartner");
+				}
 			}
 		}
+		
+		private Account _dmtk;
+		public virtual Account Account
+		{
+			get
+			{
+				return this._dmtk;
+			}
+			set
+			{
+				if(this._dmtk != value)
+				{
+					this.OnPropertyChanging("Account");
+					this._dmtk = value;
+					this.OnPropertyChanged("Account");
+				}
+			}
+		}
+		
+		private JobGroup _jobGroup;
+		public virtual JobGroup JobGroup1
+		{
+			get
+			{
+				return this._jobGroup;
+			}
+			set
+			{
+				if(this._jobGroup != value)
+				{
+					this.OnPropertyChanging("JobGroup1");
+					this._jobGroup = value;
+					this.OnPropertyChanged("JobGroup1");
+				}
+			}
+		}
+		
+		private JobGroup _jobGroup1;
+		public virtual JobGroup JobGroup2
+		{
+			get
+			{
+				return this._jobGroup1;
+			}
+			set
+			{
+				if(this._jobGroup1 != value)
+				{
+					this.OnPropertyChanging("JobGroup2");
+					this._jobGroup1 = value;
+					this.OnPropertyChanged("JobGroup2");
+				}
+			}
+		}
+		
+		private JobGroup _jobGroup2;
+		public virtual JobGroup JobGroup3
+		{
+			get
+			{
+				return this._jobGroup2;
+			}
+			set
+			{
+				if(this._jobGroup2 != value)
+				{
+					this.OnPropertyChanging("JobGroup3");
+					this._jobGroup2 = value;
+					this.OnPropertyChanged("JobGroup3");
+				}
+			}
+		}
+		
+		#region IDataErrorInfo members
+		
+		private string error = string.Empty;
+		public string Error
+		{
+			get
+			{
+				return this.error;
+			}
+		}
+		
+		public string this[string propertyName]
+		{
+			get
+			{
+				this.ValidatePropertyInternal(propertyName, ref this.error);
+		
+				return this.error;
+			}
+		}
+		
+		protected virtual void ValidatePropertyInternal(string propertyName, ref string error)
+		{
+		    this.ValidateProperty(propertyName, ref error);
+		}
+		
+		// Please implement this method in a partial class in order to provide the error message depending on each of the properties.
+		partial void ValidateProperty(string propertyName, ref string error);
+		
+		#endregion
+		
+		#region INotifyPropertyChanging members
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		protected virtual void OnPropertyChanging(string propertyName)
+		{
+			if(this.PropertyChanging != null)
+			{
+				this.PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
+		
+		#region INotifyPropertyChanged members
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void OnPropertyChanged(string propertyName)
+		{
+			if(this.PropertyChanged != null)
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
 		
 	}
 }

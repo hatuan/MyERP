@@ -1,17 +1,17 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.ServiceModel.DomainServices.Client;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
-using MyERP.DataAccess;
 using MyERP.Infrastructure;
+using MyERP.Infrastructure.Extensions;
 using MyERP.Infrastructure.ViewModels;
 using MyERP.Repositories;
+using MyERP.Repository.MyERPService;
 using MyERP.ViewModels;
-using MyERP.Web;
 using Telerik.Windows.Data;
 
 namespace MyERP.Modules.Master.ViewModels
@@ -21,7 +21,7 @@ namespace MyERP.Modules.Master.ViewModels
     {
         public NoSeriesViewModel()
         {
-            
+            this.NoSeries = new ObservableCollectionEx<NumberSequence>(true);
         }
 
         [Import]
@@ -61,36 +61,45 @@ namespace MyERP.Modules.Master.ViewModels
             }
         }
 
-        private QueryableDomainServiceCollectionView<NumberSequence> _noSeries;
-        public QueryableDomainServiceCollectionView<NumberSequence> NoSeries
+        private ObservableCollectionEx<NumberSequence> _noSeries;
+        public ObservableCollectionEx<NumberSequence> NoSeries
         {
             get { return this._noSeries; }
-            set { _noSeries = value; }
-        }
-        
-        public bool IsBusy
-        {
-            get { return this._noSeries.IsBusy; }
-        }
-
-        void _noSeries_LoadedData(object sender, Telerik.Windows.Controls.DomainServices.LoadedDataEventArgs e)
-        {
-            if (e.HasError)
+            set
             {
-                MessageBox.Show(e.Error.ToString(), "Load Error", MessageBoxButton.OK);
-                e.MarkErrorAsHandled();
+                _noSeries = value;
+                _noSeries.CollectionChanged += NoSeriesCollectionChanged;
+                this.RaisePropertyChanged("NoSeries");
             }
         }
-        
 
-        void _noSeries_SubmittedChanges(object sender, Telerik.Windows.Controls.DomainServices.DomainServiceSubmittedChangesEventArgs e)
+        private void NoSeriesCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (e.HasError)
+            if (e.Action == NotifyCollectionChangedAction.Remove)
             {
-                MessageBox.Show(e.Error.ToString(), "Submit Error", MessageBoxButton.OK);
-                e.MarkErrorAsHandled();
+                foreach (NumberSequence item in e.OldItems)
+                {
+                    //Removed items
+                    item.PropertyChanged -= NumberSequencePropertyChanged;
+                }
+            }
+            else if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (NumberSequence item in e.NewItems)
+                {
+                    //Added items
+                    item.PropertyChanged += NumberSequencePropertyChanged;
+                }
             }
         }
+
+        private void NumberSequencePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            NumberSequence entity = sender as NumberSequence;
+            NumberSequenceRepository.Update(entity);
+        }
+
+        public bool IsBusy { get; set; }
 
         void _noSeries_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -111,47 +120,62 @@ namespace MyERP.Modules.Master.ViewModels
             }
         }
 
-        //Update khi thay doi sang dong moi
-        void _noSeries_CurrentChanging(object sender, CurrentChangingEventArgs e)
-        {
-            if (_noSeries.HasChanges)
-                _noSeries.SubmitChanges();
-        }
-
         private void OnAddNewCommandExecuted()
         {
-            _noSeries.AddNew();
-
+            var newId = Guid.NewGuid();
+            var newEntity = new NumberSequence
+            {
+                OrganizationId = (SessionManager.Session["Organization"] as Organization).Id,
+                ClientId = (Guid) SessionManager.Session["ClientId"],
+                Id = newId,
+                Code = "",
+                Name = "",
+                NoSeqName = String.Format("seq_no_series_{0}", newId.ToString().Replace("-", "_")),
+                FormatNo = "",
+                StartingNo = 0,
+                EndingNo = 0,
+                CurrentNo = 0,
+                RecModifiedBy = (SessionManager.Session["User"] as User).Id,
+                RecCreatedBy = (SessionManager.Session["User"] as User).Id,
+                RecModified = DateTime.Now,
+                RecCreated = DateTime.Now,
+                Status = 1,
+                Version = 1
+            };
+            this.NoSeries.Add(newEntity);
+            this.NumberSequenceRepository.AddNew("NumberSequences", newEntity);
+            this.SelectedNo = newEntity;
         }
 
         private bool AddNewCommandCanExecute()
         {
-            return !_noSeries.HasChanges;
+            return true;
         }
         
         private void OnSubmitChangesExcuted()
         {
-            this._noSeries.SubmitChanges();
+            NumberSequenceRepository.SaveChanges();
         }
 
         private bool SubmitChangesCommandCanExecute()
         {
-            return this._noSeries.HasChanges;
+            return true;
         }
 
         private void OnRejectChangesExcuted()
         {
-            this._noSeries.RejectChanges();
         }
 
         private bool RefreshCommandCanExecute()
         {
-            return this._noSeries.CanLoad;
+            return true;
         }
 
         private void OnRefreshExcuted()
         {
-            this._noSeries.Load();
+            NoSeries.Clear();
+            NumberSequenceRepository.GetNumberSequences(results => results.ForEach((item) => this.NoSeries.Add(item)));
+
         }
 
         private bool DeleteCommandCanExecute()
@@ -165,7 +189,10 @@ namespace MyERP.Modules.Master.ViewModels
         private void OnDeleteExcuted()
         {
             if (SelectedNo != null)
+            {
+                this.NumberSequenceRepository.Delete(SelectedNo);
                 this.NoSeries.Remove(SelectedNo);
+            }
         }
 
         private bool CloseWindowCanExecute()
@@ -174,8 +201,8 @@ namespace MyERP.Modules.Master.ViewModels
                 return false;
             
             //Neu co thay doi thi khong cho dong cua so, bat buoc phai luu hay undo
-            if(this._noSeries.HasChanges)
-                return false;
+            //if(this._noSeries.HasChanges)
+            //    return false;
 
             return true;
         }
@@ -192,16 +219,7 @@ namespace MyERP.Modules.Master.ViewModels
         public override void OnImportsSatisfied()
         {
             base.OnImportsSatisfied();
-
-            MyERPDomainContext context = NumberSequenceRepository.Context;
-            EntityQuery<NumberSequence> getNoSeriesQuery = context.GetNumberSequencesQuery().OrderBy(c => c.Code);
-            this._noSeries = new QueryableDomainServiceCollectionView<NumberSequence>(context, getNoSeriesQuery);
-            this._noSeries.AutoLoad = true;
-            this._noSeries.LoadedData += _noSeries_LoadedData;
-            this._noSeries.PropertyChanged += _noSeries_PropertyChanged;
-            this._noSeries.SubmittedChanges += _noSeries_SubmittedChanges;
-            //this._noSeries.CurrentChanging += _noSeries_CurrentChanging;
-
+            
             this.AddNewCommand = new DelegateCommand(OnAddNewCommandExecuted, AddNewCommandCanExecute);
             this.SubmitChangesCommand = new DelegateCommand(OnSubmitChangesExcuted, SubmitChangesCommandCanExecute);
             this.RejectChangesCommand = new DelegateCommand(OnRejectChangesExcuted, SubmitChangesCommandCanExecute);
@@ -209,7 +227,14 @@ namespace MyERP.Modules.Master.ViewModels
             this.DeleteCommand = new DelegateCommand(OnDeleteExcuted, DeleteCommandCanExecute);
             this.CloseWindowCommand = new DelegateCommand(OnCloseWindowExcuted, CloseWindowCanExecute);
         }
-       
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            base.OnNavigatedTo(navigationContext);
+
+            NoSeries.Clear();
+            NumberSequenceRepository.GetNumberSequences(results => results.ForEach((item) => this.NoSeries.Add(item)));
+        }
+
         #endregion
 
         public event EventHandler<EventArgs> RequestClose;

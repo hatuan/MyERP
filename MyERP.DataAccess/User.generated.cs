@@ -18,18 +18,14 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
+using System.ComponentModel;
 using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("user", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Changed)]
-	[KeyGenerator(KeyGenerator.Guid)]
-	public partial class User
+	public partial class User : IDataErrorInfo, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		private Guid _id;
-		[Column("id", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_id")]
 		public virtual Guid Id
 		{
 			get
@@ -38,13 +34,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._id = value;
+				if(this._id != value)
+				{
+					this.OnPropertyChanging("Id");
+					this._id = value;
+					this.OnPropertyChanged("Id");
+				}
 			}
 		}
 		
 		private string _name;
-		[Column("name", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_name")]
 		public virtual string Name
 		{
 			get
@@ -53,13 +52,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._name = value;
+				if(this._name != value)
+				{
+					this.OnPropertyChanging("Name");
+					this._name = value;
+					this.OnPropertyChanged("Name");
+				}
 			}
 		}
 		
 		private string _password;
-		[Column("password", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_password")]
 		public virtual string Password
 		{
 			get
@@ -68,13 +70,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._password = value;
+				if(this._password != value)
+				{
+					this.OnPropertyChanging("Password");
+					this._password = value;
+					this.OnPropertyChanged("Password");
+				}
 			}
 		}
 		
 		private string _comment;
-		[Column("comment", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_comment")]
 		public virtual string Comment
 		{
 			get
@@ -83,13 +88,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._comment = value;
+				if(this._comment != value)
+				{
+					this.OnPropertyChanging("Comment");
+					this._comment = value;
+					this.OnPropertyChanged("Comment");
+				}
 			}
 		}
 		
 		private string _fullName;
-		[Column("full_name", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_fullName")]
 		public virtual string FullName
 		{
 			get
@@ -98,13 +106,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._fullName = value;
+				if(this._fullName != value)
+				{
+					this.OnPropertyChanging("FullName");
+					this._fullName = value;
+					this.OnPropertyChanged("FullName");
+				}
 			}
 		}
 		
 		private string _passwordAnswer;
-		[Column("password_answer", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_passwordAnswer")]
 		public virtual string PasswordAnswer
 		{
 			get
@@ -113,13 +124,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._passwordAnswer = value;
+				if(this._passwordAnswer != value)
+				{
+					this.OnPropertyChanging("PasswordAnswer");
+					this._passwordAnswer = value;
+					this.OnPropertyChanged("PasswordAnswer");
+				}
 			}
 		}
 		
 		private string _passwordQuestion;
-		[Column("password_question", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_passwordQuestion")]
 		public virtual string PasswordQuestion
 		{
 			get
@@ -128,13 +142,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._passwordQuestion = value;
+				if(this._passwordQuestion != value)
+				{
+					this.OnPropertyChanging("PasswordQuestion");
+					this._passwordQuestion = value;
+					this.OnPropertyChanged("PasswordQuestion");
+				}
 			}
 		}
 		
 		private string _email;
-		[Column("email", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_email")]
 		public virtual string Email
 		{
 			get
@@ -143,13 +160,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._email = value;
+				if(this._email != value)
+				{
+					this.OnPropertyChanging("Email");
+					this._email = value;
+					this.OnPropertyChanged("Email");
+				}
 			}
 		}
 		
 		private DateTime _createdDate;
-		[Column("created_date", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_createdDate")]
 		public virtual DateTime CreatedDate
 		{
 			get
@@ -158,13 +178,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._createdDate = value;
+				if(this._createdDate != value)
+				{
+					this.OnPropertyChanging("CreatedDate");
+					this._createdDate = value;
+					this.OnPropertyChanged("CreatedDate");
+				}
 			}
 		}
 		
 		private bool _isActivated;
-		[Column("is_activated", Length = 0, Scale = 0, SqlType = "bool")]
-		[Storage("_isActivated")]
 		public virtual bool IsActivated
 		{
 			get
@@ -173,13 +196,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._isActivated = value;
+				if(this._isActivated != value)
+				{
+					this.OnPropertyChanging("IsActivated");
+					this._isActivated = value;
+					this.OnPropertyChanged("IsActivated");
+				}
 			}
 		}
 		
 		private bool _isLockedOut;
-		[Column("is_locked_out", Length = 0, Scale = 0, SqlType = "bool")]
-		[Storage("_isLockedOut")]
 		public virtual bool IsLockedOut
 		{
 			get
@@ -188,13 +214,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._isLockedOut = value;
+				if(this._isLockedOut != value)
+				{
+					this.OnPropertyChanging("IsLockedOut");
+					this._isLockedOut = value;
+					this.OnPropertyChanged("IsLockedOut");
+				}
 			}
 		}
 		
 		private DateTime _lastLockedOutDate;
-		[Column("last_locked_out_date", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_lastLockedOutDate")]
 		public virtual DateTime LastLockedOutDate
 		{
 			get
@@ -203,13 +232,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._lastLockedOutDate = value;
+				if(this._lastLockedOutDate != value)
+				{
+					this.OnPropertyChanging("LastLockedOutDate");
+					this._lastLockedOutDate = value;
+					this.OnPropertyChanged("LastLockedOutDate");
+				}
 			}
 		}
 		
 		private string _lastLockedOutReason;
-		[Column("last_locked_out_reason", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_lastLockedOutReason")]
 		public virtual string LastLockedOutReason
 		{
 			get
@@ -218,13 +250,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._lastLockedOutReason = value;
+				if(this._lastLockedOutReason != value)
+				{
+					this.OnPropertyChanging("LastLockedOutReason");
+					this._lastLockedOutReason = value;
+					this.OnPropertyChanged("LastLockedOutReason");
+				}
 			}
 		}
 		
 		private DateTime _lastLoginDate;
-		[Column("last_login_date", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_lastLoginDate")]
 		public virtual DateTime LastLoginDate
 		{
 			get
@@ -233,13 +268,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._lastLoginDate = value;
+				if(this._lastLoginDate != value)
+				{
+					this.OnPropertyChanging("LastLoginDate");
+					this._lastLoginDate = value;
+					this.OnPropertyChanged("LastLoginDate");
+				}
 			}
 		}
 		
 		private string _lastLoginIp;
-		[Column("last_login_ip", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_lastLoginIp")]
 		public virtual string LastLoginIp
 		{
 			get
@@ -248,13 +286,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._lastLoginIp = value;
+				if(this._lastLoginIp != value)
+				{
+					this.OnPropertyChanging("LastLoginIp");
+					this._lastLoginIp = value;
+					this.OnPropertyChanged("LastLoginIp");
+				}
 			}
 		}
 		
 		private DateTime _lastModifiedDate;
-		[Column("last_modified_date", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_lastModifiedDate")]
 		public virtual DateTime LastModifiedDate
 		{
 			get
@@ -263,13 +304,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._lastModifiedDate = value;
+				if(this._lastModifiedDate != value)
+				{
+					this.OnPropertyChanging("LastModifiedDate");
+					this._lastModifiedDate = value;
+					this.OnPropertyChanged("LastModifiedDate");
+				}
 			}
 		}
 		
 		private Guid? _clientId;
-		[Column("client_id", OpenAccessType = OpenAccessType.Guid, IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_clientId")]
 		public virtual Guid? ClientId
 		{
 			get
@@ -278,13 +322,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._clientId = value;
+				if(this._clientId != value)
+				{
+					this.OnPropertyChanging("ClientId");
+					this._clientId = value;
+					this.OnPropertyChanged("ClientId");
+				}
 			}
 		}
 		
 		private Guid? _organizationId;
-		[Column("organization_id", OpenAccessType = OpenAccessType.Guid, IsNullable = true, Length = 0, Scale = 0, SqlType = "uuid", Converter = "OpenAccessRuntime.Data.GuidConverter")]
-		[Storage("_organizationId")]
 		public virtual Guid? OrganizationId
 		{
 			get
@@ -293,13 +340,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organizationId = value;
+				if(this._organizationId != value)
+				{
+					this.OnPropertyChanging("OrganizationId");
+					this._organizationId = value;
+					this.OnPropertyChanged("OrganizationId");
+				}
 			}
 		}
 		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
-		[Storage("_client")]
 		public virtual Client Client
 		{
 			get
@@ -308,13 +358,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._client = value;
+				if(this._client != value)
+				{
+					this.OnPropertyChanging("Client");
+					this._client = value;
+					this.OnPropertyChanged("Client");
+				}
 			}
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
-		[Storage("_organization")]
 		public virtual Organization Organization
 		{
 			get
@@ -323,9 +376,82 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organization = value;
+				if(this._organization != value)
+				{
+					this.OnPropertyChanging("Organization");
+					this._organization = value;
+					this.OnPropertyChanged("Organization");
+				}
 			}
 		}
+		
+		private IList<UserInRole> _userInRole = new List<UserInRole>();
+		public virtual IList<UserInRole> RolesInUser
+		{
+			get
+			{
+				return this._userInRole;
+			}
+		}
+		
+		#region IDataErrorInfo members
+		
+		private string error = string.Empty;
+		public string Error
+		{
+			get
+			{
+				return this.error;
+			}
+		}
+		
+		public string this[string propertyName]
+		{
+			get
+			{
+				this.ValidatePropertyInternal(propertyName, ref this.error);
+		
+				return this.error;
+			}
+		}
+		
+		protected virtual void ValidatePropertyInternal(string propertyName, ref string error)
+		{
+		    this.ValidateProperty(propertyName, ref error);
+		}
+		
+		// Please implement this method in a partial class in order to provide the error message depending on each of the properties.
+		partial void ValidateProperty(string propertyName, ref string error);
+		
+		#endregion
+		
+		#region INotifyPropertyChanging members
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		protected virtual void OnPropertyChanging(string propertyName)
+		{
+			if(this.PropertyChanging != null)
+			{
+				this.PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
+		
+		#region INotifyPropertyChanged members
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void OnPropertyChanged(string propertyName)
+		{
+			if(this.PropertyChanged != null)
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
 		
 	}
 }

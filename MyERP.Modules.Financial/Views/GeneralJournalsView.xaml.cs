@@ -68,6 +68,8 @@ namespace MyERP.Modules.Financial.Views
             //Su dung RequestNaviage de dua GeneralJournalsHeaderUserControl vao GeneralJournalsViewRegionNames.GeneralJournalsHeader
             //va chay thu tuc OnNavigatedTo trong GeneralJournalsHeaderUserControl
             this.RegionManager.RequestNavigate(GeneralJournalsViewRegionNames.GeneralJournalsHeader, "GeneralJournalsHeaderUserControl");
+            this.RegionManager.RequestNavigate(GeneralJournalsViewRegionNames.GeneralJournalDocumentsOverview, "GeneralJournalDocumentsListUserControl");
+            this.RegionManager.RequestNavigate(GeneralJournalsViewRegionNames.GeneralJournalLinesOverview, "GeneralJournalLinesListUserControl");
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

@@ -1,20 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.ServiceModel.DomainServices.Client.ApplicationServices;
 using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using MyERP;
 using MyERP.Helpers;
-using MyERP.Web;
 using Telerik.Windows.Controls;
 
 namespace MyERP
@@ -32,12 +20,12 @@ namespace MyERP
 
             // Create a WebContext and add it to the ApplicationLifetimeObjects
             // collection.  This will then be available as WebContext.Current.
-            MyERP.Repositories.WebContext webContext = new MyERP.Repositories.WebContext();
-            webContext.Authentication = new FormsAuthentication()
-            {
-                DomainContext = new MyERPAuthenticationDomainContext()
-            };
-            this.ApplicationLifetimeObjects.Add(webContext);
+            //MyERP.Repositories.WebContext webContext = new MyERP.Repositories.WebContext();
+            //webContext.Authentication = new FormsAuthentication()
+            //{
+            //    DomainContext = new MyERPAuthenticationDomainContext()
+            //};
+            //this.ApplicationLifetimeObjects.Add(webContext);
         }
 
         private void Application_Startup(object sender, StartupEventArgs e) 
@@ -47,11 +35,8 @@ namespace MyERP
             Thread.CurrentThread.CurrentCulture = LocalizationManager.DefaultCulture;
             Thread.CurrentThread.CurrentUICulture = LocalizationManager.DefaultCulture;
             
-            var otherContext = new MyERPOtherDomainContext();
-            otherContext.UpdateSchema();
-            otherContext.LoadModuleData();
-            otherContext.LoadDemoData();
-
+            //TODO : Thuc hien Update Schema, Create Index & Upload Data
+            
             AssemblyCache.Initialize();
             var bootstrapper = new Bootstrapper();
             bootstrapper.Run();

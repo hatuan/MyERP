@@ -1,58 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Data.Services.Client;
 using System.Linq;
-using System.ServiceModel.DomainServices.Client;
-using MyERP.DataAccess;
+using MyERP.Infrastructure;
+using MyERP.Repository.MyERPService;
 
 namespace MyERP.Repositories
 {
     [Export]
     public class CurrencyRepository : RepositoryBase
     {
+        public void GetCurrencies(Action<IEnumerable<Currency>> callback)
+        {
+            DataServiceQuery<Currency> query = (DataServiceQuery<Currency>)from currency in Container.Currencies
+                                                                             .Expand(c => c.RecCreatedByUser)
+                                                                             .Expand(c => c.RecModifiedByUser)
+                                                                           where currency.ClientId.Equals(SessionManager.Session["ClientId"])
+                                                                           orderby currency.Code
+                                                                           select currency;
+
+            query.BeginExecute(result =>
+            {
+                var request = result.AsyncState as DataServiceQuery<Currency>;
+                var response = request.EndExecute(result);
+
+                UIThread.Invoke(() => callback(response));
+            }, query);
+        }
+
         public void GetCurrencyById(Guid id, Action<Currency> callback)
         {
-            EntityQuery<Currency> query = this.Context.GetCurrenciesQuery().Where(c => c.Id == id);
+            DataServiceQuery<Currency> query = (DataServiceQuery<Currency>)from currency in Container.Currencies
+                                                                           where currency.Id.Equals(id)
+                                                                           select currency;
 
-            this.LoadQuery(query, callback);
+            query.BeginExecute(result =>
+            {
+                var request = result.AsyncState as DataServiceQuery<Currency>;
+                var response = request.EndExecute(result);
+
+                UIThread.Invoke(() => callback(response.FirstOrDefault()));
+            }, query);
         }
 
         public void GetCurrenciesByLookupValue(string lookupValue, Action<IEnumerable<Currency>> callback)
         {
-            if (lookupValue == null)
+            DataServiceQuery<Currency> query = (DataServiceQuery<Currency>)from currency in Container.Currencies
+                                                                           orderby currency.Code
+                                                                           where currency.ClientId.Equals(SessionManager.Session["ClientId"])
+                                                                            && currency.Code.StartsWith(lookupValue)
+                                                                           select currency;
+
+            query.BeginExecute(result =>
             {
-                callback(Enumerable.Empty<Currency>());
-                return;
-            }
-                
-            EntityQuery<Currency> query =
-                this.Context.GetCurrenciesQuery().Where(u => u.Code.ToLower().StartsWith(lookupValue.ToLower())).OrderBy(c => c.Code).Take(500);
+                var request = result.AsyncState as DataServiceQuery<Currency>;
+                var response = request.EndExecute(result);
 
-            this.LoadQuery(query, callback);
-        }
-
-        public void GetCurrenciesByClientAndOrg(Client client, Organization organization, Action<IEnumerable<Currency>> callback)
-        {
-            if (client == null || organization == null)
-            {
-                callback(Enumerable.Empty<Currency>());
-                return;
-            }
-
-            EntityQuery<Currency> query = this.Context.GetCurrenciesQuery().Where(c => c.ClientId == client.ClientId && c.OrganizationId == organization.Id).OrderBy(c => c.Code);
-            if (organization.Code != "*")
-            {
-                Organization defaultOrganization =
-                    this.Context.Organizations.FirstOrDefault(c => c.ClientId == client.ClientId && c.Code == "*");
-
-                query = this.Context.GetCurrenciesQuery()
-                        .Where(
-                            c =>
-                                c.ClientId == client.ClientId &&
-                                (c.OrganizationId == organization.Id || c.OrganizationId == defaultOrganization.Id)).OrderBy(c => c.Code);
-            }
-
-            this.LoadQuery(query, callback);
+                UIThread.Invoke(() => callback(response));
+            }, query);
         }
     }
 }

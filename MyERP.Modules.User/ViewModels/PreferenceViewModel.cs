@@ -1,35 +1,24 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Linq;
-using System.ServiceModel.DomainServices.Client;
-using System.ServiceModel.DomainServices.Client.ApplicationServices;
 using System.Windows.Input;
-using Microsoft.Practices.Prism;
-using Microsoft.Practices.ServiceLocation;
-using MyERP.DataAccess;
 using MyERP.Infrastructure;
-using MyERP.Infrastructure.ViewModels;
-using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.Prism.ViewModel;
 using MyERP.Repositories;
+using MyERP.Repository.MyERPService;
 using MyERP.ViewModels;
-using MyERP.Web;
-using Telerik.Windows.Controls;
 using Telerik.Windows.Data;
 using DelegateCommand = Microsoft.Practices.Prism.Commands.DelegateCommand;
-using ViewModelBase = MyERP.Infrastructure.ViewModelBase;
+using ViewModelBase = MyERP.Infrastructure.ViewModels.ViewModelBase;
 
 
 namespace MyERP.Modules.User.ViewModels
 {
     [Export]
-    public class PreferenceViewModel : ViewModelBase, ICloseable
+    public class PreferenceViewModel : Infrastructure.ViewModels.ViewModelBase, ICloseable
     {
         public PreferenceViewModel()
         {
@@ -48,12 +37,11 @@ namespace MyERP.Modules.User.ViewModels
         [Import]
         public IRegionManager RegionManager { get; set; }
 
-        private QueryableCollectionView _organizations;
-        public QueryableCollectionView Organizations
+        private IEnumerable<Organization> _organizations = Enumerable.Empty<Organization>();
+        public IEnumerable<Organization> Organizations
         {
             get
             {
-                
                 return this._organizations;
             }
             set

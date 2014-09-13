@@ -1,0 +1,135 @@
+﻿html, body{
+  height:100%;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto;
+    /* Negative indent footer by its height */
+    margin: 0 auto -200px;
+    /* Pad bottom by footer height */
+    padding: 0 0 200px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+    height: 200px;
+    padding: 20px 0 0;
+    background-color: #f5f5f5;
+}
+
+
+/* Set width on the form input elements since they're 100% wide by default */
+input, 
+select, 
+textarea {
+    max-width: 280px;    
+}
+
+/* Set icon in the right side*/
+.ui-li-icon-right {
+    float: right;
+    margin-top: 2px;
+    margin-right: -6px;
+    opacity: .25;
+}
+
+.title-bar-item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.appframe-title-bar {
+    border-bottom: 1px solid #ddd;
+}
+
+
+.appframe-iconbar {
+    border-bottom: 1px solid #ddd;
+}
+
+.iconbar {
+    padding-bottom: 20px;
+}
+
+.listview-main-section {
+    border-right: 1px solid #ddd;
+}
+
+.form-link {
+    font-weight: bold;
+    font-size: 102%;
+}
+
+.col-text-overflow {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 30px;
+    white-space: nowrap;
+}
+
+/* Autocomplete*/
+.ui-autocomplete-loading {
+    background: white url("themes/base/images/ui-anim_basic_16x16.gif") right center no-repeat;
+  }
+
+/* listing */
+
+.show_filters {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid #c7c7c7;
+}
+
+.list-row {
+	padding: 5px 15px;
+	margin: 0px -15px;
+	border-bottom: 1px solid #c7c7c7;
+}
+
+.side-panel {
+	border-bottom: 1px solid #c7c7c7;
+	margin: 0px -15px;
+	padding: 5px 15px;
+}
+
+
+/* list */
+
+.doclist-row {
+	position: relative;
+	padding-top: 5px;
+	padding-bottom: 6px;
+	/*border-bottom: 1px solid #eee;*/
+}
+
+.doclist-row .col {
+	padding-left: 7px;
+	padding-right: 7px;
+}
+
+.list-timestamp {
+	position: absolute;
+	right: 5px;
+	bottom: 2px;
+	font-size: 70%;
+	color: #888;
+}
+
+.list-doc-name {
+	position: absolute;
+	bottom: 2px;
+}
+
+.list-doc-name a {
+	font-size: 70%;
+	color: #888;
+}

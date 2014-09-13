@@ -2,12 +2,14 @@
   <Deployment.Parts>
     <AssemblyPart x:Name="MyERP.Modules.Master" Source="MyERP.Modules.Master.dll" />
     <AssemblyPart x:Name="MyERP.Controls" Source="MyERP.Controls.dll" />
+    <AssemblyPart x:Name="System.Spatial.SL" Source="System.Spatial.SL.dll" />
   </Deployment.Parts>
   <Deployment.ExternalParts>
     <ExtensionPart Source="System.ComponentModel.Composition.zip" />
     <ExtensionPart Source="System.ComponentModel.DataAnnotations.zip" />
     <ExtensionPart Source="System.Windows.Controls.zip" />
     <ExtensionPart Source="System.Windows.Data.zip" />
+    <ExtensionPart Source="System.Xml.Linq.zip" />
     <ExtensionPart Source="Telerik.Windows.Controls.Data.zip" />
     <ExtensionPart Source="Telerik.Windows.Controls.zip" />
     <ExtensionPart Source="Telerik.Windows.Controls.Docking.zip" />
@@ -19,6 +21,6 @@
     <ExtensionPart Source="Telerik.Windows.Data.zip" />
     <ExtensionPart Source="Telerik.Windows.Themes.Windows8.zip" />
     <ExtensionPart Source="Microsoft.CSharp.zip" />
-    <ExtensionPart Source="System.Xml.Linq.zip" />
+    <ExtensionPart Source="System.ServiceModel.DomainServices.Client.zip" />
   </Deployment.ExternalParts>
 </Deployment>

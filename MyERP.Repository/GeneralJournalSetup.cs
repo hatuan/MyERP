@@ -1,7 +1,4 @@
-﻿using System;
-using MyERP.Infrastructure;
-
-namespace MyERP.DataAccess
+﻿namespace MyERP.Repository.MyERPService
 {
     public partial class GeneralJournalSetup
     {

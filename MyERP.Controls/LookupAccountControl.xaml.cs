@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.ServiceModel.DomainServices.Client;
@@ -11,9 +12,10 @@ using System.Windows.Threading;
 using MyERP.DataAccess;
 using MyERP.Infrastructure.Annotations;
 using MyERP.Repositories;
-using MyERP.Web;
+using MyERP.Repository.MyERPService;
 using Telerik.Windows.Controls;
 using Telerik.Windows.Data;
+using ViewModelBase = MyERP.Infrastructure.ViewModels.ViewModelBase;
 using WindowStartupLocation = Telerik.Windows.Controls.WindowStartupLocation;
 
 
@@ -25,8 +27,9 @@ namespace MyERP.Controls
         {
             InitializeComponent();
 
-            if (!MyERP.Infrastructure.ViewModelBase.IsInDesignModeStatic)
+            if (!ViewModelBase.IsInDesignModeStatic)
             {
+                _accountRepository = new AccountRepository();
                 this.SearchCommand = new DelegateCommand(this.OnSearchCommandExecuted);
                 LayoutRoot.DataContext = this;
                 
@@ -46,14 +49,14 @@ namespace MyERP.Controls
                 this.loadTimer.Stop();
             }
             IsBusy = true;
-            _accountRepository.GetAccountsByLookupValue(textBox.SearchText, accounts =>
+            _accountRepository.GetAccountsByLookupValue(textBox.SearchText, results =>
             {
-                Accounts = accounts;
+                this.Accounts = new ObservableCollection<Account>(results);;
                 IsBusy = false;
             });
         }
 
-        private readonly AccountRepository _accountRepository = new AccountRepository();
+        private readonly AccountRepository _accountRepository;
 
         readonly RadWindow _searchWindow = new RadWindow();
 
@@ -123,8 +126,8 @@ namespace MyERP.Controls
             }
         }
 
-        private IEnumerable<Account> _accounts;
-        public IEnumerable<Account> Accounts
+        private ObservableCollection<Account> _accounts;
+        public ObservableCollection<Account> Accounts
         {
             get { return _accounts; }
             set

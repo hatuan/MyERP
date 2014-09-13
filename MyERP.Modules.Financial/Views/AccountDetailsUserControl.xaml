@@ -152,15 +152,16 @@
     
     <Grid x:Name="LayoutRoot">
         <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}">
-			<telerik:RadDataForm x:Name="dataForm" 
-				ItemsSource="{Binding Accounts}" 
-				ReadOnlyTemplate="{StaticResource AccountReadOnlyTemplate}" 
-				NewItemTemplate="{StaticResource AccountEditTemplate}" 
-				EditTemplate="{StaticResource AccountEditTemplate}" 
-				AutoGenerateFields="False" Background="Transparent"
-				VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" 
-				CommandButtonsVisibility="Navigation" 
-				AutoEdit="True"/>
-		</telerik:RadBusyIndicator>
+            <telerik:RadDataForm x:Name="dataForm" 
+                                 ItemsSource="{Binding Accounts}" 
+                                 CurrentItem="{Binding SelectedAccount, Mode=TwoWay}"
+                                 ReadOnlyTemplate="{StaticResource AccountReadOnlyTemplate}" 
+                                 NewItemTemplate="{StaticResource AccountEditTemplate}" 
+                                 EditTemplate="{StaticResource AccountEditTemplate}" 
+                                 AutoGenerateFields="False" Background="Transparent"
+                                 VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" 
+                                 CommandButtonsVisibility="Navigation" 
+                                 AutoEdit="True"/>
+        </telerik:RadBusyIndicator>
 	</Grid>
 </UserControl>

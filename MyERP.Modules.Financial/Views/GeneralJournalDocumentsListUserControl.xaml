@@ -45,7 +45,7 @@
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn Header="ORGANIZATION" DataMemberBinding="{Binding Organization.Code}" Width="150"/>
                 <telerik:GridViewDataColumn Header="NO" DataMemberBinding="{Binding DocumentNo, Mode=TwoWay}" Width="150"/>
-                <telerik:GridViewDataColumn Header="CREATED DATE" DataMemberBinding="{Binding DocumentCreated, Mode=TwoWay}" DataFormatString="{} {0:d}" Width="150"/>
+                <!-- <telerik:GridViewDataColumn Header="CREATED DATE" DataMemberBinding="{Binding DocumentCreated, Mode=TwoWay}" DataFormatString="{} {0:d}" Width="150"/> -->
                 <telerik:GridViewDataColumn Header="POSTED DATE" DataMemberBinding="{Binding DocumentPosted, Mode=TwoWay}" DataFormatString="{} {0:d}" Width="150"/>
                 <telerik:GridViewDataColumn Header="DESCRIPTION" DataMemberBinding="{Binding Description, Mode=TwoWay}" Width="150*"/>
                 <telerik:GridViewDataColumn Header="STATUS" DataMemberBinding="{Binding Status, Converter={StaticResource mapGeneralJournalDocumentStatusTypeToString}}" IsReadOnly="True" Width="150"/>

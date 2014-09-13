@@ -1,32 +1,18 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
-using System.Linq;
-using System.ServiceModel.DomainServices.Client;
-using System.ServiceModel.DomainServices.Client.ApplicationServices;
+using System.Text;
 using System.Windows.Input;
-using Microsoft.Practices.Prism;
-using Microsoft.Practices.ServiceLocation;
-using MyERP.DataAccess;
 using MyERP.Infrastructure;
-using MyERP.Infrastructure.ViewModels;
-using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.Prism.ViewModel;
 using MyERP.Repositories;
 using MyERP.ViewModels;
-using Telerik.Windows.Controls;
 using DelegateCommand = Microsoft.Practices.Prism.Commands.DelegateCommand;
-using ViewModelBase = MyERP.Infrastructure.ViewModelBase;
 
 
 namespace MyERP.Modules.User.ViewModels
 {
     [Export]
-    public class LoginViewModel : ViewModelBase, ICloseable
+    public class LoginViewModel : Infrastructure.ViewModels.ViewModelBase, ICloseable
     {
         public LoginViewModel()
         {
@@ -69,39 +55,38 @@ namespace MyERP.Modules.User.ViewModels
             string passEncrypt = Cryptography.Encrypt(Cryptography.GetHashKey(UserName + Password), Password);
             
             IsBusyLogin = true;
-            
-            LoginOperation lop = MyERP.Repositories.WebContext.Current.Authentication.Login((new LoginParameters(UserName, passEncrypt, true, null)));
-            lop.Completed += (Authsender, args) =>
-            {
-                if (!lop.HasError)
-                {
-                    if (lop.LoginSuccess)
-                    {
-                        RemoveError("Password", PASSWORD_ERROR);
-                        
-                        SessionManager.Session.Clear();
-                        SessionManager.Session.Add("SessionId", Guid.NewGuid());
 
-                        UserRepository.GetUserByUserName(UserName,
+            UserRepository.Auth(UserName, passEncrypt, success =>
+            {
+                if (success)
+                {
+                    RemoveError("Password", PASSWORD_ERROR);
+
+                    SessionManager.Session.Clear();
+                    SessionManager.Session.Add("SessionId", Guid.NewGuid());
+
+                    //Set AuthHeader 
+                    var buffer = Encoding.UTF8.GetBytes(String.Format("{0}:{1}", UserName, passEncrypt));
+                    UserRepository.SetAuthHeader(String.Format("Basic {0}", Convert.ToBase64String(buffer)));
+                    
+                    UserRepository.GetUserByUserName(UserName,
                             user =>
                             {
+                                SessionManager.Session.Add("User", user);
+                                
+                                //Neu User khong duoc phan quyen vao client nao thi thoat
+                                //va thong bao user khong duoc phan quyen vao mot Client nao
+                                if (user.ClientId == Guid.Empty) return;
+
+                                SessionManager.Session.Add("Client", user.Client);
+                                SessionManager.Session.Add("ClientId", user.ClientId);
                                 LoginSuccessfully();
                             });
-                    }
-                    else
-                    {
-                        AddError("Password", PASSWORD_ERROR, false);
-                    }
-                  
                 }
-                else
-                {
-                    AddError("Password", lop.Error.Message, false);
-                    lop.MarkErrorAsHandled();
-                }
+                else AddError("Password", PASSWORD_ERROR, false);
 
                 IsBusyLogin = false;
-            };
+            });
         }
 
         private String _userName = String.Empty;

@@ -18,107 +18,104 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
+using System.ComponentModel;
 using MyERP.DataAccess;
 
 namespace MyERP.DataAccess	
 {
-	[Table("job_group", UpdateSchema = true)]
-	[ConcurrencyControl(OptimisticConcurrencyControlStrategy.Changed)]
-	public partial class JobGroup
+	public partial class JobGroup : IDataErrorInfo, INotifyPropertyChanging, INotifyPropertyChanged
 	{
-		private short _loai_nh;
-		[Column("loai_nh", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_loai_nh")]
-		public virtual short Loai_Nh
+		private short _level;
+		public virtual short Level
 		{
 			get
 			{
-				return this._loai_nh;
+				return this._level;
 			}
 			set
 			{
-				this._loai_nh = value;
+				if(this._level != value)
+				{
+					this.OnPropertyChanging("Level");
+					this._level = value;
+					this.OnPropertyChanged("Level");
+				}
 			}
 		}
 		
-		private string _ma_nh;
-		[Column("code", IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_ma_nh")]
+		private string _code;
 		public virtual string Code
 		{
 			get
 			{
-				return this._ma_nh;
+				return this._code;
 			}
 			set
 			{
-				this._ma_nh = value;
+				if(this._code != value)
+				{
+					this.OnPropertyChanging("Code");
+					this._code = value;
+					this.OnPropertyChanged("Code");
+				}
 			}
 		}
 		
-		private string _ten_nh;
-		[Column("ten_nh", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_ten_nh")]
-		public virtual string Ten_Nh
+		private string _name;
+		public virtual string Name
 		{
 			get
 			{
-				return this._ten_nh;
+				return this._name;
 			}
 			set
 			{
-				this._ten_nh = value;
+				if(this._name != value)
+				{
+					this.OnPropertyChanging("Name");
+					this._name = value;
+					this.OnPropertyChanged("Name");
+				}
 			}
 		}
 		
-		private string _ten_nh2;
-		[Column("ten_nh2", Length = 0, Scale = 0, SqlType = "varchar")]
-		[Storage("_ten_nh2")]
-		public virtual string Ten_Nh2
+		private DateTime _recCreated;
+		public virtual DateTime RecCreated
 		{
 			get
 			{
-				return this._ten_nh2;
+				return this._recCreated;
 			}
 			set
 			{
-				this._ten_nh2 = value;
+				if(this._recCreated != value)
+				{
+					this.OnPropertyChanging("RecCreated");
+					this._recCreated = value;
+					this.OnPropertyChanged("RecCreated");
+				}
 			}
 		}
 		
-		private DateTime _date0;
-		[Column("date0", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date0")]
-		public virtual DateTime Date0
+		private Guid _recCreateBy;
+		public virtual Guid RecCreateBy
 		{
 			get
 			{
-				return this._date0;
+				return this._recCreateBy;
 			}
 			set
 			{
-				this._date0 = value;
-			}
-		}
-		
-		private Guid _user_id0;
-		[Column("user_id0", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_user_id0")]
-		public virtual Guid User_Id0
-		{
-			get
-			{
-				return this._user_id0;
-			}
-			set
-			{
-				this._user_id0 = value;
+				if(this._recCreateBy != value)
+				{
+					this.OnPropertyChanging("RecCreateBy");
+					this._recCreateBy = value;
+					this.OnPropertyChanged("RecCreateBy");
+				}
 			}
 		}
 		
 		private byte _status;
-		[Column("status", Length = 0, Scale = 0, SqlType = "int2")]
-		[Storage("_status")]
 		public virtual byte Status
 		{
 			get
@@ -127,43 +124,52 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._status = value;
+				if(this._status != value)
+				{
+					this.OnPropertyChanging("Status");
+					this._status = value;
+					this.OnPropertyChanged("Status");
+				}
 			}
 		}
 		
-		private DateTime _date2;
-		[Column("date2", Length = 0, Scale = 0, SqlType = "timestamp")]
-		[Storage("_date2")]
-		public virtual DateTime Date2
+		private DateTime _recModified;
+		public virtual DateTime RecModified
 		{
 			get
 			{
-				return this._date2;
+				return this._recModified;
 			}
 			set
 			{
-				this._date2 = value;
+				if(this._recModified != value)
+				{
+					this.OnPropertyChanging("RecModified");
+					this._recModified = value;
+					this.OnPropertyChanged("RecModified");
+				}
 			}
 		}
 		
-		private Guid _user_id2;
-		[Column("user_id2", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_user_id2")]
-		public virtual Guid User_Id2
+		private Guid _recModifiedBy;
+		public virtual Guid RecModifiedBy
 		{
 			get
 			{
-				return this._user_id2;
+				return this._recModifiedBy;
 			}
 			set
 			{
-				this._user_id2 = value;
+				if(this._recModifiedBy != value)
+				{
+					this.OnPropertyChanging("RecModifiedBy");
+					this._recModifiedBy = value;
+					this.OnPropertyChanged("RecModifiedBy");
+				}
 			}
 		}
 		
 		private Guid _clientId;
-		[Column("client_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_clientId")]
 		public virtual Guid ClientId
 		{
 			get
@@ -172,13 +178,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._clientId = value;
+				if(this._clientId != value)
+				{
+					this.OnPropertyChanging("ClientId");
+					this._clientId = value;
+					this.OnPropertyChanged("ClientId");
+				}
 			}
 		}
 		
 		private Guid _organizationId;
-		[Column("organization_id", Length = 0, Scale = 0, SqlType = "uuid")]
-		[Storage("_organizationId")]
 		public virtual Guid OrganizationId
 		{
 			get
@@ -187,43 +196,52 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organizationId = value;
+				if(this._organizationId != value)
+				{
+					this.OnPropertyChanging("OrganizationId");
+					this._organizationId = value;
+					this.OnPropertyChanged("OrganizationId");
+				}
 			}
 		}
 		
-		private User _userinfo;
-		[ForeignKeyAssociation(SharedFields = "User_Id0", TargetFields = "Id")]
-		[Storage("_userinfo")]
-		public virtual User Userinfo0
+		private Guid _id;
+		public virtual Guid Id
 		{
 			get
 			{
-				return this._userinfo;
+				return this._id;
 			}
 			set
 			{
-				this._userinfo = value;
+				if(this._id != value)
+				{
+					this.OnPropertyChanging("Id");
+					this._id = value;
+					this.OnPropertyChanged("Id");
+				}
 			}
 		}
 		
-		private User _userinfo1;
-		[ForeignKeyAssociation(SharedFields = "User_Id2", TargetFields = "Id")]
-		[Storage("_userinfo1")]
-		public virtual User Userinfo2
+		private long _version;
+		public virtual long Version
 		{
 			get
 			{
-				return this._userinfo1;
+				return this._version;
 			}
 			set
 			{
-				this._userinfo1 = value;
+				if(this._version != value)
+				{
+					this.OnPropertyChanging("Version");
+					this._version = value;
+					this.OnPropertyChanged("Version");
+				}
 			}
 		}
 		
 		private Client _client;
-		[ForeignKeyAssociation(SharedFields = "ClientId", TargetFields = "ClientId")]
-		[Storage("_client")]
 		public virtual Client Client
 		{
 			get
@@ -232,13 +250,16 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._client = value;
+				if(this._client != value)
+				{
+					this.OnPropertyChanging("Client");
+					this._client = value;
+					this.OnPropertyChanged("Client");
+				}
 			}
 		}
 		
 		private Organization _organization;
-		[ForeignKeyAssociation(SharedFields = "OrganizationId", TargetFields = "Id")]
-		[Storage("_organization")]
 		public virtual Organization Organization
 		{
 			get
@@ -247,42 +268,136 @@ namespace MyERP.DataAccess
 			}
 			set
 			{
-				this._organization = value;
+				if(this._organization != value)
+				{
+					this.OnPropertyChanging("Organization");
+					this._organization = value;
+					this.OnPropertyChanged("Organization");
+				}
 			}
 		}
 		
-		private IList<Job> _dmvvs = new List<Job>();
-		[Collection(InverseProperty = "Dmnhvv1")]
-		[Storage("_dmvvs")]
-		public virtual IList<Job> Dmvv1s
+		private User _userinfo;
+		public virtual User RecCreatedByUser
 		{
 			get
 			{
-				return this._dmvvs;
+				return this._userinfo;
+			}
+			set
+			{
+				if(this._userinfo != value)
+				{
+					this.OnPropertyChanging("RecCreatedByUser");
+					this._userinfo = value;
+					this.OnPropertyChanged("RecCreatedByUser");
+				}
 			}
 		}
 		
-		private IList<Job> _dmvvs1 = new List<Job>();
-		[Collection(InverseProperty = "Dmnhvv2")]
-		[Storage("_dmvvs1")]
-		public virtual IList<Job> Dmvv2s
+		private User _userinfo1;
+		public virtual User RecModifiedByUser
 		{
 			get
 			{
-				return this._dmvvs1;
+				return this._userinfo1;
+			}
+			set
+			{
+				if(this._userinfo1 != value)
+				{
+					this.OnPropertyChanging("RecModifiedByUser");
+					this._userinfo1 = value;
+					this.OnPropertyChanged("RecModifiedByUser");
+				}
 			}
 		}
 		
-		private IList<Job> _dmvvs2 = new List<Job>();
-		[Collection(InverseProperty = "Dmnhvv3")]
-		[Storage("_dmvvs2")]
-		public virtual IList<Job> Dmvv3s
+		private IList<Job> _job = new List<Job>();
+		public virtual IList<Job> Job1s
 		{
 			get
 			{
-				return this._dmvvs2;
+				return this._job;
 			}
 		}
+		
+		private IList<Job> _job1 = new List<Job>();
+		public virtual IList<Job> Job2s
+		{
+			get
+			{
+				return this._job1;
+			}
+		}
+		
+		private IList<Job> _job2 = new List<Job>();
+		public virtual IList<Job> Job3s
+		{
+			get
+			{
+				return this._job2;
+			}
+		}
+		
+		#region IDataErrorInfo members
+		
+		private string error = string.Empty;
+		public string Error
+		{
+			get
+			{
+				return this.error;
+			}
+		}
+		
+		public string this[string propertyName]
+		{
+			get
+			{
+				this.ValidatePropertyInternal(propertyName, ref this.error);
+		
+				return this.error;
+			}
+		}
+		
+		protected virtual void ValidatePropertyInternal(string propertyName, ref string error)
+		{
+		    this.ValidateProperty(propertyName, ref error);
+		}
+		
+		// Please implement this method in a partial class in order to provide the error message depending on each of the properties.
+		partial void ValidateProperty(string propertyName, ref string error);
+		
+		#endregion
+		
+		#region INotifyPropertyChanging members
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		protected virtual void OnPropertyChanging(string propertyName)
+		{
+			if(this.PropertyChanging != null)
+			{
+				this.PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
+		
+		#region INotifyPropertyChanged members
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void OnPropertyChanged(string propertyName)
+		{
+			if(this.PropertyChanged != null)
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		#endregion
 		
 	}
 }

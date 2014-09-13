@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.ServiceModel.DomainServices.Client;
-using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
-using MyERP.DataAccess;
 using MyERP.Infrastructure;
+using MyERP.Infrastructure.Extensions;
 using MyERP.Infrastructure.ViewModels;
 using MyERP.Repositories;
+using MyERP.Repository.MyERPService;
 using MyERP.ViewModels;
-using MyERP.Web;
-using Telerik.Windows.Data;
 
 namespace MyERP.Modules.Financial.ViewModels
 {
@@ -23,7 +22,8 @@ namespace MyERP.Modules.Financial.ViewModels
     {
         public AccountsViewModel()
         {
-            
+            this.Accounts = new ObservableCollectionEx<Account>(true);
+
         }
 
         [Import]
@@ -81,98 +81,98 @@ namespace MyERP.Modules.Financial.ViewModels
             }
         }
 
-        private QueryableDomainServiceCollectionView<Account> _accounts;
-        public QueryableDomainServiceCollectionView<Account> Accounts
+        private ObservableCollectionEx<Account> _accounts;
+        public ObservableCollectionEx<Account> Accounts
         {
             get { return this._accounts; }
-            set { _accounts = value; }
+            set
+            {
+                _accounts = value;
+                _accounts.CollectionChanged += AccountCollectionChanged;
+                this.RaisePropertyChanged("Accounts");
+            }
+        }
+
+        private void AccountCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Account item in e.OldItems)
+                {
+                    //Removed items
+                    item.PropertyChanged -= AccountPropertyChanged;
+                }
+            }
+            else if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (Account item in e.NewItems)
+                {
+                    //Added items
+                    item.PropertyChanged += AccountPropertyChanged;
+                }
+            }    
+        }
+
+        private void AccountPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Account entity = sender as Account;
+            AccountRepository.Update(entity);
         }
         
-        public bool IsBusy
-        {
-            get { return this._accounts.IsBusy; }
-        }
-
-        void _accounts_LoadedData(object sender, Telerik.Windows.Controls.DomainServices.LoadedDataEventArgs e)
-        {
-            if (e.HasError)
-            {
-                MessageBox.Show(e.Error.ToString(), "Load Error", MessageBoxButton.OK);
-                e.MarkErrorAsHandled();
-            }
-        }
-        
-
-        void _accounts_SubmittedChanges(object sender, Telerik.Windows.Controls.DomainServices.DomainServiceSubmittedChangesEventArgs e)
-        {
-            if (e.HasError)
-            {
-                MessageBox.Show(e.Error.ToString(), "Submit Error", MessageBoxButton.OK);
-                e.MarkErrorAsHandled();
-            }
-        }
-
-        void _accounts_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "CanLoad":
-                    ((DelegateCommand)RefreshCommand).RaiseCanExecuteChanged();
-                    break;
-                case "IsBusy":
-                    RaisePropertyChanged(e.PropertyName);
-                    break;
-                case "HasChanges":
-                    ((DelegateCommand)AddNewCommand).RaiseCanExecuteChanged();
-                    ((DelegateCommand)CloseWindowCommand).RaiseCanExecuteChanged();
-                    ((DelegateCommand)SubmitChangesCommand).RaiseCanExecuteChanged();
-                    ((DelegateCommand)RejectChangesCommand).RaiseCanExecuteChanged();
-                    break;
-            }
-        }
-
-        //Update khi thay doi sang dong moi
-        void _accounts_CurrentChanging(object sender, CurrentChangingEventArgs e)
-        {
-            if (_accounts.HasChanges)
-                _accounts.SubmitChanges();
-        }
+        public bool IsBusy { get; set; }
 
         private void OnAddNewCommandExecuted()
         {
-            _accounts.AddNew();
-
+            var newId = Guid.NewGuid();
+            var newEntity = new Account()
+            {
+                OrganizationId = (SessionManager.Session["Organization"] as Organization).Id,
+                ClientId = (Guid)SessionManager.Session["ClientId"],
+                Id = newId,
+                Code = "",
+                Name = "",
+                RecModifiedById = (SessionManager.Session["User"] as User).Id,
+                RecCreatedById = (SessionManager.Session["User"] as User).Id,
+                RecModified = DateTime.Now,
+                RecCreated = DateTime.Now,
+                Status = 1,
+                Version = 1
+            };
+            this.Accounts.Add(newEntity);
+            this.AccountRepository.AddNew("Accounts", newEntity);
+            this.SelectedAccount = newEntity;
         }
 
         private bool AddNewCommandCanExecute()
         {
-            return !_accounts.HasChanges;
+            return true;
         }
 
 
         private bool SubmitChangesCommandCanExecute()
         {
-            return this._accounts.HasChanges;
+            return true;
         }
 
         private void OnRejectChangesExcuted()
         {
-            this._accounts.RejectChanges();
+
         }
 
         private void OnSubmitChangesExcuted()
         {
-            this._accounts.SubmitChanges();
+            AccountRepository.SaveChanges();
         }
 
         private bool RefreshCommandCanExecute()
         {
-            return this._accounts.CanLoad;
+            return true;
         }
 
         private void OnRefreshExcuted()
         {
-            this._accounts.Load();
+            Accounts.Clear();
+            AccountRepository.GetAccounts(results => results.ForEach((item) => this.Accounts.Add(item)));
         }
 
         private bool DeleteCommandCanExecute()
@@ -185,8 +185,11 @@ namespace MyERP.Modules.Financial.ViewModels
 
         private void OnDeleteExcuted()
         {
-            if(SelectedAccount != null)
+            if (SelectedAccount != null)
+            {
+                this.AccountRepository.Delete(SelectedAccount);
                 this.Accounts.Remove(SelectedAccount);
+            }
         }
 
         private bool CloseWindowCanExecute()
@@ -195,8 +198,8 @@ namespace MyERP.Modules.Financial.ViewModels
                 return false;
             
             //Neu co thay doi thi khong cho dong cua so, bat buoc phai luu hay undo
-            if(this._accounts.HasChanges)
-                return false;
+            //if(this._accounts.HasChanges)
+            //    return false;
 
             return true;
         }
@@ -213,16 +216,7 @@ namespace MyERP.Modules.Financial.ViewModels
         public override void OnImportsSatisfied()
         {
             base.OnImportsSatisfied();
-
-            MyERPDomainContext context = AccountRepository.Context;
-            EntityQuery<Account> getAccountsQuery = context.GetAccountsQuery().OrderBy(c => c.Code);
-            this._accounts = new QueryableDomainServiceCollectionView<Account>(context, getAccountsQuery);
-            this._accounts.AutoLoad = true;
-            this._accounts.LoadedData += _accounts_LoadedData;
-            this._accounts.PropertyChanged += _accounts_PropertyChanged;
-            this._accounts.SubmittedChanges += _accounts_SubmittedChanges;
-            //this._accounts.CurrentChanging += _accounts_CurrentChanging;
-
+            
             this.AddNewCommand = new DelegateCommand(OnAddNewCommandExecuted, AddNewCommandCanExecute);
             this.SubmitChangesCommand = new DelegateCommand(OnSubmitChangesExcuted, SubmitChangesCommandCanExecute);
             this.RejectChangesCommand = new DelegateCommand(OnRejectChangesExcuted, SubmitChangesCommandCanExecute);
@@ -230,7 +224,16 @@ namespace MyERP.Modules.Financial.ViewModels
             this.DeleteCommand = new DelegateCommand(OnDeleteExcuted, DeleteCommandCanExecute);
             this.CloseWindowCommand = new DelegateCommand(OnCloseWindowExcuted, CloseWindowCanExecute);
         }
-       
+
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            base.OnNavigatedTo(navigationContext);
+            
+            Accounts.Clear();
+            AccountRepository.GetAccounts(results => results.ForEach((item) => this.Accounts.Add(item)));
+            this.RaisePropertyChanged("Accounts");
+        }
+
         #endregion
 
         public event EventHandler<EventArgs> RequestClose;

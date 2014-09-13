@@ -1,34 +1,68 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.ServiceModel.DomainServices.Client;
-using MyERP.DataAccess;
+using System.Data.Services.Client;
+using System.Linq;
+using System.Net;
+using System.Runtime.CompilerServices;
+using System.Text;
+using MyERP.Infrastructure;
+using MyERP.Repository.MyERPService;
+
 
 namespace MyERP.Repositories
 {
     [Export]
     public class UserRepository : RepositoryBase
     {
-        public void GetUsers(Action<IEnumerable<User>> callback)
+        public void GetUsers()
         {
-            this.LoadQuery<User>(this.Context.GetUsersQuery(), callback);
+
         }
 
-        public void GetUserByUserNameAndPassword(String userName, String pass, Action<User> callback)
+        public void Auth(String name, String password, Action<bool> callback)
         {
-            EntityQuery<User> query =
-                this.Context.GetUsersQuery().Where(u => u.Name == userName && u.Password == pass);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(new Uri(String.Format("http://localhost/MyERP.Web/auth?name={0}&password={1}", name, password)));
+            request.Method = "GET";
 
-            this.LoadQuery<User>(query, callback);
+            request.BeginGetResponse(result =>
+            {
+                try
+                {
+                    HttpWebRequest _request = (HttpWebRequest) result.AsyncState;
+                    HttpWebResponse _response = (HttpWebResponse) _request.EndGetResponse(result);
+
+                    if (_response.StatusCode == HttpStatusCode.Unauthorized)
+                        UIThread.Invoke(() =>callback(false));
+                    else
+                        UIThread.Invoke(() =>callback(true));
+                }
+                catch (Exception)
+                {
+                    UIThread.Invoke(() => callback(false));
+                }
+
+            }, request);
         }
 
-        public void GetUserByUserName(String userName, Action<User> callback)
+        public void SetAuthHeader(String authHeader)
         {
-            EntityQuery<User> query =
-                this.Context.GetUsersQuery().Where(u => u.Name == userName);
+            base.AuthHeader = authHeader;
+        }
 
-            this.LoadQuery<User>(query, callback);
+        public void GetUserByUserName(String name, Action<User> callback)
+        {
+            DataServiceQuery<User> query = (DataServiceQuery<User>) from user in Container.Users
+                                                                    .Expand(c => c.Organization)
+                                                                    .Expand(c => c.Client)
+                                                                    where user.Name == name
+                                                                    select user;
+            query.BeginExecute(result =>
+            {
+                var request = result.AsyncState as DataServiceQuery<User>;
+                var response = request.EndExecute(result);
+
+                UIThread.Invoke(() =>callback(response.FirstOrDefault()));
+            }, query);
         }
     }
 }
