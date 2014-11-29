@@ -1,0 +1,12 @@
+﻿<Modularity:ModuleCatalog xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                          xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+                          xmlns:Modularity="clr-namespace:Microsoft.Practices.Prism.Modularity;assembly=Microsoft.Practices.Prism">
+
+    <Modularity:ModuleInfo  Ref="MyERP.Modules.User.xap" InitializationMode="OnDemand" ModuleName="UserModule" />
+    <Modularity:ModuleInfo  Ref="MyERP.Modules.Home.xap" InitializationMode="OnDemand" ModuleName="HomeModule" />
+    <Modularity:ModuleInfo  Ref="MyERP.Modules.Financial.xap" InitializationMode="OnDemand" ModuleName="FinancialModule" />
+    <Modularity:ModuleInfo  Ref="MyERP.Modules.Master.xap" InitializationMode="OnDemand" ModuleName="MasterModule" />
+    
+    
+</Modularity:ModuleCatalog>
