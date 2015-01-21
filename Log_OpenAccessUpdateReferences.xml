@@ -23,8 +23,6 @@
     <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Web\packages.config" Message="Config Sections" />
     <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Web\packages.config" Message="Render Extensions" />
     <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Web\packages.config" Message="packages.config" />
-    <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Web\Sl.aspx" Message="Register Directives" />
-    <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Web\Sl.aspx" Message="Assembly Directives" />
     <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Web\Sl.aspx" Message="Sl.aspx" />
     <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Web\Views\Web.config" Message="Assembly References" />
     <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Web\Views\Web.config" Message="Http Handlers" />
@@ -52,5 +50,12 @@
     <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Web\Web.Release.config" Message="Web.Release.config" />
     <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.Web\MyERP.Web.csproj" Message="MyERP.Web" />
     <Event EventType="Success" Action="Analyze" SourceItem="Z:\MyERP\MyERP.sln" Message="MyERP" />
+    <Event EventType="Success" Action="Upgrade" SourceItem="Z:\MyERP\MyERP.DataAccess\MyERP.DataAccess.csproj" Message="Assembly References" />
+    <Event EventType="Success" Action="Upgrade" SourceItem="Z:\MyERP\MyERP.DataAccess\MyERP.DataAccess.csproj" Message="MyERP.DataAccess" />
+    <Event EventType="Success" Action="Upgrade" SourceItem="Z:\MyERP\MyERP.Web\MyERP.Web.csproj" Message="Assembly References" />
+    <Event EventType="Success" Action="Upgrade" SourceItem="Z:\MyERP\MyERP.Web\Web.config" Message="Assembly References" />
+    <Event EventType="Success" Action="Upgrade" SourceItem="Z:\MyERP\MyERP.Web\Web.config" Message="Web.config" />
+    <Event EventType="Success" Action="Upgrade" SourceItem="Z:\MyERP\MyERP.Web\MyERP.Web.csproj" Message="MyERP.Web" />
+    <Event EventType="Success" Action="Upgrade" SourceItem="Z:\MyERP\MyERP.sln" Message="MyERP" />
   </Events>
 </UpgradeLog>

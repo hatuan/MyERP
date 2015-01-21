@@ -14,8 +14,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.Web", "MyERP.Web\MyER
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.DataAccess", "MyERP.DataAccess\MyERP.DataAccess.csproj", "{9529EAEC-44B4-4E50-8EBB-5EAC00B0912B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{CB54CC65-9590-432E-8E1E-28240531E6C8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedCode", "SharedCode", "{81BE53CB-3357-4C2F-9EEB-1A139F412240}"
 	ProjectSection(SolutionItems) = preProject
 		SharedCode\Cryptography.cs = SharedCode\Cryptography.cs
@@ -58,14 +56,10 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{AB9E4713-11C7-4903-9D30-D7F5C4FCC1DF} = {CB54CC65-9590-432E-8E1E-28240531E6C8}
-		{9529EAEC-44B4-4E50-8EBB-5EAC00B0912B} = {CB54CC65-9590-432E-8E1E-28240531E6C8}
-	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VersionFieldUsingAttrib = True
-		FetchGroupUsingAttrib = True
-		IndexUsingAttrib = False
 		ShowOldMenu = False
+		IndexUsingAttrib = False
+		FetchGroupUsingAttrib = True
+		VersionFieldUsingAttrib = True
 	EndGlobalSection
 EndGlobal
