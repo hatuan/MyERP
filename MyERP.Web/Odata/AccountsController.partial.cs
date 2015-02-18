@@ -16,6 +16,12 @@ namespace MyERP.Web.Odata
 
     public partial class AccountsController 
     {
+        /// <summary>
+        /// http://localhost:1602/odata/Accounts(guid'103237eb-bbf8-40ae-8ab8-795bf31fd878')
+        /// http://localhost:1602/odata/Accounts/(guid'103237eb-bbf8-40ae-8ab8-795bf31fd878')
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public SingleResult<Account> GetAccount([FromODataUri] Guid key)
         {
             return SingleResult.Create(repository.GetAll().Where(c => c.Id == key).AsQueryable());

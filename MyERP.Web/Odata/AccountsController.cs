@@ -38,6 +38,7 @@ namespace MyERP.Web.Odata
 
         /// <summary>
         /// Gets single instance by it's primary key
+        /// http://localhost:1602/odata/Accounts?id=103237eb-bbf8-40ae-8ab8-795bf31fd878
         /// </summary>
         /// <param name="id">Primary key value to filter by</param>
         /// <returns>Entity instance if a matching entity is found</returns>
