@@ -203,5 +203,28 @@ namespace MyERP.Web.Controllers
 
             return View(model);
         }
+
+        //
+        //GET: /Account/Search
+        public ActionResult Search()
+        {
+            var model = new AccountSearchViewModel();
+            model.Searches.Add(new Search() {AccountSearchField = AccountSearchField.Code, SearchFieldValue = ""});
+            return View(model);
+        }
+
+        //
+        //POST: Account/Search
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Search(AccountSearchViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                
+            }
+
+            return View(model);
+        }
     }
 }

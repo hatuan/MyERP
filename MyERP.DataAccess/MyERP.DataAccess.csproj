@@ -54,6 +54,7 @@
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Account\Account.cs" />
+    <Compile Include="Account\AccountSearchField.cs" />
     <Compile Include="Account\AccountStatusType.cs" />
     <Compile Include="BusinessPartner.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>

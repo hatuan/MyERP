@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Data.Edm.Csdl;
 using MyERP.DataAccess;
 
 namespace MyERP.Web.Models
@@ -106,5 +107,21 @@ namespace MyERP.Web.Models
         public AccountStatusType Status { get; set; }
 
         public Int64 Version { get; set; }
+    }
+    
+    public class Search
+    {
+        public AccountSearchField AccountSearchField { get; set; }
+        public String SearchFieldValue { get; set; }
+    }
+
+    public class AccountSearchViewModel
+    {
+        public AccountSearchViewModel()
+        {
+            Searches = new List<Search>();
+        }
+
+        public List<Search> Searches { get; set; }
     }
 }
