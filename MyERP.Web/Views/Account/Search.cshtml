@@ -52,6 +52,7 @@
                 </div>
                 <div class="col-xs-8">
                     @Html.TextBoxFor(x => x.Searches[i].SearchFieldValue, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(x => x.Searches[i].SearchFieldValue, "", new { @class = "text-danger" })
                 </div>
             </div>
         }

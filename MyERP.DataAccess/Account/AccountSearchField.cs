@@ -9,13 +9,15 @@ namespace MyERP.DataAccess
 {
     public enum AccountSearchField : byte
     {
-        [Display(Name = "Organization Name")]
-        OrganizationName = 0,
+        [Display(Name = "None")]
+        None = 0,
+        [Display(Name = "Organization Code")]
+        AccountOrganizationCode = 1 << 0,
         [Display(Name = "Account Code")]
-        Code = 1,
+        AccountCode = 1 << 1,
         [Display(Name = "Account Name")]
-        Name = 2,
+        AccountName = 1 << 2,
         [Display(Name = "Account Currency")]
-        CurrencyCode = 3
+        AccountCurrencyCode = 1 << 3
     }
 }

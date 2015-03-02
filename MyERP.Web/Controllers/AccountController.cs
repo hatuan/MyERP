@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.Security;
 using System.Web.UI.WebControls;
 using MyERP.DataAccess;
+using MyERP.Parse;
 using MyERP.Web.Models;
 
 namespace MyERP.Web.Controllers
@@ -33,9 +36,11 @@ namespace MyERP.Web.Controllers
 
         //
         //GET: Account
-        public ActionResult Index()
+        public ActionResult Index(string search = null)
         {
-            var accounts = repository.GetAll(User).OrderBy(c => c.Code)
+            var accounts = repository.GetAll(User)
+                .Where(search ?? "1=1")
+                .OrderBy(c => c.Code)
                 .ToList()
                 .Select(c => new AccountViewModels()
                 {
@@ -209,7 +214,7 @@ namespace MyERP.Web.Controllers
         public ActionResult Search()
         {
             var model = new AccountSearchViewModel();
-            model.Searches.Add(new Search() {AccountSearchField = AccountSearchField.Code, SearchFieldValue = ""});
+            model.Searches.Add(new MyERP.Search.SearchFieldInfo() { AccountSearchField = AccountSearchField.None, SearchFieldValue = "" });
             return View(model);
         }
 
@@ -221,7 +226,79 @@ namespace MyERP.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                String search = null;
+                foreach (var searchField in model.Searches)
+                {
+                    if (searchField.AccountSearchField != AccountSearchField.None &&
+                        !String.IsNullOrEmpty(searchField.SearchFieldValue))
+                    {
+                        Scanner scanner = new Scanner();
+                        Parser parser = new Parser(scanner);
+                        String searchFieldValue = null;
+                        ParseTree tree = null;
+
+                        switch (searchField.AccountSearchField)
+                        {
+                            case AccountSearchField.AccountCode:
+                                searchFieldValue = String.Format("Code={0}", searchField.SearchFieldValue);
+                                tree = parser.Parse(searchFieldValue);
+                                if (tree.Errors.Count <= 0)
+                                {
+                                    if( String.IsNullOrEmpty(search))
+                                        search = tree.Eval(null).ToString().Replace("#<#", "\"").Replace("#>#", "\"");
+                                    else
+                                        search += " AND " + tree.Eval(null).ToString().Replace("#<#", "\"").Replace("#>#", "\"");
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError(String.Format("Searches[{0}].SearchFieldValue", model.Searches.IndexOf(searchField)), "Error on conditions of search");
+                                    return View(model);
+                                }
+
+                                break;
+                            case AccountSearchField.AccountName:
+                                break;
+                            case AccountSearchField.AccountCurrencyCode:
+                                searchFieldValue = String.Format("Currency.Code={0}", searchField.SearchFieldValue);
+                                tree = parser.Parse(searchFieldValue);
+                                if (tree.Errors.Count <= 0)
+                                {
+                                    if( String.IsNullOrEmpty(search))
+                                        search = "(Currency != null AND (" + tree.Eval(null).ToString().Replace("#<#", "\"").Replace("#>#", "\"") + "))";
+                                    else
+                                        search += " AND " + "(Currency != null AND (" + tree.Eval(null).ToString().Replace("#<#", "\"").Replace("#>#", "\"") + "))";
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError(String.Format("Searches[{0}].SearchFieldValue", model.Searches.IndexOf(searchField)), "Error on conditions of search");
+                                    return View(model);
+                                }
+
+
+                                break;
+                            case AccountSearchField.AccountOrganizationCode:
+                                searchFieldValue = String.Format("Organization.Code={0}", searchField.SearchFieldValue);
+                                tree = parser.Parse(searchFieldValue);
+                                if (tree.Errors.Count <= 0)
+                                {
+                                    if( String.IsNullOrEmpty(search))
+                                        search = "(Organization != null AND (" + tree.Eval(null).ToString().Replace("#<#", "\"").Replace("#>#", "\"") + "))";
+                                    else
+                                        search += " AND " + "(Organization != null AND (" + tree.Eval(null).ToString().Replace("#<#", "\"").Replace("#>#", "\"") + "))";
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError(String.Format("Searches[{0}].SearchFieldValue", model.Searches.IndexOf(searchField)), "Error on conditions of search");
+                                    return View(model);
+                                }
+                                break;
+                        }
+                    }
+                }
+                if( String.IsNullOrEmpty(search))
+                    return RedirectToAction("Index");
+                else
+                    return RedirectToAction("Index", routeValues: new { search = search });
             }
 
             return View(model);

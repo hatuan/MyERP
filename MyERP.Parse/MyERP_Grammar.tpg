@@ -1,0 +1,75 @@
+//@TinyPG - a Tiny Parser Generator v1.1
+//Copyright © Herre Kuijpers 2008-2010
+//Simple expression - example of an mathematical expression parser
+
+<% @TinyPG Namespace="MyERP.Parse" Language="c#" %>
+
+BROPEN 	-> @"\(";
+BRCLOSE 	-> @"\)";
+ID	->	@"[a-zA-Z0-9_\w][a-zA-Z0-9_\w]*";
+COLUMNNAME	->	@"[a-zA-Z0-9_\w]*[.][a-zA-Z0-9_\w]*|[a-zA-Z0-9_\w]*";
+OR		-> @"\|";
+BETWEEN		-> @"\..";
+LIKEBEGIN		-> @"\%";
+LIKEEND		-> @"\%";
+AND			-> @"\&";
+SET	-> @"\=";
+EOF		-> @"^$";
+
+[Skip] WHITESPACE  -> @"\s+";
+
+Start 		-> COLUMNNAME SET Expression EOF
+{
+	return String.Format(Convert.ToString($Expression), $COLUMNNAME) ;
+};
+
+
+Expression -> Predexp (OR Expression)* (AND Expression)*
+{
+	string _value = "";
+	_value = "(" + Convert.ToString($Predexp) + ")";
+
+	if ($Expression != null)
+	{
+		if ($OR != null)
+			_value = _value + " OR " + Convert.ToString($Expression);
+		if ($AND != null)
+			_value = _value + " AND " + Convert.ToString($Expression);
+	}
+	return _value;
+};
+
+
+Predexp	-> (LIKEBEGIN)? (Value)? ((BETWEEN Value)|LIKEEND)?
+{
+	string _value = "1=1";
+	if ($LIKEBEGIN != null)
+	{
+		if ($Value == null)
+			return _value;
+		else if ($LIKEEND == null)
+			return (" {0}.EndsWith(\"" + Convert.ToString($Value) + "\")");
+		else
+			return (" {0}.Contains(\"" + Convert.ToString($Value) + "\")");
+
+	}
+	else if ($LIKEEND != null)
+	{
+		if ($Value == null)
+			return _value;
+		else
+			return (" {0}.StartsWith(\"" + Convert.ToString($Value) + "\")");
+
+	}
+	else if ($Value[1] != null)
+		return (" {0} >= #<#" + Convert.ToString($Value[0]) + "#># AND {0} <= #<#" + Convert.ToString($Value[1]) + "#># ");
+	else if ($Value != null)
+		return (" {0} = #<#" + Convert.ToString($Value[0]) + "#># ");
+	
+	return _value;
+};
+
+Value -> ID
+{
+	return Convert.ToString($ID);
+};

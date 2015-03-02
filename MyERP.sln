@@ -22,6 +22,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedCode", "SharedCode", 
 		SharedCode\RadWindowShowEvent.cs = SharedCode\RadWindowShowEvent.cs
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.Parse", "MyERP.Parse\MyERP.Parse.csproj", "{26792409-1862-49E5-BDDD-CD231B0EFFC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.Search", "MyERP.Search\MyERP.Search.csproj", "{EDF52B9C-C9CB-42CB-98DA-3F8D93B2A8B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,14 +56,34 @@ Global
 		{9529EAEC-44B4-4E50-8EBB-5EAC00B0912B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9529EAEC-44B4-4E50-8EBB-5EAC00B0912B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9529EAEC-44B4-4E50-8EBB-5EAC00B0912B}.Release|x86.ActiveCfg = Release|Any CPU
+		{26792409-1862-49E5-BDDD-CD231B0EFFC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26792409-1862-49E5-BDDD-CD231B0EFFC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26792409-1862-49E5-BDDD-CD231B0EFFC6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{26792409-1862-49E5-BDDD-CD231B0EFFC6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{26792409-1862-49E5-BDDD-CD231B0EFFC6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{26792409-1862-49E5-BDDD-CD231B0EFFC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26792409-1862-49E5-BDDD-CD231B0EFFC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26792409-1862-49E5-BDDD-CD231B0EFFC6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{26792409-1862-49E5-BDDD-CD231B0EFFC6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{26792409-1862-49E5-BDDD-CD231B0EFFC6}.Release|x86.ActiveCfg = Release|Any CPU
+		{EDF52B9C-C9CB-42CB-98DA-3F8D93B2A8B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDF52B9C-C9CB-42CB-98DA-3F8D93B2A8B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDF52B9C-C9CB-42CB-98DA-3F8D93B2A8B0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{EDF52B9C-C9CB-42CB-98DA-3F8D93B2A8B0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{EDF52B9C-C9CB-42CB-98DA-3F8D93B2A8B0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EDF52B9C-C9CB-42CB-98DA-3F8D93B2A8B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDF52B9C-C9CB-42CB-98DA-3F8D93B2A8B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDF52B9C-C9CB-42CB-98DA-3F8D93B2A8B0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{EDF52B9C-C9CB-42CB-98DA-3F8D93B2A8B0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{EDF52B9C-C9CB-42CB-98DA-3F8D93B2A8B0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		ShowOldMenu = False
-		IndexUsingAttrib = False
-		FetchGroupUsingAttrib = True
 		VersionFieldUsingAttrib = True
+		FetchGroupUsingAttrib = True
+		IndexUsingAttrib = False
+		ShowOldMenu = False
 	EndGlobalSection
 EndGlobal

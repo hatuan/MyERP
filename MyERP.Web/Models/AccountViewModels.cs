@@ -108,20 +108,16 @@ namespace MyERP.Web.Models
 
         public Int64 Version { get; set; }
     }
-    
-    public class Search
-    {
-        public AccountSearchField AccountSearchField { get; set; }
-        public String SearchFieldValue { get; set; }
-    }
+
+
 
     public class AccountSearchViewModel
     {
         public AccountSearchViewModel()
         {
-            Searches = new List<Search>();
+            Searches = new List<MyERP.Search.SearchFieldInfo>();
         }
 
-        public List<Search> Searches { get; set; }
+        public List<MyERP.Search.SearchFieldInfo> Searches { get; set; }
     }
 }
