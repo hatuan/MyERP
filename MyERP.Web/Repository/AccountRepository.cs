@@ -22,9 +22,7 @@ namespace MyERP.Web
             this.fetchStrategy.LoadWith<Account>(c => c.ChildAccounts);
             
         }
-
-
-
+        
         public override IQueryable<Account> GetAll(IPrincipal principal)
         {
             var membershipUser = (MyERPMembershipUser)Membership.GetUser(principal.Identity.Name, true);

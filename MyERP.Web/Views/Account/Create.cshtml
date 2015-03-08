@@ -22,7 +22,7 @@
     </div>
 </div>
 
-@using (Html.BeginForm("Create", "Account", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form", id="create-account" }))
+@using (Html.BeginForm("Create", "Account", new { currentFilter = ViewBag.CurrentFilter }, FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form", id = "create-account" }))
 {
     @Html.AntiForgeryToken()
     

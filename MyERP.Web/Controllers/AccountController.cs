@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using MyERP.DataAccess;
 using MyERP.Parse;
 using MyERP.Web.Models;
+using PagedList;
 
 namespace MyERP.Web.Controllers
 {
@@ -36,10 +37,21 @@ namespace MyERP.Web.Controllers
 
         //
         //GET: Account
-        public ActionResult Index(string search = null)
+        public ActionResult Index(string currentFilter, string searchString, int? page, Guid? currentItemId)
         {
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
             var accounts = repository.GetAll(User)
-                .Where(search ?? "1=1")
+                .Where(searchString ?? "1=1")
                 .OrderBy(c => c.Code)
                 .ToList()
                 .Select(c => new AccountViewModels()
@@ -63,18 +75,32 @@ namespace MyERP.Web.Controllers
                     Version = c.Version
                 });
 
-            return View(accounts);
+            int pageNumber = (page ?? 1);
+
+            if (currentItemId != null)
+            {
+                var currentItem = accounts.Select((account, index) => new { account, index }) 
+                    .FirstOrDefault(x => x.account.Id.Equals(currentItemId));
+
+                if (currentItem != null)
+                    pageNumber = (currentItem.index / MyERP.Common.Define.PAGESIZE) + 1;
+            }
+
+            return View(accounts.ToPagedList(pageNumber, MyERP.Common.Define.PAGESIZE));
         }
 
         //
         //GET: /Account/Create
-        public ActionResult Create()
+        public ActionResult Create(string currentFilter)
         {
             var model = new AccountEditViewModel()
             {
                 Id = Guid.NewGuid(),
                 Status = AccountStatusType.Active
             };
+
+            ViewBag.CurrentFilter = currentFilter;
+
             return View(model);
         }
 
@@ -82,7 +108,7 @@ namespace MyERP.Web.Controllers
         //POST: /Account/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(AccountEditViewModel model)
+        public ActionResult Create(AccountEditViewModel model, string currentFilter)
         {
             if (ModelState.IsValid)
             {
@@ -93,6 +119,7 @@ namespace MyERP.Web.Controllers
 
                 Account newAccount = new Account()
                 {
+                    Id = model.Id,
                     ClientId = clientId,
                     OrganizationId = organizationId,
                     Code = model.Code,
@@ -110,7 +137,7 @@ namespace MyERP.Web.Controllers
                 {
                     this.repository.AddNew(newAccount);
 
-                    return RedirectToAction("Index", "Account");
+                    return RedirectToAction("Index", "Account", routeValues: new { currentFilter, currentItemId = newAccount.Id });
                 }
                 catch (Exception ex)
                 {
@@ -149,8 +176,10 @@ namespace MyERP.Web.Controllers
 
         //
         // GET: Account/Edit
-        public ActionResult Edit(Guid id)
+        public ActionResult Edit(Guid id, string currentFilter)
         {
+            ViewBag.CurrentFilter = currentFilter;
+
             var account = repository.GetBy(c => c.Id == id);
             var model = new AccountEditViewModel() 
                 {
@@ -173,7 +202,7 @@ namespace MyERP.Web.Controllers
         //POST: Account/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(AccountEditViewModel model)
+        public ActionResult Edit(AccountEditViewModel model, string currentFilter)
         {
             if (ModelState.IsValid)
             {
@@ -197,7 +226,7 @@ namespace MyERP.Web.Controllers
                 try
                 {
                     this.repository.Update(updateAccount);
-                    return RedirectToAction("Index", "Account");
+                    return RedirectToAction("Index", "Account", routeValues: new { currentFilter, currentItemId = updateAccount.Id });
                 }
                 catch (Exception ex)
                 {
@@ -298,7 +327,7 @@ namespace MyERP.Web.Controllers
                 if( String.IsNullOrEmpty(search))
                     return RedirectToAction("Index");
                 else
-                    return RedirectToAction("Index", routeValues: new { search = search });
+                    return RedirectToAction("Index", routeValues: new { searchString = search });
             }
 
             return View(model);

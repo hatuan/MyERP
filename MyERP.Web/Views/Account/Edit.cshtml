@@ -21,7 +21,7 @@
     </div>
 </div>
 
-@using (Html.BeginForm("Edit", "Account", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form", id = "edit-account" }))
+@using (Html.BeginForm("Edit", "Account", new { currentFilter = ViewBag.CurrentFilter }, FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form", id = "edit-account" }))
 {
     @Html.AntiForgeryToken()
 
