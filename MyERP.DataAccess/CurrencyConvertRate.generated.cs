@@ -187,20 +187,20 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Guid _currencyIdTo;
-		public virtual Guid CurrencyIdTo
+		private Guid _currencyRelationalId;
+		public virtual Guid CurrencyRelationalId
 		{
 			get
 			{
-				return this._currencyIdTo;
+				return this._currencyRelationalId;
 			}
 			set
 			{
-				if(this._currencyIdTo != value)
+				if(this._currencyRelationalId != value)
 				{
-					this.OnPropertyChanging("CurrencyIdTo");
-					this._currencyIdTo = value;
-					this.OnPropertyChanged("CurrencyIdTo");
+					this.OnPropertyChanging("CurrencyRelationalId");
+					this._currencyRelationalId = value;
+					this.OnPropertyChanged("CurrencyRelationalId");
 				}
 			}
 		}
@@ -223,60 +223,6 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private DateTime _validTo;
-		public virtual DateTime ValidTo
-		{
-			get
-			{
-				return this._validTo;
-			}
-			set
-			{
-				if(this._validTo != value)
-				{
-					this.OnPropertyChanging("ValidTo");
-					this._validTo = value;
-					this.OnPropertyChanged("ValidTo");
-				}
-			}
-		}
-		
-		private int _multiplyRate;
-		public virtual int MultiplyRate
-		{
-			get
-			{
-				return this._multiplyRate;
-			}
-			set
-			{
-				if(this._multiplyRate != value)
-				{
-					this.OnPropertyChanging("MultiplyRate");
-					this._multiplyRate = value;
-					this.OnPropertyChanged("MultiplyRate");
-				}
-			}
-		}
-		
-		private int _divideRate;
-		public virtual int DivideRate
-		{
-			get
-			{
-				return this._divideRate;
-			}
-			set
-			{
-				if(this._divideRate != value)
-				{
-					this.OnPropertyChanging("DivideRate");
-					this._divideRate = value;
-					this.OnPropertyChanged("DivideRate");
-				}
-			}
-		}
-		
 		private byte _status;
 		public virtual byte Status
 		{
@@ -295,20 +241,38 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private byte _conversionRateType;
-		public virtual byte ConversionRateType
+		private uint _exchangeRateAmount;
+		public virtual uint ExchangeRateAmount
 		{
 			get
 			{
-				return this._conversionRateType;
+				return this._exchangeRateAmount;
 			}
 			set
 			{
-				if(this._conversionRateType != value)
+				if(this._exchangeRateAmount != value)
 				{
-					this.OnPropertyChanging("ConversionRateType");
-					this._conversionRateType = value;
-					this.OnPropertyChanged("ConversionRateType");
+					this.OnPropertyChanging("ExchangeRateAmount");
+					this._exchangeRateAmount = value;
+					this.OnPropertyChanged("ExchangeRateAmount");
+				}
+			}
+		}
+		
+		private uint _relationalExchRateAmount;
+		public virtual uint RelationalExchRateAmount
+		{
+			get
+			{
+				return this._relationalExchRateAmount;
+			}
+			set
+			{
+				if(this._relationalExchRateAmount != value)
+				{
+					this.OnPropertyChanging("RelationalExchRateAmount");
+					this._relationalExchRateAmount = value;
+					this.OnPropertyChanged("RelationalExchRateAmount");
 				}
 			}
 		}
@@ -403,20 +367,20 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Currency _currency1;
-		public virtual Currency CurrencyTo
+		private Currency _currencyRelational;
+		public virtual Currency CurrencyRelational
 		{
 			get
 			{
-				return this._currency1;
+				return this._currencyRelational;
 			}
 			set
 			{
-				if(this._currency1 != value)
+				if(this._currencyRelational != value)
 				{
-					this.OnPropertyChanging("CurrencyTo");
-					this._currency1 = value;
-					this.OnPropertyChanged("CurrencyTo");
+					this.OnPropertyChanging("CurrencyRelational");
+					this._currencyRelational = value;
+					this.OnPropertyChanged("CurrencyRelational");
 				}
 			}
 		}

@@ -325,6 +325,11 @@
     <Content Include="Views\NumberSequence\Create.cshtml" />
     <Content Include="Views\NumberSequence\Edit.cshtml" />
     <Content Include="Views\Account\Search.cshtml" />
+    <Content Include="Views\Currency\Edit.cshtml" />
+    <Content Include="Views\Currency\Index.cshtml" />
+    <Content Include="Views\Currency\Create.cshtml" />
+    <Content Include="Views\Currency\Search.cshtml" />
+    <Content Include="Views\CurrencyConvertRate\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -348,6 +353,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CurrencyController.cs" />
+    <Compile Include="Controllers\CurrencyConvertRateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
@@ -355,9 +361,12 @@
     <Compile Include="Controllers\OpenAccessBaseController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValidationController.cs" />
+    <Compile Include="Helpers\CultureHelper.cs" />
+    <Compile Include="Models\CurrencyConvertRateViewModels.cs" />
     <Compile Include="Models\CurrencyViewModels.cs" />
     <Compile Include="Models\NumberSequenceViewModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Models\UserViewModels.cs" />
     <Compile Include="odata\GeneralJournalDocumentsController.partial.cs" />
     <Compile Include="odata\GeneralJournalLinesController.partial.cs" />
@@ -382,6 +391,7 @@
     <Compile Include="CustomMembershipProvider.cs" />
     <Compile Include="CustomRoleProvider.cs" />
     <Compile Include="odata\RolesController.cs" />
+    <Compile Include="Repository\CurrencyConvertRateRepository.cs" />
     <Compile Include="Repository\CurrencyRepository.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -419,7 +429,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ClientBin\Images\" />
-    <Folder Include="Views\Currency\" />
     <Folder Include="Views\Validation\" />
   </ItemGroup>
   <ItemGroup>

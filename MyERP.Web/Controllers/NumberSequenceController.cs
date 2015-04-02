@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using MyERP.DataAccess;
 using MyERP.Web.Models;
+using PagedList;
 
 namespace MyERP.Web.Controllers
 {
@@ -32,7 +33,7 @@ namespace MyERP.Web.Controllers
 
 
         // GET: NumberSequence
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var numberSequences = repository.GetAll(User).OrderBy(c => c.Code)
                 .ToList()
@@ -55,7 +56,9 @@ namespace MyERP.Web.Controllers
                     Status = (NumberSequenceStatusType)c.Status,
                 });
 
-            return View(numberSequences);
+            int pageNumber = (page ?? 1);
+
+            return View(numberSequences.ToPagedList(pageNumber, MyERP.Common.Define.PAGESIZE));
         }
 
         //

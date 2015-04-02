@@ -32,14 +32,5 @@ namespace MyERP.DataAccess
             [Association("Account-user-modified-association", "RecModifiedById", "Id")]
             public User RecModifiedByUser { get; set; }
         }
-
-        public CurrencyStatusType StatusType
-        {
-            get { return (CurrencyStatusType)Status; }
-            set
-            {
-                //intentionally empty
-            }
-        }
     }
 }

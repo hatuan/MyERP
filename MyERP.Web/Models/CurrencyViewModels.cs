@@ -30,7 +30,7 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Status")]
-        public AccountStatusType Status { get; set; }
+        public CurrencyStatusType Status { get; set; }
 
         [Required]
         [Display(Name="Created By")]
@@ -55,11 +55,11 @@ namespace MyERP.Web.Models
 
     public class CurrencyEditViewModel
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [Display(Name = "Code")]
-        [Remote("CheckDuplicateCurrency", "Validation", AdditionalFields = "Id", ErrorMessage = "Account code already exists. Please specify another one.")]
+        [Remote("CheckDuplicateCurrency", "Validation", AdditionalFields = "Id", ErrorMessage = "Currency code already exists. Please specify another one.")]
         [RegularExpression(@"^[A-Za-z0-9]*$", ErrorMessage = "Invalid Code - only allow a-z A-Z 0-9 character")]
         public String Code { get; set; }
 
@@ -69,7 +69,7 @@ namespace MyERP.Web.Models
         
         [Required]
         [Display(Name = "Status")]
-        public AccountStatusType Status { get; set; }
+        public CurrencyStatusType Status { get; set; }
 
         public Int64 Version { get; set; }
     }

@@ -2,7 +2,7 @@
 @model MyERP.Web.Models.SearchViewModel
 
 @{
-    ViewBag.Title = "Search Account";
+    ViewBag.Title = "Search Currency";
 }
 
 <div class="page-header">
@@ -34,7 +34,7 @@
     </div>
 </div>
 
-@using (Html.BeginForm("Search", "Account", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form", id = "search-account" }))
+@using (Html.BeginForm("Search", "Currency", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form", id = "search-form" }))
 {
     @Html.AntiForgeryToken()
 
@@ -48,7 +48,7 @@
                     @Html.Hidden("Searchs.Index", i)
                 </div>
                 <div class="col-xs-3">
-                    @Html.EnumDropDownListFor(x => x.Searches[i].AccountSearchField, new {@class = "form-control"})
+                    @Html.EnumDropDownListFor(x => x.Searches[i].CurrencySearchField, new {@class = "form-control"})
                 </div>
                 <div class="col-xs-8">
                     @Html.TextBoxFor(x => x.Searches[i].SearchFieldValue, new {@class = "form-control"})
@@ -69,7 +69,7 @@
     <script type="text/javascript">
         $(function () {
             $("#search-button").click(function () {
-                $("#search-account").submit();
+                $("#search-form").submit();
             });
 
 

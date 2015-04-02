@@ -242,7 +242,7 @@ namespace MyERP.Web.Controllers
         //GET: /Account/Search
         public ActionResult Search()
         {
-            var model = new AccountSearchViewModel();
+            var model = new SearchViewModel();
             model.Searches.Add(new MyERP.Search.SearchFieldInfo() { AccountSearchField = AccountSearchField.None, SearchFieldValue = "" });
             return View(model);
         }
@@ -251,7 +251,7 @@ namespace MyERP.Web.Controllers
         //POST: Account/Search
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Search(AccountSearchViewModel model)
+        public ActionResult Search(SearchViewModel model)
         {
             if (ModelState.IsValid)
             {

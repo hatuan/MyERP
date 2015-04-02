@@ -1023,6 +1023,12 @@
         <orm:field name="_clientId" property="ClientId" uniqueId="c0527efd-8c4b-48bc-9cd9-7e93dc08143e" type="System.Guid">
           <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         </orm:field>
+        <orm:field name="_cultureId" property="CultureId" behavior="readwrite" uniqueId="7c8e9c26-cea9-484b-8dfa-6e4a0c3d2088" type="System.String">
+          <orm:column name="culture_id" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_cultureUIId" property="CultureUIId" behavior="readwrite" uniqueId="38eca984-371e-40e6-996e-2487704a2db3" type="System.String">
+          <orm:column name="culture_ui_id" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
         <orm:field name="_recCreatedByUser" property="RecCreatedByUser" behavior="readwrite" uniqueId="80faad2e-b992-4242-a1de-4196c08f5fa0" type="MyERP.DataAccess.User">
           <orm:reference uniqueId="6cf46b87-f996-4e0e-850a-2ba457350c37" association-name="OrganizationHasCreatedBy">
             <orm:sharedfield name="_recCreatedById" target-class="MyERP.DataAccess.User" target-field="_id" />
@@ -1131,6 +1137,12 @@
         </orm:field>
         <orm:field name="_recCreated" property="RecCreated" uniqueId="536a8c07-499f-495a-ac51-6c079304f8ef" type="System.DateTime">
           <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="6" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_cultureId" property="CultureId" behavior="readwrite" uniqueId="3a68c5c3-1869-43c8-9eaf-99791b62b786" type="System.String">
+          <orm:column name="culture_id" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_culuteUIId" property="CuluteUIId" behavior="readwrite" uniqueId="23c57fa8-fbb0-42cf-9fa3-586159114a84" type="System.String">
+          <orm:column name="culute_ui_id" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_user" property="RecCreatedByUser" behavior="readwrite" uniqueId="d5e17f5f-fcbe-4b81-8de8-266a28f3c9ae" type="MyERP.DataAccess.User">
           <orm:reference uniqueId="5069b2d7-d334-4f19-ac42-ed3a6cf8a7ba" association-name="ClientHasCreatedBy">
@@ -1340,26 +1352,20 @@
         <orm:field name="_currencyId" property="CurrencyId" uniqueId="524f9850-5167-4c91-8d29-83f19becfb20" type="System.Guid">
           <orm:column name="currency_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         </orm:field>
-        <orm:field name="_currencyIdTo" property="CurrencyIdTo" uniqueId="8ce2dfc7-c313-440d-af56-59fd787f79af" type="System.Guid">
-          <orm:column name="currency_id_to" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:field name="_currencyRelationalId" property="CurrencyRelationalId" uniqueId="8ce2dfc7-c313-440d-af56-59fd787f79af" type="System.Guid">
+          <orm:column name="currency_relational_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         </orm:field>
         <orm:field name="_validFrom" property="ValidFrom" uniqueId="564aaf74-2c82-440c-8aa8-57fcc3f1c30d" type="System.DateTime">
           <orm:column name="valid_from" sql-type="date" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
         </orm:field>
-        <orm:field name="_validTo" property="ValidTo" uniqueId="57c2b6ce-879b-4934-8c06-e0b83d508328" type="System.DateTime">
-          <orm:column name="valid_to" sql-type="date" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
-        </orm:field>
-        <orm:field name="_multiplyRate" property="MultiplyRate" uniqueId="9823eff9-41db-48a8-878e-50ea573b626b" type="System.Int32">
-          <orm:column name="multiply_rate" sql-type="int4" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
-        </orm:field>
-        <orm:field name="_divideRate" property="DivideRate" uniqueId="74caf299-bd8a-407b-8f48-7f743bcab69a" type="System.Int32">
-          <orm:column name="divide_rate" sql-type="int4" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
-        </orm:field>
         <orm:field name="_status" property="Status" uniqueId="1d25115d-b5fb-4101-9e0c-3fd23c8f48cc" type="System.Byte">
           <orm:column name="status" sql-type="int2" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.TinyInt2UByteConverter" ado-type="Int16" />
         </orm:field>
-        <orm:field name="_conversionRateType" property="ConversionRateType" uniqueId="1d170883-40f4-408e-a523-4958d836c5b5" type="System.Byte">
-          <orm:column name="conversion_rate_type" sql-type="int2" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.TinyInt2UByteConverter" ado-type="Int16" />
+        <orm:field name="_exchangeRateAmount" property="ExchangeRateAmount" uniqueId="3338a9a4-8b6f-4603-932a-b04d67d7e431" type="System.UInt32">
+          <orm:column name="exchange_rate_amount" sql-type="int8" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.BigIntConverter+ToUInt32" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_relationalExchRateAmount" property="RelationalExchRateAmount" uniqueId="3f7d6d47-1d29-49ce-b9ea-43b510acdf20" type="System.UInt32">
+          <orm:column name="relational_exch_rate_amount" sql-type="int8" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.BigIntConverter+ToUInt32" ado-type="Int64" />
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="9ee25815-aa7f-4b40-a4e9-622660ad8c67" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="0d9603d7-aa24-465e-b9aa-7adfbef01071" association-name="CurrencyConvertRateHasClient">
@@ -1386,9 +1392,9 @@
             <orm:sharedfield name="_currencyId" target-class="MyERP.DataAccess.Currency" target-field="_id" />
           </orm:reference>
         </orm:field>
-        <orm:field name="_currency1" property="CurrencyTo" behavior="readwrite" uniqueId="d4e35fa4-2c4f-4ca2-ba87-2ed2183c5452" type="MyERP.DataAccess.Currency">
+        <orm:field name="_currencyRelational" property="CurrencyRelational" behavior="readwrite" uniqueId="d4e35fa4-2c4f-4ca2-ba87-2ed2183c5452" type="MyERP.DataAccess.Currency">
           <orm:reference uniqueId="74b18b80-b512-4d14-a457-bffd3a54d078" association-name="CurrencyConvertRateHasCurrencyTo">
-            <orm:sharedfield name="_currencyIdTo" target-class="MyERP.DataAccess.Currency" target-field="_id" />
+            <orm:sharedfield name="_currencyRelationalId" target-class="MyERP.DataAccess.Currency" target-field="_id" />
           </orm:reference>
         </orm:field>
       </orm:class>
@@ -1693,6 +1699,8 @@
         <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:column name="culture_ui_id" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="culture_id" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
       </orm:table>
       <orm:table name="general_journal_line">
         <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
@@ -1747,6 +1755,8 @@
         <orm:column name="is_activated" sql-type="bool" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.BooleanConverter" ado-type="Bit" />
         <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="6" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
+        <orm:column name="culute_ui_id" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="culture_id" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
       </orm:table>
       <orm:table name="number_sequence">
         <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
@@ -1805,17 +1815,15 @@
         <orm:column name="rec_modified" sql-type="timestamp" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
         <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.BigIntConverter" ado-type="Int64" />
         <orm:column name="valid_from" sql-type="date" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
-        <orm:column name="valid_to" sql-type="date" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
-        <orm:column name="multiply_rate" sql-type="int4" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
-        <orm:column name="divide_rate" sql-type="int4" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.IntConverter" ado-type="Int32" />
         <orm:column name="status" sql-type="int2" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.TinyInt2UByteConverter" ado-type="Int16" />
         <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         <orm:column name="rec_modified_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         <orm:column name="currency_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
-        <orm:column name="currency_id_to" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
-        <orm:column name="conversion_rate_type" sql-type="int2" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.TinyInt2UByteConverter" ado-type="Int16" />
+        <orm:column name="currency_relational_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+        <orm:column name="relational_exch_rate_amount" sql-type="int8" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.BigIntConverter+ToUInt32" ado-type="Int64" />
+        <orm:column name="exchange_rate_amount" sql-type="int8" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.BigIntConverter+ToUInt32" ado-type="Int64" />
         <orm:constraint name="ref_CurrencyConvertRate_client" destination-table="client">
           <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         </orm:constraint>
@@ -1823,7 +1831,7 @@
           <orm:column name="currency_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         </orm:constraint>
         <orm:constraint name="ref_CrrencyConvertRate_currenc2" destination-table="currency">
-          <orm:column name="currency_id_to" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
+          <orm:column name="currency_relational_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         </orm:constraint>
         <orm:constraint name="ref_CrrncyCnvrtRte_organization" destination-table="organization">
           <orm:column name="organization_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
@@ -2873,6 +2881,8 @@
       <Property Id="6cc4d3a2-4f88-43e5-b56d-2e1d008d5a17" name="Id" type="Guid" label="Id : Guid" kind="Persistent" identity="true" fieldName="_id" />
       <Property Id="a759a6fc-b8eb-4bdd-a544-562473c76a1a" name="Version" type="Int64" label="Version : Int64" kind="Persistent" fieldName="_version" />
       <Property Id="c0527efd-8c4b-48bc-9cd9-7e93dc08143e" name="ClientId" type="Guid" label="ClientId : Guid" fieldName="_clientId" />
+      <Property Id="7c8e9c26-cea9-484b-8dfa-6e4a0c3d2088" name="CultureId" label="CultureId : String" kind="Persistent" fieldName="_cultureId" />
+      <Property Id="38eca984-371e-40e6-996e-2487704a2db3" name="CultureUIId" label="CultureUIId : String" kind="Persistent" fieldName="_cultureUIId" />
       <AssociationTargets>
         <Association Id="6cf46b87-f996-4e0e-850a-2ba457350c37" SourceMultiplicity="ZeroOne" name="OrganizationHasCreatedBy">
           <DomainClassMoniker name="/EntitiesModel/User" />
@@ -2966,6 +2976,8 @@
       <Property Id="4c3b213f-546d-4b90-9f14-44c67973b9e6" name="IsActivated" type="Boolean" label="IsActivated : Boolean" fieldName="_isActivated" />
       <Property Id="fa0d38c4-996b-47d3-be69-9834b9f461fa" name="RecCreatedById" type="Guid" label="RecCreatedById : Guid" fieldName="_recCreatedById" />
       <Property Id="536a8c07-499f-495a-ac51-6c079304f8ef" name="RecCreated" type="DateTime" label="RecCreated : DateTime" fieldName="_recCreated" />
+      <Property Id="3a68c5c3-1869-43c8-9eaf-99791b62b786" name="CultureId" label="CultureId : String" kind="Persistent" fieldName="_cultureId" />
+      <Property Id="23c57fa8-fbb0-42cf-9fa3-586159114a84" name="CuluteUIId" label="CuluteUIId : String" kind="Persistent" fieldName="_culuteUIId" />
       <AssociationTargets>
         <Association Id="5069b2d7-d334-4f19-ac42-ed3a6cf8a7ba" SourceMultiplicity="ZeroOne" name="ClientHasCreatedBy">
           <DomainClassMoniker name="/EntitiesModel/User" />
@@ -3146,13 +3158,11 @@
       <Property Id="8a88e3cf-2919-4a3b-9002-16fc95b80fb3" name="OrganizationId" type="Guid" label="OrganizationId : Guid" fieldName="_organizationId" />
       <Property Id="5d1e2ae0-f072-4e49-9c5a-e8df6a7bf78c" name="Version" type="Int64" label="Version : Int64" fieldName="_version" />
       <Property Id="524f9850-5167-4c91-8d29-83f19becfb20" name="CurrencyId" type="Guid" label="CurrencyId : Guid" fieldName="_currencyId" />
-      <Property Id="8ce2dfc7-c313-440d-af56-59fd787f79af" name="CurrencyIdTo" type="Guid" label="CurrencyIdTo : Guid" fieldName="_currencyIdTo" />
+      <Property Id="8ce2dfc7-c313-440d-af56-59fd787f79af" name="CurrencyRelationalId" type="Guid" label="CurrencyRelationalId : Guid" fieldName="_currencyRelationalId" />
       <Property Id="564aaf74-2c82-440c-8aa8-57fcc3f1c30d" name="ValidFrom" type="DateTime" label="ValidFrom : DateTime" fieldName="_validFrom" />
-      <Property Id="57c2b6ce-879b-4934-8c06-e0b83d508328" name="ValidTo" type="DateTime" label="ValidTo : DateTime" fieldName="_validTo" />
-      <Property Id="9823eff9-41db-48a8-878e-50ea573b626b" name="MultiplyRate" type="Int32" label="MultiplyRate : Int32" fieldName="_multiplyRate" />
-      <Property Id="74caf299-bd8a-407b-8f48-7f743bcab69a" name="DivideRate" type="Int32" label="DivideRate : Int32" fieldName="_divideRate" />
       <Property Id="1d25115d-b5fb-4101-9e0c-3fd23c8f48cc" name="Status" type="Byte" label="Status : Byte" fieldName="_status" />
-      <Property Id="1d170883-40f4-408e-a523-4958d836c5b5" name="ConversionRateType" type="Byte" label="ConversionRateType : Byte" fieldName="_conversionRateType" />
+      <Property Id="3338a9a4-8b6f-4603-932a-b04d67d7e431" name="ExchangeRateAmount" type="UInt32" label="ExchangeRateAmount : UInt32" fieldName="_exchangeRateAmount" />
+      <Property Id="3f7d6d47-1d29-49ce-b9ea-43b510acdf20" name="RelationalExchRateAmount" type="UInt32" label="RelationalExchRateAmount : UInt32" fieldName="_relationalExchRateAmount" />
       <AssociationTargets>
         <Association Id="3ad3548b-d37b-4a9f-baa2-8e1d8be883a4" SourceMultiplicity="ZeroOne" name="CurrencyConvertRateHasCreatedBy">
           <DomainClassMoniker name="/EntitiesModel/User" />
@@ -3198,7 +3208,7 @@
           <DomainClassMoniker name="/EntitiesModel/Currency" />
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="e9e289d7-97e9-44a7-bbda-1af4c50451f6">
-              <NavigationalPropertyMoniker name="/EntitiesModel/CurrencyConvertRate/CurrencyTo" />
+              <NavigationalPropertyMoniker name="/EntitiesModel/CurrencyConvertRate/CurrencyRelational" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
@@ -3220,7 +3230,7 @@
           <NavigationalProperty Id="581da32b-5b0e-4fbd-b65b-331b39500f15" name="Currency" type="Currency" label="Currency : Currency" nullable="true" kind="Persistent" fieldName="_currency" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="122fcefb-aaeb-4052-b2d9-07b74d6767d9">
-          <NavigationalProperty Id="d4e35fa4-2c4f-4ca2-ba87-2ed2183c5452" name="CurrencyTo" type="Currency" label="CurrencyTo : Currency" nullable="true" kind="Persistent" fieldName="_currency1" isDependent="false" isManaged="false" />
+          <NavigationalProperty Id="d4e35fa4-2c4f-4ca2-ba87-2ed2183c5452" name="CurrencyRelational" type="Currency" label="CurrencyRelational : Currency" nullable="true" kind="Persistent" fieldName="_currencyRelational" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>

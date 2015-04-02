@@ -11,11 +11,7 @@ namespace MyERP.Search
     public class SearchFieldInfo
     {
         public AccountSearchField AccountSearchField { get; set; }
+        public CurrencySearchField CurrencySearchField { get; set; }
         public String SearchFieldValue { get; set; }
-    }
-
-    public class Lib
-    {
-
     }
 }

@@ -31,9 +31,6 @@ namespace MyERP.DataAccess
             }
         }
         
-        //Cot khong co trong CSDL. Chi dung de su lay Organization.Code = "*" cua Organization hien tai
-        //sau thu tuc GET http://localhost/MyERP.Web/odata/Organizations(guid'...')/AllOrganization
-        //Neu 
         /// <summary>
         /// Cot khong co trong CSDL. Chi dung de su lay Organization.Code = "*" cua Organization hien tai sau thu tuc GET http://localhost/MyERP.Web/odata/Organizations(guid'...')/AllOrganization
         /// 
