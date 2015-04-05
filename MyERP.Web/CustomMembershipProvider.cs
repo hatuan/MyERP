@@ -97,7 +97,8 @@ namespace MyERP.Web
                     OrganizationId = null,
                     Password = password,
                     PasswordAnswer = passwordAnswer,
-                    PasswordQuestion = passwordQuestion
+                    PasswordQuestion = passwordQuestion,
+                    CultureUIId = "vi-VN"
                 };
                 try
                 {
@@ -329,6 +330,7 @@ namespace MyERP.Web
         public Client Client { get; set; }
         public Guid? ClientId { get; set; }
         public Guid? OrganizationId { get; set; }
+        public String CultureUIId { get; set; }
 
         public Organization Organization { get; set; }
         public string FullName { get; set; }
@@ -354,6 +356,8 @@ namespace MyERP.Web
             OrganizationId = user.OrganizationId ?? Guid.Empty;
             
             FullName = user.FullName;
+
+            CultureUIId = user.CultureUIId;
         }
 
         //public MyERPMembershipUser(string providername,

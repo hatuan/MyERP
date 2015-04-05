@@ -223,24 +223,6 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private string _cultureUIId;
-		public virtual string CultureUIId
-		{
-			get
-			{
-				return this._cultureUIId;
-			}
-			set
-			{
-				if(this._cultureUIId != value)
-				{
-					this.OnPropertyChanging("CultureUIId");
-					this._cultureUIId = value;
-					this.OnPropertyChanged("CultureUIId");
-				}
-			}
-		}
-		
 		private User _recCreatedByUser;
 		public virtual User RecCreatedByUser
 		{

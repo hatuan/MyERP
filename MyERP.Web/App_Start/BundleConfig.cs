@@ -37,9 +37,11 @@ namespace MyERP.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/datepicker3.css",
                       "~/Content/themes/base/jquery-ui.css",
                       "~/Content/site.css"));
+
+            //bundles.Add(new StyleBundle("~/Content/datepickercss").Include(
+            //          "~/Content/bootstrap-datepicker3.css"));
 
             //bundles.Add(new StyleBundle("~/Content/jqueryuicss").Include(
             //          "~/Content/themes/jquery-ui.css"));

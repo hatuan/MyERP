@@ -29,9 +29,16 @@
         </div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(m => m.CultureUI, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.CultureUI, (IEnumerable<SelectListItem>)ViewBag.CultureUIs, "--Select Languages--", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CultureUI, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
         @Html.LabelFor(m => m.WorkingDate, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.WorkingDate, Model.WorkingDate.ToShortDateString(), htmlAttributes: new { @class = "form-control datepicker", type = "text" })
+            @Html.TextBoxFor(m => m.WorkingDate, Model.WorkingDate.ToShortDateString(), htmlAttributes: new { @class = "form-control datepicker" })
             @Html.ValidationMessageFor(m => m.WorkingDate, "", new { @class = "text-danger" })
         </div>
     </div>

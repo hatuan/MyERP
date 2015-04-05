@@ -151,24 +151,6 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private string _culuteUIId;
-		public virtual string CuluteUIId
-		{
-			get
-			{
-				return this._culuteUIId;
-			}
-			set
-			{
-				if(this._culuteUIId != value)
-				{
-					this.OnPropertyChanging("CuluteUIId");
-					this._culuteUIId = value;
-					this.OnPropertyChanged("CuluteUIId");
-				}
-			}
-		}
-		
 		private User _user;
 		public virtual User RecCreatedByUser
 		{

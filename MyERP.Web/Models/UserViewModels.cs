@@ -94,7 +94,9 @@ namespace MyERP.Web.Models
             set;
         }
 
-        //public IEnumerable<SelectListItem> Organizations { get; set; }
+        [Required]
+        [Display(Name = "Language")]
+        public String CultureUI { get; set; }
 
         [Required]
         [DataType(DataType.Date)]

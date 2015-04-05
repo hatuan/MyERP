@@ -67,7 +67,7 @@ namespace MyERP.Web.Controllers
                         var preference = new PreferenceViewModel();
                         preference.OrganizationId = user.OrganizationId == Guid.Empty ? "" : user.OrganizationId.ToString();
                         preference.Organization = user.Organization;
-
+                        preference.CultureUI = user.CultureUIId;
                         preference.WorkingDate = DateTime.Now;
                         Session["Preference"] = preference;
                         string[] roles = Roles.Provider.GetRolesForUser(user.UserName);
@@ -267,9 +267,12 @@ namespace MyERP.Web.Controllers
                 });
 
             var defaultOrganizationId = (Membership.GetUser(User.Identity.Name, true) as MyERPMembershipUser).OrganizationId.ToString();
+            var defaultCultureUI = (Membership.GetUser(User.Identity.Name, true) as MyERPMembershipUser).CultureUIId;
+
             if (Session["Preference"] != null)
             {
                 defaultOrganizationId = (Session["Preference"] as PreferenceViewModel).OrganizationId;
+                defaultCultureUI = model.CultureUI = (Session["Preference"] as PreferenceViewModel).CultureUI;
                 model.WorkingDate = (Session["Preference"] as PreferenceViewModel).WorkingDate;
             }
 
@@ -289,6 +292,28 @@ namespace MyERP.Web.Controllers
             }
             else
                 ViewBag.Organizations = new SelectList(organizations, "Value", "Text");
+
+            var cultureUIs = new List<SelectListItem>()
+            {
+                new SelectListItem() { Value = "vi-VN", Text = "VietNam"},
+                new SelectListItem() { Value = "en-US", Text = "English"},
+            };
+
+            if (!String.IsNullOrEmpty(defaultCultureUI))
+            {
+                SelectListItem selectedcultureUI = cultureUIs.FirstOrDefault(c => c.Value == defaultCultureUI);
+
+                if (selectedcultureUI != null)
+                {
+                    selectedcultureUI.Selected = true;
+                    ViewBag.CultureUIs = new SelectList(cultureUIs, "Value", "Text", defaultCultureUI);
+                }
+                else
+                    ViewBag.CultureUIs = new SelectList(cultureUIs, "Value", "Text");
+            }
+            else
+                ViewBag.CultureUIs = new SelectList(cultureUIs, "Value", "Text");
+
             return View(model);
         }
 
