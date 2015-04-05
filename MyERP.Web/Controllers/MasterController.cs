@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace MyERP.Web.Controllers
 {
-    public class MasterController : Controller
+    public class MasterController : BaseController
     {
         // GET: Master
         public ActionResult Index()

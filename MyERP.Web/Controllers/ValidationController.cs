@@ -10,7 +10,7 @@ using MyERP.DataAccess;
 namespace MyERP.Web.Controllers
 {
     [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
-    public class ValidationController : Controller
+    public class ValidationController : BaseController
     {
         //
         // CheckDuplicateAccount

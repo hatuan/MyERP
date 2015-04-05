@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace MyERP.Web.Controllers
 {
     [AllowAnonymous]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         // GET: Home
         public ActionResult Index()

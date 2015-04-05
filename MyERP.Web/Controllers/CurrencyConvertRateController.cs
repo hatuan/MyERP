@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace MyERP.Web.Controllers
 {
-    public class CurrencyConvertRateController : Controller
+    public class CurrencyConvertRateController : BaseController
     {
         // GET: CurrencyConvertRate
         public ActionResult Index()

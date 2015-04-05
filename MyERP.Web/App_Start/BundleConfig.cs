@@ -35,6 +35,17 @@ namespace MyERP.Web
                       "~/Scripts/myerp.autocomplete.js",
                       "~/Scripts/myerp.toolbar.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
+                      "~/Scripts/kendo/2015.1.318/kendo.ui.core.min.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/kendo/cultures").Include(
+                      "~/Scripts/kendo/2015.1.318/cultures/kendo.culture.en.min.js",
+                      "~/Scripts/kendo/2015.1.318/cultures/kendo.culture.en-US.min.js",
+                      "~/Scripts/kendo/2015.1.318/cultures/kendo.culture.vi.min.js",
+                      "~/Scripts/kendo/2015.1.318/cultures/kendo.culture.vi-VN.min.js"
+                      ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/themes/base/jquery-ui.css",
@@ -46,12 +57,19 @@ namespace MyERP.Web
             //bundles.Add(new StyleBundle("~/Content/jqueryuicss").Include(
             //          "~/Content/themes/jquery-ui.css"));
 
+            bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
+                      "~/Content/kendo/2015.1.318/kendo.common-bootstrap.core.min.css",
+                      "~/Content/kendo/2015.1.318/kendo.bootstrap.min.css"));
+
             bundles.Add(new StyleBundle("~/bundles/knockout").Include(
                       "~/Scripts/knockout-{version}.js"));
 
+#if DEBUG
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
+
             BundleTable.EnableOptimizations = false;
+#endif
         }
     }
 }
