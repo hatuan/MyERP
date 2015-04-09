@@ -1,0 +1,109 @@
+﻿
+@model MyERP.Web.Models.SearchViewModel
+
+@{
+    ViewBag.Title = "Search Currency Rate";
+}
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-8">
+            <h3 class="pull-left">
+                @ViewBag.Title
+            </h3>
+        </div>
+        <div class="col-sm-4">
+            <div class="pull-right">
+                <div style="bottom: 15px; position: relative; top: 15px">
+                    <a class="btn btn-primary" href="#" id="search-button"><span class="glyphicon glyphicon-search"></span> Search</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row chiller-record-template" style="display:none">
+    <div class="col-xs-1">
+        @Html.Hidden("Searchs.Index", 0)
+    </div>
+    <div class="col-xs-3">
+        @Html.EnumDropDownListFor(x => x.Searches[0].CurrencyConvertRateSearchField, new { @class = "form-control" })
+    </div>
+    <div class="col-xs-8">
+        @Html.TextBoxFor(x => x.Searches[0].SearchFieldValue, new { @class = "form-control" })
+    </div>
+</div>
+
+@using (Html.BeginForm("Search", "CurrencyConvertRate", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form", id = "search-form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="table list-chiller-record">
+        @for (int i = 0; i < this.Model.Searches.Count; i++)
+        {
+            <div class="row">
+                <div class="col-xs-1">
+                    @Html.Hidden("Searchs.Index", i)
+                </div>
+                <div class="col-xs-3">
+                    @Html.EnumDropDownListFor(x => x.Searches[i].CurrencyConvertRateSearchField, new {@class = "form-control"})
+                </div>
+                <div class="col-xs-8">
+                    @Html.TextBoxFor(x => x.Searches[i].SearchFieldValue, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(x => x.Searches[i].SearchFieldValue, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+    </div>
+
+    <br />
+    <button type="button" id="add-button" class="btn" name="add">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+    </button>
+
+}
+@section Scripts {
+    <script type="text/javascript" src="~/Scripts/myerp.autocomplete.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#search-button").click(function () {
+                $("#search-form").submit();
+            });
+
+
+            var count = 1;
+            $('#add-button').click(function () {
+                count++;
+                var template = $('.chiller-record-template').clone();
+                template.find('input[type=text]').val('');
+                template.find('input[type=hidden]').val(count - 1);
+
+                $.each(template.find('input[type=text]'), function () {
+                    var name = $(this).attr('name');
+                    name = name.replace('0', count - 1);
+                    $(this).attr('name', name);
+
+                    var id = $(this).attr('id');
+                    id = id.replace('0', count - 1);
+                    $(this).attr('id', id);
+                });
+
+                $.each(template.find('select'), function () {
+                    var name = $(this).attr('name');
+                    name = name.replace('0', count - 1);
+                    $(this).attr('name', name);
+
+                    var id = $(this).attr('id');
+                    id = id.replace('0', count - 1);
+                    $(this).attr('id', id);
+                });
+
+                $('.list-chiller-record').append(template);
+                template.removeClass('chiller-record-template').addClass('chiller-record').show();
+            });
+
+        });
+    </script>
+}

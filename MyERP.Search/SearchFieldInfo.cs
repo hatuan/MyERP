@@ -12,6 +12,7 @@ namespace MyERP.Search
     {
         public AccountSearchField AccountSearchField { get; set; }
         public CurrencySearchField CurrencySearchField { get; set; }
+        public CurrencyConvertRateSearchField CurrencyConvertRateSearchField { get; set; }
         public String SearchFieldValue { get; set; }
     }
 }

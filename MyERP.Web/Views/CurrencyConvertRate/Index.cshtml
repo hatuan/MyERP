@@ -1,10 +1,10 @@
 ﻿@using MyERP.DataAccess
 @using PagedList.Mvc;
 
-@model PagedList.IPagedList<MyERP.Web.Models.CurrencyViewModel>
+@model PagedList.IPagedList<MyERP.Web.Models.CurrencyConvertRateViewModel>
 
 @{
-    ViewBag.Title = "Currency List";
+    ViewBag.Title = "Currency Convert Rate List";
 }
 
 <div class="page-header">
@@ -17,7 +17,7 @@
             <div class="col-sm-4">
                 <div class="pull-right">
                     <div style="bottom: 15px; position: relative; top: 15px">
-                        <a class="btn btn-primary" href="@Url.Action("Create", "Currency", new { currentFilter = ViewBag.CurrentFilter })"><span class="glyphicon glyphicon-plus"></span> New</a>
+                        <a class="btn btn-primary" href="@Url.Action("Create", "CurrencyConvertRate", new { currentFilter = ViewBag.CurrentFilter })"><span class="glyphicon glyphicon-plus"></span> New</a>
                     </div>
                 </div>            
             </div>
@@ -28,8 +28,8 @@
         <div class="btn-toolbar" role="toolbar">
             <div class="btn-group iconbar">
                 <a class="btn btn-default" role="button" href="#"><span class="glyphicon glyphicon-refresh"></span></a>
-                <a class="btn btn-default" role="button" href="@Url.Action("Create", "Currency", new { currentFilter = ViewBag.CurrentFilter })"><span class="glyphicon glyphicon-plus"></span></a>
-                <a class="btn btn-default" role="button" href="@Url.Action("Search", "Currency")"><span class="glyphicon glyphicon-search"></span></a>
+                <a class="btn btn-default" role="button" href="@Url.Action("Create", "CurrencyConvertRate", new { currentFilter = ViewBag.CurrentFilter })"><span class="glyphicon glyphicon-plus"></span></a>
+                <a class="btn btn-default" role="button" href="@Url.Action("Search", "CurrencyConvertRate")"><span class="glyphicon glyphicon-search"></span></a>
                 <a class="btn btn-default" role="button" href="#" id="btn-toolbar-delete" data-request-url="@Url.Action("Delete")"><span class="glyphicon glyphicon-remove"></span></a>
                 <a class="btn btn-default" role="button" href="#" id="btn-toolbar-check-all"><span class="glyphicon glyphicon-ok"></span></a>
                 <a class="btn btn-default" role="button" href="#" id="help"><span class="glyphicon glyphicon-question-sign"></span></a>
@@ -50,19 +50,22 @@
                     <div class="col-sm-4">
                         <div class="col-sm-6 col-text-overflow">
                             @Html.CheckBox("list-action", htmlAttributes: new { value = _model.Id, type = "checkbox", style = "margin-right: 15px;" })
-                            @Html.ActionLink(_model.Code, "Edit", "Currency", new { id = _model.Id, currentFilter = ViewBag.CurrentFilter }, new { @class = "form-link" })
+                            @Html.ActionLink(_model.CurrencyCode + "-" + _model.CurrencyRelationalCode, "Edit", "CurrencyConvertRate", new { id = _model.Id, currentFilter = ViewBag.CurrentFilter }, new { @class = "form-link" })
                         </div>
                         <div class="col-sm-6 col-text-overflow">
                             @_model.OrganizationName
                         </div>
                     </div>
                     <div class="col-sm-8">
-                        <div class="col-sm-6 col-text-overflow">
-                            <span>@_model.Name</span>
+                        <div class="col-sm-3 col-text-overflow">
+                            <span>@String.Format("{0:d}", _model.ValidFrom)</span>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-4 col-text-overflow">
+                            <span> @String.Format("{0:N}",_model.ExchangeRateAmount) - @String.Format("{0:N}", _model.RelationalExchRateAmount)</span>
+                        </div>
+                        <div class="col-sm-3">
 
-                            @if (_model.Status != CurrencyStatusType.Active)
+                            @if (_model.Status != CurrencyConvertRateStatusType.Active)
                             {
                                 <span class="label label-warning">Disable</span>
                             }

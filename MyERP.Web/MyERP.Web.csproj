@@ -1176,6 +1176,9 @@
     <Content Include="Scripts\kendo\2015.1.318\kendo.autocomplete.min.js.map" />
     <Content Include="Scripts\kendo\2015.1.318\kendo.angular.min.js.map" />
     <Content Include="Scripts\kendo\2015.1.318\jquery.min.map" />
+    <Content Include="Views\CurrencyConvertRate\Create.cshtml" />
+    <Content Include="Views\CurrencyConvertRate\Edit.cshtml" />
+    <Content Include="Views\CurrencyConvertRate\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

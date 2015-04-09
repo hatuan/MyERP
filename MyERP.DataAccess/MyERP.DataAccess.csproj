@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="CurrencyConvertRate\CurrencyConvertRate.cs" />
     <Compile Include="CurrencyConvertRate\CurrencyConvertRateStatusType.cs" />
+    <Compile Include="CurrencyConvertRate\CurrencyConvertRateSearchField.cs" />
     <Compile Include="Currency\CurrencySearchField.cs" />
     <Compile Include="Currency\Currency.cs" />
     <Compile Include="Currency\CurrencyStatusType.cs" />

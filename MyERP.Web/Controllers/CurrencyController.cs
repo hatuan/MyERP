@@ -15,7 +15,7 @@ namespace MyERP.Web.Controllers
 {
     public class CurrencyController : OpenAccessBaseController<MyERP.DataAccess.Currency, MyERP.DataAccess.EntitiesModel>
     {
-         /// <summary>
+        /// <summary>
         /// Constructor used by the Controller.
         /// </summary>
         public CurrencyController() : this(new CurrencyRepository())

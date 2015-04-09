@@ -347,6 +347,14 @@ namespace MyERP.Web.Controllers
                     Text = c.Name
                 });
             ViewBag.Organizations = model.OrganizationId != "" ? new SelectList(organizations, "Value", "Text", model.OrganizationId) : new SelectList(organizations, "Value", "Text");
+
+            var cultureUIs = new List<SelectListItem>()
+            {
+                new SelectListItem() { Value = "vi-VN", Text = "VietNam"},
+                new SelectListItem() { Value = "en-US", Text = "English"},
+            };
+            ViewBag.CultureUIs = new SelectList(cultureUIs, "Value", "Text", model.CultureUI);
+
             return View(model);
         }
 

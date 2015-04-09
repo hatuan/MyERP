@@ -33,10 +33,12 @@ namespace MyERP.Web.Models
         public String CurrencyRelationalCode { get; set; }
 
         [Display(Name = "Exchange Rate Amount")]
-        public short ExchangeRateAmount { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+        public UInt32 ExchangeRateAmount { get; set; }
 
         [Display(Name = "Relational Exch Rate Amount")]
-        public short RelationalExchRateAmount { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+        public UInt32 RelationalExchRateAmount { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
@@ -77,14 +79,14 @@ namespace MyERP.Web.Models
         public Guid Id { get; set; }
 
         [Required]
-        public Guid? CurrencyId { get; set; }
+        public Guid CurrencyId { get; set; }
 
         [Required]
         [Display(Name = "From Currency")]
         public String CurrencyCode { get; set; }
 
         [Required]
-        public Guid? CurrencyRelationId { get; set; }
+        public Guid CurrencyRelationId { get; set; }
 
         [Required]
         [Display(Name = "To Currency Name")]
@@ -97,10 +99,10 @@ namespace MyERP.Web.Models
         public DateTime ValidFrom { get; set; }
 
         [Display(Name = "Exchange Rate Amount")]
-        public short ExchangeRateAmount { get; set; }
+        public UInt32 ExchangeRateAmount { get; set; }
 
         [Display(Name = "Relational Exch Rate Amount")]
-        public short RelationalExchRateAmount { get; set; }
+        public UInt32 RelationalExchRateAmount { get; set; }
 
         [Required]
         [Display(Name = "Status")]
