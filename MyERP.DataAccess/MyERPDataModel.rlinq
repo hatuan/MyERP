@@ -1026,9 +1026,6 @@
         <orm:field name="_clientId" property="ClientId" uniqueId="c0527efd-8c4b-48bc-9cd9-7e93dc08143e" type="System.Guid">
           <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         </orm:field>
-        <orm:field name="_cultureId" property="CultureId" behavior="readwrite" uniqueId="7c8e9c26-cea9-484b-8dfa-6e4a0c3d2088" type="System.String">
-          <orm:column name="culture_id" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
-        </orm:field>
         <orm:field name="_recCreatedByUser" property="RecCreatedByUser" behavior="readwrite" uniqueId="80faad2e-b992-4242-a1de-4196c08f5fa0" type="MyERP.DataAccess.User">
           <orm:reference uniqueId="6cf46b87-f996-4e0e-850a-2ba457350c37" association-name="OrganizationHasCreatedBy">
             <orm:sharedfield name="_recCreatedById" target-class="MyERP.DataAccess.User" target-field="_id" />
@@ -1697,7 +1694,6 @@
         <orm:column name="version" sql-type="int8" nullable="false" length="0" scale="0" backend-version="true" ado-type="" />
         <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
         <orm:column name="client_id" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
-        <orm:column name="culture_id" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
       </orm:table>
       <orm:table name="general_journal_line">
         <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
@@ -2878,7 +2874,6 @@
       <Property Id="6cc4d3a2-4f88-43e5-b56d-2e1d008d5a17" name="Id" type="Guid" label="Id : Guid" kind="Persistent" identity="true" fieldName="_id" />
       <Property Id="a759a6fc-b8eb-4bdd-a544-562473c76a1a" name="Version" type="Int64" label="Version : Int64" kind="Persistent" fieldName="_version" />
       <Property Id="c0527efd-8c4b-48bc-9cd9-7e93dc08143e" name="ClientId" type="Guid" label="ClientId : Guid" fieldName="_clientId" />
-      <Property Id="7c8e9c26-cea9-484b-8dfa-6e4a0c3d2088" name="CultureId" label="CultureId : String" kind="Persistent" fieldName="_cultureId" />
       <AssociationTargets>
         <Association Id="6cf46b87-f996-4e0e-850a-2ba457350c37" SourceMultiplicity="ZeroOne" name="OrganizationHasCreatedBy">
           <DomainClassMoniker name="/EntitiesModel/User" />

@@ -20,7 +20,7 @@ namespace MyERP.Web.Controllers
             {
                 var preference = Session["Preference"] as PreferenceViewModel;
                 cultureUIName = preference.CultureUI;
-                cultureName = preference.Organization.CultureId;
+                cultureName = preference.Organization.Client.CultureId;
             }
             else
             {
