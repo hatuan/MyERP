@@ -151,6 +151,96 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		private string _amountDecimalPlaces;
+		public virtual string AmountDecimalPlaces
+		{
+			get
+			{
+				return this._amountDecimalPlaces;
+			}
+			set
+			{
+				if(this._amountDecimalPlaces != value)
+				{
+					this.OnPropertyChanging("AmountDecimalPlaces");
+					this._amountDecimalPlaces = value;
+					this.OnPropertyChanged("AmountDecimalPlaces");
+				}
+			}
+		}
+		
+		private decimal _amountRoundingPrecision;
+		public virtual decimal AmountRoundingPrecision
+		{
+			get
+			{
+				return this._amountRoundingPrecision;
+			}
+			set
+			{
+				if(this._amountRoundingPrecision != value)
+				{
+					this.OnPropertyChanging("AmountRoundingPrecision");
+					this._amountRoundingPrecision = value;
+					this.OnPropertyChanged("AmountRoundingPrecision");
+				}
+			}
+		}
+		
+		private string _unitAmountDecimalPlaces;
+		public virtual string UnitAmountDecimalPlaces
+		{
+			get
+			{
+				return this._unitAmountDecimalPlaces;
+			}
+			set
+			{
+				if(this._unitAmountDecimalPlaces != value)
+				{
+					this.OnPropertyChanging("UnitAmountDecimalPlaces");
+					this._unitAmountDecimalPlaces = value;
+					this.OnPropertyChanged("UnitAmountDecimalPlaces");
+				}
+			}
+		}
+		
+		private decimal _unitAmountRoundingPrecision;
+		public virtual decimal UnitAmountRoundingPrecision
+		{
+			get
+			{
+				return this._unitAmountRoundingPrecision;
+			}
+			set
+			{
+				if(this._unitAmountRoundingPrecision != value)
+				{
+					this.OnPropertyChanging("UnitAmountRoundingPrecision");
+					this._unitAmountRoundingPrecision = value;
+					this.OnPropertyChanged("UnitAmountRoundingPrecision");
+				}
+			}
+		}
+		
+		private Guid? _currencyLCYId;
+		public virtual Guid? CurrencyLCYId
+		{
+			get
+			{
+				return this._currencyLCYId;
+			}
+			set
+			{
+				if(this._currencyLCYId != value)
+				{
+					this.OnPropertyChanging("CurrencyLCYId");
+					this._currencyLCYId = value;
+					this.OnPropertyChanged("CurrencyLCYId");
+				}
+			}
+		}
+		
 		private User _user;
 		public virtual User RecCreatedByUser
 		{
@@ -165,6 +255,24 @@ namespace MyERP.DataAccess
 					this.OnPropertyChanging("RecCreatedByUser");
 					this._user = value;
 					this.OnPropertyChanged("RecCreatedByUser");
+				}
+			}
+		}
+		
+		private Currency _currencyLCY;
+		public virtual Currency CurrencyLCY
+		{
+			get
+			{
+				return this._currencyLCY;
+			}
+			set
+			{
+				if(this._currencyLCY != value)
+				{
+					this.OnPropertyChanging("CurrencyLCY");
+					this._currencyLCY = value;
+					this.OnPropertyChanged("CurrencyLCY");
 				}
 			}
 		}

@@ -65,6 +65,7 @@
     <Compile Include="Client.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="Client\Client.cs" />
     <Compile Include="Currency.generated.cs">
       <DependentUpon>MyERPDataModel.rlinq</DependentUpon>
     </Compile>
@@ -176,6 +177,10 @@
     <Content Include="Script\Connection%282015-04-05 01-57-49%29.rlinq.sql" />
     <Content Include="Script\Connection%282015-04-05 01-58-45%29.rlinq.sql" />
     <Content Include="Script\Connection%282015-04-12 02-26-10%29.rlinq.sql" />
+    <Content Include="Script\Connection%282015-04-13 00-24-43%29.rlinq.sql" />
+    <Content Include="Script\Connection%282015-04-13 01-08-27%29.rlinq.sql" />
+    <Content Include="Script\Connection%282015-04-13 01-39-56%29.rlinq.sql" />
+    <Content Include="Script\Connection%282015-04-13 02-10-53%29.rlinq.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Condition="Exists('$(MSBuildExtensionsPath)\OpenAccess.targets')" Project="$(MSBuildExtensionsPath)\OpenAccess.targets" />

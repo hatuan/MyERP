@@ -17,6 +17,7 @@ namespace MyERP.DataAccess
 
             [Association("gldocument-client-association", "ClientId", "ClientId")]
             public Client Client { get; set; }
+
             [Association("gldocument-organization-association", "OrganizationId", "Id")]
             public Organization Organization { get; set; }
 

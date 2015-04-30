@@ -11,6 +11,13 @@ namespace MyERP.DataAccess
         protected override void OnDatabaseOpen(BackendConfiguration backendConfiguration,
             MetadataContainer metadataContainer, MetadataContainer aggregatedMetadataContainer)
         {
+            MetaTable metaTableClient = metadataContainer.Tables.First(t => t.Name.Equals("client"));
+            MetaIndex metaIndexCurrencyOfTableClient = new MetaIndex("idx_client_currency_lcy", metaTableClient);
+            MetaColumn metaColumnCurrencyOfTableClient = metaTableClient.Columns.First(c => c.Name.Equals("currency_lcy_id"));
+            metaIndexCurrencyOfTableClient.Columns.Add(new MetaIndexColumnMapping("CurrencyLCY", metaColumnCurrencyOfTableClient, 1, SortOrder.Ascending));
+            metaTableClient.Indexes.Add(metaIndexCurrencyOfTableClient);
+            metadataContainer.Indexes.Add(metaIndexCurrencyOfTableClient);
+            
             MetaTable metaTableOrganization = metadataContainer.Tables.First(t => t.Name.Equals("organization"));
             MetaIndex metaIndexNameOfTableOrganization = new MetaIndex("idx_organization_code", metaTableOrganization);
             MetaColumn metaColumnCodeOfTableOrganization = metaTableOrganization.Columns.First(c => c.Name.Equals("code"));

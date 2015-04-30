@@ -1138,6 +1138,21 @@
         <orm:field name="_cultureId" property="CultureId" behavior="readwrite" uniqueId="3a68c5c3-1869-43c8-9eaf-99791b62b786" type="System.String">
           <orm:column name="culture_id" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
+        <orm:field name="_amountDecimalPlaces" property="AmountDecimalPlaces" behavior="readwrite" uniqueId="00b35774-ae57-41e6-a21a-cf1df954e239" type="System.String">
+          <orm:column name="amount_decimal_places" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_amountRoundingPrecision" property="AmountRoundingPrecision" behavior="readwrite" uniqueId="047fdaef-fbfe-4f13-9c1c-fedf74788292" type="System.Decimal">
+          <orm:column name="amount_rounding_precision" sql-type="numeric" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_unitAmountDecimalPlaces" property="UnitAmountDecimalPlaces" behavior="readwrite" uniqueId="e47b6cdb-32c2-41c0-9ffe-4668ac6784c1" type="System.String">
+          <orm:column name="unit-amount_decimal_places" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_unitAmountRoundingPrecision" property="UnitAmountRoundingPrecision" behavior="readwrite" uniqueId="8c83d146-b1ba-4a12-b897-77267aff60e2" type="System.Decimal">
+          <orm:column name="unit-amount_rounding_precision" sql-type="numeric" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_currencyLCYId" property="CurrencyLCYId" behavior="readwrite" uniqueId="0a5e2479-3343-42f0-93a4-4e8579e91c01" type="System.Nullable`1[[System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="currency_lcy_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
+        </orm:field>
         <orm:field name="_user" property="RecCreatedByUser" behavior="readwrite" uniqueId="d5e17f5f-fcbe-4b81-8de8-266a28f3c9ae" type="MyERP.DataAccess.User">
           <orm:reference uniqueId="5069b2d7-d334-4f19-ac42-ed3a6cf8a7ba" association-name="ClientHasCreatedBy">
             <orm:sharedfield name="_recCreatedById" target-class="MyERP.DataAccess.User" target-field="_id" />
@@ -1145,6 +1160,11 @@
         </orm:field>
         <orm:field name="_organization" property="Organizations" behavior="readwrite" uniqueId="84b6dd6a-9552-4d7b-9dee-091778e250c4" type="MyERP.DataAccess.Organization">
           <orm:collection element-class="MyERP.DataAccess.Organization" inverse-field="_client" order-by="" uniqueId="696e2216-63f8-4cbf-b083-15702ae040dc" />
+        </orm:field>
+        <orm:field name="_currencyLCY" property="CurrencyLCY" behavior="readwrite" uniqueId="1fbc9a64-969a-4311-9e82-150422ef249a" type="MyERP.DataAccess.Currency">
+          <orm:reference uniqueId="a6770857-8779-4da4-8dc2-b5c86e115cee" association-name="ClientHasCurrencyLCY">
+            <orm:sharedfield name="_currencyLCYId" target-class="MyERP.DataAccess.Currency" target-field="_id" />
+          </orm:reference>
         </orm:field>
       </orm:class>
       <orm:class name="NumberSequence" update-schema="true" uniqueId="c70d8460-aa9c-4b2c-843a-b78560b3a579">
@@ -1749,6 +1769,11 @@
         <orm:column name="rec_created_by" sql-type="uuid" nullable="false" length="0" scale="0" converter="OpenAccessRuntime.Data.GuidConverter" ado-type="Guid" />
         <orm:column name="rec_created" sql-type="timestamp" nullable="false" length="6" scale="0" converter="OpenAccessRuntime.Data.PostgresTimestampTZConverter" ado-type="DateTime" />
         <orm:column name="culture_id" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="currency_lcy_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
+        <orm:column name="unit-amount_rounding_precision" sql-type="numeric" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="unit-amount_decimal_places" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="amount_rounding_precision" sql-type="numeric" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="amount_decimal_places" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
       </orm:table>
       <orm:table name="number_sequence">
         <orm:column name="id" sql-type="uuid" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
@@ -2968,12 +2993,25 @@
       <Property Id="fa0d38c4-996b-47d3-be69-9834b9f461fa" name="RecCreatedById" type="Guid" label="RecCreatedById : Guid" fieldName="_recCreatedById" />
       <Property Id="536a8c07-499f-495a-ac51-6c079304f8ef" name="RecCreated" type="DateTime" label="RecCreated : DateTime" fieldName="_recCreated" />
       <Property Id="3a68c5c3-1869-43c8-9eaf-99791b62b786" name="CultureId" label="CultureId : String" kind="Persistent" fieldName="_cultureId" />
+      <Property Id="00b35774-ae57-41e6-a21a-cf1df954e239" name="AmountDecimalPlaces" label="AmountDecimalPlaces : String" kind="Persistent" fieldName="_amountDecimalPlaces" />
+      <Property Id="047fdaef-fbfe-4f13-9c1c-fedf74788292" name="AmountRoundingPrecision" type="Decimal" label="AmountRoundingPrecision : Decimal" kind="Persistent" fieldName="_amountRoundingPrecision" />
+      <Property Id="e47b6cdb-32c2-41c0-9ffe-4668ac6784c1" name="UnitAmountDecimalPlaces" label="UnitAmountDecimalPlaces : String" kind="Persistent" fieldName="_unitAmountDecimalPlaces" />
+      <Property Id="8c83d146-b1ba-4a12-b897-77267aff60e2" name="UnitAmountRoundingPrecision" type="Decimal" label="UnitAmountRoundingPrecision : Decimal" kind="Persistent" fieldName="_unitAmountRoundingPrecision" />
+      <Property Id="0a5e2479-3343-42f0-93a4-4e8579e91c01" name="CurrencyLCYId" type="Guid" label="CurrencyLCYId : Guid" nullable="true" kind="Persistent" fieldName="_currencyLCYId" />
       <AssociationTargets>
         <Association Id="5069b2d7-d334-4f19-ac42-ed3a6cf8a7ba" SourceMultiplicity="ZeroOne" name="ClientHasCreatedBy">
           <DomainClassMoniker name="/EntitiesModel/User" />
           <sourceNavigationalProperty>
             <associationDefinesSourceProperty Id="5a818217-c5e2-47e7-8844-e7065e87847c">
               <NavigationalPropertyMoniker name="/EntitiesModel/Client/RecCreatedByUser" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="a6770857-8779-4da4-8dc2-b5c86e115cee" SourceMultiplicity="ZeroOne" name="ClientHasCurrencyLCY">
+          <DomainClassMoniker name="/EntitiesModel/Currency" />
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="07e4252b-e8a7-4739-bf46-c403cbeca448">
+              <NavigationalPropertyMoniker name="/EntitiesModel/Client/CurrencyLCY" />
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
@@ -2984,6 +3022,9 @@
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="b324f852-49ae-4bbd-844f-df352b0cefa0">
           <NavigationalProperty Id="84b6dd6a-9552-4d7b-9dee-091778e250c4" name="Organizations" type="IList&lt;Organization&gt;" label="Organizations : IList&lt;Organization&gt;" nullable="true" kind="Persistent" fieldName="_organization" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="687b263a-fe92-4623-b3a7-d297c9d467e8">
+          <NavigationalProperty Id="1fbc9a64-969a-4311-9e82-150422ef249a" name="CurrencyLCY" type="Currency" label="CurrencyLCY : Currency" nullable="true" kind="Persistent" fieldName="_currencyLCY" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
