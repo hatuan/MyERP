@@ -1179,6 +1179,7 @@
     <Content Include="Views\CurrencyConvertRate\Create.cshtml" />
     <Content Include="Views\CurrencyConvertRate\Edit.cshtml" />
     <Content Include="Views\CurrencyConvertRate\Search.cshtml" />
+    <Content Include="Views\Client\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1202,6 +1203,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\CurrencyController.cs" />
     <Compile Include="Controllers\CurrencyConvertRateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1212,6 +1214,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValidationController.cs" />
     <Compile Include="Helpers\CultureHelper.cs" />
+    <Compile Include="Models\ClientViewModels.cs" />
     <Compile Include="Models\CurrencyConvertRateViewModels.cs" />
     <Compile Include="Models\CurrencyViewModels.cs" />
     <Compile Include="Models\NumberSequenceViewModels.cs" />
@@ -1241,6 +1244,7 @@
     <Compile Include="CustomMembershipProvider.cs" />
     <Compile Include="CustomRoleProvider.cs" />
     <Compile Include="odata\RolesController.cs" />
+    <Compile Include="Repository\ClientRepository.cs" />
     <Compile Include="Repository\CurrencyConvertRateRepository.cs" />
     <Compile Include="Repository\CurrencyRepository.cs">
       <SubType>Code</SubType>

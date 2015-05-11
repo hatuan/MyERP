@@ -151,8 +151,8 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private string _amountDecimalPlaces;
-		public virtual string AmountDecimalPlaces
+		private ushort _amountDecimalPlaces;
+		public virtual ushort AmountDecimalPlaces
 		{
 			get
 			{
@@ -187,8 +187,8 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private string _unitAmountDecimalPlaces;
-		public virtual string UnitAmountDecimalPlaces
+		private ushort _unitAmountDecimalPlaces;
+		public virtual ushort UnitAmountDecimalPlaces
 		{
 			get
 			{
@@ -241,6 +241,42 @@ namespace MyERP.DataAccess
 			}
 		}
 		
+		private DateTime _recModified;
+		public virtual DateTime RecModified
+		{
+			get
+			{
+				return this._recModified;
+			}
+			set
+			{
+				if(this._recModified != value)
+				{
+					this.OnPropertyChanging("RecModified");
+					this._recModified = value;
+					this.OnPropertyChanged("RecModified");
+				}
+			}
+		}
+		
+		private Guid _recModifiedById;
+		public virtual Guid RecModifiedById
+		{
+			get
+			{
+				return this._recModifiedById;
+			}
+			set
+			{
+				if(this._recModifiedById != value)
+				{
+					this.OnPropertyChanging("RecModifiedById");
+					this._recModifiedById = value;
+					this.OnPropertyChanged("RecModifiedById");
+				}
+			}
+		}
+		
 		private User _user;
 		public virtual User RecCreatedByUser
 		{
@@ -273,6 +309,24 @@ namespace MyERP.DataAccess
 					this.OnPropertyChanging("CurrencyLCY");
 					this._currencyLCY = value;
 					this.OnPropertyChanged("CurrencyLCY");
+				}
+			}
+		}
+		
+		private User _user1;
+		public virtual User RecModifiedByUser
+		{
+			get
+			{
+				return this._user1;
+			}
+			set
+			{
+				if(this._user1 != value)
+				{
+					this.OnPropertyChanging("RecModifiedByUser");
+					this._user1 = value;
+					this.OnPropertyChanged("RecModifiedByUser");
 				}
 			}
 		}

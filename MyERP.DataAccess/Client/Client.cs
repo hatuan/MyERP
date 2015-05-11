@@ -19,10 +19,10 @@ namespace MyERP.DataAccess
             public String CultureId { get; set; }
 
             [Required(ErrorMessageResourceName = "ValidationErrorRequiredField", ErrorMessageResourceType = typeof(ValidationErrorResources))]
-            public String AmountDecimalPlaces { get; set; }
+            public UInt16 AmountDecimalPlaces { get; set; }
 
             [Required(ErrorMessageResourceName = "ValidationErrorRequiredField", ErrorMessageResourceType = typeof(ValidationErrorResources))]
-            public String UnitAmountDecimalPlaces { get; set; }
+            public UInt16 UnitAmountDecimalPlaces { get; set; }
 
             [Required(ErrorMessageResourceName = "ValidationErrorRequiredField", ErrorMessageResourceType = typeof(ValidationErrorResources))]
             public Decimal AmountRoundingPrecision { get; set; }
@@ -39,6 +39,9 @@ namespace MyERP.DataAccess
 
             [Association("Client-user-created-association", "RecCreatedById", "Id")]
             public User RecCreatedByUser { get; set; }
+
+            [Association("Client-user-modified-association", "RecModifiedById", "Id")]
+            public User RecModifiedByUser { get; set; }
 
         }
     }
