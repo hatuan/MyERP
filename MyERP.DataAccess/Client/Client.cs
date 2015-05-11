@@ -19,10 +19,10 @@ namespace MyERP.DataAccess
             public String CultureId { get; set; }
 
             [Required(ErrorMessageResourceName = "ValidationErrorRequiredField", ErrorMessageResourceType = typeof(ValidationErrorResources))]
-            public UInt16 AmountDecimalPlaces { get; set; }
+            public Int16 AmountDecimalPlaces { get; set; }
 
             [Required(ErrorMessageResourceName = "ValidationErrorRequiredField", ErrorMessageResourceType = typeof(ValidationErrorResources))]
-            public UInt16 UnitAmountDecimalPlaces { get; set; }
+            public Int16 UnitAmountDecimalPlaces { get; set; }
 
             [Required(ErrorMessageResourceName = "ValidationErrorRequiredField", ErrorMessageResourceType = typeof(ValidationErrorResources))]
             public Decimal AmountRoundingPrecision { get; set; }

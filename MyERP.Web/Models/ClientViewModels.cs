@@ -30,7 +30,7 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Amount Decimal Places")]
-        public UInt16 AmountDecimalPlaces { get; set; }
+        public Int16 AmountDecimalPlaces { get; set; }
 
         [Required]
         [Display(Name = "Amount Rounding Precision")]
@@ -38,7 +38,7 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Unit-Amount Decimal Places")]
-        public UInt16 UnitAmountDecimalPlaces { get; set; }
+        public Int16 UnitAmountDecimalPlaces { get; set; }
 
         [Required]
         [Display(Name = "Unit-Amount Rounding Precision")]
@@ -48,25 +48,5 @@ namespace MyERP.Web.Models
         public Boolean IsActived { get; set; }
 
         public Int64 Version { get; set; }
-
-        [Required]
-        [Display(Name = "Created By")]
-        public String RecCreateBy { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:mm/dd/yyyy}")]
-        [Display(Name = "Created")]
-        public DateTime RecCreated { get; set; }
-
-        [Required]
-        [Display(Name = "Modified By")]
-        public String RecModifiedBy { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:mm/dd/yyyy}")]
-        [Display(Name = "Modified")]
-        public DateTime RecModified { get; set; }
     }
 }

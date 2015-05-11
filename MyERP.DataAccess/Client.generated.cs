@@ -151,8 +151,8 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private ushort _amountDecimalPlaces;
-		public virtual ushort AmountDecimalPlaces
+		private short _amountDecimalPlaces;
+		public virtual short AmountDecimalPlaces
 		{
 			get
 			{
@@ -187,8 +187,8 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private ushort _unitAmountDecimalPlaces;
-		public virtual ushort UnitAmountDecimalPlaces
+		private short _unitAmountDecimalPlaces;
+		public virtual short UnitAmountDecimalPlaces
 		{
 			get
 			{
@@ -223,8 +223,8 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Guid? _currencyLCYId;
-		public virtual Guid? CurrencyLCYId
+		private Guid _currencyLCYId;
+		public virtual Guid CurrencyLCYId
 		{
 			get
 			{
@@ -295,24 +295,6 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private Currency _currencyLCY;
-		public virtual Currency CurrencyLCY
-		{
-			get
-			{
-				return this._currencyLCY;
-			}
-			set
-			{
-				if(this._currencyLCY != value)
-				{
-					this.OnPropertyChanging("CurrencyLCY");
-					this._currencyLCY = value;
-					this.OnPropertyChanged("CurrencyLCY");
-				}
-			}
-		}
-		
 		private User _user1;
 		public virtual User RecModifiedByUser
 		{
@@ -327,6 +309,24 @@ namespace MyERP.DataAccess
 					this.OnPropertyChanging("RecModifiedByUser");
 					this._user1 = value;
 					this.OnPropertyChanged("RecModifiedByUser");
+				}
+			}
+		}
+		
+		private Currency _currencyLCY;
+		public virtual Currency CurrencyLCY
+		{
+			get
+			{
+				return this._currencyLCY;
+			}
+			set
+			{
+				if(this._currencyLCY != value)
+				{
+					this.OnPropertyChanging("CurrencyLCY");
+					this._currencyLCY = value;
+					this.OnPropertyChanged("CurrencyLCY");
 				}
 			}
 		}
