@@ -79,10 +79,10 @@
 <script type="text/javascript" src="~/Scripts/myerp.autocomplete.js"></script>
 <script type="text/javascript">
         $(function() {
-            $("#AmountDecimalPlaces").kendoNumericTextBox({ spinners: false });
-            $("#UnitAmountDecimalPlaces").kendoNumericTextBox({ spinners: false });
-            $("#AmountRoundingPrecision").kendoNumericTextBox({ spinners: false });
-            $("#UnitAmountRoundingPrecision").kendoNumericTextBox({ spinners: false });
+            $("#AmountDecimalPlaces").kendoNumericTextBox({ format:"n0", min:0, max:5, spinners: false });
+            $("#UnitAmountDecimalPlaces").kendoNumericTextBox({ format: "n0", min: 0, max: 5, spinners: false });
+            $("#AmountRoundingPrecision").kendoNumericTextBox({ format:"n5", decimals:5, min:0, max:9, spinners: false });
+            $("#UnitAmountRoundingPrecision").kendoNumericTextBox({ format: "n5", decimals: 5, min: 0, max: 9, spinners: false });
         });
 </script>
 }
