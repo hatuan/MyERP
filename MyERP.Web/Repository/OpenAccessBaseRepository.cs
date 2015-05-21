@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Linq.Dynamic;
 using System.Reflection;
 using System.Security.Principal;
+using System.Web;
 using System.Web.Security;
 using Telerik.OpenAccess;
 using Telerik.OpenAccess.FetchOptimization;
@@ -39,7 +41,15 @@ namespace MyERP.Web
 
         public virtual IQueryable<TEntity> GetAll()
         {
-            List<TEntity> allEntities = dataContext.GetAll<TEntity>().ToList();
+            var membershipUser = (MyERPMembershipUser) Membership.GetUser(HttpContext.Current.User.Identity.Name, true);
+            List<TEntity> allEntities = new List<TEntity>();
+            if (membershipUser != null)
+            {
+                string clause = "ClientId = @0";
+                //LambdaExpression expr = System.Linq.Dynamic.DynamicExpression.ParseLambda(typeof(TEntity), typeof(bool), clause, membershipUser.ClientId);
+                allEntities = dataContext.GetAll<TEntity>()
+                        .Where(clause, membershipUser.ClientId).ToList();
+            }
 
             List<TEntity> detachedEntities = dataContext.CreateDetachedCopy<List<TEntity>>(allEntities, fetchStrategy);
 
@@ -53,7 +63,18 @@ namespace MyERP.Web
         /// <returns></returns>
         public virtual IQueryable<TEntity> GetAll(IPrincipal principal)
         {
-            throw new ArgumentNullException("principal", "Please override this method on Repository");
+            var membershipUser = (MyERPMembershipUser)Membership.GetUser(principal, true);
+            List<TEntity> allEntities = new List<TEntity>();
+            if (membershipUser != null)
+            {
+                string clause = "ClientId = @0";
+                allEntities = dataContext.GetAll<TEntity>()
+                        .Where(clause, membershipUser.ClientId).ToList();
+            }
+
+            List<TEntity> detachedEntities = dataContext.CreateDetachedCopy<List<TEntity>>(allEntities, fetchStrategy);
+
+            return detachedEntities.AsQueryable();
         }
 
         public virtual TEntity GetBy(Expression<Func<TEntity, bool>> filter)

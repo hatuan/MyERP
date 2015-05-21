@@ -266,6 +266,8 @@ namespace MyERP.Web.Controllers
                     Text = c.Name
                 });
 
+            model.RootOrganization = organizationRepository.GetRootOrganization(User);
+
             var defaultOrganizationId = (Membership.GetUser(User.Identity.Name, true) as MyERPMembershipUser).OrganizationId.ToString();
             var defaultCultureUI = (Membership.GetUser(User.Identity.Name, true) as MyERPMembershipUser).CultureUIId;
 
@@ -321,10 +323,12 @@ namespace MyERP.Web.Controllers
         //POST: /User/Preference
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Preference([Bind(Exclude = "Organization")] PreferenceViewModel model)
+        public ActionResult Preference([Bind(Exclude = "Organization,RootOrganization")] PreferenceViewModel model)
         {
             var organizationRepository = new OrganizationRepository();
             model.Organization = organizationRepository.GetBy(c => c.Id == new Guid(model.OrganizationId));
+            model.RootOrganization = organizationRepository.GetRootOrganization(model.Organization);
+
             if (ModelState.IsValid)
             {
                 Session["Preference"] = model;

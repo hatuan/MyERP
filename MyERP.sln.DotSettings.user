@@ -5,4 +5,5 @@
   &lt;Assembly Path="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Web.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Silverlight\v5.0\System.Core.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Program Files (x86)\Microsoft SDKs\RIA Services\v1.0\Libraries\Server\System.ServiceModel.DomainServices.Server.dll" /&gt;&#xD;
+  &lt;Assembly Path="Z:\MyERP\packages\System.Linq.Dynamic.1.0.4\lib\net40\System.Linq.Dynamic.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>

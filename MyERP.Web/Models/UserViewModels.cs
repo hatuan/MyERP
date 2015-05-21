@@ -94,6 +94,12 @@ namespace MyERP.Web.Models
             set;
         }
 
+        public Organization RootOrganization
+        {
+            get;
+            set;
+        }
+
         [Required]
         [Display(Name = "Language")]
         public String CultureUI { get; set; }

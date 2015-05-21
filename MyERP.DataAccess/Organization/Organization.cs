@@ -21,15 +21,6 @@ namespace MyERP.DataAccess
             [Association("Organization-user-modified-association", "RecModifiedById", "Id")]
             public User RecModifiedByUser { get; set; }
         }
-
-        public OrganizationStatusType StatusType
-        {
-            get { return (OrganizationStatusType)Status; }
-            set
-            {
-                //intentionally empty
-            }
-        }
         
         /// <summary>
         /// Cot khong co trong CSDL. Chi dung de su lay Organization.Code = "*" cua Organization hien tai sau thu tuc GET http://localhost/MyERP.Web/odata/Organizations(guid'...')/AllOrganization
