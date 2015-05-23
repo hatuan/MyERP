@@ -89,5 +89,26 @@ namespace MyERP.Web.Controllers
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
         }
+
+        //
+        // CheckDuplicateCurrency
+        public JsonResult CheckDuplicateOrganization(string code, Guid? id)
+        {
+            var repository = new OrganizationRepository();
+            Organization exists;
+            if (id != null && id != Guid.Empty)
+                exists = repository.GetBy(c => c.Code.Equals(code, StringComparison.InvariantCultureIgnoreCase) && c.Id != id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(code, StringComparison.InvariantCultureIgnoreCase));
+
+            if (exists == null)
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

@@ -1179,6 +1179,9 @@
     <Content Include="Views\CurrencyConvertRate\Edit.cshtml" />
     <Content Include="Views\CurrencyConvertRate\Search.cshtml" />
     <Content Include="Views\Client\Edit.cshtml" />
+    <Content Include="Views\Organization\Create.cshtml" />
+    <Content Include="Views\Organization\Edit.cshtml" />
+    <Content Include="Views\Organization\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1200,6 +1203,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
@@ -1215,6 +1219,7 @@
     <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Models\ClientViewModels.cs" />
     <Compile Include="Models\CurrencyConvertRateViewModels.cs" />
+    <Compile Include="Models\OrganizationViewModels.cs" />
     <Compile Include="Models\CurrencyViewModels.cs" />
     <Compile Include="Models\NumberSequenceViewModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
