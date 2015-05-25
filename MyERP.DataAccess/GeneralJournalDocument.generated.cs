@@ -367,20 +367,20 @@ namespace MyERP.DataAccess
 			}
 		}
 		
-		private int _currencyExchangeRate;
-		public virtual int CurrencyExchangeRate
+		private int _exchangeRateAmount;
+		public virtual int ExchangeRateAmount
 		{
 			get
 			{
-				return this._currencyExchangeRate;
+				return this._exchangeRateAmount;
 			}
 			set
 			{
-				if(this._currencyExchangeRate != value)
+				if(this._exchangeRateAmount != value)
 				{
-					this.OnPropertyChanging("CurrencyExchangeRate");
-					this._currencyExchangeRate = value;
-					this.OnPropertyChanged("CurrencyExchangeRate");
+					this.OnPropertyChanging("ExchangeRateAmount");
+					this._exchangeRateAmount = value;
+					this.OnPropertyChanged("ExchangeRateAmount");
 				}
 			}
 		}
@@ -417,6 +417,24 @@ namespace MyERP.DataAccess
 					this.OnPropertyChanging("Description");
 					this._description = value;
 					this.OnPropertyChanged("Description");
+				}
+			}
+		}
+		
+		private decimal _relationalExchRateAmount;
+		public virtual decimal RelationalExchRateAmount
+		{
+			get
+			{
+				return this._relationalExchRateAmount;
+			}
+			set
+			{
+				if(this._relationalExchRateAmount != value)
+				{
+					this.OnPropertyChanging("RelationalExchRateAmount");
+					this._relationalExchRateAmount = value;
+					this.OnPropertyChanged("RelationalExchRateAmount");
 				}
 			}
 		}

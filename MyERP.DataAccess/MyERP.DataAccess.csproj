@@ -184,6 +184,7 @@
     <Content Include="Script\Connection%282015-05-10 02-06-49%29.rlinq.sql" />
     <Content Include="Script\Connection%282015-05-11 00-55-22%29.rlinq.sql" />
     <Content Include="Script\Connection%282015-05-11 01-02-04%29.rlinq.sql" />
+    <Content Include="Script\Connection%282015-05-27 00-08-38%29.rlinq.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Condition="Exists('$(MSBuildExtensionsPath)\OpenAccess.targets')" Project="$(MSBuildExtensionsPath)\OpenAccess.targets" />

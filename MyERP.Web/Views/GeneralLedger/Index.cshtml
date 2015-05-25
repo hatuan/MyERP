@@ -1,0 +1,104 @@
+﻿@using MyERP.DataAccess
+@using PagedList.Mvc;
+
+@model PagedList.IPagedList<MyERP.Web.Models.GeneralJournalDocumentViewModels>
+
+@{
+    ViewBag.Title = "General Journal List";
+}
+
+<div class="page-header">
+        <div class="row">
+            <div class="col-sm-8">
+                <h3 class="pull-left">
+                    @ViewBag.Title
+                </h3>
+            </div>
+            <div class="col-sm-4">
+                <div class="pull-right">
+                    <div style="bottom: 15px; position: relative; top: 15px">
+                        <a class="btn btn-primary" href="@Url.Action("Create", new { currentFilter = ViewBag.CurrentFilter })"><span class="glyphicon glyphicon-plus"></span> New</a>
+                    </div>
+                </div>            
+            </div>
+        </div>
+</div>
+
+<div class="appframe-iconbar">
+        <div class="btn-toolbar" role="toolbar">
+            <div class="btn-group iconbar">
+                <a class="btn btn-default" role="button" href="#"><span class="glyphicon glyphicon-refresh"></span></a>
+                <a class="btn btn-default" role="button" href="@Url.Action("Create", new { currentFilter = ViewBag.CurrentFilter })"><span class="glyphicon glyphicon-plus"></span></a>
+                <a class="btn btn-default" role="button" href="@Url.Action("Search")"><span class="glyphicon glyphicon-search"></span></a>
+                <a class="btn btn-default" role="button" href="#" id="btn-toolbar-delete" data-request-url="@Url.Action("Delete")"><span class="glyphicon glyphicon-remove"></span></a>
+                <a class="btn btn-default" role="button" href="#" id="btn-toolbar-check-all"><span class="glyphicon glyphicon-ok"></span></a>
+                <a class="btn btn-default" role="button" href="#" id="help"><span class="glyphicon glyphicon-question-sign"></span></a>
+            </div>
+        </div>        
+</div>
+
+@Html.AntiForgeryToken()
+
+@Html.ValidationSummary("", new { @class = "text-danger" })
+
+<div class="row">
+    <div class="col-sm-9 listview-main-section">
+        @foreach (var item in Model)
+        {
+            <div class="list-row" style="position: relative;">
+                <div class="doclist-row row">
+                    <div class="col-sm-8">
+                        <div class="col-sm-3 col-text-overflow">
+                            @Html.CheckBox("list-action", htmlAttributes: new { value = item.Id, type = "checkbox", style = "margin-right: 15px;" })
+                            @Html.ActionLink(item.DocumentNo, "Edit", new { id = item.Id, currentFilter = ViewBag.CurrentFilter }, new { @class = "form-link" })
+                        </div>
+                        <div class="col-sm-3 col-text-overflow">
+                            @String.Format("{0:d}", @item.DocumentPosted)
+                        </div>
+                        <div class="col-sm-6 col-text-overflow">
+                            <span>@item.Description</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+
+                        <div class="col-sm-6 col-text-overflow">
+                            <span>@String.Format("{0:d}", item.DocumentCreated)</span>
+                        </div>
+                        <div class="col-sm-4">
+                            @if (item.CurrencyId != null)
+                            {
+                                <span class="label label-info">@item.CurrencyCode</span>
+                            }
+                        </div>
+
+                        <div class="col-sm-4">
+                            @if (item.Status != GeneralJournalDocumentStatusType.Draft)
+                            {
+                                <span class="label label-info">Draft</span>
+                            }
+                            @if (item.Status != GeneralJournalDocumentStatusType.Posted)
+                            {
+                                <span class="label label-success">Posted</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="list-timestamp">
+                        <span>@item.RecModifiedBy - @item.RecModified</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-sm-3"></div>
+</div>
+<br />
+<div>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+</div>
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+</div>
+@section scripts
+{
+    
+}

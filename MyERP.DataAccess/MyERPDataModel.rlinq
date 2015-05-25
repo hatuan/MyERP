@@ -799,14 +799,17 @@
         <orm:field name="_transactionType" property="TransactionType" behavior="readwrite" uniqueId="d8824da7-0b51-4fc8-b77b-4abe61a5dff5" type="TransactionType">
           <orm:column name="transaction_type" sql-type="int4" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
-        <orm:field name="_currencyExchangeRate" property="CurrencyExchangeRate" behavior="readwrite" uniqueId="caccca09-0645-4ec6-a09b-e68d47214791" type="System.Int32">
-          <orm:column name="currency_exchange_rate" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:field name="_exchangeRateAmount" property="ExchangeRateAmount" behavior="readwrite" uniqueId="caccca09-0645-4ec6-a09b-e68d47214791" type="System.Int32">
+          <orm:column name="exchange_rate_amount" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         </orm:field>
         <orm:field name="_currencyId" property="CurrencyId" behavior="readwrite" uniqueId="cbcdb9d4-ee20-450a-bbea-77b8dce97ea1" type="System.Nullable`1[[System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="currency_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_description" property="Description" behavior="readwrite" uniqueId="9ba4dc12-b1f7-4a0f-92df-547a2a8aea25" type="System.String">
           <orm:column name="description" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        </orm:field>
+        <orm:field name="_relationalExchRateAmount" property="RelationalExchRateAmount" behavior="readwrite" uniqueId="ae62bb75-fda7-4abd-af45-2cd26d7f247d" type="System.Decimal">
+          <orm:column name="relational_exch_rate_amount" sql-type="numeric" nullable="false" length="0" scale="0" ado-type="" />
         </orm:field>
         <orm:field name="_client" property="Client" behavior="readwrite" uniqueId="6efc28df-900c-406b-b8c2-07b39932ac28" type="MyERP.DataAccess.Client">
           <orm:reference uniqueId="1bb14f80-ef9c-4541-9c01-68db0a18ea9d" association-name="TransactionDocumentHasClient">
@@ -1711,8 +1714,9 @@
         <orm:column name="document_no" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="document_created_date" sql-type="date" nullable="false" length="0" scale="0" ado-type="" />
         <orm:column name="currency_id" sql-type="uuid" nullable="true" length="0" scale="0" ado-type="" />
-        <orm:column name="currency_exchange_rate" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
+        <orm:column name="exchange_rate_amount" sql-type="numeric" nullable="false" length="38" scale="20" ado-type="" />
         <orm:column name="description" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="relational_exch_rate_amount" sql-type="numeric" nullable="false" length="0" scale="0" ado-type="" />
       </orm:table>
       <orm:table name="organization">
         <orm:column name="code" sql-type="varchar" nullable="false" length="0" scale="0" ado-type="" />
@@ -2676,9 +2680,10 @@
       <Property Id="7facadce-e9d3-438b-88b3-da332ebd8c7a" name="TotalDebitAmount" type="Decimal" label="TotalDebitAmount : Decimal" kind="Persistent" fieldName="_totalDebitAmount" />
       <Property Id="b781c8b4-72e0-4af1-8fff-5cc2c1292e0b" name="TotalDebitAmountLcy" type="Decimal" label="TotalDebitAmountLcy : Decimal" kind="Persistent" fieldName="_totalDebitAmountLcy" />
       <Property Id="d8824da7-0b51-4fc8-b77b-4abe61a5dff5" name="TransactionType" type="TransactionType" label="TransactionType : TransactionType" kind="Persistent" fieldName="_transactionType" />
-      <Property Id="caccca09-0645-4ec6-a09b-e68d47214791" name="CurrencyExchangeRate" type="Int32" label="CurrencyExchangeRate : Int32" kind="Persistent" fieldName="_currencyExchangeRate" />
+      <Property Id="caccca09-0645-4ec6-a09b-e68d47214791" name="ExchangeRateAmount" type="Int32" label="ExchangeRateAmount : Int32" kind="Persistent" fieldName="_exchangeRateAmount" />
       <Property Id="cbcdb9d4-ee20-450a-bbea-77b8dce97ea1" name="CurrencyId" type="Guid" label="CurrencyId : Guid" nullable="true" kind="Persistent" fieldName="_currencyId" />
       <Property Id="9ba4dc12-b1f7-4a0f-92df-547a2a8aea25" name="Description" label="Description : String" kind="Persistent" fieldName="_description" />
+      <Property Id="ae62bb75-fda7-4abd-af45-2cd26d7f247d" name="RelationalExchRateAmount" type="Decimal" label="RelationalExchRateAmount : Decimal" kind="Persistent" fieldName="_relationalExchRateAmount" />
       <AssociationTargets>
         <Association Id="0cb22bb7-2d7d-4db3-80ce-b9fcfdf36e34" SourceMultiplicity="ZeroOne" name="GeneralJournalDocumentHasCurrency">
           <DomainClassMoniker name="/EntitiesModel/Currency" />
