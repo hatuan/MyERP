@@ -14,6 +14,6 @@ namespace MyERP.DataAccess
         CashPayment = 300,
         BankCheck = 400, //Bao no - Chuyen tien tu ngan hang cho nha cung cap
         BankDeposit = 500, //Bao co - Ngan hang co tien khach hang tra
-        AssetJournal = 600
+        AssetJournalDepreciation = 600
     }
 }
