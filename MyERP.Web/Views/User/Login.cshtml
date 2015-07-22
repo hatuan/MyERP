@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
-            @using (Html.BeginForm("Login", "User", new {ReturnUrl = ViewBag.ReturnUrl}, FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form"}))
+            @using (Html.BeginForm("Login", "User", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form", autocomplete = "off" }))
             {
                 @Html.AntiForgeryToken()
                 <h4>Use a local account to log in.</h4>

@@ -104,11 +104,13 @@ namespace MyERP.Web.Controllers
             var preference = Session["Preference"] as PreferenceViewModel;
             var generalJournalSetup = generalJournalSetupRepo.GetAll().FirstOrDefault(c => c.Id == preference.Organization.Id) ??
                                       generalJournalSetupRepo.GetAll().FirstOrDefault(c => c.Id == preference.RootOrganization.Id);
-            
-            if(generalJournalSetup == null)
-                return Json(new { Error = "General Journal Setup not found" });
 
-            var model = new GeneralJournalDocumentEditViewModel()
+            if (generalJournalSetup == null)
+            {
+                TempData["GeneralJournalSetupNotFound"] = "General Journal Setup Not Found";
+                return RedirectToAction("Index");
+            }
+            var model = new GeneralJournalDocumentCreateViewModel()
             {
                 Id = Guid.NewGuid(),
                 NumberSequenceId = generalJournalSetup.GeneralJournalNumberSequence.Id,
@@ -121,7 +123,7 @@ namespace MyERP.Web.Controllers
 
             ViewBag.CurrentFilter = currentFilter;
 
-            return View(model);
+            return PartialView("_Create", model);
         }
 
         //

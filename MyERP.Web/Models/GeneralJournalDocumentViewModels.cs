@@ -92,6 +92,41 @@ namespace MyERP.Web.Models
         public DateTime RecModified { get; set; }
     }
 
+    public class GeneralJournalDocumentCreateViewModel
+    {
+        public Guid Id { get; set; }
+
+        [Required]
+        [Display(Name = "Document Created")]
+        public DateTime DocumentCreated { get; set; }
+
+        [Required]
+        [Display(Name = "Document Posted")]
+        public DateTime DocumentPosted { get; set; }
+
+        [Required]
+        [Display(Name = "Document No")]
+        public String DocumentNo { get; set; }
+
+        public Guid NumberSequenceId { get; set; }
+
+        [Required]
+        [Display(Name = "Number Sequence")]
+        public String NumberSequenceCode { get; set; }
+
+        public Guid? CurrencyId { get; set; }
+
+        [Required]
+        [Display(Name = "Currency")]
+        public String CurrencyCode { get; set; }
+
+        [Required]
+        [Display(Name = "Status")]
+        public GeneralJournalDocumentStatusType Status { get; set; }
+
+        public Int64 Version { get; set; }
+    }
+
     public class GeneralJournalDocumentEditViewModel
     {
         public Guid Id { get; set; }
