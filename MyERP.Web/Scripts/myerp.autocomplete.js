@@ -63,16 +63,16 @@ $(function () {
 
         widgetInst._renderMenu = function(ul, items) {
             var self = this;
-            ul.append("<table class=\"table table-hover\"><thead><tr><th class=\"col-sm-1\">Code</th><th class=\"col-sm-2\">Name</th></tr></thead><tbody></tbody></table>");
+            ul.append('<div class="row"></div>');
 
             $.each(items, function(index, item) {
-                self._renderItem(ul.find("table tbody"), item);
+                self._renderItem(ul.find("div"), item);
             });
         };
         widgetInst._renderItem = function (ul, item) {
             return $("<li></li>")
                 .data("ui-autocomplete-item", item)
-                .append("<a><table class='table table-condensed table-hover' style='margin-bottom:0px;'><tr><td class='col-sm-1'>" + item.value + "</td><td class='col-sm-2'>" + item.label + "</td></tr></table></a>")
+                .append("<div class='col-sm-1'>" + item.value + "</div><div class='col-sm-2'>" + item.label + "</div>")
                 .appendTo(ul);
 
             //return $('<tr class="ui-menu-item" role="presentation"></tr>')

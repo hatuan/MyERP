@@ -17,7 +17,7 @@
           <StartPageUrl>MyERPService.svc</StartPageUrl>
           <StartAction>CurrentPage</StartAction>
           <AspNetDebugging>True</AspNetDebugging>
-          <SilverlightDebugging>True</SilverlightDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
           <NativeDebugging>False</NativeDebugging>
           <SQLDebugging>False</SQLDebugging>
           <ExternalProgram>

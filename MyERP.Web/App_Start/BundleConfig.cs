@@ -45,6 +45,15 @@ namespace MyERP.Web
                       "~/Scripts/kendo/2015.1.318/cultures/kendo.culture.vi-VN.min.js"
                       ));
 
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
+                      "~/Scripts/knockout-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/select2").Include(
+                     "~/Scripts/select2/4.0.0/select2.full.min.js",
+                     "~/Scripts/select2/4.0.0/i18n/en.js",
+                     "~/Scripts/select2/4.0.0/i18n/vi.js"
+                     ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/themes/base/jquery-ui.css",
@@ -60,8 +69,8 @@ namespace MyERP.Web
                       "~/Content/kendo/2015.1.318/kendo.common-bootstrap.core.min.css",
                       "~/Content/kendo/2015.1.318/kendo.bootstrap.min.css"));
 
-            bundles.Add(new StyleBundle("~/bundles/knockout").Include(
-                      "~/Scripts/knockout-{version}.js"));
+            bundles.Add(new StyleBundle("~/bundles/select2/css").Include(
+                      "~/Content/select2/4.0.0/select2.min.css"));
 
 #if DEBUG
             // Set EnableOptimizations to false for debugging. For more information,
