@@ -73,7 +73,8 @@ namespace MyERP.Web.Controllers
                         string[] roles = Roles.Provider.GetRolesForUser(user.UserName);
 
                         FormsAuthentication.SetAuthCookie(model.Name, model.RememberMe);
-                        return RedirectToLocal(returnUrl);
+                        return RedirectToAction("Preference", routeValues: new { returnUrl = returnUrl });
+                        //return RedirectToLocal(returnUrl);
                     }
                     if (user != null && user.ClientId == Guid.Empty)
                     {
@@ -253,8 +254,10 @@ namespace MyERP.Web.Controllers
 
         //
         //GET: /User/Preference
-        public ActionResult Preference()
+        public ActionResult Preference(string returnUrl = "~/")
         {
+            ViewBag.ReturnUrl = returnUrl;
+
             var model = new PreferenceViewModel();
             model.WorkingDate = DateTime.Now;
             
@@ -323,7 +326,7 @@ namespace MyERP.Web.Controllers
         //POST: /User/Preference
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Preference([Bind(Exclude = "Organization,RootOrganization")] PreferenceViewModel model)
+        public ActionResult Preference([Bind(Exclude = "Organization,RootOrganization")] PreferenceViewModel model, string returnUrl)
         {
             var organizationRepository = new OrganizationRepository();
             model.Organization = organizationRepository.GetBy(c => c.Id == new Guid(model.OrganizationId));
@@ -340,7 +343,11 @@ namespace MyERP.Web.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Home");
+                    if (returnUrl.Trim().ToLower() == "~/")
+                        return RedirectToAction("Index", "Home");
+                    else
+                        return RedirectToLocal(returnUrl);
+                    
                 }
             }
 
@@ -384,5 +391,10 @@ namespace MyERP.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+      public ActionResult CreateCompany()
+      {
+          throw new NotImplementedException();
+      }
     }
 }

@@ -4,20 +4,20 @@ $(function () {
     /* ========================================================================
      * Currency Autocomplete
      * ======================================================================== */
-    $("input[data-autocomplete='currency-code']").each(function(index, element) {
-        var urlBase = $(element).attr("data-urlbase");
+    $("input[data-autocomplete='currency-code']").each(function (index, element) {
+        var urlBase = $(element).attr('data-urlbase');
         var that = element;
-        var elementId = document.getElementById($(element).attr("data-autocomplete-id"));
+        var elementId = document.getElementById($(element).attr('data-autocomplete-id'));
 
-        var widgetInst = $(that).autocomplete({
+        $(that).autocomplete({
             autoFocus: true,
-            source: function(req, resp) {
+            source: function (req, resp) {
                 $.ajax({
                     url: urlBase + "/Currencies?$filter=startswith(Code,'" + req.term + "')&$select=Id,Code,Name&$orderby=Code",
-                    success: function(result) {
-                        resp($.map(result.value, function(item) {
+                    success: function (result) {
+                        resp($.map(result.value, function (item) {
                             return {
-                                label: item.Code + " - " + item.Name,
+                                label: item.Code + ' - ' + item.Name,
                                 value: item.Code,
                                 id: item.Id
                             };
@@ -25,20 +25,16 @@ $(function () {
                     }
                 });
             },
-            open: function () {
-                // After menu has been opened, set width
-                $('.ui-menu').width(250);
-            },
-            select: function(event, ui) {
+            select: function (event, ui) {
                 if (ui.item) {
                     $(that).val(ui.item.value);
                     $(elementId).val(ui.item.id);
                 } else {
-                    $(that).val("");
-                    $(elementId).val("");
+                    $(that).val('');
+                    $(elementId).val('');
                 }
             },
-            change: function(event, ui) {
+            change: function (event, ui) {
                 if (ui.item) {
                     $(that).val(ui.item.value);
                     $(elementId).val(ui.item.id);
@@ -47,10 +43,10 @@ $(function () {
 
                     $.ajax({
                         url: urlBase + "/Currencies?$filter=Code eq '" + currentValue + "'&$select=Id,Code,Name&$orderby=Code",
-                        success: function(result) {
+                        success: function (result) {
                             if (result.value.length == 0) {
-                                $(that).val("");
-                                $(elementId).val("");
+                                $(that).val('');
+                                $(elementId).val('');
                             } else {
                                 $(that).val(result.value[0].Code);
                                 $(elementId).val(result.value[0].Id);
@@ -59,27 +55,7 @@ $(function () {
                     });
                 }
             }
-        }).data("ui-autocomplete");
-
-        widgetInst._renderMenu = function(ul, items) {
-            var self = this;
-            ul.append('<div class="row"></div>');
-
-            $.each(items, function(index, item) {
-                self._renderItem(ul.find("div"), item);
-            });
-        };
-        widgetInst._renderItem = function (ul, item) {
-            return $("<li></li>")
-                .data("ui-autocomplete-item", item)
-                .append("<div class='col-sm-1'>" + item.value + "</div><div class='col-sm-2'>" + item.label + "</div>")
-                .appendTo(ul);
-
-            //return $('<tr class="ui-menu-item" role="presentation"></tr>')
-            //    .data("ui-autocomplete-item", item)
-            //    .append("<td>" + item.value + "</td>" + "<td>" + item.label + "</td>")
-            //    .appendTo(ul);
-        };
+        });
     });
 
     /* ========================================================================

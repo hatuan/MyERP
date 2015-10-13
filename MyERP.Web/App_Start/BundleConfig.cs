@@ -9,7 +9,8 @@ namespace MyERP.Web
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery.unobtrusive-ajax.js"));
+                        "~/Scripts/jquery.unobtrusive-ajax.js",
+                        "~/Scripts/jquery.cookie.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
@@ -32,17 +33,18 @@ namespace MyERP.Web
 
             bundles.Add(new ScriptBundle("~/bundles/myerp").Include(
                       "~/Scripts/myerp.autocomplete.js",
-                      "~/Scripts/myerp.toolbar.js"));
+                      "~/Scripts/myerp.toolbar.js",
+                      "~/Scripts/myerp.flashMessage.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
-                      "~/Scripts/kendo/2015.1.318/kendo.ui.core.min.js"
+                      "~/Scripts/kendo/2015.2.805/kendo.ui.core.min.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/kendo/cultures").Include(
-                      "~/Scripts/kendo/2015.1.318/cultures/kendo.culture.en.min.js",
-                      "~/Scripts/kendo/2015.1.318/cultures/kendo.culture.en-US.min.js",
-                      "~/Scripts/kendo/2015.1.318/cultures/kendo.culture.vi.min.js",
-                      "~/Scripts/kendo/2015.1.318/cultures/kendo.culture.vi-VN.min.js"
+                      "~/Scripts/kendo/2015.2.805/cultures/kendo.culture.en.min.js",
+                      "~/Scripts/kendo/2015.2.805/cultures/kendo.culture.en-US.min.js",
+                      "~/Scripts/kendo/2015.2.805/cultures/kendo.culture.vi.min.js",
+                      "~/Scripts/kendo/2015.2.805/cultures/kendo.culture.vi-VN.min.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
@@ -54,10 +56,16 @@ namespace MyERP.Web
                      "~/Scripts/select2/4.0.0/i18n/vi.js"
                      ));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new ScriptBundle("~/bundles/select2-v3").Include(
+                "~/Scripts/select2/3.5.2/select2.js"
+                ));
+
+            bundles.Add(new StyleBundle("~/Content/3rdcss").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/themes/base/jquery-ui.css",
-                      "~/Content/site.css"));
+                      "~/Content/themes/base/jquery-ui.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                     "~/Content/site.css"));
 
             //bundles.Add(new StyleBundle("~/Content/datepickercss").Include(
             //          "~/Content/bootstrap-datepicker3.css"));
@@ -66,11 +74,16 @@ namespace MyERP.Web
             //          "~/Content/themes/jquery-ui.css"));
 
             bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
-                      "~/Content/kendo/2015.1.318/kendo.common-bootstrap.core.min.css",
-                      "~/Content/kendo/2015.1.318/kendo.bootstrap.min.css"));
+                      "~/Content/kendo/2015.2.805/kendo.common-bootstrap.core.min.css",
+                      "~/Content/kendo/2015.2.805/kendo.bootstrap.min.css"));
 
-            bundles.Add(new StyleBundle("~/bundles/select2/css").Include(
-                      "~/Content/select2/4.0.0/select2.min.css"));
+            bundles.Add(new StyleBundle("~/Content/select2/css").Include(
+                      "~/Content/select2/4.0.0/select2.min.css",
+                      "~/Content/select2/4.0.0/select2-bootstrap.min.css"));
+            
+            bundles.Add(new StyleBundle("~/Content/select2-v3/css").Include(
+                "~/Content/select2/3.5.2/select2.css",
+                "~/Content/select2/3.5.2/select2-bootstrap.css"));
 
 #if DEBUG
             // Set EnableOptimizations to false for debugging. For more information,

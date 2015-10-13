@@ -11,6 +11,8 @@ using System.Web.UI.WebControls;
 using MyERP.DataAccess;
 using MyERP.Parse;
 using MyERP.Web.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using PagedList;
 
 namespace MyERP.Web.Controllers
@@ -102,24 +104,48 @@ namespace MyERP.Web.Controllers
         {
             var generalJournalSetupRepo = new GeneralJournalSetupRepository();
             var preference = Session["Preference"] as PreferenceViewModel;
-            var generalJournalSetup = generalJournalSetupRepo.GetAll().FirstOrDefault(c => c.Id == preference.Organization.Id) ??
-                                      generalJournalSetupRepo.GetAll().FirstOrDefault(c => c.Id == preference.RootOrganization.Id);
+            var generalJournalSetup = generalJournalSetupRepo.GetAll().FirstOrDefault(c => c.OrganizationId == preference.Organization.Id) ??
+                                      generalJournalSetupRepo.GetAll().FirstOrDefault(c => c.OrganizationId == preference.RootOrganization.Id);
 
             if (generalJournalSetup == null)
             {
-                TempData["GeneralJournalSetupNotFound"] = "General Journal Setup Not Found";
+                Response.Cookies.Add(new HttpCookie("GeneralJournalSetupNotFound", "General Journal Setup Not Found") { Path = "/" });
                 return RedirectToAction("Index");
             }
+
+            Session["GeneralJournalSetup"] = generalJournalSetup;
+
             var model = new GeneralJournalDocumentCreateViewModel()
             {
                 Id = Guid.NewGuid(),
-                NumberSequenceId = generalJournalSetup.GeneralJournalNumberSequence.Id,
+                NumberSequenceId = generalJournalSetup.GeneralJournalNumberSequenceId,
                 NumberSequenceCode = generalJournalSetup.GeneralJournalNumberSequence.Code,
                 CurrencyId = generalJournalSetup.LocalCurrency.Id,
                 CurrencyCode = generalJournalSetup.LocalCurrency.Code,
-                DocumentCreated = DateTime.Now,
+                DocumentCreated = preference.WorkingDate,
+                DocumentPosted = preference.WorkingDate,
                 Status = GeneralJournalDocumentStatusType.Draft
             };
+
+            NumberSequenceRepository numberSequenceRepo = new NumberSequenceRepository();
+            var numberSequences = new JObject(
+                new JProperty("data", new JArray(
+                    numberSequenceRepo.GetAll(User)
+                        .OrderBy(c => c.Code)
+                        .Where(c => (NumberSequenceStatusType) c.Status == NumberSequenceStatusType.Active && c.Id == generalJournalSetup.GeneralJournalNumberSequenceId)
+                        .ToList()
+                        .Select(c => new JObject(
+                            new JProperty("code", c.Code),
+                            new JProperty("currentno", c.CurrentNo),
+                            new JProperty("endingno", c.EndingNo),
+                            new JProperty("formatno", c.FormatNo),
+                            new JProperty("id", c.Id),
+                            new JProperty("isdefault", c.IsDefault),
+                            new JProperty("manual", c.Manual),
+                            new JProperty("name", c.Name)
+                            )))));
+
+            ViewData["NumberSequences"] = numberSequences.ToString(Formatting.None);
 
             ViewBag.CurrentFilter = currentFilter;
 
@@ -130,8 +156,9 @@ namespace MyERP.Web.Controllers
         //POST: /Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(GeneralJournalDocumentEditViewModel model, string currentFilter)
+        public ActionResult Create(GeneralJournalDocumentCreateViewModel model, string currentFilter)
         {
+            var generalJournalSetup =  Session["GeneralJournalSetup"] as GeneralJournalSetup;
             if (ModelState.IsValid)
             {
                 MyERPMembershipUser user = (MyERPMembershipUser) Membership.GetUser(User.Identity.Name, true);
@@ -145,6 +172,7 @@ namespace MyERP.Web.Controllers
                     ClientId = clientId,
                     OrganizationId = organizationId,
                     CurrencyId = model.CurrencyId,
+                    NumberSequenceId = model.NumberSequenceId,
                     Status = (byte) model.Status,
                     RecModified = DateTime.Now,
                     RecCreatedBy = (Guid) user.ProviderUserKey,
@@ -155,7 +183,9 @@ namespace MyERP.Web.Controllers
                 {
                     this.repository.AddNew(newItem);
 
-                    return RedirectToAction("Index", routeValues: new { currentFilter, currentItemId = newItem.Id });
+                    string url = Url.Action("Index", new { currentFilter, currentItemId = newItem.Id });
+
+                    return Json(new { success = true, url = url });
                 }
                 catch (Exception ex)
                 {
@@ -163,7 +193,29 @@ namespace MyERP.Web.Controllers
                 }
             }
 
-            return View(model);
+            NumberSequenceRepository numberSequenceRepo = new NumberSequenceRepository();
+            var numberSequences = new JObject(
+                new JProperty("data", new JArray(
+                    numberSequenceRepo.GetAll(User)
+                        .OrderBy(c => c.Code)
+                        .Where(c => (NumberSequenceStatusType)c.Status == NumberSequenceStatusType.Active && c.Id == generalJournalSetup.GeneralJournalNumberSequenceId)
+                        .ToList()
+                        .Select(c => new JObject(
+                            new JProperty("code", c.Code),
+                            new JProperty("currentno", c.CurrentNo),
+                            new JProperty("endingno", c.EndingNo),
+                            new JProperty("formatno", c.FormatNo),
+                            new JProperty("id", c.Id),
+                            new JProperty("isdefault", c.IsDefault),
+                            new JProperty("manual", c.Manual),
+                            new JProperty("name", c.Name)
+                            )))));
+
+            ViewData["NumberSequences"] = numberSequences.ToString(Formatting.None);
+
+            ViewBag.CurrentFilter = currentFilter;
+
+            return PartialView("_Create", model);
         }
 
         //

@@ -15,7 +15,7 @@
     </div>
 </div>
 
-@using (Html.BeginForm("Preference", "User", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Preference", "User", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     <h4>Set user preference</h4>
@@ -24,7 +24,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.OrganizationId, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.OrganizationId, (IEnumerable<SelectListItem>)ViewBag.Organizations, "--Select Organization--", htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.OrganizationId, (IEnumerable<SelectListItem>)ViewBag.Organizations, "--Select Organization--", htmlAttributes: new { @class = "form-control"})
             @Html.ValidationMessageFor(m => m.OrganizationId, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -50,4 +50,12 @@
     <p>
         @Html.ActionLink("Create new Company", "CreateCompany")
     </p>
+}
+@section scripts
+{
+<script type="text/javascript">
+    $(document).ready(function () {
+            $("#OrganizationId, #CultureUI").kendoDropDownList();
+        });
+</script>
 }
