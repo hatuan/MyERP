@@ -37,14 +37,14 @@ namespace MyERP.Web
                       "~/Scripts/myerp.flashMessage.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
-                      "~/Scripts/kendo/2015.2.805/kendo.ui.core.min.js"
+                      "~/Scripts/kendo/2015.3.1111/kendo.ui.core.min.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/kendo/cultures").Include(
-                      "~/Scripts/kendo/2015.2.805/cultures/kendo.culture.en.min.js",
-                      "~/Scripts/kendo/2015.2.805/cultures/kendo.culture.en-US.min.js",
-                      "~/Scripts/kendo/2015.2.805/cultures/kendo.culture.vi.min.js",
-                      "~/Scripts/kendo/2015.2.805/cultures/kendo.culture.vi-VN.min.js"
+                      "~/Scripts/kendo/2015.3.1111/cultures/kendo.culture.en.min.js",
+                      "~/Scripts/kendo/2015.3.1111/cultures/kendo.culture.en-US.min.js",
+                      "~/Scripts/kendo/2015.3.1111/cultures/kendo.culture.vi.min.js",
+                      "~/Scripts/kendo/2015.3.1111/cultures/kendo.culture.vi-VN.min.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
@@ -74,16 +74,16 @@ namespace MyERP.Web
             //          "~/Content/themes/jquery-ui.css"));
 
             bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
-                      "~/Content/kendo/2015.2.805/kendo.common-bootstrap.core.min.css",
-                      "~/Content/kendo/2015.2.805/kendo.bootstrap.min.css"));
+                      "~/Content/kendo/2015.3.1111/kendo.common-bootstrap.core.min.css",
+                      "~/Content/kendo/2015.3.1111/kendo.bootstrap.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/select2/css").Include(
                       "~/Content/select2/4.0.0/select2.min.css",
                       "~/Content/select2/4.0.0/select2-bootstrap.min.css"));
             
             bundles.Add(new StyleBundle("~/Content/select2-v3/css").Include(
-                "~/Content/select2/3.5.2/select2.css",
-                "~/Content/select2/3.5.2/select2-bootstrap.css"));
+                "~/Content/select2/4.0.0/select2.css",
+                "~/Content/select2/4.0.0/select2-bootstrap.css"));
 
 #if DEBUG
             // Set EnableOptimizations to false for debugging. For more information,
