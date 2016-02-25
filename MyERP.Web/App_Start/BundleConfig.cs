@@ -37,14 +37,14 @@ namespace MyERP.Web
                       "~/Scripts/myerp.flashMessage.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
-                      "~/Scripts/kendo/2015.3.1111/kendo.ui.core.min.js"
+                      "~/Scripts/kendo/2016.1.112/kendo.ui.core.min.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/kendo/cultures").Include(
-                      "~/Scripts/kendo/2015.3.1111/cultures/kendo.culture.en.min.js",
-                      "~/Scripts/kendo/2015.3.1111/cultures/kendo.culture.en-US.min.js",
-                      "~/Scripts/kendo/2015.3.1111/cultures/kendo.culture.vi.min.js",
-                      "~/Scripts/kendo/2015.3.1111/cultures/kendo.culture.vi-VN.min.js"
+                      "~/Scripts/kendo/2016.1.112/cultures/kendo.culture.en.min.js",
+                      "~/Scripts/kendo/2016.1.112/cultures/kendo.culture.en-US.min.js",
+                      "~/Scripts/kendo/2016.1.112/cultures/kendo.culture.vi.min.js",
+                      "~/Scripts/kendo/2016.1.112/cultures/kendo.culture.vi-VN.min.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
@@ -73,9 +73,10 @@ namespace MyERP.Web
             //bundles.Add(new StyleBundle("~/Content/jqueryuicss").Include(
             //          "~/Content/themes/jquery-ui.css"));
 
+            //http://docs.telerik.com/kendo-ui/third-party/using-kendo-with-twitter-bootstrap
             bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
-                      "~/Content/kendo/2015.3.1111/kendo.common-bootstrap.core.min.css",
-                      "~/Content/kendo/2015.3.1111/kendo.bootstrap.min.css"));
+                      "~/Content/kendo/2016.1.112/kendo.common-bootstrap.core.min.css",
+                      "~/Content/kendo/2016.1.112/kendo.bootstrap.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/select2/css").Include(
                       "~/Content/select2/4.0.0/select2.min.css",

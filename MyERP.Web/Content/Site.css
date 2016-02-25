@@ -219,7 +219,7 @@ textarea {
    top: 10px;
 }
 
-
+/*
 .k-widget select, .k-widget textarea, .k-widget input[type="text"]:not(.k-input), .k-widget input[type="password"], .k-widget input[type="datetime"], .k-widget input[type="datetime-local"], .k-widget input[type="date"], .k-widget input[type="month"], .k-widget input[type="time"], .k-widget input[type="week"], .k-widget input[type="number"], .k-widget input[type="email"], .k-widget input[type="url"], .k-widget input[type="search"], .k-widget input[type="tel"], .k-widget input[type="color"], .k-widget .uneditable-input {
     box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
 }
@@ -230,3 +230,16 @@ textarea {
 {
     box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
 }
+
+.form-control.k-widget
+{
+    padding: 0;
+    width: 100%;
+    height: auto;
+}
+
+.form-control.k-widget:not(.k-autocomplete)
+{
+    border-width: 0;
+}
+    */
