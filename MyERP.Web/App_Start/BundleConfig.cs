@@ -37,6 +37,7 @@ namespace MyERP.Web
                       "~/Scripts/myerp.flashMessage.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
+                      "~/Scripts/kendo/2016.1.112/kendo.core.min.js",
                       "~/Scripts/kendo/2016.1.112/kendo.ui.core.min.js"
                       ));
 
