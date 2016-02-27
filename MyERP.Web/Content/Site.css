@@ -242,4 +242,8 @@ textarea {
 {
     border-width: 0;
 }
-    */
+*/
+
+.k-numeric-wrap::before {
+    content: none !important;
+}
