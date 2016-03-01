@@ -83,7 +83,7 @@
     <Compile Include="FluentModel\Job.generated.cs" />
     <Compile Include="FluentModel\JobGroup.generated.cs" />
     <Compile Include="FluentModel\Module.generated.cs" />
-    <Compile Include="FluentModel\MyERPDataModel.cs" />
+    <Compile Include="FluentModel\EntitiesModel.cs" />
     <Compile Include="FluentModel\NumberSequence.generated.cs" />
     <Compile Include="FluentModel\Organization.generated.cs" />
     <Compile Include="FluentModel\PaymentTerm.generated.cs" />

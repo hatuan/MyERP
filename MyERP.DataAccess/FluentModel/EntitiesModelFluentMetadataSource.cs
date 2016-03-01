@@ -26,8 +26,18 @@ namespace MyERP.DataAccess
 
 	public partial class EntitiesModelFluentMetadataSource : FluentMetadataSource
 	{
-		
-		protected override IList<MappingConfiguration> PrepareMapping()
+        /// <summary>
+        /// http://docs.telerik.com/data-access/developers-guide/code-only-mapping/mapping-clr-types-properties-and-associations/mapping-associations/fluent-mapping-mapping-clr-mapping-associations-fk-constraint
+        /// </summary>
+        /// <returns></returns>
+        protected override MetadataContainer CreateModel()
+        {
+            MetadataContainer container = base.CreateModel();
+            container.DefaultMapping.NullForeignKey = true;
+            return container;
+        }
+
+        protected override IList<MappingConfiguration> PrepareMapping()
 		{
 			List<MappingConfiguration> mappingConfigurations = new List<MappingConfiguration>();
 			
