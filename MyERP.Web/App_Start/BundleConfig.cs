@@ -61,6 +61,18 @@ namespace MyERP.Web
                 "~/Scripts/select2/3.5.2/select2.js"
                 ));
 
+            // jQuery Globalize
+            bundles.Add(new ScriptBundle("~/bundles/globalize").Include(
+                                                    "~/Scripts/cldr.js",
+                                                    "~/Scripts/cldr/event.js",
+                                                    "~/Scripts/cldr/supplemental.js",
+                                                    "~/Scripts/globalize.js",
+                                                    "~/Scripts/globalize/number.js",
+                                                    "~/Scripts/globalize/plural.js",
+                                                    "~/Scripts/globalize/currency.js",
+                                                    "~/Scripts/globalize/date.js",
+                                                    "~/Scripts/jquery.validate.globalize.js"));
+
             bundles.Add(new StyleBundle("~/Content/3rdcss").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/themes/base/jquery-ui.css"));

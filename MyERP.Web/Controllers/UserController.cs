@@ -343,10 +343,10 @@ namespace MyERP.Web.Controllers
                 }
                 else
                 {
-                    if (returnUrl.Trim().ToLower() == "~/")
+                    //if (returnUrl.Trim().ToLower() == "~/")
                         return RedirectToAction("Index", "Home");
-                    else
-                        return RedirectToLocal(returnUrl);
+                    //else
+                    //    return RedirectToLocal(returnUrl);
                     
                 }
             }

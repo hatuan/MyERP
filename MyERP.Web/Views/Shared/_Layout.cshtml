@@ -22,6 +22,27 @@
     @Scripts.Render("~/bundles/myerp")
     
     @Scripts.Render("~/bundles/modernizr")
+    
+    @Scripts.Render("~/bundles/globalize")
+
+    @{
+        var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
+    }
+    
+    <script type="text/javascript">
+
+        kendo.culture("@culture");
+
+        $(function () {
+            $('.datepicker').kendoDatePicker({ culture: "@culture" });
+        });
+
+        $.validator.methods.date = function (value, element) {
+            Globalize("@culture");
+            return this.optional(element) || Globalize.parseDate(value) !== null;
+        }
+    </script>
+
 
 </head>
 <body>
@@ -112,20 +133,6 @@
     </div>
     <!--END COMFIRM DELETE-->
     
-    @{
-        var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
-    }
-
-
-    <script type="text/javascript">
-
-        kendo.culture("@culture");
-
-        $(function () {
-            $('.datepicker').kendoDatePicker({ culture: "@culture" });
-        });
-    </script>
-
     @RenderSection("scripts", required: false)
 
 </body>
