@@ -16,7 +16,7 @@ namespace MyERP.Web
                         "~/Scripts/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*",
+                        "~/Scripts/jquery.validate.js",
                         "~/Scripts/jquery.validate.unobtrusive.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -67,11 +67,14 @@ namespace MyERP.Web
                                                     "~/Scripts/cldr/event.js",
                                                     "~/Scripts/cldr/supplemental.js",
                                                     "~/Scripts/globalize.js",
+                                                    "~/Scripts/globalize/message.js",
                                                     "~/Scripts/globalize/number.js",
                                                     "~/Scripts/globalize/plural.js",
-                                                    "~/Scripts/globalize/currency.js",
                                                     "~/Scripts/globalize/date.js",
-                                                    "~/Scripts/jquery.validate.globalize.js"));
+                                                    "~/Scripts/globalize/currency.js",
+                                                    "~/Scripts/globalize/relative-time.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery.validate.globalize").Include("~/Scripts/jquery.validate.globalize.js"));
 
             bundles.Add(new StyleBundle("~/Content/3rdcss").Include(
                       "~/Content/bootstrap.css",

@@ -53,7 +53,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.ValidFrom, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.ValidFrom, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.ValidFrom, Model.ValidFrom.ToShortDateString(), new { @class = "form-control datepicker" })
                 @Html.ValidationMessageFor(m => m.ValidFrom, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -96,7 +96,6 @@
 
             $("#ExchangeRateAmount").kendoNumericTextBox({ spinners: false });
             $("#RelationalExchRateAmount").kendoNumericTextBox({ spinners: false });
-            $("#ValidFrom").kendoDatePicker({});
         });
     </script>
 }
