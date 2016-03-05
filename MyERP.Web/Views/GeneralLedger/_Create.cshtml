@@ -36,10 +36,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.DocumentPosted, new { @class = "col-md-4 control-label" })
+                    @Html.LabelFor(m => m.DocumentPosted, new {@class = "col-md-4 control-label"})
                     <div class="col-md-8">
-                        @Html.TextBoxFor(m => m.DocumentPosted, new { @class = "form-control datepicker" })
-                        @Html.ValidationMessageFor(m => m.DocumentPosted, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.DocumentPosted, new {@class = "form-control datepicker"})
+                        @Html.ValidationMessageFor(m => m.DocumentPosted, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Description, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">

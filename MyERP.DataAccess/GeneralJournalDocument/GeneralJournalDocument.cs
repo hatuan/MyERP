@@ -15,6 +15,9 @@ namespace MyERP.DataAccess
             [Association("gldocument-line-association", "Id", "GeneralJournalDocumentId")]
             public ICollection<GeneralJournalLine> GeneralJournalLines { get; set; }
 
+            [Association("gldocument-currency-association", "CurrencyId", "Id")]
+            public Currency Currency { get; set; }
+
             [Association("gldocument-client-association", "ClientId", "ClientId")]
             public Client Client { get; set; }
 

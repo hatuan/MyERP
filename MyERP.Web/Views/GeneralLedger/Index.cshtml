@@ -142,7 +142,7 @@
                     success: function (result) {
                         if (result.success) {
                             $('#myModal').modal('hide');
-                            $('#body-content').load(result.url); //  Load data from the server and place the returned HTML into the matched element
+                            window.location.href = result.url; // Load data from the server and place the returned HTML into the matched element
                         } else {
                             $('#myModalContent').html(result);
                             bindForm(dialog);

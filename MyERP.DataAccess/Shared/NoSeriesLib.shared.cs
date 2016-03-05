@@ -72,7 +72,8 @@ namespace MyERP.DataAccess.Shared
             });
 #endif
         }
-        public static string ReplaceNoText(string No, int NewNo, int FixedLength, int StartPos, int EndPos)
+
+        private static string ReplaceNoText(string No, int NewNo, int FixedLength, int StartPos, int EndPos)
         {
             string StartNo = "";
             string EndNo = "";
@@ -103,7 +104,7 @@ namespace MyERP.DataAccess.Shared
             return StartNo + ZeroNo + NewNo + EndNo;
         }
 
-        public static void GetIntegerPos(string No, ref int StartPos, ref int EndPos)
+        private static void GetIntegerPos(string No, ref int StartPos, ref int EndPos)
         {
             bool IsDigit = false;
             int i;

@@ -18,7 +18,7 @@ namespace MyERP.Web
             this.fetchStrategy.LoadWith<GeneralJournalDocument>(c => c.Organization);
             this.fetchStrategy.LoadWith<GeneralJournalDocument>(c => c.RecModifiedByUser);
             this.fetchStrategy.LoadWith<GeneralJournalDocument>(c => c.RecCreatedByUser);
-
+            this.fetchStrategy.LoadWith<GeneralJournalDocument>(c => c.Currency);
             this.fetchStrategy.LoadWith<GeneralJournalDocument>(c => c.NumberSequence);
             this.fetchStrategy.LoadWith<GeneralJournalDocument>(c => c.GeneralJournalLines);
         }

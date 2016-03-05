@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Web;
@@ -9,6 +10,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.UI.WebControls;
 using MyERP.DataAccess;
+using MyERP.DataAccess.Shared;
 using MyERP.Parse;
 using MyERP.Web.Models;
 using Newtonsoft.Json;
@@ -159,6 +161,8 @@ namespace MyERP.Web.Controllers
         public ActionResult Create(GeneralJournalDocumentCreateViewModel model, string currentFilter)
         {
             var generalJournalSetup =  Session["GeneralJournalSetup"] as GeneralJournalSetup;
+            var numberSequenceRepo = new NumberSequenceRepository();
+
             if (ModelState.IsValid)
             {
                 MyERPMembershipUser user = (MyERPMembershipUser) Membership.GetUser(User.Identity.Name, true);
@@ -166,13 +170,22 @@ namespace MyERP.Web.Controllers
                 Guid clientId = user.ClientId ?? Guid.Empty;
                 Guid organizationId = user.OrganizationId ?? Guid.Empty;
 
+                NumberSequence selectNumberSequence = numberSequenceRepo.GetBy(c => c.Id == model.NumberSequenceId);
+
+                String documentNo = NoSeriesLib.NextNo(model.NumberSequenceId, selectNumberSequence.FormatNo);
                 GeneralJournalDocument newItem = new GeneralJournalDocument()
                 {
                     Id = model.Id,
                     ClientId = clientId,
                     OrganizationId = organizationId,
-                    CurrencyId = model.CurrencyId,
+                    CurrencyId = model.CurrencyId == generalJournalSetup.LocalCurrencyId ? null : model.CurrencyId,
                     NumberSequenceId = model.NumberSequenceId,
+                    DocumentNo = documentNo,
+                    Description = model.Description??String.Empty,
+                    DocumentCreated = model.DocumentCreated,
+                    DocumentPosted = model.DocumentPosted,
+                    TransactionType = TransactionType.GeneralJournal,
+                    DocumentType = DocumentType.GeneralJournal,
                     Status = (byte) model.Status,
                     RecModified = DateTime.Now,
                     RecCreatedBy = (Guid) user.ProviderUserKey,
@@ -192,8 +205,7 @@ namespace MyERP.Web.Controllers
                     ModelState.AddModelError("ExceptionError", ex.Message);
                 }
             }
-
-            NumberSequenceRepository numberSequenceRepo = new NumberSequenceRepository();
+            
             var numberSequences = new JObject(
                 new JProperty("data", new JArray(
                     numberSequenceRepo.GetAll(User)

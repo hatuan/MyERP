@@ -96,6 +96,9 @@ namespace MyERP.Web.Models
     {
         public Guid Id { get; set; }
 
+        [Display(Name = "Description")]
+        public String Description { get; set; }
+
         [Required]
         [Display(Name = "Document Created")]
         public DateTime DocumentCreated { get; set; }
@@ -103,11 +106,7 @@ namespace MyERP.Web.Models
         [Required]
         [Display(Name = "Document Posted")]
         public DateTime DocumentPosted { get; set; }
-
-        [Required]
-        [Display(Name = "Document No")]
-        public String DocumentNo { get; set; }
-
+        
         public Guid NumberSequenceId { get; set; }
 
         [Required]

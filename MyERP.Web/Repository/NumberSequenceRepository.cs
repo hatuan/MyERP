@@ -60,23 +60,7 @@ namespace MyERP.Web
         {
             numberSequence = base.AddNew(numberSequence);
 
-            String NoSeqName = "seq_no_series_" + numberSequence.Id.ToString().Replace("-", "_");
-            using (var dbContext = new EntitiesModel())
-            {
-                string sqlQuery = String.Format("CREATE SEQUENCE {0} MINVALUE {1} MAXVALUE {2} START {3};\n",
-                    new object[] { NoSeqName, numberSequence.StartingNo, numberSequence.EndingNo, numberSequence.CurrentNo });
-                sqlQuery += String.Format("UPDATE number_sequence SET no_seq_name = '{0}' WHERE id = '{1}'",
-                    new object[] { NoSeqName, numberSequence.Id.ToString() });
-
-                // 3. Create a new instance of the OACommand class.
-                using (var command = dbContext.Connection.CreateCommand())
-                {
-                    command.CommandText = sqlQuery;
-                    command.ExecuteNonQuery();
-                }
-                
-                dbContext.SaveChanges();
-            }
+            CreateSequenceOfNumberSequence(numberSequence);
         }
 
         public new void Delete(NumberSequence numberSequence)
