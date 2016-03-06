@@ -32,6 +32,9 @@ select,
 textarea {
     max-width: 280px;    
 }
+.input-group { /*fix WEB-7 - Liệu có thể sử dụng col-xs, col-md để đặt max-width cho input text được không?*/
+    display: block !important;
+}
 
 /* Set icon in the right side*/
 .ui-li-icon-right {
