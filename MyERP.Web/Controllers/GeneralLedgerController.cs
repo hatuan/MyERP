@@ -63,6 +63,7 @@ namespace MyERP.Web.Controllers
                 .Select(c => new GeneralJournalDocumentViewModels()
                 {
                     DocumentNo = c.DocumentNo,
+                    Description = c.Description,
                     DocumentCreated = c.DocumentCreated,
                     DocumentPosted = c.DocumentPosted,
                     NumberSequenceId = c.NumberSequenceId,
@@ -265,7 +266,6 @@ namespace MyERP.Web.Controllers
             var account = repository.GetBy(c => c.Id == id);
             var model = new GeneralJournalDocumentEditViewModel()
                 {
-
                     CurrencyId = account.CurrencyId ?? Guid.Empty,
                     CurrencyCode = account.CurrencyId == null ? "" : account.Currency.Code,
                     Id = account.Id,

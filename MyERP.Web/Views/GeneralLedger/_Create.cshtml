@@ -52,8 +52,15 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.CurrencyCode, new { @class = "col-md-4 control-label" })
                     <div class="col-md-8">
-                        @Html.TextBoxFor(m => m.CurrencyCode, new { @class = "form-control", id = "currency-code", data_urlbase = Url.Content(MyERP.Web.WebApiOdataConfig.UrlPrefixRelative), data_autocomplete_id = "currency-id", data_autocomplete = "currency-code" })
-                        @Html.ValidationMessageFor(m => m.CurrencyCode, "", new { @class = "text-danger" })
+                        <div class="input-group">
+                            @Html.TextBoxFor(m => m.CurrencyCode, new { @class = "form-control", id = "currency-code", data_urlbase = Url.Content(MyERP.Web.WebApiOdataConfig.UrlPrefixRelative), data_autocomplete_id = "currency-id", data_autocomplete = "currency-code" })
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.CurrencyCode, "", new {@class = "text-danger"})
                     </div>
                     @Html.HiddenFor(m => m.CurrencyId, htmlAttributes: new { id = "currency-id" })
                 </div>

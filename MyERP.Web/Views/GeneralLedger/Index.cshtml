@@ -72,11 +72,11 @@
                         </div>
 
                         <div class="col-sm-4">
-                            @if (item.Status != GeneralJournalDocumentStatusType.Draft)
+                            @if (item.Status == GeneralJournalDocumentStatusType.Draft)
                             {
                                 <span class="label label-info">Draft</span>
                             }
-                            @if (item.Status != GeneralJournalDocumentStatusType.Posted)
+                            @if (item.Status == GeneralJournalDocumentStatusType.Posted)
                             {
                                 <span class="label label-success">Posted</span>
                             }

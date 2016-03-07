@@ -130,6 +130,9 @@ namespace MyERP.Web.Models
     {
         public Guid Id { get; set; }
 
+        [Display(Name = "Description")]
+        public String Description { get; set; }
+
         [Required]
         [Display(Name = "Document Created")]
         public DateTime DocumentCreated { get; set; }

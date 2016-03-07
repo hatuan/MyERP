@@ -1504,6 +1504,7 @@
     <Content Include="Scripts\kendo\2016.1.112\kendo.angular2.min.js.map" />
     <Content Include="Scripts\kendo\2016.1.112\kendo.angular.min.js.map" />
     <Content Include="Scripts\kendo\2016.1.112\jquery.min.map" />
+    <Content Include="Views\GeneralLedger\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
