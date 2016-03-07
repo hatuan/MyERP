@@ -42,7 +42,7 @@ namespace MyERP.Web
                     var user = context.Users.FirstOrDefault(u => u.Name == username && u.Password == password);
                     return user != null;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     return false;
                 }
