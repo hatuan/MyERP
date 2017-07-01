@@ -63,6 +63,8 @@
     <Compile Include="Account\Account.cs" />
     <Compile Include="Account\AccountSearchField.cs" />
     <Compile Include="Account\AccountStatusType.cs" />
+    <Compile Include="BusinessRelationSector\BusinessRelationSector.cs" />
+    <Compile Include="BusinessRelationType\BusinessRelationType.cs" />
     <Compile Include="Client\Client.cs" />
     <Compile Include="CurrencyConvertRate\CurrencyConvertRate.cs" />
     <Compile Include="CurrencyConvertRate\CurrencyConvertRateStatusType.cs" />

@@ -97,8 +97,14 @@ namespace MyERP.DataAccess
 			
 			MappingConfiguration<UserInRole> userinroleConfiguration = this.GetUserInRoleMappingConfiguration();
 			mappingConfigurations.Add(userinroleConfiguration);
-			
-			return mappingConfigurations;
+
+            MappingConfiguration<BusinessRelationType> businessRelationTypeConfiguration = this.GetBusinessRelationTypeMappingConfiguration();
+            mappingConfigurations.Add(businessRelationTypeConfiguration);
+
+            MappingConfiguration<BusinessRelationSector> businessRelationSectorConfiguration = this.GetBusinessRelationSectorMappingConfiguration();
+            mappingConfigurations.Add(businessRelationSectorConfiguration);
+
+            return mappingConfigurations;
 		}
 		
 		protected override void SetContainerSettings(MetadataContainer container)
@@ -135,9 +141,9 @@ namespace MyERP.DataAccess
 			configuration.HasProperty(x => x.ParentAccountId).HasFieldName("_parentAccountId").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("parent_account_id").IsNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Level).HasFieldName("_level").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("level").IsNotNullable().HasColumnType("int2").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.ArAp).HasFieldName("_arAp").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("ar_ap").IsNotNullable().HasColumnType("bool").HasPrecision(0).HasScale(0);
-			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecCreatedById).HasFieldName("_recCreatedById").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
-			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecModifiedById).HasFieldName("_recModifiedById").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Status).HasFieldName("_status").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("status").IsNotNullable().HasColumnType("int2").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Version).HasFieldName("_version").IsVersion().WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("version").IsNotNullable().HasColumnType("int8").HasPrecision(0).HasScale(0);
@@ -184,14 +190,14 @@ namespace MyERP.DataAccess
 			configuration.HasProperty(x => x.PasswordAnswer).HasFieldName("_passwordAnswer").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("password_answer").IsNotNullable().HasColumnType("varchar").HasLength(0);
 			configuration.HasProperty(x => x.PasswordQuestion).HasFieldName("_passwordQuestion").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("password_question").IsNotNullable().HasColumnType("varchar").HasLength(0);
 			configuration.HasProperty(x => x.Email).HasFieldName("_email").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("email").IsNotNullable().HasColumnType("varchar").HasLength(0);
-			configuration.HasProperty(x => x.CreatedDate).HasFieldName("_createdDate").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("created_date").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.CreatedDate).HasFieldName("_createdDate").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("created_date").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.IsActivated).HasFieldName("_isActivated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("is_activated").IsNotNullable().HasColumnType("bool").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.IsLockedOut).HasFieldName("_isLockedOut").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("is_locked_out").IsNotNullable().HasColumnType("bool").HasPrecision(0).HasScale(0);
-			configuration.HasProperty(x => x.LastLockedOutDate).HasFieldName("_lastLockedOutDate").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("last_locked_out_date").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.LastLockedOutDate).HasFieldName("_lastLockedOutDate").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("last_locked_out_date").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.LastLockedOutReason).HasFieldName("_lastLockedOutReason").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("last_locked_out_reason").IsNotNullable().HasColumnType("varchar").HasLength(0);
-			configuration.HasProperty(x => x.LastLoginDate).HasFieldName("_lastLoginDate").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("last_login_date").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.LastLoginDate).HasFieldName("_lastLoginDate").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("last_login_date").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.LastLoginIp).HasFieldName("_lastLoginIp").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("last_login_ip").IsNotNullable().HasColumnType("varchar").HasLength(0);
-			configuration.HasProperty(x => x.LastModifiedDate).HasFieldName("_lastModifiedDate").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("last_modified_date").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.LastModifiedDate).HasFieldName("_lastModifiedDate").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("last_modified_date").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.ClientId).HasFieldName("_clientId").ToColumn("client_id").IsNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
 			configuration.HasProperty(x => x.OrganizationId).HasFieldName("_organizationId").ToColumn("organization_id").IsNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
 			configuration.HasProperty(x => x.CultureUIId).HasFieldName("_cultureUIId").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("culture_ui_id").IsNotNullable().HasColumnType("varchar").HasLength(0);
@@ -225,9 +231,9 @@ namespace MyERP.DataAccess
 		{
 			configuration.HasProperty(x => x.Id).IsIdentity(KeyGenerator.Guid).HasFieldName("_id").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("id").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Name).HasFieldName("_name").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("name").IsNotNullable().HasColumnType("varchar").HasLength(0);
-			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecCreatedById).HasFieldName("_recCreatedById").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
-			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecModifiedById).HasFieldName("_recModifiedById").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Status).HasFieldName("_status").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("status").IsNotNullable().HasColumnType("int2").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Version).HasFieldName("_version").IsVersion().WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("version").IsNotNullable().HasColumnType("int8").HasPrecision(0).HasScale(0);
@@ -279,9 +285,9 @@ namespace MyERP.DataAccess
 			configuration.HasProperty(x => x.BusinessPartnerGroupId3).HasFieldName("_businessPartnerGroupId3").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("business_partner_group_id3").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.CreditLimit).HasFieldName("_creditLimit").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("credit_limit").IsNotNullable().HasColumnType("numeric").HasPrecision(38).HasScale(20);
 			configuration.HasProperty(x => x.AmountLimit).HasFieldName("_amountLimit").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("amount_limit").IsNotNullable().HasColumnType("numeric").HasPrecision(38).HasScale(20);
-			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecCreatedBy).HasFieldName("_recCreatedBy").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
-			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecModifiedBy).HasFieldName("_recModifiedBy").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.PaymentTermId).HasFieldName("_paymentTermId").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("payment_term_id").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.IsCustomer).HasFieldName("_isCustomer").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("is_customer").IsNotNullable().HasColumnType("bool").HasPrecision(0).HasScale(0);
@@ -333,9 +339,9 @@ namespace MyERP.DataAccess
 			configuration.HasProperty(x => x.Level).HasFieldName("_level").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("level").IsNotNullable().HasColumnType("int2").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Code).HasFieldName("_code").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("code").IsNotNullable().HasColumnType("varchar").HasLength(0);
 			configuration.HasProperty(x => x.Name).HasFieldName("_name").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("name").IsNotNullable().HasColumnType("varchar").HasLength(0);
-			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecCreatedBy).HasFieldName("_recCreatedBy").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
-			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecModifiedBy).HasFieldName("_recModifiedBy").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Status).HasFieldName("_status").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("status").IsNotNullable().HasColumnType("int2").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Id).IsIdentity(KeyGenerator.Guid).HasFieldName("_id").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("id").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
@@ -377,9 +383,9 @@ namespace MyERP.DataAccess
 			configuration.HasProperty(x => x.Han_Tt).HasFieldName("_han_tt").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("han_tt").IsNotNullable().HasColumnType("int2").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Han_Tt_Gg).HasFieldName("_han_tt_gg").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("han_tt_gg").IsNotNullable().HasColumnType("int2").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Pt_Gg).HasFieldName("_pt_gg").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("pt_gg").IsNotNullable().HasColumnType("numeric").HasPrecision(38).HasScale(20);
-			configuration.HasProperty(x => x.Date0).HasFieldName("_date0").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("date0").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.Date0).HasFieldName("_date0").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("date0").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.UserId0).HasFieldName("_userId0").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("user_id0").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
-			configuration.HasProperty(x => x.Date2).HasFieldName("_date2").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("date2").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.Date2).HasFieldName("_date2").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("date2").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.UserId2).HasFieldName("_userId2").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("user_id2").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Status).HasFieldName("_status").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("status").IsNotNullable().HasColumnType("int2").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Id).IsIdentity(KeyGenerator.Guid).HasFieldName("_id").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("id").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
@@ -425,9 +431,9 @@ namespace MyERP.DataAccess
 			configuration.HasProperty(x => x.Amount).HasFieldName("_amount").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("amount").IsNotNullable().HasColumnType("numeric").HasPrecision(38).HasScale(20);
 			configuration.HasProperty(x => x.AmountLcy).HasFieldName("_amountLcy").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("amount_lcy").IsNotNullable().HasColumnType("numeric").HasPrecision(38).HasScale(20);
 			configuration.HasProperty(x => x.Comment).HasFieldName("_comment").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("comment").IsNotNullable().HasColumnType("varchar").HasLength(0);
-			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecCreatedBy).HasFieldName("_recCreatedBy").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
-			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecModifiedBy).HasFieldName("_recModifiedBy").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Status).HasFieldName("_status").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("status").IsNotNullable().HasColumnType("int2").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.AccountId).HasFieldName("_accountId").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("account_id").IsNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
@@ -472,10 +478,10 @@ namespace MyERP.DataAccess
 			configuration.HasProperty(x => x.Level).HasFieldName("_level").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("level").IsNotNullable().HasColumnType("int2").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Code).HasFieldName("_code").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("code").IsNotNullable().HasColumnType("varchar").HasLength(0);
 			configuration.HasProperty(x => x.Name).HasFieldName("_name").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("name").IsNotNullable().HasColumnType("varchar").HasLength(0);
-			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecCreateBy).HasFieldName("_recCreateBy").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Status).HasFieldName("_status").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("status").IsNotNullable().HasColumnType("int2").HasPrecision(0).HasScale(0);
-			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecModifiedBy).HasFieldName("_recModifiedBy").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.ClientId).HasFieldName("_clientId").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("client_id").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.OrganizationId).HasFieldName("_organizationId").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("organization_id").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
@@ -523,9 +529,9 @@ namespace MyERP.DataAccess
 			configuration.HasProperty(x => x.DocumentNo).HasFieldName("_documentNo").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("document_no").IsNotNullable().HasColumnType("varchar").HasLength(0);
 			configuration.HasProperty(x => x.DocumentPosted).HasFieldName("_documentPosted").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("document_posted_date").IsNotNullable().HasColumnType("date");
 			configuration.HasProperty(x => x.DocumentType).HasFieldName("_documentType").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("document_type").IsNotNullable().HasColumnType("int4");
-			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecCreatedBy).HasFieldName("_recCreatedBy").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
-			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecModifiedBy).HasFieldName("_recModifiedBy").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Status).HasFieldName("_status").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("status").IsNotNullable().HasColumnType("int4").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.TotalCreditAmount).HasFieldName("_totalCreditAmount").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("total_credit_amount").IsNotNullable().HasColumnType("numeric").HasPrecision(38).HasScale(20);
@@ -589,9 +595,9 @@ namespace MyERP.DataAccess
 			configuration.HasProperty(x => x.DocumentNo).HasFieldName("_documentNo").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("document_no").IsNotNullable().HasColumnType("varchar").HasLength(0);
 			configuration.HasProperty(x => x.DocumentPosted).HasFieldName("_documentPosted").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("document_posted_date").IsNotNullable().HasColumnType("date");
 			configuration.HasProperty(x => x.DocumentType).HasFieldName("_documentType").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("document_type").IsNotNullable().HasColumnType("int4");
-			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecCreatedBy).HasFieldName("_recCreatedBy").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
-			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecModifiedBy).HasFieldName("_recModifiedBy").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.TransactionType).HasFieldName("_transactionType").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("transaction_type").IsNotNullable().HasColumnType("int4");
 			configuration.HasProperty(x => x.FixAssetId).HasFieldName("_fixAssetId").ToColumn("fix_asset_id").IsNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
@@ -632,9 +638,9 @@ namespace MyERP.DataAccess
 		{
 			configuration.HasProperty(x => x.Code).HasFieldName("_code").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("code").IsNotNullable().HasColumnType("varchar").HasLength(0);
 			configuration.HasProperty(x => x.Name).HasFieldName("_name").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("name").IsNotNullable().HasColumnType("varchar").HasLength(0);
-			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecCreatedById).HasFieldName("_recCreatedById").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
-			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecModifiedById).HasFieldName("_recModifiedById").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Status).HasFieldName("_status").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("status").IsNotNullable().HasColumnType("int2").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Id).IsIdentity(KeyGenerator.Guid).HasFieldName("_id").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("id").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
@@ -697,7 +703,7 @@ namespace MyERP.DataAccess
 			configuration.HasProperty(x => x.Expire).HasFieldName("_expire").ToColumn("expire").IsNullable().HasColumnType("bool").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.BooleanConverter");
 			configuration.HasProperty(x => x.WorkingDate).HasFieldName("_workingDate").ToColumn("working_date").IsNotNullable().HasColumnType("date").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
 			configuration.HasProperty(x => x.OrganizationId).HasFieldName("_organizationId").ToColumn("organization_id").IsNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
-			configuration.HasProperty(x => x.LastTime).HasFieldName("_lastTime").ToColumn("last_time").IsNotNullable().HasColumnType("timestamp").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
+			configuration.HasProperty(x => x.LastTime).HasFieldName("_lastTime").ToColumn("last_time").IsNotNullable().HasColumnType("timestamp with time zone").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
 			configuration.HasProperty(x => x.WarehouseId).HasFieldName("_warehouseId").ToColumn("warehouse_id").IsNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
 			configuration.HasProperty(x => x.ClientId).HasFieldName("_clientId").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("client_id").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 		}
@@ -732,14 +738,14 @@ namespace MyERP.DataAccess
 			configuration.HasProperty(x => x.Version).HasFieldName("_version").IsVersion().ToColumn("version").IsNotNullable().HasColumnType("int8").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.BigIntConverter");
 			configuration.HasProperty(x => x.IsActivated).HasFieldName("_isActivated").ToColumn("is_activated").IsNotNullable().HasColumnType("bool").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.BooleanConverter");
 			configuration.HasProperty(x => x.RecCreatedById).HasFieldName("_recCreatedById").ToColumn("rec_created_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
-			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
+			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp with time zone").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
 			configuration.HasProperty(x => x.CultureId).HasFieldName("_cultureId").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("culture_id").IsNotNullable().HasColumnType("varchar").HasLength(0);
 			configuration.HasProperty(x => x.AmountDecimalPlaces).HasFieldName("_amountDecimalPlaces").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("amount_decimal_places").IsNotNullable().HasColumnType("int2").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.AmountRoundingPrecision).HasFieldName("_amountRoundingPrecision").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("amount_rounding_precision").IsNotNullable().HasColumnType("numeric").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.UnitAmountDecimalPlaces).HasFieldName("_unitAmountDecimalPlaces").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("unit-amount_decimal_places").IsNotNullable().HasColumnType("int2").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.UnitAmountRoundingPrecision).HasFieldName("_unitAmountRoundingPrecision").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("unit-amount_rounding_precision").IsNotNullable().HasColumnType("numeric").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.CurrencyLCYId).HasFieldName("_currencyLCYId").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("currency_lcy_id").IsNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
-			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecModifiedById).HasFieldName("_recModifiedById").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
 		}
 	
@@ -785,9 +791,9 @@ namespace MyERP.DataAccess
 			configuration.HasProperty(x => x.StartingNo).HasFieldName("_startingNo").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("starting_no").IsNotNullable().HasColumnType("int4").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.Status).HasFieldName("_status").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("status").IsNotNullable().HasColumnType("int2").HasPrecision(0).HasScale(0);
 			configuration.HasProperty(x => x.RecModifiedBy).HasFieldName("_recModifiedBy").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
-			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp with time zone");
 			configuration.HasProperty(x => x.RecCreatedBy).HasFieldName("_recCreatedBy").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_created_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0);
-			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp");
+			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").WithDataAccessKind(DataAccessKind.ReadWrite).ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp with time zone");
 		}
 	
 		public void PrepareNumberSequenceAssociationConfigurations(MappingConfiguration<NumberSequence> configuration)
@@ -823,8 +829,8 @@ namespace MyERP.DataAccess
 			configuration.HasProperty(x => x.LocalCurrencyId).HasFieldName("_localCurrencyId").ToColumn("local_currency_id").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
 			configuration.HasProperty(x => x.LcyExchangeRateUnit).HasFieldName("_lcyExchangeRateUnit").ToColumn("lcy_exchange_rate_unit").IsNotNullable().HasColumnType("int4").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.IntConverter");
 			configuration.HasProperty(x => x.GeneralJournalNumberSequenceId).HasFieldName("_generalJournalNumberSequenceId").ToColumn("general_journal_number_sequence_id").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
-			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
-			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
+			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp with time zone").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
+			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp with time zone").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
 			configuration.HasProperty(x => x.RecCreatedBy).HasFieldName("_recCreatedBy").ToColumn("rec_created_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
 			configuration.HasProperty(x => x.RecModifiedBy).HasFieldName("_recModifiedBy").ToColumn("rec_modified_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
 			configuration.HasProperty(x => x.Version).HasFieldName("_version").IsVersion().ToColumn("version").IsNotNullable().HasColumnType("int8").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.BigIntConverter");
@@ -860,9 +866,9 @@ namespace MyERP.DataAccess
 		public void PrepareCurrencyConvertRatePropertyConfigurations(MappingConfiguration<CurrencyConvertRate> configuration)
 		{
 			configuration.HasProperty(x => x.Id).IsIdentity(KeyGenerator.Guid).HasFieldName("_id").ToColumn("id").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
-			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
+			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp with time zone").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
 			configuration.HasProperty(x => x.RecCreatedBy).HasFieldName("_recCreatedBy").ToColumn("rec_created_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
-			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
+			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp with time zone").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
 			configuration.HasProperty(x => x.RecModifiedBy).HasFieldName("_recModifiedBy").ToColumn("rec_modified_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
 			configuration.HasProperty(x => x.ClientId).HasFieldName("_clientId").ToColumn("client_id").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
 			configuration.HasProperty(x => x.OrganizationId).HasFieldName("_organizationId").ToColumn("organization_id").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
@@ -911,9 +917,9 @@ namespace MyERP.DataAccess
 			configuration.HasProperty(x => x.Description).HasFieldName("_description").ToColumn("description").IsNotNullable().HasColumnType("varchar").HasLength(0).WithConverter("OpenAccessRuntime.Data.VariableLengthStringConverter");
 			configuration.HasProperty(x => x.Version).HasFieldName("_version").IsVersion().ToColumn("version").IsNotNullable().HasColumnType("int8").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.BigIntConverter");
 			configuration.HasProperty(x => x.Status).HasFieldName("_status").ToColumn("status").IsNotNullable().HasColumnType("int2").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.SmallInt2Int16Converter");
-			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
+			configuration.HasProperty(x => x.RecCreated).HasFieldName("_recCreated").ToColumn("rec_created_at").IsNotNullable().HasColumnType("timestamp with time zone").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
 			configuration.HasProperty(x => x.RecCreatedBy).HasFieldName("_recCreatedBy").ToColumn("rec_created_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
-			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
+			configuration.HasProperty(x => x.RecModified).HasFieldName("_recModified").ToColumn("rec_modified_at").IsNotNullable().HasColumnType("timestamp with time zone").WithConverter("OpenAccessRuntime.Data.PostgresTimestampTZConverter");
 			configuration.HasProperty(x => x.RecModifiedBy).HasFieldName("_recModifiedBy").ToColumn("rec_modified_by").IsNotNullable().HasColumnType("uuid").HasPrecision(0).HasScale(0).WithConverter("OpenAccessRuntime.Data.GuidConverter");
 		}
 	
