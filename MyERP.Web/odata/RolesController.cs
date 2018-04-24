@@ -12,7 +12,7 @@ namespace MyERP.Web.Odata
     /// Web API Controller for Users entity defined in MyERP.DataAccess.EntitiesModel data model
     /// </summary>
     
-    public partial class RolesController : OpenAccessBaseApiController<MyERP.DataAccess.Role, MyERP.DataAccess.EntitiesModel>
+    public partial class RolesController : BaseApiController<MyERP.DataAccess.Role, MyERP.DataAccess.EntitiesModel>
     {
         /// <summary>
         /// Constructor used by the Web API infrastructure.
@@ -28,7 +28,7 @@ namespace MyERP.Web.Odata
         /// </summary>
         /// <remarks>Web API Infrastructure will ALWAYS use the default constructor!</remarks>
         /// <param name="repository">Repository instance of the specific type</param>
-        public RolesController(IOpenAccessBaseRepository<MyERP.DataAccess.Role, MyERP.DataAccess.EntitiesModel> repository)
+        public RolesController(IBaseRepository<MyERP.DataAccess.Role, MyERP.DataAccess.EntitiesModel> repository)
         {
             this.repository = repository;
         }
@@ -40,7 +40,7 @@ namespace MyERP.Web.Odata
         /// </summary>
         /// <param name="id">Primary key value to filter by</param>
         /// <returns>Entity instance if a matching entity is found</returns>
-        public virtual MyERP.DataAccess.Role Get(Guid id)
+        public virtual MyERP.DataAccess.Role Get(long id)
         {
             MyERP.DataAccess.Role entity = repository.GetBy(m => m.Id == id);
 
@@ -61,23 +61,22 @@ namespace MyERP.Web.Odata
         /// <param name="entity">Entity with the new updated values</param>
         /// <returns>HttpStatusCode.BadRequest if ID parameter does not match the ID value of the entity,
         /// or HttpStatusCode.NoContent if the operation was successful</returns>
-        public virtual HttpResponseMessage Put(Guid id, MyERP.DataAccess.Role entity)
+        public virtual HttpResponseMessage Put(long id, MyERP.DataAccess.Role entity)
         {
-                        if (entity == null ||
-                id != entity.Id)
+            if (entity == null || id != entity.Id)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
             repository.Update(entity);
 
             return Request.CreateResponse(HttpStatusCode.NoContent);
-                    }
+        }
 
         /// <summary>
         /// Deletes an entity by it's ID
         /// </summary>
         /// <param name="id">ID of the entity to delete</param>
         /// <returns>Always HttpStatusCode.OK</returns>
-        public virtual HttpResponseMessage Delete(Guid id)
+        public virtual HttpResponseMessage Delete(long id)
         {
                         MyERP.DataAccess.Role entity = repository.GetBy(m => m.Id == id);
             if (entity != null)

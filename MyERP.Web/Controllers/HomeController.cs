@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
+using Ext.Net.MVC;
+using MyERP.Web.Models;
 
 namespace MyERP.Web.Controllers
 {
     [AllowAnonymous]
+    [DirectController]
     public class HomeController : BaseController
     {
         // GET: Home
@@ -15,22 +15,20 @@ namespace MyERP.Web.Controllers
             return View();
         }
 
-        //
-        //GET: /Home/About
-        public ActionResult About()
+        public ActionResult Home()
         {
-            ViewBag.Message = "MyERP is a new Cloud ERP system for small to medium company using HTML, CSS and JavaScript";
-
             return View();
         }
 
-        //
-        //GET: /Home/Contact
-        public ActionResult Contact()
+        [OutputCache(Duration = 3600)]
+        public ActionResult GetMenuNodes(string node)
         {
-            ViewBag.Message = "Please contact to :";
+            if (node == "Root")
+            {
+                return this.Content(TreeMenusModel.GetTreeMenusNodes().ToJson());
+            }
 
-            return View();
+            return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
         }
     }
 }

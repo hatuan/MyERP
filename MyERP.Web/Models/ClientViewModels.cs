@@ -1,24 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.Data.Edm.Csdl;
-using MyERP.DataAccess;
 
 namespace MyERP.Web.Models
 {
     
     public class ClientEditViewModel
     {
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
-        [Display(Name = "Name")]
-        public String Name { get; set; }
+        [Display(Name = "Description")]
+        public String Description { get; set; }
 
-        public Guid CurrencyLCYId { get; set; }
+        public long CurrencyLcyId { get; set; }
 
         [Required]
         [Display(Name = "Currency LCY")]
@@ -42,7 +36,7 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Unit-Amount Rounding Precision")]
-        public Decimal UnitAmountRoundingPrecision { get; set; }
+        public Int16 UnitAmountRoundingPrecision { get; set; }
 
         [Display(Name = "Actived")]
         public Boolean IsActived { get; set; }

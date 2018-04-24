@@ -21,9 +21,7 @@ namespace MyERP.DataAccess.Client
         {
             using (var context = new EntitiesModel())
             {
-                context.UpdateSchema();
             }
-
         }
     }
 }

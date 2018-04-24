@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
 using MyERP.DataAccess;
 using MyERP.Web.Models;
-using Telerik.OpenAccess;
 
 namespace MyERP.Web
 {
@@ -14,10 +11,6 @@ namespace MyERP.Web
     {
         public CurrencyRepository()
         {
-            this.fetchStrategy.LoadWith<Currency>(c => c.Client);
-            this.fetchStrategy.LoadWith<Currency>(c => c.Organization);
-            this.fetchStrategy.LoadWith<Currency>(c => c.RecModifiedByUser);
-            this.fetchStrategy.LoadWith<Currency>(c => c.RecCreatedByUser);
             
         }
 

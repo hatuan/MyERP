@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 using System.Web.Caching;
 using System.Web.Security;
 using MyERP.DataAccess;
-using Telerik.OpenAccess;
 
 namespace MyERP.Web
 {
@@ -58,10 +56,10 @@ namespace MyERP.Web
             using (var context = new EntitiesModel())
             {
                 userRoles = (from userInRole in context.UserInRoles
-                    .Include(c => c.Role)
-                    .Include(c => c.User)
+                    .Include("Role")
+                    .Include("User")
                     where userInRole.User.Name == username
-                    select userInRole.Role.Name).ToArray();
+                    select userInRole.Role.Description).ToArray();
             }
 
             //Store in cache

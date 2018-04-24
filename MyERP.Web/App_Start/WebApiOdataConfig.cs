@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Http.OData.Builder;
 using MyERP.DataAccess;
 
@@ -20,22 +16,9 @@ namespace MyERP.Web
             //                               defaults: new { id = RouteParameter.Optional });
 
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-            builder.EntitySet<Account>("Accounts");
-            builder.EntitySet<BusinessPartnerGroup>("BusinessPartnerGroups");
-            builder.EntitySet<BusinessPartner>("BusinessPartners");
             builder.EntitySet<Client>("Clients");
             builder.EntitySet<Currency>("Currencies");
-            builder.EntitySet<CurrencyConvertRate>("CurrencyConvertRates");
-            builder.EntitySet<GeneralJournalDocument>("GeneralJournalDocuments");
-            builder.EntitySet<GeneralJournalLine>("GeneralJournalLines");
-            builder.EntitySet<GeneralJournalSetup>("GeneralJournalSetups");
-            builder.EntitySet<JobGroup>("JobGroups");
-            builder.EntitySet<Job>("Jobs");
-            builder.EntitySet<Module>("Modules");
-            builder.EntitySet<NumberSequence>("NumberSequences");
             builder.EntitySet<Organization>("Organizations");
-            builder.EntitySet<PaymentTerm>("PaymentTerms");
-            builder.EntitySet<Session>("Sessions");
             builder.EntitySet<Role>("Roles");
             builder.EntitySet<User>("Users");
             builder.EntitySet<UserInRole>("UserInRoles");

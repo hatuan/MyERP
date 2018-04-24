@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 using System.Web.Caching;
 using System.Web.Security;
 using MyERP.DataAccess;
-using Telerik.OpenAccess;
 
 namespace MyERP.Web
 {
@@ -35,17 +33,15 @@ namespace MyERP.Web
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return false;
 
-            using (EntitiesModel context = new EntitiesModel())
+            var context = new EntitiesModel();
+            try
             {
-                try
-                {
-                    var user = context.Users.FirstOrDefault(u => u.Name == username && u.Password == password);
-                    return user != null;
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                }
+                var user = context.Users.FirstOrDefault(u => u.Name == username && u.Password == password);
+                return user != null;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 
@@ -98,11 +94,11 @@ namespace MyERP.Web
                     Password = password,
                     PasswordAnswer = passwordAnswer,
                     PasswordQuestion = passwordQuestion,
-                    CultureUIId = "vi-VN"
+                    CultureUiId = "vi-VN"
                 };
                 try
                 {
-                    context.Add(user);
+                    context.Users.Add(user);
                     context.SaveChanges();
                     status = MembershipCreateStatus.Success;
 
@@ -243,7 +239,7 @@ namespace MyERP.Web
 
             using (var context = new EntitiesModel())
             {
-                var user = context.Users.FirstOrDefault(u => u.Id == (Guid)providerUserKey);
+                var user = context.Users.FirstOrDefault(u => u.Id == (long)providerUserKey);
                 if (user != null)
                 {
                     var membershipUser = new MyERPMembershipUser(user);
@@ -328,9 +324,9 @@ namespace MyERP.Web
     public class MyERPMembershipUser : MembershipUser
     {
         public Client Client { get; set; }
-        public Guid? ClientId { get; set; }
-        public Guid? OrganizationId { get; set; }
-        public String CultureUIId { get; set; }
+        public long? ClientId { get; set; }
+        public long? OrganizationId { get; set; }
+        public String CultureUiId { get; set; }
 
         public Organization Organization { get; set; }
         public string FullName { get; set; }
@@ -346,18 +342,18 @@ namespace MyERP.Web
             creationDate:user.CreatedDate,
             lastLoginDate:user.LastLoginDate,
             lastActivityDate:user.LastLoginDate,
-            lastPasswordChangedDate:user.LastModifiedDate,
+            lastPasswordChangedDate:user.LastPasswordChangedDate,
             lastLockoutDate:user.LastLockedOutDate)
         {
             Client = user.Client;
-            ClientId = user.ClientId ?? Guid.Empty;
+            ClientId = user.ClientId ?? null;
             
             Organization = user.Organization;
-            OrganizationId = user.OrganizationId ?? Guid.Empty;
+            OrganizationId = user.OrganizationId ?? null;
             
             FullName = user.FullName;
 
-            CultureUIId = user.CultureUIId;
+            CultureUiId = user.CultureUiId;
         }
 
         //public MyERPMembershipUser(string providername,

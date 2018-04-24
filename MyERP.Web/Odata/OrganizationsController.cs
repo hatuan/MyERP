@@ -11,7 +11,7 @@ namespace MyERP.Web.Odata
     /// <summary>
     /// Web API Controller for Organizations entity defined in MyERP.DataAccess.EntitiesModel data model
     /// </summary>
-    public partial class OrganizationsController : OpenAccessBaseApiController<MyERP.DataAccess.Organization, MyERP.DataAccess.EntitiesModel>
+    public partial class OrganizationsController : BaseApiController<MyERP.DataAccess.Organization, MyERP.DataAccess.EntitiesModel>
     {
         /// <summary>
         /// Constructor used by the Web API infrastructure.
@@ -27,7 +27,7 @@ namespace MyERP.Web.Odata
         /// </summary>
         /// <remarks>Web API Infrastructure will ALWAYS use the default constructor!</remarks>
         /// <param name="repository">Repository instance of the specific type</param>
-        public OrganizationsController(IOpenAccessBaseRepository<MyERP.DataAccess.Organization , MyERP.DataAccess.EntitiesModel> repository)
+        public OrganizationsController(IBaseRepository<MyERP.DataAccess.Organization , MyERP.DataAccess.EntitiesModel> repository)
         {
             this.repository = repository;
         }
@@ -39,7 +39,7 @@ namespace MyERP.Web.Odata
         /// </summary>
         /// <param name="id">Primary key value to filter by</param>
         /// <returns>Entity instance if a matching entity is found</returns>
-        public virtual MyERP.DataAccess.Organization Get(Guid id)
+        public virtual MyERP.DataAccess.Organization Get(long id)
         {
             MyERP.DataAccess.Organization entity = repository.GetBy(m => m.Id == id);
 
@@ -60,10 +60,9 @@ namespace MyERP.Web.Odata
         /// <param name="entity">Entity with the new updated values</param>
         /// <returns>HttpStatusCode.BadRequest if ID parameter does not match the ID value of the entity,
         /// or HttpStatusCode.NoContent if the operation was successful</returns>
-        public virtual HttpResponseMessage Put(Guid id, MyERP.DataAccess.Organization entity)
+        public virtual HttpResponseMessage Put(long id, MyERP.DataAccess.Organization entity)
         {
-                        if (entity == null ||
-                id != entity.Id)
+            if (entity == null || id != entity.Id)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
             repository.Update(entity);
@@ -76,9 +75,9 @@ namespace MyERP.Web.Odata
         /// </summary>
         /// <param name="id">ID of the entity to delete</param>
         /// <returns>Always HttpStatusCode.OK</returns>
-        public virtual HttpResponseMessage Delete(Guid id)
+        public virtual HttpResponseMessage Delete(long id)
         {
-                        MyERP.DataAccess.Organization entity = repository.GetBy(m => m.Id == id);
+            MyERP.DataAccess.Organization entity = repository.GetBy(m => m.Id == id);
             if (entity != null)
             {
                 repository.Delete(entity);

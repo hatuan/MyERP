@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Runtime.Remoting.Contexts;
-using System.Security.Principal;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using MyERP.DataAccess;
 using MyERP.Web.Models;
 
 namespace MyERP.Web.Controllers
 {
-  public class UserController : OpenAccessBaseController<MyERP.DataAccess.User, MyERP.DataAccess.EntitiesModel>
+  public class UserController : EntityBaseController<MyERP.DataAccess.User, MyERP.DataAccess.EntitiesModel>
     {
          /// <summary>
         /// Constructor used by the Controller.
@@ -28,7 +23,7 @@ namespace MyERP.Web.Controllers
         /// </summary>
         /// <remarks>Controller will ALWAYS use the default constructor!</remarks>
         /// <param name="repository">Repository instance of the specific type</param>
-        public UserController(IOpenAccessBaseRepository<MyERP.DataAccess.User, MyERP.DataAccess.EntitiesModel> repository)
+        public UserController(IBaseRepository<MyERP.DataAccess.User, MyERP.DataAccess.EntitiesModel> repository)
         {
             this.repository = repository;
         }
@@ -61,22 +56,21 @@ namespace MyERP.Web.Controllers
                 if (Membership.Provider.ValidateUser(model.Name, passEncrypt))
                 {
                     var user = (MyERPMembershipUser) Membership.GetUser(model.Name, true);
-                    if (user != null && user.ClientId != Guid.Empty)
+                    if (user != null && user.ClientId != null)
                     {
                         //Lay thong tin mac dinh cua user
                         var preference = new PreferenceViewModel();
-                        preference.OrganizationId = user.OrganizationId == Guid.Empty ? "" : user.OrganizationId.ToString();
+                        preference.OrganizationId = user.OrganizationId == null ? "" : user.OrganizationId.ToString();
                         preference.Organization = user.Organization;
-                        preference.CultureUI = user.CultureUIId;
+                        preference.CultureUI = user.CultureUiId;
                         preference.WorkingDate = DateTime.Now;
                         Session["Preference"] = preference;
                         string[] roles = Roles.Provider.GetRolesForUser(user.UserName);
 
                         FormsAuthentication.SetAuthCookie(model.Name, model.RememberMe);
                         return RedirectToAction("Preference", routeValues: new { returnUrl = returnUrl });
-                        //return RedirectToLocal(returnUrl);
                     }
-                    if (user != null && user.ClientId == Guid.Empty)
+                    if (user != null && user.ClientId == null)
                     {
                         ModelState.AddModelError("Name", "User don't have available Client - Press create new Client");
                     }
@@ -266,13 +260,13 @@ namespace MyERP.Web.Controllers
                 .Select(c => new SelectListItem()
                 {
                     Value = c.Id.ToString(),
-                    Text = c.Name
+                    Text = c.Desctiption
                 });
 
             model.RootOrganization = organizationRepository.GetRootOrganization(User);
 
             var defaultOrganizationId = (Membership.GetUser(User.Identity.Name, true) as MyERPMembershipUser).OrganizationId.ToString();
-            var defaultCultureUI = (Membership.GetUser(User.Identity.Name, true) as MyERPMembershipUser).CultureUIId;
+            var defaultCultureUI = (Membership.GetUser(User.Identity.Name, true) as MyERPMembershipUser).CultureUiId;
 
             if (Session["Preference"] != null)
             {
@@ -329,7 +323,7 @@ namespace MyERP.Web.Controllers
         public ActionResult Preference([Bind(Exclude = "Organization,RootOrganization")] PreferenceViewModel model, string returnUrl)
         {
             var organizationRepository = new OrganizationRepository();
-            model.Organization = organizationRepository.GetBy(c => c.Id == new Guid(model.OrganizationId));
+            model.Organization = organizationRepository.GetBy(c => c.Id == long.Parse(model.OrganizationId));
             model.RootOrganization = organizationRepository.GetRootOrganization(model.Organization);
 
             if (ModelState.IsValid)
@@ -337,7 +331,7 @@ namespace MyERP.Web.Controllers
                 Session["Preference"] = model;
 
                 var userRepository = new UserRepository();
-                if (!userRepository.UpdateDefaultOrganization(User.Identity.Name, Guid.Parse(model.OrganizationId)))
+                if (!userRepository.UpdateDefaultOrganization(User.Identity.Name, long.Parse(model.OrganizationId)))
                 {
                     ModelState.AddModelError("OrganizationId", "Set default Organization of User failed ");
                 }
@@ -355,7 +349,7 @@ namespace MyERP.Web.Controllers
                 .Select(c => new SelectListItem()
                 {
                     Value = c.Id.ToString(),
-                    Text = c.Name
+                    Text = c.Desctiption
                 });
             ViewBag.Organizations = model.OrganizationId != "" ? new SelectList(organizations, "Value", "Text", model.OrganizationId) : new SelectList(organizations, "Value", "Text");
 

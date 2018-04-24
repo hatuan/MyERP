@@ -1,4 +1,4 @@
-﻿using System;
+﻿sing System;
 using Microsoft.Practices.Prism.Events;
 
 namespace MyERP.Infrastructure

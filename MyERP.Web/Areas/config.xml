@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<example>
+  <order>
+    <folder name="Getting_Started" />
+  </order>
+  <icons>
+    <folder name="Action" iconCls="fa fa-play" />
+    <folder name="Associations" iconCls="fa fa-cogs" />
+    <folder name="Buttons" iconCls="fa fa-hand-pointer-o" />
+    <folder name="Calendar" iconCls="fa fa-calendar-o" />
+    <folder name="Chart" iconCls="fa fa-pie-chart" />
+    <folder name="ColorPicker" iconCls="fa fa-paint-brush" />
+    <folder name="Combination_Samples" iconCls="fa fa-random" />
+    <folder name="Data" iconCls="fa fa-database" />
+    <folder name="DataView" iconCls="fa fa-eye-slash" />
+    <folder name="Desktop" iconCls="fa fa-desktop" />
+    <folder name="DragDrop" iconCls="fa fa-arrows" />
+    <folder name="Draw" iconCls="fa fa-pencil-square-o" />
+    <folder name="Dynamic_Partial_Rendering" iconCls="fa fa-bullseye" />
+    <folder name="Editor" iconCls="fa fa-pencil" />
+    <folder name="Element" iconCls="fa fa-puzzle-piece" />
+    <folder name="Events" iconCls="fa fa-bolt" />
+    <folder name="Form" iconCls="fa fa-check-square-o" />
+    <folder name="Getting_Started" iconCls="fa fa-info-circle" />
+    <folder name="GridPanel" iconCls="fa fa-th">
+      <folder name="Plugins" iconCls="icon-plugin" />
+    </folder>
+    <folder name="Items" iconCls="fa fa-cubes" />
+    <folder name="Keys" iconCls="fa fa-keyboard-o" />
+    <folder name="Kitchen_Sink" iconCls="fa fa-home">
+      <folder name="Forms" iconCls="#ApplicationForm" />
+      <folder name="GridPanels" iconCls="#ApplicationViewColumns" />
+      <folder name="Panels" iconCls="#Application" />
+      <folder name="TabPanels" iconCls="#TabPanel" />
+      <folder name="Toolbars" iconCls="#Toolbar" />
+      <folder name="TreePanels" iconCls="#ApplicationSideTree" />
+      <folder name="Windows" iconCls="#ApplicationDouble" />
+    </folder>
+    <folder name="Layout" iconCls="fa fa-th-large" />
+    <folder name="Loaders" iconCls="fa fa-spinner" />
+    <folder name="MessageBox" iconCls="fa fa-envelope-o" />
+    <folder name="MessageBus" iconCls="fa fa-bus" />
+    <folder name="Miscellaneous" iconCls="fa fa-asterisk" />
+    <folder name="Models" iconCls="fa fa-building-o" />
+    <folder name="MultiUpload" iconCls="fa fa-upload" />
+    <folder name="Panel" iconCls="fa fa-clone" />
+    <folder name="Portal" iconCls="fa fa-laptop" />
+    <folder name="PropertyGrid" iconCls="fa fa-columns" />
+    <folder name="SignalR" iconCls="fa fa-wifi" />
+    <folder name="TabPanel" iconCls="fa fa-list-alt" />
+    <folder name="TaskManager" iconCls="fa fa-hourglass-o" />
+    <folder name="Toolbar" iconCls="fa fa-wrench" />
+    <folder name="TreePanel" iconCls="fa fa-tree" />
+    <folder name="Viewport" iconCls="fa fa-object-group" />
+    <folder name="Window" iconCls="fa fa-object-ungroup" />
+    <folder name="XRender" iconCls="fa fa-magic" />
+  </icons>
+</example>

@@ -1,16 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using System.Web.Security;
 using System.Web.SessionState;
+using System.Web.UI;
 
 namespace MyERP.Web
 {
+    public class MyERPVersion
+    {
+        public static Version Version = typeof(MyERP.Web.Global).Assembly.GetName().Version;
+
+        private static string rev = (Version.Revision == 0) ? "" : ("." + Version.Revision);
+        private static string bld = (Version.Build == 0) ? "" : ("." + Version.Build + rev);
+
+        public static string Major = Version.Major + "." + Version.Minor + bld;
+        public static string WithBuild = Version.Major + "." + Version.Minor + "." + Version.Build;
+        public static string Full = Version.ToString();
+    }
+
     public partial class Global : System.Web.HttpApplication
     {
         protected void Application_Start(object sender, EventArgs e)
@@ -23,8 +33,6 @@ namespace MyERP.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-
-            Telerik.OpenAccess.ServiceHost.ServiceHostManager.StartProfilerService(15555); 
         }
 
         /// <summary>
@@ -45,7 +53,18 @@ namespace MyERP.Web
 
         protected void Session_Start(object sender, EventArgs e)
         {
+#if DEBUG
+            // Enables debugging code output by default if the project is built in debug configuration.
+            if (Session["Ext.Net.ScriptMode"] == null)
+            {
+                Session["Ext.Net.ScriptMode"] = ScriptMode.Debug;
+            }
 
+            if (Session["Ext.Net.SourceFormatting"] == null)
+            {
+                Session["Ext.Net.SourceFormatting"] = true;
+            }
+#endif // DEBUG
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
@@ -55,7 +74,11 @@ namespace MyERP.Web
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
-
+            // Skip authenticating all ext.axd embedded resources (.js, .css, images)
+            if (HttpContext.Current.Request.FilePath.EndsWith("/ext.axd"))
+            {
+                HttpContext.Current.SkipAuthorization = true;
+            }
         }
 
         public void Application_PreRequestHandlerExecute(Object source, EventArgs e)
@@ -68,8 +91,7 @@ namespace MyERP.Web
             {
                 if (context.Session["Preference"] == null 
                     && HttpContext.Current.User.Identity.IsAuthenticated
-                    && !Context.Request.Url.AbsoluteUri.ToLower().Contains("/user/preference")
-                    && !Context.Request.Url.AbsoluteUri.ToLower().Contains("/sl.aspx"))
+                    && !Context.Request.Url.AbsoluteUri.ToLower().Contains("/user/preference"))
                 {
                     // You've handled the error, so clear it. Leaving the server in an error state can cause unintended side effects as the server continues its attempts to handle the error.
                     Server.ClearError();

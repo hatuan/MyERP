@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MyERP.Common
+﻿namespace MyERP.Common
 {
     public class Define
     {

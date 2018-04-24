@@ -5,13 +5,14 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Routing.Constraints;
 
 namespace MyERP.Web.Odata
 {
     /// <summary>
     /// Web API Controller for Clients entity defined in MyERP.DataAccess.EntitiesModel data model
     /// </summary>
-    public partial class ClientsController : OpenAccessBaseApiController<MyERP.DataAccess.Client, MyERP.DataAccess.EntitiesModel>
+    public partial class ClientsController : BaseApiController<MyERP.DataAccess.Client, MyERP.DataAccess.EntitiesModel>
     {
         /// <summary>
         /// Constructor used by the Web API infrastructure.
@@ -27,7 +28,7 @@ namespace MyERP.Web.Odata
         /// </summary>
         /// <remarks>Web API Infrastructure will ALWAYS use the default constructor!</remarks>
         /// <param name="repository">Repository instance of the specific type</param>
-        public ClientsController(IOpenAccessBaseRepository<MyERP.DataAccess.Client , MyERP.DataAccess.EntitiesModel> repository)
+        public ClientsController(IBaseRepository<MyERP.DataAccess.Client , MyERP.DataAccess.EntitiesModel> repository)
         {
             this.repository = repository;
         }
@@ -39,9 +40,9 @@ namespace MyERP.Web.Odata
         /// </summary>
         /// <param name="id">Primary key value to filter by</param>
         /// <returns>Entity instance if a matching entity is found</returns>
-        public virtual MyERP.DataAccess.Client Get(Guid id)
+        public virtual MyERP.DataAccess.Client Get(long id)
         {
-            MyERP.DataAccess.Client entity = repository.GetBy(m => m.ClientId == id);
+            MyERP.DataAccess.Client entity = repository.GetBy(m => m.Id == id);
 
             if (entity == null)
             {
@@ -60,10 +61,10 @@ namespace MyERP.Web.Odata
         /// <param name="entity">Entity with the new updated values</param>
         /// <returns>HttpStatusCode.BadRequest if ID parameter does not match the ID value of the entity,
         /// or HttpStatusCode.NoContent if the operation was successful</returns>
-        public virtual HttpResponseMessage Put(Guid id, MyERP.DataAccess.Client entity)
+        public virtual HttpResponseMessage Put(long id, MyERP.DataAccess.Client entity)
         {
                         if (entity == null ||
-                id != entity.ClientId)
+                id != entity.Id)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
             repository.Update(entity);
@@ -76,9 +77,9 @@ namespace MyERP.Web.Odata
         /// </summary>
         /// <param name="id">ID of the entity to delete</param>
         /// <returns>Always HttpStatusCode.OK</returns>
-        public virtual HttpResponseMessage Delete(Guid id)
+        public virtual HttpResponseMessage Delete(long id)
         {
-                        MyERP.DataAccess.Client entity = repository.GetBy(m => m.ClientId == id);
+            MyERP.DataAccess.Client entity = repository.GetBy(m => m.Id == id);
             if (entity != null)
             {
                 repository.Delete(entity);
@@ -88,7 +89,7 @@ namespace MyERP.Web.Odata
             // meaning that several DELETE requests to the same URI must have the same effect as a single DELETE request. 
             // Therefore, the method should not return an error code if the product was already deleted.
             return new HttpResponseMessage(HttpStatusCode.OK);
-                    }
+        }
 
         /// <summary>
         /// Creates the response sent back to client after a new entity is successfully created.
@@ -100,7 +101,7 @@ namespace MyERP.Web.Odata
         {
             HttpResponseMessage response = Request.CreateResponse<MyERP.DataAccess.Client>(httpStatusCode, entityToEmbed);
 
-            string uri = Url.Link("DefaultApi", new { id = entityToEmbed.ClientId });
+            string uri = Url.Link("DefaultApi", new { id = entityToEmbed.Id });
             response.Headers.Location = new Uri(uri);
 
             return response;

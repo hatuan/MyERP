@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1BCFFFB5-B236-44DB-8208-4058CF67A653}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,9 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedCode", "SharedCode", 
 	ProjectSection(SolutionItems) = preProject
 		SharedCode\Cryptography.cs = SharedCode\Cryptography.cs
 		SharedCode\Define.cs = SharedCode\Define.cs
-		SharedCode\EntityClickedEvents.cs = SharedCode\EntityClickedEvents.cs
 		SharedCode\Extensions.cs = SharedCode\Extensions.cs
-		SharedCode\RadWindowShowEvent.cs = SharedCode\RadWindowShowEvent.cs
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.Parse", "MyERP.Parse\MyERP.Parse.csproj", "{26792409-1862-49E5-BDDD-CD231B0EFFC6}"
@@ -96,9 +94,10 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VersionFieldUsingAttrib = True
-		FetchGroupUsingAttrib = True
-		IndexUsingAttrib = False
 		ShowOldMenu = False
+		IndexUsingAttrib = False
+		FetchGroupUsingAttrib = True
+		VersionFieldUsingAttrib = True
+		SolutionGuid = {96EC2254-12B9-441E-B1AD-2826A735F8DA}
 	EndGlobalSection
 EndGlobal

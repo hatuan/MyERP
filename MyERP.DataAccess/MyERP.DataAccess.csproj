@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -15,6 +15,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <EnhancerAssembly>$(SolutionDir)\packages\Telerik.DataAccess.Fluent.2016.1.224.1\tools\enhancer\enhancer.exe</EnhancerAssembly>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -42,116 +49,47 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Telerik.OpenAccess, Version=2016.1.224.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.DataAccess.Core.2016.1.224.1\lib\net40\Telerik.OpenAccess.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.OpenAccess.35.Extensions, Version=2016.1.224.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.DataAccess.Core.2016.1.224.1\lib\net40\Telerik.OpenAccess.35.Extensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.OpenAccess.40.Extensions, Version=2016.1.224.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.DataAccess.Core.2016.1.224.1\lib\net40\Telerik.OpenAccess.40.Extensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.OpenAccess.Runtime, Version=2016.1.224.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL">
-      <HintPath>..\packages\Telerik.DataAccess.Core.2016.1.224.1\lib\net40\Telerik.OpenAccess.Runtime.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\Account.cs" />
-    <Compile Include="Account\AccountSearchField.cs" />
-    <Compile Include="Account\AccountStatusType.cs" />
-    <Compile Include="BusinessRelationSector\BusinessRelationSector.cs" />
-    <Compile Include="BusinessRelationType\BusinessRelationType.cs" />
-    <Compile Include="Client\Client.cs" />
-    <Compile Include="CurrencyConvertRate\CurrencyConvertRate.cs" />
-    <Compile Include="CurrencyConvertRate\CurrencyConvertRateStatusType.cs" />
-    <Compile Include="CurrencyConvertRate\CurrencyConvertRateSearchField.cs" />
-    <Compile Include="Currency\CurrencySearchField.cs" />
-    <Compile Include="Currency\Currency.cs" />
-    <Compile Include="Currency\CurrencyStatusType.cs" />
-    <Compile Include="FluentModel\Account.generated.cs" />
-    <Compile Include="FluentModel\BusinessPartner.generated.cs" />
-    <Compile Include="FluentModel\BusinessPartnerGroup.generated.cs" />
-    <Compile Include="FluentModel\Client.generated.cs" />
-    <Compile Include="FluentModel\Currency.generated.cs" />
-    <Compile Include="FluentModel\CurrencyConvertRate.generated.cs" />
-    <Compile Include="FluentModel\EntitiesModelFluentMetadataSource.cs" />
-    <Compile Include="FluentModel\GeneralJournalDocument.generated.cs" />
-    <Compile Include="FluentModel\GeneralJournalLine.generated.cs" />
-    <Compile Include="FluentModel\GeneralJournalSetup.generated.cs" />
-    <Compile Include="FluentModel\Job.generated.cs" />
-    <Compile Include="FluentModel\JobGroup.generated.cs" />
-    <Compile Include="FluentModel\Module.generated.cs" />
-    <Compile Include="FluentModel\EntitiesModel.cs" />
-    <Compile Include="FluentModel\NumberSequence.generated.cs" />
-    <Compile Include="FluentModel\Organization.generated.cs" />
-    <Compile Include="FluentModel\PaymentTerm.generated.cs" />
-    <Compile Include="FluentModel\Role.generated.cs" />
-    <Compile Include="FluentModel\Session.generated.cs" />
-    <Compile Include="FluentModel\SessionVariable.cs" />
-    <Compile Include="FluentModel\User.generated.cs" />
-    <Compile Include="FluentModel\UserInRole.generated.cs" />
-    <Compile Include="GeneralJournalDocument\GeneralJournalDocument.cs" />
-    <Compile Include="GeneralJournalDocument\GeneralJournalDocumentStatusType.cs" />
-    <Compile Include="GeneralJournalLine\GeneralJournalLine.cs" />
-    <Compile Include="GeneralJournalSetup\GeneralJournalSetup.cs" />
-    <Compile Include="MyERPDataModel.partial.cs" />
-    <Compile Include="Module\Module.cs" />
-    <Compile Include="Module\ModuleName.cs" />
-    <Compile Include="NumberSequence\NumberSequenceStatusType.cs" />
-    <Compile Include="NumberSequence\NumberSequence.cs" />
-    <Compile Include="Organization\Organization.cs" />
-    <Compile Include="Organization\OrganizationStatusType.cs" />
+    <Compile Include="Context\MyERPDataModel.EntitiesModel.cs" />
+    <Compile Include="Context\MyERPDataModel.EntitiesModel.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Client.cs" />
+    <Compile Include="Entities\MyERPDataModel.Client.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Currency.cs" />
+    <Compile Include="Entities\MyERPDataModel.Currency.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Organization.cs" />
+    <Compile Include="Entities\MyERPDataModel.Organization.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Role.cs" />
+    <Compile Include="Entities\MyERPDataModel.Role.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.User.cs" />
+    <Compile Include="Entities\MyERPDataModel.User.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.UserInRole.cs" />
+    <Compile Include="Entities\MyERPDataModel.UserInRole.Generated.cs" />
+    <Compile Include="Enum\CurrencySearchField.cs" />
+    <Compile Include="Enum\CurrencyStatusType.cs" />
+    <Compile Include="Enum\OrganizationStatusType.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ClientConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ClientConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.CurrencyConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.CurrencyConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.OrganizationConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.OrganizationConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.RoleConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.RoleConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.UserConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.UserConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.UserInRoleConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.UserInRoleConfiguration.Generated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\ValidationErrorResources.Designer.cs">
-      <DependentUpon>ValidationErrorResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Shared\DocumentType.cs" />
-    <Compile Include="Shared\NoSeriesLib.shared.cs" />
-    <Compile Include="Shared\RudeValidation.shared.cs" />
-    <Compile Include="Shared\TransactionType.cs" />
-    <Compile Include="User\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="OpenAccessNuGet.targets" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ValidationErrorResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ValidationErrorResources.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>MyERP.DataAccess.Resources</CustomToolNamespace>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Script\Connection%282015-03-16 19-13-38%29.rlinq.sql" />
-    <Content Include="Script\Connection%282015-03-26 23-59-59%29.rlinq.sql" />
-    <Content Include="Script\Connection%282015-04-03 02-09-42%29.rlinq.sql" />
-    <Content Include="Script\Connection%282015-04-05 01-28-32%29.rlinq.sql" />
-    <Content Include="Script\Connection%282015-04-05 01-57-49%29.rlinq.sql" />
-    <Content Include="Script\Connection%282015-04-05 01-58-45%29.rlinq.sql" />
-    <Content Include="Script\Connection%282015-04-12 02-26-10%29.rlinq.sql" />
-    <Content Include="Script\Connection%282015-04-13 00-24-43%29.rlinq.sql" />
-    <Content Include="Script\Connection%282015-04-13 01-08-27%29.rlinq.sql" />
-    <Content Include="Script\Connection%282015-04-13 01-39-56%29.rlinq.sql" />
-    <Content Include="Script\Connection%282015-04-13 02-10-53%29.rlinq.sql" />
-    <Content Include="Script\Connection%282015-05-10 02-06-49%29.rlinq.sql" />
-    <Content Include="Script\Connection%282015-05-11 00-55-22%29.rlinq.sql" />
-    <Content Include="Script\Connection%282015-05-11 01-02-04%29.rlinq.sql" />
-    <Content Include="Script\Connection%282015-05-27 00-08-38%29.rlinq.sql" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="OpenAccessNuget.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

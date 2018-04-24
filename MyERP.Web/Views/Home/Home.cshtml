@@ -1,0 +1,31 @@
+﻿@{
+    Layout = null;
+    var enVer = MyERP.Web.MyERPVersion.Full;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ext.NET MVC Examples Explorer</title>
+    <link rel="stylesheet" href="@Url.Content("~/resources/css/main.css?" + enVer)" />
+    <script>Ext.onReady(function () {
+            if (top !== self) {
+                Ext.select("a", true).on("click", function (e, el) {
+                    if (!Ext.fly(el).hasCls("exclude")) {
+                        parent.location = el.href;
+                    }
+                }, null, { preventDefault: true });
+            }
+        });</script>
+</head>
+<body class="welcome">
+    @Html.X().ResourceManager().Theme(Theme.Triton)
+    @(Html.X().Container()
+                .Content(
+                    @<text>
+                        <div class="container">
+                        </div>
+                    </text>
+                        )
+    )
+</body>
+</html>

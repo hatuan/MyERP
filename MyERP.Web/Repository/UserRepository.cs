@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
 using MyERP.DataAccess;
-using Telerik.OpenAccess;
 
 namespace MyERP.Web
 {
@@ -13,9 +11,6 @@ namespace MyERP.Web
     {
         public UserRepository()
         {
-            this.fetchStrategy.LoadWith<User>(c => c.Client);
-            this.fetchStrategy.LoadWith<User>(c => c.Organization);
-            this.fetchStrategy.LoadWith<User>(c => c.RolesInUser);
           
         }
         
@@ -25,7 +20,7 @@ namespace MyERP.Web
         /// <param name="name"></param>
         /// <param name="organizationId"></param>
         /// <returns></returns>
-        public bool UpdateDefaultOrganization(string name, Guid organizationId)
+        public bool UpdateDefaultOrganization(string name, long organizationId)
         {
             var user = GetBy(c => c.Name == name);
             if (user == null) return false;

@@ -16,7 +16,7 @@ namespace MyERP.Web.Odata
     /// </summary>
     public partial class OrganizationsController 
     {
-        public SingleResult<Organization> GetOrganization([FromODataUri] Guid key)
+        public SingleResult<Organization> GetOrganization([FromODataUri] long key)
         {
             return SingleResult.Create(repository.GetAll().Where(c => c.Id == key).AsQueryable());
         }
@@ -26,7 +26,7 @@ namespace MyERP.Web.Odata
         /// </summary>
         /// <param name="key">Organization 's ID of current Organization</param>
         /// <returns></returns>
-        public Organization GetAllOrganization([FromODataUri] Guid key)
+        public Organization GetAllOrganization([FromODataUri] long key)
         {
             Organization organization = repository.GetBy(o => o.Id == key);
             if (organization == null)
@@ -34,32 +34,6 @@ namespace MyERP.Web.Odata
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
             return repository.GetAll().FirstOrDefault(c => c.ClientId == organization.ClientId && c.Code == "*");
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key">Organization 's ID of current Organization</param>
-        /// <returns></returns>
-        public SingleResult<GeneralJournalSetup> GetGeneralJournalSetup([FromODataUri] Guid key)
-        {
-            var generalJournalSetup = new GeneralJournalSetupRepository();
-
-            GeneralJournalSetup entity = generalJournalSetup.GetBy(c => c.OrganizationId == key);
-            if (entity == null)
-            {
-                Organization organization = repository.GetBy(o => o.Id == key);
-                Organization allOrganization = repository.GetBy(o => o.ClientId == organization.ClientId && o.Code == "*");
-
-                entity = generalJournalSetup.GetBy(c => c.OrganizationId == allOrganization.Id);
-            }
-
-            if (entity == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
-
-            return SingleResult.Create(new List<GeneralJournalSetup>(){entity}.AsQueryable());
         }
     }
 }

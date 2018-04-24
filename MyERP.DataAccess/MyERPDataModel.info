@@ -1,0 +1,2 @@
+﻿// Custom tool 'DevartEfGenerator' failed.
+//

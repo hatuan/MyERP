@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Principal;
-using System.Web;
 using System.Web.Security;
 using MyERP.DataAccess;
 
@@ -13,9 +10,6 @@ namespace MyERP.Web
     {
         public OrganizationRepository()
         {
-            this.fetchStrategy.LoadWith<Organization>(c => c.Client);
-            this.fetchStrategy.LoadWith<Organization>(c => c.RecModifiedByUser);
-            this.fetchStrategy.LoadWith<Organization>(c => c.RecCreatedByUser);
         }
 
         /// <summary>
