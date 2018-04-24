@@ -50,10 +50,6 @@
       <Project>{9529eaec-44b4-4e50-8ebb-5eac00b0912b}</Project>
       <Name>MyERP.DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MyERP.Parse\MyERP.Parse.csproj">
-      <Project>{26792409-1862-49e5-bddd-cd231b0effc6}</Project>
-      <Name>MyERP.Parse</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

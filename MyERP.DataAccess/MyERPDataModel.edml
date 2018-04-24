@@ -39,14 +39,6 @@
             <End Role="user" EntitySet="users" />
             <End Role="organization" EntitySet="organizations" />
           </AssociationSet>
-          <AssociationSet Name="FK_user_profile_organization" Association="MyERP.DataAccess.Store.FK_user_profile_organization">
-            <End Role="organization" EntitySet="organizations" />
-            <End Role="user" EntitySet="users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_user_profile_client" Association="MyERP.DataAccess.Store.FK_user_profile_client">
-            <End Role="client" EntitySet="clients" />
-            <End Role="user" EntitySet="users" />
-          </AssociationSet>
           <AssociationSet Name="FK_user_in_role_user" Association="MyERP.DataAccess.Store.FK_user_in_role_user">
             <End Role="user" EntitySet="users" />
             <End Role="user_in_role" EntitySet="user_in_roles" />
@@ -54,14 +46,6 @@
           <AssociationSet Name="FK_user_in_role_role" Association="MyERP.DataAccess.Store.FK_user_in_role_role">
             <End Role="role" EntitySet="roles" />
             <End Role="user_in_role" EntitySet="user_in_roles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_client_currency" Association="MyERP.DataAccess.Store.FK_client_currency">
-            <End Role="currency" EntitySet="currencies" />
-            <End Role="client" EntitySet="clients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_client_currency1" Association="MyERP.DataAccess.Store.FK_client_currency1">
-            <End Role="currency" EntitySet="currencies" />
-            <End Role="client" EntitySet="clients" />
           </AssociationSet>
           <AssociationSet Name="FK_currency_client" Association="MyERP.DataAccess.Store.FK_currency_client">
             <End Role="client" EntitySet="clients" />
@@ -71,6 +55,18 @@
             <End Role="client" EntitySet="clients" />
             <End Role="role" EntitySet="roles" />
           </AssociationSet>
+          <AssociationSet Name="FK_client_currency" Association="MyERP.DataAccess.Store.FK_client_currency">
+            <End Role="currency" EntitySet="currencies" />
+            <End Role="client" EntitySet="clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_organization" Association="MyERP.DataAccess.Store.FK_user_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_client" Association="MyERP.DataAccess.Store.FK_user_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -78,26 +74,26 @@
           </Key>
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="varchar" Nullable="false" MaxLength="32" />
-          <Property Name="full_name" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="full_name" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="email" Type="varchar" Nullable="false" MaxLength="256" />
           <Property Name="is_activated" Type="bit" Nullable="false" />
           <Property Name="is_email_confirmed" Type="bit" Nullable="false" />
           <Property Name="email_confirmation_code" Type="varchar" MaxLength="512" />
           <Property Name="is_locked_out" Type="bit" Nullable="false" />
-          <Property Name="password_question" Type="varchar" MaxLength="512" />
-          <Property Name="password_answer" Type="varchar" MaxLength="512" />
+          <Property Name="password_question" Type="nvarchar" MaxLength="512" />
+          <Property Name="password_answer" Type="nvarchar" MaxLength="512" />
           <Property Name="password" Type="varchar" Nullable="false" MaxLength="128" />
           <Property Name="salt" Type="varchar" Nullable="false" MaxLength="32" />
-          <Property Name="organization_id" Type="bigint" />
-          <Property Name="client_id" Type="bigint" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="culture_ui_id" Type="varchar" MaxLength="8" />
-          <Property Name="comment" Type="varchar" MaxLength="512" devart:DefaultValue="" />
+          <Property Name="comment" Type="nvarchar" MaxLength="512" devart:DefaultValue="" />
           <Property Name="created_date" Type="datetime2" Nullable="false" />
           <Property Name="last_modified_date" Type="datetime2" />
-          <Property Name="last_login_ip" Type="varchar" Nullable="false" MaxLength="32" devart:DefaultValue="'0.0.0.0'" DefaultValue="0.0.0.0" />
-          <Property Name="last_login_date" Type="datetime2" Nullable="false" devart:DefaultValue="'1900-01-01 00:00:00'" />
-          <Property Name="last_locked_out_reason" Type="varchar" MaxLength="512" devart:DefaultValue="" />
-          <Property Name="last_locked_out_date" Type="datetime2" Nullable="false" devart:DefaultValue="'1900-01-01 00:00:00'" />
+          <Property Name="last_login_ip" Type="varchar" Nullable="false" MaxLength="32" devart:DefaultValue="" />
+          <Property Name="last_login_date" Type="datetime2" Nullable="false" devart:DefaultValue="" />
+          <Property Name="last_locked_out_reason" Type="nvarchar" MaxLength="512" devart:DefaultValue="" />
+          <Property Name="last_locked_out_date" Type="datetime2" Nullable="false" devart:DefaultValue="" />
           <Property Name="last_password_changed_date" Type="datetime2" Nullable="false" devart:DefaultValue="'1900-01-01 00:00:00'" />
           <Property Name="version" Type="bigint" Nullable="false" DefaultValue="1" />
         </EntityType>
@@ -106,20 +102,19 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="description" Type="varchar" MaxLength="256" />
+          <Property Name="description" Type="nvarchar" MaxLength="256" />
           <Property Name="is_activated" Type="bit" Nullable="false" />
           <Property Name="culture_id" Type="varchar" MaxLength="8" />
           <Property Name="amount_decimal_places" Type="smallint" Nullable="false" />
           <Property Name="amount_rounding_precision" Type="decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="unit_amount_decimal_places" Type="smallint" Nullable="false" />
           <Property Name="unit_amount_rounding_precision" Type="smallint" Nullable="false" />
-          <Property Name="currency_lcy_id1" Type="bigint" />
+          <Property Name="currency_lcy_id" Type="bigint" />
           <Property Name="rec_created_by" Type="bigint" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" />
           <Property Name="rec_modified_at" Type="datetime2" />
           <Property Name="version" Type="bigint" Nullable="false" DefaultValue="1" />
-          <Property Name="currency_lcy_id" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="currency">
           <Key>
@@ -127,22 +122,22 @@
           </Key>
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="code" Type="varchar" Nullable="false" MaxLength="32" />
-          <Property Name="desccription" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="desccription" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
-          <Property Name="client_id1" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="status" Type="smallint" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
-          <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="verson" Type="bigint" Nullable="false" DefaultValue="1" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="organization">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="desctiption" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="desctiption" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="code" Type="varchar" Nullable="false" MaxLength="32" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="status" Type="smallint" Nullable="false" />
@@ -252,30 +247,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_user_profile_organization">
-          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="0..1" />
-          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="organization">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="user">
-              <PropertyRef Name="organization_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_user_profile_client">
-          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="0..1" />
-          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="client">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="user">
-              <PropertyRef Name="client_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_user_in_role_user">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
           <End Role="user_in_role" Type="MyERP.DataAccess.Store.user_in_role" Multiplicity="*" />
@@ -300,30 +271,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_client_currency">
-          <End Role="currency" Type="MyERP.DataAccess.Store.currency" Multiplicity="1" />
-          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="currency">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="client">
-              <PropertyRef Name="id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_client_currency1">
-          <End Role="currency" Type="MyERP.DataAccess.Store.currency" Multiplicity="1" />
-          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="currency">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="client">
-              <PropertyRef Name="currency_lcy_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_currency_client">
           <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
           <End Role="currency" Type="MyERP.DataAccess.Store.currency" Multiplicity="*" />
@@ -344,6 +291,42 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="role">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_client_currency">
+          <End Role="currency" Type="MyERP.DataAccess.Store.currency" Multiplicity="0..1" />
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="currency">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="client">
+              <PropertyRef Name="currency_lcy_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user">
               <PropertyRef Name="client_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -392,14 +375,6 @@
             <End Role="RecModifiedByUser" EntitySet="Users" />
             <End Role="Organizations1" EntitySet="Organizations" />
           </AssociationSet>
-          <AssociationSet Name="Organization_UserProfileSet" Association="MyERP.DataAccess.Organization_UserProfile">
-            <End Role="Organization" EntitySet="Organizations" />
-            <End Role="UserProfile" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="Client_UserProfileSet" Association="MyERP.DataAccess.Client_UserProfile">
-            <End Role="Client" EntitySet="Clients" />
-            <End Role="UserProfile" EntitySet="Users" />
-          </AssociationSet>
           <AssociationSet Name="User_UserInRoleSet" Association="MyERP.DataAccess.User_UserInRole">
             <End Role="User" EntitySet="Users" />
             <End Role="Roles" EntitySet="UserInRoles" />
@@ -420,6 +395,14 @@
             <End Role="Client" EntitySet="Clients" />
             <End Role="Roles" EntitySet="Roles" />
           </AssociationSet>
+          <AssociationSet Name="Organization_UserSet" Association="MyERP.DataAccess.Organization_User">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="Client_UserSet" Association="MyERP.DataAccess.Client_User">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
           <Key>
@@ -427,38 +410,38 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="9db3212b-9d45-413f-9142-9e4f0eca4697" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="083fd2bd-717b-4340-b404-3a66c518ff93" />
-          <Property Name="FullName" Type="String" Nullable="false" MaxLength="256" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="3f2a523f-0705-4a39-8af5-8beae3f0bdd9" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="3f2a523f-0705-4a39-8af5-8beae3f0bdd9" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="256" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="c5e89d40-fc8b-4928-a9df-35f9fdfa13ff" />
           <Property Name="IsActivated" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="efbe311d-67d5-45dd-8b2a-8db20eabb990" />
           <Property Name="IsEmailConfirmed" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="9e1833b4-49f5-4015-bf3a-5bf8368ce89d" />
           <Property Name="EmailConfirmationCode" Type="String" MaxLength="512" ed:ValidateMaxLength="512" ed:ValidateRequired="false" ed:Guid="e4a98b7b-0e6a-43d2-a0dd-620981979d70" />
-          <Property Name="PasswordQuestion" Type="String" MaxLength="512" ed:ValidateMaxLength="512" ed:ValidateRequired="false" ed:Guid="db1776f8-e643-42fa-938d-f83676f0a08b" />
-          <Property Name="PasswordAnswer" Type="String" MaxLength="512" ed:ValidateMaxLength="512" ed:ValidateRequired="false" ed:Guid="71071cad-b3f8-4619-b8be-331be49f6967" />
+          <Property Name="PasswordQuestion" Type="String" MaxLength="512" Unicode="true" ed:ValidateMaxLength="512" ed:ValidateRequired="false" ed:Guid="db1776f8-e643-42fa-938d-f83676f0a08b" />
+          <Property Name="PasswordAnswer" Type="String" MaxLength="512" Unicode="true" ed:ValidateMaxLength="512" ed:ValidateRequired="false" ed:Guid="71071cad-b3f8-4619-b8be-331be49f6967" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="128" ed:ValidateMaxLength="128" ed:ValidateRequired="true" ed:Guid="45632fe4-34fb-4d2b-9f38-0e0ebf964a5e" />
           <Property Name="Salt" Type="String" Nullable="false" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="7fed247c-837c-4c3e-be6e-521f013273a3" />
-          <Property Name="OrganizationId" Type="Int64" ed:ValidateRequired="false" ed:Guid="2a412a1c-e529-4e89-9be2-81c9b2b05e49" />
-          <Property Name="ClientId" Type="Int64" ed:ValidateRequired="false" ed:Guid="e04b8809-c230-4d94-9681-fd0fad6756d4" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e3afbbff-174a-4bb1-90c5-dcecae42ab4c" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="3b0d3397-8f7e-4bf1-84d6-e3276564c839" />
           <Property Name="CultureUiId" Type="String" MaxLength="8" ed:ValidateMaxLength="8" ed:ValidateRequired="false" ed:Guid="3c7327ca-519b-4524-9f04-9ee33194db59" />
-          <Property Name="Comment" Type="String" MaxLength="512" ed:ValidateMaxLength="512" ed:ValidateRequired="false" ed:Guid="d0994184-3681-4b2e-8d59-cbfae1da8120" />
+          <Property Name="Comment" Type="String" MaxLength="512" Unicode="true" ed:ValidateMaxLength="512" ed:ValidateRequired="false" ed:Guid="d0994184-3681-4b2e-8d59-cbfae1da8120" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="c30edd52-6c13-475b-8431-4e2343f4c967" />
           <Property Name="LastModifiedDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="6c6a33cc-47db-44dd-8951-2af15392270f" />
-          <Property Name="LastLoginIp" Type="String" Nullable="false" DefaultValue="0.0.0.0" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="39eb121e-b98f-4560-b9f9-4d3b6c8a2242" />
-          <Property Name="LastLoginDate" Type="DateTime" Nullable="false" DefaultValue="'1900-01-01 00:00:00'" ed:ValidateRequired="true" ed:Guid="f5cb19a6-7a58-47a6-9924-9cb1886faae5" />
+          <Property Name="LastLoginIp" Type="String" Nullable="false" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="39eb121e-b98f-4560-b9f9-4d3b6c8a2242" />
+          <Property Name="LastLoginDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="f5cb19a6-7a58-47a6-9924-9cb1886faae5" />
           <Property Name="IsLockedOut" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="17d4ecaa-60d2-40b2-af8d-cdf486f8a6cd" />
-          <Property Name="LastLockedOutReason" Type="String" MaxLength="512" ed:ValidateMaxLength="512" ed:ValidateRequired="false" ed:Guid="7966921c-6da5-481e-999b-f1677a125794" />
-          <Property Name="LastLockedOutDate" Type="DateTime" Nullable="false" DefaultValue="'1900-01-01 00:00:00'" ed:ValidateRequired="true" ed:Guid="73a20203-54fa-42fc-b5bb-136641825c56" />
+          <Property Name="LastLockedOutReason" Type="String" MaxLength="512" Unicode="true" ed:ValidateMaxLength="512" ed:ValidateRequired="false" ed:Guid="7966921c-6da5-481e-999b-f1677a125794" />
+          <Property Name="LastLockedOutDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="73a20203-54fa-42fc-b5bb-136641825c56" />
           <Property Name="LastPasswordChangedDate" Type="DateTime" Nullable="false" DefaultValue="'1900-01-01 00:00:00'" ed:ValidateRequired="true" ed:Guid="c36ce865-18aa-43e8-b699-202ac287268d" />
           <Property Name="Version" Type="Int64" Nullable="false" DefaultValue="1" ed:ValidateRequired="true" ed:Guid="7b3ad66f-1125-4a4e-b85b-ddc6c191a7fb" />
-          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_UserProfile" FromRole="UserProfile" ToRole="Organization" ed:Guid="71a26f14-e5e0-4f56-88ba-0c0f48b00767" />
-          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_UserProfile" FromRole="UserProfile" ToRole="Client" ed:Guid="cfceaf7e-212e-422d-a0ea-cf02aec46fec" />
           <NavigationProperty Name="Roles" Relationship="MyERP.DataAccess.User_UserInRole" FromRole="User" ToRole="Roles" ed:Guid="43260679-7d39-401a-9f63-24023798eccc" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_User" FromRole="Users" ToRole="Organization" ed:Guid="dfe685df-2d02-44cf-9884-0da3cb05954e" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_User" FromRole="Users" ToRole="Client" ed:Guid="aa9f2477-2bbc-45d0-8300-32910ef59c0e" />
         </EntityType>
         <EntityType Name="Client" ed:Guid="8754758b-7440-4978-8a30-ff644e1d9950">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="d3b7a0f4-9e7e-4950-9844-209f002a2989" />
-          <Property Name="Description" Type="String" MaxLength="256" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="d0a40861-7b0f-4a6e-8fe6-13ef2bc7e477" />
+          <Property Name="Description" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="d0a40861-7b0f-4a6e-8fe6-13ef2bc7e477" />
           <Property Name="IsActivated" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="0a7fa17b-be3c-457e-84a2-feccd5f4334f" />
           <Property Name="CultureId" Type="String" MaxLength="8" ed:ValidateMaxLength="8" ed:ValidateRequired="false" ed:Guid="a4a18b92-4cc8-4768-b6c0-3d23f4baae2b" />
           <Property Name="AmountDecimalPlaces" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="d8487a88-0621-457d-ab76-ba4e2153295d" />
@@ -469,7 +452,7 @@
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="7201971a-c51f-4753-826c-25116b4cfc3f" />
           <Property Name="RecModifiedBy" Type="Int64" ed:ValidateRequired="true" ed:Guid="c6fcd91e-15ef-4481-a32a-a0075cb44ac6" />
           <Property Name="RecModifiedAt" Type="DateTime" ed:ValidateRequired="false" ed:Guid="73e42812-2bb8-4648-8704-5c7659eaf0d8" />
-          <Property Name="CurrencyLcyId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="75ad659c-bb0b-4eaf-b311-277192c574ac" />
+          <Property Name="CurrencyLcyId" Type="Int64" ed:ValidateRequired="false" ed:Guid="75ad659c-bb0b-4eaf-b311-277192c574ac" />
           <Property Name="Version" Type="Int64" Nullable="false" DefaultValue="1" ed:ValidateRequired="true" ed:Guid="c4bed1e7-5396-4842-8b64-feec4ffc7bbc" />
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Client_CreatedBy" FromRole="Clients" ToRole="RecCreatedByUser" ed:Guid="ce4d1885-6424-455d-9277-01aed8112888" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_Client_ModifiedBy" FromRole="Clients1" ToRole="RecModifiedByUser" ed:Guid="41eb4c56-5928-4a60-a555-6aeff073f145" />
@@ -482,11 +465,12 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="e262d153-07d1-4088-a89b-5a710220889c" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="f33e603b-cf28-4194-be3b-b37cf22660a1" />
-          <Property Name="Desccription" Type="String" Nullable="false" MaxLength="256" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="d9ce13c5-825d-4d01-b0ef-2dc69e3cb844" />
+          <Property Name="Desccription" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="d9ce13c5-825d-4d01-b0ef-2dc69e3cb844" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f822fd4e-5fdf-42f3-9209-7137a7f7dd41" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f636cade-01a4-43cc-860c-c527b84193ee" />
           <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="dca1b7e2-f951-4dd3-bb4c-ec09a7b4d5d0" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="30bf07ad-4abd-4de3-b820-db7bc8766492" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4bdea275-3d08-41dc-a5a1-1baada77a0d9" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a976dad5-6bb0-4777-bafd-328c70f3a144" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="f55e1d8d-eb4d-49c4-9951-ece0fd770f7c" />
           <Property Name="Verson" Type="Int64" Nullable="false" DefaultValue="1" ed:ValidateRequired="true" ed:Guid="cb131c5f-1363-4dbe-bf51-a8ead561bca0" />
@@ -501,7 +485,7 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="cfda07cc-44ad-42aa-a7f9-19251af5bee8" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="ed1dcb77-2dda-40d2-8f4b-33cc9b718826" />
-          <Property Name="Desctiption" Type="String" Nullable="false" MaxLength="256" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="b571d474-0a6f-41df-9304-2e5b1bd67e25" />
+          <Property Name="Desctiption" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="b571d474-0a6f-41df-9304-2e5b1bd67e25" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="109cc6af-6c2f-44d5-8cf8-8f8cefe5ee09" />
           <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="7261e335-251c-4379-88e9-c9f7907dc4bb" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="411da790-27e6-46b7-8a6a-372ea450c3c5" />
@@ -560,6 +544,14 @@
         <Association Name="UserProfile_Currency_CreatedBy" ed:Guid="9a6abd45-5df4-4670-8eb6-7db10e86bfb6">
           <End Role="RecCreateByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
           <End Role="Currencies" Type="MyERP.DataAccess.Currency" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecCreateByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Currencies">
+              <PropertyRef Name="RecCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <Association Name="UserProfile_Currency_ModifiedBy" ed:Guid="7f22172b-d81b-4668-b27d-ec90339acb27">
           <End Role="RecModifiedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
@@ -621,30 +613,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Organization_UserProfile" ed:Guid="481ef603-542d-4f7f-adbf-8753727dc933">
-          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
-          <End Role="UserProfile" Type="MyERP.DataAccess.User" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProfile">
-              <PropertyRef Name="OrganizationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Client_UserProfile" ed:Guid="b0b695db-f73f-49f7-b823-cf2774e85ef9">
-          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
-          <End Role="UserProfile" Type="MyERP.DataAccess.User" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProfile">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="User_UserInRole" ed:Guid="4b4648b4-abfa-49a5-8d63-e4b38e326b74">
           <End Role="User" Type="MyERP.DataAccess.User" Multiplicity="1" />
           <End Role="Roles" Type="MyERP.DataAccess.UserInRole" Multiplicity="*" />
@@ -670,7 +638,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Currency_Client" ed:Guid="936134d6-d2cc-438c-9daf-82a2057b81e2">
-          <End Role="CurrencyLcy" Type="MyERP.DataAccess.Currency" Multiplicity="1" />
+          <End Role="CurrencyLcy" Type="MyERP.DataAccess.Currency" Multiplicity="0..1" />
           <End Role="Clients" Type="MyERP.DataAccess.Client" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CurrencyLcy">
@@ -705,6 +673,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Organization_User" ed:Guid="4cd52e1e-8796-467e-bba3-9eccfb7580fa">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="Users" Type="MyERP.DataAccess.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_User" ed:Guid="27d0a079-f69f-4f72-9bee-7eedfde53f27">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="Users" Type="MyERP.DataAccess.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- MSL content -->
@@ -726,8 +718,6 @@
                 <ScalarProperty Name="PasswordAnswer" ColumnName="password_answer" />
                 <ScalarProperty Name="Password" ColumnName="password" />
                 <ScalarProperty Name="Salt" ColumnName="salt" />
-                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
-                <ScalarProperty Name="ClientId" ColumnName="client_id" />
                 <ScalarProperty Name="CultureUiId" ColumnName="culture_ui_id" />
                 <ScalarProperty Name="Comment" ColumnName="comment" />
                 <ScalarProperty Name="CreatedDate" ColumnName="created_date" />
@@ -738,6 +728,8 @@
                 <ScalarProperty Name="LastLockedOutDate" ColumnName="last_locked_out_date" />
                 <ScalarProperty Name="LastPasswordChangedDate" ColumnName="last_password_changed_date" />
                 <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -774,6 +766,7 @@
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
                 <ScalarProperty Name="Verson" ColumnName="verson" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -27,7 +27,7 @@ namespace MyERP.Web.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Name")]
+        [Display(Name = "User Name")]
         public string Name { get; set; }
 
         [Required]
@@ -35,14 +35,14 @@ namespace MyERP.Web.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Remember me")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "Name")]
+        [Display(Name = "User Name")]
         public string Name { get; set; }
 
         [Required]

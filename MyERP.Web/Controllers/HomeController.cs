@@ -5,8 +5,8 @@ using MyERP.Web.Models;
 
 namespace MyERP.Web.Controllers
 {
-    [AllowAnonymous]
     [DirectController]
+    [Authorize]
     public class HomeController : BaseController
     {
         // GET: Home

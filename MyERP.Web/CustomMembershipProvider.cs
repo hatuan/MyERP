@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Caching;
@@ -77,7 +78,7 @@ namespace MyERP.Web
 
                 user = new User()
                 {
-                    ClientId = null,
+                    ClientId = 0,
                     Comment = "",
                     CreatedDate = DateTime.Now,
                     Email = email,
@@ -90,7 +91,7 @@ namespace MyERP.Web
                     LastLoginDate = DateTime.Now,
                     LastLoginIp = "0.0.0.0",
                     LastModifiedDate = DateTime.Now,
-                    OrganizationId = null,
+                    OrganizationId = 0,
                     Password = password,
                     PasswordAnswer = passwordAnswer,
                     PasswordQuestion = passwordQuestion,
@@ -215,7 +216,8 @@ namespace MyERP.Web
 
             using (var context = new EntitiesModel())
             {
-                var user = context.Users.FirstOrDefault(u => u.Name == username);
+                var user = context.Users.Include("Client").Include("Organization")
+                    .FirstOrDefault(u => u.Name == username);
                 if (user != null)
                 {
                     var membershipUser = new MyERPMembershipUser(user);
@@ -239,7 +241,7 @@ namespace MyERP.Web
 
             using (var context = new EntitiesModel())
             {
-                var user = context.Users.FirstOrDefault(u => u.Id == (long)providerUserKey);
+                var user = context.Users.Include("Client").Include("Organization").FirstOrDefault(u => u.Id == (long)providerUserKey);
                 if (user != null)
                 {
                     var membershipUser = new MyERPMembershipUser(user);
@@ -324,8 +326,8 @@ namespace MyERP.Web
     public class MyERPMembershipUser : MembershipUser
     {
         public Client Client { get; set; }
-        public long? ClientId { get; set; }
-        public long? OrganizationId { get; set; }
+        public long ClientId { get; set; }
+        public long OrganizationId { get; set; }
         public String CultureUiId { get; set; }
 
         public Organization Organization { get; set; }
@@ -346,10 +348,10 @@ namespace MyERP.Web
             lastLockoutDate:user.LastLockedOutDate)
         {
             Client = user.Client;
-            ClientId = user.ClientId ?? null;
+            ClientId = user.ClientId ;
             
             Organization = user.Organization;
-            OrganizationId = user.OrganizationId ?? null;
+            OrganizationId = user.OrganizationId;
             
             FullName = user.FullName;
 
