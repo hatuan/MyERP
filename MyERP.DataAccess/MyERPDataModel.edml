@@ -84,8 +84,8 @@
           <Property Name="password_answer" Type="nvarchar" MaxLength="512" />
           <Property Name="password" Type="varchar" Nullable="false" MaxLength="128" />
           <Property Name="salt" Type="varchar" Nullable="false" MaxLength="32" />
-          <Property Name="organization_id" Type="bigint" Nullable="false" />
-          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="organization_id" Type="bigint" />
+          <Property Name="client_id" Type="bigint" />
           <Property Name="culture_ui_id" Type="varchar" MaxLength="8" />
           <Property Name="comment" Type="nvarchar" MaxLength="512" devart:DefaultValue="" />
           <Property Name="created_date" Type="datetime2" Nullable="false" />
@@ -419,8 +419,8 @@
           <Property Name="PasswordAnswer" Type="String" MaxLength="512" Unicode="true" ed:ValidateMaxLength="512" ed:ValidateRequired="false" ed:Guid="71071cad-b3f8-4619-b8be-331be49f6967" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="128" ed:ValidateMaxLength="128" ed:ValidateRequired="true" ed:Guid="45632fe4-34fb-4d2b-9f38-0e0ebf964a5e" />
           <Property Name="Salt" Type="String" Nullable="false" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="7fed247c-837c-4c3e-be6e-521f013273a3" />
-          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e3afbbff-174a-4bb1-90c5-dcecae42ab4c" />
-          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="3b0d3397-8f7e-4bf1-84d6-e3276564c839" />
+          <Property Name="OrganizationId" Type="Int64" ed:ValidateRequired="false" ed:Guid="e3afbbff-174a-4bb1-90c5-dcecae42ab4c" />
+          <Property Name="ClientId" Type="Int64" ed:ValidateRequired="false" ed:Guid="3b0d3397-8f7e-4bf1-84d6-e3276564c839" />
           <Property Name="CultureUiId" Type="String" MaxLength="8" ed:ValidateMaxLength="8" ed:ValidateRequired="false" ed:Guid="3c7327ca-519b-4524-9f04-9ee33194db59" />
           <Property Name="Comment" Type="String" MaxLength="512" Unicode="true" ed:ValidateMaxLength="512" ed:ValidateRequired="false" ed:Guid="d0994184-3681-4b2e-8d59-cbfae1da8120" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="c30edd52-6c13-475b-8431-4e2343f4c967" />

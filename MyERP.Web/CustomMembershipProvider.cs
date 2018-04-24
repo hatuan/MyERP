@@ -78,7 +78,7 @@ namespace MyERP.Web
 
                 user = new User()
                 {
-                    ClientId = 0,
+                    ClientId = null,
                     Comment = "",
                     CreatedDate = DateTime.Now,
                     Email = email,
@@ -91,7 +91,7 @@ namespace MyERP.Web
                     LastLoginDate = DateTime.Now,
                     LastLoginIp = "0.0.0.0",
                     LastModifiedDate = DateTime.Now,
-                    OrganizationId = 0,
+                    OrganizationId = null,
                     Password = password,
                     PasswordAnswer = passwordAnswer,
                     PasswordQuestion = passwordQuestion,
@@ -326,8 +326,8 @@ namespace MyERP.Web
     public class MyERPMembershipUser : MembershipUser
     {
         public Client Client { get; set; }
-        public long ClientId { get; set; }
-        public long OrganizationId { get; set; }
+        public long? ClientId { get; set; }
+        public long? OrganizationId { get; set; }
         public String CultureUiId { get; set; }
 
         public Organization Organization { get; set; }
@@ -348,10 +348,10 @@ namespace MyERP.Web
             lastLockoutDate:user.LastLockedOutDate)
         {
             Client = user.Client;
-            ClientId = user.ClientId ;
+            ClientId = user.ClientId ?? null ;
             
             Organization = user.Organization;
-            OrganizationId = user.OrganizationId;
+            OrganizationId = user.OrganizationId ?? null;
             
             FullName = user.FullName;
 
