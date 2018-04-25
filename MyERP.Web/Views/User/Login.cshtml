@@ -1,5 +1,4 @@
-﻿@using InputType = Ext.Net.InputType
-@model MyERP.Web.Models.LoginViewModel
+﻿@model MyERP.Web.Models.LoginViewModel
 
 @{
     Layout = null;
@@ -53,7 +52,7 @@
                         .AllowBlank(false)
                         .LabelAlign(LabelAlign.Left)
                         .BlankText("Your password is required.")
-                        .InputType(InputType.Password),
+                        .InputType(Ext.Net.InputType.Password),
                     Html.X().CheckboxFor(m => m.RememberMe)
                         .LabelAlign(LabelAlign.Left)
                         .Name("remember")

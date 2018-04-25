@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using Ext.Net;
 using MyERP.Web.Models;
 
 namespace MyERP.Web.Controllers
@@ -68,17 +69,28 @@ namespace MyERP.Web.Controllers
                         string[] roles = Roles.Provider.GetRolesForUser(user.UserName);
 
                         FormsAuthentication.SetAuthCookie(model.Name, model.RememberMe);
-                        return RedirectToAction("Preference", routeValues: new { returnUrl = returnUrl });
+                        return RedirectToAction("Index", "Home");
                     }
                     if (user != null && user.ClientId == null)
                     {
-                        ModelState.AddModelError("Name", "User don't have available Client - Press create new Client");
+                        X.Msg.Notify(new NotificationConfig()
+                        {
+                            Title = "Login Error",
+                            Html = "User don't have available Client - Press create new Client",
+                            Width = 250,
+                            Height = 150
+                        }).Show();
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("Name", "Invalid username or password.");
-                    ModelState.AddModelError("Password", "Invalid username or password.");
+                    X.Msg.Notify(new NotificationConfig()
+                    {
+                        Title = "Login Error",
+                        Html = "Invalid username or password.",
+                        Width = 250,
+                        Height = 150
+                    }).Show();
                 }
             }
 

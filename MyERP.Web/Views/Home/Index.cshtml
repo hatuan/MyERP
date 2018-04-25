@@ -1,8 +1,79 @@
-﻿@(
-    Html.X().Viewport().Layout(LayoutType.Border)
-        .ItemsFromPage(this, "~/Views/Home/_North.cshtml")
-        .ItemsFromPage(this, "~/Views/Home/_West.cshtml")
-        .ItemsFromPage(this, "~/Views/Home/_Center.cshtml")
-        .ItemsFromPage(this, "~/Views/Home/_East.cshtml")
-        .ItemsFromPage(this, "~/Views/Home/_RedirectionOverlay.cshtml")
-      )
+﻿@model MyERP.Web.Models.PreferenceViewModel     
+    
+@{
+    var showPreference = ViewBag.showPreferencel??true;
+    var Organizations = (ViewBag.Organizations as SelectList).Select(m => new ListItem {Text = m.Text, Value = m.Value});
+    var CultureUIs = (ViewBag.CultureUIs as SelectList).Select(m => new ListItem { Text = m.Text, Value = m.Value });
+}
+    
+@(Html.X().Viewport()
+          .ID("IndexViewport")
+          .Layout(LayoutType.Border)
+          .ItemsFromPage(this, "~/Views/Home/_North.cshtml")
+          .ItemsFromPage(this, "~/Views/Home/_West.cshtml")
+          .ItemsFromPage(this, "~/Views/Home/_Center.cshtml")
+          .ItemsFromPage(this, "~/Views/Home/_East.cshtml")
+          .ItemsFromPage(this, "~/Views/Home/_RedirectionOverlay.cshtml")
+        )
+
+@(Html.X().Window()
+          .ID("WindowPreference")
+          .Title("Preference")
+          .Closable(false)
+          .Resizable(false)
+          .Height(300)
+          .Draggable(true)
+          .Width(350)
+          .Modal(true)
+          .Layout(LayoutType.Fit)
+          .Hidden(false)
+          .Items(
+              Html.X().FormPanel()
+                  .ID("FormPreference")      
+                  .Layout(LayoutType.Form)
+                  .Border(false)
+                  .BodyPadding(5)
+                  .DefaultButton("Button1")
+                  .Items(
+                      Html.X().ComboBoxFor(m => m.OrganizationId)
+                        .ID("ComboBoxOrganization")
+                        .EmptyText("--Please Select--")
+                        .LabelAlign(LabelAlign.Left)
+                        .Editable(false)
+                        .QueryMode(DataLoadMode.Local)
+                        .TriggerAction(TriggerAction.All)
+                        .DisplayField("Text")
+                        .ValueField("Value")
+                        .Items(Organizations),
+                      Html.X().ComboBoxFor(m => m.CultureUI)
+                        .ID("ComboBoxCultureUI")
+                        .EmptyText("--Please Select--")
+                        .LabelAlign(LabelAlign.Left)
+                        .Editable(false)
+                        .QueryMode(DataLoadMode.Local)
+                        .TriggerAction(TriggerAction.All)
+                        .DisplayField("Text")
+                        .ValueField("Value")
+                        .Items(CultureUIs),
+                      Html.X().DateFieldFor(m => m.WorkingDate)
+                        .LabelAlign(LabelAlign.Left)
+                        .Format("dd/MM/yyyy")
+                  )
+                  .Buttons(Html.X().Button()
+                      .ID("Button1")
+                      .Text("Submit")
+                      .Icon(Icon.Accept)
+                  )
+          )
+          )
+
+
+@section headtag
+{
+    <script type="text/javascript">
+        Ext.onReady(function () {
+            console.log("Ext.onReady");
+            App.WindowPreference.show();
+        });
+    </script>
+}

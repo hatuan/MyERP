@@ -101,8 +101,6 @@ namespace MyERP.Web.Models
         public String CultureUI { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:mm/dd/yyyy}")]
         [Display(Name = "Working Date")]
         public DateTime WorkingDate { get; set; }
     }
