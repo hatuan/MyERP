@@ -8,12 +8,14 @@
 <html>
 <head>
     <title>MyERP - Login</title>
-    <link rel="stylesheet" href="@Url.Content("~/resources/css/main.css?" + enVer)"/>
+    <link rel="stylesheet" href="@Url.Content("~/resources/css/main.css?" + enVer)" />
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
+
     <script>
-        Ext.onReady(function() {
+        Ext.onReady(function () {
             if (top !== self) {
                 Ext.select("a", true).on("click",
-                    function(e, el) {
+                    function (e, el) {
                         if (!Ext.fly(el).hasCls("exclude")) {
                             parent.location = el.href;
                         }
@@ -22,48 +24,106 @@
                     { preventDefault: true });
             }
         });
+
+        var handleLogin = function () {
+            App.LoginWindow.close();
+
+            Ext.net.directRequest({
+                url: "/User/Preference",
+                method: "GET",
+                eventMask: {
+                    showMask: true
+                }
+            });
+        };
+
+        var invalidateLogin = function (reason) {
+            Ext.MessageBox.show({
+                title: 'Login Error',
+                msg: reason,
+                buttons: Ext.MessageBox.OK,
+                animateTarget: 'LoginWindow',
+                icon: 'Error'
+            });
+        };
     </script>
 </head>
-<body class="welcome">
+<body>
     @Html.X().ResourceManager().Theme(Theme.Triton)
 
-    @(Html.X().Viewport()
-        .ID("ViewPort")
-        .Layout(LayoutType.Center)
-        .Items(
-            Html.X().FormPanel()
-                .ID("LoginFormPanel")
+    @(Html.X().Window()
+                .ID("LoginWindow")
                 .Title("Login")
                 .Height(215)
                 .Width(350)
-                .Frame(true)
-                .Collapsible(false)
-                .BodyPadding(5)
-                .DefaultButton("Button1")
+                .Modal(true)
+                .Layout(LayoutType.Fit)
                 .Items(
-                    Html.X().AntiForgeryField(),
-                    Html.X().TextFieldFor(m => m.Name)
-                        .EmptyText("")
-                        .AllowBlank(false)
-                        .LabelAlign(LabelAlign.Left)
-                        .BlankText("Your username is required."),
-                    Html.X().TextFieldFor(m => m.Password)
-                        .EmptyText("")
-                        .AllowBlank(false)
-                        .LabelAlign(LabelAlign.Left)
-                        .BlankText("Your password is required.")
-                        .InputType(Ext.Net.InputType.Password),
-                    Html.X().CheckboxFor(m => m.RememberMe)
-                        .LabelAlign(LabelAlign.Left)
-                        .Name("remember")
-                )
-                .Buttons(Html.X().Button()
-                    .ID("Button1")
-                    .Text("Submit")
-                    .Icon(Icon.Accept)
-                    .DirectClickAction("Login")
-                )
-        )
+                    Html.X().FormPanel()
+                        .ID("FormLogin")
+                        .Layout(LayoutType.Form)
+                        .Border(false)
+                        .BodyPadding(5)
+                        .DefaultButton("Button1")
+                        .Items(
+                            Html.X().AntiForgeryField(),
+                            Html.X().TextFieldFor(m => m.Name)
+                                .EmptyText("")
+                                .AllowBlank(false)
+                                .LabelAlign(LabelAlign.Left)
+                                .BlankText("Your username is required."),
+                            Html.X().TextFieldFor(m => m.Password)
+                                .EmptyText("")
+                                .AllowBlank(false)
+                                .LabelAlign(LabelAlign.Left)
+                                .BlankText("Your password is required.")
+                                .InputType(Ext.Net.InputType.Password),
+                            Html.X().CheckboxFor(m => m.RememberMe)
+                                .LabelAlign(LabelAlign.Left)
+                                .Name("remember")
+                                )
+                        .Buttons(Html.X().Button()
+                            .ID("Button1")
+                            .Text("Submit")
+                            .Icon(Icon.Accept)
+                            .Listeners(ls =>
+                            {
+                                ls.Click.Handler = @"
+                                    if ( !#{FormLogin}.getForm().isValid() ) {
+                                        // Show all invalid field with error
+                                        #{FormLogin}.validate();
+                                        return false;
+                                    } else {
+                                        // Run DirectEvent
+                                        return true;
+                                    }";
+                            })
+                            .DirectEvents(de =>
+                            {
+                                de.Click.Url = Url.Action("Login");
+                                de.Click.Success = "handleLogin";
+                                de.Click.Failure = "invalidateLogin(result.errorMessage)";
+                                de.Click.ShowWarningOnFailure = false;
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.FormID = "FormLogin";
+                            })
+                            )
+                        )
     )
+
+    @*
+        @(Html.X().Panel()
+              .ID("PreferenceWindow")
+              .Title("Preference")
+              .Hidden(true)
+              .Loader(
+                  Html.X().ComponentLoader()
+                      .Url(Url.Action("Preference"))
+                      .LoadMask(mask => mask.ShowMask = true)
+                      .AjaxOptions(new Ext.Net.AjaxOptions { Method = HttpMethod.GET})
+                      .Mode(LoadMode.Html)
+                      .Params(new { containerId = "PreferenceWindow" })
+              ))
+    *@
 </body>
 </html>

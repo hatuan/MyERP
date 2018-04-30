@@ -17,13 +17,13 @@ namespace MyERP.Web
         /// </summary>
         /// <param name="principal">IPrincipal of User</param>
         /// <returns></returns>
-        public override IQueryable<Organization> GetAll(IPrincipal principal)
-        {
-            var membershipUser = (MyERPMembershipUser)Membership.GetUser(principal.Identity.Name, true);
-            var allEntities = GetAll().Where(c => c.ClientId == membershipUser.ClientId);
-
-            return allEntities;
-        }
+        //public override IQueryable<Organization> GetAll(IPrincipal principal)
+        //{
+        //    var membershipUser = (MyERPMembershipUser)Membership.GetUser(principal.Identity.Name, true);
+        //   var allEntities = GetAll().Where(c => c.ClientId == membershipUser.ClientId);
+        //
+        //    return allEntities;
+        //}
 
         /// <summary>
         /// Get Root Org of current organization

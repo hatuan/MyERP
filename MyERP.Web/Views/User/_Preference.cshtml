@@ -1,0 +1,58 @@
+﻿@model MyERP.Web.Models.PreferenceViewModel
+
+@(Html.X().Window()
+      .ID("WindowPreference")
+      .Title("Preference")
+      .Closable(false)
+      .Height(300)
+      .Width(350)
+      .Modal(true)
+      .Layout(LayoutType.Fit)
+      .Items(
+        Html.X().FormPanel()
+            .ID("FormPreference")
+            .Layout(LayoutType.Form)
+            .Border(false)
+            .BodyPadding(5)
+            .DefaultButton("Button1")
+            .Items(
+                Html.X().AntiForgeryField(),
+                Html.X().ComboBoxFor(m => m.OrganizationId)
+                    .ID("ComboBoxOrganization")
+                    .EmptyText("--Please Select--")
+                    .LabelAlign(LabelAlign.Left)
+                    .Editable(false)
+                    .QueryMode(DataLoadMode.Local)
+                    .TriggerAction(TriggerAction.All)
+                    .DisplayField("Text")
+                    .ValueField("Value")
+                    .Items(Model.Organizations),
+                Html.X().ComboBoxFor(m => m.CultureUI)
+                    .ID("ComboBoxCultureUI")
+                    .EmptyText("--Please Select--")
+                    .LabelAlign(LabelAlign.Left)
+                    .Editable(false)
+                    .QueryMode(DataLoadMode.Local)
+                    .TriggerAction(TriggerAction.All)
+                    .DisplayField("Text")
+                    .ValueField("Value")
+                    .Items(Model.CultureUIs),
+                Html.X().DateFieldFor(m => m.WorkingDate)
+                    .LabelAlign(LabelAlign.Left)
+                    .Format("dd/MM/yyyy")
+                    )
+            .Buttons(Html.X().Button()
+                .ID("Button1")
+                .Text("Submit")
+                .Icon(Icon.Accept)
+                .DirectEvents(de =>
+                {
+                    de.Click.Url = Url.Action("Preference");
+                    de.Click.Success = "App.WindowPreference.close();";
+                    de.Click.ShowWarningOnFailure = false;
+                    de.Click.EventMask.ShowMask = true;
+                    de.Click.FormID = "FormPreference";
+                })
+                )
+        )
+)

@@ -306,7 +306,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
-    <Content Include="Views\User\Preference.cshtml" />
+    <Content Include="Views\User\_Preference.cshtml" />
     <Content Include="Views\User\Manage.cshtml" />
     <Content Include="Views\User\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\User\_SetPasswordPartial.cshtml" />

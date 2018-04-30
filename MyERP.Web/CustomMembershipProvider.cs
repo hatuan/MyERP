@@ -52,10 +52,6 @@ namespace MyERP.Web
             set { }
         }
 
-
-        // Other overrides not implemented
-        #region Other overrides not implemented
-
         public override MembershipUser CreateUser(string username, string password, string email,
             string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey,
             out MembershipCreateStatus status)
@@ -68,7 +64,7 @@ namespace MyERP.Web
                     status = MembershipCreateStatus.DuplicateUserName;
                     return null;
                 }
-                
+
                 user = context.Users.FirstOrDefault(u => u.Id.CompareTo(providerUserKey) == 0);
                 if (user != null)
                 {
@@ -110,12 +106,12 @@ namespace MyERP.Web
                     status = MembershipCreateStatus.ProviderError;
                     return null;
                 }
-                
+
 
             }
 
         }
-        
+
         public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             using (var context = new EntitiesModel())
@@ -163,6 +159,75 @@ namespace MyERP.Web
             }
         }
 
+
+        public override string GetPassword(string username, string answer)
+        {
+            using (var context = new EntitiesModel())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Name == username && u.PasswordAnswer == answer);
+                return user != null ? user.Password : null;
+            }
+        }
+
+        public override MembershipUser GetUser(string username, bool userIsOnline)
+        {
+            //Get MyERPMembershipUser from Cache if found
+            var cacheKey = string.Format("UserData_{0}", username);
+            if (HttpRuntime.Cache[cacheKey] != null)
+                return (MyERPMembershipUser)HttpRuntime.Cache[cacheKey];
+
+            using (var context = new EntitiesModel())
+            {
+                var user = context.Users.Include("Client").Include("Organization").FirstOrDefault(u => u.Name == username);
+                if (user != null)
+                {
+                    var membershipUser = new MyERPMembershipUser(user);
+
+                    //Store in cache
+                    HttpRuntime.Cache.Insert(cacheKey, membershipUser, null, DateTime.Now.AddMinutes(_cacheTimeoutInMinutes), Cache.NoSlidingExpiration);
+
+                    return membershipUser;
+                }
+                else
+                    return null;
+
+            }
+        }
+
+        public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)
+        {
+            var cacheKey = string.Format("UserData_{0}", providerUserKey);
+            if (HttpRuntime.Cache[cacheKey] != null)
+                return (MyERPMembershipUser)HttpRuntime.Cache[cacheKey];
+
+            using (var context = new EntitiesModel())
+            {
+                var user = context.Users.Include("Client").Include("Organization").FirstOrDefault(u => u.Id == (long)providerUserKey);
+                if (user != null)
+                {
+                    var membershipUser = new MyERPMembershipUser(user);
+                    //Store in cache
+                    HttpRuntime.Cache.Insert(cacheKey, membershipUser, null, DateTime.Now.AddMinutes(_cacheTimeoutInMinutes), Cache.NoSlidingExpiration);
+
+                    return membershipUser;
+                }
+                else
+                    return null;
+
+            }
+        }
+
+        public override string GetUserNameByEmail(string email)
+        {
+            using (var context = new EntitiesModel())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email == email);
+                return user.Name;
+            }
+        }
+
+        #region Other overrides not implemented
+
         public override bool DeleteUser(string username, bool deleteAllRelatedData)
         {
             throw new NotImplementedException();
@@ -196,73 +261,6 @@ namespace MyERP.Web
         public override int GetNumberOfUsersOnline()
         {
             throw new NotImplementedException();
-        }
-
-        public override string GetPassword(string username, string answer)
-        {
-            using (var context = new EntitiesModel())
-            {
-                var user = context.Users.FirstOrDefault(u => u.Name == username && u.PasswordAnswer == answer);
-                return user != null ? user.Password : null;
-            }
-        }
-        
-        public override MembershipUser GetUser(string username, bool userIsOnline)
-        {
-            //Get MyERPMembershipUser from Cache if found
-            var cacheKey = string.Format("UserData_{0}", username);
-            if (HttpRuntime.Cache[cacheKey] != null)
-                return (MyERPMembershipUser)HttpRuntime.Cache[cacheKey];
-
-            using (var context = new EntitiesModel())
-            {
-                var user = context.Users.Include("Client").Include("Organization")
-                    .FirstOrDefault(u => u.Name == username);
-                if (user != null)
-                {
-                    var membershipUser = new MyERPMembershipUser(user);
-                    
-                    //Store in cache
-                    HttpRuntime.Cache.Insert(cacheKey, membershipUser, null, DateTime.Now.AddMinutes(_cacheTimeoutInMinutes), Cache.NoSlidingExpiration);
-
-                    return membershipUser;
-                }
-                else
-                    return null;
-
-            }
-        }
-
-        public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)
-        {
-            var cacheKey = string.Format("UserData_{0}", providerUserKey);
-            if (HttpRuntime.Cache[cacheKey] != null)
-                return (MyERPMembershipUser) HttpRuntime.Cache[cacheKey];
-
-            using (var context = new EntitiesModel())
-            {
-                var user = context.Users.Include("Client").Include("Organization").FirstOrDefault(u => u.Id == (long)providerUserKey);
-                if (user != null)
-                {
-                    var membershipUser = new MyERPMembershipUser(user);
-                    //Store in cache
-                    HttpRuntime.Cache.Insert(cacheKey, membershipUser, null, DateTime.Now.AddMinutes(_cacheTimeoutInMinutes), Cache.NoSlidingExpiration);
-
-                    return membershipUser;
-                }
-                else
-                    return null;
-
-            }
-        }
-
-        public override string GetUserNameByEmail(string email)
-        {
-            using (var context = new EntitiesModel())
-            {
-                var user = context.Users.FirstOrDefault(u => u.Email == email);
-                return user.Name;
-            }
         }
 
         public override int MaxInvalidPasswordAttempts

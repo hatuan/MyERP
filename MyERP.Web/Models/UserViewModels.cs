@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Ext.Net;
 using MyERP.DataAccess;
 
 namespace MyERP.Web.Models
@@ -78,7 +80,7 @@ namespace MyERP.Web.Models
     {
         [Required]
         [Display(Name = "Organization")]
-        public String OrganizationId
+        public Int64 OrganizationId
         {
             get;
             set;
@@ -103,5 +105,8 @@ namespace MyERP.Web.Models
         [Required]
         [Display(Name = "Working Date")]
         public DateTime WorkingDate { get; set; }
+
+        public List<ListItem> Organizations { get; set; }
+        public List<ListItem> CultureUIs { get; set; }
     }
 }

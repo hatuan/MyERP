@@ -34,6 +34,9 @@ namespace MyERP.Web
                 var membershipUser = new MyERPMembershipUser(user);
                 HttpRuntime.Cache[cacheKey] = membershipUser;
 
+                cacheKey = string.Format("UserData_{0}", user.Id);
+                HttpRuntime.Cache[cacheKey] = membershipUser;
+
                 return true;
             }
             catch (Exception)

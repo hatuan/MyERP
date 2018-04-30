@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
+using System.Threading;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Ext.Net;
+using Ext.Net.MVC;
+using MyERP.Web.Helpers;
 using MyERP.Web.Models;
 
 namespace MyERP.Web.Controllers
@@ -51,6 +56,8 @@ namespace MyERP.Web.Controllers
         [ValidateAntiForgeryToken]
         public  ActionResult Login(LoginViewModel model, string returnUrl)
         {
+            DirectResult r = new DirectResult();
+
             if (ModelState.IsValid)
             {
                 string passEncrypt = Cryptography.Encrypt(Cryptography.GetHashKey(model.Name + model.Password), model.Password);
@@ -61,7 +68,7 @@ namespace MyERP.Web.Controllers
                     {
                         //Lay thong tin mac dinh cua user
                         var preference = new PreferenceViewModel();
-                        preference.OrganizationId = user.OrganizationId == null ? "" : user.OrganizationId.ToString();
+                        preference.OrganizationId = user.OrganizationId ?? 0;
                         preference.Organization = user.Organization;
                         preference.CultureUI = user.CultureUiId;
                         preference.WorkingDate = DateTime.Now;
@@ -69,33 +76,62 @@ namespace MyERP.Web.Controllers
                         string[] roles = Roles.Provider.GetRolesForUser(user.UserName);
 
                         FormsAuthentication.SetAuthCookie(model.Name, model.RememberMe);
-                        return RedirectToAction("Index", "Home");
+                        r.Success = true;
+                        return r;
+
+                        #region If don't use Ext.net.directRequest in handleLogin (remove return r; before)
+                        var cultureUIName = preference.CultureUI;
+                        var cultureName = preference.Organization.Client.CultureId;
+                        // Validate culture name
+                        cultureUIName = CultureHelper.GetImplementedCulture(cultureUIName); // This is safe
+                        cultureName = CultureHelper.GetImplementedCulture(cultureName); // This is safe
+
+                        // Modify current thread's cultures            
+                        Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(cultureUIName);
+                        Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cultureName);
+
+                        var cacheKey = string.Format("UserData_{0}", user.UserName);
+                        HttpRuntime.Cache.Remove(cacheKey);
+
+                        cacheKey = string.Format("UserData_{0}", user.ProviderUserKey);
+                        HttpRuntime.Cache.Remove(cacheKey);
+
+                        IPrincipal principal = new GenericPrincipal(new GenericIdentity(user.UserName), roles);
+                        var organizationRepository = new OrganizationRepository();
+                        var organizations = organizationRepository.GetAll(principal)
+                            .Select(c => new Ext.Net.ListItem(c.Desctiption, c.Id)).ToList();
+
+                        preference.RootOrganization = organizationRepository.GetRootOrganization(principal);
+                        preference.Organizations = organizations;
+
+                        var cultureUIs = new List<Ext.Net.ListItem>()
+                        {
+                            new Ext.Net.ListItem() { Value = "vi-VN", Text = "VietNam"},
+                            new Ext.Net.ListItem() { Value = "en-US", Text = "English"},
+                        };
+                        preference.CultureUIs = cultureUIs;
+
+                        return new Ext.Net.MVC.PartialViewResult { ViewName = "_Preference", Model = preference };
+                        #endregion
                     }
+                    
                     if (user != null && user.ClientId == null)
                     {
-                        X.Msg.Notify(new NotificationConfig()
-                        {
-                            Title = "Login Error",
-                            Html = "User don't have available Client - Press create new Client",
-                            Width = 250,
-                            Height = 150
-                        }).Show();
+                        r.ErrorMessage = "User don't have available Client - Press create new Client";
+                        r.Success = false;
+                        return r;
                     }
                 }
                 else
                 {
-                    X.Msg.Notify(new NotificationConfig()
-                    {
-                        Title = "Login Error",
-                        Html = "Invalid username or password.",
-                        Width = 250,
-                        Height = 150
-                    }).Show();
+                    r.ErrorMessage = "Invalid username or password.";
+                    r.Success = false;
+                    return r;
                 }
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            r.Success = false;
+            r.ErrorMessage = "Invalid username or password.";
+            return r;
         }
 
         //
@@ -264,115 +300,66 @@ namespace MyERP.Web.Controllers
         {
             ViewBag.ReturnUrl = returnUrl;
 
-            var model = new PreferenceViewModel();
-            model.WorkingDate = DateTime.Now;
-            
+            var preference = new PreferenceViewModel();
+            preference.WorkingDate = DateTime.Now;
+
             var organizationRepository = new OrganizationRepository();
-            var organizations = organizationRepository.GetAll(User).ToList()
-                .Select(c => new SelectListItem()
-                {
-                    Value = c.Id.ToString(),
-                    Text = c.Desctiption
-                });
+            var organizations = organizationRepository.GetAll(User)
+                .Select(c => new Ext.Net.ListItem(c.Desctiption, c.Id)).ToList();
 
-            model.RootOrganization = organizationRepository.GetRootOrganization(User);
+            preference.RootOrganization = organizationRepository.GetRootOrganization(User);
 
-            var defaultOrganizationId = (Membership.GetUser(User.Identity.Name, true) as MyERPMembershipUser).OrganizationId.ToString();
+            var defaultOrganizationId = (Membership.GetUser(User.Identity.Name, true) as MyERPMembershipUser).OrganizationId;
             var defaultCultureUI = (Membership.GetUser(User.Identity.Name, true) as MyERPMembershipUser).CultureUiId;
 
             if (Session["Preference"] != null)
             {
-                defaultOrganizationId = (Session["Preference"] as PreferenceViewModel).OrganizationId;
-                defaultCultureUI = model.CultureUI = (Session["Preference"] as PreferenceViewModel).CultureUI;
-                model.WorkingDate = (Session["Preference"] as PreferenceViewModel).WorkingDate;
+                defaultOrganizationId = preference.OrganizationId = (Session["Preference"] as PreferenceViewModel).OrganizationId;
+                defaultCultureUI = preference.CultureUI = (Session["Preference"] as PreferenceViewModel).CultureUI;
+                preference.WorkingDate = (Session["Preference"] as PreferenceViewModel).WorkingDate;
             }
 
-            if (!string.IsNullOrEmpty(defaultOrganizationId) && defaultOrganizationId != Guid.Empty.ToString())
-            {
-                SelectListItem selected = organizations.FirstOrDefault(c => c.Value == defaultOrganizationId);
-                
-                if (selected != null)
-                {
-                    selected.Selected = true;
-                    ViewBag.Organizations = new SelectList(organizations, "Value", "Text", selected.Value);
-                }
-                else
-                {
-                    ViewBag.Organizations = new SelectList(organizations, "Value", "Text");
-                }
-            }
-            else
-                ViewBag.Organizations = new SelectList(organizations, "Value", "Text");
+            preference.Organizations = organizations;
 
-            var cultureUIs = new List<SelectListItem>()
+            var cultureUIs = new List<Ext.Net.ListItem>()
             {
-                new SelectListItem() { Value = "vi-VN", Text = "VietNam"},
-                new SelectListItem() { Value = "en-US", Text = "English"},
+                new Ext.Net.ListItem() { Value = "vi-VN", Text = "VietNam"},
+                new Ext.Net.ListItem() { Value = "en-US", Text = "English"},
             };
 
-            if (!String.IsNullOrEmpty(defaultCultureUI))
-            {
-                SelectListItem selectedcultureUI = cultureUIs.FirstOrDefault(c => c.Value == defaultCultureUI);
+            preference.CultureUIs = cultureUIs;
 
-                if (selectedcultureUI != null)
-                {
-                    selectedcultureUI.Selected = true;
-                    ViewBag.CultureUIs = new SelectList(cultureUIs, "Value", "Text", defaultCultureUI);
-                }
-                else
-                    ViewBag.CultureUIs = new SelectList(cultureUIs, "Value", "Text");
-            }
-            else
-                ViewBag.CultureUIs = new SelectList(cultureUIs, "Value", "Text");
-
-            return View(model);
+            return new Ext.Net.MVC.PartialViewResult { ViewName = "_Preference", Model = preference };
         }
 
         //
         //POST: /User/Preference
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Preference([Bind(Exclude = "Organization,RootOrganization")] PreferenceViewModel model, string returnUrl)
+        public ActionResult Preference([Bind(Exclude = "Organization,RootOrganization,Organizations,CultureUIs")] PreferenceViewModel model, string returnUrl = "~/")
         {
             var organizationRepository = new OrganizationRepository();
-            model.Organization = organizationRepository.GetBy(c => c.Id == long.Parse(model.OrganizationId));
+            model.Organization = organizationRepository.GetBy(c => c.Id == model.OrganizationId);
             model.RootOrganization = organizationRepository.GetRootOrganization(model.Organization);
+
+            DirectResult r = new DirectResult();
 
             if (ModelState.IsValid)
             {
                 Session["Preference"] = model;
 
                 var userRepository = new UserRepository();
-                if (!userRepository.UpdateDefaultOrganization(User.Identity.Name, long.Parse(model.OrganizationId)))
+                if (userRepository.UpdateDefaultOrganization(User.Identity.Name, model.OrganizationId))
                 {
-                    ModelState.AddModelError("OrganizationId", "Set default Organization of User failed ");
-                }
-                else
-                {
-                    //if (returnUrl.Trim().ToLower() == "~/")
+                    if (returnUrl.Trim().ToLower() == "~/")
                         return RedirectToAction("Index", "Home");
-                    //else
-                    //    return RedirectToLocal(returnUrl);
-                    
+                    else
+                        return RedirectToLocal(returnUrl);
                 }
+                r.ErrorMessage = "Set default Organization of User failed ";
             }
 
-            var organizations = organizationRepository.GetAll(User).ToList()
-                .Select(c => new SelectListItem()
-                {
-                    Value = c.Id.ToString(),
-                    Text = c.Desctiption
-                });
-            ViewBag.Organizations = model.OrganizationId != "" ? new SelectList(organizations, "Value", "Text", model.OrganizationId) : new SelectList(organizations, "Value", "Text");
-
-            var cultureUIs = new List<SelectListItem>()
-            {
-                new SelectListItem() { Value = "vi-VN", Text = "VietNam"},
-                new SelectListItem() { Value = "en-US", Text = "English"},
-            };
-            ViewBag.CultureUIs = new SelectList(cultureUIs, "Value", "Text", model.CultureUI);
-
-            return View(model);
+            r.Success = false;
+            return r;
         }
 
         private bool HasPassword()

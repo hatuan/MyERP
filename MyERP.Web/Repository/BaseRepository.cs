@@ -57,7 +57,7 @@ namespace MyERP.Web
         /// <returns></returns>
         public virtual IQueryable<TEntity> GetAll(IPrincipal principal)
         {
-            var membershipUser = (MyERPMembershipUser)Membership.GetUser(principal, true);
+            var membershipUser = (MyERPMembershipUser)Membership.GetUser(principal.Identity.Name, true);
             List<TEntity> allEntities = new List<TEntity>();
             if (membershipUser != null)
             {
@@ -96,11 +96,12 @@ namespace MyERP.Web
         {
             if (entity == null)
                 throw new ArgumentNullException("entity");
-
-            TEntity attachedEntity = dataContext.Set<TEntity>().Attach(entity);
+            
+            //TEntity attachedEntity = dataContext.Set<TEntity>().Attach(entity);
+            dataContext.Entry(entity).State = EntityState.Modified;
             dataContext.SaveChanges();
 
-            return attachedEntity;
+            return entity;
         }
 
         public virtual void Delete(TEntity entity)
