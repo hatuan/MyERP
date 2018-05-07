@@ -61,6 +61,8 @@
     <Compile Include="Entities\MyERPDataModel.Organization.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Role.cs" />
     <Compile Include="Entities\MyERPDataModel.Role.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Uom.cs" />
+    <Compile Include="Entities\MyERPDataModel.Uom.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.User.cs" />
     <Compile Include="Entities\MyERPDataModel.User.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.UserInRole.cs" />
@@ -76,6 +78,8 @@
     <Compile Include="Mapping\MyERPDataModel.OrganizationConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.RoleConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.RoleConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.UomConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.UomConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.UserConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.UserConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.UserInRoleConfiguration.cs" />

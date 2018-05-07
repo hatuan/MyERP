@@ -7,6 +7,7 @@ using System.Web.Security;
 using Ext.Net;
 using Ext.Net.MVC;
 using MyERP.Web.Models;
+using PartialViewResult = Ext.Net.MVC.PartialViewResult;
 
 namespace MyERP.Web.Controllers
 {
@@ -34,6 +35,17 @@ namespace MyERP.Web.Controllers
             }
 
             return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
+        }
+
+        public PartialViewResult ApplicationMenuPartialView(string containerId)
+        {
+            return new PartialViewResult
+            {
+                ContainerId = containerId,
+                ViewName = "_ApplicationMenu",
+                WrapByScriptTag = false,
+                RenderMode = RenderMode.Replace 
+            };
         }
     }
 }

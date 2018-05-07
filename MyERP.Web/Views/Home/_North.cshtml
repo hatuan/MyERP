@@ -1,30 +1,48 @@
-﻿@{ var mobileVersion = "4.1"; }
+﻿@using ParameterMode = System.Data.Entity.Core.Metadata.Edm.ParameterMode
 @(Html.X().Panel()
-        .Header(false)
-        .Region(Region.North)
-        .Border(false)
-        .Height(70)
-        .Content(
-        @<text>
-            <header class="site-header" role="banner">
-                <nav class="top-navigation">
-                    <div class="logo-container">
-                        <img src="../../resources/images/einvoice-logo.png" />
-                    </div>
-                    <div class="navigation-bar">
-                        <div class="application-title-container">
-                            @(Html.X().Label()
-                                        .Cls("application-title")
-                                        .Text("Phần mềm hóa đơn điện tử")
-                            )
-                        </div>
-                        <input type="checkbox" id="menu-button-checkbox" />
-                        <label id="menu-button" for="menu-button-checkbox">
-                            <span></span>
-                        </label>
-                    </div>
-                </nav>
-            </header>
-        </text>
-                )
-)
+      .Header(false)
+      .Region(Region.North)
+      .Border(false)
+      .Height(110)
+      .Items(
+          Html.X().Panel()
+              .Header(false)
+              .Region(Region.North)
+              .Border(false)
+              .Height(70)
+              .Content(
+                  @<text>
+                      <header class="site-header" role="banner">
+                          <nav class="top-navigation">
+                              <div class="logo-container">
+                                  <img src="../../resources/images/einvoice-logo.png" />
+                              </div>
+                              <div class="navigation-bar">
+                                  <div class="application-title-container">
+                                      @(Html.X().Label()
+                                            .Cls("application-title")
+                                            .Text("Phần mềm hóa đơn điện tử"))
+                                  </div>
+                                  <input type="checkbox" id="menu-button-checkbox" />
+                                  <label id="menu-button" for="menu-button-checkbox">
+                                      <span></span>
+                                  </label>
+                              </div>
+                          </nav>
+                      </header>
+                   </text>
+              ),
+          Html.X().Panel()
+              .ID("ApplicationMenuContainer")
+              .Header(false)
+              .Region(Region.South)
+              .Border(false)
+              .Height(40)
+              .Layout(LayoutType.Fit)
+              .BodyCls("application-menu-panel")
+              .Loader(Html.X().ComponentLoader()
+                  .Url(Url.Action("ApplicationMenuPartialView"))
+                  .Mode(LoadMode.Script)
+                  .Params(new { containerId = "ApplicationMenuContainer" })
+              )
+      ))

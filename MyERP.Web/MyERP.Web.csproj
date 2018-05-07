@@ -171,7 +171,6 @@
     <Content Include="App_Readme\Transformer.NET\README.txt" />
     <Content Include="Areas\Getting_Started\config.xml" />
     <Content Include="Areas\Getting_Started\Views\CHANGELOG\config.xml" />
-    <Content Include="Resources\css\examples.css" />
     <Content Include="Resources\css\main.css" />
     <Content Include="Resources\fonts\fontawesome-webfont.svg" />
     <Content Include="Resources\fonts\LICENSE_TITILLIUMTEXT.txt" />
@@ -232,7 +231,6 @@
     <Content Include="Resources\icons\wand.png" />
     <Content Include="Resources\icons\wrench.png" />
     <Content Include="Resources\images\404.png" />
-    <Content Include="Resources\images\banner-2-small.png" />
     <Content Include="Resources\images\bg-main.png" />
     <Content Include="Resources\images\bg.gif" />
     <Content Include="Resources\images\bgnoise.png" />
@@ -242,14 +240,10 @@
     <Content Include="Resources\images\commentlogo.png" />
     <Content Include="Resources\images\coolite.png" />
     <Content Include="Resources\images\ee-ad-bg.png" />
-    <Content Include="Resources\images\ee-ad-content.png" />
     <Content Include="Resources\images\ee-ad-store-bg.png" />
+    <Content Include="Resources\images\logo.png" />
+    <Content Include="Resources\images\einvoice-logo.png" />
     <Content Include="Resources\images\expand-all.gif" />
-    <Content Include="Resources\images\ext.net-logo.png" />
-    <Content Include="Resources\images\extdotnet-logo.svg" />
-    <Content Include="Resources\images\extnet-mobile-final.svg" />
-    <Content Include="Resources\images\ext_net_badge.gif" />
-    <Content Include="Resources\images\ext_net_logo_small.gif" />
     <Content Include="Resources\images\grey.png" />
     <Content Include="Resources\images\grid-badge-bg.png" />
     <Content Include="Resources\images\grid.png" />
@@ -260,19 +254,15 @@
     <Content Include="Resources\images\layout-browser-hd-bg.gif" />
     <Content Include="Resources\images\loading.gif" />
     <Content Include="Resources\images\loading32.gif" />
-    <Content Include="Resources\images\logo.png" />
     <Content Include="Resources\images\new.gif" />
     <Content Include="Resources\images\newgray.gif" />
-    <Content Include="Resources\images\noimage.gif" />
     <Content Include="Resources\images\noimage.png" />
     <Content Include="Resources\images\sample-over.gif" />
-    <Content Include="Resources\images\screenshot.png" />
     <Content Include="Resources\images\title-background.png" />
     <Content Include="Resources\images\titlebar-badge-bg.png" />
     <Content Include="Resources\images\titlebar-bg.jpg" />
     <Content Include="Resources\images\titlebar-logo-bg.jpg" />
     <Content Include="Resources\images\welcome-bullet.png" />
-    <Content Include="Resources\images\welcome-screens.png" />
     <Content Include="Resources\js\main.js" />
     <Content Include="Resources\js\perfect-scrollbar.min.js" />
     <Content Include="Resources\fonts\fontawesome-webfont.eot" />
@@ -324,6 +314,9 @@
     <Content Include="Areas\Getting_Started\Views\CHANGELOG\Index.cshtml" />
     <Content Include="Areas\Getting_Started\Views\Web.config" />
     <Content Include="Views\Shared\_BaseLayout.cshtml" />
+    <Content Include="Views\Home\_ApplicationMenu.cshtml" />
+    <Content Include="Areas\UOM\Views\web.config" />
+    <Content Include="Areas\UOM\Views\Index\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -345,6 +338,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Getting_Started\Controllers\CHANGELOGController.cs" />
     <Compile Include="Areas\Getting_Started\Getting_StartedAreaRegistration.cs" />
+    <Compile Include="Areas\UOM\Controllers\IndexController.cs" />
+    <Compile Include="Areas\UOM\UOMAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ExtNetController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -397,6 +392,7 @@
     <Compile Include="ValidateJsonAntiForgeryTokenAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\UOM\Models\" />
     <Folder Include="Views\Validation\" />
   </ItemGroup>
   <ItemGroup>

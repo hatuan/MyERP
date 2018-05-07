@@ -1,0 +1,68 @@
+﻿@(Html.X().Panel()
+    .ID("ApplicationMenuPanel")
+    .BodyCls("application-menu-panel")
+    .Header(false)
+    .Border(false)
+    .BodyPadding(5)
+    .Layout(LayoutType.HBox)
+    .Defaults(Html.X().Parameter().Name("margin").Value("0 5 0 0").Mode(Ext.Net.ParameterMode.Value))
+    .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle })
+    .Height(40)
+    .Items(
+        Html.X().Button().Text("Home").IconCls("x-fa fa-home"),
+        Html.X().Button().Text("Master Setup").IconCls("x-fa fa-list").Menu(Html.X().Menu()
+                                                                                        .Items(
+                                                                                            Html.X().MenuItem()
+                                                                                                .Text("Financial"),
+                                                                                            Html.X().MenuItem()
+                                                                                                .Text("Sale").Menu(Html.X().Menu()
+                                                                                                    .Items(
+                                                                                                        Html.X().MenuItem().Text("Business Partner")
+                                                                                                        )
+                                                                                                ),
+                                                                                            Html.X().MenuItem()
+                                                                                                .Text("Purchase").Menu(Html.X().Menu()
+                                                                                                    .Items(
+                                                                                                        Html.X().MenuItem().Text("Business Partner")
+                                                                                                    )
+                                                                                                ),
+                                                                                            Html.X().MenuItem()
+                                                                                                .Text("Warehouse").Menu(Html.X().Menu()
+                                                                                                    .Items(
+                                                                                                        Html.X().MenuItem().Text("Product").Tag("Product").Listeners(ls => ls.Click.Handler= "mainMenuClick(this)"),
+                                                                                                        Html.X().MenuItem().Text("UOM").Tag("UOM").Listeners(ls => ls.Click.Handler = "mainMenuClick(this)")
+                                                                                                    )
+                                                                                                ),
+                                                                                            Html.X().MenuItem()
+                                                                                                .Text("System")
+                                                                                            )
+                                                                            ),
+        Html.X().Button().Text("Modules").IconCls("x-fa fa-book").Menu(Html.X().Menu()
+                                                                                    .Items(
+                                                                                        Html.X().MenuItem()
+                                                                                            .Text("Financial"),
+                                                                                        Html.X().MenuItem()
+                                                                                            .Text("Sale"),
+                                                                                        Html.X().MenuItem()
+                                                                                            .Text("Purchase"),
+                                                                                        Html.X().MenuItem()
+                                                                                            .Text("Warehouse"),
+                                                                                        Html.X().MenuItem()
+                                                                                            .Text("System")
+                                                                                    )
+                                                                        ),
+        Html.X().Button().Text("Reports").IconCls("x-fa fa-file").Menu(Html.X().Menu().Width(100)
+                                                                                    .Items(
+                                                                                        Html.X().MenuItem()
+                                                                                            .Text("Sale"),
+                                                                                        Html.X().MenuItem()
+                                                                                            .Text("Purchase"),
+                                                                                        Html.X().MenuItem()
+                                                                                            .Text("Warehouse"),
+                                                                                        Html.X().MenuItem()
+                                                                                            .Text("System")
+                                                                                    )
+                                                                        ),
+        Html.X().Button().Text("About").IconCls("x-fa fa-info")
+        )
+)

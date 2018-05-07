@@ -17,14 +17,14 @@ using System.Data.Entity.ModelConfiguration;
 namespace MyERP.DataAccess.Mapping
 {
 
-    public partial class OrganizationConfiguration : EntityTypeConfiguration<Organization>
+    public partial class UomConfiguration : EntityTypeConfiguration<Uom>
     {
 
-        public OrganizationConfiguration()
+        public UomConfiguration()
         {
             this
                 .HasKey(p => p.Id)
-                .ToTable("organization", "dbo");
+                .ToTable("uom", "dbo");
             // Properties:
             this
                 .Property(p => p.Id)
@@ -37,26 +37,21 @@ namespace MyERP.DataAccess.Mapping
                     .HasColumnName(@"code")
                     .IsRequired()
                     .HasMaxLength(32)
-                    .HasColumnType("varchar");
+                    .HasColumnType("nvarchar");
             this
-                .Property(p => p.Desctiption)
-                    .HasColumnName(@"desctiption")
+                .Property(p => p.Desccription)
+                    .HasColumnName(@"desccription")
                     .IsRequired()
                     .HasMaxLength(256)
                     .HasColumnType("nvarchar");
             this
-                .Property(p => p.ClientId)
-                    .HasColumnName(@"client_id")
+                .Property(p => p.OrganizationId)
+                    .HasColumnName(@"organization_id")
                     .IsRequired()
                     .HasColumnType("bigint");
             this
-                .Property(p => p.Status)
-                    .HasColumnName(@"status")
-                    .IsRequired()
-                    .HasColumnType("smallint");
-            this
-                .Property(p => p.RecCreatedBy)
-                    .HasColumnName(@"rec_created_by")
+                .Property(p => p.ClientId)
+                    .HasColumnName(@"client_id")
                     .IsRequired()
                     .HasColumnType("bigint");
             this
@@ -65,8 +60,8 @@ namespace MyERP.DataAccess.Mapping
                     .IsRequired()
                     .HasColumnType("datetime2");
             this
-                .Property(p => p.RecModifiedBy)
-                    .HasColumnName(@"rec_modified_by")
+                .Property(p => p.RecCreatedBy)
+                    .HasColumnName(@"rec_created_by")
                     .IsRequired()
                     .HasColumnType("bigint");
             this
@@ -75,11 +70,31 @@ namespace MyERP.DataAccess.Mapping
                     .IsRequired()
                     .HasColumnType("datetime2");
             this
+                .Property(p => p.RecModifiedBy)
+                    .HasColumnName(@"rec_modified_by")
+                    .IsRequired()
+                    .HasColumnType("bigint");
+            this
+                .Property(p => p.Status)
+                    .HasColumnName(@"status")
+                    .IsRequired()
+                    .HasColumnType("smallint");
+            this
                 .Property(p => p.Version)
                     .HasColumnName(@"version")
                     .IsRequired()
                     .HasColumnType("bigint");
             // Associations:
+            this
+                .HasRequired(p => p.Client)
+                    .WithMany()
+                .HasForeignKey(p => p.ClientId)
+                    .WillCascadeOnDelete(false);
+            this
+                .HasRequired(p => p.Organization)
+                    .WithMany()
+                .HasForeignKey(p => p.OrganizationId)
+                    .WillCascadeOnDelete(false);
             this
                 .HasRequired(p => p.RecCreatedByUser)
                     .WithMany()

@@ -17,13 +17,12 @@ namespace MyERP.DataAccess
 {
 
     /// <summary>
-    /// There are no comments for MyERP.DataAccess.Currency in the schema.
+    /// There are no comments for MyERP.DataAccess.Uom in the schema.
     /// </summary>
-    public partial class Currency    {
+    public partial class Uom    {
 
-        public Currency()
+        public Uom()
         {
-          this.Verson = 1;
             OnCreated();
         }
 
@@ -89,17 +88,6 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for Status in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual short Status
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
         /// There are no comments for RecCreatedAt in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
@@ -122,17 +110,6 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for RecModifiedBy in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long RecModifiedBy
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
         /// There are no comments for RecModifiedAt in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
@@ -144,10 +121,32 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for Verson in the schema.
+        /// There are no comments for RecModifiedBy in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long Verson
+        public virtual long RecModifiedBy
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for Status in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual short Status
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for Version in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual long Version
         {
             get;
             set;
@@ -159,18 +158,9 @@ namespace MyERP.DataAccess
         #region Navigation Properties
     
         /// <summary>
-        /// There are no comments for RecCreateByUser in the schema.
+        /// There are no comments for Client in the schema.
         /// </summary>
-        public virtual User RecCreateByUser
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for RecModifiedByUser in the schema.
-        /// </summary>
-        public virtual User RecModifiedByUser
+        public virtual Client Client
         {
             get;
             set;
@@ -186,9 +176,18 @@ namespace MyERP.DataAccess
         }
     
         /// <summary>
-        /// There are no comments for Client in the schema.
+        /// There are no comments for RecCreatedByUser in the schema.
         /// </summary>
-        public virtual Client Client
+        public virtual User RecCreatedByUser
+        {
+            get;
+            set;
+        }
+    
+        /// <summary>
+        /// There are no comments for RecModifiedByUser in the schema.
+        /// </summary>
+        public virtual User RecModifiedByUser
         {
             get;
             set;
