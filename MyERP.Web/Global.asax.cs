@@ -101,7 +101,7 @@ namespace MyERP.Web
                     Context.Response.Clear();
 
                     // Finally redirect, transfer, or render a error view
-                    Context.Response.Redirect(@"~/User/Preference");
+                    Context.Response.Redirect(@"/User/Preference");
                 }
 
             }

@@ -186,7 +186,7 @@
           </Key>
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
-          <Property Name="desccription" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
@@ -621,7 +621,7 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="e2482ad2-7f37-4dcf-8859-dcfc7e4090a6" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="5ab37474-0ed3-4531-a46e-83c6d41834d2" />
-          <Property Name="Desccription" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="c1b865dd-07f7-47e7-b891-f576046363cd" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="c1b865dd-07f7-47e7-b891-f576046363cd" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="fa328244-37ce-4128-8ade-02ec293bd3b1" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="ecbc93e3-64e8-4105-a4e4-d2f67371e02c" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="2749ce4f-ef3f-4560-995a-20f6743a73e0" />
@@ -975,7 +975,7 @@
               <MappingFragment StoreEntitySet="uoms">
                 <ScalarProperty Name="Id" ColumnName="id" />
                 <ScalarProperty Name="Code" ColumnName="code" />
-                <ScalarProperty Name="Desccription" ColumnName="desccription" />
+                <ScalarProperty Name="Description" ColumnName="description" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
                 <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />

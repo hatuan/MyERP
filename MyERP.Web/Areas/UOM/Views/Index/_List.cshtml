@@ -1,0 +1,91 @@
+﻿@using SortDirection = Ext.Net.SortDirection
+@(Html.X().GridPanel()
+      .ID("UOMList")
+      .Title("UOM List")
+      .MinHeight(300)
+      .Region(Region.Center)
+      .Frame(true)
+      .TopBar(items =>
+      {
+          items.Add(Html.X().Toolbar().Items(buttons =>
+          {
+              buttons.Add(Html.X().Button()
+                  .ID("btnEdit")
+                  .Text("Edit")
+                  .Icon(Icon.NoteEdit)
+                  .Disabled(true)
+                  );
+              buttons.Add(Html.X().Button()
+                  .ID("btnAdd")
+                  .Text("Add")
+                  .Icon(Icon.Add)
+                  );
+              buttons.Add(Html.X().Button()
+                  .ID("btnDelete")
+                  .Text("Delete")
+                  .Icon(Icon.Delete)
+                  .Disabled(true)
+                  .DirectEvents(de =>
+                  {
+                      de.Click.Action = "Delete";
+                      de.Click.Confirmation.ConfirmRequest = true;
+                      de.Click.Confirmation.Title = "Alert";
+                      de.Click.Confirmation.Message = "Do you want to DELETE ?";
+                      de.Click.ExtraParams.Add(new Parameter("ID", "#{UOMList}.getSelectionModel().getSelected().Id", ParameterMode.Raw));
+                  })
+                  );
+          }));
+
+      })
+      .Store(
+          Html.X().Store()
+              .ID("StoreUOMList")
+              .RemoteSort(true)
+              .PageSize(10)
+              .Sorters("Code", SortDirection.ASC)
+              .AutoLoad(true)
+              .Model(
+                  Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String),
+                          new ModelField("Status", ModelFieldType.Int),
+                          new ModelField("RecCreateBy", ModelFieldType.String),
+                          new ModelField("RecCreatedAt", ModelFieldType.Date),
+                          new ModelField("RecModifiedBy", ModelFieldType.String),
+                          new ModelField("RecModifiedAt", ModelFieldType.Date),
+                          new ModelField("Version", ModelFieldType.Int)
+                      )
+              )
+              .Proxy(
+                  Html.X().AjaxProxy()
+                      .Url(Url.Action("GetData"))
+                      .Reader(Html.X().JsonReader().RootProperty("data"))
+              )
+      )
+      .ColumnModel(
+          Html.X().Column().Text("Org").DataIndex("OrganizationCode").Width(75).Locked(true),
+          Html.X().Column().Text("Code").DataIndex("Code").Width(85).Locked(true),
+          Html.X().Column().Text("Description").DataIndex("Description").MinWidth(256),
+          Html.X().Column().Text("Status").DataIndex("Status").Width(85).Renderer("status"),
+          Html.X().Column().Text("Last User").DataIndex("RecModifiedBy").Width(85),
+          Html.X().DateColumn().Text("Last Updated").DataIndex("RecModifiedAt").Width(150).Format("dd/MM/yyyy H:mm:ss")
+      )
+      .BottomBar(items =>
+      {
+          items.Add(Html.X().PagingToolbar().DisplayInfo(true));
+      })
+      .SelectionModel(
+          Html.X().CheckboxSelectionModel()
+              .Mode(SelectionMode.Single)
+              .Listeners(ls =>
+              {
+                  ls.Select.Handler = "#{btnDelete}.enable();#{btnEdit}.enable();";
+                  ls.Deselect.Handler = "if (!#{UOMList}.hasSelection()) {#{btnDelete}.disable();#{btnEdit}.disable()}";
+              })
+      )
+      .ViewConfig(new GridView(){Listeners = { Refresh = {Handler = "#{btnDelete}.disable();#{btnEdit}.disable();" } }})
+)

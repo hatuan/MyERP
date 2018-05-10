@@ -28,4 +28,9 @@ namespace MyERP.Web
     {
 
     }
+
+    public partial class UomRepository : BaseRepository<MyERP.DataAccess.Uom, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
 }

@@ -68,6 +68,7 @@
     <Compile Include="Entities\MyERPDataModel.UserInRole.cs" />
     <Compile Include="Entities\MyERPDataModel.UserInRole.Generated.cs" />
     <Compile Include="Enum\CurrencySearchField.cs" />
+    <Compile Include="Enum\DefaultStatusType.cs" />
     <Compile Include="Enum\CurrencyStatusType.cs" />
     <Compile Include="Enum\OrganizationStatusType.cs" />
     <Compile Include="Mapping\MyERPDataModel.ClientConfiguration.cs" />

@@ -31,11 +31,32 @@ namespace MyERP.Web.Controllers
         }
 
         //
-        // CheckDuplicateCurrency
+        // CheckDuplicateOrganization
         public JsonResult CheckDuplicateOrganization(string code, long? id)
         {
             var repository = new OrganizationRepository();
             Organization exists;
+            if (id != null)
+                exists = repository.GetBy(c => c.Code.Equals(code, StringComparison.InvariantCultureIgnoreCase) && c.Id != id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(code, StringComparison.InvariantCultureIgnoreCase));
+
+            if (exists == null)
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        //
+        // CheckDuplicateUOM
+        public JsonResult CheckDuplicateUom(string code, long? id)
+        {
+            var repository = new UomRepository();
+            Uom exists;
             if (id != null)
                 exists = repository.GetBy(c => c.Code.Equals(code, StringComparison.InvariantCultureIgnoreCase) && c.Id != id);
             else

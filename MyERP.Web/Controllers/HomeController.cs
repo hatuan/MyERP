@@ -11,7 +11,6 @@ using PartialViewResult = Ext.Net.MVC.PartialViewResult;
 
 namespace MyERP.Web.Controllers
 {
-    [DirectController]
     [Authorize]
     public class HomeController : BaseController
     {
@@ -24,17 +23,6 @@ namespace MyERP.Web.Controllers
         public ActionResult Home()
         {
             return View();
-        }
-
-        [OutputCache(Duration = 3600)]
-        public ActionResult GetMenuNodes(string node)
-        {
-            if (node == "Root")
-            {
-                return this.Content(TreeMenusModel.GetTreeMenusNodes().ToJson());
-            }
-
-            return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
         }
 
         public PartialViewResult ApplicationMenuPartialView(string containerId)

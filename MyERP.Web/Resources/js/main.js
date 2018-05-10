@@ -1,55 +1,3 @@
-var handleRedirection = function () {
-    if (Ext.os.deviceType !== "Desktop") {
-        var query = Ext.Object.fromQueryString(window.location.search),
-            queryRedirect = query.redirect;
-
-        if (!Ext.isEmpty(queryRedirect)) {
-            queryRedirect = Ext.JSON.decode(queryRedirect);
-
-            if (queryRedirect === false) {
-                return;
-            } else if (queryRedirect === true) {
-                window.location = "http://mobile.ext.net";
-                return;
-            }
-        }
-
-        var cookieRedirect = Ext.util.Cookies.get("redirect");
-
-        if (!Ext.isEmpty(cookieRedirect)) {
-            cookieRedirect = Ext.JSON.decode(cookieRedirect);
-
-            if (cookieRedirect === false) {
-                return;
-            } else if (cookieRedirect === true) {
-                window.location = "http://mobile.ext.net";
-                return;
-            }
-        }
-
-        // Rich this code if neither query string nor Cookie directives
-        // So, we should ask the user eiter redirect or stay
-        Ext.onReady(function () {
-            App.RedirectOverlay.show();
-        });
-    }
-};
-
-handleRedirection();
-
-Ext.grid.NavigationModel.override({
-    onKeyUp: function (keyEvent) {
-        var newRecord = keyEvent.view.walkRecs(keyEvent.record, -1);
-
-        if (newRecord && newRecord !== keyEvent.record) {
-            this.setPosition(newRecord, this.columnIndex, keyEvent);
-        } else {
-            keyEvent.view.getSelectionModel().deselectAll();
-            App.SearchField.focus(false, 100);
-        }
-    }
-});
-
 Ext.onReady(function () {
     var sidebarRight = document.getElementById('rightnav-body');
     Ps.initialize(sidebarRight);
@@ -71,42 +19,7 @@ Ext.onReady(function () {
     });
 });
 
-var SEARCH_URL = "/search/",
-    TAG_CLOUD_TOKEN = "/TagCloud",
-    lockHistoryChange = false;
-
-var tagLabelConfig = {
-    trackOver: true,
-    listeners: {
-        beforetagadd: function (field, tag, o) {
-            tag.overCls = "example-tag";
-            o["data-qtip"] = "Click to filter examples by '" + tag.text + "'";
-        },
-        click: function (field, tag) {
-            var searchField = App.SearchField;
-
-            searchField.setValue(tag.text);
-            changeFilterHash(tag.text.replace(" ", "+"));
-            filter(searchField, true);
-        }
-    }
-};
-
-var createTagItems = function (tab, node) {
-    var tb = tab.getDockedItems('toolbar[dock="top"]')[0];
-
-    tb.insert(1, {
-        xtype: "tbseparator"
-    });
-
-    if (node.data.tags.length > 0) {
-        tb.insert(2, Ext.applyIf({
-            xtype: "taglabel",
-            tags: node.data.tags
-        }, tagLabelConfig));
-    }
-};
-
+var lockHistoryChange = false;
 
 var makeTab = function (id, url, title) {
     var win,
@@ -295,70 +208,9 @@ var makeTab = function (id, url, title) {
     setTimeout(function () {
         App.ExampleTabs.setActiveTab(tab);
     }, 250);
-
-    var node = App.exampleTree.getStore().getNodeById(id),
-        expandAndSelect = function (node) {
-            var view = App.exampleTree.getView(),
-                originalAnimate = view.animate;
-
-            view.animate = false;
-            node.bubble(function (node) {
-                node.expand(false);
-            });
-
-            App.exampleTree.getSelectionModel().select(node);
-            view.animate = originalAnimate;
-        };
-
-    if (node) {
-        expandAndSelect(node);
-        createTagItems(tab, node);
-    } else {
-        App.exampleTree.on("load", function (node) {
-            node = App.exampleTree.getStore().getNodeById(id);
-            if (node) {
-                expandAndSelect(node);
-                createTagItems(tab, node);
-            }
-        }, this, { delay: 10, single: true });
-    }
-};
+ };
 
 var lookup = {};
-
-var onTreeAfterRender = function (tree) {
-    var sm = tree.getSelectionModel();
-
-    Ext.create('Ext.util.KeyNav', {
-        target: tree.view.el,
-        enter: function (e) {
-            if (sm.hasSelection()) {
-                onTreeItemClick(sm.getSelection()[0], e);
-            }
-        }
-    });
-};
-
-var onTreeItemClick = function (record, e) {
-    if (record.isLeaf()) {
-        e.stopEvent();
-        loadExample(record.get('url'), record.getId(), record.get('text'));
-    } else {
-        record[record.isExpanded() ? 'collapse' : 'expand']();
-    }
-};
-
-var treeRenderer = function (value, metadata, record) {
-    if (record.data.flags) {
-        if (record.data.flags == "n") {
-            value += "<span>New</span>";
-        } else if (record.data.flags == "u") {
-            value += "<span>Update</span>";
-        }
-    }
-
-    return value;
-};
 
 var loadExample = function (href, id, title) {
     var tab = App.ExampleTabs.getComponent(id),
@@ -400,32 +252,10 @@ var loadExample = function (href, id, title) {
     }
 };
 
-var viewClick = function (dv, e) {
-    var group = e.getTarget("h2", 3, true);
-
-    if (group) {
-        group.up("div").toggleClass("collapsed");
-    }
-};
-
-var beforeSourceShow = function (el) {
-    var height = Ext.getBody().getViewSize().height;
-
-    if (el.getSize().height > height) {
-        el.setHeight(height - 20);
-    }
-};
-
 var change = function (token) {
     if (!lockHistoryChange) {
         if (token) {
-            if (token.indexOf(SEARCH_URL) === 0) {
-                filterByUrl(token);
-            } else if (token === TAG_CLOUD_TOKEN) {
-                showTagCloud();
-            } else {
-                loadExample(token, lookup[token] || "-");
-            }
+            loadExample(token, lookup[token] || "-");
         } else {
             App.ExampleTabs.setActiveTab(0);
         }
@@ -464,282 +294,19 @@ var keyUp = function (field, e) {
     }
 };
 
-/*
-    field: the search field
-    byTagsOnly: true means searcing by tags only and by full matching
-*/
-var filter = function (field, byTagsOnly) {
-    var tree = App.exampleTree,
-        text = field.getRawValue(),
-        view = tree.getView(),
-        originalAnimate = view.animate;
-
-    if (Ext.isEmpty(text, false)) {
-        clearFilter(field);
-        return;
-    }
-
-    if (text.length < 2) {
-        return;
-    }
-
-    field.getTrigger(0).show();
-
-    var re = new RegExp(".*" + text + ".*", "i");
-
-    tree.clearFilter(true);
-
-    tree.filterBy(function (node) {
-        var tags = node.data.tags,
-            hasTags = Ext.isArray(node.data.tags) && node.data.tags.length > 0,
-            match = false,
-            pn = node.parentNode,
-            pnIsFixed = false,
-            i, len,
-            tagMatch = false;
-
-        if (App.SearchByTitles.checked && !byTagsOnly) {
-            match = re.test(node.data.text);
-        }
-
-        if ((App.SearchByTags.checked || byTagsOnly) && hasTags) {
-            if (byTagsOnly) {
-                match = match || Ext.Array.contains(tags, text);
-            } else {
-                for (i = 0, len = tags.length; i < len; i++) {
-                    if (re.test(tags[i])) {
-                        match = true;
-                        break;
-                    }
-                }
-            }
-        }
-
-        if (match && node.isLeaf()) {
-            pn.hasMatchNode = true;
-        }
-
-        if (pn) {
-            node.bubble(function (n) {
-                if (node != n) {
-                    pnIsFixed = re.test(n.data.text);
-
-                    return !pnIsFixed;
-                }
-            });
-        }
-
-        if (pn != null && pnIsFixed) {
-            return true;
-        }
-
-        if (node.isLeaf() === false) {
-            return match;
-        }
-
-        return pnIsFixed || match;
-    }, { expandNodes: false });
-
-    view.animate = false;
-    tree.getRootNode().cascadeBy(function (node) {
-        if (node.isRoot()) {
-            return;
-        }
-
-        if ((node.getDepth() === 1) ||
-            (node.getDepth() === 2 && node.hasMatchNode)) {
-            node.expand(false);
-        }
-
-        delete node.hasMatchNode;
-    }, tree);
-
-    view.animate = originalAnimate;
-};
-
-var filterByUrl = function (url) {
-    var field = App.SearchField,
-        tree = App.exampleTree;
-
-    if (!lockHistoryChange) {
-        var tree = App.exampleTree,
-            store = tree.getStore(),
-            fn = function () {
-                field.setValue(url.substr(SEARCH_URL.length).replace("+", " "));
-                filter(field);
-            };
-
-        if (store.loading) {
-            store.on("load", fn, null, { single: true, delay: 100 });
-        } else {
-            fn();
-        }
-    }
-};
-
-var clearFilter = function (field, trigger, index, e) {
-    var tree = App.exampleTree;
-
-    field.setValue("");
-    changeFilterHash("");
-    field.getTrigger(0).hide();
-    tree.clearFilter(true);
-    field.focus(false, 100);
-};
-
-var changeFilterHash = Ext.Function.createBuffered(
-    function (text) {
-        lockHistoryChange = true;
-        if (text.length > 2) {
-            window.location.hash = SEARCH_URL + text;
-        } else {
-            var tab = App.ExampleTabs.getActiveTab(),
-                token = "";
-
-            if (tab.loader && tab.loader.url) {
-                token = getToken(tab.loader.url);
-            }
-
-            Ext.History.add(token);
-        }
-    },
-    500);
-
-var filterSpecialKey = function (field, e) {
-    var tree = App.exampleTree,
-        view = tree.getView();
-
-    if (e.getKey() === e.DOWN) {
-        var n = tree.getRootNode().findChildBy(function (node) {
-            return node.isLeaf() && node.data.visible;
-        }, tree, true);
-
-        if (n) {
-            tree.expandPath(n.getPath(), null, null, function () {
-                tree.getSelectionModel().select(n);
-            });
-        }
-    }
-};
-
-var filterNewExamples = function (checkItem, checked) {
-    var tree = App.exampleTree;
-
-    if (checked) {
-        tree.clearFilter(true);
-        tree.filterBy(function (node) {
-            return node.data.isNew;
-        });
-    } else {
-        tree.clearFilter(true);
-    }
-};
-
-var swapThemeClass = function (frame, oldTheme, newTheme) {
-    var html = Ext.fly(frame.document.body.parentNode);
-
-    html.removeCls('x-theme-' + oldTheme);
-    html.addCls('x-theme-' + newTheme);
-};
-
-var themeChange = function (menu, menuItem) {
-    App.direct.SetTheme(menuItem.text, {
-        success: function (result) {
-            App.ExampleTabs.items.each(function(tab) {
-                if (tab.id !== "tabHome") {
-                    tab.getBody().location.reload();
-                }
-            });
-        }
-    });
-};
-
-var getAllTags = function () {
-    var tags = [],
-        root = App.exampleTree.getRootNode();
-
-    root.cascadeBy(function (node) {
-        if (Ext.isArray(node.data.tags)) {
-            tags = tags.concat(node.data.tags)
-        }
-    });
-
-    tags = Ext.Array.unique(tags);
-
-    return Ext.Array.sort(tags);
-};
-
-var showTagCloud = function () {
-    var tabPanel = App.ExampleTabs,
-        tabId = "tagCloudTab",
-        tab = tabPanel.getComponent(tabId);
-
-    if (!tab) {
-        tab = Ext.create("Ext.panel.Panel", {
-            id: tabId,
-            title: "Tag Cloud",
-            icon: "#WeatherClouds",
-            closable: true,
-            url: "TagCloud",
-            margin: 20,
-            historyToken: TAG_CLOUD_TOKEN,
-            items: [
-                Ext.applyIf({
-                    xtype: "taglabel",
-                    tags: getAllTags()
-                }, tagLabelConfig)
-            ]
-        });
-
-        tabPanel.addTab(tab);
-    }
-
-    tabPanel.setActiveTab(tab);
-};
-
 if (window.location.href.indexOf("#") > 0) {
     var directLink = window.location.href.substr(window.location.href.indexOf("#") + 1)
                     .replace(/(\s|\<|&lt;|%22|%3C|\"|\'|&quot|&#039;|script)/gi, '');
 
     Ext.onReady(function () {
         Ext.Function.defer(function () {
-            if (directLink.indexOf(SEARCH_URL) === 0) {
-                filterByUrl(directLink);
-            } else {
-                if (!Ext.isEmpty(directLink, false)) {
-                    if (directLink === TAG_CLOUD_TOKEN) {
-                        if (App.exampleTree.store.loading) {
-                            App.exampleTree.store.on("load", function () {
-                                showTagCloud();
-                            }, null, { single: true })
-                        } else {
-                            showTagCloud();
-                        }
-                    } else {
-                        loadExample(directLink, "-");
-                    }
-                }
+            if (!Ext.isEmpty(directLink, false)) {
+                loadExample(directLink, "-");
             }
         }, 100, window);
     }, window);
 }
 
-var onRedirect = function () {
-    var remember = App.RememberCheckbox.getValue();
-
-    if (remember) {
-        Ext.util.Cookies.set("redirect", true);
-    }
-
-    window.location = "http://mvc.mobile.ext.net";
-};
-
-var onStay = function () {
-    var remember = App.RememberCheckbox.getValue();
-
-    if (remember) {
-        Ext.util.Cookies.set("redirect", false);
-    }
-
-    this.up().hide();
-};
+mainMenuClick = function(menuItem) {
+    
+}

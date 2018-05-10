@@ -29,8 +29,12 @@
                                                                                             Html.X().MenuItem()
                                                                                                 .Text("Warehouse").Menu(Html.X().Menu()
                                                                                                     .Items(
-                                                                                                        Html.X().MenuItem().Text("Product").Tag("Product").Listeners(ls => ls.Click.Handler= "mainMenuClick(this)"),
-                                                                                                        Html.X().MenuItem().Text("UOM").Tag("UOM").Listeners(ls => ls.Click.Handler = "mainMenuClick(this)")
+                                                                                                        Html.X().MenuItem().Text("Product").Tag("Product"),
+                                                                                                        Html.X().MenuItem().Text("UOM").Tag("UOM").DirectEvents(de => {
+                                                                                                            de.Click.Url = Url.Action("_List", "Index", new { area = "UOM" });
+                                                                                                            de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
+                                                                                                            de.Click.EventMask.ShowMask = true;
+                                                                                                        })
                                                                                                     )
                                                                                                 ),
                                                                                             Html.X().MenuItem()

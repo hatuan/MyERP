@@ -74,7 +74,13 @@ namespace MyERP.Web
             if (filter == null)
                 throw new ArgumentNullException("filter");
 
-            TEntity entity = dataContext.Set<TEntity>().SingleOrDefault(filter);
+            var membershipUser = (MyERPMembershipUser)Membership.GetUser(HttpContext.Current.User.Identity.Name, true);
+            if (membershipUser == null)
+                throw new NullReferenceException("membershipUser");
+
+            string clause = "ClientId = @0";
+
+            TEntity entity = dataContext.Set<TEntity>().Where(clause, membershipUser.ClientId).SingleOrDefault(filter);
             if (entity == null)
                 return default(TEntity);
 
