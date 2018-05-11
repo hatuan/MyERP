@@ -27,6 +27,16 @@
                             .ID("btnSave")
                             .Text("Save")
                             .Icon(Icon.Disk)
+                            .Listeners(ls =>
+                            {
+                                ls.Click.Handler = @"
+                                    if (!#{FormUOMMaintenance}.getForm().isValid()) {
+                                        #{FormUOMMaintenance}.validate();
+                                        return false;
+                                    } else {
+                                        return true;
+                                    }";
+                            })
                             .DirectEvents(de =>
                             {
                                 de.Click.Url = Url.Action("_Maintenance");

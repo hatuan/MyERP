@@ -59,6 +59,8 @@
     <Compile Include="Entities\MyERPDataModel.Currency.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Organization.cs" />
     <Compile Include="Entities\MyERPDataModel.Organization.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Product.cs" />
+    <Compile Include="Entities\MyERPDataModel.Product.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Role.cs" />
     <Compile Include="Entities\MyERPDataModel.Role.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Uom.cs" />
@@ -77,6 +79,8 @@
     <Compile Include="Mapping\MyERPDataModel.CurrencyConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.OrganizationConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.OrganizationConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ProductConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ProductConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.RoleConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.RoleConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.UomConfiguration.cs" />

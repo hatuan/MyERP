@@ -326,6 +326,9 @@
     <Content Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Areas\UOM\Views\Index\_List.cshtml" />
     <Content Include="Areas\UOM\Views\Index\_Maintenance.cshtml" />
+    <Content Include="Areas\Product\Views\web.config" />
+    <Content Include="Areas\Product\Views\Index\Index.cshtml" />
+    <Content Include="Areas\Product\Views\Index\_List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -347,6 +350,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Getting_Started\Controllers\CHANGELOGController.cs" />
     <Compile Include="Areas\Getting_Started\Getting_StartedAreaRegistration.cs" />
+    <Compile Include="Areas\Product\Controllers\IndexController.cs" />
+    <Compile Include="Areas\Product\ProductAreaRegistration.cs" />
     <Compile Include="Areas\UOM\Controllers\IndexController.cs" />
     <Compile Include="Areas\UOM\UOMAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -395,6 +400,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\OrganizationRepository.cs" />
     <Compile Include="Repository\RoleRepository.cs" />
+    <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\UomRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="odata\UsersController.partial.cs" />
@@ -402,6 +408,7 @@
     <Compile Include="ValidateJsonAntiForgeryTokenAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Product\Models\" />
     <Folder Include="Areas\UOM\Models\" />
     <Folder Include="Views\Validation\" />
   </ItemGroup>

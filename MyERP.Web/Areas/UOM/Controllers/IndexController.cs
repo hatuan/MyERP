@@ -66,6 +66,8 @@ namespace MyERP.Web.Areas.UOM.Controllers
                 Version = c.Version
             }).ToList();
 
+            Session.Add("StoreUOMList_StoreRequestParameters", parameters);
+
             return this.Store(data, paging.TotalRecords);
         }
 

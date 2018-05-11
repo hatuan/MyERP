@@ -33,4 +33,9 @@ namespace MyERP.Web
     {
 
     }
+
+    public partial class ProductRepository : BaseRepository<MyERP.DataAccess.Product, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
 }

@@ -39,15 +39,13 @@ namespace MyERP.Web
         public virtual IQueryable<TEntity> GetAll()
         {
             var membershipUser = (MyERPMembershipUser) Membership.GetUser(HttpContext.Current.User.Identity.Name, true);
-            List<TEntity> allEntities = new List<TEntity>();
-            if (membershipUser != null)
-            {
-                string clause = "ClientId = @0";
-                //LambdaExpression expr = System.Linq.Dynamic.DynamicExpression.ParseLambda(typeof(TEntity), typeof(bool), clause, membershipUser.ClientId);
-                allEntities = dataContext.Set<TEntity>().Where(clause, membershipUser.ClientId).ToList();
-            }
+            if (membershipUser == null)
+                throw new NullReferenceException("membershipUser");
 
-            return allEntities.AsQueryable();
+            string clause = "ClientId = @0";
+            //LambdaExpression expr = System.Linq.Dynamic.DynamicExpression.ParseLambda(typeof(TEntity), typeof(bool), clause, membershipUser.ClientId);
+            return dataContext.Set<TEntity>().Where(clause, membershipUser.ClientId);
+            
         }
 
         /// <summary>
@@ -58,21 +56,17 @@ namespace MyERP.Web
         public virtual IQueryable<TEntity> GetAll(IPrincipal principal)
         {
             var membershipUser = (MyERPMembershipUser)Membership.GetUser(principal.Identity.Name, true);
-            List<TEntity> allEntities = new List<TEntity>();
-            if (membershipUser != null)
-            {
-                string clause = "ClientId = @0";
-                allEntities = dataContext.Set<TEntity>()
-                        .Where(clause, membershipUser.ClientId).ToList();
-            }
+            if (membershipUser == null)
+                throw new NullReferenceException("membershipUser");
 
-            return allEntities.AsQueryable();
+            string clause = "ClientId = @0";
+            return dataContext.Set<TEntity>().Where(clause, membershipUser.ClientId);
         }
 
         public virtual TEntity GetBy(Expression<Func<TEntity, bool>> filter)
         {
             if (filter == null)
-                throw new ArgumentNullException("filter");
+                throw new ArgumentNullException(nameof(filter));
 
             var membershipUser = (MyERPMembershipUser)Membership.GetUser(HttpContext.Current.User.Identity.Name, true);
             if (membershipUser == null)
@@ -81,6 +75,7 @@ namespace MyERP.Web
             string clause = "ClientId = @0";
 
             TEntity entity = dataContext.Set<TEntity>().Where(clause, membershipUser.ClientId).SingleOrDefault(filter);
+
             if (entity == null)
                 return default(TEntity);
 
@@ -90,7 +85,7 @@ namespace MyERP.Web
         public virtual TEntity AddNew(TEntity entity)
         {
             if (entity == null)
-                throw new ArgumentNullException("entity");
+                throw new ArgumentNullException(nameof(entity));
 
             TEntity attachedEntity = dataContext.Set<TEntity>().Add(entity);
             dataContext.SaveChanges();
@@ -101,7 +96,7 @@ namespace MyERP.Web
         public virtual TEntity Update(TEntity entity)
         {
             if (entity == null)
-                throw new ArgumentNullException("entity");
+                throw new ArgumentNullException(nameof(entity));
             
             //TEntity attachedEntity = dataContext.Set<TEntity>().Attach(entity);
             dataContext.Entry(entity).State = EntityState.Modified;
@@ -113,7 +108,7 @@ namespace MyERP.Web
         public virtual void Delete(TEntity entity)
         {
             if (entity == null)
-                throw new ArgumentNullException("entity");
+                throw new ArgumentNullException(nameof(entity));
 
             TEntity attachedEntity = dataContext.Set<TEntity>().Remove(entity);
             dataContext.SaveChanges();

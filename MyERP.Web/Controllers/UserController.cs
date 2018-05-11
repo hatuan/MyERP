@@ -304,8 +304,13 @@ namespace MyERP.Web.Controllers
             preference.WorkingDate = DateTime.Now;
 
             var organizationRepository = new OrganizationRepository();
-            var organizations = organizationRepository.GetAll(User)
-                .Select(c => new Ext.Net.ListItem(c.Desctiption, c.Id)).ToList();
+            var organizations = (from org in organizationRepository.GetAll(User)
+                                select new Ext.Net.ListItem
+                                    {
+                                        Text = org.Desctiption,
+                                        Value = org.Id + ""
+                                    }
+                                ).ToList();
 
             preference.RootOrganization = organizationRepository.GetRootOrganization(User);
 

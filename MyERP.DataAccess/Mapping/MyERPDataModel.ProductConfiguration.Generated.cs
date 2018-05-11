@@ -17,14 +17,14 @@ using System.Data.Entity.ModelConfiguration;
 namespace MyERP.DataAccess.Mapping
 {
 
-    public partial class CurrencyConfiguration : EntityTypeConfiguration<Currency>
+    public partial class ProductConfiguration : EntityTypeConfiguration<Product>
     {
 
-        public CurrencyConfiguration()
+        public ProductConfiguration()
         {
             this
                 .HasKey(p => p.Id)
-                .ToTable("currency", "dbo");
+                .ToTable("product", "dbo");
             // Properties:
             this
                 .Property(p => p.Id)
@@ -37,13 +37,18 @@ namespace MyERP.DataAccess.Mapping
                     .HasColumnName(@"code")
                     .IsRequired()
                     .HasMaxLength(32)
-                    .HasColumnType("varchar");
+                    .HasColumnType("nvarchar");
             this
-                .Property(p => p.Desccription)
-                    .HasColumnName(@"desccription")
+                .Property(p => p.Description)
+                    .HasColumnName(@"description")
                     .IsRequired()
                     .HasMaxLength(256)
                     .HasColumnType("nvarchar");
+            this
+                .Property(p => p.UomId)
+                    .HasColumnName(@"uom_id")
+                    .IsRequired()
+                    .HasColumnType("bigint");
             this
                 .Property(p => p.OrganizationId)
                     .HasColumnName(@"organization_id")
@@ -55,11 +60,6 @@ namespace MyERP.DataAccess.Mapping
                     .IsRequired()
                     .HasColumnType("bigint");
             this
-                .Property(p => p.Status)
-                    .HasColumnName(@"status")
-                    .IsRequired()
-                    .HasColumnType("smallint");
-            this
                 .Property(p => p.RecCreatedAt)
                     .HasColumnName(@"rec_created_at")
                     .IsRequired()
@@ -70,30 +70,35 @@ namespace MyERP.DataAccess.Mapping
                     .IsRequired()
                     .HasColumnType("bigint");
             this
-                .Property(p => p.RecModifiedBy)
-                    .HasColumnName(@"rec_modified_by")
-                    .IsRequired()
-                    .HasColumnType("bigint");
-            this
                 .Property(p => p.RecModifiedAt)
                     .HasColumnName(@"rec_modified_at")
                     .IsRequired()
                     .HasColumnType("datetime2");
             this
-                .Property(p => p.Verson)
-                    .HasColumnName(@"verson")
+                .Property(p => p.RecModifiedBy)
+                    .HasColumnName(@"rec_modified_by")
+                    .IsRequired()
+                    .HasColumnType("bigint");
+            this
+                .Property(p => p.Status)
+                    .HasColumnName(@"status")
+                    .IsRequired()
+                    .HasColumnType("smallint");
+            this
+                .Property(p => p.Version)
+                    .HasColumnName(@"version")
                     .IsRequired()
                     .HasColumnType("bigint");
             // Associations:
             this
-                .HasRequired(p => p.RecCreateByUser)
+                .HasRequired(p => p.Uom)
                     .WithMany()
-                .HasForeignKey(p => p.RecCreatedBy)
+                .HasForeignKey(p => p.UomId)
                     .WillCascadeOnDelete(false);
             this
-                .HasRequired(p => p.RecModifiedByUser)
+                .HasRequired(p => p.Client)
                     .WithMany()
-                .HasForeignKey(p => p.RecModifiedBy)
+                .HasForeignKey(p => p.ClientId)
                     .WillCascadeOnDelete(false);
             this
                 .HasRequired(p => p.Organization)
@@ -101,9 +106,14 @@ namespace MyERP.DataAccess.Mapping
                 .HasForeignKey(p => p.OrganizationId)
                     .WillCascadeOnDelete(false);
             this
-                .HasRequired(p => p.Client)
+                .HasRequired(p => p.RecCreatedByUser)
                     .WithMany()
-                .HasForeignKey(p => p.ClientId)
+                .HasForeignKey(p => p.RecCreatedBy)
+                    .WillCascadeOnDelete(false);
+            this
+                .HasRequired(p => p.RecModifiedByUser)
+                    .WithMany()
+                .HasForeignKey(p => p.RecModifiedBy)
                     .WillCascadeOnDelete(false);
             OnCreated();
         }
