@@ -50,7 +50,7 @@ namespace MyERP.Web.Models
 
     public class UOMEditViewModel
     {
-        public Int64 Id { get; set; }
+        public long? Id { get; set; }
 
         [Required]
         [Display(Name = "Code")]

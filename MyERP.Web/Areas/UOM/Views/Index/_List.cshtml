@@ -27,13 +27,20 @@
                       de.Click.Method = HttpMethod.GET;
                       de.Click.ShowWarningOnFailure = true;
                       de.Click.EventMask.ShowMask = true;
-                      de.Click.ExtraParams.Add(new Parameter("id", "#{UOMList}.getSelectionModel().getSelected().Id", ParameterMode.Raw));
+                      de.Click.ExtraParams.Add(new Parameter("ID", "#{UOMList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
                   })
                   );
               buttons.Add(Html.X().Button()
                   .ID("btnAdd")
                   .Text("Add")
                   .Icon(Icon.Add)
+                  .DirectEvents(de =>
+                  {
+                      de.Click.Url = Url.Action("_Maintenance");
+                      de.Click.Method = HttpMethod.GET;
+                      de.Click.ShowWarningOnFailure = true;
+                      de.Click.EventMask.ShowMask = true;
+                  })
                   );
               buttons.Add(Html.X().Button()
                   .ID("btnDelete")
@@ -52,10 +59,11 @@
                   .DirectEvents(de =>
                   {
                       de.Click.Action = "Delete";
+                      de.Click.Method = HttpMethod.GET;
                       de.Click.Confirmation.ConfirmRequest = true;
                       de.Click.Confirmation.Title = "Alert";
                       de.Click.Confirmation.Message = "Do you want to DELETE ?";
-                      de.Click.ExtraParams.Add(new Parameter("ID", "#{UOMList}.getSelectionModel().getSelected().Id", ParameterMode.Raw));
+                      de.Click.ExtraParams.Add(new Parameter("ID", "#{UOMList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
                   })
                   );
           }));

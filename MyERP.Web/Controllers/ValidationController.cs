@@ -72,6 +72,7 @@ namespace MyERP.Web.Controllers
                 }
             };
         }
+
         /// <summary>
         /// Html.X().TextFieldFor(m => m.Code).AllowBlank(false).ID("Code")
         ///     .IsRemoteValidation(true)
