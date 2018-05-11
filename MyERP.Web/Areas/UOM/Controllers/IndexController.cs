@@ -66,5 +66,38 @@ namespace MyERP.Web.Areas.UOM.Controllers
 
             return this.Store(data, paging.TotalRecords);
         }
+
+        [HttpGet]
+        public ActionResult _Maintenance(string id)
+        {
+            var model = new UOMEditViewModel()
+            {
+                Status = DefaultStatusType.Active
+            };
+            //if (!String.IsNullOrEmpty(id))
+            //{
+                var id64 = 2;
+                var uom = repository.GetBy(c => c.Id == id64);
+                model = new UOMEditViewModel()
+                {
+                    Id = uom.Id,
+                    Code = uom.Code,
+                    Description = uom.Description,
+                    Status = (DefaultStatusType)uom.Status,
+                    Version = uom.Version
+                };
+            //}
+
+            return new Ext.Net.MVC.PartialViewResult() {Model = model};
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult _Maintenance(UOMEditViewModel model)
+        {
+            DirectResult r = new DirectResult();
+            r.Success = false;
+            return r;
+        }
     }
 }

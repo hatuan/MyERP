@@ -263,6 +263,14 @@
     <Content Include="Resources\images\titlebar-bg.jpg" />
     <Content Include="Resources\images\titlebar-logo-bg.jpg" />
     <Content Include="Resources\images\welcome-bullet.png" />
+    <Content Include="Resources\js\jquery-2.2.0.js" />
+    <Content Include="Resources\js\jquery-2.2.0.min.js" />
+    <Content Include="Resources\js\jquery.unobtrusive-ajax.js" />
+    <Content Include="Resources\js\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Resources\js\jquery.validate.js" />
+    <Content Include="Resources\js\jquery.validate.min.js" />
+    <Content Include="Resources\js\jquery.validate.unobtrusive.js" />
+    <Content Include="Resources\js\jquery.validate.unobtrusive.min.js" />
     <Content Include="Resources\js\main.js" />
     <Content Include="Resources\js\perfect-scrollbar.min.js" />
     <Content Include="Resources\fonts\fontawesome-webfont.eot" />

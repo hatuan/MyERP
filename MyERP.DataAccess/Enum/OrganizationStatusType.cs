@@ -9,9 +9,9 @@ namespace MyERP.DataAccess.Enum
 {
     public enum OrganizationStatusType
     {
-        [Display(Name = "Inactive")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Inactive", Order = 1)]
         Inactive = 0,
-        [Display(Name = "Active")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Active", Order = 0)]
         Active = 1
     }
 }

@@ -54,7 +54,7 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Code")]
-        [Remote("CheckDuplicateUom", "Validation", AdditionalFields = "Id", ErrorMessage = "UOM code already exists. Please specify another one.")]
+        [Remote("ExtCheckDuplicateUom", "Validation", AreaReference.UseRoot, AdditionalFields = "Id", ErrorMessage = "UOM code already exists. Please specify another one.")]
         [RegularExpression(@"^[A-Za-z0-9]*$", ErrorMessage = "Invalid Code - only allow a-z A-Z 0-9 character")]
         public String Code { get; set; }
 
@@ -64,7 +64,7 @@ namespace MyERP.Web.Models
         
         [Required]
         [Display(Name = "Status")]
-        public CurrencyStatusType Status { get; set; }
+        public DefaultStatusType Status { get; set; }
 
         public Int64 Version { get; set; }
     }

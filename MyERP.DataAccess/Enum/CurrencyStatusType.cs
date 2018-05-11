@@ -8,7 +8,9 @@ namespace MyERP.DataAccess.Enum
 {
     public enum CurrencyStatusType
     {
+        [System.ComponentModel.DataAnnotations.Display(Name = "Inactive", Order = 1)]
         Inactive = 0,
+        [System.ComponentModel.DataAnnotations.Display(Name = "Active", Order = 0)]
         Active = 1
     }
 }

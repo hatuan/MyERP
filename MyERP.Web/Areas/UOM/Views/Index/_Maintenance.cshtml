@@ -1,1 +1,50 @@
-﻿
+﻿@model MyERP.Web.Models.UOMEditViewModel
+
+@(Html.X().Window()
+              .ID("WindowUOMMaintenance")
+              .Title("UOM Maintenance")
+              .Height(300)
+              .Width(350)
+              .Modal(true)
+              .Layout(LayoutType.Fit)
+              .Items(
+                Html.X().FormPanel()
+                    .ID("FormUOMMaintenance")
+                    .Layout(LayoutType.Form)
+                    .Border(false)
+                    .BodyPadding(5)
+                    .DefaultButton("btnSave")
+                    .Items(
+                        Html.X().AntiForgeryField(),
+                        Html.X().TextFieldFor(m => m.Code).AllowBlank(false).ID("Code")
+                            ,
+                        Html.X().TextFieldFor(m => m.Description).AllowBlank(false).ID("Description"),
+                        Html.X().ComboBoxFor(m => m.Status).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
+                        Html.X().HiddenFor(m => m.Id).ID("Id"),
+                        Html.X().HiddenFor(m => m.Version).ID("Version")
+                        )
+                    .Buttons(
+                        Html.X().Button()
+                            .ID("btnSave")
+                            .Text("Save")
+                            .Icon(Icon.Disk)
+                            .DirectEvents(de =>
+                            {
+                                de.Click.Url = Url.Action("_Maintenance");
+                                de.Click.Method = HttpMethod.POST;
+                                de.Click.Success = "App.FormUOMMaintenance.close();";
+                                de.Click.ShowWarningOnFailure = false;
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.FormID = "FormUOMMaintenance";
+                            }),
+                        Html.X().Button()
+                            .ID("btnCancel")
+                            .Text("Cancel")
+                            .Icon(Icon.Cancel)
+                            .Listeners(ls =>
+                            {
+                                ls.Click.Handler = "this.up('window').close();";
+                            })
+                        )
+                )
+)

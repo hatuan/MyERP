@@ -1,5 +1,4 @@
-﻿@using SortDirection = Ext.Net.SortDirection
-@(Html.X().GridPanel()
+﻿@(Html.X().GridPanel()
       .ID("UOMList")
       .Title("UOM List")
       .MinHeight(300)
@@ -14,6 +13,22 @@
                   .Text("Edit")
                   .Icon(Icon.NoteEdit)
                   .Disabled(true)
+                  .Listeners(ls =>
+                  {
+                      ls.Click.Handler = @"if (!#{UOMList}.hasSelection()) {
+                                                return false;
+                                            } else {
+                                                return true;
+                                            }";
+                  })
+                  .DirectEvents(de =>
+                  {
+                      de.Click.Url = Url.Action("_Maintenance");
+                      de.Click.Method = HttpMethod.GET;
+                      de.Click.ShowWarningOnFailure = true;
+                      de.Click.EventMask.ShowMask = true;
+                      de.Click.ExtraParams.Add(new Parameter("id", "#{UOMList}.getSelectionModel().getSelected().Id", ParameterMode.Raw));
+                  })
                   );
               buttons.Add(Html.X().Button()
                   .ID("btnAdd")
@@ -25,6 +40,15 @@
                   .Text("Delete")
                   .Icon(Icon.Delete)
                   .Disabled(true)
+                  .Listeners(ls =>
+                  {
+                      ls.Click.Handler = @"
+                                    if ( !#{UOMList}.hasSelection() ) {
+                                        return false;
+                                    } else {
+                                        return true;
+                                    }";
+                  })
                   .DirectEvents(de =>
                   {
                       de.Click.Action = "Delete";
@@ -42,7 +66,7 @@
               .ID("StoreUOMList")
               .RemoteSort(true)
               .PageSize(10)
-              .Sorters("Code", SortDirection.ASC)
+              .Sorters("Code", Ext.Net.SortDirection.ASC)
               .AutoLoad(true)
               .Model(
                   Html.X().Model()
@@ -52,7 +76,7 @@
                           new ModelField("OrganizationCode", ModelFieldType.String),
                           new ModelField("Code", ModelFieldType.String),
                           new ModelField("Description", ModelFieldType.String),
-                          new ModelField("Status", ModelFieldType.Int),
+                          new ModelField("Status", ModelFieldType.String),
                           new ModelField("RecCreateBy", ModelFieldType.String),
                           new ModelField("RecCreatedAt", ModelFieldType.Date),
                           new ModelField("RecModifiedBy", ModelFieldType.String),
@@ -70,7 +94,7 @@
           Html.X().Column().Text("Org").DataIndex("OrganizationCode").Width(75).Locked(true),
           Html.X().Column().Text("Code").DataIndex("Code").Width(85).Locked(true),
           Html.X().Column().Text("Description").DataIndex("Description").MinWidth(256),
-          Html.X().Column().Text("Status").DataIndex("Status").Width(85).Renderer("status"),
+          Html.X().Column().Text("Status").DataIndex("Status").Width(85),
           Html.X().Column().Text("Last User").DataIndex("RecModifiedBy").Width(85),
           Html.X().DateColumn().Text("Last Updated").DataIndex("RecModifiedAt").Width(150).Format("dd/MM/yyyy H:mm:ss")
       )
