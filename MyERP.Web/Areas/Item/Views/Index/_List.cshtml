@@ -1,6 +1,6 @@
 ﻿@(Html.X().GridPanel()
-          .ID("ProductList")
-          .Title("Product List")
+          .ID("ItemList")
+          .Title("Item List")
           .MinHeight(300)
           .Region(Region.Center)
           .Frame(true)
@@ -15,7 +15,7 @@
                       .Disabled(true)
                       .Listeners(ls =>
                       {
-                          ls.Click.Handler = @"if (!#{ProductList}.hasSelection()) {
+                          ls.Click.Handler = @"if (!#{ItemList}.hasSelection()) {
                                         return false;
                                     } else {
                                         return true;
@@ -27,7 +27,7 @@
                           de.Click.Method = HttpMethod.GET;
                           de.Click.ShowWarningOnFailure = true;
                           de.Click.EventMask.ShowMask = true;
-                          de.Click.ExtraParams.Add(new Parameter("ID", "#{ProductList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
+                          de.Click.ExtraParams.Add(new Parameter("ID", "#{ItemList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
                       })
                       );
                   buttons.Add(Html.X().Button()
@@ -50,7 +50,7 @@
                       .Listeners(ls =>
                       {
                           ls.Click.Handler = @"
-                            if ( !#{ProductList}.hasSelection() ) {
+                            if ( !#{ItemList}.hasSelection() ) {
                                 return false;
                             } else {
                                 return true;
@@ -63,7 +63,8 @@
                           de.Click.Confirmation.ConfirmRequest = true;
                           de.Click.Confirmation.Title = "Alert";
                           de.Click.Confirmation.Message = "Do you want to DELETE ?";
-                          de.Click.ExtraParams.Add(new Parameter("ID", "#{ProductList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
+                          de.Click.ExtraParams.Add(new Parameter("ID", "#{ItemList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
+                          de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
                       })
                       );
               }));
@@ -71,7 +72,7 @@
           })
           .Store(
               Html.X().Store()
-                  .ID("StoreProductList")
+                  .ID("StoreItemList")
                   .RemoteSort(true)
                   .PageSize(10)
                   .Sorters("Code", Ext.Net.SortDirection.ASC)
@@ -108,7 +109,32 @@
           )
           .BottomBar(items =>
           {
-              items.Add(Html.X().PagingToolbar().DisplayInfo(true));
+              items.Add(Html.X().PagingToolbar().DisplayInfo(true)
+                  .Items(
+                      Html.X().Label().Text("Page size:"),
+                      Html.X().ToolbarSpacer().Width(10),
+                      Html.X().ComboBox().Width(80)
+                          .Editable(false)
+                          .Items(
+                              Html.X().ListItem().Text("10"),
+                              Html.X().ListItem().Text("15"),
+                              Html.X().ListItem().Text("20")
+                          )
+                          .SelectedItems(
+                              Html.X().ListItem().Value("10")
+                          )
+                          .Listeners(ls => {
+                                               ls.Select.Fn = @"function (item, records) {
+                                                var curPageSize = #{StoreItemList}.pageSize,
+                                                wantedPageSize = parseInt(item.getValue(), 10);
+                                                if (wantedPageSize != curPageSize) {
+                                                    #{StoreItemList}.pageSize = wantedPageSize;
+                                                    #{StoreItemList}.reload();
+                                                    #{StoreItemList}.loadPage(1);
+                                                }
+                                            }"; 
+                          })
+                  ));
           })
           .SelectionModel(
               Html.X().CheckboxSelectionModel()
@@ -116,7 +142,7 @@
                   .Listeners(ls =>
                   {
                       ls.Select.Handler = "#{btnDelete}.enable();#{btnEdit}.enable();";
-                      ls.Deselect.Handler = "if (!#{ProductList}.hasSelection()) {#{btnDelete}.disable();#{btnEdit}.disable()}";
+                      ls.Deselect.Handler = "if (!#{ItemList}.hasSelection()) {#{btnDelete}.disable();#{btnEdit}.disable()}";
                   })
           )
           .ViewConfig(new GridView() { Listeners = { Refresh = { Handler = "#{btnDelete}.disable();#{btnEdit}.disable();" } } })

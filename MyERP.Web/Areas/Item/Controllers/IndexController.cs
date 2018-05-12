@@ -11,11 +11,11 @@ using MyERP.DataAccess.Enum;
 using MyERP.Web.Controllers;
 using MyERP.Web.Models;
 
-namespace MyERP.Web.Areas.UOM.Controllers
+namespace MyERP.Web.Areas.Item.Controllers
 {
-    public class IndexController : EntityBaseController<MyERP.DataAccess.Uom, MyERP.DataAccess.EntitiesModel>
+    public class IndexController : EntityBaseController<MyERP.DataAccess.Item, MyERP.DataAccess.EntitiesModel>
     {
-        public IndexController() : this(new UomRepository())
+        public IndexController() : this(new ItemRepository())
         {
 
         }
@@ -26,12 +26,12 @@ namespace MyERP.Web.Areas.UOM.Controllers
         /// </summary>
         /// <remarks>Controller will ALWAYS use the default constructor!</remarks>
         /// <param name="repository">Repository instance of the specific type</param>
-        public IndexController(IBaseRepository<MyERP.DataAccess.Uom, MyERP.DataAccess.EntitiesModel> repository)
+        public IndexController(IBaseRepository<MyERP.DataAccess.Item, MyERP.DataAccess.EntitiesModel> repository)
         {
             this.repository = repository;
         }
 
-        // GET: UOM/Index
+        // GET: Product/Index
         public ActionResult Index()
         {
             return View();
@@ -51,9 +51,9 @@ namespace MyERP.Web.Areas.UOM.Controllers
 
         public ActionResult GetData(StoreRequestParameters parameters)
         {
-            var paging = ((UomRepository) repository).UomsPaging(parameters);
+            var paging = ((ItemRepository)repository).ItemsPaging(parameters);
 
-            var data = paging.Data.Select( c=> new UOMViewModel
+            var data = paging.Data.Select(c => new ItemViewModel
             {
                 Code = c.Code,
                 Id = c.Id,
@@ -67,7 +67,7 @@ namespace MyERP.Web.Areas.UOM.Controllers
                 Version = c.Version
             }).ToList();
 
-            Session.Add("StoreUOMList_StoreRequestParameters", parameters);
+            Session.Add("StoreProductList_StoreRequestParameters", parameters);
 
             return this.Store(data, paging.TotalRecords);
         }
@@ -75,7 +75,7 @@ namespace MyERP.Web.Areas.UOM.Controllers
         [HttpGet]
         public ActionResult _Maintenance(string id = null)
         {
-            var model = new UOMEditViewModel()
+            var model = new ItemEditViewModel()
             {
                 Id = null,
                 Status = DefaultStatusType.Active
@@ -84,7 +84,7 @@ namespace MyERP.Web.Areas.UOM.Controllers
             {
                 var _id = Convert.ToInt64(id);
                 var uom = repository.GetBy(c => c.Id == _id);
-                model = new UOMEditViewModel()
+                model = new ItemEditViewModel()
                 {
                     Id = uom.Id,
                     Code = uom.Code,
@@ -94,7 +94,7 @@ namespace MyERP.Web.Areas.UOM.Controllers
                 };
             }
 
-            return new Ext.Net.MVC.PartialViewResult() {Model = model};
+            return new Ext.Net.MVC.PartialViewResult() { Model = model };
         }
 
         [HttpPost]
@@ -123,15 +123,15 @@ namespace MyERP.Web.Areas.UOM.Controllers
                     if (_update == null || _update.Version != model.Version)
                     {
                         r.Success = false;
-                        r.ErrorMessage = "UOM has been changed or deleted! Please check";
+                        r.ErrorMessage = "Item has been changed or deleted! Please check";
                         return r;
                     }
 
                     _update.Code = model.Code;
                     _update.Description = model.Description;
-                    _update.Status = (byte) model.Status;
+                    _update.Status = (byte)model.Status;
                     _update.RecModifiedAt = DateTime.Now;
-                    _update.RecModifiedBy = (long) user.ProviderUserKey;
+                    _update.RecModifiedBy = (long)user.ProviderUserKey;
                     _update.Version++;
 
                     try
@@ -148,7 +148,7 @@ namespace MyERP.Web.Areas.UOM.Controllers
                 }
                 else
                 {
-                    var _newModel = new Uom()
+                    var _newModel = new DataAccess.Item()
                     {
                         ClientId = clientId,
                         OrganizationId = organizationId,
@@ -175,8 +175,8 @@ namespace MyERP.Web.Areas.UOM.Controllers
                     }
                 }
 
-                Store storeUOMList = X.GetCmp<Store>("StoreUOMList");
-                storeUOMList.Reload();
+                Store StoreItemList = X.GetCmp<Store>("StoreItemList");
+                StoreItemList.Reload();
                 r.Success = true;
                 return r;
             }
@@ -195,7 +195,7 @@ namespace MyERP.Web.Areas.UOM.Controllers
                 if (entity == null)
                 {
                     r.Success = false;
-                    r.ErrorMessage = "UOM not found! Please check";
+                    r.ErrorMessage = "Item not found! Please check";
                     return r;
                 }
 
@@ -210,8 +210,8 @@ namespace MyERP.Web.Areas.UOM.Controllers
                     return r;
                 }
 
-                Store StoreUOMList = X.GetCmp<Store>("StoreUOMList");
-                StoreUOMList.Reload();
+                Store StoreItemList = X.GetCmp<Store>("StoreItemList");
+                StoreItemList.Reload();
             }
             else
             {

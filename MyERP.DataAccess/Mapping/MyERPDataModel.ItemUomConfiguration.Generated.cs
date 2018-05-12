@@ -17,14 +17,14 @@ using System.Data.Entity.ModelConfiguration;
 namespace MyERP.DataAccess.Mapping
 {
 
-    public partial class RoleConfiguration : EntityTypeConfiguration<Role>
+    public partial class ItemUomConfiguration : EntityTypeConfiguration<ItemUom>
     {
 
-        public RoleConfiguration()
+        public ItemUomConfiguration()
         {
             this
                 .HasKey(p => p.Id)
-                .ToTable("role", "dbo");
+                .ToTable("item_uom", "dbo");
             // Properties:
             this
                 .Property(p => p.Id)
@@ -33,25 +33,31 @@ namespace MyERP.DataAccess.Mapping
                     .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)
                     .HasColumnType("bigint");
             this
-                .Property(p => p.Description)
-                    .HasColumnName(@"description")
-                    .HasMaxLength(512)
-                    .HasColumnType("varchar");
-            this
-                .Property(p => p.ClientId)
-                    .HasColumnName(@"client_id")
+                .Property(p => p.ItemId)
+                    .HasColumnName(@"item_id")
                     .IsRequired()
                     .HasColumnType("bigint");
+            this
+                .Property(p => p.UomId)
+                    .HasColumnName(@"uom_id")
+                    .IsRequired()
+                    .HasColumnType("bigint");
+            this
+                .Property(p => p.QtyPerUom)
+                    .HasColumnName(@"qty_per_uom")
+                    .IsRequired()
+                    .HasColumnType("decimal")
+                    .HasPrecision(38, 20);
             // Associations:
             this
-                .HasMany(p => p.Users)
-                    .WithRequired(c => c.Role)
-                .HasForeignKey(p => p.RoleId)
+                .HasRequired(p => p.Uom)
+                    .WithMany()
+                .HasForeignKey(p => p.UomId)
                     .WillCascadeOnDelete(false);
             this
-                .HasRequired(p => p.Client)
+                .HasRequired(p => p.Item)
                     .WithMany()
-                .HasForeignKey(p => p.ClientId)
+                .HasForeignKey(p => p.ItemId)
                     .WillCascadeOnDelete(false);
             OnCreated();
         }

@@ -17,11 +17,11 @@ namespace MyERP.DataAccess
 {
 
     /// <summary>
-    /// There are no comments for MyERP.DataAccess.UserInRole in the schema.
+    /// There are no comments for MyERP.DataAccess.ItemUom in the schema.
     /// </summary>
-    public partial class UserInRole    {
+    public partial class ItemUom    {
 
-        public UserInRole()
+        public ItemUom()
         {
             OnCreated();
         }
@@ -42,10 +42,10 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for RoleId in the schema.
+        /// There are no comments for ItemId in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long RoleId
+        public virtual long ItemId
         {
             get;
             set;
@@ -53,10 +53,21 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for UserId in the schema.
+        /// There are no comments for UomId in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long UserId
+        public virtual long UomId
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for QtyPerUom in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal QtyPerUom
         {
             get;
             set;
@@ -68,18 +79,18 @@ namespace MyERP.DataAccess
         #region Navigation Properties
     
         /// <summary>
-        /// There are no comments for User in the schema.
+        /// There are no comments for Uom in the schema.
         /// </summary>
-        public virtual User User
+        public virtual Uom Uom
         {
             get;
             set;
         }
     
         /// <summary>
-        /// There are no comments for Role in the schema.
+        /// There are no comments for Item in the schema.
         /// </summary>
-        public virtual Role Role
+        public virtual Item Item
         {
             get;
             set;

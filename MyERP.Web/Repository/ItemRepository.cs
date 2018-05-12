@@ -11,14 +11,14 @@ using MyERP.DataAccess;
 
 namespace MyERP.Web
 {
-    public partial class ProductRepository 
+    public partial class ItemRepository 
     {
-        public Paging<Product> ProductsPaging(StoreRequestParameters parameters)
+        public Paging<Item> ItemsPaging(StoreRequestParameters parameters)
         {
-            return ProductsPaging(parameters.Start, parameters.Limit, parameters.SimpleSort, parameters.SimpleSortDirection, null);
+            return ItemsPaging(parameters.Start, parameters.Limit, parameters.SimpleSort, parameters.SimpleSortDirection, null);
         }
 
-        public  Paging<Product> ProductsPaging(int start, int limit, string sort, SortDirection dir, string filter)
+        public  Paging<Item> ItemsPaging(int start, int limit, string sort, SortDirection dir, string filter)
         {
             var entities = GetAll();
 
@@ -35,7 +35,7 @@ namespace MyERP.Web
             var count = entities.ToList().Count;
             var ranges = (start < 0 || limit < 0) ? entities.ToList() : entities.Skip(start).Take(limit).ToList();
 
-            return new Paging<Product>(ranges, count);
+            return new Paging<Item>(ranges, count);
         }
     }
 

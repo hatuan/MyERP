@@ -29,8 +29,8 @@
                                                                                             Html.X().MenuItem()
                                                                                                 .Text("Warehouse").Menu(Html.X().Menu()
                                                                                                     .Items(
-                                                                                                        Html.X().MenuItem().Text("Product").Tag("Product").DirectEvents(de => {
-                                                                                                                                                                                  de.Click.Url = Url.Action("_List", "Index", new { area = "Product" });
+                                                                                                        Html.X().MenuItem().Text("Item").Tag("Item").DirectEvents(de => {
+                                                                                                                                                                                  de.Click.Url = Url.Action("_List", "Index", new { area = "Item" });
                                                                                                                                                                                   de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
                                                                                                                                                                                   de.Click.EventMask.ShowMask = true;
                                                                                                         }),

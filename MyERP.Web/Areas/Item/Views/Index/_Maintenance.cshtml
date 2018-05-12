@@ -1,15 +1,15 @@
-﻿@model MyERP.Web.Models.UOMEditViewModel
+﻿@model MyERP.Web.Models.ItemEditViewModel
 
 @(Html.X().Window()
-              .ID("WindowUOMMaintenance")
-              .Title("UOM Maintenance")
+              .ID("WindowItemMaintenance")
+              .Title("Item Maintenance")
               .Height(300)
               .Width(350)
               .Modal(true)
               .Layout(LayoutType.Fit)
               .Items(
                 Html.X().FormPanel()
-                    .ID("FormUOMMaintenance")
+                    .ID("FormItemMaintenance")
                     .Layout(LayoutType.Form)
                     .Border(false)
                     .BodyPadding(5)
@@ -34,9 +34,9 @@
                                 de.Click.Before = "return this.up('form').isValid();";
                                 de.Click.Success = "this.up('window').close();";
                                 de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
-                                de.Click.ShowWarningOnFailure = false;
+                                de.Click.ShowWarningOnFailure = true;
                                 de.Click.EventMask.ShowMask = true;
-                                de.Click.FormID = "FormUOMMaintenance";
+                                de.Click.FormID = "FormItemMaintenance";
                             }),
                         Html.X().Button()
                             .ID("btnCancel")

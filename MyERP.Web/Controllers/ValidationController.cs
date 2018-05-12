@@ -111,5 +111,40 @@ namespace MyERP.Web.Controllers
                 }
             };
         }
+
+        //
+        // CheckDuplicateProduct
+        public JsonResult CheckDuplicateItem(ItemEditViewModel product)
+        {
+            var repository = new ItemRepository();
+            Item exists;
+            if (product.Id != null && product.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != product.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return Json(exists != null, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ExtCheckDuplicateItem(ItemEditViewModel product)
+        {
+            var repository = new ItemRepository();
+            Item exists;
+            if (product.Id != null && product.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != product.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return new JsonResult
+            {
+                Data = new
+                {
+                    serviceResponse = new
+                    {
+                        valid = exists == null
+                    }
+                }
+            };
+        }
     }
 }
