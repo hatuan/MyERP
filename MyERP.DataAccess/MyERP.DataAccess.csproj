@@ -59,6 +59,8 @@
     <Compile Include="Entities\MyERPDataModel.Currency.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Item.cs" />
     <Compile Include="Entities\MyERPDataModel.Item.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.ItemGroup.cs" />
+    <Compile Include="Entities\MyERPDataModel.ItemGroup.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.ItemUom.cs" />
     <Compile Include="Entities\MyERPDataModel.ItemUom.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Organization.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="Entities\MyERPDataModel.UserInRole.cs" />
     <Compile Include="Entities\MyERPDataModel.UserInRole.Generated.cs" />
     <Compile Include="Enum\CurrencySearchField.cs" />
+    <Compile Include="Enum\GroupLevelType.cs" />
     <Compile Include="Enum\DefaultStatusType.cs" />
     <Compile Include="Enum\CurrencyStatusType.cs" />
     <Compile Include="Enum\OrganizationStatusType.cs" />
@@ -81,6 +84,8 @@
     <Compile Include="Mapping\MyERPDataModel.CurrencyConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.ItemConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.ItemConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ItemGroupConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ItemGroupConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.ItemUomConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.ItemUomConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.OrganizationConfiguration.cs" />

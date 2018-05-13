@@ -38,4 +38,14 @@ namespace MyERP.Web
     {
 
     }
+
+    public partial class ItemGroupRepository : BaseRepository<MyERP.DataAccess.ItemGroup, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class ItemUomRepository : BaseRepository<MyERP.DataAccess.ItemUom, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
 }

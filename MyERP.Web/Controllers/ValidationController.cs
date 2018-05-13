@@ -113,7 +113,7 @@ namespace MyERP.Web.Controllers
         }
 
         //
-        // CheckDuplicateProduct
+        // CheckDuplicateItem
         public JsonResult CheckDuplicateItem(ItemEditViewModel product)
         {
             var repository = new ItemRepository();
@@ -130,6 +130,41 @@ namespace MyERP.Web.Controllers
         {
             var repository = new ItemRepository();
             Item exists;
+            if (product.Id != null && product.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != product.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return new JsonResult
+            {
+                Data = new
+                {
+                    serviceResponse = new
+                    {
+                        valid = exists == null
+                    }
+                }
+            };
+        }
+
+        //
+        // CheckDuplicateItemGroup
+        public JsonResult CheckDuplicateItemGroup(ItemGroupEditViewModel product)
+        {
+            var repository = new ItemGroupRepository();
+            ItemGroup exists;
+            if (product.Id != null && product.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != product.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return Json(exists != null, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ExtCheckDuplicateItemGroup(ItemGroupEditViewModel product)
+        {
+            var repository = new ItemGroupRepository();
+            ItemGroup exists;
             if (product.Id != null && product.Id != 0)
                 exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != product.Id);
             else

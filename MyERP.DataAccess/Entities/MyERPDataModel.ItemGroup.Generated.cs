@@ -17,11 +17,11 @@ namespace MyERP.DataAccess
 {
 
     /// <summary>
-    /// There are no comments for MyERP.DataAccess.Uom in the schema.
+    /// There are no comments for MyERP.DataAccess.ItemGroup in the schema.
     /// </summary>
-    public partial class Uom    {
+    public partial class ItemGroup    {
 
-        public Uom()
+        public ItemGroup()
         {
             OnCreated();
         }
@@ -35,6 +35,17 @@ namespace MyERP.DataAccess
         [System.ComponentModel.DataAnnotations.Key]
         [System.ComponentModel.DataAnnotations.Required()]
         public virtual long Id
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for Level in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual byte Level
         {
             get;
             set;
@@ -59,6 +70,28 @@ namespace MyERP.DataAccess
         [System.ComponentModel.DataAnnotations.StringLength(256)]
         [System.ComponentModel.DataAnnotations.Required()]
         public virtual string Description
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for Status in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual short Status
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for Version in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual long Version
         {
             get;
             set;
@@ -125,28 +158,6 @@ namespace MyERP.DataAccess
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
         public virtual long RecModifiedBy
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for Status in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual short Status
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for Version in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long Version
         {
             get;
             set;

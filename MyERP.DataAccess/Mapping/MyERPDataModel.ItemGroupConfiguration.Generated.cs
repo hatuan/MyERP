@@ -17,14 +17,14 @@ using System.Data.Entity.ModelConfiguration;
 namespace MyERP.DataAccess.Mapping
 {
 
-    public partial class UomConfiguration : EntityTypeConfiguration<Uom>
+    public partial class ItemGroupConfiguration : EntityTypeConfiguration<ItemGroup>
     {
 
-        public UomConfiguration()
+        public ItemGroupConfiguration()
         {
             this
                 .HasKey(p => p.Id)
-                .ToTable("uom", "dbo");
+                .ToTable("item_group", "dbo");
             // Properties:
             this
                 .Property(p => p.Id)
@@ -32,6 +32,11 @@ namespace MyERP.DataAccess.Mapping
                     .IsRequired()
                     .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)
                     .HasColumnType("bigint");
+            this
+                .Property(p => p.Level)
+                    .HasColumnName(@"level")
+                    .IsRequired()
+                    .HasColumnType("tinyint");
             this
                 .Property(p => p.Code)
                     .HasColumnName(@"code")
@@ -44,6 +49,16 @@ namespace MyERP.DataAccess.Mapping
                     .IsRequired()
                     .HasMaxLength(256)
                     .HasColumnType("nvarchar");
+            this
+                .Property(p => p.Status)
+                    .HasColumnName(@"status")
+                    .IsRequired()
+                    .HasColumnType("smallint");
+            this
+                .Property(p => p.Version)
+                    .HasColumnName(@"version")
+                    .IsRequired()
+                    .HasColumnType("bigint");
             this
                 .Property(p => p.OrganizationId)
                     .HasColumnName(@"organization_id")
@@ -72,16 +87,6 @@ namespace MyERP.DataAccess.Mapping
             this
                 .Property(p => p.RecModifiedBy)
                     .HasColumnName(@"rec_modified_by")
-                    .IsRequired()
-                    .HasColumnType("bigint");
-            this
-                .Property(p => p.Status)
-                    .HasColumnName(@"status")
-                    .IsRequired()
-                    .HasColumnType("smallint");
-            this
-                .Property(p => p.Version)
-                    .HasColumnName(@"version")
                     .IsRequired()
                     .HasColumnType("bigint");
             // Associations:

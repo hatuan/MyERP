@@ -30,9 +30,14 @@
                                                                                                 .Text("Warehouse").Menu(Html.X().Menu()
                                                                                                     .Items(
                                                                                                         Html.X().MenuItem().Text("Item").Tag("Item").DirectEvents(de => {
-                                                                                                                                                                                  de.Click.Url = Url.Action("_List", "Index", new { area = "Item" });
-                                                                                                                                                                                  de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
-                                                                                                                                                                                  de.Click.EventMask.ShowMask = true;
+                                                                                                                                                                            de.Click.Url = Url.Action("_List", "Index", new { area = "Item" });
+                                                                                                                                                                            de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
+                                                                                                                                                                            de.Click.EventMask.ShowMask = true;
+                                                                                                        }),
+                                                                                                        Html.X().MenuItem().Text("Item Group").Tag("ItemGroup").DirectEvents(de => {
+                                                                                                                                                                          de.Click.Url = Url.Action("_List", "ItemGroup", new { area = "Item" });
+                                                                                                                                                                          de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
+                                                                                                                                                                          de.Click.EventMask.ShowMask = true;
                                                                                                         }),
                                                                                                         Html.X().MenuItem().Text("UOM").Tag("UOM").DirectEvents(de => {
                                                                                                                                                                             de.Click.Url = Url.Action("_List", "Index", new { area = "UOM" });

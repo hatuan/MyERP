@@ -5,7 +5,7 @@ using MyERP.DataAccess.Enum;
 
 namespace MyERP.Web.Models
 {
-    public class ItemViewModel
+    public class ItemGroupViewModel
     {
         [Required]
         public Int64 Id { get; set; }
@@ -15,13 +15,17 @@ namespace MyERP.Web.Models
         public String OrganizationCode { get; set; }
 
         [Required]
+        [Display(Name = "Level")]
+        public Byte Level { get; set; }
+
+        [Required]
         [Display(Name = "Code")]
         public String Code { get; set; }
 
         [Required]
         [Display(Name = "Description")]
         public String Description { get; set; }
-        
+
         [Required]
         public Int64 Version { get; set; }
 
@@ -48,13 +52,17 @@ namespace MyERP.Web.Models
         public DateTime RecModifiedAt { get; set; }
     }
 
-    public class ItemEditViewModel
+    public class ItemGroupEditViewModel
     {
         public long? Id { get; set; }
 
         [Required]
+        [Display(Name = "Level")]
+        public Byte Level { get; set; }
+
+        [Required]
         [Display(Name = "Code")]
-        [Remote("ExtCheckDuplicateItem", "Validation", AreaReference.UseRoot, AdditionalFields = "Id", ErrorMessage = "Product code already exists. Please specify another one.")]
+        [Remote("ExtCheckDuplicateItemGroup", "Validation", AreaReference.UseRoot, AdditionalFields = "Id", ErrorMessage = "Product code already exists. Please specify another one.")]
         [RegularExpression(@"^[A-Za-z0-9]*$", ErrorMessage = "Invalid Code - only allow a-z A-Z 0-9 character")]
         public String Code { get; set; }
 

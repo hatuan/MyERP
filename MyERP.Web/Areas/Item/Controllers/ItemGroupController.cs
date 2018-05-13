@@ -6,16 +6,15 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Ext.Net;
 using Ext.Net.MVC;
-using MyERP.DataAccess;
 using MyERP.DataAccess.Enum;
 using MyERP.Web.Controllers;
 using MyERP.Web.Models;
 
 namespace MyERP.Web.Areas.Item.Controllers
 {
-    public class IndexController : EntityBaseController<MyERP.DataAccess.Item, MyERP.DataAccess.EntitiesModel>
+    public class ItemGroupController : EntityBaseController<MyERP.DataAccess.ItemGroup, MyERP.DataAccess.EntitiesModel>
     {
-        public IndexController() : this(new ItemRepository())
+        public ItemGroupController() : this(new ItemGroupRepository())
         {
 
         }
@@ -26,12 +25,12 @@ namespace MyERP.Web.Areas.Item.Controllers
         /// </summary>
         /// <remarks>Controller will ALWAYS use the default constructor!</remarks>
         /// <param name="repository">Repository instance of the specific type</param>
-        public IndexController(IBaseRepository<MyERP.DataAccess.Item, MyERP.DataAccess.EntitiesModel> repository)
+        public ItemGroupController(IBaseRepository<MyERP.DataAccess.ItemGroup, MyERP.DataAccess.EntitiesModel> repository)
         {
             this.repository = repository;
         }
 
-        // GET: Product/Index
+        // GET: Item/ItemGroup
         public ActionResult Index()
         {
             return View();
@@ -51,12 +50,13 @@ namespace MyERP.Web.Areas.Item.Controllers
 
         public ActionResult GetData(StoreRequestParameters parameters)
         {
-            var paging = ((ItemRepository)repository).ItemsPaging(parameters);
+            var paging = ((ItemGroupRepository)repository).Paging(parameters);
 
-            var data = paging.Data.Select(c => new ItemViewModel
+            var data = paging.Data.Select(c => new ItemGroupViewModel
             {
-                Code = c.Code,
                 Id = c.Id,
+                Level = c.Level,
+                Code = c.Code,
                 Description = c.Description,
                 OrganizationCode = c.Organization.Code,
                 RecCreateBy = c.RecCreatedByUser.Name,
@@ -67,7 +67,7 @@ namespace MyERP.Web.Areas.Item.Controllers
                 Version = c.Version
             }).ToList();
 
-            Session.Add("StoreProductList_StoreRequestParameters", parameters);
+            Session.Add("StoreItemGroupList_StoreRequestParameters", parameters);
 
             return this.Store(data, paging.TotalRecords);
         }
@@ -75,7 +75,7 @@ namespace MyERP.Web.Areas.Item.Controllers
         [HttpGet]
         public ActionResult _Maintenance(string id = null)
         {
-            var model = new ItemEditViewModel()
+            var model = new ItemGroupEditViewModel()
             {
                 Id = null,
                 Status = DefaultStatusType.Active
@@ -84,9 +84,10 @@ namespace MyERP.Web.Areas.Item.Controllers
             {
                 var _id = Convert.ToInt64(id);
                 var entity = repository.GetBy(c => c.Id == _id);
-                model = new ItemEditViewModel()
+                model = new ItemGroupEditViewModel()
                 {
                     Id = entity.Id,
+                    Level = entity.Level,
                     Code = entity.Code,
                     Description = entity.Description,
                     Status = (DefaultStatusType)entity.Status,
@@ -99,7 +100,7 @@ namespace MyERP.Web.Areas.Item.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _Maintenance(ItemEditViewModel model)
+        public ActionResult _Maintenance(ItemGroupEditViewModel model)
         {
             DirectResult r = new DirectResult();
 
@@ -126,7 +127,7 @@ namespace MyERP.Web.Areas.Item.Controllers
                         r.ErrorMessage = "Item has been changed or deleted! Please check";
                         return r;
                     }
-
+                    _update.Level = (byte)model.Level;
                     _update.Code = model.Code;
                     _update.Description = model.Description;
                     _update.Status = (byte)model.Status;
@@ -148,10 +149,11 @@ namespace MyERP.Web.Areas.Item.Controllers
                 }
                 else
                 {
-                    var _newModel = new DataAccess.Item()
+                    var _newModel = new DataAccess.ItemGroup()
                     {
                         ClientId = clientId,
                         OrganizationId = organizationId,
+                        Level = (byte)model.Level,
                         Code = model.Code,
                         Description = model.Description,
                         Status = (byte)model.Status,
@@ -175,8 +177,8 @@ namespace MyERP.Web.Areas.Item.Controllers
                     }
                 }
 
-                Store StoreItemList = X.GetCmp<Store>("StoreItemList");
-                StoreItemList.Reload();
+                Store StoreItemGroupList = X.GetCmp<Store>("StoreItemGroupList");
+                StoreItemGroupList.Reload();
                 r.Success = true;
                 return r;
             }
@@ -195,7 +197,7 @@ namespace MyERP.Web.Areas.Item.Controllers
                 if (entity == null)
                 {
                     r.Success = false;
-                    r.ErrorMessage = "Item not found! Please check";
+                    r.ErrorMessage = "ItemGroup not found! Please check";
                     return r;
                 }
 
@@ -210,8 +212,8 @@ namespace MyERP.Web.Areas.Item.Controllers
                     return r;
                 }
 
-                Store StoreItemList = X.GetCmp<Store>("StoreItemList");
-                StoreItemList.Reload();
+                Store StoreItemGroupList = X.GetCmp<Store>("StoreItemGroupList");
+                StoreItemGroupList.Reload();
             }
             else
             {
