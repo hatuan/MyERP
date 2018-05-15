@@ -55,10 +55,14 @@ namespace MyERP.Web.Areas.Item.Controllers
 
             var data = paging.Data.Select(c => new ItemViewModel
             {
-                Code = c.Code,
-                Id = c.Id,
-                Description = c.Description,
                 OrganizationCode = c.Organization.Code,
+                Id = c.Id,
+                Code = c.Code,
+                Description = c.Description,
+                BaseUomCode = c.BaseUom.Code,
+                ItemGroup1Code = c.ItemGroupId1 != null ? c.ItemGroup1.Code : "",
+                ItemGroup2Code = c.ItemGroupId2 != null ? c.ItemGroup2.Code : "",
+                ItemGroup3Code = c.ItemGroupId3 != null ? c.ItemGroup3.Code : "",
                 RecCreateBy = c.RecCreatedByUser.Name,
                 RecCreatedAt = c.RecCreatedAt,
                 RecModifiedBy = c.RecModifiedByUser.Name,
@@ -78,23 +82,76 @@ namespace MyERP.Web.Areas.Item.Controllers
             var model = new ItemEditViewModel()
             {
                 Id = null,
+                ItemGroupId1 = null,
+                ItemGroupId2 = null,
+                ItemGroupId3 = null,
                 Status = DefaultStatusType.Active
             };
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.GetBy(c => c.Id == _id);
+                var entity = repository.Get(c => c.Id == _id, new string[] {"BaseUom", "ItemGroup1", "ItemGroup2", "ItemGroup3"}).Single();
                 model = new ItemEditViewModel()
                 {
                     Id = entity.Id,
                     Code = entity.Code,
+                    BaseUomId = entity.BaseUomId,
+                    ItemGroupId1 = entity.ItemGroupId1,
+                    ItemGroupId2 = entity.ItemGroupId2,
+                    ItemGroupId3 = entity.ItemGroupId3,
                     Description = entity.Description,
                     Status = (DefaultStatusType)entity.Status,
                     Version = entity.Version
                 };
-            }
 
-            return new Ext.Net.MVC.PartialViewResult() { Model = model };
+                ViewData["BaseUomItems"] = new List<Uom>
+                {
+                    new Uom()
+                    {
+                        Id = entity.BaseUomId,
+                        Code = entity.BaseUom.Code,
+                        Description = entity.BaseUom.Description
+                    }
+                };
+                
+                if (entity.ItemGroupId1.HasValue)
+                {
+                    ViewData["ItemGroup1Items"] = new List<ItemGroup>
+                    {
+                        new ItemGroup()
+                        {
+                            Id = entity.ItemGroupId1??0,
+                            Code = entity.ItemGroup1.Code,
+                            Description = entity.ItemGroup1.Description
+                        }
+                    };
+                }
+                if (entity.ItemGroupId2.HasValue)
+                {
+                    ViewData["ItemGroup2Items"] = new List<ItemGroup>
+                    {
+                        new ItemGroup()
+                        {
+                            Id = entity.ItemGroupId2??0,
+                            Code = entity.ItemGroup2.Code,
+                            Description = entity.ItemGroup2.Description
+                        }
+                    };
+                }
+                if (entity.ItemGroupId3.HasValue)
+                {
+                    ViewData["ItemGroup3Items"] = new List<ItemGroup>
+                    {
+                        new ItemGroup()
+                        {
+                            Id = entity.ItemGroupId3??0,
+                            Code = entity.ItemGroup3.Code,
+                            Description = entity.ItemGroup3.Description
+                        }
+                    };
+                }
+            }
+            return new Ext.Net.MVC.PartialViewResult() { Model = model, ViewData = ViewData };
         }
 
         [HttpPost]
@@ -129,6 +186,10 @@ namespace MyERP.Web.Areas.Item.Controllers
 
                     _update.Code = model.Code;
                     _update.Description = model.Description;
+                    _update.BaseUomId = model.BaseUomId;
+                    _update.ItemGroupId1 = model.ItemGroupId1;
+                    _update.ItemGroupId2 = model.ItemGroupId2;
+                    _update.ItemGroupId3 = model.ItemGroupId3;
                     _update.Status = (byte)model.Status;
                     _update.RecModifiedAt = DateTime.Now;
                     _update.RecModifiedBy = (long)user.ProviderUserKey;
@@ -154,6 +215,10 @@ namespace MyERP.Web.Areas.Item.Controllers
                         OrganizationId = organizationId,
                         Code = model.Code,
                         Description = model.Description,
+                        BaseUomId = model.BaseUomId,
+                        ItemGroupId1 = model.ItemGroupId1 == 0 ? null : model.ItemGroupId1,
+                        ItemGroupId2 = model.ItemGroupId2 == 0 ? null : model.ItemGroupId2,
+                        ItemGroupId3 = model.ItemGroupId3 == 0 ? null : model.ItemGroupId3,
                         Status = (byte)model.Status,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,

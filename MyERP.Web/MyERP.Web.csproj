@@ -418,6 +418,7 @@
   <ItemGroup>
     <Folder Include="Areas\Item\Models\" />
     <Folder Include="Areas\UOM\Models\" />
+    <Folder Include="Resources\uploadFiles\" />
     <Folder Include="Views\Validation\" />
   </ItemGroup>
   <ItemGroup>

@@ -72,6 +72,21 @@ namespace MyERP.Web.Areas.UOM.Controllers
             return this.Store(data, paging.TotalRecords);
         }
 
+        public ActionResult LookupData(StoreRequestParameters parameters)
+        {
+            var paging = ((UomRepository)repository).UomsPaging(parameters.Start, parameters.Limit, parameters.SimpleSort, parameters.SimpleSortDirection, parameters.Query);
+
+            var data = paging.Data.Where(c=>c.Status == (short)DefaultStatusType.Active).Select(c => new UOMViewModel
+            {
+                Code = c.Code,
+                Id = c.Id,
+                Description = c.Description,
+                OrganizationCode = c.Organization.Code,
+                Status = (DefaultStatusType)c.Status
+            }).ToList();
+            return this.Store(data, paging.TotalRecords);
+        }
+
         [HttpGet]
         public ActionResult _Maintenance(string id = null)
         {

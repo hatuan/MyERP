@@ -20,20 +20,20 @@ namespace MyERP.Web
 
         public  Paging<Uom> UomsPaging(int start, int limit, string sort, SortDirection dir, string filter)
         {
-            var uoms = GetAll();
+            var entities = Get(includePaths: new String[] { "Organization", "Client", "RecCreatedByUser", "RecModifiedByUser" });
 
             if (!string.IsNullOrEmpty(filter) && filter != "*")
             {
-                uoms.Where(c => c.Description.ToLower().StartsWith(filter.ToLower()) || c.Code.ToLower().StartsWith(filter.ToLower()));
+                entities = entities.Where(c => c.Description.ToLower().StartsWith(filter.ToLower()) || c.Code.ToLower().StartsWith(filter.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(sort))
-                uoms = dir == SortDirection.ASC ? uoms.OrderBy(sort) : uoms.OrderBy(sort + " DESC");
+                entities = dir == SortDirection.ASC ? entities.OrderBy(sort) : entities.OrderBy(sort + " DESC");
             else
-                uoms = uoms.OrderBy("Code");
+                entities = entities.OrderBy("Code");
 
-            var count = uoms.ToList().Count;
-            var rangeUoms = (start < 0 || limit < 0) ? uoms.ToList() : uoms.Skip(start).Take(limit).ToList();
+            var count = entities.ToList().Count;
+            var rangeUoms = (start < 0 || limit <= 0) ? entities.ToList() : entities.Skip(start).Take(limit).ToList();
 
             return new Paging<Uom>(rangeUoms, count);
         }

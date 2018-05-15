@@ -12,6 +12,7 @@ namespace MyERP.Web.Odata
 {
     public abstract partial class BaseApiController<TEntity, TContext> : ODataController
         where TContext : DbContext, new()
+        where TEntity : class
     {
         protected IBaseRepository<TEntity, TContext> repository;
 

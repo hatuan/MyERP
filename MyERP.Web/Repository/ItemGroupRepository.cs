@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Security.Principal;
@@ -20,11 +21,11 @@ namespace MyERP.Web
 
         public  Paging<ItemGroup> Paging(int start, int limit, string sort, SortDirection dir, string filter)
         {
-            var entities = GetAll();
+            var entities = Get(includePaths: new String[]{"Organization", "Client", "RecCreatedByUser", "RecModifiedByUser" });
 
             if (!string.IsNullOrEmpty(filter) && filter != "*")
             {
-                entities.Where(c => c.Description.ToLower().StartsWith(filter.ToLower()) || c.Code.ToLower().StartsWith(filter.ToLower()));
+                entities = entities.Where(c => c.Description.ToLower().Contains(filter.ToLower()) || c.Code.ToLower().StartsWith(filter.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(sort))
@@ -33,7 +34,7 @@ namespace MyERP.Web
                 entities = entities.OrderBy("Code");
 
             var count = entities.ToList().Count;
-            var ranges = (start < 0 || limit < 0) ? entities.ToList() : entities.Skip(start).Take(limit).ToList();
+            var ranges = (start < 0 || limit <= 0) ? entities.ToList() : entities.Skip(start).Take(limit).ToList();
 
             return new Paging<ItemGroup>(ranges, count);
         }

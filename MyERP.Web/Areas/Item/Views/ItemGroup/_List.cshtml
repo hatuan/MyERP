@@ -48,7 +48,7 @@
                           de.Click.Confirmation.ConfirmRequest = true;
                           de.Click.Confirmation.Title = "Alert";
                           de.Click.Confirmation.Message = "Do you want to DELETE ?";
-                          de.Click.ExtraParams.Add(new Parameter("ID", "#{ItemList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
+                          de.Click.ExtraParams.Add(new Parameter("ID", "#{ItemGroupList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
                           de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
                       })
                       );

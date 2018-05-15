@@ -1,51 +1,237 @@
 ﻿@model MyERP.Web.Models.ItemEditViewModel
 
-@(Html.X().Window()
-              .ID("WindowItemMaintenance")
-              .Title("Item Maintenance")
-              .Height(300)
-              .Width(350)
-              .Modal(true)
-              .Layout(LayoutType.Fit)
-              .Items(
-                Html.X().FormPanel()
-                    .ID("FormItemMaintenance")
-                    .Layout(LayoutType.Form)
-                    .Border(false)
-                    .BodyPadding(5)
-                    .DefaultButton("btnSave")
-                    .Items(
-                        Html.X().AntiForgeryField(),
-                        Html.X().TextFieldFor(m => m.Code).AllowBlank(false).ID("Code"),
-                        Html.X().TextFieldFor(m => m.Description).AllowBlank(false).ID("Description"),
-                        Html.X().ComboBoxFor(m => m.Status).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
-                        Html.X().HiddenFor(m => m.Id).ID("Id"),
-                        Html.X().HiddenFor(m => m.Version).ID("Version")
-                        )
-                    .Buttons(
-                        Html.X().Button()
-                            .ID("btnSave")
-                            .Text("Save")
-                            .Icon(Icon.Disk)
-                            .DirectEvents(de =>
-                            {
-                                de.Click.Url = Url.Action("_Maintenance");
-                                de.Click.Method = HttpMethod.POST;
-                                de.Click.Before = "return this.up('form').isValid();";
-                                de.Click.Success = "this.up('window').close();";
-                                de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
-                                de.Click.ShowWarningOnFailure = true;
-                                de.Click.EventMask.ShowMask = true;
-                                de.Click.FormID = "FormItemMaintenance";
-                            }),
-                        Html.X().Button()
-                            .ID("btnCancel")
-                            .Text("Cancel")
-                            .Icon(Icon.Cancel)
-                            .Listeners(ls =>
-                            {
-                                ls.Click.Handler = "this.up('window').close();";
-                            })
-                        )
-                )
+@(Html.X().Store().ID("LookupUOMStore").AutoLoad(false)
+    
+    .Proxy(Html.X().AjaxProxy()
+        .Url(Url.Action("LookupData", "Index", new { area = "UOM" }))
+        .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total"))
+    )
+    .Model(Html.X().Model()
+        .IDProperty("Id")
+        .Fields(
+            new ModelField("Id", ModelFieldType.Int),
+            new ModelField("OrganizationCode", ModelFieldType.String),
+            new ModelField("Code", ModelFieldType.String),
+            new ModelField("Description", ModelFieldType.String)
+        )
+    )
+    .Data(ViewData["BaseUomItems"])
 )
+
+@(Html.X().Store().ID("LookupItemGroup1Store").AutoLoad(false)
+          .Proxy(Html.X().AjaxProxy()
+              .Url(Url.Action("LookupData", "ItemGroup", new { area = "Item" }))
+              .Reader(Html.X().JsonReader().RootProperty("data"))
+          )
+          .Model(Html.X().Model()
+              .IDProperty("Id")
+              .Fields(
+                  new ModelField("Id", ModelFieldType.Int),
+                  new ModelField("OrganizationCode", ModelFieldType.String),
+                  new ModelField("Code", ModelFieldType.String),
+                  new ModelField("Description", ModelFieldType.String)
+              )
+          )
+          .Parameters(p =>
+              {
+                  p.Add(new StoreParameter("level", "1", ParameterMode.Value));
+              }
+          )
+      .Data(ViewData["ItemGroup1Items"])
+)
+
+@(Html.X().Store().ID("LookupItemGroup2Store").AutoLoad(false)
+          .Proxy(Html.X().AjaxProxy()
+              .Url(Url.Action("LookupData", "ItemGroup", new { area = "Item" }))
+              .Reader(Html.X().JsonReader().RootProperty("data"))
+          )
+          .Model(Html.X().Model()
+              .IDProperty("Id")
+              .Fields(
+                  new ModelField("Id", ModelFieldType.Int),
+                  new ModelField("OrganizationCode", ModelFieldType.String),
+                  new ModelField("Code", ModelFieldType.String),
+                  new ModelField("Description", ModelFieldType.String)
+              )
+          )
+          .Parameters(p =>
+              {
+                  p.Add(new StoreParameter("level", "2", ParameterMode.Value));
+              }
+          )
+      .Data(ViewData["ItemGroup2Items"])
+)
+
+@(Html.X().Store().ID("LookupItemGroup3Store").AutoLoad(false)
+          .Proxy(Html.X().AjaxProxy()
+              .Url(Url.Action("LookupData", "ItemGroup", new { area = "Item" }))
+              .Reader(Html.X().JsonReader().RootProperty("data"))
+          )
+          .Model(Html.X().Model()
+              .IDProperty("Id")
+              .Fields(
+                  new ModelField("Id", ModelFieldType.Int),
+                  new ModelField("OrganizationCode", ModelFieldType.String),
+                  new ModelField("Code", ModelFieldType.String),
+                  new ModelField("Description", ModelFieldType.String)
+              )
+          )
+          .Parameters(p =>
+              {
+                  p.Add(new StoreParameter("level", "3", ParameterMode.Value));
+              }
+          )
+      .Data(ViewData["ItemGroup3Items"])
+)
+
+@(Html.X().Window()
+      .ID("WindowItemMaintenance")
+      .Title("Item Maintenance")
+      .Height(500)
+      .Width(600)
+      .Modal(true)
+      .Layout(LayoutType.Fit)
+      .Items(
+          Html.X().FormPanel()
+              .ID("FormItemMaintenance")
+              .Layout(LayoutType.Form)
+              .Border(false)
+              .BodyPadding(5)
+              .DefaultButton("btnSave")
+              .Items(
+                  Html.X().AntiForgeryField(),
+                  Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").Width(150).AutoFocus(true).ID("Code"),
+                  Html.X().TextFieldFor(m => m.Description).AllowBlank(false).ID("Description"),
+                  Html.X().ComboBoxFor(m => m.BaseUomId).AllowBlank(false).Width(150).ID("BaseUomId")
+                      .DisplayField("Code")
+                      .ValueField("Id")
+                      .FieldStyle("text-transform: uppercase;")
+                      .TypeAhead(true)
+                      .MinChars(0)
+                      .PageSize(10)
+                      .SelectOnTab(true)
+                      .ForceSelection(true)
+                      .ValidateOnBlur(true)
+                      .ValidateOnChange(true)
+                      .ListConfig(Html.X().BoundList()
+                          .LoadingText("Searching...")
+                          .ItemTpl(Html.X().XTemplate()
+                              .Html(@<text>
+                                        <div class="search-item">
+                                            <h3>{Code}</h3>
+                                            {Description}
+                                        </div>
+                                     </text>)
+                          )
+                      )
+                      .StoreID("LookupUOMStore"),
+                  Html.X().FieldContainer().FieldLabel("Group").Layout(LayoutType.HBox)
+                      .Items(
+                          Html.X().ComboBoxFor(m => m.ItemGroupId1).ID("ItemGroup1")
+                              .AllowBlank(true)
+                              .DisplayField("Code")
+                              .ValueField("Id")
+                              .FieldLabel("")
+                              .FieldStyle("text-transform: uppercase;")
+                              .TypeAhead(true)
+                              .MinChars(0)
+                              .PageSize(10)
+                              .SelectOnTab(true)
+                              .ForceSelection(true)
+                              .ValidateOnBlur(true)
+                              .ValidateOnChange(true)
+                              .ListConfig(Html.X().BoundList()
+                                  .LoadingText("Searching...")
+                                  .ItemTpl(Html.X().XTemplate()
+                                      .Html(@<text>
+                                                <div class="search-item">
+                                                    <h3>{Code}</h3>
+                                                    {Description}
+                                                </div>
+                                             </text>)
+                                  )
+                              )
+                              .StoreID("LookupItemGroup1Store")
+                              .MarginSpec("0 3 0 0"),
+                          Html.X().ComboBoxFor(m => m.ItemGroupId2).ID("ItemGroup2")
+                              .AllowBlank(true)
+                              .DisplayField("Code")
+                              .ValueField("Id")
+                              .FieldLabel("")
+                              .FieldStyle("text-transform: uppercase;")
+                              .TypeAhead(true)
+                              .MinChars(0)
+                              .PageSize(10)
+                              .SelectOnTab(true)
+                              .ForceSelection(true)
+                              .ValidateOnBlur(true)
+                              .ValidateOnChange(true)
+                              .ListConfig(Html.X().BoundList()
+                                  .LoadingText("Searching...")
+                                  .ItemTpl(Html.X().XTemplate()
+                                      .Html(@<text>
+                                                <div class="search-item">
+                                                    <h3>{Code}</h3>
+                                                    {Description}
+                                                </div>
+                                             </text>)
+                                  )
+                              )
+                              .StoreID("LookupItemGroup2Store")
+                              .MarginSpec("0 3 0 0"),
+                          Html.X().ComboBoxFor(m => m.ItemGroupId3).ID("ItemGroup3")
+                              .AllowBlank(true)
+                              .DisplayField("Code")
+                              .ValueField("Id")
+                              .FieldLabel("")
+                              .FieldStyle("text-transform: uppercase;")
+                              .TypeAhead(true)
+                              .MinChars(0)
+                              .PageSize(10)
+                              .SelectOnTab(true)
+                              .ForceSelection(true)
+                              .ValidateOnBlur(true)
+                              .ValidateOnChange(true)
+                              .ListConfig(Html.X().BoundList()
+                                  .LoadingText("Searching...")
+                                  .ItemTpl(Html.X().XTemplate()
+                                      .Html(@<text>
+                                                <div class="search-item">
+                                                    <h3>{Code}</h3>
+                                                    {Description}
+                                                </div>
+                                             </text>)
+                                  )
+                              )
+                              .StoreID("LookupItemGroup3Store")
+                      ),
+                  Html.X().ComboBoxFor(m => m.Status).Width(150).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
+                  Html.X().HiddenFor(m => m.Id).ID("Id"),
+                  Html.X().HiddenFor(m => m.Version).ID("Version")
+              )
+              .Buttons(
+                  Html.X().Button()
+                      .ID("btnSave")
+                      .Text("Save")
+                      .Icon(Icon.Disk)
+                      .DirectEvents(de =>
+                      {
+                          de.Click.Url = Url.Action("_Maintenance");
+                          de.Click.Method = HttpMethod.POST;
+                          de.Click.Before = "return this.up('form').isValid();";
+                          de.Click.Success = "this.up('window').close();";
+                          de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
+                          de.Click.ShowWarningOnFailure = true;
+                          de.Click.EventMask.ShowMask = true;
+                          de.Click.FormID = "FormItemMaintenance";
+                      }),
+                  Html.X().Button()
+                      .ID("btnCancel")
+                      .Text("Cancel")
+                      .Icon(Icon.Cancel)
+                      .Listeners(ls =>
+                      {
+                          ls.Click.Handler = "this.up('window').close();";
+                      })
+              )
+      ))

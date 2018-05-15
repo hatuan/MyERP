@@ -72,6 +72,39 @@ namespace MyERP.Web.Areas.Item.Controllers
             return this.Store(data, paging.TotalRecords);
         }
 
+        public ActionResult LookupData(StoreRequestParameters parameters, byte level, long? id = null)
+        {
+            if (id != null && id > 0)
+            {
+                var entity = repository.GetBy(c => c.Id == id);
+                var data = new ItemGroupViewModel()
+                {
+                    Code = entity.Code,
+                    Id = entity.Id,
+                    Description = entity.Description,
+                    OrganizationCode = entity.Organization.Code,
+                    Status = (DefaultStatusType)entity.Status
+                };
+                return this.Store(data, 1);
+            }
+            else
+            {
+                var paging = ((ItemGroupRepository) repository).Paging(parameters.Start, parameters.Limit,
+                    parameters.SimpleSort, parameters.SimpleSortDirection, parameters.Query);
+
+                var data = paging.Data.Where(c => c.Status == (short) DefaultStatusType.Active && c.Level == level)
+                    .Select(c => new ItemGroupViewModel
+                    {
+                        Code = c.Code,
+                        Id = c.Id,
+                        Description = c.Description,
+                        OrganizationCode = c.Organization.Code,
+                        Status = (DefaultStatusType) c.Status
+                    }).ToList();
+                return this.Store(data, paging.TotalRecords);
+            }
+        }
+
         [HttpGet]
         public ActionResult _Maintenance(string id = null)
         {

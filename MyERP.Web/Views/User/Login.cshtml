@@ -70,6 +70,7 @@
                             Html.X().TextFieldFor(m => m.Name)
                                 .EmptyText("")
                                 .AllowBlank(false)
+                                .AutoFocus(true)
                                 .LabelAlign(LabelAlign.Left)
                                 .BlankText("Your username is required."),
                             Html.X().TextFieldFor(m => m.Password)

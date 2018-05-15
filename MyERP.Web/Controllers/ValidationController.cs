@@ -112,6 +112,23 @@ namespace MyERP.Web.Controllers
             };
         }
 
+        public JsonResult ExtCheckLookupCodeUom(String Value)
+        {
+            var repository = new UomRepository();
+            var exists = repository.GetBy(c => c.Code.Equals(Value, StringComparison.InvariantCultureIgnoreCase));
+
+            return new JsonResult
+            {
+                Data = new
+                {
+                    serviceResponse = new
+                    {
+                        valid = exists != null
+                    }
+                }
+            };
+        }
+
         //
         // CheckDuplicateItem
         public JsonResult CheckDuplicateItem(ItemEditViewModel product)

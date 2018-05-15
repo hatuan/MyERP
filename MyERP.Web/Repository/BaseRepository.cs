@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Dynamic;
@@ -13,12 +14,33 @@ using System.Web.Security;
 
 namespace MyERP.Web
 {
+    public class SortExpression<TEntity> where TEntity : class
+    {
+        public SortExpression(Expression<Func<TEntity, object>> sortBy, ListSortDirection sortDirection)
+        {
+            SortBy = sortBy;
+            SortDirection = sortDirection;
+        }
+
+        public Expression<Func<TEntity, object>> SortBy { get; set; }
+        public ListSortDirection SortDirection { get; set; }
+    }
     public interface IBaseRepository<TEntity, TContext>
         where TContext : DbContext, new()
+        where TEntity : class
     {
         IQueryable<TEntity> GetAll();
         IQueryable<TEntity> GetAll(IPrincipal principal);
         TEntity GetBy(Expression<Func<TEntity, bool>> filter);
+        IQueryable<TEntity> Get();
+        IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null);
+        IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, 
+            string[] includePaths = null);
+        IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
+            string[] includePaths = null,
+            int? page = 0, 
+            int? pageSize = null, 
+            params SortExpression<TEntity>[] sortExpressions);
         TEntity AddNew(TEntity entity);
         TEntity Update(TEntity entity);
         void Delete(TEntity entity);
@@ -80,6 +102,97 @@ namespace MyERP.Web
                 return default(TEntity);
 
             return entity;
+        }
+
+        public IQueryable<TEntity> Get()
+        {
+            return Get(null, null, null, null, null);
+        }
+
+        public IQueryable<TEntity> Get(
+            Expression<Func<TEntity, bool>> filter = null)
+        {
+            return Get(filter, null, null, null, null);
+        }
+
+        public IQueryable<TEntity> Get(
+            Expression<Func<TEntity, bool>> filter = null,
+            string[] includePaths = null)
+        {
+            return Get(filter, includePaths, null, null, null);
+        }
+
+        public IQueryable<TEntity> Get(
+           Expression<Func<TEntity, bool>> filter = null,
+           string[] includePaths = null,
+           int? page = null,
+           int? pageSize = null,
+           params SortExpression<TEntity>[] sortExpressions)
+        {
+            IQueryable<TEntity> query = dataContext.Set<TEntity>();
+
+            var membershipUser = (MyERPMembershipUser)Membership.GetUser(HttpContext.Current.User.Identity.Name, true);
+            if (membershipUser == null)
+                throw new NullReferenceException("membershipUser");
+
+            string clause = "ClientId = @0";
+            query = query.Where(clause, membershipUser.ClientId);
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (includePaths != null)
+            {
+                for (var i = 0; i < includePaths.Count(); i++)
+                {
+                    query = query.Include(includePaths[i]);
+                }
+            }
+
+            if (sortExpressions != null)
+            {
+                IOrderedQueryable<TEntity> orderedQuery = null;
+                for (var i = 0; i < sortExpressions.Count(); i++)
+                {
+                    if (i == 0)
+                    {
+                        if (sortExpressions[i].SortDirection == ListSortDirection.Ascending)
+                        {
+                            orderedQuery = query.OrderBy(sortExpressions[i].SortBy);
+                        }
+                        else
+                        {
+                            orderedQuery = query.OrderByDescending(sortExpressions[i].SortBy);
+                        }
+                    }
+                    else
+                    {
+                        if (sortExpressions[i].SortDirection == ListSortDirection.Ascending)
+                        {
+                            orderedQuery = orderedQuery.ThenBy(sortExpressions[i].SortBy);
+                        }
+                        else
+                        {
+                            orderedQuery = orderedQuery.ThenByDescending(sortExpressions[i].SortBy);
+                        }
+
+                    }
+                }
+
+                if (page != null)
+                {
+                    query = orderedQuery.Skip(((int)page - 1) * (int)pageSize);
+                }
+            }
+
+            if (pageSize != null)
+            {
+                query = query.Take((int)pageSize);
+            }
+
+            return query;
         }
 
         public virtual TEntity AddNew(TEntity entity)

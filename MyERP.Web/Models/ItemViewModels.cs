@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Ext.Net;
+using MyERP.DataAccess;
 using MyERP.DataAccess.Enum;
 
 namespace MyERP.Web.Models
@@ -24,7 +27,16 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "UOM")]
-        public String UomCode { get; set; }
+        public String BaseUomCode { get; set; }
+
+        [Display(Name = "Group 1")]
+        public String ItemGroup1Code { get; set; }
+
+        [Display(Name = "Group 2")]
+        public String ItemGroup2Code { get; set; }
+
+        [Display(Name = "Group 3")]
+        public String ItemGroup3Code { get; set; }
 
         [Required]
         public Int64 Version { get; set; }
@@ -65,7 +77,20 @@ namespace MyERP.Web.Models
         [Required]
         [Display(Name = "Description")]
         public String Description { get; set; }
-        
+
+        [Required]
+        [Display(Name = "UOM")]
+        public long BaseUomId { get; set; }
+
+        [Display(Name = "Group 1")]
+        public long? ItemGroupId1 { get; set; }
+
+        [Display(Name = "Group 2")]
+        public long? ItemGroupId2 { get; set; }
+
+        [Display(Name = "Group 3")]
+        public long? ItemGroupId3 { get; set; }
+
         [Required]
         [Display(Name = "Status")]
         public DefaultStatusType Status { get; set; }

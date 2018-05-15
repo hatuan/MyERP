@@ -16,8 +16,8 @@
                     .DefaultButton("btnSave")
                     .Items(
                         Html.X().AntiForgeryField(),
-                        Html.X().ComboBoxFor(m => m.Level).AllowBlank(false).ID("Level").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.GroupLevelType)),
-                        Html.X().TextFieldFor(m => m.Code).AllowBlank(false).ID("Code"),
+                        Html.X().ComboBoxFor(m => m.Level).AllowBlank(false).AutoFocus(true).ID("Level").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.GroupLevelType)),
+                        Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").ID("Code"),
                         Html.X().TextFieldFor(m => m.Description).AllowBlank(false).ID("Description"),
                         Html.X().ComboBoxFor(m => m.Status).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
                         Html.X().HiddenFor(m => m.Id).ID("Id"),

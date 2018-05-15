@@ -131,6 +131,18 @@
             <End Role="user" EntitySet="users" />
             <End Role="item_group" EntitySet="item_groups" />
           </AssociationSet>
+          <AssociationSet Name="FK_item_item_group" Association="MyERP.DataAccess.Store.FK_item_item_group">
+            <End Role="item_group" EntitySet="item_groups" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_item_group1" Association="MyERP.DataAccess.Store.FK_item_item_group1">
+            <End Role="item_group" EntitySet="item_groups" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_item_group2" Association="MyERP.DataAccess.Store.FK_item_item_group2">
+            <End Role="item_group" EntitySet="item_groups" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -259,6 +271,9 @@
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
           <Property Name="status" Type="smallint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="item_group_id1" Type="bigint" />
+          <Property Name="item_group_id2" Type="bigint" />
+          <Property Name="item_group_id3" Type="bigint" />
         </EntityType>
         <EntityType Name="item_uom">
           <Key>
@@ -634,6 +649,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_item_item_group">
+          <End Role="item_group" Type="MyERP.DataAccess.Store.item_group" Multiplicity="0..1" />
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="item_group_id1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_item_group1">
+          <End Role="item_group" Type="MyERP.DataAccess.Store.item_group" Multiplicity="0..1" />
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="item_group_id2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_item_group2">
+          <End Role="item_group" Type="MyERP.DataAccess.Store.item_group" Multiplicity="0..1" />
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="item_group_id3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -727,7 +778,7 @@
             <End Role="Uoms1" EntitySet="Uoms" />
           </AssociationSet>
           <AssociationSet Name="Uom_ItemSet" Association="MyERP.DataAccess.Uom_Item">
-            <End Role="Uom" EntitySet="Uoms" />
+            <End Role="BaseUom" EntitySet="Uoms" />
             <End Role="Products" EntitySet="Items" />
           </AssociationSet>
           <AssociationSet Name="Client_ProductSet" Association="MyERP.DataAccess.Client_Product">
@@ -769,6 +820,18 @@
           <AssociationSet Name="User_ItemGroup_ModifiedByUserSet" Association="MyERP.DataAccess.User_ItemGroup_ModifiedByUser">
             <End Role="RecModifiedByUser" EntitySet="Users" />
             <End Role="ItemGroups1" EntitySet="ItemGroups" />
+          </AssociationSet>
+          <AssociationSet Name="ItemGroup_Item_Level1Set" Association="MyERP.DataAccess.ItemGroup_Item_Level1">
+            <End Role="ItemGroup1" EntitySet="ItemGroups" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="ItemGroup_Item_Level2Set" Association="MyERP.DataAccess.ItemGroup_Item_Level2">
+            <End Role="ItemGroup2" EntitySet="ItemGroups" />
+            <End Role="Items1" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="ItemGroup_Item_Level3Set" Association="MyERP.DataAccess.ItemGroup_Item_Level3">
+            <End Role="ItemGroup3" EntitySet="ItemGroups" />
+            <End Role="Items2" EntitySet="Items" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
@@ -912,6 +975,9 @@
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="b5d0a5ce-1dad-4478-9c7a-9ae4d3a02337" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="69d7dc82-d2e4-4c67-b326-dc288979700c" />
           <Property Name="BaseUomId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="93a5509c-a849-45b0-a2a4-9c969b78c7d6" />
+          <Property Name="ItemGroupId1" Type="Int64" ed:ValidateRequired="false" ed:Guid="a5b60793-6d70-4ded-9ff1-6142feecaa11" />
+          <Property Name="ItemGroupId2" Type="Int64" ed:ValidateRequired="false" ed:Guid="82aa9742-2a34-4dfc-91df-5bea4b98c1e0" />
+          <Property Name="ItemGroupId3" Type="Int64" ed:ValidateRequired="false" ed:Guid="c31e59ed-48f3-4182-b089-1f0a47b83e0e" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="296d80bc-419f-4c7f-a83c-aff7e8d8431d" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="86b2948c-9000-4965-8f40-41d42e2810c2" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="c376d9de-4b48-4d1d-ab3e-7ef9d9029cfa" />
@@ -920,11 +986,14 @@
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4833a51b-3100-4c75-b29c-6138041e404c" />
           <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="3e248b03-4b98-449c-84e3-6c557924d442" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="3222b6d9-15a0-4544-bb03-ad20911a9425" />
-          <NavigationProperty Name="Uom" Relationship="MyERP.DataAccess.Uom_Item" FromRole="Products" ToRole="Uom" ed:Guid="56faaecf-d482-42b1-a53f-a70e753dd6cc" />
+          <NavigationProperty Name="BaseUom" Relationship="MyERP.DataAccess.Uom_Item" FromRole="Products" ToRole="BaseUom" ed:Guid="56faaecf-d482-42b1-a53f-a70e753dd6cc" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_Product" FromRole="Products" ToRole="Client" ed:Guid="462c01cc-8acf-4d08-ac93-d6ea7ac3d4fc" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_Product" FromRole="Products" ToRole="Organization" ed:Guid="5d712ad6-ce1f-498c-9d8f-d3f062b30662" />
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Item_RecCreatedByUser" FromRole="Products" ToRole="RecCreatedByUser" ed:Guid="32d41ded-f4c4-474a-8988-be0952b03864" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_Item_RecModifiedByUser" FromRole="Products1" ToRole="RecModifiedByUser" ed:Guid="c150edfd-f9da-47dd-be68-d599d4bebe92" />
+          <NavigationProperty Name="ItemGroup1" Relationship="MyERP.DataAccess.ItemGroup_Item_Level1" FromRole="Items" ToRole="ItemGroup1" ed:Guid="5dbb0e41-5996-4604-aaca-a79cb9ab6025" />
+          <NavigationProperty Name="ItemGroup2" Relationship="MyERP.DataAccess.ItemGroup_Item_Level2" FromRole="Items1" ToRole="ItemGroup2" ed:Guid="1e446762-ae8b-43c4-afb0-81c74ef16af0" />
+          <NavigationProperty Name="ItemGroup3" Relationship="MyERP.DataAccess.ItemGroup_Item_Level3" FromRole="Items2" ToRole="ItemGroup3" ed:Guid="c6a4e598-4c6b-47fd-b8fb-34a8c589735f" />
         </EntityType>
         <EntityType Name="ItemUom" ed:Guid="99415c3c-dac3-4b24-900f-ff6b913d2931">
           <Key>
@@ -1187,10 +1256,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Uom_Item" ed:Guid="849c0837-6f8e-49eb-844c-156ff61b96b4">
-          <End Role="Uom" Type="MyERP.DataAccess.Uom" Multiplicity="1" />
+          <End Role="BaseUom" Type="MyERP.DataAccess.Uom" Multiplicity="1" />
           <End Role="Products" Type="MyERP.DataAccess.Item" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Uom">
+            <Principal Role="BaseUom">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Products">
@@ -1315,6 +1384,42 @@
             </Principal>
             <Dependent Role="ItemGroups1">
               <PropertyRef Name="RecModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ItemGroup_Item_Level1" ed:Guid="bf01f91a-6ba9-4e22-bf4c-699b8f1da655">
+          <End Role="ItemGroup1" Type="MyERP.DataAccess.ItemGroup" Multiplicity="0..1" />
+          <End Role="Items" Type="MyERP.DataAccess.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemGroup1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ItemGroupId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ItemGroup_Item_Level2" ed:Guid="211ef9cb-be7b-46e3-b4b8-8e5d5a8e07f5">
+          <End Role="ItemGroup2" Type="MyERP.DataAccess.ItemGroup" Multiplicity="0..1" />
+          <End Role="Items1" Type="MyERP.DataAccess.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemGroup2">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items1">
+              <PropertyRef Name="ItemGroupId2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ItemGroup_Item_Level3" ed:Guid="d99c2d6a-a6d2-4ab2-8e9f-b73a11979a26">
+          <End Role="ItemGroup3" Type="MyERP.DataAccess.ItemGroup" Multiplicity="0..1" />
+          <End Role="Items2" Type="MyERP.DataAccess.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemGroup3">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items2">
+              <PropertyRef Name="ItemGroupId3" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1457,6 +1562,9 @@
                 <ScalarProperty Name="Status" ColumnName="status" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="BaseUomId" ColumnName="base_uom_id" />
+                <ScalarProperty Name="ItemGroupId1" ColumnName="item_group_id1" />
+                <ScalarProperty Name="ItemGroupId2" ColumnName="item_group_id2" />
+                <ScalarProperty Name="ItemGroupId3" ColumnName="item_group_id3" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
