@@ -1,21 +1,26 @@
 ﻿@model MyERP.Web.Models.ItemEditViewModel
 
 @(Html.X().Store().ID("LookupUOMStore").AutoLoad(false)
-    
-    .Proxy(Html.X().AjaxProxy()
-        .Url(Url.Action("LookupData", "Index", new { area = "UOM" }))
-        .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total"))
-    )
-    .Model(Html.X().Model()
-        .IDProperty("Id")
-        .Fields(
-            new ModelField("Id", ModelFieldType.Int),
-            new ModelField("OrganizationCode", ModelFieldType.String),
-            new ModelField("Code", ModelFieldType.String),
-            new ModelField("Description", ModelFieldType.String)
-        )
-    )
-    .Data(ViewData["BaseUomItems"])
+
+      .Proxy(Html.X().AjaxProxy()
+          .Url(Url.Action("LookupData", "Index", new { area = "UOM" }))
+          .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total"))
+      )
+      .Model(Html.X().Model()
+          .IDProperty("Id")
+          .Fields(
+              new ModelField("Id", ModelFieldType.Int),
+              new ModelField("OrganizationCode", ModelFieldType.String),
+              new ModelField("Code", ModelFieldType.String),
+              new ModelField("Description", ModelFieldType.String)
+          )
+      )
+      .Parameters(p =>
+      {
+          p.Add(new StoreParameter("Id", "App.BaseUomId.getValue()", ParameterMode.Raw));
+      }
+      )
+      .Data(ViewData["BaseUomItems"])
 )
 
 @(Html.X().Store().ID("LookupItemGroup1Store").AutoLoad(false)
@@ -35,6 +40,7 @@
           .Parameters(p =>
               {
                   p.Add(new StoreParameter("level", "1", ParameterMode.Value));
+                  p.Add(new StoreParameter("Id", "App.ItemGroup1.getValue()", ParameterMode.Raw));
               }
           )
       .Data(ViewData["ItemGroup1Items"])
@@ -57,6 +63,7 @@
           .Parameters(p =>
               {
                   p.Add(new StoreParameter("level", "2", ParameterMode.Value));
+                  p.Add(new StoreParameter("Id", "App.ItemGroup2.getValue()", ParameterMode.Raw));
               }
           )
       .Data(ViewData["ItemGroup2Items"])
@@ -79,6 +86,7 @@
           .Parameters(p =>
               {
                   p.Add(new StoreParameter("level", "3", ParameterMode.Value));
+                  p.Add(new StoreParameter("Id", "App.ItemGroup3.getValue()", ParameterMode.Raw));
               }
           )
       .Data(ViewData["ItemGroup3Items"])
@@ -88,7 +96,7 @@
       .ID("WindowItemMaintenance")
       .Title("Item Maintenance")
       .Height(500)
-      .Width(600)
+      .Width(650)
       .Modal(true)
       .Layout(LayoutType.Fit)
       .Items(
@@ -124,8 +132,15 @@
                                      </text>)
                           )
                       )
-                      .StoreID("LookupUOMStore"),
+                      .StoreID("LookupUOMStore")
+                      .Listeners(ls =>
+                      {
+                          ls.BeforeQuery.Handler = "App.BaseUomId.getStore().load()";
+                      }
+                      ),
                   Html.X().FieldContainer().FieldLabel("Group").Layout(LayoutType.HBox)
+                      .Defaults(Html.X().Parameter().Name("margin").Value("0 3 0 0").Mode(ParameterMode.Value))
+                      .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle })
                       .Items(
                           Html.X().ComboBoxFor(m => m.ItemGroupId1).ID("ItemGroup1")
                               .AllowBlank(true)
@@ -152,7 +167,11 @@
                                   )
                               )
                               .StoreID("LookupItemGroup1Store")
-                              .MarginSpec("0 3 0 0"),
+                              .Listeners(ls =>
+                              {
+                                  ls.BeforeQuery.Handler = "App.ItemGroup1.getStore().load()";
+                              })
+                              .Flex(1),
                           Html.X().ComboBoxFor(m => m.ItemGroupId2).ID("ItemGroup2")
                               .AllowBlank(true)
                               .DisplayField("Code")
@@ -178,7 +197,11 @@
                                   )
                               )
                               .StoreID("LookupItemGroup2Store")
-                              .MarginSpec("0 3 0 0"),
+                              .Listeners(ls =>
+                              {
+                                  ls.BeforeQuery.Handler = "App.ItemGroup2.getStore().load()";
+                              })
+                              .Flex(1),
                           Html.X().ComboBoxFor(m => m.ItemGroupId3).ID("ItemGroup3")
                               .AllowBlank(true)
                               .DisplayField("Code")
@@ -204,6 +227,11 @@
                                   )
                               )
                               .StoreID("LookupItemGroup3Store")
+                              .Listeners(ls =>
+                              {
+                                  ls.BeforeQuery.Handler = "App.ItemGroup3.getStore().load()";
+                              })
+                              .Flex(1).Margin(0)
                       ),
                   Html.X().ComboBoxFor(m => m.Status).Width(150).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
                   Html.X().HiddenFor(m => m.Id).ID("Id"),

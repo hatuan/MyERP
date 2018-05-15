@@ -72,19 +72,37 @@ namespace MyERP.Web.Areas.UOM.Controllers
             return this.Store(data, paging.TotalRecords);
         }
 
-        public ActionResult LookupData(StoreRequestParameters parameters)
+        public ActionResult LookupData(StoreRequestParameters parameters, long? id = null)
         {
-            var paging = ((UomRepository)repository).UomsPaging(parameters.Start, parameters.Limit, parameters.SimpleSort, parameters.SimpleSortDirection, parameters.Query);
-
-            var data = paging.Data.Where(c=>c.Status == (short)DefaultStatusType.Active).Select(c => new UOMViewModel
+            if (id != null && id > 0)
             {
-                Code = c.Code,
-                Id = c.Id,
-                Description = c.Description,
-                OrganizationCode = c.Organization.Code,
-                Status = (DefaultStatusType)c.Status
-            }).ToList();
-            return this.Store(data, paging.TotalRecords);
+                var entity = repository.Get(c => c.Id == id, new string[] { "Organization" }).Single();
+                var data = new UOMViewModel()
+                {
+                    Code = entity.Code,
+                    Id = entity.Id,
+                    Description = entity.Description,
+                    OrganizationCode = entity.Organization.Code,
+                    Status = (DefaultStatusType)entity.Status
+                };
+                return this.Store(data, 1);
+            }
+            else
+            {
+                var paging = ((UomRepository) repository).UomsPaging(parameters.Start, parameters.Limit,
+                    parameters.SimpleSort, parameters.SimpleSortDirection, parameters.Query);
+
+                var data = paging.Data.Where(c => c.Status == (short) DefaultStatusType.Active).Select(c =>
+                    new UOMViewModel
+                    {
+                        Code = c.Code,
+                        Id = c.Id,
+                        Description = c.Description,
+                        OrganizationCode = c.Organization.Code,
+                        Status = (DefaultStatusType) c.Status
+                    }).ToList();
+                return this.Store(data, paging.TotalRecords);
+            }
         }
 
         [HttpGet]
