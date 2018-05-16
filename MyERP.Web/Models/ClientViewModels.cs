@@ -10,6 +10,7 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Description")]
+        [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String Description { get; set; }
 
         public long CurrencyLcyId { get; set; }

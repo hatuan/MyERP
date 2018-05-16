@@ -64,6 +64,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                 Telephone = c.Telephone,
                 Mobilephone = c.Mobilephone,
                 Mail = c.Mail,
+                ContactName = c.ContactName,
                 BusinessPartnerGroup1Code = c.BusinessPartnerGroupId1 != null ? c.BusinessPartnerGroup1.Code : "",
                 BusinessPartnerGroup2Code = c.BusinessPartnerGroupId2 != null ? c.BusinessPartnerGroup2.Code : "",
                 BusinessPartnerGroup3Code = c.BusinessPartnerGroupId3 != null ? c.BusinessPartnerGroup3.Code : "",
@@ -108,6 +109,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                     Telephone = entity.Telephone,
                     Mobilephone = entity.Mobilephone,
                     Mail = entity.Mail,
+                    ContactName = entity.ContactName,
                     Status = (DefaultStatusType)entity.Status,
                     Version = entity.Version
                 };
@@ -189,6 +191,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                     _update.Telephone = model.Telephone;
                     _update.Mobilephone = model.Mobilephone;
                     _update.Mail = model.Mail;
+                    _update.ContactName = model.ContactName;
                     _update.BusinessPartnerGroupId1 = model.BusinessPartnerGroupId1;
                     _update.BusinessPartnerGroupId2 = model.BusinessPartnerGroupId2;
                     _update.BusinessPartnerGroupId3 = model.BusinessPartnerGroupId3;
@@ -222,6 +225,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                         Telephone = model.Telephone,
                         Mobilephone = model.Mobilephone,
                         Mail = model.Mail,
+                        ContactName = model.ContactName,
                         BusinessPartnerGroupId1 = model.BusinessPartnerGroupId1 == 0 ? null : model.BusinessPartnerGroupId1,
                         BusinessPartnerGroupId2 = model.BusinessPartnerGroupId2 == 0 ? null : model.BusinessPartnerGroupId2,
                         BusinessPartnerGroupId3 = model.BusinessPartnerGroupId3 == 0 ? null : model.BusinessPartnerGroupId3,

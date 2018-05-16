@@ -54,12 +54,14 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Code")]
-        [Remote("ExtCheckDuplicateUom", "Validation", AreaReference.UseRoot, AdditionalFields = "Id", ErrorMessage = "UOM code already exists. Please specify another one.")]
+        [Remote("ExtCheckDuplicateUom", "Validation", AreaReference.UseRoot, AdditionalFields = "Id", ErrorMessage = "Code already exists. Please specify another one.")]
         [RegularExpression(@"^[A-Za-z0-9]*$", ErrorMessage = "Invalid Code - only allow a-z A-Z 0-9 character")]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String Code { get; set; }
 
         [Required]
         [Display(Name = "Description")]
+        [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String Description { get; set; }
         
         [Required]

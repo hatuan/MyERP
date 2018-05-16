@@ -411,6 +411,8 @@
               <Summary>Gioi han tien hang hoa ... tren hoa don</Summary>
             </Documentation>
           </Property>
+          <Property Name="geo_latitude" Type="float" />
+          <Property Name="geo_longitude" Type="float" />
         </EntityType>
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
@@ -1384,6 +1386,8 @@
               <Summary>Gioi han tien hang hoa ... tren hoa don</Summary>
             </Documentation>
           </Property>
+          <Property Name="GeoLatitude" Type="Double" ed:ValidateRequired="false" ed:Guid="9f02ec68-fff3-43c2-87c2-9743c2617536" />
+          <Property Name="GeoLongitude" Type="Double" ed:ValidateRequired="false" ed:Guid="12e3584a-86ac-4608-abb5-63cc06ed8596" />
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_BusinessPartner_RecCreateBy" FromRole="BusinessPartners" ToRole="RecCreatedByUser" ed:Guid="4e4a7cdc-6b2a-49ae-ac51-95131d55a694" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_BusinessPartner_RecModifiedBy" FromRole="BusinessPartners1" ToRole="RecModifiedByUser" ed:Guid="414ea6af-2086-4647-9e52-93588aa5be73" />
           <NavigationProperty Name="BusinessPartnerGroup1" Relationship="MyERP.DataAccess.BusinessPartnerGroup_BusinessPartner_Level1" FromRole="BusinessPartners" ToRole="BusinessPartnerGroup1" ed:Guid="5aad8931-0383-4a0e-914e-9e09dffeab81" />
@@ -2149,6 +2153,8 @@
                 <ScalarProperty Name="Comment" ColumnName="comment" />
                 <ScalarProperty Name="CreditLimit" ColumnName="credit_limit" />
                 <ScalarProperty Name="AmountLimit" ColumnName="amount_limit" />
+                <ScalarProperty Name="GeoLatitude" ColumnName="geo_latitude" />
+                <ScalarProperty Name="GeoLongitude" ColumnName="geo_longitude" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

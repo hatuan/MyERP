@@ -56,12 +56,14 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Code")]
-        [Remote("CheckDuplicateCurrency", "Validation", AdditionalFields = "Id", ErrorMessage = "Currency code already exists. Please specify another one.")]
+        [Remote("CheckDuplicateCurrency", "Validation", AdditionalFields = "Id", ErrorMessage = "Code already exists. Please specify another one.")]
         [RegularExpression(@"^[A-Za-z0-9]*$", ErrorMessage = "Invalid Code - only allow a-z A-Z 0-9 character")]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String Code { get; set; }
 
         [Required]
         [Display(Name = "Name")]
+        [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String Name { get; set; }
         
         [Required]

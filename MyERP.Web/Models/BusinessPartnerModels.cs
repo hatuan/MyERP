@@ -40,6 +40,9 @@ namespace MyERP.Web.Models
         [Display(Name = "Vat Code")]
         public String VatCode { get; set; }
 
+        [Display(Name = "Contact Name")]
+        public String ContactName { get; set; }
+
         [Display(Name = "Group 1")]
         public String BusinessPartnerGroup1Code { get; set; }
 
@@ -81,28 +84,39 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Code")]
-        [Remote("ExtCheckDuplicateBusinessPartner", "Validation", AreaReference.UseRoot, AdditionalFields = "Id", ErrorMessage = "Product code already exists. Please specify another one.")]
+        [Remote("ExtCheckDuplicateBusinessPartner", "Validation", AreaReference.UseRoot, AdditionalFields = "Id", ErrorMessage = "Code already exists. Please specify another one.")]
         [RegularExpression(@"^[A-Za-z0-9]*$", ErrorMessage = "Invalid Code - only allow a-z A-Z 0-9 character")]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String Code { get; set; }
 
         [Required]
         [Display(Name = "Description")]
+        [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String Description { get; set; }
 
         [Display(Name = "Address")]
+        [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String Address { get; set; }
 
         [Display(Name = "Telephone")]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String Telephone { get; set; }
 
         [Display(Name = "Mobilephone")]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String Mobilephone { get; set; }
 
         [Display(Name = "Mail")]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String Mail { get; set; }
 
         [Display(Name = "Vat Code")]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String VatCode { get; set; }
+
+        [Display(Name = "Contact Name")]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String ContactName { get; set; }
 
         [Display(Name = "Group 1")]
         public long? BusinessPartnerGroupId1 { get; set; }

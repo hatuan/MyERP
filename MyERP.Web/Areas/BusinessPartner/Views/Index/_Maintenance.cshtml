@@ -85,13 +85,14 @@
               .DefaultButton("btnSave")
               .Items(
                   Html.X().AntiForgeryField(),
-                  Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").Width(150).AutoFocus(true).ID("Code"),
-                  Html.X().TextFieldFor(m => m.Description).AllowBlank(false).ID("Description"),
-                  Html.X().TextFieldFor(m => m.VatCode).ID("VatCode"),
-                  Html.X().TextFieldFor(m => m.Address).ID("Address"),
-                  Html.X().TextFieldFor(m => m.Telephone).ID("Telephone"),
-                  Html.X().TextFieldFor(m => m.Mobilephone).ID("Mobilephone"),
-                  Html.X().TextFieldFor(m => m.Mail).ID("Mail"),
+                  Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").Width(150).AutoFocus(true).EnforceMaxLength(true).ID("Code"),
+                  Html.X().TextFieldFor(m => m.Description).AllowBlank(false).EnforceMaxLength(true).ID("Description"),
+                  Html.X().TextFieldFor(m => m.VatCode).EnforceMaxLength(true).ID("VatCode"),
+                  Html.X().TextFieldFor(m => m.Address).EnforceMaxLength(true).ID("Address"),
+                  Html.X().TextFieldFor(m => m.Telephone).EnforceMaxLength(true).ID("Telephone"),
+                  Html.X().TextFieldFor(m => m.Mobilephone).EnforceMaxLength(true).ID("Mobilephone"),
+                  Html.X().TextFieldFor(m => m.Mail).EnforceMaxLength(true).ID("Mail"),
+                  Html.X().TextFieldFor(m => m.ContactName).EnforceMaxLength(true).ID("ContactName"),
                   Html.X().FieldContainer().FieldLabel("Group").Layout(LayoutType.HBox)
                       .Defaults(Html.X().Parameter().Name("margin").Value("0 3 0 0").Mode(ParameterMode.Value))
                       .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle })

@@ -90,6 +90,7 @@
                               new ModelField("Telephone", ModelFieldType.String),
                               new ModelField("Mobilephone", ModelFieldType.String),
                               new ModelField("Mail", ModelFieldType.String),
+                              new ModelField("ContactName", ModelFieldType.String),
                               new ModelField("BusinessPartnerGroup1Code", ModelFieldType.String),
                               new ModelField("BusinessPartnerGroup2Code", ModelFieldType.String),
                               new ModelField("BusinessPartnerGroup3Code", ModelFieldType.String),
@@ -109,13 +110,14 @@
           )
           .ColumnModel(
               Html.X().Column().Text("Org").DataIndex("OrganizationCode").Width(75).Locked(true),
-              Html.X().Column().Text("Code").DataIndex("Code").Width(85).Locked(true),
+              Html.X().Column().Text("Code").DataIndex("Code").Width(95).Locked(true),
               Html.X().Column().Text("Description").DataIndex("Description").MinWidth(256),
               Html.X().Column().Text("Vat Code").DataIndex("VatCode").Width(150),
               Html.X().Column().Text("Address").DataIndex("Address").Width(200),
               Html.X().Column().Text("Telephone").DataIndex("Telephone").Width(150),
               Html.X().Column().Text("Mobilephone").DataIndex("Mobilephone").Width(150),
               Html.X().Column().Text("Mail").DataIndex("Mail").Width(150),
+              Html.X().Column().Text("ContactName").DataIndex("ContactName").Width(150),
               Html.X().Column().Text("Group 1").DataIndex("BusinessPartnerGroup1Code").Width(85),
               Html.X().Column().Text("Group 2").DataIndex("BusinessPartnerGroup2Code").Width(85),
               Html.X().Column().Text("Group 3").DataIndex("BusinessPartnerGroup3Code").Width(85),
