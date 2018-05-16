@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityDeveloper Version="6.2.487.0">
-  <ModelSettings xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" AppConnectionStringName="Connection" ConnectionStringInAppConfig="True" RegenareteConnectionStringInAppConfig="True" DetectTPTInheritance="False" EntityFrameworkVersion="Version6" IncludeForeignKeysInModel="true" DetectFunctionBasedColumnDefault="false">
+  <ModelSettings xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" AppConnectionStringName="Connection" ConnectionStringInAppConfig="True" RegenareteConnectionStringInAppConfig="True" DetectTPTInheritance="False" UseDatabaseComments="False" EntityFrameworkVersion="Version6" IncludeForeignKeysInModel="true" DetectFunctionBasedColumnDefault="false">
     <Connection ConnectionString="Data Source=.;Initial Catalog=myerp;Integrated Security=True;Persist Security Info=True" Provider="System.Data.SqlClient" />
     <Generation>
       <GeneratedFiles>
@@ -26,6 +26,10 @@
         <File Name="MyERPDataModel.ItemUom.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
         <File Name="MyERPDataModel.ItemGroup.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
         <File Name="MyERPDataModel.ItemGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.BusinessPartnerGroup.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
+        <File Name="MyERPDataModel.BusinessPartnerGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.BusinessPartner.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
+        <File Name="MyERPDataModel.BusinessPartner.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
         <File Name="MyERPDataModel.UserConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
         <File Name="MyERPDataModel.UserConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
         <File Name="MyERPDataModel.ClientConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
@@ -46,6 +50,10 @@
         <File Name="MyERPDataModel.ItemUomConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
         <File Name="MyERPDataModel.ItemGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
         <File Name="MyERPDataModel.ItemGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.BusinessPartnerGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
+        <File Name="MyERPDataModel.BusinessPartnerGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.BusinessPartnerConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
+        <File Name="MyERPDataModel.BusinessPartnerConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
       </GeneratedFiles>
     </Generation>
     <DatabaseFirstNamingRules>
@@ -65,6 +73,7 @@
       <Diagram Name="UserDiagram" />
       <Diagram Name="eHoaDonDiagram" />
       <Diagram Name="WarehouseDiagram" />
+      <Diagram Name="SaleDiagram" />
     </Diagrams>
     <Templates>
       <Template Name="DbContext" Description="Use this template to generate a strongly-typed DbContext class and persistence ignorant entity classes." Enabled="True" PredefinedTemplateName="Entity DbContext C#">

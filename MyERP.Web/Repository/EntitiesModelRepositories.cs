@@ -48,4 +48,14 @@ namespace MyERP.Web
     {
 
     }
+
+    public partial class BusinessPartnerRepository : BaseRepository<MyERP.DataAccess.BusinessPartner, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class BusinessPartnerGroupRepository : BaseRepository<MyERP.DataAccess.BusinessPartnerGroup, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
 }

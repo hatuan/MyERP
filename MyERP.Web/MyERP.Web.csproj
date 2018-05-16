@@ -333,6 +333,12 @@
     <Content Include="Areas\Item\Views\ItemGroup\Index.cshtml" />
     <Content Include="Areas\Item\Views\ItemGroup\_List.cshtml" />
     <Content Include="Areas\Item\Views\ItemGroup\_Maintenance.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\web.config" />
+    <Content Include="Areas\BusinessPartner\Views\Index\Index.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\BusinessPartnerGroup\Index.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\BusinessPartnerGroup\_List.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\BusinessPartnerGroup\_Maintenance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -352,6 +358,9 @@
     <Compile Include="App_Start\ExtNetConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\BusinessPartner\BusinessPartnerAreaRegistration.cs" />
+    <Compile Include="Areas\BusinessPartner\Controllers\BusinessPartnerGroupController.cs" />
+    <Compile Include="Areas\BusinessPartner\Controllers\IndexController.cs" />
     <Compile Include="Areas\Getting_Started\Controllers\CHANGELOGController.cs" />
     <Compile Include="Areas\Getting_Started\Getting_StartedAreaRegistration.cs" />
     <Compile Include="Areas\Item\Controllers\IndexController.cs" />
@@ -369,7 +378,9 @@
     <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Helpers\MyERPHelper.cs" />
     <Compile Include="Models\ClientViewModels.cs" />
+    <Compile Include="Models\BusinessPartnerGroupViewModels.cs" />
     <Compile Include="Models\ItemGroupViewModels.cs" />
+    <Compile Include="Models\BusinessPartnerModels.cs" />
     <Compile Include="Models\ItemViewModels.cs" />
     <Compile Include="Models\UOMViewModels.cs" />
     <Compile Include="Models\ExtNetModel.cs" />
@@ -405,7 +416,9 @@
     <Compile Include="odata\OrganizationsController.partial.cs" />
     <Compile Include="odata\OrganizationsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BusinessPartnerGroupRepository.cs" />
     <Compile Include="Repository\ItemGroupRepository.cs" />
+    <Compile Include="Repository\BusinessPartner.cs" />
     <Compile Include="Repository\OrganizationRepository.cs" />
     <Compile Include="Repository\RoleRepository.cs" />
     <Compile Include="Repository\ItemRepository.cs" />
@@ -416,6 +429,7 @@
     <Compile Include="ValidateJsonAntiForgeryTokenAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\BusinessPartner\Models\" />
     <Folder Include="Areas\Item\Models\" />
     <Folder Include="Areas\UOM\Models\" />
     <Folder Include="Resources\uploadFiles\" />

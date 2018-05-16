@@ -198,5 +198,75 @@ namespace MyERP.Web.Controllers
                 }
             };
         }
+
+        //
+        // CheckDuplicateBusinessPartner
+        public JsonResult CheckDuplicateBusinessPartner(BusinessPartnerEditViewModel product)
+        {
+            var repository = new BusinessPartnerRepository();
+            BusinessPartner exists;
+            if (product.Id != null && product.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != product.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return Json(exists != null, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ExtCheckDuplicateBusinessPartner(BusinessPartnerEditViewModel product)
+        {
+            var repository = new BusinessPartnerRepository();
+            BusinessPartner exists;
+            if (product.Id != null && product.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != product.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return new JsonResult
+            {
+                Data = new
+                {
+                    serviceResponse = new
+                    {
+                        valid = exists == null
+                    }
+                }
+            };
+        }
+
+        //
+        // CheckDuplicateBusinessPartnerGroup
+        public JsonResult CheckDuplicateBusinessPartnerGroup(BusinessPartnerGroupEditViewModel product)
+        {
+            var repository = new BusinessPartnerGroupRepository();
+            BusinessPartnerGroup exists;
+            if (product.Id != null && product.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != product.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return Json(exists != null, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ExtCheckDuplicateBusinessPartnerGroup(BusinessPartnerGroupEditViewModel product)
+        {
+            var repository = new BusinessPartnerGroupRepository();
+            BusinessPartnerGroup exists;
+            if (product.Id != null && product.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != product.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return new JsonResult
+            {
+                Data = new
+                {
+                    serviceResponse = new
+                    {
+                        valid = exists == null
+                    }
+                }
+            };
+        }
     }
 }

@@ -17,14 +17,14 @@ using System.Data.Entity.ModelConfiguration;
 namespace MyERP.DataAccess.Mapping
 {
 
-    public partial class UomConfiguration : EntityTypeConfiguration<Uom>
+    public partial class BusinessPartnerGroupConfiguration : EntityTypeConfiguration<BusinessPartnerGroup>
     {
 
-        public UomConfiguration()
+        public BusinessPartnerGroupConfiguration()
         {
             this
                 .HasKey(p => p.Id)
-                .ToTable("uom", "dbo");
+                .ToTable("business_partner_group", "dbo");
             // Properties:
             this
                 .Property(p => p.Id)
@@ -32,6 +32,11 @@ namespace MyERP.DataAccess.Mapping
                     .IsRequired()
                     .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)
                     .HasColumnType("bigint");
+            this
+                .Property(p => p.Level)
+                    .HasColumnName(@"level")
+                    .IsRequired()
+                    .HasColumnType("tinyint");
             this
                 .Property(p => p.Code)
                     .HasColumnName(@"code")
@@ -44,6 +49,15 @@ namespace MyERP.DataAccess.Mapping
                     .IsRequired()
                     .HasMaxLength(256)
                     .HasColumnType("nvarchar");
+            this
+                .Property(p => p.Status)
+                    .HasColumnName(@"status")
+                    .HasColumnType("smallint");
+            this
+                .Property(p => p.Version)
+                    .HasColumnName(@"version")
+                    .IsRequired()
+                    .HasColumnType("bigint");
             this
                 .Property(p => p.OrganizationId)
                     .HasColumnName(@"organization_id")
@@ -74,27 +88,7 @@ namespace MyERP.DataAccess.Mapping
                     .HasColumnName(@"rec_modified_by")
                     .IsRequired()
                     .HasColumnType("bigint");
-            this
-                .Property(p => p.Status)
-                    .HasColumnName(@"status")
-                    .IsRequired()
-                    .HasColumnType("smallint");
-            this
-                .Property(p => p.Version)
-                    .HasColumnName(@"version")
-                    .IsRequired()
-                    .HasColumnType("bigint");
             // Associations:
-            this
-                .HasRequired(p => p.Client)
-                    .WithMany()
-                .HasForeignKey(p => p.ClientId)
-                    .WillCascadeOnDelete(false);
-            this
-                .HasRequired(p => p.Organization)
-                    .WithMany()
-                .HasForeignKey(p => p.OrganizationId)
-                    .WillCascadeOnDelete(false);
             this
                 .HasRequired(p => p.RecCreatedByUser)
                     .WithMany()
@@ -104,6 +98,16 @@ namespace MyERP.DataAccess.Mapping
                 .HasRequired(p => p.RecModifiedByUser)
                     .WithMany()
                 .HasForeignKey(p => p.RecModifiedBy)
+                    .WillCascadeOnDelete(false);
+            this
+                .HasRequired(p => p.Client)
+                    .WithMany()
+                .HasForeignKey(p => p.ClientId)
+                    .WillCascadeOnDelete(false);
+            this
+                .HasRequired(p => p.Organization)
+                    .WithMany()
+                .HasForeignKey(p => p.OrganizationId)
                     .WillCascadeOnDelete(false);
             OnCreated();
         }

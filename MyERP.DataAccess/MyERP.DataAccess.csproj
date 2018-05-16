@@ -53,6 +53,10 @@
   <ItemGroup>
     <Compile Include="Context\MyERPDataModel.EntitiesModel.cs" />
     <Compile Include="Context\MyERPDataModel.EntitiesModel.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.BusinessPartner.cs" />
+    <Compile Include="Entities\MyERPDataModel.BusinessPartner.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.BusinessPartnerGroup.cs" />
+    <Compile Include="Entities\MyERPDataModel.BusinessPartnerGroup.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Client.cs" />
     <Compile Include="Entities\MyERPDataModel.Client.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Currency.cs" />
@@ -78,6 +82,10 @@
     <Compile Include="Enum\DefaultStatusType.cs" />
     <Compile Include="Enum\CurrencyStatusType.cs" />
     <Compile Include="Enum\OrganizationStatusType.cs" />
+    <Compile Include="Mapping\MyERPDataModel.BusinessPartnerConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.BusinessPartnerConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.BusinessPartnerGroupConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.BusinessPartnerGroupConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.ClientConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.ClientConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.CurrencyConfiguration.cs" />

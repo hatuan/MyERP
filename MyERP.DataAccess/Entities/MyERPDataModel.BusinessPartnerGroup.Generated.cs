@@ -17,13 +17,12 @@ namespace MyERP.DataAccess
 {
 
     /// <summary>
-    /// There are no comments for MyERP.DataAccess.Client in the schema.
+    /// There are no comments for MyERP.DataAccess.BusinessPartnerGroup in the schema.
     /// </summary>
-    public partial class Client    {
+    public partial class BusinessPartnerGroup    {
 
-        public Client()
+        public BusinessPartnerGroup()
         {
-          this.Version = 1;
             OnCreated();
         }
 
@@ -43,9 +42,33 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
+        /// There are no comments for Level in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual byte Level
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for Code in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.StringLength(32)]
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual string Code
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
         /// There are no comments for Description in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.StringLength(256)]
+        [System.ComponentModel.DataAnnotations.Required()]
         public virtual string Description
         {
             get;
@@ -54,10 +77,20 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for IsActivated in the schema.
+        /// There are no comments for Status in the schema.
+        /// </summary>
+        public virtual global::System.Nullable<short> Status
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for Version in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual bool IsActivated
+        public virtual long Version
         {
             get;
             set;
@@ -65,21 +98,10 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for CultureId in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.StringLength(8)]
-        public virtual string CultureId
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for AmountDecimalPlaces in the schema.
+        /// There are no comments for OrganizationId in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual short AmountDecimalPlaces
+        public virtual long OrganizationId
         {
             get;
             set;
@@ -87,42 +109,10 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for AmountRoundingPrecision in the schema.
+        /// There are no comments for ClientId in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual decimal AmountRoundingPrecision
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for UnitAmountDecimalPlaces in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual short UnitAmountDecimalPlaces
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for UnitAmountRoundingPrecision in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual short UnitAmountRoundingPrecision
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for RecCreatedBy in the schema.
-        /// </summary>
-        public virtual global::System.Nullable<long> RecCreatedBy
+        public virtual long ClientId
         {
             get;
             set;
@@ -141,10 +131,10 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for RecModifiedBy in the schema.
+        /// There are no comments for RecCreatedBy in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual global::System.Nullable<long> RecModifiedBy
+        public virtual long RecCreatedBy
         {
             get;
             set;
@@ -154,7 +144,8 @@ namespace MyERP.DataAccess
         /// <summary>
         /// There are no comments for RecModifiedAt in the schema.
         /// </summary>
-        public virtual global::System.Nullable<System.DateTime> RecModifiedAt
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual global::System.DateTime RecModifiedAt
         {
             get;
             set;
@@ -162,20 +153,10 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for CurrencyLcyId in the schema.
-        /// </summary>
-        public virtual global::System.Nullable<long> CurrencyLcyId
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for Version in the schema.
+        /// There are no comments for RecModifiedBy in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long Version
+        public virtual long RecModifiedBy
         {
             get;
             set;
@@ -205,18 +186,18 @@ namespace MyERP.DataAccess
         }
     
         /// <summary>
-        /// There are no comments for Organizations in the schema.
+        /// There are no comments for Client in the schema.
         /// </summary>
-        public virtual ICollection<Organization> Organizations
+        public virtual Client Client
         {
             get;
             set;
         }
     
         /// <summary>
-        /// There are no comments for CurrencyLcy in the schema.
+        /// There are no comments for Organization in the schema.
         /// </summary>
-        public virtual Currency CurrencyLcy
+        public virtual Organization Organization
         {
             get;
             set;
