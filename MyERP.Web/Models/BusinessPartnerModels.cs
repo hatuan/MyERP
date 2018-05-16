@@ -25,6 +25,21 @@ namespace MyERP.Web.Models
         [Display(Name = "Description")]
         public String Description { get; set; }
 
+        [Display(Name = "Address")]
+        public String Address { get; set; }
+
+        [Display(Name = "Telephone")]
+        public String Telephone { get; set; }
+
+        [Display(Name = "Mobilephone")]
+        public String Mobilephone { get; set; }
+
+        [Display(Name = "Mail")]
+        public String Mail { get; set; }
+
+        [Display(Name = "Vat Code")]
+        public String VatCode { get; set; }
+
         [Display(Name = "Group 1")]
         public String BusinessPartnerGroup1Code { get; set; }
 
@@ -73,6 +88,21 @@ namespace MyERP.Web.Models
         [Required]
         [Display(Name = "Description")]
         public String Description { get; set; }
+
+        [Display(Name = "Address")]
+        public String Address { get; set; }
+
+        [Display(Name = "Telephone")]
+        public String Telephone { get; set; }
+
+        [Display(Name = "Mobilephone")]
+        public String Mobilephone { get; set; }
+
+        [Display(Name = "Mail")]
+        public String Mail { get; set; }
+
+        [Display(Name = "Vat Code")]
+        public String VatCode { get; set; }
 
         [Display(Name = "Group 1")]
         public long? BusinessPartnerGroupId1 { get; set; }

@@ -1,0 +1,219 @@
+﻿@model MyERP.Web.Models.BusinessPartnerEditViewModel
+
+@(Html.X().Store().ID("LookupBusinessPartnerGroup1Store").AutoLoad(false)
+          .Proxy(Html.X().AjaxProxy()
+              .Url(Url.Action("LookupData", "BusinessPartnerGroup", new { area = "BusinessPartner" }))
+              .Reader(Html.X().JsonReader().RootProperty("data"))
+          )
+          .Model(Html.X().Model()
+              .IDProperty("Id")
+              .Fields(
+                  new ModelField("Id", ModelFieldType.Int),
+                  new ModelField("OrganizationCode", ModelFieldType.String),
+                  new ModelField("Code", ModelFieldType.String),
+                  new ModelField("Description", ModelFieldType.String)
+              )
+          )
+          .Parameters(p =>
+              {
+                  p.Add(new StoreParameter("level", "1", ParameterMode.Value));
+                  p.Add(new StoreParameter("Id", "App.BusinessPartnerGroup1.getValue()", ParameterMode.Raw));
+              }
+          )
+      .Data(ViewData["BusinessPartnerGroup1Items"])
+)
+
+@(Html.X().Store().ID("LookupBusinessPartnerGroup2Store").AutoLoad(false)
+          .Proxy(Html.X().AjaxProxy()
+              .Url(Url.Action("LookupData", "BusinessPartnerGroup", new { area = "BusinessPartner" }))
+              .Reader(Html.X().JsonReader().RootProperty("data"))
+          )
+          .Model(Html.X().Model()
+              .IDProperty("Id")
+              .Fields(
+                  new ModelField("Id", ModelFieldType.Int),
+                  new ModelField("OrganizationCode", ModelFieldType.String),
+                  new ModelField("Code", ModelFieldType.String),
+                  new ModelField("Description", ModelFieldType.String)
+              )
+          )
+          .Parameters(p =>
+              {
+                  p.Add(new StoreParameter("level", "2", ParameterMode.Value));
+                  p.Add(new StoreParameter("Id", "App.BusinessPartnerGroup2.getValue()", ParameterMode.Raw));
+              }
+          )
+      .Data(ViewData["BusinessPartnerGroup2Items"])
+)
+
+@(Html.X().Store().ID("LookupBusinessPartnerGroup3Store").AutoLoad(false)
+          .Proxy(Html.X().AjaxProxy()
+              .Url(Url.Action("LookupData", "BusinessPartnerGroup", new { area = "BusinessPartner" }))
+              .Reader(Html.X().JsonReader().RootProperty("data"))
+          )
+          .Model(Html.X().Model()
+              .IDProperty("Id")
+              .Fields(
+                  new ModelField("Id", ModelFieldType.Int),
+                  new ModelField("OrganizationCode", ModelFieldType.String),
+                  new ModelField("Code", ModelFieldType.String),
+                  new ModelField("Description", ModelFieldType.String)
+              )
+          )
+          .Parameters(p =>
+              {
+                  p.Add(new StoreParameter("level", "3", ParameterMode.Value));
+                  p.Add(new StoreParameter("Id", "App.BusinessPartnerGroup3.getValue()", ParameterMode.Raw));
+              }
+          )
+      .Data(ViewData["BusinessPartnerGroup3Items"])
+)
+
+@(Html.X().Window()
+      .ID("WindowBusinessPartnerMaintenance")
+      .Title("Business Partner Maintenance")
+      .Height(500)
+      .Width(650)
+      .Modal(true)
+      .Layout(LayoutType.Fit)
+      .Items(
+          Html.X().FormPanel()
+              .ID("FormBusinessPartnerMaintenance")
+              .Layout(LayoutType.Form)
+              .Border(false)
+              .BodyPadding(5)
+              .DefaultButton("btnSave")
+              .Items(
+                  Html.X().AntiForgeryField(),
+                  Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").Width(150).AutoFocus(true).ID("Code"),
+                  Html.X().TextFieldFor(m => m.Description).AllowBlank(false).ID("Description"),
+                  Html.X().TextFieldFor(m => m.VatCode).ID("VatCode"),
+                  Html.X().TextFieldFor(m => m.Address).ID("Address"),
+                  Html.X().TextFieldFor(m => m.Telephone).ID("Telephone"),
+                  Html.X().TextFieldFor(m => m.Mobilephone).ID("Mobilephone"),
+                  Html.X().TextFieldFor(m => m.Mail).ID("Mail"),
+                  Html.X().FieldContainer().FieldLabel("Group").Layout(LayoutType.HBox)
+                      .Defaults(Html.X().Parameter().Name("margin").Value("0 3 0 0").Mode(ParameterMode.Value))
+                      .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle })
+                      .Items(
+                          Html.X().ComboBoxFor(m => m.BusinessPartnerGroupId1).ID("BusinessPartnerGroup1")
+                              .AllowBlank(true)
+                              .DisplayField("Code")
+                              .ValueField("Id")
+                              .FieldLabel("")
+                              .FieldStyle("text-transform: uppercase;")
+                              .TypeAhead(true)
+                              .MinChars(0)
+                              .PageSize(10)
+                              .SelectOnTab(true)
+                              .ForceSelection(true)
+                              .ValidateOnBlur(true)
+                              .ValidateOnChange(true)
+                              .ListConfig(Html.X().BoundList()
+                                  .LoadingText("Searching...")
+                                  .ItemTpl(Html.X().XTemplate()
+                                      .Html(@<text>
+                                                <div class="search-item">
+                                                    <h3>{Code}</h3>
+                                                    {Description}
+                                                </div>
+                                             </text>)
+                                  )
+                              )
+                              .StoreID("LookupBusinessPartnerGroup1Store")
+                              .Listeners(ls =>
+                              {
+                                  ls.BeforeQuery.Handler = "App.BusinessPartnerGroup1.getStore().load()";
+                              })
+                              .Flex(1),
+                          Html.X().ComboBoxFor(m => m.BusinessPartnerGroupId2).ID("BusinessPartnerGroup2")
+                              .AllowBlank(true)
+                              .DisplayField("Code")
+                              .ValueField("Id")
+                              .FieldLabel("")
+                              .FieldStyle("text-transform: uppercase;")
+                              .TypeAhead(true)
+                              .MinChars(0)
+                              .PageSize(10)
+                              .SelectOnTab(true)
+                              .ForceSelection(true)
+                              .ValidateOnBlur(true)
+                              .ValidateOnChange(true)
+                              .ListConfig(Html.X().BoundList()
+                                  .LoadingText("Searching...")
+                                  .ItemTpl(Html.X().XTemplate()
+                                      .Html(@<text>
+                                                <div class="search-item">
+                                                    <h3>{Code}</h3>
+                                                    {Description}
+                                                </div>
+                                             </text>)
+                                  )
+                              )
+                              .StoreID("LookupBusinessPartnerGroup2Store")
+                              .Listeners(ls =>
+                              {
+                                  ls.BeforeQuery.Handler = "App.BusinessPartnerGroup2.getStore().load()";
+                              })
+                              .Flex(1),
+                          Html.X().ComboBoxFor(m => m.BusinessPartnerGroupId3).ID("BusinessPartnerGroup3")
+                              .AllowBlank(true)
+                              .DisplayField("Code")
+                              .ValueField("Id")
+                              .FieldLabel("")
+                              .FieldStyle("text-transform: uppercase;")
+                              .TypeAhead(true)
+                              .MinChars(0)
+                              .PageSize(10)
+                              .SelectOnTab(true)
+                              .ForceSelection(true)
+                              .ValidateOnBlur(true)
+                              .ValidateOnChange(true)
+                              .ListConfig(Html.X().BoundList()
+                                  .LoadingText("Searching...")
+                                  .ItemTpl(Html.X().XTemplate()
+                                      .Html(@<text>
+                                                <div class="search-item">
+                                                    <h3>{Code}</h3>
+                                                    {Description}
+                                                </div>
+                                             </text>)
+                                  )
+                              )
+                              .StoreID("LookupBusinessPartnerGroup3Store")
+                              .Listeners(ls =>
+                              {
+                                  ls.BeforeQuery.Handler = "App.BusinessPartnerGroup3.getStore().load()";
+                              })
+                              .Flex(1).Margin(0)
+                      ),
+                  Html.X().ComboBoxFor(m => m.Status).Width(150).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
+                  Html.X().HiddenFor(m => m.Id).ID("Id"),
+                  Html.X().HiddenFor(m => m.Version).ID("Version")
+              )
+              .Buttons(
+                  Html.X().Button()
+                      .ID("btnSave")
+                      .Text("Save")
+                      .Icon(Icon.Disk)
+                      .DirectEvents(de =>
+                      {
+                          de.Click.Url = Url.Action("_Maintenance");
+                          de.Click.Method = HttpMethod.POST;
+                          de.Click.Before = "return this.up('form').isValid();";
+                          de.Click.Success = "this.up('window').close();";
+                          de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
+                          de.Click.ShowWarningOnFailure = true;
+                          de.Click.EventMask.ShowMask = true;
+                          de.Click.FormID = "FormBusinessPartnerMaintenance";
+                      }),
+                  Html.X().Button()
+                      .ID("btnCancel")
+                      .Text("Cancel")
+                      .Icon(Icon.Cancel)
+                      .Listeners(ls =>
+                      {
+                          ls.Click.Handler = "this.up('window').close();";
+                      })
+              )
+      ))

@@ -1095,7 +1095,7 @@
             <End Role="BusinessPartnerGroups" EntitySet="BusinessPartnerGroups" />
           </AssociationSet>
           <AssociationSet Name="User_BusinessPartner_RecCreateBySet" Association="MyERP.DataAccess.User_BusinessPartner_RecCreateBy">
-            <End Role="RecCreateByUser" EntitySet="Users" />
+            <End Role="RecCreatedByUser" EntitySet="Users" />
             <End Role="BusinessPartners" EntitySet="BusinessPartners" />
           </AssociationSet>
           <AssociationSet Name="User_BusinessPartner_RecModifiedBySet" Association="MyERP.DataAccess.User_BusinessPartner_RecModifiedBy">
@@ -1384,7 +1384,7 @@
               <Summary>Gioi han tien hang hoa ... tren hoa don</Summary>
             </Documentation>
           </Property>
-          <NavigationProperty Name="RecCreateByUser" Relationship="MyERP.DataAccess.User_BusinessPartner_RecCreateBy" FromRole="BusinessPartners" ToRole="RecCreateByUser" ed:Guid="4e4a7cdc-6b2a-49ae-ac51-95131d55a694" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_BusinessPartner_RecCreateBy" FromRole="BusinessPartners" ToRole="RecCreatedByUser" ed:Guid="4e4a7cdc-6b2a-49ae-ac51-95131d55a694" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_BusinessPartner_RecModifiedBy" FromRole="BusinessPartners1" ToRole="RecModifiedByUser" ed:Guid="414ea6af-2086-4647-9e52-93588aa5be73" />
           <NavigationProperty Name="BusinessPartnerGroup1" Relationship="MyERP.DataAccess.BusinessPartnerGroup_BusinessPartner_Level1" FromRole="BusinessPartners" ToRole="BusinessPartnerGroup1" ed:Guid="5aad8931-0383-4a0e-914e-9e09dffeab81" />
           <NavigationProperty Name="BusinessPartnerGroup2" Relationship="MyERP.DataAccess.BusinessPartnerGroup_BusinessPartner_Level2" FromRole="BusinessPartners1" ToRole="BusinessPartnerGroup2" ed:Guid="228840c5-805f-4f2a-a35e-dbf7ff14d4bd" />
@@ -1837,10 +1837,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="User_BusinessPartner_RecCreateBy" ed:Guid="96b0a11d-194d-40cb-ab5b-b5c8dd559108">
-          <End Role="RecCreateByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
           <End Role="BusinessPartners" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="RecCreateByUser">
+            <Principal Role="RecCreatedByUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="BusinessPartners">

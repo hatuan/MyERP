@@ -339,6 +339,8 @@
     <Content Include="Areas\BusinessPartner\Views\BusinessPartnerGroup\Index.cshtml" />
     <Content Include="Areas\BusinessPartner\Views\BusinessPartnerGroup\_List.cshtml" />
     <Content Include="Areas\BusinessPartner\Views\BusinessPartnerGroup\_Maintenance.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Index\_List.cshtml" />
+    <Content Include="Areas\BusinessPartner\Views\Index\_Maintenance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
