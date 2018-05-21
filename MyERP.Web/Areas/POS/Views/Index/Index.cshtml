@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    
+}              
+
+@section main
+{                
+    @(
+    Html.X().TabPanel()
+        .ID("POSTabs")
+        .Region(Region.Center)
+        .MarginSpec("0")
+        .Cls("tabs")
+        .MinTabWidth(115)
+        .Items(items =>
+        {
+            items.Add(Html.X().Panel().ID("tabHomePOS").Title("Home").IconCls("fa fa-home"));
+        })
+        .TabBar(components =>
+        {
+            components.Add(Html.X().Button().Flat(true).Icon(Icon.Add).DirectEvents(de => { de.Click.Action = "AddTab"; }));
+        })
+    )
+}

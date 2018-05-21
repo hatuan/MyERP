@@ -67,7 +67,13 @@
                                                                                                     )
                                                                                                 ),
                                                                                             Html.X().MenuItem()
-                                                                                                .Text("System")
+                                                                                                .Text("System").Menu(Html.X().Menu()
+                                                                                                    .Items(
+                                                                                                        Html.X().MenuItem().Text("Currency").Tag("Currency"),
+                                                                                                        Html.X().MenuItem().Text("Currency Rate").Tag("CurrencyRate"),
+                                                                                                        Html.X().MenuItem().Text("Users Manager").Tag("UsersManager")
+                                                                                                    )
+                                                                                                )
                                                                                             )
                                                                             ),
         Html.X().Button().Text("Modules").IconCls("x-fa fa-book").Menu(Html.X().Menu()
@@ -75,13 +81,18 @@
                                                                                         Html.X().MenuItem()
                                                                                             .Text("Financial"),
                                                                                         Html.X().MenuItem()
-                                                                                            .Text("Sale"),
+                                                                                            .Text("Sale").Menu(Html.X().Menu()
+                                                                                                .Items(
+                                                                                                    Html.X().MenuItem().Text("Point Of Sale - POS").Tag("POS").DirectEvents(de => 
+                                                                                                    {
+                                                                                                        de.Click.Url = Url.Action("RedirectToPos");
+                                                                                                    })
+                                                                                                )
+                                                                                            ),
                                                                                         Html.X().MenuItem()
                                                                                             .Text("Purchase"),
                                                                                         Html.X().MenuItem()
-                                                                                            .Text("Warehouse"),
-                                                                                        Html.X().MenuItem()
-                                                                                            .Text("System")
+                                                                                            .Text("Warehouse")
                                                                                     )
                                                                         ),
         Html.X().Button().Text("Reports").IconCls("x-fa fa-file").Menu(Html.X().Menu().Width(100)
@@ -91,9 +102,7 @@
                                                                                         Html.X().MenuItem()
                                                                                             .Text("Purchase"),
                                                                                         Html.X().MenuItem()
-                                                                                            .Text("Warehouse"),
-                                                                                        Html.X().MenuItem()
-                                                                                            .Text("System")
+                                                                                            .Text("Warehouse")
                                                                                     )
                                                                         ),
         Html.X().Button().Text("About").IconCls("x-fa fa-info")

@@ -25,6 +25,11 @@ namespace MyERP.Web.Controllers
             return View();
         }
 
+        public ActionResult RedirectToPos()
+        {
+            return this.RedirectToAction("Index", "Index", new { area = "POS" });
+        }
+
         public PartialViewResult ApplicationMenuPartialView(string containerId)
         {
             return new PartialViewResult

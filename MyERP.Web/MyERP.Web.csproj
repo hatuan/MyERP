@@ -169,8 +169,6 @@
     <Content Include="App_Readme\Ext.NET.Utilities\README.txt" />
     <Content Include="App_Readme\Transformer.NET\LICENSE.txt" />
     <Content Include="App_Readme\Transformer.NET\README.txt" />
-    <Content Include="Areas\Getting_Started\config.xml" />
-    <Content Include="Areas\Getting_Started\Views\CHANGELOG\config.xml" />
     <Content Include="Resources\css\main.css" />
     <Content Include="Resources\fonts\fontawesome-webfont.svg" />
     <Content Include="Resources\fonts\LICENSE_TITILLIUMTEXT.txt" />
@@ -317,8 +315,6 @@
     <Content Include="App_Readme\Ext.NET\README.md" />
     <Content Include="App_Readme\Ext.NET\LICENSE" />
     <Content Include="App_Readme\Ext.NET\CHANGELOG.md" />
-    <Content Include="Areas\Getting_Started\Views\CHANGELOG\Index.cshtml" />
-    <Content Include="Areas\Getting_Started\Views\Web.config" />
     <Content Include="Views\Shared\_BaseLayout.cshtml" />
     <Content Include="Views\Home\_ApplicationMenu.cshtml" />
     <Content Include="Areas\UOM\Views\web.config" />
@@ -341,6 +337,8 @@
     <Content Include="Areas\BusinessPartner\Views\BusinessPartnerGroup\_Maintenance.cshtml" />
     <Content Include="Areas\BusinessPartner\Views\Index\_List.cshtml" />
     <Content Include="Areas\BusinessPartner\Views\Index\_Maintenance.cshtml" />
+    <Content Include="Areas\POS\Views\web.config" />
+    <Content Include="Areas\POS\Views\Index\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -363,11 +361,11 @@
     <Compile Include="Areas\BusinessPartner\BusinessPartnerAreaRegistration.cs" />
     <Compile Include="Areas\BusinessPartner\Controllers\BusinessPartnerGroupController.cs" />
     <Compile Include="Areas\BusinessPartner\Controllers\IndexController.cs" />
-    <Compile Include="Areas\Getting_Started\Controllers\CHANGELOGController.cs" />
-    <Compile Include="Areas\Getting_Started\Getting_StartedAreaRegistration.cs" />
     <Compile Include="Areas\Item\Controllers\IndexController.cs" />
     <Compile Include="Areas\Item\Controllers\ItemGroupController.cs" />
     <Compile Include="Areas\Item\ItemAreaRegistration.cs" />
+    <Compile Include="Areas\POS\Controllers\IndexController.cs" />
+    <Compile Include="Areas\POS\POSAreaRegistration.cs" />
     <Compile Include="Areas\UOM\Controllers\IndexController.cs" />
     <Compile Include="Areas\UOM\UOMAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -452,11 +450,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CommonWebApiResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\config.xml">
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -17,11 +17,11 @@ namespace MyERP.DataAccess
 {
 
     /// <summary>
-    /// There are no comments for MyERP.DataAccess.ItemGroup in the schema.
+    /// There are no comments for MyERP.DataAccess.PosLine in the schema.
     /// </summary>
-    public partial class ItemGroup    {
+    public partial class PosLine    {
 
-        public ItemGroup()
+        public PosLine()
         {
             OnCreated();
         }
@@ -42,10 +42,9 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for Level in the schema.
+        /// There are no comments for PosHeaderId in the schema.
         /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual byte Level
+        public virtual global::System.Nullable<long> PosHeaderId
         {
             get;
             set;
@@ -53,11 +52,41 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for Code in the schema.
+        /// There are no comments for LineNo in the schema.
         /// </summary>
-        [System.ComponentModel.DataAnnotations.StringLength(32)]
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual string Code
+        public virtual long LineNo
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for Type in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual byte Type
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for ItemId in the schema.
+        /// </summary>
+        public virtual global::System.Nullable<long> ItemId
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for LocationId in the schema.
+        /// </summary>
+        public virtual global::System.Nullable<long> LocationId
         {
             get;
             set;
@@ -68,7 +97,6 @@ namespace MyERP.DataAccess
         /// There are no comments for Description in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.StringLength(256)]
-        [System.ComponentModel.DataAnnotations.Required()]
         public virtual string Description
         {
             get;
@@ -77,10 +105,9 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for Status in the schema.
+        /// There are no comments for UomId in the schema.
         /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual short Status
+        public virtual global::System.Nullable<long> UomId
         {
             get;
             set;
@@ -88,10 +115,87 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for Version in the schema.
+        /// There are no comments for UomDescription in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.StringLength(256)]
+        public virtual string UomDescription
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for Quantity in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long Version
+        public virtual decimal Quantity
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for UnitPrice in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal UnitPrice
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for Amount in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal Amount
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for UnitPriceLCY in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal UnitPriceLCY
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for AmountLCY in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal AmountLCY
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for QtyPerUom in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal QtyPerUom
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for QuantityBase in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal QuantityBase
         {
             get;
             set;
@@ -119,86 +223,15 @@ namespace MyERP.DataAccess
             set;
         }
 
-    
-        /// <summary>
-        /// There are no comments for RecCreatedAt in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual global::System.DateTime RecCreatedAt
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for RecCreatedBy in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long RecCreatedBy
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for RecModifiedAt in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual global::System.DateTime RecModifiedAt
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for RecModifiedBy in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long RecModifiedBy
-        {
-            get;
-            set;
-        }
-
 
         #endregion
 
         #region Navigation Properties
     
         /// <summary>
-        /// There are no comments for Client in the schema.
+        /// There are no comments for PosHeader in the schema.
         /// </summary>
-        public virtual Client Client
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for Organization in the schema.
-        /// </summary>
-        public virtual Organization Organization
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for RecCreatedByUser in the schema.
-        /// </summary>
-        public virtual User RecCreatedByUser
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for RecModifiedByUser in the schema.
-        /// </summary>
-        public virtual User RecModifiedByUser
+        public virtual PosHeader PosHeader
         {
             get;
             set;

@@ -30,6 +30,14 @@
         <File Name="MyERPDataModel.BusinessPartnerGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
         <File Name="MyERPDataModel.BusinessPartner.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
         <File Name="MyERPDataModel.BusinessPartner.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.SalesHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
+        <File Name="MyERPDataModel.SalesHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.SalesLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
+        <File Name="MyERPDataModel.SalesLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.PosHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
+        <File Name="MyERPDataModel.PosHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.PosLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
+        <File Name="MyERPDataModel.PosLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
         <File Name="MyERPDataModel.UserConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
         <File Name="MyERPDataModel.UserConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
         <File Name="MyERPDataModel.ClientConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
@@ -54,6 +62,14 @@
         <File Name="MyERPDataModel.BusinessPartnerGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
         <File Name="MyERPDataModel.BusinessPartnerConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
         <File Name="MyERPDataModel.BusinessPartnerConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.SalesHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
+        <File Name="MyERPDataModel.SalesHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.SalesLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
+        <File Name="MyERPDataModel.SalesLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.PosHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
+        <File Name="MyERPDataModel.PosHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.PosLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
+        <File Name="MyERPDataModel.PosLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
       </GeneratedFiles>
     </Generation>
     <DatabaseFirstNamingRules>
