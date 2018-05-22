@@ -5,25 +5,49 @@
 
 @section headtag
 {
-    
-}              
+    <script>
+        var addTab = function (url) {
+            var tab = App.POSTabs.add({
+                closable : true,
+                loader: {
+                    url: '@Url.Action("PosInvoice")',
+                    renderer: 'frame',
+                    loadMask: {
+                        showMask: true,
+                    }
+                }
+
+            });
+
+            setTimeout(function () {
+                App.POSTabs.setActiveTab(tab);
+            }, 250);
+        }
+
+    </script>
+}
 
 @section main
-{                
-    @(
-    Html.X().TabPanel()
-        .ID("POSTabs")
-        .Region(Region.Center)
-        .MarginSpec("0")
-        .Cls("tabs")
-        .MinTabWidth(115)
-        .Items(items =>
-        {
-            items.Add(Html.X().Panel().ID("tabHomePOS").Title("Home").IconCls("fa fa-home"));
-        })
-        .TabBar(components =>
-        {
-            components.Add(Html.X().Button().Flat(true).Icon(Icon.Add).DirectEvents(de => { de.Click.Action = "AddTab"; }));
-        })
+{
+    @( Html.X().Viewport()
+                   .Layout(LayoutType.Fit)
+                   .Items(
+                       Html.X().TabPanel()
+                           .ID("POSTabs")
+                           .MinTabWidth(115)
+                           .Items(items =>
+                           {
+                               items.Add(Html.X().Panel().ID("tabHomePOS").Title("Home").IconCls("fa fa-home"));
+                           })
+                           .TabBar(components =>
+                           {
+                               components.Add(Html.X().Button().Flat(true).Icon(Icon.Add).DirectEvents(de =>
+                               {
+                                   de.Click.Url = Url.Action("AddTab", "Index");
+                                   de.Click.ExtraParams.Add(new { containerId = "POSTabs" });
+                                   de.Click.EventMask.ShowMask = true;
+                               }));
+                           })
+                    )
     )
 }

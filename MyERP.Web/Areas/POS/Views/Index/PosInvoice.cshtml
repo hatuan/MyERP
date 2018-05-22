@@ -1,0 +1,20 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+
+}
+
+@section main
+{
+    @( Html.X().Viewport()
+           .Layout(LayoutType.Fit)
+           .Items(
+               Html.X().Panel()
+                   .Title("TESSSSSSSSSSSSSSSSSST")
+           )
+          )
+}

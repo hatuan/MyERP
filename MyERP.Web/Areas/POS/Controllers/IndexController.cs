@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Ext.Net;
 using Ext.Net.MVC;
+using Action = System.Action;
+using PartialViewResult = Ext.Net.MVC.PartialViewResult;
 
 namespace MyERP.Web.Areas.POS.Controllers
 {
@@ -17,20 +19,23 @@ namespace MyERP.Web.Areas.POS.Controllers
             return View();
         }
 
-        public ActionResult AddTab()
+        public ActionResult AddTab(string containerId)
         {
-            Ext.Net.Panel panel = new Ext.Net.Panel
+            var result = new PartialViewResult
             {
-                Title = "New Tab",
-                Closable = true,
-                Layout = "Fit",
+                ViewName = "PosInvoiceView",
+                ContainerId = containerId,
+                RenderMode = RenderMode.AddTo
             };
-            X.GetCmp<TabPanel>("POSTabs").Add(panel);
-            panel.Render();
 
-            X.GetCmp<TabPanel>("POSTabs").SetLastTabAsActive();
+            this.GetCmp<TabPanel>("POSTabs").SetLastTabAsActive();
 
-            return this.Direct();
+            return result;
+        }
+
+        public ActionResult PosInvoice()
+        {
+            return View();
         }
     }
 }
