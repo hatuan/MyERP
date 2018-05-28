@@ -44,7 +44,7 @@
                                components.Add(Html.X().Button().Flat(true).Icon(Icon.Add).DirectEvents(de =>
                                {
                                    de.Click.Url = Url.Action("AddTab", "Index");
-                                   de.Click.ExtraParams.Add(new { containerId = "POSTabs" });
+                                   de.Click.ExtraParams.Add(new {containerId = "POSTabs"});
                                    de.Click.EventMask.ShowMask = true;
                                }));
                            })

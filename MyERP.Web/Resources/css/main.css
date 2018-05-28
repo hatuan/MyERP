@@ -3339,3 +3339,9 @@ td.alt2{
     display     : block;
     clear       : none;
 }
+
+/*IE Clear Button*/
+::-ms-clear, ::-ms-reveal {
+    height: 0;
+    width: 0;
+}

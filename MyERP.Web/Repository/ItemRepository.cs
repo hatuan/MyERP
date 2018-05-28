@@ -13,12 +13,12 @@ namespace MyERP.Web
 {
     public partial class ItemRepository 
     {
-        public Paging<Item> ItemsPaging(StoreRequestParameters parameters)
+        public Paging<Item> Paging(StoreRequestParameters parameters)
         {
-            return ItemsPaging(parameters.Start, parameters.Limit, parameters.SimpleSort, parameters.SimpleSortDirection, null);
+            return Paging(parameters.Start, parameters.Limit, parameters.SimpleSort, parameters.SimpleSortDirection, null);
         }
 
-        public  Paging<Item> ItemsPaging(int start, int limit, string sort, SortDirection dir, string filter)
+        public  Paging<Item> Paging(int start, int limit, string sort, SortDirection dir, string filter)
         {
             var entities = Get(includePaths: new String[] { "Organization", "Client", "RecCreatedByUser", "RecModifiedByUser", "BaseUom", "ItemGroup1", "ItemGroup2", "ItemGroup2" });
 

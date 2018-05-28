@@ -10,11 +10,81 @@
 
 @section main
 {
+    @(Html.X().Store().ID("LookupItemStore").AutoLoad(false)
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Index", new { area = "Item" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total"))
+                  )
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+    )
+
     @( Html.X().Viewport()
-           .Layout(LayoutType.Fit)
-           .Items(
-               Html.X().Panel()
-                   .Title("TESSSSSSSSSSSSSSSSSST")
-           )
-          )
+                   .Layout(LayoutType.Fit)
+                   .Items(
+                       Html.X().Panel()
+                      .Closable(true)
+                      .Layout(LayoutType.Border)
+                      .Header(false)
+                      .Items(
+                          Html.X().Panel()
+                              .Header(false)
+                              .Region(Region.North)
+                              .Border(false)
+                              .Layout(LayoutType.HBox)
+                              .BodyPadding(5)
+                              .Defaults(Html.X().Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+                              .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Top })
+                              .Items(
+                                  Html.X().ComboBox()
+                                      .ID("BarcodeLookupComboBox")
+                                      .Width(400)
+                                      .DisplayField("Code")
+                                      .ValueField("Id")
+                                      .FieldStyle("text-transform: uppercase;")
+                                      .TypeAhead(true)
+                                      .MinChars(0)
+                                      .PageSize(10)
+                                      .SelectOnTab(true)
+                                      .ForceSelection(true)
+                                      .ValidateOnBlur(true)
+                                      .ValidateOnChange(true)
+                                      .ListConfig(Html.X().BoundList()
+                                          .LoadingText("Searching...")
+                                          .ItemTpl(Html.X().XTemplate()
+                                              .Html(@<text>
+                                                <div class="search-item">
+                                                    <h3>{Code}</h3>
+                                                    {Description}
+                                                </div>
+                                            </text>)
+                                                    )
+                                                    .MinWidth(400)
+                                                )
+                                                .StoreID("LookupItemStore")
+                                                .Listeners(ls =>
+                                                {
+                                                    ls.BeforeQuery.Handler = "App.BarcodeLookupComboBox.getStore().load()";
+                                                }),
+                                            Html.X().Button().Icon(Icon.Find).Text("Search")
+                                        ),
+                                        Html.X().Panel()
+                                          .Title("Items Detail")
+                                          .Region(Region.Center)
+                                          .BodyPadding(5),
+                                        Html.X().FormPanel()
+                                          .Title("Invoice Information")
+                                          .Region(Region.East)
+                                          .MinWidth(400)
+                                          .Split(true)
+                                      )
+                  )
+    )
 }

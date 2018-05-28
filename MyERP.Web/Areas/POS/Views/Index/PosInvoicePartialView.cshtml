@@ -1,0 +1,115 @@
+﻿@model MyERP.Web.Models.PosHeaderEditViewModel
+
+@{
+    Layout = null;
+    String posPanelId = "POSPanel" + ViewBag.ID;
+    String lookupItemComboId = "LookupItemCombo" + ViewBag.ID;
+    String searchButtonId = "SearchButton" + ViewBag.ID;
+    String posLineGridPanel = "PosLineGridPanel" + ViewBag.ID;
+    String posLineStore = "PosLineStore" + ViewBag.ID;
+    String posLineModel = "PosLineModel" + ViewBag.ID;
+}
+
+@(Html.X().Panel()
+          .Closable(true)
+          .Layout(LayoutType.Border)
+          .Title("POS - " + DateTime.Now.ToLongTimeString())
+          .ID(posPanelId)
+          .Items(
+              Html.X().Panel()
+                  .Header(false)
+                  .Region(Region.North)
+                  .Border(false)
+                  .Layout(LayoutType.HBox)
+                  .BodyPadding(5)
+                  .Defaults(Html.X().Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+                  .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Top })
+                  .Items(
+                      Html.X().ComboBox()
+                          .ID(lookupItemComboId)
+                          .Width(400)
+                          .DisplayField("Code")
+                          .ValueField("Id")
+                          .FieldStyle("text-transform: uppercase;")
+                          .TypeAhead(true)
+                          .MinChars(0)
+                          .PageSize(10)
+                          .SelectOnTab(true)
+                          .ForceSelection(true)
+                          .ValidateOnBlur(true)
+                          .ValidateOnChange(true)
+                          .DirectEvents(de =>
+                          {
+                              de.Select.Action = "AddItemToDetails";
+                              de.Select.ExtraParams.Add(new Parameter("lookupItemId", "App." + lookupItemComboId + ".getValue()", ParameterMode.Raw));
+                              de.Select.ExtraParams.Add(new Parameter("viewBagID", ViewBag.ID));
+                              de.Select.ExtraParams.Add(new Parameter("posLinesCount", "App." + posLineGridPanel + ".getStore().getCount()", ParameterMode.Raw));
+                              de.Select.Success = "console.log(result.result)";
+                          })
+                          .ListConfig(Html.X().BoundList()
+                              .LoadingText("Searching...")
+                              .ItemTpl(Html.X().XTemplate()
+                                  .Html(@<text>
+                                    <tpl for=".">
+                                        <div class="search-item">
+                                            <h3>{Code}</h3>
+                                            {Description}
+                                        </div>
+                                    </tpl>
+                                </text>)
+                                          )
+                                    .MinWidth(400)
+                                  )
+                                  .Store(Html.X().Store().AutoLoad(false)
+                                      .Proxy(Html.X().AjaxProxy()
+                                          .Url(Url.Action("LookupData", "Index", new { area = "Item" }))
+                                          .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                                      .Model(Html.X().Model()
+                                          .IDProperty("Id")
+                                          .Fields(
+                                              new ModelField("Id", ModelFieldType.Int),
+                                              new ModelField("OrganizationCode", ModelFieldType.String),
+                                              new ModelField("Code", ModelFieldType.String),
+                                              new ModelField("Description", ModelFieldType.String)
+                                          )
+                                      )
+                                  ),
+                                  Html.X().Button().ID(searchButtonId).Icon(Icon.Find).Text("Search")
+                              ),
+                              Html.X().GridPanel()
+                                  .ID(posLineGridPanel)
+                                  .Title("Items")
+                                  .Region(Region.Center)
+                                  .SortableColumns(false)
+                                  .Store(Html.X().Store()
+                                      .ID(posLineStore)
+                                      .Model(Html.X().Model()
+                                          .Fields(
+                                              new ModelField("Id", ModelFieldType.Int),
+                                              new ModelField("LineNo", ModelFieldType.Int),
+                                              new ModelField("ItemId", ModelFieldType.Int),
+                                              new ModelField("Description", ModelFieldType.String),
+                                              new ModelField("UomId", ModelFieldType.Int),
+                                              new ModelField("UomDescription", ModelFieldType.String),
+                                              new ModelField("Quantity", ModelFieldType.Float),
+                                              new ModelField("UnitPrice", ModelFieldType.Float),
+                                              new ModelField("Amount", ModelFieldType.Float)
+                                          )
+                                      )
+                                      .DataSource(Model.PosLineEditViewModels)
+                                  )
+                                  .ColumnModel(
+                                      Html.X().Column().Text("Description").DataIndex("Description").MinWidth(256),
+                                      Html.X().Column().Text("Uom").DataIndex("UomId").Width(85),
+                                      Html.X().Column().Text("Quantity").DataIndex("Quantity").Width(85),
+                                      Html.X().Column().Text("Unit Price").DataIndex("UnitPrice").Width(85),
+                                      Html.X().Column().Text("Amount").DataIndex("Amount").Width(85)
+                                  ),
+                              Html.X().FormPanel()
+                                .Title("Invoice Information")
+                                .Region(Region.East)
+                                .MinWidth(400)
+                                .Split(true)
+                            )
+
+)

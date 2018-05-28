@@ -339,7 +339,7 @@
     <Content Include="Areas\BusinessPartner\Views\Index\_Maintenance.cshtml" />
     <Content Include="Areas\POS\Views\web.config" />
     <Content Include="Areas\POS\Views\Index\Index.cshtml" />
-    <Content Include="Areas\POS\Views\Index\PosInvoiceView.cshtml" />
+    <Content Include="Areas\POS\Views\Index\PosInvoicePartialView.cshtml" />
     <Content Include="Areas\POS\Views\Index\PosInvoice.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -384,6 +384,7 @@
     <Compile Include="Models\ItemGroupViewModels.cs" />
     <Compile Include="Models\BusinessPartnerModels.cs" />
     <Compile Include="Models\ItemViewModels.cs" />
+    <Compile Include="Models\PosViewModels.cs" />
     <Compile Include="Models\UOMViewModels.cs" />
     <Compile Include="Models\ExtNetModel.cs" />
     <Compile Include="Models\OrganizationViewModels.cs" />
