@@ -6,9 +6,9 @@
 @section headtag
 {
     <script>
-        var addTab = function (url) {
+        var addTab = function(url) {
             var tab = App.POSTabs.add({
-                closable : true,
+                closable: true,
                 loader: {
                     url: '@Url.Action("PosInvoice")',
                     renderer: 'frame',
@@ -19,16 +19,91 @@
 
             });
 
-            setTimeout(function () {
-                App.POSTabs.setActiveTab(tab);
+            setTimeout(function() {
+                    App.POSTabs.setActiveTab(tab);
             }, 250);
         }
 
+        var getViewBagId = function() {
+            return App.POSTabs.activeTab.tag;
+        };
+
+        var lineEdit = function(editor, e) {
+            /*
+                "e" is an edit event with the following properties:
+
+                    grid - The grid
+                    record - The record that was edited
+                    field - The field name that was edited
+                    value - The value being set
+                    originalValue - The original value for the field, before the edit.
+                    row - The grid table row
+                    column - The grid Column defining the column that was edited.
+                    rowIdx - The row index that was edited
+                    colIdx - The column index that was edited
+            */
+
+            // Call DirectMethod
+            if (!(e.value === e.originalValue || (Ext.isDate(e.value) && Ext.Date.isEqual(e.value, e.originalValue)))) {
+                var viewBagId = getViewBagId();
+
+                Ext.net.DirectMethod.request({
+                    url: '@(Url.Action("LineEdit"))',
+                    params: {
+                        lineNo: e.record.data.LineNo,
+                        field: e.field,
+                        oldValue: e.originalValue,
+                        newValue: e.value,
+                        viewBagId: viewBagId,
+                        recordData: e.record.data
+                    }
+                });
+            }
+        };
+
+        var beforeEdit = function(editor, e) {
+            var field = this.getEditor(e.record, e.column).field;
+
+            switch (e.field) {
+                case "UomId":
+                    field.allQuery = e.record.get('ItemId');
+                    field.store.loadData(e.record.data.ItemUoms);
+                break;
+            }
+        };
+
+        var UomRenderer = function (value, metadata, record, rowIndex, colIndex, store) {
+            if (!Ext.isEmpty(record.data.UomDescription) && value > 0) {
+                return record.data.UomDescription;
+            }
+            return "";
+        };
+
+        var uomBeforeStartEdit = function (editor, boundEl, value, eOpts) {
+            //editor.field.store.loadData(editor.grid.getSelectionModel().getSelection()[0].data.ItemUoms);
+        }
     </script>
 }
 
 @section main
-{
+{                           
+    @(Html.X().Store().ID("LookUpUomOfItemStore")
+          .Proxy(Html.X().AjaxProxy()
+              .Url(Url.Action("LookupUomOfItem", "ItemUom", new {area = "Item"}))
+              .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total"))
+          )
+          .Model(Html.X().Model()
+              .IDProperty("UomId")
+              .Fields(
+                  new ModelField("UomId", ModelFieldType.Int),
+                  new ModelField("Code", ModelFieldType.String),
+                  new ModelField("Description", ModelFieldType.String),
+                  new ModelField("QtyPerUom", ModelFieldType.Int)
+
+              )
+          )
+          )  
+
     @( Html.X().Viewport()
                    .Layout(LayoutType.Fit)
                    .Items(
@@ -37,7 +112,12 @@
                            .MinTabWidth(115)
                            .Items(items =>
                            {
-                               items.Add(Html.X().Panel().ID("tabHomePOS").Title("Home").IconCls("fa fa-home"));
+                               items.Add(Html.X().Panel()
+                                   .ID("tabHomePOS")
+                                   .Title("Home")
+                                   .IconCls("fa fa-home")
+                                   .Items()
+                               );
                            })
                            .TabBar(components =>
                            {

@@ -365,6 +365,7 @@
     <Compile Include="Areas\BusinessPartner\Controllers\IndexController.cs" />
     <Compile Include="Areas\Item\Controllers\IndexController.cs" />
     <Compile Include="Areas\Item\Controllers\ItemGroupController.cs" />
+    <Compile Include="Areas\Item\Controllers\ItemUomController.cs" />
     <Compile Include="Areas\Item\ItemAreaRegistration.cs" />
     <Compile Include="Areas\POS\Controllers\IndexController.cs" />
     <Compile Include="Areas\POS\POSAreaRegistration.cs" />
@@ -383,6 +384,7 @@
     <Compile Include="Models\BusinessPartnerGroupViewModels.cs" />
     <Compile Include="Models\ItemGroupViewModels.cs" />
     <Compile Include="Models\BusinessPartnerModels.cs" />
+    <Compile Include="Models\ItemUomViewModels.cs" />
     <Compile Include="Models\ItemViewModels.cs" />
     <Compile Include="Models\PosViewModels.cs" />
     <Compile Include="Models\UOMViewModels.cs" />
@@ -434,6 +436,7 @@
   <ItemGroup>
     <Folder Include="Areas\BusinessPartner\Models\" />
     <Folder Include="Areas\Item\Models\" />
+    <Folder Include="Areas\Item\Views\ItemUom\" />
     <Folder Include="Areas\UOM\Models\" />
     <Folder Include="Resources\uploadFiles\" />
     <Folder Include="Views\Validation\" />

@@ -58,6 +58,10 @@ namespace MyERP.Web.Models
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String UomDescription { get; set; }
 
+        public UOMViewModel Uom { get; set; }
+
+        public List<ItemUomLookUpViewModel> ItemUoms { get; set; }
+
         [Display(Name = "Quantity")]
         public Decimal Quantity { get; set; }
 

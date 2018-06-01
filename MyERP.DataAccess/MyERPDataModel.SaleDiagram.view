@@ -348,7 +348,7 @@
                     </Size>
                     <Enabled>false</Enabled>
                     <Oid xsi:type="SchemaModelOID">
-                      <Path>47968822-1b23-440c-af8e-e09047f00e19</Path>
+                      <Path>caefb0bb-2d79-4e36-91ce-4d7fbc4141fe</Path>
                       <TypeName>EntityDeveloper.EntityFramework.EntityRelationProperty</TypeName>
                     </Oid>
                   </Model>
@@ -364,7 +364,7 @@
                     </Size>
                     <Enabled>false</Enabled>
                     <Oid xsi:type="SchemaModelOID">
-                      <Path>861ee7a7-267f-4e3e-8bf2-4006b3fcb8d4</Path>
+                      <Path>2be54ed3-bd76-4c75-91a8-cd54a42b6ca3</Path>
                       <TypeName>EntityDeveloper.EntityFramework.EntityRelationProperty</TypeName>
                     </Oid>
                   </Model>
@@ -380,7 +380,7 @@
                     </Size>
                     <Enabled>false</Enabled>
                     <Oid xsi:type="SchemaModelOID">
-                      <Path>b9e2801e-6e40-4a19-96fc-bcaf0fb7adaf</Path>
+                      <Path>85fb87aa-0e31-4d71-81dc-ef2efa1d4a00</Path>
                       <TypeName>EntityDeveloper.EntityFramework.EntityRelationProperty</TypeName>
                     </Oid>
                   </Model>
@@ -4438,7 +4438,7 @@
           <ScaleMode>Free</ScaleMode>
           <Scale>1</Scale>
           <Location>
-            <X>-272 px</X>
+            <X>-849 px</X>
             <Y>-132 px</Y>
           </Location>
         </ViewPort>

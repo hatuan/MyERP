@@ -27,8 +27,6 @@ namespace MyERP.Web.Areas.POS.Controllers
                 PosLineEditViewModels = new List<PosLineEditViewModel>()
             };
 
-            model.PosLineEditViewModels.Add(new PosLineEditViewModel() { ItemId = 6, Description = "Nước khoáng 19 lít/bình", LineNo = 1, Quantity = 1, UnitPrice = 1, Amount = 1, UomId = 13, UomDescription = "", Id = 1 });
-
             var result = new PartialViewResult
             {
                 ViewName = "PosInvoicePartialView",
@@ -48,21 +46,70 @@ namespace MyERP.Web.Areas.POS.Controllers
             return View();
         }
 
-        public ActionResult AddItemToDetails(String lookupItemId, String viewBagID, int posLinesCount)
+        public ActionResult AddItemToDetails(long? lookupItemId, String viewBagID, int posLinesCount)
         {
+            if (lookupItemId == null || lookupItemId <= 0)
+                return this.Direct(false, "ERR : Lookup item is empty");
+
             var itemRepository = new ItemRepository();
-            long _lookupItemId = Int64.Parse(lookupItemId);
-            var item = itemRepository.GetBy(c => c.Id == _lookupItemId);
-            Store posLineStore = X.GetCmp<Store>("posLineStore" + viewBagID);
+            var item = itemRepository.Get(c => c.Id == lookupItemId, new []{ "BaseUom" }).SingleOrDefault();
             int lineNo = posLinesCount <= 0 ? 1 : posLinesCount + 1;
 
-            var newItem =  new PosLineEditViewModel() { ItemId = item.Id, Description = item.Description, LineNo = lineNo, Quantity = 1, UnitPrice = 1, Amount = 1, UomId = 1, UomDescription = "TEST", Id = 2};
+            var itemUomRepository = new ItemUomRepository();
+            var listUomOfItem = itemUomRepository.Get(c => c.ItemId == item.Id, new string[] { "Uom" });
 
-            DirectResult result = new DirectResult();
-            result.Success = true;
-            result.Result = newItem;
+            var itemUoms = listUomOfItem.Select(c => new ItemUomLookUpViewModel
+            {
+                Code = c.Uom.Code,
+                UomId = c.UomId,
+                Description = c.Uom.Description,
+                QtyPerUom = c.QtyPerUom
+            }).ToList();
 
-            return result;
+            var newItem =  new PosLineEditViewModel()
+            {
+                ItemId = item.Id,
+                Description = item.Description,
+                LineNo = lineNo,
+                Quantity = 1,
+                UnitPrice = 1,
+                Amount = 1,
+                UomId = item.BaseUomId,
+                UomDescription = item.BaseUom.Description,
+                ItemUoms = itemUoms
+            };
+
+            Store posLineStore = X.GetCmp<Store>("PosLineStore" + viewBagID);
+            posLineStore.Add(newItem);
+
+            return this.Direct(); 
+        }
+
+        public ActionResult LineEdit(int lineNo, string field, string oldValue, string newValue, string viewBagId, string recordData)
+        {
+            PosLineEditViewModel posLineEditViewModel = JSON.Deserialize<PosLineEditViewModel>(recordData);
+
+            ModelProxy record = X.GetCmp<Store>("PosLineStore" + viewBagId).GetById(lineNo);
+
+            switch (field)
+            {
+                case "Quantity":
+                    if(String.Compare(oldValue, newValue, StringComparison.InvariantCultureIgnoreCase) != 0)
+                        record.Set("Amount", Math.Round(posLineEditViewModel.Quantity * posLineEditViewModel.UnitPrice, MidpointRounding.AwayFromZero));
+                    break;
+                case "UomId":
+                    if (String.Compare(oldValue, newValue, StringComparison.CurrentCultureIgnoreCase) != 0)
+                    {
+                        var uomRepository = new UomRepository();
+                        var _uomId = Convert.ToInt64(newValue);
+                        var uom = uomRepository.Get(c => c.Id == _uomId).FirstOrDefault();
+                        record.Set("UomDescription", uom != null ? uom.Description : "");
+                    }
+                    break;
+            }
+
+            record.Commit();
+            return this.Direct();
         }
     }
 }

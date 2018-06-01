@@ -272,6 +272,56 @@ namespace MyERP.Web.Areas.Item.Controllers
                         return r;
                     }
                 }
+                //Update ItemUOM
+                var itemUomRepository = new ItemUomRepository();
+                var baseItemUOM = itemUomRepository.Get(c => c.ItemId == model.Id && c.IsBaseUom == 1).SingleOrDefault();
+                if (baseItemUOM != null)
+                {
+                    baseItemUOM.UomId = model.BaseUomId;
+                    baseItemUOM.QtyPerUom = 1;
+                    baseItemUOM.Version++;
+                    baseItemUOM.RecModifiedAt = DateTime.Now;
+                    baseItemUOM.RecModifiedBy = (long) user.ProviderUserKey;
+                    try
+                    {
+                        itemUomRepository.Update(baseItemUOM);
+                    }
+                    catch (Exception ex)
+                    {
+                        r.Success = false;
+                        r.ErrorMessage = ex.Message;
+                        return r;
+                    }
+                }
+                else
+                {
+                    var _newModel = new DataAccess.ItemUom()
+                    {
+                        ClientId = clientId,
+                        OrganizationId = organizationId,
+                        ItemId = model.Id ?? 0,
+                        UomId = model.BaseUomId,
+                        QtyPerUom = 1,
+                        IsBaseUom = 1,
+                        Status = (byte)DefaultStatusType.Active,
+                        Version = 1,
+                        RecModifiedAt = DateTime.Now,
+                        RecCreatedBy = (long)user.ProviderUserKey,
+                        RecCreatedAt = DateTime.Now,
+                        RecModifiedBy = (long)user.ProviderUserKey
+                    };
+
+                    try
+                    {
+                        itemUomRepository.AddNew(_newModel);
+                    }
+                    catch (Exception ex)
+                    {
+                        r.Success = false;
+                        r.ErrorMessage = ex.Message;
+                        return r;
+                    }
+                }
 
                 Store StoreItemList = X.GetCmp<Store>("StoreItemList");
                 StoreItemList.Reload();
