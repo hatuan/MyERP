@@ -116,6 +116,22 @@
                           .FieldStyle("text-transform: uppercase;")
                           .SelectOnTab(true)
                           .Editable(false)
+                          .SelectOnTab(true)
+                          .ForceSelection(true)
+                          .ValidateOnBlur(true)
+                          .ValidateOnChange(true)
+                          .ListConfig(Html.X().BoundList()
+                              .LoadingText("Searching...")
+                              .ItemTpl(Html.X().XTemplate()
+                                  .Html(@<text>
+                                            <div class="search-item">
+                                                <h3>{Code}</h3>
+                                                {Description}
+                                            </div>
+                                         </text>)
+                              )
+                              .MinWidth(400)
+                          )
                           .StoreID("LookUpUomOfItemStore")
                       ).Renderer("UomRenderer").EditorOptions(action =>
                       {
