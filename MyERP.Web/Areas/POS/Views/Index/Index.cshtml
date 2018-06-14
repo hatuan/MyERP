@@ -102,7 +102,30 @@
 
               )
           )
-          )  
+    )  
+    
+    @(Html.X().Store().ID("LookupBusinessPartner")
+          .Proxy(Html.X().AjaxProxy()
+              .Url(Url.Action("LookupData", "Index", new {area = "BusinessPartner" }))
+              .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total"))
+          )
+          .Model(Html.X().Model()
+              .IDProperty("Id")
+              .Fields(
+                  new ModelField("Id", ModelFieldType.Int),
+                  new ModelField("Code", ModelFieldType.String),
+                  new ModelField("Description", ModelFieldType.String),
+                  new ModelField("Address", ModelFieldType.String),
+                  new ModelField("Telephone", ModelFieldType.String),
+                  new ModelField("Mobilephone", ModelFieldType.String),
+                  new ModelField("Mail", ModelFieldType.String),
+                  new ModelField("VatCode", ModelFieldType.String),
+                  new ModelField("ContactName", ModelFieldType.String),
+                  new ModelField("OrganizationCode", ModelFieldType.String)
+
+              )
+          )
+    )
 
     @( Html.X().Viewport()
                    .Layout(LayoutType.Fit)

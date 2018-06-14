@@ -76,7 +76,7 @@ namespace MyERP.Web.Areas.Item.Controllers
         {
             if (id != null && id > 0)
             {
-                var entity = repository.GetBy(c => c.Id == id);
+                var entity = repository.Get(c => c.Id == id, new []{ "Organization" }).Single();
                 var data = new ItemGroupViewModel()
                 {
                     Code = entity.Code,
@@ -116,7 +116,7 @@ namespace MyERP.Web.Areas.Item.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.GetBy(c => c.Id == _id);
+                var entity = repository.Get(c => c.Id == _id).SingleOrDefault();
                 model = new ItemGroupEditViewModel()
                 {
                     Id = entity.Id,
@@ -153,7 +153,7 @@ namespace MyERP.Web.Areas.Item.Controllers
 
                 if (model.Id.HasValue)
                 {
-                    var _update = repository.GetBy(c => c.Id == model.Id);
+                    var _update = repository.Get(c => c.Id == model.Id).SingleOrDefault();
                     if (_update == null || _update.Version != model.Version)
                     {
                         r.Success = false;
@@ -226,7 +226,7 @@ namespace MyERP.Web.Areas.Item.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.GetBy(c => c.Id == _id);
+                var entity = repository.Get(c => c.Id == _id).SingleOrDefault();
                 if (entity == null)
                 {
                     r.Success = false;

@@ -139,6 +139,31 @@
                           ls.BeforeQuery.Handler = "App.BaseUomId.getStore().load()";
                       }
                       ),
+                  Html.X().FieldContainer().FieldLabel("Unit Cost").Layout(LayoutType.HBox)
+                      .Defaults(Html.X().Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+                      .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle })
+                      .Items(
+                          Html.X().TextFieldFor(m => m.UnitCost).ID("UnitCost")
+                              .FieldLabel("")
+                              .MaskRe(@"/[0-9\,\.]")
+                              .AllowBlank(true)
+                              .Listeners(ls =>
+                              {
+                                  ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
+                                  ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
+                                                    this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
+                              })
+                          ,
+                          Html.X().TextFieldFor(m => m.UnitPrice).ID("UnitPrice")
+                              .MaskRe(@"/[0-9\,\.]")
+                              .AllowBlank(true)
+                              .Listeners(ls =>
+                              {
+                                  ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
+                                  ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
+                                                    this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
+                              })
+                      ),
                   Html.X().FieldContainer().FieldLabel("Group").Layout(LayoutType.HBox)
                       .Defaults(Html.X().Parameter().Name("margin").Value("0 3 0 0").Mode(ParameterMode.Value))
                       .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle })

@@ -1,4 +1,4 @@
-﻿@using Action = System.Action
+﻿@using System.Runtime.InteropServices
 @model MyERP.Web.Models.PosHeaderEditViewModel
 
 @{
@@ -9,11 +9,24 @@
     String addItemButtonId = "AddItemButton" + ViewBag.ID;
     String posLineGridPanel = "PosLineGridPanel" + ViewBag.ID;
     String posLineStore = "PosLineStore" + ViewBag.ID;
-    
+    String invoiceInfoPanelId = "invoiceInfo" + ViewBag.ID;
+    String documentNoId = "documentNo" + ViewBag.ID;
+    String documentDateId = "documentDate" + ViewBag.ID;
+    String sellToCustomerId = "sellToCustomer" + ViewBag.ID;
+    String sellToCustomerNameId = "sellToCustomerName" + ViewBag.ID;
+    String sellToAddressId = "sellToAddress" + ViewBag.ID;
+    String descriptionId = "description" + ViewBag.ID;
+    String printButtonId = "printButton" + ViewBag.ID;
+    String totalPaymentId = "totalPayment" + ViewBag.ID;
+    String cashOfCustomerId = "cashOfCustomer" + ViewBag.ID;
+    String changeToCustomerId = "changeToCustomer" + ViewBag.ID;
 }
 
 
-@(Html.X().Panel()
+
+
+
+@(Html.X().FormPanel()
       .Closable(true)
       .Layout(LayoutType.Border)
       .Title("POS - " + DateTime.Now.ToLongTimeString())
@@ -79,7 +92,7 @@
                       de.Click.Action = "AddItemToDetails";
                       de.Click.ExtraParams.Add(new Parameter("lookupItemId", "App." + lookupItemComboId + ".getValue()", ParameterMode.Raw));
                       de.Click.ExtraParams.Add(new Parameter("viewBagID", ViewBag.ID, ParameterMode.Value));
-                      de.Click.ExtraParams.Add(new Parameter("posLinesCount", "App." + posLineGridPanel + ".getStore().getCount()", ParameterMode.Raw));
+                      de.Click.ExtraParams.Add(new Parameter("posLines", "App." + posLineGridPanel + ".getRowsValues()", ParameterMode.Raw, true));
                   })
               ),
           Html.X().GridPanel()
@@ -107,14 +120,13 @@
               )
               .ColumnModel(
                   Html.X().RowNumbererColumn(),
-                  Html.X().Column().Text("Description").DataIndex("Description").MinWidth(300),
-                  Html.X().Column().Text("Uom").DataIndex("UomId").Width(100).Editor(
+                  Html.X().ColumnFor(Model.PosLineEditViewModels, m => m.Description).ToBuilder<Column.Builder>().MinWidth(300),
+                  Html.X().ColumnFor(Model.PosLineEditViewModels, m => m.UomId).ToBuilder<Column.Builder>().Width(100).Editor(
                       Html.X().ComboBox()
                           .DisplayField("Code")
                           .ValueField("UomId")
                           .FieldLabel("")
                           .FieldStyle("text-transform: uppercase;")
-                          .SelectOnTab(true)
                           .Editable(false)
                           .SelectOnTab(true)
                           .ForceSelection(true)
@@ -137,9 +149,9 @@
                       {
                           action.Listeners.BeforeStartEdit.Fn = "uomBeforeStartEdit";
                       }),
-                  Html.X().Column().Text("Quantity").DataIndex("Quantity").Width(100).Editor(Html.X().NumberField()),
-                  Html.X().Column().Text("Unit Price").DataIndex("UnitPrice").Width(100),
-                  Html.X().Column().Text("Amount").DataIndex("Amount").Width(100),
+                  Html.X().ColumnFor(Model.PosLineEditViewModels, m => m.Quantity).ToBuilder<Column.Builder>().Width(100).Editor(Html.X().NumberField()),
+                  Html.X().ColumnFor(Model.PosLineEditViewModels, m => m.UnitPrice).ToBuilder<Column.Builder>().Width(100),
+                  Html.X().ColumnFor(Model.PosLineEditViewModels, m => m.Amount).ToBuilder<Column.Builder>().Width(100),
                   Html.X().CommandColumn()
                       .Width(35)
                       .Commands(
@@ -150,7 +162,7 @@
                       )
                       .Listeners(ls =>
                       {
-                          ls.Command.Handler = "Ext.Msg.confirm('Alert', 'Do you want to DELETE ?', function (id, value) { if (id === 'yes') { #{" + posLineStore + "}.remove(record); #{" + posLineStore + "}.commitChanges(); }}, this);";
+                          ls.Command.Handler = "Ext.Msg.confirm('Alert', 'Do you want to DELETE ?', function (id, value) { if (id === 'yes') { App." + posLineGridPanel + ".getStore().remove(record); App." + posLineGridPanel + ".getStore().commitChanges(); }}, this);";
                       })
               )
               .View(Html.X().GridView().StripeRows(true))
@@ -165,9 +177,97 @@
                   })
 
               ),
-          Html.X().FormPanel()
+          Html.X().Panel()
+              .ID(invoiceInfoPanelId)
               .Title("Invoice Information")
               .Region(Region.East)
+              .Layout(LayoutType.VBox)
+              .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Stretch })
               .MinWidth(400)
+              .BodyPadding(5)
               .Split(true)
+              .Items(
+                  Html.X().TextFieldFor(m => m.DocumentNo)
+                      .ID(documentNoId)
+                      .Editable(false),
+                  Html.X().DateFieldFor(m => m.DocumentDate)
+                      .ID(documentDateId)
+                      .ReadOnly(true)
+                      .Format("dd/MM/yyyy"),
+                  Html.X().ComboBoxFor(m=>m.SellToCustomerId)
+                      .ID(sellToCustomerId)
+                      .DisplayField("Code")
+                      .ValueField("Id")
+                      .FieldStyle("text-transform: uppercase;")
+                      .TypeAhead(true)
+                      .MinChars(0)
+                      .PageSize(10)
+                      .SelectOnTab(true)
+                      .ForceSelection(true)
+                      .ValidateOnBlur(true)
+                      .ValidateOnChange(true)
+                      .ListConfig(Html.X().BoundList()
+                          .LoadingText("Searching...")
+                          .ItemTpl(Html.X().XTemplate()
+                              .Html(@<text>
+                                        <div class="search-item">
+                                            <h3>{Code} - {Description}</h3>
+                                            {Address}
+                                        </div>
+                                     </text>)
+                          )
+                          .MinWidth(400)
+                      )
+                      .StoreID("LookupBusinessPartner")
+                      .DirectEvents(de =>
+                      {
+                          de.Select.Action = "ChangeBusinessPartner";
+                          de.Select.EventMask.ShowMask = true;
+                          de.Select.ExtraParams.Add(new Parameter("viewBagID", ViewBag.ID, ParameterMode.Value));
+                          de.Select.ExtraParams.Add(new Parameter("selectedData", "records[0].data", ParameterMode.Raw, true));
+                      })
+                  ,
+                  Html.X().TextFieldFor(m => m.SellToCustomerName)
+                      .ID(sellToCustomerNameId),
+                  Html.X().TextFieldFor(m => m.SellToAddress)
+                      .ID(sellToAddressId),
+                  Html.X().TextFieldFor(m => m.Description)
+                      .ID(descriptionId),
+                  Html.X().TextFieldFor(m => m.TotalPayment)
+                      .ReadOnly(true)
+                      .ID(totalPaymentId),
+                  Html.X().TextField()
+                      .ID(cashOfCustomerId)
+                      .FieldLabel("Cash")
+                      .MaskRe(@"/[0-9\.]/")
+                      .CheckChangeEvents(new string[] {"blur"})
+                      .Listeners(ls =>
+                      {
+                          ls.Change.Handler = "this.setValue(Ext.util.Format.number(newValue.replace(/[,]/g, ''), '0,0.00'));";
+                      })
+                  ,
+                  Html.X().TextField()
+                      .ID(changeToCustomerId)
+                      .FieldLabel("Change")
+                      .ReadOnly(true)
+                  ,
+                  Html.X().Panel().BaseCls("x-plain").Flex(1),
+                  Html.X().Button()
+                      .ID(printButtonId)
+                      .Text("PRINT")
+                      .Height(50)
+                      .Icon(Icon.Printer)
+                      .Scale(ButtonScale.Large)
+                      .Cls("my-scale")
+                      .DirectEvents(de =>
+                      {
+                          de.Click.Action = "Print";
+                          de.Click.ShowWarningOnFailure = false;
+                          de.Click.EventMask.ShowMask = true;
+                          de.Click.FormID = posPanelId;
+                          de.Click.ExtraParams.Add(new Parameter("viewBagID", ViewBag.ID, ParameterMode.Value));
+                          de.Click.ExtraParams.Add(new Parameter("posLines", "App." + posLineGridPanel + ".getRowsValues()", ParameterMode.Raw, true));
+                      })
+
+              )
       ))

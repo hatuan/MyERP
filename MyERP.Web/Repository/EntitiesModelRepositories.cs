@@ -58,4 +58,19 @@ namespace MyERP.Web
     {
 
     }
+
+    public partial class BusinessPartnerPriceGroupRepository : BaseRepository<MyERP.DataAccess.BusinessPartnerPriceGroup, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class SalesPriceGroupRepository : BaseRepository<MyERP.DataAccess.SalesPriceGroup, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class SalesPriceRepository : BaseRepository<MyERP.DataAccess.SalesPrice, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
 }

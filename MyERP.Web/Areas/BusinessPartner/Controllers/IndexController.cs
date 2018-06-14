@@ -81,6 +81,51 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
             return this.Store(data, paging.TotalRecords);
         }
 
+        public ActionResult LookupData(StoreRequestParameters parameters, long? id = null)
+        {
+            if (id != null && id > 0)
+            {
+                var entity = repository.Get(c => c.Id == id, new []{ "Organization" }).FirstOrDefault();
+                var data = new BusinessPartnerLookupViewModel()
+                {
+                    Code = entity.Code,
+                    Id = entity.Id,
+                    Description = entity.Description,
+                    Address = entity.Address,
+                    Telephone = entity.Telephone,
+                    Mobilephone = entity.Mobilephone,
+                    Mail = entity.Mail,
+                    VatCode = entity.VatCode,
+                    ContactName = entity.ContactName,
+                    OrganizationCode = entity.Organization.Code,
+                    Status = (DefaultStatusType)entity.Status
+                };
+                return this.Store(data, 1);
+            }
+            else
+            {
+                var paging = ((BusinessPartnerRepository)repository).Paging(parameters.Start, parameters.Limit,
+                    parameters.SimpleSort, parameters.SimpleSortDirection, parameters.Query);
+
+                var data = paging.Data.Where(c => c.Status == (short)DefaultStatusType.Active)
+                    .Select(c => new BusinessPartnerLookupViewModel
+                    {
+                        Code = c.Code,
+                        Id = c.Id,
+                        Description = c.Description,
+                        Address = c.Address,
+                        Telephone = c.Telephone,
+                        Mobilephone = c.Mobilephone,
+                        Mail = c.Mail,
+                        VatCode = c.VatCode,
+                        ContactName = c.ContactName,
+                        OrganizationCode = c.Organization.Code,
+                        Status = (DefaultStatusType)c.Status
+                    }).ToList();
+                return this.Store(data, paging.TotalRecords);
+            }
+        }
+
         [HttpGet]
         public ActionResult _Maintenance(string id = null)
         {
@@ -176,7 +221,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
 
                 if (model.Id.HasValue)
                 {
-                    var _update = repository.GetBy(c => c.Id == model.Id);
+                    var _update = repository.Get(c => c.Id == model.Id).SingleOrDefault();
                     if (_update == null || _update.Version != model.Version)
                     {
                         r.Success = false;
@@ -266,7 +311,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.GetBy(c => c.Id == _id);
+                var entity = repository.Get(c => c.Id == _id).SingleOrDefault();
                 if (entity == null)
                 {
                     r.Success = false;

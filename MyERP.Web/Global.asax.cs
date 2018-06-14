@@ -25,6 +25,8 @@ namespace MyERP.Web
     {
         protected void Application_Start(object sender, EventArgs e)
         {
+            this.Application["Ext.Net.LicenseKey"] = "aXJEZXZlbG9wZXJzLmNvbSw0LDIwNTAtMDEtMDE=";
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configuration.MessageHandlers.Add(new MethodOverrideHandler());
             WebApiOdataConfig.Register(GlobalConfiguration.Configuration);
@@ -33,6 +35,8 @@ namespace MyERP.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
+            ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
         }
 
         /// <summary>

@@ -9,10 +9,12 @@ namespace MyERP.Web.Models
     public class PosHeaderEditViewModel
     {
         public long? Id { get; set; }
-        
+
+        [Display(Name = "Document No")]
         public string DocumentNo { get; set; }
 
-        public string DocumentDate { get; set; }
+        [Display(Name = "Document Date")]
+        public DateTime DocumentDate { get; set; }
 
         [Display(Name = "Customer")]
         public long? SellToCustomerId { get; set; }
@@ -28,6 +30,9 @@ namespace MyERP.Web.Models
         [Display(Name = "Description")]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String Description { get; set; }
+
+        [Display(Name = "Total Payment")]
+        public Decimal TotalPayment { get; set; }
 
         [Display(Name = "Location")]
         public long? LocationId { get; set; }

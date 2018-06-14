@@ -268,5 +268,75 @@ namespace MyERP.Web.Controllers
                 }
             };
         }
+
+        //
+        // CheckDuplicateBusinessPartnerPriceGroup
+        public JsonResult CheckDuplicateBusinessPartnerPriceGroup(BusinessPartnerPriceGroupEditViewModel busPartnerPriceGroup)
+        {
+            var repository = new BusinessPartnerPriceGroupRepository();
+            BusinessPartnerPriceGroup exists;
+            if (busPartnerPriceGroup.Id != null && busPartnerPriceGroup.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(busPartnerPriceGroup.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != busPartnerPriceGroup.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(busPartnerPriceGroup.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return Json(exists != null, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ExtCheckDuplicateBusinessPartnerPriceGroup(BusinessPartnerGroupEditViewModel busPartnerPriceGroup)
+        {
+            var repository = new BusinessPartnerPriceGroupRepository();
+            BusinessPartnerPriceGroup exists;
+            if (busPartnerPriceGroup.Id != null && busPartnerPriceGroup.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(busPartnerPriceGroup.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != busPartnerPriceGroup.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(busPartnerPriceGroup.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return new JsonResult
+            {
+                Data = new
+                {
+                    serviceResponse = new
+                    {
+                        valid = exists == null
+                    }
+                }
+            };
+        }
+
+        //
+        // CheckDuplicateSalesPriceGroup
+        public JsonResult CheckDuplicateSalesPriceGroup(SalesPriceGroupEditViewModel product)
+        {
+            var repository = new SalesPriceGroupRepository();
+            SalesPriceGroup exists;
+            if (product.Id != null && product.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != product.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return Json(exists != null, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ExtCheckDuplicateSalesPriceGroup(SalesPriceGroupEditViewModel product)
+        {
+            var repository = new SalesPriceGroupRepository();
+            SalesPriceGroup exists;
+            if (product.Id != null && product.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != product.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(product.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return new JsonResult
+            {
+                Data = new
+                {
+                    serviceResponse = new
+                    {
+                        valid = exists == null
+                    }
+                }
+            };
+        }
     }
 }

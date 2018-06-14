@@ -21,6 +21,12 @@
           <EntitySet Name="sales_lines" EntityType="MyERP.DataAccess.Store.sales_line" store:Type="Tables" Schema="dbo" Table="sales_line" />
           <EntitySet Name="pos_headers" EntityType="MyERP.DataAccess.Store.pos_header" store:Type="Tables" Schema="dbo" Table="pos_header" />
           <EntitySet Name="pos_lines" EntityType="MyERP.DataAccess.Store.pos_line" store:Type="Tables" Schema="dbo" Table="pos_line" />
+          <EntitySet Name="item_discount_groups" EntityType="MyERP.DataAccess.Store.item_discount_group" store:Type="Tables" Schema="dbo" Table="item_discount_group" />
+          <EntitySet Name="sales_price_groups" EntityType="MyERP.DataAccess.Store.sales_price_group" store:Type="Tables" Schema="dbo" Table="sales_price_group" />
+          <EntitySet Name="sales_prices" EntityType="MyERP.DataAccess.Store.sales_price" store:Type="Tables" Schema="dbo" Table="sales_price" />
+          <EntitySet Name="business_partner_price_groups" EntityType="MyERP.DataAccess.Store.business_partner_price_group" store:Type="Tables" Schema="dbo" Table="business_partner_price_group" />
+          <EntitySet Name="business_partner_discount_groups" EntityType="MyERP.DataAccess.Store.business_partner_discount_group" store:Type="Tables" Schema="dbo" Table="business_partner_discount_group" />
+          <EntitySet Name="locations" EntityType="MyERP.DataAccess.Store.location" store:Type="Tables" Schema="dbo" Table="location" />
           <AssociationSet Name="FK_client_user_profile" Association="MyERP.DataAccess.Store.FK_client_user_profile">
             <End Role="user" EntitySet="users" />
             <End Role="client" EntitySet="clients" />
@@ -217,6 +223,174 @@
             <End Role="user" EntitySet="users" />
             <End Role="item_uom" EntitySet="item_uoms" />
           </AssociationSet>
+          <AssociationSet Name="FK_item_uom1" Association="MyERP.DataAccess.Store.FK_item_uom1">
+            <End Role="uom" EntitySet="uoms" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_uom2" Association="MyERP.DataAccess.Store.FK_item_uom2">
+            <End Role="uom" EntitySet="uoms" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_business_partner" Association="MyERP.DataAccess.Store.FK_item_business_partner">
+            <End Role="business_partner" EntitySet="business_partners" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_item_discount_group" Association="MyERP.DataAccess.Store.FK_item_item_discount_group">
+            <End Role="item_discount_group" EntitySet="item_discount_groups" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_price_sales_price_group" Association="MyERP.DataAccess.Store.FK_sales_price_sales_price_group">
+            <End Role="sales_price_group" EntitySet="sales_price_groups" />
+            <End Role="sales_price" EntitySet="sales_prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_price_item" Association="MyERP.DataAccess.Store.FK_sales_price_item">
+            <End Role="item" EntitySet="items" />
+            <End Role="sales_price" EntitySet="sales_prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_price_uom" Association="MyERP.DataAccess.Store.FK_sales_price_uom">
+            <End Role="uom" EntitySet="uoms" />
+            <End Role="sales_price" EntitySet="sales_prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_business_partner_price_group_organization" Association="MyERP.DataAccess.Store.FK_business_partner_price_group_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="business_partner_price_group" EntitySet="business_partner_price_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_business_partner_price_group_client" Association="MyERP.DataAccess.Store.FK_business_partner_price_group_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="business_partner_price_group" EntitySet="business_partner_price_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_business_partner_price_group_user" Association="MyERP.DataAccess.Store.FK_business_partner_price_group_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="business_partner_price_group" EntitySet="business_partner_price_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_business_partner_price_group_user1" Association="MyERP.DataAccess.Store.FK_business_partner_price_group_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="business_partner_price_group" EntitySet="business_partner_price_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_business_partner_business_partner_price_group" Association="MyERP.DataAccess.Store.FK_business_partner_business_partner_price_group">
+            <End Role="business_partner_price_group" EntitySet="business_partner_price_groups" />
+            <End Role="business_partner" EntitySet="business_partners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_business_partner_discount_group_client" Association="MyERP.DataAccess.Store.FK_business_partner_discount_group_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="business_partner_discount_group" EntitySet="business_partner_discount_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_business_partner_discount_group_organization" Association="MyERP.DataAccess.Store.FK_business_partner_discount_group_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="business_partner_discount_group" EntitySet="business_partner_discount_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_business_partner_discount_group_user" Association="MyERP.DataAccess.Store.FK_business_partner_discount_group_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="business_partner_discount_group" EntitySet="business_partner_discount_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_business_partner_discount_group_user1" Association="MyERP.DataAccess.Store.FK_business_partner_discount_group_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="business_partner_discount_group" EntitySet="business_partner_discount_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_business_partner_business_partner_discount_group" Association="MyERP.DataAccess.Store.FK_business_partner_business_partner_discount_group">
+            <End Role="business_partner_discount_group" EntitySet="business_partner_discount_groups" />
+            <End Role="business_partner" EntitySet="business_partners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pos_line_sales_price" Association="MyERP.DataAccess.Store.FK_pos_line_sales_price">
+            <End Role="sales_price" EntitySet="sales_prices" />
+            <End Role="pos_line" EntitySet="pos_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_location_client" Association="MyERP.DataAccess.Store.FK_location_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="location" EntitySet="locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_location_organization" Association="MyERP.DataAccess.Store.FK_location_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="location" EntitySet="locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_location_user" Association="MyERP.DataAccess.Store.FK_location_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="location" EntitySet="locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_location_user1" Association="MyERP.DataAccess.Store.FK_location_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="location" EntitySet="locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_discount_group_client" Association="MyERP.DataAccess.Store.FK_item_discount_group_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="item_discount_group" EntitySet="item_discount_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_discount_group_organization" Association="MyERP.DataAccess.Store.FK_item_discount_group_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="item_discount_group" EntitySet="item_discount_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_discount_group_user" Association="MyERP.DataAccess.Store.FK_item_discount_group_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="item_discount_group" EntitySet="item_discount_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_discount_group_user1" Association="MyERP.DataAccess.Store.FK_item_discount_group_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="item_discount_group" EntitySet="item_discount_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pos_header_location" Association="MyERP.DataAccess.Store.FK_pos_header_location">
+            <End Role="location" EntitySet="locations" />
+            <End Role="pos_header" EntitySet="pos_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_header_location" Association="MyERP.DataAccess.Store.FK_sales_header_location">
+            <End Role="location" EntitySet="locations" />
+            <End Role="sales_header" EntitySet="sales_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_line_location" Association="MyERP.DataAccess.Store.FK_sales_line_location">
+            <End Role="location" EntitySet="locations" />
+            <End Role="sales_line" EntitySet="sales_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pos_line_location" Association="MyERP.DataAccess.Store.FK_pos_line_location">
+            <End Role="location" EntitySet="locations" />
+            <End Role="pos_line" EntitySet="pos_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_line_sales_price" Association="MyERP.DataAccess.Store.FK_sales_line_sales_price">
+            <End Role="sales_price" EntitySet="sales_prices" />
+            <End Role="sales_line" EntitySet="sales_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_price_group_organization" Association="MyERP.DataAccess.Store.FK_sales_price_group_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="sales_price_group" EntitySet="sales_price_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_price_group_client" Association="MyERP.DataAccess.Store.FK_sales_price_group_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="sales_price_group" EntitySet="sales_price_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_price_group_user" Association="MyERP.DataAccess.Store.FK_sales_price_group_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="sales_price_group" EntitySet="sales_price_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_price_group_user1" Association="MyERP.DataAccess.Store.FK_sales_price_group_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="sales_price_group" EntitySet="sales_price_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_price_business_partner_price_group" Association="MyERP.DataAccess.Store.FK_sales_price_business_partner_price_group">
+            <End Role="business_partner_price_group" EntitySet="business_partner_price_groups" />
+            <End Role="sales_price" EntitySet="sales_prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_price_business_partner" Association="MyERP.DataAccess.Store.FK_sales_price_business_partner">
+            <End Role="business_partner" EntitySet="business_partners" />
+            <End Role="sales_price" EntitySet="sales_prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_header_business_partner" Association="MyERP.DataAccess.Store.FK_sales_header_business_partner">
+            <End Role="business_partner" EntitySet="business_partners" />
+            <End Role="sales_header" EntitySet="sales_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_header_business_partner1" Association="MyERP.DataAccess.Store.FK_sales_header_business_partner1">
+            <End Role="business_partner" EntitySet="business_partners" />
+            <End Role="sales_header" EntitySet="sales_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_header_currency" Association="MyERP.DataAccess.Store.FK_sales_header_currency">
+            <End Role="currency" EntitySet="currencies" />
+            <End Role="sales_header" EntitySet="sales_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pos_header_business_partner" Association="MyERP.DataAccess.Store.FK_pos_header_business_partner">
+            <End Role="business_partner" EntitySet="business_partners" />
+            <End Role="pos_header" EntitySet="pos_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pos_header_business_partner1" Association="MyERP.DataAccess.Store.FK_pos_header_business_partner1">
+            <End Role="business_partner" EntitySet="business_partners" />
+            <End Role="pos_header" EntitySet="pos_headers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -348,6 +522,12 @@
           <Property Name="item_group_id1" Type="bigint" />
           <Property Name="item_group_id2" Type="bigint" />
           <Property Name="item_group_id3" Type="bigint" />
+          <Property Name="unit_price" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="item_discount_group_id" Type="bigint" />
+          <Property Name="purch_vendor_id" Type="bigint" />
+          <Property Name="sales_uom_id" Type="bigint" Nullable="false" />
+          <Property Name="purch_uom_id" Type="bigint" Nullable="false" />
+          <Property Name="unit_cost" Type="decimal" Precision="38" Scale="20" />
         </EntityType>
         <EntityType Name="item_uom">
           <Key>
@@ -450,6 +630,8 @@
           </Property>
           <Property Name="geo_latitude" Type="float" />
           <Property Name="geo_longitude" Type="float" />
+          <Property Name="business_partner_price_group_id" Type="bigint" />
+          <Property Name="bus_partner_disc_group_id" Type="bigint" />
         </EntityType>
         <EntityType Name="sales_header">
           <Key>
@@ -506,6 +688,7 @@
           <Property Name="total_vat5amount" Type="int" />
           <Property Name="total_vat10amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_payment_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="location_id" Type="bigint" />
         </EntityType>
         <EntityType Name="sales_line">
           <Key>
@@ -541,6 +724,7 @@
           <Property Name="qty_shipped_not_invoiced_base" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="outstanding_quantity" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="outstanding_qty_base" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="sales_price_id" Type="bigint" />
         </EntityType>
         <EntityType Name="pos_header">
           <Key>
@@ -607,6 +791,119 @@
           <Property Name="quantity_base" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="sales_price_id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="item_discount_group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_at" Type="datetime" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="sales_price_group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sales_price">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="starting_date" Type="datetime" Nullable="false" />
+          <Property Name="ending_date" Type="datetime" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_at" Type="datetime" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+          <Property Name="sales_price_group_id" Type="bigint" Nullable="false" />
+          <Property Name="item_id" Type="bigint" Nullable="false" />
+          <Property Name="unit_price" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="uom_id" Type="bigint" />
+          <Property Name="sales_type" Type="smallint" Nullable="false">
+            <Documentation>
+              <Summary>1-Customer
+2-Customer Price Group
+3-All Customers
+4-Campaign</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="business_partner_id" Type="bigint" />
+          <Property Name="min_qty" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="bus_partner_price_group_id" Type="bigint" />
+          <Property Name="campaign_id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="business_partner_price_group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="status" Type="smallint" />
+          <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_at" Type="datetime" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="business_partner_discount_group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="status" Type="smallint" />
+          <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_at" Type="datetime" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_at" Type="datetime" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="version" Type="bigint" Nullable="false" />
         </EntityType>
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
@@ -1196,12 +1493,516 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_item_uom1">
+          <End Role="uom" Type="MyERP.DataAccess.Store.uom" Multiplicity="1" />
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uom">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="sales_uom_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_uom2">
+          <End Role="uom" Type="MyERP.DataAccess.Store.uom" Multiplicity="1" />
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uom">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="purch_uom_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_business_partner">
+          <End Role="business_partner" Type="MyERP.DataAccess.Store.business_partner" Multiplicity="0..1" />
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="business_partner">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="purch_vendor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_item_discount_group">
+          <End Role="item_discount_group" Type="MyERP.DataAccess.Store.item_discount_group" Multiplicity="1" />
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item_discount_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="item_discount_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_price_sales_price_group">
+          <End Role="sales_price_group" Type="MyERP.DataAccess.Store.sales_price_group" Multiplicity="1" />
+          <End Role="sales_price" Type="MyERP.DataAccess.Store.sales_price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sales_price_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sales_price">
+              <PropertyRef Name="sales_price_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_price_item">
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="1" />
+          <End Role="sales_price" Type="MyERP.DataAccess.Store.sales_price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sales_price">
+              <PropertyRef Name="item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_price_uom">
+          <End Role="uom" Type="MyERP.DataAccess.Store.uom" Multiplicity="0..1" />
+          <End Role="sales_price" Type="MyERP.DataAccess.Store.sales_price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uom">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sales_price">
+              <PropertyRef Name="uom_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_business_partner_price_group_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="business_partner_price_group" Type="MyERP.DataAccess.Store.business_partner_price_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="business_partner_price_group">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_business_partner_price_group_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="business_partner_price_group" Type="MyERP.DataAccess.Store.business_partner_price_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="business_partner_price_group">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_business_partner_price_group_user">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="business_partner_price_group" Type="MyERP.DataAccess.Store.business_partner_price_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="business_partner_price_group">
+              <PropertyRef Name="rec_created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_business_partner_price_group_user1">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="business_partner_price_group" Type="MyERP.DataAccess.Store.business_partner_price_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="business_partner_price_group">
+              <PropertyRef Name="rec_modified_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_business_partner_business_partner_price_group">
+          <End Role="business_partner_price_group" Type="MyERP.DataAccess.Store.business_partner_price_group" Multiplicity="0..1" />
+          <End Role="business_partner" Type="MyERP.DataAccess.Store.business_partner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="business_partner_price_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="business_partner">
+              <PropertyRef Name="business_partner_price_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_business_partner_discount_group_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="business_partner_discount_group" Type="MyERP.DataAccess.Store.business_partner_discount_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="business_partner_discount_group">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_business_partner_discount_group_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="business_partner_discount_group" Type="MyERP.DataAccess.Store.business_partner_discount_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="business_partner_discount_group">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_business_partner_discount_group_user">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="business_partner_discount_group" Type="MyERP.DataAccess.Store.business_partner_discount_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="business_partner_discount_group">
+              <PropertyRef Name="rec_created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_business_partner_discount_group_user1">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="business_partner_discount_group" Type="MyERP.DataAccess.Store.business_partner_discount_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="business_partner_discount_group">
+              <PropertyRef Name="rec_modified_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_business_partner_business_partner_discount_group">
+          <End Role="business_partner_discount_group" Type="MyERP.DataAccess.Store.business_partner_discount_group" Multiplicity="0..1" />
+          <End Role="business_partner" Type="MyERP.DataAccess.Store.business_partner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="business_partner_discount_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="business_partner">
+              <PropertyRef Name="bus_partner_disc_group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pos_line_sales_price">
+          <End Role="sales_price" Type="MyERP.DataAccess.Store.sales_price" Multiplicity="0..1" />
+          <End Role="pos_line" Type="MyERP.DataAccess.Store.pos_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sales_price">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pos_line">
+              <PropertyRef Name="sales_price_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_location_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="location" Type="MyERP.DataAccess.Store.location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="location">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_location_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="location" Type="MyERP.DataAccess.Store.location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="location">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_location_user">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="location" Type="MyERP.DataAccess.Store.location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="location">
+              <PropertyRef Name="rec_created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_location_user1">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="location" Type="MyERP.DataAccess.Store.location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="location">
+              <PropertyRef Name="rec_modified_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_discount_group_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="item_discount_group" Type="MyERP.DataAccess.Store.item_discount_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item_discount_group">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_discount_group_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="item_discount_group" Type="MyERP.DataAccess.Store.item_discount_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item_discount_group">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_discount_group_user">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="item_discount_group" Type="MyERP.DataAccess.Store.item_discount_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item_discount_group">
+              <PropertyRef Name="rec_created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_discount_group_user1">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="item_discount_group" Type="MyERP.DataAccess.Store.item_discount_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item_discount_group">
+              <PropertyRef Name="rec_modified_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pos_header_location">
+          <End Role="location" Type="MyERP.DataAccess.Store.location" Multiplicity="1" />
+          <End Role="pos_header" Type="MyERP.DataAccess.Store.pos_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pos_header">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_header_location">
+          <End Role="location" Type="MyERP.DataAccess.Store.location" Multiplicity="0..1" />
+          <End Role="sales_header" Type="MyERP.DataAccess.Store.sales_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sales_header">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_line_location">
+          <End Role="location" Type="MyERP.DataAccess.Store.location" Multiplicity="0..1" />
+          <End Role="sales_line" Type="MyERP.DataAccess.Store.sales_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sales_line">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pos_line_location">
+          <End Role="location" Type="MyERP.DataAccess.Store.location" Multiplicity="0..1" />
+          <End Role="pos_line" Type="MyERP.DataAccess.Store.pos_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pos_line">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_line_sales_price">
+          <End Role="sales_price" Type="MyERP.DataAccess.Store.sales_price" Multiplicity="0..1" />
+          <End Role="sales_line" Type="MyERP.DataAccess.Store.sales_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sales_price">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sales_line">
+              <PropertyRef Name="sales_price_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_price_group_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="sales_price_group" Type="MyERP.DataAccess.Store.sales_price_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sales_price_group">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_price_group_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="sales_price_group" Type="MyERP.DataAccess.Store.sales_price_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sales_price_group">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_price_group_user">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="sales_price_group" Type="MyERP.DataAccess.Store.sales_price_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sales_price_group">
+              <PropertyRef Name="rec_created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_price_group_user1">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="sales_price_group" Type="MyERP.DataAccess.Store.sales_price_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sales_price_group">
+              <PropertyRef Name="rec_modified_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_price_business_partner_price_group">
+          <End Role="business_partner_price_group" Type="MyERP.DataAccess.Store.business_partner_price_group" Multiplicity="0..1" />
+          <End Role="sales_price" Type="MyERP.DataAccess.Store.sales_price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="business_partner_price_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sales_price">
+              <PropertyRef Name="business_partner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_price_business_partner">
+          <End Role="business_partner" Type="MyERP.DataAccess.Store.business_partner" Multiplicity="0..1" />
+          <End Role="sales_price" Type="MyERP.DataAccess.Store.sales_price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="business_partner">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sales_price">
+              <PropertyRef Name="business_partner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_header_business_partner">
+          <End Role="business_partner" Type="MyERP.DataAccess.Store.business_partner" Multiplicity="1" />
+          <End Role="sales_header" Type="MyERP.DataAccess.Store.sales_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="business_partner">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sales_header">
+              <PropertyRef Name="sell_to_customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_header_business_partner1">
+          <End Role="business_partner" Type="MyERP.DataAccess.Store.business_partner" Multiplicity="0..1" />
+          <End Role="sales_header" Type="MyERP.DataAccess.Store.sales_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="business_partner">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sales_header">
+              <PropertyRef Name="bill_to_customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_header_currency">
+          <End Role="currency" Type="MyERP.DataAccess.Store.currency" Multiplicity="0..1" />
+          <End Role="sales_header" Type="MyERP.DataAccess.Store.sales_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="currency">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sales_header">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pos_header_business_partner">
+          <End Role="business_partner" Type="MyERP.DataAccess.Store.business_partner" Multiplicity="1" />
+          <End Role="pos_header" Type="MyERP.DataAccess.Store.pos_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="business_partner">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pos_header">
+              <PropertyRef Name="sell_to_customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pos_header_business_partner1">
+          <End Role="business_partner" Type="MyERP.DataAccess.Store.business_partner" Multiplicity="1" />
+          <End Role="pos_header" Type="MyERP.DataAccess.Store.pos_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="business_partner">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pos_header">
+              <PropertyRef Name="bill_to_customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MyERP.DataAccess" Alias="Self" d4p1:ViewGeneration="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:devart="http://devart.com/schemas/edml/ConceptualSchemaExtensions/1.0" xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" annotation:UseStrongSpatialTypes="false" xmlns:d4p1="http://devart.com/schemas/edml/ConceptualSchemaExtensions/1.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="EntitiesModel" annotation:LazyLoadingEnabled="true" ed:Guid="6542081e-8662-4332-8e7c-9d3a5aeb72fe">
+        <EntityContainer Name="EntitiesModel" annotation:LazyLoadingEnabled="false" ed:Guid="6542081e-8662-4332-8e7c-9d3a5aeb72fe">
           <EntitySet Name="Users" EntityType="MyERP.DataAccess.User" />
           <EntitySet Name="Clients" EntityType="MyERP.DataAccess.Client" />
           <EntitySet Name="Currencies" EntityType="MyERP.DataAccess.Currency" />
@@ -1218,6 +2019,12 @@
           <EntitySet Name="SalesLines" EntityType="MyERP.DataAccess.SalesLine" />
           <EntitySet Name="PosHeaders" EntityType="MyERP.DataAccess.PosHeader" />
           <EntitySet Name="PosLines" EntityType="MyERP.DataAccess.PosLine" />
+          <EntitySet Name="ItemDiscountGroups" EntityType="MyERP.DataAccess.ItemDiscountGroup" />
+          <EntitySet Name="SalesPriceGroups" EntityType="MyERP.DataAccess.SalesPriceGroup" />
+          <EntitySet Name="SalesPrices" EntityType="MyERP.DataAccess.SalesPrice" />
+          <EntitySet Name="BusinessPartnerPriceGroups" EntityType="MyERP.DataAccess.BusinessPartnerPriceGroup" />
+          <EntitySet Name="BusinessPartnerDiscountGroups" EntityType="MyERP.DataAccess.BusinessPartnerDiscountGroup" />
+          <EntitySet Name="Locations" EntityType="MyERP.DataAccess.Location" />
           <AssociationSet Name="User_Client_CreatedBySet" Association="MyERP.DataAccess.User_Client_CreatedBy">
             <End Role="RecCreatedByUser" EntitySet="Users" />
             <End Role="Clients" EntitySet="Clients" />
@@ -1418,6 +2225,174 @@
             <End Role="RecModifiedByUser" EntitySet="Users" />
             <End Role="ItemUoms1" EntitySet="ItemUoms" />
           </AssociationSet>
+          <AssociationSet Name="Uom_Item_SalesUOMSet" Association="MyERP.DataAccess.Uom_Item_SalesUOM">
+            <End Role="SalesUom" EntitySet="Uoms" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="Uom_Item_PurchUomSet" Association="MyERP.DataAccess.Uom_Item_PurchUom">
+            <End Role="PurchUom" EntitySet="Uoms" />
+            <End Role="Items1" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="BusinessPartner_Item_PurchVendorSet" Association="MyERP.DataAccess.BusinessPartner_Item_PurchVendor">
+            <End Role="PurchVendor" EntitySet="BusinessPartners" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="ItemDiscountGroup_ItemSet" Association="MyERP.DataAccess.ItemDiscountGroup_Item">
+            <End Role="ItemDiscountGroup" EntitySet="ItemDiscountGroups" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="SalesPriceGroup_SalesPriceSet" Association="MyERP.DataAccess.SalesPriceGroup_SalesPrice">
+            <End Role="SalesPriceGroup" EntitySet="SalesPriceGroups" />
+            <End Role="SalesPrices" EntitySet="SalesPrices" />
+          </AssociationSet>
+          <AssociationSet Name="Item_SalesPriceSet" Association="MyERP.DataAccess.Item_SalesPrice">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="SalesPrices" EntitySet="SalesPrices" />
+          </AssociationSet>
+          <AssociationSet Name="Uom_SalesPriceSet" Association="MyERP.DataAccess.Uom_SalesPrice">
+            <End Role="Uom" EntitySet="Uoms" />
+            <End Role="SalesPrices" EntitySet="SalesPrices" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_BusinessPartnerPriceGroupSet" Association="MyERP.DataAccess.Organization_BusinessPartnerPriceGroup">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="BusinessPartnerPriceGroups" EntitySet="BusinessPartnerPriceGroups" />
+          </AssociationSet>
+          <AssociationSet Name="Client_BusinessPartnerPriceGroupSet" Association="MyERP.DataAccess.Client_BusinessPartnerPriceGroup">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="BusinessPartnerPriceGroups" EntitySet="BusinessPartnerPriceGroups" />
+          </AssociationSet>
+          <AssociationSet Name="User_BusinessPartnerPriceGroup_RecCreatedBySet" Association="MyERP.DataAccess.User_BusinessPartnerPriceGroup_RecCreatedBy">
+            <End Role="RecCreatedByUser" EntitySet="Users" />
+            <End Role="BusinessPartnerPriceGroups" EntitySet="BusinessPartnerPriceGroups" />
+          </AssociationSet>
+          <AssociationSet Name="User_BusinessPartnerPriceGroup_RecModifiedBySet" Association="MyERP.DataAccess.User_BusinessPartnerPriceGroup_RecModifiedBy">
+            <End Role="RecModifiedByUser" EntitySet="Users" />
+            <End Role="BusinessPartnerPriceGroups1" EntitySet="BusinessPartnerPriceGroups" />
+          </AssociationSet>
+          <AssociationSet Name="BusinessPartnerPriceGroup_BusinessPartnerSet" Association="MyERP.DataAccess.BusinessPartnerPriceGroup_BusinessPartner">
+            <End Role="BusinessPartnerPriceGroup" EntitySet="BusinessPartnerPriceGroups" />
+            <End Role="BusinessPartners" EntitySet="BusinessPartners" />
+          </AssociationSet>
+          <AssociationSet Name="Client_BusinessPartnerDiscountGroupSet" Association="MyERP.DataAccess.Client_BusinessPartnerDiscountGroup">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="BusinessPartnerDiscountGroups" EntitySet="BusinessPartnerDiscountGroups" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_BusinessPartnerDiscountGroupSet" Association="MyERP.DataAccess.Organization_BusinessPartnerDiscountGroup">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="BusinessPartnerDiscountGroups" EntitySet="BusinessPartnerDiscountGroups" />
+          </AssociationSet>
+          <AssociationSet Name="User_BusinessPartnerDiscountGroup_RecCreatedBySet" Association="MyERP.DataAccess.User_BusinessPartnerDiscountGroup_RecCreatedBy">
+            <End Role="RecCreatedByUser" EntitySet="Users" />
+            <End Role="BusinessPartnerDiscountGroups" EntitySet="BusinessPartnerDiscountGroups" />
+          </AssociationSet>
+          <AssociationSet Name="User_BusinessPartnerDiscountGroup_RecModifiedBySet" Association="MyERP.DataAccess.User_BusinessPartnerDiscountGroup_RecModifiedBy">
+            <End Role="RecModifiedByUser" EntitySet="Users" />
+            <End Role="BusinessPartnerDiscountGroups1" EntitySet="BusinessPartnerDiscountGroups" />
+          </AssociationSet>
+          <AssociationSet Name="BusinessPartnerDiscountGroup_BusinessPartnerSet" Association="MyERP.DataAccess.BusinessPartnerDiscountGroup_BusinessPartner">
+            <End Role="BusPartnerDiscGroup" EntitySet="BusinessPartnerDiscountGroups" />
+            <End Role="BusinessPartners" EntitySet="BusinessPartners" />
+          </AssociationSet>
+          <AssociationSet Name="SalesPrice_PosLineSet" Association="MyERP.DataAccess.SalesPrice_PosLine">
+            <End Role="SalesPrice" EntitySet="SalesPrices" />
+            <End Role="PosLines" EntitySet="PosLines" />
+          </AssociationSet>
+          <AssociationSet Name="Client_LocationSet" Association="MyERP.DataAccess.Client_Location">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Locations" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_LocationSet" Association="MyERP.DataAccess.Organization_Location">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="Locations" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="User_Location_RecCreatedBySet" Association="MyERP.DataAccess.User_Location_RecCreatedBy">
+            <End Role="RecCreatedByUser" EntitySet="Users" />
+            <End Role="Locations" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="User_Location_RecModifiedBySet" Association="MyERP.DataAccess.User_Location_RecModifiedBy">
+            <End Role="RecModifiedByUser" EntitySet="Users" />
+            <End Role="Locations1" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="Client_ItemDiscountGroupSet" Association="MyERP.DataAccess.Client_ItemDiscountGroup">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="ItemDiscountGroups" EntitySet="ItemDiscountGroups" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_ItemDiscountGroupSet" Association="MyERP.DataAccess.Organization_ItemDiscountGroup">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="ItemDiscountGroups" EntitySet="ItemDiscountGroups" />
+          </AssociationSet>
+          <AssociationSet Name="User_ItemDiscountGroup_RecCreatedBySet" Association="MyERP.DataAccess.User_ItemDiscountGroup_RecCreatedBy">
+            <End Role="RecCreatedByUser" EntitySet="Users" />
+            <End Role="ItemDiscountGroups" EntitySet="ItemDiscountGroups" />
+          </AssociationSet>
+          <AssociationSet Name="User_ItemDiscountGroup_RecModifiedBySet" Association="MyERP.DataAccess.User_ItemDiscountGroup_RecModifiedBy">
+            <End Role="RecModifiedByUser" EntitySet="Users" />
+            <End Role="ItemDiscountGroups1" EntitySet="ItemDiscountGroups" />
+          </AssociationSet>
+          <AssociationSet Name="Location_PosHeaderSet" Association="MyERP.DataAccess.Location_PosHeader">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="PosHeaders" EntitySet="PosHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="Location_SalesHeaderSet" Association="MyERP.DataAccess.Location_SalesHeader">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="SalesHeaders" EntitySet="SalesHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="Location_SalesLineSet" Association="MyERP.DataAccess.Location_SalesLine">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="SalesLines" EntitySet="SalesLines" />
+          </AssociationSet>
+          <AssociationSet Name="Location_PosLineSet" Association="MyERP.DataAccess.Location_PosLine">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="PosLines" EntitySet="PosLines" />
+          </AssociationSet>
+          <AssociationSet Name="SalesPrice_SalesLineSet" Association="MyERP.DataAccess.SalesPrice_SalesLine">
+            <End Role="SalesPrice" EntitySet="SalesPrices" />
+            <End Role="SalesLines" EntitySet="SalesLines" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_SalesPriceGroupSet" Association="MyERP.DataAccess.Organization_SalesPriceGroup">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="SalesPriceGroups" EntitySet="SalesPriceGroups" />
+          </AssociationSet>
+          <AssociationSet Name="Client_SalesPriceGroupSet" Association="MyERP.DataAccess.Client_SalesPriceGroup">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="SalesPriceGroups" EntitySet="SalesPriceGroups" />
+          </AssociationSet>
+          <AssociationSet Name="User_SalesPriceGroup_RecCreatedBySet" Association="MyERP.DataAccess.User_SalesPriceGroup_RecCreatedBy">
+            <End Role="RecCreatedByUser" EntitySet="Users" />
+            <End Role="SalesPriceGroups" EntitySet="SalesPriceGroups" />
+          </AssociationSet>
+          <AssociationSet Name="User_SalesPriceGroup_RecModifiedBySet" Association="MyERP.DataAccess.User_SalesPriceGroup_RecModifiedBy">
+            <End Role="RecModifiedByUser" EntitySet="Users" />
+            <End Role="SalesPriceGroups1" EntitySet="SalesPriceGroups" />
+          </AssociationSet>
+          <AssociationSet Name="BusinessPartnerPriceGroup_SalesPriceSet" Association="MyERP.DataAccess.BusinessPartnerPriceGroup_SalesPrice">
+            <End Role="BusPartnerPriceGroup" EntitySet="BusinessPartnerPriceGroups" />
+            <End Role="SalesPrices" EntitySet="SalesPrices" />
+          </AssociationSet>
+          <AssociationSet Name="BusinessPartner_SalesPriceSet" Association="MyERP.DataAccess.BusinessPartner_SalesPrice">
+            <End Role="BusinessPartner" EntitySet="BusinessPartners" />
+            <End Role="SalesPrices" EntitySet="SalesPrices" />
+          </AssociationSet>
+          <AssociationSet Name="BusinessPartner_SalesHeader_SellToCustomerSet" Association="MyERP.DataAccess.BusinessPartner_SalesHeader_SellToCustomer">
+            <End Role="SellToCustomer" EntitySet="BusinessPartners" />
+            <End Role="SalesHeaders" EntitySet="SalesHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="BusinessPartner_SalesHeader_BillToCustomerSet" Association="MyERP.DataAccess.BusinessPartner_SalesHeader_BillToCustomer">
+            <End Role="BillToCustomer" EntitySet="BusinessPartners" />
+            <End Role="SalesHeaders1" EntitySet="SalesHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="Currency_SalesHeaderSet" Association="MyERP.DataAccess.Currency_SalesHeader">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="SalesHeaders" EntitySet="SalesHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="BusinessPartner_PosHeaderSet" Association="MyERP.DataAccess.BusinessPartner_PosHeader">
+            <End Role="SellToCustomer" EntitySet="BusinessPartners" />
+            <End Role="PosHeaders" EntitySet="PosHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="BusinessPartner_PosHeader1Set" Association="MyERP.DataAccess.BusinessPartner_PosHeader1">
+            <End Role="BillToCustomer" EntitySet="BusinessPartners" />
+            <End Role="PosHeaders1" EntitySet="PosHeaders" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
           <Key>
@@ -1560,9 +2535,15 @@
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="b5d0a5ce-1dad-4478-9c7a-9ae4d3a02337" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="69d7dc82-d2e4-4c67-b326-dc288979700c" />
           <Property Name="BaseUomId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="93a5509c-a849-45b0-a2a4-9c969b78c7d6" />
+          <Property Name="UnitCost" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="29d2e934-1cc1-44a2-90fb-143aa6433764" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="c647081c-fc9e-4e97-b2b2-4f9e3868ad74" />
+          <Property Name="ItemDiscountGroupId" Type="Int64" ed:ValidateRequired="false" ed:Guid="d5a4cea1-ce97-44f8-a3a4-66c671114d8c" />
           <Property Name="ItemGroupId1" Type="Int64" ed:ValidateRequired="false" ed:Guid="a5b60793-6d70-4ded-9ff1-6142feecaa11" />
           <Property Name="ItemGroupId2" Type="Int64" ed:ValidateRequired="false" ed:Guid="82aa9742-2a34-4dfc-91df-5bea4b98c1e0" />
           <Property Name="ItemGroupId3" Type="Int64" ed:ValidateRequired="false" ed:Guid="c31e59ed-48f3-4182-b089-1f0a47b83e0e" />
+          <Property Name="PurchVendorId" Type="Int64" ed:ValidateRequired="false" ed:Guid="524e54db-d112-41d7-8b90-5fabd34e9b1a" />
+          <Property Name="SalesUomId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="914d5a93-35eb-41e8-aaf7-b66e4d7ddc49" />
+          <Property Name="PurchUomId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="8803310e-cef3-4386-8d17-f14ba270ee08" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="296d80bc-419f-4c7f-a83c-aff7e8d8431d" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="86b2948c-9000-4965-8f40-41d42e2810c2" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="c376d9de-4b48-4d1d-ab3e-7ef9d9029cfa" />
@@ -1580,6 +2561,10 @@
           <NavigationProperty Name="ItemGroup1" Relationship="MyERP.DataAccess.ItemGroup_Item_Level1" FromRole="Items" ToRole="ItemGroup1" ed:Guid="5dbb0e41-5996-4604-aaca-a79cb9ab6025" />
           <NavigationProperty Name="ItemGroup2" Relationship="MyERP.DataAccess.ItemGroup_Item_Level2" FromRole="Items1" ToRole="ItemGroup2" ed:Guid="1e446762-ae8b-43c4-afb0-81c74ef16af0" />
           <NavigationProperty Name="ItemGroup3" Relationship="MyERP.DataAccess.ItemGroup_Item_Level3" FromRole="Items2" ToRole="ItemGroup3" ed:Guid="c6a4e598-4c6b-47fd-b8fb-34a8c589735f" />
+          <NavigationProperty Name="SalesUom" Relationship="MyERP.DataAccess.Uom_Item_SalesUOM" FromRole="Items" ToRole="SalesUom" ed:Guid="9c154c96-390e-4322-aefd-ec6cffcbd280" />
+          <NavigationProperty Name="PurchUom" Relationship="MyERP.DataAccess.Uom_Item_PurchUom" FromRole="Items1" ToRole="PurchUom" ed:Guid="53cbd185-cee4-4d61-92d3-6c227b182111" />
+          <NavigationProperty Name="PurchVendor" Relationship="MyERP.DataAccess.BusinessPartner_Item_PurchVendor" FromRole="Items" ToRole="PurchVendor" ed:Guid="2e4b92f1-e0ce-45a4-b695-6d603d04e336" />
+          <NavigationProperty Name="ItemDiscountGroup" Relationship="MyERP.DataAccess.ItemDiscountGroup_Item" FromRole="Items" ToRole="ItemDiscountGroup" ed:Guid="095f92c8-d7ee-4fba-9e79-46947457b9dd" />
         </EntityType>
         <EntityType Name="ItemUom" ed:Guid="99415c3c-dac3-4b24-900f-ff6b913d2931">
           <Key>
@@ -1662,9 +2647,11 @@
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="b6e6381b-7138-4f72-ba40-e0217baf87c0" />
           <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="477f2e87-5894-4c84-a42d-6e6a7b92600b" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="870e51a2-b01c-4c89-8f14-b3a342bfb2f0" />
+          <Property Name="BusinessPartnerPriceGroupId" Type="Int64" ed:ValidateRequired="false" ed:Guid="be3b9c8b-0492-48d6-b43c-1331032e0ab0" />
           <Property Name="BusinessPartnerGroupId1" Type="Int64" ed:ValidateRequired="false" ed:Guid="b5166d18-455e-446b-8c93-bf83f5c91e81" />
           <Property Name="BusinessPartnerGroupId2" Type="Int64" ed:ValidateRequired="false" ed:Guid="b6696c08-a295-4a2f-afe5-177cf26f8556" />
           <Property Name="BusinessPartnerGroupId3" Type="Int64" ed:ValidateRequired="false" ed:Guid="70a44303-51d5-42bd-b8bc-2816466a8096" />
+          <Property Name="BusPartnerDiscGroupId" Type="Int64" ed:ValidateRequired="false" ed:Guid="433e0fa4-10c6-43b8-9ccc-6d582ca2bcca" />
           <Property Name="VatCode" Type="String" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="016165a1-b357-4bd4-9808-681380b3eefb" />
           <Property Name="ContactName" Type="String" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="fe33f856-bc8c-494e-9e25-169a2b9ebba5" />
           <Property Name="Address" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="93ee8450-a4cf-4c0b-8186-074320577e19" />
@@ -1703,6 +2690,9 @@
           <NavigationProperty Name="BusinessPartnerGroup3" Relationship="MyERP.DataAccess.BusinessPartnerGroup_BusinessPartner_Level3" FromRole="BusinessPartners2" ToRole="BusinessPartnerGroup3" ed:Guid="ce599b8d-7993-47e2-a710-266f8c952f25" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_BusinessPartner" FromRole="BusinessPartners" ToRole="Client" ed:Guid="6e07e3a5-9ad5-495c-aba6-6d52b56bdf30" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_BusinessPartner" FromRole="BusinessPartners" ToRole="Organization" ed:Guid="46941efc-d276-4ef7-b45a-f8979b6bea3d" />
+          <NavigationProperty Name="BusinessPartnerPriceGroup" Relationship="MyERP.DataAccess.BusinessPartnerPriceGroup_BusinessPartner" FromRole="BusinessPartners" ToRole="BusinessPartnerPriceGroup" ed:Guid="9ed65287-e91f-4614-a45e-2e14eb4e61fa" />
+          <NavigationProperty Name="BusPartnerDiscGroup" Relationship="MyERP.DataAccess.BusinessPartnerDiscountGroup_BusinessPartner" FromRole="BusinessPartners" ToRole="BusPartnerDiscGroup" ed:Guid="ac4e420e-4128-4f9a-bb2c-4d87d01f5010" />
+          <NavigationProperty Name="PosHeaders1" Relationship="MyERP.DataAccess.BusinessPartner_PosHeader1" FromRole="BillToCustomer" ToRole="PosHeaders1" ed:Guid="df2efa24-b90e-4a63-9c47-c9dbc23d9ae8" />
         </EntityType>
         <EntityType Name="SalesHeader" ed:Guid="3d902181-b50c-4a3e-8b73-00592805507f">
           <Key>
@@ -1735,6 +2725,7 @@
           <Property Name="ShipToContactName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="b8cb2bd6-a036-4aef-a12e-dd9b78af876d" />
           <Property Name="CurrencyId" Type="Int64" ed:ValidateRequired="false" ed:Guid="17c3d9cf-2280-485a-835e-3eac4c230da0" />
           <Property Name="CurrencyFactor" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="0b9ec6cd-9f54-43b2-9055-9bcca79a3c12" />
+          <Property Name="LocationId" Type="Int64" ed:ValidateRequired="false" ed:Guid="5ec097c3-deb9-4c61-bf57-1bca1a84e66b" />
           <Property Name="SalesPersonId" Type="Int64" ed:ValidateRequired="false" ed:Guid="65557578-d8b1-4a38-bafe-ff3694d08a4e" />
           <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="5741eb15-e275-4a86-8611-3e5edd47d112" />
           <Property Name="TotalAmountLCY" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="04b48d18-3c62-42e2-b60b-b7a54efc3351" />
@@ -1760,6 +2751,10 @@
           <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="e9247ea4-5189-46ae-938f-f65432a78a94" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c47e4ba3-374e-4fef-a992-c27669588e85" />
           <NavigationProperty Name="SalesLines" Relationship="MyERP.DataAccess.SalesHeader_SalesLine" FromRole="SalesHeader" ToRole="SalesLines" ed:Guid="cddd5d44-0d82-4f7c-b904-f51d8f40370e" />
+          <NavigationProperty Name="Location" Relationship="MyERP.DataAccess.Location_SalesHeader" FromRole="SalesHeaders" ToRole="Location" ed:Guid="bc3d75e9-b2e3-435f-93f9-113b073cd922" />
+          <NavigationProperty Name="SellToCustomer" Relationship="MyERP.DataAccess.BusinessPartner_SalesHeader_SellToCustomer" FromRole="SalesHeaders" ToRole="SellToCustomer" ed:Guid="078a5c54-8fbd-48ca-b02a-a22180533dac" />
+          <NavigationProperty Name="BillToCustomer" Relationship="MyERP.DataAccess.BusinessPartner_SalesHeader_BillToCustomer" FromRole="SalesHeaders1" ToRole="BillToCustomer" ed:Guid="5765cafc-4af3-42df-bd60-7581d1d63524" />
+          <NavigationProperty Name="Currency" Relationship="MyERP.DataAccess.Currency_SalesHeader" FromRole="SalesHeaders" ToRole="Currency" ed:Guid="9961de56-b095-49f6-97c3-7b74a2bbe8f4" />
         </EntityType>
         <EntityType Name="SalesLine" ed:Guid="419694f1-0d47-489a-8884-bb2e6ff46f2c">
           <Key>
@@ -1775,6 +2770,7 @@
           <Property Name="UomId" Type="Int64" ed:ValidateRequired="false" ed:Guid="596f5a22-ec76-40d9-9600-2ccbd2d2ef2c" />
           <Property Name="UomDescription" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="1946f997-22bc-41c3-9c77-86eb5406c8d5" />
           <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="2f5a662b-6a93-4b98-8408-5dca8b704aa2" />
+          <Property Name="SalesPriceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="0bb03f4e-c3e9-48e0-8342-c493a6edc16d" />
           <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="c2e3febc-5303-4c01-825c-a05b24709251" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="5812dded-4f09-47bf-a27f-3f3d28596834" />
           <Property Name="UnitPriceLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="10323273-99c4-41fe-a133-e051284569e9" />
@@ -1796,6 +2792,8 @@
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="77959383-5b06-43d2-92d4-b09977fc1fe3" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="adf0da3b-864e-4cb0-bbbb-409704090e97" />
           <NavigationProperty Name="SalesHeader" Relationship="MyERP.DataAccess.SalesHeader_SalesLine" FromRole="SalesLines" ToRole="SalesHeader" ed:Guid="e31e73b4-179a-4aeb-be98-92293fe79227" />
+          <NavigationProperty Name="Location" Relationship="MyERP.DataAccess.Location_SalesLine" FromRole="SalesLines" ToRole="Location" ed:Guid="6a4f0a53-e325-48d8-9e8e-813de4a3c71a" />
+          <NavigationProperty Name="SalesPrice" Relationship="MyERP.DataAccess.SalesPrice_SalesLine" FromRole="SalesLines" ToRole="SalesPrice" ed:Guid="c1b65650-73e1-418a-add6-78961c419ccd" />
         </EntityType>
         <EntityType Name="PosHeader" ed:Guid="3b6cebb8-da2b-4944-9bee-fdf702fe28bb">
           <Key>
@@ -1840,6 +2838,9 @@
           <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="258db733-b647-4911-ae1c-5d56e3f6ee1d" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="bf7cc6ba-e0bc-40a9-af3e-e2e0ea4de0e6" />
           <NavigationProperty Name="PosLines" Relationship="MyERP.DataAccess.PosHeader_PosLine" FromRole="PosHeader" ToRole="PosLines" ed:Guid="013cef17-0db3-4196-95f1-cba030e0be7b" />
+          <NavigationProperty Name="Location" Relationship="MyERP.DataAccess.Location_PosHeader" FromRole="PosHeaders" ToRole="Location" ed:Guid="a24b433d-58d1-45d2-91d9-ebec9fde734c" />
+          <NavigationProperty Name="SellToCustomer" Relationship="MyERP.DataAccess.BusinessPartner_PosHeader" FromRole="PosHeaders" ToRole="SellToCustomer" ed:Guid="7bbb4d20-1a78-481a-a6ec-be70365e217a" />
+          <NavigationProperty Name="BillToCustomer" Relationship="MyERP.DataAccess.BusinessPartner_PosHeader1" FromRole="PosHeaders1" ToRole="BillToCustomer" ed:Guid="ea1e9f9a-7707-47d0-b005-f36ef09d6154" />
         </EntityType>
         <EntityType Name="PosLine" ed:Guid="3551723d-34e4-421f-bd85-1b5bca48aa2c">
           <Key>
@@ -1855,6 +2856,7 @@
           <Property Name="UomId" Type="Int64" ed:ValidateRequired="false" ed:Guid="efd956b0-8339-46df-a315-1c4dddb74ce5" />
           <Property Name="UomDescription" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="d59cd1a2-3966-41d2-9555-e24b68df7a92" />
           <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="0d4c64a3-eee0-4f8e-9ffc-287e484c5ce3" />
+          <Property Name="SalesPriceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="c2afc648-2576-4b1a-8685-5221e1d9a7fe" />
           <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="aeba8926-aecc-47b1-a306-a5e544fdc1c5" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="3971eae5-9324-4214-8a98-60641d4e9a95" />
           <Property Name="UnitPriceLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="1b59d6e3-d60c-4a3f-8ae2-57eb06602d5a" />
@@ -1864,6 +2866,146 @@
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a1df6b14-aa70-4569-abcf-fc1dfceb517e" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="d7f48398-c9a6-402a-bd0a-4364572c5989" />
           <NavigationProperty Name="PosHeader" Relationship="MyERP.DataAccess.PosHeader_PosLine" FromRole="PosLines" ToRole="PosHeader" ed:Guid="18de0bfe-c61d-4134-88ba-7ef8d3027af8" />
+          <NavigationProperty Name="SalesPrice" Relationship="MyERP.DataAccess.SalesPrice_PosLine" FromRole="PosLines" ToRole="SalesPrice" ed:Guid="2affa33c-92e5-498d-9ab8-d2545a89c09d" />
+          <NavigationProperty Name="Location" Relationship="MyERP.DataAccess.Location_PosLine" FromRole="PosLines" ToRole="Location" ed:Guid="e73a413c-7d80-46b5-a377-e8798cc59415" />
+        </EntityType>
+        <EntityType Name="ItemDiscountGroup" ed:Guid="9bb6d4eb-fda8-4f1b-8282-abedd388e5cf">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="dd3405b9-7251-4775-8506-3299d49ef7b8" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="30248931-dbf2-487c-8ac4-ceda52d28f42" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="d261dd79-9862-4340-a873-e78f86236c20" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="7797e7bd-560f-485c-923a-f7bdc19b68bf" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="06f9d085-6aba-41fc-abf5-671d8fbf8be8" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="90003d79-c9ea-42e1-a19f-612e5f02203c" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="3261cefe-8796-481a-a88a-866931576b4e" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="9d1c00d6-4081-43b6-8c63-557ea3d256d2" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="7dccdff2-d88e-4e9b-b86c-8a3476869662" />
+          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="35819959-8cbd-4159-9514-c93aed42e9a9" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4e3eb53e-cc5b-4e3a-9d3b-1db66c06e684" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_ItemDiscountGroup" FromRole="ItemDiscountGroups" ToRole="Client" ed:Guid="9bd9f4fb-951a-4890-9f33-3e1429318fe6" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_ItemDiscountGroup" FromRole="ItemDiscountGroups" ToRole="Organization" ed:Guid="c772d9a7-62d8-445f-a9d7-957ac21ee8cf" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_ItemDiscountGroup_RecCreatedBy" FromRole="ItemDiscountGroups" ToRole="RecCreatedByUser" ed:Guid="d77490c6-c076-43cf-a957-45eeab2520f0" />
+          <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_ItemDiscountGroup_RecModifiedBy" FromRole="ItemDiscountGroups1" ToRole="RecModifiedByUser" ed:Guid="d84352bb-b7bc-43ed-b1ab-5418a0b8f3fe" />
+        </EntityType>
+        <EntityType Name="SalesPriceGroup" ed:Guid="3b28a832-4ab7-41d1-bfc0-7bfafe07ba27">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="43e73329-8c0c-4a2c-b980-f5911ade4f9b" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="0f7c75e7-a899-4f99-ba16-ae556c0e0005" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="e42c922c-f8a3-43d3-9c3f-d67a654268c9" />
+          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="b64fe557-84e5-4358-af39-03c5e14985c4" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="2d0f1c46-30f7-4d7a-942c-6d6d72ab2261" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="23640162-1094-49bd-9ce6-d5379e9cb3ba" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="bec671c9-33f7-49a6-ac96-9be73ce3ff02" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="dd7d355a-6354-486c-a6dd-91ebea018495" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="55532ff6-550d-4ed4-8bca-2caf57390348" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="8013f88f-ffc8-49a0-8015-6210ad28b204" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="63d6d2f7-0ba3-436a-85f2-c71dee98e13e" />
+          <NavigationProperty Name="SalesPrices" Relationship="MyERP.DataAccess.SalesPriceGroup_SalesPrice" FromRole="SalesPriceGroup" ToRole="SalesPrices" ed:Guid="c09db902-9562-4aca-a72a-d6c1b90b6787" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_SalesPriceGroup" FromRole="SalesPriceGroups" ToRole="Organization" ed:Guid="eb6a9eb0-381e-4ed0-9835-06382e7f7b29" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_SalesPriceGroup" FromRole="SalesPriceGroups" ToRole="Client" ed:Guid="196ae337-f28b-4f1b-b4e6-f3cd82c561c2" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_SalesPriceGroup_RecCreatedBy" FromRole="SalesPriceGroups" ToRole="RecCreatedByUser" ed:Guid="23249fe6-8b88-42b9-86e4-a9da5747b168" />
+          <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_SalesPriceGroup_RecModifiedBy" FromRole="SalesPriceGroups1" ToRole="RecModifiedByUser" ed:Guid="fc5efb7a-cd40-49a4-9bbf-4287207231b9" />
+        </EntityType>
+        <EntityType Name="SalesPrice" ed:Guid="19453827-e57d-4360-a0ed-52c22341cf64">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="e27681c3-9da5-4c90-b42f-1f994d7caeab" />
+          <Property Name="SalesPriceGroupId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="51ac3607-d3de-4614-a3b8-2526f0d71f66" />
+          <Property Name="SalesType" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="60c6ffbd-bf46-4d23-abb0-95f85e4ba7f2">
+            <Documentation>
+              <Summary>1-Customer
+2-Customer Price Group
+3-All Customers
+4-Campaign</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="BusinessPartnerId" Type="Int64" ed:ValidateRequired="false" ed:Guid="07806575-a91f-4306-96b0-7757753e14b2" />
+          <Property Name="BusPartnerPriceGroupId" Type="Int64" ed:ValidateRequired="false" ed:Guid="1ad9a705-6a16-43c1-86aa-4d82d674abbf" />
+          <Property Name="CampaignId" Type="Int64" ed:ValidateRequired="false" ed:Guid="453add8e-9dba-40d3-aeb6-ba1a6201397e" />
+          <Property Name="ItemId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="22330a6c-5abf-4c64-a260-1a8f1c052314" />
+          <Property Name="UomId" Type="Int64" ed:ValidateRequired="false" ed:Guid="46a9779f-0295-4c59-bdc9-b1b4fb2f6bf8" />
+          <Property Name="StartingDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="113b9451-107f-4f63-b54e-cbf28e717780" />
+          <Property Name="MinQty" Type="Decimal" Nullable="false" ed:ValidateRequired="true" ed:Guid="53612974-258c-458b-a9d9-e4736919c561" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" ed:ValidateRequired="true" ed:Guid="ed7d4acd-87a6-4458-b1c0-2dc64431e611" />
+          <Property Name="EndingDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="948b6b11-71b1-4362-ae39-7fc26de6a78f" />
+          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="3445038c-1ad2-416e-a0ca-7c25b4885576" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="df4f6ea5-dbe3-4f35-8bca-f43a897b07ba" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="b3deea57-f021-442d-aa8e-fb8b2f5e8ebc" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a1370857-cc11-47da-8de5-e4f2aa1df12f" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="8e6717a5-73b4-4184-83c2-78b430adbd63" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="cbc176fe-bd94-438b-9328-54536d16c2c9" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="c70ac1dd-d9f3-49c1-939d-fcc43f826a40" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="6fc7f688-09db-4a7f-9849-bd408d8a599f" />
+          <NavigationProperty Name="SalesPriceGroup" Relationship="MyERP.DataAccess.SalesPriceGroup_SalesPrice" FromRole="SalesPrices" ToRole="SalesPriceGroup" ed:Guid="839bf388-6707-46b3-979c-e58fe573a8fc" />
+          <NavigationProperty Name="Item" Relationship="MyERP.DataAccess.Item_SalesPrice" FromRole="SalesPrices" ToRole="Item" ed:Guid="b3c48b82-0a2b-464b-9360-4de832d21d6b" />
+          <NavigationProperty Name="Uom" Relationship="MyERP.DataAccess.Uom_SalesPrice" FromRole="SalesPrices" ToRole="Uom" ed:Guid="8542b1de-e177-44a2-9bd4-32029307f314" />
+          <NavigationProperty Name="BusPartnerPriceGroup" Relationship="MyERP.DataAccess.BusinessPartnerPriceGroup_SalesPrice" FromRole="SalesPrices" ToRole="BusPartnerPriceGroup" ed:Guid="caa17945-0d98-4d5f-bf92-f08fd15d1c6f" />
+          <NavigationProperty Name="BusinessPartner" Relationship="MyERP.DataAccess.BusinessPartner_SalesPrice" FromRole="SalesPrices" ToRole="BusinessPartner" ed:Guid="161737df-6a08-4cb2-8291-0ca9842e4267" />
+        </EntityType>
+        <EntityType Name="BusinessPartnerPriceGroup" ed:Guid="2beacff1-447e-412d-b35f-29fb6b69285b">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="359d74c6-1a22-432a-8afc-ba5eb20c1a27" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="28bfa332-7134-4545-a4fd-a13a5fda6d1d" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="6341c5df-efda-49bc-b731-926348f1b1ca" />
+          <Property Name="Status" Type="Int16" ed:ValidateRequired="false" ed:Guid="6598efef-2e45-40e6-a3f4-0882d8b1756c" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="879378bc-1c56-408f-b589-804e3e0c7384" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c8087228-5e01-4a79-89e4-759dca626e39" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="b735b07e-d463-4902-b7f4-83edb3ec9f22" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="67704825-8e4c-4de3-8b38-d933196ac561" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a87fd2a0-7dec-42aa-9dbd-68d5227c26ed" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="2938a702-196b-4e80-bfb7-1b55e97664f9" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="25333eb6-66f7-4045-8c77-9c081f63a1fb" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_BusinessPartnerPriceGroup" FromRole="BusinessPartnerPriceGroups" ToRole="Organization" ed:Guid="0ba616e3-9dd2-467b-9181-b778d2c8bd5b" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_BusinessPartnerPriceGroup" FromRole="BusinessPartnerPriceGroups" ToRole="Client" ed:Guid="fbbb2974-b4ee-4de2-abba-d4b6076d9480" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_BusinessPartnerPriceGroup_RecCreatedBy" FromRole="BusinessPartnerPriceGroups" ToRole="RecCreatedByUser" ed:Guid="77e20ef1-c3e9-447c-9a23-dfce4eb27a3a" />
+          <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_BusinessPartnerPriceGroup_RecModifiedBy" FromRole="BusinessPartnerPriceGroups1" ToRole="RecModifiedByUser" ed:Guid="697eac9a-c72e-4c65-aa98-4110326f5977" />
+        </EntityType>
+        <EntityType Name="BusinessPartnerDiscountGroup" ed:Guid="5d256550-9c6d-4bfe-8793-f78baced54c5">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="3ad49567-4d07-4f6b-9529-59106522db88" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="60c753ae-5a75-4f08-a7d9-0087cce613d4" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="0b08c1a8-f80f-4074-966a-00950cf8af4d" />
+          <Property Name="Status" Type="Int16" ed:ValidateRequired="false" ed:Guid="b0f2029e-5f12-4ec3-aa7d-7bef25b3b1aa" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e426112e-e90f-4855-92c3-2678705f126d" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5e32f173-19b8-46cc-b658-d49c84be3ee5" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="caaa8aad-633c-455f-a607-7556bb00854b" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="07acf6e7-1503-486e-b584-5d6bef1161b5" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="09b1e92d-3e8e-4ab4-b72c-64952e1016fa" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="c46c8b31-7fb0-4f92-aa1d-31e682dc870b" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="14a0b1b1-4c15-46a7-9397-573f814ebfee" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_BusinessPartnerDiscountGroup" FromRole="BusinessPartnerDiscountGroups" ToRole="Client" ed:Guid="b3fec70f-8fe0-4a4b-be4f-baad380db1a2" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_BusinessPartnerDiscountGroup" FromRole="BusinessPartnerDiscountGroups" ToRole="Organization" ed:Guid="be066624-3308-4263-a7c6-b8b2d4ec77e5" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_BusinessPartnerDiscountGroup_RecCreatedBy" FromRole="BusinessPartnerDiscountGroups" ToRole="RecCreatedByUser" ed:Guid="c5df40aa-28e1-4513-b971-8001d99c9dcd" />
+          <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_BusinessPartnerDiscountGroup_RecModifiedBy" FromRole="BusinessPartnerDiscountGroups1" ToRole="RecModifiedByUser" ed:Guid="61303077-79d9-4cf4-ab27-b955ffc0de97" />
+        </EntityType>
+        <EntityType Name="Location" ed:Guid="63a10341-b5e9-4049-b76e-d8f7c2d59235">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="41ac0c52-905c-4948-abfe-365e18807d1a" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="549a058f-048f-4043-9103-e38b0367c454" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="4e1abe25-d885-4781-ab68-f8b735a42a6b" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e8621e97-9999-4218-bd55-80b414029be9" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="68cb78c5-fab0-4930-818b-70bd22500d8f" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="98c07b66-e7f0-4025-bc71-0fb230ba5efb" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="d91a3dd1-e7e8-4543-99cf-3956dbbf0f34" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="f90a7258-362c-42a7-9445-0c11f7a171e8" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="100e78d4-a167-4683-83df-1fe64cb12476" />
+          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="bcd33051-c9cf-40a1-8a24-296ea9d1c328" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="815e37d9-e6b4-47f1-8f61-1b8d271caab5" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_Location" FromRole="Locations" ToRole="Client" ed:Guid="7500928b-1391-4d0f-8eb4-dc12d8466a4e" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_Location" FromRole="Locations" ToRole="Organization" ed:Guid="7422abb9-b7c1-45e6-8c17-0dd2b0ee28fd" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Location_RecCreatedBy" FromRole="Locations" ToRole="RecCreatedByUser" ed:Guid="f20c175d-b91e-42f1-91a3-634786237813" />
+          <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_Location_RecModifiedBy" FromRole="Locations1" ToRole="RecModifiedByUser" ed:Guid="ef393429-6be3-4c17-ad9f-7c07e490d802" />
         </EntityType>
         <Association Name="User_Client_CreatedBy" ed:Guid="cc64066d-a254-493f-8be0-7609622c4e6a">
           <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
@@ -2465,6 +3607,510 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Uom_Item_SalesUOM" ed:Guid="e6e24c68-a608-458c-b8e2-21f466949351">
+          <End Role="SalesUom" Type="MyERP.DataAccess.Uom" Multiplicity="1" />
+          <End Role="Items" Type="MyERP.DataAccess.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesUom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="SalesUomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Uom_Item_PurchUom" ed:Guid="f83cb825-6fbe-4779-a36b-d73bea9ab37f">
+          <End Role="PurchUom" Type="MyERP.DataAccess.Uom" Multiplicity="1" />
+          <End Role="Items1" Type="MyERP.DataAccess.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchUom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items1">
+              <PropertyRef Name="PurchUomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BusinessPartner_Item_PurchVendor" ed:Guid="fbee5907-968a-493a-ad5e-1e2d4e60b416">
+          <End Role="PurchVendor" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="1" />
+          <End Role="Items" Type="MyERP.DataAccess.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchVendor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="PurchVendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ItemDiscountGroup_Item" ed:Guid="98f39ae1-b6e0-4279-b417-f5ea08cedac8">
+          <End Role="ItemDiscountGroup" Type="MyERP.DataAccess.ItemDiscountGroup" Multiplicity="1" />
+          <End Role="Items" Type="MyERP.DataAccess.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemDiscountGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ItemDiscountGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SalesPriceGroup_SalesPrice" ed:Guid="853b575b-1512-465d-b85d-66b59f5e8770">
+          <End Role="SalesPriceGroup" Type="MyERP.DataAccess.SalesPriceGroup" Multiplicity="1" />
+          <End Role="SalesPrices" Type="MyERP.DataAccess.SalesPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesPriceGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesPrices">
+              <PropertyRef Name="SalesPriceGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Item_SalesPrice" ed:Guid="4f48ad47-b52f-489f-afe2-068c1d339f99">
+          <End Role="Item" Type="MyERP.DataAccess.Item" Multiplicity="1" />
+          <End Role="SalesPrices" Type="MyERP.DataAccess.SalesPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesPrices">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Uom_SalesPrice" ed:Guid="e48faeed-001f-4f76-beaa-86741983cc25">
+          <End Role="Uom" Type="MyERP.DataAccess.Uom" Multiplicity="0..1" />
+          <End Role="SalesPrices" Type="MyERP.DataAccess.SalesPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesPrices">
+              <PropertyRef Name="UomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_BusinessPartnerPriceGroup" ed:Guid="b36b470a-a3d9-4bea-b852-f0753b15ed97">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="BusinessPartnerPriceGroups" Type="MyERP.DataAccess.BusinessPartnerPriceGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BusinessPartnerPriceGroups">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_BusinessPartnerPriceGroup" ed:Guid="8c8afa2f-f0bb-4e47-9223-3d72070ae5ff">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="BusinessPartnerPriceGroups" Type="MyERP.DataAccess.BusinessPartnerPriceGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BusinessPartnerPriceGroups">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_BusinessPartnerPriceGroup_RecCreatedBy" ed:Guid="fc5f6dac-d0d1-4858-a365-b9fbab378025">
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="BusinessPartnerPriceGroups" Type="MyERP.DataAccess.BusinessPartnerPriceGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecCreatedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BusinessPartnerPriceGroups">
+              <PropertyRef Name="RecCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_BusinessPartnerPriceGroup_RecModifiedBy" ed:Guid="dd52a362-b81a-48ae-be5f-1e1d36ce4427">
+          <End Role="RecModifiedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="BusinessPartnerPriceGroups1" Type="MyERP.DataAccess.BusinessPartnerPriceGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecModifiedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BusinessPartnerPriceGroups1">
+              <PropertyRef Name="RecModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BusinessPartnerPriceGroup_BusinessPartner" ed:Guid="4f502dd0-9768-47ab-95e4-3e35ddab56de">
+          <End Role="BusinessPartnerPriceGroup" Type="MyERP.DataAccess.BusinessPartnerPriceGroup" Multiplicity="0..1" />
+          <End Role="BusinessPartners" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusinessPartnerPriceGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BusinessPartners">
+              <PropertyRef Name="BusinessPartnerPriceGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_BusinessPartnerDiscountGroup" ed:Guid="efa33208-bd00-4487-9dab-0131fcf2d373">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="BusinessPartnerDiscountGroups" Type="MyERP.DataAccess.BusinessPartnerDiscountGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BusinessPartnerDiscountGroups">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_BusinessPartnerDiscountGroup" ed:Guid="189791c9-eb49-42aa-9905-678cf7eb9a66">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="BusinessPartnerDiscountGroups" Type="MyERP.DataAccess.BusinessPartnerDiscountGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BusinessPartnerDiscountGroups">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_BusinessPartnerDiscountGroup_RecCreatedBy" ed:Guid="89c5b4df-57d5-4c1c-b262-d17ff264531d">
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="BusinessPartnerDiscountGroups" Type="MyERP.DataAccess.BusinessPartnerDiscountGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecCreatedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BusinessPartnerDiscountGroups">
+              <PropertyRef Name="RecCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_BusinessPartnerDiscountGroup_RecModifiedBy" ed:Guid="1b4b84c5-4b10-4985-9f47-ff7789170ab9">
+          <End Role="RecModifiedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="BusinessPartnerDiscountGroups1" Type="MyERP.DataAccess.BusinessPartnerDiscountGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecModifiedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BusinessPartnerDiscountGroups1">
+              <PropertyRef Name="RecModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BusinessPartnerDiscountGroup_BusinessPartner" ed:Guid="67d5b4e2-e08b-4d2e-9c70-42feb9b39035">
+          <End Role="BusPartnerDiscGroup" Type="MyERP.DataAccess.BusinessPartnerDiscountGroup" Multiplicity="0..1" />
+          <End Role="BusinessPartners" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusPartnerDiscGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BusinessPartners">
+              <PropertyRef Name="BusPartnerDiscGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SalesPrice_PosLine" ed:Guid="b3b51092-93df-4d7d-b66e-187bde29157f">
+          <End Role="SalesPrice" Type="MyERP.DataAccess.SalesPrice" Multiplicity="1" />
+          <End Role="PosLines" Type="MyERP.DataAccess.PosLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesPrice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PosLines">
+              <PropertyRef Name="SalesPriceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_Location" ed:Guid="8ccc1cd7-2212-4eb1-85ad-d8b0f04aefec">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="Locations" Type="MyERP.DataAccess.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Locations">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_Location" ed:Guid="919237ed-13f7-4a1c-9ad3-a30fe21957db">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="Locations" Type="MyERP.DataAccess.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Locations">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Location_RecCreatedBy" ed:Guid="63cd5c22-9117-425e-b3dc-2a40716045b9">
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="Locations" Type="MyERP.DataAccess.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecCreatedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Locations">
+              <PropertyRef Name="RecCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Location_RecModifiedBy" ed:Guid="43ce535e-26e1-414f-b3e1-9a9d642c1741">
+          <End Role="RecModifiedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="Locations1" Type="MyERP.DataAccess.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecModifiedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Locations1">
+              <PropertyRef Name="RecModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_ItemDiscountGroup" ed:Guid="8de85dd2-9b8b-4b89-b970-6a14b9209bc8">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="ItemDiscountGroups" Type="MyERP.DataAccess.ItemDiscountGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItemDiscountGroups">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_ItemDiscountGroup" ed:Guid="c3d02ede-e00c-4a57-ad58-0584f1930080">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="ItemDiscountGroups" Type="MyERP.DataAccess.ItemDiscountGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItemDiscountGroups">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_ItemDiscountGroup_RecCreatedBy" ed:Guid="faaace6a-1714-47fb-a6b5-b4455ba19e90">
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="ItemDiscountGroups" Type="MyERP.DataAccess.ItemDiscountGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecCreatedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItemDiscountGroups">
+              <PropertyRef Name="RecCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_ItemDiscountGroup_RecModifiedBy" ed:Guid="12dafdf5-4bbf-4cfd-b642-5609fc1b3a9f">
+          <End Role="RecModifiedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="ItemDiscountGroups1" Type="MyERP.DataAccess.ItemDiscountGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecModifiedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItemDiscountGroups1">
+              <PropertyRef Name="RecModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Location_PosHeader" ed:Guid="62de57c5-3eaa-4207-b8d8-9a8c0818501b">
+          <End Role="Location" Type="MyERP.DataAccess.Location" Multiplicity="1" />
+          <End Role="PosHeaders" Type="MyERP.DataAccess.PosHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PosHeaders">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Location_SalesHeader" ed:Guid="1e97493b-4ad3-4ddb-ac84-aad3568f930e">
+          <End Role="Location" Type="MyERP.DataAccess.Location" Multiplicity="1" />
+          <End Role="SalesHeaders" Type="MyERP.DataAccess.SalesHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesHeaders">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Location_SalesLine" ed:Guid="8929c295-4bfe-4889-98ac-7ec97d1ec59b">
+          <End Role="Location" Type="MyERP.DataAccess.Location" Multiplicity="1" />
+          <End Role="SalesLines" Type="MyERP.DataAccess.SalesLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesLines">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Location_PosLine" ed:Guid="bead05de-4c67-4bb6-95a0-c78c10f7d70b">
+          <End Role="Location" Type="MyERP.DataAccess.Location" Multiplicity="1" />
+          <End Role="PosLines" Type="MyERP.DataAccess.PosLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PosLines">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SalesPrice_SalesLine" ed:Guid="3de0a60d-061b-467c-bd16-6e010d06adad">
+          <End Role="SalesPrice" Type="MyERP.DataAccess.SalesPrice" Multiplicity="1" />
+          <End Role="SalesLines" Type="MyERP.DataAccess.SalesLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesPrice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesLines">
+              <PropertyRef Name="SalesPriceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_SalesPriceGroup" ed:Guid="bf6b139e-963d-4365-abd7-cf5118343229">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="SalesPriceGroups" Type="MyERP.DataAccess.SalesPriceGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesPriceGroups">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_SalesPriceGroup" ed:Guid="f9389a0c-87dc-4688-94da-b36e853aa889">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="SalesPriceGroups" Type="MyERP.DataAccess.SalesPriceGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesPriceGroups">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_SalesPriceGroup_RecCreatedBy" ed:Guid="e5c91ae9-3b6e-4ef9-b3d8-a154f11c3e66">
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="SalesPriceGroups" Type="MyERP.DataAccess.SalesPriceGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecCreatedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesPriceGroups">
+              <PropertyRef Name="RecCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_SalesPriceGroup_RecModifiedBy" ed:Guid="260aee14-63a3-46f0-a85a-7cef68c21b8d">
+          <End Role="RecModifiedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="SalesPriceGroups1" Type="MyERP.DataAccess.SalesPriceGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecModifiedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesPriceGroups1">
+              <PropertyRef Name="RecModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BusinessPartnerPriceGroup_SalesPrice" ed:Guid="4ee047b8-e24c-48ef-963b-cdfa26c77169">
+          <End Role="BusPartnerPriceGroup" Type="MyERP.DataAccess.BusinessPartnerPriceGroup" Multiplicity="0..1" />
+          <End Role="SalesPrices" Type="MyERP.DataAccess.SalesPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusPartnerPriceGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesPrices">
+              <PropertyRef Name="BusPartnerPriceGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BusinessPartner_SalesPrice" ed:Guid="1d24a027-efbd-4c29-b364-20640f752a3f">
+          <End Role="BusinessPartner" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="0..1" />
+          <End Role="SalesPrices" Type="MyERP.DataAccess.SalesPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusinessPartner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesPrices">
+              <PropertyRef Name="BusinessPartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BusinessPartner_SalesHeader_SellToCustomer" ed:Guid="f9ab5541-44b7-4025-9fbe-2559c7eed53e">
+          <End Role="SellToCustomer" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="1" />
+          <End Role="SalesHeaders" Type="MyERP.DataAccess.SalesHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SellToCustomer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesHeaders">
+              <PropertyRef Name="SellToCustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BusinessPartner_SalesHeader_BillToCustomer" ed:Guid="af062bd9-af05-4599-a82d-7796e4243c10">
+          <End Role="BillToCustomer" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="1" />
+          <End Role="SalesHeaders1" Type="MyERP.DataAccess.SalesHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BillToCustomer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesHeaders1">
+              <PropertyRef Name="BillToCustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Currency_SalesHeader" ed:Guid="f001aa52-3eec-40dd-ab27-163181c5474d">
+          <End Role="Currency" Type="MyERP.DataAccess.Currency" Multiplicity="1" />
+          <End Role="SalesHeaders" Type="MyERP.DataAccess.SalesHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesHeaders">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BusinessPartner_PosHeader" ed:Guid="b7bde6b4-1ec0-4a99-829d-c0c0eced9ad5">
+          <End Role="SellToCustomer" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="1" />
+          <End Role="PosHeaders" Type="MyERP.DataAccess.PosHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SellToCustomer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PosHeaders">
+              <PropertyRef Name="SellToCustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BusinessPartner_PosHeader1" ed:Guid="b8d0d4b5-80e5-4efa-af78-9ca8e813b6b7">
+          <End Role="BillToCustomer" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="1" />
+          <End Role="PosHeaders1" Type="MyERP.DataAccess.PosHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BillToCustomer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PosHeaders1">
+              <PropertyRef Name="BillToCustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- MSL content -->
@@ -2607,6 +4253,12 @@
                 <ScalarProperty Name="ItemGroupId1" ColumnName="item_group_id1" />
                 <ScalarProperty Name="ItemGroupId2" ColumnName="item_group_id2" />
                 <ScalarProperty Name="ItemGroupId3" ColumnName="item_group_id3" />
+                <ScalarProperty Name="UnitPrice" ColumnName="unit_price" />
+                <ScalarProperty Name="ItemDiscountGroupId" ColumnName="item_discount_group_id" />
+                <ScalarProperty Name="PurchVendorId" ColumnName="purch_vendor_id" />
+                <ScalarProperty Name="SalesUomId" ColumnName="sales_uom_id" />
+                <ScalarProperty Name="PurchUomId" ColumnName="purch_uom_id" />
+                <ScalarProperty Name="UnitCost" ColumnName="unit_cost" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2705,6 +4357,8 @@
                 <ScalarProperty Name="AmountLimit" ColumnName="amount_limit" />
                 <ScalarProperty Name="GeoLatitude" ColumnName="geo_latitude" />
                 <ScalarProperty Name="GeoLongitude" ColumnName="geo_longitude" />
+                <ScalarProperty Name="BusinessPartnerPriceGroupId" ColumnName="business_partner_price_group_id" />
+                <ScalarProperty Name="BusPartnerDiscGroupId" ColumnName="bus_partner_disc_group_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2758,6 +4412,7 @@
                 <ScalarProperty Name="TotalVat5Amount" ColumnName="total_vat5amount" />
                 <ScalarProperty Name="TotalVat10Amount" ColumnName="total_vat10amount" />
                 <ScalarProperty Name="TotalPaymentLCY" ColumnName="total_payment_lcy" />
+                <ScalarProperty Name="LocationId" ColumnName="location_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2794,6 +4449,7 @@
                 <ScalarProperty Name="QtyShippedNotInvoicedBase" ColumnName="qty_shipped_not_invoiced_base" />
                 <ScalarProperty Name="OutstandingQuantity" ColumnName="outstanding_quantity" />
                 <ScalarProperty Name="OutstandingQtyBase" ColumnName="outstanding_qty_base" />
+                <ScalarProperty Name="SalesPriceId" ColumnName="sales_price_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2862,6 +4518,118 @@
                 <ScalarProperty Name="QuantityBase" ColumnName="quantity_base" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="SalesPriceId" ColumnName="sales_price_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemDiscountGroups">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.ItemDiscountGroup">
+              <MappingFragment StoreEntitySet="item_discount_groups">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="Description" ColumnName="description" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="Code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesPriceGroups">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.SalesPriceGroup">
+              <MappingFragment StoreEntitySet="sales_price_groups">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="Code" ColumnName="code" />
+                <ScalarProperty Name="Description" ColumnName="description" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesPrices">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.SalesPrice">
+              <MappingFragment StoreEntitySet="sales_prices">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="StartingDate" ColumnName="starting_date" />
+                <ScalarProperty Name="EndingDate" ColumnName="ending_date" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+                <ScalarProperty Name="SalesPriceGroupId" ColumnName="sales_price_group_id" />
+                <ScalarProperty Name="ItemId" ColumnName="item_id" />
+                <ScalarProperty Name="UnitPrice" ColumnName="unit_price" />
+                <ScalarProperty Name="UomId" ColumnName="uom_id" />
+                <ScalarProperty Name="SalesType" ColumnName="sales_type" />
+                <ScalarProperty Name="BusinessPartnerId" ColumnName="business_partner_id" />
+                <ScalarProperty Name="MinQty" ColumnName="min_qty" />
+                <ScalarProperty Name="BusPartnerPriceGroupId" ColumnName="bus_partner_price_group_id" />
+                <ScalarProperty Name="CampaignId" ColumnName="campaign_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusinessPartnerPriceGroups">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.BusinessPartnerPriceGroup">
+              <MappingFragment StoreEntitySet="business_partner_price_groups">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="Code" ColumnName="code" />
+                <ScalarProperty Name="Description" ColumnName="description" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusinessPartnerDiscountGroups">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.BusinessPartnerDiscountGroup">
+              <MappingFragment StoreEntitySet="business_partner_discount_groups">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="Code" ColumnName="code" />
+                <ScalarProperty Name="Description" ColumnName="description" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.Location">
+              <MappingFragment StoreEntitySet="locations">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="Code" ColumnName="code" />
+                <ScalarProperty Name="Description" ColumnName="description" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Version" ColumnName="version" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -304,7 +304,7 @@ namespace MyERP.Web.Controllers
             preference.WorkingDate = DateTime.Now;
 
             var organizationRepository = new OrganizationRepository();
-            var organizations = (from org in organizationRepository.GetAll(User)
+            var organizations = (from org in organizationRepository.Get(null, new string[] { "Client" })
                                 select new Ext.Net.ListItem
                                     {
                                         Text = org.Desctiption,
@@ -343,7 +343,7 @@ namespace MyERP.Web.Controllers
         public ActionResult Preference([Bind(Exclude = "Organization,RootOrganization,Organizations,CultureUIs")] PreferenceViewModel model, string returnUrl = "~/")
         {
             var organizationRepository = new OrganizationRepository();
-            model.Organization = organizationRepository.GetBy(c => c.Id == model.OrganizationId);
+            model.Organization = organizationRepository.Get(c => c.Id == model.OrganizationId, new []{"Client"}).Single();
             model.RootOrganization = organizationRepository.GetRootOrganization(model.Organization);
 
             DirectResult r = new DirectResult();

@@ -116,7 +116,7 @@ namespace MyERP.Web.Areas.UOM.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var uom = repository.GetBy(c => c.Id == _id);
+                var uom = repository.Get(c => c.Id == _id).Single();
                 model = new UOMEditViewModel()
                 {
                     Id = uom.Id,
@@ -152,7 +152,7 @@ namespace MyERP.Web.Areas.UOM.Controllers
 
                 if (model.Id.HasValue)
                 {
-                    var _update = repository.GetBy(c => c.Id == model.Id);
+                    var _update = repository.Get(c => c.Id == model.Id).SingleOrDefault();
                     if (_update == null || _update.Version != model.Version)
                     {
                         r.Success = false;
@@ -224,7 +224,7 @@ namespace MyERP.Web.Areas.UOM.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.GetBy(c => c.Id == _id);
+                var entity = repository.Get(c => c.Id == _id).SingleOrDefault();
                 if (entity == null)
                 {
                     r.Success = false;

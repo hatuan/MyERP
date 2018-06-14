@@ -3345,3 +3345,41 @@ td.alt2{
     height: 0;
     width: 0;
 }
+
+/*BEGIN SCALE BUTTON & ICON*/
+.my-scale.x-btn-default-large-icon button, 
+.my-scale.x-btn-default-large-icon a, 
+.my-scale.x-btn-default-large-icon .x-btn-inner {
+    height: 48px !important;
+    line-height: 48px;
+}
+        
+.my-scale.x-btn-default-large-icon .x-btn-inner {
+    width: 48px;
+}
+        
+.my-scale.x-btn-default-large-icon .x-btn-icon {
+    width: 48px;
+    height: 48px;
+}
+        
+.my-scale.x-btn-default-large-icon-text-left button, 
+.my-scale.x-btn-default-large-icon-text-left a {
+    height: 48px;
+}
+        
+.my-scale.x-btn-default-large-icon-text-left .x-btn-inner {
+    height: 48px;
+    line-height: 48px;
+    padding-left: 52px;
+}
+        
+.my-scale.x-btn-default-large-icon-text-left .x-btn-icon {
+    width: 48px;
+}
+        
+.x-ie6 .my-scale.x-btn-default-large-icon-text-left .x-btn-icon, 
+.x-quirks .my-scale.x-btn-default-large-icon-text-left .x-btn-icon {
+    height: 48px;
+}
+/*END SCALE BUTTON & ICON*/

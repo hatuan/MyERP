@@ -84,6 +84,14 @@ namespace MyERP.Web.Models
         [Display(Name = "UOM")]
         public long BaseUomId { get; set; }
 
+        [Display(Name = "Unit Cost")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal? UnitCost { get; set; }
+
+        [Display(Name = "Unit Price")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal? UnitPrice { get; set; }
+
         [Display(Name = "Group 1")]
         public long? ItemGroupId1 { get; set; }
 

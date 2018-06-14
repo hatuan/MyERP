@@ -1,0 +1,258 @@
+﻿@model MyERP.Web.Models.SalesPriceGroupEditViewModel
+
+@(Html.X().FormPanel()
+                                  .ID("FormSalesPriceGroupMaintenance")
+                                  .Layout(LayoutType.Fit)
+                                  .Border(true)
+                                  .MarginSpec("0 5 5 0")
+                                  .BodyPadding(5)
+                                  .Items(
+                                      Html.X().Panel()
+                                          .Layout(LayoutType.VBox)
+                                          .LayoutConfig(action => action.Add(new VBoxLayoutConfig() { Align = VBoxAlign.Stretch }))
+                                          .Items(
+                                              Html.X().Container()
+                                                  .Layout(LayoutType.Form)
+                                                  .Items(
+                                                      Html.X().AntiForgeryField(),
+                                                      Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").EnforceMaxLength(true).ID("Code"),
+                                                      Html.X().TextFieldFor(m => m.Description).AllowBlank(false).EnforceMaxLength(true).ID("Description"),
+                                                      Html.X().ComboBoxFor(m => m.Status).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
+                                                      Html.X().HiddenFor(m => m.Id).ID("Id"),
+                                                      Html.X().HiddenFor(m => m.Version).ID("Version")
+                                                  ),
+                                      Html.X().GridPanel()
+                                          .ID("SalesPriceGridPanel")
+                                          .Flex(1)
+                                          .Title("Sales Price List")
+                                          .Border(true)
+                                          .LeftBar(leftBarItems =>
+                                          {
+                                              leftBarItems.Add(Html.X().Toolbar()
+                                                  .Flat(true)
+                                                  .Layout(LayoutType.VBox)
+                                                  .Items(buttons =>
+                                                  {
+                                                      buttons.Add(Html.X().Button()
+                                                          .ID("btnAddLine")
+                                                          .Icon(Icon.Add)
+                                                          .DirectEvents(de =>
+                                                          {
+                                                              de.Click.Action = "AddLineToSalesPrice";
+                                                          })
+                                                      );
+                                                      buttons.Add(Html.X().Button()
+                                                          .ID("btnDeleteLine")
+                                                          .Icon(Icon.Delete)
+                                                          .Disabled(true)
+                                                      );
+                                                  })
+                                              );
+                                          })
+                                          .Store(Html.X().Store()
+                                              .ID("SalesPriceGridStore")
+                                              .Model(
+                                                  Html.X().Model()
+                                                      .IDProperty("ExtId")
+                                                      .Fields(
+                                                          new ModelField("ExtId", ModelFieldType.String),
+                                                          new ModelField("Id", ModelFieldType.Int),
+                                                          new ModelField("SalesPriceGroupId", ModelFieldType.Int),
+                                                          new ModelField("SalesType", ModelFieldType.Int),
+                                                          new ModelField("SalesCodeId", ModelFieldType.Int),
+                                                          new ModelField("ItemId", ModelFieldType.Int),
+                                                          new ModelField("ItemDescription", ModelFieldType.String),
+                                                          new ModelField("UomId", ModelFieldType.Int),
+                                                          new ModelField("StartingDate", ModelFieldType.Date),
+                                                          new ModelField("MinQty", ModelFieldType.String),
+                                                          new ModelField("UnitPrice", ModelFieldType.String),
+                                                          new ModelField("EndingDate", ModelFieldType.Date),
+                                                          new ModelField("Status", ModelFieldType.String),
+                                                          new ModelField("Version", ModelFieldType.Int)
+                                                      ))
+                                              .DataSource(Model.SalesPrices)
+                                          )
+                                          .ColumnModel(cols =>
+                                          {
+                                              cols.Columns.Add(Html.X().RowNumbererColumn());
+                                              cols.Columns.Add(Html.X().ComponentColumn().Text("Sales Type").DataIndex("SalesType").Width(200).Editor(true).Component(
+                                                  Html.X().ComboBox().Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.SalesPriceSalesType))
+                                                      .ListConfig(Html.X().BoundList().MinWidth(200))
+                                                  ));
+                                              cols.Columns.Add(Html.X().ComponentColumn().Sortable(false).Text("Sales Code").DataIndex("SalesCodeId").Width(150).Editor(true).Component(
+                                                  Html.X().ComboBox()
+                                                      .DisplayField("Code")
+                                                      .ValueField("Id")
+                                                      .FieldStyle("text-transform: uppercase;")
+                                                      .TypeAhead(true)
+                                                      .MinChars(0)
+                                                      .PageSize(10)
+                                                      .SelectOnTab(true)
+                                                      .ForceSelection(true)
+                                                      .ValidateOnBlur(true)
+                                                      .ValidateOnChange(true)
+                                                      .ListConfig(Html.X().BoundList()
+                                                          .LoadingText("Searching...")
+                                                          .ItemTpl(Html.X().XTemplate()
+                                                              .Html(@<text>
+                                                                        <tpl for=".">
+                                                                            <div class="search-item">
+                                                                                <h3>{Code}</h3>
+                                                                                {Description}
+                                                                            </div>
+                                                                        </tpl>
+                                                                    </text>))
+                                                                .MinWidth(400)
+                                                          )
+                                                      .Store(Html.X().Store().AutoLoad(false)
+                                                          .Proxy(Html.X().AjaxProxy()
+                                                              .Url(Url.Action("LookupSalesCode"))
+                                                              .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                                                          .Model(Html.X().Model()
+                                                              .IDProperty("Id")
+                                                              .Fields(
+                                                                  new ModelField("Id", ModelFieldType.Int),
+                                                                  new ModelField("OrganizationCode", ModelFieldType.String),
+                                                                  new ModelField("Code", ModelFieldType.String),
+                                                                  new ModelField("Description", ModelFieldType.String)
+                                                              )
+                                                            )
+                                                          .Parameters(p =>
+                                                          {
+                                                              p.Add(new StoreParameter("salesType", "this.salesType", ParameterMode.Raw));
+                                                          })
+                                                      )
+                                                      .Listeners(ls =>
+                                                      {
+                                                          ls.BeforeQuery.Handler = @"var salesType = this.record.get('SalesType');
+                                                                                  if(salesType === 3) return false;
+                                                                                  this.getStore().salesType = salesType";
+                                                      })
+                                                    ));
+                                              cols.Columns.Add(Html.X().ComponentColumn().Sortable(false).Text("Item").DataIndex("ItemId").Width(150).Editor(true).Component(
+                                                    Html.X().ComboBox()
+                                                        .DisplayField("Code")
+                                                        .ValueField("Id")
+                                                        .FieldStyle("text-transform: uppercase;")
+                                                        .TypeAhead(true)
+                                                        .MinChars(0)
+                                                        .PageSize(10)
+                                                        .SelectOnTab(true)
+                                                        .ForceSelection(true)
+                                                        .ValidateOnBlur(true)
+                                                        .ValidateOnChange(true)
+                                                        .ListConfig(Html.X().BoundList()
+                                                            .LoadingText("Searching...")
+                                                            .ItemTpl(Html.X().XTemplate()
+                                                                .Html(@<text>
+                                                                        <tpl for=".">
+                                                                            <div class="search-item">
+                                                                                <h3>{Code}</h3>
+                                                                                {Description}
+                                                                            </div>
+                                                                        </tpl>
+                                                                </text>))
+                                                                    .MinWidth(400)
+                                                                  )
+                                                                  .Store(Html.X().Store().AutoLoad(false)
+                                                                      .Proxy(Html.X().AjaxProxy()
+                                                                          .Url(Url.Action("LookupData", "Index", new { area = "Item" }))
+                                                                          .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                                                                      .Model(Html.X().Model()
+                                                                          .IDProperty("Id")
+                                                                          .Fields(
+                                                                              new ModelField("Id", ModelFieldType.Int),
+                                                                              new ModelField("OrganizationCode", ModelFieldType.String),
+                                                                              new ModelField("Code", ModelFieldType.String),
+                                                                              new ModelField("Description", ModelFieldType.String)
+                                                                          )
+                                                                        )
+                                                                  )
+                                                            ));
+                                              cols.Columns.Add(Html.X().ColumnFor(Model.SalesPrices, m => m.ItemDescription).ToBuilder<Column.Builder>().Sortable(false).Flex(1).MinWidth(256));
+                                              cols.Columns.Add(Html.X().ComponentColumn().Sortable(false).Text("UOM").DataIndex("UomId").Width(100).Editor(true).Component(
+                                                    Html.X().ComboBox()
+                                                        .DisplayField("Code")
+                                                        .ValueField("Id")
+                                                        .FieldStyle("text-transform: uppercase;")
+                                                        .TypeAhead(true)
+                                                        .MinChars(0)
+                                                        .PageSize(10)
+                                                        .SelectOnTab(true)
+                                                        .ForceSelection(true)
+                                                        .ValidateOnBlur(true)
+                                                        .ValidateOnChange(true)
+                                                        .ListConfig(Html.X().BoundList()
+                                                            .LoadingText("Searching...")
+                                                            .ItemTpl(Html.X().XTemplate()
+                                                                .Html(@<text>
+                                                                    <tpl for=".">
+                                                                        <div class="search-item">
+                                                                            <h3>{Code}</h3>
+                                                                            {Description}
+                                                                        </div>
+                                                                    </tpl>
+                                                                </text>))
+                                                            .MinWidth(400)
+                                                            )
+                                                        .Store(Html.X().Store().AutoLoad(false)
+                                                            .Proxy(Html.X().AjaxProxy()
+                                                                .Url(Url.Action("LookupUomOfItem", "ItemUom", new { area = "Item" }))
+                                                                .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                                                            .Model(Html.X().Model()
+                                                                .IDProperty("UomId")
+                                                                .Fields(
+                                                                    new ModelField("UomId", ModelFieldType.Int),
+                                                                    new ModelField("Code", ModelFieldType.String),
+                                                                    new ModelField("Description", ModelFieldType.String),
+                                                                    new ModelField("QtyPerUom", ModelFieldType.Int)
+                                                                )
+                                                              )
+                                                        )
+                                                        .Listeners(ls =>
+                                                        {
+                                                            ls.BeforeQuery.Handler = "queryEvent.query = this.record.get('ItemId')";
+                                                        })
+                                                    ));
+                                              cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(125).DataIndex("StartingDate").Text("Starting Date").Component(Html.X().DateField()));
+                                              cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(100).DataIndex("MinQty").Text("MinQty").Component(
+                                                  Html.X().TextField().MaskRe(@"/[0-9\,\.]").Listeners(ls =>
+                                                  {
+                                                      ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
+                                                      ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
+                                                                            this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
+                                                  })
+                                              ));
+                                              cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(100).DataIndex("UnitPrice").Text("Unit Price").Component(
+                                                  Html.X().TextField().MaskRe(@"/[0-9\,\.]").Listeners(ls =>
+                                                  {
+                                                      ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
+                                                      ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
+                                                                            this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
+                                                  })
+                                              ));
+                                          }))
+                                    )
+                                    .Buttons(
+                                        Html.X().Button()
+                                            .ID("btnSave")
+                                            .Text("Save")
+                                            .Icon(Icon.Disk)
+                                            .DirectEvents(de =>
+                                            {
+                                                de.Click.Url = Url.Action("_Maintenance");
+                                                de.Click.Method = HttpMethod.POST;
+                                                de.Click.Before = "return this.up('form').isValid();";
+                                                de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
+                                                de.Click.ShowWarningOnFailure = true;
+                                                de.Click.EventMask.ShowMask = true;
+                                                de.Click.FormID = "FormSalesPriceGroupMaintenance";
+                                                de.Click.ExtraParams.Add(new Parameter { Name = "salesPrice", Value = "App.SalesPriceGridPanel.getRowsValues()", Mode = ParameterMode.Raw, Encode = true });
+                                            }),
+                                        Html.X().Button()
+                                            .ID("btnCancel")
+                                            .Text("Cancel")
+                                            .Icon(Icon.Cancel)
+                                    )
+)
+

@@ -40,7 +40,7 @@ namespace MyERP.Web.Areas.Item.Controllers
         {
             var itemUomRepository = new ItemUomRepository();
             long itemId = 0;
-            if (query == null)
+            if (String.IsNullOrEmpty(query))
                 return this.Direct();
             if (!Int64.TryParse(query, out itemId))
             {

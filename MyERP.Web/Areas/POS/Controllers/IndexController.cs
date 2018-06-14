@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Ext.Net;
 using Ext.Net.MVC;
 using MyERP.Web.Models;
-using Action = System.Action;
+using Newtonsoft.Json;
 using PartialViewResult = Ext.Net.MVC.PartialViewResult;
 
 namespace MyERP.Web.Areas.POS.Controllers
@@ -24,6 +24,7 @@ namespace MyERP.Web.Areas.POS.Controllers
         {
             var model = new PosHeaderEditViewModel()
             {
+                DocumentDate = DateTime.Now,
                 PosLineEditViewModels = new List<PosLineEditViewModel>()
             };
 
@@ -46,17 +47,19 @@ namespace MyERP.Web.Areas.POS.Controllers
             return View();
         }
 
-        public ActionResult AddItemToDetails(long? lookupItemId, String viewBagID, int posLinesCount)
+        public ActionResult AddItemToDetails(long? lookupItemId, String viewBagID, String posLines)
         {
             if (lookupItemId == null || lookupItemId <= 0)
                 return this.Direct(false, "ERR : Lookup item is empty");
 
             var itemRepository = new ItemRepository();
-            var item = itemRepository.Get(c => c.Id == lookupItemId, new []{ "BaseUom" }).SingleOrDefault();
-            int lineNo = posLinesCount <= 0 ? 1 : posLinesCount + 1;
+            var item = itemRepository.Get(c => c.Id == lookupItemId, new[] {"BaseUom"}).SingleOrDefault();
+
+            List<PosLineEditViewModel> posLinesModel = JsonConvert.DeserializeObject<List<PosLineEditViewModel>>(posLines);
+            long lineNo = posLinesModel.Count >= 1 ? posLinesModel.Max(c => c.LineNo) + 1 : 1;
 
             var itemUomRepository = new ItemUomRepository();
-            var listUomOfItem = itemUomRepository.Get(c => c.ItemId == item.Id, new string[] { "Uom" });
+            var listUomOfItem = itemUomRepository.Get(c => c.ItemId == item.Id, new string[] {"Uom"});
 
             var itemUoms = listUomOfItem.Select(c => new ItemUomLookUpViewModel
             {
@@ -66,7 +69,7 @@ namespace MyERP.Web.Areas.POS.Controllers
                 QtyPerUom = c.QtyPerUom
             }).ToList();
 
-            var newItem =  new PosLineEditViewModel()
+            var newItem = new PosLineEditViewModel()
             {
                 ItemId = item.Id,
                 Description = item.Description,
@@ -81,11 +84,13 @@ namespace MyERP.Web.Areas.POS.Controllers
 
             Store posLineStore = X.GetCmp<Store>("PosLineStore" + viewBagID);
             posLineStore.Add(newItem);
+            posLineStore.CommitChanges();
 
-            return this.Direct(); 
+            return this.Direct();
         }
 
-        public ActionResult LineEdit(int lineNo, string field, string oldValue, string newValue, string viewBagId, string recordData)
+        public ActionResult LineEdit(int lineNo, string field, string oldValue, string newValue, string viewBagId,
+            string recordData)
         {
             PosLineEditViewModel posLineEditViewModel = JSON.Deserialize<PosLineEditViewModel>(recordData);
 
@@ -94,8 +99,10 @@ namespace MyERP.Web.Areas.POS.Controllers
             switch (field)
             {
                 case "Quantity":
-                    if(String.Compare(oldValue, newValue, StringComparison.InvariantCultureIgnoreCase) != 0)
-                        record.Set("Amount", Math.Round(posLineEditViewModel.Quantity * posLineEditViewModel.UnitPrice, MidpointRounding.AwayFromZero));
+                    if (String.Compare(oldValue, newValue, StringComparison.InvariantCultureIgnoreCase) != 0)
+                        record.Set("Amount",
+                            Math.Round(posLineEditViewModel.Quantity * posLineEditViewModel.UnitPrice,
+                                MidpointRounding.AwayFromZero));
                     break;
                 case "UomId":
                     if (String.Compare(oldValue, newValue, StringComparison.CurrentCultureIgnoreCase) != 0)
@@ -105,10 +112,25 @@ namespace MyERP.Web.Areas.POS.Controllers
                         var uom = uomRepository.Get(c => c.Id == _uomId).FirstOrDefault();
                         record.Set("UomDescription", uom != null ? uom.Description : "");
                     }
+
                     break;
             }
 
             record.Commit();
+            return this.Direct();
+        }
+
+        public ActionResult ChangeBusinessPartner(String viewBagID, string selectedData)
+        {
+            BusinessPartnerLookupViewModel selectedPartner = JsonConvert.DeserializeObject<BusinessPartnerLookupViewModel>(selectedData);
+            this.GetCmp<TextField>("sellToCustomerName" + viewBagID).Value = selectedPartner.Description;
+            this.GetCmp<TextField>("sellToAddress" + viewBagID).Value = selectedPartner.Address;
+            return this.Direct();
+        }
+
+        public ActionResult Print(String viewBagID, String posLines, PosHeaderEditViewModel headerModel)
+        {
+            List<PosLineEditViewModel> posLinesModel = JsonConvert.DeserializeObject<List<PosLineEditViewModel>>(posLines);
             return this.Direct();
         }
     }

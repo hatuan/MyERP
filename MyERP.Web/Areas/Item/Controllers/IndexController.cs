@@ -80,7 +80,7 @@ namespace MyERP.Web.Areas.Item.Controllers
         {
             if (id != null && id > 0)
             {
-                var entity = repository.GetBy(c => c.Id == id);
+                var entity = repository.Get(c => c.Id == id, new []{ "Organization" }).SingleOrDefault();
                 var data = new ItemViewModel()
                 {
                     Code = entity.Code,
@@ -129,6 +129,8 @@ namespace MyERP.Web.Areas.Item.Controllers
                     Id = entity.Id,
                     Code = entity.Code,
                     BaseUomId = entity.BaseUomId,
+                    UnitPrice = entity.UnitPrice,
+                    UnitCost = entity.UnitCost,
                     ItemGroupId1 = entity.ItemGroupId1,
                     ItemGroupId2 = entity.ItemGroupId2,
                     ItemGroupId3 = entity.ItemGroupId3,
@@ -209,7 +211,7 @@ namespace MyERP.Web.Areas.Item.Controllers
 
                 if (model.Id.HasValue)
                 {
-                    var _update = repository.GetBy(c => c.Id == model.Id);
+                    var _update = repository.Get(c => c.Id == model.Id).SingleOrDefault();
                     if (_update == null || _update.Version != model.Version)
                     {
                         r.Success = false;
@@ -220,6 +222,10 @@ namespace MyERP.Web.Areas.Item.Controllers
                     _update.Code = model.Code;
                     _update.Description = model.Description;
                     _update.BaseUomId = model.BaseUomId;
+                    _update.PurchUomId = model.BaseUomId;
+                    _update.SalesUomId = model.BaseUomId;
+                    _update.UnitPrice = model.UnitPrice;
+                    _update.UnitCost = model.UnitCost;
                     _update.ItemGroupId1 = model.ItemGroupId1;
                     _update.ItemGroupId2 = model.ItemGroupId2;
                     _update.ItemGroupId3 = model.ItemGroupId3;
@@ -249,6 +255,10 @@ namespace MyERP.Web.Areas.Item.Controllers
                         Code = model.Code,
                         Description = model.Description,
                         BaseUomId = model.BaseUomId,
+                        PurchUomId = model.BaseUomId,
+                        SalesUomId = model.BaseUomId,
+                        UnitPrice = model.UnitPrice,
+                        UnitCost = model.UnitCost,
                         ItemGroupId1 = model.ItemGroupId1 == 0 ? null : model.ItemGroupId1,
                         ItemGroupId2 = model.ItemGroupId2 == 0 ? null : model.ItemGroupId2,
                         ItemGroupId3 = model.ItemGroupId3 == 0 ? null : model.ItemGroupId3,
@@ -339,7 +349,7 @@ namespace MyERP.Web.Areas.Item.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.GetBy(c => c.Id == _id);
+                var entity = repository.Get(c => c.Id == _id).SingleOrDefault();
                 if (entity == null)
                 {
                     r.Success = false;
