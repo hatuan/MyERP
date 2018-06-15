@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Ext.Net;
 using Ext.Net.MVC;
+using MyERP.DataAccess;
 using MyERP.DataAccess.Enum;
 using MyERP.Web;
 using MyERP.Web.Controllers;
@@ -98,12 +100,12 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                         Id = salesPrice.Id,
                         SalesPriceGroupId = salesPrice.SalesPriceGroupId,
                         ItemId = salesPrice.ItemId,
-                        ItemCode = salesPrice.Item.Code,
-                        ItemDescription = salesPrice.Item.Description,
+                        ItemCode = salesPrice.Item?.Code,
+                        ItemDescription = salesPrice.Item?.Description,
                         Item = salesPrice.Item,
                         UomId = salesPrice.UomId,
-                        UomCode = salesPrice.Uom.Code,
-                        UomDescription = salesPrice.Uom.Description,
+                        UomCode = salesPrice.Uom?.Code,
+                        UomDescription = salesPrice.Uom?.Description,
                         Uom = salesPrice.Uom,
                         SalesType = salesPrice.SalesType,
                         SalesCodeId = (
@@ -118,10 +120,10 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                         SalesCode = (
                             salesPrice.SalesType == (short) SalesPriceSalesType.Customer
                                 ?
-                                salesPrice.BusinessPartner.Code
+                                salesPrice.BusinessPartner?.Code
                                 :
                                 salesPrice.SalesType == (short) SalesPriceSalesType.CustomerPriceGroup
-                                    ? salesPrice.BusPartnerPriceGroup.Code
+                                    ? salesPrice.BusPartnerPriceGroup?.Code
                                     : ""
                         ),
                         SalesModel = (
@@ -129,8 +131,8 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                                 ? new ExtNetComboBoxModel
                                 {
                                     Id = salesPrice.BusinessPartnerId,
-                                    Code = salesPrice.BusinessPartner.Code,
-                                    Description = salesPrice.BusinessPartner.Description
+                                    Code = salesPrice.BusinessPartner?.Code,
+                                    Description = salesPrice.BusinessPartner?.Description
                                 }
                                 :
                                 salesPrice.SalesType == (short) SalesPriceSalesType.CustomerPriceGroup
@@ -138,18 +140,42 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                                     new ExtNetComboBoxModel
                                     {
                                         Id = salesPrice.BusPartnerPriceGroupId,
-                                        Code = salesPrice.BusPartnerPriceGroup.Code,
-                                        Description = salesPrice.BusPartnerPriceGroup.Description
+                                        Code = salesPrice.BusPartnerPriceGroup?.Code,
+                                        Description = salesPrice.BusPartnerPriceGroup?.Description
                                     }
                                     : null
                         ),
-                        StartingDate = salesPrice.StartingDate,
+                        StartingDate = salesPrice.StartingDate.CompareTo(new DateTime(1900, 1, 1, 0, 0, 0)) == 0 ? default(DateTime) : salesPrice.StartingDate,
                         MinQty = salesPrice.MinQty,
                         UnitPrice = salesPrice.UnitPrice,
                         EndingDate = salesPrice.EndingDate,
                         Status = (DefaultStatusType) salesPrice.Status,
                         Version = salesPrice.Version
                     }).ToList();
+
+                ViewData["SalesCodes"] = salesPrices.GroupBy(x => new { x.SalesCodeId, x.SalesCode }).Select(i => i.First())
+                    .Select(x => new 
+                    {
+                        Id = x.SalesCodeId,
+                        Code = x.SalesCode,
+                        Description = x.SalesCode,
+                    });
+
+                ViewData["Items"] = salesPrices.GroupBy(x => new { x.ItemId, x.ItemCode, x.ItemDescription }).Select(i => i.First())
+                    .Select(x => new 
+                    {
+                        Id = x.ItemId,
+                        Code = x.ItemCode,
+                        Description = x.ItemDescription,
+                    });
+
+                ViewData["Uoms"] = salesPrices.GroupBy(x => new { x.UomId, x.UomCode, x.UomDescription }).Select(i => i.First())
+                    .Select(x => new 
+                    {
+                        Id = x.UomId,
+                        Code = x.UomCode,
+                        Description = x.UomDescription,
+                    });
 
                 model = new SalesPriceGroupEditViewModel()
                 {
@@ -172,7 +198,8 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                 Model = model,
                 WrapByScriptTag = false,
                 RenderMode = RenderMode.AddTo,
-                ClearContainer = true
+                ClearContainer = true,
+                ViewData = ViewData
             };
         }
 
@@ -180,11 +207,74 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult _Maintenance(SalesPriceGroupEditViewModel model, string salesPrice)
         {
-            List<SalesPriceEditViewModel> salesPriceLine = JsonConvert.DeserializeObject<List<SalesPriceEditViewModel>>(salesPrice, new JsonSerializerSettings
+            List<SalesPriceEditViewModel> salesPricesModel = JsonConvert.DeserializeObject<List<SalesPriceEditViewModel>>(salesPrice, new JsonSerializerSettings
             {
                 Culture = Thread.CurrentThread.CurrentCulture
             });
-            return new Ext.Net.MVC.PartialViewResult();
+            DirectResult r = new DirectResult();
+            r.Success = false;
+
+
+            if (ModelState.IsValid)
+            {
+                MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
+                long clientId = user.ClientId ?? 0;
+                long organizationId = user.OrganizationId ?? 0;
+
+                if (clientId == 0 || organizationId == 0)
+                {
+                    r.Success = false;
+                    r.ErrorMessage = "User don't have Client or Organization. Please set";
+                    return r;
+                }
+                if (!model.Id.HasValue) //New
+                {
+                    SalesPriceGroup newSalesPriceGroup = new SalesPriceGroup()
+                    {
+                        ClientId = clientId,
+                        OrganizationId = organizationId,
+                        Code = model.Code,
+                        Description = model.Description,
+                        Status = (byte) model.Status,
+                        Version = 1,
+                        RecModifiedAt = DateTime.Now,
+                        RecCreatedBy = (long) user.ProviderUserKey,
+                        RecCreatedAt = DateTime.Now,
+                        RecModifiedBy = (long) user.ProviderUserKey
+                    };
+                    List<DataAccess.SalesPrice> salesPriceList = salesPricesModel
+                        .Select(c => new DataAccess.SalesPrice()
+                        {
+                            ClientId = clientId,
+                            OrganizationId = organizationId,
+                            SalesType = c.SalesType,
+                            BusPartnerPriceGroupId = c.SalesType == 2 ? c.SalesCodeId : null,
+                            BusinessPartnerId = c.SalesType == 1 ? c.SalesCodeId : null,
+                            ItemId = c.ItemId,
+                            UomId = c.UomId,
+                            StartingDate = c.StartingDate ?? new DateTime(1900, 1, 1, 0, 0, 0),
+                            MinQty = c.MinQty ?? 0,
+                            UnitPrice = c.UnitPrice ?? 0,
+                            Status = (byte)DefaultStatusType.Active,
+                            Version = 1,
+                            RecModifiedAt = DateTime.Now,
+                            RecCreatedBy = (long)user.ProviderUserKey,
+                            RecCreatedAt = DateTime.Now,
+                            RecModifiedBy = (long)user.ProviderUserKey
+                        }).ToList();
+                    newSalesPriceGroup.SalesPrices = salesPriceList;
+
+                    newSalesPriceGroup = repository.AddNew(newSalesPriceGroup);
+                    r.Result = newSalesPriceGroup.Id;
+                }
+                Store storeList = X.GetCmp<Store>("StoreSalesPriceGroupList");
+                storeList.Reload();
+
+                r.Success = true;
+                return r;
+            }
+            
+            return r;
         }
 
         public ActionResult AddLineToSalesPrice()

@@ -56,19 +56,36 @@
                                                       .IDProperty("ExtId")
                                                       .Fields(
                                                           new ModelField("ExtId", ModelFieldType.String),
-                                                          new ModelField("Id", ModelFieldType.Int),
-                                                          new ModelField("SalesPriceGroupId", ModelFieldType.Int),
+                                                          new ModelField("Id", ModelFieldType.String),
                                                           new ModelField("SalesType", ModelFieldType.Int),
-                                                          new ModelField("SalesCodeId", ModelFieldType.Int),
-                                                          new ModelField("ItemId", ModelFieldType.Int),
+                                                          new ModelField("SalesCodeId", ModelFieldType.String),
+                                                          new ModelField("ItemId", ModelFieldType.String),
                                                           new ModelField("ItemDescription", ModelFieldType.String),
-                                                          new ModelField("UomId", ModelFieldType.Int),
+                                                          new ModelField("UomId", ModelFieldType.String),
                                                           new ModelField("StartingDate", ModelFieldType.Date),
-                                                          new ModelField("MinQty", ModelFieldType.String),
-                                                          new ModelField("UnitPrice", ModelFieldType.String),
+                                                          new ModelField("MinQty", ModelFieldType.String)
+                                                          {
+                                                              Convert =
+                                                              {
+                                                                  Handler = @"var v = value + '';
+                                                                            v.replace(/\./g,'').replace(',', '.');
+                                                                            return Ext.util.Format.number(v, '0.000,00/i');"
+                                                              }
+                                                          },
+                                                          new ModelField("UnitPrice", ModelFieldType.String)
+                                                          {
+                                                              Convert =
+                                                              {
+                                                                  Handler = @"var v = value + '';
+                                                                            v.replace(/\./g,'').replace(',', '.');
+                                                                            return Ext.util.Format.number(v, '0.000,00/i');"
+                                                              }
+                                                          },
                                                           new ModelField("EndingDate", ModelFieldType.Date),
                                                           new ModelField("Status", ModelFieldType.String),
-                                                          new ModelField("Version", ModelFieldType.Int)
+                                                          new ModelField("Version", ModelFieldType.Int),
+                                                          new ModelField("Item", ModelFieldType.Object),
+                                                          new ModelField("Uom", ModelFieldType.Object)
                                                       ))
                                               .DataSource(Model.SalesPrices)
                                           )
@@ -121,6 +138,7 @@
                                                           {
                                                               p.Add(new StoreParameter("salesType", "this.salesType", ParameterMode.Raw));
                                                           })
+                                                          .Data(ViewData["SalesCodes"])
                                                       )
                                                       .Listeners(ls =>
                                                       {
@@ -167,8 +185,10 @@
                                                                               new ModelField("Description", ModelFieldType.String)
                                                                           )
                                                                         )
+                                                                      .Data(ViewData["Items"])
                                                                   )
-                                                            ));
+                                                            )
+                                              );
                                               cols.Columns.Add(Html.X().ColumnFor(Model.SalesPrices, m => m.ItemDescription).ToBuilder<Column.Builder>().Sortable(false).Flex(1).MinWidth(256));
                                               cols.Columns.Add(Html.X().ComponentColumn().Sortable(false).Text("UOM").DataIndex("UomId").Width(100).Editor(true).Component(
                                                     Html.X().ComboBox()
@@ -208,6 +228,7 @@
                                                                     new ModelField("QtyPerUom", ModelFieldType.Int)
                                                                 )
                                                               )
+                                                            .Data(ViewData["Uoms"])
                                                         )
                                                         .Listeners(ls =>
                                                         {
@@ -216,7 +237,7 @@
                                                     ));
                                               cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(125).DataIndex("StartingDate").Text("Starting Date").Component(Html.X().DateField()));
                                               cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(100).DataIndex("MinQty").Text("MinQty").Component(
-                                                  Html.X().TextField().MaskRe(@"/[0-9\,\.]").Listeners(ls =>
+                                                  Html.X().TextField().SelectOnFocus(true).MaskRe(@"/[0-9\,\.]").Listeners(ls =>
                                                   {
                                                       ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
                                                       ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
@@ -224,7 +245,7 @@
                                                   })
                                               ));
                                               cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(100).DataIndex("UnitPrice").Text("Unit Price").Component(
-                                                  Html.X().TextField().MaskRe(@"/[0-9\,\.]").Listeners(ls =>
+                                                  Html.X().TextField().SelectOnFocus(true).MaskRe(@"/[0-9\,\.]").Listeners(ls =>
                                                   {
                                                       ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
                                                       ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
@@ -233,8 +254,9 @@
                                               ));
                                           }))
                                     )
-                                    .Buttons(
-                                        Html.X().Button()
+                                    .Buttons(buttons =>
+                                    {
+                                        buttons.Add(Html.X().Button()
                                             .ID("btnSave")
                                             .Text("Save")
                                             .Icon(Icon.Disk)
@@ -248,11 +270,11 @@
                                                 de.Click.EventMask.ShowMask = true;
                                                 de.Click.FormID = "FormSalesPriceGroupMaintenance";
                                                 de.Click.ExtraParams.Add(new Parameter { Name = "salesPrice", Value = "App.SalesPriceGridPanel.getRowsValues()", Mode = ParameterMode.Raw, Encode = true });
-                                            }),
-                                        Html.X().Button()
+                                            }));
+                                        buttons.Add(Html.X().Button()
                                             .ID("btnCancel")
                                             .Text("Cancel")
-                                            .Icon(Icon.Cancel)
-                                    )
+                                            .Icon(Icon.Cancel));
+                                    })
 )
 

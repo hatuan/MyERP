@@ -59,7 +59,7 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Price Group")]
-        public long SalesPriceGroupId { get; set; }
+        public long? SalesPriceGroupId { get; set; }
 
         [Display(Name = "Price Group")]
         public String SalesPriceGroupCode { get; set; }
@@ -106,9 +106,11 @@ namespace MyERP.Web.Models
         public DateTime? StartingDate { get; set; }
 
         [Display(Name = "MinQty")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal? MinQty { get; set; }
 
         [Display(Name = "Unit Price")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal? UnitPrice { get; set; }
 
         [Display(Name = "Ending Date")]

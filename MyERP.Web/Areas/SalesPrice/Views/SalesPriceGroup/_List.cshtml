@@ -59,18 +59,17 @@
       {
           its.Add(Html.X().GridPanel()
               .ID("SalesPriceGroupGrid")
-              .Header(false)
-              .MinWidth(550)
+              .Title("Sales Price Group")
               .Region(Region.West)
-              .Split(true)
+              .Layout(LayoutType.Fit)
+              .Width(300)
               .Border(true)
               .MarginSpec("0 0 5 5")
               .Store(Html.X().Store()
                   .ID("StoreSalesPriceGroupList")
                   .RemoteSort(true)
-                  .PageSize(10)
+                  .PageSize(15)
                   .Sorters("Code", Ext.Net.SortDirection.ASC)
-                  .AutoLoad(true)
                   .Model(
                       Html.X().Model()
                           .IDProperty("Id")
@@ -90,7 +89,7 @@
               .ColumnModel(
                   Html.X().Column().Text("Org").DataIndex("OrganizationCode").Width(75),
                   Html.X().Column().Text("Code").DataIndex("Code").Width(85),
-                  Html.X().Column().Text("Description").DataIndex("Description").MinWidth(256)
+                  Html.X().Column().Text("Description").DataIndex("Description").MinWidth(120)
               )
               .BottomBar(items =>
               {
@@ -132,16 +131,18 @@
                   .DirectEvents(de =>
                   {
                       de.Select.Action = "_Maintenance";
+                      de.Select.Method = HttpMethod.GET;
                       de.Select.Buffer = 250;
                       de.Select.EventMask.Target = MaskTarget.CustomTarget;
                       de.Select.EventMask.CustomTarget = "FormSalesPriceGroupMaintenance";
-                      de.Select.ExtraParams.Add(new Parameter("ID", "#{StoreSalesPriceGroupList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
+                      de.Select.ExtraParams.Add(new Parameter("ID", "#{SalesPriceGroupGrid}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
                   })
               )
               .ViewConfig(new GridView() { Listeners = { Refresh = { Handler = "#{btnDelete}.disable();#{btnEdit}.disable();" } } })
           );
-          its.Add(Html.X().Container()
+          its.Add(Html.X().Panel()
               .ID("SalesPriceGroupMaintenanceContainer")
+              .Header(false)
               .Region(Region.Center)
               .Layout(LayoutType.Fit)
               .Loader(Html.X().ComponentLoader()

@@ -363,10 +363,6 @@
             <End Role="user" EntitySet="users" />
             <End Role="sales_price_group" EntitySet="sales_price_groups" />
           </AssociationSet>
-          <AssociationSet Name="FK_sales_price_business_partner_price_group" Association="MyERP.DataAccess.Store.FK_sales_price_business_partner_price_group">
-            <End Role="business_partner_price_group" EntitySet="business_partner_price_groups" />
-            <End Role="sales_price" EntitySet="sales_prices" />
-          </AssociationSet>
           <AssociationSet Name="FK_sales_price_business_partner" Association="MyERP.DataAccess.Store.FK_sales_price_business_partner">
             <End Role="business_partner" EntitySet="business_partners" />
             <End Role="sales_price" EntitySet="sales_prices" />
@@ -390,6 +386,10 @@
           <AssociationSet Name="FK_pos_header_business_partner1" Association="MyERP.DataAccess.Store.FK_pos_header_business_partner1">
             <End Role="business_partner" EntitySet="business_partners" />
             <End Role="pos_header" EntitySet="pos_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_price_business_partner_price_group" Association="MyERP.DataAccess.Store.FK_sales_price_business_partner_price_group">
+            <End Role="business_partner_price_group" EntitySet="business_partner_price_groups" />
+            <End Role="sales_price" EntitySet="sales_prices" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
@@ -1913,18 +1913,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_sales_price_business_partner_price_group">
-          <End Role="business_partner_price_group" Type="MyERP.DataAccess.Store.business_partner_price_group" Multiplicity="0..1" />
-          <End Role="sales_price" Type="MyERP.DataAccess.Store.sales_price" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="business_partner_price_group">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="sales_price">
-              <PropertyRef Name="business_partner_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_sales_price_business_partner">
           <End Role="business_partner" Type="MyERP.DataAccess.Store.business_partner" Multiplicity="0..1" />
           <End Role="sales_price" Type="MyERP.DataAccess.Store.sales_price" Multiplicity="*" />
@@ -1994,6 +1982,18 @@
             </Principal>
             <Dependent Role="pos_header">
               <PropertyRef Name="bill_to_customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_price_business_partner_price_group">
+          <End Role="business_partner_price_group" Type="MyERP.DataAccess.Store.business_partner_price_group" Multiplicity="0..1" />
+          <End Role="sales_price" Type="MyERP.DataAccess.Store.sales_price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="business_partner_price_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sales_price">
+              <PropertyRef Name="bus_partner_price_group_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
