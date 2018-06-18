@@ -159,15 +159,15 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                         Id = x.SalesCodeId,
                         Code = x.SalesCode,
                         Description = x.SalesCode,
-                    });
+                    }).ToList();
 
                 ViewData["Items"] = salesPrices.GroupBy(x => new { x.ItemId, x.ItemCode, x.ItemDescription }).Select(i => i.First())
-                    .Select(x => new 
+                    .Select(x => new ItemViewModel
                     {
                         Id = x.ItemId,
                         Code = x.ItemCode,
                         Description = x.ItemDescription,
-                    });
+                    }).ToList();
 
                 ViewData["Uoms"] = salesPrices.GroupBy(x => new { x.UomId, x.UomCode, x.UomDescription }).Select(i => i.First())
                     .Select(x => new 
@@ -175,7 +175,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                         Id = x.UomId,
                         Code = x.UomCode,
                         Description = x.UomDescription,
-                    });
+                    }).ToList();
 
                 model = new SalesPriceGroupEditViewModel()
                 {
@@ -368,6 +368,37 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                     return this.Store(data, paging.TotalRecords);
                 }
             }
+
+            return this.Direct();
+        }
+
+        public ActionResult ItemCbbSelect(string record, string gridRecord)
+        {
+            dynamic itemModel = JsonConvert.DeserializeObject(record, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+
+            SalesPriceEditViewModel salesPricesModel = JsonConvert.DeserializeObject<SalesPriceEditViewModel>(gridRecord, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+
+            ModelProxy gridRecordModel = X.GetCmp<Store>("SalesPriceGridStore").GetById(salesPricesModel.ExtId);
+            gridRecordModel.Set("ItemDescription", itemModel.Description);
+
+            Store itemStore = X.GetCmp<Store>("ItemStore");
+            object itemData = new object[]
+            {
+                new
+                {
+                    Id = 20,
+                    Code = "14002",
+                    Description = "Bia HN",
+                    OrganizationCode = ""
+                }
+            };
+            itemStore.LoadData(itemData, true);
 
             return this.Direct();
         }
