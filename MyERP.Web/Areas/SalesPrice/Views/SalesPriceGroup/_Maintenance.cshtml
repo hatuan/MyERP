@@ -20,7 +20,39 @@
                                                           new ModelField("OrganizationCode", ModelFieldType.String),
                                                           new ModelField("Code", ModelFieldType.String),
                                                           new ModelField("Description", ModelFieldType.String)))
-                                                  .Data(ViewData["Items"])
+                                                  .Data(ViewData["Items"]),
+                                              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                                                  .ID("SalesCodeStore")
+                                                  .Proxy(Html.X().AjaxProxy()
+                                                      .Url(Url.Action("LookupSalesCode"))
+                                                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                                                  .Model(Html.X().Model()
+                                                      .IDProperty("Id")
+                                                      .Fields(
+                                                          new ModelField("Id", ModelFieldType.Int),
+                                                          new ModelField("OrganizationCode", ModelFieldType.String),
+                                                          new ModelField("Code", ModelFieldType.String),
+                                                          new ModelField("Description", ModelFieldType.String)
+                                                      )
+                                                  )
+                                                  .Parameters(p =>
+                                                  {
+                                                      p.Add(new StoreParameter("salesType", "this.salesType", ParameterMode.Raw));
+                                                  })
+                                                  .Data(ViewData["SalesCodes"]),
+                                              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                                                  .ID("UomStore")
+                                                  .Proxy(Html.X().AjaxProxy()
+                                                      .Url(Url.Action("LookupUomOfItem", "ItemUom", new { area = "Item" }))
+                                                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                                                  .Model(Html.X().Model()
+                                                      .IDProperty("UomId")
+                                                      .Fields(
+                                                          new ModelField("UomId", ModelFieldType.Int),
+                                                          new ModelField("Code", ModelFieldType.String),
+                                                          new ModelField("Description", ModelFieldType.String),
+                                                          new ModelField("QtyPerUom", ModelFieldType.Int)))
+                                                  .Data(ViewData["Uoms"])
                                               )
                                           .Items(
                                               Html.X().Panel()
@@ -42,6 +74,7 @@
                                                           .Flex(1)
                                                           .Title("Sales Price List")
                                                           .Border(true)
+                                                          .View(new GridView() { MarkDirty = false })
                                                           .LeftBar(leftBarItems =>
                                                           {
                                                               leftBarItems.Add(Html.X().Toolbar()
@@ -86,7 +119,7 @@
                                                                                   Handler = @"var v = value + '';
                                                                                             v.replace(/\./g,'').replace(',', '.');
                                                                                             return Ext.util.Format.number(v, '0.000,00/i');"
-                                                                                                      }
+                                                                              }
                                                                           },
                                                                           new ModelField("UnitPrice", ModelFieldType.String)
                                                                           {
@@ -95,7 +128,7 @@
                                                                                   Handler = @"var v = value + '';
                                                                                             v.replace(/\./g,'').replace(',', '.');
                                                                                             return Ext.util.Format.number(v, '0.000,00/i');"
-                                                                                                      }
+                                                                              }
                                                                           },
                                                                           new ModelField("EndingDate", ModelFieldType.Date),
                                                                           new ModelField("Status", ModelFieldType.String),
@@ -137,25 +170,7 @@
                                                                             </text>))
                                                                                 .MinWidth(400)
                                                                             )
-                                                                            .Store(Html.X().Store().AutoLoad(false)
-                                                                                .Proxy(Html.X().AjaxProxy()
-                                                                                    .Url(Url.Action("LookupSalesCode"))
-                                                                                    .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
-                                                                                .Model(Html.X().Model()
-                                                                                    .IDProperty("Id")
-                                                                                    .Fields(
-                                                                                        new ModelField("Id", ModelFieldType.Int),
-                                                                                        new ModelField("OrganizationCode", ModelFieldType.String),
-                                                                                        new ModelField("Code", ModelFieldType.String),
-                                                                                        new ModelField("Description", ModelFieldType.String)
-                                                                                    )
-                                                                                )
-                                                                                .Parameters(p =>
-                                                                                {
-                                                                                    p.Add(new StoreParameter("salesType", "this.salesType", ParameterMode.Raw));
-                                                                                })
-                                                                                .Data(ViewData["SalesCodes"])
-                                                                            )
+                                                                            .StoreID("SalesCodeStore")
                                                                             .Listeners(ls =>
                                                                             {
                                                                                 ls.BeforeQuery.Handler = @"var salesType = this.record.get('SalesType');
@@ -188,12 +203,13 @@
                                                                                     </text>))
                                                                                 .MinWidth(400))
                                                                       .StoreID("ItemStore")
-                                                                      .Listeners(ls =>
-                                                                      {
-                                                                          ls.Select.Handler = "this.record.set('ItemDescription', records[0].data.Description);";
-                                                                          ls.Select.Delay = 100;
-                                                                      })
-                                                              ));
+                                                                  )
+                                                                  .SilentSave(false)
+                                                                  .Listeners(ls =>
+                                                                  {
+                                                                      ls.Edit.Handler = @"e.record.data.ItemDescription = e.cmp.findRecordByValue(e.cmp.getValue()).data.Description;";
+                                                                  })
+                                                              );
                                                               cols.Columns.Add(Html.X().ColumnFor(Model.SalesPrices, m => m.ItemDescription).ToBuilder<Column.Builder>().Sortable(false).Flex(1).MinWidth(256));
                                                               cols.Columns.Add(Html.X().ComponentColumn().Sortable(false).Text("UOM").DataIndex("UomId").Width(100).Editor(true).Component(
                                                                   Html.X().ComboBox()
@@ -219,36 +235,28 @@
                                                                                         </tpl>
                                                                                     </text>))
                                                                           .MinWidth(400))
-                                                                      .Store(Html.X().Store().AutoLoad(false)
-                                                                          .Proxy(Html.X().AjaxProxy()
-                                                                              .Url(Url.Action("LookupUomOfItem", "ItemUom", new { area = "Item" }))
-                                                                              .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
-                                                                          .Model(Html.X().Model()
-                                                                              .IDProperty("UomId")
-                                                                              .Fields(
-                                                                                  new ModelField("UomId", ModelFieldType.Int),
-                                                                                  new ModelField("Code", ModelFieldType.String),
-                                                                                  new ModelField("Description", ModelFieldType.String),
-                                                                                  new ModelField("QtyPerUom", ModelFieldType.Int)))
-                                                                          .Data(ViewData["Uoms"]))
+                                                                      .StoreID("UomStore")
                                                                       .Listeners(ls =>
                                                                       {
                                                                               ls.BeforeQuery.Handler = "queryEvent.query = this.record.get('ItemId')";
                                                                       })));
-                                                              cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(125).DataIndex("StartingDate").Text("Starting Date").Component(Html.X().DateField()));
+                                                              cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(125).DataIndex("StartingDate").Text("Starting Date").Component(
+                                                                  Html.X().DateField()));
                                                               cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(100).DataIndex("MinQty").Text("MinQty").Component(
                                                                   Html.X().TextField().SelectOnFocus(true).MaskRe(@"/[0-9\,\.]").Listeners(ls =>
                                                                   {
                                                                         ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
                                                                         ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
-                                                                      this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
+                                                                                            this.setValue(v);
+                                                                                            this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
                                                                   })));
                                                               cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(100).DataIndex("UnitPrice").Text("Unit Price").Component(
                                                                   Html.X().TextField().SelectOnFocus(true).MaskRe(@"/[0-9\,\.]").Listeners(ls =>
                                                                   {
                                                                         ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
                                                                         ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
-                                                                      this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
+                                                                                    this.setValue(v);
+                                                                                    this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
                                                                   })));
                                                           })
                                                     )

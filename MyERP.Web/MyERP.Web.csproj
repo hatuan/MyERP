@@ -340,6 +340,7 @@
     <Content Include="App_Readme\Ext.NET\README.md" />
     <Content Include="App_Readme\Ext.NET\LICENSE" />
     <Content Include="App_Readme\Ext.NET\CHANGELOG.md" />
+    <Content Include="Areas\Item\Views\ItemUom\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -446,7 +447,6 @@
   <ItemGroup>
     <Folder Include="Areas\BusinessPartner\Models\" />
     <Folder Include="Areas\Item\Models\" />
-    <Folder Include="Areas\Item\Views\ItemUom\" />
     <Folder Include="Areas\SalesPrice\Models\" />
     <Folder Include="Areas\SalesPrice\Views\Shared\" />
     <Folder Include="Areas\UOM\Models\" />
