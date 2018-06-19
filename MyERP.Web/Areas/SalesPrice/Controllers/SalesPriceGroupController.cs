@@ -372,35 +372,35 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
             return this.Direct();
         }
 
-        public ActionResult ItemCbbSelect(string record, string gridRecord)
-        {
-            dynamic itemModel = JsonConvert.DeserializeObject(record, new JsonSerializerSettings
-            {
-                Culture = Thread.CurrentThread.CurrentCulture
-            });
+        //public ActionResult ItemCbbSelect(string record, string gridRecord)
+        //{
+        //    dynamic itemModel = JsonConvert.DeserializeObject(record, new JsonSerializerSettings
+        //    {
+        //        Culture = Thread.CurrentThread.CurrentCulture
+        //    });
 
-            SalesPriceEditViewModel salesPricesModel = JsonConvert.DeserializeObject<SalesPriceEditViewModel>(gridRecord, new JsonSerializerSettings
-            {
-                Culture = Thread.CurrentThread.CurrentCulture
-            });
+        //    SalesPriceEditViewModel salesPricesModel = JsonConvert.DeserializeObject<SalesPriceEditViewModel>(gridRecord, new JsonSerializerSettings
+        //    {
+        //        Culture = Thread.CurrentThread.CurrentCulture
+        //    });
 
-            ModelProxy gridRecordModel = X.GetCmp<Store>("SalesPriceGridStore").GetById(salesPricesModel.ExtId);
-            gridRecordModel.Set("ItemDescription", itemModel.Description);
+        //    ModelProxy gridRecordModel = X.GetCmp<Store>("SalesPriceGridStore").GetById(salesPricesModel.ExtId);
+        //    gridRecordModel.Set("ItemDescription", itemModel.Description);
 
-            Store itemStore = X.GetCmp<Store>("ItemStore");
-            object itemData = new object[]
-            {
-                new
-                {
-                    Id = 20,
-                    Code = "14002",
-                    Description = "Bia HN",
-                    OrganizationCode = ""
-                }
-            };
-            itemStore.LoadData(itemData, true);
+        //    //Store itemStore = X.GetCmp<Store>("ItemStore");
+        //    //object itemData = new object[]
+        //    //{
+        //    //    new
+        //    //    {
+        //    //         Id = 20,
+        //    //        Code = "14002",
+        //    //       Description = "Bia HN",
+        //    //        OrganizationCode = ""
+        //    //    }
+        //    //};
+        //    //itemStore.LoadData(itemData, true);
 
-            return this.Direct();
-        }
+        //    return this.Direct();
+        //}
     }
 }

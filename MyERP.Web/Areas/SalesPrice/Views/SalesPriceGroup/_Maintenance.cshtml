@@ -188,79 +188,68 @@
                                                                                     </text>))
                                                                                 .MinWidth(400))
                                                                       .StoreID("ItemStore")
-                                                                      .DirectEvents(de =>
+                                                                      .Listeners(ls =>
                                                                       {
-                                                                          de.Select.Action = "ItemCbbSelect";
-                                                                          de.Select.ExtraParams.Add(new Parameter("record", "records[0].data", ParameterMode.Raw));  
-                                                                          de.Select.ExtraParams.Add(new Parameter("gridRecord", "this.record.data", ParameterMode.Raw));
+                                                                          ls.Select.Handler = "this.record.set('ItemDescription', records[0].data.Description);";
+                                                                          ls.Select.Delay = 100;
                                                                       })
                                                               ));
-                                                                            cols.Columns.Add(Html.X().ComponentColumn().Sortable(false).Text("Item Description").DataIndex("ItemDescription").Flex(1).MinWidth(256).Editor(true).Component(
-                                                                                Html.X().TextField().ReadOnly(true)
-                                                                                )
-                                                                                );
-                                                                            cols.Columns.Add(Html.X().ComponentColumn().Sortable(false).Text("UOM").DataIndex("UomId").Width(100).Editor(true).Component(
-                                                                                Html.X().ComboBox()
-                                                                                    .DisplayField("Code")
-                                                                                    .ValueField("Id")
-                                                                                    .FieldStyle("text-transform: uppercase;")
-                                                                                    .TypeAhead(true)
-                                                                                    .MinChars(0)
-                                                                                    .PageSize(10)
-                                                                                    .SelectOnTab(true)
-                                                                                    .ForceSelection(true)
-                                                                                    .ValidateOnBlur(true)
-                                                                                    .ValidateOnChange(true)
-                                                                                    .ListConfig(Html.X().BoundList()
-                                                                                        .LoadingText("Searching...")
-                                                                                        .ItemTpl(Html.X().XTemplate()
-                                                                                            .Html(@<text>
-                                                                                                <tpl for=".">
-                                                                                                    <div class="search-item">
-                                                                                                        <h3>{Code}</h3>
-                                                                                                        {Description}
-                                                                                                    </div>
-                                                                                                </tpl>
-                                                                                            </text>))
-                                                                                                .MinWidth(400)
-                                                                                            )
-                                                                                            .Store(Html.X().Store().AutoLoad(false)
-                                                                                                .Proxy(Html.X().AjaxProxy()
-                                                                                                    .Url(Url.Action("LookupUomOfItem", "ItemUom", new { area = "Item" }))
-                                                                                                    .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
-                                                                                                .Model(Html.X().Model()
-                                                                                                    .IDProperty("UomId")
-                                                                                                    .Fields(
-                                                                                                        new ModelField("UomId", ModelFieldType.Int),
-                                                                                                        new ModelField("Code", ModelFieldType.String),
-                                                                                                        new ModelField("Description", ModelFieldType.String),
-                                                                                                        new ModelField("QtyPerUom", ModelFieldType.Int)
-                                                                                                    )
-                                                                                                )
-                                                                                                .Data(ViewData["Uoms"])
-                                                                                            )
-                                                                                            .Listeners(ls =>
-                                                                                            {
-                                                                                                ls.BeforeQuery.Handler = "queryEvent.query = this.record.get('ItemId')";
-                                                                                            })
-                                                                                        ));
-                                                                                    cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(125).DataIndex("StartingDate").Text("Starting Date").Component(Html.X().DateField()));
-                                                                                    cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(100).DataIndex("MinQty").Text("MinQty").Component(
-                                                                                        Html.X().TextField().SelectOnFocus(true).MaskRe(@"/[0-9\,\.]").Listeners(ls =>
-                                                                                        {
-                                                                                            ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
-                                                                                            ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
-                                                                                          this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
-                                                                                        })
-                                                                                        ));
-                                                                                    cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(100).DataIndex("UnitPrice").Text("Unit Price").Component(
-                                                                                        Html.X().TextField().SelectOnFocus(true).MaskRe(@"/[0-9\,\.]").Listeners(ls =>
-                                                                                        {
-                                                                                            ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
-                                                                                            ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
-                                                                                          this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
-                                                                                        })
-                                                                                        ));
+                                                              cols.Columns.Add(Html.X().ColumnFor(Model.SalesPrices, m => m.ItemDescription).ToBuilder<Column.Builder>().Sortable(false).Flex(1).MinWidth(256));
+                                                              cols.Columns.Add(Html.X().ComponentColumn().Sortable(false).Text("UOM").DataIndex("UomId").Width(100).Editor(true).Component(
+                                                                  Html.X().ComboBox()
+                                                                      .DisplayField("Code")
+                                                                      .ValueField("Id")
+                                                                      .FieldStyle("text-transform: uppercase;")
+                                                                      .TypeAhead(true)
+                                                                      .MinChars(0)
+                                                                      .PageSize(10)
+                                                                      .SelectOnTab(true)
+                                                                      .ForceSelection(true)
+                                                                      .ValidateOnBlur(true)
+                                                                      .ValidateOnChange(true)
+                                                                      .ListConfig(Html.X().BoundList()
+                                                                          .LoadingText("Searching...")
+                                                                          .ItemTpl(Html.X().XTemplate()
+                                                                              .Html(@<text>
+                                                                                        <tpl for=".">
+                                                                                            <div class="search-item">
+                                                                                                <h3>{Code}</h3>
+                                                                                                {Description}
+                                                                                            </div>
+                                                                                        </tpl>
+                                                                                    </text>))
+                                                                          .MinWidth(400))
+                                                                      .Store(Html.X().Store().AutoLoad(false)
+                                                                          .Proxy(Html.X().AjaxProxy()
+                                                                              .Url(Url.Action("LookupUomOfItem", "ItemUom", new { area = "Item" }))
+                                                                              .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                                                                          .Model(Html.X().Model()
+                                                                              .IDProperty("UomId")
+                                                                              .Fields(
+                                                                                  new ModelField("UomId", ModelFieldType.Int),
+                                                                                  new ModelField("Code", ModelFieldType.String),
+                                                                                  new ModelField("Description", ModelFieldType.String),
+                                                                                  new ModelField("QtyPerUom", ModelFieldType.Int)))
+                                                                          .Data(ViewData["Uoms"]))
+                                                                      .Listeners(ls =>
+                                                                      {
+                                                                              ls.BeforeQuery.Handler = "queryEvent.query = this.record.get('ItemId')";
+                                                                      })));
+                                                              cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(125).DataIndex("StartingDate").Text("Starting Date").Component(Html.X().DateField()));
+                                                              cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(100).DataIndex("MinQty").Text("MinQty").Component(
+                                                                  Html.X().TextField().SelectOnFocus(true).MaskRe(@"/[0-9\,\.]").Listeners(ls =>
+                                                                  {
+                                                                        ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
+                                                                        ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
+                                                                      this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
+                                                                  })));
+                                                              cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(100).DataIndex("UnitPrice").Text("Unit Price").Component(
+                                                                  Html.X().TextField().SelectOnFocus(true).MaskRe(@"/[0-9\,\.]").Listeners(ls =>
+                                                                  {
+                                                                        ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
+                                                                        ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
+                                                                      this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
+                                                                  })));
                                                           })
                                                     )
                                               )
