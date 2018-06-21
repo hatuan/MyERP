@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading;
 using System.Web;
@@ -173,7 +174,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                 ViewData["Uoms"] = salesPrices.GroupBy(x => new { x.UomId, x.UomCode, x.UomDescription }).Select(i => i.First())
                     .Select(x => new 
                     {
-                        Id = x.UomId,
+                        UomId = x.UomId,    
                         Code = x.UomCode,
                         Description = x.UomDescription,
                     }).ToList();
@@ -337,10 +338,10 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
 
                     var salesPriceRepository = new SalesPriceRepository();
 
-                    foreach (var salesPriceRemove in updateSalesPriceGroup.SalesPrices.Where(x => salesPriceViewModels.All(u => u.Id != x.Id)).ToList())
+                    foreach (var salesPriceRemove in updateSalesPriceGroup.SalesPrices.Where(x => salesPriceViewModels.All(u => u.Id != x.Id && u.Id != 0 && u.Id.HasValue)).ToList())
                     {
                         updateSalesPriceGroup.SalesPrices.Remove(salesPriceRemove);
-                        this.repository.DataContext.SalesPrices.Remove(salesPriceRemove);
+                        this.repository.DataContext.SalesPrices.Remove(salesPriceRemove); //this.repository.DataContext.Entry(salesPriceRemove).State = EntityState.Deleted;
                     }
 
                     try
