@@ -13,6 +13,7 @@ using MyERP.Web;
 using MyERP.Web.Controllers;
 using MyERP.Web.Models;
 using Newtonsoft.Json;
+using WebGrease.Css.Extensions;
 
 namespace MyERP.Web.Areas.SalesPrice.Controllers
 {
@@ -205,15 +206,15 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _Maintenance(SalesPriceGroupEditViewModel model, string salesPrice)
+        public ActionResult _Maintenance(SalesPriceGroupEditViewModel model, string salesPriceJSON)
         {
-            List<SalesPriceEditViewModel> salesPricesModel = JsonConvert.DeserializeObject<List<SalesPriceEditViewModel>>(salesPrice, new JsonSerializerSettings
+            List<SalesPriceEditViewModel> salesPriceViewModels = JsonConvert.DeserializeObject<List<SalesPriceEditViewModel>>(salesPriceJSON, new JsonSerializerSettings
             {
                 Culture = Thread.CurrentThread.CurrentCulture
             });
+
             DirectResult r = new DirectResult();
             r.Success = false;
-
 
             if (ModelState.IsValid)
             {
@@ -242,7 +243,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                         RecCreatedAt = DateTime.Now,
                         RecModifiedBy = (long) user.ProviderUserKey
                     };
-                    List<DataAccess.SalesPrice> salesPriceList = salesPricesModel
+                    List<DataAccess.SalesPrice> salesPrices = salesPriceViewModels
                         .Select(c => new DataAccess.SalesPrice()
                         {
                             ClientId = clientId,
@@ -262,13 +263,98 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                             RecCreatedAt = DateTime.Now,
                             RecModifiedBy = (long)user.ProviderUserKey
                         }).ToList();
-                    newSalesPriceGroup.SalesPrices = salesPriceList;
+                    newSalesPriceGroup.SalesPrices = salesPrices;
 
                     newSalesPriceGroup = repository.AddNew(newSalesPriceGroup);
-                    r.Result = newSalesPriceGroup.Id;
+                    model.Id = newSalesPriceGroup.Id;
                 }
-                Store storeList = X.GetCmp<Store>("StoreSalesPriceGroupList");
-                storeList.Reload();
+                else //edit
+                {
+                    SalesPriceGroup updateSalesPriceGroup = repository.Get(c => c.Id == model.Id, new string[] { "SalesPrices" }).SingleOrDefault();
+                    if (updateSalesPriceGroup == null || updateSalesPriceGroup.Version != model.Version)
+                    {
+                        r.Success = false;
+                        r.ErrorMessage = "Sales Price Group has been changed or deleted! Please check";
+                        return r;
+                    }
+
+                    updateSalesPriceGroup.Code = model.Code;
+                    updateSalesPriceGroup.Description = model.Description;
+                    updateSalesPriceGroup.Status = (byte)model.Status;
+                    updateSalesPriceGroup.RecModifiedAt = DateTime.Now;
+                    updateSalesPriceGroup.RecModifiedBy = (long)user.ProviderUserKey;
+                    updateSalesPriceGroup.Version++;
+                    
+                    foreach (var salesPriceViewModel in salesPriceViewModels)
+                    {
+                        if (salesPriceViewModel.Id == 0 || salesPriceViewModel.Id == null)
+                            updateSalesPriceGroup.SalesPrices.Add(new DataAccess.SalesPrice()
+                            {
+                                ClientId = clientId,
+                                OrganizationId = organizationId,
+                                SalesType = salesPriceViewModel.SalesType,
+                                BusPartnerPriceGroupId = salesPriceViewModel.SalesType == 2
+                                    ? salesPriceViewModel.SalesCodeId
+                                    : null,
+                                BusinessPartnerId =
+                                    salesPriceViewModel.SalesType == 1 ? salesPriceViewModel.SalesCodeId : null,
+                                ItemId = salesPriceViewModel.ItemId,
+                                UomId = salesPriceViewModel.UomId,
+                                StartingDate = salesPriceViewModel.StartingDate ?? new DateTime(1900, 1, 1, 0, 0, 0),
+                                MinQty = salesPriceViewModel.MinQty ?? 0,
+                                UnitPrice = salesPriceViewModel.UnitPrice ?? 0,
+                                Status = (byte) DefaultStatusType.Active,
+                                Version = 1,
+                                RecCreatedBy = (long)user.ProviderUserKey,
+                                RecCreatedAt = DateTime.Now,
+                                RecModifiedAt = DateTime.Now,
+                                RecModifiedBy = (long) user.ProviderUserKey
+                            });
+                        else
+                        {
+                            updateSalesPriceGroup.SalesPrices.Where(c => c.Id == salesPriceViewModel.Id)
+                                .ForEach(x =>
+                                {
+                                    x.SalesType = salesPriceViewModel.SalesType;
+                                    x.BusPartnerPriceGroupId = salesPriceViewModel.SalesType == 2
+                                        ? salesPriceViewModel.SalesCodeId
+                                        : null;
+                                    x.BusinessPartnerId =
+                                        salesPriceViewModel.SalesType == 1 ? salesPriceViewModel.SalesCodeId : null;
+                                    x.ItemId = salesPriceViewModel.ItemId;
+                                    x.UomId = salesPriceViewModel.UomId;
+                                    x.StartingDate =
+                                        salesPriceViewModel.StartingDate ?? new DateTime(1900, 1, 1, 0, 0, 0);
+                                    x.MinQty = salesPriceViewModel.MinQty ?? 0;
+                                    x.UnitPrice = salesPriceViewModel.UnitPrice ?? 0;
+                                    x.Status = (byte) DefaultStatusType.Active;
+                                    x.Version++;
+                                    x.RecModifiedAt = DateTime.Now;
+                                    x.RecModifiedBy = (long) user.ProviderUserKey;
+                                });
+                        }
+                    }
+
+                    var salesPriceRepository = new SalesPriceRepository();
+
+                    foreach (var salesPriceRemove in updateSalesPriceGroup.SalesPrices.Where(x => salesPriceViewModels.All(u => u.Id != x.Id)).ToList())
+                    {
+                        updateSalesPriceGroup.SalesPrices.Remove(salesPriceRemove);
+                        this.repository.DataContext.SalesPrices.Remove(salesPriceRemove);
+                    }
+
+                    try
+                    {
+                        this.repository.Update(updateSalesPriceGroup);
+                    }
+                    catch (Exception ex)
+                    {
+                        r.Success = false;
+                        r.ErrorMessage = ex.Message;
+                        return r;
+                    }
+
+                }
 
                 r.Success = true;
                 return r;

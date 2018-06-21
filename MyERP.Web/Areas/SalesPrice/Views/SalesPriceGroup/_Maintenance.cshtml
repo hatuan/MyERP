@@ -93,7 +93,15 @@
                                                                       buttons.Add(Html.X().Button()
                                                                           .ID("btnDeleteLine")
                                                                           .Icon(Icon.Delete)
-                                                                          .Disabled(true)
+                                                                          .Listeners(ls =>
+                                                                          {
+                                                                              ls.Click.Handler = @"if ( !#{SalesPriceGridPanel}.hasSelection() ) {
+                                                                                                        return false;
+                                                                                                    } else {
+                                                                                                        #{SalesPriceGridPanel}.deleteSelected();
+                                                                                                        return true;
+                                                                                                    }";
+                                                                          })
                                                                       );
                                                                   })
                                                               );
@@ -144,7 +152,12 @@
                                                               cols.Columns.Add(Html.X().ComponentColumn().Sortable(false).Text("Sales Type").DataIndex("SalesType").Width(200).Editor(true).Component(
                                                                   Html.X().ComboBox().Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.SalesPriceSalesType))
                                                                       .ListConfig(Html.X().BoundList().MinWidth(200))
-                                                                  ));
+                                                                  )
+                                                                  .SilentSave(false)
+                                                                  .Listeners(ls =>
+                                                                  {
+                                                                      ls.Edit.Handler = @"e.record.data.SalesCodeId = 0;";
+                                                                  }));
                                                               cols.Columns.Add(Html.X().ComponentColumn().Sortable(false).Text("Sales Code").DataIndex("SalesCodeId").Width(150).Editor(true).Component(
                                                                   Html.X().ComboBox()
                                                                       .DisplayField("Code")
@@ -235,11 +248,22 @@
                                                                                         </tpl>
                                                                                     </text>))
                                                                           .MinWidth(400))
-                                                                      .StoreID("UomStore")
+                                                                      .Store(Html.X().Store().AutoLoad(false)
+                                                                          .Proxy(Html.X().AjaxProxy()
+                                                                              .Url(Url.Action("LookupUomOfItem", "ItemUom", new { area = "Item" }))
+                                                                              .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                                                                          .Model(Html.X().Model()
+                                                                              .IDProperty("UomId")
+                                                                              .Fields(
+                                                                                  new ModelField("UomId", ModelFieldType.Int),
+                                                                                  new ModelField("Code", ModelFieldType.String),
+                                                                                  new ModelField("Description", ModelFieldType.String)))
+                                                                          .Data(ViewData["Uoms"]))
                                                                       .Listeners(ls =>
                                                                       {
                                                                               ls.BeforeQuery.Handler = "queryEvent.query = this.record.get('ItemId')";
-                                                                      })));
+                                                                      }))
+                                                                  .SilentSave(false));
                                                               cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(125).DataIndex("StartingDate").Text("Starting Date").Component(
                                                                   Html.X().DateField()));
                                                               cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(100).DataIndex("MinQty").Text("MinQty").Component(
@@ -255,10 +279,11 @@
                                                                   {
                                                                         ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
                                                                         ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
-                                                                                    this.setValue(v);
-                                                                                    this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
+                                                                                            this.setValue(v);
+                                                                                            this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
                                                                   })));
                                                           })
+                                                          .SelectionModel(Html.X().RowSelectionModel().Mode(SelectionMode.Single))
                                                     )
                                               )
                                               .Buttons(buttons =>
@@ -276,7 +301,7 @@
                                                           de.Click.ShowWarningOnFailure = true;
                                                           de.Click.EventMask.ShowMask = true;
                                                           de.Click.FormID = "FormSalesPriceGroupMaintenance";
-                                                          de.Click.ExtraParams.Add(new Parameter { Name = "salesPrice", Value = "App.SalesPriceGridPanel.getRowsValues()", Mode = ParameterMode.Raw, Encode = true });
+                                                          de.Click.ExtraParams.Add(new Parameter { Name = "salesPriceJSON", Value = "App.SalesPriceGridPanel.getRowsValues()", Mode = ParameterMode.Raw, Encode = true });
                                                       }));
                                                   buttons.Add(Html.X().Button()
                                                       .ID("btnCancel")
