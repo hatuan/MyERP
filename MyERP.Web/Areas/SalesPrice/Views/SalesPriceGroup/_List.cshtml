@@ -17,7 +17,7 @@
                   .DirectEvents(de =>
                   {
                       de.Click.Url = Url.Action("_Maintenance");
-                      de.Click.Before = "return #{SalesPriceGroupList}.hasSelection();";
+                      de.Click.Before = "return #{SalesPriceGroupGrid}.hasSelection();";
                       de.Click.Method = HttpMethod.GET;
                       de.Click.ShowWarningOnFailure = true;
                       de.Click.EventMask.ShowMask = true;
@@ -43,13 +43,13 @@
                   .Disabled(true)
                   .DirectEvents(de =>
                   {
-                      de.Click.Action = "Delete";
-                      de.Click.Before = "return #{SalesPriceGroupList}.hasSelection();";
+                      de.Click.Url = Url.Action("Delete");
+                      de.Click.Before = "return #{SalesPriceGroupGrid}.hasSelection();";
                       de.Click.Method = HttpMethod.GET;
                       de.Click.Confirmation.ConfirmRequest = true;
                       de.Click.Confirmation.Title = "Alert";
                       de.Click.Confirmation.Message = "Do you want to DELETE ?";
-                      de.Click.ExtraParams.Add(new Parameter("ID", "#{SalesPriceGroupList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
+                      de.Click.ExtraParams.Add(new Parameter("ID", "#{SalesPriceGroupGrid}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
                       de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
                   })
                   );
@@ -126,7 +126,7 @@
                   .Listeners(ls =>
                   {
                       ls.Select.Handler = "#{btnDelete}.enable();#{btnEdit}.enable();";
-                      ls.Deselect.Handler = "if (!#{SalesPriceGroupList}.hasSelection()) {#{btnDelete}.disable();#{btnEdit}.disable()}";
+                      ls.Deselect.Handler = "if (!#{SalesPriceGroupGrid}.hasSelection()) {#{btnDelete}.disable();#{btnEdit}.disable()}";
                   })
                   .DirectEvents(de =>
                   {

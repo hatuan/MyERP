@@ -248,17 +248,7 @@
                                                                                         </tpl>
                                                                                     </text>))
                                                                           .MinWidth(400))
-                                                                      .Store(Html.X().Store().AutoLoad(false)
-                                                                          .Proxy(Html.X().AjaxProxy()
-                                                                              .Url(Url.Action("LookupUomOfItem", "ItemUom", new { area = "Item" }))
-                                                                              .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
-                                                                          .Model(Html.X().Model()
-                                                                              .IDProperty("UomId")
-                                                                              .Fields(
-                                                                                  new ModelField("UomId", ModelFieldType.Int),
-                                                                                  new ModelField("Code", ModelFieldType.String),
-                                                                                  new ModelField("Description", ModelFieldType.String)))
-                                                                          .Data(ViewData["Uoms"]))
+                                                                      .StoreID("UomStore")
                                                                       .Listeners(ls =>
                                                                       {
                                                                               ls.BeforeQuery.Handler = "queryEvent.query = this.record.get('ItemId')";

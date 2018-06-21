@@ -364,6 +364,48 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
             return r;
         }
 
+        public ActionResult Delete(string id = null)
+        {
+            DirectResult r = new DirectResult();
+            if (!String.IsNullOrEmpty(id))
+            {
+                var _id = Convert.ToInt64(id);
+                var entity = repository.Get(c => c.Id == _id, new string[] { "SalesPrices" }).SingleOrDefault();
+                if (entity == null)
+                {
+                    r.Success = false;
+                    r.ErrorMessage = "Sales Price Group not found! Please check";
+                    return r;
+                }
+
+                foreach (var salesPriceRemove in entity.SalesPrices.ToList())
+                {
+                    entity.SalesPrices.Remove(salesPriceRemove);
+                    this.repository.DataContext.SalesPrices.Remove(salesPriceRemove);  //this.repository.DataContext.Entry(salesPriceRemove).State = EntityState.Deleted;
+                }
+
+                try
+                {
+                    this.repository.Delete(entity);
+                }
+                catch (Exception e)
+                {
+                    r.Success = false;
+                    r.ErrorMessage = e.Message;
+                    return r;
+                }
+
+                Store salesPriceGroupStore = X.GetCmp<Store>("StoreSalesPriceGroupList");
+                salesPriceGroupStore.Reload();
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            return this.Direct();
+        }
+
         public ActionResult AddLineToSalesPrice()
         {
             var newItem = new SalesPriceEditViewModel()
