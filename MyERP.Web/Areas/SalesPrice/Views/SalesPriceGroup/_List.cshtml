@@ -31,6 +31,7 @@
                   .DirectEvents(de =>
                   {
                       de.Click.Url = Url.Action("_Maintenance");
+                      de.Click.Before = "#{SalesPriceGroupGrid}.getSelectionModel().deselectAll();";
                       de.Click.Method = HttpMethod.GET;
                       de.Click.ShowWarningOnFailure = true;
                       de.Click.EventMask.ShowMask = true;
