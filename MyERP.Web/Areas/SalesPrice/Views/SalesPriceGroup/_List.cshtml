@@ -51,7 +51,13 @@
                       de.Click.Confirmation.Message = "Do you want to DELETE ?";
                       de.Click.ExtraParams.Add(new Parameter("ID", "#{SalesPriceGroupGrid}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
                       de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
-                      de.Click.Success = "#{btnAdd}.fireEvent('click');";
+                      de.Click.Success = "function(response, result) { " +
+                                         "  App.StoreSalesPriceGroupList.reload({ " +
+                                         "    callback : function() { " +
+                                         "      Ext.net.directRequest({url:'/SalesPrice/SalesPriceGroup/_Maintenance', method:'GET', eventMask:{showMask:true}});" +
+                                         "    }" +
+                                         "  });" +
+                                         "}";
                   })
                   );
           }));

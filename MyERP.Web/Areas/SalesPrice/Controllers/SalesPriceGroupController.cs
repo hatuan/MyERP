@@ -104,11 +104,9 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                         ItemId = salesPrice.ItemId,
                         ItemCode = salesPrice.Item?.Code,
                         ItemDescription = salesPrice.Item?.Description,
-                        Item = salesPrice.Item,
                         UomId = salesPrice.UomId,
                         UomCode = salesPrice.Uom?.Code,
                         UomDescription = salesPrice.Uom?.Description,
-                        Uom = salesPrice.Uom,
                         SalesType = salesPrice.SalesType,
                         SalesCodeId = (
                             salesPrice.SalesType == (short) SalesPriceSalesType.Customer
@@ -127,25 +125,6 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                                 salesPrice.SalesType == (short) SalesPriceSalesType.CustomerPriceGroup
                                     ? salesPrice.BusPartnerPriceGroup?.Code
                                     : ""
-                        ),
-                        SalesModel = (
-                            salesPrice.SalesType == (short) SalesPriceSalesType.Customer
-                                ? new ExtNetComboBoxModel
-                                {
-                                    Id = salesPrice.BusinessPartnerId,
-                                    Code = salesPrice.BusinessPartner?.Code,
-                                    Description = salesPrice.BusinessPartner?.Description
-                                }
-                                :
-                                salesPrice.SalesType == (short) SalesPriceSalesType.CustomerPriceGroup
-                                    ?
-                                    new ExtNetComboBoxModel
-                                    {
-                                        Id = salesPrice.BusPartnerPriceGroupId,
-                                        Code = salesPrice.BusPartnerPriceGroup?.Code,
-                                        Description = salesPrice.BusPartnerPriceGroup?.Description
-                                    }
-                                    : null
                         ),
                         StartingDate = salesPrice.StartingDate.CompareTo(new DateTime(1900, 1, 1, 0, 0, 0)) == 0 ? default(DateTime) : salesPrice.StartingDate,
                         MinQty = salesPrice.MinQty,
@@ -356,10 +335,11 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                     }
 
                 }
-                Store salesPriceGroupStore = X.GetCmp<Store>("StoreSalesPriceGroupList");
-                salesPriceGroupStore.Reload();
+                //Store salesPriceGroupStore = X.GetCmp<Store>("StoreSalesPriceGroupList");
+                //salesPriceGroupStore.Reload();
 
                 r.Success = true;
+                r.Result = new { Id = model.Id };
                 return r;
             }
             

@@ -302,6 +302,17 @@
                                                           de.Click.EventMask.ShowMask = true;
                                                           de.Click.FormID = "FormSalesPriceGroupMaintenance";
                                                           de.Click.ExtraParams.Add(new Parameter { Name = "salesPriceJSON", Value = "App.SalesPriceGridPanel.getRowsValues()", Mode = ParameterMode.Raw, Encode = true });
+                                                          de.Click.Success = "function(response, result) { " +
+                                                                             " console.log(result.result);" +
+                                                                             " var record = App.SalesPriceGroupGrid.getSelectionModel().getSelected()[0]; " +
+                                                                             " var index = App.SalesPriceGroupGrid.store.indexOf(record);" +
+                                                                             " App.StoreSalesPriceGroupList.reload({ " +
+                                                                             "   callback : function() { " +
+                                                                             "     App.SalesPriceGroupGrid.getSelectionModel().select(index);" +
+                                                                             "     Ext.net.directRequest({url:'/SalesPrice/SalesPriceGroup/_Maintenance?id='+result.result.Id, method:'GET', eventMask:{showMask:true}});" +
+                                                                             "   }" +
+                                                                             " });" +
+                                                                             "}";
                                                       }));
                                                   buttons.Add(Html.X().Button()
                                                       .ID("btnCancel")
