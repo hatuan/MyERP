@@ -149,16 +149,16 @@
                                                           .ColumnModel(cols =>
                                                           {
                                                               cols.Columns.Add(Html.X().RowNumbererColumn());
-                                                              cols.Columns.Add(Html.X().ComponentColumn().Sortable(false).Text("Sales Type").DataIndex("SalesType").Width(200).Editor(true).Component(
+                                                              cols.Columns.Add(Html.X().ComponentColumn().ID("SalesTypeCol").Sortable(false).Text("Sales Type").DataIndex("SalesType").Width(200).Editor(true).Component(
                                                                   Html.X().ComboBox().Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.SalesPriceSalesType))
                                                                       .ListConfig(Html.X().BoundList().MinWidth(200))
                                                                   )
-                                                                  .SilentSave(false)
                                                                   .Listeners(ls =>
                                                                   {
-                                                                      ls.Edit.Handler = @"e.record.data.SalesCodeId = 0;";
+                                                                      ls.Edit.Handler = @"e.record.data.SalesCodeId = 0;
+                                                                                        #{SalesTypeIdCol}.getComponent(e.record.store.indexOf(e.record)).setValue(0);";
                                                                   }));
-                                                              cols.Columns.Add(Html.X().ComponentColumn().Sortable(false).Text("Sales Code").DataIndex("SalesCodeId").Width(150).Editor(true).Component(
+                                                              cols.Columns.Add(Html.X().ComponentColumn().ID("SalesTypeIdCol").Sortable(false).Text("Sales Code").DataIndex("SalesCodeId").Width(150).Editor(true).Component(
                                                                   Html.X().ComboBox()
                                                                       .DisplayField("Code")
                                                                       .ValueField("Id")
@@ -191,7 +191,7 @@
                                                                                       this.getStore().salesType = salesType";
                                                                             })
                                                                         ));
-                                                              cols.Columns.Add(Html.X().ComponentColumn().Sortable(false).Text("Item").DataIndex("ItemId").Width(150).Editor(true).Component(
+                                                              cols.Columns.Add(Html.X().ComponentColumn().ID("ItemIdCol").Sortable(false).Text("Item").DataIndex("ItemId").Width(150).Editor(true).Component(
                                                                   Html.X().ComboBox()
                                                                       .DisplayField("Code")
                                                                       .ValueField("Id")
@@ -217,14 +217,24 @@
                                                                                 .MinWidth(400))
                                                                       .StoreID("ItemStore")
                                                                   )
-                                                                  .SilentSave(false)
                                                                   .Listeners(ls =>
                                                                   {
-                                                                      ls.Edit.Handler = @"e.record.data.ItemDescription = e.cmp.findRecordByValue(e.cmp.getValue()).data.Description;";
+                                                                      ls.Edit.Handler = @"var value = e.cmp.findRecordByValue(e.cmp.getValue()).data.Description;
+                                                                                          var view = #{SalesPriceGridPanel}.getView();
+                                                                                          var column = #{ItemDescriptionCol};
+                                                                                          var cell = view.getCell(e.record, column).childNodes[0];
+                                                                                          if (Ext.isFunction(column.renderer)) {
+                                                                                              value = column.renderer(value, record); // pass all the parameters which you are using in Renderer
+                                                                                          }
+                                                                                          e.record.data.ItemDescription = value;
+                                                                                          cell.innerText = value;
+
+                                                                                          e.record.data.UomId = 0;
+                                                                                          #{UomIdCol}.getComponent(e.record.store.indexOf(e.record)).setValue(0);";
                                                                   })
                                                               );
-                                                              cols.Columns.Add(Html.X().ColumnFor(Model.SalesPrices, m => m.ItemDescription).ToBuilder<Column.Builder>().Sortable(false).Flex(1).MinWidth(256));
-                                                              cols.Columns.Add(Html.X().ComponentColumn().Sortable(false).Text("UOM").DataIndex("UomId").Width(100).Editor(true).Component(
+                                                              cols.Columns.Add(Html.X().ColumnFor(Model.SalesPrices, m => m.ItemDescription).ToBuilder<Column.Builder>().ID("ItemDescriptionCol").Sortable(false).Flex(1).MinWidth(256));
+                                                              cols.Columns.Add(Html.X().ComponentColumn().ID("UomIdCol").Sortable(false).Text("UOM").DataIndex("UomId").Width(100).Editor(true).Component(
                                                                   Html.X().ComboBox()
                                                                       .DisplayField("Code")
                                                                       .ValueField("UomId")
@@ -252,11 +262,10 @@
                                                                       .Listeners(ls =>
                                                                       {
                                                                               ls.BeforeQuery.Handler = "queryEvent.query = this.record.get('ItemId')";
-                                                                      }))
-                                                                  .SilentSave(false));
-                                                              cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(125).DataIndex("StartingDate").Text("Starting Date").Component(
+                                                                      })));
+                                                              cols.Columns.Add(Html.X().ComponentColumn().ID("StartingDateCol").Editor(true).Sortable(false).Width(125).DataIndex("StartingDate").Text("Starting Date").Component(
                                                                   Html.X().DateField()));
-                                                              cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(100).DataIndex("MinQty").Text("MinQty").Component(
+                                                              cols.Columns.Add(Html.X().ComponentColumn().ID("MinQtyCol").Editor(true).Sortable(false).Width(100).DataIndex("MinQty").Text("MinQty").Component(
                                                                   Html.X().TextField().SelectOnFocus(true).MaskRe(@"/[0-9\,\.]").Listeners(ls =>
                                                                   {
                                                                         ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
@@ -264,7 +273,7 @@
                                                                                             this.setValue(v);
                                                                                             this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
                                                                   })));
-                                                              cols.Columns.Add(Html.X().ComponentColumn().Editor(true).Sortable(false).Width(100).DataIndex("UnitPrice").Text("Unit Price").Component(
+                                                              cols.Columns.Add(Html.X().ComponentColumn().ID("UnitPriceCol").Editor(true).Sortable(false).Width(100).DataIndex("UnitPrice").Text("Unit Price").Component(
                                                                   Html.X().TextField().SelectOnFocus(true).MaskRe(@"/[0-9\,\.]").Listeners(ls =>
                                                                   {
                                                                         ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
