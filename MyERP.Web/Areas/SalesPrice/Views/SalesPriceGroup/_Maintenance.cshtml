@@ -155,7 +155,7 @@
                                                                   )
                                                                   .Listeners(ls =>
                                                                   {
-                                                                      ls.Edit.Handler = @"e.record.data.SalesCodeId = 0;
+                                                                      ls.Edit.Handler = @"e.record.data.SalesCodeId = null;
                                                                                         #{SalesTypeIdCol}.getComponent(e.record.store.indexOf(e.record)).setValue(null);";
                                                                   }));
                                                               cols.Columns.Add(Html.X().ComponentColumn().ID("SalesTypeIdCol").Sortable(false).Text("Sales Code").DataIndex("SalesCodeId").Width(150).Editor(true).Component(

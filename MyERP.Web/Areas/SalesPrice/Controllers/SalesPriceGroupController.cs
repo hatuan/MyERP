@@ -253,7 +253,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                             BusPartnerPriceGroupId = c.SalesType == 2 ? c.SalesCodeId : null,
                             BusinessPartnerId = c.SalesType == 1 ? c.SalesCodeId : null,
                             ItemId = c.ItemId,
-                            UomId = c.UomId,
+                            UomId = (c.UomId == null || c.UomId == 0) ? null : c.UomId,
                             StartingDate = c.StartingDate ?? new DateTime(1900, 1, 1, 0, 0, 0),
                             MinQty = c.MinQty ?? 0,
                             UnitPrice = c.UnitPrice ?? 0,
@@ -356,6 +356,8 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                     }
 
                 }
+                Store salesPriceGroupStore = X.GetCmp<Store>("StoreSalesPriceGroupList");
+                salesPriceGroupStore.Reload();
 
                 r.Success = true;
                 return r;
