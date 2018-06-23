@@ -341,6 +341,10 @@
     <Content Include="App_Readme\Ext.NET\LICENSE" />
     <Content Include="App_Readme\Ext.NET\CHANGELOG.md" />
     <Content Include="Areas\Item\Views\ItemUom\Index.cshtml" />
+    <Content Include="Areas\Location\Views\web.config" />
+    <Content Include="Areas\Location\Views\Index\Index.cshtml" />
+    <Content Include="Areas\Location\Views\Index\_List.cshtml" />
+    <Content Include="Areas\Location\Views\Index\_Maintenance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -367,6 +371,8 @@
     <Compile Include="Areas\Item\Controllers\ItemGroupController.cs" />
     <Compile Include="Areas\Item\Controllers\ItemUomController.cs" />
     <Compile Include="Areas\Item\ItemAreaRegistration.cs" />
+    <Compile Include="Areas\Location\Controllers\IndexController.cs" />
+    <Compile Include="Areas\Location\LocationAreaRegistration.cs" />
     <Compile Include="Areas\POS\Controllers\IndexController.cs" />
     <Compile Include="Areas\POS\POSAreaRegistration.cs" />
     <Compile Include="Areas\SalesPrice\Controllers\IndexController.cs" />
@@ -393,6 +399,7 @@
     <Compile Include="Models\ItemGroupViewModels.cs" />
     <Compile Include="Models\BusinessPartnerModels.cs" />
     <Compile Include="Models\ItemUomViewModels.cs" />
+    <Compile Include="Models\LocationViewModels.cs" />
     <Compile Include="Models\SalesPriceViewModels.cs" />
     <Compile Include="Models\SalesPriceGroupViewModels.cs" />
     <Compile Include="Models\ItemViewModels.cs" />
@@ -416,6 +423,7 @@
     <Compile Include="CustomRoleProvider.cs" />
     <Compile Include="odata\RolesController.cs" />
     <Compile Include="Repository\BusinessPartnerPriceGroupRepository.cs" />
+    <Compile Include="Repository\LocationRepository.cs" />
     <Compile Include="Repository\SalesPriceGroupRepository.cs" />
     <Compile Include="Repository\ClientRepository.cs" />
     <Compile Include="Repository\CurrencyRepository.cs">
@@ -447,6 +455,8 @@
   <ItemGroup>
     <Folder Include="Areas\BusinessPartner\Models\" />
     <Folder Include="Areas\Item\Models\" />
+    <Folder Include="Areas\Location\Models\" />
+    <Folder Include="Areas\Location\Views\Shared\" />
     <Folder Include="Areas\SalesPrice\Models\" />
     <Folder Include="Areas\SalesPrice\Views\Shared\" />
     <Folder Include="Areas\UOM\Models\" />

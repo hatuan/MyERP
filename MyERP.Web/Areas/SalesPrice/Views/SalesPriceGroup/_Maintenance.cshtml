@@ -303,7 +303,7 @@
                                                           de.Click.FormID = "FormSalesPriceGroupMaintenance";
                                                           de.Click.ExtraParams.Add(new Parameter { Name = "salesPriceJSON", Value = "App.SalesPriceGridPanel.getRowsValues()", Mode = ParameterMode.Raw, Encode = true });
                                                           de.Click.Success = "function(response, result) { " +
-                                                                             " App.StoreSalesPriceGroupList.reload({ " +
+                                                                             " App.StoreSalesPriceGroupList.load({ " +
                                                                              "   callback : function() { " +
                                                                              "     var record = App.SalesPriceGroupGrid.store.getById(result.result.Id); " +
                                                                              "     var index = App.SalesPriceGroupGrid.store.indexOf(record);" +

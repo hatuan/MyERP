@@ -49,6 +49,11 @@ namespace MyERP.Web
 
     }
 
+    public partial class LocationRepository : BaseRepository<MyERP.DataAccess.Location, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
     public partial class BusinessPartnerRepository : BaseRepository<MyERP.DataAccess.BusinessPartner, MyERP.DataAccess.EntitiesModel>
     {
 

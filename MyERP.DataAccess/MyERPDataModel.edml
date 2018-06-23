@@ -904,6 +904,12 @@
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
           <Property Name="status" Type="smallint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="contact_name" Type="nvarchar" MaxLength="32" />
+          <Property Name="address" Type="nvarchar" MaxLength="256" />
+          <Property Name="telephone" Type="nvarchar" MaxLength="32" />
+          <Property Name="mobiphone" Type="nvarchar" MaxLength="32" />
+          <Property Name="fax" Type="nvarchar" MaxLength="32" />
+          <Property Name="email" Type="varchar" MaxLength="32" />
         </EntityType>
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
@@ -2994,6 +3000,12 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="41ac0c52-905c-4948-abfe-365e18807d1a" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="549a058f-048f-4043-9103-e38b0367c454" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="4e1abe25-d885-4781-ab68-f8b735a42a6b" />
+          <Property Name="ContactName" Type="String" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="96675083-c553-40e8-af02-6d4c59395edb" />
+          <Property Name="Address" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="ef66654d-6d1b-4d6a-ae6b-f982f7c0ed87" />
+          <Property Name="Telephone" Type="String" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="03205369-d20d-47d7-a4fc-c8ebf07e22a8" />
+          <Property Name="Mobiphone" Type="String" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="976d3eb4-e343-43e3-9cf5-3916a01c89d4" />
+          <Property Name="Fax" Type="String" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="7c799dd5-36a7-4a2a-a2b3-89405da141cb" />
+          <Property Name="Email" Type="String" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="c6d081c1-996e-49dc-ac9e-8e83cb4c3cb2" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e8621e97-9999-4218-bd55-80b414029be9" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="68cb78c5-fab0-4930-818b-70bd22500d8f" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="98c07b66-e7f0-4025-bc71-0fb230ba5efb" />
@@ -4630,6 +4642,12 @@
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
                 <ScalarProperty Name="Status" ColumnName="status" />
                 <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="ContactName" ColumnName="contact_name" />
+                <ScalarProperty Name="Address" ColumnName="address" />
+                <ScalarProperty Name="Telephone" ColumnName="telephone" />
+                <ScalarProperty Name="Mobiphone" ColumnName="mobiphone" />
+                <ScalarProperty Name="Fax" ColumnName="fax" />
+                <ScalarProperty Name="Email" ColumnName="email" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

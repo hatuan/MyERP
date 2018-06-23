@@ -1,0 +1,68 @@
+﻿@model MyERP.Web.Models.LocationEditViewModel
+
+@(Html.X().Window()
+          .ID("WindowLocationMaintenance")
+          .Title("Location Maintenance")
+          .Height(500)
+          .Width(650)
+          .Modal(true)
+          .Layout(LayoutType.Fit)
+          .Items(
+              Html.X().FormPanel()
+                  .ID("FormLocationMaintenance")
+                  .Layout(LayoutType.Form)
+                  .Border(false)
+                  .BodyPadding(5)
+                  .DefaultButton("btnSave")
+                  .Items(items =>
+                  {
+                      items.Add(Html.X().AntiForgeryField());
+                      items.Add(Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").Width(150).AutoFocus(true).EnforceMaxLength(true).ID("Code"));
+                      items.Add(Html.X().TextFieldFor(m => m.Description).AllowBlank(false).EnforceMaxLength(true).ID("Description"));
+                      items.Add(Html.X().TextFieldFor(m => m.ContactName).EnforceMaxLength(true).ID("ContactName"));
+                      items.Add(Html.X().TextFieldFor(m => m.Address).EnforceMaxLength(true).ID("Address"));
+                      items.Add(Html.X().TextFieldFor(m => m.Telephone).EnforceMaxLength(true).ID("Telephone"));
+                      items.Add(Html.X().TextFieldFor(m => m.Mobilephone).EnforceMaxLength(true).ID("Mobilephone"));
+                      items.Add(Html.X().TextFieldFor(m => m.Fax).EnforceMaxLength(true).ID("Fax"));
+                      items.Add(Html.X().TextFieldFor(m => m.Email).EnforceMaxLength(true).ID("Email"));
+                      items.Add(Html.X().ComboBoxFor(m => m.Status).Width(150).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)));
+                      items.Add(Html.X().HiddenFor(m => m.Id).ID("Id"));
+                      items.Add(Html.X().HiddenFor(m => m.Version).ID("Version"));
+                  })
+                  .Buttons(
+                      Html.X().Button()
+                          .ID("btnSave")
+                          .Text("Save")
+                          .Icon(Icon.Disk)
+                          .DirectEvents(de =>
+                          {
+                              de.Click.Url = Url.Action("_Maintenance");
+                              de.Click.Method = HttpMethod.POST;
+                              de.Click.Before = "return this.up('form').isValid();";
+                              de.Click.Success = "function(response, result) { " +
+                                                 "  this.up('window').close();" +
+                                                 "  App.LocationList.getSelectionModel().deselectAll();" +
+                                                 "  App.StoreLocationList.reload({ " +
+                                                 "    callback : function() { " +
+                                                 "      var record = App.LocationList.store.getById(result.result.Id); " +
+                                                 "      var index = App.LocationList.store.indexOf(record);" +
+                                                 "      App.LocationList.getSelectionModel().select(index);" +
+                                                 "   }" +
+                                                 " });" +
+                                                 "}";
+                              de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
+                              de.Click.ShowWarningOnFailure = true;
+                              de.Click.EventMask.ShowMask = true;
+                              de.Click.FormID = "FormLocationMaintenance";
+                          }),
+                       Html.X().Button()
+                           .ID("btnCancel")
+                           .Text("Cancel")
+                           .Icon(Icon.Cancel)
+                           .Listeners(ls =>
+                           {
+                               ls.Click.Handler = "this.up('window').close();";
+                           }))
+    )
+)
+

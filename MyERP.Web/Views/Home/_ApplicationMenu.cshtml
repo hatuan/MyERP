@@ -77,7 +77,7 @@
                                                                                                         }),
                                                                                                         Html.X().MenuItem().Text("Location").Tag("Location").DirectEvents(de => 
                                                                                                         {
-                                                                                                            de.Click.Url = Url.Action("_List", "Index", new { area = "UOM" });
+                                                                                                            de.Click.Url = Url.Action("_List", "Index", new { area = "Location" });
                                                                                                             de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
                                                                                                             de.Click.EventMask.ShowMask = true;
                                                                                                         })
