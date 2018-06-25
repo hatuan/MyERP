@@ -88,6 +88,12 @@
                                                                                                     .Items(
                                                                                                         Html.X().MenuItem().Text("Currency").Tag("Currency"),
                                                                                                         Html.X().MenuItem().Text("Currency Rate").Tag("CurrencyRate"),
+                                                                                                        Html.X().MenuItem().Text("No Sequence").Tag("NoSequence").DirectEvents(de =>
+                                                                                                        {
+                                                                                                            de.Click.Url = Url.Action("_List", "Index", new { area = "NoSequence" });
+                                                                                                            de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
+                                                                                                            de.Click.EventMask.ShowMask = true;
+                                                                                                        }),
                                                                                                         Html.X().MenuItem().Text("Users Manager").Tag("UsersManager")
                                                                                                     )
                                                                                                 )

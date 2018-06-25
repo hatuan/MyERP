@@ -219,16 +219,22 @@
                                                                   )
                                                                   .Listeners(ls =>
                                                                   {
-                                                                      ls.Edit.Handler = @"var value = e.cmp.findRecordByValue(e.cmp.getValue()).data.Description;
-                                                                                          var view = #{SalesPriceGridPanel}.getView();
+                                                                      ls.Edit.Handler = @"var view = #{SalesPriceGridPanel}.getView();
                                                                                           var column = #{ItemDescriptionCol};
                                                                                           var cell = view.getCell(e.record, column);
                                                                                           var div = cell.getElementsByTagName('div')[0];
-                                                                                          if (Ext.isFunction(column.renderer)) {
+                                                                                          var recordSelected = e.cmp.findRecordByValue(e.cmp.getValue());
+                                                                                          if(recordSelected) {          
+                                                                                            var value = e.cmp.findRecordByValue(e.cmp.getValue()).data.Description; 
+                                                                                            if (Ext.isFunction(column.renderer)) {
                                                                                               value = column.renderer(value, record); // pass all the parameters which you are using in Renderer
-                                                                                          }
-                                                                                          e.record.data.ItemDescription = value;
-                                                                                          div.innerText = value;
+                                                                                            }
+                                                                                            e.record.data.ItemDescription = value;
+                                                                                            div.innerText = value;
+                                                                                          } else {
+                                                                                            e.record.data.ItemDescription = '';
+                                                                                            div.innerText = '';  
+                                                                                          }  
                                                                                           /*Set UomId */
                                                                                           e.record.data.UomId = null;
                                                                                           #{UomIdCol}.getComponent(e.record.store.indexOf(e.record)).setValue(null);";

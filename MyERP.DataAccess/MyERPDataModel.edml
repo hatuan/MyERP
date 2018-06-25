@@ -27,6 +27,9 @@
           <EntitySet Name="business_partner_price_groups" EntityType="MyERP.DataAccess.Store.business_partner_price_group" store:Type="Tables" Schema="dbo" Table="business_partner_price_group" />
           <EntitySet Name="business_partner_discount_groups" EntityType="MyERP.DataAccess.Store.business_partner_discount_group" store:Type="Tables" Schema="dbo" Table="business_partner_discount_group" />
           <EntitySet Name="locations" EntityType="MyERP.DataAccess.Store.location" store:Type="Tables" Schema="dbo" Table="location" />
+          <EntitySet Name="no_sequences" EntityType="MyERP.DataAccess.Store.no_sequence" store:Type="Tables" Schema="dbo" Table="no_sequence" />
+          <EntitySet Name="no_sequence_lines" EntityType="MyERP.DataAccess.Store.no_sequence_line" store:Type="Tables" Schema="dbo" Table="no_sequence_line" />
+          <EntitySet Name="options" EntityType="MyERP.DataAccess.Store.option" store:Type="Tables" Schema="dbo" Table="option" />
           <AssociationSet Name="FK_client_user_profile" Association="MyERP.DataAccess.Store.FK_client_user_profile">
             <End Role="user" EntitySet="users" />
             <End Role="client" EntitySet="clients" />
@@ -390,6 +393,54 @@
           <AssociationSet Name="FK_sales_price_business_partner_price_group" Association="MyERP.DataAccess.Store.FK_sales_price_business_partner_price_group">
             <End Role="business_partner_price_group" EntitySet="business_partner_price_groups" />
             <End Role="sales_price" EntitySet="sales_prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_no_sequence_line_no_sequence" Association="MyERP.DataAccess.Store.FK_no_sequence_line_no_sequence">
+            <End Role="no_sequence" EntitySet="no_sequences" />
+            <End Role="no_sequence_line" EntitySet="no_sequence_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_no_sequence_client" Association="MyERP.DataAccess.Store.FK_no_sequence_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="no_sequence" EntitySet="no_sequences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_no_sequence_organization" Association="MyERP.DataAccess.Store.FK_no_sequence_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="no_sequence" EntitySet="no_sequences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_no_sequence_user" Association="MyERP.DataAccess.Store.FK_no_sequence_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="no_sequence" EntitySet="no_sequences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_no_sequence_user1" Association="MyERP.DataAccess.Store.FK_no_sequence_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="no_sequence" EntitySet="no_sequences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_no_sequence_line_client" Association="MyERP.DataAccess.Store.FK_no_sequence_line_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="no_sequence_line" EntitySet="no_sequence_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_no_sequence_line_organization" Association="MyERP.DataAccess.Store.FK_no_sequence_line_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="no_sequence_line" EntitySet="no_sequence_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_no_sequence_line_user" Association="MyERP.DataAccess.Store.FK_no_sequence_line_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="no_sequence_line" EntitySet="no_sequence_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_no_sequence_line_user1" Association="MyERP.DataAccess.Store.FK_no_sequence_line_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="no_sequence_line" EntitySet="no_sequence_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_option_client" Association="MyERP.DataAccess.Store.FK_option_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_option_organization" Association="MyERP.DataAccess.Store.FK_option_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_option_user" Association="MyERP.DataAccess.Store.FK_option_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="option" EntitySet="options" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
@@ -910,6 +961,56 @@
           <Property Name="mobiphone" Type="nvarchar" MaxLength="32" />
           <Property Name="fax" Type="nvarchar" MaxLength="32" />
           <Property Name="email" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="no_sequence">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="default_no" Type="tinyint" Nullable="false" />
+          <Property Name="manual_no" Type="tinyint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="no_sequence_line">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="line_no" Type="bigint" Nullable="false" />
+          <Property Name="starting_no" Type="int" Nullable="false" />
+          <Property Name="ending_no" Type="int" Nullable="false" />
+          <Property Name="current_no" Type="int" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_at" Type="datetime" Nullable="false" />
+          <Property Name="no_sequence_id" Type="bigint" Nullable="false" />
+          <Property Name="format_no" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="warning_no" Type="int" Nullable="false" />
+          <Property Name="starting_date" Type="datetime2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="option">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
         </EntityType>
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
@@ -2003,6 +2104,150 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_no_sequence_line_no_sequence">
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="1" />
+          <End Role="no_sequence_line" Type="MyERP.DataAccess.Store.no_sequence_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="no_sequence">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="no_sequence_line">
+              <PropertyRef Name="no_sequence_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_no_sequence_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="no_sequence">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_no_sequence_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="no_sequence">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_no_sequence_user">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="no_sequence">
+              <PropertyRef Name="rec_created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_no_sequence_user1">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="no_sequence">
+              <PropertyRef Name="rec_modified_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_no_sequence_line_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="no_sequence_line" Type="MyERP.DataAccess.Store.no_sequence_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="no_sequence_line">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_no_sequence_line_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="no_sequence_line" Type="MyERP.DataAccess.Store.no_sequence_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="no_sequence_line">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_no_sequence_line_user">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="no_sequence_line" Type="MyERP.DataAccess.Store.no_sequence_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="no_sequence_line">
+              <PropertyRef Name="rec_created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_no_sequence_line_user1">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="no_sequence_line" Type="MyERP.DataAccess.Store.no_sequence_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="no_sequence_line">
+              <PropertyRef Name="rec_modified_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_option_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_option_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_option_user">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="rec_modified_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -2031,6 +2276,9 @@
           <EntitySet Name="BusinessPartnerPriceGroups" EntityType="MyERP.DataAccess.BusinessPartnerPriceGroup" />
           <EntitySet Name="BusinessPartnerDiscountGroups" EntityType="MyERP.DataAccess.BusinessPartnerDiscountGroup" />
           <EntitySet Name="Locations" EntityType="MyERP.DataAccess.Location" />
+          <EntitySet Name="NoSequences" EntityType="MyERP.DataAccess.NoSequence" />
+          <EntitySet Name="NoSequenceLines" EntityType="MyERP.DataAccess.NoSequenceLine" />
+          <EntitySet Name="Options" EntityType="MyERP.DataAccess.Option" />
           <AssociationSet Name="User_Client_CreatedBySet" Association="MyERP.DataAccess.User_Client_CreatedBy">
             <End Role="RecCreatedByUser" EntitySet="Users" />
             <End Role="Clients" EntitySet="Clients" />
@@ -2399,6 +2647,54 @@
             <End Role="BillToCustomer" EntitySet="BusinessPartners" />
             <End Role="PosHeaders1" EntitySet="PosHeaders" />
           </AssociationSet>
+          <AssociationSet Name="NoSequence_NoSequenceLineSet" Association="MyERP.DataAccess.NoSequence_NoSequenceLine">
+            <End Role="NoSequence" EntitySet="NoSequences" />
+            <End Role="NoSequenceLines" EntitySet="NoSequenceLines" />
+          </AssociationSet>
+          <AssociationSet Name="Client_NoSequenceSet" Association="MyERP.DataAccess.Client_NoSequence">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="NoSequences" EntitySet="NoSequences" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_NoSequenceSet" Association="MyERP.DataAccess.Organization_NoSequence">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="NoSequences" EntitySet="NoSequences" />
+          </AssociationSet>
+          <AssociationSet Name="User_NoSequence_RecCreatedBySet" Association="MyERP.DataAccess.User_NoSequence_RecCreatedBy">
+            <End Role="RecCreatedByUser" EntitySet="Users" />
+            <End Role="NoSequences" EntitySet="NoSequences" />
+          </AssociationSet>
+          <AssociationSet Name="User_NoSequence_RecModifiedBySet" Association="MyERP.DataAccess.User_NoSequence_RecModifiedBy">
+            <End Role="RecModifiedByUser" EntitySet="Users" />
+            <End Role="NoSequences1" EntitySet="NoSequences" />
+          </AssociationSet>
+          <AssociationSet Name="Client_NoSequenceLineSet" Association="MyERP.DataAccess.Client_NoSequenceLine">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="NoSequenceLines" EntitySet="NoSequenceLines" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_NoSequenceLineSet" Association="MyERP.DataAccess.Organization_NoSequenceLine">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="NoSequenceLines" EntitySet="NoSequenceLines" />
+          </AssociationSet>
+          <AssociationSet Name="User_NoSequenceLine_RecCreatedBySet" Association="MyERP.DataAccess.User_NoSequenceLine_RecCreatedBy">
+            <End Role="RecCreatedByUser" EntitySet="Users" />
+            <End Role="NoSequenceLines" EntitySet="NoSequenceLines" />
+          </AssociationSet>
+          <AssociationSet Name="User_NoSequenceLine_RecModifiedBySet" Association="MyERP.DataAccess.User_NoSequenceLine_RecModifiedBy">
+            <End Role="RecModifiedByUser" EntitySet="Users" />
+            <End Role="NoSequenceLines1" EntitySet="NoSequenceLines" />
+          </AssociationSet>
+          <AssociationSet Name="Client_OptionSet" Association="MyERP.DataAccess.Client_Option">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Options" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_OptionSet" Association="MyERP.DataAccess.Organization_Option">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="Options" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="User_Option_RecModifiedBySet" Association="MyERP.DataAccess.User_Option_RecModifiedBy">
+            <End Role="RecModifiedByUser" EntitySet="Users" />
+            <End Role="Options" EntitySet="Options" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
           <Key>
@@ -2431,6 +2727,8 @@
           <NavigationProperty Name="Roles" Relationship="MyERP.DataAccess.User_UserInRole" FromRole="User" ToRole="Roles" ed:Guid="43260679-7d39-401a-9f63-24023798eccc" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_User" FromRole="Users" ToRole="Organization" ed:Guid="dfe685df-2d02-44cf-9884-0da3cb05954e" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_User" FromRole="Users" ToRole="Client" ed:Guid="aa9f2477-2bbc-45d0-8300-32910ef59c0e" />
+          <NavigationProperty Name="NoSequenceLines1" Relationship="MyERP.DataAccess.User_NoSequenceLine_RecModifiedBy" FromRole="RecModifiedByUser" ToRole="NoSequenceLines1" ed:Guid="feefb5fc-150e-40d7-9dc5-403ca07f880e" />
+          <NavigationProperty Name="Options" Relationship="MyERP.DataAccess.User_Option_RecModifiedBy" FromRole="RecModifiedByUser" ToRole="Options" ed:Guid="b2615a57-33df-480e-b19a-d5cd4c16b0b4" />
         </EntityType>
         <EntityType Name="Client" ed:Guid="8754758b-7440-4978-8a30-ff644e1d9950">
           <Key>
@@ -3018,6 +3316,69 @@
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_Location" FromRole="Locations" ToRole="Organization" ed:Guid="7422abb9-b7c1-45e6-8c17-0dd2b0ee28fd" />
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Location_RecCreatedBy" FromRole="Locations" ToRole="RecCreatedByUser" ed:Guid="f20c175d-b91e-42f1-91a3-634786237813" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_Location_RecModifiedBy" FromRole="Locations1" ToRole="RecModifiedByUser" ed:Guid="ef393429-6be3-4c17-ad9f-7c07e490d802" />
+        </EntityType>
+        <EntityType Name="NoSequence" ed:Guid="e6a0f1aa-417a-40cf-a4f5-4fe3f1884199">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c69995e0-ac59-4c98-9cf1-475aeecd5af6" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="3a6b2958-32a7-4889-8541-bc8ed7ec6f02" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="82350464-7109-4d67-b065-1825acafd0db" />
+          <Property Name="DefaultNo" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="336a9ec7-1150-43f8-b845-a6730055253b" />
+          <Property Name="ManualNo" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="b09601cb-3e75-41c5-b9f7-16dd8ce2bbe4" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="eab9b274-5f4a-485b-9d9d-ec066f6bc6cc" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="300f9ce7-68ab-4f03-9576-90450c2d542e" />
+          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="c5ce9145-066f-4ba3-abea-cf9112ee32cc" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a0be6c6d-4eb5-4b1b-9917-241547f189ae" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="6f5ade12-eebe-4b07-ab95-70d8abe1b0cd" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="80b1ba3d-88d7-4620-b779-1e1e0ff6ce15" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5e9625b3-5394-4388-83ca-ea5fdbafbfa9" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="90a732e4-72cd-49af-a038-e557a38894d9" />
+          <NavigationProperty Name="NoSequenceLines" Relationship="MyERP.DataAccess.NoSequence_NoSequenceLine" FromRole="NoSequence" ToRole="NoSequenceLines" ed:Guid="ef8471a7-033f-4359-902e-51fae5cf7983" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_NoSequence" FromRole="NoSequences" ToRole="Client" ed:Guid="bb4a2860-7699-4f23-acbc-7f78f9c459e0" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_NoSequence" FromRole="NoSequences" ToRole="Organization" ed:Guid="6f5e5233-34b5-4987-b7d5-bb5bbea9907a" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_NoSequence_RecCreatedBy" FromRole="NoSequences" ToRole="RecCreatedByUser" ed:Guid="e9034669-8ac4-4114-8d0a-44b2c0041950" />
+          <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_NoSequence_RecModifiedBy" FromRole="NoSequences1" ToRole="RecModifiedByUser" ed:Guid="5b1c1d4c-1adc-4a71-a2cb-9a4860806ed2" />
+        </EntityType>
+        <EntityType Name="NoSequenceLine" ed:Guid="a6ceff7e-3446-4178-90bc-4e07410bb1b8">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="b9c1038c-7f09-4305-a895-dfae839aaa63" />
+          <Property Name="NoSequenceId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="7321cedb-7719-438c-a0d5-d3151e6865e4" />
+          <Property Name="LineNo" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="51a5dcba-e416-46c1-84fc-1ce598bb7343" />
+          <Property Name="StartingDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="51c70889-65cb-4ba2-9588-939e454d8d53" />
+          <Property Name="StartingNo" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="08b049fc-b566-4326-b59c-f396b08f48cb" />
+          <Property Name="EndingNo" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="d8f30f90-54c5-42e1-babf-7e6e10c7807d" />
+          <Property Name="CurrentNo" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="5cd35e4a-2d2d-4e4a-b6c2-e44a0e1f2b85" />
+          <Property Name="FormatNo" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="84982a0f-a647-46ad-bafd-863b5346f73b" />
+          <Property Name="WarningNo" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="df8698fd-1e2b-4607-82a8-101f5b771ca1" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="92f18e94-5b0b-4037-872a-7241046a5455" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="9e46eb84-be48-401c-af5b-abecdb36fc65" />
+          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="e1a9e507-e4b9-45fb-a8c9-c117a1226109" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="80fba58f-5305-4e1d-876b-a60f93c6e142" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4c606e02-879f-4950-9b3d-cb2664871559" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="a9339607-2d74-48cf-a147-19f59c7de9c4" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="18b6c71b-2cf8-4c3a-9eb2-e4b5ccd459d4" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="70a92355-f280-4c98-a300-541d8e3ba840" />
+          <NavigationProperty Name="NoSequence" Relationship="MyERP.DataAccess.NoSequence_NoSequenceLine" FromRole="NoSequenceLines" ToRole="NoSequence" ed:Guid="a1a96184-bb64-4961-9692-41806a24171f" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_NoSequenceLine" FromRole="NoSequenceLines" ToRole="Client" ed:Guid="f9bdeaae-e035-4e1d-9613-ec4745c91864" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_NoSequenceLine" FromRole="NoSequenceLines" ToRole="Organization" ed:Guid="6046ab9e-9a34-43d4-bc74-69f7655a6bb3" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_NoSequenceLine_RecCreatedBy" FromRole="NoSequenceLines" ToRole="RecCreatedByUser" ed:Guid="e0a5fabc-d33f-4564-bf63-240cb3d0dab9" />
+          <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_NoSequenceLine_RecModifiedBy" FromRole="NoSequenceLines1" ToRole="RecModifiedByUser" ed:Guid="18f5d25a-521d-488e-b02a-c842b412dd98" />
+        </EntityType>
+        <EntityType Name="Option" ed:Guid="6eb81860-7804-4ed6-afa7-db3f38d7eee1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="d5f97426-a58b-4200-bbec-013ee863b2df" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="19193184-9f47-49da-a79e-1702ab8b2b0d" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f76d4599-0080-4766-8af6-b593b2cb5826" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="b35ef1f8-1db2-45b2-a0ae-9477fb88081c" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="82743c90-e41e-4579-8d45-90a25da5af60" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_Option" FromRole="Options" ToRole="Client" ed:Guid="a4ad320d-f2db-484d-ae5f-d540c4c5b668" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_Option" FromRole="Options" ToRole="Organization" ed:Guid="85351236-3da0-489a-9036-947d4474afe0" />
+          <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_Option_RecModifiedBy" FromRole="Options" ToRole="RecModifiedByUser" ed:Guid="9f5d95ea-4f72-40ef-8502-b29c973b6731" />
         </EntityType>
         <Association Name="User_Client_CreatedBy" ed:Guid="cc64066d-a254-493f-8be0-7609622c4e6a">
           <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
@@ -4123,6 +4484,150 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="NoSequence_NoSequenceLine" ed:Guid="c98c0fdc-1831-43f0-b3d7-0ff3c3419eb9">
+          <End Role="NoSequence" Type="MyERP.DataAccess.NoSequence" Multiplicity="1" />
+          <End Role="NoSequenceLines" Type="MyERP.DataAccess.NoSequenceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NoSequence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NoSequenceLines">
+              <PropertyRef Name="NoSequenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_NoSequence" ed:Guid="b265ad93-c7a6-49c3-87b6-a5bb2b2986c9">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="NoSequences" Type="MyERP.DataAccess.NoSequence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NoSequences">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_NoSequence" ed:Guid="96acfa77-bf18-4a89-a44d-75de70b28869">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="NoSequences" Type="MyERP.DataAccess.NoSequence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NoSequences">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_NoSequence_RecCreatedBy" ed:Guid="e2c4b1d3-92ba-4c40-b769-79ff2cd5d133">
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="NoSequences" Type="MyERP.DataAccess.NoSequence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecCreatedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NoSequences">
+              <PropertyRef Name="RecCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_NoSequence_RecModifiedBy" ed:Guid="32f3bc07-9fb9-41b8-99ae-9bc0ce51a4d6">
+          <End Role="RecModifiedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="NoSequences1" Type="MyERP.DataAccess.NoSequence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecModifiedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NoSequences1">
+              <PropertyRef Name="RecModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_NoSequenceLine" ed:Guid="a9a04073-5df5-41ae-8dc3-005a2886c288">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="NoSequenceLines" Type="MyERP.DataAccess.NoSequenceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NoSequenceLines">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_NoSequenceLine" ed:Guid="ade128f0-eca8-4989-b338-eb20bd311e4e">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="NoSequenceLines" Type="MyERP.DataAccess.NoSequenceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NoSequenceLines">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_NoSequenceLine_RecCreatedBy" ed:Guid="83daf6ae-2a40-454b-8814-084bfb4e5aff">
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="NoSequenceLines" Type="MyERP.DataAccess.NoSequenceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecCreatedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NoSequenceLines">
+              <PropertyRef Name="RecCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_NoSequenceLine_RecModifiedBy" ed:Guid="7c3528ca-49f3-4b3d-9e73-b9c4d80f5906">
+          <End Role="RecModifiedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="NoSequenceLines1" Type="MyERP.DataAccess.NoSequenceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecModifiedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NoSequenceLines1">
+              <PropertyRef Name="RecModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_Option" ed:Guid="f2f2c1ff-32ab-4703-beed-47da69570157">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="Options" Type="MyERP.DataAccess.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_Option" ed:Guid="b4eafa29-db78-436c-a59f-4c4fb9d0d0f9">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="Options" Type="MyERP.DataAccess.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Option_RecModifiedBy" ed:Guid="eb95091b-1004-4321-a42c-03425cd0aa85">
+          <End Role="RecModifiedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="Options" Type="MyERP.DataAccess.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecModifiedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options">
+              <PropertyRef Name="RecModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- MSL content -->
@@ -4648,6 +5153,59 @@
                 <ScalarProperty Name="Mobiphone" ColumnName="mobiphone" />
                 <ScalarProperty Name="Fax" ColumnName="fax" />
                 <ScalarProperty Name="Email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NoSequences">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.NoSequence">
+              <MappingFragment StoreEntitySet="no_sequences">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="Code" ColumnName="code" />
+                <ScalarProperty Name="Description" ColumnName="description" />
+                <ScalarProperty Name="DefaultNo" ColumnName="default_no" />
+                <ScalarProperty Name="ManualNo" ColumnName="manual_no" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NoSequenceLines">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.NoSequenceLine">
+              <MappingFragment StoreEntitySet="no_sequence_lines">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="LineNo" ColumnName="line_no" />
+                <ScalarProperty Name="StartingNo" ColumnName="starting_no" />
+                <ScalarProperty Name="EndingNo" ColumnName="ending_no" />
+                <ScalarProperty Name="CurrentNo" ColumnName="current_no" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+                <ScalarProperty Name="NoSequenceId" ColumnName="no_sequence_id" />
+                <ScalarProperty Name="FormatNo" ColumnName="format_no" />
+                <ScalarProperty Name="WarningNo" ColumnName="warning_no" />
+                <ScalarProperty Name="StartingDate" ColumnName="starting_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Options">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.Option">
+              <MappingFragment StoreEntitySet="options">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

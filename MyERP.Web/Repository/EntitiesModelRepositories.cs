@@ -29,6 +29,16 @@ namespace MyERP.Web
 
     }
 
+    public partial class NoSequenceRepository : BaseRepository<MyERP.DataAccess.NoSequence, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class NoSequenceLineRepository : BaseRepository<MyERP.DataAccess.NoSequenceLine, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
     public partial class UomRepository : BaseRepository<MyERP.DataAccess.Uom, MyERP.DataAccess.EntitiesModel>
     {
 

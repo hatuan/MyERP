@@ -75,6 +75,12 @@
     <Compile Include="Entities\MyERPDataModel.ItemUom.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Location.cs" />
     <Compile Include="Entities\MyERPDataModel.Location.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.NoSequence.cs" />
+    <Compile Include="Entities\MyERPDataModel.NoSequence.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.NoSequenceLine.cs" />
+    <Compile Include="Entities\MyERPDataModel.NoSequenceLine.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Option.cs" />
+    <Compile Include="Entities\MyERPDataModel.Option.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Organization.cs" />
     <Compile Include="Entities\MyERPDataModel.Organization.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.PosHeader.cs" />
@@ -125,6 +131,12 @@
     <Compile Include="Mapping\MyERPDataModel.ItemUomConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.LocationConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.LocationConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.NoSequenceConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.NoSequenceConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.NoSequenceLineConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.NoSequenceLineConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.OptionConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.OptionConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.OrganizationConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.OrganizationConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.PosHeaderConfiguration.cs" />
