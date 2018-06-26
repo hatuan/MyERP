@@ -21,7 +21,7 @@
                       .Layout(LayoutType.Form)
                       .Items(
                           Html.X().AntiForgeryField(),
-                          Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").EnforceMaxLength(true).ID("Code"),
+                          Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").EnforceMaxLength(true).ID("Code").AutoFocus(true),
                           Html.X().TextFieldFor(m => m.Description).AllowBlank(false).EnforceMaxLength(true).ID("Description"),
                           Html.X().ComboBoxFor(m => m.Status).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
                           Html.X().HiddenFor(m => m.Id).ID("Id"),
@@ -95,16 +95,16 @@
                           cols.Columns.Add(Html.X().ColumnFor(Model.NoSequenceLines, m => m.StartingDate).ToBuilder<DateColumn.Builder>().ID("StartingDateCol").Sortable(false).Width(125)
                               .Editor(Html.X().DateField().ID("StartingDateEditor").Format("dd-MM-yyyy"))
                           );
-                          cols.Columns.Add(Html.X().ColumnFor(Model.NoSequenceLines, m => m.StartingNo).ToBuilder<Column.Builder>().ID("StartingNoCol").Sortable(false).Width(100)
+                          cols.Columns.Add(Html.X().ColumnFor(Model.NoSequenceLines, m => m.StartingNo).ToBuilder<Column.Builder>().ID("StartingNoCol").Sortable(false).Width(125)
                               .Editor(Html.X().NumberField().ID("StartingNoEditor").DecimalPrecision(0)).Renderer(RendererFormat.Number, new string[] { "'0.000/i'" })
                           );
-                          cols.Columns.Add(Html.X().ColumnFor(Model.NoSequenceLines, m => m.EndingNo).ToBuilder<Column.Builder>().ID("EndingNoCol").Sortable(false).Width(100)
+                          cols.Columns.Add(Html.X().ColumnFor(Model.NoSequenceLines, m => m.EndingNo).ToBuilder<Column.Builder>().ID("EndingNoCol").Sortable(false).Width(125)
                               .Editor(Html.X().NumberField().ID("EndingNoEditor").DecimalPrecision(0)).Renderer(RendererFormat.Number, new string[] { "'0.000/i'" })
                           );
-                          cols.Columns.Add(Html.X().ColumnFor(Model.NoSequenceLines, m => m.WarningNo).ToBuilder<Column.Builder>().ID("WarningNoCol").Sortable(false).Width(100)
+                          cols.Columns.Add(Html.X().ColumnFor(Model.NoSequenceLines, m => m.WarningNo).ToBuilder<Column.Builder>().ID("WarningNoCol").Sortable(false).Width(125)
                               .Editor(Html.X().NumberField().ID("WarningNoEditor").DecimalPrecision(0)).Renderer(RendererFormat.Number, new string[] { "'0.000/i'" })
                           );
-                          cols.Columns.Add(Html.X().ColumnFor(Model.NoSequenceLines, m => m.CurrentNo).ToBuilder<Column.Builder>().ID("CurrentNoCol").Sortable(false).Width(100)
+                          cols.Columns.Add(Html.X().ColumnFor(Model.NoSequenceLines, m => m.CurrentNo).ToBuilder<Column.Builder>().ID("CurrentNoCol").Sortable(false).Width(125)
                               .Renderer(RendererFormat.Number, new string[] { "'0.000/i'" })
                           );
                           cols.Columns.Add(Html.X().ColumnFor(Model.NoSequenceLines, m => m.FormatNo).ToBuilder<Column.Builder>().ID("FormatNoCol").Sortable(false).Width(125)
