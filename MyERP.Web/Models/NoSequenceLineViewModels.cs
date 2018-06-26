@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Ext.Net;
+using Ext.Net.MVC;
 using MyERP.DataAccess;
 using MyERP.DataAccess.Enum;
 
@@ -73,20 +74,22 @@ namespace MyERP.Web.Models
         public long LineNo { get; set; }
 
         [Display(Name = "Starting Date")]
-        [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:d}")]
+        [DateColumn(Format = "d")]
         public DateTime? StartingDate { get; set; }
 
         [Display(Name = "Starting No")]
-        public Int32 StartingNo { get; set; }
+        public int? StartingNo { get; set; }
 
         [Display(Name = "Ending No")]
-        public Int32 EndingNo { get; set; }
+        public int? EndingNo { get; set; }
 
         [Display(Name = "Current No")]
-        public Int32 CurrentNo { get; set; }
+        public int? CurrentNo { get; set; }
 
         [Display(Name = "Warning No")]
-        public Int32 WarningNo { get; set; }
+        public int? WarningNo { get; set; }
 
         [Display(Name = "Format No")]
         [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]

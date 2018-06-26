@@ -245,7 +245,17 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                         }).ToList();
                     newSalesPriceGroup.SalesPrices = salesPrices;
 
-                    newSalesPriceGroup = repository.AddNew(newSalesPriceGroup);
+                    try
+                    {
+                        newSalesPriceGroup = this.repository.AddNew(newSalesPriceGroup);
+                    }
+                    catch (Exception ex)
+                    {
+                        r.Success = false;
+                        r.ErrorMessage = ex.Message;
+                        return r;
+                    }
+
                     model.Id = newSalesPriceGroup.Id;
                 }
                 else //edit

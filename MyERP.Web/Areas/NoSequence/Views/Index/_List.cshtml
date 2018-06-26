@@ -112,7 +112,7 @@
                       Html.X().Column().Text("Org").DataIndex("OrganizationCode").Width(75).Locked(true),
                       Html.X().Column().Text("Code").DataIndex("Code").Width(85).Locked(true),
                       Html.X().Column().Text("Description").DataIndex("Description").MinWidth(256),
-                      Html.X().Column().Text("Starting Date").DataIndex("StartingDate").Width(125),
+                      Html.X().DateColumn().Text("Starting Date").DataIndex("StartingDate").Width(125).Format("dd/MM/yyyy"),
                       Html.X().Column().Text("Starting No").DataIndex("StartingNo").Width(125),
                       Html.X().Column().Text("Ending No").DataIndex("EndingNo").Width(125),
                       Html.X().Column().Text("Warning No").DataIndex("WarningNo").Width(125),

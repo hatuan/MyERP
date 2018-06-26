@@ -966,7 +966,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
           <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="default_no" Type="tinyint" Nullable="false" />
@@ -984,7 +984,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="line_no" Type="bigint" Nullable="false" />
           <Property Name="starting_no" Type="int" Nullable="false" />
           <Property Name="ending_no" Type="int" Nullable="false" />
@@ -1006,7 +1006,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
@@ -3321,7 +3321,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c69995e0-ac59-4c98-9cf1-475aeecd5af6" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="c69995e0-ac59-4c98-9cf1-475aeecd5af6" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="3a6b2958-32a7-4889-8541-bc8ed7ec6f02" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="82350464-7109-4d67-b065-1825acafd0db" />
           <Property Name="DefaultNo" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="336a9ec7-1150-43f8-b845-a6730055253b" />
@@ -3344,7 +3344,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="b9c1038c-7f09-4305-a895-dfae839aaa63" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="b9c1038c-7f09-4305-a895-dfae839aaa63" />
           <Property Name="NoSequenceId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="7321cedb-7719-438c-a0d5-d3151e6865e4" />
           <Property Name="LineNo" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="51a5dcba-e416-46c1-84fc-1ce598bb7343" />
           <Property Name="StartingDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="51c70889-65cb-4ba2-9588-939e454d8d53" />
@@ -3371,7 +3371,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="d5f97426-a58b-4200-bbec-013ee863b2df" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="d5f97426-a58b-4200-bbec-013ee863b2df" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="19193184-9f47-49da-a79e-1702ab8b2b0d" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f76d4599-0080-4766-8af6-b593b2cb5826" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="b35ef1f8-1db2-45b2-a0ae-9477fb88081c" />

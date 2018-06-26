@@ -348,6 +348,7 @@
     <Content Include="Areas\NoSequence\Views\web.config" />
     <Content Include="Areas\NoSequence\Views\Index\Index.cshtml" />
     <Content Include="Areas\NoSequence\Views\Index\_List.cshtml" />
+    <Content Include="Areas\NoSequence\Views\Index\_Maintenance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

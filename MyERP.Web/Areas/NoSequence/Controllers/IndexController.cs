@@ -57,18 +57,22 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
             var paging = ((NoSequenceRepository)repository).Paging(parameters);
 
             var noSequenceLineRepository = new NoSequenceLineRepository();
+            List<long> Ids = (from noSequence in paging.Data
+                select noSequence.Id).ToList();
+            
             var noSequenceLines =
-                from noSequenceLine in noSequenceLineRepository.Get(c => paging.Data.Any(x => x.Id == c.Id))
-                orderby noSequenceLine.StartingDate
-                group noSequenceLine by noSequenceLine.Id
-                into g
-                select new
-                {
-                    Id = g.Key,
-                    StartingDate = g.Min(t => t.StartingDate)
-                };
+                (from noSequenceLine in noSequenceLineRepository.Get(x =>Ids.Contains(x.NoSequenceId))
+                    orderby noSequenceLine.StartingDate
+                    group noSequenceLine by noSequenceLine.Id
+                    into g
+                    select new
+                        {
+                            Id = g.Key,
+                            StartingDate = g.Min(t => t.StartingDate)
+                        });
 
-            var currentNoSequenceLines = (from curNoSequenceLine in noSequenceLineRepository.Get(x => noSequenceLines.Any(noSequenceLine => noSequenceLine.Id == x.Id && noSequenceLine.StartingDate == x.StartingDate))
+            var currentNoSequenceLines = (from curNoSequenceLine in noSequenceLineRepository.Get()
+                join noSequenceLine in noSequenceLines on new{curNoSequenceLine.Id, curNoSequenceLine.StartingDate} equals new {noSequenceLine.Id, noSequenceLine.StartingDate}
                 select curNoSequenceLine).ToList();
 
             var data = paging.Data.Select(c => new NoSequenceViewModel
@@ -77,7 +81,7 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
                 Id = c.Id,
                 Code = c.Code,
                 Description = c.Description,
-                StartingDate = currentNoSequenceLines.Where(currentNoSequenceLine => currentNoSequenceLine.NoSequenceId == c.Id).Select(currentNoSequenceLine => currentNoSequenceLine.StartingDate).FirstOrDefault(),
+                StartingDate = currentNoSequenceLines.Where(currentNoSequenceLine => currentNoSequenceLine.NoSequenceId == c.Id).Select(currentNoSequenceLine => currentNoSequenceLine.StartingDate.CompareTo(new DateTime(1900, 1, 1, 0, 0, 0)) == 0 ? default(DateTime) : currentNoSequenceLine.StartingDate).FirstOrDefault(),
                 StartingNo = currentNoSequenceLines.Where(currentNoSequenceLine => currentNoSequenceLine.NoSequenceId == c.Id).Select(currentNoSequenceLine => currentNoSequenceLine.StartingNo).FirstOrDefault(),
                 EndingNo = currentNoSequenceLines.Where(currentNoSequenceLine => currentNoSequenceLine.NoSequenceId == c.Id).Select(currentNoSequenceLine => currentNoSequenceLine.EndingNo).FirstOrDefault(),
                 CurrentNo = currentNoSequenceLines.Where(currentNoSequenceLine => currentNoSequenceLine.NoSequenceId == c.Id).Select(currentNoSequenceLine => currentNoSequenceLine.CurrentNo).FirstOrDefault(),
@@ -120,11 +124,12 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
                                {
                                    Id = noSequenceLine.Id,
                                    NoSequenceId = noSequenceLine.NoSequenceId,
+                                   LineNo = noSequenceLine.LineNo,
                                    StartingDate = noSequenceLine.StartingDate.CompareTo(new DateTime(1900, 1, 1, 0, 0, 0)) == 0 ? default(DateTime) : noSequenceLine.StartingDate,
-                                   StartingNo = noSequenceLine.StartingNo,
-                                   EndingNo = noSequenceLine.EndingNo,
-                                   CurrentNo = noSequenceLine.CurrentNo,
-                                   WarningNo = noSequenceLine.WarningNo,
+                                   StartingNo = noSequenceLine.StartingNo == 0 ?  (int?) null : noSequenceLine.StartingNo,
+                                   EndingNo = noSequenceLine.EndingNo == 0 ? (int?)null : noSequenceLine.EndingNo,
+                                   CurrentNo = noSequenceLine.CurrentNo == 0 ? (int?)null : noSequenceLine.CurrentNo,
+                                   WarningNo = noSequenceLine.WarningNo == 0 ? (int?)null : noSequenceLine.WarningNo,
                                    FormatNo = noSequenceLine.FormatNo,
                                    Status = (DefaultStatusType)noSequenceLine.Status,
                                    Version = noSequenceLine.Version
@@ -173,7 +178,7 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
                 }
                 if (!model.Id.HasValue) //New
                 {
-                    DataAccess.NoSequence newSalesPriceGroup = new DataAccess.NoSequence()
+                    DataAccess.NoSequence newNoSequence = new DataAccess.NoSequence()
                     {
                         ClientId = clientId,
                         OrganizationId = organizationId,
@@ -192,20 +197,32 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
                         {
                             ClientId = clientId,
                             OrganizationId = organizationId,
+                            LineNo = c.LineNo,
                             StartingDate = c.StartingDate ?? new DateTime(1900, 1, 1, 0, 0, 0),
-                            StartingNo = c.StartingNo,
-                            EndingNo = c.EndingNo,
-                            WarningNo = c.WarningNo,
+                            StartingNo = c.StartingNo??0,
+                            EndingNo = c.EndingNo??0,
+                            WarningNo = c.WarningNo??0,
                             FormatNo = c.FormatNo,
-                            Status = (byte)DefaultStatusType.Active,
+                            Status = (byte)c.Status,
                             Version = 1,
                             RecModifiedAt = DateTime.Now,
                             RecCreatedBy = (long)user.ProviderUserKey,
                             RecCreatedAt = DateTime.Now,
                             RecModifiedBy = (long)user.ProviderUserKey
                         }).ToList();
-                    newSalesPriceGroup.NoSequenceLines = noSequenceLines;
-                    model.Id = newSalesPriceGroup.Id;
+                    newNoSequence.NoSequenceLines = noSequenceLines;
+
+                    try
+                    {
+                        newNoSequence = this.repository.AddNew(newNoSequence);
+                    }
+                    catch (Exception ex)
+                    {
+                        r.Success = false;
+                        r.ErrorMessage = ex.Message;
+                        return r;
+                    }
+                    model.Id = newNoSequence.Id;
                 }
                 else //edit
                 {
@@ -213,7 +230,7 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
                     if (updateNoSequence == null || updateNoSequence.Version != model.Version)
                     {
                         r.Success = false;
-                        r.ErrorMessage = "Sales Price Group has been changed or deleted! Please check";
+                        r.ErrorMessage = "No Sequence has been changed or deleted! Please check";
                         return r;
                     }
 
@@ -231,12 +248,13 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
                             {
                                 ClientId = clientId,
                                 OrganizationId = organizationId,
+                                LineNo = noSequenceLineEditViewModel.LineNo,
                                 StartingDate = noSequenceLineEditViewModel.StartingDate ?? new DateTime(1900, 1, 1, 0, 0, 0),
-                                StartingNo = noSequenceLineEditViewModel.StartingNo,
-                                EndingNo = noSequenceLineEditViewModel.EndingNo,
-                                WarningNo = noSequenceLineEditViewModel.WarningNo,
+                                StartingNo = noSequenceLineEditViewModel.StartingNo??0,
+                                EndingNo = noSequenceLineEditViewModel.EndingNo??0,
+                                WarningNo = noSequenceLineEditViewModel.WarningNo??0,
                                 FormatNo = noSequenceLineEditViewModel.FormatNo,
-                                Status = (byte)DefaultStatusType.Active,
+                                Status = (byte)noSequenceLineEditViewModel.Status,
                                 Version = 1,
                                 RecCreatedBy = (long)user.ProviderUserKey,
                                 RecCreatedAt = DateTime.Now,
@@ -248,12 +266,13 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
                             updateNoSequence.NoSequenceLines.Where(c => c.Id == noSequenceLineEditViewModel.Id)
                                 .ForEach(x =>
                                 {
+                                    x.LineNo = noSequenceLineEditViewModel.LineNo;
                                     x.StartingDate = noSequenceLineEditViewModel.StartingDate ?? new DateTime(1900, 1, 1, 0, 0, 0);
-                                    x.StartingNo = noSequenceLineEditViewModel.StartingNo;
-                                    x.EndingNo = noSequenceLineEditViewModel.EndingNo;
-                                    x.WarningNo = noSequenceLineEditViewModel.WarningNo;
+                                    x.StartingNo = noSequenceLineEditViewModel.StartingNo??0;
+                                    x.EndingNo = noSequenceLineEditViewModel.EndingNo??0;
+                                    x.WarningNo = noSequenceLineEditViewModel.WarningNo??0;
                                     x.FormatNo = noSequenceLineEditViewModel.FormatNo;
-                                    x.Status = (byte)DefaultStatusType.Active;
+                                    x.Status = (byte)noSequenceLineEditViewModel.Status;
                                     x.Version++;
                                     x.RecModifiedAt = DateTime.Now;
                                     x.RecModifiedBy = (long)user.ProviderUserKey;
@@ -327,18 +346,22 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
             return this.Direct();
         }
 
-        public ActionResult AddLineToNoSequenceLine()
+        public ActionResult AddLineToNoSequenceLine(String noSequenceLinesJSON)
         {
+            List<NoSequenceLineEditViewModel> noSequenceLinesModel = JsonConvert.DeserializeObject<List<NoSequenceLineEditViewModel>>(noSequenceLinesJSON);
+            long lineNo = noSequenceLinesModel.Count >= 1 ? noSequenceLinesModel.Max(c => c.LineNo) + 1000 : 1000;
+
             var newItem = new NoSequenceLineEditViewModel()
             {
                 Id = null,
+                LineNo = lineNo,
                 NoSequenceId = null,
                 StartingDate = default(DateTime),
-                StartingNo = 0,
-                EndingNo = 0,
-                CurrentNo = 0,
-                WarningNo = 0,
-                FormatNo = "",
+                StartingNo = 1,
+                EndingNo = 1000,
+                CurrentNo = null,
+                WarningNo = 990,
+                FormatNo = "####",
                 Status = DefaultStatusType.Active,
                 Version = 1
             };
@@ -346,7 +369,7 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
             Store noSequenceLineGridStore = X.GetCmp<Store>("NoSequenceLineGridStore");
             noSequenceLineGridStore.Add(newItem);
 
-            return this.Direct();
+            return this.Direct(new {LineNo = lineNo});
         }
     }
 }

@@ -1,335 +1,161 @@
-﻿@model MyERP.Web.Models.SalesPriceGroupEditViewModel
+﻿@model MyERP.Web.Models.NoSequenceEditViewModel
 
 
-@(Html.X().FormPanel()
-                                          .ID("FormSalesPriceGroupMaintenance")
-                                          .Layout(LayoutType.Fit)
-                                          .Border(true)
-                                          .MarginSpec("0 5 5 0")
-                                          .BodyPadding(5)
-                                          .Bin(
-                                              Html.X().Store().AutoLoad(false).AutoDestroy(false)
-                                                  .ID("ItemStore")
-                                                  .Proxy(Html.X().AjaxProxy()
-                                                      .Url(Url.Action("LookupData", "Index", new { area = "Item" }))
-                                                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
-                                                  .Model(Html.X().Model()
-                                                      .IDProperty("Id")
-                                                      .Fields(
-                                                          new ModelField("Id", ModelFieldType.Int),
-                                                          new ModelField("OrganizationCode", ModelFieldType.String),
-                                                          new ModelField("Code", ModelFieldType.String),
-                                                          new ModelField("Description", ModelFieldType.String)))
-                                                  .Data(ViewData["Items"]),
-                                              Html.X().Store().AutoLoad(false).AutoDestroy(false)
-                                                  .ID("SalesCodeStore")
-                                                  .Proxy(Html.X().AjaxProxy()
-                                                      .Url(Url.Action("LookupSalesCode"))
-                                                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
-                                                  .Model(Html.X().Model()
-                                                      .IDProperty("Id")
-                                                      .Fields(
-                                                          new ModelField("Id", ModelFieldType.Int),
-                                                          new ModelField("OrganizationCode", ModelFieldType.String),
-                                                          new ModelField("Code", ModelFieldType.String),
-                                                          new ModelField("Description", ModelFieldType.String)
-                                                      )
-                                                  )
-                                                  .Parameters(p =>
-                                                  {
-                                                      p.Add(new StoreParameter("salesType", "this.salesType", ParameterMode.Raw));
-                                                  })
-                                                  .Data(ViewData["SalesCodes"]),
-                                              Html.X().Store().AutoLoad(false).AutoDestroy(false)
-                                                  .ID("UomStore")
-                                                  .Proxy(Html.X().AjaxProxy()
-                                                      .Url(Url.Action("LookupUomOfItem", "ItemUom", new { area = "Item" }))
-                                                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
-                                                  .Model(Html.X().Model()
-                                                      .IDProperty("UomId")
-                                                      .Fields(
-                                                          new ModelField("UomId", ModelFieldType.Int),
-                                                          new ModelField("Code", ModelFieldType.String),
-                                                          new ModelField("Description", ModelFieldType.String),
-                                                          new ModelField("QtyPerUom", ModelFieldType.Int)))
-                                                  .Data(ViewData["Uoms"])
-                                              )
-                                          .Items(
-                                              Html.X().Panel()
-                                                  .Layout(LayoutType.VBox)
-                                                  .LayoutConfig(action => action.Add(new VBoxLayoutConfig() { Align = VBoxAlign.Stretch }))
-                                                  .Items(
-                                                      Html.X().Container()
-                                                          .Layout(LayoutType.Form)
-                                                          .Items(
-                                                              Html.X().AntiForgeryField(),
-                                                              Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").EnforceMaxLength(true).ID("Code"),
-                                                              Html.X().TextFieldFor(m => m.Description).AllowBlank(false).EnforceMaxLength(true).ID("Description"),
-                                                              Html.X().ComboBoxFor(m => m.Status).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
-                                                              Html.X().HiddenFor(m => m.Id).ID("Id"),
-                                                              Html.X().HiddenFor(m => m.Version).ID("Version")
-                                                          ),
-                                                      Html.X().GridPanel()
-                                                          .ID("SalesPriceGridPanel")
-                                                          .Flex(1)
-                                                          .Title("Sales Price List")
-                                                          .Border(true)
-                                                          .View(new GridView() { MarkDirty = false })
-                                                          .LeftBar(leftBarItems =>
-                                                          {
-                                                              leftBarItems.Add(Html.X().Toolbar()
-                                                                  .Flat(true)
-                                                                  .Layout(LayoutType.VBox)
-                                                                  .Items(buttons =>
-                                                                  {
-                                                                      buttons.Add(Html.X().Button()
-                                                                          .ID("btnAddLine")
-                                                                          .Icon(Icon.Add)
-                                                                          .DirectEvents(de =>
-                                                                          {
-                                                                              de.Click.Action = "AddLineToSalesPrice";
-                                                                          })
-                                                                      );
-                                                                      buttons.Add(Html.X().Button()
-                                                                          .ID("btnDeleteLine")
-                                                                          .Icon(Icon.Delete)
-                                                                          .Listeners(ls =>
-                                                                          {
-                                                                              ls.Click.Handler = @"if ( !#{SalesPriceGridPanel}.hasSelection() ) {
-                                                                                                        return false;
-                                                                                                    } else {
-                                                                                                        #{SalesPriceGridPanel}.deleteSelected();
-                                                                                                        return true;
-                                                                                                    }";
-                                                                          })
-                                                                      );
-                                                                  })
-                                                              );
-                                                          })
-                                                          .Store(Html.X().Store()
-                                                              .ID("SalesPriceGridStore")
-                                                              .Model(
-                                                                  Html.X().Model()
-                                                                      .IDProperty("ExtId")
-                                                                      .Fields(
-                                                                          new ModelField("ExtId", ModelFieldType.String),
-                                                                          new ModelField("Id", ModelFieldType.String),
-                                                                          new ModelField("SalesType", ModelFieldType.Int),
-                                                                          new ModelField("SalesCodeId", ModelFieldType.String),
-                                                                          new ModelField("ItemId", ModelFieldType.String),
-                                                                          new ModelField("ItemDescription", ModelFieldType.String),
-                                                                          new ModelField("UomId", ModelFieldType.String),
-                                                                          new ModelField("StartingDate", ModelFieldType.Date),
-                                                                          new ModelField("MinQty", ModelFieldType.String)
-                                                                          {
-                                                                              Convert =
-                                                                              {
-                                                                                  Handler = @"var v = value + '';
-                                                                                            v.replace(/\./g,'').replace(',', '.');
-                                                                                            return Ext.util.Format.number(v, '0.000,00/i');"
-                                                                              }
-                                                                          },
-                                                                          new ModelField("UnitPrice", ModelFieldType.String)
-                                                                          {
-                                                                              Convert =
-                                                                              {
-                                                                                  Handler = @"var v = value + '';
-                                                                                            v.replace(/\./g,'').replace(',', '.');
-                                                                                            return Ext.util.Format.number(v, '0.000,00/i');"
-                                                                              }
-                                                                          },
-                                                                          new ModelField("EndingDate", ModelFieldType.Date),
-                                                                          new ModelField("Status", ModelFieldType.String),
-                                                                          new ModelField("Version", ModelFieldType.Int),
-                                                                          new ModelField("Item", ModelFieldType.Object),
-                                                                          new ModelField("Uom", ModelFieldType.Object)
-                                                                      ))
-                                                              .DataSource(Model.SalesPrices)
-                                                          )
-                                                          .ColumnModel(cols =>
-                                                          {
-                                                              cols.Columns.Add(Html.X().RowNumbererColumn());
-                                                              cols.Columns.Add(Html.X().ComponentColumn().ID("SalesTypeCol").Sortable(false).Text("Sales Type").DataIndex("SalesType").Width(200).Editor(true).Component(
-                                                                  Html.X().ComboBox().Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.SalesPriceSalesType))
-                                                                      .ListConfig(Html.X().BoundList().MinWidth(200))
-                                                                  )
-                                                                  .Listeners(ls =>
-                                                                  {
-                                                                      ls.Edit.Handler = @"e.record.data.SalesCodeId = null;
-                                                                                        #{SalesTypeIdCol}.getComponent(e.record.store.indexOf(e.record)).setValue(null);";
-                                                                  }));
-                                                              cols.Columns.Add(Html.X().ComponentColumn().ID("SalesTypeIdCol").Sortable(false).Text("Sales Code").DataIndex("SalesCodeId").Width(150).Editor(true).Component(
-                                                                  Html.X().ComboBox()
-                                                                      .DisplayField("Code")
-                                                                      .ValueField("Id")
-                                                                      .FieldStyle("text-transform: uppercase;")
-                                                                      .TypeAhead(true)
-                                                                      .MinChars(0)
-                                                                      .PageSize(10)
-                                                                      .SelectOnTab(true)
-                                                                      .ForceSelection(true)
-                                                                      .ValidateOnBlur(true)
-                                                                      .ValidateOnChange(true)
-                                                                      .ListConfig(Html.X().BoundList()
-                                                                          .LoadingText("Searching...")
-                                                                          .ItemTpl(Html.X().XTemplate()
-                                                                              .Html(@<text>
-                                                                                <tpl for=".">
-                                                                                    <div class="search-item">
-                                                                                        <h3>{Code}</h3>
-                                                                                        {Description}
-                                                                                    </div>
-                                                                                </tpl>
-                                                                            </text>))
-                                                                                .MinWidth(400)
-                                                                            )
-                                                                            .StoreID("SalesCodeStore")
-                                                                            .Listeners(ls =>
-                                                                            {
-                                                                                ls.BeforeQuery.Handler = @"var salesType = this.record.get('SalesType');
-                                                                                      if(salesType === 3) return false;
-                                                                                      this.getStore().salesType = salesType";
-                                                                            })
-                                                                        ));
-                                                              cols.Columns.Add(Html.X().ComponentColumn().ID("ItemIdCol").Sortable(false).Text("Item").DataIndex("ItemId").Width(150).Editor(true).Component(
-                                                                  Html.X().ComboBox()
-                                                                      .DisplayField("Code")
-                                                                      .ValueField("Id")
-                                                                      .FieldStyle("text-transform: uppercase;")
-                                                                      .TypeAhead(true)
-                                                                      .MinChars(0)
-                                                                      .PageSize(10)
-                                                                      .SelectOnTab(true)
-                                                                      .ForceSelection(true)
-                                                                      .ValidateOnBlur(true)
-                                                                      .ValidateOnChange(true)
-                                                                      .ListConfig(Html.X().BoundList()
-                                                                          .LoadingText("Searching...")
-                                                                          .ItemTpl(Html.X().XTemplate()
-                                                                              .Html(@<text>
-                                                                                        <tpl for=".">
-                                                                                            <div class="search-item">
-                                                                                                <h3>{Code}</h3>
-                                                                                                {Description}
-                                                                                            </div>
-                                                                                        </tpl>
-                                                                                    </text>))
-                                                                                .MinWidth(400))
-                                                                      .StoreID("ItemStore")
-                                                                  )
-                                                                  .Listeners(ls =>
-                                                                  {
-                                                                      ls.Edit.Handler = @"var view = #{SalesPriceGridPanel}.getView();
-                                                                                          var column = #{ItemDescriptionCol};
-                                                                                          var cell = view.getCell(e.record, column);
-                                                                                          var div = cell.getElementsByTagName('div')[0];
-                                                                                          var recordSelected = e.cmp.findRecordByValue(e.cmp.getValue());
-                                                                                          if(recordSelected) {          
-                                                                                            var value = e.cmp.findRecordByValue(e.cmp.getValue()).data.Description; 
-                                                                                            if (Ext.isFunction(column.renderer)) {
-                                                                                              value = column.renderer(value, record); // pass all the parameters which you are using in Renderer
-                                                                                            }
-                                                                                            e.record.data.ItemDescription = value;
-                                                                                            div.innerText = value;
-                                                                                          } else {
-                                                                                            e.record.data.ItemDescription = '';
-                                                                                            div.innerText = '';  
-                                                                                          }  
-                                                                                          /*Set UomId */
-                                                                                          e.record.data.UomId = null;
-                                                                                          #{UomIdCol}.getComponent(e.record.store.indexOf(e.record)).setValue(null);";
-                                                                  })
-                                                              );
-                                                              cols.Columns.Add(Html.X().ColumnFor(Model.SalesPrices, m => m.ItemDescription).ToBuilder<Column.Builder>().ID("ItemDescriptionCol").Sortable(false).Flex(1).MinWidth(256));
-                                                              cols.Columns.Add(Html.X().ComponentColumn().ID("UomIdCol").Sortable(false).Text("UOM").DataIndex("UomId").Width(100).Editor(true).Component(
-                                                                  Html.X().ComboBox()
-                                                                      .DisplayField("Code")
-                                                                      .ValueField("UomId")
-                                                                      .FieldStyle("text-transform: uppercase;")
-                                                                      .TypeAhead(true)
-                                                                      .MinChars(0)
-                                                                      .PageSize(10)
-                                                                      .SelectOnTab(true)
-                                                                      .ForceSelection(true)
-                                                                      .ValidateOnBlur(true)
-                                                                      .ValidateOnChange(true)
-                                                                      .ListConfig(Html.X().BoundList()
-                                                                          .LoadingText("Searching...")
-                                                                          .ItemTpl(Html.X().XTemplate()
-                                                                              .Html(@<text>
-                                                                                        <tpl for=".">
-                                                                                            <div class="search-item">
-                                                                                                <h3>{Code}</h3>
-                                                                                                {Description}
-                                                                                            </div>
-                                                                                        </tpl>
-                                                                                    </text>))
-                                                                          .MinWidth(400))
-                                                                      .StoreID("UomStore")
-                                                                      .Listeners(ls =>
-                                                                      {
-                                                                          ls.BeforeQuery.Handler = "queryEvent.query = this.record.get('ItemId')";
-                                                                      })));
-                                                              cols.Columns.Add(Html.X().ComponentColumn().ID("StartingDateCol").Editor(true).Sortable(false).Width(125).DataIndex("StartingDate").Text("Starting Date").Component(
-                                                                  Html.X().DateField()));
-                                                              cols.Columns.Add(Html.X().ComponentColumn().ID("MinQtyCol").Editor(true).Sortable(false).Width(100).DataIndex("MinQty").Text("MinQty").Component(
-                                                                  Html.X().TextField().SelectOnFocus(true).MaskRe(@"/[0-9\,\.]").Listeners(ls =>
-                                                                  {
-                                                                      ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
-                                                                      ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
-                                                                                            this.setValue(v);
-                                                                                            this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
-                                                                  })));
-                                                              cols.Columns.Add(Html.X().ComponentColumn().ID("UnitPriceCol").Editor(true).Sortable(false).Width(100).DataIndex("UnitPrice").Text("Unit Price").Component(
-                                                                  Html.X().TextField().SelectOnFocus(true).MaskRe(@"/[0-9\,\.]").Listeners(ls =>
-                                                                  {
-                                                                      ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
-                                                                      ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
-                                                                                            this.setValue(v);
-                                                                                            this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
-                                                                  })));
-                                                          })
-                                                          .SelectionModel(Html.X().RowSelectionModel().Mode(SelectionMode.Single))
-                                                    )
-                                              )
-                                              .Buttons(buttons =>
-                                              {
-                                                  buttons.Add(Html.X().Button()
-                                                      .ID("btnSave")
-                                                      .Text("Save")
-                                                      .Icon(Icon.Disk)
-                                                      .DirectEvents(de =>
-                                                      {
-                                                          de.Click.Url = Url.Action("_Maintenance");
-                                                          de.Click.Method = HttpMethod.POST;
-                                                          de.Click.Before = "return this.up('form').isValid();";
-                                                          de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
-                                                          de.Click.ShowWarningOnFailure = true;
-                                                          de.Click.EventMask.ShowMask = true;
-                                                          de.Click.FormID = "FormSalesPriceGroupMaintenance";
-                                                          de.Click.ExtraParams.Add(new Parameter { Name = "noSequenceLineJSON", Value = "App.SalesPriceGridPanel.getRowsValues()", Mode = ParameterMode.Raw, Encode = true });
-                                                          de.Click.Success = "function(response, result) { " +
-                                                                             " App.StoreSalesPriceGroupList.load({ " +
-                                                                             "   callback : function() { " +
-                                                                             "     var record = App.SalesPriceGroupGrid.store.getById(result.result.Id); " +
-                                                                             "     var index = App.SalesPriceGroupGrid.store.indexOf(record);" +
-                                                                             "     App.SalesPriceGroupGrid.getSelectionModel().select(index, true);" +
-                                                                             "     Ext.net.directRequest({url:'/SalesPrice/SalesPriceGroup/_Maintenance?id='+result.result.Id, method:'GET', eventMask:{showMask:true}});" +
-                                                                             "   }" +
-                                                                             " });" +
-                                                                             "}";
-                                                      }));
-                                                  buttons.Add(Html.X().Button()
-                                                      .ID("btnCancel")
-                                                      .Text("Cancel")
-                                                      .Icon(Icon.Cancel)
-                                                      .DirectEvents(de =>
-                                                      {
-                                                          de.Click.Url = Url.Action("_Maintenance");
-                                                          de.Click.Method = HttpMethod.GET;
-                                                          de.Click.EventMask.ShowMask = true;
-                                                          de.Click.ExtraParams.Add(new Parameter { Name = "id", Value = Model.Id.HasValue ? Model.Id + "" : "", Mode = ParameterMode.Value });
-                                                      }));
-                                              })
+@(Html.X().Window()
+      .ID("WindowNoSequenceMaintenance")
+      .Title("No Sequence Maintenance")
+      .Height(600)
+      .Width(900)
+      .Modal(true)
+      .Layout(LayoutType.Fit)
+      .MarginSpec("0 5 5 0")
+      .BodyPadding(5)
+      .Items(
+          Html.X().FormPanel()
+              .ID("FormNoSequenceMaintenance")
+              .Layout(LayoutType.VBox)
+              .LayoutConfig(action => action.Add(new VBoxLayoutConfig() { Align = VBoxAlign.Stretch }))
+              .Items(items =>
+              {
+                  items.Add(Html.X().Container()
+                      .Layout(LayoutType.Form)
+                      .Items(
+                          Html.X().AntiForgeryField(),
+                          Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").EnforceMaxLength(true).ID("Code"),
+                          Html.X().TextFieldFor(m => m.Description).AllowBlank(false).EnforceMaxLength(true).ID("Description"),
+                          Html.X().ComboBoxFor(m => m.Status).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
+                          Html.X().HiddenFor(m => m.Id).ID("Id"),
+                          Html.X().HiddenFor(m => m.Version).ID("Version")
+                      ));
+                  items.Add(Html.X().GridPanel()
+                      .ID("NoSequenceLineGridPanel")
+                      .Flex(1)
+                      .Title("No Sequence Line")
+                      .Border(true)
+                      .View(new GridView() { MarkDirty = false })
+                      .LeftBar(leftBarItems =>
+                      {
+                          leftBarItems.Add(Html.X().Toolbar()
+                              .Flat(true)
+                              .Layout(LayoutType.VBox)
+                              .Items(buttons =>
+                              {
+                                  buttons.Add(Html.X().Button()
+                                      .ID("btnAddLine")
+                                      .Icon(Icon.Add)
+                                      .DirectEvents(de =>
+                                      {
+                                          de.Click.Action = "AddLineToNoSequenceLine";
+                                          de.Click.ExtraParams.Add(new Parameter("noSequenceLinesJSON", "#{NoSequenceLineGridPanel}.getRowsValues()", ParameterMode.Raw, true));
+                                          de.Click.Success = "function(response, result) {" +
+                                                             "  var record = this.up('grid').store.getById(result.result.LineNo); " +
+                                                             "  var index = this.up('grid').store.indexOf(record);" +
+                                                             "  this.up('grid').editingPlugin.startEdit(index, 0);" +
+                                                             "}";
+                                      })
+                                  );
+                                  buttons.Add(Html.X().Button()
+                                      .ID("btnDeleteLine")
+                                      .Icon(Icon.Delete)
+                                      .Listeners(ls =>
+                                      {
+                                          ls.Click.Handler = @"if ( !#{NoSequenceLineGridPanel}.hasSelection() ) {
+                                                                    return false;
+                                                                } else {
+                                                                    #{NoSequenceLineGridPanel}.deleteSelected();
+                                                                    return true;
+                                                                }";
+                                      })
+                                  );
+                              })
+                          );
+                      })
+                      .Store(Html.X().Store()
+                          .ID("NoSequenceLineGridStore")
+                          .Model(
+                              Html.X().Model()
+                                  .IDProperty("LineNo")
+                                  .Fields(
+                                      new ModelField("LineNo", ModelFieldType.String),
+                                      new ModelField("Id", ModelFieldType.String),
+                                      new ModelField("StartingDate", ModelFieldType.Date),
+                                      new ModelField("StartingNo", ModelFieldType.Int),
+                                      new ModelField("EndingNo", ModelFieldType.Int),
+                                      new ModelField("WarningNo", ModelFieldType.Int),
+                                      new ModelField("CurrentNo", ModelFieldType.Int),
+                                      new ModelField("FormatNo", ModelFieldType.String),
+                                      new ModelField("Status", ModelFieldType.String),
+                                      new ModelField("Version", ModelFieldType.String)
+                                  ))
+                          .DataSource(Model.NoSequenceLines)
+                      )
+                      .ColumnModel(cols =>
+                      {
+                          cols.Columns.Add(Html.X().RowNumbererColumn());
+                          cols.Columns.Add(Html.X().ColumnFor(Model.NoSequenceLines, m => m.StartingDate).ToBuilder<DateColumn.Builder>().ID("StartingDateCol").Sortable(false).Width(125)
+                              .Editor(Html.X().DateField().ID("StartingDateEditor").Format("dd-MM-yyyy"))
+                          );
+                          cols.Columns.Add(Html.X().ColumnFor(Model.NoSequenceLines, m => m.StartingNo).ToBuilder<Column.Builder>().ID("StartingNoCol").Sortable(false).Width(100)
+                              .Editor(Html.X().NumberField().ID("StartingNoEditor").DecimalPrecision(0)).Renderer(RendererFormat.Number, new string[] { "'0.000/i'" })
+                          );
+                          cols.Columns.Add(Html.X().ColumnFor(Model.NoSequenceLines, m => m.EndingNo).ToBuilder<Column.Builder>().ID("EndingNoCol").Sortable(false).Width(100)
+                              .Editor(Html.X().NumberField().ID("EndingNoEditor").DecimalPrecision(0)).Renderer(RendererFormat.Number, new string[] { "'0.000/i'" })
+                          );
+                          cols.Columns.Add(Html.X().ColumnFor(Model.NoSequenceLines, m => m.WarningNo).ToBuilder<Column.Builder>().ID("WarningNoCol").Sortable(false).Width(100)
+                              .Editor(Html.X().NumberField().ID("WarningNoEditor").DecimalPrecision(0)).Renderer(RendererFormat.Number, new string[] { "'0.000/i'" })
+                          );
+                          cols.Columns.Add(Html.X().ColumnFor(Model.NoSequenceLines, m => m.CurrentNo).ToBuilder<Column.Builder>().ID("CurrentNoCol").Sortable(false).Width(100)
+                              .Renderer(RendererFormat.Number, new string[] { "'0.000/i'" })
+                          );
+                          cols.Columns.Add(Html.X().ColumnFor(Model.NoSequenceLines, m => m.FormatNo).ToBuilder<Column.Builder>().ID("FormatNoCol").Sortable(false).Width(125)
+                              .Editor(Html.X().TextField().ID("FormatNoEditor"))
+                          );
+                      })
+                      .Plugins(
+                          Html.X().RowEditing()
+                              .Listeners(l =>
+                              {
+                                  l.CancelEdit.Handler = "if (e.record.phantom) { e.store.remove(e.record); }";
+                              })
+                      ));
+              })
+              .Buttons(buttons =>
+              {
+                  buttons.Add(Html.X().Button()
+                      .ID("btnSave")
+                      .Text("Save")
+                      .Icon(Icon.Disk)
+                      .DirectEvents(de =>
+                      {
+                          de.Click.Url = Url.Action("_Maintenance");
+                          de.Click.Method = HttpMethod.POST;
+                          de.Click.Before = "return this.up('form').isValid();";
+                          de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
+                          de.Click.ShowWarningOnFailure = true;
+                          de.Click.EventMask.ShowMask = true;
+                          de.Click.FormID = "FormNoSequenceMaintenance";
+                          de.Click.ExtraParams.Add(new Parameter { Name = "noSequenceLineJSON", Value = "App.NoSequenceLineGridPanel.getRowsValues()", Mode = ParameterMode.Raw, Encode = true });
+                          de.Click.Success = "function(response, result) { " +
+                                             " this.up('window').close();" +
+                                             " App.NoSequenceList.getSelectionModel().deselectAll();" +
+                                             " App.StoreNoSequenceList.load({ " +
+                                             "   callback : function() { " +
+                                             "     var record = App.NoSequenceList.store.getById(result.result.Id); " +
+                                             "     var index = App.NoSequenceList.store.indexOf(record);" +
+                                             "     App.NoSequenceList.getSelectionModel().select(index, true);" +
+                                             "   }" +
+                                             " });" +
+                                             "}";
+                      }));
+                  buttons.Add(Html.X().Button()
+                      .ID("btnCancel")
+                      .Text("Cancel")
+                      .Icon(Icon.Cancel)
+                      .Listeners(ls =>
+                      {
+                          ls.Click.Handler = "this.up('window').close();";
+                      }));
+              })
+      )
 )
 
