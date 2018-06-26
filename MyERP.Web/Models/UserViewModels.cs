@@ -108,5 +108,8 @@ namespace MyERP.Web.Models
 
         public List<ListItem> Organizations { get; set; }
         public List<ListItem> CultureUIs { get; set; }
+
+        [Required]
+        public String CultureId { get; set; }
     }
 }

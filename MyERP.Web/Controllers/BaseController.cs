@@ -49,7 +49,7 @@ namespace MyERP.Web.Controllers
                 {
                     var preference = requestContext.HttpContext.Session["Preference"] as PreferenceViewModel;
                     cultureUIName = preference.CultureUI;
-                    cultureName = preference.Organization.Client.CultureId;
+                    cultureName = preference.CultureId;
                 }
                 else
                 {

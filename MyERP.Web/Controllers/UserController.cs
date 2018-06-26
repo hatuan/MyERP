@@ -63,15 +63,24 @@ namespace MyERP.Web.Controllers
                 string passEncrypt = Cryptography.Encrypt(Cryptography.GetHashKey(model.Name + model.Password), model.Password);
                 if (Membership.Provider.ValidateUser(model.Name, passEncrypt))
                 {
+                    //Delete cache key
+                    var cacheKey = string.Format("UserData_{0}", model.Name);
+                    HttpRuntime.Cache.Remove(cacheKey);
+
                     var user = (MyERPMembershipUser) Membership.GetUser(model.Name, true);
                     if (user != null && user.ClientId != null)
                     {
+                        //Delete cache key
+                        cacheKey = string.Format("UserData_{0}", user.ProviderUserKey);
+                        HttpRuntime.Cache.Remove(cacheKey);
+
                         //Lay thong tin mac dinh cua user
                         var preference = new PreferenceViewModel();
                         preference.OrganizationId = user.OrganizationId ?? 0;
                         preference.Organization = user.Organization;
                         preference.CultureUI = user.CultureUiId;
                         preference.WorkingDate = DateTime.Now;
+                        preference.CultureId = user.Client.CultureId;
                         Session["Preference"] = preference;
                         string[] roles = Roles.Provider.GetRolesForUser(user.UserName);
 
@@ -90,7 +99,7 @@ namespace MyERP.Web.Controllers
                         Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(cultureUIName);
                         Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cultureName);
 
-                        var cacheKey = string.Format("UserData_{0}", user.UserName);
+                        //var cacheKey = string.Format("UserData_{0}", user.UserName);
                         HttpRuntime.Cache.Remove(cacheKey);
 
                         cacheKey = string.Format("UserData_{0}", user.ProviderUserKey);
@@ -304,24 +313,31 @@ namespace MyERP.Web.Controllers
             preference.WorkingDate = DateTime.Now;
 
             var organizationRepository = new OrganizationRepository();
-            var organizations = (from org in organizationRepository.Get(null, new string[] { "Client" })
+            var organizations = (from org in organizationRepository.Get()
                                 select new Ext.Net.ListItem
                                     {
                                         Text = org.Desctiption,
                                         Value = org.Id + ""
                                     }
                                 ).ToList();
+            var user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
 
-            preference.RootOrganization = organizationRepository.GetRootOrganization(User);
-
-            var defaultOrganizationId = (Membership.GetUser(User.Identity.Name, true) as MyERPMembershipUser).OrganizationId;
-            var defaultCultureUI = (Membership.GetUser(User.Identity.Name, true) as MyERPMembershipUser).CultureUiId;
+            var defaultOrganizationId = user.OrganizationId ?? 0;
+            var defaultCultureUI = user.CultureUiId;
+            var defaultCultureId = user.Client.CultureId;
 
             if (Session["Preference"] != null)
             {
-                defaultOrganizationId = preference.OrganizationId = (Session["Preference"] as PreferenceViewModel).OrganizationId;
-                defaultCultureUI = preference.CultureUI = (Session["Preference"] as PreferenceViewModel).CultureUI;
-                preference.WorkingDate = (Session["Preference"] as PreferenceViewModel).WorkingDate;
+                preference.OrganizationId = ((PreferenceViewModel) Session["Preference"]).OrganizationId;
+                preference.CultureUI = ((PreferenceViewModel) Session["Preference"]).CultureUI;
+                preference.CultureId = ((PreferenceViewModel) Session["Preference"]).CultureId;
+                preference.WorkingDate = ((PreferenceViewModel) Session["Preference"]).WorkingDate;
+            }
+            else
+            {
+                preference.OrganizationId = defaultOrganizationId;
+                preference.CultureUI = defaultCultureUI;
+                preference.CultureId = defaultCultureId;
             }
 
             preference.Organizations = organizations;
@@ -342,14 +358,11 @@ namespace MyERP.Web.Controllers
         [HttpPost]
         public ActionResult Preference([Bind(Exclude = "Organization,RootOrganization,Organizations,CultureUIs")] PreferenceViewModel model, string returnUrl = "~/")
         {
-            var organizationRepository = new OrganizationRepository();
-            model.Organization = organizationRepository.Get(c => c.Id == model.OrganizationId, new []{"Client"}).Single();
-            model.RootOrganization = organizationRepository.GetRootOrganization(model.Organization);
-
             DirectResult r = new DirectResult();
-
             if (ModelState.IsValid)
             {
+                model.RootOrganization = (new OrganizationRepository()).GetRootOrganization(User);
+
                 Session["Preference"] = model;
 
                 var userRepository = new UserRepository();

@@ -40,7 +40,8 @@
                         .Items(Model.CultureUIs),
                     Html.X().DateFieldFor(m => m.WorkingDate)
                         .LabelAlign(LabelAlign.Left)
-                        .Format("dd/MM/yyyy")
+                        .Format("dd/MM/yyyy"),
+                    Html.X().HiddenFor(m=>m.CultureId)
                         )
                 .Buttons(Html.X().Button()
                     .ID("Button1")
