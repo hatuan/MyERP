@@ -94,6 +94,12 @@
                                                                                                             de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
                                                                                                             de.Click.EventMask.ShowMask = true;
                                                                                                         }),
+                                                                                                        Html.X().MenuItem().Text("Options").Tag("Options").DirectEvents(de =>
+                                                                                                        {
+                                                                                                            de.Click.Url = Url.Action("_Maintenance", "Option");
+                                                                                                            de.Click.ExtraParams.Add(new { containerId = "IndexViewport" });
+                                                                                                            de.Click.EventMask.ShowMask = true;
+                                                                                                        }),
                                                                                                         Html.X().MenuItem().Text("Users Manager").Tag("UsersManager")
                                                                                                     )
                                                                                                 )

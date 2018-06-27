@@ -38,6 +38,10 @@ namespace MyERP.Web
     {
 
     }
+    public partial class OptionRepository : BaseRepository<MyERP.DataAccess.Option, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
 
     public partial class UomRepository : BaseRepository<MyERP.DataAccess.Uom, MyERP.DataAccess.EntitiesModel>
     {

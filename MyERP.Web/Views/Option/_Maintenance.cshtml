@@ -1,0 +1,71 @@
+﻿@model MyERP.Web.Models.OptionEditViewModel
+
+@(Html.X().Window()
+              .ID("WindowOptionsMaintenance")
+              .Title("Options Maintenance")
+              .Height(500)
+              .Width(650)
+              .Layout(LayoutType.Fit)
+              .Modal(true)
+              .Items(
+                  Html.X().FormPanel()
+                      .ID("FormOptionMaintenance")
+                      .Layout(LayoutType.Form)
+                      .Border(false)
+                      .BodyPadding(5)
+                      .DefaultButton("btnSave")
+                      .Items(items =>
+                      {
+                          items.Add(Html.X().AntiForgeryField());
+                          items.Add(Html.X().HiddenFor(m => m.Status));
+                          items.Add(Html.X().HiddenFor(m => m.Id).ID("Id"));
+                          items.Add(Html.X().HiddenFor(m => m.Version).ID("Version"));
+                          items.Add(Html.X().TabPanel()
+                              .ID("OptionTabs")
+                              .DeferredRender(false)
+                              .Items(tabs =>
+                              {
+                                  tabs.Add(Html.X().FormPanel()
+                                      .ID("OptionSeqTab")
+                                      .Title("Sequences")
+                                      .Items(tabItems =>
+                                      {
+                                          tabItems.Add(Html.X().ComboBoxFor(m => m.SalesOrderSequenceId).ID("SalesOrderSequence").Editable(false));
+                                          tabItems.Add(Html.X().ComboBoxFor(m => m.SalesShipmentSeqId).ID("SalesShipmentSeq").Editable(false));
+                                          tabItems.Add(Html.X().ComboBoxFor(m => m.SaleInvoiceSeqId).ID("SaleInvoiceSeq").Editable(false));
+                                          tabItems.Add(Html.X().ComboBoxFor(m => m.PosSequenceId).ID("PosSequence").Editable(false));
+                                          tabItems.Add(Html.X().ComboBoxFor(m => m.PurchOrderSequenceId).ID("PurchOrderSequence").Editable(false));
+                                          tabItems.Add(Html.X().ComboBoxFor(m => m.PurchReceiveSeqId).ID("PurchReceiveSeq").Editable(false));
+                                          tabItems.Add(Html.X().ComboBoxFor(m => m.PurchInvoiceSeqId).ID("PurchInvoiceSeq").Editable(false));
+                                      })
+                                  );
+                              })
+                              );
+                      })
+                      .Buttons(
+                          Html.X().Button()
+                              .ID("btnSave")
+                              .Text("Save")
+                              .Icon(Icon.Disk)
+                              .DirectEvents(de =>
+                              {
+                                  de.Click.Url = Url.Action("_Maintenance");
+                                  de.Click.Method = HttpMethod.POST;
+                                  de.Click.Before = "return this.up('form').isValid();";
+                                  de.Click.Success = "Ext.Msg.notify('Success', 'Save Success');";
+                                  de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
+                                  de.Click.ShowWarningOnFailure = true;
+                                  de.Click.EventMask.ShowMask = true;
+                                  de.Click.FormID = "FormLocationMaintenance";
+                              }),
+                           Html.X().Button()
+                               .ID("btnCancel")
+                               .Text("Cancel")
+                               .Icon(Icon.Cancel)
+                               .Listeners(ls =>
+                               {
+                                   ls.Click.Handler = "this.up('window').close();";
+                               }))
+        )
+)
+

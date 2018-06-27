@@ -349,6 +349,7 @@
     <Content Include="Areas\NoSequence\Views\Index\Index.cshtml" />
     <Content Include="Areas\NoSequence\Views\Index\_List.cshtml" />
     <Content Include="Areas\NoSequence\Views\Index\_Maintenance.cshtml" />
+    <Content Include="Views\Option\_Maintenance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -391,6 +392,7 @@
     <Compile Include="Controllers\ExtNetController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EntityBaseController.cs" />
+    <Compile Include="Controllers\OptionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValidationController.cs" />
     <Compile Include="DecimalModelBinder.cs" />
@@ -405,6 +407,7 @@
     <Compile Include="Models\ItemGroupViewModels.cs" />
     <Compile Include="Models\BusinessPartnerModels.cs" />
     <Compile Include="Models\ItemUomViewModels.cs" />
+    <Compile Include="Models\OptionViewModels.cs" />
     <Compile Include="Models\NoSequenceLineViewModels.cs" />
     <Compile Include="Models\NoSequenceViewModels.cs" />
     <Compile Include="Models\LocationViewModels.cs" />
@@ -431,6 +434,7 @@
     <Compile Include="CustomRoleProvider.cs" />
     <Compile Include="odata\RolesController.cs" />
     <Compile Include="Repository\BusinessPartnerPriceGroupRepository.cs" />
+    <Compile Include="Repository\OptionRepository.cs" />
     <Compile Include="Repository\NoSequenceLineRepository.cs" />
     <Compile Include="Repository\NoSequenceRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />

@@ -442,6 +442,38 @@
             <End Role="user" EntitySet="users" />
             <End Role="option" EntitySet="options" />
           </AssociationSet>
+          <AssociationSet Name="FK_option_no_sequence" Association="MyERP.DataAccess.Store.FK_option_no_sequence">
+            <End Role="no_sequence" EntitySet="no_sequences" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_option_no_sequence1" Association="MyERP.DataAccess.Store.FK_option_no_sequence1">
+            <End Role="no_sequence" EntitySet="no_sequences" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_option_no_sequence2" Association="MyERP.DataAccess.Store.FK_option_no_sequence2">
+            <End Role="no_sequence" EntitySet="no_sequences" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_option_no_sequence3" Association="MyERP.DataAccess.Store.FK_option_no_sequence3">
+            <End Role="no_sequence" EntitySet="no_sequences" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_option_no_sequence4" Association="MyERP.DataAccess.Store.FK_option_no_sequence4">
+            <End Role="no_sequence" EntitySet="no_sequences" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_option_no_sequence5" Association="MyERP.DataAccess.Store.FK_option_no_sequence5">
+            <End Role="no_sequence" EntitySet="no_sequences" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_option_no_sequence6" Association="MyERP.DataAccess.Store.FK_option_no_sequence6">
+            <End Role="no_sequence" EntitySet="no_sequences" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_option_user1" Association="MyERP.DataAccess.Store.FK_option_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -481,15 +513,27 @@
           <Property Name="is_activated" Type="bit" Nullable="false" />
           <Property Name="culture_id" Type="varchar" MaxLength="8" />
           <Property Name="amount_decimal_places" Type="smallint" Nullable="false" />
-          <Property Name="amount_rounding_precision" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="amount_rounding_precision" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="unit_amount_decimal_places" Type="smallint" Nullable="false" />
-          <Property Name="unit_amount_rounding_precision" Type="smallint" Nullable="false" />
+          <Property Name="unit_amount_rounding_precision" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="currency_lcy_id" Type="bigint" />
           <Property Name="rec_created_by" Type="bigint" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" />
           <Property Name="rec_modified_at" Type="datetime2" />
           <Property Name="version" Type="bigint" Nullable="false" DefaultValue="1" />
+          <Property Name="tax_code" Type="varchar" MaxLength="14" />
+          <Property Name="adress" Type="nvarchar" MaxLength="256" />
+          <Property Name="address_transition" Type="nvarchar" MaxLength="256" />
+          <Property Name="telephone" Type="varchar" MaxLength="32" />
+          <Property Name="email" Type="nvarchar" MaxLength="32" />
+          <Property Name="website" Type="nvarchar" MaxLength="32" />
+          <Property Name="image" Type="varbinary" />
+          <Property Name="representative_name" Type="nvarchar" MaxLength="32" />
+          <Property Name="representative_position" Type="nvarchar" MaxLength="32" />
+          <Property Name="contact_name" Type="nvarchar" MaxLength="32" />
+          <Property Name="mobilephone" Type="varchar" MaxLength="32" />
+          <Property Name="tax_authorities_id" Type="bigint" />
         </EntityType>
         <EntityType Name="currency">
           <Key>
@@ -1011,6 +1055,17 @@
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
+          <Property Name="pos_sequence_id" Type="bigint" />
+          <Property Name="sales_order_sequence_id" Type="bigint" />
+          <Property Name="purch_order_sequence_id" Type="bigint" />
+          <Property Name="sales_shipment_seq_id" Type="bigint" />
+          <Property Name="sale_invoice_seq_id" Type="bigint" />
+          <Property Name="purch_receive_seq_id" Type="bigint" />
+          <Property Name="purch_invoice_seq_id" Type="bigint" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
+          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="version" Type="bigint" Nullable="false" />
         </EntityType>
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
@@ -2248,6 +2303,102 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_option_no_sequence">
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="0..1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="no_sequence">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="pos_sequence_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_option_no_sequence1">
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="0..1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="no_sequence">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="sales_order_sequence_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_option_no_sequence2">
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="0..1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="no_sequence">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="sales_shipment_seq_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_option_no_sequence3">
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="0..1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="no_sequence">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="sale_invoice_seq_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_option_no_sequence4">
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="0..1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="no_sequence">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="purch_order_sequence_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_option_no_sequence5">
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="0..1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="no_sequence">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="purch_receive_seq_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_option_no_sequence6">
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="0..1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="no_sequence">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="purch_invoice_seq_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_option_user1">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="rec_created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -2695,6 +2846,38 @@
             <End Role="RecModifiedByUser" EntitySet="Users" />
             <End Role="Options" EntitySet="Options" />
           </AssociationSet>
+          <AssociationSet Name="NoSequence_Option_PosSet" Association="MyERP.DataAccess.NoSequence_Option_Pos">
+            <End Role="PosSequence" EntitySet="NoSequences" />
+            <End Role="Options" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="NoSequence_Option_SalesOrderSet" Association="MyERP.DataAccess.NoSequence_Option_SalesOrder">
+            <End Role="SalesOrderSequence" EntitySet="NoSequences" />
+            <End Role="Options1" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="NoSequence_Option_SalesShipmentSet" Association="MyERP.DataAccess.NoSequence_Option_SalesShipment">
+            <End Role="SalesShipmentSequence" EntitySet="NoSequences" />
+            <End Role="Options2" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="NoSequence_Option_SalesInvoiceSet" Association="MyERP.DataAccess.NoSequence_Option_SalesInvoice">
+            <End Role="SalesInvoiceSequence" EntitySet="NoSequences" />
+            <End Role="Options3" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="NoSequence_Option_PurchOrderSet" Association="MyERP.DataAccess.NoSequence_Option_PurchOrder">
+            <End Role="PurchOrderSequence" EntitySet="NoSequences" />
+            <End Role="Options4" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="NoSequence_Option_PurchReceiveSet" Association="MyERP.DataAccess.NoSequence_Option_PurchReceive">
+            <End Role="PurchReceiveSequence" EntitySet="NoSequences" />
+            <End Role="Options5" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="NoSequence_Option_PurchInvoiceSet" Association="MyERP.DataAccess.NoSequence_Option_PurchInvoice">
+            <End Role="PurchInvoiceSequence" EntitySet="NoSequences" />
+            <End Role="Options6" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="User_Option_RecCreatedBySet" Association="MyERP.DataAccess.User_Option_RecCreatedBy">
+            <End Role="RecCreatedByUser" EntitySet="Users" />
+            <End Role="Options1" EntitySet="Options" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
           <Key>
@@ -2739,14 +2922,26 @@
           <Property Name="IsActivated" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="0a7fa17b-be3c-457e-84a2-feccd5f4334f" />
           <Property Name="CultureId" Type="String" MaxLength="8" ed:ValidateMaxLength="8" ed:ValidateRequired="false" ed:Guid="a4a18b92-4cc8-4768-b6c0-3d23f4baae2b" />
           <Property Name="AmountDecimalPlaces" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="d8487a88-0621-457d-ab76-ba4e2153295d" />
-          <Property Name="AmountRoundingPrecision" Type="Decimal" Nullable="false" ed:ValidateRequired="true" ed:Guid="a0f1faf6-0ba9-4a07-8619-62db3e8d16d0" />
+          <Property Name="AmountRoundingPrecision" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="a0f1faf6-0ba9-4a07-8619-62db3e8d16d0" />
           <Property Name="UnitAmountDecimalPlaces" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="9b9fa71d-d759-4a34-9291-6adb0ef21bb3" />
-          <Property Name="UnitAmountRoundingPrecision" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="1d0151b9-1593-47cd-95b7-240144c598d3" />
+          <Property Name="UnitAmountRoundingPrecision" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="1d0151b9-1593-47cd-95b7-240144c598d3" />
+          <Property Name="CurrencyLcyId" Type="Int64" ed:ValidateRequired="false" ed:Guid="75ad659c-bb0b-4eaf-b311-277192c574ac" />
+          <Property Name="TaxCode" Type="String" MaxLength="14" ed:ValidateMaxLength="14" ed:ValidateRequired="false" ed:Guid="16fa9131-54b6-43c8-8872-df574e8dac24" />
+          <Property Name="Adress" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="018299ea-b183-4855-97cc-c6d24c4855b3" />
+          <Property Name="AddressTransition" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="739b5b9a-688b-4ef0-a52a-2a8b06de050e" />
+          <Property Name="Telephone" Type="String" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="66b7e6de-68d8-4e52-bf2a-193933439720" />
+          <Property Name="Email" Type="String" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="0b14b6aa-04a3-41d7-ab45-1e7fb17e730a" />
+          <Property Name="Website" Type="String" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="9b3b9c84-0eec-48d6-99d8-8fbef6e78d0b" />
+          <Property Name="Image" Type="Binary" ed:ValidateRequired="false" ed:Guid="864f9865-99c0-4fab-a100-cddd9ab76305" />
+          <Property Name="RepresentativeName" Type="String" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="446a4044-1868-47d0-bfe0-0c4e77b2eda3" />
+          <Property Name="RepresentativePosition" Type="String" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="df7f7f49-2f51-466e-b134-097282bf9455" />
+          <Property Name="ContactName" Type="String" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="2edf326d-70ca-48ca-a249-042fef03f9d1" />
+          <Property Name="Mobilephone" Type="String" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="14a3c2cc-7db2-4488-936c-dd7e67890d7c" />
+          <Property Name="TaxAuthoritiesId" Type="Int64" ed:ValidateRequired="false" ed:Guid="91c2487d-a7a3-4808-a1bc-0334d4101264" />
           <Property Name="RecCreatedBy" Type="Int64" ed:ValidateRequired="false" ed:Guid="9ffccfec-0c56-4341-9b0b-e932bcf06acf" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="7201971a-c51f-4753-826c-25116b4cfc3f" />
           <Property Name="RecModifiedBy" Type="Int64" ed:ValidateRequired="true" ed:Guid="c6fcd91e-15ef-4481-a32a-a0075cb44ac6" />
           <Property Name="RecModifiedAt" Type="DateTime" ed:ValidateRequired="false" ed:Guid="73e42812-2bb8-4648-8704-5c7659eaf0d8" />
-          <Property Name="CurrencyLcyId" Type="Int64" ed:ValidateRequired="false" ed:Guid="75ad659c-bb0b-4eaf-b311-277192c574ac" />
           <Property Name="Version" Type="Int64" Nullable="false" DefaultValue="1" ed:ValidateRequired="true" ed:Guid="c4bed1e7-5396-4842-8b64-feec4ffc7bbc" />
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Client_CreatedBy" FromRole="Clients" ToRole="RecCreatedByUser" ed:Guid="ce4d1885-6424-455d-9277-01aed8112888" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_Client_ModifiedBy" FromRole="Clients1" ToRole="RecModifiedByUser" ed:Guid="41eb4c56-5928-4a60-a555-6aeff073f145" />
@@ -3372,13 +3567,32 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="d5f97426-a58b-4200-bbec-013ee863b2df" />
+          <Property Name="PosSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="c5b6e437-ae23-47c2-a976-5fc93aeed301" />
+          <Property Name="SalesOrderSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="cfbc16c9-e53b-4c86-b906-ce8691ec0a22" />
+          <Property Name="SalesShipmentSeqId" Type="Int64" ed:ValidateRequired="false" ed:Guid="9ca3748a-9db9-4a02-ae47-c8eb1a77f046" />
+          <Property Name="SaleInvoiceSeqId" Type="Int64" ed:ValidateRequired="false" ed:Guid="4e3e5d79-2be4-4161-ae09-353a13914633" />
+          <Property Name="PurchOrderSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="0d54163b-fcdd-48a1-af10-a5cea7c3b053" />
+          <Property Name="PurchReceiveSeqId" Type="Int64" ed:ValidateRequired="false" ed:Guid="d5566720-5518-4466-9cd1-c24d1713a690" />
+          <Property Name="PurchInvoiceSeqId" Type="Int64" ed:ValidateRequired="false" ed:Guid="22455b20-8bc0-4c71-8cd0-988af02c37c5" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="19193184-9f47-49da-a79e-1702ab8b2b0d" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f76d4599-0080-4766-8af6-b593b2cb5826" />
+          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="e179bfd9-f149-49cf-a633-f4355fdc1329" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="9e6aa219-352c-45c3-845d-983439e9daf4" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="74facb80-7cd3-463a-988d-b7775c0d4198" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="78ef60dd-5238-4db4-ab48-c5c6ce9d9c35" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="b35ef1f8-1db2-45b2-a0ae-9477fb88081c" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="82743c90-e41e-4579-8d45-90a25da5af60" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_Option" FromRole="Options" ToRole="Client" ed:Guid="a4ad320d-f2db-484d-ae5f-d540c4c5b668" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_Option" FromRole="Options" ToRole="Organization" ed:Guid="85351236-3da0-489a-9036-947d4474afe0" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_Option_RecModifiedBy" FromRole="Options" ToRole="RecModifiedByUser" ed:Guid="9f5d95ea-4f72-40ef-8502-b29c973b6731" />
+          <NavigationProperty Name="PosSequence" Relationship="MyERP.DataAccess.NoSequence_Option_Pos" FromRole="Options" ToRole="PosSequence" ed:Guid="dcd757db-bcee-40fc-96be-14d91be70962" />
+          <NavigationProperty Name="SalesOrderSequence" Relationship="MyERP.DataAccess.NoSequence_Option_SalesOrder" FromRole="Options1" ToRole="SalesOrderSequence" ed:Guid="d5e3887f-61d2-44d9-864f-b93ff3ab0fa0" />
+          <NavigationProperty Name="SalesShipmentSequence" Relationship="MyERP.DataAccess.NoSequence_Option_SalesShipment" FromRole="Options2" ToRole="SalesShipmentSequence" ed:Guid="98f658e9-0e24-48f6-9043-0e9c268b9867" />
+          <NavigationProperty Name="SalesInvoiceSequence" Relationship="MyERP.DataAccess.NoSequence_Option_SalesInvoice" FromRole="Options3" ToRole="SalesInvoiceSequence" ed:Guid="ad30ac90-eb32-42b7-a678-301addedcd4b" />
+          <NavigationProperty Name="PurchOrderSequence" Relationship="MyERP.DataAccess.NoSequence_Option_PurchOrder" FromRole="Options4" ToRole="PurchOrderSequence" ed:Guid="9881b153-7612-4952-a88a-0a9a37237074" />
+          <NavigationProperty Name="PurchReceiveSequence" Relationship="MyERP.DataAccess.NoSequence_Option_PurchReceive" FromRole="Options5" ToRole="PurchReceiveSequence" ed:Guid="12f77eab-4bf9-4360-98a0-96b645a7dcde" />
+          <NavigationProperty Name="PurchInvoiceSequence" Relationship="MyERP.DataAccess.NoSequence_Option_PurchInvoice" FromRole="Options6" ToRole="PurchInvoiceSequence" ed:Guid="c9dede43-032b-418d-9171-74892814db8d" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Option_RecCreatedBy" FromRole="Options1" ToRole="RecCreatedByUser" ed:Guid="25bdacd5-af56-4937-a266-76752baa5205" />
         </EntityType>
         <Association Name="User_Client_CreatedBy" ed:Guid="cc64066d-a254-493f-8be0-7609622c4e6a">
           <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
@@ -4628,6 +4842,102 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="NoSequence_Option_Pos" ed:Guid="f17c033e-db4e-4d51-b8b7-8d53c4f2885d">
+          <End Role="PosSequence" Type="MyERP.DataAccess.NoSequence" Multiplicity="0..1" />
+          <End Role="Options" Type="MyERP.DataAccess.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PosSequence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options">
+              <PropertyRef Name="PosSequenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NoSequence_Option_SalesOrder" ed:Guid="e04158a9-cf9d-4eae-be50-ee031dd35960">
+          <End Role="SalesOrderSequence" Type="MyERP.DataAccess.NoSequence" Multiplicity="0..1" />
+          <End Role="Options1" Type="MyERP.DataAccess.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesOrderSequence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options1">
+              <PropertyRef Name="SalesOrderSequenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NoSequence_Option_SalesShipment" ed:Guid="e45f65c3-14e2-4792-8b79-9293c92d50a1">
+          <End Role="SalesShipmentSequence" Type="MyERP.DataAccess.NoSequence" Multiplicity="0..1" />
+          <End Role="Options2" Type="MyERP.DataAccess.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesShipmentSequence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options2">
+              <PropertyRef Name="SalesShipmentSeqId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NoSequence_Option_SalesInvoice" ed:Guid="674a8374-f114-42a0-a892-7573bf5015a6">
+          <End Role="SalesInvoiceSequence" Type="MyERP.DataAccess.NoSequence" Multiplicity="0..1" />
+          <End Role="Options3" Type="MyERP.DataAccess.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesInvoiceSequence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options3">
+              <PropertyRef Name="SaleInvoiceSeqId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NoSequence_Option_PurchOrder" ed:Guid="91fe6f18-9529-4279-a46d-6ac69bcea21d">
+          <End Role="PurchOrderSequence" Type="MyERP.DataAccess.NoSequence" Multiplicity="0..1" />
+          <End Role="Options4" Type="MyERP.DataAccess.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchOrderSequence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options4">
+              <PropertyRef Name="PurchOrderSequenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NoSequence_Option_PurchReceive" ed:Guid="25ce901e-6041-4423-b0ca-26a0fe424f30">
+          <End Role="PurchReceiveSequence" Type="MyERP.DataAccess.NoSequence" Multiplicity="0..1" />
+          <End Role="Options5" Type="MyERP.DataAccess.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchReceiveSequence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options5">
+              <PropertyRef Name="PurchReceiveSeqId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NoSequence_Option_PurchInvoice" ed:Guid="e087b28c-c877-492d-9e3b-a758c6461b38">
+          <End Role="PurchInvoiceSequence" Type="MyERP.DataAccess.NoSequence" Multiplicity="0..1" />
+          <End Role="Options6" Type="MyERP.DataAccess.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchInvoiceSequence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options6">
+              <PropertyRef Name="PurchInvoiceSeqId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Option_RecCreatedBy" ed:Guid="63423542-ae1f-4f51-9916-5e26a5e6f293">
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="Options1" Type="MyERP.DataAccess.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecCreatedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options1">
+              <PropertyRef Name="RecCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- MSL content -->
@@ -4681,6 +4991,18 @@
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
                 <ScalarProperty Name="CurrencyLcyId" ColumnName="currency_lcy_id" />
                 <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="TaxCode" ColumnName="tax_code" />
+                <ScalarProperty Name="Adress" ColumnName="adress" />
+                <ScalarProperty Name="AddressTransition" ColumnName="address_transition" />
+                <ScalarProperty Name="Telephone" ColumnName="telephone" />
+                <ScalarProperty Name="Email" ColumnName="email" />
+                <ScalarProperty Name="Website" ColumnName="website" />
+                <ScalarProperty Name="Image" ColumnName="image" />
+                <ScalarProperty Name="RepresentativeName" ColumnName="representative_name" />
+                <ScalarProperty Name="RepresentativePosition" ColumnName="representative_position" />
+                <ScalarProperty Name="ContactName" ColumnName="contact_name" />
+                <ScalarProperty Name="Mobilephone" ColumnName="mobilephone" />
+                <ScalarProperty Name="TaxAuthoritiesId" ColumnName="tax_authorities_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5206,6 +5528,17 @@
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+                <ScalarProperty Name="PosSequenceId" ColumnName="pos_sequence_id" />
+                <ScalarProperty Name="SalesOrderSequenceId" ColumnName="sales_order_sequence_id" />
+                <ScalarProperty Name="PurchOrderSequenceId" ColumnName="purch_order_sequence_id" />
+                <ScalarProperty Name="SalesShipmentSeqId" ColumnName="sales_shipment_seq_id" />
+                <ScalarProperty Name="SaleInvoiceSeqId" ColumnName="sale_invoice_seq_id" />
+                <ScalarProperty Name="PurchReceiveSeqId" ColumnName="purch_receive_seq_id" />
+                <ScalarProperty Name="PurchInvoiceSeqId" ColumnName="purch_invoice_seq_id" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Version" ColumnName="version" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
