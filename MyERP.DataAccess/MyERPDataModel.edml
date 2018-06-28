@@ -1055,7 +1055,7 @@
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
-          <Property Name="pos_sequence_id" Type="bigint" />
+          <Property Name="sales_pos_sequence_id" Type="bigint" />
           <Property Name="sales_order_sequence_id" Type="bigint" />
           <Property Name="purch_order_sequence_id" Type="bigint" />
           <Property Name="sales_shipment_seq_id" Type="bigint" />
@@ -2311,7 +2311,7 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="option">
-              <PropertyRef Name="pos_sequence_id" />
+              <PropertyRef Name="sales_pos_sequence_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2847,7 +2847,7 @@
             <End Role="Options" EntitySet="Options" />
           </AssociationSet>
           <AssociationSet Name="NoSequence_Option_PosSet" Association="MyERP.DataAccess.NoSequence_Option_Pos">
-            <End Role="PosSequence" EntitySet="NoSequences" />
+            <End Role="SalesPosSequence" EntitySet="NoSequences" />
             <End Role="Options" EntitySet="Options" />
           </AssociationSet>
           <AssociationSet Name="NoSequence_Option_SalesOrderSet" Association="MyERP.DataAccess.NoSequence_Option_SalesOrder">
@@ -3567,7 +3567,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="d5f97426-a58b-4200-bbec-013ee863b2df" />
-          <Property Name="PosSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="c5b6e437-ae23-47c2-a976-5fc93aeed301" />
+          <Property Name="SalesPosSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="c5b6e437-ae23-47c2-a976-5fc93aeed301" />
           <Property Name="SalesOrderSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="cfbc16c9-e53b-4c86-b906-ce8691ec0a22" />
           <Property Name="SalesShipmentSeqId" Type="Int64" ed:ValidateRequired="false" ed:Guid="9ca3748a-9db9-4a02-ae47-c8eb1a77f046" />
           <Property Name="SaleInvoiceSeqId" Type="Int64" ed:ValidateRequired="false" ed:Guid="4e3e5d79-2be4-4161-ae09-353a13914633" />
@@ -3585,7 +3585,7 @@
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_Option" FromRole="Options" ToRole="Client" ed:Guid="a4ad320d-f2db-484d-ae5f-d540c4c5b668" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_Option" FromRole="Options" ToRole="Organization" ed:Guid="85351236-3da0-489a-9036-947d4474afe0" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_Option_RecModifiedBy" FromRole="Options" ToRole="RecModifiedByUser" ed:Guid="9f5d95ea-4f72-40ef-8502-b29c973b6731" />
-          <NavigationProperty Name="PosSequence" Relationship="MyERP.DataAccess.NoSequence_Option_Pos" FromRole="Options" ToRole="PosSequence" ed:Guid="dcd757db-bcee-40fc-96be-14d91be70962" />
+          <NavigationProperty Name="SalesPosSequence" Relationship="MyERP.DataAccess.NoSequence_Option_Pos" FromRole="Options" ToRole="SalesPosSequence" ed:Guid="dcd757db-bcee-40fc-96be-14d91be70962" />
           <NavigationProperty Name="SalesOrderSequence" Relationship="MyERP.DataAccess.NoSequence_Option_SalesOrder" FromRole="Options1" ToRole="SalesOrderSequence" ed:Guid="d5e3887f-61d2-44d9-864f-b93ff3ab0fa0" />
           <NavigationProperty Name="SalesShipmentSequence" Relationship="MyERP.DataAccess.NoSequence_Option_SalesShipment" FromRole="Options2" ToRole="SalesShipmentSequence" ed:Guid="98f658e9-0e24-48f6-9043-0e9c268b9867" />
           <NavigationProperty Name="SalesInvoiceSequence" Relationship="MyERP.DataAccess.NoSequence_Option_SalesInvoice" FromRole="Options3" ToRole="SalesInvoiceSequence" ed:Guid="ad30ac90-eb32-42b7-a678-301addedcd4b" />
@@ -4843,14 +4843,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="NoSequence_Option_Pos" ed:Guid="f17c033e-db4e-4d51-b8b7-8d53c4f2885d">
-          <End Role="PosSequence" Type="MyERP.DataAccess.NoSequence" Multiplicity="0..1" />
+          <End Role="SalesPosSequence" Type="MyERP.DataAccess.NoSequence" Multiplicity="0..1" />
           <End Role="Options" Type="MyERP.DataAccess.Option" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PosSequence">
+            <Principal Role="SalesPosSequence">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Options">
-              <PropertyRef Name="PosSequenceId" />
+              <PropertyRef Name="SalesPosSequenceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5528,7 +5528,7 @@
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
-                <ScalarProperty Name="PosSequenceId" ColumnName="pos_sequence_id" />
+                <ScalarProperty Name="SalesPosSequenceId" ColumnName="sales_pos_sequence_id" />
                 <ScalarProperty Name="SalesOrderSequenceId" ColumnName="sales_order_sequence_id" />
                 <ScalarProperty Name="PurchOrderSequenceId" ColumnName="purch_order_sequence_id" />
                 <ScalarProperty Name="SalesShipmentSeqId" ColumnName="sales_shipment_seq_id" />

@@ -2,7 +2,7 @@
 
 @(Html.X().Window()
           .ID("WindowPreference")
-          .Title("Preference")
+          .Title(@Resources.Resources.Preference)
           .Closable(false)
           .Height(300)
           .Width(350)
@@ -19,7 +19,7 @@
                     Html.X().AntiForgeryField(),
                     Html.X().ComboBoxFor(m => m.OrganizationId)
                         .ID("ComboBoxOrganization")
-                        .EmptyText("--Please Select--")
+                        .EmptyText(@Resources.Resources.Please_Select)
                         .LabelAlign(LabelAlign.Left)
                         .Editable(false)
                         .AutoFocus(true)
@@ -30,7 +30,7 @@
                         .Items(Model.Organizations),
                     Html.X().ComboBoxFor(m => m.CultureUI)
                         .ID("ComboBoxCultureUI")
-                        .EmptyText("--Please Select--")
+                        .EmptyText(@Resources.Resources.Please_Select)
                         .LabelAlign(LabelAlign.Left)
                         .Editable(false)
                         .QueryMode(DataLoadMode.Local)
@@ -45,7 +45,7 @@
                         )
                 .Buttons(Html.X().Button()
                     .ID("Button1")
-                    .Text("Submit")
+                    .Text(@Resources.Resources.Submit)
                     .Icon(Icon.Accept)
                     .DirectEvents(de =>
                     {

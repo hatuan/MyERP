@@ -361,6 +361,7 @@ namespace MyERP.Web.Controllers
             DirectResult r = new DirectResult();
             if (ModelState.IsValid)
             {
+                model.Organization = (new OrganizationRepository()).Get(c => c.Id == model.OrganizationId).Single();
                 model.RootOrganization = (new OrganizationRepository()).GetRootOrganization(User);
 
                 Session["Preference"] = model;

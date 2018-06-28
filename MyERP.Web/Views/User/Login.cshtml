@@ -53,7 +53,7 @@
 
     @(Html.X().Window()
                 .ID("LoginWindow")
-                .Title("Login")
+                .Title(@Resources.Resources.Login)
                 .Height(215)
                 .Width(350)
                 .Modal(true)
@@ -72,12 +72,12 @@
                                 .AllowBlank(false)
                                 .AutoFocus(true)
                                 .LabelAlign(LabelAlign.Left)
-                                .BlankText("Your username is required."),
+                                .BlankText(@Resources.Resources.Your_username_is_required),
                             Html.X().TextFieldFor(m => m.Password)
                                 .EmptyText("")
                                 .AllowBlank(false)
                                 .LabelAlign(LabelAlign.Left)
-                                .BlankText("Your password is required.")
+                                .BlankText(@Resources.Resources.Your_password_is_required)
                                 .InputType(Ext.Net.InputType.Password),
                             Html.X().CheckboxFor(m => m.RememberMe)
                                 .LabelAlign(LabelAlign.Left)
@@ -85,7 +85,7 @@
                                 )
                         .Buttons(Html.X().Button()
                             .ID("Button1")
-                            .Text("Submit")
+                            .Text(@Resources.Resources.Login)
                             .Icon(Icon.Accept)
                             .Listeners(ls =>
                             {

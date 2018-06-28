@@ -1,71 +1,172 @@
 ﻿@model MyERP.Web.Models.OptionEditViewModel
 
-@(Html.X().Window()
-              .ID("WindowOptionsMaintenance")
-              .Title("Options Maintenance")
-              .Height(500)
-              .Width(650)
-              .Layout(LayoutType.Fit)
-              .Modal(true)
+@(Html.X().FormPanel()
+      .ID("FormOptionMaintenance")
+      .Frame(true)
+      .Width(600)
+      .Border(false)
+      .BodyPadding(5)
+      .Bin(bins =>
+      {
+          bins.Add(Html.X().Store()
+              .ID("LookupNoSequenceStore")
+              .AutoDestroy(false)
+              .Model(Html.X().Model()
+                  .IDProperty("Id")
+                  .Fields(
+                      new ModelField("Id", ModelFieldType.Int),
+                      new ModelField("OrganizationCode", ModelFieldType.String),
+                      new ModelField("Code", ModelFieldType.String),
+                      new ModelField("Description", ModelFieldType.String)
+                  )
+              )
+              .Data(ViewData["NoSequences"])
+              );
+      })
+      .DefaultButton("btnSave")
+      .Items(items =>
+      {
+          items.Add(Html.X().Panel()
+              .Content(
+                  @<text>
+                      <h1>@Resources.Resources.Options</h1>
+                   </text>)
+          );
+          items.Add(Html.X().AntiForgeryField());
+          items.Add(Html.X().HiddenFor(m => m.Status));
+          items.Add(Html.X().HiddenFor(m => m.Id).ID("Id"));
+          items.Add(Html.X().HiddenFor(m => m.Version).ID("Version"));
+          items.Add(Html.X().FieldSet()
+              .Title(@Resources.Resources.Sequence_Options)
               .Items(
-                  Html.X().FormPanel()
-                      .ID("FormOptionMaintenance")
-                      .Layout(LayoutType.Form)
-                      .Border(false)
-                      .BodyPadding(5)
-                      .DefaultButton("btnSave")
-                      .Items(items =>
-                      {
-                          items.Add(Html.X().AntiForgeryField());
-                          items.Add(Html.X().HiddenFor(m => m.Status));
-                          items.Add(Html.X().HiddenFor(m => m.Id).ID("Id"));
-                          items.Add(Html.X().HiddenFor(m => m.Version).ID("Version"));
-                          items.Add(Html.X().TabPanel()
-                              .ID("OptionTabs")
-                              .DeferredRender(false)
-                              .Items(tabs =>
-                              {
-                                  tabs.Add(Html.X().FormPanel()
-                                      .ID("OptionSeqTab")
-                                      .Title("Sequences")
-                                      .Items(tabItems =>
-                                      {
-                                          tabItems.Add(Html.X().ComboBoxFor(m => m.SalesOrderSequenceId).ID("SalesOrderSequence").Editable(false));
-                                          tabItems.Add(Html.X().ComboBoxFor(m => m.SalesShipmentSeqId).ID("SalesShipmentSeq").Editable(false));
-                                          tabItems.Add(Html.X().ComboBoxFor(m => m.SaleInvoiceSeqId).ID("SaleInvoiceSeq").Editable(false));
-                                          tabItems.Add(Html.X().ComboBoxFor(m => m.PosSequenceId).ID("PosSequence").Editable(false));
-                                          tabItems.Add(Html.X().ComboBoxFor(m => m.PurchOrderSequenceId).ID("PurchOrderSequence").Editable(false));
-                                          tabItems.Add(Html.X().ComboBoxFor(m => m.PurchReceiveSeqId).ID("PurchReceiveSeq").Editable(false));
-                                          tabItems.Add(Html.X().ComboBoxFor(m => m.PurchInvoiceSeqId).ID("PurchInvoiceSeq").Editable(false));
-                                      })
-                                  );
-                              })
-                              );
-                      })
-                      .Buttons(
-                          Html.X().Button()
-                              .ID("btnSave")
-                              .Text("Save")
-                              .Icon(Icon.Disk)
-                              .DirectEvents(de =>
-                              {
-                                  de.Click.Url = Url.Action("_Maintenance");
-                                  de.Click.Method = HttpMethod.POST;
-                                  de.Click.Before = "return this.up('form').isValid();";
-                                  de.Click.Success = "Ext.Msg.notify('Success', 'Save Success');";
-                                  de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
-                                  de.Click.ShowWarningOnFailure = true;
-                                  de.Click.EventMask.ShowMask = true;
-                                  de.Click.FormID = "FormLocationMaintenance";
-                              }),
-                           Html.X().Button()
-                               .ID("btnCancel")
-                               .Text("Cancel")
-                               .Icon(Icon.Cancel)
-                               .Listeners(ls =>
-                               {
-                                   ls.Click.Handler = "this.up('window').close();";
-                               }))
-        )
+                  Html.X().ComboBoxFor(m => m.SalesOrderSequenceId).ID("SalesOrderSequence").Editable(false).LabelAlign(LabelAlign.Top)
+                      .DisplayField("Code")
+                      .ValueField("Id")
+                      .FieldStyle("text-transform: uppercase;")
+                      .ListConfig(Html.X().BoundList()
+                          .LoadingText("Searching...")
+                          .ItemTpl(Html.X().XTemplate()
+                              .Html(@<text>
+                                    <div class="search-item">
+                                        <h3>{Code}</h3>
+                                        {Description}
+                                    </div>
+                                 </text>))
+                          .MinWidth(400))
+                      .StoreID("LookupNoSequenceStore"),
+                  Html.X().ComboBoxFor(m => m.SalesShipmentSeqId).ID("SalesShipmentSeq").Editable(false).LabelAlign(LabelAlign.Top)
+                      .DisplayField("Code")
+                      .ValueField("Id")
+                      .FieldStyle("text-transform: uppercase;")
+                      .ListConfig(Html.X().BoundList()
+                          .LoadingText("Searching...")
+                          .ItemTpl(Html.X().XTemplate()
+                              .Html(@<text>
+                                        <div class="search-item">
+                                            <h3>{Code}</h3>
+                                            {Description}
+                                        </div>
+                                     </text>)
+                          )
+                          .MinWidth(400))
+                      .StoreID("LookupNoSequenceStore"),
+                  Html.X().ComboBoxFor(m => m.SaleInvoiceSeqId).ID("SalesInvoiceSeq").Editable(false).LabelAlign(LabelAlign.Top)
+                      .DisplayField("Code")
+                      .ValueField("Id")
+                      .FieldStyle("text-transform: uppercase;")
+                      .ListConfig(Html.X().BoundList()
+                          .LoadingText("Searching...")
+                          .ItemTpl(Html.X().XTemplate()
+                              .Html(@<text>
+                                        <div class="search-item">
+                                            <h3>{Code}</h3>
+                                            {Description}
+                                        </div>
+                                     </text>)
+                          )
+                          .MinWidth(400))
+                      .StoreID("LookupNoSequenceStore"),
+                  Html.X().ComboBoxFor(m => m.SalesPosSequenceId).ID("SalesPosSequence").Editable(false).LabelAlign(LabelAlign.Top).DisplayField("Code")
+                      .ValueField("Id")
+                      .FieldStyle("text-transform: uppercase;")
+                      .ListConfig(Html.X().BoundList()
+                          .LoadingText("Searching...")
+                          .ItemTpl(Html.X().XTemplate()
+                              .Html(@<text>
+                                        <div class="search-item">
+                                            <h3>{Code}</h3>
+                                            {Description}
+                                        </div>
+                                     </text>)
+                          )
+                          .MinWidth(400))
+                      .StoreID("LookupNoSequenceStore"),
+                  Html.X().ComboBoxFor(m => m.PurchOrderSequenceId).ID("PurchOrderSequence").Editable(false).LabelAlign(LabelAlign.Top).DisplayField("Code")
+                      .ValueField("Id")
+                      .FieldStyle("text-transform: uppercase;")
+                      .ListConfig(Html.X().BoundList()
+                          .LoadingText("Searching...")
+                          .ItemTpl(Html.X().XTemplate()
+                              .Html(@<text>
+                                        <div class="search-item">
+                                            <h3>{Code}</h3>
+                                            {Description}
+                                        </div>
+                                     </text>)
+                          )
+                          .MinWidth(400))
+                      .StoreID("LookupNoSequenceStore"),
+                  Html.X().ComboBoxFor(m => m.PurchReceiveSeqId).ID("PurchReceiveSeq").Editable(false).LabelAlign(LabelAlign.Top).DisplayField("Code")
+                      .ValueField("Id")
+                      .FieldStyle("text-transform: uppercase;")
+                      .ListConfig(Html.X().BoundList()
+                          .LoadingText("Searching...")
+                          .ItemTpl(Html.X().XTemplate()
+                              .Html(@<text>
+                                        <div class="search-item">
+                                            <h3>{Code}</h3>
+                                            {Description}
+                                        </div>
+                                     </text>)
+                          )
+                          .MinWidth(400))
+                      .StoreID("LookupNoSequenceStore"),
+                  Html.X().ComboBoxFor(m => m.PurchInvoiceSeqId).ID("PurchInvoiceSeq").Editable(false).LabelAlign(LabelAlign.Top).DisplayField("Code")
+                      .ValueField("Id")
+                      .FieldStyle("text-transform: uppercase;")
+                      .ListConfig(Html.X().BoundList()
+                          .LoadingText("Searching...")
+                          .ItemTpl(Html.X().XTemplate()
+                              .Html(@<text>
+                                        <div class="search-item">
+                                            <h3>{Code}</h3>
+                                            {Description}
+                                        </div>
+                                     </text>)
+                          )
+                          .MinWidth(400))
+                      .StoreID("LookupNoSequenceStore")
+              ));
+      })
+      .Buttons(
+          Html.X().Button()
+              .ID("btnSave")
+              .Text("Save")
+              .Icon(Icon.Disk)
+              .DirectEvents(de =>
+              {
+                  de.Click.Url = Url.Action("_Maintenance");
+                  de.Click.Method = HttpMethod.POST;
+                  de.Click.Before = "return this.up('form').isValid();";
+                  de.Click.Success = "Ext.Msg.notify('Success', 'Save Success');";
+                  de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
+                  de.Click.ShowWarningOnFailure = true;
+                  de.Click.EventMask.ShowMask = true;
+                  de.Click.FormID = "FormLocationMaintenance";
+              }),
+          Html.X().Button()
+              .ID("btnCancel")
+              .Text("Cancel")
+              .Icon(Icon.Cancel))
 )
 
