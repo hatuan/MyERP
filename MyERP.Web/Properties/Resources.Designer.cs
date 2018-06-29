@@ -106,6 +106,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Code.
         /// </summary>
         public static string Code {
@@ -120,6 +129,15 @@ namespace Resources {
         public static string Code_already_exists_Please_specify_another_one {
             get {
                 return ResourceManager.GetString("Code_already_exists_Please_specify_another_one", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        public static string Confirm {
+            get {
+                return ResourceManager.GetString("Confirm", resourceCulture);
             }
         }
         
@@ -381,6 +399,15 @@ namespace Resources {
         public static string No_Sequence {
             get {
                 return ResourceManager.GetString("No_Sequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         

@@ -140,6 +140,12 @@
                                                                                             .Text(@Resources.Resources.Warehouse)
                                                                                     )
                                                                         ),
-        Html.X().Button().Text(@Resources.Resources.About).IconCls("x-fa fa-info")
+        Html.X().Button().Text(@Resources.Resources.About).IconCls("x-fa fa-info").Tag("About").DirectEvents(de =>
+        {
+            de.Click.Url = Url.Action("_About", "Home");
+            de.Click.Method = HttpMethod.GET;
+            de.Click.ExtraParams.Add(new { containerId = "IndexViewport" });
+            de.Click.EventMask.ShowMask = true;
+        })
         )
 )

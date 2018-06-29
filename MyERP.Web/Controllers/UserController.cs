@@ -108,7 +108,7 @@ namespace MyERP.Web.Controllers
                         IPrincipal principal = new GenericPrincipal(new GenericIdentity(user.UserName), roles);
                         var organizationRepository = new OrganizationRepository();
                         var organizations = organizationRepository.GetAll(principal)
-                            .Select(c => new Ext.Net.ListItem(c.Desctiption, c.Id)).ToList();
+                            .Select(c => new Ext.Net.ListItem(c.Description, c.Id)).ToList();
 
                         preference.RootOrganization = organizationRepository.GetRootOrganization(principal);
                         preference.Organizations = organizations;
@@ -316,7 +316,7 @@ namespace MyERP.Web.Controllers
             var organizations = (from org in organizationRepository.Get()
                                 select new Ext.Net.ListItem
                                     {
-                                        Text = org.Desctiption,
+                                        Text = org.Description,
                                         Value = org.Id + ""
                                     }
                                 ).ToList();
@@ -404,7 +404,7 @@ namespace MyERP.Web.Controllers
             }
         }
 
-      public ActionResult CreateCompany()
+      public ActionResult CreateClient()
       {
           throw new NotImplementedException();
       }

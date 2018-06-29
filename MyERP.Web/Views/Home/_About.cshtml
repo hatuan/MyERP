@@ -1,0 +1,23 @@
+﻿@(Html.X().Window()
+      .ID("WindowAboutMaintenance")
+      .Title("About")
+      .Height(600)
+      .Width(500)
+      .Layout(LayoutType.Fit)
+      .Modal(true)
+      .Resizable(false)
+      .Content(@<text>
+
+                </text>)
+      .Buttons(butons =>
+      {
+          butons.Add(Html.X().Button()
+              .Text(@Resources.Resources.Close)
+              .Listeners(ls =>
+              {
+                  ls.Click.Handler = "this.up('window').close();";
+              })
+          );
+      })
+                  
+)

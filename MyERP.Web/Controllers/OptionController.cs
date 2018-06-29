@@ -46,7 +46,7 @@ namespace MyERP.Web.Controllers
                     orderby org.Code
                     select new Ext.Net.ListItem
                     {
-                        Text = org.Desctiption,
+                        Text = org.Description,
                         Value = org.Id + ""
                     }
                 ).ToList();

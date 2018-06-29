@@ -40,5 +40,16 @@ namespace MyERP.Web.Controllers
                 RenderMode = RenderMode.Replace 
             };
         }
+
+        public PartialViewResult _About(string containerId = "IndexViewport")
+        {
+            return new PartialViewResult
+            {
+                ContainerId = containerId,
+                ViewName = "_About",
+                WrapByScriptTag = false,
+                RenderMode = RenderMode.AddTo
+            };
+        }
     }
 }

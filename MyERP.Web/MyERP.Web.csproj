@@ -352,6 +352,7 @@
     <Content Include="Views\Currency\Index.cshtml" />
     <Content Include="Views\Currency\_List.cshtml" />
     <Content Include="Views\Currency\_Maintenance.cshtml" />
+    <Content Include="Views\Home\_About.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -436,8 +437,8 @@
     <Compile Include="CustomMembershipProvider.cs" />
     <Compile Include="CustomRoleProvider.cs" />
     <Compile Include="odata\RolesController.cs" />
-    <Compile Include="Properties\Resources.vi.Designer.cs">
-      <DependentUpon>Resources.vi.resx</DependentUpon>
+    <Compile Include="Properties\Resources.vi-VN.Designer.cs">
+      <DependentUpon>Resources.vi-VN.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -508,9 +509,9 @@
       <LastGenOutput>CommonWebApiResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.vi.resx">
+    <EmbeddedResource Include="Properties\Resources.vi-VN.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.vi.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.vi-VN.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
