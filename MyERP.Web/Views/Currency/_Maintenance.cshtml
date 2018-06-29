@@ -4,17 +4,17 @@
 @(Html.X().Window()
       .ID("WindowCurrencyMaintenance")
       .Title(@Resources.Resources.Currency_Maintenance)
-      .Height(600)
-      .Width(900)
+      .Height(300)
+      .Width(500)
       .Modal(true)
       .Layout(LayoutType.Fit)
-      .MarginSpec("0 5 5 0")
-      .BodyPadding(5)
       .Items(
           Html.X().FormPanel()
               .ID("FormCurrencyMaintenance")
-              .Layout(LayoutType.VBox)
-              .LayoutConfig(action => action.Add(new VBoxLayoutConfig() { Align = VBoxAlign.Stretch }))
+              .Layout(LayoutType.Form)
+              .Border(false)
+              .BodyPadding(5)
+              .DefaultButton("btnSave")
               .Items(
                   Html.X().AntiForgeryField(),
                   Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").EnforceMaxLength(true).ID("Code").AutoFocus(true),
