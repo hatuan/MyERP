@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Business Partner.
         /// </summary>
         public static string Business_Partner {
@@ -84,6 +93,33 @@ namespace Resources {
         public static string Business_Partner_Group {
             get {
                 return ResourceManager.GetString("Business_Partner_Group", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code.
+        /// </summary>
+        public static string Code {
+            get {
+                return ResourceManager.GetString("Code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code already exists. Please specify another one..
+        /// </summary>
+        public static string Code_already_exists_Please_specify_another_one {
+            get {
+                return ResourceManager.GetString("Code_already_exists_Please_specify_another_one", resourceCulture);
             }
         }
         
@@ -133,6 +169,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Currency has been changed or deleted! Please check.
+        /// </summary>
+        public static string Currency_has_been_changed_or_deleted_Please_check {
+            get {
+                return ResourceManager.GetString("Currency_has_been_changed_or_deleted_Please_check", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency List.
+        /// </summary>
+        public static string Currency_List {
+            get {
+                return ResourceManager.GetString("Currency_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency Maintenance.
+        /// </summary>
+        public static string Currency_Maintenance {
+            get {
+                return ResourceManager.GetString("Currency_Maintenance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Currency Rate.
         /// </summary>
         public static string Currency_Rate {
@@ -147,6 +210,33 @@ namespace Resources {
         public static string Current_password {
             get {
                 return ResourceManager.GetString("Current_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
@@ -183,6 +273,15 @@ namespace Resources {
         public static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Code - only allow a-z A-Z 0-9 character.
+        /// </summary>
+        public static string Invalid_Code_only_allow_a_z_A_Z_0_9_character {
+            get {
+                return ResourceManager.GetString("Invalid_Code_only_allow_a_z_A_Z_0_9_character", resourceCulture);
             }
         }
         
@@ -493,6 +592,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sequence Options.
         /// </summary>
         public static string Sequence_Options {
@@ -552,6 +660,15 @@ namespace Resources {
         public static string UOM {
             get {
                 return ResourceManager.GetString("UOM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User don&apos;t have Client or Organization. Please set.
+        /// </summary>
+        public static string User_dont_have_Client_or_Organization_Please_set {
+            get {
+                return ResourceManager.GetString("User_dont_have_Client_or_Organization_Please_set", resourceCulture);
             }
         }
         

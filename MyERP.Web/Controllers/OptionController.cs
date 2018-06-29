@@ -85,7 +85,7 @@ namespace MyERP.Web.Controllers
                 PurchOrderSequenceId = option.PurchOrderSequenceId,
                 PurchReceiveSeqId = option.PurchReceiveSeqId,
                 SalesPosSequenceId = option.SalesPosSequenceId,
-                SaleInvoiceSeqId = option.SaleInvoiceSeqId,
+                SalesInvoiceSeqId = option.SalesInvoiceSeqId,
                 SalesOrderSequenceId = option.SalesOrderSequenceId,
                 SalesShipmentSeqId = option.SalesShipmentSeqId,
                 Status = (DefaultStatusType) option.Status,
@@ -107,7 +107,93 @@ namespace MyERP.Web.Controllers
         [HttpPost]
         public ActionResult _Maintenance(OptionEditViewModel model)
         {
-            return this.Direct();
+            DirectResult r = new DirectResult();
+
+            if (ModelState.IsValid)
+            {
+                MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
+                long clientId = user.ClientId ?? 0;
+                long organizationId = user.OrganizationId ?? 0;
+
+                if (clientId == 0 || organizationId == 0)
+                {
+                    r.Success = false;
+                    r.ErrorMessage = "User don't have Client or Organization. Please set";
+                    return r;
+                }
+
+                if (model.Id.HasValue)
+                {
+                    var _update = repository.Get(c => c.Id == model.Id).SingleOrDefault();
+                    if (_update == null || _update.Version != model.Version)
+                    {
+                        r.Success = false;
+                        r.ErrorMessage = "Option has been changed or deleted! Please check";
+                        return r;               
+                    }
+                    _update.PurchInvoiceSeqId = model.PurchInvoiceSeqId;
+                    _update.PurchOrderSequenceId = model.PurchOrderSequenceId;
+                    _update.PurchReceiveSeqId = model.PurchReceiveSeqId;
+                    _update.SalesOrderSequenceId = model.SalesOrderSequenceId;
+                    _update.SalesInvoiceSeqId = model.SalesInvoiceSeqId;
+                    _update.SalesPosSequenceId = model.SalesPosSequenceId;
+                    _update.SalesShipmentSeqId = model.SalesShipmentSeqId;
+                    _update.Status = (byte)model.Status;
+                    _update.RecModifiedAt = DateTime.Now;
+                    _update.RecModifiedBy = (long)user.ProviderUserKey;
+                    _update.Version++;
+
+                    try
+                    {
+                        var entity = this.repository.Update(_update);
+                        model.Version = entity.Version;
+                    }
+                    catch (Exception ex)
+                    {
+                        r.Success = false;
+                        r.ErrorMessage = ex.Message;
+                        return r;
+                    }
+                }
+                else
+                {
+                    var _newModel = new DataAccess.Option()
+                    {
+                        ClientId = clientId,
+                        OrganizationId = organizationId,
+                        PurchInvoiceSeqId = model.PurchInvoiceSeqId,
+                        PurchOrderSequenceId = model.PurchOrderSequenceId,
+                        PurchReceiveSeqId = model.PurchReceiveSeqId,
+                        SalesOrderSequenceId = model.SalesOrderSequenceId,
+                        SalesInvoiceSeqId = model.SalesInvoiceSeqId,
+                        SalesPosSequenceId = model.SalesPosSequenceId,
+                        SalesShipmentSeqId = model.SalesShipmentSeqId,
+                        Status = (byte)model.Status,
+                        Version = 1,
+                        RecModifiedAt = DateTime.Now,
+                        RecCreatedBy = (long)user.ProviderUserKey,
+                        RecCreatedAt = DateTime.Now,
+                        RecModifiedBy = (long)user.ProviderUserKey
+                    };
+
+                    try
+                    {
+                        var newEntity = this.repository.AddNew(_newModel);
+                        model.Id = newEntity.Id;
+                    }
+                    catch (Exception ex)
+                    {
+                        r.Success = false;
+                        r.ErrorMessage = ex.Message;
+                        return r;
+                    }
+                }
+                r.Success = true;
+                r.Result = new {Id = model.Id, Version = model.Version};
+                return r;
+            }
+            r.Success = false;
+            return r;
         }
 
         public ActionResult GetData(StoreRequestParameters parameters)

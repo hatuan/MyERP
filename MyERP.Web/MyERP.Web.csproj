@@ -349,6 +349,9 @@
     <Content Include="Areas\NoSequence\Views\Index\_List.cshtml" />
     <Content Include="Areas\NoSequence\Views\Index\_Maintenance.cshtml" />
     <Content Include="Views\Option\_Maintenance.cshtml" />
+    <Content Include="Views\Currency\Index.cshtml" />
+    <Content Include="Views\Currency\_List.cshtml" />
+    <Content Include="Views\Currency\_Maintenance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -387,6 +390,7 @@
     <Compile Include="Areas\UOM\Controllers\IndexController.cs" />
     <Compile Include="Areas\UOM\UOMAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CurrencyController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ExtNetController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

@@ -67,7 +67,7 @@ namespace MyERP.Web.Models
         public long? SalesShipmentSeqId { get; set; }
 
         [Display(Name = "Sales_Invoice", ResourceType = typeof(Resources.Resources))]
-        public long? SaleInvoiceSeqId { get; set; }
+        public long? SalesInvoiceSeqId { get; set; }
 
         [Display(Name = "Purchase_Order", ResourceType = typeof(Resources.Resources))]
         public long? PurchOrderSequenceId { get; set; }

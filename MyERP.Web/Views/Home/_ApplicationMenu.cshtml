@@ -17,19 +17,19 @@
                                                                                             Html.X().MenuItem()
                                                                                                 .Text(@Resources.Resources.Sales).Menu(Html.X().Menu()
                                                                                                     .Items(
-                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Business_Partner).Tag("BusinessPartner").DirectEvents(de => 
+                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Business_Partner).Tag("BusinessPartner").DirectEvents(de =>
                                                                                                         {
                                                                                                             de.Click.Url = Url.Action("_List", "Index", new { area = "BusinessPartner" });
                                                                                                             de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
                                                                                                             de.Click.EventMask.ShowMask = true;
                                                                                                         }),
-                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Business_Partner_Group).Tag("BusinessPartnerGroup").DirectEvents(de => 
+                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Business_Partner_Group).Tag("BusinessPartnerGroup").DirectEvents(de =>
                                                                                                         {
                                                                                                             de.Click.Url = Url.Action("_List", "BusinessPartnerGroup", new { area = "BusinessPartner" });
                                                                                                             de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
                                                                                                             de.Click.EventMask.ShowMask = true;
                                                                                                         }),
-                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Sales_Price).Tag("SalesPrice").DirectEvents(de => 
+                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Sales_Price).Tag("SalesPrice").DirectEvents(de =>
                                                                                                         {
                                                                                                             de.Click.Url = Url.Action("_List", "SalesPriceGroup", new { area = "SalesPrice" });
                                                                                                             de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
@@ -57,25 +57,25 @@
                                                                                             Html.X().MenuItem()
                                                                                                 .Text(@Resources.Resources.Warehouse).Menu(Html.X().Menu()
                                                                                                     .Items(
-                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Item).Tag("Item").DirectEvents(de => 
+                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Item).Tag("Item").DirectEvents(de =>
                                                                                                         {
                                                                                                             de.Click.Url = Url.Action("_List", "Index", new { area = "Item" });
                                                                                                             de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
                                                                                                             de.Click.EventMask.ShowMask = true;
                                                                                                         }),
-                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Item_Group).Tag("ItemGroup").DirectEvents(de => 
+                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Item_Group).Tag("ItemGroup").DirectEvents(de =>
                                                                                                         {
                                                                                                             de.Click.Url = Url.Action("_List", "ItemGroup", new { area = "Item" });
                                                                                                             de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
                                                                                                             de.Click.EventMask.ShowMask = true;
                                                                                                         }),
-                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.UOM).Tag("UOM").DirectEvents(de => 
+                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.UOM).Tag("UOM").DirectEvents(de =>
                                                                                                         {
                                                                                                             de.Click.Url = Url.Action("_List", "Index", new { area = "UOM" });
                                                                                                             de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
                                                                                                             de.Click.EventMask.ShowMask = true;
                                                                                                         }),
-                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Location).Tag("Location").DirectEvents(de => 
+                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Location).Tag("Location").DirectEvents(de =>
                                                                                                         {
                                                                                                             de.Click.Url = Url.Action("_List", "Index", new { area = "Location" });
                                                                                                             de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
@@ -86,8 +86,13 @@
                                                                                             Html.X().MenuItem()
                                                                                                 .Text(@Resources.Resources.System).Menu(Html.X().Menu()
                                                                                                     .Items(
-                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Currency).Tag("Currency"),
-                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Currency_Rate).Tag("CurrencyRate"),
+                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Currency).Tag("Currency").DirectEvents(de =>
+                                                                                                        {
+                                                                                                            de.Click.Url = Url.Action("_List", "Currency");
+                                                                                                            de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
+                                                                                                            de.Click.EventMask.ShowMask = true;
+                                                                                                        }),
+                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Currency_Rate).Tag("CurrencyRate").Hidden(true),
                                                                                                         Html.X().MenuItem().Text(@Resources.Resources.No_Sequence).Tag("NoSequence").DirectEvents(de =>
                                                                                                         {
                                                                                                             de.Click.Url = Url.Action("_List", "Index", new { area = "NoSequence" });
@@ -101,7 +106,7 @@
                                                                                                             de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
                                                                                                             de.Click.EventMask.ShowMask = true;
                                                                                                         }),
-                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Users_Manager).Tag("UsersManager")
+                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Users_Manager).Tag("UsersManager").Hidden(true)
                                                                                                     )
                                                                                                 )
                                                                                             )
@@ -113,7 +118,7 @@
                                                                                         Html.X().MenuItem()
                                                                                             .Text(@Resources.Resources.Sales).Menu(Html.X().Menu()
                                                                                                 .Items(
-                                                                                                    Html.X().MenuItem().Text(@Resources.Resources.Point_Of_Sale).Tag("POS").DirectEvents(de => 
+                                                                                                    Html.X().MenuItem().Text(@Resources.Resources.Point_Of_Sale).Tag("POS").DirectEvents(de =>
                                                                                                     {
                                                                                                         de.Click.Url = Url.Action("RedirectToPos");
                                                                                                     })

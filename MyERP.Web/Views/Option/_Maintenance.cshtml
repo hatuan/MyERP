@@ -6,6 +6,7 @@
       .Width(600)
       .Border(false)
       .BodyPadding(5)
+      .AutoScroll(true)
       .Bin(bins =>
       {
           bins.Add(Html.X().Store()
@@ -38,6 +39,9 @@
           items.Add(Html.X().HiddenFor(m => m.Version).ID("Version"));
           items.Add(Html.X().FieldSet()
               .Title(@Resources.Resources.Sequence_Options)
+              .Width(800)
+              .Layout(LayoutType.Column)
+              .Defaults(Html.X().Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
               .Items(
                   Html.X().ComboBoxFor(m => m.SalesOrderSequenceId).ID("SalesOrderSequence").Editable(false).LabelAlign(LabelAlign.Top)
                       .DisplayField("Code")
@@ -70,7 +74,7 @@
                           )
                           .MinWidth(400))
                       .StoreID("LookupNoSequenceStore"),
-                  Html.X().ComboBoxFor(m => m.SaleInvoiceSeqId).ID("SalesInvoiceSeq").Editable(false).LabelAlign(LabelAlign.Top)
+                  Html.X().ComboBoxFor(m => m.SalesInvoiceSeqId).ID("SalesInvoiceSeq").Editable(false).LabelAlign(LabelAlign.Top)
                       .DisplayField("Code")
                       .ValueField("Id")
                       .FieldStyle("text-transform: uppercase;")
@@ -151,14 +155,14 @@
       .Buttons(
           Html.X().Button()
               .ID("btnSave")
-              .Text("Save")
+              .Text(@Resources.Resources.Save)
               .Icon(Icon.Disk)
               .DirectEvents(de =>
               {
                   de.Click.Url = Url.Action("_Maintenance");
                   de.Click.Method = HttpMethod.POST;
                   de.Click.Before = "return this.up('form').isValid();";
-                  de.Click.Success = "Ext.Msg.notify('Success', 'Save Success');";
+                  de.Click.Success = "Ext.Msg.notify('Success', 'Save Success'); #{Version}.setValue(result.result.Version);";
                   de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
                   de.Click.ShowWarningOnFailure = true;
                   de.Click.EventMask.ShowMask = true;
@@ -166,7 +170,7 @@
               }),
           Html.X().Button()
               .ID("btnCancel")
-              .Text("Cancel")
+              .Text(@Resources.Resources.Cancel)
               .Icon(Icon.Cancel))
 )
 

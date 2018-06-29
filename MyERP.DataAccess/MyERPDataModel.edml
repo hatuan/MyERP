@@ -541,13 +541,13 @@
           </Key>
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="code" Type="varchar" Nullable="false" MaxLength="32" />
-          <Property Name="desccription" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="status" Type="smallint" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
-          <Property Name="verson" Type="bigint" Nullable="false" DefaultValue="1" />
+          <Property Name="version" Type="bigint" Nullable="false" devart:DefaultValue="" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
         </EntityType>
@@ -1059,7 +1059,7 @@
           <Property Name="sales_order_sequence_id" Type="bigint" />
           <Property Name="purch_order_sequence_id" Type="bigint" />
           <Property Name="sales_shipment_seq_id" Type="bigint" />
-          <Property Name="sale_invoice_seq_id" Type="bigint" />
+          <Property Name="sales_invoice_seq_id" Type="bigint" />
           <Property Name="purch_receive_seq_id" Type="bigint" />
           <Property Name="purch_invoice_seq_id" Type="bigint" />
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
@@ -2347,7 +2347,7 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="option">
-              <PropertyRef Name="sale_invoice_seq_id" />
+              <PropertyRef Name="sales_invoice_seq_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2439,7 +2439,7 @@
             <End Role="Clients1" EntitySet="Clients" />
           </AssociationSet>
           <AssociationSet Name="UserProfile_Currency_CreatedBySet" Association="MyERP.DataAccess.UserProfile_Currency_CreatedBy">
-            <End Role="RecCreateByUser" EntitySet="Users" />
+            <End Role="RecCreatedByUser" EntitySet="Users" />
             <End Role="Currencies" EntitySet="Currencies" />
           </AssociationSet>
           <AssociationSet Name="UserProfile_Currency_ModifiedBySet" Association="MyERP.DataAccess.UserProfile_Currency_ModifiedBy">
@@ -2954,7 +2954,7 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="e262d153-07d1-4088-a89b-5a710220889c" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="f33e603b-cf28-4194-be3b-b37cf22660a1" />
-          <Property Name="Desccription" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="d9ce13c5-825d-4d01-b0ef-2dc69e3cb844" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="d9ce13c5-825d-4d01-b0ef-2dc69e3cb844" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f822fd4e-5fdf-42f3-9209-7137a7f7dd41" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f636cade-01a4-43cc-860c-c527b84193ee" />
           <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="dca1b7e2-f951-4dd3-bb4c-ec09a7b4d5d0" />
@@ -2962,8 +2962,8 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4bdea275-3d08-41dc-a5a1-1baada77a0d9" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a976dad5-6bb0-4777-bafd-328c70f3a144" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="f55e1d8d-eb4d-49c4-9951-ece0fd770f7c" />
-          <Property Name="Verson" Type="Int64" Nullable="false" DefaultValue="1" ed:ValidateRequired="true" ed:Guid="cb131c5f-1363-4dbe-bf51-a8ead561bca0" />
-          <NavigationProperty Name="RecCreateByUser" Relationship="MyERP.DataAccess.UserProfile_Currency_CreatedBy" FromRole="Currencies" ToRole="RecCreateByUser" ed:Guid="f11294ee-f235-4110-9923-79f62a815758" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="cb131c5f-1363-4dbe-bf51-a8ead561bca0" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.UserProfile_Currency_CreatedBy" FromRole="Currencies" ToRole="RecCreatedByUser" ed:Guid="f11294ee-f235-4110-9923-79f62a815758" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.UserProfile_Currency_ModifiedBy" FromRole="Currencies1" ToRole="RecModifiedByUser" ed:Guid="c2094d8b-1d85-46af-96bb-9cbb9740a485" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_Currency" FromRole="Currencies" ToRole="Organization" ed:Guid="9a39f78c-7586-4110-baf6-771a5c504ae5" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_Currency" FromRole="Currencies" ToRole="Client" ed:Guid="22480d97-6d1b-4364-b0be-ce95c51b234f" />
@@ -3570,7 +3570,7 @@
           <Property Name="SalesPosSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="c5b6e437-ae23-47c2-a976-5fc93aeed301" />
           <Property Name="SalesOrderSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="cfbc16c9-e53b-4c86-b906-ce8691ec0a22" />
           <Property Name="SalesShipmentSeqId" Type="Int64" ed:ValidateRequired="false" ed:Guid="9ca3748a-9db9-4a02-ae47-c8eb1a77f046" />
-          <Property Name="SaleInvoiceSeqId" Type="Int64" ed:ValidateRequired="false" ed:Guid="4e3e5d79-2be4-4161-ae09-353a13914633" />
+          <Property Name="SalesInvoiceSeqId" Type="Int64" ed:ValidateRequired="false" ed:Guid="4e3e5d79-2be4-4161-ae09-353a13914633" />
           <Property Name="PurchOrderSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="0d54163b-fcdd-48a1-af10-a5cea7c3b053" />
           <Property Name="PurchReceiveSeqId" Type="Int64" ed:ValidateRequired="false" ed:Guid="d5566720-5518-4466-9cd1-c24d1713a690" />
           <Property Name="PurchInvoiceSeqId" Type="Int64" ed:ValidateRequired="false" ed:Guid="22455b20-8bc0-4c71-8cd0-988af02c37c5" />
@@ -3619,10 +3619,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UserProfile_Currency_CreatedBy" ed:Guid="9a6abd45-5df4-4670-8eb6-7db10e86bfb6">
-          <End Role="RecCreateByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
           <End Role="Currencies" Type="MyERP.DataAccess.Currency" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="RecCreateByUser">
+            <Principal Role="RecCreatedByUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Currencies">
@@ -4886,7 +4886,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Options3">
-              <PropertyRef Name="SaleInvoiceSeqId" />
+              <PropertyRef Name="SalesInvoiceSeqId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5011,14 +5011,14 @@
               <MappingFragment StoreEntitySet="currencies">
                 <ScalarProperty Name="Id" ColumnName="id" />
                 <ScalarProperty Name="Code" ColumnName="code" />
-                <ScalarProperty Name="Desccription" ColumnName="desccription" />
+                <ScalarProperty Name="Description" ColumnName="description" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="Status" ColumnName="status" />
                 <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
-                <ScalarProperty Name="Verson" ColumnName="verson" />
+                <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -5532,7 +5532,7 @@
                 <ScalarProperty Name="SalesOrderSequenceId" ColumnName="sales_order_sequence_id" />
                 <ScalarProperty Name="PurchOrderSequenceId" ColumnName="purch_order_sequence_id" />
                 <ScalarProperty Name="SalesShipmentSeqId" ColumnName="sales_shipment_seq_id" />
-                <ScalarProperty Name="SaleInvoiceSeqId" ColumnName="sale_invoice_seq_id" />
+                <ScalarProperty Name="SalesInvoiceSeqId" ColumnName="sales_invoice_seq_id" />
                 <ScalarProperty Name="PurchReceiveSeqId" ColumnName="purch_receive_seq_id" />
                 <ScalarProperty Name="PurchInvoiceSeqId" ColumnName="purch_invoice_seq_id" />
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />

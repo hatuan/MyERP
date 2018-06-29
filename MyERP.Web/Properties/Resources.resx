@@ -215,7 +215,6 @@
   </data>
   <data name="Required" xml:space="preserve">
     <value>Required</value>
-    <comment>Required</comment>
   </data>
   <data name="Sales" xml:space="preserve">
     <value>Sales</value>
@@ -300,5 +299,44 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Code_already_exists_Please_specify_another_one" xml:space="preserve">
+    <value>Code already exists. Please specify another one.</value>
+  </data>
+  <data name="Currency_has_been_changed_or_deleted_Please_check" xml:space="preserve">
+    <value>Currency has been changed or deleted! Please check</value>
+  </data>
+  <data name="Currency_List" xml:space="preserve">
+    <value>Currency List</value>
+  </data>
+  <data name="Currency_Maintenance" xml:space="preserve">
+    <value>Currency Maintenance</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Invalid_Code_only_allow_a_z_A_Z_0_9_character" xml:space="preserve">
+    <value>Invalid Code - only allow a-z A-Z 0-9 character</value>
+  </data>
+  <data name="User_dont_have_Client_or_Organization_Please_set" xml:space="preserve">
+    <value>User don't have Client or Organization. Please set</value>
   </data>
 </root>

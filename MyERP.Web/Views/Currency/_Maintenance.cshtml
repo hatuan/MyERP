@@ -1,0 +1,64 @@
+﻿@model MyERP.Web.Models.CurrencyEditViewModel
+
+
+@(Html.X().Window()
+      .ID("WindowCurrencyMaintenance")
+      .Title(@Resources.Resources.Currency_Maintenance)
+      .Height(600)
+      .Width(900)
+      .Modal(true)
+      .Layout(LayoutType.Fit)
+      .MarginSpec("0 5 5 0")
+      .BodyPadding(5)
+      .Items(
+          Html.X().FormPanel()
+              .ID("FormCurrencyMaintenance")
+              .Layout(LayoutType.VBox)
+              .LayoutConfig(action => action.Add(new VBoxLayoutConfig() { Align = VBoxAlign.Stretch }))
+              .Items(
+                  Html.X().AntiForgeryField(),
+                  Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").EnforceMaxLength(true).ID("Code").AutoFocus(true),
+                  Html.X().TextFieldFor(m => m.Description).AllowBlank(false).EnforceMaxLength(true).ID("Description"),
+                  Html.X().ComboBoxFor(m => m.Status).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
+                  Html.X().HiddenFor(m => m.Id).ID("Id"),
+                  Html.X().HiddenFor(m => m.Version).ID("Version")
+              )
+              .Buttons(buttons =>
+              {
+                  buttons.Add(Html.X().Button()
+                      .ID("btnSave")
+                      .Text(@Resources.Resources.Save)
+                      .Icon(Icon.Disk)
+                      .DirectEvents(de =>
+                      {
+                          de.Click.Url = Url.Action("_Maintenance");
+                          de.Click.Method = HttpMethod.POST;
+                          de.Click.Before = "return this.up('form').isValid();";
+                          de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
+                          de.Click.ShowWarningOnFailure = true;
+                          de.Click.EventMask.ShowMask = true;
+                          de.Click.FormID = "FormCurrencyMaintenance";
+                          de.Click.Success = "function(response, result) { " +
+                                             " this.up('window').close();" +
+                                             " App.CurrencyList.getSelectionModel().deselectAll();" +
+                                             " App.StoreCurrencyList.load({ " +
+                                             "   callback : function() { " +
+                                             "     var record = App.CurrencyList.store.getById(result.result.Id); " +
+                                             "     var index = App.CurrencyList.store.indexOf(record);" +
+                                             "     App.CurrencyList.getSelectionModel().select(index, true);" +
+                                             "   }" +
+                                             " });" +
+                                             "}";
+                      }));
+                  buttons.Add(Html.X().Button()
+                      .ID("btnCancel")
+                      .Text(@Resources.Resources.Cancel)
+                      .Icon(Icon.Cancel)
+                      .Listeners(ls =>
+                      {
+                          ls.Click.Handler = "this.up('window').close();";
+                      }));
+              })
+      )
+)
+
