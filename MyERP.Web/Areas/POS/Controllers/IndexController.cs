@@ -229,7 +229,7 @@ namespace MyERP.Web.Areas.POS.Controllers
             return this.Direct();
         }
 
-        public ActionResult ChangeBusinessPartner(String viewBagID, string selectedData)
+        public ActionResult ChangeBusinessPartner(String viewBagID, string selectedData, String posLines)
         {
             BusinessPartnerLookupViewModel selectedPartner = JsonConvert.DeserializeObject<BusinessPartnerLookupViewModel>(selectedData, new JsonSerializerSettings
             {
@@ -238,7 +238,64 @@ namespace MyERP.Web.Areas.POS.Controllers
             this.GetCmp<TextField>("sellToCustomerName" + viewBagID).Value = selectedPartner.Description;
             this.GetCmp<TextField>("sellToAddress" + viewBagID).Value = selectedPartner.Address;
 
-            //TODO : Calc unit-price
+            MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
+            long clientId = user.ClientId ?? 0;
+            long organizationId = user.OrganizationId ?? 0;
+
+            if (clientId == 0 || organizationId == 0)
+                return this.Direct(false, "User don't have Client or Organization. Please set");
+
+            List<PosLineEditViewModel> posLinesModel = JsonConvert.DeserializeObject<List<PosLineEditViewModel>>(posLines, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+            
+            List<GetPriceDTO> itemListRequest = (from posLine in posLinesModel
+                select new GetPriceDTO
+                {
+                    Id = posLine.LineNo,
+                    OrgId = organizationId,
+                    BusPartId = selectedPartner.Id,
+                    WorkingDate = DateTime.Today,
+                    ItemId = posLine.ItemId??0,
+                    UomId = posLine.UomId??0,
+                    Qty = posLine.Quantity
+                }).ToList();
+
+            var salesPriceRepository = new SalesPriceRepository();
+            itemListRequest = salesPriceRepository.GetPriceOfItemList(organizationId, selectedPartner.Id, DateTime.Today, itemListRequest);
+            Store posLineStore = X.GetCmp<Store>("PosLineStore" + viewBagID);
+
+            var getPriceDTONotFound =
+                (from getPriceDTO in itemListRequest where getPriceDTO.UnitPrice <= 0 select getPriceDTO).FirstOrDefault();
+
+            if (getPriceDTONotFound != null)
+            {
+                PosLineEditViewModel posLineEditViewModel = (from posLine in posLinesModel where posLine.LineNo == getPriceDTONotFound.Id select posLine).First();
+                return this.Direct(false, $"ERR : Item { posLineEditViewModel.Description } unit price not found, can't be selling");
+            }
+
+            foreach (GetPriceDTO getPriceDTO in itemListRequest)
+            {
+                PosLineEditViewModel posLineEditViewModel = (from posLine in posLinesModel where posLine.LineNo == getPriceDTO.Id select posLine).First();
+
+                ModelProxy record = posLineStore.GetById(getPriceDTO.Id);
+                Decimal unitPrice = getPriceDTO.UnitPrice;
+
+                if (unitPrice == 0)
+                {
+                    return this.Direct(false, "ERR : Item unit price not found, can't be selling");
+                }
+
+                var amount = Round.RoundAmountLCY(posLineEditViewModel.Quantity * unitPrice);
+
+                record.Set("UnitPrice", unitPrice);
+                record.Set("Amount", amount);
+                record.Set("UnitPriceLCY", unitPrice);
+                record.Set("AmountLCY", amount);
+
+                record.Commit();
+            }
 
             return this.Direct();
         }

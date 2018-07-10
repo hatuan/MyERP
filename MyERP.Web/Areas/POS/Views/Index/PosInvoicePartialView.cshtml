@@ -260,6 +260,7 @@
                           de.Select.EventMask.ShowMask = true;
                           de.Select.ExtraParams.Add(new Parameter("viewBagID", ViewBag.ID, ParameterMode.Value));
                           de.Select.ExtraParams.Add(new Parameter("selectedData", "records[0].data", ParameterMode.Raw, true));
+                          de.Select.ExtraParams.Add(new Parameter("posLines", "App." + posLineGridPanel + ".getRowsValues()", ParameterMode.Raw, true));
                           de.Select.Success = "getSumOfAmount(App." + posLineGridPanel + ");";
                       })
                   ,

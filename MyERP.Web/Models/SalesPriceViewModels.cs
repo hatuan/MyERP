@@ -125,6 +125,7 @@ namespace MyERP.Web.Models
 
     public class GetPriceDTO
     {
+        public long Id { get; set; }
         public long OrgId { get; set; }
         public long BusPartId { get; set; }
         public DateTime WorkingDate { get; set; }
