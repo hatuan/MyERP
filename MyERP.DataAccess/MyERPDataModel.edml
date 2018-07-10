@@ -1045,6 +1045,7 @@
           <Property Name="format_no" Type="nvarchar" Nullable="false" MaxLength="32" />
           <Property Name="warning_no" Type="int" Nullable="false" />
           <Property Name="starting_date" Type="datetime2" Nullable="false" />
+          <Property Name="last_date_used" Type="datetime2" />
         </EntityType>
         <EntityType Name="option">
           <Key>
@@ -3548,6 +3549,7 @@
           <Property Name="CurrentNo" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="5cd35e4a-2d2d-4e4a-b6c2-e44a0e1f2b85" />
           <Property Name="FormatNo" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="84982a0f-a647-46ad-bafd-863b5346f73b" />
           <Property Name="WarningNo" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="df8698fd-1e2b-4607-82a8-101f5b771ca1" />
+          <Property Name="LastDateUsed" Type="DateTime" ed:ValidateRequired="false" ed:Guid="058b252b-6ccc-4261-88de-abe9254c71e0" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="92f18e94-5b0b-4037-872a-7241046a5455" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="9e46eb84-be48-401c-af5b-abecdb36fc65" />
           <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="e1a9e507-e4b9-45fb-a8c9-c117a1226109" />
@@ -5517,6 +5519,7 @@
                 <ScalarProperty Name="FormatNo" ColumnName="format_no" />
                 <ScalarProperty Name="WarningNo" ColumnName="warning_no" />
                 <ScalarProperty Name="StartingDate" ColumnName="starting_date" />
+                <ScalarProperty Name="LastDateUsed" ColumnName="last_date_used" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

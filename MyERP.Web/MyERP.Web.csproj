@@ -222,6 +222,7 @@
     <Content Include="Resources\icons\wand.png" />
     <Content Include="Resources\icons\wrench.png" />
     <Content Include="Resources\images\404.png" />
+    <Content Include="Resources\images\app-about-image.png" />
     <Content Include="Resources\images\bg-main.png" />
     <Content Include="Resources\images\bg.gif" />
     <Content Include="Resources\images\bgnoise.png" />
@@ -233,7 +234,7 @@
     <Content Include="Resources\images\ee-ad-bg.png" />
     <Content Include="Resources\images\ee-ad-store-bg.png" />
     <Content Include="Resources\images\logo.png" />
-    <Content Include="Resources\images\einvoice-logo.png" />
+    <Content Include="Resources\images\app-logo.png" />
     <Content Include="Resources\images\expand-all.gif" />
     <Content Include="Resources\images\grey.png" />
     <Content Include="Resources\images\grid-badge-bg.png" />
@@ -437,6 +438,8 @@
     <Compile Include="CustomMembershipProvider.cs" />
     <Compile Include="CustomRoleProvider.cs" />
     <Compile Include="odata\RolesController.cs" />
+    <Compile Include="Others\Round.cs" />
+    <Compile Include="Others\AppSettings.cs" />
     <Compile Include="Properties\Resources.vi-VN.Designer.cs">
       <DependentUpon>Resources.vi-VN.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -452,6 +455,8 @@
     <Compile Include="Repository\NoSequenceLineRepository.cs" />
     <Compile Include="Repository\NoSequenceRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
+    <Compile Include="Repository\PosLineRepository.cs" />
+    <Compile Include="Repository\PosHeaderRepository.cs" />
     <Compile Include="Repository\SalesPriceGroupRepository.cs" />
     <Compile Include="Repository\ClientRepository.cs" />
     <Compile Include="Repository\CurrencyRepository.cs">
@@ -474,6 +479,7 @@
     <Compile Include="Repository\OrganizationRepository.cs" />
     <Compile Include="Repository\RoleRepository.cs" />
     <Compile Include="Repository\ItemRepository.cs" />
+    <Compile Include="Repository\SalesPriceRepository.cs" />
     <Compile Include="Repository\UomRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="odata\UsersController.partial.cs" />

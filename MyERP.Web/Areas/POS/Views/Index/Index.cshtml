@@ -46,6 +46,7 @@
             // Call DirectMethod
             if (!(e.value === e.originalValue || (Ext.isDate(e.value) && Ext.Date.isEqual(e.value, e.originalValue)))) {
                 var viewBagId = getViewBagId();
+                var sellToCustomerId = Ext.getCmp("sellToCustomer" + viewBagId).getValue();
 
                 Ext.net.DirectMethod.request({
                     url: '@(Url.Action("LineEdit"))',
@@ -55,7 +56,11 @@
                         oldValue: e.originalValue,
                         newValue: e.value,
                         viewBagId: viewBagId,
-                        recordData: e.record.data
+                        recordData: e.record.data,
+                        sellToCustomerId: sellToCustomerId
+                    },
+                    success: function() {
+                        getSumOfAmount(e.grid);
                     }
                 });
             }
@@ -82,6 +87,24 @@
         var uomBeforeStartEdit = function (editor, boundEl, value, eOpts) {
             //editor.field.store.loadData(editor.grid.getSelectionModel().getSelection()[0].data.ItemUoms);
         }
+
+        // or https://stackoverflow.com/questions/37924120/extjs-store-sum-field-where-acct-12345
+        var getSumOfAmount = function (grid) {
+            var sum = 0;
+            grid.getStore().each(function (record) {
+                var v = record.get("Amount").replace(/\./g, '').replace(',', '.');
+                sum += parseFloat(v);
+            });
+
+            var viewBagId = getViewBagId();
+            var totalPaymentId = "totalPayment" + viewBagId;
+            Ext.getCmp(totalPaymentId).setValue(sum);
+            var v = Ext.getCmp(totalPaymentId).getRawValue().replace(/\./g, '').replace(',', '.');
+            Ext.getCmp(totalPaymentId).setRawValue(Ext.util.Format.number(v, '0.000,00/i'));
+
+            return sum;
+        };
+
     </script>
 }
 

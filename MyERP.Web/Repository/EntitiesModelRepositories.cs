@@ -92,4 +92,14 @@ namespace MyERP.Web
     {
 
     }
+
+    public partial class PosHeaderRepository : BaseRepository<MyERP.DataAccess.PosHeader, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class PosLineRepository : BaseRepository<MyERP.DataAccess.PosLine, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
 }

@@ -59,6 +59,7 @@
                       .Listeners(ls =>
                       {
                           ls.KeyDown.Handler = "if (e.getKey() == e.ENTER) { var lookupItemValue = this.getValue(); if (lookupItemValue > 0) { Ext.getCmp('" + addItemButtonId + "').fireEvent('click'); }}";
+                          ls.KeyDown.Delay = 100;
                       })
                       .ListConfig(Html.X().BoundList()
                           .LoadingText("Searching...")
@@ -93,6 +94,20 @@
                       de.Click.ExtraParams.Add(new Parameter("lookupItemId", "App." + lookupItemComboId + ".getValue()", ParameterMode.Raw));
                       de.Click.ExtraParams.Add(new Parameter("viewBagID", ViewBag.ID, ParameterMode.Value));
                       de.Click.ExtraParams.Add(new Parameter("posLines", "App." + posLineGridPanel + ".getRowsValues()", ParameterMode.Raw, true));
+                      de.Click.ExtraParams.Add(new Parameter("sellToCustomerId", "App." + sellToCustomerId + ".getValue()", ParameterMode.Raw));
+                      de.Click.Delay = 100;
+                      de.Click.DisableControl = true;
+                      de.Click.EventMask.ShowMask = true;
+                      de.Click.Success = "getSumOfAmount(App." + posLineGridPanel + ");";
+                  }).Listeners(ls =>
+                  {
+                      ls.Click.Handler = "if(App." + sellToCustomerId + ".getValue() == null) { " +
+                                         "  Ext.Msg.alert('ERROR', 'Please select CUSTOMER FIRST!!'); " +
+                                         "  App." + sellToCustomerId + ".focus();" +
+                                         "  return false; " +
+                                         "} else { " +
+                                         "  return true; " +
+                                         "}";
                   })
               ),
           Html.X().GridPanel()
@@ -112,8 +127,28 @@
                           new ModelField("UomId", ModelFieldType.Int),
                           new ModelField("UomDescription", ModelFieldType.String),
                           new ModelField("Quantity", ModelFieldType.Float),
-                          new ModelField("UnitPrice", ModelFieldType.Float),
+                          new ModelField("UnitPrice", ModelFieldType.Float)
+                          {
+                              Convert =
+                              {
+                                  Handler = @"var v = value + '';
+                                            v.replace(/\./g,'').replace(',', '.');
+                                            return Ext.util.Format.number(v, '0.000,00/i');"
+                              }
+                          },
                           new ModelField("Amount", ModelFieldType.Float)
+                          {
+                              Convert =
+                              {
+                                  Handler = @"var v = value + '';
+                                            v.replace(/\./g,'').replace(',', '.');
+                                            return Ext.util.Format.number(v, '0.000,00/i');"
+                              }
+                          },
+                          new ModelField("QtyPerUom", ModelFieldType.Float),
+                          new ModelField("QuantityBase", ModelFieldType.Float),
+                          new ModelField("UnitPriceLCY", ModelFieldType.Float),
+                          new ModelField("AmountLCY", ModelFieldType.Float)
                       )
                   )
                   .DataSource(Model.PosLineEditViewModels)
@@ -162,7 +197,7 @@
                       )
                       .Listeners(ls =>
                       {
-                          ls.Command.Handler = "Ext.Msg.confirm('Alert', 'Do you want to DELETE ?', function (id, value) { if (id === 'yes') { App." + posLineGridPanel + ".getStore().remove(record); App." + posLineGridPanel + ".getStore().commitChanges(); }}, this);";
+                          ls.Command.Handler = "Ext.Msg.confirm('Alert', 'Do you want to DELETE ?', function (id, value) { if (id === 'yes') { App." + posLineGridPanel + ".getStore().remove(record); App." + posLineGridPanel + ".getStore().commitChanges(); getSumOfAmount(App." + posLineGridPanel + ");}}, this);";
                       })
               )
               .View(Html.X().GridView().StripeRows(true))
@@ -225,6 +260,7 @@
                           de.Select.EventMask.ShowMask = true;
                           de.Select.ExtraParams.Add(new Parameter("viewBagID", ViewBag.ID, ParameterMode.Value));
                           de.Select.ExtraParams.Add(new Parameter("selectedData", "records[0].data", ParameterMode.Raw, true));
+                          de.Select.Success = "getSumOfAmount(App." + posLineGridPanel + ");";
                       })
                   ,
                   Html.X().TextFieldFor(m => m.SellToCustomerName)
@@ -236,19 +272,19 @@
                   Html.X().TextFieldFor(m => m.TotalPayment)
                       .ReadOnly(true)
                       .ID(totalPaymentId),
-                  Html.X().TextField()
+                  Html.X().TextFieldFor(m => m.CashOfCustomer)
                       .ID(cashOfCustomerId)
-                      .FieldLabel("Cash")
                       .MaskRe(@"/[0-9\.]/")
-                      .CheckChangeEvents(new string[] {"blur"})
                       .Listeners(ls =>
                       {
-                          ls.Change.Handler = "this.setValue(Ext.util.Format.number(newValue.replace(/[,]/g, ''), '0,0.00'));";
+                          ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
+                          ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
+                                                    this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
                       })
                   ,
-                  Html.X().TextField()
+                  Html.X().TextFieldFor(m=>m.ChangeReturnToCustomer)
                       .ID(changeToCustomerId)
-                      .FieldLabel("Change")
+                      .FieldLabel("Change Return")
                       .ReadOnly(true)
                   ,
                   Html.X().Panel().BaseCls("x-plain").Flex(1),

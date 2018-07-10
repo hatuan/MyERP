@@ -122,4 +122,16 @@ namespace MyERP.Web.Models
 
         public Int64 Version { get; set; }
     }
+
+    public class GetPriceDTO
+    {
+        public long OrgId { get; set; }
+        public long BusPartId { get; set; }
+        public DateTime WorkingDate { get; set; }
+        public long ItemId { get; set; }
+        public long UomId { get; set; }
+        public Decimal Qty { get; set; }
+        public Decimal UnitPrice { get; set; }
+        public long SalesPriceId { get; set; }
+    }
 }
