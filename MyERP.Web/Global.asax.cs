@@ -37,6 +37,7 @@ namespace MyERP.Web
             AuthConfig.RegisterAuth();
 
             ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
+            ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
         }
 
         /// <summary>

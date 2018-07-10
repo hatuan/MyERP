@@ -14,6 +14,9 @@ namespace MyERP.Web.Models
         [Display(Name = "Document No")]
         public string DocumentNo { get; set; }
 
+        [Display(Name = "Sequence No")]
+        public long DocSequenceId { get; set; }
+
         [Display(Name = "Document Date")]
         public DateTime DocumentDate { get; set; }
 

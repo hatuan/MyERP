@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Ext.Net;
 using Ext.Net.MVC;
+using MyERP.DataAccess.Enum;
 using MyERP.Web.Controllers;
 using MyERP.Web.Models;
 using MyERP.Web.Others;
@@ -42,9 +43,42 @@ namespace MyERP.Web.Areas.POS.Controllers
 
         public ActionResult AddTab(string containerId)
         {
+            MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
+            long clientId = user.ClientId ?? 0;
+            long organizationId = user.OrganizationId ?? 0;
+
+            if (clientId == 0 || organizationId == 0)
+                return this.Direct(false, "User don't have Client or Organization. Please set");
+
+            var optionRepository = new OptionRepository();
+
+            long oneTimeBusinessPartnerId =
+                optionRepository.OptionParameter(organizationId, OptionParameter.OneTimeBusinessPartnerId);
+            if (oneTimeBusinessPartnerId == 0)
+                return this.Direct(false, "ERROR : Please set Option OneTimeBusinessPartner first");
+
+            long salesPosLocationId = optionRepository.OptionParameter(organizationId, OptionParameter.SalesPosLocationId);
+            if (salesPosLocationId == 0)
+                return this.Direct(false, "ERROR : Please set Option SalesPosLocation first");
+
+            long salesPosSequenceId = optionRepository.OptionParameter(organizationId, OptionParameter.SalesPosSequenceId);
+            if (salesPosSequenceId == 0)
+                return this.Direct(false, "ERROR : Please set Option SalesPosSequence first");
+
+            var businessPartnerRepository = new BusinessPartnerRepository();
+            var oneTimeBusinessPartner = businessPartnerRepository.Get(x => x.Id == oneTimeBusinessPartnerId).FirstOrDefault();
+            if(oneTimeBusinessPartner == null)
+                return this.Direct(false, "ERROR : OneTimeBusinessPartner not found!! Please check");
+
             var model = new PosHeaderEditViewModel()
             {
                 DocumentDate = DateTime.Now,
+                DocSequenceId = salesPosSequenceId,
+                LocationId = salesPosLocationId,
+                SellToCustomerId = oneTimeBusinessPartnerId,
+                SellToCustomerName = oneTimeBusinessPartner.Description,
+                SellToAddress = oneTimeBusinessPartner.Address,
+
                 PosLineEditViewModels = new List<PosLineEditViewModel>()
             };
 
@@ -302,7 +336,12 @@ namespace MyERP.Web.Areas.POS.Controllers
 
         public ActionResult Print(String viewBagID, String posLines, PosHeaderEditViewModel headerModel)
         {
-            List<PosLineEditViewModel> posLinesModel = JsonConvert.DeserializeObject<List<PosLineEditViewModel>>(posLines);
+            List<PosLineEditViewModel> posLinesModel = JsonConvert.DeserializeObject<List<PosLineEditViewModel>>(posLines, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+
+
             return this.Direct();
         }
     }

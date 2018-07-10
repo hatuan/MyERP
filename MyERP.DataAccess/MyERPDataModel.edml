@@ -474,6 +474,14 @@
             <End Role="user" EntitySet="users" />
             <End Role="option" EntitySet="options" />
           </AssociationSet>
+          <AssociationSet Name="FK_option_location" Association="MyERP.DataAccess.Store.FK_option_location">
+            <End Role="location" EntitySet="locations" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_option_business_partner" Association="MyERP.DataAccess.Store.FK_option_business_partner">
+            <End Role="business_partner" EntitySet="business_partners" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -1063,6 +1071,8 @@
           <Property Name="sales_invoice_seq_id" Type="bigint" />
           <Property Name="purch_receive_seq_id" Type="bigint" />
           <Property Name="purch_invoice_seq_id" Type="bigint" />
+          <Property Name="one_time_business_partner_id" Type="bigint" />
+          <Property Name="sales_pos_location_id" Type="bigint" />
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="status" Type="smallint" Nullable="false" />
@@ -2400,6 +2410,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_option_location">
+          <End Role="location" Type="MyERP.DataAccess.Store.location" Multiplicity="0..1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="sales_pos_location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_option_business_partner">
+          <End Role="business_partner" Type="MyERP.DataAccess.Store.business_partner" Multiplicity="0..1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="business_partner">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="one_time_business_partner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -2879,6 +2913,14 @@
             <End Role="RecCreatedByUser" EntitySet="Users" />
             <End Role="Options1" EntitySet="Options" />
           </AssociationSet>
+          <AssociationSet Name="Location_Option_SalesPosSet" Association="MyERP.DataAccess.Location_Option_SalesPos">
+            <End Role="SalesPosLocation" EntitySet="Locations" />
+            <End Role="Option" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="BusinessPartner_Option_OneTimeSet" Association="MyERP.DataAccess.BusinessPartner_Option_OneTime">
+            <End Role="OneTimeBusinessPartner" EntitySet="BusinessPartners" />
+            <End Role="Option" EntitySet="Options" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
           <Key>
@@ -2911,8 +2953,6 @@
           <NavigationProperty Name="Roles" Relationship="MyERP.DataAccess.User_UserInRole" FromRole="User" ToRole="Roles" ed:Guid="43260679-7d39-401a-9f63-24023798eccc" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_User" FromRole="Users" ToRole="Organization" ed:Guid="dfe685df-2d02-44cf-9884-0da3cb05954e" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_User" FromRole="Users" ToRole="Client" ed:Guid="aa9f2477-2bbc-45d0-8300-32910ef59c0e" />
-          <NavigationProperty Name="NoSequenceLines1" Relationship="MyERP.DataAccess.User_NoSequenceLine_RecModifiedBy" FromRole="RecModifiedByUser" ToRole="NoSequenceLines1" ed:Guid="feefb5fc-150e-40d7-9dc5-403ca07f880e" />
-          <NavigationProperty Name="Options" Relationship="MyERP.DataAccess.User_Option_RecModifiedBy" FromRole="RecModifiedByUser" ToRole="Options" ed:Guid="b2615a57-33df-480e-b19a-d5cd4c16b0b4" />
         </EntityType>
         <EntityType Name="Client" ed:Guid="8754758b-7440-4978-8a30-ff644e1d9950">
           <Key>
@@ -3569,6 +3609,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="d5f97426-a58b-4200-bbec-013ee863b2df" />
+          <Property Name="SalesPosLocationId" Type="Int64" ed:ValidateRequired="false" ed:Guid="3d48b71e-2ab3-4774-8835-d8a6f3d7c3fd" />
           <Property Name="SalesPosSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="c5b6e437-ae23-47c2-a976-5fc93aeed301" />
           <Property Name="SalesOrderSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="cfbc16c9-e53b-4c86-b906-ce8691ec0a22" />
           <Property Name="SalesShipmentSeqId" Type="Int64" ed:ValidateRequired="false" ed:Guid="9ca3748a-9db9-4a02-ae47-c8eb1a77f046" />
@@ -3576,6 +3617,7 @@
           <Property Name="PurchOrderSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="0d54163b-fcdd-48a1-af10-a5cea7c3b053" />
           <Property Name="PurchReceiveSeqId" Type="Int64" ed:ValidateRequired="false" ed:Guid="d5566720-5518-4466-9cd1-c24d1713a690" />
           <Property Name="PurchInvoiceSeqId" Type="Int64" ed:ValidateRequired="false" ed:Guid="22455b20-8bc0-4c71-8cd0-988af02c37c5" />
+          <Property Name="OneTimeBusinessPartnerId" Type="Int64" ed:ValidateRequired="false" ed:Guid="6b308d01-5bb4-426a-9f92-197fe8a18bbf" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="19193184-9f47-49da-a79e-1702ab8b2b0d" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f76d4599-0080-4766-8af6-b593b2cb5826" />
           <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="e179bfd9-f149-49cf-a633-f4355fdc1329" />
@@ -3595,6 +3637,8 @@
           <NavigationProperty Name="PurchReceiveSequence" Relationship="MyERP.DataAccess.NoSequence_Option_PurchReceive" FromRole="Options5" ToRole="PurchReceiveSequence" ed:Guid="12f77eab-4bf9-4360-98a0-96b645a7dcde" />
           <NavigationProperty Name="PurchInvoiceSequence" Relationship="MyERP.DataAccess.NoSequence_Option_PurchInvoice" FromRole="Options6" ToRole="PurchInvoiceSequence" ed:Guid="c9dede43-032b-418d-9171-74892814db8d" />
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Option_RecCreatedBy" FromRole="Options1" ToRole="RecCreatedByUser" ed:Guid="25bdacd5-af56-4937-a266-76752baa5205" />
+          <NavigationProperty Name="SalesPosLocation" Relationship="MyERP.DataAccess.Location_Option_SalesPos" FromRole="Option" ToRole="SalesPosLocation" ed:Guid="421a06bb-0004-426b-9cf8-362358825056" />
+          <NavigationProperty Name="OneTimeBusinessPartner" Relationship="MyERP.DataAccess.BusinessPartner_Option_OneTime" FromRole="Option" ToRole="OneTimeBusinessPartner" ed:Guid="42f89ee9-b240-4d20-9ce8-6070e00ad7f6" />
         </EntityType>
         <Association Name="User_Client_CreatedBy" ed:Guid="cc64066d-a254-493f-8be0-7609622c4e6a">
           <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
@@ -4940,6 +4984,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Location_Option_SalesPos" ed:Guid="c2b0968a-eaf2-4c91-8740-151f32bfccf7">
+          <End Role="SalesPosLocation" Type="MyERP.DataAccess.Location" Multiplicity="1" />
+          <End Role="Option" Type="MyERP.DataAccess.Option" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SalesPosLocation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Option">
+              <PropertyRef Name="SalesPosLocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BusinessPartner_Option_OneTime" ed:Guid="3b8c3142-6884-4693-8c6f-b1b66f5ad591">
+          <End Role="OneTimeBusinessPartner" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="1" />
+          <End Role="Option" Type="MyERP.DataAccess.Option" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="OneTimeBusinessPartner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Option">
+              <PropertyRef Name="OneTimeBusinessPartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- MSL content -->
@@ -5542,6 +5610,8 @@
                 <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
                 <ScalarProperty Name="Status" ColumnName="status" />
                 <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="SalesPosLocationId" ColumnName="sales_pos_location_id" />
+                <ScalarProperty Name="OneTimeBusinessPartnerId" ColumnName="one_time_business_partner_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
