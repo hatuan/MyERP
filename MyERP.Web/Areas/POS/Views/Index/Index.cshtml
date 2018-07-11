@@ -59,6 +59,9 @@
                         recordData: e.record.data,
                         sellToCustomerId: sellToCustomerId
                     },
+                    eventMask: {
+                        showMask: true
+                    },
                     success: function() {
                         getSumOfAmount(e.grid);
                     }
@@ -105,6 +108,19 @@
             return sum;
         };
 
+        var calcChangeToCustomer = function () {
+            var viewBagId = getViewBagId();
+            var totalPaymentId = "totalPayment" + viewBagId;
+            var cashOfCustomerId = "cashOfCustomer" + viewBagId;
+            var changeToCustomerId = "changeToCustomer" + viewBagId;
+
+            var valueOftotalPayment = Ext.getCmp(totalPaymentId).getValue().replace(/\./g, '').replace(',', '.');
+            var valueOfcashOfCustomer = Ext.getCmp(cashOfCustomerId).getValue().replace(/\./g, '').replace(',', '.');
+            var valueOfchangeToCustomer = parseFloat(valueOfcashOfCustomer) - parseFloat(valueOftotalPayment);
+            
+            Ext.getCmp(changeToCustomerId).setRawValue(Ext.util.Format.number(valueOfchangeToCustomer, '0.000,00/i'));
+        }
+
     </script>
 }
 
@@ -122,7 +138,6 @@
                   new ModelField("Code", ModelFieldType.String),
                   new ModelField("Description", ModelFieldType.String),
                   new ModelField("QtyPerUom", ModelFieldType.Int)
-
               )
           )
     )  

@@ -78,7 +78,7 @@ namespace MyERP.Web.Areas.POS.Controllers
                 SellToCustomerId = oneTimeBusinessPartnerId,
                 SellToCustomerName = oneTimeBusinessPartner.Description,
                 SellToAddress = oneTimeBusinessPartner.Address,
-
+                SalesPersonId = (long)user.ProviderUserKey,
                 PosLineEditViewModels = new List<PosLineEditViewModel>()
             };
 

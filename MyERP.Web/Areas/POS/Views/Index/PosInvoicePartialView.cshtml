@@ -224,6 +224,7 @@
               .Items(
                   Html.X().TextFieldFor(m => m.DocumentNo)
                       .ID(documentNoId)
+                      .EmptyText("AUTO")
                       .Editable(false),
                   Html.X().DateFieldFor(m => m.DocumentDate)
                       .ID(documentDateId)
@@ -271,21 +272,24 @@
                   Html.X().TextFieldFor(m => m.Description)
                       .ID(descriptionId),
                   Html.X().TextFieldFor(m => m.TotalPayment)
-                      .ReadOnly(true)
-                      .ID(totalPaymentId),
+                      .ID(totalPaymentId)
+                      .FieldStyle("font-size: 28px; line-height: 28px; height: 33px; text-align: right;")
+                      .ReadOnly(true),
                   Html.X().TextFieldFor(m => m.CashOfCustomer)
                       .ID(cashOfCustomerId)
+                      .FieldStyle("font-size: 28px; line-height: 28px; height: 33px; text-align: right;")
                       .MaskRe(@"/[0-9\.]/")
                       .Listeners(ls =>
                       {
                           ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
-                          ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
-                                                    this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
+                          ls.Blur.Handler = "var v = this.getRawValue().replace(/\\./g,'').replace(',', '.');" +
+                                            "this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));" +
+                                            "calcChangeToCustomer();";
                       })
                   ,
                   Html.X().TextFieldFor(m=>m.ChangeReturnToCustomer)
                       .ID(changeToCustomerId)
-                      .FieldLabel("Change Return")
+                      .FieldStyle("font-size: 28px; line-height: 28px; height: 33px; text-align: right;")
                       .ReadOnly(true)
                   ,
                   Html.X().Panel().BaseCls("x-plain").Flex(1),
@@ -305,6 +309,9 @@
                           de.Click.ExtraParams.Add(new Parameter("viewBagID", ViewBag.ID, ParameterMode.Value));
                           de.Click.ExtraParams.Add(new Parameter("posLines", "App." + posLineGridPanel + ".getRowsValues()", ParameterMode.Raw, true));
                       })
-
+                  ,
+                  Html.X().HiddenFor(m=>m.DocSequenceId),
+                  Html.X().HiddenFor(m=>m.LocationId),
+                  Html.X().HiddenFor(m=>m.SalesPersonId)
               )
       ))
