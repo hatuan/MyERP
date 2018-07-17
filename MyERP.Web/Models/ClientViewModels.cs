@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Linq;
 
 namespace MyERP.Web.Models
 {
@@ -38,6 +39,49 @@ namespace MyERP.Web.Models
         [Required]
         [Display(Name = "Unit-Amount Rounding Precision")]
         public Int16 UnitAmountRoundingPrecision { get; set; }
+
+        [Display(Name = "TaxCode")]
+        [StringLength(14, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String TaxCode { get; set; }
+
+        [Display(Name = "Adress")]
+        [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String Adress { get; set; }
+
+        [Display(Name = "Address Transition")]
+        [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String AddressTransition { get; set; }
+
+        [Display(Name = "Telephone")]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String Telephone { get; set; }
+
+        [Display(Name = "Email")]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String Email { get; set; }
+
+        [Display(Name = "Website")]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String Website { get; set; }
+
+        [Display(Name = "Representative Name")]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String RepresentativeName { get; set; }
+
+        [Display(Name = "Representative Position")]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String RepresentativePosition { get; set; }
+
+        [Display(Name = "Contact Name")]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String ContactName { get; set; }
+
+        [Display(Name = "Mobilephone")]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String Mobilephone { get; set; }
+
+        [Display(Name = "Image")]
+        public byte[] Image { get; set; }
 
         [Display(Name = "Actived")]
         public Boolean IsActived { get; set; }

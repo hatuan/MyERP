@@ -106,11 +106,32 @@ namespace MyERP.Web.Models
         public long SalesPersonId { get; set; }
 
         [EnsureMinimumElements(1, ErrorMessage = "At least a POS Line is required")]
-        [JsonProperty("PosLineEditViewModels")]
+        [JsonProperty("PosLines")]
         public List<PosLineEditViewModel> PosLines { get; set; }
+
+        [JsonProperty("Version")]
+        public Int64 Version { get; set; }
 
         [JsonProperty("Status")]
         public SalesPosDocumentStatusType Status { get; set; }
+
+        [Display(Name = "Created By")]
+        [JsonProperty("RecCreateBy")]
+        public String RecCreateBy { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Created At")]
+        [JsonProperty("RecCreatedAt")]
+        public DateTime RecCreatedAt { get; set; }
+
+        [Display(Name = "Modified By")]
+        [JsonProperty("RecModifiedBy")]
+        public String RecModifiedBy { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Modified At")]
+        [JsonProperty("RecModifiedAt")]
+        public DateTime RecModifiedAt { get; set; }
     }
 
     public class PosLineEditViewModel

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
@@ -104,6 +105,7 @@ namespace MyERP.Web.Areas.POS.Controllers
                 TotalVatAmount = 0,
                 TotalLineDiscountAmount = 0,
                 TotalPayment = 0,
+                Version = 1,
                 Status = SalesPosDocumentStatusType.Released,
                 PosLines = new List<PosLineEditViewModel>()
             };
@@ -412,8 +414,10 @@ namespace MyERP.Web.Areas.POS.Controllers
                 return this.Direct(false, Resources.Resources.User_dont_have_Client_or_Organization_Please_set);
             }
 
-            var documentNo =
+            headerModel.DocumentDate = headerModel.DocumentDate + DateTime.Now.TimeOfDay;
+            headerModel.DocumentNo =
                 (new NoSequenceRepository()).GetNextNo(headerModel.DocSequenceId, headerModel.DocumentDate);
+            headerModel.Version = 1;
 
             List<DataAccess.PosLine> posLines = posLinesModel
                 .Select(c => new DataAccess.PosLine()
@@ -450,7 +454,7 @@ namespace MyERP.Web.Areas.POS.Controllers
                 ClientId = clientId,
                 OrganizationId = organizationId,
                 DocSequenceId = headerModel.DocSequenceId,
-                DocumentNo = documentNo,
+                DocumentNo = headerModel.DocumentNo,
                 DocumentDate = headerModel.DocumentDate,
                 SellToCustomerId = headerModel.SellToCustomerId,
                 SellToCustomerName = headerModel.SellToCustomerName,
@@ -486,7 +490,7 @@ namespace MyERP.Web.Areas.POS.Controllers
                 CashOfCustomer = headerModel.CashOfCustomer,
                 ChangeReturnToCustomer = headerModel.ChangeReturnToCustomer,
                 Status = (byte)headerModel.Status,
-                Version = 1,
+                Version = headerModel.Version,
                 RecModifiedAt = DateTime.Now,
                 RecCreatedBy = (long)user.ProviderUserKey,
                 RecCreatedAt = DateTime.Now,
@@ -512,7 +516,7 @@ namespace MyERP.Web.Areas.POS.Controllers
             report.Load(Server.MapPath("~/Resources/Reports/salespos_001.mrt"));
 
             Client client = (new ClientRepository()).Get(User);
-            var data = JObject.FromObject(new {PosHeader = newPosHeader, PosLines = newPosHeader.PosLines}, new JsonSerializer() { ReferenceLoopHandling = ReferenceLoopHandling.Serialize, PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+            var data = JObject.FromObject(new {PosHeader = headerModel, PosLines = headerModel.PosLines, Client = client });
 
             //data.PosHeader = JToken.FromObject(headerModel);
             //data.PosLines = JToken.FromObject(posLines);

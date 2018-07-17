@@ -1,11 +1,11 @@
 {
   "ReportVersion": "2018.2.3.0",
-  "ReportGuid": "36dbac740b1a4892bfe6197cc239ef35",
+  "ReportGuid": "44a8ac71af1c44cf8dbe4c80c9ddc0f8",
   "ReportName": "SalesPos",
   "ReportAlias": "SalesPos",
   "ReportAuthor": "Hoang Anh Tuan - www.binhminhsoft.com",
   "ReportCreated": "/Date(1531490358000+0700)/",
-  "ReportChanged": "/Date(1531817444040+0700)/",
+  "ReportChanged": "/Date(1531842796510+0700)/",
   "EngineVersion": "EngineV2",
   "CalculationMode": "Interpretation",
   "ReportUnit": "Millimeters",
@@ -24,63 +24,6 @@
   "Dictionary": {
     "DataSources": {
       "0": {
-        "Ident": "StiDataTableSource",
-        "Name": "CompanyInfo",
-        "Alias": "CompanyInfo",
-        "Columns": {
-          "0": {
-            "Name": "CompanyAddress",
-            "Index": -1,
-            "NameInSource": "CompanyAddress",
-            "Alias": "CompanyAddress",
-            "Type": "System.String"
-          },
-          "1": {
-            "Name": "CompanyEmail",
-            "Index": -1,
-            "NameInSource": "CompanyEmail",
-            "Alias": "CompanyEmail",
-            "Type": "System.String"
-          },
-          "2": {
-            "Name": "CompanyImageHeader",
-            "Index": -1,
-            "NameInSource": "CompanyImageHeader",
-            "Alias": "CompanyImageHeader",
-            "Type": "System.String"
-          },
-          "3": {
-            "Name": "CompanyName",
-            "Index": -1,
-            "NameInSource": "CompanyName",
-            "Alias": "CompanyName",
-            "Type": "System.String"
-          },
-          "4": {
-            "Name": "CompanyPhone",
-            "Index": -1,
-            "NameInSource": "CompanyPhone",
-            "Alias": "CompanyPhone",
-            "Type": "System.String"
-          },
-          "5": {
-            "Name": "CompanyURL",
-            "Index": -1,
-            "NameInSource": "CompanyURL",
-            "Alias": "CompanyURL",
-            "Type": "System.String"
-          },
-          "6": {
-            "Name": "CompanyVatNumber",
-            "Index": -1,
-            "NameInSource": "CompanyVatNumber",
-            "Alias": "CompanyVatNumber",
-            "Type": "System.String"
-          }
-        },
-        "NameInSource": "data.CompanyInfo"
-      },
-      "1": {
         "Ident": "StiDataTableSource",
         "Name": "PosHeader",
         "Alias": "PosHeader",
@@ -329,11 +272,25 @@
             "NameInSource": "Vat",
             "Alias": "Vat",
             "Type": "System.String"
+          },
+          "35": {
+            "Name": "CashOfCustomer",
+            "Index": -1,
+            "NameInSource": "CashOfCustomer",
+            "Alias": "CashOfCustomer",
+            "Type": "System.String"
+          },
+          "36": {
+            "Name": "ChangeReturnToCustomer",
+            "Index": -1,
+            "NameInSource": "ChangeReturnToCustomer",
+            "Alias": "ChangeReturnToCustomer",
+            "Type": "System.String"
           }
         },
         "NameInSource": "data.PosHeader"
       },
-      "2": {
+      "1": {
         "Ident": "StiDataTableSource",
         "Name": "PosLines",
         "Alias": "PosLines",
@@ -544,7 +501,7 @@
         },
         "NameInSource": "data.PosLines"
       },
-      "3": {
+      "2": {
         "Ident": "StiDataTableSource",
         "Name": "Var",
         "Alias": "Var",
@@ -558,6 +515,63 @@
           }
         },
         "NameInSource": "data.Var"
+      },
+      "3": {
+        "Ident": "StiDataTableSource",
+        "Name": "Client",
+        "Alias": "Client",
+        "Columns": {
+          "0": {
+            "Name": "Description",
+            "Index": -1,
+            "NameInSource": "Description",
+            "Alias": "Description",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "TaxCode",
+            "Index": -1,
+            "NameInSource": "TaxCode",
+            "Alias": "TaxCode",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "Adress",
+            "Index": -1,
+            "NameInSource": "Adress",
+            "Alias": "Adress",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "Telephone",
+            "Index": -1,
+            "NameInSource": "Telephone",
+            "Alias": "Telephone",
+            "Type": "System.String"
+          },
+          "4": {
+            "Name": "Email",
+            "Index": -1,
+            "NameInSource": "Email",
+            "Alias": "Email",
+            "Type": "System.String"
+          },
+          "5": {
+            "Name": "Website",
+            "Index": -1,
+            "NameInSource": "Website",
+            "Alias": "Website",
+            "Type": "System.String"
+          },
+          "6": {
+            "Name": "Image",
+            "Index": -1,
+            "NameInSource": "Image",
+            "Alias": "Image",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "data.Client"
       }
     },
     "Databases": {
@@ -577,17 +591,17 @@
       "Interaction": {
         "Ident": "StiInteraction"
       },
-      "Border": ";;2;;;;;solid:Black",
+      "Border": "All;;2;;;;;solid:Black",
       "Brush": "solid:",
       "Components": {
         "0": {
           "Ident": "StiReportTitleBand",
           "Name": "ReportTitleBand1",
-          "ClientRectangle": "0,4,80,38",
+          "ClientRectangle": "0,4,80,40",
           "Interaction": {
             "Ident": "StiInteraction"
           },
-          "Border": ";;;;;;;solid:Black",
+          "Border": "Bottom;;;;;;;solid:Black",
           "Brush": "solid:",
           "Components": {
             "0": {
@@ -595,52 +609,56 @@
               "Name": "Text1",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "0,0,80,9",
+              "ClientRectangle": "1,0,78,9",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{CompanyInfo.CompanyName}"
+                "Value": "{Client.Description}"
               },
+              "HorAlignment": "Center",
               "VertAlignment": "Center",
               "Font": ";14;Bold;",
               "Border": ";;;;;;;solid:Black",
               "Brush": "solid:",
-              "TextBrush": "solid:Black"
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
             },
             "1": {
               "Ident": "StiText",
               "Name": "Text2",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "0,9,80,5",
+              "ClientRectangle": "13,9,66,5",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{CompanyInfo.CompanyAddress}"
+                "Value": "{Client.Adress}"
               },
               "VertAlignment": "Center",
               "Border": ";;;;;;;solid:Black",
               "Brush": "solid:",
-              "TextBrush": "solid:Black"
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
             },
             "2": {
               "Ident": "StiText",
               "Name": "Text3",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "0,14,80,5",
+              "ClientRectangle": "17,14,62,5",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{CompanyInfo.CompanyPhone}"
+                "Value": "{Client.Telephone}"
               },
               "VertAlignment": "Center",
               "Border": ";;;;;;;solid:Black",
               "Brush": "solid:",
-              "TextBrush": "solid:Black"
+              "TextBrush": "solid:Black",
+              "Type": "Expression"
             },
             "3": {
               "Ident": "StiText",
@@ -648,7 +666,7 @@
               "Guid": "38c9af415e7ef8cfeae3a1700ae41555",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "2,20,11,6",
+              "ClientRectangle": "1,20,11,6",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -668,13 +686,14 @@
               "Name": "Text19",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "62,21,17,5",
+              "ClientRectangle": "51,20,28,6",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
                 "Value": "{PosHeader.DocumentNo}"
               },
+              "HorAlignment": "Right",
               "VertAlignment": "Center",
               "Border": ";;;;;;;solid:0,0,0",
               "Brush": "solid:",
@@ -686,7 +705,7 @@
               "Guid": "5fb2b796e0018d9d0ea0c4aca12b4024",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "1,27,25,5",
+              "ClientRectangle": "1,27,25,6",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -705,7 +724,7 @@
               "Guid": "6042f3eddac1f4530b05288d8b4c9db3",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "1,32,25,5",
+              "ClientRectangle": "1,33,25,6",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -723,7 +742,7 @@
               "Name": "Text23",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "26,27,54,5",
+              "ClientRectangle": "26,27,53,6",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -740,7 +759,7 @@
               "Name": "Text24",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "26,32,54,5",
+              "ClientRectangle": "26,33,53,6",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -757,7 +776,7 @@
               "Name": "Text15",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "14,20,36,6",
+              "ClientRectangle": "12,20,38,6",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -767,14 +786,56 @@
               "VertAlignment": "Center",
               "Border": ";;;;;;;solid:Black",
               "Brush": "solid:",
-              "TextBrush": "solid:Black"
+              "TextBrush": "solid:Black",
+              "TextFormat": {
+                "Ident": "StiCustomFormatService",
+                "StringFormat": "dd/MM/yyyy HH:mm:ss"
+              }
+            },
+            "10": {
+              "Ident": "StiText",
+              "Name": "Text26",
+              "Guid": "8448d730a6914acaa24d24bbd16e2427",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1,9,12,5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Địa chỉ :"
+              },
+              "VertAlignment": "Center",
+              "Border": ";;;;;;;solid:0,0,0",
+              "Brush": "solid:",
+              "TextBrush": "solid:0,0,0",
+              "Type": "Expression"
+            },
+            "11": {
+              "Ident": "StiText",
+              "Name": "Text27",
+              "Guid": "6dadc44e40ba491a84ad558af3e1d93e",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "1,14,16,5",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Điện thoại :"
+              },
+              "VertAlignment": "Center",
+              "Border": ";;;;;;;solid:0,0,0",
+              "Brush": "solid:",
+              "TextBrush": "solid:0,0,0",
+              "Type": "Expression"
             }
           }
         },
         "1": {
           "Ident": "StiHeaderBand",
           "Name": "HeaderBand1",
-          "ClientRectangle": "0,50,80,9",
+          "ClientRectangle": "0,52,80,10",
           "Interaction": {
             "Ident": "StiInteraction"
           },
@@ -786,7 +847,7 @@
               "Name": "Text4",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "1,1,78,3",
+              "ClientRectangle": "1,1,78,4",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -806,7 +867,7 @@
               "Guid": "b925823be186c66513e4c285973122ea",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "1,5,16,3",
+              "ClientRectangle": "7,5,11,4",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -827,14 +888,14 @@
               "Guid": "25c943a05058ffae0afe35afc36a147b",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "31,5,22,3",
+              "ClientRectangle": "31,5,22,4",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
                 "Value": "Giá bán"
               },
-              "HorAlignment": "Center",
+              "HorAlignment": "Right",
               "VertAlignment": "Center",
               "Border": ";;;;;;;solid:Black",
               "Brush": "solid:",
@@ -847,14 +908,14 @@
               "Guid": "2958b8b564c8f2897ae82e8de238a9bf",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "54,5,25,3",
+              "ClientRectangle": "54,5,25,4",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
                 "Value": "Thành tiền"
               },
-              "HorAlignment": "Center",
+              "HorAlignment": "Right",
               "VertAlignment": "Center",
               "Border": ";;;;;;;solid:Black",
               "Brush": "solid:",
@@ -867,7 +928,7 @@
               "Guid": "4b409d1b7f33b3a91424f3068e553846",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "17,5,14,3",
+              "ClientRectangle": "17,5,14,4",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -886,7 +947,7 @@
         "2": {
           "Ident": "StiDataBand",
           "Name": "DataBand1",
-          "ClientRectangle": "0,67,80,9",
+          "ClientRectangle": "0,70,80,11",
           "Interaction": {
             "Ident": "StiBandInteraction"
           },
@@ -898,7 +959,7 @@
               "Name": "Text8",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "1,0,78,4",
+              "ClientRectangle": "1,0,78,5",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -916,7 +977,7 @@
               "Name": "Text9",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "1,4,16,4",
+              "ClientRectangle": "2,5,16,5",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -935,7 +996,7 @@
               "Name": "Text10",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "17,4,14,4",
+              "ClientRectangle": "17,5,14,5",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -953,7 +1014,7 @@
               "Name": "Text11",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "28,4,25,4",
+              "ClientRectangle": "28,5,25,5",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -976,7 +1037,7 @@
               "Name": "Text12",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "49,4,30,4",
+              "ClientRectangle": "49,5,30,5",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -1000,11 +1061,11 @@
         "3": {
           "Ident": "StiFooterBand",
           "Name": "FooterBand1",
-          "ClientRectangle": "0,84,80,14",
+          "ClientRectangle": "0,89,80,28",
           "Interaction": {
             "Ident": "StiInteraction"
           },
-          "Border": ";;;;;;;solid:Black",
+          "Border": "Top;;;;;;;solid:Black",
           "Brush": "solid:",
           "Components": {
             "0": {
@@ -1012,14 +1073,15 @@
               "Name": "Text13",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "8,0,29,5",
+              "ClientRectangle": "10,1,31,8",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "Tổng tiền"
+                "Value": "Tổng tiền : "
               },
               "VertAlignment": "Center",
+              "Font": ";14;Bold;",
               "Border": ";;;;;;;solid:0,0,0",
               "Brush": "solid:",
               "TextBrush": "solid:0,0,0",
@@ -1030,14 +1092,16 @@
               "Name": "Text16",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "38,0,41,5",
+              "ClientRectangle": "42,1,37,8",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
                 "Value": "{PosHeader.TotalPayment}"
               },
+              "HorAlignment": "Right",
               "VertAlignment": "Center",
+              "Font": ";14;Bold;",
               "Border": ";;;;;;;solid:0,0,0",
               "Brush": "solid:",
               "TextBrush": "solid:0,0,0",
@@ -1053,18 +1117,87 @@
               "Guid": "4371e72f3a274c46b01fdf8a5ab61a26",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "8,6,29,5",
+              "ClientRectangle": "10,10,31,9",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "Khách đưa"
+                "Value": "Khách đưa : "
               },
               "VertAlignment": "Center",
+              "Font": ";14;Bold;",
               "Border": ";;;;;;;solid:0,0,0",
               "Brush": "solid:",
               "TextBrush": "solid:0,0,0",
               "Type": "Expression"
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Text18",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "42,10,37,9",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{PosHeader.CashOfCustomer}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": ";14;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 1,
+                "GroupSeparator": ","
+              }
+            },
+            "4": {
+              "Ident": "StiText",
+              "Name": "Text22",
+              "Guid": "4ba0b252c78946b3b50e5ee634e91556",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "10,20,31,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Trả lại : "
+              },
+              "VertAlignment": "Center",
+              "Font": ";14;Bold;",
+              "Border": ";;;;;;;solid:0,0,0",
+              "Brush": "solid:",
+              "TextBrush": "solid:0,0,0",
+              "Type": "Expression"
+            },
+            "5": {
+              "Ident": "StiText",
+              "Name": "Text25",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "42,20,37,8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{PosHeader.ChangeReturnToCustomer}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": ";14;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextFormat": {
+                "Ident": "StiNumberFormatService",
+                "NegativePattern": 1,
+                "GroupSeparator": ","
+              }
             }
           },
           "PrintIfEmpty": true
@@ -1072,7 +1205,7 @@
         "4": {
           "Ident": "StiReportSummaryBand",
           "Name": "ReportSummaryBand1",
-          "ClientRectangle": "0,106,80,8",
+          "ClientRectangle": "0,125,80,8",
           "Interaction": {
             "Ident": "StiInteraction"
           },
@@ -1081,7 +1214,7 @@
         }
       },
       "PageWidth": 100.0,
-      "PageHeight": 200.0,
+      "PageHeight": 140.0,
       "Watermark": {
         "TextBrush": "solid:50,0,0,0"
       },

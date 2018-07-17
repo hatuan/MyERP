@@ -1,12 +1,12 @@
 {
-    "CompanyInfo": {
-        "CompanyName": "",
-        "CompanyVatNumber": "",
-        "CompanyAddress": "",
-        "CompanyPhone": "",
-        "CompanyEmail": "",
-        "CompanyURL": "",
-        "CompanyImageHeader": ""
+    "Client": {
+        "Description": "",
+        "TaxCode": "",
+        "Adress": "",
+        "Telephone": "",
+        "Email": "",
+        "Website": "",
+        "Image": ""
     },
     "Var": {
         "TotalPaymentWords": ""    
@@ -45,7 +45,9 @@
         "TotalDiscount": "",
         "TotalDiscountLCY": "",
         "TotalPayment": "",
-        "TotalPaymentLCY": ""
+        "TotalPaymentLCY": "",
+        "CashOfCustomer":"",
+        "ChangeReturnToCustomer":""
     },
     "PosLines": [
         {
