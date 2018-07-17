@@ -22,7 +22,8 @@ namespace MyERP.Web
             {                                                                           
                 httpClient.BaseAddress = new Uri(URL);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                string urlParameters = $"?org_id={OrgId:D}&bus_part_id={BusPartId:D}&date={date:yyyy/MM/dd}&item_id={ItemId:D}&uom_id={UomId:D}&qty={Qty}";
+                string _qty = String.Format(new System.Globalization.CultureInfo("en-US"), "{0:0.00}", Qty);
+                string urlParameters = $"?org_id={OrgId:D}&bus_part_id={BusPartId:D}&date={date:yyyy/MM/dd}&item_id={ItemId:D}&uom_id={UomId:D}&qty={_qty}";
 
                 var response = httpClient.GetAsync(urlParameters).Result;
                 if (response.IsSuccessStatusCode)

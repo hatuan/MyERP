@@ -421,7 +421,6 @@
                                                     de.Click.ExtraParams.Add(new Parameter("viewBagID", ViewBag.ID, ParameterMode.Value));
                                                     de.Click.ExtraParams.Add(new Parameter("posLinesJSON", "App." + posLineGridPanel + ".getRowsValues()", ParameterMode.Raw, true));
                                                     de.Click.Success = "function(response, result) {" +
-                                                                       "    #{PreviousPrintId}.setValue(result.result.id)" +
                                                                        "    printReportHtml(result.result.report); " +
                                                                        "}";
                                                     de.Click.DisableControl = true;
