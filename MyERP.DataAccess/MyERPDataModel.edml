@@ -839,19 +839,19 @@
           <Property Name="document_date" Type="datetime2" Nullable="false" />
           <Property Name="sell_to_customer_id" Type="bigint" Nullable="false" />
           <Property Name="sell_to_customer_name" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="sell_to_address" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="sell_to_contact_id" Type="bigint" Nullable="false" />
-          <Property Name="sell_to_contact_name" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="sell_to_address" Type="nvarchar" MaxLength="256" />
+          <Property Name="sell_to_contact_id" Type="bigint" />
+          <Property Name="sell_to_contact_name" Type="nvarchar" MaxLength="256" />
+          <Property Name="description" Type="nvarchar" MaxLength="256" />
           <Property Name="bill_to_customer_id" Type="bigint" Nullable="false" />
           <Property Name="bill_to_name" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="bill_to_address" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="bill_to_contact_id" Type="bigint" Nullable="false" />
-          <Property Name="bill_to_contact_name" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="bill_to_vat_code" Type="varchar" Nullable="false" MaxLength="32" />
-          <Property Name="ship_to_address" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="ship_to_name" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="ship_to_contact_name" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="bill_to_address" Type="nvarchar" MaxLength="256" />
+          <Property Name="bill_to_contact_id" Type="bigint" />
+          <Property Name="bill_to_contact_name" Type="nvarchar" MaxLength="256" />
+          <Property Name="bill_to_vat_code" Type="varchar" MaxLength="32" />
+          <Property Name="ship_to_address" Type="nvarchar" MaxLength="256" />
+          <Property Name="ship_to_name" Type="nvarchar" MaxLength="256" />
+          <Property Name="ship_to_contact_name" Type="nvarchar" MaxLength="256" />
           <Property Name="currency_id" Type="bigint" Nullable="false" />
           <Property Name="currency_factor" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
@@ -870,7 +870,15 @@
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="sales_person_id" Type="bigint" Nullable="false" />
           <Property Name="location_id" Type="bigint" Nullable="false" />
-          <Property Name="bill_to_vat_note" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="bill_to_vat_note" Type="nvarchar" MaxLength="256" />
+          <Property Name="cash_of_customer" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="change_return_to_customer" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="discount_id" Type="bigint" />
+          <Property Name="invoice_discount_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="invoice_discount_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_line_discount_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_line_discount_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="invoice_discount_percentage" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="pos_line">
           <Key>
@@ -895,6 +903,16 @@
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="sales_price_id" Type="bigint" />
+          <Property Name="vat_identifier_id" Type="bigint" />
+          <Property Name="vat_percentage" Type="tinyint" Nullable="false" />
+          <Property Name="vat_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="discount_id" Type="bigint" />
+          <Property Name="line_discount_percentage" Type="tinyint" Nullable="false" />
+          <Property Name="line_discount_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="invoice_discount_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="line_discount_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="invoice_discount_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="vat_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
         </EntityType>
         <EntityType Name="item_discount_group">
           <Key>
@@ -3345,20 +3363,20 @@
           <Property Name="DocumentDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="e5640909-1acb-4783-8704-cda96dae73e3" />
           <Property Name="SellToCustomerId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="ae14d7f2-f840-42b2-8bb0-525389f67adc" />
           <Property Name="SellToCustomerName" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="e8999832-65a3-4c3e-a6d1-0459479e6e00" />
-          <Property Name="SellToAddress" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="308853a0-ddc0-4b31-b213-c39054bee01d" />
-          <Property Name="SellToContactId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="3e52d047-2ff1-4882-872f-20d2e0e82d85" />
-          <Property Name="SellToContactName" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="00798eff-6c7e-4910-85e3-2d7d8a3ea475" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="a91a86b8-f954-4466-93dd-148f95c3b49c" />
+          <Property Name="SellToAddress" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="308853a0-ddc0-4b31-b213-c39054bee01d" />
+          <Property Name="SellToContactId" Type="Int64" ed:ValidateRequired="false" ed:Guid="3e52d047-2ff1-4882-872f-20d2e0e82d85" />
+          <Property Name="SellToContactName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="00798eff-6c7e-4910-85e3-2d7d8a3ea475" />
+          <Property Name="Description" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="a91a86b8-f954-4466-93dd-148f95c3b49c" />
           <Property Name="BillToCustomerId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="79c6f0b0-4575-4d36-9fd2-788b30781ab7" />
           <Property Name="BillToName" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="41a4e9a8-2d46-475a-8715-234d246dad7a" />
-          <Property Name="BillToAddress" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="99313a2c-9d95-469c-a5e8-68a0c770f1ea" />
-          <Property Name="BillToContactId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="44591126-6460-48a8-8335-678e40842dbf" />
-          <Property Name="BillToContactName" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="b57f77d2-50ed-46e5-ad9e-08a84bccfa98" />
-          <Property Name="BillToVatCode" Type="String" Nullable="false" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="7755f5e2-eb22-463f-a722-f5104f365713" />
-          <Property Name="BillToVatNote" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="59b8e794-0005-4250-8d58-0ed6ee0a5a4d" />
-          <Property Name="ShipToName" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="588b5112-777d-4334-89a3-17e5cee74eba" />
-          <Property Name="ShipToAddress" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="962071de-14c7-443c-a0bc-bc7f242bb726" />
-          <Property Name="ShipToContactName" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="2847e1be-488a-4eda-8b22-9433f960eec3" />
+          <Property Name="BillToAddress" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="99313a2c-9d95-469c-a5e8-68a0c770f1ea" />
+          <Property Name="BillToContactId" Type="Int64" ed:ValidateRequired="false" ed:Guid="44591126-6460-48a8-8335-678e40842dbf" />
+          <Property Name="BillToContactName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="b57f77d2-50ed-46e5-ad9e-08a84bccfa98" />
+          <Property Name="BillToVatCode" Type="String" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="7755f5e2-eb22-463f-a722-f5104f365713" />
+          <Property Name="BillToVatNote" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="59b8e794-0005-4250-8d58-0ed6ee0a5a4d" />
+          <Property Name="ShipToName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="588b5112-777d-4334-89a3-17e5cee74eba" />
+          <Property Name="ShipToAddress" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="962071de-14c7-443c-a0bc-bc7f242bb726" />
+          <Property Name="ShipToContactName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="2847e1be-488a-4eda-8b22-9433f960eec3" />
           <Property Name="LocationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="98718a33-1203-433f-a649-aa54a2fb30d8" />
           <Property Name="SalesPersonId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="42d66d1e-b8ee-432f-9732-a50318234aed" />
           <Property Name="CurrencyId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="1421074c-3289-40d0-b6e6-c4e38b80509d" />
@@ -3367,8 +3385,16 @@
           <Property Name="TotalAmountLCY" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="02d50c2e-7c35-4137-908e-32a40cb8cd74" />
           <Property Name="TotalVatAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="265eeca6-1183-4aac-82aa-d74a9482f33f" />
           <Property Name="TotalVatAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="0f99fcd8-f9aa-4b2e-a0c1-5638b49b2645" />
+          <Property Name="DiscountId" Type="Int64" ed:ValidateRequired="false" ed:Guid="fd9f4ca6-5e1d-430e-aa2b-d28686e02a9e" />
+          <Property Name="InvoiceDiscountPercentage" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="d8e2b927-b6e2-44bb-85d2-e24a6fc8ddd6" />
+          <Property Name="InvoiceDiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="7f71168e-3553-442a-9dd4-bb80190e43db" />
+          <Property Name="InvoiceDiscountAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="3b360cc1-e482-4809-a287-8181a3285cc5" />
+          <Property Name="TotalLineDiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="67e1c034-866e-4b1d-a599-381f900a2d4c" />
+          <Property Name="TotalLineDiscountAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="0765b798-a40a-4265-9616-5488ce0a22ef" />
           <Property Name="TotalPayment" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="1b50254b-f7ac-4bb3-9f7d-482fc1a4bc43" />
           <Property Name="TotalPaymentLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="119a3bb8-69a9-4829-8db2-9d2f5b484e9e" />
+          <Property Name="CashOfCustomer" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="191d8840-c045-4bf5-a5df-5d5cf175948e" />
+          <Property Name="ChangeReturnToCustomer" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="4792452f-8c3f-47d2-b68a-c0011879b2a6" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="53ae42af-5d1f-48cd-acc2-edd139ad55b0" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="ee2dbdf7-1fc6-464e-b57f-5e9f65ca023b" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="49e7e733-fe93-4169-bc13-293da15c9505" />
@@ -3399,8 +3425,18 @@
           <Property Name="SalesPriceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="c2afc648-2576-4b1a-8685-5221e1d9a7fe" />
           <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="aeba8926-aecc-47b1-a306-a5e544fdc1c5" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="3971eae5-9324-4214-8a98-60641d4e9a95" />
+          <Property Name="VatIdentifierId" Type="Int64" ed:ValidateRequired="false" ed:Guid="9623964a-b103-46de-b8cb-b210945b8254" />
+          <Property Name="VatPercentage" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="ea4593db-048c-49ad-8330-6f44dd6e86fe" />
+          <Property Name="VatAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="17be5105-e208-4241-ac6d-2d0ee4a670f4" />
+          <Property Name="DiscountId" Type="Int64" ed:ValidateRequired="false" ed:Guid="bb48dca9-07bc-4447-8573-4a78a75cbc46" />
+          <Property Name="LineDiscountPercentage" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="39245405-214b-496b-9a25-3b58d1d5ad8a" />
+          <Property Name="LineDiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="95869927-1b2b-4035-b747-e9a3e7c20105" />
+          <Property Name="InvoiceDiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="c44a8e86-d654-4202-a20c-97818f311161" />
           <Property Name="UnitPriceLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="1b59d6e3-d60c-4a3f-8ae2-57eb06602d5a" />
           <Property Name="AmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="b0e22df7-83f6-41b8-bc65-8c970a8167ad" />
+          <Property Name="VatAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="5f1049e5-052b-41f5-9af0-c67762ee8cc0" />
+          <Property Name="LineDiscountAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="fc084eef-e824-4777-bd5b-2ff085f000ac" />
+          <Property Name="InvoiceDiscountAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="26bbc8b1-103d-4ec3-97e3-c66b9432ecbd" />
           <Property Name="QtyPerUom" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="2ea7e851-e93a-4e50-9cd6-187db50af134" />
           <Property Name="QuantityBase" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="90846a3e-f917-48f5-8f08-03689be627bf" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a1df6b14-aa70-4569-abcf-fc1dfceb517e" />
@@ -5403,6 +5439,14 @@
                 <ScalarProperty Name="TotalVatAmountLCY" ColumnName="total_vat_amount_lcy" />
                 <ScalarProperty Name="TotalPayment" ColumnName="total_payment" />
                 <ScalarProperty Name="TotalPaymentLCY" ColumnName="total_payment_lcy" />
+                <ScalarProperty Name="CashOfCustomer" ColumnName="cash_of_customer" />
+                <ScalarProperty Name="ChangeReturnToCustomer" ColumnName="change_return_to_customer" />
+                <ScalarProperty Name="DiscountId" ColumnName="discount_id" />
+                <ScalarProperty Name="InvoiceDiscountAmount" ColumnName="invoice_discount_amount" />
+                <ScalarProperty Name="InvoiceDiscountAmountLCY" ColumnName="invoice_discount_amount_lcy" />
+                <ScalarProperty Name="TotalLineDiscountAmount" ColumnName="total_line_discount_amount" />
+                <ScalarProperty Name="TotalLineDiscountAmountLCY" ColumnName="total_line_discount_amount_lcy" />
+                <ScalarProperty Name="InvoiceDiscountPercentage" ColumnName="invoice_discount_percentage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5428,6 +5472,16 @@
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
                 <ScalarProperty Name="SalesPriceId" ColumnName="sales_price_id" />
+                <ScalarProperty Name="VatIdentifierId" ColumnName="vat_identifier_id" />
+                <ScalarProperty Name="VatPercentage" ColumnName="vat_percentage" />
+                <ScalarProperty Name="VatAmount" ColumnName="vat_amount" />
+                <ScalarProperty Name="DiscountId" ColumnName="discount_id" />
+                <ScalarProperty Name="LineDiscountPercentage" ColumnName="line_discount_percentage" />
+                <ScalarProperty Name="LineDiscountAmount" ColumnName="line_discount_amount" />
+                <ScalarProperty Name="InvoiceDiscountAmount" ColumnName="invoice_discount_amount" />
+                <ScalarProperty Name="LineDiscountAmountLCY" ColumnName="line_discount_amount_lcy" />
+                <ScalarProperty Name="InvoiceDiscountAmountLCY" ColumnName="invoice_discount_amount_lcy" />
+                <ScalarProperty Name="VatAmountLCY" ColumnName="vat_amount_lcy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

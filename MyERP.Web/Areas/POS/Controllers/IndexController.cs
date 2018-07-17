@@ -1,17 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using System.Web.Security;
 using Ext.Net;
 using Ext.Net.MVC;
+using MyERP.DataAccess;
 using MyERP.DataAccess.Enum;
 using MyERP.Web.Controllers;
 using MyERP.Web.Models;
 using MyERP.Web.Others;
-using Newtonsoft.Json;
+using Stimulsoft.Base;
+using Stimulsoft.Base.Json;
+using Stimulsoft.Base.Json.Linq;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dictionary;
+using Stimulsoft.Report.Web;
+using JsonConvert = Newtonsoft.Json.JsonConvert;
+using JsonSerializerSettings = Newtonsoft.Json.JsonSerializerSettings;
 using PartialViewResult = Ext.Net.MVC.PartialViewResult;
 
 namespace MyERP.Web.Areas.POS.Controllers
@@ -48,7 +59,12 @@ namespace MyERP.Web.Areas.POS.Controllers
             long organizationId = user.OrganizationId ?? 0;
 
             if (clientId == 0 || organizationId == 0)
-                return this.Direct(false, "User don't have Client or Organization. Please set");
+                return this.Direct(false, Resources.Resources.User_dont_have_Client_or_Organization_Please_set);
+
+            Client client = (new ClientRepository()).Get(User);
+            long currencyLcyId = client.CurrencyLcyId ?? 0;
+            if(currencyLcyId == 0)
+                return this.Direct(false, "ERROR : Please set Client CurrencyLcy first");
 
             var optionRepository = new OptionRepository();
 
@@ -78,8 +94,18 @@ namespace MyERP.Web.Areas.POS.Controllers
                 SellToCustomerId = oneTimeBusinessPartnerId,
                 SellToCustomerName = oneTimeBusinessPartner.Description,
                 SellToAddress = oneTimeBusinessPartner.Address,
+                Description = "Bán lẻ",
+                CurrencyId = currencyLcyId,
+                CurrencyFactor = 1,
                 SalesPersonId = (long)user.ProviderUserKey,
-                PosLineEditViewModels = new List<PosLineEditViewModel>()
+                InvoiceDiscountPercentage = 0,
+                InvoiceDiscountAmount = 0,
+                TotalAmount = 0,
+                TotalVatAmount = 0,
+                TotalLineDiscountAmount = 0,
+                TotalPayment = 0,
+                Status = SalesPosDocumentStatusType.Released,
+                PosLines = new List<PosLineEditViewModel>()
             };
 
             var result = new PartialViewResult
@@ -108,7 +134,7 @@ namespace MyERP.Web.Areas.POS.Controllers
             long organizationId = user.OrganizationId ?? 0;
 
             if (clientId == 0 || organizationId == 0)
-                return this.Direct(false, "User don't have Client or Organization. Please set");
+                return this.Direct(false, Resources.Resources.User_dont_have_Client_or_Organization_Please_set);
 
             if (lookupItemId == null || lookupItemId <= 0)
                 return this.Direct(false, "ERR : Lookup item is empty");
@@ -160,10 +186,19 @@ namespace MyERP.Web.Areas.POS.Controllers
                 Quantity = quantity,
                 UnitPrice = unitPrice,
                 Amount = amount,
+                VatIdentifierId = null,
+                VatPercentage = 0,
+                VatAmount = 0,
+                LineDiscountPercentage = 0,
+                LineDiscountAmount = 0,
+                InvoiceDiscountAmount = 0,
                 UomId = item.BaseUomId,
                 UomDescription = item.BaseUom.Description,
                 UnitPriceLCY = unitPrice,
                 AmountLCY = amount,
+                VatAmountLCY = 0,
+                LineDiscountAmountLCY = 0,
+                InvoiceDiscountAmountLCY = 0,
                 QtyPerUom = 1,
                 QuantityBase = quantity,
                 Item = item,
@@ -190,7 +225,7 @@ namespace MyERP.Web.Areas.POS.Controllers
             long organizationId = user.OrganizationId ?? 0;
 
             if (clientId == 0 || organizationId == 0)
-                return this.Direct(false, "User don't have Client or Organization. Please set");
+                return this.Direct(false, Resources.Resources.User_dont_have_Client_or_Organization_Please_set);
 
             PosLineEditViewModel posLineEditViewModel = JSON.Deserialize<PosLineEditViewModel>(recordData, new JsonSerializerSettings
             {
@@ -211,7 +246,7 @@ namespace MyERP.Web.Areas.POS.Controllers
                         record.Set("QuantityBase", itemUom.QtyPerUom * posLineEditViewModel.Quantity);
 
                         var salesPriceRepository = new SalesPriceRepository();
-                        var getPriceDTO = salesPriceRepository.GetPriceOfItem(organizationId, sellToCustomerId, DateTime.Today, posLineEditViewModel.ItemId??0, posLineEditViewModel.UomId??0, posLineEditViewModel.Quantity);
+                        var getPriceDTO = salesPriceRepository.GetPriceOfItem(organizationId, sellToCustomerId, DateTime.Today, posLineEditViewModel.ItemId, posLineEditViewModel.UomId, posLineEditViewModel.Quantity);
                         Decimal unitPrice = getPriceDTO.UnitPrice;
 
                         if (unitPrice == 0)
@@ -223,8 +258,14 @@ namespace MyERP.Web.Areas.POS.Controllers
 
                         record.Set("UnitPrice", unitPrice);
                         record.Set("Amount", amount);
+                        record.Set("VatAmount", 0);
+                        record.Set("LineDiscountAmount", 0);
+                        record.Set("InvoiceDiscountAmount", 0);
                         record.Set("UnitPriceLCY", unitPrice);
                         record.Set("AmountLCY", amount);
+                        record.Set("VatAmountLCY", 0);
+                        record.Set("LineDiscountAmountLCY", 0);
+                        record.Set("InvoiceDiscountAmountLCY", 0);
                     }
 
                     break;
@@ -239,7 +280,7 @@ namespace MyERP.Web.Areas.POS.Controllers
                         record.Set("QuantityBase", itemUom.QtyPerUom * posLineEditViewModel.Quantity);
 
                         var salesPriceRepository = new SalesPriceRepository();
-                        var getPriceDTO = salesPriceRepository.GetPriceOfItem(organizationId, sellToCustomerId, DateTime.Today, posLineEditViewModel.ItemId ?? 0, posLineEditViewModel.UomId ?? 0, posLineEditViewModel.Quantity);
+                        var getPriceDTO = salesPriceRepository.GetPriceOfItem(organizationId, sellToCustomerId, DateTime.Today, posLineEditViewModel.ItemId, posLineEditViewModel.UomId, posLineEditViewModel.Quantity);
                         Decimal unitPrice = getPriceDTO.UnitPrice;
 
                         if (unitPrice == 0)
@@ -251,8 +292,14 @@ namespace MyERP.Web.Areas.POS.Controllers
 
                         record.Set("UnitPrice", unitPrice);
                         record.Set("Amount", amount);
+                        record.Set("VatAmount", 0);
+                        record.Set("LineDiscountAmount", 0);
+                        record.Set("InvoiceDiscountAmount", 0);
                         record.Set("UnitPriceLCY", unitPrice);
                         record.Set("AmountLCY", amount);
+                        record.Set("VatAmountLCY", 0);
+                        record.Set("LineDiscountAmountLCY", 0);
+                        record.Set("InvoiceDiscountAmountLCY", 0);
                     }
 
                     break;
@@ -277,7 +324,7 @@ namespace MyERP.Web.Areas.POS.Controllers
             long organizationId = user.OrganizationId ?? 0;
 
             if (clientId == 0 || organizationId == 0)
-                return this.Direct(false, "User don't have Client or Organization. Please set");
+                return this.Direct(false, Resources.Resources.User_dont_have_Client_or_Organization_Please_set);
 
             List<PosLineEditViewModel> posLinesModel = JsonConvert.DeserializeObject<List<PosLineEditViewModel>>(posLines, new JsonSerializerSettings
             {
@@ -291,8 +338,8 @@ namespace MyERP.Web.Areas.POS.Controllers
                     OrgId = organizationId,
                     BusPartId = selectedPartner.Id,
                     WorkingDate = DateTime.Today,
-                    ItemId = posLine.ItemId??0,
-                    UomId = posLine.UomId??0,
+                    ItemId = posLine.ItemId,
+                    UomId = posLine.UomId,
                     Qty = posLine.Quantity
                 }).ToList();
 
@@ -325,8 +372,14 @@ namespace MyERP.Web.Areas.POS.Controllers
 
                 record.Set("UnitPrice", unitPrice);
                 record.Set("Amount", amount);
+                record.Set("VatAmount", 0);
+                record.Set("LineDiscountAmount", 0);
+                record.Set("InvoiceDiscountAmountLCY", 0);
                 record.Set("UnitPriceLCY", unitPrice);
                 record.Set("AmountLCY", amount);
+                record.Set("VatAmountLCY", 0);
+                record.Set("LineDiscountAmountLCY", 0);
+                record.Set("InvoiceDiscountAmountLCY", 0);
 
                 record.Commit();
             }
@@ -334,15 +387,190 @@ namespace MyERP.Web.Areas.POS.Controllers
             return this.Direct();
         }
 
-        public ActionResult Print(String viewBagID, String posLines, PosHeaderEditViewModel headerModel)
+        public ActionResult Print(String viewBagID, String posLinesJSON, PosHeaderEditViewModel headerModel)
         {
-            List<PosLineEditViewModel> posLinesModel = JsonConvert.DeserializeObject<List<PosLineEditViewModel>>(posLines, new JsonSerializerSettings
+            List<PosLineEditViewModel> posLinesModel = JsonConvert.DeserializeObject<List<PosLineEditViewModel>>(posLinesJSON, new JsonSerializerSettings
             {
                 Culture = Thread.CurrentThread.CurrentCulture
             });
 
+            //Save
+            ModelState.Clear();
+            headerModel.PosLines = posLinesModel;
+            TryValidateModel(headerModel);
+            if (!ModelState.IsValid)
+            {
+                return this.Direct(false, ModelState.StringifyModelErrors());
+            }
 
+            MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
+            long clientId = user.ClientId ?? 0;
+            long organizationId = user.OrganizationId ?? 0;
+
+            if (clientId == 0 || organizationId == 0)
+            {
+                return this.Direct(false, Resources.Resources.User_dont_have_Client_or_Organization_Please_set);
+            }
+
+            var documentNo =
+                (new NoSequenceRepository()).GetNextNo(headerModel.DocSequenceId, headerModel.DocumentDate);
+
+            List<DataAccess.PosLine> posLines = posLinesModel
+                .Select(c => new DataAccess.PosLine()
+                {
+                    ClientId = clientId,
+                    OrganizationId = organizationId,
+                    LineNo = c.LineNo,
+                    ItemId = c.ItemId,
+                    Description = c.Description,
+                    LocationId = headerModel.LocationId,
+                    UomId = c.UomId,
+                    UomDescription = c.UomDescription,
+                    UnitPrice = c.UnitPrice,
+                    Quantity = c.Quantity,
+                    QtyPerUom = c.QtyPerUom,
+                    QuantityBase = c.QuantityBase,
+                    Amount = c.Amount,
+                    VatIdentifierId = c.VatIdentifierId,
+                    VatPercentage = c.VatPercentage,
+                    VatAmount = c.VatAmount,
+                    DiscountId = null,
+                    LineDiscountPercentage = c.LineDiscountPercentage,
+                    LineDiscountAmount = c.LineDiscountAmount,
+                    InvoiceDiscountAmount = c.InvoiceDiscountAmount, //TODO : recalculate InvoiceDiscountAmount from header.InvoiceDiscountAmount
+                    UnitPriceLCY = c.UnitPriceLCY,
+                    AmountLCY = c.AmountLCY,
+                    VatAmountLCY = c.VatAmount,
+                    LineDiscountAmountLCY = c.LineDiscountAmount,
+                    InvoiceDiscountAmountLCY = c.InvoiceDiscountAmount, //TODO : recalculate InvoiceDiscountAmount from header.InvoiceDiscountAmount
+                }).ToList();
+
+            PosHeader newPosHeader = new PosHeader()
+            {
+                ClientId = clientId,
+                OrganizationId = organizationId,
+                DocSequenceId = headerModel.DocSequenceId,
+                DocumentNo = documentNo,
+                DocumentDate = headerModel.DocumentDate,
+                SellToCustomerId = headerModel.SellToCustomerId,
+                SellToCustomerName = headerModel.SellToCustomerName,
+                SellToAddress = headerModel.SellToAddress,
+                SellToContactId = null,
+                SellToContactName = "",
+                BillToCustomerId = headerModel.SellToCustomerId,
+                BillToName = headerModel.SellToCustomerName,
+                BillToAddress = headerModel.SellToAddress,
+                BillToContactId = null,
+                BillToContactName = "",
+                BillToVatCode = "",
+                BillToVatNote = "",
+                ShipToName = "",
+                ShipToAddress = "",
+                ShipToContactName = "",
+                CurrencyId = headerModel.CurrencyId,
+                CurrencyFactor = headerModel.CurrencyFactor,
+                Description = headerModel.Description,
+                LocationId = headerModel.LocationId,
+                SalesPersonId = headerModel.SalesPersonId,
+                TotalAmount = headerModel.TotalAmount,
+                TotalAmountLCY = headerModel.TotalAmount,
+                TotalVatAmount = headerModel.TotalVatAmount,
+                TotalVatAmountLCY = headerModel.TotalVatAmount,
+                TotalLineDiscountAmount = headerModel.TotalLineDiscountAmount,
+                TotalLineDiscountAmountLCY = headerModel.TotalLineDiscountAmount,
+                InvoiceDiscountPercentage = headerModel.InvoiceDiscountPercentage,
+                InvoiceDiscountAmount = headerModel.InvoiceDiscountAmount,
+                InvoiceDiscountAmountLCY = headerModel.InvoiceDiscountAmount,
+                TotalPayment = headerModel.TotalPayment,
+                TotalPaymentLCY = headerModel.TotalPayment,
+                CashOfCustomer = headerModel.CashOfCustomer,
+                ChangeReturnToCustomer = headerModel.ChangeReturnToCustomer,
+                Status = (byte)headerModel.Status,
+                Version = 1,
+                RecModifiedAt = DateTime.Now,
+                RecCreatedBy = (long)user.ProviderUserKey,
+                RecCreatedAt = DateTime.Now,
+                RecModifiedBy = (long)user.ProviderUserKey
+            };
+            newPosHeader.PosLines = posLines;
+
+            try
+            {
+                newPosHeader = this.repository.AddNew(newPosHeader);
+            }
+            catch (DbEntityValidationException ex)
+            {
+                return this.Direct(false, ex.DbEntityValidationExceptionToString());
+            }
+            catch (Exception ex)
+            {
+                return this.Direct(false, ex.Message);
+            }
+
+            //Print
+            StiReport report = new StiReport();
+            report.Load(Server.MapPath("~/Resources/Reports/salespos_001.mrt"));
+
+            Client client = (new ClientRepository()).Get(User);
+            var data = JObject.FromObject(new {PosHeader = newPosHeader, PosLines = newPosHeader.PosLines}, new JsonSerializer() { ReferenceLoopHandling = ReferenceLoopHandling.Serialize, PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+
+            //data.PosHeader = JToken.FromObject(headerModel);
+            //data.PosLines = JToken.FromObject(posLines);
+
+            //dataSet.RegData("data", data);
+
+            report.Dictionary.Databases.Clear();
+            var ds = StiJsonToDataSetConverter.GetDataSet(data);
+            report.RegData("data", "", ds);
+            report.Dictionary.Synchronize();
+            //========================
+            report.Render();
+            var fileName = $"salespos_{newPosHeader.Id}_{User.Identity.Name}_{DateTime.Now:yyyyMMddhhmmss}";
+            report.ExportDocument(StiExportFormat.Pdf, Server.MapPath("~/Resources/printReports/") + fileName + ".pdf");
+
+            var settings = new Stimulsoft.Report.Export.StiHtmlExportSettings();
+            var service = new Stimulsoft.Report.Export.StiHtmlExportService();
+            var stream = new System.IO.MemoryStream();
+            service.ExportTo(report, stream, settings);
+            stream.Seek(0, SeekOrigin.Begin);
+            var streamReader = new StreamReader(stream);
+            var htmlString = streamReader.ReadToEnd();
+
+            return this.Direct(new { report = htmlString, id = newPosHeader.Id });
+            
+            /*
+            var jsonString = report.SaveToJsonString();
+            Window win = new Window
+            {
+                ID = "SalesPosReportWindows1",
+                Icon = Ext.Net.Icon.PageWhiteAcrobat,
+                Height = 600,
+                Width = 800,
+                BodyPadding = 2,
+                Frame = true,
+                Modal = true,
+                Layout = "Fit",
+                CloseAction = CloseAction.Destroy,
+                Items =
+                {
+                     new Panel
+                     {
+                         Loader = new ComponentLoader()
+                         {
+                             Url = Url.Action("PrintHtml", "Report"),
+                             Params =
+                             {
+                                 new Parameter("jsonString", jsonString, ParameterMode.Value)
+                             },
+                             Mode = LoadMode.Frame
+                         }
+                     }   
+                }
+            };
+
+            win.Render(RenderMode.Auto);
             return this.Direct();
+            */
         }
     }
 }

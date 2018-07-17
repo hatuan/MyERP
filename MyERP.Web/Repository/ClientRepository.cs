@@ -12,12 +12,14 @@ namespace MyERP.Web
            
         }
         
-        public override IQueryable<Client> GetAll(IPrincipal principal)
+        public Client Get(IPrincipal principal)
         {
             var membershipUser = (MyERPMembershipUser)Membership.GetUser(principal.Identity.Name, true);
-            var allEntities = GetAll().Where(c => c.Id == membershipUser.ClientId);
 
-            return allEntities;
+            IQueryable<Client> query = dataContext.Set<Client>();
+            query = query.Where(c => c.Id == membershipUser.ClientId);
+
+            return query.First();
         }
     }
 

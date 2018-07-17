@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using MyERP.DataAccess;
 using MyERP.DataAccess.Enum;
+using Newtonsoft.Json;
 
 namespace MyERP.Web.Models
 {
@@ -12,65 +13,125 @@ namespace MyERP.Web.Models
         public long? Id { get; set; }
 
         [Display(Name = "Document No")]
+        [JsonProperty("DocumentNo")]
         public string DocumentNo { get; set; }
 
         [Display(Name = "Sequence No")]
+        [Required]
+        [JsonProperty("DocSequenceId")]
         public long DocSequenceId { get; set; }
 
         [Display(Name = "Document Date")]
+        [Required]
+        [JsonProperty("DocumentDate")]
         public DateTime DocumentDate { get; set; }
 
+        [Display(Name = "Currency")]
+        [Required]
+        [JsonProperty("CurrencyId")]
+        public long CurrencyId { get; set; }
+
+        [Display(Name = "Currency Factor")]
+        [Required]
+        [JsonProperty("CurrencyFactor")]
+        public Decimal CurrencyFactor { get; set; }
+
         [Display(Name = "Customer")]
-        public long? SellToCustomerId { get; set; }
+        [Required]
+        [JsonProperty("SellToCustomerId")]
+        public long SellToCustomerId { get; set; }
 
         [Display(Name = "Customer Name")]
+        [Required]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        [JsonProperty("SellToCustomerName")]
         public String SellToCustomerName { get; set; }
 
         [Display(Name = "Address")]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        [JsonProperty("SellToAddress")]
         public String SellToAddress { get; set; }
 
         [Display(Name = "Description")]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        [JsonProperty("Description")]
         public String Description { get; set; }
+
+        [Display(Name = "Total Amount")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        [JsonProperty("TotalAmount")]
+        public Decimal TotalAmount { get; set; }
+
+        [Display(Name = "Total Vat Amount")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        [JsonProperty("TotalVatAmount")]
+        public Decimal TotalVatAmount { get; set; }
+
+        [Display(Name = "Total Line Discount Amount")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        [JsonProperty("TotalLineDiscountAmount")]
+        public Decimal TotalLineDiscountAmount { get; set; }
+
+        [Display(Name = "Invoice Discount %")]
+        [DisplayFormat(DataFormatString = "{0:n}")]
+        [JsonProperty("InvoiceDiscountPercentage")]
+        public byte InvoiceDiscountPercentage { get; set; }
+
+        [Display(Name = "Invoice Discount Amount")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        [JsonProperty("InvoiceDiscountAmount")]
+        public Decimal InvoiceDiscountAmount { get; set; }
 
         [Display(Name = "Total Payment")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
+        [JsonProperty("TotalPayment")]
         public Decimal TotalPayment { get; set; }
 
         [Display(Name = "Cash Of Customer")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
+        [JsonProperty("CashOfCustomer")]
         public Decimal CashOfCustomer { get; set; }
 
         [Display(Name = "Change Return")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
+        [JsonProperty("ChangeReturnToCustomer")]
         public Decimal ChangeReturnToCustomer { get; set; }
 
         [Display(Name = "Location")]
-        public long? LocationId { get; set; }
+        [JsonProperty("LocationId")]
+        public long LocationId { get; set; }
 
         [Display(Name = "Sales Person")]
-        public long? SalesPersonId { get; set; }
+        [JsonProperty("SalesPersonId")]
+        public long SalesPersonId { get; set; }
 
-        public List<PosLineEditViewModel> PosLineEditViewModels { get; set; }
+        [EnsureMinimumElements(1, ErrorMessage = "At least a POS Line is required")]
+        [JsonProperty("PosLineEditViewModels")]
+        public List<PosLineEditViewModel> PosLines { get; set; }
+
+        [JsonProperty("Status")]
+        public SalesPosDocumentStatusType Status { get; set; }
     }
 
     public class PosLineEditViewModel
     {
         public long? Id { get; set; }
 
+        [Required]
         public long LineNo { get; set; }
-                                                 
+                  
         [Display(Name = "Item")]
-        public long? ItemId { get; set; }
+        [Required]
+        public long ItemId { get; set; }
 
         [Display(Name = "Description")]
+        [Required]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String Description { get; set; }
 
         [Display(Name = "UOM")]
-        public long? UomId { get; set; }
+        [Required]
+        public long UomId { get; set; }
 
         [Display(Name = "UOM")]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
@@ -85,17 +146,45 @@ namespace MyERP.Web.Models
         [Display(Name = "Quantity")]
         public Decimal Quantity { get; set; }
 
+        [Range(0.01, Double.MaxValue, ErrorMessage = "Please enter a price above zero.")]
         [Display(Name = "Unit Price")]
         public Decimal UnitPrice { get; set; }
 
         [Display(Name = "Amount")]
         public Decimal Amount { get; set; }
 
+        [Display(Name = "VatIdentifier")]
+        public long? VatIdentifierId { get; set; }
+
+        [Display(Name = "Vat %")]
+        public byte VatPercentage { get; set; }
+
+        [Display(Name = "Vat Amount")]
+        public Decimal VatAmount { get; set; }
+
+        [Display(Name = "Discount %")]
+        public byte LineDiscountPercentage { get; set; }
+
+        [Display(Name = "Discount Amount")]
+        public Decimal LineDiscountAmount { get; set; }
+
+        [Display(Name = "Invoice Discount Amount")]
+        public Decimal InvoiceDiscountAmount { get; set; }
+
         [Display(Name = "Unit Price LCY")]
         public Decimal UnitPriceLCY { get; set; }
 
         [Display(Name = "Amount LCY")]
         public Decimal AmountLCY { get; set; }
+
+        [Display(Name = "Vat Amount LCY")]
+        public Decimal VatAmountLCY { get; set; }
+ 
+        [Display(Name = "Discount Amount LCY")]
+        public Decimal LineDiscountAmountLCY { get; set; }
+
+        [Display(Name = "Invoice Discount Amount LCY")]
+        public Decimal InvoiceDiscountAmountLCY { get; set; }
 
         [Display(Name = "Qty Per Uom")]
         public Decimal QtyPerUom { get; set; }

@@ -65,7 +65,9 @@
       <HintPath>..\packages\Ext.NET.Utilities.2.5.0\lib\Ext.Net.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="LibExcel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stimulsoft.Reports.Web.2018.2.3\lib\net40\LibExcel.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Stimulsoft.Reports.Web.2018.2.3\lib\net40\LibExcel.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -86,34 +88,54 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Stimulsoft.Base, Version=2018.2.3.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Base.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Base.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Stimulsoft.Data, Version=2018.2.3.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Data.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Data.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Stimulsoft.Map, Version=2018.2.3.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Map.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Map.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Stimulsoft.Report, Version=2018.2.3.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Report.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Report.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Stimulsoft.Report.Check, Version=2018.2.3.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Report.Check.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Report.Check.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Stimulsoft.Report.Helper, Version=2018.2.3.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Report.Helper.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Report.Helper.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Stimulsoft.Report.Mvc, Version=2018.2.3.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Report.Mvc.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Report.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Stimulsoft.Report.Web, Version=2018.2.3.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Report.Web.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Report.Web.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Stimulsoft.Report.WebDesign, Version=2018.2.3.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Report.WebDesign.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Stimulsoft.Report.WebDesign.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Svg, Version=2.2.1.39233, Culture=neutral, PublicKeyToken=12a0bac221edeae2, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Svg.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Stimulsoft.Reports.Web.2018.2.3\lib\net40\Svg.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Linq" />
@@ -195,46 +217,6 @@
     <Content Include="App_Readme\Ext.NET.Utilities\README.txt" />
     <Content Include="App_Readme\Transformer.NET\LICENSE.txt" />
     <Content Include="App_Readme\Transformer.NET\README.txt" />
-    <Content Include="Localization\ar.xml" />
-    <Content Include="Localization\be.xml" />
-    <Content Include="Localization\bg.xml" />
-    <Content Include="Localization\ca-ES.xml" />
-    <Content Include="Localization\cs.xml" />
-    <Content Include="Localization\de.ext.xml" />
-    <Content Include="Localization\de.xml" />
-    <Content Include="Localization\el-GR.xml" />
-    <Content Include="Localization\en-GB.xml" />
-    <Content Include="Localization\en.ext.xml" />
-    <Content Include="Localization\en.xml" />
-    <Content Include="Localization\es.xml" />
-    <Content Include="Localization\eu-ES.xml" />
-    <Content Include="Localization\fa.xml" />
-    <Content Include="Localization\fr.ext.xml" />
-    <Content Include="Localization\fr.xml" />
-    <Content Include="Localization\gl-ES.xml" />
-    <Content Include="Localization\hr.xml" />
-    <Content Include="Localization\hu.xml" />
-    <Content Include="Localization\id.xml" />
-    <Content Include="Localization\it.xml" />
-    <Content Include="Localization\ka.xml" />
-    <Content Include="Localization\Lt-sr-SP.xml" />
-    <Content Include="Localization\lt.xml" />
-    <Content Include="Localization\nb-NO.xml" />
-    <Content Include="Localization\nl.xml" />
-    <Content Include="Localization\pl.xml" />
-    <Content Include="Localization\pt-BR.xml" />
-    <Content Include="Localization\pt.xml" />
-    <Content Include="Localization\ro.xml" />
-    <Content Include="Localization\ru.ext.xml" />
-    <Content Include="Localization\ru.xml" />
-    <Content Include="Localization\sk.xml" />
-    <Content Include="Localization\sv.ext.xml" />
-    <Content Include="Localization\sv.xml" />
-    <Content Include="Localization\tr.xml" />
-    <Content Include="Localization\uk.xml" />
-    <Content Include="Localization\vi.xml" />
-    <Content Include="Localization\zh-CHS.xml" />
-    <Content Include="Localization\zh-CHT.xml" />
     <Content Include="Resources\css\main.css" />
     <Content Include="Resources\fonts\fontawesome-webfont.svg" />
     <Content Include="Resources\fonts\LICENSE_TITILLIUMTEXT.txt" />
@@ -475,12 +457,15 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EntityBaseController.cs" />
     <Compile Include="Controllers\OptionController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValidationController.cs" />
     <Compile Include="DecimalModelBinder.cs" />
+    <Compile Include="EnsureMinimumElementsAttribute.cs" />
     <Compile Include="FormattedDecimalJsonConverter.cs" />
     <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Helpers\MyERPHelper.cs" />
+    <Compile Include="ModelStateErrorHandler.cs" />
     <Compile Include="Models\BusinessPartnerPriceGroupViewModel.cs" />
     <Compile Include="Models\ClientViewModels.cs" />
     <Compile Include="Models\BusinessPartnerGroupViewModels.cs" />
@@ -515,6 +500,7 @@
     <Compile Include="CustomMembershipProvider.cs" />
     <Compile Include="CustomRoleProvider.cs" />
     <Compile Include="odata\RolesController.cs" />
+    <Compile Include="Others\DbEntityValidationException.cs" />
     <Compile Include="Others\Round.cs" />
     <Compile Include="Others\AppSettings.cs" />
     <Compile Include="Properties\Resources.vi-VN.Designer.cs">
@@ -573,8 +559,10 @@
     <Folder Include="Areas\SalesPrice\Models\" />
     <Folder Include="Areas\SalesPrice\Views\Shared\" />
     <Folder Include="Areas\UOM\Models\" />
+    <Folder Include="Resources\printReports\" />
     <Folder Include="Resources\reports\" />
     <Folder Include="Resources\uploadFiles\" />
+    <Folder Include="Views\Report\" />
     <Folder Include="Views\Validation\" />
   </ItemGroup>
   <ItemGroup>
@@ -637,6 +625,9 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <PropertyGroup>
+    <PreBuildEvent>taskkill /IM Microsoft.VisualStudio.Web.Host.exe /F 2&gt;nul&amp;SET ERRORLEVEL = 0</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

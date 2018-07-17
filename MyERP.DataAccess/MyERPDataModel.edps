@@ -218,6 +218,319 @@
         </ed:Property>
       </Template>
     </Templates>
-    <AttributeAssemblies />
+    <AttributeAssemblies>
+      <AttributeAssembly Name="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" File="..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.ComponentModel.DataAnnotations.dll">
+        <AttributeType Name="AssociationAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field">
+          <AttributeConstructor>
+            <ed:Property Name="name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="thisKey" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="otherKey" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+          <Properties>
+            <ed:Property Name="IsForeignKey" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="BindableTypeAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Class, Struct, Enum">
+          <AttributeConstructor />
+          <Properties>
+            <ed:Property Name="IsBindable" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="CompareAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property">
+          <AttributeConstructor>
+            <ed:Property Name="otherProperty" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+          <Properties>
+            <ed:Property Name="ErrorMessage" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="ConcurrencyCheckAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field">
+          <AttributeConstructor />
+        </AttributeType>
+        <AttributeType Name="CreditCardAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field, Parameter">
+          <AttributeConstructor />
+          <Properties>
+            <ed:Property Name="ErrorMessage" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="CustomValidationAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="True" AttributeValidOn="Class, Method, Property, Field, Parameter">
+          <AttributeConstructor>
+            <ed:Property Name="validatorType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="method" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+          <Properties>
+            <ed:Property Name="ErrorMessage" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="DataTypeAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Method, Property, Field, Parameter">
+          <AttributeConstructor>
+            <ed:Property Name="dataType" Type="System.ComponentModel.DataAnnotations.DataType, System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Default="Custom" />
+          </AttributeConstructor>
+          <AttributeConstructor>
+            <ed:Property Name="customDataType" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+          <Properties>
+            <ed:Property Name="ErrorMessage" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="DisplayAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Method, Property, Field, Parameter">
+          <AttributeConstructor />
+          <Properties>
+            <ed:Property Name="ShortName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="Description" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="Prompt" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="GroupName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ResourceType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="AutoGenerateField" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="AutoGenerateFilter" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="DisplayColumnAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Class">
+          <AttributeConstructor>
+            <ed:Property Name="displayColumn" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+          <AttributeConstructor>
+            <ed:Property Name="displayColumn" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="sortColumn" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+          <AttributeConstructor>
+            <ed:Property Name="displayColumn" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="sortColumn" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="sortDescending" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Default="False" />
+          </AttributeConstructor>
+        </AttributeType>
+        <AttributeType Name="DisplayFormatAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field">
+          <AttributeConstructor />
+          <Properties>
+            <ed:Property Name="DataFormatString" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="NullDisplayText" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ConvertEmptyStringToNull" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ApplyFormatInEditMode" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="HtmlEncode" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="EditableAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field">
+          <AttributeConstructor>
+            <ed:Property Name="allowEdit" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Default="False" />
+          </AttributeConstructor>
+          <Properties>
+            <ed:Property Name="AllowInitialValue" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="EmailAddressAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field, Parameter">
+          <AttributeConstructor />
+          <Properties>
+            <ed:Property Name="ErrorMessage" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="EnumDataTypeAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Method, Property, Field, Parameter">
+          <AttributeConstructor>
+            <ed:Property Name="enumType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+          <Properties>
+            <ed:Property Name="ErrorMessage" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="FileExtensionsAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field, Parameter">
+          <AttributeConstructor />
+          <Properties>
+            <ed:Property Name="Extensions" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessage" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="FilterUIHintAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field">
+          <AttributeConstructor>
+            <ed:Property Name="filterUIHint" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+          <AttributeConstructor>
+            <ed:Property Name="filterUIHint" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="presentationLayer" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+          <AttributeConstructor>
+            <ed:Property Name="filterUIHint" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="presentationLayer" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="controlParameters" Type="System.Object[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+        </AttributeType>
+        <AttributeType Name="KeyAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field">
+          <AttributeConstructor />
+        </AttributeType>
+        <AttributeType Name="MaxLengthAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field, Parameter">
+          <AttributeConstructor>
+            <ed:Property Name="length" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Default="0" />
+          </AttributeConstructor>
+          <AttributeConstructor />
+          <Properties>
+            <ed:Property Name="ErrorMessage" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="MetadataTypeAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Class">
+          <AttributeConstructor>
+            <ed:Property Name="metadataClassType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+        </AttributeType>
+        <AttributeType Name="MinLengthAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field, Parameter">
+          <AttributeConstructor>
+            <ed:Property Name="length" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Default="0" />
+          </AttributeConstructor>
+          <Properties>
+            <ed:Property Name="ErrorMessage" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="PhoneAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field, Parameter">
+          <AttributeConstructor />
+          <Properties>
+            <ed:Property Name="ErrorMessage" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="RangeAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field, Parameter">
+          <AttributeConstructor>
+            <ed:Property Name="minimum" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Default="0" />
+            <ed:Property Name="maximum" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Default="0" />
+          </AttributeConstructor>
+          <AttributeConstructor>
+            <ed:Property Name="minimum" Type="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Default="0" />
+            <ed:Property Name="maximum" Type="System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Default="0" />
+          </AttributeConstructor>
+          <AttributeConstructor>
+            <ed:Property Name="type" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="minimum" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="maximum" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+          <Properties>
+            <ed:Property Name="ErrorMessage" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="RegularExpressionAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field, Parameter">
+          <AttributeConstructor>
+            <ed:Property Name="pattern" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+          <Properties>
+            <ed:Property Name="MatchTimeoutInMilliseconds" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessage" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="RequiredAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field, Parameter">
+          <AttributeConstructor />
+          <Properties>
+            <ed:Property Name="AllowEmptyStrings" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessage" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="ScaffoldColumnAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field">
+          <AttributeConstructor>
+            <ed:Property Name="scaffold" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Default="False" />
+          </AttributeConstructor>
+        </AttributeType>
+        <AttributeType Name="ScaffoldTableAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Class">
+          <AttributeConstructor>
+            <ed:Property Name="scaffold" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Default="False" />
+          </AttributeConstructor>
+        </AttributeType>
+        <AttributeType Name="StringLengthAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field, Parameter">
+          <AttributeConstructor>
+            <ed:Property Name="maximumLength" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Default="0" />
+          </AttributeConstructor>
+          <Properties>
+            <ed:Property Name="MinimumLength" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessage" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="TimestampAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field">
+          <AttributeConstructor />
+        </AttributeType>
+        <AttributeType Name="UIHintAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="True" AttributeValidOn="Property, Field">
+          <AttributeConstructor>
+            <ed:Property Name="uiHint" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+          <AttributeConstructor>
+            <ed:Property Name="uiHint" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="presentationLayer" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+          <AttributeConstructor>
+            <ed:Property Name="uiHint" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="presentationLayer" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="controlParameters" Type="System.Object[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+        </AttributeType>
+        <AttributeType Name="UrlAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations" AttributeAllowMultiple="False" AttributeValidOn="Property, Field, Parameter">
+          <AttributeConstructor />
+          <Properties>
+            <ed:Property Name="ErrorMessage" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="ErrorMessageResourceType" Type="System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="ColumnAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations.Schema" AttributeAllowMultiple="False" AttributeValidOn="Property, Field">
+          <AttributeConstructor />
+          <AttributeConstructor>
+            <ed:Property Name="name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+          <Properties>
+            <ed:Property Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            <ed:Property Name="TypeName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+        <AttributeType Name="ComplexTypeAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations.Schema" AttributeAllowMultiple="False" AttributeValidOn="Class">
+          <AttributeConstructor />
+        </AttributeType>
+        <AttributeType Name="DatabaseGeneratedAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations.Schema" AttributeAllowMultiple="False" AttributeValidOn="Property, Field">
+          <AttributeConstructor>
+            <ed:Property Name="databaseGeneratedOption" Type="System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption, System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Default="None" />
+          </AttributeConstructor>
+        </AttributeType>
+        <AttributeType Name="ForeignKeyAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations.Schema" AttributeAllowMultiple="False" AttributeValidOn="Property, Field">
+          <AttributeConstructor>
+            <ed:Property Name="name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+        </AttributeType>
+        <AttributeType Name="InversePropertyAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations.Schema" AttributeAllowMultiple="False" AttributeValidOn="Property, Field">
+          <AttributeConstructor>
+            <ed:Property Name="property" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+        </AttributeType>
+        <AttributeType Name="NotMappedAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations.Schema" AttributeAllowMultiple="False" AttributeValidOn="Class, Property, Field">
+          <AttributeConstructor />
+        </AttributeType>
+        <AttributeType Name="TableAttribute" AttributeNamespace="System.ComponentModel.DataAnnotations.Schema" AttributeAllowMultiple="False" AttributeValidOn="Class">
+          <AttributeConstructor>
+            <ed:Property Name="name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </AttributeConstructor>
+          <Properties>
+            <ed:Property Name="Schema" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+          </Properties>
+        </AttributeType>
+      </AttributeAssembly>
+    </AttributeAssemblies>
   </ModelSettings>
 </EntityDeveloper>

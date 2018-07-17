@@ -38,7 +38,7 @@ namespace MyERP.Web.Controllers
 
             if (clientId == 0 || organizationId == 0)
             {
-                return this.Direct(false, "User don't have Client or Organization. Please set");
+                return this.Direct(false, Resources.Resources.User_dont_have_Client_or_Organization_Please_set);
             }
 
             var organizationRepository = new OrganizationRepository();
@@ -118,7 +118,7 @@ namespace MyERP.Web.Controllers
                 if (clientId == 0 || organizationId == 0)
                 {
                     r.Success = false;
-                    r.ErrorMessage = "User don't have Client or Organization. Please set";
+                    r.ErrorMessage = Resources.Resources.User_dont_have_Client_or_Organization_Please_set;
                     return r;
                 }
 

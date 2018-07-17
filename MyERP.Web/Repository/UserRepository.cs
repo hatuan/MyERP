@@ -52,6 +52,13 @@ namespace MyERP.Web
 
             return allEntities;
         }
+
+        public Client GetClient(IPrincipal principal)
+        {
+            //TODO: Kiem tra xem tai sao khong cache duoc MyERPMembershipUser.Client
+            var membershipUser = (MyERPMembershipUser)Membership.GetUser(principal.Identity.Name, true);
+            return (new ClientRepository()).GetBy(x => x.Id == membershipUser.ClientId);
+        }
     }
 
 }

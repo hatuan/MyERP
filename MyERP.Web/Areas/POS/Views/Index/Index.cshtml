@@ -21,7 +21,8 @@
 
             setTimeout(function() {
                     App.POSTabs.setActiveTab(tab);
-            }, 250);
+                },
+                250);
         }
 
         var getViewBagId = function() {
@@ -73,42 +74,63 @@
             var field = this.getEditor(e.record, e.column).field;
 
             switch (e.field) {
-                case "UomId":
-                    field.allQuery = e.record.get('ItemId');
-                    field.store.loadData(e.record.data.ItemUoms);
+            case "UomId":
+                field.allQuery = e.record.get('ItemId');
+                field.store.loadData(e.record.data.ItemUoms);
                 break;
             }
         };
 
-        var UomRenderer = function (value, metadata, record, rowIndex, colIndex, store) {
+        var UomRenderer = function(value, metadata, record, rowIndex, colIndex, store) {
             if (!Ext.isEmpty(record.data.UomDescription) && value > 0) {
                 return record.data.UomDescription;
             }
             return "";
         };
 
-        var uomBeforeStartEdit = function (editor, boundEl, value, eOpts) {
+        var uomBeforeStartEdit = function(editor, boundEl, value, eOpts) {
             //editor.field.store.loadData(editor.grid.getSelectionModel().getSelection()[0].data.ItemUoms);
         }
 
         // or https://stackoverflow.com/questions/37924120/extjs-store-sum-field-where-acct-12345
-        var getSumOfAmount = function (grid) {
-            var sum = 0;
-            grid.getStore().each(function (record) {
+        // TODO: Convert getSumOfAmount to server calculate
+        var getSumOfAmount = function(grid) {
+            var sumAmount = 0;
+            var sumLineDiscountAmount = 0;
+            var sumVatAmount = 0;
+            var sumPayment = 0;
+            grid.getStore().each(function(record) {
                 var v = record.get("Amount").replace(/\./g, '').replace(',', '.');
-                sum += parseFloat(v);
+                sumAmount += parseFloat(v);
+
+                var lineDiscountAmount = record.get("LineDiscountAmount").replace(/\./g, '').replace(',', '.');
+                sumLineDiscountAmount += parseFloat(lineDiscountAmount);
+
+                var vatAmount = record.get("VatAmount").replace(/\./g, '').replace(',', '.');
+                sumVatAmount += parseFloat(vatAmount);
+
+                sumPayment += (sumAmount - sumLineDiscountAmount - sumVatAmount);
             });
 
             var viewBagId = getViewBagId();
+            var totalAmountId = "totalAmount" + viewBagId;
+            var totalVatAmountId = "totalVatAmount" + viewBagId;
+            var totalLineDiscountAmountId = "totalLineDiscountAmount" + viewBagId;
             var totalPaymentId = "totalPayment" + viewBagId;
-            Ext.getCmp(totalPaymentId).setValue(sum);
+            var invoiceDiscountAmountId = "invoiceDiscountAmount" + viewBagId;
+
+            Ext.getCmp(totalAmountId).setRawValue(Ext.util.Format.number(sumAmount, '0.000,00/i'));
+            Ext.getCmp(totalVatAmountId).setRawValue(Ext.util.Format.number(sumVatAmount, '0.000,00/i'));
+            Ext.getCmp(totalLineDiscountAmountId).setRawValue(Ext.util.Format.number(sumLineDiscountAmount, '0.000,00/i'));
+
+            var invoiceDiscountAmount = Ext.getCmp(invoiceDiscountAmountId).getValue().replace(/\./g, '').replace(',', '.');
+            sumPayment -= invoiceDiscountAmount;
+            Ext.getCmp(totalPaymentId).setValue(sumPayment);
             var v = Ext.getCmp(totalPaymentId).getRawValue().replace(/\./g, '').replace(',', '.');
             Ext.getCmp(totalPaymentId).setRawValue(Ext.util.Format.number(v, '0.000,00/i'));
-
-            return sum;
         };
 
-        var calcChangeToCustomer = function () {
+        var calcChangeToCustomer = function() {
             var viewBagId = getViewBagId();
             var totalPaymentId = "totalPayment" + viewBagId;
             var cashOfCustomerId = "cashOfCustomer" + viewBagId;
@@ -117,8 +139,22 @@
             var valueOftotalPayment = Ext.getCmp(totalPaymentId).getValue().replace(/\./g, '').replace(',', '.');
             var valueOfcashOfCustomer = Ext.getCmp(cashOfCustomerId).getValue().replace(/\./g, '').replace(',', '.');
             var valueOfchangeToCustomer = parseFloat(valueOfcashOfCustomer) - parseFloat(valueOftotalPayment);
-            
+
             Ext.getCmp(changeToCustomerId).setRawValue(Ext.util.Format.number(valueOfchangeToCustomer, '0.000,00/i'));
+        };
+
+        var printReportHtml = function(innerHtml) {
+            var height = screen.availHeight;
+            var width = screen.availWidth;
+            var printWin = window.open('',
+                '_blank',
+                'left=0,top=0,height=' + height + ',width= ' + width + ',toolbar=0,scrollbars=0,status=0');
+            printWin.document.open();
+            printWin.document.write(innerHtml);
+            printWin.document.close();
+            printWin.focus();
+            printWin.print();
+            setTimeout(function() { printWin.close(); }, 100);
         }
 
     </script>

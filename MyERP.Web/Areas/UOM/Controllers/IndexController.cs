@@ -145,7 +145,7 @@ namespace MyERP.Web.Areas.UOM.Controllers
                 if (clientId == 0 || organizationId == 0)
                 {
                     r.Success = false;
-                    r.ErrorMessage = "User don't have Client or Organization. Please set";
+                    r.ErrorMessage = Resources.Resources.User_dont_have_Client_or_Organization_Please_set;
                     return r;
                 }
                 bool isEdit = model.Id.HasValue;

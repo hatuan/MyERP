@@ -1,5 +1,4 @@
-﻿@using System.Runtime.InteropServices
-@model MyERP.Web.Models.PosHeaderEditViewModel
+﻿@model MyERP.Web.Models.PosHeaderEditViewModel
 
 @{
     Layout = null;
@@ -17,6 +16,10 @@
     String sellToAddressId = "sellToAddress" + ViewBag.ID;
     String descriptionId = "description" + ViewBag.ID;
     String printButtonId = "printButton" + ViewBag.ID;
+    String totalAmountId = "totalAmount" + ViewBag.ID;
+    String totalVatAmountId = "totalVatAmount" + ViewBag.ID;
+    String totalLineDiscountAmountId = "totalLineDiscountAmount" + ViewBag.ID;
+    String invoiceDiscountAmountId = "invoiceDiscountAmount" + ViewBag.ID;
     String totalPaymentId = "totalPayment" + ViewBag.ID;
     String cashOfCustomerId = "cashOfCustomer" + ViewBag.ID;
     String changeToCustomerId = "changeToCustomer" + ViewBag.ID;
@@ -27,291 +30,401 @@
 
 
 @(Html.X().FormPanel()
-      .Closable(true)
-      .Layout(LayoutType.Border)
-      .Title("POS - " + DateTime.Now.ToLongTimeString())
-      .ID(posPanelId)
-      .Tag(ViewBag.ID)
-      .Items(
-          Html.X().Panel()
-              .Header(false)
-              .Region(Region.North)
-              .Border(false)
-              .Layout(LayoutType.HBox)
-              .BodyPadding(5)
-              .Defaults(Html.X().Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
-              .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Top })
-              .Items(
-                  Html.X().ComboBox()
-                      .ID(lookupItemComboId)
-                      .Width(400)
-                      .DisplayField("Code")
-                      .ValueField("Id")
-                      .FieldStyle("text-transform: uppercase;")
-                      .TypeAhead(true)
-                      .MinChars(0)
-                      .PageSize(10)
-                      .SelectOnTab(true)
-                      .ForceSelection(true)
-                      .ValidateOnBlur(true)
-                      .ValidateOnChange(true)
-                      .EnableKeyEvents(true)
-                      .Listeners(ls =>
-                      {
-                          ls.KeyDown.Handler = "if (e.getKey() == e.ENTER) { var lookupItemValue = this.getValue(); if (lookupItemValue > 0) { Ext.getCmp('" + addItemButtonId + "').fireEvent('click'); }}";
-                          ls.KeyDown.Delay = 100;
-                      })
-                      .ListConfig(Html.X().BoundList()
-                          .LoadingText("Searching...")
-                          .ItemTpl(Html.X().XTemplate()
-                              .Html(@<text>
-                                        <tpl for=".">
-                                            <div class="search-item">
-                                                <h3>{Code}</h3>
-                                                {Description}
-                                            </div>
-                                        </tpl>
-                                     </text>))
-                          .MinWidth(400))
-                      .Store(Html.X().Store().AutoLoad(false)
-                          .Proxy(Html.X().AjaxProxy()
-                              .Url(Url.Action("LookupData", "Index", new { area = "Item" }))
-                              .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
-                          .Model(Html.X().Model()
-                              .IDProperty("Id")
-                              .Fields(
-                                  new ModelField("Id", ModelFieldType.Int),
-                                  new ModelField("OrganizationCode", ModelFieldType.String),
-                                  new ModelField("Code", ModelFieldType.String),
-                                  new ModelField("Description", ModelFieldType.String)
-                              )
-                          )
-                      ),
-                  Html.X().Button().ID(searchButtonId).Icon(Icon.Find),
-                  Html.X().Button().ID(addItemButtonId).Icon(Icon.ArrowDown).DirectEvents(de =>
-                  {
-                      de.Click.Action = "AddItemToDetails";
-                      de.Click.ExtraParams.Add(new Parameter("lookupItemId", "App." + lookupItemComboId + ".getValue()", ParameterMode.Raw));
-                      de.Click.ExtraParams.Add(new Parameter("viewBagID", ViewBag.ID, ParameterMode.Value));
-                      de.Click.ExtraParams.Add(new Parameter("posLines", "App." + posLineGridPanel + ".getRowsValues()", ParameterMode.Raw, true));
-                      de.Click.ExtraParams.Add(new Parameter("sellToCustomerId", "App." + sellToCustomerId + ".getValue()", ParameterMode.Raw));
-                      de.Click.Delay = 100;
-                      de.Click.DisableControl = true;
-                      de.Click.EventMask.ShowMask = true;
-                      de.Click.Success = "getSumOfAmount(App." + posLineGridPanel + ");";
-                  }).Listeners(ls =>
-                  {
-                      ls.Click.Handler = "if(App." + sellToCustomerId + ".getValue() == null) { " +
-                                         "  Ext.Msg.alert('ERROR', 'Please select CUSTOMER FIRST!!'); " +
-                                         "  App." + sellToCustomerId + ".focus();" +
-                                         "  return false; " +
-                                         "} else { " +
-                                         "  return true; " +
-                                         "}";
-                  })
-              ),
-          Html.X().GridPanel()
-              .ID(posLineGridPanel)
-              .Title("Items")
-              .Region(Region.Center)
-              .SortableColumns(false)
-              .Store(Html.X().Store()
-                  .ID(posLineStore)
-                  .Model(Html.X().Model()
-                      .IDProperty("LineNo")
-                      .Fields(
-                          new ModelField("Id", ModelFieldType.Int),
-                          new ModelField("LineNo", ModelFieldType.Int),
-                          new ModelField("ItemId", ModelFieldType.Int),
-                          new ModelField("Description", ModelFieldType.String),
-                          new ModelField("UomId", ModelFieldType.Int),
-                          new ModelField("UomDescription", ModelFieldType.String),
-                          new ModelField("Quantity", ModelFieldType.Float),
-                          new ModelField("UnitPrice", ModelFieldType.Float)
-                          {
-                              Convert =
-                              {
-                                  Handler = @"var v = value + '';
-                                            v.replace(/\./g,'').replace(',', '.');
-                                            return Ext.util.Format.number(v, '0.000,00/i');"
-                              }
-                          },
-                          new ModelField("Amount", ModelFieldType.Float)
-                          {
-                              Convert =
-                              {
-                                  Handler = @"var v = value + '';
-                                            v.replace(/\./g,'').replace(',', '.');
-                                            return Ext.util.Format.number(v, '0.000,00/i');"
-                              }
-                          },
-                          new ModelField("QtyPerUom", ModelFieldType.Float),
-                          new ModelField("QuantityBase", ModelFieldType.Float),
-                          new ModelField("UnitPriceLCY", ModelFieldType.Float),
-                          new ModelField("AmountLCY", ModelFieldType.Float)
-                      )
-                  )
-                  .DataSource(Model.PosLineEditViewModels)
-              )
-              .ColumnModel(
-                  Html.X().RowNumbererColumn(),
-                  Html.X().ColumnFor(Model.PosLineEditViewModels, m => m.Description).ToBuilder<Column.Builder>().MinWidth(300),
-                  Html.X().ColumnFor(Model.PosLineEditViewModels, m => m.UomId).ToBuilder<Column.Builder>().Width(100).Editor(
+          .Closable(true)
+          .Layout(LayoutType.Border)
+          .Title("POS - " + DateTime.Now.ToLongTimeString())
+          .ID(posPanelId)
+          .Tag(ViewBag.ID)
+          .Items(
+              Html.X().Panel()
+                  .Header(false)
+                  .Region(Region.North)
+                  .Border(false)
+                  .Layout(LayoutType.HBox)
+                  .BodyPadding(5)
+                  .Defaults(Html.X().Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
+                  .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Top })
+                  .Items(
                       Html.X().ComboBox()
+                          .ID(lookupItemComboId)
+                          .Width(400)
                           .DisplayField("Code")
-                          .ValueField("UomId")
-                          .FieldLabel("")
+                          .ValueField("Id")
                           .FieldStyle("text-transform: uppercase;")
-                          .Editable(false)
+                          .TypeAhead(true)
+                          .MinChars(0)
+                          .PageSize(10)
                           .SelectOnTab(true)
                           .ForceSelection(true)
                           .ValidateOnBlur(true)
                           .ValidateOnChange(true)
+                          .EnableKeyEvents(true)
+                          .Listeners(ls =>
+                          {
+                              ls.KeyDown.Handler = "if (e.getKey() == e.ENTER) { var lookupItemValue = this.getValue(); if (lookupItemValue > 0) { Ext.getCmp('" + addItemButtonId + "').fireEvent('click'); }}";
+                              ls.KeyDown.Delay = 100;
+                          })
                           .ListConfig(Html.X().BoundList()
                               .LoadingText("Searching...")
                               .ItemTpl(Html.X().XTemplate()
                                   .Html(@<text>
-                                            <div class="search-item">
-                                                <h3>{Code}</h3>
-                                                {Description}
-                                            </div>
-                                         </text>)
-                              )
-                              .MinWidth(400)
-                          )
-                          .StoreID("LookUpUomOfItemStore")
-                      ).Renderer("UomRenderer").EditorOptions(action =>
-                      {
-                          action.Listeners.BeforeStartEdit.Fn = "uomBeforeStartEdit";
-                      }),
-                  Html.X().ColumnFor(Model.PosLineEditViewModels, m => m.Quantity).ToBuilder<Column.Builder>().Width(100).Editor(Html.X().NumberField()),
-                  Html.X().ColumnFor(Model.PosLineEditViewModels, m => m.UnitPrice).ToBuilder<Column.Builder>().Width(100),
-                  Html.X().ColumnFor(Model.PosLineEditViewModels, m => m.Amount).ToBuilder<Column.Builder>().Width(100),
-                  Html.X().CommandColumn()
-                      .Width(35)
-                      .Commands(
-                          Html.X().GridCommand()
-                              .CommandName("Delete")
-                              .Icon(Icon.Delete)
-                              .ToolTip(tt => tt.Text = "Delete")
-                      )
-                      .Listeners(ls =>
-                      {
-                          ls.Command.Handler = "Ext.Msg.confirm('Alert', 'Do you want to DELETE ?', function (id, value) { if (id === 'yes') { App." + posLineGridPanel + ".getStore().remove(record); App." + posLineGridPanel + ".getStore().commitChanges(); getSumOfAmount(App." + posLineGridPanel + ");}}, this);";
-                      })
-              )
-              .View(Html.X().GridView().StripeRows(true))
-              .SelectionModel(
-                  Html.X().CellSelectionModel()
-              )
-              .Plugins(
-                  Html.X().CellEditing().Listeners(ls =>
-                  {
-                      ls.Edit.Fn = "lineEdit";
-                      ls.BeforeEdit.Fn = "beforeEdit";
-                  })
-
-              ),
-          Html.X().Panel()
-              .ID(invoiceInfoPanelId)
-              .Title("Invoice Information")
-              .Region(Region.East)
-              .Layout(LayoutType.VBox)
-              .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Stretch })
-              .MinWidth(400)
-              .BodyPadding(5)
-              .Split(true)
-              .Items(
-                  Html.X().TextFieldFor(m => m.DocumentNo)
-                      .ID(documentNoId)
-                      .EmptyText("AUTO")
-                      .Editable(false),
-                  Html.X().DateFieldFor(m => m.DocumentDate)
-                      .ID(documentDateId)
-                      .ReadOnly(true)
-                      .Format("dd/MM/yyyy"),
-                  Html.X().ComboBoxFor(m=>m.SellToCustomerId)
-                      .ID(sellToCustomerId)
-                      .DisplayField("Code")
-                      .ValueField("Id")
-                      .FieldStyle("text-transform: uppercase;")
-                      .TypeAhead(true)
-                      .MinChars(0)
-                      .PageSize(10)
-                      .SelectOnTab(true)
-                      .ForceSelection(true)
-                      .ValidateOnBlur(true)
-                      .ValidateOnChange(true)
-                      .ListConfig(Html.X().BoundList()
-                          .LoadingText("Searching...")
-                          .ItemTpl(Html.X().XTemplate()
-                              .Html(@<text>
+                                    <tpl for=".">
                                         <div class="search-item">
-                                            <h3>{Code} - {Description}</h3>
-                                            {Address}
+                                            <h3>{Code}</h3>
+                                            {Description}
                                         </div>
-                                     </text>)
-                          )
-                          .MinWidth(400)
-                      )
-                      .StoreID("LookupBusinessPartner")
-                      .DirectEvents(de =>
-                      {
-                          de.Select.Action = "ChangeBusinessPartner";
-                          de.Select.EventMask.ShowMask = true;
-                          de.Select.ExtraParams.Add(new Parameter("viewBagID", ViewBag.ID, ParameterMode.Value));
-                          de.Select.ExtraParams.Add(new Parameter("selectedData", "records[0].data", ParameterMode.Raw, true));
-                          de.Select.ExtraParams.Add(new Parameter("posLines", "App." + posLineGridPanel + ".getRowsValues()", ParameterMode.Raw, true));
-                          de.Select.Success = "getSumOfAmount(App." + posLineGridPanel + ");";
-                      })
-                  ,
-                  Html.X().TextFieldFor(m => m.SellToCustomerName)
-                      .ID(sellToCustomerNameId),
-                  Html.X().TextFieldFor(m => m.SellToAddress)
-                      .ID(sellToAddressId),
-                  Html.X().TextFieldFor(m => m.Description)
-                      .ID(descriptionId),
-                  Html.X().TextFieldFor(m => m.TotalPayment)
-                      .ID(totalPaymentId)
-                      .FieldStyle("font-size: 28px; line-height: 28px; height: 33px; text-align: right;")
-                      .ReadOnly(true),
-                  Html.X().TextFieldFor(m => m.CashOfCustomer)
-                      .ID(cashOfCustomerId)
-                      .FieldStyle("font-size: 28px; line-height: 28px; height: 33px; text-align: right;")
-                      .MaskRe(@"/[0-9\.]/")
-                      .Listeners(ls =>
-                      {
-                          ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
-                          ls.Blur.Handler = "var v = this.getRawValue().replace(/\\./g,'').replace(',', '.');" +
-                                            "this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));" +
-                                            "calcChangeToCustomer();";
-                      })
-                  ,
-                  Html.X().TextFieldFor(m=>m.ChangeReturnToCustomer)
-                      .ID(changeToCustomerId)
-                      .FieldStyle("font-size: 28px; line-height: 28px; height: 33px; text-align: right;")
-                      .ReadOnly(true)
-                  ,
-                  Html.X().Panel().BaseCls("x-plain").Flex(1),
-                  Html.X().Button()
-                      .ID(printButtonId)
-                      .Text("PRINT")
-                      .Height(50)
-                      .Icon(Icon.Printer)
-                      .Scale(ButtonScale.Large)
-                      .Cls("my-scale")
-                      .DirectEvents(de =>
-                      {
-                          de.Click.Action = "Print";
-                          de.Click.ShowWarningOnFailure = false;
-                          de.Click.EventMask.ShowMask = true;
-                          de.Click.FormID = posPanelId;
-                          de.Click.ExtraParams.Add(new Parameter("viewBagID", ViewBag.ID, ParameterMode.Value));
-                          de.Click.ExtraParams.Add(new Parameter("posLines", "App." + posLineGridPanel + ".getRowsValues()", ParameterMode.Raw, true));
-                      })
-                  ,
-                  Html.X().HiddenFor(m=>m.DocSequenceId),
-                  Html.X().HiddenFor(m=>m.LocationId),
-                  Html.X().HiddenFor(m=>m.SalesPersonId)
-              )
-      ))
+                                    </tpl>
+                                </text>))
+                                    .MinWidth(400))
+                                .Store(Html.X().Store().AutoLoad(false)
+                                    .Proxy(Html.X().AjaxProxy()
+                                        .Url(Url.Action("LookupData", "Index", new { area = "Item" }))
+                                        .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                                    .Model(Html.X().Model()
+                                        .IDProperty("Id")
+                                        .Fields(
+                                            new ModelField("Id", ModelFieldType.Int),
+                                            new ModelField("OrganizationCode", ModelFieldType.String),
+                                            new ModelField("Code", ModelFieldType.String),
+                                            new ModelField("Description", ModelFieldType.String)
+                                        )
+                                    )
+                                ),
+                            Html.X().Button().ID(searchButtonId).Icon(Icon.Find),
+                            Html.X().Button().ID(addItemButtonId).Icon(Icon.ArrowDown).DirectEvents(de =>
+                            {
+                                de.Click.Action = "AddItemToDetails";
+                                de.Click.ExtraParams.Add(new Parameter("lookupItemId", "App." + lookupItemComboId + ".getValue()", ParameterMode.Raw));
+                                de.Click.ExtraParams.Add(new Parameter("viewBagID", ViewBag.ID, ParameterMode.Value));
+                                de.Click.ExtraParams.Add(new Parameter("posLines", "App." + posLineGridPanel + ".getRowsValues()", ParameterMode.Raw, true));
+                                de.Click.ExtraParams.Add(new Parameter("sellToCustomerId", "App." + sellToCustomerId + ".getValue()", ParameterMode.Raw));
+                                de.Click.Delay = 100;
+                                de.Click.DisableControl = true;
+                                de.Click.EventMask.ShowMask = true;
+                                de.Click.Success = "getSumOfAmount(App." + posLineGridPanel + ");";
+                            }).Listeners(ls =>
+                            {
+                                ls.Click.Handler = "if(App." + sellToCustomerId + ".getValue() == null) { " +
+                                                   "  Ext.Msg.alert('ERROR', 'Please select CUSTOMER FIRST!!'); " +
+                                                   "  App." + sellToCustomerId + ".focus();" +
+                                                   "  return false; " +
+                                                   "} else { " +
+                                                   "  return true; " +
+                                                   "}";
+                            })
+                        ),
+                    Html.X().GridPanel()
+                        .ID(posLineGridPanel)
+                        .Title("Items")
+                        .Region(Region.Center)
+                        .SortableColumns(false)
+                        .Store(Html.X().Store()
+                            .ID(posLineStore)
+                            .Model(Html.X().Model()
+                                .IDProperty("LineNo")
+                                .Fields(
+                                    new ModelField("Id", ModelFieldType.Int),
+                                    new ModelField("LineNo", ModelFieldType.Int),
+                                    new ModelField("ItemId", ModelFieldType.Int),
+                                    new ModelField("Description", ModelFieldType.String),
+                                    new ModelField("UomId", ModelFieldType.Int),
+                                    new ModelField("UomDescription", ModelFieldType.String),
+                                    new ModelField("Quantity", ModelFieldType.Float)
+                                    {
+                                        Convert =
+                                        {
+                                            Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                        }
+                                    },
+                                    new ModelField("UnitPrice", ModelFieldType.Float)
+                                    {
+                                        Convert =
+                                        {
+                                            Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                        }
+                                    },
+                                    new ModelField("Amount", ModelFieldType.Float)
+                                    {
+                                        Convert =
+                                        {
+                                            Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                        }
+                                    },
+                                    new ModelField("LineDiscountPercentage", ModelFieldType.Int),
+                                    new ModelField("LineDiscountAmount", ModelFieldType.Float)
+                                    {
+                                        Convert =
+                                        {
+                                            Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                        }
+                                    },
+                                    new ModelField("InvoiceDiscountAmount", ModelFieldType.Float)
+                                    {
+                                        Convert =
+                                        {
+                                            Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                        }
+                                    },
+                                    new ModelField("VatIdentifierId", ModelFieldType.Int),
+                                    new ModelField("VatPercentage", ModelFieldType.Int),
+                                    new ModelField("VatAmount", ModelFieldType.Float)
+                                    {
+                                        Convert =
+                                        {
+                                            Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                        }
+                                    },
+                                    new ModelField("QtyPerUom", ModelFieldType.Float),
+                                    new ModelField("QuantityBase", ModelFieldType.Float)
+                                    {
+                                        Convert =
+                                        {
+                                            Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                        }
+                                    },
+                                    new ModelField("UnitPriceLCY", ModelFieldType.Float)
+                                    {
+                                        Convert =
+                                        {
+                                            Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                        }
+                                    },
+                                    new ModelField("AmountLCY", ModelFieldType.Float)
+                                    {
+                                        Convert =
+                                        {
+                                            Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                        }
+                                    },
+                                    new ModelField("VatAmountLCY", ModelFieldType.Float)
+                                    {
+                                        Convert =
+                                        {
+                                            Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                        }
+                                    },
+                                    new ModelField("LineDiscountAmountLCY", ModelFieldType.Float)
+                                    {
+                                        Convert =
+                                        {
+                                            Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                        }
+                                    },
+                                    new ModelField("InvoiceDiscountAmountLCY", ModelFieldType.Float)
+                                    {
+                                        Convert =
+                                        {
+                                            Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                        }
+                                    }
+                                )
+                            )
+                            .DataSource(Model.PosLines)
+                        )
+                        .ColumnModel(
+                            Html.X().RowNumbererColumn(),
+                            Html.X().ColumnFor(Model.PosLines, m => m.Description).ToBuilder<Column.Builder>().MinWidth(300),
+                            Html.X().ColumnFor(Model.PosLines, m => m.UomId).ToBuilder<Column.Builder>().Width(100).Editor(
+                                Html.X().ComboBox()
+                                    .DisplayField("Code")
+                                    .ValueField("UomId")
+                                    .FieldLabel("")
+                                    .FieldStyle("text-transform: uppercase;")
+                                    .Editable(false)
+                                    .SelectOnTab(true)
+                                    .ForceSelection(true)
+                                    .ValidateOnBlur(true)
+                                    .ValidateOnChange(true)
+                                    .ListConfig(Html.X().BoundList()
+                                        .LoadingText("Searching...")
+                                        .ItemTpl(Html.X().XTemplate()
+                                            .Html(@<text>
+                                                <div class="search-item">
+                                                    <h3>{Code}</h3>
+                                                    {Description}
+                                                </div>
+                                            </text>)
+                                                )
+                                                .MinWidth(400)
+                                            )
+                                            .StoreID("LookUpUomOfItemStore")
+                                        ).Renderer("UomRenderer").EditorOptions(action =>
+                                        {
+                                            action.Listeners.BeforeStartEdit.Fn = "uomBeforeStartEdit";
+                                        }),
+                                    Html.X().ColumnFor(Model.PosLines, m => m.Quantity).ToBuilder<Column.Builder>().Width(100).Editor(Html.X().NumberField()),
+                                    Html.X().ColumnFor(Model.PosLines, m => m.UnitPrice).ToBuilder<Column.Builder>().Width(100),
+                                    Html.X().ColumnFor(Model.PosLines, m => m.Amount).ToBuilder<Column.Builder>().Width(100),
+                                    Html.X().CommandColumn()
+                                        .Width(35)
+                                        .Commands(
+                                            Html.X().GridCommand()
+                                                .CommandName("Delete")
+                                                .Icon(Icon.Delete)
+                                                .ToolTip(tt => tt.Text = "Delete")
+                                        )
+                                        .Listeners(ls =>
+                                        {
+                                            ls.Command.Handler = "Ext.Msg.confirm('Alert', 'Do you want to DELETE ?', function (id, value) { if (id === 'yes') { App." + posLineGridPanel + ".getStore().remove(record); App." + posLineGridPanel + ".getStore().commitChanges(); getSumOfAmount(App." + posLineGridPanel + ");}}, this);";
+                                        })
+                                )
+                                .View(Html.X().GridView().StripeRows(true))
+                                .SelectionModel(
+                                    Html.X().CellSelectionModel()
+                                )
+                                .Plugins(
+                                    Html.X().CellEditing().Listeners(ls =>
+                                    {
+                                        ls.Edit.Fn = "lineEdit";
+                                        ls.BeforeEdit.Fn = "beforeEdit";
+                                    })
+
+                                ),
+                            Html.X().Panel()
+                                .ID(invoiceInfoPanelId)
+                                .Title("Invoice Information")
+                                .Region(Region.East)
+                                .Layout(LayoutType.VBox)
+                                .LayoutConfig(new VBoxLayoutConfig { Align = VBoxAlign.Stretch })
+                                .MinWidth(400)
+                                .BodyPadding(5)
+                                .Split(true)
+                                .Items(
+                                    Html.X().HiddenFor(m => m.Id),
+                                    Html.X().HiddenFor(m => m.DocSequenceId),
+                                    Html.X().HiddenFor(m => m.LocationId),
+                                    Html.X().HiddenFor(m => m.SalesPersonId),
+                                    Html.X().HiddenFor(m => m.CurrencyId),
+                                    Html.X().HiddenFor(m => m.CurrencyFactor),
+                                    Html.X().HiddenFor(m => m.Status),
+                                    Html.X().HiddenFor(m => m.TotalAmount)
+                                        .ID(totalAmountId)
+                                    ,
+                                    Html.X().HiddenFor(m => m.TotalVatAmount)
+                                        .ID(totalVatAmountId)
+                                    ,
+                                    Html.X().HiddenFor(m => m.TotalLineDiscountAmount)
+                                        .ID(totalLineDiscountAmountId)
+                                    ,
+                                    Html.X().HiddenFor(m => m.InvoiceDiscountPercentage),
+                                    Html.X().HiddenFor(m => m.InvoiceDiscountAmount)
+                                        .ID(invoiceDiscountAmountId)
+                                    ,
+                                    Html.X().TextFieldFor(m => m.DocumentNo)
+                                        .ID(documentNoId)
+                                        .EmptyText("AUTO")
+                                        .Editable(false),
+                                    Html.X().DateFieldFor(m => m.DocumentDate)
+                                        .ID(documentDateId)
+                                        .ReadOnly(true)
+                                        .Format("dd/MM/yyyy"),
+                                    Html.X().ComboBoxFor(m => m.SellToCustomerId)
+                                        .ID(sellToCustomerId)
+                                        .DisplayField("Code")
+                                        .ValueField("Id")
+                                        .FieldStyle("text-transform: uppercase;")
+                                        .TypeAhead(true)
+                                        .MinChars(0)
+                                        .PageSize(10)
+                                        .SelectOnTab(true)
+                                        .ForceSelection(true)
+                                        .ValidateOnBlur(true)
+                                        .ValidateOnChange(true)
+                                        .ListConfig(Html.X().BoundList()
+                                            .LoadingText("Searching...")
+                                            .ItemTpl(Html.X().XTemplate()
+                                                .Html(@<text>
+                                                    <div class="search-item">
+                                                        <h3>{Code} - {Description}</h3>
+                                                        {Address}
+                                                    </div>
+                                                </text>)
+                                                    )
+                                                    .MinWidth(400)
+                                                )
+                                                .StoreID("LookupBusinessPartner")
+                                                .DirectEvents(de =>
+                                                {
+                                                    de.Select.Action = "ChangeBusinessPartner";
+                                                    de.Select.EventMask.ShowMask = true;
+                                                    de.Select.ExtraParams.Add(new Parameter("viewBagID", ViewBag.ID, ParameterMode.Value));
+                                                    de.Select.ExtraParams.Add(new Parameter("selectedData", "records[0].data", ParameterMode.Raw, true));
+                                                    de.Select.ExtraParams.Add(new Parameter("posLines", "App." + posLineGridPanel + ".getRowsValues()", ParameterMode.Raw, true));
+                                                    de.Select.Success = "getSumOfAmount(App." + posLineGridPanel + ");";
+                                                })
+                                            ,
+                                            Html.X().TextFieldFor(m => m.SellToCustomerName)
+                                                .ID(sellToCustomerNameId),
+                                            Html.X().TextFieldFor(m => m.SellToAddress)
+                                                .ID(sellToAddressId),
+                                            Html.X().TextFieldFor(m => m.Description)
+                                                .ID(descriptionId),
+                                            Html.X().TextFieldFor(m => m.TotalPayment)
+                                                .ID(totalPaymentId)
+                                                .FieldStyle("font-size: 28px; line-height: 28px; height: 33px; text-align: right;")
+                                                .ReadOnly(true),
+                                            Html.X().TextFieldFor(m => m.CashOfCustomer)
+                                                .ID(cashOfCustomerId)
+                                                .FieldStyle("font-size: 28px; line-height: 28px; height: 33px; text-align: right;")
+                                                .MaskRe(@"/[0-9\.]/")
+                                                .Listeners(ls =>
+                                                {
+                                                    ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
+                                                    ls.Blur.Handler = "var v = this.getRawValue().replace(/\\./g,'').replace(',', '.');" +
+                                                                      "this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));" +
+                                                                      "calcChangeToCustomer();";
+                                                })
+                                            ,
+                                            Html.X().TextFieldFor(m => m.ChangeReturnToCustomer)
+                                                .ID(changeToCustomerId)
+                                                .FieldStyle("font-size: 28px; line-height: 28px; height: 33px; text-align: right;")
+                                                .ReadOnly(true)
+                                            ,
+                                            Html.X().Panel().BaseCls("x-plain").Flex(1),
+                                            Html.X().Button()
+                                                .ID(printButtonId)
+                                                .Text("PRINT")
+                                                .Height(50)
+                                                .Icon(Icon.Printer)
+                                                .Scale(ButtonScale.Large)
+                                                .Cls("my-scale")
+                                                .DirectEvents(de =>
+                                                {
+                                                    de.Click.Action = "Print";
+                                                    de.Click.EventMask.ShowMask = true;
+                                                    de.Click.Method = HttpMethod.POST;
+                                                    de.Click.FormID = posPanelId;
+                                                    de.Click.ExtraParams.Add(new Parameter("viewBagID", ViewBag.ID, ParameterMode.Value));
+                                                    de.Click.ExtraParams.Add(new Parameter("posLinesJSON", "App." + posLineGridPanel + ".getRowsValues()", ParameterMode.Raw, true));
+                                                    de.Click.Success = "function(response, result) {" +
+                                                                       "    #{PreviousPrintId}.setValue(result.result.id)" +
+                                                                       "    printReportHtml(result.result.report); " +
+                                                                       "}";
+                                                    de.Click.DisableControl = true;
+                                                })
+                                        )
+                                ))

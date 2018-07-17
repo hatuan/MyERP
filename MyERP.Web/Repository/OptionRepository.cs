@@ -56,6 +56,20 @@ namespace MyERP.Web
                         return rootOption?.SalesPosLocationId ?? 0;
                     case DataAccess.Enum.OptionParameter.OneTimeBusinessPartnerId:
                         return rootOption?.OneTimeBusinessPartnerId ?? 0;
+                    case DataAccess.Enum.OptionParameter.SalesPosSequenceId:
+                        return rootOption?.SalesPosSequenceId ?? 0;
+                    case DataAccess.Enum.OptionParameter.SalesInvoiceSeqId:
+                        return rootOption?.SalesInvoiceSeqId ?? 0;
+                    case DataAccess.Enum.OptionParameter.SalesOrderSequenceId:
+                        return rootOption?.SalesOrderSequenceId ?? 0;
+                    case DataAccess.Enum.OptionParameter.SalesShipmentSeqId:
+                        return rootOption?.SalesShipmentSeqId ?? 0;
+                    case DataAccess.Enum.OptionParameter.PurchOrderSequenceId:
+                        return rootOption?.PurchOrderSequenceId ?? 0;
+                    case DataAccess.Enum.OptionParameter.PurchReceiveSeqId:
+                        return rootOption?.PurchReceiveSeqId ?? 0;
+                    case DataAccess.Enum.OptionParameter.PurchInvoiceSeqId:
+                        return rootOption?.PurchInvoiceSeqId ?? 0;
                 }
                 
             }
@@ -82,11 +96,11 @@ namespace MyERP.Web
                         }
                         else
                         {
-                            return option?.OneTimeBusinessPartnerId ?? 0;
+                            return option?.SalesPosLocationId ?? 0;
 
                         }
                     case DataAccess.Enum.OptionParameter.SalesPosSequenceId:
-                        if (option.OneTimeBusinessPartnerId == null)
+                        if (option.SalesPosSequenceId == null)
                         {
                             var rootOption = this.Get(x => x.OrganizationId == rootOrganization.Id).SingleOrDefault();
                             return rootOption?.SalesPosSequenceId ?? 0;
@@ -97,7 +111,7 @@ namespace MyERP.Web
 
                         }
                     case DataAccess.Enum.OptionParameter.SalesInvoiceSeqId:
-                        if (option.OneTimeBusinessPartnerId == null)
+                        if (option.SalesInvoiceSeqId == null)
                         {
                             var rootOption = this.Get(x => x.OrganizationId == rootOrganization.Id).SingleOrDefault();
                             return rootOption?.SalesInvoiceSeqId ?? 0;
@@ -108,7 +122,7 @@ namespace MyERP.Web
 
                         }
                     case DataAccess.Enum.OptionParameter.SalesOrderSequenceId:
-                        if (option.OneTimeBusinessPartnerId == null)
+                        if (option.SalesOrderSequenceId == null)
                         {
                             var rootOption = this.Get(x => x.OrganizationId == rootOrganization.Id).SingleOrDefault();
                             return rootOption?.SalesOrderSequenceId ?? 0;
@@ -119,7 +133,7 @@ namespace MyERP.Web
 
                         }
                     case DataAccess.Enum.OptionParameter.SalesShipmentSeqId:
-                        if (option.OneTimeBusinessPartnerId == null)
+                        if (option.SalesShipmentSeqId == null)
                         {
                             var rootOption = this.Get(x => x.OrganizationId == rootOrganization.Id).SingleOrDefault();
                             return rootOption?.SalesShipmentSeqId ?? 0;
@@ -130,7 +144,7 @@ namespace MyERP.Web
 
                         }
                     case DataAccess.Enum.OptionParameter.PurchOrderSequenceId:
-                        if (option.OneTimeBusinessPartnerId == null)
+                        if (option.PurchOrderSequenceId == null)
                         {
                             var rootOption = this.Get(x => x.OrganizationId == rootOrganization.Id).SingleOrDefault();
                             return rootOption?.PurchOrderSequenceId ?? 0;
@@ -141,7 +155,7 @@ namespace MyERP.Web
 
                         }
                     case DataAccess.Enum.OptionParameter.PurchReceiveSeqId:
-                        if (option.OneTimeBusinessPartnerId == null)
+                        if (option.PurchReceiveSeqId == null)
                         {
                             var rootOption = this.Get(x => x.OrganizationId == rootOrganization.Id).SingleOrDefault();
                             return rootOption?.PurchReceiveSeqId ?? 0;
@@ -152,7 +166,7 @@ namespace MyERP.Web
 
                         }
                     case DataAccess.Enum.OptionParameter.PurchInvoiceSeqId:
-                        if (option.OneTimeBusinessPartnerId == null)
+                        if (option.PurchInvoiceSeqId == null)
                         {
                             var rootOption = this.Get(x => x.OrganizationId == rootOrganization.Id).SingleOrDefault();
                             return rootOption?.PurchInvoiceSeqId ?? 0;

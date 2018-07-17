@@ -205,7 +205,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                 if (clientId == 0 || organizationId == 0)
                 {
                     r.Success = false;
-                    r.ErrorMessage = "User don't have Client or Organization. Please set";
+                    r.ErrorMessage = Resources.Resources.User_dont_have_Client_or_Organization_Please_set;
                     return r;
                 }
                 if (!model.Id.HasValue) //New
