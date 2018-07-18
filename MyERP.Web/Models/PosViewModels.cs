@@ -8,101 +8,159 @@ using Newtonsoft.Json;
 
 namespace MyERP.Web.Models
 {
+    public class PosHeaderViewModel
+    {
+        [Required]
+        public Int64 Id { get; set; }
+
+        [Required]
+        [Display(Name = "Organization")]
+        public String OrganizationCode { get; set; }
+
+        [Display(Name = "Document No")]
+        public string DocumentNo { get; set; }
+
+        [Display(Name = "Document Date")]
+        [Required]
+        public DateTime DocumentDate { get; set; }
+
+        [Required]
+        [Display(Name = "Description")]
+        public String Description { get; set; }
+
+        [Display(Name = "Customer")]
+        [Required]
+        public String SellToCustomerCode { get; set; }
+
+        [Display(Name = "Customer Name")]
+        [Required]
+        [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellToCustomerName { get; set; }
+
+        [Display(Name = "Address")]
+        [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellToAddress { get; set; }
+
+        [Display(Name = "Total Payment")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal TotalPayment { get; set; }
+
+        [Display(Name = "Cash Of Customer")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal CashOfCustomer { get; set; }
+
+        [Display(Name = "Change Return")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal ChangeReturnToCustomer { get; set; }
+
+        [Display(Name = "Location")]
+        public String LocationCode { get; set; }
+
+        [Display(Name = "Sales Person")]
+        public String SalesPersonCode { get; set; }
+
+        [Required]
+        public Int64 Version { get; set; }
+
+        [Required]
+        [Display(Name = "Status")]
+        public DefaultStatusType Status { get; set; }
+
+        [Required]
+        [Display(Name = "Created By")]
+        public String RecCreateBy { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Created")]
+        public DateTime RecCreatedAt { get; set; }
+
+        [Required]
+        [Display(Name = "Modified By")]
+        public String RecModifiedBy { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Modified")]
+        public DateTime RecModifiedAt { get; set; }
+    }
+
     public class PosHeaderEditViewModel
     {
         public long? Id { get; set; }
 
         [Display(Name = "Document No")]
-        [JsonProperty("DocumentNo")]
         public string DocumentNo { get; set; }
 
         [Display(Name = "Sequence No")]
         [Required]
-        [JsonProperty("DocSequenceId")]
         public long DocSequenceId { get; set; }
 
         [Display(Name = "Document Date")]
         [Required]
-        [JsonProperty("DocumentDate")]
         public DateTime DocumentDate { get; set; }
 
         [Display(Name = "Currency")]
         [Required]
-        [JsonProperty("CurrencyId")]
         public long CurrencyId { get; set; }
 
         [Display(Name = "Currency Factor")]
         [Required]
-        [JsonProperty("CurrencyFactor")]
         public Decimal CurrencyFactor { get; set; }
 
         [Display(Name = "Customer")]
         [Required]
-        [JsonProperty("SellToCustomerId")]
         public long SellToCustomerId { get; set; }
 
         [Display(Name = "Customer Name")]
         [Required]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
-        [JsonProperty("SellToCustomerName")]
         public String SellToCustomerName { get; set; }
 
         [Display(Name = "Address")]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
-        [JsonProperty("SellToAddress")]
         public String SellToAddress { get; set; }
 
         [Display(Name = "Description")]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
-        [JsonProperty("Description")]
         public String Description { get; set; }
 
         [Display(Name = "Total Amount")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
-        [JsonProperty("TotalAmount")]
         public Decimal TotalAmount { get; set; }
 
         [Display(Name = "Total Vat Amount")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
-        [JsonProperty("TotalVatAmount")]
         public Decimal TotalVatAmount { get; set; }
 
         [Display(Name = "Total Line Discount Amount")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
-        [JsonProperty("TotalLineDiscountAmount")]
         public Decimal TotalLineDiscountAmount { get; set; }
 
         [Display(Name = "Invoice Discount %")]
         [DisplayFormat(DataFormatString = "{0:n}")]
-        [JsonProperty("InvoiceDiscountPercentage")]
         public byte InvoiceDiscountPercentage { get; set; }
 
         [Display(Name = "Invoice Discount Amount")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
-        [JsonProperty("InvoiceDiscountAmount")]
         public Decimal InvoiceDiscountAmount { get; set; }
 
         [Display(Name = "Total Payment")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
-        [JsonProperty("TotalPayment")]
         public Decimal TotalPayment { get; set; }
 
         [Display(Name = "Cash Of Customer")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
-        [JsonProperty("CashOfCustomer")]
         public Decimal CashOfCustomer { get; set; }
 
         [Display(Name = "Change Return")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
-        [JsonProperty("ChangeReturnToCustomer")]
         public Decimal ChangeReturnToCustomer { get; set; }
 
         [Display(Name = "Location")]
-        [JsonProperty("LocationId")]
         public long LocationId { get; set; }
 
         [Display(Name = "Sales Person")]
-        [JsonProperty("SalesPersonId")]
         public long SalesPersonId { get; set; }
 
         [EnsureMinimumElements(1, ErrorMessage = "At least a POS Line is required")]
@@ -116,21 +174,17 @@ namespace MyERP.Web.Models
         public SalesPosDocumentStatusType Status { get; set; }
 
         [Display(Name = "Created By")]
-        [JsonProperty("RecCreateBy")]
         public String RecCreateBy { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Created At")]
-        [JsonProperty("RecCreatedAt")]
         public DateTime RecCreatedAt { get; set; }
 
         [Display(Name = "Modified By")]
-        [JsonProperty("RecModifiedBy")]
         public String RecModifiedBy { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Modified At")]
-        [JsonProperty("RecModifiedAt")]
         public DateTime RecModifiedAt { get; set; }
     }
 

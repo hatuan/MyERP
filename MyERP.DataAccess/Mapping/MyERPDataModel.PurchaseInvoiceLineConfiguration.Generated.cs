@@ -17,14 +17,14 @@ using System.Data.Entity.ModelConfiguration;
 namespace MyERP.DataAccess.Mapping
 {
 
-    public partial class SalesLineConfiguration : EntityTypeConfiguration<SalesLine>
+    public partial class PurchaseInvoiceLineConfiguration : EntityTypeConfiguration<PurchaseInvoiceLine>
     {
 
-        public SalesLineConfiguration()
+        public PurchaseInvoiceLineConfiguration()
         {
             this
                 .HasKey(p => p.Id)
-                .ToTable("sales_line", "dbo");
+                .ToTable("purchase_invoice_line", "dbo");
             // Properties:
             this
                 .Property(p => p.Id)
@@ -33,8 +33,9 @@ namespace MyERP.DataAccess.Mapping
                     .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)
                     .HasColumnType("bigint");
             this
-                .Property(p => p.SalesHeaderId)
-                    .HasColumnName(@"sales_header_id")
+                .Property(p => p.PurchaseInvoiceHeaderId)
+                    .HasColumnName(@"purchase_invoice_header_id")
+                    .IsRequired()
                     .HasColumnType("bigint");
             this
                 .Property(p => p.LineNo)
@@ -196,17 +197,6 @@ namespace MyERP.DataAccess.Mapping
                     .HasColumnName(@"client_id")
                     .IsRequired()
                     .HasColumnType("bigint");
-            // Associations:
-            this
-                .HasRequired(p => p.Location)
-                    .WithMany()
-                .HasForeignKey(p => p.LocationId)
-                    .WillCascadeOnDelete(false);
-            this
-                .HasRequired(p => p.SalesPrice)
-                    .WithMany()
-                .HasForeignKey(p => p.SalesPriceId)
-                    .WillCascadeOnDelete(false);
             OnCreated();
         }
 

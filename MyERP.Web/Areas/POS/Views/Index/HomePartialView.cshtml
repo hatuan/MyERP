@@ -1,0 +1,130 @@
+﻿@{
+    Layout = null;
+}
+
+@(Html.X().FormPanel()
+      .BodyPadding(5)
+      .LayoutConfig(new VBoxLayoutConfig() { Align = VBoxAlign.Stretch })
+      .Items(items =>
+      {
+          items.Add(Html.X().Panel()
+              .Height(400)
+              .LayoutConfig(new HBoxLayoutConfig() { Align = HBoxAlign.Stretch })
+              .Items(
+                  Html.X().GridPanel()
+                      .ID("ListPOSGrid")
+                      .Flex(6)
+                      .Title("List")
+                      .Store(Html.X().Store()
+                          .ID("ListPOSStore")
+                          .RemoteSort(true)
+                          .PageSize(10)
+                          .Sorters("DocumentNo", Ext.Net.SortDirection.DESC)
+                          .AutoLoad(true)
+                          .Model(
+                              Html.X().Model()
+                                  .IDProperty("Id")
+                                  .Fields(
+                                      new ModelField("Id", ModelFieldType.Int),
+                                      new ModelField("DocumentNo", ModelFieldType.String),
+                                      new ModelField("DocumentDate", ModelFieldType.Date),
+                                      new ModelField("Description", ModelFieldType.String),
+                                      new ModelField("SellToCustomerCode", ModelFieldType.String),
+                                      new ModelField("SellToCustomerName", ModelFieldType.String),
+                                      new ModelField("SellToAddress", ModelFieldType.String),
+                                      new ModelField("LocationCode", ModelFieldType.String),
+                                      new ModelField("SalesPersonCode", ModelFieldType.String),
+                                      new ModelField("TotalPayment", ModelFieldType.Float)
+                                      {
+                                          Convert =
+                                          {
+                                              Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                          }
+                                      },
+                                      new ModelField("CashOfCustomer", ModelFieldType.Float)
+                                      {
+                                          Convert =
+                                          {
+                                              Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                          }
+                                      },
+                                      new ModelField("ChangeReturnToCustomer", ModelFieldType.Float)
+                                      {
+                                          Convert =
+                                          {
+                                              Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                          }
+                                      },
+                                      new ModelField("Status", ModelFieldType.String),
+                                      new ModelField("RecCreateBy", ModelFieldType.String),
+                                      new ModelField("RecCreatedAt", ModelFieldType.Date),
+                                      new ModelField("RecModifiedBy", ModelFieldType.String),
+                                      new ModelField("RecModifiedAt", ModelFieldType.Date),
+                                      new ModelField("Version", ModelFieldType.Int)
+                                  )
+                          )
+                          .Proxy(
+                              Html.X().AjaxProxy()
+                                  .Url(Url.Action("GetListPOS"))
+                                  .Reader(Html.X().JsonReader().RootProperty("data"))
+                          ))
+                      .ColumnModel(
+                          Html.X().RowNumbererColumn(),
+                          Html.X().Column().Text("Org").DataIndex("OrganizationCode").Width(75),
+                          Html.X().Column().Text("DocumentNo").DataIndex("DocumentNo").Width(100),
+                          Html.X().DateColumn().Text("DocumentDate").DataIndex("DocumentDate").Width(100).Format("dd/MM/yyyy"),
+                          Html.X().Column().Text("Description").DataIndex("Description").MinWidth(200),
+                          Html.X().Column().Text("SellToCustomerCode").DataIndex("SellToCustomerCode").MinWidth(85),
+                          Html.X().Column().Text("SellToCustomerName").DataIndex("SellToCustomerName").MinWidth(200),
+                          Html.X().Column().Text("SellToAddress").DataIndex("SellToAddress").MinWidth(200),
+                          Html.X().Column().Text("LocationCode").DataIndex("LocationCode").Width(85),
+                          Html.X().Column().Text("SalesPersonCode").DataIndex("SalesPersonCode").Width(85),
+                          Html.X().Column().Text("TotalPayment").DataIndex("TotalPayment").Width(100),
+                          Html.X().Column().Text("Status").DataIndex("Status").Width(85),
+                          Html.X().Column().Text("Last User").DataIndex("RecModifiedBy").Width(85),
+                          Html.X().DateColumn().Text("Last Updated").DataIndex("RecModifiedAt").Width(150).Format("dd/MM/yyyy H:mm:ss")
+                      )
+                      .BottomBar(bottomBarItems =>
+                      {
+                          bottomBarItems.Add(Html.X().PagingToolbar().DisplayInfo(true)
+                              .Items(
+                                  Html.X().Label().Text("Page size:"),
+                                  Html.X().ToolbarSpacer().Width(10),
+                                  Html.X().ComboBox().Width(80)
+                                      .Editable(false)
+                                      .Items(
+                                          Html.X().ListItem().Text("10"),
+                                          Html.X().ListItem().Text("15"),
+                                          Html.X().ListItem().Text("20")
+                                      )
+                                      .SelectedItems(
+                                          Html.X().ListItem().Value("10")
+                                      )
+                                      .Listeners(ls => {
+                                                           ls.Select.Fn = @"function (item, records) {
+                                                                                var curPageSize = #{ListPOSStore}.pageSize,
+                                                                                wantedPageSize = parseInt(item.getValue(), 10);
+                                                                                if (wantedPageSize != curPageSize) {
+                                                                                    #{ListPOSStore}.pageSize = wantedPageSize;
+                                                                                    #{ListPOSStore}.reload();
+                                                                                    #{ListPOSStore}.loadPage(1);
+                                                                                }
+                                                                            }";
+                                      })
+                              ));
+                      }),
+                  Html.X().Panel()
+                      .ID("UserInformation")
+                      .Flex(4)
+                      .Title("User Information")
+                      .MarginSpec("0 0 0 5")
+                  )
+              );
+      })
+)

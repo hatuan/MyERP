@@ -411,6 +411,7 @@
     <Content Include="Views\Currency\_List.cshtml" />
     <Content Include="Views\Currency\_Maintenance.cshtml" />
     <Content Include="Views\Home\_About.cshtml" />
+    <Content Include="Areas\POS\Views\Index\HomePartialView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

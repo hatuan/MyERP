@@ -53,6 +53,19 @@ namespace MyERP.Web.Areas.POS.Controllers
             return View();
         }
 
+        public ActionResult AddHome(string containerId)
+        {
+            var result = new PartialViewResult
+            {
+                ViewName = "HomePartialView",
+                ContainerId = containerId,
+                WrapByScriptTag = false,
+                RenderMode = RenderMode.AddTo,
+            };
+
+            return result;
+
+        }
         public ActionResult AddTab(string containerId)
         {
             MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
@@ -127,6 +140,38 @@ namespace MyERP.Web.Areas.POS.Controllers
         public ActionResult PosInvoice()
         {
             return View();
+        }
+
+        public ActionResult GetListPOS(StoreRequestParameters parameters)
+        {
+            var paging = ((PosHeaderRepository)repository).Paging(parameters);
+
+            var data = paging.Data.Select(c => new PosHeaderViewModel()
+            {
+                OrganizationCode = c.Organization.Code,
+                Id = c.Id,
+                DocumentNo = c.DocumentNo,
+                DocumentDate = c.DocumentDate,
+                Description = c.Description,
+                SellToCustomerCode = c.SellToCustomer.Code,
+                SellToCustomerName = c.SellToCustomerName,
+                SellToAddress = c.SellToAddress,
+                TotalPayment = c.TotalPayment,
+                CashOfCustomer = c.CashOfCustomer,
+                ChangeReturnToCustomer = c.ChangeReturnToCustomer,
+                LocationCode = c.Location.Code,
+                SalesPersonCode = "",
+                RecCreateBy = c.RecCreatedByUser.Name,
+                RecCreatedAt = c.RecCreatedAt,
+                RecModifiedBy = c.RecModifiedByUser.Name,
+                RecModifiedAt = c.RecModifiedAt,
+                Status = (DefaultStatusType)c.Status,
+                Version = c.Version
+            }).ToList();
+
+            Session.Add("StoreListPOSList_StoreRequestParameters", parameters);
+
+            return this.Store(data, paging.TotalRecords);
         }
 
         public ActionResult AddItemToDetails(long? lookupItemId, String viewBagID, String posLines, long sellToCustomerId)

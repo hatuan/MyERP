@@ -17,11 +17,11 @@ namespace MyERP.DataAccess
 {
 
     /// <summary>
-    /// There are no comments for MyERP.DataAccess.PosLine in the schema.
+    /// There are no comments for MyERP.DataAccess.PurchaseInvoiceLine in the schema.
     /// </summary>
-    public partial class PosLine    {
+    public partial class PurchaseInvoiceLine    {
 
-        public PosLine()
+        public PurchaseInvoiceLine()
         {
             OnCreated();
         }
@@ -42,9 +42,10 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for PosHeaderId in the schema.
+        /// There are no comments for PurchaseInvoiceHeaderId in the schema.
         /// </summary>
-        public virtual global::System.Nullable<long> PosHeaderId
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual long PurchaseInvoiceHeaderId
         {
             get;
             set;
@@ -169,81 +170,6 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for VatIdentifierId in the schema.
-        /// </summary>
-        public virtual global::System.Nullable<long> VatIdentifierId
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for VatPercentage in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual byte VatPercentage
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for VatAmount in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual decimal VatAmount
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for DiscountId in the schema.
-        /// </summary>
-        public virtual global::System.Nullable<long> DiscountId
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for LineDiscountPercentage in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual byte LineDiscountPercentage
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for LineDiscountAmount in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual decimal LineDiscountAmount
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for InvoiceDiscountAmount in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual decimal InvoiceDiscountAmount
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
         /// There are no comments for UnitPriceLCY in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
@@ -266,10 +192,10 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for VatAmountLCY in the schema.
+        /// There are no comments for CostUnit in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual decimal VatAmountLCY
+        public virtual decimal CostUnit
         {
             get;
             set;
@@ -277,10 +203,10 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for LineDiscountAmountLCY in the schema.
+        /// There are no comments for CostUnitLCY in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual decimal LineDiscountAmountLCY
+        public virtual decimal CostUnitLCY
         {
             get;
             set;
@@ -288,10 +214,65 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for InvoiceDiscountAmountLCY in the schema.
+        /// There are no comments for CostAmount in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual decimal InvoiceDiscountAmountLCY
+        public virtual decimal CostAmount
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for CostAmountLCY in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal CostAmountLCY
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for QuantityShipped in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal QuantityShipped
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for OutstandingQuantity in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal OutstandingQuantity
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for QuantityInvoiced in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal QuantityInvoiced
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for QtyShippedNotInvoiced in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal QtyShippedNotInvoiced
         {
             get;
             set;
@@ -314,6 +295,50 @@ namespace MyERP.DataAccess
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
         public virtual decimal QuantityBase
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for OutstandingQtyBase in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal OutstandingQtyBase
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for QuantityShippedBase in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal QuantityShippedBase
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for QuantityInvoicedBase in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal QuantityInvoicedBase
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for QtyShippedNotInvoicedBase in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal QtyShippedNotInvoicedBase
         {
             get;
             set;
@@ -347,27 +372,9 @@ namespace MyERP.DataAccess
         #region Navigation Properties
     
         /// <summary>
-        /// There are no comments for PosHeader in the schema.
+        /// There are no comments for PurchaseInvoiceHeader in the schema.
         /// </summary>
-        public virtual PosHeader PosHeader
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for SalesPrice in the schema.
-        /// </summary>
-        public virtual SalesPrice SalesPrice
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for Location in the schema.
-        /// </summary>
-        public virtual Location Location
+        public virtual PurchaseInvoiceHeader PurchaseInvoiceHeader
         {
             get;
             set;

@@ -126,6 +126,7 @@
       <Diagram Name="eHoaDonDiagram" />
       <Diagram Name="WarehouseDiagram" />
       <Diagram Name="SaleDiagram" />
+      <Diagram Name="PurchaseDiagram" />
     </Diagrams>
     <Templates>
       <Template Name="DbContext" Description="Use this template to generate a strongly-typed DbContext class and persistence ignorant entity classes." Enabled="True" PredefinedTemplateName="Entity DbContext C#">

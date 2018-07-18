@@ -30,6 +30,8 @@
           <EntitySet Name="no_sequences" EntityType="MyERP.DataAccess.Store.no_sequence" store:Type="Tables" Schema="dbo" Table="no_sequence" />
           <EntitySet Name="no_sequence_lines" EntityType="MyERP.DataAccess.Store.no_sequence_line" store:Type="Tables" Schema="dbo" Table="no_sequence_line" />
           <EntitySet Name="options" EntityType="MyERP.DataAccess.Store.option" store:Type="Tables" Schema="dbo" Table="option" />
+          <EntitySet Name="purchase_invoice_headers" EntityType="MyERP.DataAccess.Store.purchase_invoice_header" store:Type="Tables" Schema="dbo" Table="purchase_invoice_header" />
+          <EntitySet Name="purchase_invoice_lines" EntityType="MyERP.DataAccess.Store.purchase_invoice_line" store:Type="Tables" Schema="dbo" Table="purchase_invoice_line" />
           <AssociationSet Name="FK_client_user_profile" Association="MyERP.DataAccess.Store.FK_client_user_profile">
             <End Role="user" EntitySet="users" />
             <End Role="client" EntitySet="clients" />
@@ -481,6 +483,26 @@
           <AssociationSet Name="FK_option_business_partner" Association="MyERP.DataAccess.Store.FK_option_business_partner">
             <End Role="business_partner" EntitySet="business_partners" />
             <End Role="option" EntitySet="options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_line1_sales_header1" Association="MyERP.DataAccess.Store.FK_sales_line1_sales_header1">
+            <End Role="purchase_invoice_header" EntitySet="purchase_invoice_headers" />
+            <End Role="purchase_invoice_line" EntitySet="purchase_invoice_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pos_header_client" Association="MyERP.DataAccess.Store.FK_pos_header_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="pos_header" EntitySet="pos_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pos_header_organization" Association="MyERP.DataAccess.Store.FK_pos_header_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="pos_header" EntitySet="pos_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pos_header_user" Association="MyERP.DataAccess.Store.FK_pos_header_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="pos_header" EntitySet="pos_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pos_header_user1" Association="MyERP.DataAccess.Store.FK_pos_header_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="pos_header" EntitySet="pos_headers" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
@@ -1095,6 +1117,99 @@
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="status" Type="smallint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="purchase_invoice_header">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="document_type" Type="tinyint" Nullable="false" />
+          <Property Name="doc_sequence_id" Type="bigint" Nullable="false" />
+          <Property Name="document_no" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="document_date" Type="datetime" Nullable="false" />
+          <Property Name="sell_to_customer_id" Type="bigint" Nullable="false" />
+          <Property Name="sell_to_customer_name" Type="nvarchar" MaxLength="256" />
+          <Property Name="sell_to_address" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="sell_to_contact_id" Type="bigint" />
+          <Property Name="sell_to_contact_name" Type="nvarchar" MaxLength="256" />
+          <Property Name="description" Type="nvarchar" MaxLength="256" />
+          <Property Name="bill_to_customer_id" Type="bigint" />
+          <Property Name="bill_to_name" Type="nvarchar" MaxLength="256" />
+          <Property Name="bill_to_address" Type="nvarchar" MaxLength="256" />
+          <Property Name="bill_to_contact_id" Type="bigint" />
+          <Property Name="bill_to_contact_name" Type="nvarchar" MaxLength="256" />
+          <Property Name="bill_to_vat_code" Type="varchar" MaxLength="32" />
+          <Property Name="bill_to_vat_note" Type="nvarchar" MaxLength="256">
+            <Documentation>
+              <Summary>Ten nhom vat tu khi ke khai hoa don VAT dau ra</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ship_to_name" Type="nvarchar" MaxLength="256" />
+          <Property Name="ship_to_address" Type="nvarchar" MaxLength="256" />
+          <Property Name="ship_to_contact_name" Type="nvarchar" MaxLength="256" />
+          <Property Name="currency_id" Type="bigint" />
+          <Property Name="currency_factor" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="location_id" Type="bigint" />
+          <Property Name="sales_person_id" Type="bigint" />
+          <Property Name="total_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_amount_lcy" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="total_amount_no_vat" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_amount_vat0" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_amount_vat5" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_amount_vat10" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_vat_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_vat5amount" Type="int" />
+          <Property Name="total_vat10amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_payment" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_payment_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="no_printed" Type="int" Nullable="false" />
+          <Property Name="quote_id" Type="bigint" />
+          <Property Name="campaign_id" Type="bigint" />
+          <Property Name="opportunity_id" Type="bigint" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" />
+          <Property Name="rec_modified_at" Type="datetime" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="version" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="purchase_invoice_line">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="purchase_invoice_header_id" Type="bigint" Nullable="false" />
+          <Property Name="line_no" Type="bigint" Nullable="false" />
+          <Property Name="type" Type="tinyint" Nullable="false" />
+          <Property Name="item_id" Type="bigint" />
+          <Property Name="location_id" Type="bigint" />
+          <Property Name="description" Type="nvarchar" MaxLength="256" />
+          <Property Name="uom_id" Type="bigint" />
+          <Property Name="uom_description" Type="nvarchar" MaxLength="256" />
+          <Property Name="quantity" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="sales_price_id" Type="bigint" />
+          <Property Name="unit_price" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="unit_price_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="cost_unit" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="cost_unit_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="cost_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="cost_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="quantity_shipped" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="outstanding_quantity" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="quantity_invoiced" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="qty_shipped_not_invoiced" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="qty_per_uom" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="quantity_base" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="outstanding_qty_base" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="quantity_shipped_base" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="quantity_invoiced_base" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="qty_shipped_not_invoiced_base" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
         </EntityType>
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
@@ -2452,6 +2567,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_sales_line1_sales_header1">
+          <End Role="purchase_invoice_header" Type="MyERP.DataAccess.Store.purchase_invoice_header" Multiplicity="0..1" />
+          <End Role="purchase_invoice_line" Type="MyERP.DataAccess.Store.purchase_invoice_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="purchase_invoice_header">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="purchase_invoice_line">
+              <PropertyRef Name="purchase_invoice_header_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pos_header_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="pos_header" Type="MyERP.DataAccess.Store.pos_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pos_header">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pos_header_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="pos_header" Type="MyERP.DataAccess.Store.pos_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pos_header">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pos_header_user">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="pos_header" Type="MyERP.DataAccess.Store.pos_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pos_header">
+              <PropertyRef Name="rec_created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pos_header_user1">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="pos_header" Type="MyERP.DataAccess.Store.pos_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="pos_header">
+              <PropertyRef Name="rec_modified_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -2483,6 +2658,8 @@
           <EntitySet Name="NoSequences" EntityType="MyERP.DataAccess.NoSequence" />
           <EntitySet Name="NoSequenceLines" EntityType="MyERP.DataAccess.NoSequenceLine" />
           <EntitySet Name="Options" EntityType="MyERP.DataAccess.Option" />
+          <EntitySet Name="PurchaseInvoiceHeaders" EntityType="MyERP.DataAccess.PurchaseInvoiceHeader" />
+          <EntitySet Name="PurchaseInvoiceLines" EntityType="MyERP.DataAccess.PurchaseInvoiceLine" />
           <AssociationSet Name="User_Client_CreatedBySet" Association="MyERP.DataAccess.User_Client_CreatedBy">
             <End Role="RecCreatedByUser" EntitySet="Users" />
             <End Role="Clients" EntitySet="Clients" />
@@ -2938,6 +3115,26 @@
           <AssociationSet Name="BusinessPartner_Option_OneTimeSet" Association="MyERP.DataAccess.BusinessPartner_Option_OneTime">
             <End Role="OneTimeBusinessPartner" EntitySet="BusinessPartners" />
             <End Role="Option" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="SalesHeader_SalesLine1Set" Association="MyERP.DataAccess.SalesHeader_SalesLine1">
+            <End Role="PurchaseInvoiceHeader" EntitySet="PurchaseInvoiceHeaders" />
+            <End Role="PuchaseInvoiceLines" EntitySet="PurchaseInvoiceLines" />
+          </AssociationSet>
+          <AssociationSet Name="Client_PosHeaderSet" Association="MyERP.DataAccess.Client_PosHeader">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="PosHeaders" EntitySet="PosHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_PosHeaderSet" Association="MyERP.DataAccess.Organization_PosHeader">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="PosHeaders" EntitySet="PosHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="User_PosHeader_RecCreatedBySet" Association="MyERP.DataAccess.User_PosHeader_RecCreatedBy">
+            <End Role="RecCreatedByUser" EntitySet="Users" />
+            <End Role="PosHeaders" EntitySet="PosHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="User_PosHeader_RecModifiedBySet" Association="MyERP.DataAccess.User_PosHeader_RecModifiedBy">
+            <End Role="RecModifiedByUser" EntitySet="Users" />
+            <End Role="PosHeaders1" EntitySet="PosHeaders" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
@@ -3407,6 +3604,10 @@
           <NavigationProperty Name="Location" Relationship="MyERP.DataAccess.Location_PosHeader" FromRole="PosHeaders" ToRole="Location" ed:Guid="a24b433d-58d1-45d2-91d9-ebec9fde734c" />
           <NavigationProperty Name="SellToCustomer" Relationship="MyERP.DataAccess.BusinessPartner_PosHeader" FromRole="PosHeaders" ToRole="SellToCustomer" ed:Guid="7bbb4d20-1a78-481a-a6ec-be70365e217a" />
           <NavigationProperty Name="BillToCustomer" Relationship="MyERP.DataAccess.BusinessPartner_PosHeader1" FromRole="PosHeaders1" ToRole="BillToCustomer" ed:Guid="ea1e9f9a-7707-47d0-b005-f36ef09d6154" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_PosHeader" FromRole="PosHeaders" ToRole="Client" ed:Guid="e65a2d9a-c95b-433e-828e-fd60aa8f6fe5" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_PosHeader" FromRole="PosHeaders" ToRole="Organization" ed:Guid="6b0e9466-38c6-4696-9133-203b9d0f8176" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_PosHeader_RecCreatedBy" FromRole="PosHeaders" ToRole="RecCreatedByUser" ed:Guid="e6960ae0-c1ba-4297-af74-84ef9938712e" />
+          <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_PosHeader_RecModifiedBy" FromRole="PosHeaders1" ToRole="RecModifiedByUser" ed:Guid="090d6431-9891-4fcf-b65a-24b6279ae1f4" />
         </EntityType>
         <EntityType Name="PosLine" ed:Guid="3551723d-34e4-421f-bd85-1b5bca48aa2c">
           <Key>
@@ -3675,6 +3876,101 @@
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Option_RecCreatedBy" FromRole="Options1" ToRole="RecCreatedByUser" ed:Guid="25bdacd5-af56-4937-a266-76752baa5205" />
           <NavigationProperty Name="SalesPosLocation" Relationship="MyERP.DataAccess.Location_Option_SalesPos" FromRole="Option" ToRole="SalesPosLocation" ed:Guid="421a06bb-0004-426b-9cf8-362358825056" />
           <NavigationProperty Name="OneTimeBusinessPartner" Relationship="MyERP.DataAccess.BusinessPartner_Option_OneTime" FromRole="Option" ToRole="OneTimeBusinessPartner" ed:Guid="42f89ee9-b240-4d20-9ce8-6070e00ad7f6" />
+        </EntityType>
+        <EntityType Name="PurchaseInvoiceHeader" ed:Guid="f8188cf8-e65e-44ac-8567-473cee33819e">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="aaedeabc-13d0-464d-a274-211663c7937e" />
+          <Property Name="DocumentType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="06bf8ad8-2965-4366-92ad-e2cea44fa6f9" />
+          <Property Name="DocSequenceId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f3832f19-507d-45c4-a7c7-ea3870a745f0" />
+          <Property Name="DocumentNo" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="d60dfa28-80e4-436e-b30b-e4e4e51aff41" />
+          <Property Name="DocumentDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="f4601940-d518-406a-a278-939f9e9451f2" />
+          <Property Name="SellToCustomerId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="38af5f31-4f07-4408-a9d8-4099813f48c8" />
+          <Property Name="SellToCustomerName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="afdda0da-386b-4dd0-aecc-183df1d43dec" />
+          <Property Name="SellToAddress" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="6553b6c2-8301-4ff4-81b9-c576e1fbc84c" />
+          <Property Name="SellToContactId" Type="Int64" ed:ValidateRequired="false" ed:Guid="f4ffe549-a6d1-44d7-9d78-84de89193eda" />
+          <Property Name="SellToContactName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="de069214-18a7-4ce7-8c55-4737c09d8fef" />
+          <Property Name="Description" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="a732918b-6722-41aa-aeaa-e328d9a36f0f" />
+          <Property Name="BillToCustomerId" Type="Int64" ed:ValidateRequired="false" ed:Guid="e0a70aa6-5fe3-4de6-b381-8fabedb69046" />
+          <Property Name="BillToName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="669c3f60-2b86-41d8-b746-83d0bafde8f2" />
+          <Property Name="BillToAddress" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="9c37ebea-1062-43b0-a73e-5ef90404ab65" />
+          <Property Name="BillToContactId" Type="Int64" ed:ValidateRequired="false" ed:Guid="e042c2df-4125-4c4f-87dc-139d6c44e77a" />
+          <Property Name="BillToContactName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="e8991bac-5510-4637-bc00-bfd8dc662656" />
+          <Property Name="BillToVatCode" Type="String" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="57f8a960-0e74-4963-a416-6628b66e8b13" />
+          <Property Name="BillToVatNote" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="81ebb3bf-54a1-4bb9-a6c9-4b852f636470">
+            <Documentation>
+              <Summary>Ten nhom vat tu khi ke khai hoa don VAT dau ra</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ShipToName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="e75fa142-6eac-4ff7-b0a8-a68d097a248e" />
+          <Property Name="ShipToAddress" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="33f96f1c-b35f-456b-a641-4bb0b052acee" />
+          <Property Name="ShipToContactName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="013e8ad7-975c-4894-aeeb-3833e4face03" />
+          <Property Name="CurrencyId" Type="Int64" ed:ValidateRequired="false" ed:Guid="fb404a50-9b51-4350-94d1-49c5f3cde1e2" />
+          <Property Name="CurrencyFactor" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="24ffabd4-1556-40c7-8867-0a9aaf513138" />
+          <Property Name="LocationId" Type="Int64" ed:ValidateRequired="false" ed:Guid="60c4974c-17b0-412f-a254-ebbcd32da4bf" />
+          <Property Name="SalesPersonId" Type="Int64" ed:ValidateRequired="false" ed:Guid="5532804a-2262-4904-bc78-85424c9f8291" />
+          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="a19bd3c7-4e18-4db0-9b39-d12cd33f2f06" />
+          <Property Name="TotalAmountLCY" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="45d1653d-eeee-4186-a1ab-6f76648f73d1" />
+          <Property Name="TotalAmountNoVat" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="f507c11c-bf4a-42f5-ba34-84a82eb19223" />
+          <Property Name="TotalAmountVat0" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="71216db0-f42a-4f71-adfd-6a7e4fd78f2b" />
+          <Property Name="TotalAmountVat5" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="0214dd06-fcc3-4c61-8f9c-b48a4c71b67b" />
+          <Property Name="TotalAmountVat10" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="3128471f-bca3-4bd8-88f7-0de5461a890c" />
+          <Property Name="TotalVatAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="08b73363-b13a-4de1-aaed-40fb46103fce" />
+          <Property Name="TotalVat5Amount" Type="Int32" ed:ValidateRequired="false" ed:Guid="83886cf2-1fd4-4bcf-8d26-9b6e4ca570ed" />
+          <Property Name="TotalVat10Amount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="a7c346be-a189-4174-8984-aff70cda02bd" />
+          <Property Name="TotalPayment" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="f8b5ffb5-bbbe-4b2e-8fc4-3730a3bac1aa" />
+          <Property Name="TotalPaymentLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="46c021f3-08bb-4318-930a-724f743b655f" />
+          <Property Name="NoPrinted" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="f1606451-8fd7-42aa-a66c-c21d653e3b17" />
+          <Property Name="QuoteId" Type="Int64" ed:ValidateRequired="false" ed:Guid="5db30969-dbeb-45e8-9cea-5eea3e76dcb9" />
+          <Property Name="CampaignId" Type="Int64" ed:ValidateRequired="false" ed:Guid="47eb14af-9072-4965-87ca-eec68374c4da" />
+          <Property Name="OpportunityId" Type="Int64" ed:ValidateRequired="false" ed:Guid="d47a3215-e194-47af-a4b8-b1504a7581e2" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="37fc7f42-4718-4918-b34c-283a5335efdc" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="6770c1af-2812-4913-bfba-f44449dd387b" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="5c6c645d-e4cd-4408-86aa-40eddaee9caa" />
+          <Property Name="RecCreatedBy" Type="Int64" ed:ValidateRequired="false" ed:Guid="a4e86482-9842-4cfd-b95f-3dc476aaa389" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="f971b533-63cb-4e58-988d-58eb4b78b24f" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="6ba43e76-7c7e-4fc1-ad14-eb71c52546cf" />
+          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="860bd444-1f04-40a9-b011-5563f0ebde57" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="1ef1194b-8518-40b3-9549-9c8b72dd17d2" />
+          <NavigationProperty Name="PuchaseInvoiceLines" Relationship="MyERP.DataAccess.SalesHeader_SalesLine1" FromRole="PurchaseInvoiceHeader" ToRole="PuchaseInvoiceLines" ed:Guid="379219b9-c70f-419e-9cee-bd0cb908f127" />
+        </EntityType>
+        <EntityType Name="PurchaseInvoiceLine" ed:Guid="51e8ab3e-4359-4036-a42a-b1a898e9af1c">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="1228ece8-1bef-4a8b-b7fb-65559c39df47" />
+          <Property Name="PurchaseInvoiceHeaderId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="503f0276-99db-4ecf-bf7c-5b37fa7f877d" />
+          <Property Name="LineNo" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a2847240-4464-4f15-b3d1-95cf96835044" />
+          <Property Name="Type" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="2b5ef7b3-7e92-47e6-a17f-0beda9913fa1" />
+          <Property Name="ItemId" Type="Int64" ed:ValidateRequired="false" ed:Guid="17a29107-3245-4e8d-86e1-028030449b7e" />
+          <Property Name="LocationId" Type="Int64" ed:ValidateRequired="false" ed:Guid="ce30d96a-e098-4bf5-a4f7-6bfd6e6bce6c" />
+          <Property Name="Description" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="791f9c86-a988-42cd-909c-c77d072c2339" />
+          <Property Name="UomId" Type="Int64" ed:ValidateRequired="false" ed:Guid="2dcaf922-880e-454c-9f69-182a2ef856bb" />
+          <Property Name="UomDescription" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="cec913bb-bdbf-4ba7-b610-c2bdc18d6a51" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="a5d3e77f-099e-4858-b669-9de8adbeb881" />
+          <Property Name="SalesPriceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="fcf9f9dc-db30-4e6a-8176-8287e1040ede" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="3073a8a8-fed9-4270-9ec8-5afe6095ef4a" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="843fb0ba-9fb5-427e-9198-d6fb75e66654" />
+          <Property Name="UnitPriceLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="8c9aa15c-fd6a-4125-a470-c2b6201c8ea7" />
+          <Property Name="AmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="76dd7f15-55ba-4c1a-8162-f61f12ac4fbf" />
+          <Property Name="CostUnit" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="3988e377-e572-4e44-badb-bd1db09e64c3" />
+          <Property Name="CostUnitLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="d346df5d-17cb-402b-89e2-46315fd12815" />
+          <Property Name="CostAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="282a6707-a838-4fa1-9025-e9fa22de09f0" />
+          <Property Name="CostAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="3054d385-a908-4201-8822-70b2befdb63e" />
+          <Property Name="QuantityShipped" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="37a8ef8f-412c-4d19-9ad9-5c37502d76f8" />
+          <Property Name="OutstandingQuantity" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="894f2a1b-8b64-4efa-b059-53fa2b9a8bdb" />
+          <Property Name="QuantityInvoiced" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="e62d0aa3-3703-4c40-b1e0-cdee2f7566b9" />
+          <Property Name="QtyShippedNotInvoiced" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="ca751618-7b5f-4165-ae04-75b9fdb573d8" />
+          <Property Name="QtyPerUom" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="ea83f927-7b40-470f-9958-6a23b0bcbbb3" />
+          <Property Name="QuantityBase" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="a1660f43-1578-43fe-a3c2-75e66bb8836b" />
+          <Property Name="OutstandingQtyBase" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="d30abc85-83ff-4643-ace1-dbb414711a18" />
+          <Property Name="QuantityShippedBase" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="331da3e7-9d22-40ff-81c8-ce5b86895e1a" />
+          <Property Name="QuantityInvoicedBase" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="6b3963d8-8176-40dd-9ee7-78e73f7e1756" />
+          <Property Name="QtyShippedNotInvoicedBase" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="c9f6684b-bf56-450a-aa3b-85cb45810bdb" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="eeaa8845-113b-4fe8-bb32-e32ab918b8f3" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="586a126f-cea2-444b-a8f2-b6a9f8b799f1" />
+          <NavigationProperty Name="PurchaseInvoiceHeader" Relationship="MyERP.DataAccess.SalesHeader_SalesLine1" FromRole="PuchaseInvoiceLines" ToRole="PurchaseInvoiceHeader" ed:Guid="f1ad1e09-41cd-4f47-af98-a68592191688" />
         </EntityType>
         <Association Name="User_Client_CreatedBy" ed:Guid="cc64066d-a254-493f-8be0-7609622c4e6a">
           <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
@@ -5044,6 +5340,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="SalesHeader_SalesLine1" ed:Guid="619d8b28-0331-4785-82a3-941e59aa18b7">
+          <End Role="PurchaseInvoiceHeader" Type="MyERP.DataAccess.PurchaseInvoiceHeader" Multiplicity="1" />
+          <End Role="PuchaseInvoiceLines" Type="MyERP.DataAccess.PurchaseInvoiceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseInvoiceHeader">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PuchaseInvoiceLines">
+              <PropertyRef Name="PurchaseInvoiceHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_PosHeader" ed:Guid="c74d1d77-5b6d-4c94-b845-700ea407efd0">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="PosHeaders" Type="MyERP.DataAccess.PosHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PosHeaders">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_PosHeader" ed:Guid="e567b056-798a-4a07-a8f1-905786fb7157">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="PosHeaders" Type="MyERP.DataAccess.PosHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PosHeaders">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_PosHeader_RecCreatedBy" ed:Guid="daa304de-9cf0-4a39-b100-b3c61c0290bb">
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="PosHeaders" Type="MyERP.DataAccess.PosHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecCreatedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PosHeaders">
+              <PropertyRef Name="RecCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_PosHeader_RecModifiedBy" ed:Guid="fe6e344d-151c-4ed2-91ea-29b2dd4c21b2">
+          <End Role="RecModifiedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="PosHeaders1" Type="MyERP.DataAccess.PosHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecModifiedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PosHeaders1">
+              <PropertyRef Name="RecModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- MSL content -->
@@ -5666,6 +6022,97 @@
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="SalesPosLocationId" ColumnName="sales_pos_location_id" />
                 <ScalarProperty Name="OneTimeBusinessPartnerId" ColumnName="one_time_business_partner_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseInvoiceHeaders">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.PurchaseInvoiceHeader">
+              <MappingFragment StoreEntitySet="purchase_invoice_headers">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="DocumentType" ColumnName="document_type" />
+                <ScalarProperty Name="DocSequenceId" ColumnName="doc_sequence_id" />
+                <ScalarProperty Name="DocumentNo" ColumnName="document_no" />
+                <ScalarProperty Name="DocumentDate" ColumnName="document_date" />
+                <ScalarProperty Name="SellToCustomerId" ColumnName="sell_to_customer_id" />
+                <ScalarProperty Name="SellToCustomerName" ColumnName="sell_to_customer_name" />
+                <ScalarProperty Name="SellToAddress" ColumnName="sell_to_address" />
+                <ScalarProperty Name="SellToContactId" ColumnName="sell_to_contact_id" />
+                <ScalarProperty Name="SellToContactName" ColumnName="sell_to_contact_name" />
+                <ScalarProperty Name="Description" ColumnName="description" />
+                <ScalarProperty Name="BillToCustomerId" ColumnName="bill_to_customer_id" />
+                <ScalarProperty Name="BillToName" ColumnName="bill_to_name" />
+                <ScalarProperty Name="BillToAddress" ColumnName="bill_to_address" />
+                <ScalarProperty Name="BillToContactId" ColumnName="bill_to_contact_id" />
+                <ScalarProperty Name="BillToContactName" ColumnName="bill_to_contact_name" />
+                <ScalarProperty Name="BillToVatCode" ColumnName="bill_to_vat_code" />
+                <ScalarProperty Name="BillToVatNote" ColumnName="bill_to_vat_note" />
+                <ScalarProperty Name="ShipToName" ColumnName="ship_to_name" />
+                <ScalarProperty Name="ShipToAddress" ColumnName="ship_to_address" />
+                <ScalarProperty Name="ShipToContactName" ColumnName="ship_to_contact_name" />
+                <ScalarProperty Name="CurrencyId" ColumnName="currency_id" />
+                <ScalarProperty Name="CurrencyFactor" ColumnName="currency_factor" />
+                <ScalarProperty Name="LocationId" ColumnName="location_id" />
+                <ScalarProperty Name="SalesPersonId" ColumnName="sales_person_id" />
+                <ScalarProperty Name="TotalAmount" ColumnName="total_amount" />
+                <ScalarProperty Name="TotalAmountLCY" ColumnName="total_amount_lcy" />
+                <ScalarProperty Name="TotalAmountNoVat" ColumnName="total_amount_no_vat" />
+                <ScalarProperty Name="TotalAmountVat0" ColumnName="total_amount_vat0" />
+                <ScalarProperty Name="TotalAmountVat5" ColumnName="total_amount_vat5" />
+                <ScalarProperty Name="TotalAmountVat10" ColumnName="total_amount_vat10" />
+                <ScalarProperty Name="TotalVatAmount" ColumnName="total_vat_amount" />
+                <ScalarProperty Name="TotalVat5Amount" ColumnName="total_vat5amount" />
+                <ScalarProperty Name="TotalVat10Amount" ColumnName="total_vat10amount" />
+                <ScalarProperty Name="TotalPayment" ColumnName="total_payment" />
+                <ScalarProperty Name="TotalPaymentLCY" ColumnName="total_payment_lcy" />
+                <ScalarProperty Name="NoPrinted" ColumnName="no_printed" />
+                <ScalarProperty Name="QuoteId" ColumnName="quote_id" />
+                <ScalarProperty Name="CampaignId" ColumnName="campaign_id" />
+                <ScalarProperty Name="OpportunityId" ColumnName="opportunity_id" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Version" ColumnName="version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseInvoiceLines">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.PurchaseInvoiceLine">
+              <MappingFragment StoreEntitySet="purchase_invoice_lines">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="PurchaseInvoiceHeaderId" ColumnName="purchase_invoice_header_id" />
+                <ScalarProperty Name="LineNo" ColumnName="line_no" />
+                <ScalarProperty Name="Type" ColumnName="type" />
+                <ScalarProperty Name="ItemId" ColumnName="item_id" />
+                <ScalarProperty Name="LocationId" ColumnName="location_id" />
+                <ScalarProperty Name="Description" ColumnName="description" />
+                <ScalarProperty Name="UomId" ColumnName="uom_id" />
+                <ScalarProperty Name="UomDescription" ColumnName="uom_description" />
+                <ScalarProperty Name="Quantity" ColumnName="quantity" />
+                <ScalarProperty Name="SalesPriceId" ColumnName="sales_price_id" />
+                <ScalarProperty Name="UnitPrice" ColumnName="unit_price" />
+                <ScalarProperty Name="Amount" ColumnName="amount" />
+                <ScalarProperty Name="UnitPriceLCY" ColumnName="unit_price_lcy" />
+                <ScalarProperty Name="AmountLCY" ColumnName="amount_lcy" />
+                <ScalarProperty Name="CostUnit" ColumnName="cost_unit" />
+                <ScalarProperty Name="CostUnitLCY" ColumnName="cost_unit_lcy" />
+                <ScalarProperty Name="CostAmount" ColumnName="cost_amount" />
+                <ScalarProperty Name="CostAmountLCY" ColumnName="cost_amount_lcy" />
+                <ScalarProperty Name="QuantityShipped" ColumnName="quantity_shipped" />
+                <ScalarProperty Name="OutstandingQuantity" ColumnName="outstanding_quantity" />
+                <ScalarProperty Name="QuantityInvoiced" ColumnName="quantity_invoiced" />
+                <ScalarProperty Name="QtyShippedNotInvoiced" ColumnName="qty_shipped_not_invoiced" />
+                <ScalarProperty Name="QtyPerUom" ColumnName="qty_per_uom" />
+                <ScalarProperty Name="QuantityBase" ColumnName="quantity_base" />
+                <ScalarProperty Name="OutstandingQtyBase" ColumnName="outstanding_qty_base" />
+                <ScalarProperty Name="QuantityShippedBase" ColumnName="quantity_shipped_base" />
+                <ScalarProperty Name="QuantityInvoicedBase" ColumnName="quantity_invoiced_base" />
+                <ScalarProperty Name="QtyShippedNotInvoicedBase" ColumnName="qty_shipped_not_invoiced_base" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

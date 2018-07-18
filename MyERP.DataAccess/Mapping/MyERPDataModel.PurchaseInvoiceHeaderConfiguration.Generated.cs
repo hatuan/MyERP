@@ -17,14 +17,14 @@ using System.Data.Entity.ModelConfiguration;
 namespace MyERP.DataAccess.Mapping
 {
 
-    public partial class PosHeaderConfiguration : EntityTypeConfiguration<PosHeader>
+    public partial class PurchaseInvoiceHeaderConfiguration : EntityTypeConfiguration<PurchaseInvoiceHeader>
     {
 
-        public PosHeaderConfiguration()
+        public PurchaseInvoiceHeaderConfiguration()
         {
             this
                 .HasKey(p => p.Id)
-                .ToTable("pos_header", "dbo");
+                .ToTable("purchase_invoice_header", "dbo");
             // Properties:
             this
                 .Property(p => p.Id)
@@ -32,6 +32,11 @@ namespace MyERP.DataAccess.Mapping
                     .IsRequired()
                     .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)
                     .HasColumnType("bigint");
+            this
+                .Property(p => p.DocumentType)
+                    .HasColumnName(@"document_type")
+                    .IsRequired()
+                    .HasColumnType("tinyint");
             this
                 .Property(p => p.DocSequenceId)
                     .HasColumnName(@"doc_sequence_id")
@@ -47,7 +52,7 @@ namespace MyERP.DataAccess.Mapping
                 .Property(p => p.DocumentDate)
                     .HasColumnName(@"document_date")
                     .IsRequired()
-                    .HasColumnType("datetime2");
+                    .HasColumnType("datetime");
             this
                 .Property(p => p.SellToCustomerId)
                     .HasColumnName(@"sell_to_customer_id")
@@ -56,12 +61,12 @@ namespace MyERP.DataAccess.Mapping
             this
                 .Property(p => p.SellToCustomerName)
                     .HasColumnName(@"sell_to_customer_name")
-                    .IsRequired()
                     .HasMaxLength(256)
                     .HasColumnType("nvarchar");
             this
                 .Property(p => p.SellToAddress)
                     .HasColumnName(@"sell_to_address")
+                    .IsRequired()
                     .HasMaxLength(256)
                     .HasColumnType("nvarchar");
             this
@@ -81,12 +86,10 @@ namespace MyERP.DataAccess.Mapping
             this
                 .Property(p => p.BillToCustomerId)
                     .HasColumnName(@"bill_to_customer_id")
-                    .IsRequired()
                     .HasColumnType("bigint");
             this
                 .Property(p => p.BillToName)
                     .HasColumnName(@"bill_to_name")
-                    .IsRequired()
                     .HasMaxLength(256)
                     .HasColumnType("nvarchar");
             this
@@ -129,19 +132,8 @@ namespace MyERP.DataAccess.Mapping
                     .HasMaxLength(256)
                     .HasColumnType("nvarchar");
             this
-                .Property(p => p.LocationId)
-                    .HasColumnName(@"location_id")
-                    .IsRequired()
-                    .HasColumnType("bigint");
-            this
-                .Property(p => p.SalesPersonId)
-                    .HasColumnName(@"sales_person_id")
-                    .IsRequired()
-                    .HasColumnType("bigint");
-            this
                 .Property(p => p.CurrencyId)
                     .HasColumnName(@"currency_id")
-                    .IsRequired()
                     .HasColumnType("bigint");
             this
                 .Property(p => p.CurrencyFactor)
@@ -149,6 +141,14 @@ namespace MyERP.DataAccess.Mapping
                     .IsRequired()
                     .HasColumnType("decimal")
                     .HasPrecision(38, 20);
+            this
+                .Property(p => p.LocationId)
+                    .HasColumnName(@"location_id")
+                    .HasColumnType("bigint");
+            this
+                .Property(p => p.SalesPersonId)
+                    .HasColumnName(@"sales_person_id")
+                    .HasColumnType("bigint");
             this
                 .Property(p => p.TotalAmount)
                     .HasColumnName(@"total_amount")
@@ -161,47 +161,42 @@ namespace MyERP.DataAccess.Mapping
                     .HasColumnType("decimal")
                     .HasPrecision(38, 20);
             this
+                .Property(p => p.TotalAmountNoVat)
+                    .HasColumnName(@"total_amount_no_vat")
+                    .IsRequired()
+                    .HasColumnType("decimal")
+                    .HasPrecision(38, 20);
+            this
+                .Property(p => p.TotalAmountVat0)
+                    .HasColumnName(@"total_amount_vat0")
+                    .IsRequired()
+                    .HasColumnType("decimal")
+                    .HasPrecision(38, 20);
+            this
+                .Property(p => p.TotalAmountVat5)
+                    .HasColumnName(@"total_amount_vat5")
+                    .IsRequired()
+                    .HasColumnType("decimal")
+                    .HasPrecision(38, 20);
+            this
+                .Property(p => p.TotalAmountVat10)
+                    .HasColumnName(@"total_amount_vat10")
+                    .IsRequired()
+                    .HasColumnType("decimal")
+                    .HasPrecision(38, 20);
+            this
                 .Property(p => p.TotalVatAmount)
                     .HasColumnName(@"total_vat_amount")
                     .IsRequired()
                     .HasColumnType("decimal")
                     .HasPrecision(38, 20);
             this
-                .Property(p => p.TotalVatAmountLCY)
-                    .HasColumnName(@"total_vat_amount_lcy")
-                    .IsRequired()
-                    .HasColumnType("decimal")
-                    .HasPrecision(38, 20);
+                .Property(p => p.TotalVat5Amount)
+                    .HasColumnName(@"total_vat5amount")
+                    .HasColumnType("int");
             this
-                .Property(p => p.DiscountId)
-                    .HasColumnName(@"discount_id")
-                    .HasColumnType("bigint");
-            this
-                .Property(p => p.InvoiceDiscountPercentage)
-                    .HasColumnName(@"invoice_discount_percentage")
-                    .IsRequired()
-                    .HasColumnType("tinyint");
-            this
-                .Property(p => p.InvoiceDiscountAmount)
-                    .HasColumnName(@"invoice_discount_amount")
-                    .IsRequired()
-                    .HasColumnType("decimal")
-                    .HasPrecision(38, 20);
-            this
-                .Property(p => p.InvoiceDiscountAmountLCY)
-                    .HasColumnName(@"invoice_discount_amount_lcy")
-                    .IsRequired()
-                    .HasColumnType("decimal")
-                    .HasPrecision(38, 20);
-            this
-                .Property(p => p.TotalLineDiscountAmount)
-                    .HasColumnName(@"total_line_discount_amount")
-                    .IsRequired()
-                    .HasColumnType("decimal")
-                    .HasPrecision(38, 20);
-            this
-                .Property(p => p.TotalLineDiscountAmountLCY)
-                    .HasColumnName(@"total_line_discount_amount_lcy")
+                .Property(p => p.TotalVat10Amount)
+                    .HasColumnName(@"total_vat10amount")
                     .IsRequired()
                     .HasColumnType("decimal")
                     .HasPrecision(38, 20);
@@ -218,17 +213,22 @@ namespace MyERP.DataAccess.Mapping
                     .HasColumnType("decimal")
                     .HasPrecision(38, 20);
             this
-                .Property(p => p.CashOfCustomer)
-                    .HasColumnName(@"cash_of_customer")
+                .Property(p => p.NoPrinted)
+                    .HasColumnName(@"no_printed")
                     .IsRequired()
-                    .HasColumnType("decimal")
-                    .HasPrecision(38, 20);
+                    .HasColumnType("int");
             this
-                .Property(p => p.ChangeReturnToCustomer)
-                    .HasColumnName(@"change_return_to_customer")
-                    .IsRequired()
-                    .HasColumnType("decimal")
-                    .HasPrecision(38, 20);
+                .Property(p => p.QuoteId)
+                    .HasColumnName(@"quote_id")
+                    .HasColumnType("bigint");
+            this
+                .Property(p => p.CampaignId)
+                    .HasColumnName(@"campaign_id")
+                    .HasColumnType("bigint");
+            this
+                .Property(p => p.OpportunityId)
+                    .HasColumnName(@"opportunity_id")
+                    .HasColumnType("bigint");
             this
                 .Property(p => p.OrganizationId)
                     .HasColumnName(@"organization_id")
@@ -243,17 +243,16 @@ namespace MyERP.DataAccess.Mapping
                 .Property(p => p.RecCreatedAt)
                     .HasColumnName(@"rec_created_at")
                     .IsRequired()
-                    .HasColumnType("datetime2");
+                    .HasColumnType("datetime");
             this
                 .Property(p => p.RecCreatedBy)
                     .HasColumnName(@"rec_created_by")
-                    .IsRequired()
                     .HasColumnType("bigint");
             this
                 .Property(p => p.RecModifiedAt)
                     .HasColumnName(@"rec_modified_at")
                     .IsRequired()
-                    .HasColumnType("datetime2");
+                    .HasColumnType("datetime");
             this
                 .Property(p => p.RecModifiedBy)
                     .HasColumnName(@"rec_modified_by")
@@ -269,41 +268,11 @@ namespace MyERP.DataAccess.Mapping
                     .HasColumnName(@"version")
                     .IsRequired()
                     .HasColumnType("bigint");
-            // Associations:
+            // Association:
             this
-                .HasMany(p => p.PosLines)
-                    .WithRequired(c => c.PosHeader)
-                .HasForeignKey(p => p.PosHeaderId)
-                    .WillCascadeOnDelete(false);
-            this
-                .HasRequired(p => p.Location)
-                    .WithMany()
-                .HasForeignKey(p => p.LocationId)
-                    .WillCascadeOnDelete(false);
-            this
-                .HasRequired(p => p.SellToCustomer)
-                    .WithMany()
-                .HasForeignKey(p => p.SellToCustomerId)
-                    .WillCascadeOnDelete(false);
-            this
-                .HasRequired(p => p.Client)
-                    .WithMany()
-                .HasForeignKey(p => p.ClientId)
-                    .WillCascadeOnDelete(false);
-            this
-                .HasRequired(p => p.Organization)
-                    .WithMany()
-                .HasForeignKey(p => p.OrganizationId)
-                    .WillCascadeOnDelete(false);
-            this
-                .HasRequired(p => p.RecCreatedByUser)
-                    .WithMany()
-                .HasForeignKey(p => p.RecCreatedBy)
-                    .WillCascadeOnDelete(false);
-            this
-                .HasRequired(p => p.RecModifiedByUser)
-                    .WithMany()
-                .HasForeignKey(p => p.RecModifiedBy)
+                .HasMany(p => p.PuchaseInvoiceLines)
+                    .WithRequired(c => c.PurchaseInvoiceHeader)
+                .HasForeignKey(p => p.PurchaseInvoiceHeaderId)
                     .WillCascadeOnDelete(false);
             OnCreated();
         }

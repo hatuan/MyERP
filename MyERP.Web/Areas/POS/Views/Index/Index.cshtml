@@ -213,7 +213,10 @@
                                    .ID("tabHomePOS")
                                    .Title("Home")
                                    .IconCls("fa fa-home")
-                                   .Items()
+                                   .Loader(Html.X().ComponentLoader()
+                                            .Url(Url.Action("AddHome"))
+                                            .Mode(LoadMode.Script)
+                                            .Params(new { containerId = "tabHomePOS" }))
                                );
                            })
                            .TabBar(components =>

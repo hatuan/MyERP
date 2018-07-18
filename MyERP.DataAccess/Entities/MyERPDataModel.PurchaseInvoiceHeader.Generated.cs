@@ -17,11 +17,11 @@ namespace MyERP.DataAccess
 {
 
     /// <summary>
-    /// There are no comments for MyERP.DataAccess.PosHeader in the schema.
+    /// There are no comments for MyERP.DataAccess.PurchaseInvoiceHeader in the schema.
     /// </summary>
-    public partial class PosHeader    {
+    public partial class PurchaseInvoiceHeader    {
 
-        public PosHeader()
+        public PurchaseInvoiceHeader()
         {
             OnCreated();
         }
@@ -35,6 +35,17 @@ namespace MyERP.DataAccess
         [System.ComponentModel.DataAnnotations.Key]
         [System.ComponentModel.DataAnnotations.Required()]
         public virtual long Id
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for DocumentType in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual byte DocumentType
         {
             get;
             set;
@@ -90,7 +101,6 @@ namespace MyERP.DataAccess
         /// There are no comments for SellToCustomerName in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.StringLength(256)]
-        [System.ComponentModel.DataAnnotations.Required()]
         public virtual string SellToCustomerName
         {
             get;
@@ -102,6 +112,7 @@ namespace MyERP.DataAccess
         /// There are no comments for SellToAddress in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.StringLength(256)]
+        [System.ComponentModel.DataAnnotations.Required()]
         public virtual string SellToAddress
         {
             get;
@@ -144,8 +155,7 @@ namespace MyERP.DataAccess
         /// <summary>
         /// There are no comments for BillToCustomerId in the schema.
         /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long BillToCustomerId
+        public virtual global::System.Nullable<long> BillToCustomerId
         {
             get;
             set;
@@ -156,7 +166,6 @@ namespace MyERP.DataAccess
         /// There are no comments for BillToName in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.StringLength(256)]
-        [System.ComponentModel.DataAnnotations.Required()]
         public virtual string BillToName
         {
             get;
@@ -208,7 +217,7 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for BillToVatNote in the schema.
+        /// Ten nhom vat tu khi ke khai hoa don VAT dau ra
         /// </summary>
         [System.ComponentModel.DataAnnotations.StringLength(256)]
         public virtual string BillToVatNote
@@ -252,32 +261,9 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for LocationId in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long LocationId
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for SalesPersonId in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long SalesPersonId
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
         /// There are no comments for CurrencyId in the schema.
         /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long CurrencyId
+        public virtual global::System.Nullable<long> CurrencyId
         {
             get;
             set;
@@ -289,6 +275,26 @@ namespace MyERP.DataAccess
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
         public virtual decimal CurrencyFactor
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for LocationId in the schema.
+        /// </summary>
+        public virtual global::System.Nullable<long> LocationId
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for SalesPersonId in the schema.
+        /// </summary>
+        public virtual global::System.Nullable<long> SalesPersonId
         {
             get;
             set;
@@ -317,6 +323,50 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
+        /// There are no comments for TotalAmountNoVat in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal TotalAmountNoVat
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for TotalAmountVat0 in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal TotalAmountVat0
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for TotalAmountVat5 in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal TotalAmountVat5
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for TotalAmountVat10 in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal TotalAmountVat10
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
         /// There are no comments for TotalVatAmount in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
@@ -328,10 +378,9 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for TotalVatAmountLCY in the schema.
+        /// There are no comments for TotalVat5Amount in the schema.
         /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual decimal TotalVatAmountLCY
+        public virtual global::System.Nullable<int> TotalVat5Amount
         {
             get;
             set;
@@ -339,64 +388,10 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for DiscountId in the schema.
-        /// </summary>
-        public virtual global::System.Nullable<long> DiscountId
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for InvoiceDiscountPercentage in the schema.
+        /// There are no comments for TotalVat10Amount in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual byte InvoiceDiscountPercentage
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for InvoiceDiscountAmount in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual decimal InvoiceDiscountAmount
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for InvoiceDiscountAmountLCY in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual decimal InvoiceDiscountAmountLCY
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for TotalLineDiscountAmount in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual decimal TotalLineDiscountAmount
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for TotalLineDiscountAmountLCY in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual decimal TotalLineDiscountAmountLCY
+        public virtual decimal TotalVat10Amount
         {
             get;
             set;
@@ -426,10 +421,10 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for CashOfCustomer in the schema.
+        /// There are no comments for NoPrinted in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual decimal CashOfCustomer
+        public virtual int NoPrinted
         {
             get;
             set;
@@ -437,10 +432,29 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for ChangeReturnToCustomer in the schema.
+        /// There are no comments for QuoteId in the schema.
         /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual decimal ChangeReturnToCustomer
+        public virtual global::System.Nullable<long> QuoteId
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for CampaignId in the schema.
+        /// </summary>
+        public virtual global::System.Nullable<long> CampaignId
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for OpportunityId in the schema.
+        /// </summary>
+        public virtual global::System.Nullable<long> OpportunityId
         {
             get;
             set;
@@ -483,8 +497,7 @@ namespace MyERP.DataAccess
         /// <summary>
         /// There are no comments for RecCreatedBy in the schema.
         /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long RecCreatedBy
+        public virtual global::System.Nullable<long> RecCreatedBy
         {
             get;
             set;
@@ -540,72 +553,9 @@ namespace MyERP.DataAccess
         #region Navigation Properties
     
         /// <summary>
-        /// There are no comments for PosLines in the schema.
+        /// There are no comments for PuchaseInvoiceLines in the schema.
         /// </summary>
-        public virtual ICollection<PosLine> PosLines
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for Location in the schema.
-        /// </summary>
-        public virtual Location Location
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for SellToCustomer in the schema.
-        /// </summary>
-        public virtual BusinessPartner SellToCustomer
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for BillToCustomer in the schema.
-        /// </summary>
-        public virtual BusinessPartner BillToCustomer
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for Client in the schema.
-        /// </summary>
-        public virtual Client Client
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for Organization in the schema.
-        /// </summary>
-        public virtual Organization Organization
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for RecCreatedByUser in the schema.
-        /// </summary>
-        public virtual User RecCreatedByUser
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for RecModifiedByUser in the schema.
-        /// </summary>
-        public virtual User RecModifiedByUser
+        public virtual ICollection<PurchaseInvoiceLine> PuchaseInvoiceLines
         {
             get;
             set;

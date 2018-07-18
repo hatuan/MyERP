@@ -423,6 +423,11 @@
                                                     de.Click.ExtraParams.Add(new Parameter("posLinesJSON", "App." + posLineGridPanel + ".getRowsValues()", ParameterMode.Raw, true));
                                                     de.Click.Success = "function(response, result) {" +
                                                                        "    printReportHtml(result.result.report); " +
+                                                                       "    #{" + posLineStore + "}.removeAll();" +
+                                                                       "    #{" + posLineStore + "}.load();" +
+                                                                       "    #{" + totalPaymentId + "}.setRawValue(Ext.util.Format.number(0, '0.000,00/i'));" +
+                                                                       "    #{" + cashOfCustomerId + "}.setRawValue(Ext.util.Format.number(0, '0.000,00/i'));" +
+                                                                       "    #{" + changeToCustomerId + "}.setRawValue(Ext.util.Format.number(0, '0.000,00/i'));" +
                                                                        "}";
                                                     de.Click.DisableControl = true;
                                                 })

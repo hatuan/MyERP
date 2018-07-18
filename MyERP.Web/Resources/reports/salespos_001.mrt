@@ -1,11 +1,11 @@
 {
   "ReportVersion": "2018.2.3.0",
-  "ReportGuid": "44a8ac71af1c44cf8dbe4c80c9ddc0f8",
+  "ReportGuid": "a4639b7186ca4039a1488955d2de5264",
   "ReportName": "SalesPos",
   "ReportAlias": "SalesPos",
   "ReportAuthor": "Hoang Anh Tuan - www.binhminhsoft.com",
   "ReportCreated": "/Date(1531490358000+0700)/",
-  "ReportChanged": "/Date(1531842796510+0700)/",
+  "ReportChanged": "/Date(1531880107338+0700)/",
   "EngineVersion": "EngineV2",
   "CalculationMode": "Interpretation",
   "ReportUnit": "Millimeters",
@@ -867,14 +867,14 @@
               "Guid": "b925823be186c66513e4c285973122ea",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "7,5,11,4",
+              "ClientRectangle": "7,5,10,4",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
                 "Value": "SL"
               },
-              "HorAlignment": "Center",
+              "HorAlignment": "Right",
               "VertAlignment": "Center",
               "Font": ";;Italic;",
               "Border": ";;;;;;;solid:Black",
@@ -888,7 +888,7 @@
               "Guid": "25c943a05058ffae0afe35afc36a147b",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "31,5,22,4",
+              "ClientRectangle": "31,5,23,4",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -935,7 +935,7 @@
               "Text": {
                 "Value": "ĐVT"
               },
-              "HorAlignment": "Center",
+              "HorAlignment": "Right",
               "VertAlignment": "Center",
               "Border": ";;;;;;;solid:Black",
               "Brush": "solid:",
@@ -977,14 +977,14 @@
               "Name": "Text9",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "2,5,16,5",
+              "ClientRectangle": "1,5,16,5",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
                 "Value": "{PosLines.Quantity}"
               },
-              "HorAlignment": "Center",
+              "HorAlignment": "Right",
               "VertAlignment": "Center",
               "Font": ";;Italic;",
               "Border": ";;;;;;;solid:0,0,0",
@@ -1003,7 +1003,7 @@
               "Text": {
                 "Value": "{PosLines.UomDescription}"
               },
-              "HorAlignment": "Center",
+              "HorAlignment": "Right",
               "VertAlignment": "Center",
               "Border": ";;;;;;;solid:0,0,0",
               "Brush": "solid:",
@@ -1014,7 +1014,7 @@
               "Name": "Text11",
               "MinSize": "0,0",
               "MaxSize": "0,0",
-              "ClientRectangle": "28,5,25,5",
+              "ClientRectangle": "29,5,25,5",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
