@@ -13,12 +13,12 @@ namespace MyERP.Web
     {
         public static Version Version = typeof(MyERP.Web.Global).Assembly.GetName().Version;
 
-        private static string rev = (Version.Revision == 0) ? "" : ("." + Version.Revision);
-        private static string bld = (Version.Build == 0) ? "" : ("." + Version.Build + rev);
+        private static readonly string rev = (Version.Revision == 0) ? "" : ("." + Version.Revision);
+        private static readonly string bld = (Version.Build == 0) ? "" : ("." + Version.Build + rev);
 
         public static string Major = Version.Major + "." + Version.Minor + bld;
         public static string WithBuild = Version.Major + "." + Version.Minor + "." + Version.Build;
-        public static string Full = Version.ToString();
+        public static readonly string Full = Version.ToString();
     }
 
     public partial class Global : System.Web.HttpApplication
@@ -107,7 +107,7 @@ namespace MyERP.Web
                     Context.Response.Clear();
 
                     // Finally redirect, transfer, or render a error view
-                    Context.Response.Redirect(@"/User/Preference");
+                    Context.Response.Redirect(@"~/User/Preference");
                 }
 
             }

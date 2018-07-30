@@ -6,7 +6,7 @@ using System.Collections.Specialized;
 namespace MyERP.DataAccess.Mapping
 {
 
-    public partial class PurchaseInvoiceLineConfiguration
+    public partial class PurchaseLineConfiguration
     {
     }
 }

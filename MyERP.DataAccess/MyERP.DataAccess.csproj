@@ -87,10 +87,10 @@
     <Compile Include="Entities\MyERPDataModel.PosHeader.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.PosLine.cs" />
     <Compile Include="Entities\MyERPDataModel.PosLine.Generated.cs" />
-    <Compile Include="Entities\MyERPDataModel.PurchaseInvoiceHeader.cs" />
-    <Compile Include="Entities\MyERPDataModel.PurchaseInvoiceHeader.Generated.cs" />
-    <Compile Include="Entities\MyERPDataModel.PurchaseInvoiceLine.cs" />
-    <Compile Include="Entities\MyERPDataModel.PurchaseInvoiceLine.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.PurchaseHeader.cs" />
+    <Compile Include="Entities\MyERPDataModel.PurchaseHeader.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.PurchaseLine.cs" />
+    <Compile Include="Entities\MyERPDataModel.PurchaseLine.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Role.cs" />
     <Compile Include="Entities\MyERPDataModel.Role.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.SalesHeader.cs" />
@@ -149,10 +149,10 @@
     <Compile Include="Mapping\MyERPDataModel.PosHeaderConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.PosLineConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.PosLineConfiguration.Generated.cs" />
-    <Compile Include="Mapping\MyERPDataModel.PurchaseInvoiceHeaderConfiguration.cs" />
-    <Compile Include="Mapping\MyERPDataModel.PurchaseInvoiceHeaderConfiguration.Generated.cs" />
-    <Compile Include="Mapping\MyERPDataModel.PurchaseInvoiceLineConfiguration.cs" />
-    <Compile Include="Mapping\MyERPDataModel.PurchaseInvoiceLineConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.PurchaseHeaderConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.PurchaseHeaderConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.PurchaseLineConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.PurchaseLineConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.RoleConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.RoleConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.SalesHeaderConfiguration.cs" />
@@ -170,6 +170,7 @@
     <Compile Include="Mapping\MyERPDataModel.UserInRoleConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.UserInRoleConfiguration.Generated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SingleConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

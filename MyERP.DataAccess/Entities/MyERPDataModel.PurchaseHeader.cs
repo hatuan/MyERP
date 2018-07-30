@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 
-namespace MyERP.DataAccess.Mapping
+namespace MyERP.DataAccess
 {
 
-    public partial class PurchaseInvoiceHeaderConfiguration
+    public partial class PurchaseHeader
     {
     }
 }

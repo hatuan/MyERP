@@ -28,6 +28,7 @@
     <Use64BitIISExpress />
     <TargetFrameworkProfile />
     <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -344,6 +345,9 @@
     <Content Include="Resources\fonts\TitilliumText25L005-webfont.woff" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Resources\printReports\blank.txt" />
+    <Content Include="Resources\reports\blank.txt" />
+    <Content Include="Resources\uploadFiles\blank.txt" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -412,6 +416,13 @@
     <Content Include="Views\Currency\_Maintenance.cshtml" />
     <Content Include="Views\Home\_About.cshtml" />
     <Content Include="Areas\POS\Views\Index\HomePartialView.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Resources\reports\salespos-002.json" />
+    <Content Include="Resources\reports\salespos-003.json" />
+    <Content Include="Resources\reports\salespos.json" />
+    <Content Include="Resources\reports\salespos_001.mrt" />
+    <Content Include="Resources\reports\salespos_002.mrt" />
+    <Content Include="Resources\reports\salespos_003.mrt" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -560,9 +571,6 @@
     <Folder Include="Areas\SalesPrice\Models\" />
     <Folder Include="Areas\SalesPrice\Views\Shared\" />
     <Folder Include="Areas\UOM\Models\" />
-    <Folder Include="Resources\printReports\" />
-    <Folder Include="Resources\reports\" />
-    <Folder Include="Resources\uploadFiles\" />
     <Folder Include="Views\Report\" />
     <Folder Include="Views\Validation\" />
   </ItemGroup>
@@ -636,4 +644,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>if /I "$(ConfigurationName)" == "Release" Eazfuscator.NET.exe "$(TargetPath)" --msbuild-project-path "$(ProjectPath)" --msbuild-project-configuration "$(ConfigurationName)" --msbuild-project-platform "$(PlatformName)" --msbuild-solution-path "$(SolutionPath)" -n --newline-flush -v 2018.2</PostBuildEvent>
+  </PropertyGroup>
 </Project>
