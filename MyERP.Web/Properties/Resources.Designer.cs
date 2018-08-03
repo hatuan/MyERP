@@ -106,6 +106,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cash Receipt.
+        /// </summary>
+        public static string Cash_Receipt {
+            get {
+                return ResourceManager.GetString("Cash_Receipt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string Close {

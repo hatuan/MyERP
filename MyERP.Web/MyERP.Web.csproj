@@ -416,6 +416,10 @@
     <Content Include="Views\Currency\_Maintenance.cshtml" />
     <Content Include="Views\Home\_About.cshtml" />
     <Content Include="Areas\POS\Views\Index\HomePartialView.cshtml" />
+    <Content Include="Areas\Cash\Views\web.config" />
+    <Content Include="Areas\Cash\Views\CashReceipt\Index.cshtml" />
+    <Content Include="Areas\Cash\Views\CashReceipt\_List.cshtml" />
+    <Content Include="Areas\Cash\Views\CashReceipt\_Maintenance.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Resources\reports\salespos-002.json" />
     <Content Include="Resources\reports\salespos-003.json" />
@@ -447,6 +451,9 @@
     <Compile Include="Areas\BusinessPartner\BusinessPartnerAreaRegistration.cs" />
     <Compile Include="Areas\BusinessPartner\Controllers\BusinessPartnerGroupController.cs" />
     <Compile Include="Areas\BusinessPartner\Controllers\IndexController.cs" />
+    <Compile Include="Areas\Cash\CashAreaRegistration.cs" />
+    <Compile Include="Areas\Cash\Controllers\CashPaymentController.cs" />
+    <Compile Include="Areas\Cash\Controllers\CashReceiptController.cs" />
     <Compile Include="Areas\Item\Controllers\IndexController.cs" />
     <Compile Include="Areas\Item\Controllers\ItemGroupController.cs" />
     <Compile Include="Areas\Item\Controllers\ItemUomController.cs" />
@@ -479,6 +486,7 @@
     <Compile Include="Helpers\MyERPHelper.cs" />
     <Compile Include="ModelStateErrorHandler.cs" />
     <Compile Include="Models\BusinessPartnerPriceGroupViewModel.cs" />
+    <Compile Include="Models\CashLineViewModels.cs" />
     <Compile Include="Models\ClientViewModels.cs" />
     <Compile Include="Models\BusinessPartnerGroupViewModels.cs" />
     <Compile Include="Models\ExtNetComboBoxModel.cs" />
@@ -490,6 +498,7 @@
     <Compile Include="Models\NoSequenceLineViewModels.cs" />
     <Compile Include="Models\NoSequenceViewModels.cs" />
     <Compile Include="Models\LocationViewModels.cs" />
+    <Compile Include="Models\CashHeaderViewModels.cs" />
     <Compile Include="Models\SalesPriceViewModels.cs" />
     <Compile Include="Models\SalesPriceGroupViewModels.cs" />
     <Compile Include="Models\ItemViewModels.cs" />
@@ -526,10 +535,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Repository\BusinessPartnerPriceGroupRepository.cs" />
+    <Compile Include="Repository\SalesHeaderRepository.cs" />
     <Compile Include="Repository\OptionRepository.cs" />
     <Compile Include="Repository\NoSequenceLineRepository.cs" />
     <Compile Include="Repository\NoSequenceRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
+    <Compile Include="Repository\CashHeaderRepository.cs" />
     <Compile Include="Repository\PosLineRepository.cs" />
     <Compile Include="Repository\PosHeaderRepository.cs" />
     <Compile Include="Repository\SalesPriceGroupRepository.cs" />
@@ -563,6 +574,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\BusinessPartner\Models\" />
+    <Folder Include="Areas\Cash\Models\" />
+    <Folder Include="Areas\Cash\Views\CashPayment\" />
+    <Folder Include="Areas\Cash\Views\Shared\" />
     <Folder Include="Areas\Item\Models\" />
     <Folder Include="Areas\Location\Models\" />
     <Folder Include="Areas\Location\Views\Shared\" />

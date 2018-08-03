@@ -1,0 +1,144 @@
+﻿@model MyERP.Web.Models.CashHeaderEditViewModel
+
+
+@(Html.X().Window()
+          .ID("WindowCashHeaderMaintenance")
+          .Title("Cash Receipt Maintenance")
+          .Height(600)
+          .Width(900)
+          .Modal(true)
+          .Layout(LayoutType.Fit)
+          .MarginSpec("0 5 5 0")
+          .BodyPadding(5)
+          .Items(
+              Html.X().FormPanel()
+                  .ID("FormCashHeaderMaintenance")
+                  .Layout(LayoutType.VBox)
+                  .LayoutConfig(action => action.Add(new VBoxLayoutConfig() { Align = VBoxAlign.Stretch }))
+                  .Items(items =>
+                  {
+                      items.Add(Html.X().Container()
+                          .Layout(LayoutType.Form)
+                          .Items(
+                              Html.X().AntiForgeryField(),
+                              Html.X().TextFieldFor(m => m.Description).AllowBlank(false).EnforceMaxLength(true).ID("Description"),
+                              Html.X().ComboBoxFor(m => m.Status).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.CashDocumentStatusType)),
+                              Html.X().HiddenFor(m => m.Id).ID("Id"),
+                              Html.X().HiddenFor(m => m.Version).ID("Version")
+                          ));
+                      items.Add(Html.X().GridPanel()
+                          .ID("CashLineGridPanel")
+                          .Flex(1)
+                          .Title("Cash Receipt Line")
+                          .Border(true)
+                          .View(new GridView() { MarkDirty = false })
+                          .LeftBar(leftBarItems =>
+                          {
+                              leftBarItems.Add(Html.X().Toolbar()
+                                  .Flat(true)
+                                  .Layout(LayoutType.VBox)
+                                  .Items(buttons =>
+                                  {
+                                      buttons.Add(Html.X().Button()
+                                          .ID("btnAddLine")
+                                          .Icon(Icon.Add)
+                                          .DirectEvents(de =>
+                                          {
+                                              de.Click.Action = "AddLine";
+                                              de.Click.ExtraParams.Add(new Parameter("cashLinesJSON", "#{CashLineGridPanel}.getRowsValues()", ParameterMode.Raw, true));
+                                              de.Click.Success = "function(response, result) {" +
+                                                                 "  var record = this.up('grid').store.getById(result.result.LineNo); " +
+                                                                 "  var index = this.up('grid').store.indexOf(record);" +
+                                                                 "  this.up('grid').editingPlugin.startEdit(index, 0);" +
+                                                                 "}";
+                                          })
+                                      );
+                                      buttons.Add(Html.X().Button()
+                                          .ID("btnDeleteLine")
+                                          .Icon(Icon.Delete)
+                                          .Listeners(ls =>
+                                          {
+                                              ls.Click.Handler = @"if ( !#{CashLineGridPanel}.hasSelection() ) {
+                                                            return false;
+                                                        } else {
+                                                            #{CashLineGridPanel}.deleteSelected();
+                                                            return true;
+                                                        }";
+                                          })
+                                      );
+                                  })
+                              );
+                          })
+                          .Store(Html.X().Store()
+                              .ID("CashLineGridStore")
+                              .Model(
+                                  Html.X().Model()
+                                      .IDProperty("LineNo")
+                                      .Fields(
+                                          new ModelField("LineNo", ModelFieldType.String),
+                                          new ModelField("Id", ModelFieldType.String),
+                                          new ModelField("Description", ModelFieldType.String),
+                                          new ModelField("Amount", ModelFieldType.Float),
+                                          new ModelField("AmountLCY", ModelFieldType.Float)
+                                      ))
+                              .DataSource(Model.CashLines)
+                          )
+                          .ColumnModel(cols =>
+                          {
+                              cols.Columns.Add(Html.X().RowNumbererColumn());
+                              cols.Columns.Add(Html.X().ColumnFor(Model.CashLines, m => m.Description).ToBuilder<Column.Builder>().ID("DescriptionCol").Sortable(false).Width(256)
+                                  .Editor(Html.X().TextField().ID("DescriptionEditor"))
+                              );
+                              cols.Columns.Add(Html.X().ColumnFor(Model.CashLines, m => m.Amount).ToBuilder<Column.Builder>().ID("AmountCol").Sortable(false).Width(125)
+                                  .Editor(Html.X().NumberField().ID("AmountEditor").DecimalPrecision(2)).Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
+                              );
+                          })
+                          .Plugins(
+                              Html.X().RowEditing()
+                                  .Listeners(l =>
+                                  {
+                                      l.CancelEdit.Handler = "if (e.record.phantom) { e.store.remove(e.record); }";
+                                  })
+                          ));
+                  })
+                  .Buttons(buttons =>
+                  {
+                      buttons.Add(Html.X().Button()
+                          .ID("btnSave")
+                          .Text("Save")
+                          .Icon(Icon.Disk)
+                          .DirectEvents(de =>
+                          {
+                              de.Click.Url = Url.Action("_Maintenance");
+                              de.Click.Method = HttpMethod.POST;
+                              de.Click.Before = "return this.up('form').isValid();";
+                              de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
+                              de.Click.ShowWarningOnFailure = true;
+                              de.Click.EventMask.ShowMask = true;
+                              de.Click.FormID = "FormCashHeaderMaintenance";
+                              de.Click.ExtraParams.Add(new Parameter { Name = "cashLineJSON", Value = "App.CashLineGridPanel.getRowsValues()", Mode = ParameterMode.Raw, Encode = true });
+                              de.Click.Success = "function(response, result) { " +
+                                                 " this.up('window').close();" +
+                                                 " App.CashReceiptList.getSelectionModel().deselectAll();" +
+                                                 " App.StoreCashReceiptList.load({ " +
+                                                 "   callback : function() { " +
+                                                 "     var record = App.CashReceiptList.store.getById(result.result.Id); " +
+                                                 "     var index = App.CashReceiptList.store.indexOf(record);" +
+                                                 "     App.CashReceiptList.getSelectionModel().select(index, true);" +
+                                                 "   }" +
+                                                 " });" +
+                                                 "}";
+                          }));
+                      buttons.Add(Html.X().Button()
+                          .ID("btnCancel")
+                          .Text("Cancel")
+                          .Icon(Icon.Cancel)
+                          .Listeners(ls =>
+                          {
+                              ls.Click.Handler = "this.up('window').close();";
+                          }));
+                  })
+          )
+)
+
+

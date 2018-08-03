@@ -60,6 +60,20 @@
         <File Name="MyERPDataModel.PurchaseHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
         <File Name="MyERPDataModel.PurchaseLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
         <File Name="MyERPDataModel.PurchaseLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.CashHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
+        <File Name="MyERPDataModel.CashHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.CashLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
+        <File Name="MyERPDataModel.CashLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.Account.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
+        <File Name="MyERPDataModel.Account.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.AccountsReceivableLedger.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
+        <File Name="MyERPDataModel.AccountsReceivableLedger.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.AccountsPayableLedger.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
+        <File Name="MyERPDataModel.AccountsPayableLedger.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.ItemLedgerEntry.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
+        <File Name="MyERPDataModel.ItemLedgerEntry.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.GeneralLedgerEntry.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
+        <File Name="MyERPDataModel.GeneralLedgerEntry.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
         <File Name="MyERPDataModel.UserConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
         <File Name="MyERPDataModel.UserConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
         <File Name="MyERPDataModel.ClientConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
@@ -114,6 +128,20 @@
         <File Name="MyERPDataModel.PurchaseHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
         <File Name="MyERPDataModel.PurchaseLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
         <File Name="MyERPDataModel.PurchaseLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.CashHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
+        <File Name="MyERPDataModel.CashHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.CashLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
+        <File Name="MyERPDataModel.CashLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.AccountConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
+        <File Name="MyERPDataModel.AccountConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.AccountsReceivableLedgerConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
+        <File Name="MyERPDataModel.AccountsReceivableLedgerConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.AccountsPayableLedgerConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
+        <File Name="MyERPDataModel.AccountsPayableLedgerConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.ItemLedgerEntryConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
+        <File Name="MyERPDataModel.ItemLedgerEntryConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.GeneralLedgerEntryConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
+        <File Name="MyERPDataModel.GeneralLedgerEntryConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
       </GeneratedFiles>
     </Generation>
     <DatabaseFirstNamingRules>
@@ -136,6 +164,7 @@
       <Diagram Name="SaleDiagram" />
       <Diagram Name="PurchaseDiagram" />
       <Diagram Name="FinancalDiagram" />
+      <Diagram Name="InventoryDiagram" />
     </Diagrams>
     <Templates>
       <Template Name="DbContext" Description="Use this template to generate a strongly-typed DbContext class and persistence ignorant entity classes." Enabled="True" PredefinedTemplateName="Entity DbContext C#">

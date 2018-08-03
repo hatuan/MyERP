@@ -102,4 +102,39 @@ namespace MyERP.Web
     {
 
     }
+
+    public partial class AccountRepository : BaseRepository<MyERP.DataAccess.Account, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class CashHeaderRepository : BaseRepository<MyERP.DataAccess.CashHeader, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class CashLineRepository : BaseRepository<MyERP.DataAccess.CashLine, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class PurchaseHeaderRepository : BaseRepository<MyERP.DataAccess.PurchaseHeader, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class PurchaseLineRepository : BaseRepository<MyERP.DataAccess.PurchaseLine, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class SalesHeaderRepository : BaseRepository<MyERP.DataAccess.SalesHeader, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class SalesLineRepository : BaseRepository<MyERP.DataAccess.SalesLine, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
 }

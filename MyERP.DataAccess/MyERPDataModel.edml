@@ -35,6 +35,10 @@
           <EntitySet Name="cash_headers" EntityType="MyERP.DataAccess.Store.cash_header" store:Type="Tables" Schema="dbo" Table="cash_header" />
           <EntitySet Name="cash_lines" EntityType="MyERP.DataAccess.Store.cash_line" store:Type="Tables" Schema="dbo" Table="cash_line" />
           <EntitySet Name="accounts" EntityType="MyERP.DataAccess.Store.account" store:Type="Tables" Schema="dbo" Table="account" />
+          <EntitySet Name="accounts_receivable_ledgers" EntityType="MyERP.DataAccess.Store.accounts_receivable_ledger" store:Type="Tables" Schema="dbo" Table="accounts_receivable_ledger" />
+          <EntitySet Name="accounts_payable_ledgers" EntityType="MyERP.DataAccess.Store.accounts_payable_ledger" store:Type="Tables" Schema="dbo" Table="accounts_payable_ledger" />
+          <EntitySet Name="item_ledger_entries" EntityType="MyERP.DataAccess.Store.item_ledger_entry" store:Type="Tables" Schema="dbo" Table="item_ledger_entry" />
+          <EntitySet Name="general_ledger_entries" EntityType="MyERP.DataAccess.Store.general_ledger_entry" store:Type="Tables" Schema="dbo" Table="general_ledger_entry" />
           <AssociationSet Name="FK_client_user_profile" Association="MyERP.DataAccess.Store.FK_client_user_profile">
             <End Role="user" EntitySet="users" />
             <End Role="client" EntitySet="clients" />
@@ -622,6 +626,18 @@
           <AssociationSet Name="FK_account_currency" Association="MyERP.DataAccess.Store.FK_account_currency">
             <End Role="currency" EntitySet="currencies" />
             <End Role="account" EntitySet="accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cash_line_accounts_receivable_ledger" Association="MyERP.DataAccess.Store.FK_cash_line_accounts_receivable_ledger">
+            <End Role="accounts_receivable_ledger" EntitySet="accounts_receivable_ledgers" />
+            <End Role="cash_line" EntitySet="cash_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cash_line_accounts_receivable_ledger1" Association="MyERP.DataAccess.Store.FK_cash_line_accounts_receivable_ledger1">
+            <End Role="accounts_receivable_ledger" EntitySet="accounts_receivable_ledgers" />
+            <End Role="cash_line" EntitySet="cash_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cash_line_accounts_payable_ledger" Association="MyERP.DataAccess.Store.FK_cash_line_accounts_payable_ledger">
+            <End Role="accounts_payable_ledger" EntitySet="accounts_payable_ledgers" />
+            <End Role="cash_line" EntitySet="cash_lines" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
@@ -1364,6 +1380,7 @@
           <Property Name="total_payment" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_vat_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_payment_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="doc_sub_type" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="cash_line">
           <Key>
@@ -1381,24 +1398,22 @@
           </Property>
           <Property Name="amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="amount_lcy" Type="decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="debit_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
-          <Property Name="credit_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
-          <Property Name="debit_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
-          <Property Name="credit_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="job_id" Type="bigint" />
           <Property Name="line_no" Type="bigint" Nullable="false" />
           <Property Name="document_type" Type="tinyint" Nullable="false" />
           <Property Name="posting_date" Type="datetime2" Nullable="false" />
-          <Property Name="pay_for_document_id" Type="bigint" />
-          <Property Name="pay_amount_exch" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="accounts_receivable_ledger_id1" Type="bigint" />
+          <Property Name="accounts_rpamount_conv" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="accounts_payable_ledger_id" Type="bigint" />
+          <Property Name="accounts_receivable_ledger_id" Type="bigint" />
         </EntityType>
         <EntityType Name="account">
           <Key>
             <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
-          <Property Name="id" Type="bigint" Nullable="false" />
           <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
@@ -1407,6 +1422,30 @@
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
           <Property Name="currency_id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="accounts_receivable_ledger">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="accounts_payable_ledger">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="item_ledger_entry">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="general_ledger_entry">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
@@ -3172,6 +3211,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_cash_line_accounts_receivable_ledger">
+          <End Role="accounts_receivable_ledger" Type="MyERP.DataAccess.Store.accounts_receivable_ledger" Multiplicity="1" />
+          <End Role="cash_line" Type="MyERP.DataAccess.Store.cash_line" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="accounts_receivable_ledger">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cash_line">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cash_line_accounts_receivable_ledger1">
+          <End Role="accounts_receivable_ledger" Type="MyERP.DataAccess.Store.accounts_receivable_ledger" Multiplicity="0..1" />
+          <End Role="cash_line" Type="MyERP.DataAccess.Store.cash_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts_receivable_ledger">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cash_line">
+              <PropertyRef Name="accounts_receivable_ledger_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cash_line_accounts_payable_ledger">
+          <End Role="accounts_payable_ledger" Type="MyERP.DataAccess.Store.accounts_payable_ledger" Multiplicity="0..1" />
+          <End Role="cash_line" Type="MyERP.DataAccess.Store.cash_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts_payable_ledger">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cash_line">
+              <PropertyRef Name="accounts_receivable_ledger_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -3208,6 +3283,10 @@
           <EntitySet Name="CashHeaders" EntityType="MyERP.DataAccess.CashHeader" />
           <EntitySet Name="CashLines" EntityType="MyERP.DataAccess.CashLine" />
           <EntitySet Name="Accounts" EntityType="MyERP.DataAccess.Account" />
+          <EntitySet Name="AccountsReceivableLedgers" EntityType="MyERP.DataAccess.AccountsReceivableLedger" />
+          <EntitySet Name="AccountsPayableLedgers" EntityType="MyERP.DataAccess.AccountsPayableLedger" />
+          <EntitySet Name="ItemLedgerEntries" EntityType="MyERP.DataAccess.ItemLedgerEntry" />
+          <EntitySet Name="GeneralLedgerEntries" EntityType="MyERP.DataAccess.GeneralLedgerEntry" />
           <AssociationSet Name="User_Client_CreatedBySet" Association="MyERP.DataAccess.User_Client_CreatedBy">
             <End Role="RecCreatedByUser" EntitySet="Users" />
             <End Role="Clients" EntitySet="Clients" />
@@ -3799,6 +3878,14 @@
           <AssociationSet Name="Currency_AccountSet" Association="MyERP.DataAccess.Currency_Account">
             <End Role="Currency" EntitySet="Currencies" />
             <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="AccountsReceivableLedger_CashLineSet" Association="MyERP.DataAccess.AccountsReceivableLedger_CashLine">
+            <End Role="AccountsReceivableLedger" EntitySet="AccountsReceivableLedgers" />
+            <End Role="CashLines" EntitySet="CashLines" />
+          </AssociationSet>
+          <AssociationSet Name="AccountsPayableLedger_CashLineSet" Association="MyERP.DataAccess.AccountsPayableLedger_CashLine">
+            <End Role="AccountsPayableLedger" EntitySet="AccountsPayableLedgers" />
+            <End Role="CashLines" EntitySet="CashLines" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
@@ -4656,6 +4743,7 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="395da8c9-b24c-41c7-aad5-bc41bf24bed9" />
           <Property Name="DocumentType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="d07ab204-8199-4926-8f6a-5926693f2fca" />
+          <Property Name="DocSubType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="7f66357f-dd7e-432c-8f4c-e774a4c0e557" />
           <Property Name="DocSequenceId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a138242d-a2d9-4c1c-9f09-e009cff40ca5" />
           <Property Name="DocumentNo" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="cd736131-0b5f-453f-9cea-a486115bd815" />
           <Property Name="DocumentDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="56d19002-205f-4532-b3b2-042b08924ece" />
@@ -4712,23 +4800,22 @@
           </Property>
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="668f7219-28c3-42a9-8a2f-65d705a81092" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="cfbddc9d-bb06-447c-81e9-87824ca577b5" />
-          <Property Name="DebitAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="1a1487ac-4dbc-4ec1-9ee5-e54825904231" />
-          <Property Name="CreditAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="a397d2e3-a032-4586-a3df-8b3915d9467b" />
           <Property Name="AmountLCY" Type="Decimal" Nullable="false" ed:ValidateRequired="true" ed:Guid="24de3103-4836-48d2-b35c-0cd79860a9c6" />
-          <Property Name="DebitAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="8e022e8d-176f-4071-ac02-89fbe06934e6" />
-          <Property Name="CreditAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="9ac4477c-4852-4e6a-b206-c931082c0137" />
           <Property Name="JobId" Type="Int64" ed:ValidateRequired="false" ed:Guid="3c6628f9-961e-4446-bdec-2cfa137302ef" />
-          <Property Name="PayForDocumentId" Type="Int64" ed:ValidateRequired="false" ed:Guid="c461f180-4960-4972-801d-b8a62c358cea" />
-          <Property Name="PayAmountExch" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="4e05d22d-77e3-425b-bac9-d5ac4bd6cb92" />
+          <Property Name="AccountsPayableLedgerId" Type="Int64" ed:ValidateRequired="false" ed:Guid="2945abc1-6055-468c-95db-22affaee07e6" />
+          <Property Name="AccountsReceivableLedgerId" Type="Int64" ed:ValidateRequired="false" ed:Guid="37391106-b751-4f6a-8a48-b2f6b3a774d3" />
+          <Property Name="AccountsRPAmountConv" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="4e05d22d-77e3-425b-bac9-d5ac4bd6cb92" />
           <NavigationProperty Name="CashHeader" Relationship="MyERP.DataAccess.CashHeader_CashLine" FromRole="CashLines" ToRole="CashHeader" ed:Guid="454209fe-f6fc-4de2-bb24-89d14e7a4513" />
           <NavigationProperty Name="BusinessPartner" Relationship="MyERP.DataAccess.BusinessPartner_CashLine" FromRole="CashLines" ToRole="BusinessPartner" ed:Guid="f53b2222-30a9-4545-b556-9bdbef23fc20" />
           <NavigationProperty Name="CorrespAccount" Relationship="MyERP.DataAccess.Account_CashLine" FromRole="CashLines" ToRole="CorrespAccount" ed:Guid="d3b4037c-f5e6-4d2f-a986-8db15341713a" />
+          <NavigationProperty Name="AccountsReceivableLedger" Relationship="MyERP.DataAccess.AccountsReceivableLedger_CashLine" FromRole="CashLines" ToRole="AccountsReceivableLedger" ed:Guid="f93d012e-93c4-4de3-8907-99d9c4a1c071" />
+          <NavigationProperty Name="AccountsPayableLedger" Relationship="MyERP.DataAccess.AccountsPayableLedger_CashLine" FromRole="CashLines" ToRole="AccountsPayableLedger" ed:Guid="37137c20-3abb-4a6f-b1ed-922faa1ac335" />
         </EntityType>
         <EntityType Name="Account" ed:Guid="a54428be-02ef-41d1-a177-e1a9e6ef8781">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e9705edb-bd7c-4b9e-bfa6-36879116af54" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="e9705edb-bd7c-4b9e-bfa6-36879116af54" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="53e5f7b2-eeba-4075-8115-bdaca0e1569f" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="1df204d2-873a-4fc1-9a93-0197bd4679e2" />
           <Property Name="CurrencyId" Type="Int64" ed:ValidateRequired="false" ed:Guid="7ffca80a-f33c-406a-84e0-acab35c80f78" />
@@ -4743,6 +4830,30 @@
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Account_RecCreatedBy" FromRole="Accounts" ToRole="RecCreatedByUser" ed:Guid="39cbbfdd-ba88-46c4-b4aa-56c739f89b4e" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_Account_RecModifiedBy" FromRole="Accounts1" ToRole="RecModifiedByUser" ed:Guid="2419b8fe-8d77-4806-8c02-972782dca282" />
           <NavigationProperty Name="Currency" Relationship="MyERP.DataAccess.Currency_Account" FromRole="Account" ToRole="Currency" ed:Guid="69b9ae2f-c8e7-4450-abc6-475cd5ae06eb" />
+        </EntityType>
+        <EntityType Name="AccountsReceivableLedger" ed:Guid="4c8d23ad-6187-433b-b295-0fba16a8b709">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="8d098d41-3dc8-4003-89c3-e5db980efe22" />
+        </EntityType>
+        <EntityType Name="AccountsPayableLedger" ed:Guid="b00970ab-0e3f-4265-83c6-d976bb31fd2f">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5d790eb6-0c62-4a30-85c3-d48abad56c26" />
+        </EntityType>
+        <EntityType Name="ItemLedgerEntry" ed:Guid="830ad514-fe78-4a66-9898-0082cd169787">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="fe8cdf82-91b5-43a6-a2e4-ada4fca68ad8" />
+        </EntityType>
+        <EntityType Name="GeneralLedgerEntry" ed:Guid="bbb0ae76-48d3-4e2c-965d-4f6f8f286b98">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="a128c033-780d-403a-8e31-f42570a31b2d" />
         </EntityType>
         <Association Name="User_Client_CreatedBy" ed:Guid="cc64066d-a254-493f-8be0-7609622c4e6a">
           <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
@@ -6520,6 +6631,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="AccountsReceivableLedger_CashLine" ed:Guid="dd48a256-8654-45f3-a39f-968f0d372b97">
+          <End Role="AccountsReceivableLedger" Type="MyERP.DataAccess.AccountsReceivableLedger" Multiplicity="0..1" />
+          <End Role="CashLines" Type="MyERP.DataAccess.CashLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountsReceivableLedger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CashLines">
+              <PropertyRef Name="AccountsReceivableLedgerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AccountsPayableLedger_CashLine" ed:Guid="86faa6fb-b89c-4fbe-a606-3ee54e24536d">
+          <End Role="AccountsPayableLedger" Type="MyERP.DataAccess.AccountsPayableLedger" Multiplicity="0..1" />
+          <End Role="CashLines" Type="MyERP.DataAccess.CashLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountsPayableLedger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CashLines">
+              <PropertyRef Name="AccountsPayableLedgerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- MSL content -->
@@ -7269,6 +7404,7 @@
                 <ScalarProperty Name="TotalPayment" ColumnName="total_payment" />
                 <ScalarProperty Name="TotalVatAmountLCY" ColumnName="total_vat_amount_lcy" />
                 <ScalarProperty Name="TotalPaymentLCY" ColumnName="total_payment_lcy" />
+                <ScalarProperty Name="DocSubType" ColumnName="doc_sub_type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -7282,17 +7418,14 @@
                 <ScalarProperty Name="CorrespAccountId" ColumnName="corresp_account_id" />
                 <ScalarProperty Name="Amount" ColumnName="amount" />
                 <ScalarProperty Name="AmountLCY" ColumnName="amount_lcy" />
-                <ScalarProperty Name="DebitAmount" ColumnName="debit_amount" />
-                <ScalarProperty Name="CreditAmount" ColumnName="credit_amount" />
-                <ScalarProperty Name="DebitAmountLCY" ColumnName="debit_amount_lcy" />
-                <ScalarProperty Name="CreditAmountLCY" ColumnName="credit_amount_lcy" />
                 <ScalarProperty Name="Description" ColumnName="description" />
                 <ScalarProperty Name="JobId" ColumnName="job_id" />
                 <ScalarProperty Name="LineNo" ColumnName="line_no" />
                 <ScalarProperty Name="DocumentType" ColumnName="document_type" />
                 <ScalarProperty Name="PostingDate" ColumnName="posting_date" />
-                <ScalarProperty Name="PayForDocumentId" ColumnName="pay_for_document_id" />
-                <ScalarProperty Name="PayAmountExch" ColumnName="pay_amount_exch" />
+                <ScalarProperty Name="AccountsRPAmountConv" ColumnName="accounts_rpamount_conv" />
+                <ScalarProperty Name="AccountsPayableLedgerId" ColumnName="accounts_payable_ledger_id" />
+                <ScalarProperty Name="AccountsReceivableLedgerId" ColumnName="accounts_receivable_ledger_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -7309,6 +7442,34 @@
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
                 <ScalarProperty Name="CurrencyId" ColumnName="currency_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountsReceivableLedgers">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.AccountsReceivableLedger">
+              <MappingFragment StoreEntitySet="accounts_receivable_ledgers">
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountsPayableLedgers">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.AccountsPayableLedger">
+              <MappingFragment StoreEntitySet="accounts_payable_ledgers">
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemLedgerEntries">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.ItemLedgerEntry">
+              <MappingFragment StoreEntitySet="item_ledger_entries">
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeneralLedgerEntries">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.GeneralLedgerEntry">
+              <MappingFragment StoreEntitySet="general_ledger_entries">
+                <ScalarProperty Name="Id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
