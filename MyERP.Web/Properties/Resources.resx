@@ -351,4 +351,19 @@
   <data name="Cash_Receipt" xml:space="preserve">
     <value>Cash Receipt</value>
   </data>
+  <data name="Bank_Checkque" xml:space="preserve">
+    <value>Bank Checkque</value>
+  </data>
+  <data name="Bank_Receipt" xml:space="preserve">
+    <value>Bank Receipt</value>
+  </data>
+  <data name="Cash_Payment" xml:space="preserve">
+    <value>Cash Payment</value>
+  </data>
+  <data name="General_Ledger" xml:space="preserve">
+    <value>General Ledger</value>
+  </data>
+  <data name="One_Time_Business_Partner" xml:space="preserve">
+    <value>One Time Business Partner</value>
+  </data>
 </root>

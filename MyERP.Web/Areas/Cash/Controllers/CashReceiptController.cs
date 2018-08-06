@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Ext.Net;
 using Ext.Net.MVC;
+using MyERP.DataAccess;
 using MyERP.DataAccess.Enum;
 using MyERP.Web.Controllers;
 using MyERP.Web.Models;
+using MyERP.Web.Others;
+using Newtonsoft.Json;
 
 namespace MyERP.Web.Areas.Cash.Controllers
 {
@@ -83,25 +87,66 @@ namespace MyERP.Web.Areas.Cash.Controllers
         [HttpGet]
         public ActionResult _Maintenance(string id = null)
         {
+            MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
+            long clientId = user.ClientId ?? 0;
+            long organizationId = user.OrganizationId ?? 0;
+
+            if (clientId == 0 || organizationId == 0)
+                return this.Direct(false, Resources.Resources.User_dont_have_Client_or_Organization_Please_set);
+
+            Client client = new ClientRepository().Get(User);
+            long currencyLcyId = client.CurrencyLcyId ?? 0;
+            if (currencyLcyId == 0)
+                return this.Direct(false, "ERROR : Please set Client CurrencyLcy first");
+
+            var optionRepository = new OptionRepository();
+            long cashReceiptSequenceId = optionRepository.OptionParameter(organizationId, OptionParameter.CashReceiptSequenceId);
+            if (cashReceiptSequenceId == 0)
+                return this.Direct(false, "ERROR : Please set Option CashReceiptSequence first");
+
+            ViewData["CurrencyLCYId"] = currencyLcyId;
+            CurrencyRepository currencyRepository = new CurrencyRepository();
+            ViewData["Currency"] = currencyRepository.Get(filter: c => c.Id == currencyLcyId, includePaths: new string[] { "Organization" })
+                .Select(x => new CurrencyLookupViewModel()
+                {
+                    Id = x.Id,
+                    Code = x.Code,
+                    Description = x.Description,
+                    OrganizationCode = x.Organization.Code,
+                    Status = (DefaultStatusType)x.Status
+                }).ToList();
+
+            PreferenceViewModel preference = (PreferenceViewModel) Session["Preference"];
             var model = new CashHeaderEditViewModel()
             {
                 Id = null,
+                DocSequenceId = cashReceiptSequenceId,
+                DocumentDate = preference.WorkingDate,
+                PostingDate = preference.WorkingDate,
+                CurrencyId = currencyLcyId,
+                CurrencyFactor = 1,
+                CashLines = new List<CashLineEditViewModel>(),
                 Status = CashDocumentStatusType.Draft
             };
+
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.Get(c => c.Id == _id).SingleOrDefault();
+                var entity = repository.Get(c => c.Id == _id, new string[] {"CashLines"}).SingleOrDefault();
+
+                List<CashLineEditViewModel> cashLines = new List<CashLineEditViewModel>();
+
                 model = new CashHeaderEditViewModel()
                 {
                     Id = entity.Id,
                     Description = entity.Description,
+                    CashLines = cashLines,
                     Status = (CashDocumentStatusType)entity.Status,
                     Version = entity.Version
                 };
             }
 
-            return new Ext.Net.MVC.PartialViewResult() { Model = model };
+            return new Ext.Net.MVC.PartialViewResult() { Model = model, ViewData = ViewData };
         }
 
         [HttpPost]
@@ -221,6 +266,46 @@ namespace MyERP.Web.Areas.Cash.Controllers
             {
                 throw new ArgumentNullException(nameof(id));
             }
+
+            return this.Direct();
+        }
+
+        public ActionResult ChangeBusinessPartner(string selectedData)
+        {
+            BusinessPartnerLookupViewModel selectedPartner = JsonConvert.DeserializeObject<BusinessPartnerLookupViewModel>(selectedData, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+            this.GetCmp<TextField>("BusinessPartnerAddress").Value = selectedPartner.Address;
+            this.GetCmp<TextField>("BusinessPartnerContactName").Value = selectedPartner.ContactName;
+            
+            return this.Direct();
+        }
+
+        public ActionResult ChangeCurrency(string selectedData)
+        {
+            CurrencyLookupViewModel selectedCurrency = JsonConvert.DeserializeObject<CurrencyLookupViewModel>(selectedData, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+
+            MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
+            long clientId = user.ClientId ?? 0;
+            long organizationId = user.OrganizationId ?? 0;
+
+            if (clientId == 0 || organizationId == 0)
+            {
+                return this.Direct(false, Resources.Resources.User_dont_have_Client_or_Organization_Please_set);
+            }
+
+            Client client = (new ClientRepository()).Get(User);
+            long currencyLcyId = client.CurrencyLcyId ?? 0;
+            if (currencyLcyId == 0)
+                return this.Direct(false, "ERROR : Please set Client CurrencyLcy first");
+            
+
+            this.GetCmp<TextField>("CurrencyFactor").Value = selectedCurrency.Id == currencyLcyId ? 1 : 1;
+            this.GetCmp<TextField>("CurrencyFactor").ReadOnly = selectedCurrency.Id == currencyLcyId ? true : false;
 
             return this.Direct();
         }

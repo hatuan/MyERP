@@ -70,6 +70,16 @@ namespace MyERP.Web
                         return rootOption?.PurchReceiveSeqId ?? 0;
                     case DataAccess.Enum.OptionParameter.PurchInvoiceSeqId:
                         return rootOption?.PurchInvoiceSeqId ?? 0;
+                    case DataAccess.Enum.OptionParameter.GeneralLedgerSequenceId:
+                        return rootOption?.GeneralLedgerSequenceId ?? 0;
+                    case DataAccess.Enum.OptionParameter.CashReceiptSequenceId:
+                        return rootOption?.CashReceiptSequenceId ?? 0;
+                    case DataAccess.Enum.OptionParameter.CashPaymentSequenceId:
+                        return rootOption?.CashPaymentSequenceId ?? 0;
+                    case DataAccess.Enum.OptionParameter.BankReceiptSequenceId:
+                        return rootOption?.BankReceiptSequenceId ?? 0;
+                    case DataAccess.Enum.OptionParameter.BankCheckqueSequenceId:
+                        return rootOption?.BankCheckqueSequenceId ?? 0;
                 }
                 
             }
@@ -174,6 +184,61 @@ namespace MyERP.Web
                         else
                         {
                             return option?.PurchInvoiceSeqId ?? 0;
+
+                        }
+                    case DataAccess.Enum.OptionParameter.GeneralLedgerSequenceId:
+                        if (option.GeneralLedgerSequenceId == null)
+                        {
+                            var rootOption = this.Get(x => x.OrganizationId == rootOrganization.Id).SingleOrDefault();
+                            return rootOption?.GeneralLedgerSequenceId ?? 0;
+                        }
+                        else
+                        {
+                            return option?.GeneralLedgerSequenceId ?? 0;
+
+                        }
+                    case DataAccess.Enum.OptionParameter.CashReceiptSequenceId:
+                        if (option.CashReceiptSequenceId == null)
+                        {
+                            var rootOption = this.Get(x => x.OrganizationId == rootOrganization.Id).SingleOrDefault();
+                            return rootOption?.CashReceiptSequenceId ?? 0;
+                        }
+                        else
+                        {
+                            return option?.CashReceiptSequenceId ?? 0;
+
+                        }
+                    case DataAccess.Enum.OptionParameter.CashPaymentSequenceId:
+                        if (option.CashPaymentSequenceId == null)
+                        {
+                            var rootOption = this.Get(x => x.OrganizationId == rootOrganization.Id).SingleOrDefault();
+                            return rootOption?.CashPaymentSequenceId ?? 0;
+                        }
+                        else
+                        {
+                            return option?.CashPaymentSequenceId ?? 0;
+
+                        }
+                    case DataAccess.Enum.OptionParameter.BankReceiptSequenceId:
+                        if (option.BankReceiptSequenceId == null)
+                        {
+                            var rootOption = this.Get(x => x.OrganizationId == rootOrganization.Id).SingleOrDefault();
+                            return rootOption?.BankReceiptSequenceId ?? 0;
+                        }
+                        else
+                        {
+                            return option?.BankReceiptSequenceId ?? 0;
+
+                        }
+                    case DataAccess.Enum.OptionParameter.BankCheckqueSequenceId:
+                        if (option.BankCheckqueSequenceId == null)
+                        {
+                            var rootOption = this.Get(x => x.OrganizationId == rootOrganization.Id).SingleOrDefault();
+                            return rootOption?.BankCheckqueSequenceId ?? 0;
+                        }
+                        else
+                        {
+                            return option?.BankCheckqueSequenceId ?? 0;
 
                         }
                 }

@@ -54,7 +54,7 @@ namespace MyERP.Web.Controllers
             ViewData["Organizations"] = organizations;
 
             var noSequenceRepository = new NoSequenceRepository();
-            ViewData["NoSequences"] = noSequenceRepository.Get(filter: c => c.Status == (short)DefaultStatusType.Active, includePaths: new string[] {"Organization"})
+            ViewData["NoSequences"] = noSequenceRepository.Get(includePaths: new string[] {"Organization"})
                 .OrderBy(o => o.Code)
                 .Select(x => new NoSequenceViewModel()
                 {
@@ -75,12 +75,28 @@ namespace MyERP.Web.Controllers
                 ViewData["OrgHasOption"] = false;
                 option = optionRepository.Get(x => x.OrganizationId == rootOrganizationId).Single();
             }
+            var businessPartnerRepository = new BusinessPartnerRepository();
+            ViewData["BusinessPartner"] = businessPartnerRepository.Get(filter: c => c.Id == option.OneTimeBusinessPartnerId, includePaths: new string[] { "Organization" })
+                .Select(x => new BusinessPartnerLookupViewModel()
+                {
+                    Id = x.Id,
+                    Code = x.Code,
+                    Description = x.Description,
+                    OrganizationCode = x.Organization.Code,
+                    Status = (DefaultStatusType)x.Status
+                }).ToList();
 
             var model = new OptionEditViewModel()
             {
                 Id = option.Id,
                 OrganizationId = option.OrganizationId,
                 RootOrganizationId = rootOrganizationId,
+                OneTimeBusinessPartnerId = option.OneTimeBusinessPartnerId,
+                GeneralLedgerSequenceId = option.GeneralLedgerSequenceId,
+                CashReceiptSequenceId = option.CashReceiptSequenceId,
+                CashPaymentSequenceId = option.CashPaymentSequenceId,
+                BankReceiptSequenceId = option.BankReceiptSequenceId,
+                BankCheckqueSequenceId = option.BankCheckqueSequenceId,
                 PurchInvoiceSeqId = option.PurchInvoiceSeqId,
                 PurchOrderSequenceId = option.PurchOrderSequenceId,
                 PurchReceiveSeqId = option.PurchReceiveSeqId,
@@ -131,6 +147,13 @@ namespace MyERP.Web.Controllers
                         r.ErrorMessage = "Option has been changed or deleted! Please check";
                         return r;               
                     }
+
+                    _update.OneTimeBusinessPartnerId = model.OneTimeBusinessPartnerId;
+                    _update.GeneralLedgerSequenceId = model.GeneralLedgerSequenceId;
+                    _update.CashReceiptSequenceId = model.CashReceiptSequenceId;
+                    _update.CashPaymentSequenceId = model.CashPaymentSequenceId;
+                    _update.BankReceiptSequenceId = model.BankReceiptSequenceId;
+                    _update.BankCheckqueSequenceId = model.BankCheckqueSequenceId;
                     _update.PurchInvoiceSeqId = model.PurchInvoiceSeqId;
                     _update.PurchOrderSequenceId = model.PurchOrderSequenceId;
                     _update.PurchReceiveSeqId = model.PurchReceiveSeqId;
@@ -161,6 +184,12 @@ namespace MyERP.Web.Controllers
                     {
                         ClientId = clientId,
                         OrganizationId = organizationId,
+                        OneTimeBusinessPartnerId = model.OneTimeBusinessPartnerId,
+                        GeneralLedgerSequenceId = model.GeneralLedgerSequenceId,
+                        CashReceiptSequenceId = model.CashReceiptSequenceId,
+                        CashPaymentSequenceId = model.CashPaymentSequenceId,
+                        BankReceiptSequenceId = model.BankReceiptSequenceId,
+                        BankCheckqueSequenceId = model.BankCheckqueSequenceId,
                         PurchInvoiceSeqId = model.PurchInvoiceSeqId,
                         PurchOrderSequenceId = model.PurchOrderSequenceId,
                         PurchReceiveSeqId = model.PurchReceiveSeqId,

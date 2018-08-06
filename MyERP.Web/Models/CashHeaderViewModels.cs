@@ -110,6 +110,10 @@ namespace MyERP.Web.Models
         [Required]
         public DateTime DocumentDate { get; set; }
 
+        [Display(Name = "Posting Date")]
+        [Required]
+        public DateTime PostingDate { get; set; }
+
         [Display(Name = "Account")]
         [Required]
         public long AccountId { get; set; }

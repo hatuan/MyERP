@@ -639,6 +639,26 @@
             <End Role="accounts_payable_ledger" EntitySet="accounts_payable_ledgers" />
             <End Role="cash_line" EntitySet="cash_lines" />
           </AssociationSet>
+          <AssociationSet Name="FK_option_no_sequence7" Association="MyERP.DataAccess.Store.FK_option_no_sequence7">
+            <End Role="no_sequence" EntitySet="no_sequences" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_option_no_sequence8" Association="MyERP.DataAccess.Store.FK_option_no_sequence8">
+            <End Role="no_sequence" EntitySet="no_sequences" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_option_no_sequence9" Association="MyERP.DataAccess.Store.FK_option_no_sequence9">
+            <End Role="no_sequence" EntitySet="no_sequences" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_option_no_sequence10" Association="MyERP.DataAccess.Store.FK_option_no_sequence10">
+            <End Role="no_sequence" EntitySet="no_sequences" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_option_no_sequence11" Association="MyERP.DataAccess.Store.FK_option_no_sequence11">
+            <End Role="no_sequence" EntitySet="no_sequences" />
+            <End Role="option" EntitySet="options" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -1252,6 +1272,11 @@
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="status" Type="smallint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="general_ledger_sequence_id" Type="bigint" />
+          <Property Name="cash_receipt_sequence_id" Type="bigint" />
+          <Property Name="cash_payment_sequence_id" Type="bigint" />
+          <Property Name="bank_receipt_sequence_id" Type="bigint" />
+          <Property Name="bank_checkque_sequence_id" Type="bigint" />
         </EntityType>
         <EntityType Name="purchase_header">
           <Key>
@@ -3247,6 +3272,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_option_no_sequence7">
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="0..1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="no_sequence">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="general_ledger_sequence_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_option_no_sequence8">
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="0..1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="no_sequence">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="cash_receipt_sequence_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_option_no_sequence9">
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="0..1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="no_sequence">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="cash_receipt_sequence_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_option_no_sequence10">
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="0..1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="no_sequence">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="bank_receipt_sequence_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_option_no_sequence11">
+          <End Role="no_sequence" Type="MyERP.DataAccess.Store.no_sequence" Multiplicity="0..1" />
+          <End Role="option" Type="MyERP.DataAccess.Store.option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="no_sequence">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="option">
+              <PropertyRef Name="bank_checkque_sequence_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -3886,6 +3971,26 @@
           <AssociationSet Name="AccountsPayableLedger_CashLineSet" Association="MyERP.DataAccess.AccountsPayableLedger_CashLine">
             <End Role="AccountsPayableLedger" EntitySet="AccountsPayableLedgers" />
             <End Role="CashLines" EntitySet="CashLines" />
+          </AssociationSet>
+          <AssociationSet Name="NoSequence_Option_GeneralLedgerSet" Association="MyERP.DataAccess.NoSequence_Option_GeneralLedger">
+            <End Role="GeneralLedgerSequence" EntitySet="NoSequences" />
+            <End Role="Options7" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="NoSequence_Option_CashReceiptSet" Association="MyERP.DataAccess.NoSequence_Option_CashReceipt">
+            <End Role="CashReceiptSequence" EntitySet="NoSequences" />
+            <End Role="Options8" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="NoSequence_Option_CashPaymentSet" Association="MyERP.DataAccess.NoSequence_Option_CashPayment">
+            <End Role="CashPaymentSequence" EntitySet="NoSequences" />
+            <End Role="Options9" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="NoSequence_Option_BankReceiptSet" Association="MyERP.DataAccess.NoSequence_Option_BankReceipt">
+            <End Role="BankReceiptSequence" EntitySet="NoSequences" />
+            <End Role="Options10" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="NoSequence_Option_BankCheckqueSet" Association="MyERP.DataAccess.NoSequence_Option_BankCheckque">
+            <End Role="BankCheckque" EntitySet="NoSequences" />
+            <End Role="Options11" EntitySet="Options" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
@@ -4606,6 +4711,11 @@
           <Property Name="PurchReceiveSeqId" Type="Int64" ed:ValidateRequired="false" ed:Guid="d5566720-5518-4466-9cd1-c24d1713a690" />
           <Property Name="PurchInvoiceSeqId" Type="Int64" ed:ValidateRequired="false" ed:Guid="22455b20-8bc0-4c71-8cd0-988af02c37c5" />
           <Property Name="OneTimeBusinessPartnerId" Type="Int64" ed:ValidateRequired="false" ed:Guid="6b308d01-5bb4-426a-9f92-197fe8a18bbf" />
+          <Property Name="GeneralLedgerSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="9db2b0ef-60a5-4126-aeec-75b9dabc3e87" />
+          <Property Name="CashReceiptSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="e341d3a4-0a43-45de-be6d-31182d13c689" />
+          <Property Name="CashPaymentSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="397ac29d-9e80-4204-b8af-1ebf978b96d6" />
+          <Property Name="BankReceiptSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="6296c0ac-e773-48ec-bc7a-60869c15fa3e" />
+          <Property Name="BankCheckqueSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="f3606035-e770-46eb-9acc-40138335edfc" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="19193184-9f47-49da-a79e-1702ab8b2b0d" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f76d4599-0080-4766-8af6-b593b2cb5826" />
           <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="e179bfd9-f149-49cf-a633-f4355fdc1329" />
@@ -4627,6 +4737,11 @@
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Option_RecCreatedBy" FromRole="Options1" ToRole="RecCreatedByUser" ed:Guid="25bdacd5-af56-4937-a266-76752baa5205" />
           <NavigationProperty Name="SalesPosLocation" Relationship="MyERP.DataAccess.Location_Option_SalesPos" FromRole="Option" ToRole="SalesPosLocation" ed:Guid="421a06bb-0004-426b-9cf8-362358825056" />
           <NavigationProperty Name="OneTimeBusinessPartner" Relationship="MyERP.DataAccess.BusinessPartner_Option_OneTime" FromRole="Option" ToRole="OneTimeBusinessPartner" ed:Guid="42f89ee9-b240-4d20-9ce8-6070e00ad7f6" />
+          <NavigationProperty Name="GeneralLedgerSequence" Relationship="MyERP.DataAccess.NoSequence_Option_GeneralLedger" FromRole="Options7" ToRole="GeneralLedgerSequence" ed:Guid="4a6ccbc8-ad38-4c1e-9bfb-5d606cdc12f5" />
+          <NavigationProperty Name="CashReceiptSequence" Relationship="MyERP.DataAccess.NoSequence_Option_CashReceipt" FromRole="Options8" ToRole="CashReceiptSequence" ed:Guid="d2ef5ba4-8dae-42a9-a00b-0e088c0dbe0a" />
+          <NavigationProperty Name="CashPaymentSequence" Relationship="MyERP.DataAccess.NoSequence_Option_CashPayment" FromRole="Options9" ToRole="CashPaymentSequence" ed:Guid="e1f5c17d-3bb1-4176-8455-e7fc38ebabf6" />
+          <NavigationProperty Name="BankReceiptSequence" Relationship="MyERP.DataAccess.NoSequence_Option_BankReceipt" FromRole="Options10" ToRole="BankReceiptSequence" ed:Guid="74fe3018-d881-450d-887b-e1383bd0ff28" />
+          <NavigationProperty Name="BankCheckque" Relationship="MyERP.DataAccess.NoSequence_Option_BankCheckque" FromRole="Options11" ToRole="BankCheckque" ed:Guid="34899b73-c18c-4d82-b556-59b37021bf83" />
         </EntityType>
         <EntityType Name="PurchaseHeader" ed:Guid="f8188cf8-e65e-44ac-8567-473cee33819e">
           <Key>
@@ -6655,6 +6770,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="NoSequence_Option_GeneralLedger" ed:Guid="a7188644-a4a5-49dd-acb4-ec509ec944dd">
+          <End Role="GeneralLedgerSequence" Type="MyERP.DataAccess.NoSequence" Multiplicity="0..1" />
+          <End Role="Options7" Type="MyERP.DataAccess.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GeneralLedgerSequence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options7">
+              <PropertyRef Name="GeneralLedgerSequenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NoSequence_Option_CashReceipt" ed:Guid="539b881d-5a68-45fe-ae23-317d7eb8ffda">
+          <End Role="CashReceiptSequence" Type="MyERP.DataAccess.NoSequence" Multiplicity="0..1" />
+          <End Role="Options8" Type="MyERP.DataAccess.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CashReceiptSequence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options8">
+              <PropertyRef Name="CashReceiptSequenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NoSequence_Option_CashPayment" ed:Guid="549c0d44-c896-4f04-8c9e-33b0d88ade3c">
+          <End Role="CashPaymentSequence" Type="MyERP.DataAccess.NoSequence" Multiplicity="0..1" />
+          <End Role="Options9" Type="MyERP.DataAccess.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CashPaymentSequence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options9">
+              <PropertyRef Name="CashPaymentSequenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NoSequence_Option_BankReceipt" ed:Guid="5f53b6a8-71ae-4722-bcba-34d427192665">
+          <End Role="BankReceiptSequence" Type="MyERP.DataAccess.NoSequence" Multiplicity="1" />
+          <End Role="Options10" Type="MyERP.DataAccess.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankReceiptSequence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options10">
+              <PropertyRef Name="BankReceiptSequenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NoSequence_Option_BankCheckque" ed:Guid="af5c9f63-a709-4d5c-8a01-218e2630b579">
+          <End Role="BankCheckque" Type="MyERP.DataAccess.NoSequence" Multiplicity="0..1" />
+          <End Role="Options11" Type="MyERP.DataAccess.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankCheckque">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Options11">
+              <PropertyRef Name="BankCheckqueSequenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- MSL content -->
@@ -7277,6 +7452,11 @@
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="SalesPosLocationId" ColumnName="sales_pos_location_id" />
                 <ScalarProperty Name="OneTimeBusinessPartnerId" ColumnName="one_time_business_partner_id" />
+                <ScalarProperty Name="GeneralLedgerSequenceId" ColumnName="general_ledger_sequence_id" />
+                <ScalarProperty Name="CashReceiptSequenceId" ColumnName="cash_receipt_sequence_id" />
+                <ScalarProperty Name="CashPaymentSequenceId" ColumnName="cash_payment_sequence_id" />
+                <ScalarProperty Name="BankReceiptSequenceId" ColumnName="bank_receipt_sequence_id" />
+                <ScalarProperty Name="BankCheckqueSequenceId" ColumnName="bank_checkque_sequence_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

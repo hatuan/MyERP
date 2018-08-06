@@ -57,6 +57,21 @@ namespace MyERP.Web.Models
         [Required]
         public long RootOrganizationId { get; set; }
 
+        [Display(Name = "General_Ledger", ResourceType = typeof(Resources.Resources))]
+        public long? GeneralLedgerSequenceId { get; set; }
+
+        [Display(Name = "Cash_Receipt", ResourceType = typeof(Resources.Resources))]
+        public long? CashReceiptSequenceId { get; set; }
+
+        [Display(Name = "Cash_Payment", ResourceType = typeof(Resources.Resources))]
+        public long? CashPaymentSequenceId { get; set; }
+
+        [Display(Name = "Bank_Receipt", ResourceType = typeof(Resources.Resources))]
+        public long? BankReceiptSequenceId { get; set; }
+
+        [Display(Name = "Bank_Checkque", ResourceType = typeof(Resources.Resources))]
+        public long? BankCheckqueSequenceId { get; set; }
+
         [Display(Name = "Sales_POS", ResourceType = typeof(Resources.Resources))]
         public long? SalesPosSequenceId { get; set; }
 
@@ -77,6 +92,9 @@ namespace MyERP.Web.Models
 
         [Display(Name = "Purchase_Invoice", ResourceType = typeof(Resources.Resources))]
         public long? PurchInvoiceSeqId { get; set; }
+
+        [Display(Name = "One_Time_Business_Partner", ResourceType = typeof(Resources.Resources))]
+        public long? OneTimeBusinessPartnerId { get; set; }
 
         [Required]
         [Display(Name = "Status", ResourceType = typeof(Resources.Resources))]

@@ -79,6 +79,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bank Checkque.
+        /// </summary>
+        public static string Bank_Checkque {
+            get {
+                return ResourceManager.GetString("Bank_Checkque", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank Receipt.
+        /// </summary>
+        public static string Bank_Receipt {
+            get {
+                return ResourceManager.GetString("Bank_Receipt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Business Partner.
         /// </summary>
         public static string Business_Partner {
@@ -102,6 +120,15 @@ namespace Resources {
         public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cash Payment.
+        /// </summary>
+        public static string Cash_Payment {
+            get {
+                return ResourceManager.GetString("Cash_Payment", resourceCulture);
             }
         }
         
@@ -295,6 +322,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to General Ledger.
+        /// </summary>
+        public static string General_Ledger {
+            get {
+                return ResourceManager.GetString("General_Ledger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {
@@ -417,6 +453,15 @@ namespace Resources {
         public static string Ok {
             get {
                 return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One Time Business Partner.
+        /// </summary>
+        public static string One_Time_Business_Partner {
+            get {
+                return ResourceManager.GetString("One_Time_Business_Partner", resourceCulture);
             }
         }
         

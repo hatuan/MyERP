@@ -27,5 +27,15 @@ namespace MyERP.DataAccess.Enum
         PurchInvoiceSeqId = 7,
         [System.ComponentModel.DataAnnotations.Display(Name = "OneTimeBusinessPartnerId")]
         OneTimeBusinessPartnerId = 8,
+        [System.ComponentModel.DataAnnotations.Display(Name = "GeneralLedgerSequenceId")]
+        GeneralLedgerSequenceId = 9,
+        [System.ComponentModel.DataAnnotations.Display(Name = "CashReceiptSequenceId")]
+        CashReceiptSequenceId = 10,
+        [System.ComponentModel.DataAnnotations.Display(Name = "CashPaymentSequenceId")]
+        CashPaymentSequenceId = 11,
+        [System.ComponentModel.DataAnnotations.Display(Name = "BankReceiptSequenceId")]
+        BankReceiptSequenceId = 12,
+        [System.ComponentModel.DataAnnotations.Display(Name = "BankCheckqueSequenceId")]
+        BankCheckqueSequenceId = 13,
     }
 }

@@ -72,4 +72,24 @@ namespace MyERP.Web.Models
 
         public Int64 Version { get; set; }
     }
+
+    public class CurrencyLookupViewModel
+    {
+        [Required]
+        public Int64 Id { get; set; }
+
+        [Display(Name = "Organization")]
+        public String OrganizationCode { get; set; }
+
+        [Required]
+        [Display(Name = "Code")]
+        public String Code { get; set; }
+
+        [Required]
+        [Display(Name = "Description")]
+        public String Description { get; set; }
+
+        [Display(Name = "Status")]
+        public DefaultStatusType Status { get; set; }
+    }
 }
