@@ -19,7 +19,12 @@
                                                           new ModelField("Id", ModelFieldType.Int),
                                                           new ModelField("OrganizationCode", ModelFieldType.String),
                                                           new ModelField("Code", ModelFieldType.String),
-                                                          new ModelField("Description", ModelFieldType.String)))
+                                                          new ModelField("Description", ModelFieldType.String))
+                                                  )
+                                                  .Parameters(p =>
+                                                  {
+                                                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                                                  })
                                                   .Data(ViewData["Items"]),
                                               Html.X().Store().AutoLoad(false).AutoDestroy(false)
                                                   .ID("SalesCodeStore")
@@ -108,6 +113,7 @@
                                                           })
                                                           .Store(Html.X().Store()
                                                               .ID("SalesPriceGridStore")
+                                                              .PageSize(15)
                                                               .Model(
                                                                   Html.X().Model()
                                                                       .IDProperty("ExtId")
@@ -215,7 +221,29 @@
                                                                                         </tpl>
                                                                                     </text>))
                                                                                 .MinWidth(400))
-                                                                      .StoreID("ItemStore")
+                                                                      .Store(Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                                                                          .Proxy(Html.X().AjaxProxy()
+                                                                              .Url(Url.Action("LookupData", "Index", new { area = "Item" }))
+                                                                              .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                                                                          .Model(Html.X().Model()
+                                                                              .IDProperty("Id")
+                                                                              .Fields(
+                                                                                  new ModelField("Id", ModelFieldType.Int),
+                                                                                  new ModelField("OrganizationCode", ModelFieldType.String),
+                                                                                  new ModelField("Code", ModelFieldType.String),
+                                                                                  new ModelField("Description", ModelFieldType.String))
+                                                                          )
+                                                                          .Parameters(p =>
+                                                                          {
+                                                                              p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                                                                          })
+                                                                          .Data(ViewData["Items"])
+                                                                      )
+                                                                      .Listeners(ls =>
+                                                                      {
+                                                                          ls.BeforeQuery.Handler = @"var itemId = this.record.get('ItemId');
+                                                                                      this.getStore().id = itemId";
+                                                                      })
                                                                   )
                                                                   .Listeners(ls =>
                                                                   {
@@ -288,6 +316,36 @@
                                                                                             this.setValue(v);
                                                                                             this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
                                                                   })));
+                                                          })
+                                                          .BottomBar(items =>
+                                                          {
+                                                              items.Add(Html.X().PagingToolbar().DisplayInfo(true)
+                                                                  .Items(
+                                                                      Html.X().Label().Text("Page size:"),
+                                                                      Html.X().ToolbarSpacer().Width(10),
+                                                                      Html.X().ComboBox().Width(80)
+                                                                          .Editable(false)
+                                                                          .Items(
+                                                                              Html.X().ListItem().Text("10"),
+                                                                              Html.X().ListItem().Text("15"),
+                                                                              Html.X().ListItem().Text("20")
+                                                                          )
+                                                                          .SelectedItems(
+                                                                              Html.X().ListItem().Value("15")
+                                                                          )
+                                                                          .Listeners(ls =>
+                                                                          {
+                                                                              ls.Select.Fn = @"function (item, records) {
+                                                                                                    var curPageSize = #{SalesPriceGridStore}.pageSize,
+                                                                                                    wantedPageSize = parseInt(item.getValue(), 10);
+                                                                                                    if (wantedPageSize != curPageSize) {
+                                                                                                        #{SalesPriceGridStore}.pageSize = wantedPageSize;
+                                                                                                        #{SalesPriceGridStore}.reload();
+                                                                                                        #{SalesPriceGridStore}.loadPage(1);
+                                                                                                    }
+                                                                                                }";
+                                                                          })
+                                                                  ));
                                                           })
                                                           .SelectionModel(Html.X().RowSelectionModel().Mode(SelectionMode.Single))
                                                     )

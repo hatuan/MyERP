@@ -76,15 +76,15 @@ namespace MyERP.Web.Areas.Item.Controllers
         {
             if (id != null && id > 0)
             {
-                var entity = repository.Get(c => c.Id == id, new []{ "Organization" }).Single();
-                var data = new ItemGroupViewModel()
+                var data = repository.Get(c => c.Id == id, new []{ "Organization" }).Select( c =>
+                new ItemGroupViewModel()
                 {
-                    Code = entity.Code,
-                    Id = entity.Id,
-                    Description = entity.Description,
-                    OrganizationCode = entity.Organization.Code,
-                    Status = (DefaultStatusType)entity.Status
-                };
+                    Code = c.Code,
+                    Id = c.Id,
+                    Description = c.Description,
+                    OrganizationCode = c.Organization.Code,
+                    Status = (DefaultStatusType)c.Status
+                });
                 return this.Store(data, 1);
             }
             else

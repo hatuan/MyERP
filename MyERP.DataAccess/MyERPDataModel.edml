@@ -659,6 +659,10 @@
             <End Role="no_sequence" EntitySet="no_sequences" />
             <End Role="option" EntitySet="options" />
           </AssociationSet>
+          <AssociationSet Name="FK_account_account" Association="MyERP.DataAccess.Store.FK_account_account">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="account1" EntitySet="accounts" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -1447,6 +1451,9 @@
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
           <Property Name="currency_id" Type="bigint" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="parent_id" Type="bigint" />
         </EntityType>
         <EntityType Name="accounts_receivable_ledger">
           <Key>
@@ -3332,6 +3339,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_account_account">
+          <End Role="account" Type="MyERP.DataAccess.Store.account" Multiplicity="0..1" />
+          <End Role="account1" Type="MyERP.DataAccess.Store.account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="account1">
+              <PropertyRef Name="parent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -3991,6 +4010,10 @@
           <AssociationSet Name="NoSequence_Option_BankCheckqueSet" Association="MyERP.DataAccess.NoSequence_Option_BankCheckque">
             <End Role="BankCheckque" EntitySet="NoSequences" />
             <End Role="Options11" EntitySet="Options" />
+          </AssociationSet>
+          <AssociationSet Name="Account_AccountSet" Association="MyERP.DataAccess.Account_Account">
+            <End Role="Parent" EntitySet="Accounts" />
+            <End Role="Childs" EntitySet="Accounts" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
@@ -4933,6 +4956,7 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="e9705edb-bd7c-4b9e-bfa6-36879116af54" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="53e5f7b2-eeba-4075-8115-bdaca0e1569f" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="1df204d2-873a-4fc1-9a93-0197bd4679e2" />
+          <Property Name="ParentId" Type="Int64" ed:ValidateRequired="false" ed:Guid="5ed33719-27c6-4597-8a79-1274f1aa8120" />
           <Property Name="CurrencyId" Type="Int64" ed:ValidateRequired="false" ed:Guid="7ffca80a-f33c-406a-84e0-acab35c80f78" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5b65ff20-d858-4982-b540-bae7b6a95ee2" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="23561fd7-000a-4f7e-b73f-2ccad01059de" />
@@ -4940,11 +4964,15 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="808920e8-2fa3-4dd1-9388-a9e46bc0e66d" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="9d0bb8fa-917c-4f59-81dd-78c5ba1c8398" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e7727bc1-af9e-45fb-9514-84a4b195c2f1" />
+          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="96252b46-717d-4a01-8dfe-17586c74a3f4" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e30f5a14-e99b-4c6d-8390-3c550756c56c" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_Account" FromRole="Accounts" ToRole="Client" ed:Guid="3b0abe87-6aed-4375-82a7-d01399aac290" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_Account" FromRole="Accounts" ToRole="Organization" ed:Guid="20642fbe-7d38-4f22-80c6-e465b3e01b50" />
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Account_RecCreatedBy" FromRole="Accounts" ToRole="RecCreatedByUser" ed:Guid="39cbbfdd-ba88-46c4-b4aa-56c739f89b4e" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_Account_RecModifiedBy" FromRole="Accounts1" ToRole="RecModifiedByUser" ed:Guid="2419b8fe-8d77-4806-8c02-972782dca282" />
           <NavigationProperty Name="Currency" Relationship="MyERP.DataAccess.Currency_Account" FromRole="Account" ToRole="Currency" ed:Guid="69b9ae2f-c8e7-4450-abc6-475cd5ae06eb" />
+          <NavigationProperty Name="Childs" Relationship="MyERP.DataAccess.Account_Account" FromRole="Parent" ToRole="Childs" ed:Guid="ebda1ba6-df5f-4289-818b-02e73e685177" />
+          <NavigationProperty Name="Parent" Relationship="MyERP.DataAccess.Account_Account" FromRole="Childs" ToRole="Parent" ed:Guid="69034b68-ccc5-414d-848c-880403a9522a" />
         </EntityType>
         <EntityType Name="AccountsReceivableLedger" ed:Guid="4c8d23ad-6187-433b-b295-0fba16a8b709">
           <Key>
@@ -6830,6 +6858,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Account_Account" ed:Guid="30df777a-9fed-4135-98bd-3509c3232e7c">
+          <End Role="Parent" Type="MyERP.DataAccess.Account" Multiplicity="0..1" />
+          <End Role="Childs" Type="MyERP.DataAccess.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Childs">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- MSL content -->
@@ -7622,6 +7662,9 @@
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
                 <ScalarProperty Name="CurrencyId" ColumnName="currency_id" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="ParentId" ColumnName="parent_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

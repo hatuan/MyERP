@@ -76,15 +76,15 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
         {
             if (id != null && id > 0)
             {
-                var entity = repository.Get(c => c.Id == id, new string[] { "Organization" }).Single();
-                var data = new BusinessPartnerGroupViewModel()
+                var data = repository.Get(c => c.Id == id, new string[] { "Organization" }).Select(c=>
+                new BusinessPartnerGroupViewModel()
                 {
-                    Code = entity.Code,
-                    Id = entity.Id,
-                    Description = entity.Description,
-                    OrganizationCode = entity.Organization.Code,
-                    Status = (DefaultStatusType)entity.Status
-                };
+                    Code = c.Code,
+                    Id = c.Id,
+                    Description = c.Description,
+                    OrganizationCode = c.Organization.Code,
+                    Status = (DefaultStatusType)c.Status
+                });
                 return this.Store(data, 1);
             }
             else

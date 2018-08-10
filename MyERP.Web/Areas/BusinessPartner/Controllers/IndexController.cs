@@ -83,23 +83,23 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
 
         public ActionResult LookupData(StoreRequestParameters parameters, long? id = null)
         {
-            if (id != null && id > 0)
+            if (id != null && id > 0 && String.IsNullOrEmpty(parameters.Query))
             {
-                var entity = repository.Get(c => c.Id == id, new []{ "Organization" }).FirstOrDefault();
-                var data = new BusinessPartnerLookupViewModel()
-                {
-                    Code = entity.Code,
-                    Id = entity.Id,
-                    Description = entity.Description,
-                    Address = entity.Address,
-                    Telephone = entity.Telephone,
-                    Mobilephone = entity.Mobilephone,
-                    Mail = entity.Mail,
-                    VatCode = entity.VatCode,
-                    ContactName = entity.ContactName,
-                    OrganizationCode = entity.Organization.Code,
-                    Status = (DefaultStatusType)entity.Status
-                };
+                var data = repository.Get(c => c.Id == id, new []{ "Organization" }).Select(c =>
+                    new BusinessPartnerLookupViewModel()
+                    {
+                        Code = c.Code,
+                        Id = c.Id,
+                        Description = c.Description,
+                        Address = c.Address,
+                        Telephone = c.Telephone,
+                        Mobilephone = c.Mobilephone,
+                        Mail = c.Mail,
+                        VatCode = c.VatCode,
+                        ContactName = c.ContactName,
+                        OrganizationCode = c.Organization.Code,
+                        Status = (DefaultStatusType)c.Status
+                    });
                 return this.Store(data, 1);
             }
             else

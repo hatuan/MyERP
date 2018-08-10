@@ -429,5 +429,40 @@ namespace MyERP.Web.Controllers
                 }
             };
         }
+
+        //
+        // CheckDuplicateAccount
+        public JsonResult CheckDuplicateAccount(AccountEditViewModel entity)
+        {
+            var repository = new AccountRepository();
+            object exists;
+            if (entity.Id != null && entity.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(entity.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != entity.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(entity.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return Json(exists != null, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ExtCheckDuplicateAccount(AccountEditViewModel entity)
+        {
+            var repository = new AccountRepository();
+            object exists;
+            if (entity.Id != null && entity.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(entity.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != entity.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(entity.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return new JsonResult
+            {
+                Data = new
+                {
+                    serviceResponse = new
+                    {
+                        valid = exists == null
+                    }
+                }
+            };
+        }
     }
 }

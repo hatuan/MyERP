@@ -18,21 +18,21 @@ namespace MyERP.DataAccess.Enum
 
     public enum CashReceiptDocumentSubType
     {
-        [System.ComponentModel.DataAnnotations.Display(Name = "Cash Receipt", Order = 1)]
-        CashReceipt = 0,
-        [System.ComponentModel.DataAnnotations.Display(Name = "Cash Receipt Multi Business Partner", Order = 2)]
-        CashReceiptMultiBusinessPartner = 1,
-        [System.ComponentModel.DataAnnotations.Display(Name = "Cash Receipt For Sales Invoice", Order = 3)]
-        CashReceiptForSalesInvoice = 3,
+        [System.ComponentModel.DataAnnotations.Display(Name = "Cash Receipt From One BP", Order = 1)]
+        CashReceipt = 1,
+        //[System.ComponentModel.DataAnnotations.Display(Name = "Cash Receipt From Multi BP", Order = 2)]
+        //CashReceiptMultiBusinessPartner = 2,
+        //[System.ComponentModel.DataAnnotations.Display(Name = "Cash Receipt From Sales Invoice", Order = 3)]
+        //CashReceiptForSalesInvoice = 3,
     }
 
     public enum CashPaymentDocumentSubType
     {
-        [System.ComponentModel.DataAnnotations.Display(Name = "Cash Payment", Order = 1)]
-        CashPayment = 0,
-        [System.ComponentModel.DataAnnotations.Display(Name = "Cash Payment Multi Business Partner", Order = 2)]
-        CashPaymentMultiBusinessPartner = 1,
-        [System.ComponentModel.DataAnnotations.Display(Name = "Cash Payment For Purchase Invoice", Order = 3)]
-        CashPaymentForPurchaseInvoice = 3,
+        [System.ComponentModel.DataAnnotations.Display(Name = "Cash Payment From One BP", Order = 1)]
+        CashPayment = 1,
+        //[System.ComponentModel.DataAnnotations.Display(Name = "Cash Payment From Multi BP", Order = 2)]
+        //CashPaymentMultiBusinessPartner = 2,
+        //[System.ComponentModel.DataAnnotations.Display(Name = "Cash Payment From Purchase Invoice", Order = 3)]
+        //CashPaymentForPurchaseInvoice = 3,
     }
 }

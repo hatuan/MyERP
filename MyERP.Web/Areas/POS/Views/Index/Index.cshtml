@@ -76,7 +76,7 @@
             switch (e.field) {
             case "UomId":
                 field.allQuery = e.record.get('ItemId');
-                field.store.loadData(e.record.data.ItemUoms);
+                field.store.loadData(e.record.data.ItemUoms); //ItemUoms is array -> dont need convert to array before loadData
                 break;
             }
         };

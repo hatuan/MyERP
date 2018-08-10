@@ -99,6 +99,9 @@ namespace MyERP.Web.Models
     {
         public long? Id { get; set; }
 
+        [Display(Name = "Document Subtype")]
+        public CashReceiptDocumentSubType DocSubType { get; set; }
+
         [Display(Name = "Document No")]
         public string DocumentNo { get; set; }
 
@@ -160,13 +163,10 @@ namespace MyERP.Web.Models
         public Decimal TotalPayment { get; set; }
 
         [EnsureMinimumElements(1, ErrorMessage = "At least a Cash Line is required")]
-        [JsonProperty("CashLines")]
         public List<CashLineEditViewModel> CashLines { get; set; }
 
-        [JsonProperty("Version")]
         public Int64 Version { get; set; }
 
-        [JsonProperty("Status")]
         public CashDocumentStatusType Status { get; set; }
 
         [Display(Name = "Created By")]

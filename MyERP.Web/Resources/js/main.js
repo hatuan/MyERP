@@ -105,3 +105,47 @@ if (window.location.href.indexOf("#") > 0) {
         }, 100, window);
     }, window);
 }
+
+var CashReceipt = {
+    CorrespAccountRenderer: function(value, metadata, record, rowIndex, colIndex, store) {
+        if (!Ext.isEmpty(record.data.CorrespAccountCode) && value > 0) {
+            return record.data.CorrespAccountCode;
+        }
+        return "";
+    },
+
+    CashLineBeforeEdit: function (editor, e) {
+        e.grid.getSelectionModel().select(e.rowIdx, true);
+
+        var field = this.getEditor(e.record, e.column).field;
+
+        switch (e.field) {
+            case "CorrespAccountId":
+                //field.store.id = e.record.data.CorrespAccountId;
+                if (e.record.data.CorrespAccount != null)
+                    field.store.loadData(Object.values({ 1: e.record.data.CorrespAccount })); //convert to array before loadData
+                break;
+        }
+    },
+
+    CashLineEdit: function (editor, e) {
+         if (!(e.value === e.originalValue || (Ext.isDate(e.value) && Ext.Date.isEqual(e.value, e.originalValue)))) {
+             Ext.net.DirectMethod.request({
+                 url: "~/Areas/Cash/CashReceipt/LineEdit",
+                 params: {
+                     lineNo: e.record.data.LineNo,
+                     field: e.field,
+                     oldValue: e.originalValue,
+                     newValue: e.value,
+                     recordData: e.record.data
+                 },
+                 eventMask: {
+                     showMask: false
+                 },
+                 success: function() {
+                 }
+             });
+         }
+    }
+};
+

@@ -120,6 +120,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
             var model = new CashHeaderEditViewModel()
             {
                 Id = null,
+                DocSubType = CashReceiptDocumentSubType.CashReceipt,
                 DocSequenceId = cashReceiptSequenceId,
                 DocumentDate = preference.WorkingDate,
                 PostingDate = preference.WorkingDate,
@@ -307,6 +308,62 @@ namespace MyERP.Web.Areas.Cash.Controllers
             this.GetCmp<TextField>("CurrencyFactor").Value = selectedCurrency.Id == currencyLcyId ? 1 : 1;
             this.GetCmp<TextField>("CurrencyFactor").ReadOnly = selectedCurrency.Id == currencyLcyId ? true : false;
 
+            return this.Direct();
+        }
+
+        public ActionResult AddLine(String cashLinesJSON)
+        {
+            List<CashLineEditViewModel> cashLinesModel = JsonConvert.DeserializeObject<List<CashLineEditViewModel>>(cashLinesJSON);
+            long lineNo = cashLinesModel.Count >= 1 ? cashLinesModel.Max(c => c.LineNo) + 1000 : 1000;
+
+            var newItem = new CashLineEditViewModel()
+            {
+                Id = null,
+                LineNo = lineNo
+            };
+
+            Store cashLineGridStore = X.GetCmp<Store>("CashLineGridStore");
+            cashLineGridStore.Add(newItem);
+
+            return this.Direct(new { LineNo = lineNo });
+        }
+
+        public ActionResult LineEdit(int lineNo, string field, string oldValue, string newValue, string recordData)
+        {
+            MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
+            long clientId = user.ClientId ?? 0;
+            long organizationId = user.OrganizationId ?? 0;
+
+            if (clientId == 0 || organizationId == 0)
+                return this.Direct(false, Resources.Resources.User_dont_have_Client_or_Organization_Please_set);
+
+            CashLineEditViewModel cashLineEditViewModel = JSON.Deserialize<CashLineEditViewModel>(recordData, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+
+            ModelProxy record = X.GetCmp<Store>("CashLineGridStore").GetById(lineNo);
+
+            switch (field)
+            {
+                case "CorrespAccountId":
+                    var accountRepository = new AccountRepository();
+                    var correspAccountId = Convert.ToInt64(newValue);
+                    var corespAcc = accountRepository.Get(c => c.Id == correspAccountId, new string[] { "Organization" }).Select(c =>
+                            new AccountLookupViewModel()
+                            {
+                                Id = c.Id,
+                                Code = c.Code,
+                                Description = c.Description,
+                                OrganizationCode = c.Organization.Code,
+                                Status = (DefaultStatusType) c.Status
+                            }
+                        ).First();
+                    record.Set("CorrespAccountCode", corespAcc.Code);
+                    record.Set("CorrespAccount", corespAcc);
+                    break;
+            }
+            record.Commit();
             return this.Direct();
         }
     }

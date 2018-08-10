@@ -44,9 +44,13 @@ namespace MyERP.Web.Models
         [Required]
         public long LineNo { get; set; }
                   
-        [Display(Name = "Correspondence Account")]
+        [Display(Name = "COR Account")]
         [Required]
         public long CorrespAccountId { get; set; }
+
+        public String CorrespAccountCode { get; set; }
+
+        public AccountLookupViewModel CorrespAccount { get; set; }
 
         [Display(Name = "Description")]
         [Required]

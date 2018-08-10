@@ -80,15 +80,15 @@ namespace MyERP.Web.Areas.Item.Controllers
         {
             if (id != null && id > 0)
             {
-                var entity = repository.Get(c => c.Id == id, new []{ "Organization" }).SingleOrDefault();
-                var data = new ItemViewModel()
-                {
-                    Code = entity.Code,
-                    Id = entity.Id,
-                    Description = entity.Description,
-                    OrganizationCode = entity.Organization.Code,
-                    Status = (DefaultStatusType)entity.Status
-                };
+                var data = repository.Get(c => c.Id == id, new []{ "Organization" }).Select( c =>
+                    new ItemViewModel()
+                    {
+                        Code = c.Code,
+                        Id = c.Id,
+                        Description = c.Description,
+                        OrganizationCode = c.Organization.Code,
+                        Status = (DefaultStatusType)c.Status
+                    });
                 return this.Store(data, 1);
             }
             else

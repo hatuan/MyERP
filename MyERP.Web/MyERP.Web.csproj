@@ -420,6 +420,9 @@
     <Content Include="Areas\Cash\Views\CashReceipt\Index.cshtml" />
     <Content Include="Areas\Cash\Views\CashReceipt\_List.cshtml" />
     <Content Include="Areas\Cash\Views\CashReceipt\_Maintenance.cshtml" />
+    <Content Include="Areas\Account\Views\web.config" />
+    <Content Include="Areas\Account\Views\Index\Index.cshtml" />
+    <Content Include="Areas\Cash\Views\CashPayment\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Resources\reports\salespos-002.json" />
     <Content Include="Resources\reports\salespos-003.json" />
@@ -448,6 +451,8 @@
     <Compile Include="App_Start\ExtNetConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
+    <Compile Include="Areas\Account\Controllers\IndexController.cs" />
     <Compile Include="Areas\BusinessPartner\BusinessPartnerAreaRegistration.cs" />
     <Compile Include="Areas\BusinessPartner\Controllers\BusinessPartnerGroupController.cs" />
     <Compile Include="Areas\BusinessPartner\Controllers\IndexController.cs" />
@@ -489,6 +494,7 @@
     <Compile Include="Models\CashLineViewModels.cs" />
     <Compile Include="Models\ClientViewModels.cs" />
     <Compile Include="Models\BusinessPartnerGroupViewModels.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ExtNetComboBoxModel.cs" />
     <Compile Include="Models\ExtNetModel.cs" />
     <Compile Include="Models\ItemGroupViewModels.cs" />
@@ -535,6 +541,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Repository\BusinessPartnerPriceGroupRepository.cs" />
+    <Compile Include="Repository\CurrencyRepository.cs" />
     <Compile Include="Repository\SalesHeaderRepository.cs" />
     <Compile Include="Repository\OptionRepository.cs" />
     <Compile Include="Repository\NoSequenceLineRepository.cs" />
@@ -545,7 +552,7 @@
     <Compile Include="Repository\PosHeaderRepository.cs" />
     <Compile Include="Repository\SalesPriceGroupRepository.cs" />
     <Compile Include="Repository\ClientRepository.cs" />
-    <Compile Include="Repository\CurrencyRepository.cs">
+    <Compile Include="Repository\AccountRepository.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Repository\EntitiesModelRepositories.cs" />
@@ -573,9 +580,10 @@
     <Compile Include="ValidateJsonAntiForgeryTokenAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Account\Models\" />
+    <Folder Include="Areas\Account\Views\Shared\" />
     <Folder Include="Areas\BusinessPartner\Models\" />
     <Folder Include="Areas\Cash\Models\" />
-    <Folder Include="Areas\Cash\Views\CashPayment\" />
     <Folder Include="Areas\Cash\Views\Shared\" />
     <Folder Include="Areas\Item\Models\" />
     <Folder Include="Areas\Location\Models\" />
