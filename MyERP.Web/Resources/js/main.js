@@ -131,7 +131,7 @@ var CashReceipt = {
     CashLineEdit: function (editor, e) {
          if (!(e.value === e.originalValue || (Ext.isDate(e.value) && Ext.Date.isEqual(e.value, e.originalValue)))) {
              Ext.net.DirectMethod.request({
-                 url: "~/Areas/Cash/CashReceipt/LineEdit",
+                 url: "/Cash/CashReceipt/LineEdit",
                  params: {
                      lineNo: e.record.data.LineNo,
                      field: e.field,

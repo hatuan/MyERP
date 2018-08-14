@@ -227,41 +227,42 @@
                                                                         </div>
                                                                     </tpl>
                                                                 </text>))
-                                                                    .MinWidth(400)
-                                                                )
-                                                                .StoreID("CurrencyStore")
-                                                                .Listeners(ls =>
-                                                                {
-                                                                    ls.BeforeQuery.Handler = @"var _id = #{CurrencyId}.getValue();
+                                                                .MinWidth(400)
+                                                            )
+                                                            .StoreID("CurrencyStore")
+                                                            .Listeners(ls =>
+                                                            {
+                                                                ls.BeforeQuery.Handler = @"var _id = #{CurrencyId}.getValue();
                                                                                   this.getStore().id = _id;
                                                                                   this.getStore().load();";
-                                                                })
-                                                                .DirectEvents(de =>
-                                                                {
-                                                                    de.Select.Action = "ChangeCurrency";
-                                                                    de.Select.EventMask.ShowMask = true;
-                                                                    de.Select.ExtraParams.Add(new Parameter("selectedData", "records[0].data", ParameterMode.Raw, true));
-                                                                })
-                                                            ,
-                                                            Html.X().TextFieldFor(m => m.CurrencyFactor).AllowBlank(false).ID("CurrencyFactor")
-                                                                .ReadOnly(readOnlyCurrencyFactor)
-                                                                .MaskRe(@"/[0-9\,\.]")
-                                                                .Listeners(ls =>
-                                                                {
-                                                                    ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
-                                                                    ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
+                                                            })
+                                                            .DirectEvents(de =>
+                                                            {
+                                                                de.Select.Action = "ChangeCurrency";
+                                                                de.Select.EventMask.ShowMask = true;
+                                                                de.Select.ExtraParams.Add(new Parameter("selectedData", "records[0].data", ParameterMode.Raw, true));
+                                                            })
+                                                        ,
+                                                        Html.X().TextFieldFor(m => m.CurrencyFactor).AllowBlank(false).ID("CurrencyFactor")
+                                                            .ReadOnly(readOnlyCurrencyFactor)
+                                                            .MaskRe(@"/[0-9\,\.]")
+                                                            .Listeners(ls =>
+                                                            {
+                                                                ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
+                                                                ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
                                                                                         this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
-                                                                })
-                                                            ,
-                                                            Html.X().ComboBoxFor(m => m.Status).Editable(false).ReadOnly(true).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.CashDocumentStatusType)).ID("Status")
-                                                        )
-                                                ));
+                                                            })
+                                                        ,
+                                                        Html.X().ComboBoxFor(m => m.Status).Editable(false).ReadOnly(true).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.CashDocumentStatusType)).ID("Status")
+                                                    )
+                                            ));
                       items.Add(Html.X().GridPanel()
                           .ID("CashLineGridPanel")
                           .Height(350)
                           .Title("Cash Receipt Line")
                           .Border(true)
-                          .View(new GridView() { MarkDirty = false })
+                          .View(new GridView() { MarkDirty = false, KeyMap = { new KeyBindItem{Key = "ctrl+a", Handler = "#{btnAddLine}.fireEvent('click')"}}})
+                          .EnableColumnHide(false)
                           .LeftBar(leftBarItems =>
                           {
                               leftBarItems.Add(Html.X().Toolbar()
@@ -293,11 +294,11 @@
                                           .Listeners(ls =>
                                           {
                                               ls.Click.Handler = @"if ( !#{CashLineGridPanel}.hasSelection() ) {
-                                                                      return false;
-                                                                  } else {
-                                                                      #{CashLineGridPanel}.deleteSelected();
-                                                                      return true;
-                                                                  }";
+                                                                          return false;
+                                                                      } else {
+                                                                          #{CashLineGridPanel}.deleteSelected();
+                                                                          return true;
+                                                                      }";
                                           })
                                       );
                                   })
@@ -316,52 +317,50 @@
                                           new ModelField("Description", ModelFieldType.String),
                                           new ModelField("BusinessPartnerId", ModelFieldType.String),
                                           new ModelField("Amount", ModelFieldType.Float),
-                                          new ModelField("AmountLCY", ModelFieldType.Float)
-                                      ))
-                              .DataSource(Model.CashLines)
-                          )
+                                          new ModelField("AmountLCY", ModelFieldType.Float)))
+                              .DataSource(Model.CashLines))
                           .ColumnModel(cols =>
                           {
                               cols.Columns.Add(Html.X().RowNumbererColumn());
                               cols.Columns.Add(
-                                  Html.X().ColumnFor(Model.CashLines, m => m.CorrespAccountId).ToBuilder<Column.Builder>().ID("CashLineCorrespAccountIdCol").Sortable(false).Width(125)
-                                      .Editor(
-                                          Html.X().ComboBox()
-                                              .ID("CashLineCorrespAccountEditor")
-                                              .DisplayField("Code")
-                                              .ValueField("Id")
-                                              .FieldLabel("")
-                                              .FieldStyle("text-transform: uppercase;")
-                                              .AllowBlank(false)
-                                              .TypeAhead(true)
-                                              .MinChars(0)
-                                              .PageSize(10)
-                                              .SelectOnTab(true)
-                                              .ForceSelection(true)
-                                              .ValidateOnBlur(true)
-                                              .ValidateOnChange(true)
-                                              .ListConfig(Html.X().BoundList()
-                                                  .LoadingText("Searching...")
-                                                  .ItemTpl(Html.X().XTemplate()
-                                                      .Html(@<text>
-                                                                <div class="search-item">
-                                                                    <h3>{Code}</h3>
-                                                                    {Description}
-                                                                </div>
-                                                             </text>)
-                                                  )
-                                                  .MinWidth(400)
+                                      Html.X().ColumnFor(Model.CashLines, m => m.CorrespAccountId).ToBuilder<Column.Builder>().ID("CashLineCorrespAccountIdCol").Sortable(false).Width(125)
+                                          .Editor(
+                                              Html.X().ComboBox()
+                                                  .ID("CashLineCorrespAccountEditor")
+                                                  .DisplayField("Code")
+                                                  .ValueField("Id")
+                                                  .FieldLabel("")
+                                                  .FieldStyle("text-transform: uppercase;")
+                                                  .AllowBlank(false)
+                                                  .TypeAhead(true)
+                                                  .MinChars(0)
+                                                  .PageSize(10)
+                                                  .SelectOnTab(true)
+                                                  .ForceSelection(true)
+                                                  .ValidateOnBlur(true)
+                                                  .ValidateOnChange(true)
+                                                  .ListConfig(Html.X().BoundList()
+                                                      .LoadingText("Searching...")
+                                                      .ItemTpl(Html.X().XTemplate()
+                                                          .Html(@<text>
+                                                                        <div class="search-item">
+                                                                            <h3>{Code}</h3>
+                                                                            {Description}
+                                                                        </div>
+                                                                     </text>)
+                                                          )
+                                                          .MinWidth(400)
+                                                      )
+                                                      .StoreID("CorrespAccountStore")
+                                                      .Listeners(ls =>
+                                                      {
+                                                          ls.BeforeQuery.Handler = @"var _id = #{CashLineCorrespAccountEditor}.getValue();
+                                                                                  this.getStore().id = _id;
+                                                                                  /*this.getStore().load();*/";
+                                                      })
                                               )
-                                              .StoreID("CorrespAccountStore")
-                                              .Listeners(ls =>
-                                              {
-                                                  ls.BeforeQuery.Handler = @"var _id = #{CashLineCorrespAccountEditor}.getValue();
-                                                                          this.getStore().id = _id;
-                                                                          /*this.getStore().load();*/";
-                                              })
-                                      )
-                                      .Renderer("CashReceipt.CorrespAccountRenderer")
-                                  );
+                                              .Renderer("CashReceipt.CorrespAccountRenderer")
+                                          );
                               cols.Columns.Add(
                                   Html.X().ColumnFor(Model.CashLines, m => m.Description).ToBuilder<Column.Builder>().ID("CashLineDescriptionCol").Sortable(false).Width(256)
                                       .Editor(Html.X().TextField().ID("CashLineDescriptionEditor"))
@@ -372,31 +371,30 @@
                               );
                           })
                           .SelectionModel(Html.X().CellSelectionModel())
-                          .Plugins(
-                              Html.X().CellEditing().Listeners(ls =>
-                              {
-                                  ls.Edit.Handler = "function(editor, e) {" +
-                                                    "   if (!(e.value === e.originalValue || (Ext.isDate(e.value) && Ext.Date.isEqual(e.value, e.originalValue)))) {" +
-                                                    "       Ext.net.DirectMethod.request({" +
-                                                    "           url: '" + Url.Action("LineEdit") + "'," +
-                                                    "           params: {" +
-                                                    "               lineNo: e.record.data.LineNo," +
-                                                    "               field: e.field," +
-                                                    "               oldValue: e.originalValue," +
-                                                    "               newValue: e.value," +
-                                                    "               recordData: e.record.data" +
-                                                    "           }," +
-                                                    "           eventMask: {" +
-                                                    "               showMask: false" +
-                                                    "           }," +
-                                                    "           success: function() {" +
-                                                    "           }" +
-                                                    "       });" +
-                                                    "   }" +
-                                                    "}";
-                                  ls.BeforeEdit.Fn = "CashReceipt.CashLineBeforeEdit";
-                              })
-                          ));
+                          .Plugins(Html.X().CellEditing().Listeners(ls =>
+                          {
+                              ls.Edit.Handler = "function(editor, e) {" +
+                                                "   if (!(e.value === e.originalValue || (Ext.isDate(e.value) && Ext.Date.isEqual(e.value, e.originalValue)))) {" +
+                                                "       Ext.net.DirectMethod.request({" +
+                                                "           url: '" + Url.Action("LineEdit") + "'," +
+                                                "           params: {" +
+                                                "               lineNo: e.record.data.LineNo," +
+                                                "               field: e.field," +
+                                                "               oldValue: e.originalValue," +
+                                                "               newValue: e.value," +
+                                                "               recordData: e.record.data" +
+                                                "           }," +
+                                                "           eventMask: {" +
+                                                "               showMask: false" +
+                                                "           }," +
+                                                "           success: function() {" +
+                                                "           }" +
+                                                "       });" +
+                                                "   }" +
+                                                "}";
+                              ls.BeforeEdit.Fn = "CashReceipt.CashLineBeforeEdit";
+                          })
+                      ));
                   })
                 )
 
