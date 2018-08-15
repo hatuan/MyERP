@@ -121,9 +121,10 @@ var CashReceipt = {
 
         switch (e.field) {
             case "CorrespAccountId":
-                //field.store.id = e.record.data.CorrespAccountId;
-                if (e.record.data.CorrespAccount != null)
-                    field.store.loadData(Object.values({ 1: e.record.data.CorrespAccount })); //convert to array before loadData
+                field.store.id = e.record.data.CorrespAccountId;
+                if (e.record.data.CorrespAccount != null) {
+                    field.store.add(e.record.data.CorrespAccount);
+                }
                 break;
         }
     },

@@ -152,7 +152,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _Maintenance(CashHeaderEditViewModel model)
+        public ActionResult _Maintenance(CashHeaderEditViewModel model, String cashLineJSON)
         {
             DirectResult r = new DirectResult();
 
@@ -306,7 +306,8 @@ namespace MyERP.Web.Areas.Cash.Controllers
             
 
             this.GetCmp<TextField>("CurrencyFactor").Value = selectedCurrency.Id == currencyLcyId ? 1 : 1;
-            this.GetCmp<TextField>("CurrencyFactor").ReadOnly = selectedCurrency.Id == currencyLcyId ? true : false;
+            this.GetCmp<TextField>("CurrencyFactor").ReadOnly = selectedCurrency.Id == currencyLcyId;
+            this.GetCmp<Column>("CashLineAmountLCYCol").Hidden = selectedCurrency.Id == currencyLcyId;
 
             return this.Direct();
         }
@@ -328,7 +329,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
             return this.Direct(new { LineNo = lineNo });
         }
 
-        public ActionResult LineEdit(int lineNo, string field, string oldValue, string newValue, string recordData)
+        public ActionResult LineEdit(int lineNo, string field, string oldValue, string newValue, string recordData, string headerData)
         {
             MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
             long clientId = user.ClientId ?? 0;
@@ -336,6 +337,11 @@ namespace MyERP.Web.Areas.Cash.Controllers
 
             if (clientId == 0 || organizationId == 0)
                 return this.Direct(false, Resources.Resources.User_dont_have_Client_or_Organization_Please_set);
+
+            CashHeaderEditViewModel cashHeaderEditViewModel = JSON.Deserialize<CashHeaderEditViewModel>(headerData, new JsonSerializerSettings
+            {
+                 Culture = Thread.CurrentThread.CurrentCulture
+            });
 
             CashLineEditViewModel cashLineEditViewModel = JSON.Deserialize<CashLineEditViewModel>(recordData, new JsonSerializerSettings
             {
@@ -361,6 +367,13 @@ namespace MyERP.Web.Areas.Cash.Controllers
                         ).First();
                     record.Set("CorrespAccountCode", corespAcc.Code);
                     record.Set("CorrespAccount", corespAcc);
+                    //TODO: Update CorrespAccountStore
+                    //Store correspAccountStore = X.GetCmp<Store>("CorrespAccountStore");
+                    //correspAccountStore.Add(corespAcc);
+                    break;
+                case "Amount":
+                    var amountLCY = Round.RoundAmountLCY(cashLineEditViewModel.Amount * cashHeaderEditViewModel.CurrencyFactor);
+                    record.Set("AmountLCY", amountLCY);
                     break;
             }
             record.Commit();

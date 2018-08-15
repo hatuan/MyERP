@@ -1,6 +1,7 @@
 ﻿@model MyERP.Web.Models.CashHeaderEditViewModel
 
-@{
+@{                                                                                  
+    var documentCurrencyIsLCY = Model.CurrencyId == (long)ViewData["CurrencyLCYId"];
     var readOnlyCurrencyFactor = Model.CurrencyId == (long)ViewData["CurrencyLCYId"];
 }
 
@@ -296,8 +297,13 @@
                                               ls.Click.Handler = @"if ( !#{CashLineGridPanel}.hasSelection() ) {
                                                                           return false;
                                                                       } else {
-                                                                          #{CashLineGridPanel}.deleteSelected();
-                                                                          return true;
+                                                                          Ext.Msg.confirm('Alert', 'Do you want to DELETE?', function(btn) {
+                                                                            if(btn == 'yes') {
+                                                                                #{CashLineGridPanel}.deleteSelected();
+                                                                                return true;        
+                                                                            } else 
+                                                                                return false;
+                                                                          });
                                                                       }";
                                           })
                                       );
@@ -312,7 +318,7 @@
                                       .Fields(
                                           new ModelField("LineNo", ModelFieldType.String),
                                           new ModelField("Id", ModelFieldType.String),
-                                          new ModelField("CorrespAccountId", ModelFieldType.String),
+                                          new ModelField("CorrespAccountId", ModelFieldType.Int),
                                           new ModelField("CorrespAccountCode", ModelFieldType.String),
                                           new ModelField("Description", ModelFieldType.String),
                                           new ModelField("BusinessPartnerId", ModelFieldType.String),
@@ -359,38 +365,50 @@
                                                                                   /*this.getStore().load();*/";
                                                       })
                                               )
-                                              .Renderer("CashReceipt.CorrespAccountRenderer")
-                                          );
+                                          .Renderer("CashReceipt.CorrespAccountRenderer")
+                                          .EditorOptions(action =>
+                                          {
+                                              action.Listeners.StartEdit.Delay = 500;
+                                          })
+                                    );
                               cols.Columns.Add(
                                   Html.X().ColumnFor(Model.CashLines, m => m.Description).ToBuilder<Column.Builder>().ID("CashLineDescriptionCol").Sortable(false).Width(256)
                                       .Editor(Html.X().TextField().ID("CashLineDescriptionEditor"))
                               );
                               cols.Columns.Add(
                                   Html.X().ColumnFor(Model.CashLines, m => m.Amount).ToBuilder<Column.Builder>().ID("CashLineAmountCol").Sortable(false).Width(125)
-                                      .Editor(Html.X().NumberField().ID("CashLineAmountEditor").DecimalPrecision(2)).Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
+                                      .Editor(Html.X().NumberField().ID("CashLineAmountEditor").SelectOnFocus(true).DecimalPrecision(2)).Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
                               );
+                              cols.Columns.Add(
+                                  Html.X().ColumnFor(Model.CashLines, m => m.AmountLCY).ToBuilder<Column.Builder>().ID("CashLineAmountLCYCol").Sortable(false).Width(125).Hidden(documentCurrencyIsLCY)
+                                      .Editor(Html.X().NumberField().ID("CashLineAmountLCYEditor").SelectOnFocus(true).DecimalPrecision(2)).Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
+                                  );
                           })
                           .SelectionModel(Html.X().CellSelectionModel())
                           .Plugins(Html.X().CellEditing().Listeners(ls =>
                           {
-                              ls.Edit.Handler = "function(editor, e) {" +
-                                                "   if (!(e.value === e.originalValue || (Ext.isDate(e.value) && Ext.Date.isEqual(e.value, e.originalValue)))) {" +
-                                                "       Ext.net.DirectMethod.request({" +
-                                                "           url: '" + Url.Action("LineEdit") + "'," +
-                                                "           params: {" +
-                                                "               lineNo: e.record.data.LineNo," +
-                                                "               field: e.field," +
-                                                "               oldValue: e.originalValue," +
-                                                "               newValue: e.value," +
-                                                "               recordData: e.record.data" +
-                                                "           }," +
-                                                "           eventMask: {" +
-                                                "               showMask: false" +
-                                                "           }," +
-                                                "           success: function() {" +
-                                                "           }" +
-                                                "       });" +
-                                                "   }" +
+                              ls.Edit.Handler = "function(editor, e) { \n" +
+                                                "   if (!(e.value === e.originalValue || (Ext.isDate(e.value) && Ext.Date.isEqual(e.value, e.originalValue)))) { \n" +
+                                                "       Ext.net.DirectMethod.request({ \n" +
+                                                "           url: '" + Url.Action("LineEdit") + "', \n" +
+                                                "           params: { \n" +
+                                                "               lineNo: e.record.data.LineNo, \n" +
+                                                "               field: e.field, \n" +
+                                                "               oldValue: e.originalValue, \n" +
+                                                "               newValue: e.value, \n" +
+                                                "               recordData: e.record.data, \n" +
+                                                "               headerData: #{FormCashHeaderMaintenance}.getForm().getValues() \n" +
+                                                "           }, \n" +
+                                                "           eventMask: { \n" +
+                                                "               showMask:true, \n" +
+                                                "               target:'customtarget', \n" +
+                                                "               customTarget:#{CashLineGridPanel} \n" +
+                                                "           }, \n" +
+                                                "           success: function() { \n" +
+                                                "               #{CashLineGridPanel}.getView().refresh(); \n" +
+                                                "           } \n" +
+                                                "       }); \n" +
+                                                "   } \n" +
                                                 "}";
                               ls.BeforeEdit.Fn = "CashReceipt.CashLineBeforeEdit";
                           })
