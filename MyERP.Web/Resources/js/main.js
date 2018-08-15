@@ -33,11 +33,11 @@ var loadModule = function (href, id, title) {
         for (var i in [0, 1, 2]) {
             href = href + slashFields[i] + "/"
         }
-    } else if(href[href.length - 1] != "/") {
+    } else if(href[href.length - 1] !== "/") {
         href = href + "/";
     }
 
-    if (id == "-") {
+    if (id === "-") {
         App.direct.GetHashCode(href, {
             success: function (result) {
                 loadModule(href, "e" + result, title);
@@ -56,7 +56,7 @@ var change = function (token) {
         if (token) {
             loadModule(token, lookup[token] || "-");
         } else {
-            
+            //    
         }
     }
     lockHistoryChange = false;
@@ -122,15 +122,15 @@ var CashReceipt = {
         switch (e.field) {
             case "CorrespAccountId":
                 field.store.id = e.record.data.CorrespAccountId;
-                if (e.record.data.CorrespAccount != null) {
+                if (e.record.data.CorrespAccount !== null) {
                     field.store.add(e.record.data.CorrespAccount);
                 }
                 break;
         }
     },
-
+    /*
     CashLineEdit: function (editor, e) {
-         if (!(e.value === e.originalValue || (Ext.isDate(e.value) && Ext.Date.isEqual(e.value, e.originalValue)))) {
+        if (!(e.value === e.originalValue || (Ext.isDate(e.value) && Ext.Date.isEqual(e.value, e.originalValue)))) {
              Ext.net.DirectMethod.request({
                  url: "/Cash/CashReceipt/LineEdit",
                  params: {
@@ -146,7 +146,8 @@ var CashReceipt = {
                  success: function() {
                  }
              });
-         }
+        }
     }
+    */
 };
 

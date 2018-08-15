@@ -283,12 +283,10 @@ namespace MyERP.Web.Areas.Cash.Controllers
             return this.Direct();
         }
 
-        public ActionResult ChangeCurrency(string selectedData)
+        public ActionResult ChangeCurrency(long? currencyId)
         {
-            CurrencyLookupViewModel selectedCurrency = JsonConvert.DeserializeObject<CurrencyLookupViewModel>(selectedData, new JsonSerializerSettings
-            {
-                Culture = Thread.CurrentThread.CurrentCulture
-            });
+            if (currencyId == null)
+                return this.Direct();
 
             MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
             long clientId = user.ClientId ?? 0;
@@ -303,18 +301,38 @@ namespace MyERP.Web.Areas.Cash.Controllers
             long currencyLcyId = client.CurrencyLcyId ?? 0;
             if (currencyLcyId == 0)
                 return this.Direct(false, "ERROR : Please set Client CurrencyLcy first");
-            
 
-            this.GetCmp<TextField>("CurrencyFactor").Value = selectedCurrency.Id == currencyLcyId ? 1 : 1;
-            this.GetCmp<TextField>("CurrencyFactor").ReadOnly = selectedCurrency.Id == currencyLcyId;
-            this.GetCmp<Column>("CashLineAmountLCYCol").Hidden = selectedCurrency.Id == currencyLcyId;
+            this.GetCmp<TextField>("CurrencyFactor").Value = currencyId == currencyLcyId ? 1 : 1;
+            this.GetCmp<TextField>("CurrencyFactor").ReadOnly = currencyId == currencyLcyId;
+            this.GetCmp<Column>("CashLineAmountLCYCol").Hidden = currencyId == currencyLcyId;
 
+            return this.Direct();
+        }
+
+        public ActionResult ChangeCurrencyFactor(CashHeaderEditViewModel model, string cashLinesJSON)
+        {
+            List<CashLineEditViewModel> cashLinesModel = JsonConvert.DeserializeObject<List<CashLineEditViewModel>>(cashLinesJSON, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+            Store cashLineGridStore = X.GetCmp<Store>("CashLineGridStore");
+            foreach (CashLineEditViewModel cashLine in cashLinesModel)
+            {
+                var amountLCY = Round.RoundAmountLCY(cashLine.Amount * model.CurrencyFactor);
+                ModelProxy record = cashLineGridStore.GetById(cashLine.LineNo);
+                record.Set("AmountLCY", amountLCY);
+
+                record.Commit();
+            }
             return this.Direct();
         }
 
         public ActionResult AddLine(String cashLinesJSON)
         {
-            List<CashLineEditViewModel> cashLinesModel = JsonConvert.DeserializeObject<List<CashLineEditViewModel>>(cashLinesJSON);
+            List<CashLineEditViewModel> cashLinesModel = JsonConvert.DeserializeObject<List<CashLineEditViewModel>>(cashLinesJSON, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
             long lineNo = cashLinesModel.Count >= 1 ? cashLinesModel.Max(c => c.LineNo) + 1000 : 1000;
 
             var newItem = new CashLineEditViewModel()

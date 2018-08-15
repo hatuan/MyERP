@@ -59,8 +59,8 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Ext.Net, Version=4.6.0.0, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ext.NET.MVC.4.6.0\lib\net45\Ext.Net.dll</HintPath>
+    <Reference Include="Ext.Net, Version=4.7.0.0, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ext.NET.MVC.4.7.0\lib\net45\Ext.Net.dll</HintPath>
     </Reference>
     <Reference Include="Ext.Net.Utilities, Version=2.5.0.0, Culture=neutral, PublicKeyToken=2c34ac34702a3c23, processorArchitecture=MSIL">
       <HintPath>..\packages\Ext.NET.Utilities.2.5.0\lib\Ext.Net.Utilities.dll</HintPath>
@@ -397,10 +397,6 @@
     <Content Include="Areas\SalesPrice\Views\SalesPriceGroup\Index.cshtml" />
     <Content Include="Areas\SalesPrice\Views\SalesPriceGroup\_List.cshtml" />
     <Content Include="Areas\SalesPrice\Views\SalesPriceGroup\_Maintenance.cshtml" />
-    <Content Include="Views\ExtNet\Index.cshtml" />
-    <Content Include="App_Readme\Ext.NET\README.md" />
-    <Content Include="App_Readme\Ext.NET\LICENSE" />
-    <Content Include="App_Readme\Ext.NET\CHANGELOG.md" />
     <Content Include="Areas\Item\Views\ItemUom\Index.cshtml" />
     <Content Include="Areas\Location\Views\web.config" />
     <Content Include="Areas\Location\Views\Index\Index.cshtml" />
@@ -423,6 +419,9 @@
     <Content Include="Areas\Account\Views\web.config" />
     <Content Include="Areas\Account\Views\Index\Index.cshtml" />
     <Content Include="Areas\Cash\Views\CashPayment\Index.cshtml" />
+    <Content Include="App_Readme\Ext.NET\README.md" />
+    <Content Include="App_Readme\Ext.NET\LICENSE" />
+    <Content Include="App_Readme\Ext.NET\CHANGELOG.md" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Resources\reports\salespos-002.json" />
     <Content Include="Resources\reports\salespos-003.json" />
@@ -430,6 +429,7 @@
     <Content Include="Resources\reports\salespos_001.mrt" />
     <Content Include="Resources\reports\salespos_002.mrt" />
     <Content Include="Resources\reports\salespos_003.mrt" />
+    <Content Include="Views\ExtNet\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
