@@ -20,19 +20,19 @@ namespace MyERP.DataAccess.Enum
     {
         [System.ComponentModel.DataAnnotations.Display(Name = "Cash Receipt From One BP", Order = 1)]
         CashReceipt = 1,
-        //[System.ComponentModel.DataAnnotations.Display(Name = "Cash Receipt From Multi BP", Order = 2)]
-        //CashReceiptMultiBusinessPartner = 2,
-        //[System.ComponentModel.DataAnnotations.Display(Name = "Cash Receipt From Sales Invoice", Order = 3)]
-        //CashReceiptForSalesInvoice = 3,
+        [System.ComponentModel.DataAnnotations.Display(Name = "Cash Receipt From Multi BP", Order = 2)]
+        CashReceiptMultiBusinessPartner = 2,
+        [System.ComponentModel.DataAnnotations.Display(Name = "Cash Receipt From Sales Invoice", Order = 3)]
+        CashReceiptForSalesInvoice = 3,
     }
 
     public enum CashPaymentDocumentSubType
     {
         [System.ComponentModel.DataAnnotations.Display(Name = "Cash Payment From One BP", Order = 1)]
         CashPayment = 1,
-        //[System.ComponentModel.DataAnnotations.Display(Name = "Cash Payment From Multi BP", Order = 2)]
-        //CashPaymentMultiBusinessPartner = 2,
-        //[System.ComponentModel.DataAnnotations.Display(Name = "Cash Payment From Purchase Invoice", Order = 3)]
-        //CashPaymentForPurchaseInvoice = 3,
+        [System.ComponentModel.DataAnnotations.Display(Name = "Cash Payment From Multi BP", Order = 2)]
+        CashPaymentMultiBusinessPartner = 2,
+        [System.ComponentModel.DataAnnotations.Display(Name = "Cash Payment From Purchase Invoice", Order = 3)]
+        CashPaymentForPurchaseInvoice = 3,
     }
 }

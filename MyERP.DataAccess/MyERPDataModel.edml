@@ -631,14 +631,6 @@
             <End Role="accounts_receivable_ledger" EntitySet="accounts_receivable_ledgers" />
             <End Role="cash_line" EntitySet="cash_lines" />
           </AssociationSet>
-          <AssociationSet Name="FK_cash_line_accounts_receivable_ledger1" Association="MyERP.DataAccess.Store.FK_cash_line_accounts_receivable_ledger1">
-            <End Role="accounts_receivable_ledger" EntitySet="accounts_receivable_ledgers" />
-            <End Role="cash_line" EntitySet="cash_lines" />
-          </AssociationSet>
-          <AssociationSet Name="FK_cash_line_accounts_payable_ledger" Association="MyERP.DataAccess.Store.FK_cash_line_accounts_payable_ledger">
-            <End Role="accounts_payable_ledger" EntitySet="accounts_payable_ledgers" />
-            <End Role="cash_line" EntitySet="cash_lines" />
-          </AssociationSet>
           <AssociationSet Name="FK_option_no_sequence7" Association="MyERP.DataAccess.Store.FK_option_no_sequence7">
             <End Role="no_sequence" EntitySet="no_sequences" />
             <End Role="option" EntitySet="options" />
@@ -662,6 +654,18 @@
           <AssociationSet Name="FK_account_account" Association="MyERP.DataAccess.Store.FK_account_account">
             <End Role="account" EntitySet="accounts" />
             <End Role="account1" EntitySet="accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cash_line_client" Association="MyERP.DataAccess.Store.FK_cash_line_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="cash_line" EntitySet="cash_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cash_line_organization" Association="MyERP.DataAccess.Store.FK_cash_line_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="cash_line" EntitySet="cash_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cash_line_accounts_payable_ledger" Association="MyERP.DataAccess.Store.FK_cash_line_accounts_payable_ledger">
+            <End Role="accounts_payable_ledger" EntitySet="accounts_payable_ledgers" />
+            <End Role="cash_line" EntitySet="cash_lines" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
@@ -1386,7 +1390,7 @@
           <Property Name="document_date" Type="datetime2" Nullable="false" />
           <Property Name="business_partner_id" Type="bigint" Nullable="false" />
           <Property Name="business_partner_name" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="business_partner_address" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="business_partner_address" Type="nvarchar" MaxLength="256" />
           <Property Name="business_partner_contact_id" Type="bigint" />
           <Property Name="business_partner_contact_name" Type="nvarchar" MaxLength="256" />
           <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
@@ -1418,7 +1422,7 @@
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="cash_header_id" Type="bigint" Nullable="false" />
           <Property Name="document_no" Type="nvarchar" Nullable="false" MaxLength="32" />
-          <Property Name="business_partner_id" Type="bigint" Nullable="false" />
+          <Property Name="business_partner_id" Type="bigint" />
           <Property Name="corresp_account_id" Type="bigint" Nullable="false">
             <Documentation>
               <Summary>corresponding account</Summary>
@@ -1426,15 +1430,17 @@
             </Documentation>
           </Property>
           <Property Name="amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
-          <Property Name="amount_lcy" Type="decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="description" Type="nvarchar" MaxLength="256" />
           <Property Name="job_id" Type="bigint" />
           <Property Name="line_no" Type="bigint" Nullable="false" />
           <Property Name="document_type" Type="tinyint" Nullable="false" />
           <Property Name="posting_date" Type="datetime2" Nullable="false" />
           <Property Name="accounts_receivable_ledger_id1" Type="bigint" />
-          <Property Name="accounts_rpamount_conv" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="accounts_rpamount_conv" Type="decimal" Precision="38" Scale="20" />
           <Property Name="accounts_payable_ledger_id" Type="bigint" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="accounts_receivable_ledger_id" Type="bigint" />
         </EntityType>
         <EntityType Name="account">
@@ -3244,34 +3250,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_cash_line_accounts_receivable_ledger">
-          <End Role="accounts_receivable_ledger" Type="MyERP.DataAccess.Store.accounts_receivable_ledger" Multiplicity="1" />
-          <End Role="cash_line" Type="MyERP.DataAccess.Store.cash_line" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="accounts_receivable_ledger">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="cash_line">
-              <PropertyRef Name="id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_cash_line_accounts_receivable_ledger1">
           <End Role="accounts_receivable_ledger" Type="MyERP.DataAccess.Store.accounts_receivable_ledger" Multiplicity="0..1" />
           <End Role="cash_line" Type="MyERP.DataAccess.Store.cash_line" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="accounts_receivable_ledger">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="cash_line">
-              <PropertyRef Name="accounts_receivable_ledger_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_cash_line_accounts_payable_ledger">
-          <End Role="accounts_payable_ledger" Type="MyERP.DataAccess.Store.accounts_payable_ledger" Multiplicity="0..1" />
-          <End Role="cash_line" Type="MyERP.DataAccess.Store.cash_line" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="accounts_payable_ledger">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="cash_line">
@@ -3348,6 +3330,42 @@
             </Principal>
             <Dependent Role="account1">
               <PropertyRef Name="parent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cash_line_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="cash_line" Type="MyERP.DataAccess.Store.cash_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cash_line">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cash_line_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="cash_line" Type="MyERP.DataAccess.Store.cash_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cash_line">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cash_line_accounts_payable_ledger">
+          <End Role="accounts_payable_ledger" Type="MyERP.DataAccess.Store.accounts_payable_ledger" Multiplicity="0..1" />
+          <End Role="cash_line" Type="MyERP.DataAccess.Store.cash_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts_payable_ledger">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cash_line">
+              <PropertyRef Name="accounts_payable_ledger_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4014,6 +4032,14 @@
           <AssociationSet Name="Account_AccountSet" Association="MyERP.DataAccess.Account_Account">
             <End Role="Parent" EntitySet="Accounts" />
             <End Role="Childs" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="Client_CashLineSet" Association="MyERP.DataAccess.Client_CashLine">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="CashLines" EntitySet="CashLines" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_CashLineSet" Association="MyERP.DataAccess.Organization_CashLine">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="CashLines" EntitySet="CashLines" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
@@ -4888,7 +4914,7 @@
           <Property Name="PostingDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="c97bdcbd-62bd-4ff2-9ec1-075e09fa0af0" />
           <Property Name="BusinessPartnerId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="b774467a-d449-46f5-b984-b5881d016c52" />
           <Property Name="BusinessPartnerName" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="dfb6c0b2-a668-42a3-a60c-7a958cd44ef0" />
-          <Property Name="BusinessPartnerAddress" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="ef4f9a2a-91c1-4baa-aef7-c3ac809d0757" />
+          <Property Name="BusinessPartnerAddress" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="ef4f9a2a-91c1-4baa-aef7-c3ac809d0757" />
           <Property Name="BusinessPartnerContactId" Type="Int64" ed:ValidateRequired="false" ed:Guid="da81d566-fb29-4202-9c1e-83d9432b110e" />
           <Property Name="BusinessPartnerContactName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="a651c824-d643-476d-b1ec-cad17d4dc477" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="af7decaa-fb54-44ad-82d1-0c3f7071d1ee" />
@@ -4929,25 +4955,29 @@
           <Property Name="DocumentType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="1eced8c7-9c74-4b95-8108-970a66736595" />
           <Property Name="DocumentNo" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="8fdabe9c-e65a-4127-8349-873263d08349" />
           <Property Name="PostingDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="d168e8fd-5301-435a-a56b-bd886178829e" />
-          <Property Name="BusinessPartnerId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="07dac220-fd5b-4d19-8e60-425b3ae24b54" />
+          <Property Name="BusinessPartnerId" Type="Int64" ed:ValidateRequired="false" ed:Guid="07dac220-fd5b-4d19-8e60-425b3ae24b54" />
           <Property Name="CorrespAccountId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="43566ba2-8869-45bf-ba81-766cc447b4fc">
             <Documentation>
               <Summary>corresponding account</Summary>
               <LongDescription>corresponding account</LongDescription>
             </Documentation>
           </Property>
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="668f7219-28c3-42a9-8a2f-65d705a81092" />
+          <Property Name="Description" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="668f7219-28c3-42a9-8a2f-65d705a81092" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="cfbddc9d-bb06-447c-81e9-87824ca577b5" />
-          <Property Name="AmountLCY" Type="Decimal" Nullable="false" ed:ValidateRequired="true" ed:Guid="24de3103-4836-48d2-b35c-0cd79860a9c6" />
+          <Property Name="AmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="24de3103-4836-48d2-b35c-0cd79860a9c6" />
           <Property Name="JobId" Type="Int64" ed:ValidateRequired="false" ed:Guid="3c6628f9-961e-4446-bdec-2cfa137302ef" />
           <Property Name="AccountsPayableLedgerId" Type="Int64" ed:ValidateRequired="false" ed:Guid="2945abc1-6055-468c-95db-22affaee07e6" />
           <Property Name="AccountsReceivableLedgerId" Type="Int64" ed:ValidateRequired="false" ed:Guid="37391106-b751-4f6a-8a48-b2f6b3a774d3" />
-          <Property Name="AccountsRPAmountConv" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="4e05d22d-77e3-425b-bac9-d5ac4bd6cb92" />
+          <Property Name="AccountsRPAmountConv" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="4e05d22d-77e3-425b-bac9-d5ac4bd6cb92" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="8af8ad1b-14c2-4505-82b3-48bec0795ff8" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="31d8a20c-82a9-408e-89a6-ed2cfbcc9914" />
           <NavigationProperty Name="CashHeader" Relationship="MyERP.DataAccess.CashHeader_CashLine" FromRole="CashLines" ToRole="CashHeader" ed:Guid="454209fe-f6fc-4de2-bb24-89d14e7a4513" />
           <NavigationProperty Name="BusinessPartner" Relationship="MyERP.DataAccess.BusinessPartner_CashLine" FromRole="CashLines" ToRole="BusinessPartner" ed:Guid="f53b2222-30a9-4545-b556-9bdbef23fc20" />
           <NavigationProperty Name="CorrespAccount" Relationship="MyERP.DataAccess.Account_CashLine" FromRole="CashLines" ToRole="CorrespAccount" ed:Guid="d3b4037c-f5e6-4d2f-a986-8db15341713a" />
           <NavigationProperty Name="AccountsReceivableLedger" Relationship="MyERP.DataAccess.AccountsReceivableLedger_CashLine" FromRole="CashLines" ToRole="AccountsReceivableLedger" ed:Guid="f93d012e-93c4-4de3-8907-99d9c4a1c071" />
           <NavigationProperty Name="AccountsPayableLedger" Relationship="MyERP.DataAccess.AccountsPayableLedger_CashLine" FromRole="CashLines" ToRole="AccountsPayableLedger" ed:Guid="37137c20-3abb-4a6f-b1ed-922faa1ac335" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_CashLine" FromRole="CashLines" ToRole="Client" ed:Guid="42dd1ed8-2251-4665-bc64-57f7b11ec06f" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_CashLine" FromRole="CashLines" ToRole="Organization" ed:Guid="8bfbbafd-2ba9-4332-986a-ff83daa4ecf1" />
         </EntityType>
         <EntityType Name="Account" ed:Guid="a54428be-02ef-41d1-a177-e1a9e6ef8781">
           <Key>
@@ -6870,6 +6900,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Client_CashLine" ed:Guid="592407b3-f3a4-46bc-8020-62612c33bd1c">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="CashLines" Type="MyERP.DataAccess.CashLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CashLines">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_CashLine" ed:Guid="aa1caea8-929a-4fbe-8ce3-b56ecabad7e2">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="CashLines" Type="MyERP.DataAccess.CashLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CashLines">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- MSL content -->
@@ -7646,6 +7700,8 @@
                 <ScalarProperty Name="AccountsRPAmountConv" ColumnName="accounts_rpamount_conv" />
                 <ScalarProperty Name="AccountsPayableLedgerId" ColumnName="accounts_payable_ledger_id" />
                 <ScalarProperty Name="AccountsReceivableLedgerId" ColumnName="accounts_receivable_ledger_id" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -320,15 +320,14 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
                     r.ErrorMessage = "No Sequence not found! Please check";
                     return r;
                 }
-
-                foreach (var noSequenceLine in entity.NoSequenceLines.ToList())
-                {
-                    entity.NoSequenceLines.Remove(noSequenceLine);
-                    this.repository.DataContext.NoSequenceLines.Remove(noSequenceLine);  //this.repository.DataContext.Entry(salesPriceRemove).State = EntityState.Deleted;
-                }
-
                 try
                 {
+                    foreach (var noSequenceLine in entity.NoSequenceLines.ToList())
+                    {
+                        entity.NoSequenceLines.Remove(noSequenceLine);
+                        this.repository.DataContext.NoSequenceLines.Remove(noSequenceLine);  //this.repository.DataContext.Entry(salesPriceRemove).State = EntityState.Deleted;
+                    }
+                
                     this.repository.Delete(entity);
                 }
                 catch (Exception e)

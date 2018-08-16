@@ -99,6 +99,9 @@ namespace MyERP.Web.Models
     {
         public long? Id { get; set; }
 
+        [Display(Name = "Document Ttype")]
+        public DocumentType DocumentType { get; set; }
+
         [Display(Name = "Document Subtype")]
         public CashReceiptDocumentSubType DocSubType { get; set; }
 
@@ -131,6 +134,7 @@ namespace MyERP.Web.Models
 
         [Display(Name = "Currency Factor")]
         [Required]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal CurrencyFactor { get; set; }
 
         [Display(Name = "Business Partner")]
@@ -157,10 +161,22 @@ namespace MyERP.Web.Models
         [Display(Name = "Total Vat Amount")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal TotalVatAmount { get; set; }
-
+        
         [Display(Name = "Total Payment")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal TotalPayment { get; set; }
+
+        [Display(Name = "Total Amount LCY")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal TotalAmountLCY { get; set; }
+
+        [Display(Name = "Total Vat Amount LCY")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal TotalVatAmountLCY { get; set; }
+
+        [Display(Name = "Total Payment LCY")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal TotalPaymentLCY { get; set; }
 
         [EnsureMinimumElements(1, ErrorMessage = "At least a Cash Line is required")]
         public List<CashLineEditViewModel> CashLines { get; set; }

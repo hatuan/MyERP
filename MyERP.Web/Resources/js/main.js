@@ -108,8 +108,8 @@ if (window.location.href.indexOf("#") > 0) {
 
 var CashReceipt = {
     CorrespAccountRenderer: function(value, metadata, record, rowIndex, colIndex, store) {
-        if (!Ext.isEmpty(record.data.CorrespAccountCode) && value > 0) {
-            return record.data.CorrespAccountCode;
+        if (Ext.isDefined(record.data.CorrespAccount) && record.data.CorrespAccount !== null && value > 0) {
+            return record.data.CorrespAccount.Code;
         }
         return "";
     },
@@ -128,6 +128,26 @@ var CashReceipt = {
                 break;
         }
     },
+
+    CalcHeaderTotal: function (grid) {
+        var sumAmount = 0;
+        var sumAmountLCY = 0;
+
+        grid.getStore().each(function (record) {
+            var v = (record.get("Amount") + "").replace(/\./g, '').replace(',', '.');
+            sumAmount += parseFloat(v);
+
+            v = (record.get("AmountLCY") + "").replace(/\./g, '').replace(',', '.');
+            sumAmountLCY += parseFloat(v);
+        });
+
+        var totalAmountId = "TotalAmount";
+        var totalAmountLCYId = "TotalAmountLCY";
+
+        Ext.getCmp(totalAmountId).setRawValue(Ext.util.Format.number(sumAmount, '0.000,00/i'));
+        Ext.getCmp(totalAmountLCYId).setRawValue(Ext.util.Format.number(sumAmountLCY, '0.000,00/i'));
+    }
+
     /*
     CashLineEdit: function (editor, e) {
         if (!(e.value === e.originalValue || (Ext.isDate(e.value) && Ext.Date.isEqual(e.value, e.originalValue)))) {

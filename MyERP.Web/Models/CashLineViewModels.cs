@@ -48,8 +48,6 @@ namespace MyERP.Web.Models
         [Required]
         public long CorrespAccountId { get; set; }
 
-        public String CorrespAccountCode { get; set; }
-
         public AccountLookupViewModel CorrespAccount { get; set; }
 
         [Display(Name = "Description")]
@@ -58,8 +56,12 @@ namespace MyERP.Web.Models
         public String Description { get; set; }
 
         [Display(Name = "Business Partner")]
-        [Required]
-        public long BusinessPartnerId { get; set; }
+        public long? BusinessPartnerId { get; set; }
+
+        public BusinessPartnerLookupViewModel BusinessPartner { get; set; }
+
+        [Display(Name = "Job")]
+        public long? JobId { get; set; }
 
         [Display(Name = "Amount")]
         public Decimal Amount { get; set; }
