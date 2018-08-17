@@ -10,6 +10,8 @@ using Ext.Net;
 using Ext.Net.MVC;
 using MyERP.Web.Helpers;
 using MyERP.Web.Models;
+using Recaptcha.Web;
+using Recaptcha.Web.Mvc;
 
 namespace MyERP.Web.Controllers
 {
@@ -56,7 +58,20 @@ namespace MyERP.Web.Controllers
         [ValidateAntiForgeryToken]
         public  ActionResult Login(LoginViewModel model, string returnUrl)
         {
-            DirectResult r = new DirectResult();
+            var recaptchaHelper = this.GetRecaptchaVerificationHelper();
+            if (String.IsNullOrEmpty(recaptchaHelper.Response))
+            {
+                //ModelState.AddModelError("", Resources.Resources.Captcha_answer_cannot_be_empty);
+                return this.Direct(false, Resources.Resources.Captcha_answer_cannot_be_empty);
+            }
+
+            var recaptchaResult = recaptchaHelper.VerifyRecaptchaResponse();
+
+            if (recaptchaResult != RecaptchaVerificationResult.Success)
+            {
+                //ModelState.AddModelError("", Resources.Resources.Incorrect_captcha_answer);
+                return this.Direct(false, Resources.Resources.Incorrect_captcha_answer);
+            }
 
             if (ModelState.IsValid)
             {
@@ -85,8 +100,7 @@ namespace MyERP.Web.Controllers
                         string[] roles = Roles.Provider.GetRolesForUser(user.UserName);
 
                         FormsAuthentication.SetAuthCookie(model.Name, model.RememberMe);
-                        r.Success = true;
-                        return r;
+                        return this.Direct(true);
 
                         #region If don't use Ext.net.directRequest in handleLogin (remove return r; before)
                         var cultureUIName = preference.CultureUI;
@@ -126,21 +140,15 @@ namespace MyERP.Web.Controllers
                     
                     if (user != null && user.ClientId == null)
                     {
-                        r.ErrorMessage = "User don't have available Client - Press create new Client";
-                        r.Success = false;
-                        return r;
+                        return this.Direct(false, Resources.Resources.User_dont_have_available_Client_Press_create_new_Client);
                     }
                 }
                 else
                 {
-                    r.ErrorMessage = "Invalid username or password.";
-                    r.Success = false;
-                    return r;
+                    return this.Direct(false, Resources.Resources.Invalid_username_or_password);
                 }
             }
-            r.Success = false;
-            r.ErrorMessage = "Invalid username or password.";
-            return r;
+            return this.Direct(false, Resources.Resources.Invalid_username_or_password);
         }
 
         //

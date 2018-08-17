@@ -366,4 +366,16 @@
   <data name="One_Time_Business_Partner" xml:space="preserve">
     <value>One Time Business Partner</value>
   </data>
+  <data name="Captcha_answer_cannot_be_empty" xml:space="preserve">
+    <value>Captcha answer cannot be empty.</value>
+  </data>
+  <data name="Incorrect_captcha_answer" xml:space="preserve">
+    <value>Incorrect captcha answer.</value>
+  </data>
+  <data name="Invalid_username_or_password" xml:space="preserve">
+    <value>Invalid Username or Password.</value>
+  </data>
+  <data name="User_dont_have_available_Client_Press_create_new_Client" xml:space="preserve">
+    <value>User don't have available Client - Press create new Client</value>
+  </data>
 </root>

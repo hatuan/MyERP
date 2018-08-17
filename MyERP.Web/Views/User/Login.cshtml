@@ -1,4 +1,5 @@
-﻿@model MyERP.Web.Models.LoginViewModel
+﻿@using Recaptcha.Web.Mvc
+@model MyERP.Web.Models.LoginViewModel
 
 @{
     Layout = null;
@@ -52,44 +53,54 @@
     @Html.X().ResourceManager().Theme(Theme.Triton)
 
     @(Html.X().Window()
-                .ID("LoginWindow")
-                .Title(@Resources.Resources.Login)
-                .Height(215)
-                .Width(350)
-                .Modal(true)
-                .Layout(LayoutType.Fit)
-                .Items(
-                    Html.X().FormPanel()
-                        .ID("FormLogin")
-                        .Layout(LayoutType.Form)
-                        .Border(false)
-                        .BodyPadding(5)
-                        .DefaultButton("Button1")
-                        .Items(
-                            Html.X().AntiForgeryField(),
-                            Html.X().TextFieldFor(m => m.Name)
-                                .EmptyText("")
-                                .AllowBlank(false)
-                                .AutoFocus(true)
-                                .LabelAlign(LabelAlign.Left)
-                                .BlankText(@Resources.Resources.Your_username_is_required),
-                            Html.X().TextFieldFor(m => m.Password)
-                                .EmptyText("")
-                                .AllowBlank(false)
-                                .LabelAlign(LabelAlign.Left)
-                                .BlankText(@Resources.Resources.Your_password_is_required)
-                                .InputType(Ext.Net.InputType.Password),
-                            Html.X().CheckboxFor(m => m.RememberMe)
-                                .LabelAlign(LabelAlign.Left)
-                                .Name("remember")
-                                )
-                        .Buttons(Html.X().Button()
-                            .ID("Button1")
-                            .Text(@Resources.Resources.Login)
-                            .Icon(Icon.Accept)
-                            .Listeners(ls =>
-                            {
-                                ls.Click.Handler = @"
+          .ID("LoginWindow")
+          .Title(@Resources.Resources.Login)
+          .Width(320)
+          .Height(310)
+          .Modal(true)
+          .Layout(LayoutType.Fit)
+          .Resizable(false)
+          .Items(
+              Html.X().FormPanel()
+                  .ID("FormLogin")
+                  .Layout(LayoutType.VBox)
+                  .Border(false)
+                  .BodyPadding(5)
+                  .DefaultButton("Button1")
+                  .Items(
+                      Html.X().AntiForgeryField(),
+                      Html.X().TextFieldFor(m => m.Name)
+                          .EmptyText("")
+                          .AllowBlank(false)
+                          .AutoFocus(true)
+                          .LabelAlign(LabelAlign.Left)
+                          .BlankText(@Resources.Resources.Your_username_is_required),
+                      Html.X().TextFieldFor(m => m.Password)
+                          .EmptyText("")
+                          .AllowBlank(false)
+                          .LabelAlign(LabelAlign.Left)
+                          .BlankText(@Resources.Resources.Your_password_is_required)
+                          .InputType(Ext.Net.InputType.Password),
+                      Html.X().CheckboxFor(m => m.RememberMe)
+                          .LabelAlign(LabelAlign.Left)
+                          .Name("remember"),
+                      Html.X().Container()
+                          .Width(310)
+                          .Height(80)
+                          .Content(
+                              @<text>
+                                  @Html.Recaptcha()
+                              </text>
+                          )
+                    )
+                )
+          .Buttons(Html.X().Button()
+              .ID("Button1")
+              .Text(@Resources.Resources.Login)
+              .Icon(Icon.Accept)
+              .Listeners(ls =>
+              {
+                  ls.Click.Handler = @"
                                     if ( !#{FormLogin}.getForm().isValid() ) {
                                         // Show all invalid field with error
                                         #{FormLogin}.validate();
@@ -98,18 +109,18 @@
                                         // Run DirectEvent
                                         return true;
                                     }";
-                            })
-                            .DirectEvents(de =>
-                            {
-                                de.Click.Url = Url.Action("Login");
-                                de.Click.Success = "handleLogin";
-                                de.Click.Failure = "invalidateLogin(result.errorMessage)";
-                                de.Click.ShowWarningOnFailure = false;
-                                de.Click.EventMask.ShowMask = true;
-                                de.Click.FormID = "FormLogin";
-                            })
-                            )
-                        )
+              })
+              .DirectEvents(de =>
+              {
+                  de.Click.Url = Url.Action("Login");
+                  de.Click.Success = "handleLogin";
+                  de.Click.Failure = "invalidateLogin(result.errorMessage)";
+                  de.Click.ShowWarningOnFailure = false;
+                  de.Click.EventMask.ShowMask = true;
+                  de.Click.FormID = "FormLogin";
+                  de.Click.ExtraParams.Add(new Parameter("g-recaptcha-response", "grecaptcha.getResponse()", ParameterMode.Raw));
+              })
+          )
     )
 
     @*

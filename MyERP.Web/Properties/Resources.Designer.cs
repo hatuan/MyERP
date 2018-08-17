@@ -124,6 +124,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Captcha answer cannot be empty..
+        /// </summary>
+        public static string Captcha_answer_cannot_be_empty {
+            get {
+                return ResourceManager.GetString("Captcha_answer_cannot_be_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cash Payment.
         /// </summary>
         public static string Cash_Payment {
@@ -340,11 +349,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Incorrect captcha answer..
+        /// </summary>
+        public static string Incorrect_captcha_answer {
+            get {
+                return ResourceManager.GetString("Incorrect_captcha_answer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid Code - only allow a-z A-Z 0-9 character.
         /// </summary>
         public static string Invalid_Code_only_allow_a_z_A_Z_0_9_character {
             get {
                 return ResourceManager.GetString("Invalid_Code_only_allow_a_z_A_Z_0_9_character", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Username or Password..
+        /// </summary>
+        public static string Invalid_username_or_password {
+            get {
+                return ResourceManager.GetString("Invalid_username_or_password", resourceCulture);
             }
         }
         
@@ -741,6 +768,15 @@ namespace Resources {
         public static string UOM {
             get {
                 return ResourceManager.GetString("UOM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User don&apos;t have available Client - Press create new Client.
+        /// </summary>
+        public static string User_dont_have_available_Client_Press_create_new_Client {
+            get {
+                return ResourceManager.GetString("User_dont_have_available_Client_Press_create_new_Client", resourceCulture);
             }
         }
         
