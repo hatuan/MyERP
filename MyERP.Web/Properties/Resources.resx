@@ -378,4 +378,97 @@
   <data name="User_dont_have_available_Client_Press_create_new_Client" xml:space="preserve">
     <value>User don't have available Client - Press create new Client</value>
   </data>
+  <data name="R_BANG_CHU" xml:space="preserve">
+    <value>Amount to words</value>
+  </data>
+  <data name="R_BC_CHU_KY" xml:space="preserve">
+    <value>(Sign, fullname)</value>
+  </data>
+  <data name="R_BC_CHU_KY_DAU" xml:space="preserve">
+    <value>(Sign, fullname, seal)</value>
+  </data>
+  <data name="R_BC_GD" xml:space="preserve">
+    <value>Manager</value>
+  </data>
+  <data name="R_BC_GS" xml:space="preserve">
+    <value>Book Keeper</value>
+  </data>
+  <data name="R_BC_KTT" xml:space="preserve">
+    <value>Chief Acountant</value>
+  </data>
+  <data name="R_BC_KY_DAU" xml:space="preserve">
+    <value>(Sign, fullname, seal)</value>
+  </data>
+  <data name="R_BC_NGAY" xml:space="preserve">
+    <value>Dated ......../........./..........</value>
+  </data>
+  <data name="R_BC_NGUOI_LAP" xml:space="preserve">
+    <value>Prepares by</value>
+  </data>
+  <data name="R_BC_NGUOI_NHAN_TIEN" xml:space="preserve">
+    <value>Receipter</value>
+  </data>
+  <data name="R_BC_NLB" xml:space="preserve">
+    <value>Prepares by</value>
+  </data>
+  <data name="R_BC_THU_QUY" xml:space="preserve">
+    <value>Cashier</value>
+  </data>
+  <data name="R_CHUNG_TU_GOC" xml:space="preserve">
+    <value>Document(s)</value>
+  </data>
+  <data name="R_DAY" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="R_DA_NHAN_DU" xml:space="preserve">
+    <value>Recieved full (By words)</value>
+  </data>
+  <data name="R_DIA_CHI" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="R_DIEN_GIAI" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="R_DOI_TAC" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="R_DON_VI" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="R_MONTH" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="R_NGAY_QD_CDKT" xml:space="preserve">
+    <value>dated 25 October 2000 of the Ministry of Finance</value>
+  </data>
+  <data name="R_PAGE" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="R_SO_CT" xml:space="preserve">
+    <value>Document No</value>
+  </data>
+  <data name="R_SO_CT_KEM_THEO" xml:space="preserve">
+    <value>Include</value>
+  </data>
+  <data name="R_SO_QD_CDKT" xml:space="preserve">
+    <value>(According to Decision No. 15/2006/QĐ-BTC Date 20/03/2006)</value>
+  </data>
+  <data name="R_SO_TIEN" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="R_SO_TIEN_LCY" xml:space="preserve">
+    <value>Currency LCY</value>
+  </data>
+  <data name="R_TK" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="R_TK_DU" xml:space="preserve">
+    <value>Corr Account</value>
+  </data>
+  <data name="R_TY_GIA" xml:space="preserve">
+    <value>Rate</value>
+  </data>
+  <data name="R_YEAR" xml:space="preserve">
+    <value>Year</value>
+  </data>
 </root>

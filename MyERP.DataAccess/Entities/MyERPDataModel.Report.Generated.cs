@@ -17,11 +17,11 @@ namespace MyERP.DataAccess
 {
 
     /// <summary>
-    /// There are no comments for MyERP.DataAccess.UserInRole in the schema.
+    /// There are no comments for MyERP.DataAccess.Report in the schema.
     /// </summary>
-    public partial class UserInRole    {
+    public partial class Report    {
 
-        public UserInRole()
+        public Report()
         {
             OnCreated();
         }
@@ -42,10 +42,11 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for RoleId in the schema.
+        /// There are no comments for RepId in the schema.
         /// </summary>
+        [System.ComponentModel.DataAnnotations.StringLength(256)]
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long RoleId
+        public virtual string RepId
         {
             get;
             set;
@@ -53,37 +54,61 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for UserId in the schema.
+        /// There are no comments for RepNo in the schema.
         /// </summary>
+        [System.ComponentModel.DataAnnotations.StringLength(3)]
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long UserId
+        public virtual string RepNo
         {
             get;
             set;
         }
 
-
-        #endregion
-
-        #region Navigation Properties
     
         /// <summary>
-        /// There are no comments for User in the schema.
+        /// There are no comments for Text in the schema.
         /// </summary>
-        public virtual User User
+        [System.ComponentModel.DataAnnotations.StringLength(256)]
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual string Text
         {
             get;
             set;
         }
+
     
         /// <summary>
-        /// There are no comments for Role in the schema.
+        /// There are no comments for Title in the schema.
         /// </summary>
-        public virtual Role Role
+        [System.ComponentModel.DataAnnotations.StringLength(256)]
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual string Title
         {
             get;
             set;
         }
+
+    
+        /// <summary>
+        /// There are no comments for FileName in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.StringLength(256)]
+        public virtual string FileName
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for Blob in the schema.
+        /// </summary>
+        public virtual string Blob
+        {
+            get;
+            set;
+        }
+
 
         #endregion
     

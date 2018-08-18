@@ -350,7 +350,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Resources\printReports\blank.txt" />
-    <Content Include="Resources\reports\blank.txt" />
     <Content Include="Resources\uploadFiles\blank.txt" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -427,13 +426,10 @@
     <Content Include="App_Readme\Ext.NET\LICENSE" />
     <Content Include="App_Readme\Ext.NET\CHANGELOG.md" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <Content Include="Resources\reports\salespos-002.json" />
-    <Content Include="Resources\reports\salespos-003.json" />
     <Content Include="Resources\reports\salespos.json" />
     <Content Include="Resources\reports\salespos_001.mrt" />
-    <Content Include="Resources\reports\salespos_002.mrt" />
-    <Content Include="Resources\reports\salespos_003.mrt" />
     <Content Include="Views\ExtNet\Index.cshtml" />
+    <Content Include="Resources\reports\cashReceipt.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -532,6 +528,7 @@
     <Compile Include="CustomRoleProvider.cs" />
     <Compile Include="odata\RolesController.cs" />
     <Compile Include="Others\DbEntityValidationException.cs" />
+    <Compile Include="Others\ReportServices.cs" />
     <Compile Include="Others\Round.cs" />
     <Compile Include="Others\AppSettings.cs" />
     <Compile Include="Properties\Resources.vi-VN.Designer.cs">

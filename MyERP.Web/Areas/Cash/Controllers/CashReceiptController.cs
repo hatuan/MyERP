@@ -14,6 +14,9 @@ using MyERP.Web.Controllers;
 using MyERP.Web.Models;
 using MyERP.Web.Others;
 using Newtonsoft.Json;
+using Stimulsoft.Base;
+using Stimulsoft.Base.Json.Linq;
+using Stimulsoft.Report;
 using WebGrease.Css.Extensions;
 
 namespace MyERP.Web.Areas.Cash.Controllers
@@ -626,6 +629,93 @@ namespace MyERP.Web.Areas.Cash.Controllers
             }
             record.Commit();
             return this.Direct();
+        }
+
+        public ActionResult Print(string id)
+        {
+            if (String.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
+
+            var _id = Convert.ToInt64(id);
+            var entity = repository.Get(c => c.Id == _id, new string[] { "Account", "BusinessPartner", "Currency", "CashLines", "CashLines.CorrespAccount", "CashLines.BusinessPartner" }).SingleOrDefault();
+            if (entity == null)
+            {
+                return this.Direct(false, "Cash Header has been changed or deleted! Please check");
+            }
+
+            var cashLines = (from cashLine in entity.CashLines
+                                                     select new 
+                                                     {
+                                                         Id = cashLine.Id,
+                                                         LineNo = cashLine.LineNo,
+                                                         CorrespAccountId = cashLine.CorrespAccountId,
+                                                         CorrespAccountCode = cashLine.CorrespAccount.Code,
+                                                         Description = cashLine.Description,
+                                                         BusinessPartnerId = cashLine.BusinessPartnerId,
+                                                         BusinessPartnerCode = cashLine.BusinessPartner.Code,
+                                                         Amount = cashLine.Amount,
+                                                         AmountLCY = cashLine.AmountLCY,
+                                                         JobId = cashLine.JobId,
+                                                     }).ToList();
+
+            var headerModel = new 
+            {
+                Id = entity.Id,
+                DocumentType = (DocumentType)entity.DocumentType,
+                DocSubType = (CashReceiptDocumentSubType)entity.DocSubType,
+                DocSequenceId = entity.DocSequenceId,
+                DocumentNo = entity.DocumentNo,
+                DocumentDate = entity.DocumentDate,
+                PostingDate = entity.PostingDate,
+                CurrencyId = entity.CurrencyId,
+                CurrencyCode = entity.Currency.Code,
+                CurrencyFactor = entity.CurrencyFactor,
+                BusinessPartnerId = entity.BusinessPartnerId,
+                BusinessPartnerCode = entity.BusinessPartner.Code,
+                BusinessPartnerName = entity.BusinessPartnerName,
+                BusinessPartnerAddress = entity.BusinessPartnerAddress,
+                BusinessPartnerContactName = entity.BusinessPartnerContactName,
+                AccountId = entity.AccountId,
+                AccountCode = entity.Account.Code,
+                Description = entity.Description,
+                TotalAmount = entity.TotalAmount,
+                TotalAmountLCY = entity.TotalAmountLCY,
+                TotalVatAmount = entity.TotalVatAmount,
+                TotalVatAmountLCY = entity.TotalVatAmountLCY,
+                TotalPayment = entity.TotalPayment,
+                TotalPaymentLCY = entity.TotalPaymentLCY,
+                Status = (CashDocumentStatusType)entity.Status,
+                Version = entity.Version
+            };
+
+            //Print
+            StiReport report = new StiReport();
+            report.Load(Server.MapPath("~/Resources/Reports/cashReceipt_001.mrt"));
+
+            Client _client = (new ClientRepository()).Get(User, new string[] {"CurrencyLcy"});
+            var client = new
+            {
+                _client.Description,
+                _client.Adress,
+                _client.TaxCode,
+                _client.Telephone,
+                _client.Email,
+                _client.Website,
+                _client.Image,
+                CurrencyLcyCode = _client.CurrencyLcy.Code
+            };
+
+            var data = JObject.FromObject(new { CashHeader = headerModel, CashLines = cashLines, Client = client, ReportTexts = ReportServices.ReportGlobalizedTexts() });
+            report.Dictionary.Databases.Clear();
+            var ds = StiJsonToDataSetConverter.GetDataSet(data);
+            report.RegData("data", "", ds);
+            report.Dictionary.Synchronize();
+            report.Render();
+
+            var fileName = $"cashreceipt_{headerModel.Id}_{User.Identity.Name}_{DateTime.Now:yyyyMMddhhmmss}";
+            report.ExportDocument(StiExportFormat.Pdf, Server.MapPath("~/Resources/printReports/") + fileName + ".pdf");
+
+            return this.Direct(new { FileName = fileName });
         }
     }
 }

@@ -39,6 +39,7 @@
           <EntitySet Name="accounts_payable_ledgers" EntityType="MyERP.DataAccess.Store.accounts_payable_ledger" store:Type="Tables" Schema="dbo" Table="accounts_payable_ledger" />
           <EntitySet Name="item_ledger_entries" EntityType="MyERP.DataAccess.Store.item_ledger_entry" store:Type="Tables" Schema="dbo" Table="item_ledger_entry" />
           <EntitySet Name="general_ledger_entries" EntityType="MyERP.DataAccess.Store.general_ledger_entry" store:Type="Tables" Schema="dbo" Table="general_ledger_entry" />
+          <EntitySet Name="reports" EntityType="MyERP.DataAccess.Store.report" store:Type="Tables" Schema="dbo" Table="report" />
           <AssociationSet Name="FK_client_user_profile" Association="MyERP.DataAccess.Store.FK_client_user_profile">
             <End Role="user" EntitySet="users" />
             <End Role="client" EntitySet="clients" />
@@ -1484,6 +1485,18 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="report">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="rep_id" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="rep_no" Type="varchar" Nullable="false" MaxLength="3" />
+          <Property Name="text" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="title" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="file_name" Type="nvarchar" MaxLength="256" />
+          <Property Name="blob" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
@@ -3409,6 +3422,7 @@
           <EntitySet Name="AccountsPayableLedgers" EntityType="MyERP.DataAccess.AccountsPayableLedger" />
           <EntitySet Name="ItemLedgerEntries" EntityType="MyERP.DataAccess.ItemLedgerEntry" />
           <EntitySet Name="GeneralLedgerEntries" EntityType="MyERP.DataAccess.GeneralLedgerEntry" />
+          <EntitySet Name="Reports" EntityType="MyERP.DataAccess.Report" />
           <AssociationSet Name="User_Client_CreatedBySet" Association="MyERP.DataAccess.User_Client_CreatedBy">
             <End Role="RecCreatedByUser" EntitySet="Users" />
             <End Role="Clients" EntitySet="Clients" />
@@ -5027,6 +5041,18 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="a128c033-780d-403a-8e31-f42570a31b2d" />
+        </EntityType>
+        <EntityType Name="Report" ed:Guid="d840f073-02d7-46f9-92b7-13b5c499d17a">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="45b945f5-1ab2-4033-b789-db240e56236b" />
+          <Property Name="RepId" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="a462611e-d659-4ac4-8057-8bef9510e7e6" />
+          <Property Name="RepNo" Type="String" Nullable="false" MaxLength="3" ed:ValidateMaxLength="3" ed:ValidateRequired="true" ed:Guid="2c96d5b9-7d3b-492e-be08-23933283ca1f" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="b0dd64a7-1d31-4ad4-9dc8-3c66718b75b8" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="66e55567-b411-49c9-bc0d-c508124fc8c4" />
+          <Property Name="FileName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="6be6a2d6-df2a-4cb4-b6fc-61fab9122c6b" />
+          <Property Name="Blob" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="8b1bb312-8ba7-4a48-a2cd-ef25d6e8b376" />
         </EntityType>
         <Association Name="User_Client_CreatedBy" ed:Guid="cc64066d-a254-493f-8be0-7609622c4e6a">
           <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
@@ -7749,6 +7775,19 @@
             <EntityTypeMapping TypeName="MyERP.DataAccess.GeneralLedgerEntry">
               <MappingFragment StoreEntitySet="general_ledger_entries">
                 <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.Report">
+              <MappingFragment StoreEntitySet="reports">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="RepId" ColumnName="rep_id" />
+                <ScalarProperty Name="RepNo" ColumnName="rep_no" />
+                <ScalarProperty Name="Text" ColumnName="text" />
+                <ScalarProperty Name="Title" ColumnName="title" />
+                <ScalarProperty Name="FileName" ColumnName="file_name" />
+                <ScalarProperty Name="Blob" ColumnName="blob" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

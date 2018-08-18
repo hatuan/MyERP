@@ -610,6 +610,285 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amount to words.
+        /// </summary>
+        public static string R_BANG_CHU {
+            get {
+                return ResourceManager.GetString("R_BANG_CHU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Sign, fullname).
+        /// </summary>
+        public static string R_BC_CHU_KY {
+            get {
+                return ResourceManager.GetString("R_BC_CHU_KY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Sign, fullname, seal).
+        /// </summary>
+        public static string R_BC_CHU_KY_DAU {
+            get {
+                return ResourceManager.GetString("R_BC_CHU_KY_DAU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manager.
+        /// </summary>
+        public static string R_BC_GD {
+            get {
+                return ResourceManager.GetString("R_BC_GD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Book Keeper.
+        /// </summary>
+        public static string R_BC_GS {
+            get {
+                return ResourceManager.GetString("R_BC_GS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chief Acountant.
+        /// </summary>
+        public static string R_BC_KTT {
+            get {
+                return ResourceManager.GetString("R_BC_KTT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Sign, fullname, seal).
+        /// </summary>
+        public static string R_BC_KY_DAU {
+            get {
+                return ResourceManager.GetString("R_BC_KY_DAU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dated ......../........./...........
+        /// </summary>
+        public static string R_BC_NGAY {
+            get {
+                return ResourceManager.GetString("R_BC_NGAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prepares by.
+        /// </summary>
+        public static string R_BC_NGUOI_LAP {
+            get {
+                return ResourceManager.GetString("R_BC_NGUOI_LAP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receipter.
+        /// </summary>
+        public static string R_BC_NGUOI_NHAN_TIEN {
+            get {
+                return ResourceManager.GetString("R_BC_NGUOI_NHAN_TIEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prepares by.
+        /// </summary>
+        public static string R_BC_NLB {
+            get {
+                return ResourceManager.GetString("R_BC_NLB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cashier.
+        /// </summary>
+        public static string R_BC_THU_QUY {
+            get {
+                return ResourceManager.GetString("R_BC_THU_QUY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document(s).
+        /// </summary>
+        public static string R_CHUNG_TU_GOC {
+            get {
+                return ResourceManager.GetString("R_CHUNG_TU_GOC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recieved full (By words).
+        /// </summary>
+        public static string R_DA_NHAN_DU {
+            get {
+                return ResourceManager.GetString("R_DA_NHAN_DU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Day.
+        /// </summary>
+        public static string R_DAY {
+            get {
+                return ResourceManager.GetString("R_DAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string R_DIA_CHI {
+            get {
+                return ResourceManager.GetString("R_DIA_CHI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string R_DIEN_GIAI {
+            get {
+                return ResourceManager.GetString("R_DIEN_GIAI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact.
+        /// </summary>
+        public static string R_DOI_TAC {
+            get {
+                return ResourceManager.GetString("R_DOI_TAC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company.
+        /// </summary>
+        public static string R_DON_VI {
+            get {
+                return ResourceManager.GetString("R_DON_VI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        public static string R_MONTH {
+            get {
+                return ResourceManager.GetString("R_MONTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dated 25 October 2000 of the Ministry of Finance.
+        /// </summary>
+        public static string R_NGAY_QD_CDKT {
+            get {
+                return ResourceManager.GetString("R_NGAY_QD_CDKT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page.
+        /// </summary>
+        public static string R_PAGE {
+            get {
+                return ResourceManager.GetString("R_PAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document No.
+        /// </summary>
+        public static string R_SO_CT {
+            get {
+                return ResourceManager.GetString("R_SO_CT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Include.
+        /// </summary>
+        public static string R_SO_CT_KEM_THEO {
+            get {
+                return ResourceManager.GetString("R_SO_CT_KEM_THEO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (According to Decision No. 15/2006/QĐ-BTC Date 20/03/2006).
+        /// </summary>
+        public static string R_SO_QD_CDKT {
+            get {
+                return ResourceManager.GetString("R_SO_QD_CDKT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount.
+        /// </summary>
+        public static string R_SO_TIEN {
+            get {
+                return ResourceManager.GetString("R_SO_TIEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency LCY.
+        /// </summary>
+        public static string R_SO_TIEN_LCY {
+            get {
+                return ResourceManager.GetString("R_SO_TIEN_LCY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account.
+        /// </summary>
+        public static string R_TK {
+            get {
+                return ResourceManager.GetString("R_TK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Corr Account.
+        /// </summary>
+        public static string R_TK_DU {
+            get {
+                return ResourceManager.GetString("R_TK_DU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rate.
+        /// </summary>
+        public static string R_TY_GIA {
+            get {
+                return ResourceManager.GetString("R_TY_GIA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year.
+        /// </summary>
+        public static string R_YEAR {
+            get {
+                return ResourceManager.GetString("R_YEAR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remember me.
         /// </summary>
         public static string Remember_me {

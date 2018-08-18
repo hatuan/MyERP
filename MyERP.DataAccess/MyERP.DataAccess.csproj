@@ -105,6 +105,8 @@
     <Compile Include="Entities\MyERPDataModel.PurchaseHeader.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.PurchaseLine.cs" />
     <Compile Include="Entities\MyERPDataModel.PurchaseLine.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Report.cs" />
+    <Compile Include="Entities\MyERPDataModel.Report.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Role.cs" />
     <Compile Include="Entities\MyERPDataModel.Role.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.SalesHeader.cs" />
@@ -183,6 +185,8 @@
     <Compile Include="Mapping\MyERPDataModel.PurchaseHeaderConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.PurchaseLineConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.PurchaseLineConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ReportConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ReportConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.RoleConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.RoleConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.SalesHeaderConfiguration.cs" />

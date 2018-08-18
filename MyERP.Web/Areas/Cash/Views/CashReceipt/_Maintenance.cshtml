@@ -48,11 +48,21 @@
                                              "      } \n" +
                                              "  }); \n" +
                                              "}";
-                      }));
+                      })
+                  );
                   items.Add(Html.X().Button()
                       .ID("btnPrint")
                       .Text("Print")
-                      .Icon(Icon.Printer));
+                      .Icon(Icon.Printer)
+                      .DirectEvents(de =>
+                      {
+                          de.Click.Action = "Print";
+                          de.Click.Before = "return #{Id}.getValue() !== '';";
+                          de.Click.ShowWarningOnFailure = true;
+                          de.Click.EventMask.ShowMask = true;
+                          de.Click.ExtraParams.Add(new Parameter("id", "#{Id}.getValue()", ParameterMode.Raw));
+                      })
+                  );
               })
           )
           .Bin(

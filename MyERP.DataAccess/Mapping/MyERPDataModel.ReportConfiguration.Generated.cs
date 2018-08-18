@@ -17,14 +17,14 @@ using System.Data.Entity.ModelConfiguration;
 namespace MyERP.DataAccess.Mapping
 {
 
-    public partial class RoleConfiguration : EntityTypeConfiguration<Role>
+    public partial class ReportConfiguration : EntityTypeConfiguration<Report>
     {
 
-        public RoleConfiguration()
+        public ReportConfiguration()
         {
             this
                 .HasKey(p => p.Id)
-                .ToTable("role", "dbo");
+                .ToTable("report", "dbo");
             // Properties:
             this
                 .Property(p => p.Id)
@@ -33,26 +33,38 @@ namespace MyERP.DataAccess.Mapping
                     .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)
                     .HasColumnType("bigint");
             this
-                .Property(p => p.Description)
-                    .HasColumnName(@"description")
-                    .HasMaxLength(512)
+                .Property(p => p.RepId)
+                    .HasColumnName(@"rep_id")
+                    .IsRequired()
+                    .HasMaxLength(256)
+                    .HasColumnType("nvarchar");
+            this
+                .Property(p => p.RepNo)
+                    .HasColumnName(@"rep_no")
+                    .IsRequired()
+                    .HasMaxLength(3)
                     .HasColumnType("varchar");
             this
-                .Property(p => p.ClientId)
-                    .HasColumnName(@"client_id")
+                .Property(p => p.Text)
+                    .HasColumnName(@"text")
                     .IsRequired()
-                    .HasColumnType("bigint");
-            // Associations:
+                    .HasMaxLength(256)
+                    .HasColumnType("nvarchar");
             this
-                .HasMany(p => p.Users)
-                    .WithRequired(c => c.Role)
-                .HasForeignKey(p => p.RoleId)
-                    .WillCascadeOnDelete(false);
+                .Property(p => p.Title)
+                    .HasColumnName(@"title")
+                    .IsRequired()
+                    .HasMaxLength(256)
+                    .HasColumnType("nvarchar");
             this
-                .HasRequired(p => p.Client)
-                    .WithMany()
-                .HasForeignKey(p => p.ClientId)
-                    .WillCascadeOnDelete(false);
+                .Property(p => p.FileName)
+                    .HasColumnName(@"file_name")
+                    .HasMaxLength(256)
+                    .HasColumnType("nvarchar");
+            this
+                .Property(p => p.Blob)
+                    .HasColumnName(@"blob")
+                    .HasColumnType("nvarchar(max)");
             OnCreated();
         }
 
