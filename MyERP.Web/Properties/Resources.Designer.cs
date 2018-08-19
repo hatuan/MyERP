@@ -610,7 +610,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Amount to words.
+        ///   Looks up a localized string similar to By words.
         /// </summary>
         public static string R_BANG_CHU {
             get {

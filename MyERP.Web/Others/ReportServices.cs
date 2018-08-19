@@ -7,9 +7,9 @@ namespace MyERP.Web.Others
 {
     public static class ReportServices
     {
-        public static object ReportGlobalizedTexts()
+        public static dynamic ReportGlobalizedTexts()
         {
-            return new
+            return new 
             {
                 Resources.Resources.R_BC_GD,
                 Resources.Resources.R_BC_CHU_KY,

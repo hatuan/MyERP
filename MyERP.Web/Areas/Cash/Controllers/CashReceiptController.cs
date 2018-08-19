@@ -705,15 +705,45 @@ namespace MyERP.Web.Areas.Cash.Controllers
                 CurrencyLcyCode = _client.CurrencyLcy.Code
             };
 
-            var data = JObject.FromObject(new { CashHeader = headerModel, CashLines = cashLines, Client = client, ReportTexts = ReportServices.ReportGlobalizedTexts() });
+            var data = JObject.FromObject(new { CashHeader = headerModel, CashLines = cashLines, Client = client, T = ReportServices.ReportGlobalizedTexts() });
             report.Dictionary.Databases.Clear();
             var ds = StiJsonToDataSetConverter.GetDataSet(data);
             report.RegData("data", "", ds);
             report.Dictionary.Synchronize();
             report.Render();
 
-            var fileName = $"cashreceipt_{headerModel.Id}_{User.Identity.Name}_{DateTime.Now:yyyyMMddhhmmss}";
+            var fileName = $"cashreceipt_Id_{headerModel.Id}_No_{headerModel.DocumentNo}_{User.Identity.Name}_{DateTime.Now:yyyyMMddhhmmss}";
             report.ExportDocument(StiExportFormat.Pdf, Server.MapPath("~/Resources/printReports/") + fileName + ".pdf");
+            report.SaveDocument(Server.MapPath("~/Resources/printReports/") + fileName + ".mdc");
+
+            //var jsonString = report.SaveDocumentJsonToString();
+            Window win = new Window
+            {
+                ID = fileName,
+                Icon = Ext.Net.Icon.PageWhiteAcrobat,
+                Maximized = true,
+                BodyPadding = 2,
+                Frame = true,
+                Modal = true,
+                Layout = "Fit",
+                CloseAction = CloseAction.Destroy,
+                Items =
+                {
+                    new Panel
+                    {
+                        Loader = new ComponentLoader()
+                        {
+                            Url = Url.Action("Index", "Report", new { area = ""}),
+                            Params =
+                            {
+                                new Parameter("fileName", fileName, ParameterMode.Value)
+                            },
+                            Mode = LoadMode.Frame
+                        }
+                    }
+                }
+            };
+            win.Render(RenderMode.Auto);
 
             return this.Direct(new { FileName = fileName });
         }

@@ -430,6 +430,8 @@
     <Content Include="Resources\reports\salespos_001.mrt" />
     <Content Include="Views\ExtNet\Index.cshtml" />
     <Content Include="Resources\reports\cashReceipt.json" />
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Shared\_ReportLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -594,7 +596,6 @@
     <Folder Include="Areas\SalesPrice\Models\" />
     <Folder Include="Areas\SalesPrice\Views\Shared\" />
     <Folder Include="Areas\UOM\Models\" />
-    <Folder Include="Views\Report\" />
     <Folder Include="Views\Validation\" />
   </ItemGroup>
   <ItemGroup>
