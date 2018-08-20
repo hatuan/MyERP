@@ -118,7 +118,7 @@ var showPreviewReport = function(fileNameOfSnapshotReport) {
             {
                 paramsFn: function () { return { fileName: fileNameOfSnapshotReport }; },
                 renderer: 'frame',
-                url: baseURL + '/Report'
+                url: baseURL + 'Report'
             }
         }],
         layout: 'fit',
