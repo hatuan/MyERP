@@ -425,6 +425,8 @@
     <Content Include="App_Readme\Ext.NET\README.md" />
     <Content Include="App_Readme\Ext.NET\LICENSE" />
     <Content Include="App_Readme\Ext.NET\CHANGELOG.md" />
+    <Content Include="Areas\Cash\Views\CashPayment\_List.cshtml" />
+    <Content Include="Areas\Cash\Views\CashPayment\_Maintenance.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Resources\reports\salespos.json" />
     <Content Include="Resources\reports\salespos_001.mrt" />

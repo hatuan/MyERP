@@ -59,7 +59,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
 
         public ActionResult GetData(StoreRequestParameters parameters)
         {
-            var paging = ((CashHeaderRepository)repository).Paging(parameters);
+            var paging = ((CashHeaderRepository)repository).Paging(parameters, DocumentType.CashReceipt);
 
             var data = paging.Data.Select(c => new CashHeaderViewModel
             {
@@ -126,7 +126,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
             {
                 Id = null,
                 DocumentType = DocumentType.CashReceipt,
-                DocSubType = CashReceiptDocumentSubType.CashReceipt,
+                DocSubType = (byte)CashReceiptDocumentSubType.CashReceipt,
                 DocSequenceId = cashReceiptSequenceId,
                 DocumentDate = preference.WorkingDate,
                 PostingDate = preference.WorkingDate,
@@ -178,7 +178,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
                 {
                     Id = entity.Id,
                     DocumentType = (DocumentType)entity.DocumentType,
-                    DocSubType = (CashReceiptDocumentSubType)entity.DocSubType,
+                    DocSubType = entity.DocSubType,
                     DocSequenceId = entity.DocSequenceId,
                     DocumentNo = entity.DocumentNo,
                     DocumentDate = entity.DocumentDate,
@@ -323,7 +323,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
                             PostingDate = headerModel.PostingDate,
                             CorrespAccountId = cashLineEditViewModel.CorrespAccountId,
                             Description = cashLineEditViewModel.Description,
-                            BusinessPartnerId = headerModel.DocSubType != CashReceiptDocumentSubType.CashReceiptMultiBusinessPartner ? headerModel.BusinessPartnerId : cashLineEditViewModel.BusinessPartnerId,
+                            BusinessPartnerId = headerModel.DocSubType != (byte)CashReceiptDocumentSubType.CashReceiptMultiBusinessPartner ? headerModel.BusinessPartnerId : cashLineEditViewModel.BusinessPartnerId,
                             JobId = null,
                             AccountsPayableLedgerId = null,
                             AccountsReceivableLedgerId = null,
@@ -343,7 +343,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
                                 x.CorrespAccountId = cashLineEditViewModel.CorrespAccountId;
                                 x.Description = cashLineEditViewModel.Description;
                                 x.BusinessPartnerId =
-                                    headerModel.DocSubType != CashReceiptDocumentSubType.CashReceiptMultiBusinessPartner
+                                    headerModel.DocSubType != (byte) CashReceiptDocumentSubType.CashReceiptMultiBusinessPartner
                                         ? headerModel.BusinessPartnerId
                                         : cashLineEditViewModel.BusinessPartnerId;
                                 x.JobId = null;
@@ -394,7 +394,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
                         PostingDate = headerModel.PostingDate,
                         CorrespAccountId = c.CorrespAccountId,
                         Description = c.Description,
-                        BusinessPartnerId = headerModel.DocSubType != CashReceiptDocumentSubType.CashReceiptMultiBusinessPartner ? headerModel.BusinessPartnerId : c.BusinessPartnerId,
+                        BusinessPartnerId = headerModel.DocSubType != (byte) CashReceiptDocumentSubType.CashReceiptMultiBusinessPartner ? headerModel.BusinessPartnerId : c.BusinessPartnerId,
                         JobId = null,
                         AccountsPayableLedgerId = null,
                         AccountsReceivableLedgerId = null,
@@ -716,35 +716,6 @@ namespace MyERP.Web.Areas.Cash.Controllers
             report.ExportDocument(StiExportFormat.Pdf, Server.MapPath("~/Resources/printReports/") + fileName + ".pdf");
             report.SaveDocument(Server.MapPath("~/Resources/printReports/") + fileName + ".mdc");
 
-            /* USE javascript function showPreviewReport(fileNameOfSnapshotReport)
-            Window win = new Window
-            {
-                ID = fileName,
-                Icon = Ext.Net.Icon.Printer,
-                Maximized = true,
-                BodyPadding = 2,
-                Frame = true,
-                Modal = true,
-                Layout = "Fit",
-                CloseAction = CloseAction.Destroy,
-                Items =
-                {
-                    new Panel
-                    {
-                        Loader = new ComponentLoader()
-                        {
-                            Url = Url.Action("Index", "Report", new { area = ""}),
-                            Params =
-                            {
-                                new Parameter("fileName", fileName, ParameterMode.Value)
-                            },
-                            Mode = LoadMode.Frame
-                        }
-                    }
-                }
-            };
-            win.Render(RenderMode.Auto);
-            */
             return this.Direct(new { FileName = fileName });
         }
     }

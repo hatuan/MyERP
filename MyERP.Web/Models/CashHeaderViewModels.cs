@@ -103,7 +103,7 @@ namespace MyERP.Web.Models
         public DocumentType DocumentType { get; set; }
 
         [Display(Name = "Document Subtype")]
-        public CashReceiptDocumentSubType DocSubType { get; set; }
+        public byte DocSubType { get; set; }
 
         [Display(Name = "Document No")]
         public string DocumentNo { get; set; }

@@ -195,3 +195,45 @@ var CashReceipt = {
     */
 };
 
+var CashPayment = {
+    CorrespAccountRenderer: function (value, metadata, record, rowIndex, colIndex, store) {
+        if (Ext.isDefined(record.data.CorrespAccount) && record.data.CorrespAccount !== null && value > 0) {
+            return record.data.CorrespAccount.Code;
+        }
+        return "";
+    },
+
+    CashLineBeforeEdit: function (editor, e) {
+        e.grid.getSelectionModel().select(e.rowIdx, true);
+
+        var field = this.getEditor(e.record, e.column).field;
+
+        switch (e.field) {
+            case "CorrespAccountId":
+                field.store.id = e.record.data.CorrespAccountId;
+                if (e.record.data.CorrespAccount !== null) {
+                    field.store.add(e.record.data.CorrespAccount);
+                }
+                break;
+        }
+    },
+
+    CalcHeaderTotal: function (grid) {
+        var sumAmount = 0;
+        var sumAmountLCY = 0;
+
+        grid.getStore().each(function (record) {
+            var v = (record.get("Amount") + "").replace(/\./g, '').replace(',', '.');
+            sumAmount += parseFloat(v);
+
+            v = (record.get("AmountLCY") + "").replace(/\./g, '').replace(',', '.');
+            sumAmountLCY += parseFloat(v);
+        });
+
+        var totalAmountId = "TotalAmount";
+        var totalAmountLCYId = "TotalAmountLCY";
+
+        Ext.getCmp(totalAmountId).setRawValue(Ext.util.Format.number(sumAmount, '0.000,00/i'));
+        Ext.getCmp(totalAmountLCYId).setRawValue(Ext.util.Format.number(sumAmountLCY, '0.000,00/i'));
+    }
+};

@@ -122,6 +122,13 @@
                                                                                                         de.Click.Method = HttpMethod.GET;
                                                                                                         de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
                                                                                                         de.Click.EventMask.ShowMask = true;
+                                                                                                    }),
+                                                                                                    Html.X().MenuItem().Text(@Resources.Resources.Cash_Payment).Tag("CashPayment").DirectEvents(de =>
+                                                                                                    {
+                                                                                                        de.Click.Url = Url.Action("_List", "CashPayment", new { area = "Cash" });
+                                                                                                        de.Click.Method = HttpMethod.GET;
+                                                                                                        de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
+                                                                                                        de.Click.EventMask.ShowMask = true;
                                                                                                     })
                                                                                                 )
                                                                                             ),
