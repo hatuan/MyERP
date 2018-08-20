@@ -106,6 +106,30 @@ if (window.location.href.indexOf("#") > 0) {
     }, window);
 }
 
+
+var showPreviewReport = function(fileNameOfSnapshotReport) {
+    Ext.create("Ext.window.Window", {
+        renderTo: Ext.net.ResourceMgr.getRenderTarget(),
+        title: "Report Preview",
+        width: 200,
+        frame: true,
+        items: [{
+            loader:
+            {
+                paramsFn: function () { return { fileName: fileNameOfSnapshotReport }; },
+                renderer: 'frame',
+                url: baseURL + '/Report'
+            }
+        }],
+        layout: 'fit',
+        bodyPadding: 0,
+        closeAction: 'destroy',
+        iconCls: '#Printer',
+        maximized: true,
+        modal: true
+    }).show();
+};
+
 var CashReceipt = {
     CorrespAccountRenderer: function(value, metadata, record, rowIndex, colIndex, store) {
         if (Ext.isDefined(record.data.CorrespAccount) && record.data.CorrespAccount !== null && value > 0) {

@@ -195,7 +195,7 @@
           <AutoWidth>True</AutoWidth>
           <Border>None;Black;1;Solid;False;4;[0:0:0]</Border>
           <Brush>Transparent</Brush>
-          <ClientRectangle>8.4,2.3,0.9,0.5</ClientRectangle>
+          <ClientRectangle>8.4,2.3,1,0.5</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,10</Font>
           <Margins>0,0,0,0</Margins>
@@ -210,7 +210,7 @@
           <AutoWidth>True</AutoWidth>
           <Border>None;Black;1;Solid;False;4;[0:0:0]</Border>
           <Brush>Transparent</Brush>
-          <ClientRectangle>9.9,2.3,0.8,0.5</ClientRectangle>
+          <ClientRectangle>10,2.3,0.8,0.5</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,10</Font>
           <Margins>0,0,0,0</Margins>
@@ -240,7 +240,7 @@
         <Text8 Ref="16" type="Text" isKey="true">
           <Border>None;Black;1;Solid;False;4;[0:0:0]</Border>
           <Brush>Transparent</Brush>
-          <ClientRectangle>9.4,2.3,0.5,0.5</ClientRectangle>
+          <ClientRectangle>9.5,2.3,0.5,0.5</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,10</Font>
           <Guid>9dc4b14ecec94075989dcd5494b15dcd</Guid>
@@ -257,7 +257,7 @@
         <Text9 Ref="17" type="Text" isKey="true">
           <Border>None;Black;1;Solid;False;4;[0:0:0]</Border>
           <Brush>Transparent</Brush>
-          <ClientRectangle>10.8,2.3,1.2,0.5</ClientRectangle>
+          <ClientRectangle>10.9,2.3,1.2,0.5</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,10</Font>
           <Guid>ff5f381d253c4cb68d164ff14a1995a5</Guid>
@@ -761,7 +761,7 @@
         <Text42 Ref="51" type="Text" isKey="true">
           <Border>None;Black;1;Solid;False;4;[0:0:0]</Border>
           <Brush>Transparent</Brush>
-          <ClientRectangle>4.3,9.9,11.7,0.5</ClientRectangle>
+          <ClientRectangle>4.3,9.9,14.5,0.5</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,10</Font>
           <Guid>62680da611f447fcb7121991fbbd7016</Guid>
@@ -769,7 +769,7 @@
           <Name>Text42</Name>
           <Page isRef="8" />
           <Parent isRef="8" />
-          <Text>........................................................................................................................................</Text>
+          <Text>.....................................................................................................................................................</Text>
           <TextBrush>[0:0:0]</TextBrush>
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
@@ -777,7 +777,7 @@
         <Text43 Ref="52" type="Text" isKey="true">
           <Border>None;Black;1;Solid;False;4;[0:0:0]</Border>
           <Brush>Transparent</Brush>
-          <ClientRectangle>4.3,10.4,11.7,0.5</ClientRectangle>
+          <ClientRectangle>4.3,10.5,14.5,0.5</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Font>Arial,10</Font>
           <Guid>1511e0d9b32b429b8930e973787bdf49</Guid>
@@ -785,7 +785,7 @@
           <Name>Text43</Name>
           <Page isRef="8" />
           <Parent isRef="8" />
-          <Text>........................................................................................................................................</Text>
+          <Text>.....................................................................................................................................................</Text>
           <TextBrush>[0:0:0]</TextBrush>
           <Type>Expression</Type>
           <VertAlignment>Center</VertAlignment>
@@ -979,10 +979,10 @@
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
   <ReportAuthor>Hoang Anh Tuan www.binhminhsoft.com</ReportAuthor>
-  <ReportChanged>8/19/2018 6:18:38 PM</ReportChanged>
+  <ReportChanged>8/20/2018 9:51:56 AM</ReportChanged>
   <ReportCreated>8/17/2018 4:16:57 PM</ReportCreated>
   <ReportFile>C:\Projects\MyERP-Web\MyERP.Web\Resources\reports\cashReceipt_001.mrt</ReportFile>
-  <ReportGuid>ff1cf10ca6c742e985ef80711c47147a</ReportGuid>
+  <ReportGuid>d269ca686f084a3eb6868b8881a12566</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
   <ReportVersion>2018.2.3.0</ReportVersion>

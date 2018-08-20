@@ -716,11 +716,11 @@ namespace MyERP.Web.Areas.Cash.Controllers
             report.ExportDocument(StiExportFormat.Pdf, Server.MapPath("~/Resources/printReports/") + fileName + ".pdf");
             report.SaveDocument(Server.MapPath("~/Resources/printReports/") + fileName + ".mdc");
 
-            //var jsonString = report.SaveDocumentJsonToString();
+            /* USE javascript function showPreviewReport(fileNameOfSnapshotReport)
             Window win = new Window
             {
                 ID = fileName,
-                Icon = Ext.Net.Icon.PageWhiteAcrobat,
+                Icon = Ext.Net.Icon.Printer,
                 Maximized = true,
                 BodyPadding = 2,
                 Frame = true,
@@ -744,7 +744,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
                 }
             };
             win.Render(RenderMode.Auto);
-
+            */
             return this.Direct(new { FileName = fileName });
         }
     }

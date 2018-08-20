@@ -13,6 +13,10 @@
     <title>@ViewBag.Title</title>                                                   
     <link rel="stylesheet" href="@Url.Content("~/resources/css/main.css?" + enVer)" />
     <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
+    <script>
+        //var baseURL = '@Request.Url.Scheme' + '://' + '@Request.Url.Authority' + '@Url.Content("~")';
+        var baseURL = '@Url.Content("~")';
+    </script>
     @RenderSection("headtag", false)
 </head>
 <body>

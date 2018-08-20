@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="@Url.Content("~/resources/css/main.css?" + enVer)" />
     <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
 
+    <script>
+        //var baseURL = '@Request.Url.Scheme' + '://' + '@Request.Url.Authority' + '@Url.Content("~")';
+        var baseURL = '@Url.Content("~")';
+    </script>       
+
     <script src="@Url.Content("~/resources/js/perfect-scrollbar.min.js?0.6.8")"></script>
     @*
         <script src="@Url.Content("~/resources/js/jquery-2.2.0.min.js?2.2.0")"></script>

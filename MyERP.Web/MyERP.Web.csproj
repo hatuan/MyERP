@@ -432,6 +432,7 @@
     <Content Include="Resources\reports\cashReceipt.json" />
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Shared\_ReportLayout.cshtml" />
+    <Content Include="Resources\reports\cashReceipt_001.mrt" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

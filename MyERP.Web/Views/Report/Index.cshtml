@@ -1,10 +1,10 @@
 ﻿@using Stimulsoft.Report.Mvc
+@using Stimulsoft.Report.Web
 
 @{
     ViewBag.Title = "Report Preview";
     Layout = "~/Views/Shared/_ReportLayout.cshtml";
 }
-
 
 @Html.Stimulsoft().StiMvcViewer(new StiMvcViewerOptions()
 {
@@ -12,5 +12,9 @@
     {
         GetReport = "GetReport",
         ViewerEvent = "ViewerEvent"
+    },
+    Toolbar = new StiMvcViewerOptions.ToolbarOptions()
+    {
+        PrintDestination = StiPrintDestination.Pdf
     }
 })
