@@ -70,6 +70,9 @@
       <HintPath>..\ThirdParty\Stimulsoft.Reports.Web.2018.2.3\lib\net40\LibExcel.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Edm.5.7.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
@@ -221,6 +224,7 @@
     <Content Include="App_Readme\Ext.NET.Utilities\README.txt" />
     <Content Include="App_Readme\Transformer.NET\LICENSE.txt" />
     <Content Include="App_Readme\Transformer.NET\README.txt" />
+    <Content Include="logs\blank.txt" />
     <Content Include="RecaptchaNet.Readme.txt" />
     <Content Include="Resources\css\main.css" />
     <Content Include="Resources\fonts\fontawesome-webfont.svg" />
@@ -435,6 +439,7 @@
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Shared\_ReportLayout.cshtml" />
     <Content Include="Resources\reports\cashReceipt_001.mrt" />
+    <Content Include="Resources\reports\cashPayment_001.mrt" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -533,6 +538,7 @@
     <Compile Include="CustomRoleProvider.cs" />
     <Compile Include="odata\RolesController.cs" />
     <Compile Include="Others\DbEntityValidationException.cs" />
+    <Compile Include="Others\Functions.cs" />
     <Compile Include="Others\ReportServices.cs" />
     <Compile Include="Others\Round.cs" />
     <Compile Include="Others\AppSettings.cs" />

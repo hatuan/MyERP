@@ -39,7 +39,7 @@
                                              "          var index = App.CashPaymentList.store.indexOf(record); \n" +
                                              "          App.CashPaymentList.getSelectionModel().select(index, true); \n" +
                                              "          Ext.net.directRequest({ \n" +
-                                             "              url:'/Cash/CashPayment/_Maintenance?id='+result.result.Id, \n" +
+                                             "              url:baseURL+'/Cash/CashPayment/_Maintenance?id='+result.result.Id, \n" +
                                              "              method:'GET', eventMask:{showMask:true}, \n" +
                                              "              success: function() { \n" +
                                              "                  Ext.Msg.alert('Status', 'Changes saved successfully', Ext.emptyFn); \n" +

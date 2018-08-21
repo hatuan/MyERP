@@ -114,7 +114,7 @@
               {
                   de.Click.Url = Url.Action("Login");
                   de.Click.Success = "handleLogin";
-                  de.Click.Failure = "invalidateLogin(result.errorMessage)";
+                  de.Click.Failure = "invalidateLogin(result.errorMessage); grecaptcha.reset();";
                   de.Click.ShowWarningOnFailure = false;
                   de.Click.EventMask.ShowMask = true;
                   de.Click.FormID = "FormLogin";

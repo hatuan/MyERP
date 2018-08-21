@@ -39,6 +39,8 @@ namespace MyERP.Web
 
             ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
             ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
+
+            log4net.Config.XmlConfigurator.Configure();
         }
 
         /// <summary>

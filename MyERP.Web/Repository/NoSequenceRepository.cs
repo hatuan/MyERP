@@ -9,6 +9,7 @@ using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
 using Ext.Net;
+using log4net;
 using MyERP.DataAccess;
 using MyERP.Web.Models;
 using MyERP.Web.Others;
@@ -17,6 +18,8 @@ namespace MyERP.Web
 {
     public partial class NoSequenceRepository
     {
+        ILog log = log4net.LogManager.GetLogger(typeof(NoSequenceRepository));
+
         public Paging<NoSequence> Paging(StoreRequestParameters parameters)
         {
             return Paging(parameters.Start, parameters.Limit, parameters.SimpleSort, parameters.SimpleSortDirection, null);
@@ -44,7 +47,7 @@ namespace MyERP.Web
 
         public String GetNextNo(long seqId, DateTime date)
         {
-            string URL = AppSettings.BaseUrl + "/NoSequences/GetNextNo";
+            string URL = Functions.GetMyERPBaseUrl("/NoSequences/GetNextNo");
 
             using (var httpClient = new HttpClient())
             {
@@ -52,14 +55,25 @@ namespace MyERP.Web
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 string urlParameters = $"?id={seqId:D}&date={date:yyyy/MM/dd}";
 
-                var response = httpClient.GetAsync(urlParameters).Result;
-                if (response.IsSuccessStatusCode)
+                log.Info($"URL AbsoluteUri = {httpClient.BaseAddress.AbsoluteUri}");
+                log.Info($"URL Parameters = {urlParameters}");
+                try
                 {
-                    return response.Content.ReadAsStringAsync().Result;
+                    var response = httpClient.GetAsync(urlParameters);
+                    var result = response.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        return result.Content.ReadAsStringAsync().Result;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    return null;
+                    log.Error("Failed", e);
+                    throw;
                 }
             }
         }

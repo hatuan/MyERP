@@ -7,11 +7,11 @@ namespace MyERP.Web.Others
     public static class AppSettings
     {
 
-        public static string BaseUrl
+        public static string MyERPBaseUrl
         {
             get
             {
-                return Setting<string>("BaseUrl");
+                return Setting<string>("MyERPBaseUrl");
             }
         }
 
