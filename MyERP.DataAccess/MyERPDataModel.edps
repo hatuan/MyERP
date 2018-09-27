@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<EntityDeveloper Version="6.3.555.0">
+<EntityDeveloper Version="6.3.582.0">
   <ModelSettings xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" AppConnectionStringName="Connection" ConnectionStringInAppConfig="True" RegenareteConnectionStringInAppConfig="False" DetectTPTInheritance="False" UseDatabaseComments="False" EntityFrameworkVersion="Version6" IncludeForeignKeysInModel="true" DetectFunctionBasedColumnDefault="false">
     <Connection ConnectionString="Data Source=.;Initial Catalog=myerp;Integrated Security=True;Persist Security Info=True" Provider="System.Data.SqlClient" />
     <Generation>
@@ -76,6 +76,12 @@
         <File Name="MyERPDataModel.GeneralLedgerEntry.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
         <File Name="MyERPDataModel.Report.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
         <File Name="MyERPDataModel.Report.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.PurchaseInvoiceHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
+        <File Name="MyERPDataModel.PurchaseInvoiceHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.PurchaseInvoiceLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
+        <File Name="MyERPDataModel.PurchaseInvoiceLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.Vat.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="None" />
+        <File Name="MyERPDataModel.Vat.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
         <File Name="MyERPDataModel.UserConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
         <File Name="MyERPDataModel.UserConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
         <File Name="MyERPDataModel.ClientConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
@@ -146,6 +152,170 @@
         <File Name="MyERPDataModel.GeneralLedgerEntryConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
         <File Name="MyERPDataModel.ReportConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
         <File Name="MyERPDataModel.ReportConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.PurchaseInvoiceHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
+        <File Name="MyERPDataModel.PurchaseInvoiceHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.PurchaseInvoiceLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
+        <File Name="MyERPDataModel.PurchaseInvoiceLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.VatConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="None" />
+        <File Name="MyERPDataModel.VatConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="IUnitOfWork.cs" />
+        <File Name="IUnitOfWorkFactory.cs" />
+        <File Name="IRepository.cs" />
+        <File Name="IUserRepository.cs" OverwriteMode="None" />
+        <File Name="IUserRepository.Generated.cs" />
+        <File Name="IClientRepository.cs" OverwriteMode="None" />
+        <File Name="IClientRepository.Generated.cs" />
+        <File Name="ICurrencyRepository.cs" OverwriteMode="None" />
+        <File Name="ICurrencyRepository.Generated.cs" />
+        <File Name="IOrganizationRepository.cs" OverwriteMode="None" />
+        <File Name="IOrganizationRepository.Generated.cs" />
+        <File Name="IRoleRepository.cs" OverwriteMode="None" />
+        <File Name="IRoleRepository.Generated.cs" />
+        <File Name="IUserInRoleRepository.cs" OverwriteMode="None" />
+        <File Name="IUserInRoleRepository.Generated.cs" />
+        <File Name="IUomRepository.cs" OverwriteMode="None" />
+        <File Name="IUomRepository.Generated.cs" />
+        <File Name="IItemRepository.cs" OverwriteMode="None" />
+        <File Name="IItemRepository.Generated.cs" />
+        <File Name="IItemUomRepository.cs" OverwriteMode="None" />
+        <File Name="IItemUomRepository.Generated.cs" />
+        <File Name="IItemGroupRepository.cs" OverwriteMode="None" />
+        <File Name="IItemGroupRepository.Generated.cs" />
+        <File Name="IBusinessPartnerGroupRepository.cs" OverwriteMode="None" />
+        <File Name="IBusinessPartnerGroupRepository.Generated.cs" />
+        <File Name="IBusinessPartnerRepository.cs" OverwriteMode="None" />
+        <File Name="IBusinessPartnerRepository.Generated.cs" />
+        <File Name="ISalesHeaderRepository.cs" OverwriteMode="None" />
+        <File Name="ISalesHeaderRepository.Generated.cs" />
+        <File Name="ISalesLineRepository.cs" OverwriteMode="None" />
+        <File Name="ISalesLineRepository.Generated.cs" />
+        <File Name="IPosHeaderRepository.cs" OverwriteMode="None" />
+        <File Name="IPosHeaderRepository.Generated.cs" />
+        <File Name="IPosLineRepository.cs" OverwriteMode="None" />
+        <File Name="IPosLineRepository.Generated.cs" />
+        <File Name="IItemDiscountGroupRepository.cs" OverwriteMode="None" />
+        <File Name="IItemDiscountGroupRepository.Generated.cs" />
+        <File Name="ISalesPriceGroupRepository.cs" OverwriteMode="None" />
+        <File Name="ISalesPriceGroupRepository.Generated.cs" />
+        <File Name="ISalesPriceRepository.cs" OverwriteMode="None" />
+        <File Name="ISalesPriceRepository.Generated.cs" />
+        <File Name="IBusinessPartnerPriceGroupRepository.cs" OverwriteMode="None" />
+        <File Name="IBusinessPartnerPriceGroupRepository.Generated.cs" />
+        <File Name="IBusinessPartnerDiscountGroupRepository.cs" OverwriteMode="None" />
+        <File Name="IBusinessPartnerDiscountGroupRepository.Generated.cs" />
+        <File Name="ILocationRepository.cs" OverwriteMode="None" />
+        <File Name="ILocationRepository.Generated.cs" />
+        <File Name="INoSequenceRepository.cs" OverwriteMode="None" />
+        <File Name="INoSequenceRepository.Generated.cs" />
+        <File Name="INoSequenceLineRepository.cs" OverwriteMode="None" />
+        <File Name="INoSequenceLineRepository.Generated.cs" />
+        <File Name="IOptionRepository.cs" OverwriteMode="None" />
+        <File Name="IOptionRepository.Generated.cs" />
+        <File Name="IPurchaseHeaderRepository.cs" OverwriteMode="None" />
+        <File Name="IPurchaseHeaderRepository.Generated.cs" />
+        <File Name="IPurchaseLineRepository.cs" OverwriteMode="None" />
+        <File Name="IPurchaseLineRepository.Generated.cs" />
+        <File Name="ICashHeaderRepository.cs" OverwriteMode="None" />
+        <File Name="ICashHeaderRepository.Generated.cs" />
+        <File Name="ICashLineRepository.cs" OverwriteMode="None" />
+        <File Name="ICashLineRepository.Generated.cs" />
+        <File Name="IAccountRepository.cs" OverwriteMode="None" />
+        <File Name="IAccountRepository.Generated.cs" />
+        <File Name="IAccountsReceivableLedgerRepository.cs" OverwriteMode="None" />
+        <File Name="IAccountsReceivableLedgerRepository.Generated.cs" />
+        <File Name="IAccountsPayableLedgerRepository.cs" OverwriteMode="None" />
+        <File Name="IAccountsPayableLedgerRepository.Generated.cs" />
+        <File Name="IItemLedgerEntryRepository.cs" OverwriteMode="None" />
+        <File Name="IItemLedgerEntryRepository.Generated.cs" />
+        <File Name="IGeneralLedgerEntryRepository.cs" OverwriteMode="None" />
+        <File Name="IGeneralLedgerEntryRepository.Generated.cs" />
+        <File Name="IReportRepository.cs" OverwriteMode="None" />
+        <File Name="IReportRepository.Generated.cs" />
+        <File Name="IPurchaseInvoiceHeaderRepository.cs" OverwriteMode="None" />
+        <File Name="IPurchaseInvoiceHeaderRepository.Generated.cs" />
+        <File Name="IPurchaseInvoiceLineRepository.cs" OverwriteMode="None" />
+        <File Name="IPurchaseInvoiceLineRepository.Generated.cs" />
+        <File Name="IVatRepository.cs" OverwriteMode="None" />
+        <File Name="IVatRepository.Generated.cs" />
+        <File Name="EntityFrameworkRepository.cs" />
+        <File Name="EntityFrameworkUnitOfWork.cs" />
+        <File Name="EntityFrameworkUnitOfWorkFactory.cs" />
+        <File Name="MyERPDataModel.UserRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.UserRepository.Generated.cs" />
+        <File Name="MyERPDataModel.ClientRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.ClientRepository.Generated.cs" />
+        <File Name="MyERPDataModel.CurrencyRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.CurrencyRepository.Generated.cs" />
+        <File Name="MyERPDataModel.OrganizationRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.OrganizationRepository.Generated.cs" />
+        <File Name="MyERPDataModel.RoleRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.RoleRepository.Generated.cs" />
+        <File Name="MyERPDataModel.UserInRoleRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.UserInRoleRepository.Generated.cs" />
+        <File Name="MyERPDataModel.UomRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.UomRepository.Generated.cs" />
+        <File Name="MyERPDataModel.ItemRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.ItemRepository.Generated.cs" />
+        <File Name="MyERPDataModel.ItemUomRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.ItemUomRepository.Generated.cs" />
+        <File Name="MyERPDataModel.ItemGroupRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.ItemGroupRepository.Generated.cs" />
+        <File Name="MyERPDataModel.BusinessPartnerGroupRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.BusinessPartnerGroupRepository.Generated.cs" />
+        <File Name="MyERPDataModel.BusinessPartnerRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.BusinessPartnerRepository.Generated.cs" />
+        <File Name="MyERPDataModel.SalesHeaderRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.SalesHeaderRepository.Generated.cs" />
+        <File Name="MyERPDataModel.SalesLineRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.SalesLineRepository.Generated.cs" />
+        <File Name="MyERPDataModel.PosHeaderRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.PosHeaderRepository.Generated.cs" />
+        <File Name="MyERPDataModel.PosLineRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.PosLineRepository.Generated.cs" />
+        <File Name="MyERPDataModel.ItemDiscountGroupRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.ItemDiscountGroupRepository.Generated.cs" />
+        <File Name="MyERPDataModel.SalesPriceGroupRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.SalesPriceGroupRepository.Generated.cs" />
+        <File Name="MyERPDataModel.SalesPriceRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.SalesPriceRepository.Generated.cs" />
+        <File Name="MyERPDataModel.BusinessPartnerPriceGroupRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.BusinessPartnerPriceGroupRepository.Generated.cs" />
+        <File Name="MyERPDataModel.BusinessPartnerDiscountGroupRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.BusinessPartnerDiscountGroupRepository.Generated.cs" />
+        <File Name="MyERPDataModel.LocationRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.LocationRepository.Generated.cs" />
+        <File Name="MyERPDataModel.NoSequenceRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.NoSequenceRepository.Generated.cs" />
+        <File Name="MyERPDataModel.NoSequenceLineRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.NoSequenceLineRepository.Generated.cs" />
+        <File Name="MyERPDataModel.OptionRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.OptionRepository.Generated.cs" />
+        <File Name="MyERPDataModel.PurchaseHeaderRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.PurchaseHeaderRepository.Generated.cs" />
+        <File Name="MyERPDataModel.PurchaseLineRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.PurchaseLineRepository.Generated.cs" />
+        <File Name="MyERPDataModel.CashHeaderRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.CashHeaderRepository.Generated.cs" />
+        <File Name="MyERPDataModel.CashLineRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.CashLineRepository.Generated.cs" />
+        <File Name="MyERPDataModel.AccountRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.AccountRepository.Generated.cs" />
+        <File Name="MyERPDataModel.AccountsReceivableLedgerRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.AccountsReceivableLedgerRepository.Generated.cs" />
+        <File Name="MyERPDataModel.AccountsPayableLedgerRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.AccountsPayableLedgerRepository.Generated.cs" />
+        <File Name="MyERPDataModel.ItemLedgerEntryRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.ItemLedgerEntryRepository.Generated.cs" />
+        <File Name="MyERPDataModel.GeneralLedgerEntryRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.GeneralLedgerEntryRepository.Generated.cs" />
+        <File Name="MyERPDataModel.ReportRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.ReportRepository.Generated.cs" />
+        <File Name="MyERPDataModel.PurchaseInvoiceHeaderRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.PurchaseInvoiceHeaderRepository.Generated.cs" />
+        <File Name="MyERPDataModel.PurchaseInvoiceLineRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.PurchaseInvoiceLineRepository.Generated.cs" />
+        <File Name="MyERPDataModel.VatRepository.cs" OverwriteMode="None" />
+        <File Name="MyERPDataModel.VatRepository.Generated.cs" />
       </GeneratedFiles>
     </Generation>
     <DatabaseFirstNamingRules>
@@ -172,10 +342,10 @@
     </Diagrams>
     <Templates>
       <Template Name="DbContext" Description="Use this template to generate a strongly-typed DbContext class and persistence ignorant entity classes." Enabled="True" PredefinedTemplateName="Entity DbContext C#">
-        <ed:Property Name="ValidationFramework" Type="EntityDeveloper.TemplateEngine.ValidationFramework, EntityDeveloper.Common, Version=6.3.555.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="ValidationFramework" Type="EntityDeveloper.TemplateEngine.ValidationFramework, EntityDeveloper.Common, Version=6.3.582.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <ValidationFramework>DataAnnotations</ValidationFramework>
         </ed:Property>
-        <ed:Property Name="ValidationErrorMessages" Type="EntityDeveloper.TemplateEngine.ValidationErrorMessages, EntityDeveloper.Common, Version=6.3.555.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="ValidationErrorMessages" Type="EntityDeveloper.TemplateEngine.ValidationErrorMessages, EntityDeveloper.Common, Version=6.3.582.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <ValidationErrorMessages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
         </ed:Property>
         <ed:Property Name="FilePerClass" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -187,14 +357,14 @@
         <ed:Property Name="HeaderTimestampVersionControlTag" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <string d6p1:nil="true" xmlns:d6p1="http://www.w3.org/2001/XMLSchema-instance" />
         </ed:Property>
-        <ed:Property Name="EntitiesOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.3.555.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="EntitiesOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.3.582.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <OutputInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
             <Project />
             <ProjectFolder />
             <DestinationFolder>C:\Projects\MyERP-Web\MyERP.DataAccess\Entities</DestinationFolder>
           </OutputInfo>
         </ed:Property>
-        <ed:Property Name="ContextOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.3.555.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="ContextOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.3.582.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <OutputInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
             <Project />
             <ProjectFolder />
@@ -222,7 +392,7 @@
         <ed:Property Name="WcfDataContractAttributes" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <boolean>false</boolean>
         </ed:Property>
-        <ed:Property Name="WcfDataMemberOnNavigationProperties" Type="EntityDeveloper.WcfDataMemberGenerationBehavior, EntityDeveloper.Orm.Common, Version=6.3.555.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="WcfDataMemberOnNavigationProperties" Type="EntityDeveloper.WcfDataMemberGenerationBehavior, EntityDeveloper.Orm.Common, Version=6.3.582.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <WcfDataMemberGenerationBehavior>All</WcfDataMemberGenerationBehavior>
         </ed:Property>
         <ed:Property Name="EnableWinFormsDataBinding" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -234,16 +404,16 @@
         <ed:Property Name="FluentMapping" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <boolean>true</boolean>
         </ed:Property>
-        <ed:Property Name="MappingGenerationStrategy" Type="EntityDeveloper.EntityFramework.CodeFirstMappingGenerationStrategy, EntityDeveloper.Orm.EntityFramework, Version=6.3.555.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="MappingGenerationStrategy" Type="EntityDeveloper.EntityFramework.CodeFirstMappingGenerationStrategy, EntityDeveloper.Orm.EntityFramework, Version=6.3.582.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <CodeFirstMappingGenerationStrategy>UseConfigurationClasses</CodeFirstMappingGenerationStrategy>
         </ed:Property>
         <ed:Property Name="DatabaseIndependent" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <boolean>false</boolean>
         </ed:Property>
-        <ed:Property Name="DisabledConventions" Type="EntityDeveloper.EntityFramework.CodeFirstConfigurationConvention, EntityDeveloper.Orm.EntityFramework, Version=6.3.555.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="DisabledConventions" Type="EntityDeveloper.EntityFramework.CodeFirstConfigurationConvention, EntityDeveloper.Orm.EntityFramework, Version=6.3.582.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <CodeFirstConfigurationConvention />
         </ed:Property>
-        <ed:Property Name="ConfigurationsOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.3.555.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="ConfigurationsOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.3.582.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <OutputInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
             <Project />
             <ProjectFolder />

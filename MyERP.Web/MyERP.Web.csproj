@@ -225,6 +225,7 @@
     <Content Include="App_Readme\Transformer.NET\LICENSE.txt" />
     <Content Include="App_Readme\Transformer.NET\README.txt" />
     <Content Include="logs\blank.txt" />
+    <Content Include="MyERPBase.dll" />
     <Content Include="RecaptchaNet.Readme.txt" />
     <Content Include="Resources\css\main.css" />
     <Content Include="Resources\fonts\fontawesome-webfont.svg" />
@@ -431,6 +432,10 @@
     <Content Include="App_Readme\Ext.NET\CHANGELOG.md" />
     <Content Include="Areas\Cash\Views\CashPayment\_List.cshtml" />
     <Content Include="Areas\Cash\Views\CashPayment\_Maintenance.cshtml" />
+    <Content Include="Areas\Purchase\Views\web.config" />
+    <Content Include="Areas\Purchase\Views\PurchaseInvoice\Index.cshtml" />
+    <Content Include="Areas\Purchase\Views\PurchaseInvoice\_List.cshtml" />
+    <Content Include="Areas\Purchase\Views\PurchaseInvoice\_Maintenance.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Resources\reports\salespos.json" />
     <Content Include="Resources\reports\salespos_001.mrt" />
@@ -479,6 +484,8 @@
     <Compile Include="Areas\NoSequence\NoSequenceAreaRegistration.cs" />
     <Compile Include="Areas\POS\Controllers\IndexController.cs" />
     <Compile Include="Areas\POS\POSAreaRegistration.cs" />
+    <Compile Include="Areas\Purchase\Controllers\PurchaseInvoiceController.cs" />
+    <Compile Include="Areas\Purchase\PurchaseAreaRegistration.cs" />
     <Compile Include="Areas\SalesPrice\Controllers\IndexController.cs" />
     <Compile Include="Areas\SalesPrice\Controllers\SalesPriceGroupController.cs" />
     <Compile Include="Areas\SalesPrice\SalesPriceAreaRegistration.cs" />
@@ -515,6 +522,10 @@
     <Compile Include="Models\NoSequenceViewModels.cs" />
     <Compile Include="Models\LocationViewModels.cs" />
     <Compile Include="Models\CashHeaderViewModels.cs" />
+    <Compile Include="Models\PurchaseInvoiceHeaderViewModels.cs" />
+    <Compile Include="Models\PurchaseInvoiceLineViewModels.cs" />
+    <Compile Include="Models\SalesInvoiceHeaderViewModels.cs" />
+    <Compile Include="Models\SalesInvoiceLineViewModels.cs" />
     <Compile Include="Models\SalesPriceViewModels.cs" />
     <Compile Include="Models\SalesPriceGroupViewModels.cs" />
     <Compile Include="Models\ItemViewModels.cs" />
@@ -554,6 +565,7 @@
     </Compile>
     <Compile Include="Repository\BusinessPartnerPriceGroupRepository.cs" />
     <Compile Include="Repository\CurrencyRepository.cs" />
+    <Compile Include="Repository\PurchaseInvoiceHeaderRepository.cs" />
     <Compile Include="Repository\SalesHeaderRepository.cs" />
     <Compile Include="Repository\OptionRepository.cs" />
     <Compile Include="Repository\NoSequenceLineRepository.cs" />
@@ -602,6 +614,8 @@
     <Folder Include="Areas\Location\Views\Shared\" />
     <Folder Include="Areas\NoSequence\Models\" />
     <Folder Include="Areas\NoSequence\Views\Shared\" />
+    <Folder Include="Areas\Purchase\Models\" />
+    <Folder Include="Areas\Purchase\Views\Shared\" />
     <Folder Include="Areas\SalesPrice\Models\" />
     <Folder Include="Areas\SalesPrice\Views\Shared\" />
     <Folder Include="Areas\UOM\Models\" />

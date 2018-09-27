@@ -128,6 +128,16 @@ namespace MyERP.Web
 
     }
 
+    public partial class PurchaseInvoiceHeaderRepository : BaseRepository<MyERP.DataAccess.PurchaseInvoiceHeader, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class PurchaseInvoiceLineRepository : BaseRepository<MyERP.DataAccess.PurchaseInvoiceLine, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
     public partial class SalesHeaderRepository : BaseRepository<MyERP.DataAccess.SalesHeader, MyERP.DataAccess.EntitiesModel>
     {
 

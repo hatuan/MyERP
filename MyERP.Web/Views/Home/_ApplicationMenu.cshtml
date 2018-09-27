@@ -142,7 +142,17 @@
                                                                                                 )
                                                                                             ),
                                                                                         Html.X().MenuItem()
-                                                                                            .Text(@Resources.Resources.Purchase),
+                                                                                            .Text(@Resources.Resources.Purchase).Menu(Html.X().Menu()
+                                                                                                .Items(
+                                                                                                    Html.X().MenuItem().Text(@Resources.Resources.Purchase_Invoice).Tag("PurchaseInvoice").DirectEvents(de =>
+                                                                                                    {
+                                                                                                        de.Click.Url = Url.Action("_List", "PurchaseInvoice", new { area = "Purchase" });
+                                                                                                        de.Click.Method = HttpMethod.GET;
+                                                                                                        de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
+                                                                                                        de.Click.EventMask.ShowMask = true;
+                                                                                                    })
+                                                                                                )
+                                                                                            ),
                                                                                         Html.X().MenuItem()
                                                                                             .Text(@Resources.Resources.Warehouse)
                                                                                     )
