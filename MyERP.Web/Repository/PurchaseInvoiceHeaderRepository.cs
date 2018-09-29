@@ -8,19 +8,22 @@ using System.Web;
 using System.Web.Security;
 using Ext.Net;
 using MyERP.DataAccess;
+using MyERP.DataAccess.Enum;
 
 namespace MyERP.Web
 {
     public partial class PurchaseInvoiceHeaderRepository
     {
-        public Paging<PurchaseInvoiceHeader> Paging(StoreRequestParameters parameters)
+        public Paging<PurchaseInvoiceHeader> Paging(StoreRequestParameters parameters, DocumentType documentType)
         {
-            return Paging(parameters.Start, parameters.Limit, parameters.SimpleSort, parameters.SimpleSortDirection, null);
+            return Paging(parameters.Start, parameters.Limit, parameters.SimpleSort, parameters.SimpleSortDirection, null, documentType);
         }
 
-        public Paging<PurchaseInvoiceHeader> Paging(int start, int limit, string sort, SortDirection dir, string filter)
+        public Paging<PurchaseInvoiceHeader> Paging(int start, int limit, string sort, SortDirection dir, string filter, DocumentType documentType)
         {
             var entities = Get(includePaths: new String[] { "Organization", "Client", "RecCreatedByUser", "RecModifiedByUser", "Currency" });
+
+            entities = entities.Where(c => c.DocumentType == (byte)documentType);
 
             if (!string.IsNullOrEmpty(filter) && filter != "*")
             {

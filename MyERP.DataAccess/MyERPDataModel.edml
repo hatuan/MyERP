@@ -739,6 +739,18 @@
             <End Role="vat" EntitySet="vats" />
             <End Role="item" EntitySet="items" />
           </AssociationSet>
+          <AssociationSet Name="FK_purchase_invoice_header_account_payable" Association="MyERP.DataAccess.Store.FK_purchase_invoice_header_account_payable">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="purchase_invoice_header" EntitySet="purchase_invoice_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchase_invoice_line_item" Association="MyERP.DataAccess.Store.FK_purchase_invoice_line_item">
+            <End Role="item" EntitySet="items" />
+            <End Role="purchase_invoice_line" EntitySet="purchase_invoice_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchase_invoice_line_uom" Association="MyERP.DataAccess.Store.FK_purchase_invoice_line_uom">
+            <End Role="uom" EntitySet="uoms" />
+            <End Role="purchase_invoice_line" EntitySet="purchase_invoice_lines" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -1586,7 +1598,7 @@
           <Property Name="buy_from_contact_id" Type="bigint" />
           <Property Name="buy_from_contact_name" Type="nvarchar" MaxLength="256" />
           <Property Name="description" Type="nvarchar" MaxLength="256" />
-          <Property Name="pay_to_vendor_id" Type="bigint" />
+          <Property Name="pay_to_vendor_id" Type="bigint" Nullable="false" />
           <Property Name="pay_to_name" Type="nvarchar" MaxLength="256" />
           <Property Name="pay_to_address" Type="nvarchar" MaxLength="256" />
           <Property Name="payl_to_contact_id" Type="bigint" />
@@ -1600,12 +1612,12 @@
           <Property Name="ship_to_name" Type="nvarchar" MaxLength="256" />
           <Property Name="ship_to_address" Type="nvarchar" MaxLength="256" />
           <Property Name="ship_to_contact_name" Type="nvarchar" MaxLength="256" />
-          <Property Name="currency_id" Type="bigint" />
+          <Property Name="currency_id" Type="bigint" Nullable="false" />
           <Property Name="currency_factor" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="location_id" Type="bigint" />
           <Property Name="sales_person_id" Type="bigint" />
           <Property Name="total_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
-          <Property Name="total_amount_lcy" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="total_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_vat_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_payment" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_payment_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
@@ -1636,9 +1648,10 @@
           </Property>
           <Property Name="total_charge_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_charge_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
-          <Property Name="total_vat_amount_lcy" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="total_vat_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_line_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_line_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="account_payable_id" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="purchase_invoice_line">
           <Key>
@@ -1647,7 +1660,12 @@
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="purchase_header_id" Type="bigint" Nullable="false" />
           <Property Name="line_no" Type="bigint" Nullable="false" />
-          <Property Name="type" Type="tinyint" Nullable="false" />
+          <Property Name="type" Type="tinyint" Nullable="false">
+            <Documentation>
+              <Summary>0 - Comment
+1 - Item</Summary>
+            </Documentation>
+          </Property>
           <Property Name="item_id" Type="bigint" />
           <Property Name="location_id" Type="bigint" Nullable="false" />
           <Property Name="description" Type="nvarchar" MaxLength="256" />
@@ -1722,7 +1740,7 @@
           <Property Name="vat_percentage" Type="tinyint" Nullable="false" />
           <Property Name="vat_id" Type="bigint" />
           <Property Name="amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
-          <Property Name="amount_lcy" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="unit_price" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="unit_price_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
         </EntityType>
@@ -3714,7 +3732,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_purchase_invoice_header_business_partner1">
-          <End Role="business_partner" Type="MyERP.DataAccess.Store.business_partner" Multiplicity="0..1" />
+          <End Role="business_partner" Type="MyERP.DataAccess.Store.business_partner" Multiplicity="1" />
           <End Role="purchase_invoice_header" Type="MyERP.DataAccess.Store.purchase_invoice_header" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="business_partner">
@@ -3830,6 +3848,42 @@
             </Principal>
             <Dependent Role="item">
               <PropertyRef Name="vat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchase_invoice_header_account_payable">
+          <End Role="account" Type="MyERP.DataAccess.Store.account" Multiplicity="1" />
+          <End Role="purchase_invoice_header" Type="MyERP.DataAccess.Store.purchase_invoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="purchase_invoice_header">
+              <PropertyRef Name="account_payable_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchase_invoice_line_item">
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="0..1" />
+          <End Role="purchase_invoice_line" Type="MyERP.DataAccess.Store.purchase_invoice_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="purchase_invoice_line">
+              <PropertyRef Name="item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchase_invoice_line_uom">
+          <End Role="uom" Type="MyERP.DataAccess.Store.uom" Multiplicity="0..1" />
+          <End Role="purchase_invoice_line" Type="MyERP.DataAccess.Store.purchase_invoice_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uom">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="purchase_invoice_line">
+              <PropertyRef Name="uom_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4511,7 +4565,7 @@
           </AssociationSet>
           <AssociationSet Name="PurchaseInvoiceHeader_PurchaseInvoiceLineSet" Association="MyERP.DataAccess.PurchaseInvoiceHeader_PurchaseInvoiceLine">
             <End Role="PurchaseInvoiceHeader" EntitySet="PurchaseInvoiceHeaders" />
-            <End Role="PuchaseInvoiceLines" EntitySet="PurchaseInvoiceLines" />
+            <End Role="PurchaseInvoiceLines" EntitySet="PurchaseInvoiceLines" />
           </AssociationSet>
           <AssociationSet Name="Client_PurchaseInvoiceHeaderSet" Association="MyERP.DataAccess.Client_PurchaseInvoiceHeader">
             <End Role="Client" EntitySet="Clients" />
@@ -4576,6 +4630,18 @@
           <AssociationSet Name="Vat_ItemSet" Association="MyERP.DataAccess.Vat_Item">
             <End Role="Vat" EntitySet="Vats" />
             <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="AccountPayable_PurchaseInvoiceHeaderSet" Association="MyERP.DataAccess.AccountPayable_PurchaseInvoiceHeader">
+            <End Role="AccountPayable" EntitySet="Accounts" />
+            <End Role="PurchaseInvoiceHeaders" EntitySet="PurchaseInvoiceHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="Item_PurchaseInvoiceLineSet" Association="MyERP.DataAccess.Item_PurchaseInvoiceLine">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="PurchaseInvoiceLines" EntitySet="PurchaseInvoiceLines" />
+          </AssociationSet>
+          <AssociationSet Name="Uom_PurchaseInvoiceLineSet" Association="MyERP.DataAccess.Uom_PurchaseInvoiceLine">
+            <End Role="Uom" EntitySet="Uoms" />
+            <End Role="PurchaseInvoiceLines" EntitySet="PurchaseInvoiceLines" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
@@ -5594,7 +5660,7 @@
           <Property Name="BuyFromContactId" Type="Int64" ed:ValidateRequired="false" ed:Guid="4732c9df-c52e-41db-a94c-d9e096e7c879" />
           <Property Name="BuyFromContactName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="f653cb26-536e-4fcb-b2ec-131c8ff28017" />
           <Property Name="Description" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="d9611d17-aa82-4355-9aa3-707cc05ee223" />
-          <Property Name="PayToVendorId" Type="Int64" ed:ValidateRequired="false" ed:Guid="fb959b26-0b96-4a6f-8e9f-9e5543a2916b" />
+          <Property Name="PayToVendorId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="fb959b26-0b96-4a6f-8e9f-9e5543a2916b" />
           <Property Name="PayToName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="b128fbd6-a492-47e4-80cc-9b8b51a21b7b" />
           <Property Name="PayToAddress" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="9671b5b9-f646-45f4-a4fb-bfcca2f929a7" />
           <Property Name="PaylToContactId" Type="Int64" ed:ValidateRequired="false" ed:Guid="a452c5ee-f8ef-46a9-a585-d36dde66fc05" />
@@ -5605,17 +5671,18 @@
               <Summary>Ten nhom vat tu khi ke khai hoa don VAT dau ra</Summary>
             </Documentation>
           </Property>
+          <Property Name="AccountPayableId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="382dc2cb-8db5-4963-824b-c1ccda2df19a" />
           <Property Name="ShipToName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="1f493adb-482b-4ce4-ba4b-dd2d59d1e08c" />
           <Property Name="ShipToAddress" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="053cb101-c3db-4420-8eed-c42e794d2472" />
           <Property Name="ShipToContactName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="afcfc2ed-8773-4d64-9b9f-506490f26d27" />
-          <Property Name="CurrencyId" Type="Int64" ed:ValidateRequired="false" ed:Guid="34a146d0-6ce5-4ce7-bad5-0824311dfbeb" />
+          <Property Name="CurrencyId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="34a146d0-6ce5-4ce7-bad5-0824311dfbeb" />
           <Property Name="CurrencyFactor" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="193f35f0-25d6-4841-baa5-4903c0742f6c" />
           <Property Name="LocationId" Type="Int64" ed:ValidateRequired="false" ed:Guid="095e43d9-27c5-455d-9706-1b7dc99fd509" />
           <Property Name="SalesPersonId" Type="Int64" ed:ValidateRequired="false" ed:Guid="8a2739cf-08bb-4461-a088-e847898a6abd" />
           <Property Name="TotalLineAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="9048f1b1-40a6-4a44-b4a7-040a923b93d2" />
           <Property Name="TotalLineAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="0290f363-7d9a-467c-9cd4-9af25de883c8" />
           <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="f1b09040-af6b-464a-93fe-720f10f90560" />
-          <Property Name="TotalAmountLCY" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="376015ea-5c63-4a68-9495-0d08aaeca13c" />
+          <Property Name="TotalAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="376015ea-5c63-4a68-9495-0d08aaeca13c" />
           <Property Name="TotalChargeAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="7a644093-4279-4f6a-8d4e-e91a11e23e96" />
           <Property Name="TotalChargeAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="7a72ce8f-0a94-407e-b1ef-64fba6da66e3" />
           <Property Name="DiscountId" Type="Int64" ed:ValidateRequired="false" ed:Guid="8c4028ca-d7e9-427f-ad94-6f5f4c164203">
@@ -5631,7 +5698,7 @@
           <Property Name="InvoiceDiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="6ccdebd1-da5f-4a28-9dc0-8476c348c9f1" />
           <Property Name="InvoiceDiscountAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="dff81b67-2c20-444e-add9-dd1bef20b72f" />
           <Property Name="TotalVatAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="84e3c8e4-5a98-41d0-b65d-4a01072e60b4" />
-          <Property Name="TotalVatAmountLCY" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="22e7c091-622f-48a0-8cf6-1dc32108c2fb" />
+          <Property Name="TotalVatAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="22e7c091-622f-48a0-8cf6-1dc32108c2fb" />
           <Property Name="TotalPayment" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="1a36f436-7df1-439d-b30c-b5f73a011008" />
           <Property Name="TotalPaymentLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="315bdddf-2afc-4bfe-9a03-00879ce5c262" />
           <Property Name="NoPrinted" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="d74371f5-b578-4bfd-a389-3f951e95f5e7" />
@@ -5646,7 +5713,7 @@
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e64af9f0-77a5-46d6-816f-1dc8afa24a06" />
           <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="084aed83-3de2-4d18-b14f-a1b3f9598e7c" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="7964b2d6-9e6d-4500-8ef7-59d8bcbf27e8" />
-          <NavigationProperty Name="PuchaseInvoiceLines" Relationship="MyERP.DataAccess.PurchaseInvoiceHeader_PurchaseInvoiceLine" FromRole="PurchaseInvoiceHeader" ToRole="PuchaseInvoiceLines" ed:Guid="7c752d10-79d6-4a9b-b8e5-048b8e4709c1" />
+          <NavigationProperty Name="PurchaseInvoiceLines" Relationship="MyERP.DataAccess.PurchaseInvoiceHeader_PurchaseInvoiceLine" FromRole="PurchaseInvoiceHeader" ToRole="PurchaseInvoiceLines" ed:Guid="7c752d10-79d6-4a9b-b8e5-048b8e4709c1" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_PurchaseInvoiceHeader" FromRole="PurchaseInvoiceHeaders" ToRole="Client" ed:Guid="2b6ce62e-a8e2-4b16-9201-a458ce42f549" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_PurchaseInvoiceHeader" FromRole="PurchaseInvoiceHeaders" ToRole="Organization" ed:Guid="7c54f37b-bdbf-4d36-a6e2-2e54e714b05f" />
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_PurchaseInvoiceHeader_RecCreatedBy" FromRole="PurchaseInvoiceHeaders" ToRole="RecCreatedByUser" ed:Guid="3aa4549f-1c3e-411f-9471-13185d6c93ed" />
@@ -5656,6 +5723,7 @@
           <NavigationProperty Name="BuyFromVendor" Relationship="MyERP.DataAccess.BusinessPartner_PurchaseInvoiceHeader_BuyFromVendor" FromRole="PurchaseInvoiceHeaders" ToRole="BuyFromVendor" ed:Guid="6b993f96-9b7f-4c70-beba-28a1005d5311" />
           <NavigationProperty Name="PayToVendor" Relationship="MyERP.DataAccess.BusinessPartner_PurchaseInvoiceHeader_PayToVendor" FromRole="PurchaseInvoiceHeaders1" ToRole="PayToVendor" ed:Guid="dc9626f4-1382-45a0-a785-bbac4c1a6ab8" />
           <NavigationProperty Name="Location" Relationship="MyERP.DataAccess.Location_PurchaseInvoiceHeader" FromRole="PurchaseInvoiceHeaders" ToRole="Location" ed:Guid="54dbe6c3-fd42-46f8-a303-c74a96ac8702" />
+          <NavigationProperty Name="AccountPayable" Relationship="MyERP.DataAccess.AccountPayable_PurchaseInvoiceHeader" FromRole="PurchaseInvoiceHeaders" ToRole="AccountPayable" ed:Guid="4d9768df-79ce-4fa3-93a7-28c4365adc75" />
         </EntityType>
         <EntityType Name="PurchaseInvoiceLine" ed:Guid="a4d1e6b0-2d7e-4839-911f-c68f3fbbab80">
           <Key>
@@ -5667,7 +5735,12 @@
           <Property Name="DocumentNo" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="ed86fab5-10b7-4c77-8fc0-cdb03c6a57e9" />
           <Property Name="PostingDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="3824c42b-15f3-403d-97d6-480afa562a5a" />
           <Property Name="LineNo" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="da5b1665-0a04-4561-aec3-d5ee6c19999b" />
-          <Property Name="Type" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="a62cdb30-33f3-4e5a-b98f-156f2066c4cf" />
+          <Property Name="Type" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="a62cdb30-33f3-4e5a-b98f-156f2066c4cf">
+            <Documentation>
+              <Summary>0 - Comment
+1 - Item</Summary>
+            </Documentation>
+          </Property>
           <Property Name="ItemId" Type="Int64" ed:ValidateRequired="false" ed:Guid="93c40204-0e34-472c-a2f5-b99ef4d001bf" />
           <Property Name="LocationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="0f0500b3-8c6b-4073-bd39-b486d6734675" />
           <Property Name="Description" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="05389b36-cca5-4d64-9056-3e6f7687b1d3" />
@@ -5695,7 +5768,7 @@
           <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="9686245c-7181-4dd8-838c-b7c9146edafe" />
           <Property Name="UnitPriceLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="0e846d61-eae2-4f7f-a6d9-d51e7892153d" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="7458d352-d224-4cf0-93ba-9b242b6794f4" />
-          <Property Name="AmountLCY" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="ab2da203-97f1-40f3-b786-8c1f2d135de6" />
+          <Property Name="AmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="ab2da203-97f1-40f3-b786-8c1f2d135de6" />
           <Property Name="ChargeAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="7420411a-0f29-493f-b1ed-42e710892cd3">
             <Documentation>
               <Summary>Chi phi</Summary>
@@ -5742,11 +5815,13 @@
           <Property Name="CostAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="05bfa4e8-e628-4425-87ea-6c8b64d0e38c" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="03604cec-d9a2-4d42-bd81-4c14ccb5e9a5" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="aa1e312c-90a7-4b2c-b7e4-bdc2562bc138" />
-          <NavigationProperty Name="PurchaseInvoiceHeader" Relationship="MyERP.DataAccess.PurchaseInvoiceHeader_PurchaseInvoiceLine" FromRole="PuchaseInvoiceLines" ToRole="PurchaseInvoiceHeader" ed:Guid="b33fa50f-e999-4092-b13d-ad2f57143bc2" />
+          <NavigationProperty Name="PurchaseInvoiceHeader" Relationship="MyERP.DataAccess.PurchaseInvoiceHeader_PurchaseInvoiceLine" FromRole="PurchaseInvoiceLines" ToRole="PurchaseInvoiceHeader" ed:Guid="b33fa50f-e999-4092-b13d-ad2f57143bc2" />
           <NavigationProperty Name="Location" Relationship="MyERP.DataAccess.Location_PurchaseInvoiceLine" FromRole="PurchaseInvoiceLines" ToRole="Location" ed:Guid="ae5b8520-7a2e-4210-95b2-47fbe0b0915a" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_PurchaseInvoiceLine" FromRole="PurchaseInvoiceLines" ToRole="Organization" ed:Guid="50e542fe-17c2-48ae-950d-37e8f3ec1173" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_PurchaseInvoiceLine" FromRole="PurchaseInvoiceLines" ToRole="Client" ed:Guid="283eedef-bee4-4e83-9657-3aa171492b7a" />
           <NavigationProperty Name="Vat" Relationship="MyERP.DataAccess.Vat_PurchaseInvoiceLine" FromRole="PurchaseInvoiceLines" ToRole="Vat" ed:Guid="e4aa2571-7b8d-4e41-9278-51a3cb3fe06d" />
+          <NavigationProperty Name="Item" Relationship="MyERP.DataAccess.Item_PurchaseInvoiceLine" FromRole="PurchaseInvoiceLines" ToRole="Item" ed:Guid="98621a4b-6b49-418f-9965-ad5bfae2c770" />
+          <NavigationProperty Name="Uom" Relationship="MyERP.DataAccess.Uom_PurchaseInvoiceLine" FromRole="PurchaseInvoiceLines" ToRole="Uom" ed:Guid="fcab2dae-38c0-4438-8c4f-52336a94005c" />
         </EntityType>
         <EntityType Name="Vat" ed:Guid="5604c381-1dc8-463c-b85a-6a932722b01f">
           <Key>
@@ -7667,12 +7742,12 @@
         </Association>
         <Association Name="PurchaseInvoiceHeader_PurchaseInvoiceLine" ed:Guid="fd76d945-690c-441c-a144-10a4fc549414">
           <End Role="PurchaseInvoiceHeader" Type="MyERP.DataAccess.PurchaseInvoiceHeader" Multiplicity="1" />
-          <End Role="PuchaseInvoiceLines" Type="MyERP.DataAccess.PurchaseInvoiceLine" Multiplicity="*" />
+          <End Role="PurchaseInvoiceLines" Type="MyERP.DataAccess.PurchaseInvoiceLine" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PurchaseInvoiceHeader">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="PuchaseInvoiceLines">
+            <Dependent Role="PurchaseInvoiceLines">
               <PropertyRef Name="PurchaseHeaderId" />
             </Dependent>
           </ReferentialConstraint>
@@ -7866,6 +7941,42 @@
             </Principal>
             <Dependent Role="Items">
               <PropertyRef Name="VatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AccountPayable_PurchaseInvoiceHeader" ed:Guid="722be399-9e7e-4ad5-89db-29522da3fd42">
+          <End Role="AccountPayable" Type="MyERP.DataAccess.Account" Multiplicity="1" />
+          <End Role="PurchaseInvoiceHeaders" Type="MyERP.DataAccess.PurchaseInvoiceHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountPayable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseInvoiceHeaders">
+              <PropertyRef Name="AccountPayableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Item_PurchaseInvoiceLine" ed:Guid="152b91ec-b333-48f6-8ce9-b3665c86a689">
+          <End Role="Item" Type="MyERP.DataAccess.Item" Multiplicity="0..1" />
+          <End Role="PurchaseInvoiceLines" Type="MyERP.DataAccess.PurchaseInvoiceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseInvoiceLines">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Uom_PurchaseInvoiceLine" ed:Guid="eaec1739-2d6b-434e-9462-afa2af51775b">
+          <End Role="Uom" Type="MyERP.DataAccess.Uom" Multiplicity="0..1" />
+          <End Role="PurchaseInvoiceLines" Type="MyERP.DataAccess.PurchaseInvoiceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseInvoiceLines">
+              <PropertyRef Name="UomId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8767,6 +8878,7 @@
                 <ScalarProperty Name="TotalVatAmountLCY" ColumnName="total_vat_amount_lcy" />
                 <ScalarProperty Name="TotalLineAmount" ColumnName="total_line_amount" />
                 <ScalarProperty Name="TotalLineAmountLCY" ColumnName="total_line_amount_lcy" />
+                <ScalarProperty Name="AccountPayableId" ColumnName="account_payable_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

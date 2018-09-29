@@ -21,9 +21,9 @@ using WebGrease.Css.Extensions;
 
 namespace MyERP.Web.Areas.Purchase.Controllers
 {
-    public class PurchaseInvoiceController : EntityBaseController<MyERP.DataAccess.CashHeader, MyERP.DataAccess.EntitiesModel>
+    public class PurchaseInvoiceController : EntityBaseController<MyERP.DataAccess.PurchaseInvoiceHeader, MyERP.DataAccess.EntitiesModel>
     {
-        public PurchaseInvoiceController() : this(new CashHeaderRepository())
+        public PurchaseInvoiceController() : this(new PurchaseInvoiceHeaderRepository())
         {
 
         }
@@ -34,7 +34,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
         /// </summary>
         /// <remarks>Controller will ALWAYS use the default constructor!</remarks>
         /// <param name="repository">Repository instance of the specific type</param>
-        public PurchaseInvoiceController(IBaseRepository<MyERP.DataAccess.CashHeader, MyERP.DataAccess.EntitiesModel> repository)
+        public PurchaseInvoiceController(IBaseRepository<MyERP.DataAccess.PurchaseInvoiceHeader, MyERP.DataAccess.EntitiesModel> repository)
         {
             this.repository = repository;
         }
@@ -59,20 +59,22 @@ namespace MyERP.Web.Areas.Purchase.Controllers
 
         public ActionResult GetData(StoreRequestParameters parameters)
         {
-            var paging = ((CashHeaderRepository)repository).Paging(parameters, DocumentType.CashPayment);
+            var paging = ((PurchaseInvoiceHeaderRepository)repository).Paging(parameters, DocumentType.PurchaseInvoice);
 
-            var data = paging.Data.Select(c => new CashHeaderViewModel
+            var data = paging.Data.Select(c => new PurchaseInvoiceHeaderViewModel
             {
                 OrganizationCode = c.Organization.Code,
                 Id = c.Id,
                 DocumentNo = c.DocumentNo,
                 DocumentDate = c.DocumentDate,
-                AccountCode = c.Account.Code,
+                AccountPayableCode = c.AccountPayable.Code,
                 Description = c.Description,
-                BusinessPartnerCode = c.BusinessPartner.Code,
-                BusinessPartnerName = c.BusinessPartnerName,
-                BusinessPartnerAddress = c.BusinessPartnerAddress,
-                BusinessPartnerContactName = c.BusinessPartnerContactName,
+                BuyFromVendorCode = c.BuyFromVendor.Code,
+                BuyFromVendorName = c.BuyFromVendorName,
+                BuyFromAddress = c.BuyFromAddress,
+                BuyFromContactName = c.BuyFromContactName,
+                PayToVendorCode = c.PayToVendor.Code,
+                PayToName = c.PayToName,
                 TotalAmount = c.TotalAmount,
                 TotalVatAmount = c.TotalVatAmount,
                 TotalPayment = c.TotalPayment,
@@ -122,7 +124,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 }).ToList();
 
             PreferenceViewModel preference = (PreferenceViewModel)Session["Preference"];
-            var model = new CashHeaderEditViewModel()
+            var model = new PurchaseInvoiceHeaderEditViewModel()
             {
                 Id = null,
                 DocumentType = DocumentType.CashPayment,
@@ -132,89 +134,115 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 PostingDate = preference.WorkingDate,
                 CurrencyId = currencyLcyId,
                 CurrencyFactor = 1,
-                CashLines = new List<CashLineEditViewModel>(),
-                Status = CashDocumentStatusType.Draft
+                PurchaseInvoiceLines = new List<PurchaseInvoiceLineEditViewModel>(),
+                Status = PurchaseInvoiceDocumentStatusType.Draft
             };
 
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.Get(c => c.Id == _id, new string[] { "Account", "BusinessPartner", "Currency", "CashLines", "CashLines.CorrespAccount", "CashLines.BusinessPartner" }).SingleOrDefault();
+                var entity = repository.Get(c => c.Id == _id, new string[] { "AccountPayable", "BuyFromVendor", "PayToVendor", "Currency", "PurchaseInvoiceLines", "PurchaseInvoiceLines.Item", "PurchaseInvoiceLines.Location", "PurchaseInvoiceLines.Uom", "PurchaseInvoiceLines.Vat" }).SingleOrDefault();
                 if (entity == null)
                 {
                     return this.Direct(false, "Cash Header has been changed or deleted! Please check");
                 }
 
-                List<CashLineEditViewModel> cashLines = (from cashLine in entity.CashLines
-                                                         select new CashLineEditViewModel()
+                List<PurchaseInvoiceLineEditViewModel> purchaseInvoiceLines = (from purchaseInvoiceLine in entity.PurchaseInvoiceLines
+                                                         select new PurchaseInvoiceLineEditViewModel()
                                                          {
-                                                             Id = cashLine.Id,
-                                                             LineNo = cashLine.LineNo,
-                                                             CorrespAccountId = cashLine.CorrespAccountId,
-                                                             CorrespAccount = new AccountLookupViewModel()
+                                                             Id = purchaseInvoiceLine.Id,
+                                                             LineNo = purchaseInvoiceLine.LineNo,
+                                                             Type = purchaseInvoiceLine.Type,
+                                                             ItemId = purchaseInvoiceLine.ItemId,
+                                                             Item = purchaseInvoiceLine.Type == (byte) PurchaseInvoiceLineType.Comment ? null : new ExtNetComboBoxModel()
                                                              {
-                                                                 Id = cashLine.CorrespAccount.Id,
-                                                                 Code = cashLine.CorrespAccount.Code,
-                                                                 Description = cashLine.CorrespAccount.Description,
-                                                                 OrganizationCode = "",
-                                                                 Status = (DefaultStatusType)cashLine.CorrespAccount.Status
+                                                                 Id = purchaseInvoiceLine.Item.Id,
+                                                                 Code = purchaseInvoiceLine.Item.Code,
+                                                                 Description = purchaseInvoiceLine.Item.Description
                                                              },
-                                                             Description = cashLine.Description,
-                                                             BusinessPartnerId = cashLine.BusinessPartnerId,
-                                                             BusinessPartner = new BusinessPartnerLookupViewModel()
+                                                             Description = purchaseInvoiceLine.Description,
+                                                             UomId = purchaseInvoiceLine.UomId,
+                                                             Uom = purchaseInvoiceLine.Type == (byte)PurchaseInvoiceLineType.Comment ? null : new ExtNetComboBoxModel()
                                                              {
-                                                                 Id = cashLine.BusinessPartner.Id,
-                                                                 Code = cashLine.BusinessPartner.Code,
-                                                                 Description = cashLine.BusinessPartner.Description,
-                                                                 OrganizationCode = "",
-                                                                 Status = (DefaultStatusType)cashLine.BusinessPartner.Status
+                                                                 Id = purchaseInvoiceLine.Uom.Id,
+                                                                 Code = purchaseInvoiceLine.Uom.Code,
+                                                                 Description = purchaseInvoiceLine.Uom.Description
                                                              },
-                                                             Amount = cashLine.Amount,
-                                                             AmountLCY = cashLine.AmountLCY,
-                                                             JobId = cashLine.JobId,
+                                                             LocationId = purchaseInvoiceLine.LocationId,
+                                                             Location = purchaseInvoiceLine.Type == (byte)PurchaseInvoiceLineType.Comment ? null : new ExtNetComboBoxModel()
+                                                             {
+                                                                 Id = purchaseInvoiceLine.Location.Id,
+                                                                 Code = purchaseInvoiceLine.Location.Code,
+                                                                 Description = purchaseInvoiceLine.Location.Description
+                                                             },
+                                                             VatId = purchaseInvoiceLine.VatId,
+                                                             Vat = purchaseInvoiceLine.Type == (byte)PurchaseInvoiceLineType.Comment ? null : new ExtNetComboBoxModel()
+                                                             {
+                                                                 Id = purchaseInvoiceLine.Vat.Id,
+                                                                 Code = purchaseInvoiceLine.Vat.Code,
+                                                                 Description = purchaseInvoiceLine.Vat.Description
+                                                             },
+                                                             Amount = purchaseInvoiceLine.Amount,
+                                                             AmountLCY = purchaseInvoiceLine.AmountLCY
                                                          }).ToList();
 
-                model = new CashHeaderEditViewModel()
+                model = new PurchaseInvoiceHeaderEditViewModel()
                 {
                     Id = entity.Id,
                     DocumentType = (DocumentType)entity.DocumentType,
-                    DocSubType = entity.DocSubType,
                     DocSequenceId = entity.DocSequenceId,
                     DocumentNo = entity.DocumentNo,
                     DocumentDate = entity.DocumentDate,
                     PostingDate = entity.PostingDate,
                     CurrencyId = entity.CurrencyId,
                     CurrencyFactor = entity.CurrencyFactor,
-                    BusinessPartnerId = entity.BusinessPartnerId,
-                    BusinessPartnerName = entity.BusinessPartnerName,
-                    BusinessPartnerAddress = entity.BusinessPartnerAddress,
-                    BusinessPartnerContactName = entity.BusinessPartnerContactName,
-                    AccountId = entity.AccountId,
+                    BuyFromVendorId = entity.BuyFromVendorId,
+                    BuyFromVendorName = entity.BuyFromVendorName,
+                    BuyFromAddress = entity.BuyFromAddress,
+                    BuyFromContactName = entity.BuyFromContactName,
+                    PayToVendorId = entity.PayToVendorId,
+                    PayToName = entity.PayToName,
+                    PayToAddress = entity.PayToAddress,
+                    PayToContactName = entity.PayToContactName,
+                    ShipToName = entity.ShipToName,
+                    ShipToAddress = entity.ShipToAddress,
+                    ShipToContactName = entity.ShipToContactName,
+                    AccountPayableId = entity.AccountPayableId,
                     Description = entity.Description,
-                    CashLines = cashLines,
+                    PurchaseInvoiceLines = purchaseInvoiceLines,
                     TotalAmount = entity.TotalAmount,
                     TotalAmountLCY = entity.TotalAmountLCY,
                     TotalVatAmount = entity.TotalVatAmount,
                     TotalVatAmountLCY = entity.TotalVatAmountLCY,
                     TotalPayment = entity.TotalPayment,
                     TotalPaymentLCY = entity.TotalPaymentLCY,
-                    Status = (CashDocumentStatusType)entity.Status,
+                    Status = (PurchaseInvoiceDocumentStatusType)entity.Status,
                     Version = entity.Version
                 };
 
-                ViewData["BusinessPartners"] = new List<Object>()
+                ViewData["BuyFromVendor"] = new List<Object>()
                 {
-                    new BusinessPartnerLookupViewModel
+                    new ExtNetComboBoxModel
                     {
-                        Id = entity.BusinessPartnerId,
-                        Code = entity.BusinessPartner.Code,
-                        Description = entity.BusinessPartner.Description
+                        Id = entity.BuyFromVendorId,
+                        Code = entity.BuyFromVendor.Code,
+                        Description = entity.BuyFromVendor.Description
                     }
                 };
 
-                ViewData["Currencies"] = new List<Object>()
+                ViewData["PayToVendor"] = new List<Object>()
                 {
-                    new CurrencyLookupViewModel
+                    new ExtNetComboBoxModel
+                    {
+                        Id = entity.PayToVendorId,
+                        Code = entity.PayToVendor.Code,
+                        Description = entity.PayToVendor.Description
+                    }
+                };
+
+                ViewData["Currency"] = new List<Object>()
+                {
+                    new ExtNetComboBoxModel
                     {
                         Id = entity.CurrencyId,
                         Code = entity.Currency.Code,
@@ -222,22 +250,22 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     }
                 };
 
-                ViewData["Accounts"] = new List<Object>()
+                ViewData["AccountPayable"] = new List<Object>()
                 {
-                     new AccountLookupViewModel
+                     new ExtNetComboBoxModel
                      {
-                         Id = entity.AccountId,
-                         Code = entity.Account.Code,
-                         Description = entity.Account.Description
+                         Id = entity.AccountPayableId,
+                         Code = entity.AccountPayable.Code,
+                         Description = entity.AccountPayable.Description
                      }
                 };
 
-                ViewData["CorrespAccounts"] = cashLines.GroupBy(x => new { x.CorrespAccountId }).Select(i => i.First())
-                    .Select(x => new AccountLookupViewModel
+                ViewData["Items"] = purchaseInvoiceLines.Where(x => x.Item != null).GroupBy(x => new { x.ItemId }).Select(i => i.First())
+                    .Select(x => new ExtNetComboBoxModel
                     {
-                        Id = x.CorrespAccountId,
-                        Code = x.CorrespAccount.Code,
-                        Description = x.CorrespAccount.Description,
+                        Id = x.ItemId,
+                        Code = x.Item.Code,
+                        Description = x.Item.Description,
                     }).ToList();
             }
 
@@ -246,16 +274,16 @@ namespace MyERP.Web.Areas.Purchase.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _Maintenance(CashHeaderEditViewModel headerModel, String cashLinesJSON)
+        public ActionResult _Maintenance(PurchaseInvoiceHeaderEditViewModel headerModel, String purchaseInvoiceLinesJSON)
         {
-            List<CashLineEditViewModel> cashLinesModel = JsonConvert.DeserializeObject<List<CashLineEditViewModel>>(cashLinesJSON, new JsonSerializerSettings
+            List<PurchaseInvoiceLineEditViewModel> purchaseInvoiceLines = JsonConvert.DeserializeObject<List<PurchaseInvoiceLineEditViewModel>>(purchaseInvoiceLinesJSON, new JsonSerializerSettings
             {
                 Culture = Thread.CurrentThread.CurrentCulture
             });
 
             //Save
             ModelState.Clear();
-            headerModel.CashLines = cashLinesModel;
+            headerModel.PurchaseInvoiceLines = purchaseInvoiceLines;
             TryValidateModel(headerModel);
             if (!ModelState.IsValid)
             {
@@ -273,8 +301,8 @@ namespace MyERP.Web.Areas.Purchase.Controllers
 
             if (headerModel.Id.HasValue)
             {
-                var updateCashHeader = repository.Get(c => c.Id == headerModel.Id, new string[] { "CashLines" }).SingleOrDefault();
-                if (updateCashHeader == null || updateCashHeader.Version != headerModel.Version)
+                var updatePurchaseInvoiceHeader = repository.Get(c => c.Id == headerModel.Id, new string[] { "CashLines" }).SingleOrDefault();
+                if (updatePurchaseInvoiceHeader == null || updatePurchaseInvoiceHeader.Version != headerModel.Version)
                 {
                     return this.Direct(false, "Cash Header has been changed or deleted! Please check");
                 }
@@ -284,87 +312,75 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 headerModel.TotalPayment = headerModel.TotalAmount;
                 headerModel.TotalPaymentLCY = headerModel.TotalAmountLCY;
 
-                updateCashHeader.DocSequenceId = headerModel.DocSequenceId;
-                updateCashHeader.DocumentNo = headerModel.DocumentNo;
-                updateCashHeader.DocumentDate = headerModel.DocumentDate;
-                updateCashHeader.PostingDate = headerModel.PostingDate;
-                updateCashHeader.DocumentType = (byte)headerModel.DocumentType;
-                updateCashHeader.DocSubType = (byte)headerModel.DocSubType;
-                updateCashHeader.BusinessPartnerId = headerModel.BusinessPartnerId;
-                updateCashHeader.BusinessPartnerName = headerModel.BusinessPartnerName;
-                updateCashHeader.BusinessPartnerAddress = headerModel.BusinessPartnerAddress;
-                updateCashHeader.BusinessPartnerContactId = null;
-                updateCashHeader.BusinessPartnerContactName = headerModel.BusinessPartnerContactName;
-                updateCashHeader.CurrencyId = headerModel.CurrencyId;
-                updateCashHeader.CurrencyFactor = headerModel.CurrencyFactor;
-                updateCashHeader.AccountId = headerModel.AccountId;
-                updateCashHeader.Description = headerModel.Description;
-                updateCashHeader.TotalAmount = headerModel.TotalAmount;
-                updateCashHeader.TotalAmountLCY = headerModel.TotalAmountLCY;
-                updateCashHeader.TotalVatAmount = headerModel.TotalVatAmount;
-                updateCashHeader.TotalVatAmountLCY = headerModel.TotalVatAmountLCY;
-                updateCashHeader.TotalPayment = headerModel.TotalPayment;
-                updateCashHeader.TotalPaymentLCY = headerModel.TotalPaymentLCY;
-                updateCashHeader.Status = (byte)headerModel.Status;
-                updateCashHeader.RecModifiedAt = DateTime.Now;
-                updateCashHeader.RecModifiedBy = (long)user.ProviderUserKey;
-                updateCashHeader.Version++;
+                updatePurchaseInvoiceHeader.DocSequenceId = headerModel.DocSequenceId;
+                updatePurchaseInvoiceHeader.DocumentNo = headerModel.DocumentNo;
+                updatePurchaseInvoiceHeader.DocumentDate = headerModel.DocumentDate;
+                updatePurchaseInvoiceHeader.PostingDate = headerModel.PostingDate;
+                updatePurchaseInvoiceHeader.DocumentType = (byte)headerModel.DocumentType;
+                updatePurchaseInvoiceHeader.BuyFromVendorId = headerModel.BuyFromVendorId;
+                updatePurchaseInvoiceHeader.BuyFromVendorName = headerModel.BuyFromVendorName;
+                updatePurchaseInvoiceHeader.BuyFromAddress = headerModel.BuyFromAddress;
+                updatePurchaseInvoiceHeader.BuyFromContactId = null;
+                updatePurchaseInvoiceHeader.BuyFromContactName = headerModel.BuyFromContactName;
+                updatePurchaseInvoiceHeader.CurrencyId = headerModel.CurrencyId;
+                updatePurchaseInvoiceHeader.CurrencyFactor = headerModel.CurrencyFactor;
+                updatePurchaseInvoiceHeader.AccountPayableId = headerModel.AccountPayableId;
+                updatePurchaseInvoiceHeader.Description = headerModel.Description;
+                updatePurchaseInvoiceHeader.TotalAmount = headerModel.TotalAmount;
+                updatePurchaseInvoiceHeader.TotalAmountLCY = headerModel.TotalAmountLCY;
+                updatePurchaseInvoiceHeader.TotalVatAmount = headerModel.TotalVatAmount;
+                updatePurchaseInvoiceHeader.TotalVatAmountLCY = headerModel.TotalVatAmountLCY;
+                updatePurchaseInvoiceHeader.TotalPayment = headerModel.TotalPayment;
+                updatePurchaseInvoiceHeader.TotalPaymentLCY = headerModel.TotalPaymentLCY;
+                updatePurchaseInvoiceHeader.Status = (byte)headerModel.Status;
+                updatePurchaseInvoiceHeader.RecModifiedAt = DateTime.Now;
+                updatePurchaseInvoiceHeader.RecModifiedBy = (long)user.ProviderUserKey;
+                updatePurchaseInvoiceHeader.Version++;
 
-                foreach (var cashLineEditViewModel in cashLinesModel)
+                foreach (var purchaseInvoiceLine in purchaseInvoiceLines)
                 {
-                    if (cashLineEditViewModel.Id == 0 || cashLineEditViewModel.Id == null)
-                        updateCashHeader.CashLines.Add(new DataAccess.CashLine()
+                    if (purchaseInvoiceLine.Id == 0 || purchaseInvoiceLine.Id == null)
+                        updatePurchaseInvoiceHeader.PurchaseInvoiceLines.Add(new DataAccess.PurchaseInvoiceLine()
                         {
                             ClientId = clientId,
                             OrganizationId = organizationId,
-                            LineNo = cashLineEditViewModel.LineNo,
+                            LineNo = purchaseInvoiceLine.LineNo,
                             DocumentType = (byte)headerModel.DocumentType,
                             DocumentNo = headerModel.DocumentNo,
                             PostingDate = headerModel.PostingDate,
-                            CorrespAccountId = cashLineEditViewModel.CorrespAccountId,
-                            Description = cashLineEditViewModel.Description,
-                            BusinessPartnerId = headerModel.DocSubType != (byte)CashPaymentDocumentSubType.CashPaymentMultiBusinessPartner ? headerModel.BusinessPartnerId : cashLineEditViewModel.BusinessPartnerId,
-                            JobId = null,
-                            AccountsPayableLedgerId = null,
-                            AccountsReceivableLedgerId = null,
-                            AccountsRPAmountConv = 0,
-                            Amount = cashLineEditViewModel.Amount,
-                            AmountLCY = cashLineEditViewModel.AmountLCY
+                            Type = purchaseInvoiceLine.Type,
+                            ItemId  = purchaseInvoiceLine.ItemId,
+                            Description = purchaseInvoiceLine.Description,
+                            Amount = purchaseInvoiceLine.Amount,
+                            AmountLCY = purchaseInvoiceLine.AmountLCY
                         });
                     else
                     {
-                        updateCashHeader.CashLines.Where(c => c.Id == cashLineEditViewModel.Id)
+                        updatePurchaseInvoiceHeader.PurchaseInvoiceLines.Where(c => c.Id == purchaseInvoiceLine.Id)
                             .ForEach(x =>
                             {
-                                x.LineNo = cashLineEditViewModel.LineNo;
+                                x.LineNo = purchaseInvoiceLine.LineNo;
                                 x.DocumentType = (byte)headerModel.DocumentType;
                                 x.DocumentNo = headerModel.DocumentNo;
                                 x.PostingDate = headerModel.PostingDate;
-                                x.CorrespAccountId = cashLineEditViewModel.CorrespAccountId;
-                                x.Description = cashLineEditViewModel.Description;
-                                x.BusinessPartnerId =
-                                    headerModel.DocSubType != (byte)CashPaymentDocumentSubType.CashPaymentMultiBusinessPartner
-                                        ? headerModel.BusinessPartnerId
-                                        : cashLineEditViewModel.BusinessPartnerId;
-                                x.JobId = null;
-                                x.AccountsPayableLedgerId = null;
-                                x.AccountsReceivableLedgerId = null;
-                                x.AccountsRPAmountConv = 0;
-                                x.Amount = cashLineEditViewModel.Amount;
-                                x.AmountLCY = cashLineEditViewModel.AmountLCY;
+                                x.Type = purchaseInvoiceLine.Type;
+                                x.ItemId = purchaseInvoiceLine.ItemId;
+                                x.Description = purchaseInvoiceLine.Description;
+                                x.Amount = purchaseInvoiceLine.Amount;
+                                x.AmountLCY = purchaseInvoiceLine.AmountLCY;
                             });
                     }
                 }
 
-                foreach (var cashLine in updateCashHeader.CashLines.Where(x => cashLinesModel.All(u => u.Id != x.Id && u.Id != 0 && u.Id.HasValue)).ToList())
+                foreach (var purchaseInvoiceLine in updatePurchaseInvoiceHeader.PurchaseInvoiceLines.Where(x => purchaseInvoiceLines.All(u => u.Id != x.Id && u.Id != 0 && u.Id.HasValue)).ToList())
                 {
-                    updateCashHeader.CashLines.Remove(cashLine);
-                    this.repository.DataContext.CashLines.Remove(cashLine); //this.repository.DataContext.Entry(salesPriceRemove).State = EntityState.Deleted;
+                    updatePurchaseInvoiceHeader.PurchaseInvoiceLines.Remove(purchaseInvoiceLine);
+                    this.repository.DataContext.PurchaseInvoiceLines.Remove(purchaseInvoiceLine); //this.repository.DataContext.Entry(salesPriceRemove).State = EntityState.Deleted;
                 }
 
                 try
                 {
-                    var updateEntity = this.repository.Update(updateCashHeader);
+                    var updateEntity = this.repository.Update(updatePurchaseInvoiceHeader);
                     headerModel.Id = updateEntity.Id;
                     headerModel.Version = updateEntity.Version;
                 }
@@ -383,45 +399,24 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 headerModel.TotalPayment = headerModel.TotalAmount;
                 headerModel.TotalPaymentLCY = headerModel.TotalAmountLCY;
 
-                List<DataAccess.CashLine> cashLines = cashLinesModel
-                    .Select(c => new DataAccess.CashLine()
-                    {
-                        ClientId = clientId,
-                        OrganizationId = organizationId,
-                        LineNo = c.LineNo,
-                        DocumentType = (byte)headerModel.DocumentType,
-                        DocumentNo = headerModel.DocumentNo,
-                        PostingDate = headerModel.PostingDate,
-                        CorrespAccountId = c.CorrespAccountId,
-                        Description = c.Description,
-                        BusinessPartnerId = headerModel.DocSubType != (byte)CashPaymentDocumentSubType.CashPaymentMultiBusinessPartner ? headerModel.BusinessPartnerId : c.BusinessPartnerId,
-                        JobId = null,
-                        AccountsPayableLedgerId = null,
-                        AccountsReceivableLedgerId = null,
-                        AccountsRPAmountConv = 0,
-                        Amount = c.Amount,
-                        AmountLCY = c.AmountLCY
-                    }).ToList();
-
-                var newCashHeader = new DataAccess.CashHeader()
+                var newPurchaseInvoiceHeader = new DataAccess.PurchaseInvoiceHeader()
                 {
                     ClientId = clientId,
                     OrganizationId = organizationId,
                     DocSequenceId = headerModel.DocSequenceId,
                     DocumentType = (byte)headerModel.DocumentType,
-                    DocSubType = (byte)headerModel.DocSubType,
                     DocumentNo = headerModel.DocumentNo,
                     DocumentDate = headerModel.DocumentDate,
                     PostingDate = headerModel.PostingDate,
-                    BusinessPartnerId = headerModel.BusinessPartnerId,
-                    BusinessPartnerName = headerModel.BusinessPartnerName,
-                    BusinessPartnerAddress = headerModel.BusinessPartnerAddress,
-                    BusinessPartnerContactId = null,
-                    BusinessPartnerContactName = headerModel.BusinessPartnerContactName,
+                    BuyFromVendorId  = headerModel.BuyFromVendorId,
+                    BuyFromVendorName = headerModel.BuyFromVendorName,
+                    BuyFromAddress = headerModel.BuyFromAddress,
+                    BuyFromContactId = null,
+                    BuyFromContactName = headerModel.BuyFromContactName,
                     CurrencyId = headerModel.CurrencyId,
                     CurrencyFactor = headerModel.CurrencyFactor,
                     Description = headerModel.Description,
-                    AccountId = headerModel.AccountId,
+                    AccountPayableId = headerModel.AccountPayableId,
                     TotalAmount = headerModel.TotalAmount,
                     TotalAmountLCY = headerModel.TotalAmountLCY,
                     TotalVatAmount = headerModel.TotalVatAmount,
@@ -435,10 +430,24 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     RecCreatedAt = DateTime.Now,
                     RecModifiedBy = (long)user.ProviderUserKey
                 };
-                newCashHeader.CashLines = cashLines;
+                newPurchaseInvoiceHeader.PurchaseInvoiceLines = purchaseInvoiceLines
+                    .Select(c => new DataAccess.PurchaseInvoiceLine()
+                    {
+                        ClientId = clientId,
+                        OrganizationId = organizationId,
+                        LineNo = c.LineNo,
+                        DocumentType = (byte)headerModel.DocumentType,
+                        DocumentNo = headerModel.DocumentNo,
+                        PostingDate = headerModel.PostingDate,
+                        Type = c.Type,
+                        ItemId = c.ItemId,
+                        Description = c.Description,
+                        Amount = c.Amount,
+                        AmountLCY = c.AmountLCY
+                    }).ToList(); 
                 try
                 {
-                    var newEntity = this.repository.AddNew(newCashHeader);
+                    var newEntity = this.repository.AddNew(newPurchaseInvoiceHeader);
                     headerModel.Id = newEntity.Id;
                     headerModel.Version = newEntity.Version;
                 }
@@ -465,20 +474,20 @@ namespace MyERP.Web.Areas.Purchase.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.Get(c => c.Id == _id, new string[] { "CashLines" }).SingleOrDefault();
+                var entity = repository.Get(c => c.Id == _id, new string[] { "PurchaseInvoiceLines" }).SingleOrDefault();
                 if (entity == null)
                 {
-                    return this.Direct(false, "Cash Header not found!Please check");
+                    return this.Direct(false, "Purchase Invoice Header not found! Please check");
                 }
 
                 using (var dbContextTransaction = this.repository.DataContext.Database.BeginTransaction())
                 {
                     try
                     {
-                        foreach (var cashLine in entity.CashLines.ToList())
+                        foreach (var purchaseInvoiceLine in entity.PurchaseInvoiceLines.ToList())
                         {
-                            entity.CashLines.Remove(cashLine);
-                            this.repository.DataContext.CashLines.Remove(cashLine);  //this.repository.DataContext.Entry(salesPriceRemove).State = EntityState.Deleted;
+                            entity.PurchaseInvoiceLines.Remove(purchaseInvoiceLine);
+                            this.repository.DataContext.PurchaseInvoiceLines.Remove(purchaseInvoiceLine);  //this.repository.DataContext.Entry(salesPriceRemove).State = EntityState.Deleted;
                         }
 
                         this.repository.Delete(entity);
@@ -543,7 +552,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
             return this.Direct();
         }
 
-        public ActionResult ChangeCurrencyFactor(CashHeaderEditViewModel model, string cashLinesJSON)
+        public ActionResult ChangeCurrencyFactor(PurchaseInvoiceHeaderEditViewModel model, string cashLinesJSON)
         {
             List<CashLineEditViewModel> cashLinesModel = JsonConvert.DeserializeObject<List<CashLineEditViewModel>>(cashLinesJSON, new JsonSerializerSettings
             {
@@ -590,7 +599,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
             if (clientId == 0 || organizationId == 0)
                 return this.Direct(false, Resources.Resources.User_dont_have_Client_or_Organization_Please_set);
 
-            CashHeaderEditViewModel cashHeaderEditViewModel = JSON.Deserialize<CashHeaderEditViewModel>(headerData, new JsonSerializerSettings
+            PurchaseInvoiceHeaderEditViewModel purchaseInvoiceHeaderEditViewModel = JSON.Deserialize<PurchaseInvoiceHeaderEditViewModel>(headerData, new JsonSerializerSettings
             {
                 Culture = Thread.CurrentThread.CurrentCulture
             });
@@ -623,7 +632,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     //correspAccountStore.Add(corespAcc);
                     break;
                 case "Amount":
-                    var amountLCY = Round.RoundAmountLCY(cashLineEditViewModel.Amount * cashHeaderEditViewModel.CurrencyFactor);
+                    var amountLCY = Round.RoundAmountLCY(cashLineEditViewModel.Amount * purchaseInvoiceHeaderEditViewModel.CurrencyFactor);
                     record.Set("AmountLCY", amountLCY);
                     break;
             }
@@ -637,32 +646,28 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 throw new ArgumentNullException(nameof(id));
 
             var _id = Convert.ToInt64(id);
-            var entity = repository.Get(c => c.Id == _id, new string[] { "Account", "BusinessPartner", "Currency", "CashLines", "CashLines.CorrespAccount", "CashLines.BusinessPartner" }).SingleOrDefault();
+            var entity = repository.Get(c => c.Id == _id, new string[] { "AccountPayable", "BuyFromVendor", "PayToVendor", "Currency", "PurchaseInvoiceLines", "PurchaseInvoiceLines.Item", "PurchaseInvoiceLines.Location", "PurchaseInvoiceLines.Uom", "PurchaseInvoiceLines.Vat" }).SingleOrDefault();
             if (entity == null)
             {
                 return this.Direct(false, "Cash Header has been changed or deleted! Please check");
             }
 
-            var cashLines = (from cashLine in entity.CashLines
+            var purchaseInvoiceLines = (from purchaseInvoiceLine in entity.PurchaseInvoiceLines
                              select new
                              {
-                                 Id = cashLine.Id,
-                                 LineNo = cashLine.LineNo,
-                                 CorrespAccountId = cashLine.CorrespAccountId,
-                                 CorrespAccountCode = cashLine.CorrespAccount.Code,
-                                 Description = cashLine.Description,
-                                 BusinessPartnerId = cashLine.BusinessPartnerId,
-                                 BusinessPartnerCode = cashLine.BusinessPartner.Code,
-                                 Amount = cashLine.Amount,
-                                 AmountLCY = cashLine.AmountLCY,
-                                 JobId = cashLine.JobId,
+                                 Id = purchaseInvoiceLine.Id,
+                                 LineNo = purchaseInvoiceLine.LineNo,
+                                 ItemId = purchaseInvoiceLine.ItemId,
+                                 ItemCode = purchaseInvoiceLine.Item == null ? null : purchaseInvoiceLine.Item.Code,
+                                 Description = purchaseInvoiceLine.Description,
+                                 Amount = purchaseInvoiceLine.Amount,
+                                 AmountLCY = purchaseInvoiceLine.AmountLCY,
                              }).ToList();
 
             var headerModel = new
             {
                 Id = entity.Id,
                 DocumentType = (DocumentType)entity.DocumentType,
-                DocSubType = (CashPaymentDocumentSubType)entity.DocSubType,
                 DocSequenceId = entity.DocSequenceId,
                 DocumentNo = entity.DocumentNo,
                 DocumentDate = entity.DocumentDate,
@@ -670,13 +675,13 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 CurrencyId = entity.CurrencyId,
                 CurrencyCode = entity.Currency.Code,
                 CurrencyFactor = entity.CurrencyFactor,
-                BusinessPartnerId = entity.BusinessPartnerId,
-                BusinessPartnerCode = entity.BusinessPartner.Code,
-                BusinessPartnerName = entity.BusinessPartnerName,
-                BusinessPartnerAddress = entity.BusinessPartnerAddress,
-                BusinessPartnerContactName = entity.BusinessPartnerContactName,
-                AccountId = entity.AccountId,
-                AccountCode = entity.Account.Code,
+                BuyFromVendorId = entity.BuyFromVendorId,
+                BuyFromVendorCode = entity.BuyFromVendor.Code,
+                BuyFromVendorName = entity.BuyFromVendorName,
+                BuyFromAddress = entity.BuyFromAddress,
+                BuyFromContactName = entity.BuyFromContactName,
+                AccountPayableId = entity.AccountPayableId,
+                AccountPayableCode = entity.AccountPayable.Code,
                 Description = entity.Description,
                 TotalAmount = entity.TotalAmount,
                 TotalAmountLCY = entity.TotalAmountLCY,
@@ -690,7 +695,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
 
             //Print
             StiReport report = new StiReport();
-            report.Load(Server.MapPath("~/Resources/Reports/cashPayment_001.mrt"));
+            report.Load(Server.MapPath("~/Resources/Reports/purchaseInvoice_001.mrt"));
 
             Client _client = (new ClientRepository()).Get(User, new string[] { "CurrencyLcy" });
             var client = new
@@ -705,14 +710,14 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 CurrencyLcyCode = _client.CurrencyLcy.Code
             };
 
-            var data = JObject.FromObject(new { CashHeader = headerModel, CashLines = cashLines, Client = client, T = ReportServices.ReportGlobalizedTexts() });
+            var data = JObject.FromObject(new { PurchaseInvoiceHeader = headerModel, PurchaseInvoiceLines = purchaseInvoiceLines, Client = client, T = ReportServices.ReportGlobalizedTexts() });
             report.Dictionary.Databases.Clear();
             var ds = StiJsonToDataSetConverter.GetDataSet(data);
             report.RegData("data", "", ds);
             report.Dictionary.Synchronize();
             report.Render();
 
-            var fileName = $"cashreceipt_Id_{headerModel.Id}_No_{headerModel.DocumentNo}_{User.Identity.Name}_{DateTime.Now:yyyyMMddhhmmss}";
+            var fileName = $"purchaseInvoice_Id_{headerModel.Id}_No_{headerModel.DocumentNo}_{User.Identity.Name}_{DateTime.Now:yyyyMMddhhmmss}";
             report.ExportDocument(StiExportFormat.Pdf, Server.MapPath("~/Resources/printReports/") + fileName + ".pdf");
             report.SaveDocument(Server.MapPath("~/Resources/printReports/") + fileName + ".mdc");
 

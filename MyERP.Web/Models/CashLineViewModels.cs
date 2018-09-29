@@ -15,7 +15,7 @@ namespace MyERP.Web.Models
         [Required]
         public long LineNo { get; set; }
 
-        [Display(Name = "Correspondence Account")]
+        [Display(Name = "COR Account")]
         [Required]
         public String CorrespAccountCode { get; set; }
 

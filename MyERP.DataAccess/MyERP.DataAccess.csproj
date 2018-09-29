@@ -135,6 +135,7 @@
     <Compile Include="Enum\DocumentType.cs" />
     <Compile Include="Enum\SalesPosDocumentStatusType.cs" />
     <Compile Include="Enum\OptionParameter.cs" />
+    <Compile Include="Enum\PurchaseInvoiceLineType.cs" />
     <Compile Include="Enum\SalesPriceSalesType.cs" />
     <Compile Include="Enum\GroupLevelType.cs" />
     <Compile Include="Enum\DefaultStatusType.cs" />

@@ -517,6 +517,7 @@
     <Compile Include="Models\ItemGroupViewModels.cs" />
     <Compile Include="Models\BusinessPartnerModels.cs" />
     <Compile Include="Models\ItemUomViewModels.cs" />
+    <Compile Include="Models\VatViewModels.cs" />
     <Compile Include="Models\OptionViewModels.cs" />
     <Compile Include="Models\NoSequenceLineViewModels.cs" />
     <Compile Include="Models\NoSequenceViewModels.cs" />
