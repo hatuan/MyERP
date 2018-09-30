@@ -31,7 +31,7 @@ namespace MyERP.Web.Models
         [Required]
         public String BuyFromVendorCode { get; set; }
 
-        [Display(Name = "Buy From Vendor Name")]
+        [Display(Name = "Buy From Name")]
         [Required]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String BuyFromVendorName { get; set; }
@@ -81,7 +81,7 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Status")]
-        public CashDocumentStatusType Status { get; set; }
+        public PurchaseInvoiceDocumentStatusType Status { get; set; }
 
         [Required]
         [Display(Name = "Created By")]

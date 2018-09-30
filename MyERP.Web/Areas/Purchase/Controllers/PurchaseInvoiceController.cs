@@ -82,11 +82,11 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 RecCreatedAt = c.RecCreatedAt,
                 RecModifiedBy = c.RecModifiedByUser.Name,
                 RecModifiedAt = c.RecModifiedAt,
-                Status = (CashDocumentStatusType)c.Status,
+                Status = (PurchaseInvoiceDocumentStatusType)c.Status,
                 Version = c.Version
             }).ToList();
 
-            Session.Add("StoreCashPaymentList_StoreRequestParameters", parameters);
+            Session.Add("StorePurchaseInvoiceList_StoreRequestParameters", parameters);
 
             return this.Store(data, paging.TotalRecords);
         }
@@ -107,13 +107,13 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 return this.Direct(false, "ERROR : Please set Client CurrencyLcy first");
 
             var optionRepository = new OptionRepository();
-            long cashReceiptSequenceId = optionRepository.OptionParameter(organizationId, OptionParameter.CashPaymentSequenceId);
-            if (cashReceiptSequenceId == 0)
-                return this.Direct(false, "ERROR : Please set Option CashPaymentSequence first");
+            long purchaseInvoiceSequenceId = optionRepository.OptionParameter(organizationId, OptionParameter.PurchInvoiceSeqId);
+            if (purchaseInvoiceSequenceId == 0)
+                return this.Direct(false, "ERROR : Please set Option Purchase Invoice first");
 
             ViewData["CurrencyLCYId"] = currencyLcyId;
             CurrencyRepository currencyRepository = new CurrencyRepository();
-            ViewData["Currencies"] = currencyRepository.Get(filter: c => c.Id == currencyLcyId, includePaths: new string[] { "Organization" })
+            ViewData["Currency"] = currencyRepository.Get(filter: c => c.Id == currencyLcyId, includePaths: new string[] { "Organization" })
                 .Select(x => new CurrencyLookupViewModel()
                 {
                     Id = x.Id,
@@ -127,9 +127,9 @@ namespace MyERP.Web.Areas.Purchase.Controllers
             var model = new PurchaseInvoiceHeaderEditViewModel()
             {
                 Id = null,
-                DocumentType = DocumentType.CashPayment,
-                DocSubType = (byte)CashPaymentDocumentSubType.CashPayment,
-                DocSequenceId = cashReceiptSequenceId,
+                DocumentType = DocumentType.PurchaseInvoice,
+                DocSubType = (byte)PurchaseInvoiceDocumentSubType.PurchaseInvoice,
+                DocSequenceId = purchaseInvoiceSequenceId,
                 DocumentDate = preference.WorkingDate,
                 PostingDate = preference.WorkingDate,
                 CurrencyId = currencyLcyId,
@@ -168,6 +168,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                                  Code = purchaseInvoiceLine.Uom.Code,
                                                                  Description = purchaseInvoiceLine.Uom.Description
                                                              },
+                                                             UomDescription = purchaseInvoiceLine.Type == (byte)PurchaseInvoiceLineType.Comment ? null : purchaseInvoiceLine.Uom.Description,
                                                              LocationId = purchaseInvoiceLine.LocationId,
                                                              Location = purchaseInvoiceLine.Type == (byte)PurchaseInvoiceLineType.Comment ? null : new ExtNetComboBoxModel()
                                                              {
@@ -175,6 +176,27 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                                  Code = purchaseInvoiceLine.Location.Code,
                                                                  Description = purchaseInvoiceLine.Location.Description
                                                              },
+                                                             Quantity = purchaseInvoiceLine.Quantity,
+                                                             PurchasePrice = purchaseInvoiceLine.PurchasePrice,
+                                                             LineDiscountPercentage = purchaseInvoiceLine.LineDiscountPercentage,
+                                                             LineDiscountAmount = purchaseInvoiceLine.LineDiscountAmount,
+                                                             LineAmount = purchaseInvoiceLine.LineAmount,
+                                                             PurchasePriceLCY = purchaseInvoiceLine.PurchasePriceLCY,
+                                                             LineDiscountAmountLCY = purchaseInvoiceLine.LineDiscountAmountLCY,
+                                                             LineAmountLCY = purchaseInvoiceLine.LineAmountLCY,
+                                                             InvoiceDiscountAmount = purchaseInvoiceLine.InvoiceDiscountAmount,
+                                                             InvoiceDiscountAmountLCY = purchaseInvoiceLine.InvoiceDiscountAmountLCY,
+                                                             UnitPrice = purchaseInvoiceLine.UnitPrice,
+                                                             UnitPriceLCY = purchaseInvoiceLine.UnitPriceLCY,
+                                                             Amount = purchaseInvoiceLine.Amount,
+                                                             AmountLCY = purchaseInvoiceLine.AmountLCY,
+                                                             ChargeAmount = purchaseInvoiceLine.ChargeAmount,
+                                                             ChargeAmountLCY = purchaseInvoiceLine.CostAmountLCY,
+                                                             ImportDutyAmount = purchaseInvoiceLine.ImportDutyAmount,
+                                                             ImportDutyAmountLCY = purchaseInvoiceLine.ImportDutyAmountLCY,
+                                                             ExciseTaxAmount = purchaseInvoiceLine.ExciseTaxAmount,
+                                                             ExciseTaxAmountLCY = purchaseInvoiceLine.ExciseTaxAmountLCY,
+                                                             VatBaseAmount = purchaseInvoiceLine.VatBaseAmount,
                                                              VatId = purchaseInvoiceLine.VatId,
                                                              Vat = purchaseInvoiceLine.Type == (byte)PurchaseInvoiceLineType.Comment ? null : new ExtNetComboBoxModel()
                                                              {
@@ -182,8 +204,18 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                                  Code = purchaseInvoiceLine.Vat.Code,
                                                                  Description = purchaseInvoiceLine.Vat.Description
                                                              },
-                                                             Amount = purchaseInvoiceLine.Amount,
-                                                             AmountLCY = purchaseInvoiceLine.AmountLCY
+                                                             VatPercentage = purchaseInvoiceLine.VatPercentage,
+                                                             VatAmount = purchaseInvoiceLine.VatAmount,
+                                                             VatBaseAmountLCY = purchaseInvoiceLine.VatBaseAmountLCY,
+                                                             VatAmountLCY = purchaseInvoiceLine.VatAmountLCY,
+                                                             QtyPerUom = purchaseInvoiceLine.QtyPerUom,
+                                                             QuantityBase = purchaseInvoiceLine.QuantityBase,
+                                                             CostPrice = purchaseInvoiceLine.CostPrice,
+                                                             CostPriceQtyBase = purchaseInvoiceLine.CostPriceQtyBase,
+                                                             CostAmount = purchaseInvoiceLine.CostAmount,
+                                                             CostPriceLCY = purchaseInvoiceLine.CostPriceLCY,
+                                                             CostPriceQtyBaseLCY = purchaseInvoiceLine.CostPriceQtyBaseLCY,
+                                                             CostAmountLCY = purchaseInvoiceLine.CostAmountLCY,
                                                          }).ToList();
 
                 model = new PurchaseInvoiceHeaderEditViewModel()
@@ -210,6 +242,8 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     AccountPayableId = entity.AccountPayableId,
                     Description = entity.Description,
                     PurchaseInvoiceLines = purchaseInvoiceLines,
+                    TotalLineAmount = entity.TotalLineAmount,
+                    TotalLineAmountLCY = entity.TotalLineAmountLCY,
                     TotalAmount = entity.TotalAmount,
                     TotalAmountLCY = entity.TotalAmountLCY,
                     TotalVatAmount = entity.TotalVatAmount,
@@ -220,7 +254,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     Version = entity.Version
                 };
 
-                ViewData["BuyFromVendor"] = new List<Object>()
+                ViewData["BuyFromVendor"] = new List<object>()
                 {
                     new ExtNetComboBoxModel
                     {
@@ -230,7 +264,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     }
                 };
 
-                ViewData["PayToVendor"] = new List<Object>()
+                ViewData["PayToVendor"] = new List<object>()
                 {
                     new ExtNetComboBoxModel
                     {
@@ -240,7 +274,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     }
                 };
 
-                ViewData["Currency"] = new List<Object>()
+                ViewData["Currency"] = new List<object>()
                 {
                     new ExtNetComboBoxModel
                     {
@@ -250,7 +284,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     }
                 };
 
-                ViewData["AccountPayable"] = new List<Object>()
+                ViewData["AccountPayable"] = new List<object>()
                 {
                      new ExtNetComboBoxModel
                      {
@@ -266,6 +300,22 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                         Id = x.ItemId,
                         Code = x.Item.Code,
                         Description = x.Item.Description,
+                    }).ToList();
+
+                ViewData["UOMs"] = purchaseInvoiceLines.Where(x => x.Uom != null).GroupBy(x => new { x.UomId }).Select(i => i.First())
+                    .Select(x => new ExtNetComboBoxModel
+                    {
+                        Id = x.UomId,
+                        Code = x.Uom.Code,
+                        Description = x.Uom.Description,
+                    }).ToList();
+
+                ViewData["Locations"] = purchaseInvoiceLines.Where(x => x.Location != null).GroupBy(x => new { x.LocationId }).Select(i => i.First())
+                    .Select(x => new ExtNetComboBoxModel
+                    {
+                        Id = x.LocationId,
+                        Code = x.Location.Code,
+                        Description = x.Location.Description,
                     }).ToList();
             }
 

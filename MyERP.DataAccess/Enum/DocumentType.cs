@@ -52,7 +52,5 @@ namespace MyERP.DataAccess.Enum
     {
         [System.ComponentModel.DataAnnotations.Display(Name = "Purchase Invoice", Order = 1)]
         PurchaseInvoice = 1,
-        [System.ComponentModel.DataAnnotations.Display(Name = "Purchase Invoice For Import", Order = 2)]
-        PurchaseInvoiceImport = 2,
     }
 }

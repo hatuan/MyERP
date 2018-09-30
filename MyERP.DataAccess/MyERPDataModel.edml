@@ -1667,7 +1667,7 @@
             </Documentation>
           </Property>
           <Property Name="item_id" Type="bigint" />
-          <Property Name="location_id" Type="bigint" Nullable="false" />
+          <Property Name="location_id" Type="bigint" />
           <Property Name="description" Type="nvarchar" MaxLength="256" />
           <Property Name="uom_id" Type="bigint" />
           <Property Name="uom_description" Type="nvarchar" MaxLength="256" />
@@ -3768,7 +3768,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_purchase_invoice_line_location">
-          <End Role="location" Type="MyERP.DataAccess.Store.location" Multiplicity="1" />
+          <End Role="location" Type="MyERP.DataAccess.Store.location" Multiplicity="0..1" />
           <End Role="purchase_invoice_line" Type="MyERP.DataAccess.Store.purchase_invoice_line" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="location">
@@ -5742,7 +5742,7 @@
             </Documentation>
           </Property>
           <Property Name="ItemId" Type="Int64" ed:ValidateRequired="false" ed:Guid="93c40204-0e34-472c-a2f5-b99ef4d001bf" />
-          <Property Name="LocationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="0f0500b3-8c6b-4073-bd39-b486d6734675" />
+          <Property Name="LocationId" Type="Int64" ed:ValidateRequired="false" ed:Guid="0f0500b3-8c6b-4073-bd39-b486d6734675" />
           <Property Name="Description" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="05389b36-cca5-4d64-9056-3e6f7687b1d3" />
           <Property Name="UomId" Type="Int64" ed:ValidateRequired="false" ed:Guid="a0e01dfd-4374-438f-a0f7-4ecd1b9e4f39" />
           <Property Name="UomDescription" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="aeda4143-829d-49c7-91ac-9b6dc33eaaf8" />
@@ -7861,7 +7861,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Location_PurchaseInvoiceLine" ed:Guid="770158fc-bce7-4498-8dd1-1882637b08d8">
-          <End Role="Location" Type="MyERP.DataAccess.Location" Multiplicity="1" />
+          <End Role="Location" Type="MyERP.DataAccess.Location" Multiplicity="0..1" />
           <End Role="PurchaseInvoiceLines" Type="MyERP.DataAccess.PurchaseInvoiceLine" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Location">

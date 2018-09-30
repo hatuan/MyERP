@@ -1,5 +1,5 @@
 ﻿@(Html.X().GridPanel()
-              .ID("CashPaymentList")
+              .ID("PurchaseInvoiceList")
               .Title("Cash Payment List")
               .MinHeight(300)
               .Region(Region.Center)
@@ -16,11 +16,11 @@
                           .DirectEvents(de =>
                           {
                               de.Click.Url = Url.Action("_Maintenance");
-                              de.Click.Before = "return #{CashPaymentList}.hasSelection();";
+                              de.Click.Before = "return #{PurchaseInvoiceList}.hasSelection();";
                               de.Click.Method = HttpMethod.GET;
                               de.Click.ShowWarningOnFailure = true;
                               de.Click.EventMask.ShowMask = true;
-                              de.Click.ExtraParams.Add(new Parameter("ID", "#{CashPaymentList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
+                              de.Click.ExtraParams.Add(new Parameter("ID", "#{PurchaseInvoiceList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
                           })
                           );
                       buttons.Add(Html.X().Button()
@@ -42,10 +42,10 @@
                           .DirectEvents(de =>
                           {
                               de.Click.Action = "Print";
-                              de.Click.Before = "return #{CashPaymentList}.hasSelection();";
+                              de.Click.Before = "return #{PurchaseInvoiceList}.hasSelection();";
                               de.Click.ShowWarningOnFailure = true;
                               de.Click.EventMask.ShowMask = true;
-                              de.Click.ExtraParams.Add(new Parameter("id", "#{CashPaymentList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
+                              de.Click.ExtraParams.Add(new Parameter("id", "#{PurchaseInvoiceList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
                               de.Click.Success = "function(response, result) { \n" +
                                                  "  showPreviewReport(result.result.FileName); \n" +
                                                  "}";
@@ -59,12 +59,12 @@
                           .DirectEvents(de =>
                           {
                               de.Click.Action = "Delete";
-                              de.Click.Before = "return #{CashPaymentList}.hasSelection();";
+                              de.Click.Before = "return #{PurchaseInvoiceList}.hasSelection();";
                               de.Click.Method = HttpMethod.GET;
                               de.Click.Confirmation.ConfirmRequest = true;
                               de.Click.Confirmation.Title = "Alert";
                               de.Click.Confirmation.Message = "Do you want to DELETE ?";
-                              de.Click.ExtraParams.Add(new Parameter("ID", "#{CashPaymentList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
+                              de.Click.ExtraParams.Add(new Parameter("ID", "#{PurchaseInvoiceList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
                               de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
                           })
                           );
@@ -73,7 +73,7 @@
               })
               .Store(
                   Html.X().Store()
-                      .ID("StoreCashPaymentList")
+                      .ID("StorePurchaseInvoiceList")
                       .RemoteSort(true)
                       .PageSize(10)
                       .Sorters("DocumentNo", Ext.Net.SortDirection.DESC)
@@ -86,13 +86,33 @@
                                   new ModelField("OrganizationCode", ModelFieldType.String),
                                   new ModelField("DocumentNo", ModelFieldType.String),
                                   new ModelField("DocumentDate", ModelFieldType.Date),
-                                  new ModelField("AccountCode", ModelFieldType.String),
+                                  new ModelField("AccountPayableCode", ModelFieldType.String),
                                   new ModelField("Description", ModelFieldType.String),
-                                  new ModelField("BusinessPartnerCode", ModelFieldType.String),
-                                  new ModelField("BusinessPartnerName", ModelFieldType.String),
-                                  new ModelField("BusinessPartnerAddress", ModelFieldType.String),
-                                  new ModelField("BusinessPartnerContactName", ModelFieldType.String),
+                                  new ModelField("BuyFromVendorCode", ModelFieldType.String),
+                                  new ModelField("BuyFromVendorName", ModelFieldType.String),
+                                  new ModelField("BuyFromAddress", ModelFieldType.String),
+                                  new ModelField("BuyFromContactName", ModelFieldType.String),
+                                  new ModelField("PayToVendorCode", ModelFieldType.String),
+                                  new ModelField("PayToName", ModelFieldType.String),
                                   new ModelField("TotalAmount", ModelFieldType.Float)
+                                  {
+                                      Convert =
+                                      {
+                                          Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                      }
+                                  },
+                                  new ModelField("TotalVatAmount", ModelFieldType.Float)
+                                  {
+                                      Convert =
+                                      {
+                                          Handler = @"var v = value + '';
+                                                      v.replace(/\./g,'').replace(',', '.');
+                                                      return Ext.util.Format.number(v, '0.000,00/i');"
+                                      }
+                                  },
+                                  new ModelField("TotalPayment", ModelFieldType.Float)
                                   {
                                       Convert =
                                       {
@@ -119,12 +139,16 @@
                   Html.X().Column().Text("Org").DataIndex("OrganizationCode").Width(75).Locked(true),
                   Html.X().Column().Text("No").DataIndex("DocumentNo").Width(100).Locked(true),
                   Html.X().DateColumn().Text("Date").DataIndex("DocumentDate").Width(100).Locked(true).Format("dd/MM/yyyy"),
-                  Html.X().Column().Text("Account").DataIndex("AccountCode").MinWidth(85),
+                  Html.X().Column().Text("Account Payable").DataIndex("AccountPayableCode").MinWidth(85),
                   Html.X().Column().Text("Description").DataIndex("Description").MinWidth(256),
-                  Html.X().Column().Text("BusinessPartner").DataIndex("BusinessPartnerCode").MinWidth(85),
-                  Html.X().Column().Text("BP Name").DataIndex("BusinessPartnerName").MinWidth(200),
-                  Html.X().Column().Text("BP Address").DataIndex("BusinessPartnerAddress").MinWidth(200),
+                  Html.X().Column().Text("Buy From ").DataIndex("BuyFromVendorCode").MinWidth(85),
+                  Html.X().Column().Text("Buy From Vendor Name").DataIndex("BuyFromVendorName").MinWidth(200),
+                  Html.X().Column().Text("Buy From Address").DataIndex("BuyFromAddress").MinWidth(200),
+                  Html.X().Column().Text("Pay To ").DataIndex("PayToVendorCode").MinWidth(85),
+                  Html.X().Column().Text("Pay To Name").DataIndex("PayToName").MinWidth(200),
                   Html.X().Column().Text("Total Amount").DataIndex("TotalAmount").Width(100),
+                  Html.X().Column().Text("Total Vat").DataIndex("TotalVatAmount").Width(100),
+                  Html.X().Column().Text("Total Payment").DataIndex("TotalPayment").Width(100),
                   Html.X().Column().Text("Status").DataIndex("Status").Width(85),
                   Html.X().Column().Text("Last User").DataIndex("RecModifiedBy").Width(85),
                   Html.X().DateColumn().Text("Last Updated").DataIndex("RecModifiedAt").Width(150).Format("dd/MM/yyyy H:mm:ss")
@@ -148,12 +172,12 @@
                               .Listeners(ls =>
                               {
                                   ls.Select.Fn = @"function (item, records) {
-                                        var curPageSize = #{StoreCashPaymentList}.pageSize,
+                                        var curPageSize = #{StorePurchaseInvoiceList}.pageSize,
                                         wantedPageSize = parseInt(item.getValue(), 10);
                                         if (wantedPageSize != curPageSize) {
-                                            #{StoreCashPaymentList}.pageSize = wantedPageSize;
-                                            #{StoreCashPaymentList}.reload();
-                                            #{StoreCashPaymentList}.loadPage(1);
+                                            #{StorePurchaseInvoiceList}.pageSize = wantedPageSize;
+                                            #{StorePurchaseInvoiceList}.reload();
+                                            #{StorePurchaseInvoiceList}.loadPage(1);
                                         }
                                     }";
                               })
@@ -165,7 +189,7 @@
                       .Listeners(ls =>
                       {
                           ls.Select.Handler = "#{btnDelete}.enable(); #{btnEdit}.enable(); #{btnListPrint}.enable();";
-                          ls.Deselect.Handler = "if (!#{CashPaymentList}.hasSelection()) {#{btnDelete}.disable(); #{btnEdit}.disable(); #{btnListPrint}.disable();}";
+                          ls.Deselect.Handler = "if (!#{PurchaseInvoiceList}.hasSelection()) {#{btnDelete}.disable(); #{btnEdit}.disable(); #{btnListPrint}.disable();}";
                       })
               )
               .ViewConfig(new GridView() { Listeners = { Refresh = { Handler = "#{btnDelete}.disable(); #{btnEdit}.disable(); #{btnListPrint}.disable();" } } })

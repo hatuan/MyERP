@@ -40,7 +40,7 @@ namespace MyERP.Web.Models
 
         [Display(Name = "Location")]
         [Required]
-        public long LocationId { get; set; }
+        public long? LocationId { get; set; }
 
         public ExtNetComboBoxModel Location { get; set; }
 
