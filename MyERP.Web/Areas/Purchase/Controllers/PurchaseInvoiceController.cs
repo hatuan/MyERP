@@ -154,7 +154,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                              LineNo = purchaseInvoiceLine.LineNo,
                                                              Type = purchaseInvoiceLine.Type,
                                                              ItemId = purchaseInvoiceLine.ItemId,
-                                                             Item = purchaseInvoiceLine.Type == (byte) PurchaseInvoiceLineType.Comment ? null : new ExtNetComboBoxModel()
+                                                             Item = purchaseInvoiceLine.Item == null ? null : new ExtNetComboBoxModel()
                                                              {
                                                                  Id = purchaseInvoiceLine.Item.Id,
                                                                  Code = purchaseInvoiceLine.Item.Code,
@@ -162,15 +162,15 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                              },
                                                              Description = purchaseInvoiceLine.Description,
                                                              UomId = purchaseInvoiceLine.UomId,
-                                                             Uom = purchaseInvoiceLine.Type == (byte)PurchaseInvoiceLineType.Comment ? null : new ExtNetComboBoxModel()
+                                                             Uom = purchaseInvoiceLine.Uom == null ? null : new ExtNetComboBoxModel()
                                                              {
                                                                  Id = purchaseInvoiceLine.Uom.Id,
                                                                  Code = purchaseInvoiceLine.Uom.Code,
                                                                  Description = purchaseInvoiceLine.Uom.Description
                                                              },
-                                                             UomDescription = purchaseInvoiceLine.Type == (byte)PurchaseInvoiceLineType.Comment ? null : purchaseInvoiceLine.Uom.Description,
+                                                             UomDescription = purchaseInvoiceLine.Uom == null ? null : purchaseInvoiceLine.Uom.Description,
                                                              LocationId = purchaseInvoiceLine.LocationId,
-                                                             Location = purchaseInvoiceLine.Type == (byte)PurchaseInvoiceLineType.Comment ? null : new ExtNetComboBoxModel()
+                                                             Location = purchaseInvoiceLine.Location == null ? null : new ExtNetComboBoxModel()
                                                              {
                                                                  Id = purchaseInvoiceLine.Location.Id,
                                                                  Code = purchaseInvoiceLine.Location.Code,
@@ -198,7 +198,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                              ExciseTaxAmountLCY = purchaseInvoiceLine.ExciseTaxAmountLCY,
                                                              VatBaseAmount = purchaseInvoiceLine.VatBaseAmount,
                                                              VatId = purchaseInvoiceLine.VatId,
-                                                             Vat = purchaseInvoiceLine.Type == (byte)PurchaseInvoiceLineType.Comment ? null : new ExtNetComboBoxModel()
+                                                             Vat = purchaseInvoiceLine.Vat == null ? null : new ExtNetComboBoxModel()
                                                              {
                                                                  Id = purchaseInvoiceLine.Vat.Id,
                                                                  Code = purchaseInvoiceLine.Vat.Code,
@@ -351,16 +351,11 @@ namespace MyERP.Web.Areas.Purchase.Controllers
 
             if (headerModel.Id.HasValue)
             {
-                var updatePurchaseInvoiceHeader = repository.Get(c => c.Id == headerModel.Id, new string[] { "CashLines" }).SingleOrDefault();
+                var updatePurchaseInvoiceHeader = repository.Get(c => c.Id == headerModel.Id, new string[] { "PurchaseInvoiceLines" }).SingleOrDefault();
                 if (updatePurchaseInvoiceHeader == null || updatePurchaseInvoiceHeader.Version != headerModel.Version)
                 {
-                    return this.Direct(false, "Cash Header has been changed or deleted! Please check");
+                    return this.Direct(false, "Purchase Invoice has been changed or deleted! Please check");
                 }
-
-                headerModel.TotalVatAmount = 0;
-                headerModel.TotalVatAmountLCY = 0;
-                headerModel.TotalPayment = headerModel.TotalAmount;
-                headerModel.TotalPaymentLCY = headerModel.TotalAmountLCY;
 
                 updatePurchaseInvoiceHeader.DocSequenceId = headerModel.DocSequenceId;
                 updatePurchaseInvoiceHeader.DocumentNo = headerModel.DocumentNo;
@@ -372,10 +367,25 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 updatePurchaseInvoiceHeader.BuyFromAddress = headerModel.BuyFromAddress;
                 updatePurchaseInvoiceHeader.BuyFromContactId = null;
                 updatePurchaseInvoiceHeader.BuyFromContactName = headerModel.BuyFromContactName;
+                updatePurchaseInvoiceHeader.PayToVendorId = headerModel.PayToVendorId;
+                updatePurchaseInvoiceHeader.PayToName = headerModel.PayToName;
+                updatePurchaseInvoiceHeader.PayToAddress = headerModel.PayToAddress;
+                updatePurchaseInvoiceHeader.PayToContactName = headerModel.PayToContactName;
+                updatePurchaseInvoiceHeader.ShipToName = headerModel.ShipToName;
+                updatePurchaseInvoiceHeader.ShipToAddress = headerModel.ShipToAddress;
+                updatePurchaseInvoiceHeader.ShipToContactName = headerModel.ShipToContactName;
                 updatePurchaseInvoiceHeader.CurrencyId = headerModel.CurrencyId;
                 updatePurchaseInvoiceHeader.CurrencyFactor = headerModel.CurrencyFactor;
                 updatePurchaseInvoiceHeader.AccountPayableId = headerModel.AccountPayableId;
                 updatePurchaseInvoiceHeader.Description = headerModel.Description;
+                updatePurchaseInvoiceHeader.LocationId = null;
+                updatePurchaseInvoiceHeader.SalesPersonId = null;
+                updatePurchaseInvoiceHeader.TotalLineAmount = headerModel.TotalLineAmount;
+                updatePurchaseInvoiceHeader.TotalLineAmountLCY = headerModel.TotalLineAmountLCY;
+                updatePurchaseInvoiceHeader.DiscountId = null;
+                updatePurchaseInvoiceHeader.InvoiceDiscountPercentage = headerModel.InvoiceDiscountPercentage;
+                updatePurchaseInvoiceHeader.InvoiceDiscountAmount = headerModel.InvoiceDiscountAmount;
+                updatePurchaseInvoiceHeader.InvoiceDiscountAmountLCY = headerModel.InvoiceDiscountAmountLCY;
                 updatePurchaseInvoiceHeader.TotalAmount = headerModel.TotalAmount;
                 updatePurchaseInvoiceHeader.TotalAmountLCY = headerModel.TotalAmountLCY;
                 updatePurchaseInvoiceHeader.TotalVatAmount = headerModel.TotalVatAmount;
@@ -401,8 +411,40 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                             Type = purchaseInvoiceLine.Type,
                             ItemId  = purchaseInvoiceLine.ItemId,
                             Description = purchaseInvoiceLine.Description,
+                            Quantity = purchaseInvoiceLine.Quantity,
+                            PurchasePrice = purchaseInvoiceLine.PurchasePrice,
+                            LineDiscountPercentage = purchaseInvoiceLine.LineDiscountPercentage,
+                            LineDiscountAmount = purchaseInvoiceLine.LineDiscountAmount,
+                            LineAmount = purchaseInvoiceLine.LineAmount,
+                            PurchasePriceLCY = purchaseInvoiceLine.PurchasePriceLCY,
+                            LineDiscountAmountLCY = purchaseInvoiceLine.LineDiscountAmountLCY,
+                            LineAmountLCY = purchaseInvoiceLine.LineAmountLCY,
+                            InvoiceDiscountAmount = purchaseInvoiceLine.InvoiceDiscountAmount,
+                            InvoiceDiscountAmountLCY = purchaseInvoiceLine.InvoiceDiscountAmountLCY,
+                            UnitPrice = purchaseInvoiceLine.UnitPrice,
+                            UnitPriceLCY = purchaseInvoiceLine.UnitPriceLCY,
                             Amount = purchaseInvoiceLine.Amount,
-                            AmountLCY = purchaseInvoiceLine.AmountLCY
+                            AmountLCY = purchaseInvoiceLine.AmountLCY,
+                            ChargeAmount = purchaseInvoiceLine.ChargeAmount,
+                            ChargeAmountLCY = purchaseInvoiceLine.CostAmountLCY,
+                            ImportDutyAmount = purchaseInvoiceLine.ImportDutyAmount,
+                            ImportDutyAmountLCY = purchaseInvoiceLine.ImportDutyAmountLCY,
+                            ExciseTaxAmount = purchaseInvoiceLine.ExciseTaxAmount,
+                            ExciseTaxAmountLCY = purchaseInvoiceLine.ExciseTaxAmountLCY,
+                            VatBaseAmount = purchaseInvoiceLine.VatBaseAmount,
+                            VatId = purchaseInvoiceLine.VatId,
+                            VatPercentage = purchaseInvoiceLine.VatPercentage,
+                            VatAmount = purchaseInvoiceLine.VatAmount,
+                            VatBaseAmountLCY = purchaseInvoiceLine.VatBaseAmountLCY,
+                            VatAmountLCY = purchaseInvoiceLine.VatAmountLCY,
+                            QtyPerUom = purchaseInvoiceLine.QtyPerUom,
+                            QuantityBase = purchaseInvoiceLine.QuantityBase,
+                            CostPrice = purchaseInvoiceLine.CostPrice,
+                            CostPriceQtyBase = purchaseInvoiceLine.CostPriceQtyBase,
+                            CostAmount = purchaseInvoiceLine.CostAmount,
+                            CostPriceLCY = purchaseInvoiceLine.CostPriceLCY,
+                            CostPriceQtyBaseLCY = purchaseInvoiceLine.CostPriceQtyBaseLCY,
+                            CostAmountLCY = purchaseInvoiceLine.CostAmountLCY,
                         });
                     else
                     {
@@ -416,8 +458,40 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                 x.Type = purchaseInvoiceLine.Type;
                                 x.ItemId = purchaseInvoiceLine.ItemId;
                                 x.Description = purchaseInvoiceLine.Description;
+                                x.Quantity = purchaseInvoiceLine.Quantity;
+                                x.PurchasePrice = purchaseInvoiceLine.PurchasePrice;
+                                x.LineDiscountPercentage = purchaseInvoiceLine.LineDiscountPercentage;
+                                x.LineDiscountAmount = purchaseInvoiceLine.LineDiscountAmount;
+                                x.LineAmount = purchaseInvoiceLine.LineAmount;
+                                x.PurchasePriceLCY = purchaseInvoiceLine.PurchasePriceLCY;
+                                x.LineDiscountAmountLCY = purchaseInvoiceLine.LineDiscountAmountLCY;
+                                x.LineAmountLCY = purchaseInvoiceLine.LineAmountLCY;
+                                x.InvoiceDiscountAmount = purchaseInvoiceLine.InvoiceDiscountAmount;
+                                x.InvoiceDiscountAmountLCY = purchaseInvoiceLine.InvoiceDiscountAmountLCY;
+                                x.UnitPrice = purchaseInvoiceLine.UnitPrice;
+                                x.UnitPriceLCY = purchaseInvoiceLine.UnitPriceLCY;
                                 x.Amount = purchaseInvoiceLine.Amount;
                                 x.AmountLCY = purchaseInvoiceLine.AmountLCY;
+                                x.ChargeAmount = purchaseInvoiceLine.ChargeAmount;
+                                x.ChargeAmountLCY = purchaseInvoiceLine.CostAmountLCY;
+                                x.ImportDutyAmount = purchaseInvoiceLine.ImportDutyAmount;
+                                x.ImportDutyAmountLCY = purchaseInvoiceLine.ImportDutyAmountLCY;
+                                x.ExciseTaxAmount = purchaseInvoiceLine.ExciseTaxAmount;
+                                x.ExciseTaxAmountLCY = purchaseInvoiceLine.ExciseTaxAmountLCY;
+                                x.VatBaseAmount = purchaseInvoiceLine.VatBaseAmount;
+                                x.VatId = purchaseInvoiceLine.VatId;
+                                x.VatPercentage = purchaseInvoiceLine.VatPercentage;
+                                x.VatAmount = purchaseInvoiceLine.VatAmount;
+                                x.VatBaseAmountLCY = purchaseInvoiceLine.VatBaseAmountLCY;
+                                x.VatAmountLCY = purchaseInvoiceLine.VatAmountLCY;
+                                x.QtyPerUom = purchaseInvoiceLine.QtyPerUom;
+                                x.QuantityBase = purchaseInvoiceLine.QuantityBase;
+                                x.CostPrice = purchaseInvoiceLine.CostPrice;
+                                x.CostPriceQtyBase = purchaseInvoiceLine.CostPriceQtyBase;
+                                x.CostAmount = purchaseInvoiceLine.CostAmount;
+                                x.CostPriceLCY = purchaseInvoiceLine.CostPriceLCY;
+                                x.CostPriceQtyBaseLCY = purchaseInvoiceLine.CostPriceQtyBaseLCY;
+                                x.CostAmountLCY = purchaseInvoiceLine.CostAmountLCY;
                             });
                     }
                 }
@@ -463,10 +537,25 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     BuyFromAddress = headerModel.BuyFromAddress,
                     BuyFromContactId = null,
                     BuyFromContactName = headerModel.BuyFromContactName,
+                    PayToVendorId = headerModel.PayToVendorId,
+                    PayToName = headerModel.PayToName,
+                    PayToAddress = headerModel.PayToAddress,
+                    PayToContactName = headerModel.PayToContactName,
+                    ShipToName = headerModel.ShipToName,
+                    ShipToAddress = headerModel.ShipToAddress,
+                    ShipToContactName = headerModel.ShipToContactName,
                     CurrencyId = headerModel.CurrencyId,
                     CurrencyFactor = headerModel.CurrencyFactor,
-                    Description = headerModel.Description,
                     AccountPayableId = headerModel.AccountPayableId,
+                    Description = headerModel.Description,
+                    LocationId = null,
+                    SalesPersonId = null,
+                    TotalLineAmount = headerModel.TotalLineAmount,
+                    TotalLineAmountLCY = headerModel.TotalLineAmountLCY,
+                    DiscountId = null,
+                    InvoiceDiscountPercentage = headerModel.InvoiceDiscountPercentage,
+                    InvoiceDiscountAmount = headerModel.InvoiceDiscountAmount,
+                    InvoiceDiscountAmountLCY = headerModel.InvoiceDiscountAmountLCY,
                     TotalAmount = headerModel.TotalAmount,
                     TotalAmountLCY = headerModel.TotalAmountLCY,
                     TotalVatAmount = headerModel.TotalVatAmount,
@@ -492,8 +581,40 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                         Type = c.Type,
                         ItemId = c.ItemId,
                         Description = c.Description,
+                        Quantity = c.Quantity,
+                        PurchasePrice = c.PurchasePrice,
+                        LineDiscountPercentage = c.LineDiscountPercentage,
+                        LineDiscountAmount = c.LineDiscountAmount,
+                        LineAmount = c.LineAmount,
+                        PurchasePriceLCY = c.PurchasePriceLCY,
+                        LineDiscountAmountLCY = c.LineDiscountAmountLCY,
+                        LineAmountLCY = c.LineAmountLCY,
+                        InvoiceDiscountAmount = c.InvoiceDiscountAmount,
+                        InvoiceDiscountAmountLCY = c.InvoiceDiscountAmountLCY,
+                        UnitPrice = c.UnitPrice,
+                        UnitPriceLCY = c.UnitPriceLCY,
                         Amount = c.Amount,
-                        AmountLCY = c.AmountLCY
+                        AmountLCY = c.AmountLCY,
+                        ChargeAmount = c.ChargeAmount,
+                        ChargeAmountLCY = c.CostAmountLCY,
+                        ImportDutyAmount = c.ImportDutyAmount,
+                        ImportDutyAmountLCY = c.ImportDutyAmountLCY,
+                        ExciseTaxAmount = c.ExciseTaxAmount,
+                        ExciseTaxAmountLCY = c.ExciseTaxAmountLCY,
+                        VatBaseAmount = c.VatBaseAmount,
+                        VatId = c.VatId,
+                        VatPercentage = c.VatPercentage,
+                        VatAmount = c.VatAmount,
+                        VatBaseAmountLCY = c.VatBaseAmountLCY,
+                        VatAmountLCY = c.VatAmountLCY,
+                        QtyPerUom = c.QtyPerUom,
+                        QuantityBase = c.QuantityBase,
+                        CostPrice = c.CostPrice,
+                        CostPriceQtyBase = c.CostPriceQtyBase,
+                        CostAmount = c.CostAmount,
+                        CostPriceLCY = c.CostPriceLCY,
+                        CostPriceQtyBaseLCY = c.CostPriceQtyBaseLCY,
+                        CostAmountLCY = c.CostAmountLCY,
                     }).ToList(); 
                 try
                 {
@@ -699,7 +820,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
             var entity = repository.Get(c => c.Id == _id, new string[] { "AccountPayable", "BuyFromVendor", "PayToVendor", "Currency", "PurchaseInvoiceLines", "PurchaseInvoiceLines.Item", "PurchaseInvoiceLines.Location", "PurchaseInvoiceLines.Uom", "PurchaseInvoiceLines.Vat" }).SingleOrDefault();
             if (entity == null)
             {
-                return this.Direct(false, "Cash Header has been changed or deleted! Please check");
+                return this.Direct(false, "Purchase Invoice has been changed or deleted! Please check");
             }
 
             var purchaseInvoiceLines = (from purchaseInvoiceLine in entity.PurchaseInvoiceLines
@@ -710,8 +831,40 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                  ItemId = purchaseInvoiceLine.ItemId,
                                  ItemCode = purchaseInvoiceLine.Item == null ? null : purchaseInvoiceLine.Item.Code,
                                  Description = purchaseInvoiceLine.Description,
+                                 Quantity = purchaseInvoiceLine.Quantity,
+                                 PurchasePrice = purchaseInvoiceLine.PurchasePrice,
+                                 LineDiscountPercentage = purchaseInvoiceLine.LineDiscountPercentage,
+                                 LineDiscountAmount = purchaseInvoiceLine.LineDiscountAmount,
+                                 LineAmount = purchaseInvoiceLine.LineAmount,
+                                 PurchasePriceLCY = purchaseInvoiceLine.PurchasePriceLCY,
+                                 LineDiscountAmountLCY = purchaseInvoiceLine.LineDiscountAmountLCY,
+                                 LineAmountLCY = purchaseInvoiceLine.LineAmountLCY,
+                                 InvoiceDiscountAmount = purchaseInvoiceLine.InvoiceDiscountAmount,
+                                 InvoiceDiscountAmountLCY = purchaseInvoiceLine.InvoiceDiscountAmountLCY,
+                                 UnitPrice = purchaseInvoiceLine.UnitPrice,
+                                 UnitPriceLCY = purchaseInvoiceLine.UnitPriceLCY,
                                  Amount = purchaseInvoiceLine.Amount,
                                  AmountLCY = purchaseInvoiceLine.AmountLCY,
+                                 ChargeAmount = purchaseInvoiceLine.ChargeAmount,
+                                 ChargeAmountLCY = purchaseInvoiceLine.CostAmountLCY,
+                                 ImportDutyAmount = purchaseInvoiceLine.ImportDutyAmount,
+                                 ImportDutyAmountLCY = purchaseInvoiceLine.ImportDutyAmountLCY,
+                                 ExciseTaxAmount = purchaseInvoiceLine.ExciseTaxAmount,
+                                 ExciseTaxAmountLCY = purchaseInvoiceLine.ExciseTaxAmountLCY,
+                                 VatBaseAmount = purchaseInvoiceLine.VatBaseAmount,
+                                 VatId = purchaseInvoiceLine.VatId,
+                                 VatPercentage = purchaseInvoiceLine.VatPercentage,
+                                 VatAmount = purchaseInvoiceLine.VatAmount,
+                                 VatBaseAmountLCY = purchaseInvoiceLine.VatBaseAmountLCY,
+                                 VatAmountLCY = purchaseInvoiceLine.VatAmountLCY,
+                                 QtyPerUom = purchaseInvoiceLine.QtyPerUom,
+                                 QuantityBase = purchaseInvoiceLine.QuantityBase,
+                                 CostPrice = purchaseInvoiceLine.CostPrice,
+                                 CostPriceQtyBase = purchaseInvoiceLine.CostPriceQtyBase,
+                                 CostAmount = purchaseInvoiceLine.CostAmount,
+                                 CostPriceLCY = purchaseInvoiceLine.CostPriceLCY,
+                                 CostPriceQtyBaseLCY = purchaseInvoiceLine.CostPriceQtyBaseLCY,
+                                 CostAmountLCY = purchaseInvoiceLine.CostAmountLCY,
                              }).ToList();
 
             var headerModel = new
@@ -730,9 +883,26 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 BuyFromVendorName = entity.BuyFromVendorName,
                 BuyFromAddress = entity.BuyFromAddress,
                 BuyFromContactName = entity.BuyFromContactName,
+                PayToVendorId = entity.PayToVendorId,
+                PayToVendorCode = entity.PayToVendor.Code,
+                PayToName = entity.PayToName,
+                PayToAddress = entity.PayToAddress,
+                PayToContactName = entity.PayToContactName,
+                ShipToName = entity.ShipToName,
+                ShipToAddress = entity.ShipToAddress,
+                ShipToContactName = entity.ShipToContactName,
                 AccountPayableId = entity.AccountPayableId,
                 AccountPayableCode = entity.AccountPayable.Code,
                 Description = entity.Description,
+                LocationId = entity.LocationId,
+                LocationCode = entity.Location?.Code,
+                SalesPersonId = entity.SalesPersonId,
+                TotalLineAmount = entity.TotalLineAmount,
+                TotalLineAmountLCY = entity.TotalLineAmountLCY,
+                DiscountId = entity.DiscountId,
+                InvoiceDiscountPercentage = entity.InvoiceDiscountPercentage,
+                InvoiceDiscountAmount = entity.InvoiceDiscountAmount,
+                InvoiceDiscountAmountLCY = entity.InvoiceDiscountAmountLCY,
                 TotalAmount = entity.TotalAmount,
                 TotalAmountLCY = entity.TotalAmountLCY,
                 TotalVatAmount = entity.TotalVatAmount,
