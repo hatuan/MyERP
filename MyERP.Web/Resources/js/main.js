@@ -237,3 +237,78 @@ var CashPayment = {
         Ext.getCmp(totalAmountLCYId).setRawValue(Ext.util.Format.number(sumAmountLCY, '0.000,00/i'));
     }
 };
+
+var PurchaseInvoice = {
+
+    ItemRenderer: function (value, metadata, record, rowIndex, colIndex, store) {
+
+        if (Ext.isDefined(record.data.Item) && record.data.Item !== null && value > 0) {
+            return record.data.Item.Code;
+        }
+        return "";
+    },
+
+    UomRenderer: function (value, metadata, record, rowIndex, colIndex, store) {
+
+        if (Ext.isDefined(record.data.Uom) && record.data.Uom !== null && value > 0) {
+            return record.data.Uom.Code;
+        }
+        return "";
+    },
+
+    LocationRenderer: function (value, metadata, record, rowIndex, colIndex, store) {
+
+        if (Ext.isDefined(record.data.Location) && record.data.Location !== null && value > 0) {
+            return record.data.Location.Code;
+        }
+        return "";
+    },
+
+    PurchaseInvoiceLineBeforeEdit: function (editor, e) {
+        e.grid.getSelectionModel().select(e.rowIdx, true);
+
+        var field = this.getEditor(e.record, e.column).field;
+
+        switch (e.field) {
+            case "ItemId":
+                field.store.id = e.record.data.ItemId;
+                if (e.record.data.Item !== null) {
+                    field.store.add(e.record.data.Item);
+                }
+                break;
+            case "UomId":
+                field.allQuery = e.record.get('ItemId');
+                //field.store.id = e.record.data.UomId;
+                if (e.record.data.Uom !== null) {
+                    field.store.add(e.record.data.Uom);
+                }
+                break;
+            case "LocationId":
+                field.store.id = e.record.data.LocationId;
+                if (e.record.data.Location !== null) {
+                    field.store.add(e.record.data.Location);
+                }
+            break;
+        }
+    },
+
+    CalcHeaderTotal: function (grid) {
+        var sumAmount = 0;
+        var sumAmountLCY = 0;
+
+        grid.getStore().each(function (record) {
+            var v = (record.get("Amount") + "").replace(/\./g, '').replace(',', '.');
+            sumAmount += parseFloat(v);
+
+            v = (record.get("AmountLCY") + "").replace(/\./g, '').replace(',', '.');
+            sumAmountLCY += parseFloat(v);
+        });
+
+        var totalAmountId = "TotalAmount";
+        var totalAmountLCYId = "TotalAmountLCY";
+
+        Ext.getCmp(totalAmountId).setRawValue(Ext.util.Format.number(sumAmount, '0.000,00/i'));
+        Ext.getCmp(totalAmountLCYId).setRawValue(Ext.util.Format.number(sumAmountLCY, '0.000,00/i'));
+    }
+
+};

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using MyERP.DataAccess;
 
 namespace MyERP.Web.Models
 {
@@ -22,7 +23,7 @@ namespace MyERP.Web.Models
         [Required]
         public long? ItemId { get; set; }
 
-        public ExtNetComboBoxModel Item { get; set; }
+        public LookupViewModel Item { get; set; }
 
         [Display(Name = "Description")]
         [Required]
@@ -33,7 +34,7 @@ namespace MyERP.Web.Models
         [Display(Name = "UOM")]
         public long? UomId { get; set; }
 
-        public ExtNetComboBoxModel Uom { get; set; }
+        public LookupViewModel Uom { get; set; }
 
         [Display(Name = "Uom Description")]
         public String UomDescription { get; set; }
@@ -42,7 +43,7 @@ namespace MyERP.Web.Models
         [Required]
         public long? LocationId { get; set; }
 
-        public ExtNetComboBoxModel Location { get; set; }
+        public LookupViewModel Location { get; set; }
 
         [Display(Name = "Qty")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
@@ -132,7 +133,7 @@ namespace MyERP.Web.Models
         [Required]
         public long? VatId { get; set; }
 
-        public ExtNetComboBoxModel Vat { get; set; }
+        public LookupViewModel Vat { get; set; }
 
         [Display(Name = "Vat %")]
         [DisplayFormat(DataFormatString = "{0:n2}")]

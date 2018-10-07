@@ -113,14 +113,12 @@ namespace MyERP.Web.Areas.Purchase.Controllers
 
             ViewData["CurrencyLCYId"] = currencyLcyId;
             CurrencyRepository currencyRepository = new CurrencyRepository();
-            ViewData["Currency"] = currencyRepository.Get(filter: c => c.Id == currencyLcyId, includePaths: new string[] { "Organization" })
-                .Select(x => new CurrencyLookupViewModel()
+            ViewData["Currencies"] = currencyRepository.Get(filter: c => c.Id == currencyLcyId, includePaths: new string[] { "Organization" })
+                .Select(x => new ExtNetComboBoxModel()
                 {
                     Id = x.Id,
                     Code = x.Code,
-                    Description = x.Description,
-                    OrganizationCode = x.Organization.Code,
-                    Status = (DefaultStatusType)x.Status
+                    Description = x.Description
                 }).ToList();
 
             PreferenceViewModel preference = (PreferenceViewModel)Session["Preference"];
@@ -154,27 +152,33 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                              LineNo = purchaseInvoiceLine.LineNo,
                                                              Type = purchaseInvoiceLine.Type,
                                                              ItemId = purchaseInvoiceLine.ItemId,
-                                                             Item = purchaseInvoiceLine.Item == null ? null : new ExtNetComboBoxModel()
+                                                             Item = new LookupViewModel()
                                                              {
-                                                                 Id = purchaseInvoiceLine.Item.Id,
                                                                  Code = purchaseInvoiceLine.Item.Code,
-                                                                 Description = purchaseInvoiceLine.Item.Description
-                                                             },
+                                                                 OrganizationCode = "",
+                                                                 Description = purchaseInvoiceLine.Item.Description,
+                                                                 Status = (DefaultStatusType) purchaseInvoiceLine.Item.Status
+
+                                                             }, 
                                                              Description = purchaseInvoiceLine.Description,
                                                              UomId = purchaseInvoiceLine.UomId,
-                                                             Uom = purchaseInvoiceLine.Uom == null ? null : new ExtNetComboBoxModel()
+                                                             Uom = new LookupViewModel()
                                                              {
-                                                                 Id = purchaseInvoiceLine.Uom.Id,
                                                                  Code = purchaseInvoiceLine.Uom.Code,
-                                                                 Description = purchaseInvoiceLine.Uom.Description
+                                                                 OrganizationCode = "",
+                                                                 Description = purchaseInvoiceLine.Uom.Description,
+                                                                 Status = (DefaultStatusType)purchaseInvoiceLine.Uom.Status
+
                                                              },
                                                              UomDescription = purchaseInvoiceLine.Uom == null ? null : purchaseInvoiceLine.Uom.Description,
                                                              LocationId = purchaseInvoiceLine.LocationId,
-                                                             Location = purchaseInvoiceLine.Location == null ? null : new ExtNetComboBoxModel()
+                                                             Location = new LookupViewModel()
                                                              {
-                                                                 Id = purchaseInvoiceLine.Location.Id,
                                                                  Code = purchaseInvoiceLine.Location.Code,
-                                                                 Description = purchaseInvoiceLine.Location.Description
+                                                                 OrganizationCode = "",
+                                                                 Description = purchaseInvoiceLine.Location.Description,
+                                                                 Status = (DefaultStatusType)purchaseInvoiceLine.Location.Status
+
                                                              },
                                                              Quantity = purchaseInvoiceLine.Quantity,
                                                              PurchasePrice = purchaseInvoiceLine.PurchasePrice,
@@ -198,11 +202,13 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                              ExciseTaxAmountLCY = purchaseInvoiceLine.ExciseTaxAmountLCY,
                                                              VatBaseAmount = purchaseInvoiceLine.VatBaseAmount,
                                                              VatId = purchaseInvoiceLine.VatId,
-                                                             Vat = purchaseInvoiceLine.Vat == null ? null : new ExtNetComboBoxModel()
+                                                             Vat = new LookupViewModel()
                                                              {
-                                                                 Id = purchaseInvoiceLine.Vat.Id,
                                                                  Code = purchaseInvoiceLine.Vat.Code,
-                                                                 Description = purchaseInvoiceLine.Vat.Description
+                                                                 OrganizationCode = "",
+                                                                 Description = purchaseInvoiceLine.Vat.Description,
+                                                                 Status = (DefaultStatusType)purchaseInvoiceLine.Vat.Status
+
                                                              },
                                                              VatPercentage = purchaseInvoiceLine.VatPercentage,
                                                              VatAmount = purchaseInvoiceLine.VatAmount,
@@ -254,7 +260,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     Version = entity.Version
                 };
 
-                ViewData["BuyFromVendor"] = new List<object>()
+                ViewData["BuyFromVendors"] = new List<object>()
                 {
                     new ExtNetComboBoxModel
                     {
@@ -264,7 +270,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     }
                 };
 
-                ViewData["PayToVendor"] = new List<object>()
+                ViewData["PayToVendors"] = new List<object>()
                 {
                     new ExtNetComboBoxModel
                     {
@@ -274,7 +280,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     }
                 };
 
-                ViewData["Currency"] = new List<object>()
+                ViewData["Currencies"] = new List<object>()
                 {
                     new ExtNetComboBoxModel
                     {
@@ -284,7 +290,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     }
                 };
 
-                ViewData["AccountPayable"] = new List<object>()
+                ViewData["AccountPayables"] = new List<object>()
                 {
                      new ExtNetComboBoxModel
                      {
@@ -411,6 +417,9 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                             Type = purchaseInvoiceLine.Type,
                             ItemId  = purchaseInvoiceLine.ItemId,
                             Description = purchaseInvoiceLine.Description,
+                            UomId = purchaseInvoiceLine.UomId,
+                            UomDescription = purchaseInvoiceLine.Uom == null ? null : purchaseInvoiceLine.Uom.Description,
+                            LocationId = purchaseInvoiceLine.LocationId,
                             Quantity = purchaseInvoiceLine.Quantity,
                             PurchasePrice = purchaseInvoiceLine.PurchasePrice,
                             LineDiscountPercentage = purchaseInvoiceLine.LineDiscountPercentage,
@@ -458,6 +467,11 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                 x.Type = purchaseInvoiceLine.Type;
                                 x.ItemId = purchaseInvoiceLine.ItemId;
                                 x.Description = purchaseInvoiceLine.Description;
+                                x.UomId = purchaseInvoiceLine.UomId;
+                                x.UomDescription = purchaseInvoiceLine.Uom == null
+                                    ? null
+                                    : purchaseInvoiceLine.Uom.Description;
+                                x.LocationId = purchaseInvoiceLine.LocationId;
                                 x.Quantity = purchaseInvoiceLine.Quantity;
                                 x.PurchasePrice = purchaseInvoiceLine.PurchasePrice;
                                 x.LineDiscountPercentage = purchaseInvoiceLine.LineDiscountPercentage;
@@ -581,6 +595,9 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                         Type = c.Type,
                         ItemId = c.ItemId,
                         Description = c.Description,
+                        UomId = c.UomId,
+                        UomDescription = c.Uom == null ? null : c.Uom.Description,
+                        LocationId = c.LocationId,
                         Quantity = c.Quantity,
                         PurchasePrice = c.PurchasePrice,
                         LineDiscountPercentage = c.LineDiscountPercentage,
@@ -683,15 +700,15 @@ namespace MyERP.Web.Areas.Purchase.Controllers
             return this.Direct();
         }
 
-        public ActionResult ChangeBusinessPartner(string selectedData)
+        public ActionResult ChangeBuyFromVendor(string selectedData)
         {
             BusinessPartnerLookupViewModel selectedPartner = JsonConvert.DeserializeObject<BusinessPartnerLookupViewModel>(selectedData, new JsonSerializerSettings
             {
                 Culture = Thread.CurrentThread.CurrentCulture
             });
-            this.GetCmp<TextField>("BusinessPartnerName").Value = selectedPartner.Description;
-            this.GetCmp<TextField>("BusinessPartnerAddress").Value = selectedPartner.Address;
-            this.GetCmp<TextField>("BusinessPartnerContactName").Value = selectedPartner.ContactName;
+            this.GetCmp<TextField>("BuyFromVendorName").Value = selectedPartner.Description;
+            this.GetCmp<TextField>("BuyFromAddress").Value = selectedPartner.Address;
+            this.GetCmp<TextField>("BuyFromContactName").Value = selectedPartner.ContactName;
 
             return this.Direct();
         }
@@ -718,22 +735,22 @@ namespace MyERP.Web.Areas.Purchase.Controllers
             this.GetCmp<TextField>("CurrencyFactor").Value = currencyId == currencyLcyId ? 1 : 1;
             this.GetCmp<TextField>("CurrencyFactor").ReadOnly = currencyId == currencyLcyId;
             this.GetCmp<TextField>("TotalAmountLCY").Hidden = currencyId == currencyLcyId;
-            this.GetCmp<Column>("CashLineAmountLCYCol").Hidden = currencyId == currencyLcyId;
+            //this.GetCmp<Column>("CashLineAmountLCYCol").Hidden = currencyId == currencyLcyId;
 
             return this.Direct();
         }
 
-        public ActionResult ChangeCurrencyFactor(PurchaseInvoiceHeaderEditViewModel model, string cashLinesJSON)
+        public ActionResult ChangeCurrencyFactor(PurchaseInvoiceHeaderEditViewModel model, string purchaseInvoiceLinesJSON)
         {
-            List<CashLineEditViewModel> cashLinesModel = JsonConvert.DeserializeObject<List<CashLineEditViewModel>>(cashLinesJSON, new JsonSerializerSettings
+            List<PurchaseInvoiceLineEditViewModel> lines = JsonConvert.DeserializeObject<List<PurchaseInvoiceLineEditViewModel>>(purchaseInvoiceLinesJSON, new JsonSerializerSettings
             {
                 Culture = Thread.CurrentThread.CurrentCulture
             });
-            Store cashLineGridStore = X.GetCmp<Store>("CashLineGridStore");
-            foreach (CashLineEditViewModel cashLine in cashLinesModel)
+            Store lineGridStore = X.GetCmp<Store>("PurchaseInvoiceLineGridStore");
+            foreach (PurchaseInvoiceLineEditViewModel line in lines)
             {
-                var amountLCY = Round.RoundAmountLCY(cashLine.Amount * model.CurrencyFactor);
-                ModelProxy record = cashLineGridStore.GetById(cashLine.LineNo);
+                var amountLCY = Round.RoundAmountLCY(line.Amount * model.CurrencyFactor);
+                ModelProxy record = lineGridStore.GetById(line.LineNo);
                 record.Set("AmountLCY", amountLCY);
 
                 record.Commit();
@@ -741,28 +758,31 @@ namespace MyERP.Web.Areas.Purchase.Controllers
             return this.Direct();
         }
 
-        public ActionResult AddLine(String cashLinesJSON)
+        public ActionResult AddLine(String purchaseInvoiceLinesJSON)
         {
-            List<CashLineEditViewModel> cashLinesModel = JsonConvert.DeserializeObject<List<CashLineEditViewModel>>(cashLinesJSON, new JsonSerializerSettings
+            List<PurchaseInvoiceLineEditViewModel> purchaseInvoiceLinesModel = JsonConvert.DeserializeObject<List<PurchaseInvoiceLineEditViewModel>>(purchaseInvoiceLinesJSON, new JsonSerializerSettings
             {
                 Culture = Thread.CurrentThread.CurrentCulture
             });
-            long lineNo = cashLinesModel.Count >= 1 ? cashLinesModel.Max(c => c.LineNo) + 1000 : 1000;
+            long lineNo = purchaseInvoiceLinesModel.Count >= 1 ? purchaseInvoiceLinesModel.Max(c => c.LineNo) + 1000 : 1000;
 
-            var newItem = new CashLineEditViewModel()
+            var newItem = new PurchaseInvoiceLineEditViewModel()
             {
                 Id = null,
                 LineNo = lineNo
             };
 
-            Store cashLineGridStore = X.GetCmp<Store>("CashLineGridStore");
-            cashLineGridStore.Add(newItem);
+            Store purchaseInvoiceLineGridStore = X.GetCmp<Store>("PurchaseInvoiceLineGridStore");
+            purchaseInvoiceLineGridStore.Add(newItem);
 
             return this.Direct(new { LineNo = lineNo });
         }
 
         public ActionResult LineEdit(int lineNo, string field, string oldValue, string newValue, string recordData, string headerData)
         {
+            if (String.Compare(oldValue, newValue, StringComparison.CurrentCultureIgnoreCase) == 0)
+                return this.Direct(); 
+
             MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
             long clientId = user.ClientId ?? 0;
             long organizationId = user.OrganizationId ?? 0;
@@ -775,36 +795,91 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 Culture = Thread.CurrentThread.CurrentCulture
             });
 
-            CashLineEditViewModel cashLineEditViewModel = JSON.Deserialize<CashLineEditViewModel>(recordData, new JsonSerializerSettings
+            PurchaseInvoiceLineEditViewModel purchaseInvoiceLineEditViewModel = JSON.Deserialize<PurchaseInvoiceLineEditViewModel>(recordData, new JsonSerializerSettings
             {
                 Culture = Thread.CurrentThread.CurrentCulture
             });
 
-            ModelProxy record = X.GetCmp<Store>("CashLineGridStore").GetById(lineNo);
+            ModelProxy record = X.GetCmp<Store>("PurchaseInvoiceLineGridStore").GetById(lineNo);
 
             switch (field)
             {
-                case "CorrespAccountId":
-                    var accountRepository = new AccountRepository();
-                    var correspAccountId = Convert.ToInt64(newValue);
-                    var corespAcc = accountRepository.Get(c => c.Id == correspAccountId, new string[] { "Organization" }).Select(c =>
-                            new AccountLookupViewModel()
+                case "ItemId":
+                {
+                    var itemRepository = new ItemRepository();
+                    var itemId = Convert.ToInt64(newValue);
+                    var item = itemRepository.Get(c => c.Id == itemId, new string[] {"Organization"}).First();
+                    var itemModel = new LookupViewModel()
+                    {
+                        Id = item.Id,
+                        Code = item.Code,
+                        Description = item.Description,
+                        OrganizationCode = item.Organization.Code,
+                        Status = (DefaultStatusType) item.Status
+                    };
+
+                    record.Set("Item", itemModel);
+                    var itemUomRepository = new ItemUomRepository();
+                    var itemUom = itemUomRepository.Get(c => c.ItemId == itemId && c.UomId == item.PurchUomId,
+                        new string[] {"Uom"}).First();
+                    var uomModel = new ItemUomLookUpViewModel
+                    {
+                        Code = itemUom.Uom.Code,
+                        UomId = itemUom.UomId,
+                        Description = itemUom.Uom.Description,
+                        QtyPerUom = itemUom.QtyPerUom
+                    };
+                    record.Set("Description", itemModel.Description);
+                    record.Set("Uom", uomModel);
+                    record.Set("UomId", uomModel.UomId);
+                    record.Set("QtyPerUom", uomModel.QtyPerUom);
+                    //TODO: Update CorrespAccountStore
+                    //Store correspAccountStore = X.GetCmp<Store>("CorrespAccountStore");
+                    //correspAccountStore.Add(corespAcc);
+                }
+                    break;
+                case "UomId":
+                {
+                    var uomId = Convert.ToInt64(newValue);
+                    var itemUomRepository = new ItemUomRepository();
+                    var itemUom = itemUomRepository.Get(c => c.ItemId == purchaseInvoiceLineEditViewModel.ItemId && c.UomId == uomId,
+                        new string[] {"Uom"}).First();
+                    var uomModel = new ItemUomLookUpViewModel()
+                    {
+                        UomId = itemUom.Id,
+                        Code = itemUom.Uom.Code,
+                        Description = itemUom.Uom.Description,
+                        QtyPerUom = itemUom.QtyPerUom
+                    };
+                    record.Set("Uom", uomModel);
+                    record.Set("UomId", uomModel.UomId);
+                    record.Set("QtyPerUom", uomModel.QtyPerUom);
+                }
+                    break;
+                case "LocationId":
+                {
+                    var locationRepository = new LocationRepository();
+                    var locationId = Convert.ToInt64(newValue);
+                    var locationModel = locationRepository.Get(c => c.Id == locationId, new string[] {"Organization"})
+                        .Select(c =>
+                            new LookupViewModel()
                             {
                                 Id = c.Id,
                                 Code = c.Code,
                                 Description = c.Description,
                                 OrganizationCode = c.Organization.Code,
-                                Status = (DefaultStatusType)c.Status
+                                Status = (DefaultStatusType) c.Status
                             }
                         ).First();
-                    record.Set("CorrespAccount", corespAcc);
-                    //TODO: Update CorrespAccountStore
-                    //Store correspAccountStore = X.GetCmp<Store>("CorrespAccountStore");
-                    //correspAccountStore.Add(corespAcc);
+                    record.Set("Location", locationModel);
+                }
                     break;
                 case "Amount":
-                    var amountLCY = Round.RoundAmountLCY(cashLineEditViewModel.Amount * purchaseInvoiceHeaderEditViewModel.CurrencyFactor);
+                {
+                    var amountLCY = Round.RoundAmountLCY(purchaseInvoiceLineEditViewModel.Amount *
+                                                         purchaseInvoiceHeaderEditViewModel.CurrencyFactor);
                     record.Set("AmountLCY", amountLCY);
+                }
                     break;
             }
             record.Commit();
@@ -829,8 +904,13 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                  Id = purchaseInvoiceLine.Id,
                                  LineNo = purchaseInvoiceLine.LineNo,
                                  ItemId = purchaseInvoiceLine.ItemId,
-                                 ItemCode = purchaseInvoiceLine.Item == null ? null : purchaseInvoiceLine.Item.Code,
+                                 ItemCode = purchaseInvoiceLine.Item?.Code,
                                  Description = purchaseInvoiceLine.Description,
+                                 UomId = purchaseInvoiceLine.UomId,
+                                 UomCode = purchaseInvoiceLine.Uom?.Code,
+                                 UomDescription = purchaseInvoiceLine.Description,
+                                 LocationId = purchaseInvoiceLine.LocationId,
+                                 LocationCode = purchaseInvoiceLine.Location?.Code,
                                  Quantity = purchaseInvoiceLine.Quantity,
                                  PurchasePrice = purchaseInvoiceLine.PurchasePrice,
                                  LineDiscountPercentage = purchaseInvoiceLine.LineDiscountPercentage,
@@ -853,6 +933,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                  ExciseTaxAmountLCY = purchaseInvoiceLine.ExciseTaxAmountLCY,
                                  VatBaseAmount = purchaseInvoiceLine.VatBaseAmount,
                                  VatId = purchaseInvoiceLine.VatId,
+                                 VatCode = purchaseInvoiceLine.Vat?.Code,
                                  VatPercentage = purchaseInvoiceLine.VatPercentage,
                                  VatAmount = purchaseInvoiceLine.VatAmount,
                                  VatBaseAmountLCY = purchaseInvoiceLine.VatBaseAmountLCY,
