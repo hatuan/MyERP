@@ -567,6 +567,7 @@
     </Compile>
     <Compile Include="Repository\BusinessPartnerPriceGroupRepository.cs" />
     <Compile Include="Repository\CurrencyRepository.cs" />
+    <Compile Include="Repository\PurchaseInvoiceLineRepository.cs" />
     <Compile Include="Repository\PurchaseInvoiceHeaderRepository.cs" />
     <Compile Include="Repository\SalesHeaderRepository.cs" />
     <Compile Include="Repository\OptionRepository.cs" />

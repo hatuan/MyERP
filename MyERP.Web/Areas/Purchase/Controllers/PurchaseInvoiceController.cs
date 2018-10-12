@@ -836,8 +836,8 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     //TODO: Update CorrespAccountStore
                     //Store correspAccountStore = X.GetCmp<Store>("CorrespAccountStore");
                     //correspAccountStore.Add(corespAcc);
-                }
                     break;
+                }
                 case "UomId":
                 {
                     var uomId = Convert.ToInt64(newValue);
@@ -854,8 +854,8 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     record.Set("Uom", uomModel);
                     record.Set("UomId", uomModel.UomId);
                     record.Set("QtyPerUom", uomModel.QtyPerUom);
-                }
                     break;
+                }
                 case "LocationId":
                 {
                     var locationRepository = new LocationRepository();
@@ -872,15 +872,78 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                             }
                         ).First();
                     record.Set("Location", locationModel);
-                }
                     break;
+                }
+                case "Quantity":
+                {
+                    var purchaseInvoiceLineRepository = new PurchaseInvoiceLineRepository();
+                    purchaseInvoiceLineRepository.Update("Quantity", ref purchaseInvoiceHeaderEditViewModel,
+                        ref purchaseInvoiceLineEditViewModel);
+                    break;
+                }
+                case "PurchasePrice":
+                {
+                    break;
+                }
+                case "LineDiscountPercentage":
+                {
+                    break;
+                }
+                case "LineDiscountAmount":
+                {
+                    break;
+                }
+                case "LineAmount":
+                {
+                    break;
+                }
+                case "PurchasePriceLCY":
+                {
+                    break;
+                }
+                case "LineDiscountAmountLCY":
+                {
+                    break;
+                }
+                case "LineAmountLCY":
+                {
+                    break;
+                }
+                case "ImportDutyAmount":
+                {
+                    break;
+                }
+                case "ImportDutyAmountLCY":
+                {
+                    break;
+                }
+                case "ExciseTaxAmount":
+                {
+                    break;
+                }
+                case "ExciseTaxAmountLCY":
+                {
+                    break;
+                }
+                case "VatId":
+                {
+                    break;
+                }
+                case "VatAmount":
+                {
+                    break;
+                }
+                case "VatAmountLCY":
+                {
+                    break;
+                }
                 case "Amount":
                 {
                     var amountLCY = Round.RoundAmountLCY(purchaseInvoiceLineEditViewModel.Amount *
                                                          purchaseInvoiceHeaderEditViewModel.CurrencyFactor);
                     record.Set("AmountLCY", amountLCY);
-                }
                     break;
+                }
             }
             record.Commit();
             return this.Direct();
