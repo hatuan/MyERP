@@ -1652,6 +1652,10 @@
           <Property Name="total_line_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_line_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="account_payable_id" Type="bigint" Nullable="false" />
+          <Property Name="total_import_duty_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_import_duty_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_excise_tax_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_excise_tax_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
         </EntityType>
         <EntityType Name="purchase_invoice_line">
           <Key>
@@ -5697,6 +5701,10 @@
           </Property>
           <Property Name="InvoiceDiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="6ccdebd1-da5f-4a28-9dc0-8476c348c9f1" />
           <Property Name="InvoiceDiscountAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="dff81b67-2c20-444e-add9-dd1bef20b72f" />
+          <Property Name="TotalImportDutyAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="d511c926-792b-4a46-bfca-e43ef4ea809a" />
+          <Property Name="TotalImportDutyAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="3c2cb01d-b4ca-4bf2-974d-a2cc2f46ba01" />
+          <Property Name="TotalExciseTaxAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="40959603-7bd3-4f67-8ec6-86d0e87fb539" />
+          <Property Name="TotalExciseTaxAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="9e09191d-581c-4636-84c3-865fc6c1e187" />
           <Property Name="TotalVatAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="84e3c8e4-5a98-41d0-b65d-4a01072e60b4" />
           <Property Name="TotalVatAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="22e7c091-622f-48a0-8cf6-1dc32108c2fb" />
           <Property Name="TotalPayment" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="1a36f436-7df1-439d-b30c-b5f73a011008" />
@@ -8879,6 +8887,10 @@
                 <ScalarProperty Name="TotalLineAmount" ColumnName="total_line_amount" />
                 <ScalarProperty Name="TotalLineAmountLCY" ColumnName="total_line_amount_lcy" />
                 <ScalarProperty Name="AccountPayableId" ColumnName="account_payable_id" />
+                <ScalarProperty Name="TotalImportDutyAmount" ColumnName="total_import_duty_amount" />
+                <ScalarProperty Name="TotalImportDutyAmountLCY" ColumnName="total_import_duty_amount_lcy" />
+                <ScalarProperty Name="TotalExciseTaxAmount" ColumnName="total_excise_tax_amount" />
+                <ScalarProperty Name="TotalExciseTaxAmountLCY" ColumnName="total_excise_tax_amount_lcy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

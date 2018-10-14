@@ -223,6 +223,18 @@ namespace MyERP.Web.Models
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal TotalAmount { get; set; }
 
+        [Display(Name = "Total Charge")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal TotalChargeAmount { get; set; }
+
+        [Display(Name = "Total Import Duty")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal TotalImportDutyAmount { get; set; }
+
+        [Display(Name = "Total Excise Tax")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal TotalExciseTaxAmount { get; set; }
+
         [Display(Name = "Total Vat Amount")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal TotalVatAmount { get; set; }
@@ -238,6 +250,18 @@ namespace MyERP.Web.Models
         [Display(Name = "Total Amount LCY")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal TotalAmountLCY { get; set; }
+
+        [Display(Name = "Total Charge LCY")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal TotalChargeAmountLCY { get; set; }
+
+        [Display(Name = "Total Import Duty LCY")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal TotalImportDutyAmountLCY { get; set; }
+
+        [Display(Name = "Total Excise Tax LCY")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal TotalExciseTaxAmountLCY { get; set; }
 
         [Display(Name = "Total Vat Amount LCY")]
         [DisplayFormat(DataFormatString = "{0:n2}")]

@@ -788,7 +788,14 @@ namespace MyERP.Web.Areas.Purchase.Controllers
             long organizationId = user.OrganizationId ?? 0;
 
             if (clientId == 0 || organizationId == 0)
+            {
                 return this.Direct(false, Resources.Resources.User_dont_have_Client_or_Organization_Please_set);
+            }
+
+            Client client = (new ClientRepository()).Get(User);
+            long currencyLcyId = client.CurrencyLcyId ?? 0;
+            if (currencyLcyId == 0)
+                return this.Direct(false, "ERROR : Please set Client CurrencyLcy first");
 
             PurchaseInvoiceHeaderEditViewModel purchaseInvoiceHeaderEditViewModel = JSON.Deserialize<PurchaseInvoiceHeaderEditViewModel>(headerData, new JsonSerializerSettings
             {
@@ -874,74 +881,30 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     record.Set("Location", locationModel);
                     break;
                 }
-                case "Quantity":
-                {
-                    var purchaseInvoiceLineRepository = new PurchaseInvoiceLineRepository();
-                    purchaseInvoiceLineRepository.Update("Quantity", ref purchaseInvoiceHeaderEditViewModel,
-                        ref purchaseInvoiceLineEditViewModel);
-                    break;
-                }
-                case "PurchasePrice":
-                {
-                    break;
-                }
-                case "LineDiscountPercentage":
-                {
-                    break;
-                }
-                case "LineDiscountAmount":
-                {
-                    break;
-                }
-                case "LineAmount":
-                {
-                    break;
-                }
-                case "PurchasePriceLCY":
-                {
-                    break;
-                }
-                case "LineDiscountAmountLCY":
-                {
-                    break;
-                }
-                case "LineAmountLCY":
-                {
-                    break;
-                }
-                case "ImportDutyAmount":
-                {
-                    break;
-                }
-                case "ImportDutyAmountLCY":
-                {
-                    break;
-                }
-                case "ExciseTaxAmount":
-                {
-                    break;
-                }
-                case "ExciseTaxAmountLCY":
-                {
-                    break;
-                }
                 case "VatId":
                 {
                     break;
                 }
+                case "Quantity":
+                case "PurchasePrice":
+                case "LineDiscountPercentage":
+                case "LineDiscountAmount":
+                case "LineAmount":
+                case "PurchasePriceLCY":
+                case "LineDiscountAmountLCY":
+                case "LineAmountLCY":
+                case "ImportDutyAmount":
+                case "ImportDutyAmountLCY":
+                case "ExciseTaxAmount":
+                case "ExciseTaxAmountLCY":
                 case "VatAmount":
-                {
-                    break;
-                }
                 case "VatAmountLCY":
                 {
-                    break;
-                }
-                case "Amount":
-                {
-                    var amountLCY = Round.RoundAmountLCY(purchaseInvoiceLineEditViewModel.Amount *
-                                                         purchaseInvoiceHeaderEditViewModel.CurrencyFactor);
-                    record.Set("AmountLCY", amountLCY);
+                    var purchaseInvoiceLineRepository = new PurchaseInvoiceLineRepository();
+                    purchaseInvoiceLineRepository.Update(field, currencyLcyId, ref purchaseInvoiceHeaderEditViewModel,
+                        ref purchaseInvoiceLineEditViewModel);
+
+                    purchaseInvoiceLineRepository.UpdateRecord(purchaseInvoiceLineEditViewModel, ref record);
                     break;
                 }
             }
