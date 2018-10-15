@@ -224,6 +224,7 @@
                                   .Width(600)
                                   .Items(
                                       Html.X().ComboBoxFor(m => m.BuyFromVendorId).AllowBlank(false).ID("BuyFromVendorId").Width(150)
+                                          .AutoFocus(true)
                                           .DisplayField("Code")
                                           .ValueField("Id")
                                           .FieldStyle("text-transform: uppercase;")
@@ -366,7 +367,11 @@
                                             Html.X().ComboBoxFor(m => m.Status).Editable(false).ReadOnly(true).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.CashDocumentStatusType)).ID("Status")
                                         )
                                 ));
-                      items.Add(Html.X().GridPanel()
+                      items.Add(Html.X().TabPanel()
+                          .Height(350)
+                          .Items(tabPanelItems => 
+                          {
+                              tabPanelItems.Add(Html.X().GridPanel()
                           .ID("PurchaseInvoiceLineGridPanel")
                           .Height(350)
                           .Title("Purchase Invoice Line")
@@ -670,8 +675,8 @@
                                                 "   } \n" +
                                                 "}";
                               ls.BeforeEdit.Fn = "PurchaseInvoice.PurchaseInvoiceLineBeforeEdit";
-                          }))
-                      );
+                          })));
+                          }));
                       items.Add(Html.X().Container()
                           .Layout(LayoutType.HBox)
                           .Items(

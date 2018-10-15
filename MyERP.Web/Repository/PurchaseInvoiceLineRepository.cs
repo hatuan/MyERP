@@ -301,8 +301,6 @@ namespace MyERP.Web
                         break;
                     }
             }
-
-            UpdateTotal(ref purchaseInvoiceHeader);
         }
 
         public void UpdateTotal(ref PurchaseInvoiceHeaderEditViewModel purchaseInvoiceHeader)
