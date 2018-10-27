@@ -17,14 +17,14 @@ using System.Data.Entity.ModelConfiguration;
 namespace MyERP.DataAccess.Mapping
 {
 
-    public partial class CashHeaderConfiguration : EntityTypeConfiguration<CashHeader>
+    public partial class VatEntryConfiguration : EntityTypeConfiguration<VatEntry>
     {
 
-        public CashHeaderConfiguration()
+        public VatEntryConfiguration()
         {
             this
                 .HasKey(p => p.Id)
-                .ToTable("cash_header", "dbo");
+                .ToTable("vat_entry", "dbo");
             // Properties:
             this
                 .Property(p => p.Id)
@@ -33,20 +33,20 @@ namespace MyERP.DataAccess.Mapping
                     .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)
                     .HasColumnType("bigint");
             this
+                .Property(p => p.DocumentHeaderId)
+                    .HasColumnName(@"document_header_id")
+                    .IsRequired()
+                    .HasColumnType("bigint");
+            this
                 .Property(p => p.DocumentType)
                     .HasColumnName(@"document_type")
                     .IsRequired()
                     .HasColumnType("tinyint");
             this
-                .Property(p => p.DocSubType)
-                    .HasColumnName(@"doc_sub_type")
+                .Property(p => p.DocumentSubType)
+                    .HasColumnName(@"document_sub_type")
                     .IsRequired()
                     .HasColumnType("tinyint");
-            this
-                .Property(p => p.DocSequenceId)
-                    .HasColumnName(@"doc_sequence_id")
-                    .IsRequired()
-                    .HasColumnType("bigint");
             this
                 .Property(p => p.DocumentNo)
                     .HasColumnName(@"document_no")
@@ -64,6 +64,28 @@ namespace MyERP.DataAccess.Mapping
                     .IsRequired()
                     .HasColumnType("datetime2");
             this
+                .Property(p => p.InvoiceIssuedDate)
+                    .HasColumnName(@"invoice_issued_date")
+                    .IsRequired()
+                    .HasColumnType("datetime2");
+            this
+                .Property(p => p.InvoiceNumber)
+                    .HasColumnName(@"invoice_number")
+                    .IsRequired()
+                    .HasMaxLength(32)
+                    .HasColumnType("nvarchar");
+            this
+                .Property(p => p.InvoiceSeries)
+                    .HasColumnName(@"invoice_series")
+                    .IsRequired()
+                    .HasMaxLength(32)
+                    .HasColumnType("nvarchar");
+            this
+                .Property(p => p.LineNo)
+                    .HasColumnName(@"line_no")
+                    .IsRequired()
+                    .HasColumnType("bigint");
+            this
                 .Property(p => p.BusinessPartnerId)
                     .HasColumnName(@"business_partner_id")
                     .IsRequired()
@@ -77,79 +99,69 @@ namespace MyERP.DataAccess.Mapping
             this
                 .Property(p => p.BusinessPartnerAddress)
                     .HasColumnName(@"business_partner_address")
-                    .HasMaxLength(256)
-                    .HasColumnType("nvarchar");
-            this
-                .Property(p => p.BusinessPartnerContactId)
-                    .HasColumnName(@"business_partner_contact_id")
-                    .HasColumnType("bigint");
-            this
-                .Property(p => p.BusinessPartnerContactName)
-                    .HasColumnName(@"business_partner_contact_name")
-                    .HasMaxLength(256)
-                    .HasColumnType("nvarchar");
-            this
-                .Property(p => p.Description)
-                    .HasColumnName(@"description")
                     .IsRequired()
                     .HasMaxLength(256)
                     .HasColumnType("nvarchar");
             this
-                .Property(p => p.AccountId)
-                    .HasColumnName(@"account_id")
+                .Property(p => p.TaxCode)
+                    .HasColumnName(@"tax_code")
                     .IsRequired()
-                    .HasColumnType("bigint");
+                    .HasMaxLength(32)
+                    .HasColumnType("varchar");
             this
                 .Property(p => p.CurrencyId)
                     .HasColumnName(@"currency_id")
-                    .IsRequired()
                     .HasColumnType("bigint");
             this
                 .Property(p => p.CurrencyFactor)
                     .HasColumnName(@"currency_factor")
+                    .HasColumnType("decimal")
+                    .HasPrecision(38, 20);
+            this
+                .Property(p => p.VatBaseAmount)
+                    .HasColumnName(@"vat_base_amount")
                     .IsRequired()
                     .HasColumnType("decimal")
                     .HasPrecision(38, 20);
             this
-                .Property(p => p.TotalAmount)
-                    .HasColumnName(@"total_amount")
+                .Property(p => p.VatBaseAmountLCY)
+                    .HasColumnName(@"vat_base_amount_lcy")
                     .IsRequired()
                     .HasColumnType("decimal")
                     .HasPrecision(38, 20);
             this
-                .Property(p => p.TotalVatAmount)
-                    .HasColumnName(@"total_vat_amount")
+                .Property(p => p.VatId)
+                    .HasColumnName(@"vat_id")
+                    .IsRequired()
+                    .HasColumnType("bigint");
+            this
+                .Property(p => p.VatPercentage)
+                    .HasColumnName(@"vat_percentage")
                     .IsRequired()
                     .HasColumnType("decimal")
                     .HasPrecision(38, 20);
             this
-                .Property(p => p.TotalPayment)
-                    .HasColumnName(@"total_payment")
+                .Property(p => p.VatAmount)
+                    .HasColumnName(@"vat_amount")
                     .IsRequired()
                     .HasColumnType("decimal")
                     .HasPrecision(38, 20);
             this
-                .Property(p => p.TotalAmountLCY)
-                    .HasColumnName(@"total_amount_lcy")
+                .Property(p => p.VatAmountLCY)
+                    .HasColumnName(@"vat_amount_lcy")
                     .IsRequired()
                     .HasColumnType("decimal")
                     .HasPrecision(38, 20);
             this
-                .Property(p => p.TotalVatAmountLCY)
-                    .HasColumnName(@"total_vat_amount_lcy")
+                .Property(p => p.AccountVatId)
+                    .HasColumnName(@"account_vat_id")
                     .IsRequired()
-                    .HasColumnType("decimal")
-                    .HasPrecision(38, 20);
+                    .HasColumnType("bigint");
             this
-                .Property(p => p.TotalPaymentLCY)
-                    .HasColumnName(@"total_payment_lcy")
+                .Property(p => p.CorrespAccountId)
+                    .HasColumnName(@"corresp_account_id")
                     .IsRequired()
-                    .HasColumnType("decimal")
-                    .HasPrecision(38, 20);
-            this
-                .Property(p => p.NoPrinted)
-                    .HasColumnName(@"no_printed")
-                    .HasColumnType("int");
+                    .HasColumnType("bigint");
             this
                 .Property(p => p.OrganizationId)
                     .HasColumnName(@"organization_id")
@@ -160,66 +172,16 @@ namespace MyERP.DataAccess.Mapping
                     .HasColumnName(@"client_id")
                     .IsRequired()
                     .HasColumnType("bigint");
-            this
-                .Property(p => p.RecCreatedAt)
-                    .HasColumnName(@"rec_created_at")
-                    .IsRequired()
-                    .HasColumnType("datetime2");
-            this
-                .Property(p => p.RecCreatedBy)
-                    .HasColumnName(@"rec_created_by")
-                    .IsRequired()
-                    .HasColumnType("bigint");
-            this
-                .Property(p => p.RecModifiedAt)
-                    .HasColumnName(@"rec_modified_at")
-                    .IsRequired()
-                    .HasColumnType("datetime2");
-            this
-                .Property(p => p.RecModifiedBy)
-                    .HasColumnName(@"rec_modified_by")
-                    .IsRequired()
-                    .HasColumnType("bigint");
-            this
-                .Property(p => p.Status)
-                    .HasColumnName(@"status")
-                    .IsRequired()
-                    .HasColumnType("tinyint");
-            this
-                .Property(p => p.Version)
-                    .HasColumnName(@"version")
-                    .IsRequired()
-                    .HasColumnType("bigint");
             // Associations:
-            this
-                .HasMany(p => p.CashLines)
-                    .WithRequired(c => c.CashHeader)
-                .HasForeignKey(p => p.CashHeaderId)
-                    .WillCascadeOnDelete(false);
-            this
-                .HasMany(p => p.VatEntries)
-                    .WithRequired()
-                .HasForeignKey(p => p.DocumentHeaderId)
-                    .WillCascadeOnDelete(false);
             this
                 .HasRequired(p => p.BusinessPartner)
                     .WithMany()
                 .HasForeignKey(p => p.BusinessPartnerId)
                     .WillCascadeOnDelete(false);
             this
-                .HasRequired(p => p.RecCreatedByUser)
+                .HasRequired(p => p.Vat)
                     .WithMany()
-                .HasForeignKey(p => p.RecCreatedBy)
-                    .WillCascadeOnDelete(false);
-            this
-                .HasRequired(p => p.RecModifiedByUser)
-                    .WithMany()
-                .HasForeignKey(p => p.RecModifiedBy)
-                    .WillCascadeOnDelete(false);
-            this
-                .HasRequired(p => p.Currency)
-                    .WithMany()
-                .HasForeignKey(p => p.CurrencyId)
+                .HasForeignKey(p => p.VatId)
                     .WillCascadeOnDelete(false);
             this
                 .HasRequired(p => p.Client)
@@ -232,9 +194,14 @@ namespace MyERP.DataAccess.Mapping
                 .HasForeignKey(p => p.OrganizationId)
                     .WillCascadeOnDelete(false);
             this
-                .HasRequired(p => p.Account)
+                .HasRequired(p => p.AccountVat)
                     .WithMany()
-                .HasForeignKey(p => p.AccountId)
+                .HasForeignKey(p => p.AccountVatId)
+                    .WillCascadeOnDelete(false);
+            this
+                .HasRequired(p => p.CorrespAccount)
+                    .WithMany()
+                .HasForeignKey(p => p.CorrespAccountId)
                     .WillCascadeOnDelete(false);
             OnCreated();
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Caching;
 using System.Web.Security;
+using log4net;
 using MyERP.DataAccess;
 
 namespace MyERP.Web
@@ -12,6 +13,7 @@ namespace MyERP.Web
     public class CustomMembershipProvider : MembershipProvider
     {
         private int _cacheTimeoutInMinutes = 30;
+        readonly ILog _log = log4net.LogManager.GetLogger(typeof(CustomMembershipProvider));
 
         /// <summary>
         /// Initialize values from web.config.
@@ -42,6 +44,7 @@ namespace MyERP.Web
             }
             catch (Exception ex)
             {
+                _log.Error("Failed", ex);
                 return false;
             }
         }

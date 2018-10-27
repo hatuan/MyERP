@@ -129,6 +129,8 @@
     <Compile Include="Entities\MyERPDataModel.UserInRole.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Vat.cs" />
     <Compile Include="Entities\MyERPDataModel.Vat.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.VatEntry.cs" />
+    <Compile Include="Entities\MyERPDataModel.VatEntry.Generated.cs" />
     <Compile Include="Enum\PurchaseInvoiceDocumentStatusType.cs" />
     <Compile Include="Enum\CashDocumentStatusType.cs" />
     <Compile Include="Enum\CurrencySearchField.cs" />
@@ -217,6 +219,8 @@
     <Compile Include="Mapping\MyERPDataModel.UserInRoleConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.VatConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.VatConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.VatEntryConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.VatEntryConfiguration.Generated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SingleConnection.cs" />
   </ItemGroup>

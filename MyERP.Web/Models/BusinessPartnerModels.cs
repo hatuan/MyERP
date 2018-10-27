@@ -36,8 +36,8 @@ namespace MyERP.Web.Models
         [Display(Name = "Mail")]
         public String Mail { get; set; }
 
-        [Display(Name = "Vat Code")]
-        public String VatCode { get; set; }
+        [Display(Name = "Tax Code")]
+        public String TaxCode { get; set; }
 
         [Display(Name = "Contact Name")]
         public String ContactName { get; set; }
@@ -103,9 +103,9 @@ namespace MyERP.Web.Models
         [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String Mail { get; set; }
 
-        [Display(Name = "Vat Code")]
+        [Display(Name = "Tax Code")]
         [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
-        public String VatCode { get; set; }
+        public String TaxCode { get; set; }
 
         [Display(Name = "Contact Name")]
         [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]

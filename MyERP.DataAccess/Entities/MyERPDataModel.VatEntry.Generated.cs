@@ -17,11 +17,11 @@ namespace MyERP.DataAccess
 {
 
     /// <summary>
-    /// There are no comments for MyERP.DataAccess.Item in the schema.
+    /// There are no comments for MyERP.DataAccess.VatEntry in the schema.
     /// </summary>
-    public partial class Item    {
+    public partial class VatEntry    {
 
-        public Item()
+        public VatEntry()
         {
             OnCreated();
         }
@@ -42,11 +42,44 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for Code in the schema.
+        /// There are no comments for DocumentHeaderId in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual long DocumentHeaderId
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for DocumentType in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual byte DocumentType
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for DocumentSubType in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual byte DocumentSubType
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for DocumentNo in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.StringLength(32)]
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual string Code
+        public virtual string DocumentNo
         {
             get;
             set;
@@ -54,11 +87,90 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for Description in the schema.
+        /// There are no comments for DocumentDate in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual global::System.DateTime DocumentDate
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for PostingDate in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual global::System.DateTime PostingDate
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for InvoiceIssuedDate in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual global::System.DateTime InvoiceIssuedDate
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for InvoiceNumber in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.StringLength(32)]
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual string InvoiceNumber
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for InvoiceSeries in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.StringLength(32)]
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual string InvoiceSeries
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for LineNo in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual long LineNo
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for BusinessPartnerId in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual long BusinessPartnerId
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for BusinessPartnerName in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.StringLength(256)]
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual string Description
+        public virtual string BusinessPartnerName
         {
             get;
             set;
@@ -66,10 +178,54 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for BaseUomId in the schema.
+        /// There are no comments for BusinessPartnerAddress in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.StringLength(256)]
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual string BusinessPartnerAddress
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for TaxCode in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.StringLength(32)]
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual string TaxCode
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for CurrencyId in the schema.
+        /// </summary>
+        public virtual long? CurrencyId
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for CurrencyFactor in the schema.
+        /// </summary>
+        public virtual decimal? CurrencyFactor
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for VatBaseAmount in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long BaseUomId
+        public virtual decimal VatBaseAmount
         {
             get;
             set;
@@ -77,91 +233,10 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
-        /// There are no comments for UnitCost in the schema.
-        /// </summary>
-        public virtual decimal? UnitCost
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for UnitPrice in the schema.
-        /// </summary>
-        public virtual decimal? UnitPrice
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for ItemDiscountGroupId in the schema.
-        /// </summary>
-        public virtual long? ItemDiscountGroupId
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for ItemGroupId1 in the schema.
-        /// </summary>
-        public virtual long? ItemGroupId1
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for ItemGroupId2 in the schema.
-        /// </summary>
-        public virtual long? ItemGroupId2
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for ItemGroupId3 in the schema.
-        /// </summary>
-        public virtual long? ItemGroupId3
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for PurchVendorId in the schema.
-        /// </summary>
-        public virtual long? PurchVendorId
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for SalesUomId in the schema.
+        /// There are no comments for VatBaseAmountLCY in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long SalesUomId
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for PurchUomId in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long PurchUomId
+        public virtual decimal VatBaseAmountLCY
         {
             get;
             set;
@@ -171,7 +246,63 @@ namespace MyERP.DataAccess
         /// <summary>
         /// There are no comments for VatId in the schema.
         /// </summary>
-        public virtual long? VatId
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual long VatId
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for VatPercentage in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal VatPercentage
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for VatAmount in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal VatAmount
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for VatAmountLCY in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual decimal VatAmountLCY
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for AccountVatId in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual long AccountVatId
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for CorrespAccountId in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual long CorrespAccountId
         {
             get;
             set;
@@ -199,81 +330,24 @@ namespace MyERP.DataAccess
             set;
         }
 
-    
-        /// <summary>
-        /// There are no comments for RecCreatedAt in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual global::System.DateTime RecCreatedAt
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for RecCreatedBy in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long RecCreatedBy
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for RecModifiedAt in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual global::System.DateTime RecModifiedAt
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for RecModifiedBy in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long RecModifiedBy
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for Status in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual short Status
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for Version in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual long Version
-        {
-            get;
-            set;
-        }
-
 
         #endregion
 
         #region Navigation Properties
     
         /// <summary>
-        /// There are no comments for BaseUom in the schema.
+        /// There are no comments for BusinessPartner in the schema.
         /// </summary>
-        public virtual Uom BaseUom
+        public virtual BusinessPartner BusinessPartner
+        {
+            get;
+            set;
+        }
+    
+        /// <summary>
+        /// There are no comments for Vat in the schema.
+        /// </summary>
+        public virtual Vat Vat
         {
             get;
             set;
@@ -298,99 +372,18 @@ namespace MyERP.DataAccess
         }
     
         /// <summary>
-        /// There are no comments for RecCreatedByUser in the schema.
+        /// There are no comments for AccountVat in the schema.
         /// </summary>
-        public virtual User RecCreatedByUser
+        public virtual Account AccountVat
         {
             get;
             set;
         }
     
         /// <summary>
-        /// There are no comments for RecModifiedByUser in the schema.
+        /// There are no comments for CorrespAccount in the schema.
         /// </summary>
-        public virtual User RecModifiedByUser
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for ItemUoms in the schema.
-        /// </summary>
-        public virtual ICollection<ItemUom> ItemUoms
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for ItemGroup1 in the schema.
-        /// </summary>
-        public virtual ItemGroup ItemGroup1
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for ItemGroup2 in the schema.
-        /// </summary>
-        public virtual ItemGroup ItemGroup2
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for ItemGroup3 in the schema.
-        /// </summary>
-        public virtual ItemGroup ItemGroup3
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for SalesUom in the schema.
-        /// </summary>
-        public virtual Uom SalesUom
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for PurchUom in the schema.
-        /// </summary>
-        public virtual Uom PurchUom
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for PurchVendor in the schema.
-        /// </summary>
-        public virtual BusinessPartner PurchVendor
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for ItemDiscountGroup in the schema.
-        /// </summary>
-        public virtual ItemDiscountGroup ItemDiscountGroup
-        {
-            get;
-            set;
-        }
-    
-        /// <summary>
-        /// There are no comments for Vat in the schema.
-        /// </summary>
-        public virtual Vat Vat
+        public virtual Account CorrespAccount
         {
             get;
             set;

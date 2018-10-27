@@ -59,7 +59,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                 Id = c.Id,
                 Code = c.Code,
                 Description = c.Description,
-                VatCode = c.VatCode,
+                TaxCode = c.TaxCode,
                 Address = c.Address,
                 Telephone = c.Telephone,
                 Mobilephone = c.Mobilephone,
@@ -95,7 +95,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                         Telephone = c.Telephone,
                         Mobilephone = c.Mobilephone,
                         Mail = c.Mail,
-                        VatCode = c.VatCode,
+                        VatCode = c.TaxCode,
                         ContactName = c.ContactName,
                         OrganizationCode = c.Organization.Code,
                         Status = (DefaultStatusType)c.Status
@@ -117,7 +117,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                         Telephone = c.Telephone,
                         Mobilephone = c.Mobilephone,
                         Mail = c.Mail,
-                        VatCode = c.VatCode,
+                        VatCode = c.TaxCode,
                         ContactName = c.ContactName,
                         OrganizationCode = c.Organization.Code,
                         Status = (DefaultStatusType)c.Status
@@ -149,7 +149,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                     BusinessPartnerGroupId2 = entity.BusinessPartnerGroupId2,
                     BusinessPartnerGroupId3 = entity.BusinessPartnerGroupId3,
                     Description = entity.Description,
-                    VatCode = entity.VatCode,
+                    TaxCode = entity.TaxCode,
                     Address = entity.Address,
                     Telephone = entity.Telephone,
                     Mobilephone = entity.Mobilephone,
@@ -231,7 +231,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
 
                     _update.Code = model.Code;
                     _update.Description = model.Description;
-                    _update.VatCode = model.VatCode;
+                    _update.TaxCode = model.TaxCode;
                     _update.Address = model.Address;
                     _update.Telephone = model.Telephone;
                     _update.Mobilephone = model.Mobilephone;
@@ -265,7 +265,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                         OrganizationId = organizationId,
                         Code = model.Code,
                         Description = model.Description,
-                        VatCode = model.VatCode,
+                        TaxCode = model.TaxCode,
                         Address = model.Address,
                         Telephone = model.Telephone,
                         Mobilephone = model.Mobilephone,
