@@ -436,6 +436,9 @@
     <Content Include="Areas\Purchase\Views\PurchaseInvoice\Index.cshtml" />
     <Content Include="Areas\Purchase\Views\PurchaseInvoice\_List.cshtml" />
     <Content Include="Areas\Purchase\Views\PurchaseInvoice\_Maintenance.cshtml" />
+    <Content Include="Areas\Vat\Views\web.config" />
+    <Content Include="Areas\Vat\Views\VatEntry\Index.cshtml" />
+    <Content Include="Areas\Vat\Views\Index\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Resources\reports\salespos.json" />
     <Content Include="Resources\reports\salespos_001.mrt" />
@@ -491,6 +494,9 @@
     <Compile Include="Areas\SalesPrice\SalesPriceAreaRegistration.cs" />
     <Compile Include="Areas\UOM\Controllers\IndexController.cs" />
     <Compile Include="Areas\UOM\UOMAreaRegistration.cs" />
+    <Compile Include="Areas\Vat\Controllers\IndexController.cs" />
+    <Compile Include="Areas\Vat\Controllers\VatEntryController.cs" />
+    <Compile Include="Areas\Vat\VatAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CurrencyController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -518,6 +524,7 @@
     <Compile Include="Models\BusinessPartnerModels.cs" />
     <Compile Include="Models\ItemUomViewModels.cs" />
     <Compile Include="Models\LookupViewModel.cs" />
+    <Compile Include="Models\VatEntryViewModels.cs" />
     <Compile Include="Models\VatViewModels.cs" />
     <Compile Include="Models\OptionViewModels.cs" />
     <Compile Include="Models\NoSequenceLineViewModels.cs" />
@@ -600,6 +607,8 @@
     <Compile Include="Repository\RoleRepository.cs" />
     <Compile Include="Repository\ItemRepository.cs" />
     <Compile Include="Repository\SalesPriceRepository.cs" />
+    <Compile Include="Repository\VatRepository.cs" />
+    <Compile Include="Repository\VatEntryRepository.cs" />
     <Compile Include="Repository\UomRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="odata\UsersController.partial.cs" />
@@ -622,6 +631,8 @@
     <Folder Include="Areas\SalesPrice\Models\" />
     <Folder Include="Areas\SalesPrice\Views\Shared\" />
     <Folder Include="Areas\UOM\Models\" />
+    <Folder Include="Areas\Vat\Models\" />
+    <Folder Include="Areas\Vat\Views\Shared\" />
     <Folder Include="Views\Validation\" />
   </ItemGroup>
   <ItemGroup>

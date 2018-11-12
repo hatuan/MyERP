@@ -147,4 +147,14 @@ namespace MyERP.Web
     {
 
     }
+
+    public partial class VatRepository : BaseRepository<MyERP.DataAccess.Vat, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class VatEntryRepository : BaseRepository<MyERP.DataAccess.VatEntry, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
 }

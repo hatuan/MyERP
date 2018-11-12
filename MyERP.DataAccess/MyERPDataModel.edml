@@ -784,6 +784,22 @@
             <End Role="cash_header" EntitySet="cash_headers" />
             <End Role="vat_entry" EntitySet="vat_entries" />
           </AssociationSet>
+          <AssociationSet Name="FK_vat_client" Association="MyERP.DataAccess.Store.FK_vat_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="vat" EntitySet="vats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vat_organization" Association="MyERP.DataAccess.Store.FK_vat_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="vat" EntitySet="vats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vat_user" Association="MyERP.DataAccess.Store.FK_vat_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="vat" EntitySet="vats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vat_user1" Association="MyERP.DataAccess.Store.FK_vat_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="vat" EntitySet="vats" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -1831,6 +1847,7 @@
           <Property Name="account_vat_id" Type="bigint" Nullable="false" />
           <Property Name="corresp_account_id" Type="bigint" Nullable="false" />
           <Property Name="document_header_id" Type="bigint" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
@@ -4052,6 +4069,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_vat_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="vat" Type="MyERP.DataAccess.Store.vat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vat">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vat_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="vat" Type="MyERP.DataAccess.Store.vat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vat">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vat_user">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="vat" Type="MyERP.DataAccess.Store.vat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vat">
+              <PropertyRef Name="rec_created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vat_user1">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="vat" Type="MyERP.DataAccess.Store.vat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vat">
+              <PropertyRef Name="rec_modified_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -4840,6 +4905,22 @@
           <AssociationSet Name="CashHeader_VatEntrySet" Association="MyERP.DataAccess.CashHeader_VatEntry">
             <End Role="CashHeader" EntitySet="CashHeaders" />
             <End Role="VatEntries" EntitySet="VatEntries" />
+          </AssociationSet>
+          <AssociationSet Name="Client_VatSet" Association="MyERP.DataAccess.Client_Vat">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Vats" EntitySet="Vats" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_VatSet" Association="MyERP.DataAccess.Organization_Vat">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="Vats" EntitySet="Vats" />
+          </AssociationSet>
+          <AssociationSet Name="User_Vat_RecCreatedBySet" Association="MyERP.DataAccess.User_Vat_RecCreatedBy">
+            <End Role="RecCreatedByUser" EntitySet="Users" />
+            <End Role="Vats" EntitySet="Vats" />
+          </AssociationSet>
+          <AssociationSet Name="User_Vat_RecModifiedBySet" Association="MyERP.DataAccess.User_Vat_RecModifiedBy">
+            <End Role="RecModifiedByUser" EntitySet="Users" />
+            <End Role="Vats1" EntitySet="Vats" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
@@ -6047,6 +6128,10 @@
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c14d1943-4b15-4f03-99d0-11d941b08582" />
           <NavigationProperty Name="AccountInputVat" Relationship="MyERP.DataAccess.Account_Vat_Input" FromRole="Vats" ToRole="AccountInputVat" ed:Guid="dd47cee5-7d4f-4239-ba67-e9a57dd51723" />
           <NavigationProperty Name="AccountOutputVat" Relationship="MyERP.DataAccess.Account_Vat_Output" FromRole="Vats1" ToRole="AccountOutputVat" ed:Guid="e4dda1c4-3937-4273-b3ab-6fcdb2d83091" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_Vat" FromRole="Vats" ToRole="Client" ed:Guid="7870442b-a963-455d-ae64-8f256404d337" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_Vat" FromRole="Vats" ToRole="Organization" ed:Guid="7ea38779-4bde-4cf2-a26b-44c3c34a71cd" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Vat_RecCreatedBy" FromRole="Vats" ToRole="RecCreatedByUser" ed:Guid="b516a868-d430-4ce0-81fc-4f4812da01c2" />
+          <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_Vat_RecModifiedBy" FromRole="Vats1" ToRole="RecModifiedByUser" ed:Guid="ec5d908a-ed14-4a9a-91ef-e6e66cd8a913" />
         </EntityType>
         <EntityType Name="VatEntry" ed:Guid="cd92c042-7f36-4365-a761-7b5eeb03ce37">
           <Key>
@@ -6067,6 +6152,7 @@
           <Property Name="BusinessPartnerName" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="9ac4d3cd-9e2d-46f9-8ff9-8cd1855eca63" />
           <Property Name="BusinessPartnerAddress" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="5afa25b6-2a3b-4f3e-8015-80c24702e76e" />
           <Property Name="TaxCode" Type="String" Nullable="false" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="e3fdc5d5-3a75-4402-9c63-58324fabc725" />
+          <Property Name="Description" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="0f1f88a3-e7c0-4b5c-af1a-77dc298bef0d" />
           <Property Name="CurrencyId" Type="Int64" ed:ValidateRequired="false" ed:Guid="ea8ddab7-407e-4d18-9b95-fa50633de8f8" />
           <Property Name="CurrencyFactor" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="c2ef4e2d-452f-4a99-91dd-bcaa8c79cb49" />
           <Property Name="VatBaseAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="bc488852-91c5-4f42-8bc2-62791e7591d9" />
@@ -8318,6 +8404,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Client_Vat" ed:Guid="a61aac0e-a558-4903-bcc1-89e5d099612a">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="Vats" Type="MyERP.DataAccess.Vat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vats">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_Vat" ed:Guid="f55550c6-c96a-46de-935f-c0478542e624">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="Vats" Type="MyERP.DataAccess.Vat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vats">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Vat_RecCreatedBy" ed:Guid="4e267b32-762e-4b0d-8c79-30ad07016928">
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="Vats" Type="MyERP.DataAccess.Vat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecCreatedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vats">
+              <PropertyRef Name="RecCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Vat_RecModifiedBy" ed:Guid="98a721cb-76ee-453a-97b1-a4b43ecd8755">
+          <End Role="RecModifiedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="Vats1" Type="MyERP.DataAccess.Vat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecModifiedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vats1">
+              <PropertyRef Name="RecModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- MSL content -->
@@ -9329,6 +9463,7 @@
                 <ScalarProperty Name="AccountVatId" ColumnName="account_vat_id" />
                 <ScalarProperty Name="CorrespAccountId" ColumnName="corresp_account_id" />
                 <ScalarProperty Name="DocumentHeaderId" ColumnName="document_header_id" />
+                <ScalarProperty Name="Description" ColumnName="description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

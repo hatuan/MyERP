@@ -133,6 +133,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 CurrencyId = currencyLcyId,
                 CurrencyFactor = 1,
                 PurchaseInvoiceLines = new List<PurchaseInvoiceLineEditViewModel>(),
+                PurchaseVatEntries = new List<VatEntryEditViewModel>(),
                 Status = PurchaseInvoiceDocumentStatusType.Draft
             };
 
