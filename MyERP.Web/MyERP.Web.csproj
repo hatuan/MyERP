@@ -439,6 +439,7 @@
     <Content Include="Areas\Vat\Views\web.config" />
     <Content Include="Areas\Vat\Views\VatEntry\Index.cshtml" />
     <Content Include="Areas\Vat\Views\Index\Index.cshtml" />
+    <Content Include="Areas\Vat\Views\VatEntry\Index - Copy.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Resources\reports\salespos.json" />
     <Content Include="Resources\reports\salespos_001.mrt" />

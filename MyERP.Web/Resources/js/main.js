@@ -312,3 +312,52 @@ var PurchaseInvoice = {
     }
 
 };
+
+var VatEntry = {
+
+    BusinessPartnerRenderer: function (value, metadata, record, rowIndex, colIndex, store) {
+        if (Ext.isDefined(record.data.Location) && record.data.Location !== null && value > 0) {
+            return record.data.Location.Code;
+        }
+        return "";
+    },
+    VatRenderer: function (value, metadata, record, rowIndex, colIndex, store) {
+        if (Ext.isDefined(record.data.Location) && record.data.Location !== null && value > 0) {
+            return record.data.Location.Code;
+        }
+        return "";
+    },
+    AccountVatRenderer: function (value, metadata, record, rowIndex, colIndex, store) {
+        if (Ext.isDefined(record.data.Location) && record.data.Location !== null && value > 0) {
+            return record.data.Location.Code;
+        }
+        return "";
+    },
+    BeforeEdit: function (editor, e) {
+        e.grid.getSelectionModel().select(e.rowIdx, true);
+
+        var field = this.getEditor(e.record, e.column).field;
+
+        switch (e.field) {
+            case "BusinessPartnerId":
+                field.store.id = e.record.data.BusinessPartnerId;
+                if (e.record.data.BusinessPartner !== null) {
+                    field.store.add(e.record.BusinessPartner.Item);
+                }
+                break;
+            case "VatId":
+                field.store.id = e.record.data.VatId;
+                if (e.record.data.Vat !== null) {
+                    field.store.add(e.record.data.Vat);
+                }
+                break;
+            case "AccountVatId":
+                field.store.id = e.record.data.AccountVatId;
+                if (e.record.data.AccountVat !== null) {
+                    field.store.add(e.record.data.AccountVat);
+                }
+                break;
+        }
+    }
+
+};

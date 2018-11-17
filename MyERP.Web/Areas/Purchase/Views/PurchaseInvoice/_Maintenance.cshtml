@@ -146,25 +146,6 @@
                       p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
                   })
                   .Data(ViewData["AccountPayables"]),
-              Html.X().Store().AutoLoad(false).AutoDestroy(false)
-                  .ID("VatEntryAccountVatStore")
-                  .Proxy(Html.X().AjaxProxy()
-                      .Url(Url.Action("LookupData", "Index", new { area = "Account" }))
-                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
-                  .Model(Html.X().Model()
-                      .IDProperty("Id")
-                      .Fields(
-                          new ModelField("Id", ModelFieldType.Int),
-                          new ModelField("OrganizationCode", ModelFieldType.String),
-                          new ModelField("Code", ModelFieldType.String),
-                          new ModelField("Description", ModelFieldType.String)
-                      )
-                  )
-                  .Parameters(p =>
-                  {
-                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
-                  })
-                  .Data(ViewData["VatEntryAccountVatStore"]),
               Html.X().Store()
                   .ID("ItemStore")
                   .Proxy(Html.X().AjaxProxy()
@@ -255,7 +236,26 @@
                   {
                       p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
                   })
-                  .Data(ViewData["VatEntryVatStore"])
+                  .Data(ViewData["VatEntryVatStore"]),
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("VatEntryAccountVatStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Index", new { area = "Account" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["VatEntryAccountVatStore"])
           )
           .Items(
               Html.X().FormPanel()
@@ -734,15 +734,18 @@
                                       ls.BeforeEdit.Fn = "PurchaseInvoice.PurchaseInvoiceLineBeforeEdit";
                                   })));
                               tabPanelItems.Add(Html.X().Panel()
-                                  .ID("VatEntryGridPanel")
+                                  .ID("VatEntryPanel")
                                   .Height(350)
-                                  .Title("Vat")
+                                  .Layout(LayoutType.Fit)
+                                  .Title("Vat Enties")
                                   .Border(true)
                                   .Loader(
                                       Html.X().ComponentLoader()
                                           .Url(Url.Action("Index", "VatEntry", new { area = "Vat" }))
+                                          .AjaxOptions(new Ext.Net.AjaxOptions { Method = HttpMethod.GET })
+                                          .LoadMask(mask => mask.ShowMask = true)
                                           .Mode(LoadMode.Script)
-                                          .Params(new { model = Model.PurchaseVatEntries })
+                                          .Params(new { model = new { Model.PurchaseVatEntries }, containerId = "VatEntryPanel" })
                                   ));
                           }));
                       items.Add(Html.X().Container()

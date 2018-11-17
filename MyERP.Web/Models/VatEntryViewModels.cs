@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Ext.Net.MVC;
 using MyERP.DataAccess.Enum;
 
 namespace MyERP.Web.Models
@@ -10,6 +11,9 @@ namespace MyERP.Web.Models
     public class VatEntryEditViewModel
     {
         public long? Id { get; set; }
+
+        [Required]
+        public long LineNo { get; set; }
 
         public long? DocumentHeaderId { get; set; }
 
@@ -33,8 +37,10 @@ namespace MyERP.Web.Models
         [Display(Name = "Invoice Number")]
         public string InvoiceNumber { get; set; }
 
-        [Display(Name = "Invoice Issued Date")]
+        [Display(Name = "Invoice Date")]
         [Required]
+        [DateColumn]
+        [DataType(DataType.Date)]
         public DateTime InvoiceIssuedDate { get; set; }
 
         [Display(Name = "Invoice Series")]
@@ -88,7 +94,7 @@ namespace MyERP.Web.Models
         public LookupViewModel Vat { get; set; }
 
         [Display(Name = "Vat %")]
-        [DisplayFormat(DataFormatString = "{0:n2}")]
+        [DisplayFormat(DataFormatString = "{0}")]
         public Decimal VatPercentage { get; set; }
 
         [Display(Name = "Vat Amount")]
