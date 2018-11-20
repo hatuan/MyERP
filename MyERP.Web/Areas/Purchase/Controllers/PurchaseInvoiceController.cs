@@ -736,7 +736,13 @@ namespace MyERP.Web.Areas.Purchase.Controllers
             this.GetCmp<TextField>("CurrencyFactor").Value = currencyId == currencyLcyId ? 1 : 1;
             this.GetCmp<TextField>("CurrencyFactor").ReadOnly = currencyId == currencyLcyId;
             this.GetCmp<TextField>("TotalAmountLCY").Hidden = currencyId == currencyLcyId;
-            //this.GetCmp<Column>("CashLineAmountLCYCol").Hidden = currencyId == currencyLcyId;
+            this.GetCmp<Column>("PurchaseLinePurchasePriceLCYCol").Hidden = currencyId == currencyLcyId;
+            this.GetCmp<Column>("PurchaseLineDiscountAmountLCYCol").Hidden = currencyId == currencyLcyId;
+            this.GetCmp<Column>("PurchaseLineAmountLCYCol").Hidden = currencyId == currencyLcyId;
+            this.GetCmp<Column>("PurchaseLineChargeAmountLCYCol").Hidden = currencyId == currencyLcyId;
+
+            this.GetCmp<Column>("VatEntryVatBaseAmountLCYCol").Hidden = currencyId == currencyLcyId;
+            this.GetCmp<Column>("VatEntryVatAmountLCYCol").Hidden = currencyId == currencyLcyId;
 
             return this.Direct();
         }

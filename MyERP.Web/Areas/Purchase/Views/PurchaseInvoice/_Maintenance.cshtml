@@ -221,7 +221,7 @@
               Html.X().Store().AutoLoad(false).AutoDestroy(false)
                   .ID("VatEntryVatStore")
                   .Proxy(Html.X().AjaxProxy()
-                      .Url(Url.Action("LookupData", "Index", new { area = "Account" }))
+                      .Url(Url.Action("LookupData", "Index", new { area = "Vat" }))
                       .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
                   .Model(Html.X().Model()
                       .IDProperty("Id")
@@ -739,14 +739,7 @@
                                   .Layout(LayoutType.Fit)
                                   .Title("Vat Enties")
                                   .Border(true)
-                                  .Loader(
-                                      Html.X().ComponentLoader()
-                                          .Url(Url.Action("Index", "VatEntry", new { area = "Vat" }))
-                                          .AjaxOptions(new Ext.Net.AjaxOptions { Method = HttpMethod.GET })
-                                          .LoadMask(mask => mask.ShowMask = true)
-                                          .Mode(LoadMode.Script)
-                                          .Params(new { model = new { Model.PurchaseVatEntries }, containerId = "VatEntryPanel" })
-                                  ));
+                                  .ItemsFromAction("Index", "VatEntry", new { area = "Vat", model = new { Model.PurchaseVatEntries }, documentCurrencyIsLCY = documentCurrencyIsLCY }));
                           }));
                       items.Add(Html.X().Container()
                           .Layout(LayoutType.HBox)

@@ -92,4 +92,16 @@ namespace MyERP.Web.Models
         [Display(Name = "Status")]
         public DefaultStatusType Status { get; set; }
     }
+
+    public class CurrencyHeaderViewModel
+    {
+        [Display(Name = "Currency")]
+        [Required]
+        public long CurrencyId { get; set; }
+
+        [Display(Name = "Currency Factor")]
+        [Required]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal CurrencyFactor { get; set; }
+    }
 }

@@ -316,20 +316,20 @@ var PurchaseInvoice = {
 var VatEntry = {
 
     BusinessPartnerRenderer: function (value, metadata, record, rowIndex, colIndex, store) {
-        if (Ext.isDefined(record.data.Location) && record.data.Location !== null && value > 0) {
-            return record.data.Location.Code;
+        if (Ext.isDefined(record.data.BusinessPartner) && record.data.BusinessPartner !== null && value > 0) {
+            return record.data.BusinessPartner.Code;
         }
         return "";
     },
     VatRenderer: function (value, metadata, record, rowIndex, colIndex, store) {
-        if (Ext.isDefined(record.data.Location) && record.data.Location !== null && value > 0) {
-            return record.data.Location.Code;
+        if (Ext.isDefined(record.data.Vat) && record.data.Vat !== null && value > 0) {
+            return record.data.Vat.Code;
         }
         return "";
     },
     AccountVatRenderer: function (value, metadata, record, rowIndex, colIndex, store) {
-        if (Ext.isDefined(record.data.Location) && record.data.Location !== null && value > 0) {
-            return record.data.Location.Code;
+        if (Ext.isDefined(record.data.AccountVat) && record.data.AccountVat !== null && value > 0) {
+            return record.data.AccountVat.Code;
         }
         return "";
     },

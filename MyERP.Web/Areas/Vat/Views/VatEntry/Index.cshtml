@@ -23,7 +23,8 @@
                           {
                               de.Click.Action = "AddLine";
                               de.Click.ExtraParams.Add(new Parameter("vatEntriesJSON", "#{VatEntryGridPanel}.getRowsValues()", ParameterMode.Raw, true));
-                              de.Click.Before = "debugger; return Ext.getCmp(\"FormPurchaseInvoiceHeaderMaintenance\").getForm().isValid();";
+                              de.Click.ExtraParams.Add(new Parameter("headerJSON", "Ext.getCmp(\"FormPurchaseInvoiceHeaderMaintenance\").getForm().getValues()", ParameterMode.Raw, true));
+                              de.Click.Before = "return Ext.getCmp(\"FormPurchaseInvoiceHeaderMaintenance\").getForm().isValid();";
                               de.Click.Success = "function(response, result) {" +
                                                  "  var grid = this.up('grid');" +
                                                  "  var record = grid.store.getById(result.result.LineNo); " +
@@ -84,7 +85,8 @@
                           new ModelField("VatAmountLCY", ModelFieldType.Float),
                           new ModelField("AccountVatId", ModelFieldType.String),
                           new ModelField("AccountVat", ModelFieldType.Object)
-                      )))
+                      ))
+              .DataSource(Model))
           .ColumnModel(cols =>
           {
               cols.Columns.Add(Html.X().RowNumbererColumn());
@@ -137,7 +139,7 @@
                   .Editor(Html.X().TextField().ID("VatEntryBusinessPartnerNameEditor")));
               cols.Columns.Add(Html.X().ColumnFor(Model, m => m.BusinessPartnerAddress).ToBuilder<Column.Builder>().ID("VatEntryBusinessPartnerAddressCol").Sortable(false).Width(256)
                   .Editor(Html.X().TextField().ID("VatEntryBusinessPartnerAddressEditor")));
-              cols.Columns.Add(Html.X().ColumnFor(Model, m => m.TaxCode).ToBuilder<Column.Builder>().ID("VatEntryTaxCodeCol").Sortable(false).Width(256)
+              cols.Columns.Add(Html.X().ColumnFor(Model, m => m.TaxCode).ToBuilder<Column.Builder>().ID("VatEntryTaxCodeCol").Sortable(false).Width(125)
                   .Editor(Html.X().TextField().ID("VatEntryTaxCodeEditor")));
               cols.Columns.Add(Html.X().ColumnFor(Model, m => m.Description).ToBuilder<Column.Builder>().ID("VatEntryDescriptionCol").Sortable(false).Width(256)
                   .Editor(Html.X().TextField().ID("VatEntryDescriptionEditor")));

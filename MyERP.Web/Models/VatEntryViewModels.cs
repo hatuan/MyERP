@@ -14,10 +14,10 @@ namespace MyERP.Web.Models
 
         [Required]
         public long LineNo { get; set; }
-
+        /*
         public long? DocumentHeaderId { get; set; }
 
-        [Display(Name = "Document Ttype")]
+        [Display(Name = "Document Type")]
         public DocumentType DocumentType { get; set; }
 
         [Display(Name = "Document Subtype")]
@@ -27,14 +27,13 @@ namespace MyERP.Web.Models
         public string DocumentNo { get; set; }
 
         [Display(Name = "Document Date")]
-        [Required]
         public DateTime DocumentDate { get; set; }
 
         [Display(Name = "Posting Date")]
-        [Required]
         public DateTime PostingDate { get; set; }
-
+        */
         [Display(Name = "Invoice Number")]
+        [Required]
         public string InvoiceNumber { get; set; }
 
         [Display(Name = "Invoice Date")]
@@ -59,10 +58,12 @@ namespace MyERP.Web.Models
         public String BusinessPartnerName { get; set; }
 
         [Display(Name = "BP Address")]
+        [Required]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String BusinessPartnerAddress { get; set; }
 
         [Display(Name = "Tax Code")]
+        [Required]
         [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String TaxCode { get; set; }
 
@@ -71,11 +72,9 @@ namespace MyERP.Web.Models
         public String Description { get; set; }
 
         [Display(Name = "Currency")]
-        [Required]
         public long CurrencyId { get; set; }
 
         [Display(Name = "Currency Factor")]
-        [Required]
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal CurrencyFactor { get; set; }
 
@@ -110,11 +109,13 @@ namespace MyERP.Web.Models
         public long AccountVatId { get; set; }
 
         public LookupViewModel AccountVat { get; set; }
-
+        
+        /*
         [Display(Name = "Corresp Account")]
         [Required]
         public long CorrespAccountId { get; set; }
 
         public LookupViewModel CorrespAccount { get; set; }
+        */
     }
 }
