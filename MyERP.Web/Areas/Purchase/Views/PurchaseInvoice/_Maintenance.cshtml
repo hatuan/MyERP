@@ -32,6 +32,7 @@
                           de.Click.EventMask.ShowMask = true;
                           de.Click.FormID = "FormPurchaseInvoiceHeaderMaintenance";
                           de.Click.ExtraParams.Add(new Parameter { Name = "purchaseInvoiceLinesJSON", Value = "#{PurchaseInvoiceLineGridPanel}.getRowsValues()", Mode = ParameterMode.Raw, Encode = true });
+                          de.Click.ExtraParams.Add(new Parameter { Name = "vatEntriesJSON", Value = "Ext.getCmp(\"VatEntryGridPanel\").getRowsValues()", Mode = ParameterMode.Raw, Encode = true });
                           de.Click.Success = "function(response, result) { \n" +
                                              "  App.PurchaseInvoiceList.getSelectionModel().deselectAll(); \n" +
                                              "  App.PurchaseInvoiceList.getStore().load({ \n" +
@@ -200,6 +201,25 @@
                   })
                   .Data(ViewData["Locations"]),
               Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("VatStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Index", new { area = "Vat" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["Vats"]),
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
                   .ID("VatEntryBusinessPartnerStore")
                   .Proxy(Html.X().AjaxProxy()
                       .Url(Url.Action("LookupData", "Index", new { area = "BusinessPartner" }))
@@ -271,7 +291,16 @@
                               Html.X().HiddenFor(m => m.DocSequenceId).ID("DocSequenceId"),
                               Html.X().HiddenFor(m => m.DocumentType).ID("DocumentType"),
                               Html.X().HiddenFor(m => m.Id).ID("Id"),
-                              Html.X().HiddenFor(m => m.Version).ID("Version"))
+                              Html.X().HiddenFor(m => m.Version).ID("Version"),
+                              Html.X().HiddenFor(m => m.PayToVendorId).ID("PayToVendorId"),
+                              Html.X().HiddenFor(m => m.PayToName).ID("PayToName"),
+                              Html.X().HiddenFor(m => m.PayToAddress).ID("PayToAddress"),
+                              Html.X().HiddenFor(m => m.PayToContactName).ID("PayToContactName"),
+                              Html.X().HiddenFor(m => m.PayToVatCode).ID("PayToVatCode"),
+                              Html.X().HiddenFor(m => m.PayToVatNote).ID("PayToVatNote"),
+                              Html.X().HiddenFor(m => m.ShipToName).ID("ShipToName"),
+                              Html.X().HiddenFor(m => m.ShipToAddress).ID("ShipToAddress"),
+                              Html.X().HiddenFor(m => m.ShipToContactName).ID("ShipToContactName"))
                       );
                       items.Add(Html.X().Container()
                           .Layout(LayoutType.HBox)
@@ -703,6 +732,75 @@
                                           Html.X().ColumnFor(Model.PurchaseInvoiceLines, m => m.ChargeAmountLCY).ToBuilder<Column.Builder>().ID("PurchaseLineChargeAmountLCYCol").Sortable(false).Width(125).Hidden(documentCurrencyIsLCY)
                                               .Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
                                           );
+                                      cols.Columns.Add(
+                                          Html.X().ColumnFor(Model.PurchaseInvoiceLines, m => m.ImportDutyAmount).ToBuilder<Column.Builder>().ID("PurchaseLineImportDutyAmountCol").Sortable(false).Width(125)
+                                              .Editor(Html.X().NumberField().ID("PurchaseLineImportDutyAmountEditor").SelectOnFocus(true).DecimalPrecision(2)).Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
+                                          );
+                                      cols.Columns.Add(
+                                          Html.X().ColumnFor(Model.PurchaseInvoiceLines, m => m.ImportDutyAmountLCY).ToBuilder<Column.Builder>().ID("PurchaseLineImportDutyAmountLCYCol").Sortable(false).Width(125).Hidden(documentCurrencyIsLCY)
+                                              .Editor(Html.X().NumberField().ID("PurchaseLineImportDutyAmountLCYEditor").SelectOnFocus(true).DecimalPrecision(2)).Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
+                                          );
+                                      cols.Columns.Add(
+                                          Html.X().ColumnFor(Model.PurchaseInvoiceLines, m => m.ExciseTaxAmount).ToBuilder<Column.Builder>().ID("PurchaseLineExciseTaxAmountCol").Sortable(false).Width(125)
+                                              .Editor(Html.X().NumberField().ID("PurchaseLineExciseTaxAmountEditor").SelectOnFocus(true).DecimalPrecision(2)).Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
+                                          );
+                                      cols.Columns.Add(
+                                          Html.X().ColumnFor(Model.PurchaseInvoiceLines, m => m.ExciseTaxAmountLCY).ToBuilder<Column.Builder>().ID("PurchaseLineExciseTaxAmountLCYCol").Sortable(false).Width(125).Hidden(documentCurrencyIsLCY)
+                                              .Editor(Html.X().NumberField().ID("PurchaseLineExciseTaxAmountLCYEditor").SelectOnFocus(true).DecimalPrecision(2)).Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
+                                          );
+                                      cols.Columns.Add(
+                                          Html.X().ColumnFor(Model.PurchaseInvoiceLines, m => m.VatBaseAmount).ToBuilder<Column.Builder>().ID("PurchaseLineVatBaseAmountCol").Sortable(false).Width(125)
+                                              .Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
+                                          );
+                                      cols.Columns.Add(
+                                          Html.X().ColumnFor(Model.PurchaseInvoiceLines, m => m.VatBaseAmountLCY).ToBuilder<Column.Builder>().ID("PurchaseLineVatBaseAmountLCYCol").Sortable(false).Width(125).Hidden(documentCurrencyIsLCY)
+                                              .Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
+                                          );
+                                      cols.Columns.Add(Html.X().ColumnFor(Model.PurchaseInvoiceLines, m => m.VatId).ToBuilder<Column.Builder>().ID("PurchaseLineVatIdCol").Sortable(false).Width(125)
+                                          .Editor(Html.X().ComboBox()
+                                              .ID("PurchaseLineVatEditor")
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .FieldLabel("")
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .AllowBlank(false)
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                            <div class="search-item">
+                                                                <h3>{Code}</h3>
+                                                                {Description}
+                                                            </div>
+                                                         </text>))
+                                                      .MinWidth(400))
+                                                  .StoreID("VatStore")
+                                                  .Listeners(ls =>
+                                                  {
+                                                      ls.BeforeQuery.Handler = @"var _id = #{PurchaseLineVatEditor}.getValue();
+                                                                                      this.getStore().id = _id;
+                                                                                      /*this.getStore().load();*/";
+                                                  }))
+                                              .Renderer("PurchaseInvoice.VatRenderer")
+                                              .EditorOptions(action =>
+                                              {
+                                                      action.Listeners.StartEdit.Delay = 500;
+                                              }));
+                                      cols.Columns.Add(
+                                          Html.X().ColumnFor(Model.PurchaseInvoiceLines, m => m.VatAmount).ToBuilder<Column.Builder>().ID("PurchaseLineVatAmountCol").Sortable(false).Width(125)
+                                              .Editor(Html.X().NumberField().ID("PurchaseLineVatAmountEditor").SelectOnFocus(true).DecimalPrecision(2)).Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
+                                          );
+                                      cols.Columns.Add(
+                                          Html.X().ColumnFor(Model.PurchaseInvoiceLines, m => m.VatAmountLCY).ToBuilder<Column.Builder>().ID("PurchaseLineVatAmountLCYCol").Sortable(false).Width(125).Hidden(documentCurrencyIsLCY)
+                                              .Editor(Html.X().NumberField().ID("PurchaseLineVatAmountLCYEditor").SelectOnFocus(true).DecimalPrecision(2)).Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
+                                          );
                                   })
                                   .SelectionModel(Html.X().CellSelectionModel())
                                   .Plugins(Html.X().CellEditing().Listeners(ls =>
@@ -739,7 +837,7 @@
                                   .Layout(LayoutType.Fit)
                                   .Title("Vat Enties")
                                   .Border(true)
-                                  .ItemsFromAction("Index", "VatEntry", new { area = "Vat", model = new { Model.PurchaseVatEntries }, documentCurrencyIsLCY = documentCurrencyIsLCY }));
+                                  .ItemsFromAction("Index", "VatEntry", new { area = "Vat", model = new { PurchaseVatEntries = Model.VatEntries }, documentCurrencyIsLCY = documentCurrencyIsLCY }));
                           }));
                       items.Add(Html.X().Container()
                           .Layout(LayoutType.HBox)

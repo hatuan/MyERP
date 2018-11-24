@@ -274,7 +274,7 @@ namespace MyERP.Web.Models
         [EnsureMinimumElements(1, ErrorMessage = "At least a Purchase Invoice Line is required")]
         public List<PurchaseInvoiceLineEditViewModel> PurchaseInvoiceLines { get; set; }
 
-        public List<VatEntryEditViewModel> PurchaseVatEntries { get; set; }
+        public List<VatEntryEditViewModel> VatEntries { get; set; }
 
         public Int64 Version { get; set; }
 

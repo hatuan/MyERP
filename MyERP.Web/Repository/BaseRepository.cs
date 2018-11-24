@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
@@ -56,6 +57,13 @@ namespace MyERP.Web
         public TContext DataContext
         {
             get { return dataContext; }
+        }
+
+        protected BaseRepository()
+        {
+#if DEBUG
+            dataContext.Database.Log = s => Debug.WriteLine(s);
+#endif
         }
 
         public virtual IQueryable<TEntity> GetAll()

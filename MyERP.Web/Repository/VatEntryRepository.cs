@@ -29,7 +29,7 @@ namespace MyERP.Web
                         }
                         else
                         {
-                            vatEntry.VatBaseAmountLCY = Round.RoundAmountLCY(vatEntry.VatBaseAmount * vatEntry.CurrencyFactor);
+                            vatEntry.VatBaseAmountLCY = Round.RoundAmountLCY(vatEntry.VatBaseAmount * vatEntry.CurrencyFactor??0);
 
                             vatEntry.VatAmountLCY = vatEntry.VatPercentage > 0 ? Round.RoundAmountLCY(vatEntry.VatBaseAmountLCY * vatEntry.VatPercentage / 100) : 0;
                         }
@@ -55,7 +55,7 @@ namespace MyERP.Web
                         }
                         else
                         {
-                            vatEntry.VatAmountLCY = Round.RoundAmountLCY(vatEntry.VatAmount * vatEntry.CurrencyFactor);
+                            vatEntry.VatAmountLCY = Round.RoundAmountLCY(vatEntry.VatAmount * vatEntry.CurrencyFactor??0);
                         }
                         break;
                     }

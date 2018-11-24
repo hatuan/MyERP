@@ -93,9 +93,9 @@
               cols.Columns.Add(Html.X().ColumnFor(Model, m => m.InvoiceIssuedDate).ToBuilder<DateColumn.Builder>().ID("VatEntryInvoiceIssuedDateCol").Sortable(false).Width(125)
                   .Editor(Html.X().DateField().ID("VatEntryInvoiceIssuedDateEditor")).Format("dd/MM/yyyy"));
               cols.Columns.Add(Html.X().ColumnFor(Model, m => m.InvoiceNumber).ToBuilder<Column.Builder>().ID("VatEntryInvoiceNumberCol").Sortable(false).Width(125)
-                  .Editor(Html.X().TextField().ID("VatEntryInvoiceNumberEditor")));
+                  .Editor(Html.X().TextField().ID("VatEntryInvoiceNumberEditor").EnforceMaxLength(true).FieldStyle("text-transform: uppercase;")));
               cols.Columns.Add(Html.X().ColumnFor(Model, m => m.InvoiceSeries).ToBuilder<Column.Builder>().ID("VatEntryInvoiceSeriesCol").Sortable(false).Width(125)
-                  .Editor(Html.X().TextField().ID("VatEntryInvoiceSeriesEditor")));
+                  .Editor(Html.X().TextField().ID("VatEntryInvoiceSeriesEditor").EnforceMaxLength(true).FieldStyle("text-transform: uppercase;")));
               cols.Columns.Add(Html.X().ColumnFor(Model, m => m.BusinessPartnerId).ToBuilder<Column.Builder>().ID("VatEntryBusinessPartnerIdCol").Sortable(false).Width(125)
                       .Editor(
                           Html.X().ComboBox()
@@ -136,13 +136,13 @@
                          action.Listeners.StartEdit.Delay = 500;
                      }));
               cols.Columns.Add(Html.X().ColumnFor(Model, m => m.BusinessPartnerName).ToBuilder<Column.Builder>().ID("VatEntryBusinessPartnerNameCol").Sortable(false).Width(256)
-                  .Editor(Html.X().TextField().ID("VatEntryBusinessPartnerNameEditor")));
+                  .Editor(Html.X().TextField().ID("VatEntryBusinessPartnerNameEditor").EnforceMaxLength(true)));
               cols.Columns.Add(Html.X().ColumnFor(Model, m => m.BusinessPartnerAddress).ToBuilder<Column.Builder>().ID("VatEntryBusinessPartnerAddressCol").Sortable(false).Width(256)
-                  .Editor(Html.X().TextField().ID("VatEntryBusinessPartnerAddressEditor")));
+                  .Editor(Html.X().TextField().ID("VatEntryBusinessPartnerAddressEditor").EnforceMaxLength(true)));
               cols.Columns.Add(Html.X().ColumnFor(Model, m => m.TaxCode).ToBuilder<Column.Builder>().ID("VatEntryTaxCodeCol").Sortable(false).Width(125)
-                  .Editor(Html.X().TextField().ID("VatEntryTaxCodeEditor")));
+                  .Editor(Html.X().TextField().ID("VatEntryTaxCodeEditor").EnforceMaxLength(true)));
               cols.Columns.Add(Html.X().ColumnFor(Model, m => m.Description).ToBuilder<Column.Builder>().ID("VatEntryDescriptionCol").Sortable(false).Width(256)
-                  .Editor(Html.X().TextField().ID("VatEntryDescriptionEditor")));
+                  .Editor(Html.X().TextField().ID("VatEntryDescriptionEditor").EnforceMaxLength(true)));
               cols.Columns.Add(Html.X().ColumnFor(Model, m => m.VatBaseAmount).ToBuilder<Column.Builder>().ID("VatEntryVatBaseAmountCol").Sortable(false).Width(125)
                   .Editor(Html.X().NumberField().ID("VatEntryVatBaseAmountEditor").SelectOnFocus(true).DecimalPrecision(2)).Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" }));
               cols.Columns.Add(Html.X().ColumnFor(Model, m => m.VatBaseAmountLCY).ToBuilder<Column.Builder>().ID("VatEntryVatBaseAmountLCYCol").Sortable(false).Width(125).Hidden(documentCurrencyIsLCY)

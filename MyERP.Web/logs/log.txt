@@ -59,3 +59,189 @@ System.AggregateException: One or more errors occurred. ---> System.Net.Http.Htt
    at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
    --- End of inner exception stack trace ---<---
 
+INFO  2018-11-24 12:31:04,506 82560ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 12:31:04,533 82587ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+ERROR 2018-11-24 12:31:06,626 84679ms NoSequenceRepository   GetNextNo          - Failed
+System.AggregateException: One or more errors occurred. ---> System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 127.0.0.1:8080
+   at System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at MyERP.Web.NoSequenceRepository.GetNextNo(Int64 seqId, DateTime date) in C:\Projects\MyERP-Web\MyERP.Web\Repository\NoSequenceRepository.cs:line 63
+---> (Inner Exception #0) System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 127.0.0.1:8080
+   at System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---<---
+
+INFO  2018-11-24 12:33:01,413 199466ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 12:33:01,413 199466ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+ERROR 2018-11-24 12:33:03,454 201508ms NoSequenceRepository   GetNextNo          - Failed
+System.AggregateException: One or more errors occurred. ---> System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 127.0.0.1:8080
+   at System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at MyERP.Web.NoSequenceRepository.GetNextNo(Int64 seqId, DateTime date) in C:\Projects\MyERP-Web\MyERP.Web\Repository\NoSequenceRepository.cs:line 63
+---> (Inner Exception #0) System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 127.0.0.1:8080
+   at System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---<---
+
+INFO  2018-11-24 15:02:18,353 120104ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 15:02:18,379 120130ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+INFO  2018-11-24 15:02:46,772 148523ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 15:02:46,773 148524ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+INFO  2018-11-24 15:03:28,580 190331ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 15:03:28,581 190332ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+INFO  2018-11-24 15:03:56,170 217922ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 15:03:56,171 217923ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+INFO  2018-11-24 15:04:08,497 230248ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 15:04:08,498 230249ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+INFO  2018-11-24 15:16:42,470 167902ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 15:16:42,489 167921ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+INFO  2018-11-24 15:37:19,913 93470ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 15:37:19,969 93526ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+INFO  2018-11-24 15:37:46,637 120194ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 15:37:46,638 120195ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+INFO  2018-11-24 15:37:58,906 132463ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 15:37:58,907 132464ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+INFO  2018-11-24 15:46:15,762 124577ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 15:46:15,780 124595ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+INFO  2018-11-24 15:57:31,238 167518ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 15:57:31,259 167539ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+INFO  2018-11-24 16:06:38,483 71076ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 16:06:38,507 71100ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+INFO  2018-11-24 16:07:15,845 108437ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 16:07:15,845 108437ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+INFO  2018-11-24 16:10:17,768 87831ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 16:10:17,810 87873ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+INFO  2018-11-24 16:20:54,870 64890ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 16:20:54,889 64909ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+INFO  2018-11-24 16:31:12,092 84266ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 16:31:12,110 84284ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=13&date=2018/11/24
+INFO  2018-11-24 17:14:25,225 75611ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 17:14:25,262 75648ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+ERROR 2018-11-24 17:24:20,842 16084ms stomMembershipProvider ValidateUser       - Failed
+System.NotSupportedException: There is no store type corresponding to the conceptual side type 'SByte' of primitive type 'SByte'.
+   at System.Data.Entity.SqlServer.SqlProviderManifest.GetStoreType(TypeUsage edmType)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.StructuralTypeMappingGenerator.MapTableColumn(EdmProperty property, String columnName, Boolean isInstancePropertyOnDerivedType)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.PropertyMappingGenerator.Generate(EntityType entityType, IEnumerable`1 properties, EntitySetMapping entitySetMapping, MappingFragment entityTypeMappingFragment, IList`1 propertyPath, Boolean createNewColumn)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.TableMappingGenerator.Generate(EntityType entityType, DbDatabaseMapping databaseMapping)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.DatabaseMappingGenerator.GenerateEntityTypes(DbDatabaseMapping databaseMapping)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.DatabaseMappingGenerator.Generate(EdmModel conceptualModel)
+   at System.Data.Entity.DbModelBuilder.Build(DbProviderManifest providerManifest, DbProviderInfo providerInfo)
+   at System.Data.Entity.DbModelBuilder.Build(DbConnection providerConnection)
+   at System.Data.Entity.Internal.LazyInternalContext.CreateModel(LazyInternalContext internalContext)
+   at System.Data.Entity.Internal.RetryLazy`2.GetValue(TInput input)
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at MyERP.Web.CustomMembershipProvider.ValidateUser(String username, String password) in C:\Projects\MyERP-Web\MyERP.Web\CustomMembershipProvider.cs:line 42
+ERROR 2018-11-24 17:24:35,274 30516ms stomMembershipProvider ValidateUser       - Failed
+System.NotSupportedException: There is no store type corresponding to the conceptual side type 'SByte' of primitive type 'SByte'.
+   at System.Data.Entity.SqlServer.SqlProviderManifest.GetStoreType(TypeUsage edmType)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.StructuralTypeMappingGenerator.MapTableColumn(EdmProperty property, String columnName, Boolean isInstancePropertyOnDerivedType)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.PropertyMappingGenerator.Generate(EntityType entityType, IEnumerable`1 properties, EntitySetMapping entitySetMapping, MappingFragment entityTypeMappingFragment, IList`1 propertyPath, Boolean createNewColumn)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.TableMappingGenerator.Generate(EntityType entityType, DbDatabaseMapping databaseMapping)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.DatabaseMappingGenerator.GenerateEntityTypes(DbDatabaseMapping databaseMapping)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.DatabaseMappingGenerator.Generate(EdmModel conceptualModel)
+   at System.Data.Entity.DbModelBuilder.Build(DbProviderManifest providerManifest, DbProviderInfo providerInfo)
+   at System.Data.Entity.DbModelBuilder.Build(DbConnection providerConnection)
+   at System.Data.Entity.Internal.LazyInternalContext.CreateModel(LazyInternalContext internalContext)
+   at System.Data.Entity.Internal.RetryLazy`2.GetValue(TInput input)
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at MyERP.Web.CustomMembershipProvider.ValidateUser(String username, String password) in C:\Projects\MyERP-Web\MyERP.Web\CustomMembershipProvider.cs:line 42
+ERROR 2018-11-24 17:24:50,268 45510ms stomMembershipProvider ValidateUser       - Failed
+System.NotSupportedException: There is no store type corresponding to the conceptual side type 'SByte' of primitive type 'SByte'.
+   at System.Data.Entity.SqlServer.SqlProviderManifest.GetStoreType(TypeUsage edmType)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.StructuralTypeMappingGenerator.MapTableColumn(EdmProperty property, String columnName, Boolean isInstancePropertyOnDerivedType)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.PropertyMappingGenerator.Generate(EntityType entityType, IEnumerable`1 properties, EntitySetMapping entitySetMapping, MappingFragment entityTypeMappingFragment, IList`1 propertyPath, Boolean createNewColumn)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.TableMappingGenerator.Generate(EntityType entityType, DbDatabaseMapping databaseMapping)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.DatabaseMappingGenerator.GenerateEntityTypes(DbDatabaseMapping databaseMapping)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.DatabaseMappingGenerator.Generate(EdmModel conceptualModel)
+   at System.Data.Entity.DbModelBuilder.Build(DbProviderManifest providerManifest, DbProviderInfo providerInfo)
+   at System.Data.Entity.DbModelBuilder.Build(DbConnection providerConnection)
+   at System.Data.Entity.Internal.LazyInternalContext.CreateModel(LazyInternalContext internalContext)
+   at System.Data.Entity.Internal.RetryLazy`2.GetValue(TInput input)
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at MyERP.Web.CustomMembershipProvider.ValidateUser(String username, String password) in C:\Projects\MyERP-Web\MyERP.Web\CustomMembershipProvider.cs:line 42
+ERROR 2018-11-24 17:25:11,703 66944ms stomMembershipProvider ValidateUser       - Failed
+System.NotSupportedException: There is no store type corresponding to the conceptual side type 'SByte' of primitive type 'SByte'.
+   at System.Data.Entity.SqlServer.SqlProviderManifest.GetStoreType(TypeUsage edmType)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.StructuralTypeMappingGenerator.MapTableColumn(EdmProperty property, String columnName, Boolean isInstancePropertyOnDerivedType)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.PropertyMappingGenerator.Generate(EntityType entityType, IEnumerable`1 properties, EntitySetMapping entitySetMapping, MappingFragment entityTypeMappingFragment, IList`1 propertyPath, Boolean createNewColumn)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.TableMappingGenerator.Generate(EntityType entityType, DbDatabaseMapping databaseMapping)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.DatabaseMappingGenerator.GenerateEntityTypes(DbDatabaseMapping databaseMapping)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.DatabaseMappingGenerator.Generate(EdmModel conceptualModel)
+   at System.Data.Entity.DbModelBuilder.Build(DbProviderManifest providerManifest, DbProviderInfo providerInfo)
+   at System.Data.Entity.DbModelBuilder.Build(DbConnection providerConnection)
+   at System.Data.Entity.Internal.LazyInternalContext.CreateModel(LazyInternalContext internalContext)
+   at System.Data.Entity.Internal.RetryLazy`2.GetValue(TInput input)
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at MyERP.Web.CustomMembershipProvider.ValidateUser(String username, String password) in C:\Projects\MyERP-Web\MyERP.Web\CustomMembershipProvider.cs:line 42
+ERROR 2018-11-24 17:26:14,784 130025ms stomMembershipProvider ValidateUser       - Failed
+System.NotSupportedException: There is no store type corresponding to the conceptual side type 'SByte' of primitive type 'SByte'.
+   at System.Data.Entity.SqlServer.SqlProviderManifest.GetStoreType(TypeUsage edmType)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.StructuralTypeMappingGenerator.MapTableColumn(EdmProperty property, String columnName, Boolean isInstancePropertyOnDerivedType)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.PropertyMappingGenerator.Generate(EntityType entityType, IEnumerable`1 properties, EntitySetMapping entitySetMapping, MappingFragment entityTypeMappingFragment, IList`1 propertyPath, Boolean createNewColumn)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.TableMappingGenerator.Generate(EntityType entityType, DbDatabaseMapping databaseMapping)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.DatabaseMappingGenerator.GenerateEntityTypes(DbDatabaseMapping databaseMapping)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.DatabaseMappingGenerator.Generate(EdmModel conceptualModel)
+   at System.Data.Entity.DbModelBuilder.Build(DbProviderManifest providerManifest, DbProviderInfo providerInfo)
+   at System.Data.Entity.DbModelBuilder.Build(DbConnection providerConnection)
+   at System.Data.Entity.Internal.LazyInternalContext.CreateModel(LazyInternalContext internalContext)
+   at System.Data.Entity.Internal.RetryLazy`2.GetValue(TInput input)
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at MyERP.Web.CustomMembershipProvider.ValidateUser(String username, String password) in C:\Projects\MyERP-Web\MyERP.Web\CustomMembershipProvider.cs:line 42
+INFO  2018-11-24 17:30:48,499 88653ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-24 17:30:48,593 88747ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24

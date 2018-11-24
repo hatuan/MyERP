@@ -54,7 +54,7 @@ namespace MyERP.Web.Models
         public Decimal PurchasePrice { get; set; }
 
         [Display(Name = "Line Disc %")]
-        [DisplayFormat(DataFormatString = "{0:n2}")]
+        [DisplayFormat(DataFormatString = "{0}")]
         public Byte LineDiscountPercentage { get; set; }
 
         [Display(Name = "Line Dis Amount")]
@@ -129,14 +129,14 @@ namespace MyERP.Web.Models
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal VatBaseAmount { get; set; }
 
-        [Display(Name = "Vat")]
+        [Display(Name = "Vat Identity")]
         [Required]
         public long? VatId { get; set; }
 
         public LookupViewModel Vat { get; set; }
 
         [Display(Name = "Vat %")]
-        [DisplayFormat(DataFormatString = "{0:n2}")]
+        [DisplayFormat(DataFormatString = "{0}")]
         public Decimal VatPercentage { get; set; }
 
         [Display(Name = "Vat Amount")]

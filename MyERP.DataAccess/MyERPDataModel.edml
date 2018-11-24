@@ -1650,7 +1650,7 @@
           <Property Name="pay_to_vendor_id" Type="bigint" Nullable="false" />
           <Property Name="pay_to_name" Type="nvarchar" MaxLength="256" />
           <Property Name="pay_to_address" Type="nvarchar" MaxLength="256" />
-          <Property Name="payl_to_contact_id" Type="bigint" />
+          <Property Name="pay_to_contact_id" Type="bigint" />
           <Property Name="pay_to_contact_name" Type="nvarchar" MaxLength="256" />
           <Property Name="pay_to_vat_code" Type="varchar" MaxLength="32" />
           <Property Name="pay_to_vat_note" Type="nvarchar" MaxLength="256">
@@ -1670,7 +1670,7 @@
           <Property Name="total_vat_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_payment" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_payment_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
-          <Property Name="no_printed" Type="int" Nullable="false" />
+          <Property Name="no_printed" Type="int" />
           <Property Name="quote_id" Type="bigint" />
           <Property Name="campaign_id" Type="bigint" />
           <Property Name="opportunity_id" Type="bigint" />
@@ -1739,10 +1739,10 @@
               <Summary>Khong su dung</Summary>
             </Documentation>
           </Property>
-          <Property Name="line_discount_amount" Type="decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="line_discount_amount_lcy" Type="decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="invoice_discount_amount" Type="decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="invoice_discount_amount_lcy" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="line_discount_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="line_discount_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="invoice_discount_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="invoice_discount_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="cost_price" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="cost_price_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="cost_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
@@ -1784,7 +1784,7 @@
               <Summary>Thue tieu thu dac biet LCY</Summary>
             </Documentation>
           </Property>
-          <Property Name="vat_base_amount" Type="decimal" Nullable="false" Precision="38" Scale="29" />
+          <Property Name="vat_base_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="vat_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="vat_base_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="vat_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
@@ -1846,7 +1846,7 @@
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="account_vat_id" Type="bigint" Nullable="false" />
           <Property Name="corresp_account_id" Type="bigint" Nullable="false" />
-          <Property Name="document_header_id" Type="bigint" Nullable="false" />
+          <Property Name="document_header_id" Type="bigint" />
           <Property Name="description" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <Association Name="FK_client_user_profile">
@@ -4046,7 +4046,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_vat_entry_purchase_invoice_header">
-          <End Role="purchase_invoice_header" Type="MyERP.DataAccess.Store.purchase_invoice_header" Multiplicity="1" />
+          <End Role="purchase_invoice_header" Type="MyERP.DataAccess.Store.purchase_invoice_header" Multiplicity="0..1" />
           <End Role="vat_entry" Type="MyERP.DataAccess.Store.vat_entry" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="purchase_invoice_header">
@@ -5943,7 +5943,7 @@
           <Property Name="PayToVendorId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="fb959b26-0b96-4a6f-8e9f-9e5543a2916b" />
           <Property Name="PayToName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="b128fbd6-a492-47e4-80cc-9b8b51a21b7b" />
           <Property Name="PayToAddress" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="9671b5b9-f646-45f4-a4fb-bfcca2f929a7" />
-          <Property Name="PaylToContactId" Type="Int64" ed:ValidateRequired="false" ed:Guid="a452c5ee-f8ef-46a9-a585-d36dde66fc05" />
+          <Property Name="PayToContactId" Type="Int64" ed:ValidateRequired="false" ed:Guid="a452c5ee-f8ef-46a9-a585-d36dde66fc05" />
           <Property Name="PayToContactName" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="2bd355da-254e-4f4b-9a3d-d1ee6c911a17" />
           <Property Name="PayToVatCode" Type="String" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="53a05c7f-ccc4-41fb-9fe0-dcccd0f7123d" />
           <Property Name="PayToVatNote" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="99d73ce5-5031-4baf-a980-3f4b616b0aad">
@@ -5985,7 +5985,7 @@
           <Property Name="TotalVatAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="22e7c091-622f-48a0-8cf6-1dc32108c2fb" />
           <Property Name="TotalPayment" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="1a36f436-7df1-439d-b30c-b5f73a011008" />
           <Property Name="TotalPaymentLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="315bdddf-2afc-4bfe-9a03-00879ce5c262" />
-          <Property Name="NoPrinted" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="d74371f5-b578-4bfd-a389-3f951e95f5e7" />
+          <Property Name="NoPrinted" Type="Int32" ed:ValidateRequired="false" ed:Guid="d74371f5-b578-4bfd-a389-3f951e95f5e7" />
           <Property Name="QuoteId" Type="Int64" ed:ValidateRequired="false" ed:Guid="12acf1d3-e710-413e-8f92-c5eda6a394f5" />
           <Property Name="CampaignId" Type="Int64" ed:ValidateRequired="false" ed:Guid="7bacc1fa-21d6-45ef-b811-ffa2c7d46f27" />
           <Property Name="OpportunityId" Type="Int64" ed:ValidateRequired="false" ed:Guid="e9d71c83-f3c1-4350-9abb-753d4d48b118" />
@@ -6043,13 +6043,13 @@
               <Summary>Khong su dung</Summary>
             </Documentation>
           </Property>
-          <Property Name="LineDiscountAmount" Type="Decimal" Nullable="false" ed:ValidateRequired="true" ed:Guid="01ef008c-6238-4820-95f8-c952afd252b5" />
+          <Property Name="LineDiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="01ef008c-6238-4820-95f8-c952afd252b5" />
           <Property Name="LineAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="889aaab7-d53f-4d7f-b363-ec33e3864f88" />
           <Property Name="PurchasePriceLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="c3b2ac61-35f4-4fb7-a774-58b59adc1e90" />
-          <Property Name="LineDiscountAmountLCY" Type="Decimal" Nullable="false" ed:ValidateRequired="true" ed:Guid="f600f22c-6807-4203-9073-1e2dd676a455" />
+          <Property Name="LineDiscountAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="f600f22c-6807-4203-9073-1e2dd676a455" />
           <Property Name="LineAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="072034da-3364-4901-94bb-9d43fc334d7e" />
-          <Property Name="InvoiceDiscountAmount" Type="Decimal" Nullable="false" ed:ValidateRequired="true" ed:Guid="c5af9d0f-9a85-4d1e-815d-efeb0fe02a49" />
-          <Property Name="InvoiceDiscountAmountLCY" Type="Decimal" Nullable="false" ed:ValidateRequired="true" ed:Guid="be45fb28-de25-4a9d-bea1-4746c94d4e3d" />
+          <Property Name="InvoiceDiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="c5af9d0f-9a85-4d1e-815d-efeb0fe02a49" />
+          <Property Name="InvoiceDiscountAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="be45fb28-de25-4a9d-bea1-4746c94d4e3d" />
           <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="9686245c-7181-4dd8-838c-b7c9146edafe" />
           <Property Name="UnitPriceLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="0e846d61-eae2-4f7f-a6d9-d51e7892153d" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="7458d352-d224-4cf0-93ba-9b242b6794f4" />
@@ -6059,7 +6059,7 @@
               <Summary>Chi phi</Summary>
             </Documentation>
           </Property>
-          <Property Name="ChargeAmountLCY" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="3d35003a-08b6-4500-a73a-5d765dcbcc60">
+          <Property Name="ChargeAmountLCY" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="3d35003a-08b6-4500-a73a-5d765dcbcc60">
             <Documentation>
               <Summary>Chi phi LCY</Summary>
             </Documentation>
@@ -6084,7 +6084,7 @@
               <Summary>Thue tieu thu dac biet LCY</Summary>
             </Documentation>
           </Property>
-          <Property Name="VatBaseAmount" Type="Decimal" Nullable="false" Precision="38" Scale="29" ed:ValidateRequired="true" ed:Guid="1303a817-2d6c-4118-82cd-1263ddb55e68" />
+          <Property Name="VatBaseAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="1303a817-2d6c-4118-82cd-1263ddb55e68" />
           <Property Name="VatId" Type="Int64" ed:ValidateRequired="false" ed:Guid="205d5092-e7bc-4a61-842d-40d4c4f97a35" />
           <Property Name="VatPercentage" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="4653db05-2c46-4d70-a14e-fcc9e589f8af" />
           <Property Name="VatAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="40a0ea24-24e3-4868-beda-d585aedc60b7" />
@@ -6138,7 +6138,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="24f0519d-696f-438c-99a7-cc533d67d7c2" />
-          <Property Name="DocumentHeaderId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="190465be-7204-4458-96f4-064678b4416a" />
+          <Property Name="DocumentHeaderId" Type="Int64" ed:ValidateRequired="false" ed:Guid="190465be-7204-4458-96f4-064678b4416a" />
           <Property Name="DocumentType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="32396f5f-89d5-42f7-ae6f-938e7da894db" />
           <Property Name="DocumentSubType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="e6b323c9-4039-4e22-b6c0-19654fa1a29d" />
           <Property Name="DocumentNo" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="aea795a3-c524-4847-b162-7dd07772cd11" />
@@ -8381,7 +8381,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="PurchaseInvoiceHeader_VatEntry" ed:Guid="5cb64495-aab5-447f-afb5-156080339a80">
-          <End Role="PurchaseInvoiceHeader" Type="MyERP.DataAccess.PurchaseInvoiceHeader" Multiplicity="1" />
+          <End Role="PurchaseInvoiceHeader" Type="MyERP.DataAccess.PurchaseInvoiceHeader" Multiplicity="0..1" />
           <End Role="VatEntries" Type="MyERP.DataAccess.VatEntry" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PurchaseInvoiceHeader">
@@ -9312,7 +9312,7 @@
                 <ScalarProperty Name="PayToVendorId" ColumnName="pay_to_vendor_id" />
                 <ScalarProperty Name="PayToName" ColumnName="pay_to_name" />
                 <ScalarProperty Name="PayToAddress" ColumnName="pay_to_address" />
-                <ScalarProperty Name="PaylToContactId" ColumnName="payl_to_contact_id" />
+                <ScalarProperty Name="PayToContactId" ColumnName="pay_to_contact_id" />
                 <ScalarProperty Name="PayToContactName" ColumnName="pay_to_contact_name" />
                 <ScalarProperty Name="PayToVatCode" ColumnName="pay_to_vat_code" />
                 <ScalarProperty Name="PayToVatNote" ColumnName="pay_to_vat_note" />

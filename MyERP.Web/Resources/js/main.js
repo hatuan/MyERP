@@ -264,6 +264,13 @@ var PurchaseInvoice = {
         return "";
     },
 
+    VatRenderer: function (value, metadata, record, rowIndex, colIndex, store) {
+        if (Ext.isDefined(record.data.Vat) && record.data.Vat !== null && value > 0) {
+            return record.data.Vat.Code;
+        }
+        return "";
+    },
+
     PurchaseInvoiceLineBeforeEdit: function (editor, e) {
         e.grid.getSelectionModel().select(e.rowIdx, true);
 
@@ -342,7 +349,7 @@ var VatEntry = {
             case "BusinessPartnerId":
                 field.store.id = e.record.data.BusinessPartnerId;
                 if (e.record.data.BusinessPartner !== null) {
-                    field.store.add(e.record.BusinessPartner.Item);
+                    field.store.add(e.record.BusinessPartner);
                 }
                 break;
             case "VatId":

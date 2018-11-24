@@ -21,7 +21,7 @@ namespace MyERP.Web
 
         public Paging<PurchaseInvoiceHeader> Paging(int start, int limit, string sort, SortDirection dir, string filter, DocumentType documentType)
         {
-            var entities = Get(includePaths: new String[] { "Organization", "Client", "RecCreatedByUser", "RecModifiedByUser", "Currency" });
+            var entities = Get(includePaths: new String[] { "Organization", "Client", "RecCreatedByUser", "RecModifiedByUser", "Currency", "AccountPayable", "BuyFromVendor", "PayToVendor" });
 
             entities = entities.Where(c => c.DocumentType == (byte)documentType);
 

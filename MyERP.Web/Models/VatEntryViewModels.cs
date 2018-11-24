@@ -34,6 +34,7 @@ namespace MyERP.Web.Models
         */
         [Display(Name = "Invoice Number")]
         [Required]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public string InvoiceNumber { get; set; }
 
         [Display(Name = "Invoice Date")]
@@ -44,6 +45,7 @@ namespace MyERP.Web.Models
 
         [Display(Name = "Invoice Series")]
         [Required]
+        [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public string InvoiceSeries { get; set; }
         
         [Display(Name = "Business Partner")]
@@ -72,11 +74,11 @@ namespace MyERP.Web.Models
         public String Description { get; set; }
 
         [Display(Name = "Currency")]
-        public long CurrencyId { get; set; }
+        public long? CurrencyId { get; set; }
 
         [Display(Name = "Currency Factor")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
-        public Decimal CurrencyFactor { get; set; }
+        public Decimal? CurrencyFactor { get; set; }
 
         [Display(Name = "Vat Base Amount")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
@@ -88,7 +90,7 @@ namespace MyERP.Web.Models
 
         [Display(Name = "Vat")]
         [Required]
-        public long? VatId { get; set; }
+        public long VatId { get; set; }
 
         public LookupViewModel Vat { get; set; }
 

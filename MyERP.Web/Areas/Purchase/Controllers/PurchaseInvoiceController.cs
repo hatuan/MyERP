@@ -133,17 +133,17 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 CurrencyId = currencyLcyId,
                 CurrencyFactor = 1,
                 PurchaseInvoiceLines = new List<PurchaseInvoiceLineEditViewModel>(),
-                PurchaseVatEntries = new List<VatEntryEditViewModel>(),
+                VatEntries = new List<VatEntryEditViewModel>(),
                 Status = PurchaseInvoiceDocumentStatusType.Draft
             };
 
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.Get(c => c.Id == _id, new string[] { "AccountPayable", "BuyFromVendor", "PayToVendor", "Currency", "PurchaseInvoiceLines", "PurchaseInvoiceLines.Item", "PurchaseInvoiceLines.Location", "PurchaseInvoiceLines.Uom", "PurchaseInvoiceLines.Vat" }).SingleOrDefault();
+                var entity = repository.Get(c => c.Id == _id, new string[] { "AccountPayable", "BuyFromVendor", "PayToVendor", "Currency", "PurchaseInvoiceLines", "PurchaseInvoiceLines.Item", "PurchaseInvoiceLines.Location", "PurchaseInvoiceLines.Uom", "PurchaseInvoiceLines.Vat", "VatEntries", "VatEntries.BusinessPartner", "VatEntries.Vat", "VatEntries.AccountVat" }).SingleOrDefault();
                 if (entity == null)
                 {
-                    return this.Direct(false, "Cash Header has been changed or deleted! Please check");
+                    return this.Direct(false, "Document has been changed or deleted! Please check");
                 }
 
                 List<PurchaseInvoiceLineEditViewModel> purchaseInvoiceLines = (from purchaseInvoiceLine in entity.PurchaseInvoiceLines
@@ -153,7 +153,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                              LineNo = purchaseInvoiceLine.LineNo,
                                                              Type = purchaseInvoiceLine.Type,
                                                              ItemId = purchaseInvoiceLine.ItemId,
-                                                             Item = new LookupViewModel()
+                                                             Item = purchaseInvoiceLine.Item == null ? null : new LookupViewModel()
                                                              {
                                                                  Code = purchaseInvoiceLine.Item.Code,
                                                                  OrganizationCode = "",
@@ -163,7 +163,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                              }, 
                                                              Description = purchaseInvoiceLine.Description,
                                                              UomId = purchaseInvoiceLine.UomId,
-                                                             Uom = new LookupViewModel()
+                                                             Uom = purchaseInvoiceLine.Uom == null ? null : new LookupViewModel()
                                                              {
                                                                  Code = purchaseInvoiceLine.Uom.Code,
                                                                  OrganizationCode = "",
@@ -173,7 +173,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                              },
                                                              UomDescription = purchaseInvoiceLine.Uom == null ? null : purchaseInvoiceLine.Uom.Description,
                                                              LocationId = purchaseInvoiceLine.LocationId,
-                                                             Location = new LookupViewModel()
+                                                             Location = purchaseInvoiceLine.Location == null ? null : new LookupViewModel()
                                                              {
                                                                  Code = purchaseInvoiceLine.Location.Code,
                                                                  OrganizationCode = "",
@@ -203,7 +203,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                              ExciseTaxAmountLCY = purchaseInvoiceLine.ExciseTaxAmountLCY,
                                                              VatBaseAmount = purchaseInvoiceLine.VatBaseAmount,
                                                              VatId = purchaseInvoiceLine.VatId,
-                                                             Vat = new LookupViewModel()
+                                                             Vat = purchaseInvoiceLine.Vat == null ? null : new LookupViewModel()
                                                              {
                                                                  Code = purchaseInvoiceLine.Vat.Code,
                                                                  OrganizationCode = "",
@@ -224,6 +224,53 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                              CostPriceQtyBaseLCY = purchaseInvoiceLine.CostPriceQtyBaseLCY,
                                                              CostAmountLCY = purchaseInvoiceLine.CostAmountLCY,
                                                          }).ToList();
+
+                List<VatEntryEditViewModel> purchaseVatEntries = (from line in entity.VatEntries
+                                                                select new VatEntryEditViewModel()
+                                                                {
+                                                                    Id = line.Id,
+                                                                    LineNo = line.LineNo,
+                                                                    InvoiceIssuedDate = line.InvoiceIssuedDate,
+                                                                    InvoiceNumber = line.InvoiceNumber,
+                                                                    InvoiceSeries = line.InvoiceSeries,
+                                                                    BusinessPartnerId = line.BusinessPartnerId,
+                                                                    BusinessPartner = new LookupViewModel()
+                                                                    {
+                                                                        Code = line.BusinessPartner.Code,
+                                                                        OrganizationCode = "",
+                                                                        Description = line.BusinessPartner.Description,
+                                                                        Status = (DefaultStatusType)line.BusinessPartner.Status
+                                                                    },
+                                                                    BusinessPartnerName = line.BusinessPartnerName,
+                                                                    BusinessPartnerAddress = line.BusinessPartnerAddress,
+                                                                    TaxCode = line.TaxCode,
+                                                                    Description = line.Description,
+                                                                    CurrencyId = line.CurrencyId,
+                                                                    CurrencyFactor = line.CurrencyFactor,
+                                                                    VatBaseAmount = line.VatBaseAmount,
+                                                                    VatId = line.VatId,
+                                                                    Vat = new LookupViewModel()
+                                                                    {
+                                                                        Code = line.Vat.Code,
+                                                                        OrganizationCode = "",
+                                                                        Description = line.Vat.Description,
+                                                                        Status = (DefaultStatusType)line.Vat.Status
+
+                                                                    },
+                                                                    VatPercentage = line.VatPercentage,
+                                                                    VatAmount = line.VatAmount,
+                                                                    VatBaseAmountLCY = line.VatBaseAmountLCY,
+                                                                    VatAmountLCY = line.VatAmountLCY,
+                                                                    AccountVatId = line.AccountVatId,
+                                                                    AccountVat = new LookupViewModel()
+                                                                    {
+                                                                        Code = line.AccountVat.Code,
+                                                                        OrganizationCode = "",
+                                                                        Description = line.AccountVat.Description,
+                                                                        Status = (DefaultStatusType)line.AccountVat.Status
+
+                                                                    },
+                                                                }).ToList();
 
                 model = new PurchaseInvoiceHeaderEditViewModel()
                 {
@@ -249,6 +296,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     AccountPayableId = entity.AccountPayableId,
                     Description = entity.Description,
                     PurchaseInvoiceLines = purchaseInvoiceLines,
+                    VatEntries = purchaseVatEntries,
                     TotalLineAmount = entity.TotalLineAmount,
                     TotalLineAmountLCY = entity.TotalLineAmountLCY,
                     TotalAmount = entity.TotalAmount,
@@ -324,6 +372,38 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                         Code = x.Location.Code,
                         Description = x.Location.Description,
                     }).ToList();
+
+                ViewData["Vats"] = purchaseInvoiceLines.Where(x => x.Vat != null).GroupBy(x => new { x.VatId }).Select(i => i.First())
+                    .Select(x => new ExtNetComboBoxModel
+                    {
+                        Id = x.VatId,
+                        Code = x.Vat.Code,
+                        Description = x.Vat.Description,
+                    }).ToList();
+
+                ViewData["VatEntryBusinessPartnerStore"] = purchaseVatEntries.Where(x => x.BusinessPartner != null).GroupBy(x => new { x.BusinessPartnerId }).Select(i => i.First())
+                    .Select(x => new ExtNetComboBoxModel
+                    {
+                        Id = x.BusinessPartnerId,
+                        Code = x.BusinessPartner.Code,
+                        Description = x.BusinessPartner.Description,
+                    }).ToList();
+
+                ViewData["VatEntryVatStore"] = purchaseVatEntries.Where(x => x.Vat != null).GroupBy(x => new { x.VatId }).Select(i => i.First())
+                    .Select(x => new ExtNetComboBoxModel
+                    {
+                        Id = x.VatId,
+                        Code = x.Vat.Code,
+                        Description = x.Vat.Description,
+                    }).ToList();
+
+                ViewData["VatEntryAccountVatStore"] = purchaseVatEntries.Where(x => x.AccountVat != null).GroupBy(x => new { x.AccountVatId }).Select(i => i.First())
+                    .Select(x => new ExtNetComboBoxModel
+                    {
+                        Id = x.AccountVatId,
+                        Code = x.AccountVat.Code,
+                        Description = x.AccountVat.Description,
+                    }).ToList();
             }
 
             return new Ext.Net.MVC.PartialViewResult() { Model = model, ViewData = ViewData };
@@ -331,9 +411,14 @@ namespace MyERP.Web.Areas.Purchase.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _Maintenance(PurchaseInvoiceHeaderEditViewModel headerModel, String purchaseInvoiceLinesJSON)
+        public ActionResult _Maintenance(PurchaseInvoiceHeaderEditViewModel headerModel, String purchaseInvoiceLinesJSON, String vatEntriesJSON)
         {
             List<PurchaseInvoiceLineEditViewModel> purchaseInvoiceLines = JsonConvert.DeserializeObject<List<PurchaseInvoiceLineEditViewModel>>(purchaseInvoiceLinesJSON, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+
+            List<VatEntryEditViewModel> vatEntries = JsonConvert.DeserializeObject<List<VatEntryEditViewModel>>(vatEntriesJSON, new JsonSerializerSettings
             {
                 Culture = Thread.CurrentThread.CurrentCulture
             });
@@ -341,6 +426,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
             //Save
             ModelState.Clear();
             headerModel.PurchaseInvoiceLines = purchaseInvoiceLines;
+            headerModel.VatEntries = vatEntries;
             TryValidateModel(headerModel);
             if (!ModelState.IsValid)
             {
@@ -358,7 +444,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
 
             if (headerModel.Id.HasValue)
             {
-                var updatePurchaseInvoiceHeader = repository.Get(c => c.Id == headerModel.Id, new string[] { "PurchaseInvoiceLines" }).SingleOrDefault();
+                var updatePurchaseInvoiceHeader = repository.Get(c => c.Id == headerModel.Id, new string[] { "PurchaseInvoiceLines", "VatEntries" }).SingleOrDefault();
                 if (updatePurchaseInvoiceHeader == null || updatePurchaseInvoiceHeader.Version != headerModel.Version)
                 {
                     return this.Direct(false, "Purchase Invoice has been changed or deleted! Please check");
@@ -517,6 +603,66 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     this.repository.DataContext.PurchaseInvoiceLines.Remove(purchaseInvoiceLine); //this.repository.DataContext.Entry(salesPriceRemove).State = EntityState.Deleted;
                 }
 
+                //vat enties
+                foreach (var vatEntry in vatEntries)
+                {
+                    if (vatEntry.Id == 0 || vatEntry.Id == null)
+                        updatePurchaseInvoiceHeader.VatEntries.Add(new DataAccess.VatEntry()
+                        {
+                            ClientId = clientId,
+                            OrganizationId = organizationId,
+                            LineNo = vatEntry.LineNo,
+                            DocumentType = (byte)headerModel.DocumentType,
+                            DocumentSubType = (byte)headerModel.DocSubType,
+                            DocumentNo = headerModel.DocumentNo,
+                            PostingDate = headerModel.PostingDate,
+                            BusinessPartnerId = vatEntry.BusinessPartnerId,
+                            BusinessPartnerName = vatEntry.BusinessPartnerName,
+                            BusinessPartnerAddress = vatEntry.BusinessPartnerAddress,
+                            TaxCode = vatEntry.TaxCode,
+                            Description = vatEntry.Description,
+                            VatBaseAmount = vatEntry.VatBaseAmount,
+                            VatBaseAmountLCY = vatEntry.VatBaseAmountLCY,
+                            VatId = vatEntry.VatId,
+                            VatPercentage = vatEntry.VatPercentage,
+                            VatAmount = vatEntry.VatAmount,
+                            VatAmountLCY = vatEntry.VatAmountLCY,
+                            AccountVatId = vatEntry.AccountVatId,
+                            CorrespAccountId = headerModel.AccountPayableId,
+                        });
+                    else
+                    {
+                        updatePurchaseInvoiceHeader.VatEntries.Where(c => c.Id == vatEntry.Id)
+                            .ForEach(x =>
+                            {
+                                x.LineNo = vatEntry.LineNo;
+                                x.DocumentType = (byte)headerModel.DocumentType;
+                                x.DocumentSubType = (byte) headerModel.DocSubType;
+                                x.DocumentNo = headerModel.DocumentNo;
+                                x.PostingDate = headerModel.PostingDate;
+                                x.BusinessPartnerId = vatEntry.BusinessPartnerId;
+                                x.BusinessPartnerName = vatEntry.BusinessPartnerName;
+                                x.BusinessPartnerAddress = vatEntry.BusinessPartnerAddress;
+                                x.TaxCode = vatEntry.TaxCode;
+                                x.Description = vatEntry.Description;
+                                x.VatBaseAmount = vatEntry.VatBaseAmount;
+                                x.VatBaseAmountLCY = vatEntry.VatBaseAmountLCY;
+                                x.VatId = vatEntry.VatId;
+                                x.VatPercentage = vatEntry.VatPercentage;
+                                x.VatAmount = vatEntry.VatAmount;
+                                x.VatAmountLCY = vatEntry.VatAmountLCY;
+                                x.AccountVatId = vatEntry.AccountVatId;
+                                x.CorrespAccountId = headerModel.AccountPayableId;
+                            });
+                    }
+                }
+
+                foreach (var vatEntry in updatePurchaseInvoiceHeader.VatEntries.Where(x => vatEntries.All(u => u.Id != x.Id && u.Id != 0 && u.Id.HasValue)).ToList())
+                {
+                    updatePurchaseInvoiceHeader.VatEntries.Remove(vatEntry);
+                    this.repository.DataContext.VatEntries.Remove(vatEntry); //this.repository.DataContext.Entry(salesPriceRemove).State = EntityState.Deleted;
+                }
+
                 try
                 {
                     var updateEntity = this.repository.Update(updatePurchaseInvoiceHeader);
@@ -555,6 +701,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     PayToVendorId = headerModel.PayToVendorId,
                     PayToName = headerModel.PayToName,
                     PayToAddress = headerModel.PayToAddress,
+                    PayToContactId = null,
                     PayToContactName = headerModel.PayToContactName,
                     ShipToName = headerModel.ShipToName,
                     ShipToAddress = headerModel.ShipToAddress,
@@ -573,6 +720,12 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     InvoiceDiscountAmountLCY = headerModel.InvoiceDiscountAmountLCY,
                     TotalAmount = headerModel.TotalAmount,
                     TotalAmountLCY = headerModel.TotalAmountLCY,
+                    TotalChargeAmount = headerModel.TotalChargeAmount,
+                    TotalChargeAmountLCY = headerModel.TotalChargeAmountLCY,
+                    TotalImportDutyAmount = headerModel.TotalImportDutyAmount,
+                    TotalImportDutyAmountLCY = headerModel.TotalImportDutyAmountLCY,
+                    TotalExciseTaxAmount = headerModel.TotalExciseTaxAmount,
+                    TotalExciseTaxAmountLCY = headerModel.TotalExciseTaxAmountLCY,
                     TotalVatAmount = headerModel.TotalVatAmount,
                     TotalVatAmountLCY = headerModel.TotalVatAmountLCY,
                     TotalPayment = headerModel.TotalPayment,
@@ -584,6 +737,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     RecCreatedAt = DateTime.Now,
                     RecModifiedBy = (long)user.ProviderUserKey
                 };
+
                 newPurchaseInvoiceHeader.PurchaseInvoiceLines = purchaseInvoiceLines
                     .Select(c => new DataAccess.PurchaseInvoiceLine()
                     {
@@ -633,7 +787,35 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                         CostPriceLCY = c.CostPriceLCY,
                         CostPriceQtyBaseLCY = c.CostPriceQtyBaseLCY,
                         CostAmountLCY = c.CostAmountLCY,
-                    }).ToList(); 
+                    }).ToList();
+
+                //VatEntry
+                
+                newPurchaseInvoiceHeader.VatEntries = vatEntries
+                    .Select(c => new DataAccess.VatEntry()
+                    {
+                        ClientId = clientId,
+                        OrganizationId = organizationId,
+                        LineNo = c.LineNo,
+                        DocumentType = (byte)headerModel.DocumentType,
+                        DocumentSubType = (byte)headerModel.DocSubType,
+                        DocumentNo = headerModel.DocumentNo,
+                        PostingDate = headerModel.PostingDate,
+                        BusinessPartnerId = c.BusinessPartnerId,
+                        BusinessPartnerName = c.BusinessPartnerName,
+                        BusinessPartnerAddress = c.BusinessPartnerAddress,
+                        TaxCode = c.TaxCode,
+                        Description = c.Description,
+                        VatBaseAmount = c.VatBaseAmount,
+                        VatBaseAmountLCY = c.VatBaseAmountLCY,
+                        VatId = c.VatId,
+                        VatPercentage = c.VatPercentage,
+                        VatAmount = c.VatAmount,
+                        VatAmountLCY = c.VatAmountLCY,
+                        AccountVatId = c.AccountVatId,
+                        CorrespAccountId = headerModel.AccountPayableId
+                    }).ToList();
+               
                 try
                 {
                     var newEntity = this.repository.AddNew(newPurchaseInvoiceHeader);
@@ -644,15 +826,14 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 {
                     return this.Direct(false, ex.DbEntityValidationExceptionToString());
                 }
-
                 catch (Exception ex)
                 {
                     return this.Direct(false, ex.Message);
                 }
             }
 
-            Store StoreCashPaymentList = X.GetCmp<Store>("StoreCashPaymentList");
-            StoreCashPaymentList.Reload();
+            Store storePurchaseInvoiceList = X.GetCmp<Store>("StorePurchaseInvoiceList");
+            storePurchaseInvoiceList.Reload();
 
             return this.Direct(new { Id = headerModel.Id, Version = headerModel.Version });
         }
@@ -710,6 +891,16 @@ namespace MyERP.Web.Areas.Purchase.Controllers
             this.GetCmp<TextField>("BuyFromVendorName").Value = selectedPartner.Description;
             this.GetCmp<TextField>("BuyFromAddress").Value = selectedPartner.Address;
             this.GetCmp<TextField>("BuyFromContactName").Value = selectedPartner.ContactName;
+            this.GetCmp<Hidden>("BuyFromContactName").Value = selectedPartner.ContactName;
+            this.GetCmp<Hidden>("PayToVendorId").Value = selectedPartner.Id;
+            this.GetCmp<Hidden>("PayToName").Value = selectedPartner.Description;
+            this.GetCmp<Hidden>("PayToAddress").Value = selectedPartner.Address;
+            this.GetCmp<Hidden>("PayToContactName").Value = selectedPartner.ContactName;
+            this.GetCmp<Hidden>("PayToVatCode").Value = selectedPartner.VatCode;
+            this.GetCmp<Hidden>("PayToVatNote").Value = "";
+            this.GetCmp<Hidden>("ShipToName").Value = selectedPartner.Description;
+            this.GetCmp<Hidden>("ShipToAddress").Value = selectedPartner.Address;
+            this.GetCmp<Hidden>("ShipToContactName").Value = selectedPartner.ContactName;
 
             return this.Direct();
         }
@@ -890,6 +1081,28 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 }
                 case "VatId":
                 {
+                    var vatRepository = new VatRepository();
+                    var vatId = Convert.ToInt64(newValue);
+                    var vat = vatRepository.Get(c => c.Id == vatId, new string[] { "Organization" }).First();
+                    var vatModel = new LookupViewModel()
+                    {
+                        Id = vat.Id,
+                        Code = vat.Code,
+                        Description = vat.Description,
+                        OrganizationCode = vat.Organization.Code,
+                        Status = (DefaultStatusType)vat.Status
+                    };
+
+                    record.Set("Vat", vatModel);
+                    record.Set("VatPercentage", vat.VatPercentage);
+
+                    purchaseInvoiceLineEditViewModel.VatId = vat.Id;
+                    purchaseInvoiceLineEditViewModel.VatPercentage = vat.VatPercentage;
+
+                    var purchaseInvoiceLineRepository = new PurchaseInvoiceLineRepository();
+                    purchaseInvoiceLineRepository.Update("VatPercentage", currencyLcyId, ref purchaseInvoiceHeaderEditViewModel, ref purchaseInvoiceLineEditViewModel);
+
+                    purchaseInvoiceLineRepository.UpdateRecord(purchaseInvoiceLineEditViewModel, ref record);
                     break;
                 }
                 case "Quantity":
