@@ -41,7 +41,7 @@
                                              "          var index = App.PurchaseInvoiceList.store.indexOf(record); \n" +
                                              "          App.PurchaseInvoiceList.getSelectionModel().select(index, true); \n" +
                                              "          Ext.net.directRequest({ \n" +
-                                             "              url:baseURL+'/Cash/CashPayment/_Maintenance?id='+result.result.Id, \n" +
+                                             "              url:baseURL + 'Purchase/PurchaseInvoice/_Maintenance?id='+result.result.Id, \n" +
                                              "              method:'GET', eventMask:{showMask:true}, \n" +
                                              "              success: function() { \n" +
                                              "                  Ext.Msg.alert('Status', 'Changes saved successfully', Ext.emptyFn); \n" +
@@ -383,7 +383,7 @@
                                                                 /*this.getStore().load();*/";
                                               })
                                           ,
-                                    Html.X().ComboBoxFor(m => m.DocSubType).ID("DocSubType").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.CashPaymentDocumentSubType)).Hidden(true)),
+                                    Html.X().ComboBoxFor(m => m.DocSubType).ID("DocSubType").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.PurchaseInvoiceDocumentSubType)).Hidden(true)),
                             Html.X().Panel()
                                 .Layout(LayoutType.Form)
                                 .Width(300)
@@ -837,7 +837,7 @@
                                   .Layout(LayoutType.Fit)
                                   .Title("Vat Enties")
                                   .Border(true)
-                                  .ItemsFromAction("Index", "VatEntry", new { area = "Vat", model = new { PurchaseVatEntries = Model.VatEntries }, documentCurrencyIsLCY = documentCurrencyIsLCY }));
+                                  .ItemsFromAction("Index", "VatEntry", new { area = "Vat", model = Model.VatEntries, documentCurrencyIsLCY = documentCurrencyIsLCY }));
                           }));
                       items.Add(Html.X().Container()
                           .Layout(LayoutType.HBox)

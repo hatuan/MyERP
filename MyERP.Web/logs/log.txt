@@ -245,3 +245,58 @@ System.NotSupportedException: There is no store type corresponding to the concep
    at MyERP.Web.CustomMembershipProvider.ValidateUser(String username, String password) in C:\Projects\MyERP-Web\MyERP.Web\CustomMembershipProvider.cs:line 42
 INFO  2018-11-24 17:30:48,499 88653ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
 INFO  2018-11-24 17:30:48,593 88747ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/24
+INFO  2018-11-25 12:12:32,332 282858ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-25 12:12:32,355 282881ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
+ERROR 2018-11-25 12:12:34,518 285045ms NoSequenceRepository   GetNextNo          - Failed : NoSequenceRepository.cs -> GetNextNo error = 
+System.AggregateException: One or more errors occurred. ---> System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 127.0.0.1:8080
+   at System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at MyERP.Web.NoSequenceRepository.GetNextNo(Int64 seqId, DateTime date) in C:\Projects\MyERP-Web\MyERP.Web\Repository\NoSequenceRepository.cs:line 63
+---> (Inner Exception #0) System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 127.0.0.1:8080
+   at System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---<---
+
+INFO  2018-11-25 12:12:55,632 306158ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-25 12:12:55,633 306159ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
+INFO  2018-11-25 12:13:21,780 332306ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-25 12:13:21,782 332308ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
+INFO  2018-11-25 12:35:43,976 280613ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-25 12:35:44,018 280655ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
+INFO  2018-11-25 13:08:59,717 141085ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-25 13:08:59,746 141114ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
+INFO  2018-11-25 13:09:17,869 159237ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-25 13:09:17,870 159238ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
+INFO  2018-11-25 13:09:27,966 169334ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-25 13:09:27,967 169335ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
+INFO  2018-11-25 13:09:42,751 184119ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-25 13:09:42,752 184120ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
+INFO  2018-11-25 14:21:06,312 176352ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-25 14:21:06,345 176386ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
+INFO  2018-11-25 14:21:22,452 192492ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-25 14:21:22,453 192493ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
+INFO  2018-11-25 22:01:59,864 152586ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-25 22:01:59,897 152619ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
+INFO  2018-11-25 22:02:44,542 197264ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-25 22:02:44,542 197264ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
+INFO  2018-11-25 22:03:12,638 225360ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-25 22:03:12,639 225361ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
+INFO  2018-11-25 22:46:59,424 115803ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-25 22:46:59,454 115832ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
+INFO  2018-11-25 22:47:39,625 156004ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-25 22:47:39,626 156005ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
+INFO  2018-11-25 22:51:56,953 136713ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-25 22:51:56,973 136733ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25

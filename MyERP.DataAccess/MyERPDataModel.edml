@@ -780,10 +780,6 @@
             <End Role="purchase_invoice_header" EntitySet="purchase_invoice_headers" />
             <End Role="vat_entry" EntitySet="vat_entries" />
           </AssociationSet>
-          <AssociationSet Name="FK_vat_entry_cash_header" Association="MyERP.DataAccess.Store.FK_vat_entry_cash_header">
-            <End Role="cash_header" EntitySet="cash_headers" />
-            <End Role="vat_entry" EntitySet="vat_entries" />
-          </AssociationSet>
           <AssociationSet Name="FK_vat_client" Association="MyERP.DataAccess.Store.FK_vat_client">
             <End Role="client" EntitySet="clients" />
             <End Role="vat" EntitySet="vats" />
@@ -799,6 +795,10 @@
           <AssociationSet Name="FK_vat_user1" Association="MyERP.DataAccess.Store.FK_vat_user1">
             <End Role="user" EntitySet="users" />
             <End Role="vat" EntitySet="vats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vat_entry_cash_header" Association="MyERP.DataAccess.Store.FK_vat_entry_cash_header">
+            <End Role="cash_header" EntitySet="cash_headers" />
+            <End Role="vat_entry" EntitySet="vat_entries" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
@@ -1470,6 +1470,7 @@
           <Property Name="status" Type="smallint" Nullable="false" />
           <Property Name="location_id" Type="bigint" />
           <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="doc_sub_type" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="purchase_line">
           <Key>
@@ -1705,6 +1706,7 @@
           <Property Name="total_import_duty_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_excise_tax_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_excise_tax_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="doc_sub_type" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="purchase_invoice_line">
           <Key>
@@ -1833,7 +1835,7 @@
           <Property Name="business_partner_id" Type="bigint" Nullable="false" />
           <Property Name="business_partner_name" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="business_partner_address" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="tax_code" Type="varchar" Nullable="false" MaxLength="32" />
+          <Property Name="tax_code" Type="varchar" MaxLength="32" />
           <Property Name="currency_id" Type="bigint" />
           <Property Name="currency_factor" Type="decimal" Precision="38" Scale="20" />
           <Property Name="vat_base_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
@@ -1846,8 +1848,9 @@
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="account_vat_id" Type="bigint" Nullable="false" />
           <Property Name="corresp_account_id" Type="bigint" Nullable="false" />
-          <Property Name="document_header_id" Type="bigint" />
+          <Property Name="purch_header_id" Type="bigint" />
           <Property Name="description" Type="nvarchar" MaxLength="256" />
+          <Property Name="cash_header_id" Type="bigint" />
         </EntityType>
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
@@ -4053,19 +4056,7 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="vat_entry">
-              <PropertyRef Name="document_header_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_vat_entry_cash_header">
-          <End Role="cash_header" Type="MyERP.DataAccess.Store.cash_header" Multiplicity="1" />
-          <End Role="vat_entry" Type="MyERP.DataAccess.Store.vat_entry" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cash_header">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="vat_entry">
-              <PropertyRef Name="document_header_id" />
+              <PropertyRef Name="purch_header_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4114,6 +4105,18 @@
             </Principal>
             <Dependent Role="vat">
               <PropertyRef Name="rec_modified_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vat_entry_cash_header">
+          <End Role="cash_header" Type="MyERP.DataAccess.Store.cash_header" Multiplicity="0..1" />
+          <End Role="vat_entry" Type="MyERP.DataAccess.Store.vat_entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cash_header">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vat_entry">
+              <PropertyRef Name="cash_header_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5680,6 +5683,7 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="aaedeabc-13d0-464d-a274-211663c7937e" />
           <Property Name="DocumentType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="06bf8ad8-2965-4366-92ad-e2cea44fa6f9" />
+          <Property Name="DocSubType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="1c87e3ec-2fcd-450d-a3b9-30be072a3681" />
           <Property Name="DocSequenceId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f3832f19-507d-45c4-a7c7-ea3870a745f0" />
           <Property Name="DocumentNo" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="d60dfa28-80e4-436e-b30b-e4e4e51aff41" />
           <Property Name="DocumentDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="f4601940-d518-406a-a278-939f9e9451f2" />
@@ -5930,6 +5934,7 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="47ff5301-e028-45c0-b6fe-43899cbc4fe9" />
           <Property Name="DocumentType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="9ca925f9-93b9-48aa-8142-ebf4b283aea7" />
+          <Property Name="DocSubType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="2ca8e939-eb72-40e7-becf-d0038ee041a0" />
           <Property Name="DocSequenceId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="2d715850-3f56-4fe9-a762-e3d60bc9d9c7" />
           <Property Name="DocumentNo" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="285f4389-6c26-4d3f-90a5-44713fdfb5d6" />
           <Property Name="DocumentDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="93b06215-92e3-4785-81cc-913c4720ded9" />
@@ -6138,7 +6143,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="24f0519d-696f-438c-99a7-cc533d67d7c2" />
-          <Property Name="DocumentHeaderId" Type="Int64" ed:ValidateRequired="false" ed:Guid="190465be-7204-4458-96f4-064678b4416a" />
+          <Property Name="PurchHeaderId" Type="Int64" ed:ValidateRequired="false" ed:Guid="190465be-7204-4458-96f4-064678b4416a" />
+          <Property Name="CashHeaderId" Type="Int64" ed:ValidateRequired="false" ed:Guid="a2141446-60bd-42a7-8cd6-9c570fe82ded" />
           <Property Name="DocumentType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="32396f5f-89d5-42f7-ae6f-938e7da894db" />
           <Property Name="DocumentSubType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="e6b323c9-4039-4e22-b6c0-19654fa1a29d" />
           <Property Name="DocumentNo" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="aea795a3-c524-4847-b162-7dd07772cd11" />
@@ -6151,7 +6157,7 @@
           <Property Name="BusinessPartnerId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a224e380-ad26-46c1-920e-0313773b9760" />
           <Property Name="BusinessPartnerName" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="9ac4d3cd-9e2d-46f9-8ff9-8cd1855eca63" />
           <Property Name="BusinessPartnerAddress" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="5afa25b6-2a3b-4f3e-8015-80c24702e76e" />
-          <Property Name="TaxCode" Type="String" Nullable="false" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="e3fdc5d5-3a75-4402-9c63-58324fabc725" />
+          <Property Name="TaxCode" Type="String" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="e3fdc5d5-3a75-4402-9c63-58324fabc725" />
           <Property Name="Description" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="0f1f88a3-e7c0-4b5c-af1a-77dc298bef0d" />
           <Property Name="CurrencyId" Type="Int64" ed:ValidateRequired="false" ed:Guid="ea8ddab7-407e-4d18-9b95-fa50633de8f8" />
           <Property Name="CurrencyFactor" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="c2ef4e2d-452f-4a99-91dd-bcaa8c79cb49" />
@@ -8388,19 +8394,19 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="VatEntries">
-              <PropertyRef Name="DocumentHeaderId" />
+              <PropertyRef Name="PurchHeaderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="CashHeader_VatEntry" ed:Guid="322ac7f4-6cbb-46cf-aa65-9425317b2204">
-          <End Role="CashHeader" Type="MyERP.DataAccess.CashHeader" Multiplicity="1" />
+          <End Role="CashHeader" Type="MyERP.DataAccess.CashHeader" Multiplicity="0..1" />
           <End Role="VatEntries" Type="MyERP.DataAccess.VatEntry" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CashHeader">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="VatEntries">
-              <PropertyRef Name="DocumentHeaderId" />
+              <PropertyRef Name="CashHeaderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9128,6 +9134,7 @@
                 <ScalarProperty Name="Status" ColumnName="status" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="LocationId" ColumnName="location_id" />
+                <ScalarProperty Name="DocSubType" ColumnName="doc_sub_type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -9355,6 +9362,7 @@
                 <ScalarProperty Name="TotalImportDutyAmountLCY" ColumnName="total_import_duty_amount_lcy" />
                 <ScalarProperty Name="TotalExciseTaxAmount" ColumnName="total_excise_tax_amount" />
                 <ScalarProperty Name="TotalExciseTaxAmountLCY" ColumnName="total_excise_tax_amount_lcy" />
+                <ScalarProperty Name="DocSubType" ColumnName="doc_sub_type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -9462,8 +9470,9 @@
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
                 <ScalarProperty Name="AccountVatId" ColumnName="account_vat_id" />
                 <ScalarProperty Name="CorrespAccountId" ColumnName="corresp_account_id" />
-                <ScalarProperty Name="DocumentHeaderId" ColumnName="document_header_id" />
+                <ScalarProperty Name="PurchHeaderId" ColumnName="purch_header_id" />
                 <ScalarProperty Name="Description" ColumnName="description" />
+                <ScalarProperty Name="CashHeaderId" ColumnName="cash_header_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

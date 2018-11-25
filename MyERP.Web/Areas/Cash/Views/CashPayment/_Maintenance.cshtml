@@ -11,6 +11,7 @@
           .Height(800)
           .Width(950)
           .Modal(true)
+      .Maximized(true)
           .Layout(LayoutType.Fit)
           .MarginSpec("0 5 5 0")
           .BodyPadding(5)
@@ -39,7 +40,7 @@
                                              "          var index = App.CashPaymentList.store.indexOf(record); \n" +
                                              "          App.CashPaymentList.getSelectionModel().select(index, true); \n" +
                                              "          Ext.net.directRequest({ \n" +
-                                             "              url:baseURL+'/Cash/CashPayment/_Maintenance?id='+result.result.Id, \n" +
+                                             "              url:baseURL + 'Cash/CashPayment/_Maintenance?id='+result.result.Id, \n" +
                                              "              method:'GET', eventMask:{showMask:true}, \n" +
                                              "              success: function() { \n" +
                                              "                  Ext.Msg.alert('Status', 'Changes saved successfully', Ext.emptyFn); \n" +

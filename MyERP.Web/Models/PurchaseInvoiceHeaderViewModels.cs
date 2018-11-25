@@ -106,7 +106,7 @@ namespace MyERP.Web.Models
     {
         public long? Id { get; set; }
 
-        [Display(Name = "Document Ttype")]
+        [Display(Name = "Document Type")]
         public DocumentType DocumentType { get; set; }
 
         [Display(Name = "Document Subtype")]
@@ -164,13 +164,11 @@ namespace MyERP.Web.Models
         public String BuyFromContactName { get; set; }
 
         [Display(Name = "Pay To Vendor")]
-        [Required]
         public long PayToVendorId { get; set; }
 
         public ExtNetComboBoxModel PayToVendor { get; set; }
 
         [Display(Name = "Pay To Name")]
-        [Required]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String PayToName { get; set; }
 
@@ -191,7 +189,6 @@ namespace MyERP.Web.Models
         public String PayToVatNote { get; set; }
 
         [Display(Name = "Ship To Name")]
-        [Required]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String ShipToName { get; set; }
 
