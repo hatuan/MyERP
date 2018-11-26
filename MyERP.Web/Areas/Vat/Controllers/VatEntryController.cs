@@ -153,7 +153,7 @@ namespace MyERP.Web.Areas.Vat.Controllers
                     {
                         var vatRepository = new VatRepository();
                         var vatId = Convert.ToInt64(newValue);
-                        var vat = vatRepository.Get(c => c.Id == vatId, new string[] { "Organization" }).First();
+                        var vat = vatRepository.Get(c => c.Id == vatId, new string[] { "Organization", "AccountInputVat" }).First();
                         var vatModel = new LookupViewModel()
                         {
                             Id = vat.Id,
@@ -165,6 +165,15 @@ namespace MyERP.Web.Areas.Vat.Controllers
 
                         record.Set("Vat", vatModel);
                         record.Set("VatPercentage", vat.VatPercentage);
+                        var accountVat = new LookupViewModel()
+                        {
+                            Id = vat.AccountInputVatId,
+                            Code = vat.AccountInputVat.Code,
+                            OrganizationCode = "",
+                            Status = (DefaultStatusType)vat.AccountInputVat.Status
+                        };
+                        record.Set("AccountVatId", vat.AccountInputVatId);
+                        record.Set("AccountVat", accountVat);
 
                         vatEntryViewModel.VatId = vat.Id;
                         vatEntryViewModel.VatPercentage = vat.VatPercentage;

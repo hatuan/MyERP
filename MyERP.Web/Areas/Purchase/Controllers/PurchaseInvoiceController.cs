@@ -618,6 +618,9 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                             DocumentSubType = (byte)headerModel.DocSubType,
                             DocumentNo = headerModel.DocumentNo,
                             PostingDate = headerModel.PostingDate,
+                            InvoiceIssuedDate = vatEntry.InvoiceIssuedDate,
+                            InvoiceNumber = vatEntry.InvoiceNumber,
+                            InvoiceSeries = vatEntry.InvoiceSeries,
                             BusinessPartnerId = vatEntry.BusinessPartnerId,
                             BusinessPartnerName = vatEntry.BusinessPartnerName,
                             BusinessPartnerAddress = vatEntry.BusinessPartnerAddress,
@@ -642,6 +645,9 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                 x.DocumentSubType = (byte) headerModel.DocSubType;
                                 x.DocumentNo = headerModel.DocumentNo;
                                 x.PostingDate = headerModel.PostingDate;
+                                x.InvoiceIssuedDate = vatEntry.InvoiceIssuedDate;
+                                x.InvoiceNumber = vatEntry.InvoiceNumber;
+                                x.InvoiceSeries = vatEntry.InvoiceSeries;
                                 x.BusinessPartnerId = vatEntry.BusinessPartnerId;
                                 x.BusinessPartnerName = vatEntry.BusinessPartnerName;
                                 x.BusinessPartnerAddress = vatEntry.BusinessPartnerAddress;
