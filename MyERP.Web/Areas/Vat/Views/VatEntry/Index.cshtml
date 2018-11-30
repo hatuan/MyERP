@@ -2,6 +2,7 @@
 
 @{
     var documentCurrencyIsLCY = (bool)ViewData["CurrencyIsLCY"];
+    var headerID = (string) ViewData["HeaderID"];
 }
 
 @(Html.X().GridPanel()
@@ -23,8 +24,8 @@
                           {
                               de.Click.Action = "AddLine";
                               de.Click.ExtraParams.Add(new Parameter("vatEntriesJSON", "#{VatEntryGridPanel}.getRowsValues()", ParameterMode.Raw, true));
-                              de.Click.ExtraParams.Add(new Parameter("headerJSON", "Ext.getCmp(\"FormPurchaseInvoiceHeaderMaintenance\").getForm().getValues()", ParameterMode.Raw, true));
-                              de.Click.Before = "return Ext.getCmp(\"FormPurchaseInvoiceHeaderMaintenance\").getForm().isValid();";
+                              de.Click.ExtraParams.Add(new Parameter("headerJSON", "Ext.getCmp(\"" + headerID + "\").getForm().getValues()", ParameterMode.Raw, true));
+                              de.Click.Before = "return Ext.getCmp(\"" + headerID + "\").getForm().isValid();";
                               de.Click.Success = "function(response, result) {" +
                                                  "  var grid = this.up('grid');" +
                                                  "  var record = grid.store.getById(result.result.LineNo); " +
@@ -241,7 +242,7 @@
                             "               oldValue: e.originalValue, \n" +
                             "               newValue: e.value, \n" +
                             "               recordData: e.record.data, \n" +
-                            "               headerData: Ext.getCmp(\"FormPurchaseInvoiceHeaderMaintenance\").getForm().getValues() \n" +
+                            "               headerData: Ext.getCmp(\"" + headerID + "\").getForm().getValues() \n" +
                             "           }, \n" +
                             "           eventMask: { \n" +
                             "               showMask:true, \n" +
@@ -255,5 +256,6 @@
                             "   } \n" +
                             "}";
           ls.BeforeEdit.Fn = "VatEntry.BeforeEdit";
+          ls.ValidateEdit.Fn = "VatEntry.ValidateEdit";
       }))
 )

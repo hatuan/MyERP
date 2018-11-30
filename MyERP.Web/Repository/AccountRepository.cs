@@ -24,7 +24,7 @@ namespace MyERP.Web
 
         public Paging<Account> Paging(int start, int limit, string sort, SortDirection dir, string filter)
         {
-            var entities = Get(includePaths: new String[] { "Organization", "Client", "RecCreatedByUser", "RecModifiedByUser" });
+            var entities = Get(includePaths: new String[] { "Organization", "Client", "RecCreatedByUser", "RecModifiedByUser", "Parent", "Currency" });
 
             if (!string.IsNullOrEmpty(filter) && filter != "*")
             {

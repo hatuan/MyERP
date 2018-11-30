@@ -163,12 +163,12 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                              }, 
                                                              Description = purchaseInvoiceLine.Description,
                                                              UomId = purchaseInvoiceLine.UomId,
-                                                             Uom = purchaseInvoiceLine.Uom == null ? null : new LookupViewModel()
+                                                             Uom = purchaseInvoiceLine.Uom == null ? null : new ItemUomLookUpViewModel()
                                                              {
+                                                                 UomId = purchaseInvoiceLine.Uom.Id,
                                                                  Code = purchaseInvoiceLine.Uom.Code,
-                                                                 OrganizationCode = "",
                                                                  Description = purchaseInvoiceLine.Uom.Description,
-                                                                 Status = (DefaultStatusType)purchaseInvoiceLine.Uom.Status
+                                                                 QtyPerUom = purchaseInvoiceLine.QtyPerUom
 
                                                              },
                                                              UomDescription = purchaseInvoiceLine.Uom == null ? null : purchaseInvoiceLine.Uom.Description,
@@ -844,8 +844,8 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 }
             }
 
-            Store storePurchaseInvoiceList = X.GetCmp<Store>("StorePurchaseInvoiceList");
-            storePurchaseInvoiceList.Reload();
+            //Store storePurchaseInvoiceList = X.GetCmp<Store>("StorePurchaseInvoiceList");
+            //storePurchaseInvoiceList.Reload();
 
             return this.Direct(new { Id = headerModel.Id, Version = headerModel.Version });
         }

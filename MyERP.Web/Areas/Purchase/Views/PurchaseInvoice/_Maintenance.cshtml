@@ -1,4 +1,5 @@
-﻿@model MyERP.Web.Models.PurchaseInvoiceHeaderEditViewModel
+﻿@using MyERP.DataAccess.Enum
+@model MyERP.Web.Models.PurchaseInvoiceHeaderEditViewModel
 
 @{                                                                                  
     var documentCurrencyIsLCY = Model.CurrencyId == (long)ViewData["CurrencyLCYId"];
@@ -44,7 +45,8 @@
                                              "              url:baseURL + 'Purchase/PurchaseInvoice/_Maintenance?id='+result.result.Id, \n" +
                                              "              method:'GET', eventMask:{showMask:true}, \n" +
                                              "              success: function() { \n" +
-                                             "                  Ext.Msg.alert('Status', 'Changes saved successfully', Ext.emptyFn); \n" +
+                                             "                  var alert = Ext.Msg.alert('Status', 'Changes saved successfully', Ext.emptyFn); \n" +
+                                             "                  Ext.defer(function(){ alert.toFront(); }, 100); \n " +
                                              "              } \n" +
                                              "          }); \n" +
                                              "      } \n" +
@@ -837,7 +839,7 @@
                                   .Layout(LayoutType.Fit)
                                   .Title("Vat Enties")
                                   .Border(true)
-                                  .ItemsFromAction("Index", "VatEntry", new { area = "Vat", model = Model.VatEntries, documentCurrencyIsLCY = documentCurrencyIsLCY }));
+                                  .ItemsFromAction("Index", "VatEntry", new { area = "Vat", model = Model.VatEntries, documentCurrencyIsLCY = documentCurrencyIsLCY, documentType = DocumentType.PurchaseInvoice }));
                           }));
                       items.Add(Html.X().Container()
                           .Layout(LayoutType.HBox)

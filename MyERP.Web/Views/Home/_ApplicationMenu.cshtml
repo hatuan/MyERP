@@ -13,7 +13,16 @@
         Html.X().Button().Text(@Resources.Resources.Master_Setup).IconCls("x-fa fa-list").Menu(Html.X().Menu()
                                                                                         .Items(
                                                                                             Html.X().MenuItem()
-                                                                                                .Text(@Resources.Resources.Financial),
+                                                                                                .Text(@Resources.Resources.Financial).Menu(Html.X().Menu()
+                                                                                                    .Items(
+                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Account).Tag("Account").DirectEvents(de =>
+                                                                                                        {
+                                                                                                            de.Click.Url = Url.Action("_List", "Index", new { area = "Account" });
+                                                                                                            de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
+                                                                                                            de.Click.EventMask.ShowMask = true;
+                                                                                                        })
+                                                                                                    )
+                                                                                                ),
                                                                                             Html.X().MenuItem()
                                                                                                 .Text(@Resources.Resources.Sales).Menu(Html.X().Menu()
                                                                                                     .Items(

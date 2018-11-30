@@ -21,7 +21,13 @@ namespace MyERP.Web.Models
         [Required]
         [Display(Name = "Description", ResourceType = typeof(Resources.Resources))]
         public String Description { get; set; }
-        
+
+        [Display(Name = "Parent")]
+        public String ParentCode { get; set; }
+
+        [Display(Name = "Current")]
+        public String CurrentCode { get; set; }
+
         [Required]
         public Int64 Version { get; set; }
 
@@ -65,7 +71,15 @@ namespace MyERP.Web.Models
         [Display(Name = "Description", ResourceType = typeof(Resources.Resources))]
         [StringLength(256, ErrorMessageResourceName = "The_0_must_be_at_least_2_characters_long", ErrorMessageResourceType = typeof(Resources.Resources))]
         public String Description { get; set; }
-        
+
+        [Required]
+        [Display(Name = "Parent")]
+        public long? ParentId { get; set; }
+
+        [Required]
+        [Display(Name = "Currency")]
+        public long? CurrentId { get; set; }
+
         [Required]
         [Display(Name = "Status", ResourceType = typeof(Resources.Resources))]
         public DefaultStatusType Status { get; set; }

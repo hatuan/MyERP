@@ -365,6 +365,16 @@ var VatEntry = {
                 }
                 break;
         }
-    }
+    },
+    ValidateEdit: function (ed, e) {
+        var editor = ed.getEditor(e.record, e.column),
+            v = editor.getValue();
 
+        switch (e.field) {
+            case "InvoiceNumber":
+            case "InvoiceSeries":
+                editor.setValue((v || "").toUpperCase());
+                break;
+        }
+    }
 };

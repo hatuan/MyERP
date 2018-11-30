@@ -34,21 +34,23 @@ namespace MyERP.Web.Areas.Vat.Controllers
         }
 
         // GET: Vat/VatEntry
-        public ActionResult Index(List<VatEntryEditViewModel> model, bool documentCurrencyIsLCY)
+        public ActionResult Index(List<VatEntryEditViewModel> model, bool documentCurrencyIsLCY, DocumentType documentType)
         {
             ViewData["CurrencyIsLCY"] = documentCurrencyIsLCY;
 
-            /*
-            return new Ext.Net.MVC.PartialViewResult
+            switch (documentType)
             {
-                RenderMode = RenderMode.AddTo,
-                ContainerId = containerId,
-                ClearContainer = true,
-                Model = new List<VatEntryEditViewModel>(),
-                ViewData = ViewData,
-                WrapByScriptTag = false // we load the view via Loader with Script mode therefore script tags is not required
-            };
-            */
+                case DocumentType.PurchaseInvoice:
+                    ViewData["HeaderID"] = "FormPurchaseInvoiceHeaderMaintenance";
+                    break;
+                case DocumentType.CashPayment:
+                    ViewData["HeaderID"] = "FormCashHeaderMaintenance";
+                    break;
+                case DocumentType.GeneralJournal:
+                    ViewData["HeaderID"] = "FormGeneralJournalMaintenance";
+                    break;
+            }
+
             return PartialView(model);
         }
 

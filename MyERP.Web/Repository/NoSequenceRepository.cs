@@ -72,7 +72,7 @@ namespace MyERP.Web
                 }
                 catch (Exception e)
                 {
-                    log.Error("Failed : NoSequenceRepository.cs -> GetNextNo error = ", e);
+                    log.Error(e);
                     throw;
                 }
             }

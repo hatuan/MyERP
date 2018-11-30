@@ -34,7 +34,7 @@ namespace MyERP.Web.Models
         [Display(Name = "UOM")]
         public long? UomId { get; set; }
 
-        public LookupViewModel Uom { get; set; }
+        public ItemUomLookUpViewModel Uom { get; set; }
 
         [Display(Name = "Uom Description")]
         public String UomDescription { get; set; }

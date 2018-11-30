@@ -300,3 +300,30 @@ INFO  2018-11-25 22:47:39,625 156004ms NoSequenceRepository   GetNextNo         
 INFO  2018-11-25 22:47:39,626 156005ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
 INFO  2018-11-25 22:51:56,953 136713ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
 INFO  2018-11-25 22:51:56,973 136733ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/25
+INFO  2018-11-28 21:40:35,297 1035474ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-28 21:40:35,334 1035511ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/28
+ERROR 2018-11-28 21:40:37,462 1037639ms NoSequenceRepository   GetNextNo          - Failed : NoSequenceRepository.cs -> GetNextNo error = 
+System.AggregateException: One or more errors occurred. ---> System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 127.0.0.1:8080
+   at System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at MyERP.Web.NoSequenceRepository.GetNextNo(Int64 seqId, DateTime date) in C:\Projects\MyERP-Web\MyERP.Web\Repository\NoSequenceRepository.cs:line 63
+---> (Inner Exception #0) System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 127.0.0.1:8080
+   at System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---<---
+
+INFO  2018-11-28 21:40:53,034 1053211ms NoSequenceRepository   GetNextNo          - URL AbsoluteUri = http://localhost:8080/NoSequences/GetNextNo
+INFO  2018-11-28 21:40:53,035 1053212ms NoSequenceRepository   GetNextNo          - URL Parameters = ?id=7&date=2018/11/28
