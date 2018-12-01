@@ -65,6 +65,9 @@
                               de.Click.Confirmation.Message = "Do you want to DELETE ?";
                               de.Click.ExtraParams.Add(new Parameter("ID", "#{AccountList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
                               de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
+                              de.Click.Success = "function(response, result) { " +
+                                                 "  App.StoreAccountList.reload({ callback: function() {}});" +
+                                                 "}";
                           })
                           );
                   }));

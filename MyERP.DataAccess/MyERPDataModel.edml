@@ -1596,6 +1596,7 @@
           <Property Name="status" Type="tinyint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="parent_id" Type="bigint" />
+          <Property Name="direct_posting" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="accounts_receivable_ledger">
           <Key>
@@ -5876,6 +5877,7 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="1df204d2-873a-4fc1-9a93-0197bd4679e2" />
           <Property Name="ParentId" Type="Int64" ed:ValidateRequired="false" ed:Guid="5ed33719-27c6-4597-8a79-1274f1aa8120" />
           <Property Name="CurrencyId" Type="Int64" ed:ValidateRequired="false" ed:Guid="7ffca80a-f33c-406a-84e0-acab35c80f78" />
+          <Property Name="DirectPosting" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="f7b1f0b9-3481-4bd1-a212-21ef29057d98" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5b65ff20-d858-4982-b540-bae7b6a95ee2" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="23561fd7-000a-4f7e-b73f-2ccad01059de" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="7519bb54-ec4d-47f4-a83e-3d742318d56d" />
@@ -7943,8 +7945,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Currency_Account" ed:Guid="1263cf6d-49aa-4880-9f18-376887478910">
-          <End Role="Currency" Type="MyERP.DataAccess.Currency" Multiplicity="1" />
-          <End Role="Account" Type="MyERP.DataAccess.Account" Multiplicity="0..1" />
+          <End Role="Currency" Type="MyERP.DataAccess.Currency" Multiplicity="0..1" />
+          <End Role="Account" Type="MyERP.DataAccess.Account" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Currency">
               <PropertyRef Name="Id" />
@@ -9258,6 +9260,7 @@
                 <ScalarProperty Name="Status" ColumnName="status" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="ParentId" ColumnName="parent_id" />
+                <ScalarProperty Name="DirectPosting" ColumnName="direct_posting" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

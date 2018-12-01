@@ -1,17 +1,161 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model MyERP.Web.Models.AccountEditViewModel
 
-<!DOCTYPE html>
+@(Html.X().Store().ID("ParentStore").AutoLoad(false)
+              .Proxy(Html.X().AjaxProxy()
+                  .Url(Url.Action("LookupData", "Index", new { area = "Account" }))
+                  .Reader(Html.X().JsonReader().RootProperty("data"))
+              )
+              .Model(Html.X().Model()
+                  .IDProperty("Id")
+                  .Fields(
+                      new ModelField("Id", ModelFieldType.Int),
+                      new ModelField("OrganizationCode", ModelFieldType.String),
+                      new ModelField("Code", ModelFieldType.String),
+                      new ModelField("Description", ModelFieldType.String)
+                  )
+              )
+              .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("Id", "App.ParentId.getValue()", ParameterMode.Raw));
+                  }
+              )
+          .Data(ViewData["ParentStore"])
+)
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>_Maintenance</title>
-</head>
-<body>
-    <div> 
-    </div>
-</body>
-</html>
+@(Html.X().Store().ID("CurrencyStore").AutoLoad(false)
+      .Proxy(Html.X().AjaxProxy()
+                  .Url(Url.Action("LookupData", "Currency", new { area = "" }))
+                  .Reader(Html.X().JsonReader().RootProperty("data"))
+      )
+      .Model(Html.X().Model()
+          .IDProperty("Id")
+          .Fields(
+              new ModelField("Id", ModelFieldType.Int),
+              new ModelField("OrganizationCode", ModelFieldType.String),
+              new ModelField("Code", ModelFieldType.String),
+              new ModelField("Description", ModelFieldType.String)
+          )
+      )
+      .Parameters(p =>
+      {
+          p.Add(new StoreParameter("Id", "App.CurrencyId.getValue()", ParameterMode.Raw));
+      }
+      )
+      .Data(ViewData["CurrencyStore"]))
+
+@(Html.X().Window()
+        .ID("WindowAccountMaintenance")
+        .Title("Account Maintenance")
+        .Height(650)
+        .Width(650)
+        .Modal(true)
+        .Layout(LayoutType.Fit)
+        .AutoScroll(true)
+        .Items(
+          Html.X().FormPanel()
+              .ID("FormAccountMaintenance")
+              .Layout(LayoutType.Form)
+              .Border(false)
+              .BodyPadding(5)
+              .AutoScroll(true)
+              .DefaultButton("btnSave")
+              .Items(
+                  Html.X().AntiForgeryField(),
+                  Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").Width(150).AutoFocus(true).EnforceMaxLength(true).ID("Code"),
+                  Html.X().TextFieldFor(m => m.Description).AllowBlank(false).EnforceMaxLength(true).ID("Description"),
+                  Html.X().ComboBoxFor(m => m.ParentId).ID("ParentId").Width(150)
+                      .DisplayField("Code")
+                      .ValueField("Id")
+                      .FieldStyle("text-transform: uppercase;")
+                      .TypeAhead(true)
+                      .MinChars(0)
+                      .PageSize(10)
+                      .SelectOnTab(true)
+                      .ForceSelection(true)
+                      .ValidateOnBlur(true)
+                      .ValidateOnChange(true)
+                      .ListConfig(Html.X().BoundList()
+                          .LoadingText("Searching...")
+                          .ItemTpl(Html.X().XTemplate()
+                              .Html(@<text>
+                                        <div class="search-item">
+                                            <h3>{Code}</h3>
+                                            {Description}
+                                        </div>
+                                     </text>)
+                          )
+                          .MinWidth(400)
+                      )
+                      .StoreID("ParentStore")
+                      .Listeners(ls =>
+                      {
+                          ls.BeforeQuery.Handler = "App.ParentId.getStore().load()";
+                      }),
+                  Html.X().ComboBoxFor(m => m.CurrencyId).ID("CurrencyId").Width(150)
+                      .DisplayField("Code")
+                      .ValueField("Id")
+                      .FieldStyle("text-transform: uppercase;")
+                      .TypeAhead(true)
+                      .MinChars(0)
+                      .PageSize(10)
+                      .SelectOnTab(true)
+                      .ForceSelection(true)
+                      .ValidateOnBlur(true)
+                      .ValidateOnChange(true)
+                      .ListConfig(Html.X().BoundList()
+                          .LoadingText("Searching...")
+                          .ItemTpl(Html.X().XTemplate()
+                              .Html(@<text>
+                                        <div class="search-item">
+                                            <h3>{Code}</h3>
+                                            {Description}
+                                        </div>
+                                     </text>)
+                          )
+                          .MinWidth(400)
+                      )
+                      .StoreID("CurrencyStore")
+                      .Listeners(ls =>
+                      {
+                          ls.BeforeQuery.Handler = "App.CurrencyId.getStore().load()";
+                      }),
+                  Html.X().ComboBoxFor(m => m.Status).Width(150).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
+                  Html.X().HiddenFor(m => m.Id).ID("Id"),
+                  Html.X().HiddenFor(m => m.Version).ID("Version")
+            )
+        .Buttons(
+            Html.X().Button()
+                .ID("btnSave")
+                .Text("Save")
+                .Icon(Icon.Disk)
+                .DirectEvents(de =>
+                {
+                    de.Click.Url = Url.Action("_Maintenance");
+                    de.Click.Method = HttpMethod.POST;
+                    de.Click.Before = "return this.up('form').isValid();";
+                    de.Click.Success = "function(response, result) { " +
+                                       "  this.up('window').close();" +
+                                       "  App.AccountList.getSelectionModel().deselectAll();" +
+                                       "  App.StoreAccountList.reload({ " +
+                                       "    callback : function() { " +
+                                       "      var record = App.AccountList.store.getById(result.result.Id); " +
+                                       "      var index = App.AccountList.store.indexOf(record);" +
+                                       "      App.AccountList.getSelectionModel().select(index);" +
+                                       "   }" +
+                                       " });" +
+                                       "}";
+                    de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
+                    de.Click.ShowWarningOnFailure = true;
+                    de.Click.EventMask.ShowMask = true;
+                    de.Click.FormID = "FormAccountMaintenance";
+                }),
+            Html.X().Button()
+                .ID("btnCancel")
+                .Text("Cancel")
+                .Icon(Icon.Cancel)
+                .Listeners(ls =>
+                {
+                    ls.Click.Handler = "this.up('window').close();";
+                }))
+        )
+)
