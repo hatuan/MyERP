@@ -1,0 +1,386 @@
+﻿@model MyERP.Web.Models.ItemEditViewModel
+@(
+      Html.X().Container()
+          .Bin(
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("InventoryAccountStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Index", new { area = "Account" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data"))
+                  )
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  }
+                  )
+                  .Data(ViewData["InventoryAccountStore"]),
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("ConsignmentAccountStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Index", new { area = "Account" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["ConsignmentAccountStore"]),
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("SalesAccountStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Index", new { area = "Account" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["SalesAccountStore"]),
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("SalesInternalAccountStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Index", new { area = "Account" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["SalesInternalAccountStore"]),
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("SalesReturnAccountStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Index", new { area = "Account" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["SalesReturnAccountStore"]),
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("SalesDiscountAccountStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Index", new { area = "Account" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["SalesDiscountAccountStore"]),
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("COGSAccountStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Index", new { area = "Account" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["COGSAccountStore"]),
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("COGSDiffAccountStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Index", new { area = "Account" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["COGSDiffAccountStore"]),
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("WIPAccountStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Index", new { area = "Account" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["WIPAccountStore"])
+              )
+          .Items(
+              Html.X().ComboBoxFor(m => m.InventoryAccountId).ID("InventoryAccountId")
+                      .DisplayField("Code")
+                      .ValueField("Id")
+                      .FieldStyle("text-transform: uppercase;")
+                      .TypeAhead(true)
+                      .MinChars(0)
+                      .PageSize(10)
+                      .SelectOnTab(true)
+                      .ForceSelection(true)
+                      .ValidateOnBlur(true)
+                      .ValidateOnChange(true)
+                      .ListConfig(Html.X().BoundList()
+                          .LoadingText("Searching...")
+                          .ItemTpl(Html.X().XTemplate()
+                              .Html(@<text>
+                                <div class="search-item">
+                                    <h3>{Code}</h3>
+                                    {Description}
+                                </div>
+                                </text>)
+                            )
+                            .MinWidth(400)),
+               Html.X().ComboBoxFor(m => m.ConsignmentAccountId).ID("ConsignmentAccountId")
+                        .DisplayField("Code")
+                        .ValueField("Id")
+                        .FieldStyle("text-transform: uppercase;")
+                        .TypeAhead(true)
+                        .MinChars(0)
+                        .PageSize(10)
+                        .SelectOnTab(true)
+                        .ForceSelection(true)
+                        .ValidateOnBlur(true)
+                        .ValidateOnChange(true)
+                        .ListConfig(Html.X().BoundList()
+                        .LoadingText("Searching...")
+                        .ItemTpl(Html.X().XTemplate()
+                        .Html(@<text>
+                            <div class="search-item">
+                                <h3>{Code}</h3>
+                                {Description}
+                            </div>
+                        </text>)
+                        )
+                        .MinWidth(400)
+                        ),
+              Html.X().ComboBoxFor(m => m.SalesAccountId).ID("SalesAccountId")
+                    .DisplayField("Code")
+                    .ValueField("Id")
+                    .FieldStyle("text-transform: uppercase;")
+                    .TypeAhead(true)
+                    .MinChars(0)
+                    .PageSize(10)
+                    .SelectOnTab(true)
+                    .ForceSelection(true)
+                    .ValidateOnBlur(true)
+                    .ValidateOnChange(true)
+                    .ListConfig(Html.X().BoundList()
+                    .LoadingText("Searching...")
+                    .ItemTpl(Html.X().XTemplate()
+                    .Html(@<text>
+                        <div class="search-item">
+                            <h3>{Code}</h3>
+                            {Description}
+                        </div>
+                    </text>)
+                    )
+                    .MinWidth(400)
+                    ),
+              Html.X().ComboBoxFor(m => m.SalesInternalAccountId).ID("SalesInternalAccountId")
+                    .DisplayField("Code")
+                    .ValueField("Id")
+                    .FieldStyle("text-transform: uppercase;")
+                    .TypeAhead(true)
+                    .MinChars(0)
+                    .PageSize(10)
+                    .SelectOnTab(true)
+                    .ForceSelection(true)
+                    .ValidateOnBlur(true)
+                    .ValidateOnChange(true)
+                    .ListConfig(Html.X().BoundList()
+                    .LoadingText("Searching...")
+                    .ItemTpl(Html.X().XTemplate()
+                    .Html(@<text>
+                        <div class="search-item">
+                            <h3>{Code}</h3>
+                            {Description}
+                        </div>
+                    </text>)
+                    )
+                    .MinWidth(400)
+                    ),
+             Html.X().ComboBoxFor(m => m.SalesReturnAccountId).ID("SalesReturnAccountId")
+                    .DisplayField("Code")
+                    .ValueField("Id")
+                    .FieldStyle("text-transform: uppercase;")
+                    .TypeAhead(true)
+                    .MinChars(0)
+                    .PageSize(10)
+                    .SelectOnTab(true)
+                    .ForceSelection(true)
+                    .ValidateOnBlur(true)
+                    .ValidateOnChange(true)
+                    .ListConfig(Html.X().BoundList()
+                    .LoadingText("Searching...")
+                    .ItemTpl(Html.X().XTemplate()
+                    .Html(@<text>
+                        <div class="search-item">
+                            <h3>{Code}</h3>
+                            {Description}
+                        </div>
+                    </text>)
+                    )
+                    .MinWidth(400)
+                    ),
+             Html.X().ComboBoxFor(m => m.SalesDiscountAccountId).ID("SalesDiscountAccountId")
+                .DisplayField("Code")
+                .ValueField("Id")
+                .FieldStyle("text-transform: uppercase;")
+                .TypeAhead(true)
+                .MinChars(0)
+                .PageSize(10)
+                .SelectOnTab(true)
+                .ForceSelection(true)
+                .ValidateOnBlur(true)
+                .ValidateOnChange(true)
+                .ListConfig(Html.X().BoundList()
+                .LoadingText("Searching...")
+                .ItemTpl(Html.X().XTemplate()
+                .Html(@<text>
+                    <div class="search-item">
+                        <h3>{Code}</h3>
+                        {Description}
+                    </div>
+                </text>)
+                )
+                .MinWidth(400)
+                ),
+                Html.X().ComboBoxFor(m => m.COGSAccountId).ID("COGSAccountId")
+                .DisplayField("Code")
+                .ValueField("Id")
+                .FieldStyle("text-transform: uppercase;")
+                .TypeAhead(true)
+                .MinChars(0)
+                .PageSize(10)
+                .SelectOnTab(true)
+                .ForceSelection(true)
+                .ValidateOnBlur(true)
+                .ValidateOnChange(true)
+                .ListConfig(Html.X().BoundList()
+                .LoadingText("Searching...")
+                .ItemTpl(Html.X().XTemplate()
+                .Html(@<text>
+                    <div class="search-item">
+                        <h3>{Code}</h3>
+                        {Description}
+                    </div>
+                </text>)
+                )
+                .MinWidth(400)
+                ),
+             Html.X().ComboBoxFor(m => m.COGSDiffAccountId).ID("COGSDiffAccountId")
+                .DisplayField("Code")
+                .ValueField("Id")
+                .FieldStyle("text-transform: uppercase;")
+                .TypeAhead(true)
+                .MinChars(0)
+                .PageSize(10)
+                .SelectOnTab(true)
+                .ForceSelection(true)
+                .ValidateOnBlur(true)
+                .ValidateOnChange(true)
+                .ListConfig(Html.X().BoundList()
+                .LoadingText("Searching...")
+                .ItemTpl(Html.X().XTemplate()
+                .Html(@<text>
+                    <div class="search-item">
+                        <h3>{Code}</h3>
+                        {Description}
+                    </div>
+                </text>)
+                )
+                .MinWidth(400)
+                ),
+             Html.X().ComboBoxFor(m => m.WIPAccountId).ID("WIPAccountId")
+                .DisplayField("Code")
+                .ValueField("Id")
+                .FieldStyle("text-transform: uppercase;")
+                .TypeAhead(true)
+                .MinChars(0)
+                .PageSize(10)
+                .SelectOnTab(true)
+                .ForceSelection(true)
+                .ValidateOnBlur(true)
+                .ValidateOnChange(true)
+                .ListConfig(Html.X().BoundList()
+                .LoadingText("Searching...")
+                .ItemTpl(Html.X().XTemplate()
+                    .Html(@<text>
+                        <div class="search-item">
+                            <h3>{Code}</h3>
+                            {Description}
+                        </div>
+                    </text>)
+                ).MinWidth(400)
+    )
+    )
+)

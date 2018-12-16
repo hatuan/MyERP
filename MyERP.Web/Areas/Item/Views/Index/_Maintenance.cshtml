@@ -95,176 +95,427 @@
 @(Html.X().Window()
       .ID("WindowItemMaintenance")
       .Title("Item Maintenance")
-      .Height(500)
-      .Width(650)
+      .Height(700)
+      .Width(800)
       .Modal(true)
       .Layout(LayoutType.Fit)
       .Items(
           Html.X().FormPanel()
               .ID("FormItemMaintenance")
-              .Layout(LayoutType.Form)
               .Border(false)
               .BodyPadding(5)
               .DefaultButton("btnSave")
+              .Scrollable(ScrollableOption.Vertical)
               .Items(
-                  Html.X().AntiForgeryField(),
-                  Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").Width(150).AutoFocus(true).EnforceMaxLength(true).ID("Code"),
-                  Html.X().TextFieldFor(m => m.Description).AllowBlank(false).EnforceMaxLength(true).ID("Description"),
-                  Html.X().ComboBoxFor(m => m.BaseUomId).AllowBlank(false).Width(150).ID("BaseUomId")
-                      .DisplayField("Code")
-                      .ValueField("Id")
-                      .FieldStyle("text-transform: uppercase;")
-                      .TypeAhead(true)
-                      .MinChars(0)
-                      .PageSize(10)
-                      .SelectOnTab(true)
-                      .ForceSelection(true)
-                      .ValidateOnBlur(true)
-                      .ValidateOnChange(true)
-                      .ListConfig(Html.X().BoundList()
-                          .LoadingText("Searching...")
-                          .ItemTpl(Html.X().XTemplate()
-                              .Html(@<text>
-                                        <div class="search-item">
-                                            <h3>{Code}</h3>
-                                            {Description}
-                                        </div>
-                                     </text>)
-                          )
-                          .MinWidth(400)
-                      )
-                      .StoreID("LookupUOMStore")
-                      .Listeners(ls =>
-                      {
-                          ls.BeforeQuery.Handler = "App.BaseUomId.getStore().load()";
-                      }
-                      ),
-                  Html.X().FieldContainer().FieldLabel("Unit Cost").Layout(LayoutType.HBox)
-                      .Defaults(Html.X().Parameter().Name("margin").Value("0 5 0 0").Mode(ParameterMode.Value))
-                      .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle })
+                  Html.X().Container()
+                      .Layout(LayoutType.Form)
                       .Items(
-                          Html.X().TextFieldFor(m => m.UnitCost).ID("UnitCost")
-                              .FieldLabel("")
-                              .MaskRe(@"/[0-9\,\.]")
-                              .AllowBlank(true)
-                              .Listeners(ls =>
-                              {
-                                  ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
-                                  ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
-                                                    this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
-                              })
-                          ,
-                          Html.X().TextFieldFor(m => m.UnitPrice).ID("UnitPrice")
-                              .MaskRe(@"/[0-9\,\.]")
-                              .AllowBlank(true)
-                              .Listeners(ls =>
-                              {
-                                  ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
-                                  ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
-                                                    this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
-                              })
-                      ),
-                  Html.X().FieldContainer().FieldLabel("Group").Layout(LayoutType.HBox)
-                      .Defaults(Html.X().Parameter().Name("margin").Value("0 3 0 0").Mode(ParameterMode.Value))
-                      .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle })
+                          Html.X().AntiForgeryField(),
+                          Html.X().HiddenFor(m => m.Id).ID("Id"),
+                          Html.X().HiddenFor(m => m.Version).ID("Version"),
+                          Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").Width(150).AutoFocus(true).EnforceMaxLength(true).ID("Code"),
+                          Html.X().TextFieldFor(m => m.Description).AllowBlank(false).EnforceMaxLength(true).ID("Description")
+                          ),
+                  Html.X().TabPanel()
+                      .ActiveTabIndex(0)
                       .Items(
-                          Html.X().ComboBoxFor(m => m.ItemGroupId1).ID("ItemGroup1")
-                              .AllowBlank(true)
-                              .DisplayField("Code")
-                              .ValueField("Id")
-                              .FieldLabel("")
-                              .FieldStyle("text-transform: uppercase;")
-                              .TypeAhead(true)
-                              .MinChars(0)
-                              .PageSize(10)
-                              .SelectOnTab(true)
-                              .ForceSelection(true)
-                              .ValidateOnBlur(true)
-                              .ValidateOnChange(true)
-                              .ListConfig(Html.X().BoundList()
-                                  .LoadingText("Searching...")
-                                  .ItemTpl(Html.X().XTemplate()
-                                      .Html(@<text>
-                                                <div class="search-item">
-                                                    <h3>{Code}</h3>
-                                                    {Description}
-                                                </div>
-                                             </text>)
-                                  )
-                                  .MinWidth(400)
-                              )
-                              .StoreID("LookupItemGroup1Store")
-                              .Listeners(ls =>
-                              {
-                                  ls.BeforeQuery.Handler = "App.ItemGroup1.getStore().load()";
-                              })
-                              .Flex(1),
-                          Html.X().ComboBoxFor(m => m.ItemGroupId2).ID("ItemGroup2")
-                              .AllowBlank(true)
-                              .DisplayField("Code")
-                              .ValueField("Id")
-                              .FieldLabel("")
-                              .FieldStyle("text-transform: uppercase;")
-                              .TypeAhead(true)
-                              .MinChars(0)
-                              .PageSize(10)
-                              .SelectOnTab(true)
-                              .ForceSelection(true)
-                              .ValidateOnBlur(true)
-                              .ValidateOnChange(true)
-                              .ListConfig(Html.X().BoundList()
-                                  .LoadingText("Searching...")
-                                  .ItemTpl(Html.X().XTemplate()
-                                      .Html(@<text>
-                                                <div class="search-item">
-                                                    <h3>{Code}</h3>
-                                                    {Description}
-                                                </div>
-                                             </text>)
-                                  )
-                                  .MinWidth(400)
-                              )
-                              .StoreID("LookupItemGroup2Store")
-                              .Listeners(ls =>
-                              {
-                                  ls.BeforeQuery.Handler = "App.ItemGroup2.getStore().load()";
-                              })
-                              .Flex(1),
-                          Html.X().ComboBoxFor(m => m.ItemGroupId3).ID("ItemGroup3")
-                              .AllowBlank(true)
-                              .DisplayField("Code")
-                              .ValueField("Id")
-                              .FieldLabel("")
-                              .FieldStyle("text-transform: uppercase;")
-                              .TypeAhead(true)
-                              .MinChars(0)
-                              .PageSize(10)
-                              .SelectOnTab(true)
-                              .ForceSelection(true)
-                              .ValidateOnBlur(true)
-                              .ValidateOnChange(true)
-                              .ListConfig(Html.X().BoundList()
-                                  .LoadingText("Searching...")
-                                  .ItemTpl(Html.X().XTemplate()
-                                      .Html(@<text>
-                                                <div class="search-item">
-                                                    <h3>{Code}</h3>
-                                                    {Description}
-                                                </div>
-                                             </text>)
-                                  )
-                                  .MinWidth(400)
-                              )
-                              .StoreID("LookupItemGroup3Store")
-                              .Listeners(ls =>
-                              {
-                                  ls.BeforeQuery.Handler = "App.ItemGroup3.getStore().load()";
-                              })
-                              .Flex(1).Margin(0)
-                      ),
-                  Html.X().ComboBoxFor(m => m.Status).Width(150).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
-                  Html.X().HiddenFor(m => m.Id).ID("Id"),
-                  Html.X().HiddenFor(m => m.Version).ID("Version")
+                          Html.X().Panel()
+                              .Title("Information")
+                              .Layout(LayoutType.Form)
+                              .Items(
+                                  Html.X().Container()
+                                      .Items(
+                                          Html.X().ComboBoxFor(m => m.BaseUomId).AllowBlank(false).ID("BaseUomId")
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .LabelWidth(100)
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                                <div class="search-item">
+                                                                    <h3>{Code}</h3>
+                                                                    {Description}
+                                                                </div>
+                                                             </text>)
+                                                  )
+                                                  .MinWidth(400)
+                                              )
+                                              .StoreID("LookupUOMStore")
+                                              .Listeners(ls =>
+                                              {
+                                                  ls.BeforeQuery.Handler = "App.BaseUomId.getStore().load()";
+                                              }),
+                                          Html.X().ComboBoxFor(m => m.VatId).AllowBlank(false).ID("VatId")
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .LabelWidth(100)
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                                <div class="search-item">
+                                                                    <h3>{Code}</h3>
+                                                                    {Description}
+                                                                </div>
+                                                             </text>)
+                                                  )
+                                                  .MinWidth(400)
+                                              )),
+                                  Html.X().Container()
+                                      .Items(
+                                          Html.X().TextFieldFor(m => m.UnitCost).ID("UnitCost")
+                                              .LabelWidth(100)
+                                              .MaskRe(@"/[0-9\,\.]")
+                                              .AllowBlank(true)
+                                              .Listeners(ls =>
+                                              {
+                                                  ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
+                                                  ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
+                                                                    this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
+                                              })
+                                          ,
+                                          Html.X().TextFieldFor(m => m.UnitPrice).ID("UnitPrice")
+                                              .LabelWidth(100)
+                                              .MaskRe(@"/[0-9\,\.]")
+                                              .AllowBlank(true)
+                                              .Listeners(ls =>
+                                              {
+                                                  ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
+                                                  ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
+                                                                    this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
+                                              })
+                                      ),
+                                  Html.X().Container()
+                                      .Items(
+                                          Html.X().ComboBoxFor(m => m.ItemGroupId1).ID("ItemGroup1")
+                                              .AllowBlank(true)
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                                <div class="search-item">
+                                                                    <h3>{Code}</h3>
+                                                                    {Description}
+                                                                </div>
+                                                             </text>)
+                                                  )
+                                                  .MinWidth(400)
+                                              )
+                                              .StoreID("LookupItemGroup1Store")
+                                              .Listeners(ls =>
+                                              {
+                                                  ls.BeforeQuery.Handler = "App.ItemGroup1.getStore().load()";
+                                              })
+                                              .Flex(1),
+                                          Html.X().ComboBoxFor(m => m.ItemGroupId2).ID("ItemGroup2")
+                                              .AllowBlank(true)
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                                <div class="search-item">
+                                                                    <h3>{Code}</h3>
+                                                                    {Description}
+                                                                </div>
+                                                             </text>)
+                                                  )
+                                                  .MinWidth(400)
+                                              )
+                                              .StoreID("LookupItemGroup2Store")
+                                              .Listeners(ls =>
+                                              {
+                                                  ls.BeforeQuery.Handler = "App.ItemGroup2.getStore().load()";
+                                              })
+                                              .Flex(1),
+                                          Html.X().ComboBoxFor(m => m.ItemGroupId3).ID("ItemGroup3")
+                                              .AllowBlank(true)
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                                <div class="search-item">
+                                                                    <h3>{Code}</h3>
+                                                                    {Description}
+                                                                </div>
+                                                             </text>)
+                                                  )
+                                                  .MinWidth(400)
+                                              )
+                                              .StoreID("LookupItemGroup3Store")
+                                              .Listeners(ls =>
+                                              {
+                                                  ls.BeforeQuery.Handler = "App.ItemGroup3.getStore().load()";
+                                              })
+                                              .Flex(1).Margin(0)
+                                      ),
+                                  Html.X().Container()
+                                      .Items(
+                                          Html.X().ComboBoxFor(m => m.Status).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType))
+                                      )
+                              ),
+                          Html.X().Panel()
+                              .Title("Account")
+                              .Layout(LayoutType.Form)
+                              .Items(
+                                  Html.X().Container()
+                                      .Items(
+                                          Html.X().ComboBoxFor(m => m.InventoryAccountId).ID("InventoryAccountId")
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                                <div class="search-item">
+                                                                    <h3>{Code}</h3>
+                                                                    {Description}
+                                                                </div>
+                                                             </text>)
+                                                  )
+                                                  .MinWidth(400)
+                                              ),
+                                          Html.X().ComboBoxFor(m => m.ConsignmentAccountId).ID("ConsignmentAccountId")
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                                <div class="search-item">
+                                                                    <h3>{Code}</h3>
+                                                                    {Description}
+                                                                </div>
+                                                             </text>)
+                                                  )
+                                                  .MinWidth(400)
+                                              ),
+                                          Html.X().ComboBoxFor(m => m.SalesAccountId).ID("SalesAccountId")
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                                <div class="search-item">
+                                                                    <h3>{Code}</h3>
+                                                                    {Description}
+                                                                </div>
+                                                             </text>)
+                                                  )
+                                                  .MinWidth(400)
+                                              ),
+                                          Html.X().ComboBoxFor(m => m.SalesInternalAccountId).ID("SalesInternalAccountId")
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                                <div class="search-item">
+                                                                    <h3>{Code}</h3>
+                                                                    {Description}
+                                                                </div>
+                                                             </text>)
+                                                  )
+                                                  .MinWidth(400)
+                                              ),
+                                          Html.X().ComboBoxFor(m => m.SalesReturnAccountId).ID("SalesReturnAccountId")
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                                <div class="search-item">
+                                                                    <h3>{Code}</h3>
+                                                                    {Description}
+                                                                </div>
+                                                             </text>)
+                                                  )
+                                                  .MinWidth(400)
+                                              ),
+                                          Html.X().ComboBoxFor(m => m.SalesDiscountAccountId).ID("SalesDiscountAccountId")
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                                <div class="search-item">
+                                                                    <h3>{Code}</h3>
+                                                                    {Description}
+                                                                </div>
+                                                             </text>)
+                                                  )
+                                                  .MinWidth(400)
+                                              ),
+                                          Html.X().ComboBoxFor(m => m.COGSAccountId).ID("COGSAccountId")
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                                <div class="search-item">
+                                                                    <h3>{Code}</h3>
+                                                                    {Description}
+                                                                </div>
+                                                             </text>)
+                                                  )
+                                                  .MinWidth(400)
+                                              ),
+                                          Html.X().ComboBoxFor(m => m.COGSDiffAccountId).ID("COGSDiffAccountId")
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                                <div class="search-item">
+                                                                    <h3>{Code}</h3>
+                                                                    {Description}
+                                                                </div>
+                                                             </text>)
+                                                  )
+                                                  .MinWidth(400)
+                                              ),
+                                          Html.X().ComboBoxFor(m => m.WIPAccountId).ID("WIPAccountId")
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                                <div class="search-item">
+                                                                    <h3>{Code}</h3>
+                                                                    {Description}
+                                                                </div>
+                                                             </text>)
+                                                  )
+                                                  .MinWidth(400)
+                                             )
+                                    )
+                        )
+                    )
               )
               .Buttons(
                   Html.X().Button()
@@ -291,5 +542,4 @@
                           ls.Click.Handler = "this.up('window').close();";
                       })
               )
-      )
-)
+      ))

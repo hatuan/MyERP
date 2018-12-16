@@ -44,6 +44,8 @@
           <EntitySet Name="purchase_invoice_lines" EntityType="MyERP.DataAccess.Store.purchase_invoice_line" store:Type="Tables" Schema="dbo" Table="purchase_invoice_line" />
           <EntitySet Name="vats" EntityType="MyERP.DataAccess.Store.vat" store:Type="Tables" Schema="dbo" Table="vat" />
           <EntitySet Name="vat_entries" EntityType="MyERP.DataAccess.Store.vat_entry" store:Type="Tables" Schema="dbo" Table="vat_entry" />
+          <EntitySet Name="jobs" EntityType="MyERP.DataAccess.Store.job" store:Type="Tables" Schema="dbo" Table="job" />
+          <EntitySet Name="stockkeeping_units" EntityType="MyERP.DataAccess.Store.stockkeeping_unit" store:Type="Tables" Schema="dbo" Table="stockkeeping_unit" />
           <AssociationSet Name="FK_client_user_profile" Association="MyERP.DataAccess.Store.FK_client_user_profile">
             <End Role="user" EntitySet="users" />
             <End Role="client" EntitySet="clients" />
@@ -800,6 +802,70 @@
             <End Role="cash_header" EntitySet="cash_headers" />
             <End Role="vat_entry" EntitySet="vat_entries" />
           </AssociationSet>
+          <AssociationSet Name="FK_job_client" Association="MyERP.DataAccess.Store.FK_job_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="job" EntitySet="jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_job_organization" Association="MyERP.DataAccess.Store.FK_job_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="job" EntitySet="jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_job_user" Association="MyERP.DataAccess.Store.FK_job_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="job" EntitySet="jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_job_user1" Association="MyERP.DataAccess.Store.FK_job_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="job" EntitySet="jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cash_line_job" Association="MyERP.DataAccess.Store.FK_cash_line_job">
+            <End Role="job" EntitySet="jobs" />
+            <End Role="cash_line" EntitySet="cash_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vat_entry_job" Association="MyERP.DataAccess.Store.FK_vat_entry_job">
+            <End Role="job" EntitySet="jobs" />
+            <End Role="vat_entry" EntitySet="vat_entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchase_invoice_line_job" Association="MyERP.DataAccess.Store.FK_purchase_invoice_line_job">
+            <End Role="job" EntitySet="jobs" />
+            <End Role="purchase_invoice_line" EntitySet="purchase_invoice_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_account" Association="MyERP.DataAccess.Store.FK_item_account">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_account1" Association="MyERP.DataAccess.Store.FK_item_account1">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_account2" Association="MyERP.DataAccess.Store.FK_item_account2">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_account3" Association="MyERP.DataAccess.Store.FK_item_account3">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_account4" Association="MyERP.DataAccess.Store.FK_item_account4">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_account5" Association="MyERP.DataAccess.Store.FK_item_account5">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_account6" Association="MyERP.DataAccess.Store.FK_item_account6">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_account7" Association="MyERP.DataAccess.Store.FK_item_account7">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_account8" Association="MyERP.DataAccess.Store.FK_item_account8">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -950,6 +1016,56 @@
           <Property Name="purch_uom_id" Type="bigint" Nullable="false" />
           <Property Name="vat_id" Type="bigint" />
           <Property Name="unit_cost" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="inventory_account_id" Type="bigint" />
+          <Property Name="sales_account_id" Type="bigint" />
+          <Property Name="cogs_account_id" Type="bigint" />
+          <Property Name="sales_internal_account_id" Type="bigint" />
+          <Property Name="sales_return_account_id" Type="bigint" />
+          <Property Name="wip_account_id" Type="bigint" />
+          <Property Name="sales_discount_account_id" Type="bigint" />
+          <Property Name="cogs_diff_account_id" Type="bigint" />
+          <Property Name="consignment_account_id" Type="bigint">
+            <Documentation>
+              <Summary>Tai khoan dai ly</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="costing_method" Type="tinyint" />
+          <Property Name="replenishment_system" Type="tinyint">
+            <Documentation>
+              <Summary> 0-Product Order, 1-Purchase Order, 2-Transfer Order</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="lead_time_calc" Type="varchar" MaxLength="32" />
+          <Property Name="reordering_policy" Type="tinyint">
+            <Documentation>
+              <Summary>0 - None 1 - Fix ReOrder Qty, 2 - Maximum Qty, 3 - Order, 4 - Lot-to-Lot </Summary>
+            </Documentation>
+          </Property>
+          <Property Name="include_inventory" Type="bit" />
+          <Property Name="reorder_cycle" Type="varchar" MaxLength="32" />
+          <Property Name="safety_lead_time" Type="varchar" MaxLength="32" />
+          <Property Name="safety_stock_qty" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="reorder_point" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="maximum_inventory" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="reorder_qty" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="minimum_order_qty" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="maximum_order_qty" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="order_multiple" Type="tinyint" />
+          <Property Name="manufacturing_policy" Type="tinyint">
+            <Documentation>
+              <Summary> 0 - Make-to-Stock, 1 - Make-to-Order</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="routing_id" Type="bigint" />
+          <Property Name="bom_id" Type="bigint" />
+          <Property Name="flushing_method" Type="tinyint">
+            <Documentation>
+              <Summary>0 - Manual, 1 - Forward, 2 - Backward, 3 - Pick + Forward, 4 - Pick + Backward</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="scrap" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="lot_size" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="low_level_code" Type="tinyint" />
         </EntityType>
         <EntityType Name="item_uom">
           <Key>
@@ -1596,7 +1712,6 @@
           <Property Name="status" Type="tinyint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="parent_id" Type="bigint" />
-          <Property Name="direct_posting" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="accounts_receivable_ledger">
           <Key>
@@ -1799,6 +1914,8 @@
           <Property Name="amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="unit_price" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="unit_price_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="job_id" Type="bigint" />
+          <Property Name="inventory_account_id" Type="bigint" />
         </EntityType>
         <EntityType Name="vat">
           <Key>
@@ -1852,7 +1969,28 @@
           <Property Name="purch_header_id" Type="bigint" />
           <Property Name="description" Type="nvarchar" MaxLength="256" />
           <Property Name="cash_header_id" Type="bigint" />
+          <Property Name="job_id" Type="bigint" />
         </EntityType>
+        <EntityType Name="job">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="job_group1" Type="bigint" />
+          <Property Name="job_group2" Type="bigint" />
+          <Property Name="job_group3" Type="bigint" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+          <Property Name="version" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="stockkeeping_unit" />
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
           <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="*" />
@@ -4121,6 +4259,198 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_job_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="job" Type="MyERP.DataAccess.Store.job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_job_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="job" Type="MyERP.DataAccess.Store.job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_job_user">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="job" Type="MyERP.DataAccess.Store.job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job">
+              <PropertyRef Name="rec_created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_job_user1">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="job" Type="MyERP.DataAccess.Store.job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job">
+              <PropertyRef Name="rec_modified_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cash_line_job">
+          <End Role="job" Type="MyERP.DataAccess.Store.job" Multiplicity="0..1" />
+          <End Role="cash_line" Type="MyERP.DataAccess.Store.cash_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="job">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cash_line">
+              <PropertyRef Name="job_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vat_entry_job">
+          <End Role="job" Type="MyERP.DataAccess.Store.job" Multiplicity="0..1" />
+          <End Role="vat_entry" Type="MyERP.DataAccess.Store.vat_entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="job">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vat_entry">
+              <PropertyRef Name="job_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchase_invoice_line_job">
+          <End Role="job" Type="MyERP.DataAccess.Store.job" Multiplicity="0..1" />
+          <End Role="purchase_invoice_line" Type="MyERP.DataAccess.Store.purchase_invoice_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="job">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="purchase_invoice_line">
+              <PropertyRef Name="job_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_account">
+          <End Role="account" Type="MyERP.DataAccess.Store.account" Multiplicity="0..1" />
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="inventory_account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_account1">
+          <End Role="account" Type="MyERP.DataAccess.Store.account" Multiplicity="0..1" />
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="consignment_account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_account2">
+          <End Role="account" Type="MyERP.DataAccess.Store.account" Multiplicity="0..1" />
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="sales_account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_account3">
+          <End Role="account" Type="MyERP.DataAccess.Store.account" Multiplicity="0..1" />
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="sales_internal_account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_account4">
+          <End Role="account" Type="MyERP.DataAccess.Store.account" Multiplicity="0..1" />
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="sales_return_account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_account5">
+          <End Role="account" Type="MyERP.DataAccess.Store.account" Multiplicity="0..1" />
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="sales_discount_account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_account6">
+          <End Role="account" Type="MyERP.DataAccess.Store.account" Multiplicity="0..1" />
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="cogs_account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_account7">
+          <End Role="account" Type="MyERP.DataAccess.Store.account" Multiplicity="0..1" />
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="cogs_diff_account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_account8">
+          <End Role="account" Type="MyERP.DataAccess.Store.account" Multiplicity="0..1" />
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="wip_account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -4166,6 +4496,8 @@
           <EntitySet Name="PurchaseInvoiceLines" EntityType="MyERP.DataAccess.PurchaseInvoiceLine" />
           <EntitySet Name="Vats" EntityType="MyERP.DataAccess.Vat" />
           <EntitySet Name="VatEntries" EntityType="MyERP.DataAccess.VatEntry" />
+          <EntitySet Name="Jobs" EntityType="MyERP.DataAccess.Job" />
+          <EntitySet Name="StockkeepingUnits" EntityType="MyERP.DataAccess.StockkeepingUnit" />
           <AssociationSet Name="User_Client_CreatedBySet" Association="MyERP.DataAccess.User_Client_CreatedBy">
             <End Role="RecCreatedByUser" EntitySet="Users" />
             <End Role="Clients" EntitySet="Clients" />
@@ -4926,6 +5258,70 @@
             <End Role="RecModifiedByUser" EntitySet="Users" />
             <End Role="Vats1" EntitySet="Vats" />
           </AssociationSet>
+          <AssociationSet Name="Client_JobSet" Association="MyERP.DataAccess.Client_Job">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_JobSet" Association="MyERP.DataAccess.Organization_Job">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="User_Job_RecCreatedBySet" Association="MyERP.DataAccess.User_Job_RecCreatedBy">
+            <End Role="RecCreatedByUser" EntitySet="Users" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="User_Job_RecModifiedBySet" Association="MyERP.DataAccess.User_Job_RecModifiedBy">
+            <End Role="RecModifiedByUser" EntitySet="Users" />
+            <End Role="Jobs1" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="Job_CashLineSet" Association="MyERP.DataAccess.Job_CashLine">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="CashLines" EntitySet="CashLines" />
+          </AssociationSet>
+          <AssociationSet Name="Job_VatEntrySet" Association="MyERP.DataAccess.Job_VatEntry">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="VatEntries" EntitySet="VatEntries" />
+          </AssociationSet>
+          <AssociationSet Name="Job_PurchaseInvoiceLineSet" Association="MyERP.DataAccess.Job_PurchaseInvoiceLine">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="PurchaseInvoiceLines" EntitySet="PurchaseInvoiceLines" />
+          </AssociationSet>
+          <AssociationSet Name="Account_Item_InventoryAccountSet" Association="MyERP.DataAccess.Account_Item_InventoryAccount">
+            <End Role="InventoryAccount" EntitySet="Accounts" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="Account_Item_ConsignmentAccountSet" Association="MyERP.DataAccess.Account_Item_ConsignmentAccount">
+            <End Role="ConsignmentAccount" EntitySet="Accounts" />
+            <End Role="Items1" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="Account_Item_SalesAccountSet" Association="MyERP.DataAccess.Account_Item_SalesAccount">
+            <End Role="SalesAccount" EntitySet="Accounts" />
+            <End Role="Items2" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="Account_Item_SalesInternalAccountSet" Association="MyERP.DataAccess.Account_Item_SalesInternalAccount">
+            <End Role="SalesInternalAccount" EntitySet="Accounts" />
+            <End Role="Items3" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="Account_Item_SalesReturnAccountSet" Association="MyERP.DataAccess.Account_Item_SalesReturnAccount">
+            <End Role="SalesReturnAccount" EntitySet="Accounts" />
+            <End Role="Items4" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="Account_Item_SalesDiscountAccountSet" Association="MyERP.DataAccess.Account_Item_SalesDiscountAccount">
+            <End Role="SalesDiscountAccount" EntitySet="Accounts" />
+            <End Role="Items5" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="Account_Item_COGSAccountSet" Association="MyERP.DataAccess.Account_Item_COGSAccount">
+            <End Role="COGSAccount" EntitySet="Accounts" />
+            <End Role="Items6" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="Account_Item_COGSDiffAccountSet" Association="MyERP.DataAccess.Account_Item_COGSDiffAccount">
+            <End Role="COGSDiffAccount" EntitySet="Accounts" />
+            <End Role="Items7" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="Account_Item_WIPAccountSet" Association="MyERP.DataAccess.Account_Item_WIPAccount">
+            <End Role="WIPAccount" EntitySet="Accounts" />
+            <End Role="Items8" EntitySet="Items" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
           <Key>
@@ -5082,6 +5478,7 @@
           <Property Name="BaseUomId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="93a5509c-a849-45b0-a2a4-9c969b78c7d6" />
           <Property Name="UnitCost" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="29d2e934-1cc1-44a2-90fb-143aa6433764" />
           <Property Name="UnitPrice" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="c647081c-fc9e-4e97-b2b2-4f9e3868ad74" />
+          <Property Name="CostingMethod" Type="Byte" ed:ValidateRequired="false" ed:Guid="03489e27-97ec-4ea7-aef1-da60b603c4b4" />
           <Property Name="ItemDiscountGroupId" Type="Int64" ed:ValidateRequired="false" ed:Guid="d5a4cea1-ce97-44f8-a3a4-66c671114d8c" />
           <Property Name="ItemGroupId1" Type="Int64" ed:ValidateRequired="false" ed:Guid="a5b60793-6d70-4ded-9ff1-6142feecaa11" />
           <Property Name="ItemGroupId2" Type="Int64" ed:ValidateRequired="false" ed:Guid="82aa9742-2a34-4dfc-91df-5bea4b98c1e0" />
@@ -5090,6 +5487,55 @@
           <Property Name="SalesUomId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="914d5a93-35eb-41e8-aaf7-b66e4d7ddc49" />
           <Property Name="PurchUomId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="8803310e-cef3-4386-8d17-f14ba270ee08" />
           <Property Name="VatId" Type="Int64" ed:ValidateRequired="false" ed:Guid="b8bc04f0-c684-4b30-8cdf-7619f35d4f37" />
+          <Property Name="InventoryAccountId" Type="Int64" ed:ValidateRequired="false" ed:Guid="c1d26f80-14dd-4857-884a-1644a56ffe40" />
+          <Property Name="ConsignmentAccountId" Type="Int64" ed:ValidateRequired="false" ed:Guid="bd1b56e1-cb4e-4d90-8538-2638728e0558">
+            <Documentation>
+              <Summary>Tai khoan dai ly</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="SalesAccountId" Type="Int64" ed:ValidateRequired="false" ed:Guid="d098742f-6602-40a1-9174-3f5459cffa43" />
+          <Property Name="SalesInternalAccountId" Type="Int64" ed:ValidateRequired="false" ed:Guid="bee915bd-1efb-442d-b377-bbef41eef495" />
+          <Property Name="SalesReturnAccountId" Type="Int64" ed:ValidateRequired="false" ed:Guid="157516fe-7e8b-4715-97a3-b1a46b064842" />
+          <Property Name="SalesDiscountAccountId" Type="Int64" ed:ValidateRequired="false" ed:Guid="e0a79fc3-8ff9-48f1-9c45-3a4b57029c7e" />
+          <Property Name="COGSAccountId" Type="Int64" ed:ValidateRequired="false" ed:Guid="6b46eff7-7353-42fd-ac77-7bcb1882d4ef" />
+          <Property Name="COGSDiffAccountId" Type="Int64" ed:ValidateRequired="false" ed:Guid="b8a2cf3b-8995-4af2-aee2-d5f5e4f680c5" />
+          <Property Name="WIPAccountId" Type="Int64" ed:ValidateRequired="false" ed:Guid="27c395b2-a9ce-4c63-861b-0c7aa1b36aea" />
+          <Property Name="ReplenishmentSystem" Type="Byte" ed:ValidateRequired="false" ed:Guid="9201073d-a89a-4eae-8f5f-3635e3c1df69">
+            <Documentation>
+              <Summary> 0-Product Order, 1-Purchase Order, 2-Transfer Order</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="LeadTimeCalc" Type="String" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="12aecf8a-ac3e-4dec-8920-1e9f1b02323c" />
+          <Property Name="ReorderingPolicy" Type="Byte" ed:ValidateRequired="false" ed:Guid="6223e861-506b-4f1a-b92a-b081322c9d03">
+            <Documentation>
+              <Summary>0 - None 1 - Fix ReOrder Qty, 2 - Maximum Qty, 3 - Order, 4 - Lot-to-Lot </Summary>
+            </Documentation>
+          </Property>
+          <Property Name="IncludeInventory" Type="Boolean" ed:ValidateRequired="false" ed:Guid="a4a272ed-6d8e-444c-b707-c8942e5e4456" />
+          <Property Name="ReorderCycle" Type="String" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="b93714d3-d580-4811-9db9-8d999133bdf5" />
+          <Property Name="SafetyLeadTime" Type="String" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="3337ee73-5240-4a14-93f7-ee103321c786" />
+          <Property Name="SafetyStockQty" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="1aa27e07-871c-4700-8411-83945a84a9a2" />
+          <Property Name="ReorderPoint" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="011fbdba-af8c-4269-b7d1-af8752c128fc" />
+          <Property Name="MaximumInventory" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="62e304ba-4efb-491e-be50-7840b848e790" />
+          <Property Name="ReorderQty" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="e2763ff3-b3b3-48f7-a94d-0dc4165e8e09" />
+          <Property Name="MinimumOrderQty" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="9f0d1312-7ced-444f-9b5b-8e8cb94efc91" />
+          <Property Name="MaximumOrderQty" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="7f035e21-61f7-4414-ab98-ff03cbeaf3e0" />
+          <Property Name="OrderMultiple" Type="Byte" ed:ValidateRequired="false" ed:Guid="1eef3bd8-e51c-498b-a42c-345caa5620d9" />
+          <Property Name="ManufacturingPolicy" Type="Byte" ed:ValidateRequired="false" ed:Guid="7ea56bcc-633b-4ddd-a69c-46b0ec8bd158">
+            <Documentation>
+              <Summary> 0 - Make-to-Stock, 1 - Make-to-Order</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="RoutingId" Type="Int64" ed:ValidateRequired="false" ed:Guid="02140191-6465-459e-87c7-cf907ca0950c" />
+          <Property Name="BomId" Type="Int64" ed:ValidateRequired="false" ed:Guid="b4e7a143-7622-4f4a-b1a4-14b3adbc4c5f" />
+          <Property Name="FlushingMethod" Type="Byte" ed:ValidateRequired="false" ed:Guid="1e6aa55b-6f62-4486-8f01-5a38e9d1c87f">
+            <Documentation>
+              <Summary>0 - Manual, 1 - Forward, 2 - Backward, 3 - Pick + Forward, 4 - Pick + Backward</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Scrap" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="8d337a65-a27e-424e-aa06-71af2adf36a4" />
+          <Property Name="LotSize" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="692f0d15-0d78-4f64-bdbc-35bc1d8d9a77" />
+          <Property Name="LowLevelCode" Type="Byte" ed:ValidateRequired="false" ed:Guid="39845331-0a81-473d-9df6-29df52f13039" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="296d80bc-419f-4c7f-a83c-aff7e8d8431d" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="86b2948c-9000-4965-8f40-41d42e2810c2" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="c376d9de-4b48-4d1d-ab3e-7ef9d9029cfa" />
@@ -5112,6 +5558,15 @@
           <NavigationProperty Name="PurchVendor" Relationship="MyERP.DataAccess.BusinessPartner_Item_PurchVendor" FromRole="Items" ToRole="PurchVendor" ed:Guid="2e4b92f1-e0ce-45a4-b695-6d603d04e336" />
           <NavigationProperty Name="ItemDiscountGroup" Relationship="MyERP.DataAccess.ItemDiscountGroup_Item" FromRole="Items" ToRole="ItemDiscountGroup" ed:Guid="095f92c8-d7ee-4fba-9e79-46947457b9dd" />
           <NavigationProperty Name="Vat" Relationship="MyERP.DataAccess.Vat_Item" FromRole="Items" ToRole="Vat" ed:Guid="1d185f05-dbd7-4e52-9e1d-862f5a9f2d7d" />
+          <NavigationProperty Name="InventoryAccount" Relationship="MyERP.DataAccess.Account_Item_InventoryAccount" FromRole="Items" ToRole="InventoryAccount" ed:Guid="48f57c99-c920-48d4-9e18-df3647a8302d" />
+          <NavigationProperty Name="ConsignmentAccount" Relationship="MyERP.DataAccess.Account_Item_ConsignmentAccount" FromRole="Items1" ToRole="ConsignmentAccount" ed:Guid="f88bb155-46bd-4503-aa78-2b2130403921" />
+          <NavigationProperty Name="SalesAccount" Relationship="MyERP.DataAccess.Account_Item_SalesAccount" FromRole="Items2" ToRole="SalesAccount" ed:Guid="7c24c599-5d56-45a4-a459-f948dfc94e1f" />
+          <NavigationProperty Name="SalesInternalAccount" Relationship="MyERP.DataAccess.Account_Item_SalesInternalAccount" FromRole="Items3" ToRole="SalesInternalAccount" ed:Guid="24f16a3d-0d42-472e-a770-af6888c9f28b" />
+          <NavigationProperty Name="SalesReturnAccount" Relationship="MyERP.DataAccess.Account_Item_SalesReturnAccount" FromRole="Items4" ToRole="SalesReturnAccount" ed:Guid="6e84ad6e-343b-42e7-9b2e-052fecfe2297" />
+          <NavigationProperty Name="SalesDiscountAccount" Relationship="MyERP.DataAccess.Account_Item_SalesDiscountAccount" FromRole="Items5" ToRole="SalesDiscountAccount" ed:Guid="8b235e84-98a0-431d-ba96-cc49fb4a45d1" />
+          <NavigationProperty Name="COGSAccount" Relationship="MyERP.DataAccess.Account_Item_COGSAccount" FromRole="Items6" ToRole="COGSAccount" ed:Guid="86e58c9a-a074-49fc-ba81-ce96b55cb65b" />
+          <NavigationProperty Name="COGSDiffAccount" Relationship="MyERP.DataAccess.Account_Item_COGSDiffAccount" FromRole="Items7" ToRole="COGSDiffAccount" ed:Guid="573f9d03-92d0-469b-9812-00b7eb3ff2e4" />
+          <NavigationProperty Name="WIPAccount" Relationship="MyERP.DataAccess.Account_Item_WIPAccount" FromRole="Items8" ToRole="WIPAccount" ed:Guid="8fcff91b-8051-43f6-8962-0770b465f752" />
         </EntityType>
         <EntityType Name="ItemUom" ed:Guid="99415c3c-dac3-4b24-900f-ff6b913d2931">
           <Key>
@@ -5867,6 +6322,7 @@
           <NavigationProperty Name="AccountsPayableLedger" Relationship="MyERP.DataAccess.AccountsPayableLedger_CashLine" FromRole="CashLines" ToRole="AccountsPayableLedger" ed:Guid="37137c20-3abb-4a6f-b1ed-922faa1ac335" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_CashLine" FromRole="CashLines" ToRole="Client" ed:Guid="42dd1ed8-2251-4665-bc64-57f7b11ec06f" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_CashLine" FromRole="CashLines" ToRole="Organization" ed:Guid="8bfbbafd-2ba9-4332-986a-ff83daa4ecf1" />
+          <NavigationProperty Name="Job" Relationship="MyERP.DataAccess.Job_CashLine" FromRole="CashLines" ToRole="Job" ed:Guid="d92a9cfc-ecd3-44d5-b13e-d6a4bbabadeb" />
         </EntityType>
         <EntityType Name="Account" ed:Guid="a54428be-02ef-41d1-a177-e1a9e6ef8781">
           <Key>
@@ -5877,7 +6333,6 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="1df204d2-873a-4fc1-9a93-0197bd4679e2" />
           <Property Name="ParentId" Type="Int64" ed:ValidateRequired="false" ed:Guid="5ed33719-27c6-4597-8a79-1274f1aa8120" />
           <Property Name="CurrencyId" Type="Int64" ed:ValidateRequired="false" ed:Guid="7ffca80a-f33c-406a-84e0-acab35c80f78" />
-          <Property Name="DirectPosting" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="f7b1f0b9-3481-4bd1-a212-21ef29057d98" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5b65ff20-d858-4982-b540-bae7b6a95ee2" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="23561fd7-000a-4f7e-b73f-2ccad01059de" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="7519bb54-ec4d-47f4-a83e-3d742318d56d" />
@@ -6105,6 +6560,8 @@
           <Property Name="CostPriceLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="c985dbd3-4017-4cdc-855d-31d1ad7b9b1f" />
           <Property Name="CostPriceQtyBaseLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="19dc2903-57e5-49af-a0cb-fda7362a124d" />
           <Property Name="CostAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="05bfa4e8-e628-4425-87ea-6c8b64d0e38c" />
+          <Property Name="InventoryAccountId" Type="Int64" ed:ValidateRequired="false" ed:Guid="99638fa7-5289-4849-bacd-e25c1465072d" />
+          <Property Name="JobId" Type="Int64" ed:ValidateRequired="false" ed:Guid="bba48863-abc5-4811-937b-e4f1703d9709" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="03604cec-d9a2-4d42-bd81-4c14ccb5e9a5" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="aa1e312c-90a7-4b2c-b7e4-bdc2562bc138" />
           <NavigationProperty Name="PurchaseInvoiceHeader" Relationship="MyERP.DataAccess.PurchaseInvoiceHeader_PurchaseInvoiceLine" FromRole="PurchaseInvoiceLines" ToRole="PurchaseInvoiceHeader" ed:Guid="b33fa50f-e999-4092-b13d-ad2f57143bc2" />
@@ -6114,6 +6571,7 @@
           <NavigationProperty Name="Vat" Relationship="MyERP.DataAccess.Vat_PurchaseInvoiceLine" FromRole="PurchaseInvoiceLines" ToRole="Vat" ed:Guid="e4aa2571-7b8d-4e41-9278-51a3cb3fe06d" />
           <NavigationProperty Name="Item" Relationship="MyERP.DataAccess.Item_PurchaseInvoiceLine" FromRole="PurchaseInvoiceLines" ToRole="Item" ed:Guid="98621a4b-6b49-418f-9965-ad5bfae2c770" />
           <NavigationProperty Name="Uom" Relationship="MyERP.DataAccess.Uom_PurchaseInvoiceLine" FromRole="PurchaseInvoiceLines" ToRole="Uom" ed:Guid="fcab2dae-38c0-4438-8c4f-52336a94005c" />
+          <NavigationProperty Name="Job" Relationship="MyERP.DataAccess.Job_PurchaseInvoiceLine" FromRole="PurchaseInvoiceLines" ToRole="Job" ed:Guid="65b2dd25-acc6-4588-b6f5-de1fbe3a15a7" />
         </EntityType>
         <EntityType Name="Vat" ed:Guid="5604c381-1dc8-463c-b85a-6a932722b01f">
           <Key>
@@ -6171,6 +6629,7 @@
           <Property Name="VatAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="90c9037c-5b7e-4562-a93c-4406c0663166" />
           <Property Name="AccountVatId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="0761c366-8d02-4e10-98b0-9c33cc7718d4" />
           <Property Name="CorrespAccountId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="13e37375-8b7a-4364-bcca-0ac6e30e6e5d" />
+          <Property Name="JobId" Type="Int64" ed:ValidateRequired="false" ed:Guid="0bfe357b-f653-4200-a870-e4b219e1a0aa" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="315b02ec-e6f3-4a3b-8556-5deb0a8ff2e3" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="9f0af050-5bff-44f8-b348-a05fadb8c26e" />
           <NavigationProperty Name="BusinessPartner" Relationship="MyERP.DataAccess.BusinessPartner_VatEntry" FromRole="VatEntries" ToRole="BusinessPartner" ed:Guid="612bca7f-24d2-46e7-9d0c-d54435a8905a" />
@@ -6179,7 +6638,32 @@
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_VatEntry" FromRole="VatEntries" ToRole="Organization" ed:Guid="e68001e0-4b51-43a4-90fe-2468d80d98db" />
           <NavigationProperty Name="AccountVat" Relationship="MyERP.DataAccess.Account_VatEntry_AccountVat" FromRole="VatEntries" ToRole="AccountVat" ed:Guid="72786b56-a90e-40e4-8d69-fe09ba468e04" />
           <NavigationProperty Name="CorrespAccount" Relationship="MyERP.DataAccess.Account_VatEntry_CorrespAccount" FromRole="VatEntries1" ToRole="CorrespAccount" ed:Guid="812b3220-1b79-46df-a300-373185d6fb67" />
+          <NavigationProperty Name="Job" Relationship="MyERP.DataAccess.Job_VatEntry" FromRole="VatEntries" ToRole="Job" ed:Guid="158f7873-cc51-41b6-b4a8-9983f7fda3b0" />
         </EntityType>
+        <EntityType Name="Job" ed:Guid="f902ebe2-0ed1-4aa4-8e7c-cbe696017976">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="5957fa88-48a6-44af-9597-fedeeae97f86" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="55ef2e55-c892-42de-8859-d43532b13409" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="5c8fd352-7c6f-4c40-9d86-29fe88c8091c" />
+          <Property Name="JobGroup1" Type="Int64" ed:ValidateRequired="false" ed:Guid="ff642a54-70b9-405d-9fab-3d6f1b1fa18d" />
+          <Property Name="JobGroup2" Type="Int64" ed:ValidateRequired="false" ed:Guid="72ff9a01-7a51-4770-ab94-83a8130c0a80" />
+          <Property Name="JobGroup3" Type="Int64" ed:ValidateRequired="false" ed:Guid="bf7dfae8-fa93-4fd3-872c-2f476888ac87" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="2b40dc5f-2193-4e85-97ea-c63de169f64c" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e56ecc25-bad8-4082-a0cf-8ad64c275049" />
+          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="0414cab4-b288-4ff3-b54a-f389fa270f3b" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="2d7b3788-00f4-4b18-a2b1-7e2d4898afc8" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="1a67b64f-56a2-45a9-82d5-bd4d663e37f2" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="fb3f0a13-82dc-4b6b-b0f2-38a816bdfa9d" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="6be28678-5c92-490d-bce9-f35439250c60" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="1c997d4d-1802-41fa-a136-3da41e156b1c" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_Job" FromRole="Jobs" ToRole="Client" ed:Guid="a98dc072-f6d4-4738-9251-f0d7bb13dc85" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_Job" FromRole="Jobs" ToRole="Organization" ed:Guid="9a4a704d-a131-48ee-a3f1-52581da8e81d" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Job_RecCreatedBy" FromRole="Jobs" ToRole="RecCreatedByUser" ed:Guid="3419436d-08b8-4e9b-b6b8-4032374c5746" />
+          <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_Job_RecModifiedBy" FromRole="Jobs1" ToRole="RecModifiedByUser" ed:Guid="4aca92af-9d98-4cb0-9623-2f33b9f2f70a" />
+        </EntityType>
+        <EntityType Name="StockkeepingUnit" ed:Guid="78c58525-33c7-4a9d-beae-476aaa62497a" />
         <Association Name="User_Client_CreatedBy" ed:Guid="cc64066d-a254-493f-8be0-7609622c4e6a">
           <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
           <End Role="Clients" Type="MyERP.DataAccess.Client" Multiplicity="*" />
@@ -8460,6 +8944,198 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Client_Job" ed:Guid="1e7b03db-261b-4704-9552-985382d5c846">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="Jobs" Type="MyERP.DataAccess.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_Job" ed:Guid="863277ad-123e-40e9-8019-e7ce4d6e3dfe">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="Jobs" Type="MyERP.DataAccess.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Job_RecCreatedBy" ed:Guid="27de07a2-9eec-44c1-8a89-cd4e6528b13e">
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="Jobs" Type="MyERP.DataAccess.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecCreatedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="RecCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_Job_RecModifiedBy" ed:Guid="f1c5ac0c-a7de-4bc6-897f-a7d22ad81967">
+          <End Role="RecModifiedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="Jobs1" Type="MyERP.DataAccess.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecModifiedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Jobs1">
+              <PropertyRef Name="RecModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Job_CashLine" ed:Guid="02b6b91e-c2cd-44ea-8ac4-cb05c0b4f865">
+          <End Role="Job" Type="MyERP.DataAccess.Job" Multiplicity="0..1" />
+          <End Role="CashLines" Type="MyERP.DataAccess.CashLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CashLines">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Job_VatEntry" ed:Guid="c9760114-20d5-405c-b36b-db906e0ca179">
+          <End Role="Job" Type="MyERP.DataAccess.Job" Multiplicity="0..1" />
+          <End Role="VatEntries" Type="MyERP.DataAccess.VatEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VatEntries">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Job_PurchaseInvoiceLine" ed:Guid="34d33cbe-c51a-45d6-a714-0a7707bddf7c">
+          <End Role="Job" Type="MyERP.DataAccess.Job" Multiplicity="1" />
+          <End Role="PurchaseInvoiceLines" Type="MyERP.DataAccess.PurchaseInvoiceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseInvoiceLines">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Account_Item_InventoryAccount" ed:Guid="3e4480fd-753e-4ea7-8fe7-71c5543c17b7">
+          <End Role="InventoryAccount" Type="MyERP.DataAccess.Account" Multiplicity="0..1" />
+          <End Role="Items" Type="MyERP.DataAccess.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="InventoryAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Account_Item_ConsignmentAccount" ed:Guid="add158ed-af6e-4833-a2c2-19784d6a33cb">
+          <End Role="ConsignmentAccount" Type="MyERP.DataAccess.Account" Multiplicity="0..1" />
+          <End Role="Items1" Type="MyERP.DataAccess.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConsignmentAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items1">
+              <PropertyRef Name="ConsignmentAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Account_Item_SalesAccount" ed:Guid="7680fefb-85a4-4c2c-93ed-be2b77c942a1">
+          <End Role="SalesAccount" Type="MyERP.DataAccess.Account" Multiplicity="0..1" />
+          <End Role="Items2" Type="MyERP.DataAccess.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items2">
+              <PropertyRef Name="SalesAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Account_Item_SalesInternalAccount" ed:Guid="ff619aca-4970-4cd1-8ca5-2034913cfc38">
+          <End Role="SalesInternalAccount" Type="MyERP.DataAccess.Account" Multiplicity="0..1" />
+          <End Role="Items3" Type="MyERP.DataAccess.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesInternalAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items3">
+              <PropertyRef Name="SalesInternalAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Account_Item_SalesReturnAccount" ed:Guid="302ce30a-8cf3-4100-a506-1c72dda0173e">
+          <End Role="SalesReturnAccount" Type="MyERP.DataAccess.Account" Multiplicity="0..1" />
+          <End Role="Items4" Type="MyERP.DataAccess.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesReturnAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items4">
+              <PropertyRef Name="SalesReturnAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Account_Item_SalesDiscountAccount" ed:Guid="94a3a12b-6258-4359-b51c-b9d77dc04bae">
+          <End Role="SalesDiscountAccount" Type="MyERP.DataAccess.Account" Multiplicity="0..1" />
+          <End Role="Items5" Type="MyERP.DataAccess.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesDiscountAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items5">
+              <PropertyRef Name="SalesDiscountAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Account_Item_COGSAccount" ed:Guid="8781bc95-27e9-4d33-85d5-f44faa39afa6">
+          <End Role="COGSAccount" Type="MyERP.DataAccess.Account" Multiplicity="0..1" />
+          <End Role="Items6" Type="MyERP.DataAccess.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COGSAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items6">
+              <PropertyRef Name="COGSAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Account_Item_COGSDiffAccount" ed:Guid="bb14ac0c-6afb-4e0f-8572-86b2b4c76f33">
+          <End Role="COGSDiffAccount" Type="MyERP.DataAccess.Account" Multiplicity="0..1" />
+          <End Role="Items7" Type="MyERP.DataAccess.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COGSDiffAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items7">
+              <PropertyRef Name="COGSDiffAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Account_Item_WIPAccount" ed:Guid="28ec3827-4fb4-4980-a3c9-e508699abd6b">
+          <End Role="WIPAccount" Type="MyERP.DataAccess.Account" Multiplicity="0..1" />
+          <End Role="Items8" Type="MyERP.DataAccess.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WIPAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Items8">
+              <PropertyRef Name="WIPAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- MSL content -->
@@ -8621,6 +9297,36 @@
                 <ScalarProperty Name="PurchUomId" ColumnName="purch_uom_id" />
                 <ScalarProperty Name="UnitCost" ColumnName="unit_cost" />
                 <ScalarProperty Name="VatId" ColumnName="vat_id" />
+                <ScalarProperty Name="InventoryAccountId" ColumnName="inventory_account_id" />
+                <ScalarProperty Name="SalesAccountId" ColumnName="sales_account_id" />
+                <ScalarProperty Name="COGSAccountId" ColumnName="cogs_account_id" />
+                <ScalarProperty Name="SalesInternalAccountId" ColumnName="sales_internal_account_id" />
+                <ScalarProperty Name="SalesReturnAccountId" ColumnName="sales_return_account_id" />
+                <ScalarProperty Name="WIPAccountId" ColumnName="wip_account_id" />
+                <ScalarProperty Name="SalesDiscountAccountId" ColumnName="sales_discount_account_id" />
+                <ScalarProperty Name="COGSDiffAccountId" ColumnName="cogs_diff_account_id" />
+                <ScalarProperty Name="ConsignmentAccountId" ColumnName="consignment_account_id" />
+                <ScalarProperty Name="CostingMethod" ColumnName="costing_method" />
+                <ScalarProperty Name="ReplenishmentSystem" ColumnName="replenishment_system" />
+                <ScalarProperty Name="LeadTimeCalc" ColumnName="lead_time_calc" />
+                <ScalarProperty Name="ReorderingPolicy" ColumnName="reordering_policy" />
+                <ScalarProperty Name="IncludeInventory" ColumnName="include_inventory" />
+                <ScalarProperty Name="ReorderCycle" ColumnName="reorder_cycle" />
+                <ScalarProperty Name="SafetyLeadTime" ColumnName="safety_lead_time" />
+                <ScalarProperty Name="SafetyStockQty" ColumnName="safety_stock_qty" />
+                <ScalarProperty Name="ReorderPoint" ColumnName="reorder_point" />
+                <ScalarProperty Name="MaximumInventory" ColumnName="maximum_inventory" />
+                <ScalarProperty Name="ReorderQty" ColumnName="reorder_qty" />
+                <ScalarProperty Name="MinimumOrderQty" ColumnName="minimum_order_qty" />
+                <ScalarProperty Name="MaximumOrderQty" ColumnName="maximum_order_qty" />
+                <ScalarProperty Name="OrderMultiple" ColumnName="order_multiple" />
+                <ScalarProperty Name="ManufacturingPolicy" ColumnName="manufacturing_policy" />
+                <ScalarProperty Name="RoutingId" ColumnName="routing_id" />
+                <ScalarProperty Name="BomId" ColumnName="bom_id" />
+                <ScalarProperty Name="FlushingMethod" ColumnName="flushing_method" />
+                <ScalarProperty Name="Scrap" ColumnName="scrap" />
+                <ScalarProperty Name="LotSize" ColumnName="lot_size" />
+                <ScalarProperty Name="LowLevelCode" ColumnName="low_level_code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -9260,7 +9966,6 @@
                 <ScalarProperty Name="Status" ColumnName="status" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="ParentId" ColumnName="parent_id" />
-                <ScalarProperty Name="DirectPosting" ColumnName="direct_posting" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -9421,6 +10126,8 @@
                 <ScalarProperty Name="AmountLCY" ColumnName="amount_lcy" />
                 <ScalarProperty Name="UnitPrice" ColumnName="unit_price" />
                 <ScalarProperty Name="UnitPriceLCY" ColumnName="unit_price_lcy" />
+                <ScalarProperty Name="JobId" ColumnName="job_id" />
+                <ScalarProperty Name="InventoryAccountId" ColumnName="inventory_account_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -9476,7 +10183,33 @@
                 <ScalarProperty Name="PurchHeaderId" ColumnName="purch_header_id" />
                 <ScalarProperty Name="Description" ColumnName="description" />
                 <ScalarProperty Name="CashHeaderId" ColumnName="cash_header_id" />
+                <ScalarProperty Name="JobId" ColumnName="job_id" />
               </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.Job">
+              <MappingFragment StoreEntitySet="jobs">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="Code" ColumnName="code" />
+                <ScalarProperty Name="Description" ColumnName="description" />
+                <ScalarProperty Name="JobGroup1" ColumnName="job_group1" />
+                <ScalarProperty Name="JobGroup2" ColumnName="job_group2" />
+                <ScalarProperty Name="JobGroup3" ColumnName="job_group3" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+                <ScalarProperty Name="Version" ColumnName="version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockkeepingUnits">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.StockkeepingUnit">
+              <MappingFragment StoreEntitySet="stockkeeping_units" />
             </EntityTypeMapping>
           </EntitySetMapping>
         </EntityContainerMapping>

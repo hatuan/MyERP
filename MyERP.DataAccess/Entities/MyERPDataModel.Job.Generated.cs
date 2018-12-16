@@ -17,11 +17,11 @@ namespace MyERP.DataAccess
 {
 
     /// <summary>
-    /// There are no comments for MyERP.DataAccess.ItemDiscountGroup in the schema.
+    /// There are no comments for MyERP.DataAccess.Job in the schema.
     /// </summary>
-    public partial class ItemDiscountGroup    {
+    public partial class Job    {
 
-        public ItemDiscountGroup()
+        public Job()
         {
             OnCreated();
         }
@@ -66,6 +66,36 @@ namespace MyERP.DataAccess
 
     
         /// <summary>
+        /// There are no comments for JobGroup1 in the schema.
+        /// </summary>
+        public virtual long? JobGroup1
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for JobGroup2 in the schema.
+        /// </summary>
+        public virtual long? JobGroup2
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for JobGroup3 in the schema.
+        /// </summary>
+        public virtual long? JobGroup3
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
         /// There are no comments for OrganizationId in the schema.
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
@@ -81,6 +111,17 @@ namespace MyERP.DataAccess
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
         public virtual long ClientId
+        {
+            get;
+            set;
+        }
+
+    
+        /// <summary>
+        /// There are no comments for Status in the schema.
+        /// </summary>
+        [System.ComponentModel.DataAnnotations.Required()]
+        public virtual byte Status
         {
             get;
             set;
@@ -125,17 +166,6 @@ namespace MyERP.DataAccess
         /// </summary>
         [System.ComponentModel.DataAnnotations.Required()]
         public virtual long RecModifiedBy
-        {
-            get;
-            set;
-        }
-
-    
-        /// <summary>
-        /// There are no comments for Status in the schema.
-        /// </summary>
-        [System.ComponentModel.DataAnnotations.Required()]
-        public virtual short Status
         {
             get;
             set;

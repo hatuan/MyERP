@@ -92,6 +92,9 @@ namespace MyERP.Web.Models
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal? UnitPrice { get; set; }
 
+        [Display(Name = "Vat")]
+        public long? VatId { get; set; }
+
         [Display(Name = "Group 1")]
         public long? ItemGroupId1 { get; set; }
 
@@ -100,6 +103,33 @@ namespace MyERP.Web.Models
 
         [Display(Name = "Group 3")]
         public long? ItemGroupId3 { get; set; }
+
+        [Display(Name = "Inventory")]
+        public long? InventoryAccountId { get; set; }
+
+        [Display(Name = "Consignment")]
+        public long? ConsignmentAccountId { get; set; }
+
+        [Display(Name = "Sales")]
+        public long? SalesAccountId { get; set; }
+
+        [Display(Name = "Sales Internal")]
+        public long? SalesInternalAccountId { get; set; }
+
+        [Display(Name = "Sales Return")]
+        public long? SalesReturnAccountId { get; set; }
+
+        [Display(Name = "Sales Discount")]
+        public long? SalesDiscountAccountId { get; set; }
+
+        [Display(Name = "COGS")]
+        public long? COGSAccountId { get; set; }
+
+        [Display(Name = "COGS Diff")]
+        public long? COGSDiffAccountId { get; set; }
+
+        [Display(Name = "WIP")]
+        public long? WIPAccountId { get; set; }
 
         [Required]
         [Display(Name = "Status")]

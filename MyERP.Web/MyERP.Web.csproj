@@ -441,6 +441,7 @@
     <Content Include="Areas\Vat\Views\Index\Index.cshtml" />
     <Content Include="Areas\Account\Views\Index\_List.cshtml" />
     <Content Include="Areas\Account\Views\Index\_Maintenance.cshtml" />
+    <Content Include="Areas\Item\Views\Index\_AccountPage.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Resources\reports\salespos.json" />
     <Content Include="Resources\reports\salespos_001.mrt" />

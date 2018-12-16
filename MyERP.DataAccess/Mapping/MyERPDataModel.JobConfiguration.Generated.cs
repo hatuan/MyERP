@@ -17,14 +17,14 @@ using System.Data.Entity.ModelConfiguration;
 namespace MyERP.DataAccess.Mapping
 {
 
-    public partial class AccountConfiguration : EntityTypeConfiguration<Account>
+    public partial class JobConfiguration : EntityTypeConfiguration<Job>
     {
 
-        public AccountConfiguration()
+        public JobConfiguration()
         {
             this
                 .HasKey(p => p.Id)
-                .ToTable("account", "dbo");
+                .ToTable("job", "dbo");
             // Properties:
             this
                 .Property(p => p.Id)
@@ -45,12 +45,16 @@ namespace MyERP.DataAccess.Mapping
                     .HasMaxLength(256)
                     .HasColumnType("nvarchar");
             this
-                .Property(p => p.ParentId)
-                    .HasColumnName(@"parent_id")
+                .Property(p => p.JobGroup1)
+                    .HasColumnName(@"job_group1")
                     .HasColumnType("bigint");
             this
-                .Property(p => p.CurrencyId)
-                    .HasColumnName(@"currency_id")
+                .Property(p => p.JobGroup2)
+                    .HasColumnName(@"job_group2")
+                    .HasColumnType("bigint");
+            this
+                .Property(p => p.JobGroup3)
+                    .HasColumnName(@"job_group3")
                     .HasColumnType("bigint");
             this
                 .Property(p => p.OrganizationId)
@@ -62,6 +66,11 @@ namespace MyERP.DataAccess.Mapping
                     .HasColumnName(@"client_id")
                     .IsRequired()
                     .HasColumnType("bigint");
+            this
+                .Property(p => p.Status)
+                    .HasColumnName(@"status")
+                    .IsRequired()
+                    .HasColumnType("tinyint");
             this
                 .Property(p => p.RecCreatedAt)
                     .HasColumnName(@"rec_created_at")
@@ -83,21 +92,11 @@ namespace MyERP.DataAccess.Mapping
                     .IsRequired()
                     .HasColumnType("bigint");
             this
-                .Property(p => p.Status)
-                    .HasColumnName(@"status")
-                    .IsRequired()
-                    .HasColumnType("tinyint");
-            this
                 .Property(p => p.Version)
                     .HasColumnName(@"version")
                     .IsRequired()
                     .HasColumnType("bigint");
             // Associations:
-            this
-                .HasMany(p => p.Childs)
-                    .WithOptional(c => c.Parent)
-                .HasForeignKey(p => p.ParentId)
-                    .WillCascadeOnDelete(false);
             this
                 .HasRequired(p => p.Client)
                     .WithMany()
@@ -117,11 +116,6 @@ namespace MyERP.DataAccess.Mapping
                 .HasRequired(p => p.RecModifiedByUser)
                     .WithMany()
                 .HasForeignKey(p => p.RecModifiedBy)
-                    .WillCascadeOnDelete(false);
-            this
-                .HasOptional(p => p.Currency)
-                    .WithMany()
-                .HasForeignKey(p => p.CurrencyId)
                     .WillCascadeOnDelete(false);
             OnCreated();
         }
