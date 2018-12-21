@@ -17,22 +17,21 @@ using System.Data.Entity.ModelConfiguration;
 namespace MyERP.DataAccess.Mapping
 {
 
-    public partial class AccountsReceivableLedgerConfiguration : EntityTypeConfiguration<AccountsReceivableLedger>
+    public partial class StockkeepingUnitConfiguration : EntityTypeConfiguration<StockkeepingUnit>
     {
 
-        public AccountsReceivableLedgerConfiguration()
+        public StockkeepingUnitConfiguration()
         {
             this
                 .HasKey(p => p.Id)
-                .ToTable("accounts_receivable_ledger", "dbo");
+                .ToTable("stockkeeping_unit", "dbo");
             // Property:
             this
                 .Property(p => p.Id)
                     .HasColumnName(@"id")
                     .IsRequired()
-                    .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)
+                    .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)
                     .HasColumnType("bigint");
-            // Association:
             OnCreated();
         }
 

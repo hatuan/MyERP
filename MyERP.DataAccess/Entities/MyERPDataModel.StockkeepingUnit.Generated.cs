@@ -17,11 +17,11 @@ namespace MyERP.DataAccess
 {
 
     /// <summary>
-    /// There are no comments for MyERP.DataAccess.AccountsReceivableLedger in the schema.
+    /// There are no comments for MyERP.DataAccess.StockkeepingUnit in the schema.
     /// </summary>
-    public partial class AccountsReceivableLedger    {
+    public partial class StockkeepingUnit    {
 
-        public AccountsReceivableLedger()
+        public StockkeepingUnit()
         {
             OnCreated();
         }

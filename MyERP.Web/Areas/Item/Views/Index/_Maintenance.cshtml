@@ -91,6 +91,28 @@
           )
       .Data(ViewData["ItemGroup3Items"])
 )
+ 
+@(Html.X().Store().ID("VatStore").AutoLoad(false)
+      .Proxy(Html.X().AjaxProxy()
+          .Url(Url.Action("LookupData", "Index", new { area = "Vat" }))
+          .Reader(Html.X().JsonReader().RootProperty("data"))
+      )
+      .Model(Html.X().Model()
+          .IDProperty("Id")
+          .Fields(
+              new ModelField("Id", ModelFieldType.Int),
+              new ModelField("OrganizationCode", ModelFieldType.String),
+              new ModelField("Code", ModelFieldType.String),
+              new ModelField("Description", ModelFieldType.String)
+          )
+      )
+      .Parameters(p =>
+      {
+          p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+      }
+      )
+      .Data(ViewData["VatStore"])
+)
 
 @(Html.X().Window()
       .ID("WindowItemMaintenance")
@@ -176,8 +198,14 @@
                                                                 </div>
                                                              </text>)
                                                   )
-                                                  .MinWidth(400)
-                                              )),
+                                                  .MinWidth(400))
+                                              .StoreID("VatStore")
+                                              .Listeners(ls =>
+                                              {
+                                                  ls.BeforeQuery.Handler = @"var _id = this.getValue();
+                                                                            this.getStore().id = _id;";
+                                              })
+                                        ),
                                   Html.X().Container()
                                       .Items(
                                           Html.X().TextFieldFor(m => m.UnitCost).ID("UnitCost")
@@ -303,218 +331,7 @@
                           Html.X().Panel()
                               .Title("Account")
                               .Layout(LayoutType.Form)
-                              .Items(
-                                  Html.X().Container()
-                                      .Items(
-                                          Html.X().ComboBoxFor(m => m.InventoryAccountId).ID("InventoryAccountId")
-                                              .DisplayField("Code")
-                                              .ValueField("Id")
-                                              .FieldStyle("text-transform: uppercase;")
-                                              .TypeAhead(true)
-                                              .MinChars(0)
-                                              .PageSize(10)
-                                              .SelectOnTab(true)
-                                              .ForceSelection(true)
-                                              .ValidateOnBlur(true)
-                                              .ValidateOnChange(true)
-                                              .ListConfig(Html.X().BoundList()
-                                                  .LoadingText("Searching...")
-                                                  .ItemTpl(Html.X().XTemplate()
-                                                      .Html(@<text>
-                                                                <div class="search-item">
-                                                                    <h3>{Code}</h3>
-                                                                    {Description}
-                                                                </div>
-                                                             </text>)
-                                                  )
-                                                  .MinWidth(400)
-                                              ),
-                                          Html.X().ComboBoxFor(m => m.ConsignmentAccountId).ID("ConsignmentAccountId")
-                                              .DisplayField("Code")
-                                              .ValueField("Id")
-                                              .FieldStyle("text-transform: uppercase;")
-                                              .TypeAhead(true)
-                                              .MinChars(0)
-                                              .PageSize(10)
-                                              .SelectOnTab(true)
-                                              .ForceSelection(true)
-                                              .ValidateOnBlur(true)
-                                              .ValidateOnChange(true)
-                                              .ListConfig(Html.X().BoundList()
-                                                  .LoadingText("Searching...")
-                                                  .ItemTpl(Html.X().XTemplate()
-                                                      .Html(@<text>
-                                                                <div class="search-item">
-                                                                    <h3>{Code}</h3>
-                                                                    {Description}
-                                                                </div>
-                                                             </text>)
-                                                  )
-                                                  .MinWidth(400)
-                                              ),
-                                          Html.X().ComboBoxFor(m => m.SalesAccountId).ID("SalesAccountId")
-                                              .DisplayField("Code")
-                                              .ValueField("Id")
-                                              .FieldStyle("text-transform: uppercase;")
-                                              .TypeAhead(true)
-                                              .MinChars(0)
-                                              .PageSize(10)
-                                              .SelectOnTab(true)
-                                              .ForceSelection(true)
-                                              .ValidateOnBlur(true)
-                                              .ValidateOnChange(true)
-                                              .ListConfig(Html.X().BoundList()
-                                                  .LoadingText("Searching...")
-                                                  .ItemTpl(Html.X().XTemplate()
-                                                      .Html(@<text>
-                                                                <div class="search-item">
-                                                                    <h3>{Code}</h3>
-                                                                    {Description}
-                                                                </div>
-                                                             </text>)
-                                                  )
-                                                  .MinWidth(400)
-                                              ),
-                                          Html.X().ComboBoxFor(m => m.SalesInternalAccountId).ID("SalesInternalAccountId")
-                                              .DisplayField("Code")
-                                              .ValueField("Id")
-                                              .FieldStyle("text-transform: uppercase;")
-                                              .TypeAhead(true)
-                                              .MinChars(0)
-                                              .PageSize(10)
-                                              .SelectOnTab(true)
-                                              .ForceSelection(true)
-                                              .ValidateOnBlur(true)
-                                              .ValidateOnChange(true)
-                                              .ListConfig(Html.X().BoundList()
-                                                  .LoadingText("Searching...")
-                                                  .ItemTpl(Html.X().XTemplate()
-                                                      .Html(@<text>
-                                                                <div class="search-item">
-                                                                    <h3>{Code}</h3>
-                                                                    {Description}
-                                                                </div>
-                                                             </text>)
-                                                  )
-                                                  .MinWidth(400)
-                                              ),
-                                          Html.X().ComboBoxFor(m => m.SalesReturnAccountId).ID("SalesReturnAccountId")
-                                              .DisplayField("Code")
-                                              .ValueField("Id")
-                                              .FieldStyle("text-transform: uppercase;")
-                                              .TypeAhead(true)
-                                              .MinChars(0)
-                                              .PageSize(10)
-                                              .SelectOnTab(true)
-                                              .ForceSelection(true)
-                                              .ValidateOnBlur(true)
-                                              .ValidateOnChange(true)
-                                              .ListConfig(Html.X().BoundList()
-                                                  .LoadingText("Searching...")
-                                                  .ItemTpl(Html.X().XTemplate()
-                                                      .Html(@<text>
-                                                                <div class="search-item">
-                                                                    <h3>{Code}</h3>
-                                                                    {Description}
-                                                                </div>
-                                                             </text>)
-                                                  )
-                                                  .MinWidth(400)
-                                              ),
-                                          Html.X().ComboBoxFor(m => m.SalesDiscountAccountId).ID("SalesDiscountAccountId")
-                                              .DisplayField("Code")
-                                              .ValueField("Id")
-                                              .FieldStyle("text-transform: uppercase;")
-                                              .TypeAhead(true)
-                                              .MinChars(0)
-                                              .PageSize(10)
-                                              .SelectOnTab(true)
-                                              .ForceSelection(true)
-                                              .ValidateOnBlur(true)
-                                              .ValidateOnChange(true)
-                                              .ListConfig(Html.X().BoundList()
-                                                  .LoadingText("Searching...")
-                                                  .ItemTpl(Html.X().XTemplate()
-                                                      .Html(@<text>
-                                                                <div class="search-item">
-                                                                    <h3>{Code}</h3>
-                                                                    {Description}
-                                                                </div>
-                                                             </text>)
-                                                  )
-                                                  .MinWidth(400)
-                                              ),
-                                          Html.X().ComboBoxFor(m => m.COGSAccountId).ID("COGSAccountId")
-                                              .DisplayField("Code")
-                                              .ValueField("Id")
-                                              .FieldStyle("text-transform: uppercase;")
-                                              .TypeAhead(true)
-                                              .MinChars(0)
-                                              .PageSize(10)
-                                              .SelectOnTab(true)
-                                              .ForceSelection(true)
-                                              .ValidateOnBlur(true)
-                                              .ValidateOnChange(true)
-                                              .ListConfig(Html.X().BoundList()
-                                                  .LoadingText("Searching...")
-                                                  .ItemTpl(Html.X().XTemplate()
-                                                      .Html(@<text>
-                                                                <div class="search-item">
-                                                                    <h3>{Code}</h3>
-                                                                    {Description}
-                                                                </div>
-                                                             </text>)
-                                                  )
-                                                  .MinWidth(400)
-                                              ),
-                                          Html.X().ComboBoxFor(m => m.COGSDiffAccountId).ID("COGSDiffAccountId")
-                                              .DisplayField("Code")
-                                              .ValueField("Id")
-                                              .FieldStyle("text-transform: uppercase;")
-                                              .TypeAhead(true)
-                                              .MinChars(0)
-                                              .PageSize(10)
-                                              .SelectOnTab(true)
-                                              .ForceSelection(true)
-                                              .ValidateOnBlur(true)
-                                              .ValidateOnChange(true)
-                                              .ListConfig(Html.X().BoundList()
-                                                  .LoadingText("Searching...")
-                                                  .ItemTpl(Html.X().XTemplate()
-                                                      .Html(@<text>
-                                                                <div class="search-item">
-                                                                    <h3>{Code}</h3>
-                                                                    {Description}
-                                                                </div>
-                                                             </text>)
-                                                  )
-                                                  .MinWidth(400)
-                                              ),
-                                          Html.X().ComboBoxFor(m => m.WIPAccountId).ID("WIPAccountId")
-                                              .DisplayField("Code")
-                                              .ValueField("Id")
-                                              .FieldStyle("text-transform: uppercase;")
-                                              .TypeAhead(true)
-                                              .MinChars(0)
-                                              .PageSize(10)
-                                              .SelectOnTab(true)
-                                              .ForceSelection(true)
-                                              .ValidateOnBlur(true)
-                                              .ValidateOnChange(true)
-                                              .ListConfig(Html.X().BoundList()
-                                                  .LoadingText("Searching...")
-                                                  .ItemTpl(Html.X().XTemplate()
-                                                      .Html(@<text>
-                                                                <div class="search-item">
-                                                                    <h3>{Code}</h3>
-                                                                    {Description}
-                                                                </div>
-                                                             </text>)
-                                                  )
-                                                  .MinWidth(400)
-                                             )
-                                    )
-                        )
+                              .ItemsFromPartial("_AccountPage", Model, ViewData)
                     )
               )
               .Buttons(
@@ -527,7 +344,17 @@
                           de.Click.Url = Url.Action("_Maintenance");
                           de.Click.Method = HttpMethod.POST;
                           de.Click.Before = "return this.up('form').isValid();";
-                          de.Click.Success = "this.up('window').close();";
+                          de.Click.Success = "function(response, result) { " +
+                                             "  this.up('window').close();" +
+                                             "  App.ItemList.getSelectionModel().deselectAll();" +
+                                             "  App.StoreItemList.reload({ " +
+                                             "    callback : function() { " +
+                                             "      var record = App.ItemList.store.getById(result.result.Id); " +
+                                             "      var index = App.ItemList.store.indexOf(record);" +
+                                             "      App.ItemList.getSelectionModel().select(index);" +
+                                             "   }" +
+                                             " });" +
+                                             "}";
                           de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
                           de.Click.ShowWarningOnFailure = true;
                           de.Click.EventMask.ShowMask = true;

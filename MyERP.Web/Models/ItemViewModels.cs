@@ -104,6 +104,15 @@ namespace MyERP.Web.Models
         [Display(Name = "Group 3")]
         public long? ItemGroupId3 { get; set; }
 
+        [Display(Name = "Sales Uom")]
+        public long? SalesUomId { get; set; }
+
+        [Display(Name = "Purch Vendor")]
+        public long? PurchVendorId { get; set; }
+
+        [Display(Name = "Purch Uom")]
+        public long? PurchUomId { get; set; }
+
         [Display(Name = "Inventory")]
         public long? InventoryAccountId { get; set; }
 

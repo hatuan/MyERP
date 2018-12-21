@@ -1990,7 +1990,12 @@
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
         </EntityType>
-        <EntityType Name="stockkeeping_unit" />
+        <EntityType Name="stockkeeping_unit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
           <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="*" />
@@ -2616,7 +2621,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_item_item_discount_group">
-          <End Role="item_discount_group" Type="MyERP.DataAccess.Store.item_discount_group" Multiplicity="1" />
+          <End Role="item_discount_group" Type="MyERP.DataAccess.Store.item_discount_group" Multiplicity="0..1" />
           <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="item_discount_group">
@@ -6663,7 +6668,12 @@
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Job_RecCreatedBy" FromRole="Jobs" ToRole="RecCreatedByUser" ed:Guid="3419436d-08b8-4e9b-b6b8-4032374c5746" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_Job_RecModifiedBy" FromRole="Jobs1" ToRole="RecModifiedByUser" ed:Guid="4aca92af-9d98-4cb0-9623-2f33b9f2f70a" />
         </EntityType>
-        <EntityType Name="StockkeepingUnit" ed:Guid="78c58525-33c7-4a9d-beae-476aaa62497a" />
+        <EntityType Name="StockkeepingUnit" ed:Guid="78c58525-33c7-4a9d-beae-476aaa62497a">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="86c2254f-065c-4d24-991d-570acca29fae" />
+        </EntityType>
         <Association Name="User_Client_CreatedBy" ed:Guid="cc64066d-a254-493f-8be0-7609622c4e6a">
           <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
           <End Role="Clients" Type="MyERP.DataAccess.Client" Multiplicity="*" />
@@ -7289,7 +7299,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="BusinessPartner_Item_PurchVendor" ed:Guid="fbee5907-968a-493a-ad5e-1e2d4e60b416">
-          <End Role="PurchVendor" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="1" />
+          <End Role="PurchVendor" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="0..1" />
           <End Role="Items" Type="MyERP.DataAccess.Item" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PurchVendor">
@@ -7301,7 +7311,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ItemDiscountGroup_Item" ed:Guid="98f39ae1-b6e0-4279-b417-f5ea08cedac8">
-          <End Role="ItemDiscountGroup" Type="MyERP.DataAccess.ItemDiscountGroup" Multiplicity="1" />
+          <End Role="ItemDiscountGroup" Type="MyERP.DataAccess.ItemDiscountGroup" Multiplicity="0..1" />
           <End Role="Items" Type="MyERP.DataAccess.Item" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ItemDiscountGroup">
@@ -10209,7 +10219,9 @@
           </EntitySetMapping>
           <EntitySetMapping Name="StockkeepingUnits">
             <EntityTypeMapping TypeName="MyERP.DataAccess.StockkeepingUnit">
-              <MappingFragment StoreEntitySet="stockkeeping_units" />
+              <MappingFragment StoreEntitySet="stockkeeping_units">
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
         </EntityContainerMapping>

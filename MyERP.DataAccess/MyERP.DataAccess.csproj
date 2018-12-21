@@ -123,6 +123,8 @@
     <Compile Include="Entities\MyERPDataModel.SalesPrice.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.SalesPriceGroup.cs" />
     <Compile Include="Entities\MyERPDataModel.SalesPriceGroup.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.StockkeepingUnit.cs" />
+    <Compile Include="Entities\MyERPDataModel.StockkeepingUnit.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Uom.cs" />
     <Compile Include="Entities\MyERPDataModel.Uom.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.User.cs" />
@@ -215,6 +217,8 @@
     <Compile Include="Mapping\MyERPDataModel.SalesPriceConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.SalesPriceGroupConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.SalesPriceGroupConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.StockkeepingUnitConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.StockkeepingUnitConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.UomConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.UomConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.UserConfiguration.cs" />

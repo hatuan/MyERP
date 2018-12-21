@@ -123,7 +123,7 @@ namespace MyERP.Web.Areas.Item.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.Get(c => c.Id == _id, new string[] {"BaseUom", "ItemGroup1", "ItemGroup2", "ItemGroup3"}).Single();
+                var entity = repository.Get(c => c.Id == _id, new string[] {"BaseUom", "ItemGroup1", "ItemGroup2", "ItemGroup3", "SalesUom", "PurchUom", "PurchVendor", "ItemDiscountGroup", "Vat", "InventoryAccount", "ConsignmentAccount", "SalesAccount", "SalesInternalAccount", "SalesReturnAccount", "SalesDiscountAccount", "COGSAccount", "COGSDiffAccount", "WIPAccount" }).Single();
                 model = new ItemEditViewModel()
                 {
                     Id = entity.Id,
@@ -135,6 +135,19 @@ namespace MyERP.Web.Areas.Item.Controllers
                     ItemGroupId2 = entity.ItemGroupId2,
                     ItemGroupId3 = entity.ItemGroupId3,
                     Description = entity.Description,
+                    SalesUomId = entity.SalesUomId,
+                    PurchVendorId = entity.PurchVendorId,
+                    PurchUomId = entity.PurchUomId,
+                    VatId = entity.VatId,
+                    InventoryAccountId = entity.InventoryAccountId,
+                    ConsignmentAccountId = entity.ConsignmentAccountId,
+                    SalesAccountId = entity.SalesAccountId,
+                    SalesInternalAccountId = entity.SalesInternalAccountId,
+                    SalesDiscountAccountId = entity.SalesDiscountAccountId,
+                    SalesReturnAccountId = entity.SalesReturnAccountId,
+                    COGSAccountId = entity.COGSAccountId,
+                    COGSDiffAccountId = entity.COGSDiffAccountId,
+                    WIPAccountId = entity.WIPAccountId,
                     Status = (DefaultStatusType)entity.Status,
                     Version = entity.Version
                 };
@@ -185,6 +198,126 @@ namespace MyERP.Web.Areas.Item.Controllers
                         }
                     };
                 }
+                if (entity.VatId.HasValue)
+                {
+                    ViewData["VatStore"] = new List<VatLookupViewModel>
+                    {
+                        new VatLookupViewModel()
+                        {
+                            Id = entity.VatId??0,
+                            Code = entity.Vat.Code,
+                            Description = entity.Vat.Description
+                        }
+                    };
+                }
+                if (entity.InventoryAccountId.HasValue)
+                {
+                    ViewData["InventoryAccountStore"] = new List<AccountLookupViewModel>
+                    {
+                        new AccountLookupViewModel()
+                        {
+                            Id = entity.InventoryAccountId??0,
+                            Code = entity.InventoryAccount.Code,
+                            Description = entity.InventoryAccount.Description
+                        }
+                    };
+                }
+                if (entity.ConsignmentAccountId.HasValue)
+                {
+                    ViewData["ConsignmentAccountStore"] = new List<AccountLookupViewModel>
+                    {
+                        new AccountLookupViewModel()
+                        {
+                            Id = entity.ConsignmentAccountId??0,
+                            Code = entity.ConsignmentAccount.Code,
+                            Description = entity.ConsignmentAccount.Description
+                        }
+                    };
+                }
+                if (entity.SalesAccountId.HasValue)
+                {
+                    ViewData["SalesAccountStore"] = new List<AccountLookupViewModel>
+                    {
+                        new AccountLookupViewModel()
+                        {
+                            Id = entity.SalesAccountId??0,
+                            Code = entity.SalesAccount.Code,
+                            Description = entity.SalesAccount.Description
+                        }
+                    };
+                }
+                if (entity.SalesInternalAccountId.HasValue)
+                {
+                    ViewData["SalesInternalAccountStore"] = new List<AccountLookupViewModel>
+                    {
+                        new AccountLookupViewModel()
+                        {
+                            Id = entity.SalesInternalAccountId??0,
+                            Code = entity.SalesInternalAccount.Code,
+                            Description = entity.SalesInternalAccount.Description
+                        }
+                    };
+                }
+                if (entity.SalesDiscountAccountId.HasValue)
+                {
+                    ViewData["SalesDiscountAccountStore"] = new List<AccountLookupViewModel>
+                    {
+                        new AccountLookupViewModel()
+                        {
+                            Id = entity.SalesDiscountAccountId??0,
+                            Code = entity.SalesDiscountAccount.Code,
+                            Description = entity.SalesDiscountAccount.Description
+                        }
+                    };
+                }
+                if (entity.SalesReturnAccountId.HasValue)
+                {
+                    ViewData["SalesReturnAccountStore"] = new List<AccountLookupViewModel>
+                    {
+                        new AccountLookupViewModel()
+                        {
+                            Id = entity.SalesReturnAccountId??0,
+                            Code = entity.SalesReturnAccount.Code,
+                            Description = entity.SalesReturnAccount.Description
+                        }
+                    };
+                }
+                if (entity.COGSAccountId.HasValue)
+                {
+                    ViewData["COGSAccountStore"] = new List<AccountLookupViewModel>
+                    {
+                        new AccountLookupViewModel()
+                        {
+                            Id = entity.COGSAccountId??0,
+                            Code = entity.COGSAccount.Code,
+                            Description = entity.COGSAccount.Description
+                        }
+                    };
+                }
+                if (entity.COGSDiffAccountId.HasValue)
+                {
+                    ViewData["COGSDiffAccountStore"] = new List<AccountLookupViewModel>
+                    {
+                        new AccountLookupViewModel()
+                        {
+                            Id = entity.COGSDiffAccountId??0,
+                            Code = entity.COGSDiffAccount.Code,
+                            Description = entity.COGSDiffAccount.Description
+                        }
+                    };
+                }
+                if (entity.WIPAccountId.HasValue)
+                {
+                    ViewData["WIPAccountStore"] = new List<AccountLookupViewModel>
+                    {
+                        new AccountLookupViewModel()
+                        {
+                            Id = entity.WIPAccountId??0,
+                            Code = entity.WIPAccount.Code,
+                            Description = entity.WIPAccount.Description
+                        }
+                    };
+                }
             }
             return new Ext.Net.MVC.PartialViewResult() { Model = model, ViewData = ViewData };
         }
@@ -229,6 +362,16 @@ namespace MyERP.Web.Areas.Item.Controllers
                     _update.ItemGroupId1 = model.ItemGroupId1;
                     _update.ItemGroupId2 = model.ItemGroupId2;
                     _update.ItemGroupId3 = model.ItemGroupId3;
+                    _update.VatId = model.VatId;
+                    _update.InventoryAccountId = model.InventoryAccountId;
+                    _update.ConsignmentAccountId = model.ConsignmentAccountId;
+                    _update.SalesAccountId = model.SalesAccountId;
+                    _update.SalesInternalAccountId = model.SalesInternalAccountId;
+                    _update.SalesDiscountAccountId = model.SalesDiscountAccountId;
+                    _update.SalesReturnAccountId = model.SalesReturnAccountId;
+                    _update.COGSAccountId = model.COGSAccountId;
+                    _update.COGSDiffAccountId = model.COGSDiffAccountId;
+                    _update.WIPAccountId = model.WIPAccountId;
                     _update.Status = (byte)model.Status;
                     _update.RecModifiedAt = DateTime.Now;
                     _update.RecModifiedBy = (long)user.ProviderUserKey;
@@ -262,6 +405,16 @@ namespace MyERP.Web.Areas.Item.Controllers
                         ItemGroupId1 = model.ItemGroupId1 == 0 ? null : model.ItemGroupId1,
                         ItemGroupId2 = model.ItemGroupId2 == 0 ? null : model.ItemGroupId2,
                         ItemGroupId3 = model.ItemGroupId3 == 0 ? null : model.ItemGroupId3,
+                        VatId = model.VatId == 0 ? null : model.VatId,
+                        InventoryAccountId = model.InventoryAccountId == 0 ? null : model.InventoryAccountId,
+                        ConsignmentAccountId = model.ConsignmentAccountId == 0 ? null : model.ConsignmentAccountId,
+                        SalesAccountId = model.SalesAccountId == 0 ? null : model.SalesAccountId,
+                        SalesInternalAccountId = model.SalesInternalAccountId == 0 ? null : model.SalesInternalAccountId,
+                        SalesDiscountAccountId = model.SalesDiscountAccountId == 0 ? null : model.SalesDiscountAccountId,
+                        SalesReturnAccountId = model.SalesReturnAccountId == 0 ? null : model.SalesReturnAccountId,
+                        COGSAccountId = model.COGSAccountId == 0 ? null : model.COGSAccountId,
+                        COGSDiffAccountId = model.COGSDiffAccountId == 0 ? null : model.COGSDiffAccountId,
+                        WIPAccountId = model.WIPAccountId == 0 ? null : model.WIPAccountId,
                         Status = (byte)model.Status,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
@@ -333,9 +486,8 @@ namespace MyERP.Web.Areas.Item.Controllers
                     }
                 }
 
-                Store StoreItemList = X.GetCmp<Store>("StoreItemList");
-                StoreItemList.Reload();
                 r.Success = true;
+                r.Result = new { Id = model.Id };
                 return r;
             }
             r.Success = false;
