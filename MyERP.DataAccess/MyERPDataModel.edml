@@ -46,6 +46,7 @@
           <EntitySet Name="vat_entries" EntityType="MyERP.DataAccess.Store.vat_entry" store:Type="Tables" Schema="dbo" Table="vat_entry" />
           <EntitySet Name="jobs" EntityType="MyERP.DataAccess.Store.job" store:Type="Tables" Schema="dbo" Table="job" />
           <EntitySet Name="stockkeeping_units" EntityType="MyERP.DataAccess.Store.stockkeeping_unit" store:Type="Tables" Schema="dbo" Table="stockkeeping_unit" />
+          <EntitySet Name="job_groups" EntityType="MyERP.DataAccess.Store.job_group" store:Type="Tables" Schema="dbo" Table="job_group" />
           <AssociationSet Name="FK_client_user_profile" Association="MyERP.DataAccess.Store.FK_client_user_profile">
             <End Role="user" EntitySet="users" />
             <End Role="client" EntitySet="clients" />
@@ -865,6 +866,38 @@
           <AssociationSet Name="FK_item_account8" Association="MyERP.DataAccess.Store.FK_item_account8">
             <End Role="account" EntitySet="accounts" />
             <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="FK_job_group_client" Association="MyERP.DataAccess.Store.FK_job_group_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="job_group" EntitySet="job_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_job_group_organization" Association="MyERP.DataAccess.Store.FK_job_group_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="job_group" EntitySet="job_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_job_group_user" Association="MyERP.DataAccess.Store.FK_job_group_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="job_group" EntitySet="job_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_job_group_user1" Association="MyERP.DataAccess.Store.FK_job_group_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="job_group" EntitySet="job_groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_job_job_group" Association="MyERP.DataAccess.Store.FK_job_job_group">
+            <End Role="job_group" EntitySet="job_groups" />
+            <End Role="job" EntitySet="jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_job_job_group1" Association="MyERP.DataAccess.Store.FK_job_job_group1">
+            <End Role="job_group" EntitySet="job_groups" />
+            <End Role="job" EntitySet="jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_job_job_group2" Association="MyERP.DataAccess.Store.FK_job_job_group2">
+            <End Role="job_group" EntitySet="job_groups" />
+            <End Role="job" EntitySet="jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchase_invoice_line_account" Association="MyERP.DataAccess.Store.FK_purchase_invoice_line_account">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="purchase_invoice_line" EntitySet="purchase_invoice_lines" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
@@ -1978,9 +2011,9 @@
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
           <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="job_group1" Type="bigint" />
-          <Property Name="job_group2" Type="bigint" />
-          <Property Name="job_group3" Type="bigint" />
+          <Property Name="job_group_id1" Type="bigint" />
+          <Property Name="job_group_id2" Type="bigint" />
+          <Property Name="job_group_id3" Type="bigint" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="status" Type="tinyint" Nullable="false" />
@@ -1995,6 +2028,23 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="job_group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="level" Type="tinyint" Nullable="false" />
+          <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="version" Type="bigint" Nullable="false" />
         </EntityType>
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
@@ -4456,6 +4506,102 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_job_group_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="job_group" Type="MyERP.DataAccess.Store.job_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job_group">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_job_group_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="job_group" Type="MyERP.DataAccess.Store.job_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job_group">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_job_group_user">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="job_group" Type="MyERP.DataAccess.Store.job_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job_group">
+              <PropertyRef Name="rec_created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_job_group_user1">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="job_group" Type="MyERP.DataAccess.Store.job_group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job_group">
+              <PropertyRef Name="rec_modified_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_job_job_group">
+          <End Role="job_group" Type="MyERP.DataAccess.Store.job_group" Multiplicity="0..1" />
+          <End Role="job" Type="MyERP.DataAccess.Store.job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="job_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job">
+              <PropertyRef Name="job_group_id1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_job_job_group1">
+          <End Role="job_group" Type="MyERP.DataAccess.Store.job_group" Multiplicity="0..1" />
+          <End Role="job" Type="MyERP.DataAccess.Store.job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="job_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job">
+              <PropertyRef Name="job_group_id2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_job_job_group2">
+          <End Role="job_group" Type="MyERP.DataAccess.Store.job_group" Multiplicity="0..1" />
+          <End Role="job" Type="MyERP.DataAccess.Store.job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="job_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job">
+              <PropertyRef Name="job_group_id3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchase_invoice_line_account">
+          <End Role="account" Type="MyERP.DataAccess.Store.account" Multiplicity="0..1" />
+          <End Role="purchase_invoice_line" Type="MyERP.DataAccess.Store.purchase_invoice_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="purchase_invoice_line">
+              <PropertyRef Name="inventory_account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -4503,6 +4649,7 @@
           <EntitySet Name="VatEntries" EntityType="MyERP.DataAccess.VatEntry" />
           <EntitySet Name="Jobs" EntityType="MyERP.DataAccess.Job" />
           <EntitySet Name="StockkeepingUnits" EntityType="MyERP.DataAccess.StockkeepingUnit" />
+          <EntitySet Name="JobGroups" EntityType="MyERP.DataAccess.JobGroup" />
           <AssociationSet Name="User_Client_CreatedBySet" Association="MyERP.DataAccess.User_Client_CreatedBy">
             <End Role="RecCreatedByUser" EntitySet="Users" />
             <End Role="Clients" EntitySet="Clients" />
@@ -5326,6 +5473,38 @@
           <AssociationSet Name="Account_Item_WIPAccountSet" Association="MyERP.DataAccess.Account_Item_WIPAccount">
             <End Role="WIPAccount" EntitySet="Accounts" />
             <End Role="Items8" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="Client_JobGroupSet" Association="MyERP.DataAccess.Client_JobGroup">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="JobGroups" EntitySet="JobGroups" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_JobGroupSet" Association="MyERP.DataAccess.Organization_JobGroup">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="JobGroups" EntitySet="JobGroups" />
+          </AssociationSet>
+          <AssociationSet Name="User_JobGroup_RecCreatedBySet" Association="MyERP.DataAccess.User_JobGroup_RecCreatedBy">
+            <End Role="RecCreatedByUser" EntitySet="Users" />
+            <End Role="JobGroups" EntitySet="JobGroups" />
+          </AssociationSet>
+          <AssociationSet Name="User_JobGroup_RecModifiedBySet" Association="MyERP.DataAccess.User_JobGroup_RecModifiedBy">
+            <End Role="RecModifiedByUser" EntitySet="Users" />
+            <End Role="JobGroups1" EntitySet="JobGroups" />
+          </AssociationSet>
+          <AssociationSet Name="JobGroup1_JobSet" Association="MyERP.DataAccess.JobGroup1_Job">
+            <End Role="JobGroup1" EntitySet="JobGroups" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="JobGroup2_JobSet" Association="MyERP.DataAccess.JobGroup2_Job">
+            <End Role="JobGroup2" EntitySet="JobGroups" />
+            <End Role="Jobs1" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="JobGroup3_JobSet" Association="MyERP.DataAccess.JobGroup3_Job">
+            <End Role="JobGroup3" EntitySet="JobGroups" />
+            <End Role="Jobs2" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="InventoryAccount_PurchaseInvoiceLineSet" Association="MyERP.DataAccess.InventoryAccount_PurchaseInvoiceLine">
+            <End Role="InventoryAccount" EntitySet="Accounts" />
+            <End Role="PurchaseInvoiceLines" EntitySet="PurchaseInvoiceLines" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
@@ -6577,6 +6756,7 @@
           <NavigationProperty Name="Item" Relationship="MyERP.DataAccess.Item_PurchaseInvoiceLine" FromRole="PurchaseInvoiceLines" ToRole="Item" ed:Guid="98621a4b-6b49-418f-9965-ad5bfae2c770" />
           <NavigationProperty Name="Uom" Relationship="MyERP.DataAccess.Uom_PurchaseInvoiceLine" FromRole="PurchaseInvoiceLines" ToRole="Uom" ed:Guid="fcab2dae-38c0-4438-8c4f-52336a94005c" />
           <NavigationProperty Name="Job" Relationship="MyERP.DataAccess.Job_PurchaseInvoiceLine" FromRole="PurchaseInvoiceLines" ToRole="Job" ed:Guid="65b2dd25-acc6-4588-b6f5-de1fbe3a15a7" />
+          <NavigationProperty Name="InventoryAccount" Relationship="MyERP.DataAccess.InventoryAccount_PurchaseInvoiceLine" FromRole="PurchaseInvoiceLines" ToRole="InventoryAccount" ed:Guid="6e4f7c58-bdf7-4acb-b827-7745c6038608" />
         </EntityType>
         <EntityType Name="Vat" ed:Guid="5604c381-1dc8-463c-b85a-6a932722b01f">
           <Key>
@@ -6652,9 +6832,9 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="5957fa88-48a6-44af-9597-fedeeae97f86" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="55ef2e55-c892-42de-8859-d43532b13409" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="5c8fd352-7c6f-4c40-9d86-29fe88c8091c" />
-          <Property Name="JobGroup1" Type="Int64" ed:ValidateRequired="false" ed:Guid="ff642a54-70b9-405d-9fab-3d6f1b1fa18d" />
-          <Property Name="JobGroup2" Type="Int64" ed:ValidateRequired="false" ed:Guid="72ff9a01-7a51-4770-ab94-83a8130c0a80" />
-          <Property Name="JobGroup3" Type="Int64" ed:ValidateRequired="false" ed:Guid="bf7dfae8-fa93-4fd3-872c-2f476888ac87" />
+          <Property Name="JobGroupId1" Type="Int64" ed:ValidateRequired="false" ed:Guid="ff642a54-70b9-405d-9fab-3d6f1b1fa18d" />
+          <Property Name="JobGroupId2" Type="Int64" ed:ValidateRequired="false" ed:Guid="72ff9a01-7a51-4770-ab94-83a8130c0a80" />
+          <Property Name="JobGroupId3" Type="Int64" ed:ValidateRequired="false" ed:Guid="bf7dfae8-fa93-4fd3-872c-2f476888ac87" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="2b40dc5f-2193-4e85-97ea-c63de169f64c" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e56ecc25-bad8-4082-a0cf-8ad64c275049" />
           <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="0414cab4-b288-4ff3-b54a-f389fa270f3b" />
@@ -6667,12 +6847,36 @@
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_Job" FromRole="Jobs" ToRole="Organization" ed:Guid="9a4a704d-a131-48ee-a3f1-52581da8e81d" />
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Job_RecCreatedBy" FromRole="Jobs" ToRole="RecCreatedByUser" ed:Guid="3419436d-08b8-4e9b-b6b8-4032374c5746" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_Job_RecModifiedBy" FromRole="Jobs1" ToRole="RecModifiedByUser" ed:Guid="4aca92af-9d98-4cb0-9623-2f33b9f2f70a" />
+          <NavigationProperty Name="JobGroup1" Relationship="MyERP.DataAccess.JobGroup1_Job" FromRole="Jobs" ToRole="JobGroup1" ed:Guid="1cec5d5b-8724-40be-844b-5061fc2cccde" />
+          <NavigationProperty Name="JobGroup2" Relationship="MyERP.DataAccess.JobGroup2_Job" FromRole="Jobs1" ToRole="JobGroup2" ed:Guid="fd04902e-2d0f-486b-9e94-dd25dae5943f" />
+          <NavigationProperty Name="JobGroup3" Relationship="MyERP.DataAccess.JobGroup3_Job" FromRole="Jobs2" ToRole="JobGroup3" ed:Guid="9abad65b-3663-4d95-9a1c-e0055c2ef23f" />
         </EntityType>
         <EntityType Name="StockkeepingUnit" ed:Guid="78c58525-33c7-4a9d-beae-476aaa62497a">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="86c2254f-065c-4d24-991d-570acca29fae" />
+        </EntityType>
+        <EntityType Name="JobGroup" ed:Guid="94176e49-abe9-4240-b990-ebacaf45e306">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="10cc7eaf-cc26-499d-a808-9037e087b801" />
+          <Property Name="Level" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="88168502-3e29-4932-8fc2-492d384d91c8" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="9345932a-1a56-451c-b8da-cdf64c035ced" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="0838b510-3524-420a-8422-d8b7d7c76f3e" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="de8b74ae-b36c-46ef-8b0b-6f5bd945a10e" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="759fea77-3d06-49ea-ae56-ca1da65afa4b" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="0784346a-8233-4069-b4a3-a9fb8ac2b48c" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="3ead03ad-800b-4192-998f-586986005e9f" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="126dd249-026d-4199-8c0f-e81485d8053a" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="7d3f5fe7-a388-4911-81ea-1d3d73819dd6" />
+          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="047f8a35-c2c1-4ebd-be70-0b2bc74d25b1" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="49e69bad-9d04-4490-81fd-d7b87aa8d12b" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_JobGroup" FromRole="JobGroups" ToRole="Client" ed:Guid="ea2ca3e3-783a-4f16-b7cf-e3b7a171dcfe" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_JobGroup" FromRole="JobGroups" ToRole="Organization" ed:Guid="26ec5b9f-2c92-4fe6-a31e-b1b21d593d60" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_JobGroup_RecCreatedBy" FromRole="JobGroups" ToRole="RecCreatedByUser" ed:Guid="ba87f164-9b98-42d6-bb5d-a3eb93f1beac" />
+          <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_JobGroup_RecModifiedBy" FromRole="JobGroups1" ToRole="RecModifiedByUser" ed:Guid="bf507939-341f-40e8-bb73-d97ae6dd3369" />
         </EntityType>
         <Association Name="User_Client_CreatedBy" ed:Guid="cc64066d-a254-493f-8be0-7609622c4e6a">
           <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
@@ -9027,7 +9231,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Job_PurchaseInvoiceLine" ed:Guid="34d33cbe-c51a-45d6-a714-0a7707bddf7c">
-          <End Role="Job" Type="MyERP.DataAccess.Job" Multiplicity="1" />
+          <End Role="Job" Type="MyERP.DataAccess.Job" Multiplicity="0..1" />
           <End Role="PurchaseInvoiceLines" Type="MyERP.DataAccess.PurchaseInvoiceLine" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Job">
@@ -9143,6 +9347,102 @@
             </Principal>
             <Dependent Role="Items8">
               <PropertyRef Name="WIPAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_JobGroup" ed:Guid="dac1ea57-5bd5-4e01-9a05-a37bab1520e5">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="JobGroups" Type="MyERP.DataAccess.JobGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobGroups">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_JobGroup" ed:Guid="d39e5e83-552a-41ab-bf73-80ce4dc92f23">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="JobGroups" Type="MyERP.DataAccess.JobGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobGroups">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_JobGroup_RecCreatedBy" ed:Guid="6646c3d3-3e1a-4a7f-99fd-159cf5d8a3cd">
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="JobGroups" Type="MyERP.DataAccess.JobGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecCreatedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobGroups">
+              <PropertyRef Name="RecCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_JobGroup_RecModifiedBy" ed:Guid="19da73cc-2c66-49d9-90e8-dc1c2378987a">
+          <End Role="RecModifiedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="JobGroups1" Type="MyERP.DataAccess.JobGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecModifiedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobGroups1">
+              <PropertyRef Name="RecModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="JobGroup1_Job" ed:Guid="2c031111-e560-4065-b334-f67b2ff4bc90">
+          <End Role="JobGroup1" Type="MyERP.DataAccess.JobGroup" Multiplicity="0..1" />
+          <End Role="Jobs" Type="MyERP.DataAccess.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobGroup1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="JobGroupId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="JobGroup2_Job" ed:Guid="7389ce6c-5ace-4e49-98fa-741834bbfa0b">
+          <End Role="JobGroup2" Type="MyERP.DataAccess.JobGroup" Multiplicity="0..1" />
+          <End Role="Jobs1" Type="MyERP.DataAccess.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobGroup2">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Jobs1">
+              <PropertyRef Name="JobGroupId2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="JobGroup3_Job" ed:Guid="17192bae-3dca-49f9-8954-a4a915ba002f">
+          <End Role="JobGroup3" Type="MyERP.DataAccess.JobGroup" Multiplicity="0..1" />
+          <End Role="Jobs2" Type="MyERP.DataAccess.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobGroup3">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Jobs2">
+              <PropertyRef Name="JobGroupId3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InventoryAccount_PurchaseInvoiceLine" ed:Guid="6ca45050-78fe-4a6f-b08c-87035fa3acdc">
+          <End Role="InventoryAccount" Type="MyERP.DataAccess.Account" Multiplicity="0..1" />
+          <End Role="PurchaseInvoiceLines" Type="MyERP.DataAccess.PurchaseInvoiceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseInvoiceLines">
+              <PropertyRef Name="InventoryAccountId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -10203,9 +10503,9 @@
                 <ScalarProperty Name="Id" ColumnName="id" />
                 <ScalarProperty Name="Code" ColumnName="code" />
                 <ScalarProperty Name="Description" ColumnName="description" />
-                <ScalarProperty Name="JobGroup1" ColumnName="job_group1" />
-                <ScalarProperty Name="JobGroup2" ColumnName="job_group2" />
-                <ScalarProperty Name="JobGroup3" ColumnName="job_group3" />
+                <ScalarProperty Name="JobGroupId1" ColumnName="job_group_id1" />
+                <ScalarProperty Name="JobGroupId2" ColumnName="job_group_id2" />
+                <ScalarProperty Name="JobGroupId3" ColumnName="job_group_id3" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
                 <ScalarProperty Name="Status" ColumnName="status" />
@@ -10221,6 +10521,24 @@
             <EntityTypeMapping TypeName="MyERP.DataAccess.StockkeepingUnit">
               <MappingFragment StoreEntitySet="stockkeeping_units">
                 <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobGroups">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.JobGroup">
+              <MappingFragment StoreEntitySet="job_groups">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="Level" ColumnName="level" />
+                <ScalarProperty Name="Code" ColumnName="code" />
+                <ScalarProperty Name="Description" ColumnName="description" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Version" ColumnName="version" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

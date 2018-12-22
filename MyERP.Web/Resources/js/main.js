@@ -271,6 +271,20 @@ var PurchaseInvoice = {
         return "";
     },
 
+    InventoryAccountRender: function (value, metadata, record, rowIndex, colIndex, store) {
+        if (Ext.isDefined(record.data.InventoryAccount) && record.data.InventoryAccount !== null && value > 0) {
+            return record.data.InventoryAccount.Code;
+        }
+        return "";
+    },
+
+    JobRender: function (value, metadata, record, rowIndex, colIndex, store) {
+        if (Ext.isDefined(record.data.Job) && record.data.Job !== null && value > 0) {
+            return record.data.Job.Code;
+        }
+        return "";
+    },
+
     PurchaseInvoiceLineBeforeEdit: function (editor, e) {
         e.grid.getSelectionModel().select(e.rowIdx, true);
 
@@ -295,7 +309,25 @@ var PurchaseInvoice = {
                 if (e.record.data.Location !== null) {
                     field.store.add(e.record.data.Location);
                 }
-            break;
+                break;
+            case "VatId":
+                field.store.id = e.record.data.VatId;
+                if (e.record.data.Vat !== null) {
+                    field.store.add(e.record.data.Vat);
+                }
+                break;
+            case "InventoryAccountId":
+                field.store.id = e.record.data.InventoryAccountId;
+                if (e.record.data.InventoryAccount !== null) {
+                    field.store.add(e.record.data.InventoryAccount);
+                }
+                break;
+            case "JobId":
+                field.store.id = e.record.data.JobId;
+                if (e.record.data.Job !== null) {
+                    field.store.add(e.record.data.Job);
+                }
+                break;
         }
     },
 
@@ -362,6 +394,12 @@ var VatEntry = {
                 field.store.id = e.record.data.AccountVatId;
                 if (e.record.data.AccountVat !== null) {
                     field.store.add(e.record.data.AccountVat);
+                }
+                break;
+            case "JobId":
+                field.store.id = e.record.data.JobId;
+                if (e.record.data.Job !== null) {
+                    field.store.add(e.record.data.Job);
                 }
                 break;
         }

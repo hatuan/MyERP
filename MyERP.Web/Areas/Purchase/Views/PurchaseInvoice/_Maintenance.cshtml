@@ -222,6 +222,44 @@
                   })
                   .Data(ViewData["Vats"]),
               Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("JobStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Index", new { area = "Job" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["JobStore"]),
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("InventoryAccountStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Index", new { area = "Account" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["InventoryAccountStore"]),
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
                   .ID("VatEntryBusinessPartnerStore")
                   .Proxy(Html.X().AjaxProxy()
                       .Url(Url.Action("LookupData", "Index", new { area = "BusinessPartner" }))
@@ -562,7 +600,11 @@
                                                   new ModelField("CostAmount", ModelFieldType.Float),
                                                   new ModelField("CostPriceLCY", ModelFieldType.Float),
                                                   new ModelField("CostPriceQtyBaseLCY", ModelFieldType.Float),
-                                                  new ModelField("CostAmountLCY", ModelFieldType.Float)))
+                                                  new ModelField("CostAmountLCY", ModelFieldType.Float),
+                                                  new ModelField("InventoryAccountId", ModelFieldType.String),
+                                                  new ModelField("InventoryAccount", ModelFieldType.Object),
+                                                  new ModelField("JobId", ModelFieldType.String),
+                                                  new ModelField("Job", ModelFieldType.Object)))
                                       .DataSource(Model.PurchaseInvoiceLines))
                                   .ColumnModel(cols =>
                                   {
@@ -803,6 +845,80 @@
                                           Html.X().ColumnFor(Model.PurchaseInvoiceLines, m => m.VatAmountLCY).ToBuilder<Column.Builder>().ID("PurchaseLineVatAmountLCYCol").Sortable(false).Width(125).Hidden(documentCurrencyIsLCY)
                                               .Editor(Html.X().NumberField().ID("PurchaseLineVatAmountLCYEditor").SelectOnFocus(true).DecimalPrecision(2)).Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
                                           );
+                                      cols.Columns.Add(Html.X().ColumnFor(Model.PurchaseInvoiceLines, m => m.InventoryAccountId).ToBuilder<Column.Builder>().ID("InventoryAccountIdCol").Sortable(false).Width(125)
+                                          .Editor(Html.X().ComboBox()
+                                              .ID("InventoryAccountEditor")
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .FieldLabel("")
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .AllowBlank(false)
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                            <div class="search-item">
+                                                                <h3>{Code}</h3>
+                                                                {Description}
+                                                            </div>
+                                                         </text>))
+                                                      .MinWidth(400))
+                                                  .StoreID("InventoryAccountStore")
+                                                  .Listeners(ls =>
+                                                  {
+                                                      ls.BeforeQuery.Handler = @"var _id = #{InventoryAccountEditor}.getValue();
+                                                                                      this.getStore().id = _id;
+                                                                                      /*this.getStore().load();*/";
+                                                  }))
+                                              .Renderer("PurchaseInvoice.InventoryAccountRender")
+                                              .EditorOptions(action =>
+                                              {
+                                                      action.Listeners.StartEdit.Delay = 500;
+                                              }));
+                                      cols.Columns.Add(Html.X().ColumnFor(Model.PurchaseInvoiceLines, m => m.JobId).ToBuilder<Column.Builder>().ID("JobIdCol").Sortable(false).Width(125)
+                                          .Editor(Html.X().ComboBox()
+                                              .ID("JobEditor")
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .FieldLabel("")
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .AllowBlank(false)
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                            <div class="search-item">
+                                                                <h3>{Code}</h3>
+                                                                {Description}
+                                                            </div>
+                                                         </text>))
+                                                      .MinWidth(400))
+                                                  .StoreID("JobStore")
+                                                  .Listeners(ls =>
+                                                  {
+                                                      ls.BeforeQuery.Handler = @"var _id = #{JobEditor}.getValue();
+                                                                                      this.getStore().id = _id;
+                                                                                      /*this.getStore().load();*/";
+                                                  }))
+                                              .Renderer("PurchaseInvoice.JobRender")
+                                              .EditorOptions(action =>
+                                              {
+                                                      action.Listeners.StartEdit.Delay = 500;
+                                              }));
                                   })
                                   .SelectionModel(Html.X().CellSelectionModel())
                                   .Plugins(Html.X().CellEditing().Listeners(ls =>

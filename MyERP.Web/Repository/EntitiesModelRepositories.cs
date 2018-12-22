@@ -157,4 +157,14 @@ namespace MyERP.Web
     {
 
     }
+    public partial class JobRepository : BaseRepository<MyERP.DataAccess.Job, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class JobGroupRepository : BaseRepository<MyERP.DataAccess.JobGroup, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
 }

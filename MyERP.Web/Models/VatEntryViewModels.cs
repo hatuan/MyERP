@@ -111,7 +111,13 @@ namespace MyERP.Web.Models
         public long AccountVatId { get; set; }
 
         public LookupViewModel AccountVat { get; set; }
-        
+
+        [Display(Name = "Job")]
+        [Required]
+        public long? JobId { get; set; }
+
+        public JobLookupViewModel Job { get; set; }
+
         /*
         [Display(Name = "Corresp Account")]
         [Required]

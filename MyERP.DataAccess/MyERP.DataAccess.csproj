@@ -89,6 +89,8 @@
     <Compile Include="Entities\MyERPDataModel.ItemUom.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Job.cs" />
     <Compile Include="Entities\MyERPDataModel.Job.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.JobGroup.cs" />
+    <Compile Include="Entities\MyERPDataModel.JobGroup.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Location.cs" />
     <Compile Include="Entities\MyERPDataModel.Location.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.NoSequence.cs" />
@@ -183,6 +185,8 @@
     <Compile Include="Mapping\MyERPDataModel.ItemUomConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.JobConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.JobConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.JobGroupConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.JobGroupConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.LocationConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.LocationConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.NoSequenceConfiguration.cs" />

@@ -442,6 +442,9 @@
     <Content Include="Areas\Account\Views\Index\_List.cshtml" />
     <Content Include="Areas\Account\Views\Index\_Maintenance.cshtml" />
     <Content Include="Areas\Item\Views\Index\_AccountPage.cshtml" />
+    <Content Include="Areas\Job\Views\web.config" />
+    <Content Include="Areas\Job\Views\Index\Index.cshtml" />
+    <Content Include="Areas\Job\Views\JobGroup\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Resources\reports\salespos.json" />
     <Content Include="Resources\reports\salespos_001.mrt" />
@@ -484,6 +487,9 @@
     <Compile Include="Areas\Item\Controllers\ItemGroupController.cs" />
     <Compile Include="Areas\Item\Controllers\ItemUomController.cs" />
     <Compile Include="Areas\Item\ItemAreaRegistration.cs" />
+    <Compile Include="Areas\Job\Controllers\IndexController.cs" />
+    <Compile Include="Areas\Job\Controllers\JobGroupController.cs" />
+    <Compile Include="Areas\Job\JobAreaRegistration.cs" />
     <Compile Include="Areas\Location\Controllers\IndexController.cs" />
     <Compile Include="Areas\Location\LocationAreaRegistration.cs" />
     <Compile Include="Areas\NoSequence\Controllers\IndexController.cs" />
@@ -523,11 +529,13 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ExtNetComboBoxModel.cs" />
     <Compile Include="Models\ExtNetModel.cs" />
+    <Compile Include="Models\JobGroupViewModels.cs" />
     <Compile Include="Models\ItemGroupViewModels.cs" />
     <Compile Include="Models\BusinessPartnerModels.cs" />
     <Compile Include="Models\ItemUomViewModels.cs" />
     <Compile Include="Models\LookupViewModel.cs" />
     <Compile Include="Models\VatEntryViewModels.cs" />
+    <Compile Include="Models\JobViewModels.cs" />
     <Compile Include="Models\VatViewModels.cs" />
     <Compile Include="Models\OptionViewModels.cs" />
     <Compile Include="Models\NoSequenceLineViewModels.cs" />
@@ -577,6 +585,7 @@
     </Compile>
     <Compile Include="Repository\BusinessPartnerPriceGroupRepository.cs" />
     <Compile Include="Repository\CurrencyRepository.cs" />
+    <Compile Include="Repository\JobGroupRepository.cs" />
     <Compile Include="Repository\PurchaseInvoiceLineRepository.cs" />
     <Compile Include="Repository\PurchaseInvoiceHeaderRepository.cs" />
     <Compile Include="Repository\SalesHeaderRepository.cs" />
@@ -610,6 +619,7 @@
     <Compile Include="Repository\RoleRepository.cs" />
     <Compile Include="Repository\ItemRepository.cs" />
     <Compile Include="Repository\SalesPriceRepository.cs" />
+    <Compile Include="Repository\JobRepository.cs" />
     <Compile Include="Repository\VatRepository.cs" />
     <Compile Include="Repository\VatEntryRepository.cs" />
     <Compile Include="Repository\UomRepository.cs" />
@@ -625,6 +635,8 @@
     <Folder Include="Areas\Cash\Models\" />
     <Folder Include="Areas\Cash\Views\Shared\" />
     <Folder Include="Areas\Item\Models\" />
+    <Folder Include="Areas\Job\Models\" />
+    <Folder Include="Areas\Job\Views\Shared\" />
     <Folder Include="Areas\Location\Models\" />
     <Folder Include="Areas\Location\Views\Shared\" />
     <Folder Include="Areas\NoSequence\Models\" />

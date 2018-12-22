@@ -140,7 +140,9 @@ namespace MyERP.Web.Areas.Purchase.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.Get(c => c.Id == _id, new string[] { "AccountPayable", "BuyFromVendor", "PayToVendor", "Currency", "PurchaseInvoiceLines", "PurchaseInvoiceLines.Item", "PurchaseInvoiceLines.Location", "PurchaseInvoiceLines.Uom", "PurchaseInvoiceLines.Vat", "VatEntries", "VatEntries.BusinessPartner", "VatEntries.Vat", "VatEntries.AccountVat" }).SingleOrDefault();
+                var entity = repository.Get(c => c.Id == _id, new string[] { "AccountPayable", "BuyFromVendor", "PayToVendor", "Currency",
+                    "PurchaseInvoiceLines", "PurchaseInvoiceLines.Item", "PurchaseInvoiceLines.Location", "PurchaseInvoiceLines.Uom", "PurchaseInvoiceLines.Vat", "PurchaseInvoiceLines.InventoryAccount", "PurchaseInvoiceLines.Job",
+                    "VatEntries", "VatEntries.BusinessPartner", "VatEntries.Vat", "VatEntries.AccountVat" }).SingleOrDefault();
                 if (entity == null)
                 {
                     return this.Direct(false, "Document has been changed or deleted! Please check");
@@ -223,6 +225,24 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                              CostPriceLCY = purchaseInvoiceLine.CostPriceLCY,
                                                              CostPriceQtyBaseLCY = purchaseInvoiceLine.CostPriceQtyBaseLCY,
                                                              CostAmountLCY = purchaseInvoiceLine.CostAmountLCY,
+                                                             InventoryAccountId = purchaseInvoiceLine.InventoryAccountId,
+                                                             InventoryAccount = purchaseInvoiceLine.InventoryAccount == null ? null : new AccountLookupViewModel()
+                                                             {
+                                                                 Code = purchaseInvoiceLine.InventoryAccount.Code,
+                                                                 OrganizationCode = "",
+                                                                 Description = purchaseInvoiceLine.InventoryAccount.Description,
+                                                                 Status = (DefaultStatusType)purchaseInvoiceLine.InventoryAccount.Status
+
+                                                             },
+                                                             JobId = purchaseInvoiceLine.JobId,
+                                                             Job = purchaseInvoiceLine.Job == null ? null : new JobLookupViewModel()
+                                                             {
+                                                                 Code = purchaseInvoiceLine.Job.Code,
+                                                                 OrganizationCode = "",
+                                                                 Description = purchaseInvoiceLine.Job.Description,
+                                                                 Status = (DefaultStatusType)purchaseInvoiceLine.Job.Status
+
+                                                             },
                                                          }).ToList();
 
                 List<VatEntryEditViewModel> vatEntries = (from line in entity.VatEntries
@@ -268,6 +288,15 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                                         OrganizationCode = "",
                                                                         Description = line.AccountVat.Description,
                                                                         Status = (DefaultStatusType)line.AccountVat.Status
+
+                                                                    },
+                                                                    JobId = line.JobId,
+                                                                    Job = line.Job == null ? null : new JobLookupViewModel()
+                                                                    {
+                                                                        Code = line.Job.Code,
+                                                                        OrganizationCode = "",
+                                                                        Description = line.Job.Description,
+                                                                        Status = (DefaultStatusType)line.Job.Status
 
                                                                     },
                                                                 }).ToList();
@@ -375,6 +404,22 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     }).ToList();
 
                 ViewData["Vats"] = purchaseInvoiceLines.Where(x => x.Vat != null).GroupBy(x => new { x.VatId }).Select(i => i.First())
+                    .Select(x => new ExtNetComboBoxModel
+                    {
+                        Id = x.VatId,
+                        Code = x.Vat.Code,
+                        Description = x.Vat.Description,
+                    }).ToList();
+
+                ViewData["InventoryAccountStore"] = purchaseInvoiceLines.Where(x => x.InventoryAccount != null).GroupBy(x => new { x.InventoryAccountId }).Select(i => i.First())
+                    .Select(x => new ExtNetComboBoxModel
+                    {
+                        Id = x.VatId,
+                        Code = x.Vat.Code,
+                        Description = x.Vat.Description,
+                    }).ToList();
+
+                ViewData["JobStore"] = purchaseInvoiceLines.Where(x => x.Job != null).GroupBy(x => new { x.JobId }).Select(i => i.First())
                     .Select(x => new ExtNetComboBoxModel
                     {
                         Id = x.VatId,
@@ -543,6 +588,8 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                             CostPriceLCY = purchaseInvoiceLine.CostPriceLCY,
                             CostPriceQtyBaseLCY = purchaseInvoiceLine.CostPriceQtyBaseLCY,
                             CostAmountLCY = purchaseInvoiceLine.CostAmountLCY,
+                            InventoryAccountId = purchaseInvoiceLine.InventoryAccountId,
+                            JobId = purchaseInvoiceLine.JobId,
                         });
                     else
                     {
@@ -595,6 +642,8 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                 x.CostPriceLCY = purchaseInvoiceLine.CostPriceLCY;
                                 x.CostPriceQtyBaseLCY = purchaseInvoiceLine.CostPriceQtyBaseLCY;
                                 x.CostAmountLCY = purchaseInvoiceLine.CostAmountLCY;
+                                x.InventoryAccountId = purchaseInvoiceLine.InventoryAccountId;
+                                x.JobId = purchaseInvoiceLine.JobId;
                             });
                     }
                 }
@@ -634,6 +683,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                             VatAmountLCY = vatEntry.VatAmountLCY,
                             AccountVatId = vatEntry.AccountVatId,
                             CorrespAccountId = headerModel.AccountPayableId,
+                            JobId = vatEntry.JobId,
                         });
                     else
                     {
@@ -661,6 +711,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                 x.VatAmountLCY = vatEntry.VatAmountLCY;
                                 x.AccountVatId = vatEntry.AccountVatId;
                                 x.CorrespAccountId = headerModel.AccountPayableId;
+                                x.JobId = vatEntry.JobId;
                             });
                     }
                 }
@@ -796,6 +847,8 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                         CostPriceLCY = c.CostPriceLCY,
                         CostPriceQtyBaseLCY = c.CostPriceQtyBaseLCY,
                         CostAmountLCY = c.CostAmountLCY,
+                        InventoryAccountId = c.InventoryAccountId,
+                        JobId = c.JobId,
                     }).ToList();
 
                 //VatEntry
@@ -825,7 +878,8 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                         VatAmount = c.VatAmount,
                         VatAmountLCY = c.VatAmountLCY,
                         AccountVatId = c.AccountVatId,
-                        CorrespAccountId = headerModel.AccountPayableId
+                        CorrespAccountId = headerModel.AccountPayableId,
+                        JobId = c.JobId,
                     }).ToList();
                
                 try
@@ -1031,7 +1085,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 {
                     var itemRepository = new ItemRepository();
                     var itemId = Convert.ToInt64(newValue);
-                    var item = itemRepository.Get(c => c.Id == itemId, new string[] {"Organization"}).First();
+                    var item = itemRepository.Get(c => c.Id == itemId, new string[] {"Organization", "Vat", "Vat.Organization", "InventoryAccount", "InventoryAccount.Organization" }).First();
                     var itemModel = new LookupViewModel()
                     {
                         Id = item.Id,
@@ -1056,6 +1110,37 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     record.Set("Uom", uomModel);
                     record.Set("UomId", uomModel.UomId);
                     record.Set("QtyPerUom", uomModel.QtyPerUom);
+
+                    if (item.InventoryAccount != null)
+                    {
+                        var inventoryAccountModel = new AccountLookupViewModel
+                        {
+                            Id = item.InventoryAccountId??0,
+                            Code = item.InventoryAccount.Code,
+                            Description = item.InventoryAccount.Description,
+                            OrganizationCode = item.InventoryAccount.Organization.Code,
+                            Status = (DefaultStatusType)item.InventoryAccount.Status
+                        };
+
+                        record.Set("InventoryAccount", inventoryAccountModel);
+                        record.Set("InventoryAccountId", inventoryAccountModel.Id);
+                    }
+
+                    if (item.Vat != null)
+                    {
+                        var vatModel = new VatLookupViewModel
+                        {
+                            Id = item.VatId ?? 0,
+                            Code = item.Vat.Code,
+                            Description = item.Vat.Description,
+                            OrganizationCode = item.Vat.Organization.Code,
+                            Status = (DefaultStatusType)item.Vat.Status
+                        };
+
+                        record.Set("Vat", vatModel);
+                        record.Set("VatId", vatModel.Id);
+                    }
+
                     //TODO: Update CorrespAccountStore
                     //Store correspAccountStore = X.GetCmp<Store>("CorrespAccountStore");
                     //correspAccountStore.Add(corespAcc);
@@ -1123,6 +1208,40 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     purchaseInvoiceLineRepository.UpdateRecord(purchaseInvoiceLineEditViewModel, ref record);
                     break;
                 }
+                case "InventoryAccountId":
+                {
+                    var accountRepository = new AccountRepository();
+                    var accountId = Convert.ToInt64(newValue);
+                    var account = accountRepository.Get(c => c.Id == accountId, new string[] { "Organization" }).First();
+                    var accountModel = new AccountLookupViewModel()
+                    {
+                        Id = account.Id,
+                        Code = account.Code,
+                        Description = account.Description,
+                        OrganizationCode = account.Organization.Code,
+                        Status = (DefaultStatusType)account.Status
+                    };
+
+                    record.Set("InventoryAccount", accountModel);
+                    break;
+                }
+                case "JobId":
+                {
+                    var jobRepository = new JobRepository();
+                    var jobId = Convert.ToInt64(newValue);
+                    var job = jobRepository.Get(c => c.Id == jobId, new string[] { "Organization" }).First();
+                    var jobModel = new JobLookupViewModel()
+                    {
+                        Id = job.Id,
+                        Code = job.Code,
+                        Description = job.Description,
+                        OrganizationCode = job.Organization.Code,
+                        Status = (DefaultStatusType)job.Status
+                    };
+
+                    record.Set("Job", jobModel);
+                    break;
+                }
                 case "Quantity":
                 case "PurchasePrice":
                 case "LineDiscountPercentage":
@@ -1156,7 +1275,8 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 throw new ArgumentNullException(nameof(id));
 
             var _id = Convert.ToInt64(id);
-            var entity = repository.Get(c => c.Id == _id, new string[] { "AccountPayable", "BuyFromVendor", "PayToVendor", "Currency", "PurchaseInvoiceLines", "PurchaseInvoiceLines.Item", "PurchaseInvoiceLines.Location", "PurchaseInvoiceLines.Uom", "PurchaseInvoiceLines.Vat" }).SingleOrDefault();
+            var entity = repository.Get(c => c.Id == _id, new string[] { "AccountPayable", "BuyFromVendor", "PayToVendor", "Currency",
+                "PurchaseInvoiceLines", "PurchaseInvoiceLines.Item", "PurchaseInvoiceLines.Location", "PurchaseInvoiceLines.Uom", "PurchaseInvoiceLines.Vat", "PurchaseInvoiceLines.InventoryAccount", "PurchaseInvoiceLines.Job" }).SingleOrDefault();
             if (entity == null)
             {
                 return this.Direct(false, "Purchase Invoice has been changed or deleted! Please check");
@@ -1210,6 +1330,10 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                  CostPriceLCY = purchaseInvoiceLine.CostPriceLCY,
                                  CostPriceQtyBaseLCY = purchaseInvoiceLine.CostPriceQtyBaseLCY,
                                  CostAmountLCY = purchaseInvoiceLine.CostAmountLCY,
+                                 InventoryAccountId = purchaseInvoiceLine.InventoryAccountId,
+                                 InventoryAccountCode = purchaseInvoiceLine.InventoryAccount?.Code,
+                                 JobId = purchaseInvoiceLine.JobId,
+                                 JobCode = purchaseInvoiceLine.Job?.Code,
                              }).ToList();
 
             var headerModel = new

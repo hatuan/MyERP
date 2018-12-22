@@ -182,6 +182,18 @@ namespace MyERP.Web.Models
         [Display(Name = "Cost Amount LCY")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal CostAmountLCY { get; set; }
+
+        [Display(Name = "Inventory Account")]
+        [Required]
+        public long? InventoryAccountId { get; set; }
+
+        public AccountLookupViewModel InventoryAccount { get; set; }
+
+        [Display(Name = "Job")]
+        [Required]
+        public long? JobId { get; set; }
+
+        public JobLookupViewModel Job { get; set; }
     }
 
 
