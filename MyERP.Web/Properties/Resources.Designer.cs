@@ -403,6 +403,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Job.
+        /// </summary>
+        public static string Job {
+            get {
+                return ResourceManager.GetString("Job", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Group.
+        /// </summary>
+        public static string JobGroup {
+            get {
+                return ResourceManager.GetString("JobGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Language {

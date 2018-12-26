@@ -20,6 +20,19 @@
                                                                                                             de.Click.Url = Url.Action("_List", "Index", new { area = "Account" });
                                                                                                             de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
                                                                                                             de.Click.EventMask.ShowMask = true;
+                                                                                                        }),
+                                                                                                        Html.X().MenuSeparator(),
+                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.Job).Tag("Job").DirectEvents(de =>
+                                                                                                        {
+                                                                                                            de.Click.Url = Url.Action("_List", "Index", new { area = "Job" });
+                                                                                                            de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
+                                                                                                            de.Click.EventMask.ShowMask = true;
+                                                                                                        }),
+                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.JobGroup).Tag("JobGroup").DirectEvents(de =>
+                                                                                                        {
+                                                                                                            de.Click.Url = Url.Action("_List", "JobGroup", new { area = "Job" });
+                                                                                                            de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
+                                                                                                            de.Click.EventMask.ShowMask = true;
                                                                                                         })
                                                                                                     )
                                                                                                 ),

@@ -224,7 +224,7 @@
     <Content Include="App_Readme\Ext.NET.Utilities\README.txt" />
     <Content Include="App_Readme\Transformer.NET\LICENSE.txt" />
     <Content Include="App_Readme\Transformer.NET\README.txt" />
-    <Content Include="logs\blank.txt" />
+    <Content Include="Logs\blank.txt" />
     <Content Include="MyERPBase.dll" />
     <Content Include="RecaptchaNet.Readme.txt" />
     <Content Include="Resources\css\main.css" />
@@ -445,6 +445,10 @@
     <Content Include="Areas\Job\Views\web.config" />
     <Content Include="Areas\Job\Views\Index\Index.cshtml" />
     <Content Include="Areas\Job\Views\JobGroup\Index.cshtml" />
+    <Content Include="Areas\Job\Views\JobGroup\_List.cshtml" />
+    <Content Include="Areas\Job\Views\JobGroup\_Maintenance.cshtml" />
+    <Content Include="Areas\Job\Views\Index\_List.cshtml" />
+    <Content Include="Areas\Job\Views\Index\_Maintenance.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Resources\reports\salespos.json" />
     <Content Include="Resources\reports\salespos_001.mrt" />

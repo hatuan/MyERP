@@ -464,5 +464,75 @@ namespace MyERP.Web.Controllers
                 }
             };
         }
+
+        //
+        // CheckDuplicateJobGroup
+        public JsonResult CheckDuplicateJobGroup(JobGroupEditViewModel entity)
+        {
+            var repository = new JobGroupRepository();
+            object exists;
+            if (entity.Id != null && entity.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(entity.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != entity.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(entity.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return Json(exists != null, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ExtCheckDuplicateJob(JobEditViewModel entity)
+        {
+            var repository = new JobRepository();
+            object exists;
+            if (entity.Id != null && entity.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(entity.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != entity.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(entity.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return new JsonResult
+            {
+                Data = new
+                {
+                    serviceResponse = new
+                    {
+                        valid = exists == null
+                    }
+                }
+            };
+        }
+
+        //
+        // CheckDuplicateJob
+        public JsonResult CheckDuplicateJob(JobEditViewModel entity)
+        {
+            var repository = new JobRepository();
+            object exists;
+            if (entity.Id != null && entity.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(entity.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != entity.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(entity.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return Json(exists != null, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ExtCheckDuplicateJobGroup(JobGroupEditViewModel entity)
+        {
+            var repository = new JobGroupRepository();
+            object exists;
+            if (entity.Id != null && entity.Id != 0)
+                exists = repository.GetBy(c => c.Code.Equals(entity.Code, StringComparison.InvariantCultureIgnoreCase) && c.Id != entity.Id);
+            else
+                exists = repository.GetBy(c => c.Code.Equals(entity.Code, StringComparison.InvariantCultureIgnoreCase));
+
+            return new JsonResult
+            {
+                Data = new
+                {
+                    serviceResponse = new
+                    {
+                        valid = exists == null
+                    }
+                }
+            };
+        }
     }
 }

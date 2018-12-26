@@ -1,0 +1,159 @@
+﻿@(Html.X().GridPanel()
+          .ID("JobList")
+          .Title("Job List")
+          .MinHeight(300)
+          .Region(Region.Center)
+          .Frame(true)
+          .TopBar(items =>
+          {
+              items.Add(Html.X().Toolbar().Items(buttons =>
+              {
+                  buttons.Add(Html.X().Button()
+                      .ID("btnEdit")
+                      .Text("Edit")
+                      .Icon(Icon.NoteEdit)
+                      .Disabled(true)
+                      .Listeners(ls =>
+                      {
+                          ls.Click.Handler = @"if (!#{JobList}.hasSelection()) {
+                                        return false;
+                                    } else {
+                                        return true;
+                                    }";
+                      })
+                      .DirectEvents(de =>
+                      {
+                          de.Click.Url = Url.Action("_Maintenance");
+                          de.Click.Method = HttpMethod.GET;
+                          de.Click.ShowWarningOnFailure = true;
+                          de.Click.EventMask.ShowMask = true;
+                          de.Click.ExtraParams.Add(new Parameter("ID", "#{JobList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
+                      })
+                      );
+                  buttons.Add(Html.X().Button()
+                      .ID("btnAdd")
+                      .Text("Add")
+                      .Icon(Icon.Add)
+                      .DirectEvents(de =>
+                      {
+                          de.Click.Url = Url.Action("_Maintenance");
+                          de.Click.Method = HttpMethod.GET;
+                          de.Click.ShowWarningOnFailure = true;
+                          de.Click.EventMask.ShowMask = true;
+                      })
+                      );
+                  buttons.Add(Html.X().Button()
+                      .ID("btnDelete")
+                      .Text("Delete")
+                      .Icon(Icon.Delete)
+                      .Disabled(true)
+                      .Listeners(ls =>
+                      {
+                          ls.Click.Handler = @"
+                            if ( !#{JobList}.hasSelection() ) {
+                                return false;
+                            } else {
+                                return true;
+                            }";
+                      })
+                      .DirectEvents(de =>
+                      {
+                          de.Click.Action = "Delete";
+                          de.Click.Method = HttpMethod.GET;
+                          de.Click.Confirmation.ConfirmRequest = true;
+                          de.Click.Confirmation.Title = "Alert";
+                          de.Click.Confirmation.Message = "Do you want to DELETE ?";
+                          de.Click.ExtraParams.Add(new Parameter("ID", "#{JobList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
+                          de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
+                          de.Click.Success = "function(response, result) { " +
+                                             "  #{StoreJobList}.reload({ callback: function() {}});" +
+                                             "}";
+                      })
+                      );
+              }));
+
+          })
+          .Store(
+              Html.X().Store()
+                  .ID("StoreJobList")
+                  .RemoteSort(true)
+                  .PageSize(10)
+                  .Sorters("Code", Ext.Net.SortDirection.ASC)
+                  .AutoLoad(true)
+                  .Model(
+                      Html.X().Model()
+                          .IDProperty("Id")
+                          .Fields(
+                              new ModelField("Id", ModelFieldType.Int),
+                              new ModelField("OrganizationCode", ModelFieldType.String),
+                              new ModelField("Code", ModelFieldType.String),
+                              new ModelField("Description", ModelFieldType.String),
+                              new ModelField("JobGroup1Code", ModelFieldType.String),
+                              new ModelField("JobGroup2Code", ModelFieldType.String),
+                              new ModelField("JobGroup3Code", ModelFieldType.String),
+                              new ModelField("Status", ModelFieldType.String),
+                              new ModelField("RecCreateBy", ModelFieldType.String),
+                              new ModelField("RecCreatedAt", ModelFieldType.Date),
+                              new ModelField("RecModifiedBy", ModelFieldType.String),
+                              new ModelField("RecModifiedAt", ModelFieldType.Date),
+                              new ModelField("Version", ModelFieldType.Int)
+                          )
+                  )
+                  .Proxy(
+                      Html.X().AjaxProxy()
+                          .Url(Url.Action("GetData"))
+                          .Reader(Html.X().JsonReader().RootProperty("data"))
+                  )
+          )
+          .ColumnModel(
+              Html.X().Column().Text("Org").DataIndex("OrganizationCode").Width(75).Locked(true),
+              Html.X().Column().Text("Code").DataIndex("Code").Width(95).Locked(true),
+              Html.X().Column().Text("Description").DataIndex("Description").MinWidth(256),
+              Html.X().Column().Text("Group 1").DataIndex("JobGroup1Code").Width(85),
+              Html.X().Column().Text("Group 2").DataIndex("JobGroup2Code").Width(85),
+              Html.X().Column().Text("Group 3").DataIndex("JobGroup3Code").Width(85),
+              Html.X().Column().Text("Status").DataIndex("Status").Width(85),
+              Html.X().Column().Text("Last User").DataIndex("RecModifiedBy").Width(85),
+              Html.X().DateColumn().Text("Last Updated").DataIndex("RecModifiedAt").Width(150).Format("dd/MM/yyyy H:mm:ss")
+          )
+          .BottomBar(items =>
+          {
+              items.Add(Html.X().PagingToolbar().DisplayInfo(true)
+                  .Items(
+                      Html.X().Label().Text("Page size:"),
+                      Html.X().ToolbarSpacer().Width(10),
+                      Html.X().ComboBox().Width(80)
+                          .Editable(false)
+                          .Items(
+                              Html.X().ListItem().Text("10"),
+                              Html.X().ListItem().Text("15"),
+                              Html.X().ListItem().Text("20")
+                          )
+                          .SelectedItems(
+                              Html.X().ListItem().Value("10")
+                          )
+                          .Listeners(ls => {
+                                               ls.Select.Fn = @"function (item, records) {
+                                                var curPageSize = #{StoreJobList}.pageSize,
+                                                wantedPageSize = parseInt(item.getValue(), 10);
+                                                if (wantedPageSize != curPageSize) {
+                                                    #{StoreJobList}.pageSize = wantedPageSize;
+                                                    #{StoreJobList}.reload();
+                                                    #{StoreJobList}.loadPage(1);
+                                                }
+                                            }"; 
+                          })
+                  ));
+          })
+          .SelectionModel(
+              Html.X().CheckboxSelectionModel()
+                  .Mode(SelectionMode.Single)
+                  .Listeners(ls =>
+                  {
+                      ls.Select.Handler = "#{btnDelete}.enable();#{btnEdit}.enable();";
+                      ls.Deselect.Handler = "if (!#{JobList}.hasSelection()) {#{btnDelete}.disable();#{btnEdit}.disable()}";
+                  })
+          )
+          .ViewConfig(new GridView() { Listeners = { Refresh = { Handler = "#{btnDelete}.disable();#{btnEdit}.disable();" } } })
+)
+

@@ -1,0 +1,229 @@
+﻿@model MyERP.Web.Models.JobEditViewModel
+
+@(Html.X().Store().ID("LookupJobGroup1Store").AutoLoad(false)
+          .Proxy(Html.X().AjaxProxy()
+              .Url(Url.Action("LookupData", "JobGroup", new { area = "Job" }))
+              .Reader(Html.X().JsonReader().RootProperty("data"))
+          )
+          .Model(Html.X().Model()
+              .IDProperty("Id")
+              .Fields(
+                  new ModelField("Id", ModelFieldType.Int),
+                  new ModelField("OrganizationCode", ModelFieldType.String),
+                  new ModelField("Code", ModelFieldType.String),
+                  new ModelField("Description", ModelFieldType.String)
+              )
+          )
+          .Parameters(p =>
+              {
+                  p.Add(new StoreParameter("level", "1", ParameterMode.Value));
+                  p.Add(new StoreParameter("Id", "App.JobGroup1.getValue()", ParameterMode.Raw));
+              }
+          )
+      .Data(ViewData["JobGroup1Items"])
+)
+
+@(Html.X().Store().ID("LookupJobGroup2Store").AutoLoad(false)
+          .Proxy(Html.X().AjaxProxy()
+              .Url(Url.Action("LookupData", "JobGroup", new { area = "Job" }))
+              .Reader(Html.X().JsonReader().RootProperty("data"))
+          )
+          .Model(Html.X().Model()
+              .IDProperty("Id")
+              .Fields(
+                  new ModelField("Id", ModelFieldType.Int),
+                  new ModelField("OrganizationCode", ModelFieldType.String),
+                  new ModelField("Code", ModelFieldType.String),
+                  new ModelField("Description", ModelFieldType.String)
+              )
+          )
+          .Parameters(p =>
+              {
+                  p.Add(new StoreParameter("level", "2", ParameterMode.Value));
+                  p.Add(new StoreParameter("Id", "App.JobGroup2.getValue()", ParameterMode.Raw));
+              }
+          )
+      .Data(ViewData["JobGroup2Items"])
+)
+
+@(Html.X().Store().ID("LookupJobGroup3Store").AutoLoad(false)
+          .Proxy(Html.X().AjaxProxy()
+              .Url(Url.Action("LookupData", "JobGroup", new { area = "Job" }))
+              .Reader(Html.X().JsonReader().RootProperty("data"))
+          )
+          .Model(Html.X().Model()
+              .IDProperty("Id")
+              .Fields(
+                  new ModelField("Id", ModelFieldType.Int),
+                  new ModelField("OrganizationCode", ModelFieldType.String),
+                  new ModelField("Code", ModelFieldType.String),
+                  new ModelField("Description", ModelFieldType.String)
+              )
+          )
+          .Parameters(p =>
+              {
+                  p.Add(new StoreParameter("level", "3", ParameterMode.Value));
+                  p.Add(new StoreParameter("Id", "App.JobGroup3.getValue()", ParameterMode.Raw));
+              }
+          )
+      .Data(ViewData["JobGroup3Items"])
+)
+
+@(Html.X().Window()
+      .ID("WindowJobMaintenance")
+      .Title("Business Partner Maintenance")
+      .Height(650)
+      .Width(650)
+      .Modal(true)
+      .Layout(LayoutType.Fit)
+      .AutoScroll(true)
+      .Items(
+          Html.X().FormPanel()
+              .ID("FormJobMaintenance")
+              .Layout(LayoutType.Form)
+              .Border(false)
+              .BodyPadding(5)
+              .AutoScroll(true)
+              .DefaultButton("btnSave")
+              .Items(
+                  Html.X().AntiForgeryField(),
+                  Html.X().TextFieldFor(m => m.Code).AllowBlank(false).FieldStyle("text-transform: uppercase;").Width(150).AutoFocus(true).EnforceMaxLength(true).ID("Code"),
+                  Html.X().TextFieldFor(m => m.Description).AllowBlank(false).EnforceMaxLength(true).ID("Description"),
+                  Html.X().FieldContainer().FieldLabel("Group").Layout(LayoutType.HBox)
+                      .Defaults(Html.X().Parameter().Name("margin").Value("0 3 0 0").Mode(ParameterMode.Value))
+                      .LayoutConfig(new HBoxLayoutConfig { Align = HBoxAlign.Middle })
+                      .Items(
+                          Html.X().ComboBoxFor(m => m.JobGroupId1).ID("JobGroup1")
+                              .AllowBlank(true)
+                              .DisplayField("Code")
+                              .ValueField("Id")
+                              .FieldLabel("")
+                              .FieldStyle("text-transform: uppercase;")
+                              .TypeAhead(true)
+                              .MinChars(0)
+                              .PageSize(10)
+                              .SelectOnTab(true)
+                              .ForceSelection(true)
+                              .ValidateOnBlur(true)
+                              .ValidateOnChange(true)
+                              .ListConfig(Html.X().BoundList()
+                                  .LoadingText("Searching...")
+                                  .ItemTpl(Html.X().XTemplate()
+                                      .Html(@<text>
+                                                <div class="search-item">
+                                                    <h3>{Code}</h3>
+                                                    {Description}
+                                                </div>
+                                             </text>)
+                                  )
+                                  .MinWidth(400)
+                              )
+                              .StoreID("LookupJobGroup1Store")
+                              .Listeners(ls =>
+                              {
+                                  ls.BeforeQuery.Handler = "App.JobGroup1.getStore().load()";
+                              })
+                              .Flex(1),
+                          Html.X().ComboBoxFor(m => m.JobGroupId2).ID("JobGroup2")
+                              .AllowBlank(true)
+                              .DisplayField("Code")
+                              .ValueField("Id")
+                              .FieldLabel("")
+                              .FieldStyle("text-transform: uppercase;")
+                              .TypeAhead(true)
+                              .MinChars(0)
+                              .PageSize(10)
+                              .SelectOnTab(true)
+                              .ForceSelection(true)
+                              .ValidateOnBlur(true)
+                              .ValidateOnChange(true)
+                              .ListConfig(Html.X().BoundList()
+                                  .LoadingText("Searching...")
+                                  .ItemTpl(Html.X().XTemplate()
+                                      .Html(@<text>
+                                                <div class="search-item">
+                                                    <h3>{Code}</h3>
+                                                    {Description}
+                                                </div>
+                                             </text>)
+                                  )
+                                  .MinWidth(400)
+                              )
+                              .StoreID("LookupJobGroup2Store")
+                              .Listeners(ls =>
+                              {
+                                  ls.BeforeQuery.Handler = "App.JobGroup2.getStore().load()";
+                              })
+                              .Flex(1),
+                          Html.X().ComboBoxFor(m => m.JobGroupId3).ID("JobGroup3")
+                              .AllowBlank(true)
+                              .DisplayField("Code")
+                              .ValueField("Id")
+                              .FieldLabel("")
+                              .FieldStyle("text-transform: uppercase;")
+                              .TypeAhead(true)
+                              .MinChars(0)
+                              .PageSize(10)
+                              .SelectOnTab(true)
+                              .ForceSelection(true)
+                              .ValidateOnBlur(true)
+                              .ValidateOnChange(true)
+                              .ListConfig(Html.X().BoundList()
+                                  .LoadingText("Searching...")
+                                  .ItemTpl(Html.X().XTemplate()
+                                      .Html(@<text>
+                                                <div class="search-item">
+                                                    <h3>{Code}</h3>
+                                                    {Description}
+                                                </div>
+                                             </text>)
+                                  )
+                                  .MinWidth(400)
+                              )
+                              .StoreID("LookupJobGroup3Store")
+                              .Listeners(ls =>
+                              {
+                                  ls.BeforeQuery.Handler = "App.JobGroup3.getStore().load()";
+                              })
+                              .Flex(1).Margin(0)
+                      ),
+                  Html.X().ComboBoxFor(m => m.Status).Width(150).ID("Status").Editable(false).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
+                  Html.X().HiddenFor(m => m.Id).ID("Id"),
+                  Html.X().HiddenFor(m => m.Version).ID("Version")
+              )
+              .Buttons(
+                  Html.X().Button()
+                      .ID("btnSave")
+                      .Text("Save")
+                      .Icon(Icon.Disk)
+                      .DirectEvents(de =>
+                      {
+                          de.Click.Url = Url.Action("_Maintenance");
+                          de.Click.Method = HttpMethod.POST;
+                          de.Click.Before = "return this.up('form').isValid();";
+                          de.Click.Success = "function(response, result) { " +
+                                             "  this.up('window').close();" +
+                                             "  App.JobList.getSelectionModel().deselectAll();" +
+                                             "  App.StoreJobList.reload({ " +
+                                             "    callback : function() { " +
+                                             "      var record = App.JobList.store.getById(result.result.Id); " +
+                                             "      var index = App.JobList.store.indexOf(record);" +
+                                             "      App.JobList.getSelectionModel().select(index);" +
+                                             "   }" +
+                                             " });" +
+                                             "}";
+                          de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
+                          de.Click.ShowWarningOnFailure = true;
+                          de.Click.EventMask.ShowMask = true;
+                          de.Click.FormID = "FormJobMaintenance";
+                      }),
+                  Html.X().Button()
+                      .ID("btnCancel")
+                      .Text("Cancel")
+                      .Icon(Icon.Cancel)
+                      .Listeners(ls =>
+                      {
+                          ls.Click.Handler = "this.up('window').close();";
+                      })
+              )
+      ))
