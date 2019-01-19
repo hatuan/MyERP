@@ -47,6 +47,21 @@
           <EntitySet Name="jobs" EntityType="MyERP.DataAccess.Store.job" store:Type="Tables" Schema="dbo" Table="job" />
           <EntitySet Name="stockkeeping_units" EntityType="MyERP.DataAccess.Store.stockkeeping_unit" store:Type="Tables" Schema="dbo" Table="stockkeeping_unit" />
           <EntitySet Name="job_groups" EntityType="MyERP.DataAccess.Store.job_group" store:Type="Tables" Schema="dbo" Table="job_group" />
+          <EntitySet Name="general_journal_headers" EntityType="MyERP.DataAccess.Store.general_journal_header" store:Type="Tables" Schema="dbo" Table="general_journal_header" />
+          <EntitySet Name="general_journal_lines" EntityType="MyERP.DataAccess.Store.general_journal_line" store:Type="Tables" Schema="dbo" Table="general_journal_line" />
+          <EntitySet Name="item_journal_headers" EntityType="MyERP.DataAccess.Store.item_journal_header" store:Type="Tables" Schema="dbo" Table="item_journal_header" />
+          <EntitySet Name="item_journal_lines" EntityType="MyERP.DataAccess.Store.item_journal_line" store:Type="Tables" Schema="dbo" Table="item_journal_line" />
+          <EntitySet Name="transfer_headers" EntityType="MyERP.DataAccess.Store.transfer_header" store:Type="Tables" Schema="dbo" Table="transfer_header" />
+          <EntitySet Name="transfer_lines" EntityType="MyERP.DataAccess.Store.transfer_line" store:Type="Tables" Schema="dbo" Table="transfer_line" />
+          <EntitySet Name="transfer_receipt_headers" EntityType="MyERP.DataAccess.Store.transfer_receipt_header" store:Type="Tables" Schema="dbo" Table="transfer_receipt_header" />
+          <EntitySet Name="transfer_receipt_lines" EntityType="MyERP.DataAccess.Store.transfer_receipt_line" store:Type="Tables" Schema="dbo" Table="transfer_receipt_line" />
+          <EntitySet Name="transfer_shipment_headers" EntityType="MyERP.DataAccess.Store.transfer_shipment_header" store:Type="Tables" Schema="dbo" Table="transfer_shipment_header" />
+          <EntitySet Name="transfer_shipment_lines" EntityType="MyERP.DataAccess.Store.transfer_shipment_line" store:Type="Tables" Schema="dbo" Table="transfer_shipment_line" />
+          <EntitySet Name="einv_form_types" EntityType="MyERP.DataAccess.Store.einv_form_type" store:Type="Tables" Schema="dbo" Table="einv_form_type" />
+          <EntitySet Name="einv_form_releases" EntityType="MyERP.DataAccess.Store.einv_form_release" store:Type="Tables" Schema="dbo" Table="einv_form_release" />
+          <EntitySet Name="einvoice_headers" EntityType="MyERP.DataAccess.Store.einvoice_header" store:Type="Tables" Schema="dbo" Table="einvoice_header" />
+          <EntitySet Name="einvoice_lines" EntityType="MyERP.DataAccess.Store.einvoice_line" store:Type="Tables" Schema="dbo" Table="einvoice_line" />
+          <EntitySet Name="einvoice_signeds" EntityType="MyERP.DataAccess.Store.einvoice_signed" store:Type="Tables" Schema="dbo" Table="einvoice_signed" />
           <AssociationSet Name="FK_client_user_profile" Association="MyERP.DataAccess.Store.FK_client_user_profile">
             <End Role="user" EntitySet="users" />
             <End Role="client" EntitySet="clients" />
@@ -898,6 +913,146 @@
           <AssociationSet Name="FK_purchase_invoice_line_account" Association="MyERP.DataAccess.Store.FK_purchase_invoice_line_account">
             <End Role="account" EntitySet="accounts" />
             <End Role="purchase_invoice_line" EntitySet="purchase_invoice_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_job_business_partner" Association="MyERP.DataAccess.Store.FK_job_business_partner">
+            <End Role="business_partner" EntitySet="business_partners" />
+            <End Role="job" EntitySet="jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_general_journal_line_general_journal_header" Association="MyERP.DataAccess.Store.FK_general_journal_line_general_journal_header">
+            <End Role="general_journal_header" EntitySet="general_journal_headers" />
+            <End Role="general_journal_line" EntitySet="general_journal_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_general_journal_header_client" Association="MyERP.DataAccess.Store.FK_general_journal_header_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="general_journal_header" EntitySet="general_journal_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_general_journal_header_organization" Association="MyERP.DataAccess.Store.FK_general_journal_header_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="general_journal_header" EntitySet="general_journal_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_general_journal_header_currency" Association="MyERP.DataAccess.Store.FK_general_journal_header_currency">
+            <End Role="currency" EntitySet="currencies" />
+            <End Role="general_journal_header" EntitySet="general_journal_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_general_journal_line_account" Association="MyERP.DataAccess.Store.FK_general_journal_line_account">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="general_journal_line" EntitySet="general_journal_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_general_journal_line_business_partner" Association="MyERP.DataAccess.Store.FK_general_journal_line_business_partner">
+            <End Role="business_partner" EntitySet="business_partners" />
+            <End Role="general_journal_line" EntitySet="general_journal_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_general_journal_line_job" Association="MyERP.DataAccess.Store.FK_general_journal_line_job">
+            <End Role="job" EntitySet="jobs" />
+            <End Role="general_journal_line" EntitySet="general_journal_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_item_journal_line_item_journal_header" Association="MyERP.DataAccess.Store.FK_item_journal_line_item_journal_header">
+            <End Role="item_journal_header" EntitySet="item_journal_headers" />
+            <End Role="item_journal_line" EntitySet="item_journal_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transfer_line_transfer_header" Association="MyERP.DataAccess.Store.FK_transfer_line_transfer_header">
+            <End Role="transfer_header" EntitySet="transfer_headers" />
+            <End Role="transfer_line" EntitySet="transfer_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transfer_shipment_line_transfer_shipment_header" Association="MyERP.DataAccess.Store.FK_transfer_shipment_line_transfer_shipment_header">
+            <End Role="transfer_shipment_header" EntitySet="transfer_shipment_headers" />
+            <End Role="transfer_shipment_line" EntitySet="transfer_shipment_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transfer_receipt_line_transfer_receipt_header" Association="MyERP.DataAccess.Store.FK_transfer_receipt_line_transfer_receipt_header">
+            <End Role="transfer_receipt_header" EntitySet="transfer_receipt_headers" />
+            <End Role="transfer_receipt_line" EntitySet="transfer_receipt_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einv_form_release_einv_form_type" Association="MyERP.DataAccess.Store.FK_einv_form_release_einv_form_type">
+            <End Role="einv_form_type" EntitySet="einv_form_types" />
+            <End Role="einv_form_release" EntitySet="einv_form_releases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einvoice_line_einvoice_header" Association="MyERP.DataAccess.Store.FK_einvoice_line_einvoice_header">
+            <End Role="einvoice_header" EntitySet="einvoice_headers" />
+            <End Role="einvoice_line" EntitySet="einvoice_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einvoice_header_einv_form_type" Association="MyERP.DataAccess.Store.FK_einvoice_header_einv_form_type">
+            <End Role="einv_form_type" EntitySet="einv_form_types" />
+            <End Role="einvoice_header" EntitySet="einvoice_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einvoice_signed_einv_form_type" Association="MyERP.DataAccess.Store.FK_einvoice_signed_einv_form_type">
+            <End Role="einv_form_type" EntitySet="einv_form_types" />
+            <End Role="einvoice_signed" EntitySet="einvoice_signeds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einvoice_signed_client" Association="MyERP.DataAccess.Store.FK_einvoice_signed_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="einvoice_signed" EntitySet="einvoice_signeds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einvoice_signed_organization" Association="MyERP.DataAccess.Store.FK_einvoice_signed_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="einvoice_signed" EntitySet="einvoice_signeds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einvoice_header_client" Association="MyERP.DataAccess.Store.FK_einvoice_header_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="einvoice_header" EntitySet="einvoice_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einvoice_header_organization" Association="MyERP.DataAccess.Store.FK_einvoice_header_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="einvoice_header" EntitySet="einvoice_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einvoice_header_user" Association="MyERP.DataAccess.Store.FK_einvoice_header_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="einvoice_header" EntitySet="einvoice_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einvoice_header_user1" Association="MyERP.DataAccess.Store.FK_einvoice_header_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="einvoice_header" EntitySet="einvoice_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einvoice_line_client" Association="MyERP.DataAccess.Store.FK_einvoice_line_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="einvoice_line" EntitySet="einvoice_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einvoice_line_organization" Association="MyERP.DataAccess.Store.FK_einvoice_line_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="einvoice_line" EntitySet="einvoice_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einv_form_type_client" Association="MyERP.DataAccess.Store.FK_einv_form_type_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="einv_form_type" EntitySet="einv_form_types" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einv_form_type_organization" Association="MyERP.DataAccess.Store.FK_einv_form_type_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="einv_form_type" EntitySet="einv_form_types" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einv_form_type_user" Association="MyERP.DataAccess.Store.FK_einv_form_type_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="einv_form_type" EntitySet="einv_form_types" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einv_form_type_user1" Association="MyERP.DataAccess.Store.FK_einv_form_type_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="einv_form_type" EntitySet="einv_form_types" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einv_form_release_client" Association="MyERP.DataAccess.Store.FK_einv_form_release_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="einv_form_release" EntitySet="einv_form_releases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einv_form_release_organization" Association="MyERP.DataAccess.Store.FK_einv_form_release_organization">
+            <End Role="organization" EntitySet="organizations" />
+            <End Role="einv_form_release" EntitySet="einv_form_releases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einv_form_release_user" Association="MyERP.DataAccess.Store.FK_einv_form_release_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="einv_form_release" EntitySet="einv_form_releases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einv_form_release_user1" Association="MyERP.DataAccess.Store.FK_einv_form_release_user1">
+            <End Role="user" EntitySet="users" />
+            <End Role="einv_form_release" EntitySet="einv_form_releases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einvoice_line_vat" Association="MyERP.DataAccess.Store.FK_einvoice_line_vat">
+            <End Role="vat" EntitySet="vats" />
+            <End Role="einvoice_line" EntitySet="einvoice_lines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einvoice_header_business_partner" Association="MyERP.DataAccess.Store.FK_einvoice_header_business_partner">
+            <End Role="business_partner" EntitySet="business_partners" />
+            <End Role="einvoice_header" EntitySet="einvoice_headers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_einvoice_header_currency" Association="MyERP.DataAccess.Store.FK_einvoice_header_currency">
+            <End Role="currency" EntitySet="currencies" />
+            <End Role="einvoice_header" EntitySet="einvoice_headers" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
@@ -2022,6 +2177,10 @@
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="starting_date" Type="datetime2" />
+          <Property Name="ending_date" Type="datetime2" />
+          <Property Name="creation_date" Type="datetime2" />
+          <Property Name="business_partner_id" Type="bigint" />
         </EntityType>
         <EntityType Name="stockkeeping_unit">
           <Key>
@@ -2045,6 +2204,320 @@
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
           <Property Name="status" Type="tinyint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="general_journal_header">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="document_type" Type="tinyint" Nullable="false" />
+          <Property Name="doc_sub_type" Type="tinyint" Nullable="false" />
+          <Property Name="doc_sequence_id" Type="bigint" Nullable="false" />
+          <Property Name="document_no" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="document_date" Type="datetime2" Nullable="false" />
+          <Property Name="posting_date" Type="datetime2" />
+          <Property Name="currency_id" Type="bigint" Nullable="false" />
+          <Property Name="currency_factor" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="no_printed" Type="int" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="total_debit_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_debit_amount" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="total_credit_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_credit_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="general_journal_line">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="general_journal_header_id" Type="bigint" Nullable="false" />
+          <Property Name="line_no" Type="bigint" Nullable="false" />
+          <Property Name="account_id" Type="bigint" Nullable="false" />
+          <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="document_type" Type="tinyint" Nullable="false" />
+          <Property Name="document_no" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="posting_date" Type="datetime2" />
+          <Property Name="debit_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="debit_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="credit_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="credit_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="business_partner_id" Type="bigint" />
+          <Property Name="job_id" Type="bigint" />
+          <Property Name="fix_asset_id" Type="bigint" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="posting_group" Type="varchar" Nullable="false" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="item_journal_header">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="item_journal_line">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="item_journal_header_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transfer_header">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="transfer_line">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="transfer_header_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transfer_receipt_header">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transfer_receipt_line">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="transfer_receipt_header_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transfer_shipment_header">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transfer_shipment_line">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="transfer_shipment_header_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="einv_form_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="invoice_type" Type="nvarchar" Nullable="false" MaxLength="6" />
+          <Property Name="template_code" Type="nvarchar" Nullable="false" MaxLength="11" />
+          <Property Name="invoice_form" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="invoice_series" Type="nvarchar" Nullable="false" MaxLength="6" />
+          <Property Name="form_file_name" Type="varchar" Nullable="false" MaxLength="32" />
+          <Property Name="form_file" Type="xml" Nullable="false" />
+          <Property Name="form_vars" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="organization_id" Type="bigint" />
+          <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="einv_form_release">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="form_type_id" Type="bigint" Nullable="false" />
+          <Property Name="release_total" Type="int" Nullable="false" />
+          <Property Name="release_from" Type="int" Nullable="false" />
+          <Property Name="release_to" Type="int" Nullable="false" />
+          <Property Name="release_used" Type="int" Nullable="false" />
+          <Property Name="release_date" Type="datetime2" Nullable="false" />
+          <Property Name="start_date" Type="datetime2" Nullable="false" />
+          <Property Name="tax_authorities_status" Type="tinyint" Nullable="false" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="einvoice_header">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="form_type_id" Type="bigint" Nullable="false" />
+          <Property Name="original_invoice_id" Type="bigint" />
+          <Property Name="invoice_number" Type="varchar" Nullable="false" MaxLength="7" />
+          <Property Name="invoice_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="invoice_issued_date" Type="datetime2" Nullable="false" />
+          <Property Name="signed_date" Type="datetime2" />
+          <Property Name="submitted_date" Type="datetime2" />
+          <Property Name="contract_number" Type="varchar" MaxLength="50" />
+          <Property Name="contract_date" Type="datetime2" />
+          <Property Name="currency_id" Type="bigint" Nullable="false" />
+          <Property Name="exchange_rate" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="invoice_note" Type="nvarchar" MaxLength="400" />
+          <Property Name="adjustment_type" Type="tinyint" Nullable="false" />
+          <Property Name="additional_reference_desc" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="additional_reference_date" Type="datetime2" Nullable="false" />
+          <Property Name="buyer_id" Type="bigint" />
+          <Property Name="buyer_display_name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="buyer_legal_name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="buyer_tax_code" Type="nvarchar" Nullable="false" MaxLength="14" />
+          <Property Name="buyer_address_line" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="buyer_postal_code" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="buyer_district_name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="buyer_city_name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="buyer_country_code" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="buyer_phone_number" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="buyer_fax_number" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="buyer_email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="buyer_bank_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="buyer_bank_account" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="seller_legal_name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="seller_tax_code" Type="nvarchar" Nullable="false" MaxLength="14" />
+          <Property Name="seller_address_line" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="seller_postal_code" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="seller_district_name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="seller_city_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="seller_country_code" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="seller_phone_number" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="seller_fax_number" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="seller_email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="seller_bank_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="seller_bank_account" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="seller_contact_person_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="seller_signed_person_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="seller_submitted_person_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="payment_method_name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="sum_of_total_line_amount_without_vat" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_amount_without_vat" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_vat_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_amount_with_vat" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_amount_with_vat_frn" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_amount_with_vat_in_words" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="is_total_amount_pos" Type="bit" />
+          <Property Name="is_total_vat_amount_pos" Type="bit" />
+          <Property Name="discount_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="is_discount_amt_pos" Type="bit" />
+          <Property Name="description" Type="nvarchar" MaxLength="256" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="einvoice_line">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="einvoice_header_id" Type="bigint" Nullable="false" />
+          <Property Name="line_number" Type="bigint" Nullable="false" />
+          <Property Name="item_code" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="item_name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="unit_code" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="unit_name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="unit_price" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="quantity" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="item_total_amount_without_vat" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="vat_percentage" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="vat_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="promotion" Type="tinyint" Nullable="false" />
+          <Property Name="adjustment_vat_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="is_increase_item" Type="bit" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="vat_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="einvoice_signed">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="form_type_id" Type="bigint" Nullable="false" />
+          <Property Name="form_release_no" Type="int" Nullable="false" />
+          <Property Name="original_invoice_id" Type="bigint" />
+          <Property Name="invoice_type" Type="nvarchar" Nullable="false" MaxLength="6" />
+          <Property Name="template_code" Type="nvarchar" Nullable="false" MaxLength="11" />
+          <Property Name="invoice_series" Type="nvarchar" Nullable="false" MaxLength="6" />
+          <Property Name="invoice_number" Type="nvarchar" Nullable="false" MaxLength="7" />
+          <Property Name="invoice_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="invoice_issued_date" Type="datetime2" Nullable="false" />
+          <Property Name="signed_date" Type="datetime2" Nullable="false" />
+          <Property Name="submitted_date" Type="datetime2" Nullable="false" />
+          <Property Name="contract_number" Type="nvarchar" MaxLength="50" />
+          <Property Name="contract_date" Type="datetime2" />
+          <Property Name="currency_code" Type="nvarchar" Nullable="false" MaxLength="3" />
+          <Property Name="exchange_rate" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="invoice_note" Type="nvarchar" MaxLength="400" />
+          <Property Name="adjustment_type" Type="tinyint" Nullable="false" />
+          <Property Name="additional_reference_desc" Type="nvarchar" MaxLength="255" />
+          <Property Name="additional_reference_date" Type="datetime2" />
+          <Property Name="buyer_display_name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="buyer_legal_name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="buyer_tax_code" Type="nvarchar" Nullable="false" MaxLength="14" />
+          <Property Name="buyer_address_line" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="buyer_postal_code" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="buyer_district_name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="buyer_city_name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="buyer_country_code" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="buyer_phone_number" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="buyer_fax_number" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="buyer_email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="buyer_bank_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="buyer_bank_account" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="seller_legal_name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="seller_tax_code" Type="nvarchar" Nullable="false" MaxLength="14" />
+          <Property Name="seller_address_line" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="seller_postal_code" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="seller_district_name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="seller_city_name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="seller_country_code" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="seller_phone_number" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="seller_fax_number" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="seller_email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="seller_bank_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="seller_bank_account" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="seller_contact_person_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="seller_signed_person_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="seller_submitted_person_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="payment_method_name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="sum_of_total_line_amount_without_vat" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_amount_without_vat" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_vat_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_amount_with_vat" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="total_amount_with_vat_frn" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_amount_with_vat_in_words" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="is_total_amount_pos" Type="bit" />
+          <Property Name="is_total_vat_amount_pos" Type="bit" />
+          <Property Name="discount_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="is_discount_amt_pos" Type="bit" />
+          <Property Name="einvoice_signed_xml_file" Type="xml" Nullable="false" />
+          <Property Name="einvoice_signed_xsl_file" Type="xml" Nullable="false" />
+          <Property Name="einvoice_signed_file_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="description" Type="nvarchar" MaxLength="256" />
+          <Property Name="client_id" Type="bigint" Nullable="false" />
+          <Property Name="organization_id" Type="bigint" Nullable="false" />
+          <Property Name="version" Type="bigint" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="rec_created_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
+          <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+          <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
         </EntityType>
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
@@ -4602,6 +5075,426 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_job_business_partner">
+          <End Role="business_partner" Type="MyERP.DataAccess.Store.business_partner" Multiplicity="0..1" />
+          <End Role="job" Type="MyERP.DataAccess.Store.job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="business_partner">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="job">
+              <PropertyRef Name="business_partner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_general_journal_line_general_journal_header">
+          <End Role="general_journal_header" Type="MyERP.DataAccess.Store.general_journal_header" Multiplicity="1" />
+          <End Role="general_journal_line" Type="MyERP.DataAccess.Store.general_journal_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="general_journal_header">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="general_journal_line">
+              <PropertyRef Name="general_journal_header_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_general_journal_header_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="general_journal_header" Type="MyERP.DataAccess.Store.general_journal_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="general_journal_header">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_general_journal_header_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="general_journal_header" Type="MyERP.DataAccess.Store.general_journal_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="general_journal_header">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_general_journal_header_currency">
+          <End Role="currency" Type="MyERP.DataAccess.Store.currency" Multiplicity="1" />
+          <End Role="general_journal_header" Type="MyERP.DataAccess.Store.general_journal_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="currency">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="general_journal_header">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_general_journal_line_account">
+          <End Role="account" Type="MyERP.DataAccess.Store.account" Multiplicity="1" />
+          <End Role="general_journal_line" Type="MyERP.DataAccess.Store.general_journal_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="general_journal_line">
+              <PropertyRef Name="account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_general_journal_line_business_partner">
+          <End Role="business_partner" Type="MyERP.DataAccess.Store.business_partner" Multiplicity="0..1" />
+          <End Role="general_journal_line" Type="MyERP.DataAccess.Store.general_journal_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="business_partner">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="general_journal_line">
+              <PropertyRef Name="business_partner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_general_journal_line_job">
+          <End Role="job" Type="MyERP.DataAccess.Store.job" Multiplicity="0..1" />
+          <End Role="general_journal_line" Type="MyERP.DataAccess.Store.general_journal_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="job">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="general_journal_line">
+              <PropertyRef Name="job_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_item_journal_line_item_journal_header">
+          <End Role="item_journal_header" Type="MyERP.DataAccess.Store.item_journal_header" Multiplicity="1" />
+          <End Role="item_journal_line" Type="MyERP.DataAccess.Store.item_journal_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item_journal_header">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="item_journal_line">
+              <PropertyRef Name="item_journal_header_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_transfer_line_transfer_header">
+          <End Role="transfer_header" Type="MyERP.DataAccess.Store.transfer_header" Multiplicity="1" />
+          <End Role="transfer_line" Type="MyERP.DataAccess.Store.transfer_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="transfer_header">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="transfer_line">
+              <PropertyRef Name="transfer_header_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_transfer_shipment_line_transfer_shipment_header">
+          <End Role="transfer_shipment_header" Type="MyERP.DataAccess.Store.transfer_shipment_header" Multiplicity="1" />
+          <End Role="transfer_shipment_line" Type="MyERP.DataAccess.Store.transfer_shipment_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="transfer_shipment_header">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="transfer_shipment_line">
+              <PropertyRef Name="transfer_shipment_header_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_transfer_receipt_line_transfer_receipt_header">
+          <End Role="transfer_receipt_header" Type="MyERP.DataAccess.Store.transfer_receipt_header" Multiplicity="1" />
+          <End Role="transfer_receipt_line" Type="MyERP.DataAccess.Store.transfer_receipt_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="transfer_receipt_header">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="transfer_receipt_line">
+              <PropertyRef Name="transfer_receipt_header_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einv_form_release_einv_form_type">
+          <End Role="einv_form_type" Type="MyERP.DataAccess.Store.einv_form_type" Multiplicity="1" />
+          <End Role="einv_form_release" Type="MyERP.DataAccess.Store.einv_form_release" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="einv_form_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einv_form_release">
+              <PropertyRef Name="form_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einvoice_line_einvoice_header">
+          <End Role="einvoice_header" Type="MyERP.DataAccess.Store.einvoice_header" Multiplicity="1" />
+          <End Role="einvoice_line" Type="MyERP.DataAccess.Store.einvoice_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="einvoice_header">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einvoice_line">
+              <PropertyRef Name="einvoice_header_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einvoice_header_einv_form_type">
+          <End Role="einv_form_type" Type="MyERP.DataAccess.Store.einv_form_type" Multiplicity="1" />
+          <End Role="einvoice_header" Type="MyERP.DataAccess.Store.einvoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="einv_form_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einvoice_header">
+              <PropertyRef Name="form_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einvoice_signed_einv_form_type">
+          <End Role="einv_form_type" Type="MyERP.DataAccess.Store.einv_form_type" Multiplicity="1" />
+          <End Role="einvoice_signed" Type="MyERP.DataAccess.Store.einvoice_signed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="einv_form_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einvoice_signed">
+              <PropertyRef Name="form_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einvoice_signed_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="einvoice_signed" Type="MyERP.DataAccess.Store.einvoice_signed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einvoice_signed">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einvoice_signed_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="einvoice_signed" Type="MyERP.DataAccess.Store.einvoice_signed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einvoice_signed">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einvoice_header_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="einvoice_header" Type="MyERP.DataAccess.Store.einvoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einvoice_header">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einvoice_header_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="einvoice_header" Type="MyERP.DataAccess.Store.einvoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einvoice_header">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einvoice_header_user">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="einvoice_header" Type="MyERP.DataAccess.Store.einvoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einvoice_header">
+              <PropertyRef Name="rec_created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einvoice_header_user1">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="einvoice_header" Type="MyERP.DataAccess.Store.einvoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einvoice_header">
+              <PropertyRef Name="rec_modified_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einvoice_line_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="einvoice_line" Type="MyERP.DataAccess.Store.einvoice_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einvoice_line">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einvoice_line_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="einvoice_line" Type="MyERP.DataAccess.Store.einvoice_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einvoice_line">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einv_form_type_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="einv_form_type" Type="MyERP.DataAccess.Store.einv_form_type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einv_form_type">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einv_form_type_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="0..1" />
+          <End Role="einv_form_type" Type="MyERP.DataAccess.Store.einv_form_type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einv_form_type">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einv_form_type_user">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="einv_form_type" Type="MyERP.DataAccess.Store.einv_form_type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einv_form_type">
+              <PropertyRef Name="rec_created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einv_form_type_user1">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="einv_form_type" Type="MyERP.DataAccess.Store.einv_form_type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einv_form_type">
+              <PropertyRef Name="rec_modified_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einv_form_release_client">
+          <End Role="client" Type="MyERP.DataAccess.Store.client" Multiplicity="1" />
+          <End Role="einv_form_release" Type="MyERP.DataAccess.Store.einv_form_release" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einv_form_release">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einv_form_release_organization">
+          <End Role="organization" Type="MyERP.DataAccess.Store.organization" Multiplicity="1" />
+          <End Role="einv_form_release" Type="MyERP.DataAccess.Store.einv_form_release" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einv_form_release">
+              <PropertyRef Name="organization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einv_form_release_user">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="einv_form_release" Type="MyERP.DataAccess.Store.einv_form_release" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einv_form_release">
+              <PropertyRef Name="rec_created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einv_form_release_user1">
+          <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="1" />
+          <End Role="einv_form_release" Type="MyERP.DataAccess.Store.einv_form_release" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einv_form_release">
+              <PropertyRef Name="rec_modified_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einvoice_line_vat">
+          <End Role="vat" Type="MyERP.DataAccess.Store.vat" Multiplicity="1" />
+          <End Role="einvoice_line" Type="MyERP.DataAccess.Store.einvoice_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einvoice_line">
+              <PropertyRef Name="vat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einvoice_header_business_partner">
+          <End Role="business_partner" Type="MyERP.DataAccess.Store.business_partner" Multiplicity="0..1" />
+          <End Role="einvoice_header" Type="MyERP.DataAccess.Store.einvoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="business_partner">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einvoice_header">
+              <PropertyRef Name="buyer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_einvoice_header_currency">
+          <End Role="currency" Type="MyERP.DataAccess.Store.currency" Multiplicity="1" />
+          <End Role="einvoice_header" Type="MyERP.DataAccess.Store.einvoice_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="currency">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einvoice_header">
+              <PropertyRef Name="currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -4650,6 +5543,21 @@
           <EntitySet Name="Jobs" EntityType="MyERP.DataAccess.Job" />
           <EntitySet Name="StockkeepingUnits" EntityType="MyERP.DataAccess.StockkeepingUnit" />
           <EntitySet Name="JobGroups" EntityType="MyERP.DataAccess.JobGroup" />
+          <EntitySet Name="GeneralJournalHeaders" EntityType="MyERP.DataAccess.GeneralJournalHeader" />
+          <EntitySet Name="GeneralJournalLines" EntityType="MyERP.DataAccess.GeneralJournalLine" />
+          <EntitySet Name="ItemJournalHeaders" EntityType="MyERP.DataAccess.ItemJournalHeader" />
+          <EntitySet Name="ItemJournalLines" EntityType="MyERP.DataAccess.ItemJournalLine" />
+          <EntitySet Name="TransferHeaders" EntityType="MyERP.DataAccess.TransferHeader" />
+          <EntitySet Name="TransferLines" EntityType="MyERP.DataAccess.TransferLine" />
+          <EntitySet Name="TransferReceiptHeaders" EntityType="MyERP.DataAccess.TransferReceiptHeader" />
+          <EntitySet Name="TransferReceiptLines" EntityType="MyERP.DataAccess.TransferReceiptLine" />
+          <EntitySet Name="TransferShipmentHeaders" EntityType="MyERP.DataAccess.TransferShipmentHeader" />
+          <EntitySet Name="TransferShipmentLines" EntityType="MyERP.DataAccess.TransferShipmentLine" />
+          <EntitySet Name="EInvFormTypes" EntityType="MyERP.DataAccess.EInvFormType" />
+          <EntitySet Name="EInvFormReleases" EntityType="MyERP.DataAccess.EInvFormRelease" />
+          <EntitySet Name="EInvoiceHeaders" EntityType="MyERP.DataAccess.EInvoiceHeader" />
+          <EntitySet Name="EInvoiceLines" EntityType="MyERP.DataAccess.EInvoiceLine" />
+          <EntitySet Name="EInvoiceSigneds" EntityType="MyERP.DataAccess.EInvoiceSigned" />
           <AssociationSet Name="User_Client_CreatedBySet" Association="MyERP.DataAccess.User_Client_CreatedBy">
             <End Role="RecCreatedByUser" EntitySet="Users" />
             <End Role="Clients" EntitySet="Clients" />
@@ -5505,6 +6413,146 @@
           <AssociationSet Name="InventoryAccount_PurchaseInvoiceLineSet" Association="MyERP.DataAccess.InventoryAccount_PurchaseInvoiceLine">
             <End Role="InventoryAccount" EntitySet="Accounts" />
             <End Role="PurchaseInvoiceLines" EntitySet="PurchaseInvoiceLines" />
+          </AssociationSet>
+          <AssociationSet Name="BusinessPartner_JobSet" Association="MyERP.DataAccess.BusinessPartner_Job">
+            <End Role="BusinessPartner" EntitySet="BusinessPartners" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="GeneralJournalHeader_GeneralJournalLineSet" Association="MyERP.DataAccess.GeneralJournalHeader_GeneralJournalLine">
+            <End Role="GeneralJournalHeader" EntitySet="GeneralJournalHeaders" />
+            <End Role="GeneralJournalLines" EntitySet="GeneralJournalLines" />
+          </AssociationSet>
+          <AssociationSet Name="Client_GeneralJournalHeaderSet" Association="MyERP.DataAccess.Client_GeneralJournalHeader">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="GeneralJournalHeaders" EntitySet="GeneralJournalHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_GeneralJournalHeaderSet" Association="MyERP.DataAccess.Organization_GeneralJournalHeader">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="GeneralJournalHeaders" EntitySet="GeneralJournalHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="Currency_GeneralJournalHeaderSet" Association="MyERP.DataAccess.Currency_GeneralJournalHeader">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="GeneralJournalHeaders" EntitySet="GeneralJournalHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="Account_GeneralJournalLineSet" Association="MyERP.DataAccess.Account_GeneralJournalLine">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="GeneralJournalLines" EntitySet="GeneralJournalLines" />
+          </AssociationSet>
+          <AssociationSet Name="BusinessPartner_GeneralJournalLineSet" Association="MyERP.DataAccess.BusinessPartner_GeneralJournalLine">
+            <End Role="BusinessPartner" EntitySet="BusinessPartners" />
+            <End Role="GeneralJournalLines" EntitySet="GeneralJournalLines" />
+          </AssociationSet>
+          <AssociationSet Name="Job_GeneralJournalLineSet" Association="MyERP.DataAccess.Job_GeneralJournalLine">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="GeneralJournalLines" EntitySet="GeneralJournalLines" />
+          </AssociationSet>
+          <AssociationSet Name="ItemJournalHeader_ItemJournalLineSet" Association="MyERP.DataAccess.ItemJournalHeader_ItemJournalLine">
+            <End Role="ItemJournalHeader" EntitySet="ItemJournalHeaders" />
+            <End Role="ItemJournalLines" EntitySet="ItemJournalLines" />
+          </AssociationSet>
+          <AssociationSet Name="TransferHeader_TransferLineSet" Association="MyERP.DataAccess.TransferHeader_TransferLine">
+            <End Role="TransferHeader" EntitySet="TransferHeaders" />
+            <End Role="TransferLines" EntitySet="TransferLines" />
+          </AssociationSet>
+          <AssociationSet Name="TransferShipmentHeader_TransferShipmentLineSet" Association="MyERP.DataAccess.TransferShipmentHeader_TransferShipmentLine">
+            <End Role="TransferShipmentHeader" EntitySet="TransferShipmentHeaders" />
+            <End Role="TransferShipmentLines" EntitySet="TransferShipmentLines" />
+          </AssociationSet>
+          <AssociationSet Name="TransferReceiptHeader_TransferReceiptLineSet" Association="MyERP.DataAccess.TransferReceiptHeader_TransferReceiptLine">
+            <End Role="TransferReceiptHeader" EntitySet="TransferReceiptHeaders" />
+            <End Role="TransferReceiptLines" EntitySet="TransferReceiptLines" />
+          </AssociationSet>
+          <AssociationSet Name="EInvFormType_EInvFormReleaseSet" Association="MyERP.DataAccess.EInvFormType_EInvFormRelease">
+            <End Role="EInvFormType" EntitySet="EInvFormTypes" />
+            <End Role="EInvFormReleases" EntitySet="EInvFormReleases" />
+          </AssociationSet>
+          <AssociationSet Name="EInvoiceHeader_EInvoiceLineSet" Association="MyERP.DataAccess.EInvoiceHeader_EInvoiceLine">
+            <End Role="EInvoiceHeader" EntitySet="EInvoiceHeaders" />
+            <End Role="EInvoiceLines" EntitySet="EInvoiceLines" />
+          </AssociationSet>
+          <AssociationSet Name="EInvFormType_EInvoiceHeaderSet" Association="MyERP.DataAccess.EInvFormType_EInvoiceHeader">
+            <End Role="EInvFormType" EntitySet="EInvFormTypes" />
+            <End Role="EInvoiceHeaders" EntitySet="EInvoiceHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="EInvFormType_EInvoiceSignedSet" Association="MyERP.DataAccess.EInvFormType_EInvoiceSigned">
+            <End Role="EInvFormType" EntitySet="EInvFormTypes" />
+            <End Role="EInvoiceSigneds" EntitySet="EInvoiceSigneds" />
+          </AssociationSet>
+          <AssociationSet Name="Client_EInvoiceSignedSet" Association="MyERP.DataAccess.Client_EInvoiceSigned">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="EInvoiceSigneds" EntitySet="EInvoiceSigneds" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_EInvoiceSignedSet" Association="MyERP.DataAccess.Organization_EInvoiceSigned">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="EInvoiceSigneds" EntitySet="EInvoiceSigneds" />
+          </AssociationSet>
+          <AssociationSet Name="Client_EInvoiceHeaderSet" Association="MyERP.DataAccess.Client_EInvoiceHeader">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="EInvoiceHeaders" EntitySet="EInvoiceHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_EInvoiceHeaderSet" Association="MyERP.DataAccess.Organization_EInvoiceHeader">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="EInvoiceHeaders" EntitySet="EInvoiceHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="User_EInvoiceHeader_RecCreatedBySet" Association="MyERP.DataAccess.User_EInvoiceHeader_RecCreatedBy">
+            <End Role="RecCreatedByUser" EntitySet="Users" />
+            <End Role="EInvoiceHeaders" EntitySet="EInvoiceHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="User_EInvoiceHeader_RecModifiedBySet" Association="MyERP.DataAccess.User_EInvoiceHeader_RecModifiedBy">
+            <End Role="RecModifiedByUser" EntitySet="Users" />
+            <End Role="EInvoiceHeaders1" EntitySet="EInvoiceHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="Client_EInvoiceLineSet" Association="MyERP.DataAccess.Client_EInvoiceLine">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="EInvoiceLines" EntitySet="EInvoiceLines" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_EInvoiceLineSet" Association="MyERP.DataAccess.Organization_EInvoiceLine">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="EInvoiceLines" EntitySet="EInvoiceLines" />
+          </AssociationSet>
+          <AssociationSet Name="Client_EInvFormTypeSet" Association="MyERP.DataAccess.Client_EInvFormType">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="EInvFormTypes" EntitySet="EInvFormTypes" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_EInvFormTypeSet" Association="MyERP.DataAccess.Organization_EInvFormType">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="EInvFormTypes" EntitySet="EInvFormTypes" />
+          </AssociationSet>
+          <AssociationSet Name="User_EInvFormType_RecCreatedBySet" Association="MyERP.DataAccess.User_EInvFormType_RecCreatedBy">
+            <End Role="RecCreatedByUser" EntitySet="Users" />
+            <End Role="EInvFormTypes" EntitySet="EInvFormTypes" />
+          </AssociationSet>
+          <AssociationSet Name="User_EInvFormType_RecModifiedBySet" Association="MyERP.DataAccess.User_EInvFormType_RecModifiedBy">
+            <End Role="RecModifiedByUser" EntitySet="Users" />
+            <End Role="EInvFormTypes1" EntitySet="EInvFormTypes" />
+          </AssociationSet>
+          <AssociationSet Name="Client_EInvFormReleaseSet" Association="MyERP.DataAccess.Client_EInvFormRelease">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="EInvFormReleases" EntitySet="EInvFormReleases" />
+          </AssociationSet>
+          <AssociationSet Name="Organization_EInvFormReleaseSet" Association="MyERP.DataAccess.Organization_EInvFormRelease">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="EInvFormReleases" EntitySet="EInvFormReleases" />
+          </AssociationSet>
+          <AssociationSet Name="User_EInvFormRelease_RecCreatedBySet" Association="MyERP.DataAccess.User_EInvFormRelease_RecCreatedBy">
+            <End Role="RecCreatedByUser" EntitySet="Users" />
+            <End Role="EInvFormReleases" EntitySet="EInvFormReleases" />
+          </AssociationSet>
+          <AssociationSet Name="User_EInvFormRelease_RecModifiedBySet" Association="MyERP.DataAccess.User_EInvFormRelease_RecModifiedBy">
+            <End Role="RecModifiedByUser" EntitySet="Users" />
+            <End Role="EInvFormReleases1" EntitySet="EInvFormReleases" />
+          </AssociationSet>
+          <AssociationSet Name="Vat_EInvoiceLineSet" Association="MyERP.DataAccess.Vat_EInvoiceLine">
+            <End Role="Vat" EntitySet="Vats" />
+            <End Role="EInvoiceLines" EntitySet="EInvoiceLines" />
+          </AssociationSet>
+          <AssociationSet Name="BusinessPartner_EInvoiceHeaderSet" Association="MyERP.DataAccess.BusinessPartner_EInvoiceHeader">
+            <End Role="BusinessPartner" EntitySet="BusinessPartners" />
+            <End Role="EInvoiceHeaders" EntitySet="EInvoiceHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="Currency_EInvoiceHeaderSet" Association="MyERP.DataAccess.Currency_EInvoiceHeader">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="EInvoiceHeaders" EntitySet="EInvoiceHeaders" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
@@ -6835,6 +7883,10 @@
           <Property Name="JobGroupId1" Type="Int64" ed:ValidateRequired="false" ed:Guid="ff642a54-70b9-405d-9fab-3d6f1b1fa18d" />
           <Property Name="JobGroupId2" Type="Int64" ed:ValidateRequired="false" ed:Guid="72ff9a01-7a51-4770-ab94-83a8130c0a80" />
           <Property Name="JobGroupId3" Type="Int64" ed:ValidateRequired="false" ed:Guid="bf7dfae8-fa93-4fd3-872c-2f476888ac87" />
+          <Property Name="BusinessPartnerId" Type="Int64" ed:ValidateRequired="false" ed:Guid="eee1347e-0f94-45b0-8d46-0351fe9ed031" />
+          <Property Name="CreationDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="7fcff813-be94-42c7-aab2-ff670ce2e724" />
+          <Property Name="StartingDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="5affa64a-6f78-43b3-b059-245b26df349c" />
+          <Property Name="EndingDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="98256891-87b1-4cea-9914-2a47e4e3bee2" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="2b40dc5f-2193-4e85-97ea-c63de169f64c" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e56ecc25-bad8-4082-a0cf-8ad64c275049" />
           <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="0414cab4-b288-4ff3-b54a-f389fa270f3b" />
@@ -6850,6 +7902,7 @@
           <NavigationProperty Name="JobGroup1" Relationship="MyERP.DataAccess.JobGroup1_Job" FromRole="Jobs" ToRole="JobGroup1" ed:Guid="1cec5d5b-8724-40be-844b-5061fc2cccde" />
           <NavigationProperty Name="JobGroup2" Relationship="MyERP.DataAccess.JobGroup2_Job" FromRole="Jobs1" ToRole="JobGroup2" ed:Guid="fd04902e-2d0f-486b-9e94-dd25dae5943f" />
           <NavigationProperty Name="JobGroup3" Relationship="MyERP.DataAccess.JobGroup3_Job" FromRole="Jobs2" ToRole="JobGroup3" ed:Guid="9abad65b-3663-4d95-9a1c-e0055c2ef23f" />
+          <NavigationProperty Name="BusinessPartner" Relationship="MyERP.DataAccess.BusinessPartner_Job" FromRole="Jobs" ToRole="BusinessPartner" ed:Guid="9a16e9fd-a42d-4149-9106-3c67f2bb20e4" />
         </EntityType>
         <EntityType Name="StockkeepingUnit" ed:Guid="78c58525-33c7-4a9d-beae-476aaa62497a">
           <Key>
@@ -6877,6 +7930,361 @@
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_JobGroup" FromRole="JobGroups" ToRole="Organization" ed:Guid="26ec5b9f-2c92-4fe6-a31e-b1b21d593d60" />
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_JobGroup_RecCreatedBy" FromRole="JobGroups" ToRole="RecCreatedByUser" ed:Guid="ba87f164-9b98-42d6-bb5d-a3eb93f1beac" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_JobGroup_RecModifiedBy" FromRole="JobGroups1" ToRole="RecModifiedByUser" ed:Guid="bf507939-341f-40e8-bb73-d97ae6dd3369" />
+        </EntityType>
+        <EntityType Name="GeneralJournalHeader" ed:Guid="a285d786-fc7b-44e0-b531-0ae9e592d58b">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="66edb7a8-16a1-4df9-a8d7-11f61407e44d" />
+          <Property Name="DocumentType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="9d430fe4-15a8-4ea0-a290-638f2cd56bad" />
+          <Property Name="DocSubType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="392bb163-835e-4e36-9537-4bf2c6a08fb2" />
+          <Property Name="DocSequenceId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e82487cb-27a6-48f0-a957-c743c5323e64" />
+          <Property Name="DocumentNo" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="3cf3809a-3209-45b0-bedd-a95be323b5f1" />
+          <Property Name="DocumentDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="9e0ea239-4105-4a62-b4a7-3c72572bd7b4" />
+          <Property Name="PostingDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="6e1c7b56-91ab-4b99-b592-d94a7953446b" />
+          <Property Name="CurrencyId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="0adaa83b-de9b-4462-ab0f-9655e80b2582" />
+          <Property Name="CurrencyFactor" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="0755e949-04de-42a7-857f-270c4a49a775" />
+          <Property Name="NoPrinted" Type="Int32" ed:ValidateRequired="false" ed:Guid="b4055a36-cb07-4881-b3e9-2b4ef69d1b8a" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f32fcfed-4b29-450d-83b0-3b6a1679cbd1" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="de09ca72-9ae3-453b-b5ca-970b99f6dcee" />
+          <Property Name="TotalDebitAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="826088bf-55b0-4d10-9a96-eff1eca0134f" />
+          <Property Name="TotalDebitAmount" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="7de01835-8911-462a-9ed4-dfa0abb52079" />
+          <Property Name="TotalCreditAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="4193e427-9092-4bb3-ac48-527e693b110c" />
+          <Property Name="TotalCreditAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="2b2a17c5-7f93-40af-a9d1-16f107af8abd" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="419aee51-d011-42ba-9094-3d0291bb60c3" />
+          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="178c2db2-aae8-46a2-91b2-f10a2bbdd5ea" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="b373a4d3-1c93-4e0d-94a1-dd915c3abc0e" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5e6d6062-a7b8-41c2-b536-d0a27dd04674" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="f8db1a32-8b70-4436-b365-b94b09f7dabb" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="ab981865-d5d0-4598-bfa8-9cdbfeb76ca2" />
+          <NavigationProperty Name="GeneralJournalLines" Relationship="MyERP.DataAccess.GeneralJournalHeader_GeneralJournalLine" FromRole="GeneralJournalHeader" ToRole="GeneralJournalLines" ed:Guid="78889213-f756-437e-a564-5d2c4b00a8f2" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_GeneralJournalHeader" FromRole="GeneralJournalHeaders" ToRole="Client" ed:Guid="5df41ea7-9a28-48eb-873b-42c4668e892e" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_GeneralJournalHeader" FromRole="GeneralJournalHeaders" ToRole="Organization" ed:Guid="95890ae7-5246-4f57-9e5d-8674ce878b0c" />
+          <NavigationProperty Name="Currency" Relationship="MyERP.DataAccess.Currency_GeneralJournalHeader" FromRole="GeneralJournalHeaders" ToRole="Currency" ed:Guid="43f951e3-74ea-4ea0-a5eb-0881d4310df4" />
+        </EntityType>
+        <EntityType Name="GeneralJournalLine" ed:Guid="1f977e54-aabe-4126-94f7-594a732792ff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="ee75a2e5-b53c-4c02-bf06-c6f724b88d9a" />
+          <Property Name="GeneralJournalHeaderId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="83b5cda5-406d-4217-8184-7fecb7134501" />
+          <Property Name="DocumentType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="4ee5d299-86d6-4ffe-ac24-b61aa926c638" />
+          <Property Name="DocumentNo" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="ae5b5c30-243c-49dd-9480-6becaecc03b3" />
+          <Property Name="PostingDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="186597f8-2aff-48c1-b160-c0c8da47e0bb" />
+          <Property Name="LineNo" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="fb2de839-18d5-4274-bc3e-71c8a60c8462" />
+          <Property Name="AccountId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="7399a088-e32d-4b14-9a63-4c47d49eca28" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="31dd0ee9-060a-4a1e-ae27-817fce7fe3c5" />
+          <Property Name="DebitAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="2702db8e-b855-45f1-9494-a9302973e3bd" />
+          <Property Name="DebitAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="39c58f6e-8429-4195-a5fb-71b06b653a96" />
+          <Property Name="CreditAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="80265277-cc8b-4f87-b3aa-31f6ceaa1a55" />
+          <Property Name="CreditAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="d2cc390b-91dc-42a3-a4f2-3909edba7915" />
+          <Property Name="BusinessPartnerId" Type="Int64" ed:ValidateRequired="false" ed:Guid="4ea3d082-1c9b-43b7-a975-1d06172946b2" />
+          <Property Name="JobId" Type="Int64" ed:ValidateRequired="false" ed:Guid="3a394a79-a120-4565-8ad7-0659ea82316b" />
+          <Property Name="FixAssetId" Type="Int64" ed:ValidateRequired="false" ed:Guid="e30cf8e3-3558-4e56-a39b-dea1be3af2e2" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="54d420d5-2b30-4798-b543-927d0e330830" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="d693c526-c6de-4c3f-a38a-ce58fb8a9cb7" />
+          <Property Name="PostingGroup" Type="String" Nullable="false" MaxLength="3" ed:ValidateMaxLength="3" ed:ValidateRequired="true" ed:Guid="9b29c27b-eb63-4c63-a61d-3eacb2e532b4" />
+          <NavigationProperty Name="GeneralJournalHeader" Relationship="MyERP.DataAccess.GeneralJournalHeader_GeneralJournalLine" FromRole="GeneralJournalLines" ToRole="GeneralJournalHeader" ed:Guid="646ab193-c244-435a-a541-97659290f25e" />
+          <NavigationProperty Name="Account" Relationship="MyERP.DataAccess.Account_GeneralJournalLine" FromRole="GeneralJournalLines" ToRole="Account" ed:Guid="38dca223-a569-4483-9682-7093f570be91" />
+          <NavigationProperty Name="BusinessPartner" Relationship="MyERP.DataAccess.BusinessPartner_GeneralJournalLine" FromRole="GeneralJournalLines" ToRole="BusinessPartner" ed:Guid="c60897c3-e54b-4dae-9450-a0e4d56c8708" />
+          <NavigationProperty Name="Job" Relationship="MyERP.DataAccess.Job_GeneralJournalLine" FromRole="GeneralJournalLines" ToRole="Job" ed:Guid="65ff2215-116c-4b9a-8e92-3abc5f0c7706" />
+        </EntityType>
+        <EntityType Name="ItemJournalHeader" ed:Guid="4cd09394-fcca-4e08-827d-9db902e818e6">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="cc192278-3b90-4d74-a106-8a197b7a435f" />
+          <NavigationProperty Name="ItemJournalLines" Relationship="MyERP.DataAccess.ItemJournalHeader_ItemJournalLine" FromRole="ItemJournalHeader" ToRole="ItemJournalLines" ed:Guid="a8e0de01-3f9e-4c24-b257-a58ccb65b338" />
+        </EntityType>
+        <EntityType Name="ItemJournalLine" ed:Guid="6e70d648-f478-41b0-8346-f23fcacdeb24">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="acb3e67d-f875-4705-8551-75158316d5dd" />
+          <Property Name="ItemJournalHeaderId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="af3116ab-b36e-4315-a1c9-2c299d228bd2" />
+          <NavigationProperty Name="ItemJournalHeader" Relationship="MyERP.DataAccess.ItemJournalHeader_ItemJournalLine" FromRole="ItemJournalLines" ToRole="ItemJournalHeader" ed:Guid="cfa0bf3c-a038-4c91-a79e-586a8b74f716" />
+        </EntityType>
+        <EntityType Name="TransferHeader" ed:Guid="34c50192-2dd6-4909-9c22-232201462c6b">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="ce308345-625e-4be5-801a-2f64dd395f41" />
+          <NavigationProperty Name="TransferLines" Relationship="MyERP.DataAccess.TransferHeader_TransferLine" FromRole="TransferHeader" ToRole="TransferLines" ed:Guid="8760c036-52eb-49fb-95ff-75bd20a3d0a2" />
+        </EntityType>
+        <EntityType Name="TransferLine" ed:Guid="770b3d14-252e-4c86-9b9a-a6e3e79d8259">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="8e6ffe64-4a1e-4a84-b2cc-6a768f1f949c" />
+          <Property Name="TransferHeaderId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a962ebd2-da1d-4431-b793-7e500098f15a" />
+          <NavigationProperty Name="TransferHeader" Relationship="MyERP.DataAccess.TransferHeader_TransferLine" FromRole="TransferLines" ToRole="TransferHeader" ed:Guid="511abc90-cd84-44bb-80cc-1abb33e9c893" />
+        </EntityType>
+        <EntityType Name="TransferReceiptHeader" ed:Guid="d0d13325-6c94-49b5-b4f4-72dec4ec5ada">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f583e0b7-9b83-4e5a-bef8-4e656ce0a1f8" />
+          <NavigationProperty Name="TransferReceiptLines" Relationship="MyERP.DataAccess.TransferReceiptHeader_TransferReceiptLine" FromRole="TransferReceiptHeader" ToRole="TransferReceiptLines" ed:Guid="e7c69fc7-1664-4c8e-81c9-99961f4601f5" />
+        </EntityType>
+        <EntityType Name="TransferReceiptLine" ed:Guid="38e8d9a5-dbd9-430c-93c5-5a93af7166c2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="1cf763fb-fed5-49db-934c-d03c2c6b7050" />
+          <Property Name="TransferReceiptHeaderId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="8150655f-7836-474a-a6a7-285636bfc9d5" />
+          <NavigationProperty Name="TransferReceiptHeader" Relationship="MyERP.DataAccess.TransferReceiptHeader_TransferReceiptLine" FromRole="TransferReceiptLines" ToRole="TransferReceiptHeader" ed:Guid="dee0d4e6-ab98-403d-85c1-a547765b7a02" />
+        </EntityType>
+        <EntityType Name="TransferShipmentHeader" ed:Guid="b8680041-609e-4bac-984e-65800ebc8c73">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c73ec1b7-8764-4cb2-8a53-30f9659c71a0" />
+          <NavigationProperty Name="TransferShipmentLines" Relationship="MyERP.DataAccess.TransferShipmentHeader_TransferShipmentLine" FromRole="TransferShipmentHeader" ToRole="TransferShipmentLines" ed:Guid="bcc39ac0-734e-43a7-8b54-c195078a9ec7" />
+        </EntityType>
+        <EntityType Name="TransferShipmentLine" ed:Guid="2cdde078-ce6e-4955-9b82-d22a5b2657ee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="55e4a64d-57c7-4734-94a4-b57546ec5630" />
+          <Property Name="TransferShipmentHeaderId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e088d4e3-4714-4ddc-b1c6-6bb6b1a556b5" />
+          <NavigationProperty Name="TransferShipmentHeader" Relationship="MyERP.DataAccess.TransferShipmentHeader_TransferShipmentLine" FromRole="TransferShipmentLines" ToRole="TransferShipmentHeader" ed:Guid="1a7b0e31-c3fb-4a23-9220-657e68145608" />
+        </EntityType>
+        <EntityType Name="EInvFormType" ed:Guid="e35bb281-492e-47ae-a763-a2df9e95cee0">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="47ee27ec-8d2e-47fd-97c9-17f1b7d07202" />
+          <Property Name="InvoiceType" Type="String" Nullable="false" MaxLength="6" Unicode="true" ed:ValidateMaxLength="6" ed:ValidateRequired="true" ed:Guid="21e58b43-d67b-496b-82ef-cd94aeb4fa00" />
+          <Property Name="TemplateCode" Type="String" Nullable="false" MaxLength="11" Unicode="true" ed:ValidateMaxLength="11" ed:ValidateRequired="true" ed:Guid="af8204ae-82d5-4167-abe2-a427571338ee" />
+          <Property Name="InvoiceForm" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="6cf4f087-05dc-4b44-b95b-c525f2aded05" />
+          <Property Name="InvoiceSeries" Type="String" Nullable="false" MaxLength="6" Unicode="true" ed:ValidateMaxLength="6" ed:ValidateRequired="true" ed:Guid="98358f20-7a26-4cb2-8fbb-eb950a80dff4" />
+          <Property Name="FormFileName" Type="String" Nullable="false" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="f6b9e03f-9135-4945-8024-84144b2b1791" />
+          <Property Name="FormFile" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="5025a289-3894-440e-8c4e-769d90660eda" />
+          <Property Name="FormVars" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="db43ac58-ea73-4080-9d5e-6f8a37f92f1b" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a4875466-de8c-4a86-ab43-89bc941921cb" />
+          <Property Name="OrganizationId" Type="Int64" ed:ValidateRequired="false" ed:Guid="2988e39a-a24a-490b-bba3-5e71260f219e" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e9d40cac-54c6-404a-a9ca-f278468bc573" />
+          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="59cd683a-0e6f-4cf6-a7bc-90d6f508bfc3" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="34512949-e10a-4dd1-8cca-ab0d0d378b0e" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="6e6fc436-2b9a-4a5a-8364-91d3bcf89867" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="29b2b0ea-99a6-40b9-a23c-22e4ff586864" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="0275ec4f-8e02-4ebb-a67b-57f9b98a984a" />
+          <NavigationProperty Name="EInvFormReleases" Relationship="MyERP.DataAccess.EInvFormType_EInvFormRelease" FromRole="EInvFormType" ToRole="EInvFormReleases" ed:Guid="86b51986-e8c8-4ede-b321-445dbe3857a4" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_EInvFormType" FromRole="EInvFormTypes" ToRole="Client" ed:Guid="7219cd22-25d8-4a99-8530-3c4a8ed43040" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_EInvFormType" FromRole="EInvFormTypes" ToRole="Organization" ed:Guid="cd5b9b38-4058-40f9-bfbb-de6027f67fc5" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_EInvFormType_RecCreatedBy" FromRole="EInvFormTypes" ToRole="RecCreatedByUser" ed:Guid="5aba2f46-107f-46a4-924f-49774417c5b0" />
+          <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_EInvFormType_RecModifiedBy" FromRole="EInvFormTypes1" ToRole="RecModifiedByUser" ed:Guid="d24d3145-eede-4477-90fb-896e5feb128e" />
+        </EntityType>
+        <EntityType Name="EInvFormRelease" ed:Guid="e02295b4-9230-4bdb-a543-95da01cef45a">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="579ffc96-9f3d-409b-aca8-3aae3d122953" />
+          <Property Name="FormTypeId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="0b8c2a38-dc4c-45bb-ad18-b32aeed2fb52" />
+          <Property Name="ReleaseTotal" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="c18b6929-df9a-4e65-abe1-b50aa3fdcf57" />
+          <Property Name="ReleaseFrom" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="af66e54a-a50d-4a42-ad45-de434f00019f" />
+          <Property Name="ReleaseTo" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="427f80a8-50ee-47dc-b3f6-30fd5f645539" />
+          <Property Name="ReleaseUsed" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="1572d813-1f28-46a6-b274-5f3e47a321eb" />
+          <Property Name="ReleaseDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="bf59b85c-3910-4f64-8b11-1d5a22f5d941" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="65ad7c11-0897-460f-9f72-49bcee977b6b" />
+          <Property Name="TaxAuthoritiesStatus" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="bf7502e2-2f45-4024-8d71-26d4550ac021" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4aef08f6-95b1-475c-b0f5-6c1390868a19" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e5c4d862-d621-4e99-ab31-53bb92748565" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="89c6c129-bd2d-4808-88d7-31f0456644db" />
+          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="4b0c38cf-54a1-4144-a0d1-db19cff2af7f" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="80a5fc07-ea15-4b1b-8f46-63bc5666c417" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="4fc3e533-ad42-4e21-b659-7cc64f4152a0" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="3608080b-9156-4985-9d30-ffd1cc879bad" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="d6dec309-f17e-4818-b1c1-eb999ccc3e88" />
+          <NavigationProperty Name="EInvFormType" Relationship="MyERP.DataAccess.EInvFormType_EInvFormRelease" FromRole="EInvFormReleases" ToRole="EInvFormType" ed:Guid="2afa6e98-c7dd-4bdd-809a-ba24106dd7d9" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_EInvFormRelease" FromRole="EInvFormReleases" ToRole="Client" ed:Guid="7c350dd6-f6e5-49dc-88d4-64fbc53e09b0" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_EInvFormRelease" FromRole="EInvFormReleases" ToRole="Organization" ed:Guid="8bcd540b-95b4-4d78-bf3c-92057f148f9f" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_EInvFormRelease_RecCreatedBy" FromRole="EInvFormReleases" ToRole="RecCreatedByUser" ed:Guid="7168e555-676e-4052-a2e7-1e2f79df0a22" />
+          <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_EInvFormRelease_RecModifiedBy" FromRole="EInvFormReleases1" ToRole="RecModifiedByUser" ed:Guid="77ffbd7b-612f-465a-b54f-b5bb3b9326ce" />
+        </EntityType>
+        <EntityType Name="EInvoiceHeader" ed:Guid="4c010660-2a5a-4479-83e2-75f9be7c8d52">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a5f21194-b986-457b-b440-f5efb8f2b141" />
+          <Property Name="FormTypeId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5e1aa5da-05f1-431f-b06a-59a61160cc5c" />
+          <Property Name="OriginalInvoiceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="ce47d185-b0ed-4c9b-9f74-f5c019c3725c" />
+          <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="7" ed:ValidateMaxLength="7" ed:ValidateRequired="true" ed:Guid="ccdbbd40-69a2-4e24-8da9-eb2e8d45a4a6" />
+          <Property Name="InvoiceName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="f6bfa460-0f04-4be6-a526-ad7fedace1d8" />
+          <Property Name="InvoiceIssuedDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="92820e72-8b25-4907-8e10-d51ac9bcb957" />
+          <Property Name="SignedDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="f96e5415-72cd-4941-b734-f259e3f82b17" />
+          <Property Name="SubmittedDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="15ceda53-0000-4337-912e-bf4c6cd2f7e6" />
+          <Property Name="ContractNumber" Type="String" MaxLength="50" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="8b43e82a-7576-4192-9678-334659f52a3f" />
+          <Property Name="ContractDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="2090738c-4074-47fc-b4dc-a677e44b000e" />
+          <Property Name="Description" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="449200a7-0edf-4130-8d31-0b1d0e0a3815" />
+          <Property Name="CurrencyId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="afdba3f4-9f05-4854-a72d-c773ce86e624" />
+          <Property Name="ExchangeRate" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="4264a20f-7f92-4465-982b-814c729575c9" />
+          <Property Name="InvoiceNote" Type="String" MaxLength="400" Unicode="true" ed:ValidateMaxLength="400" ed:ValidateRequired="false" ed:Guid="17be070a-daa5-4707-b71e-123c29f7d3ec" />
+          <Property Name="AdjustmentType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="19635350-c00a-4c2d-a4cc-774cf4ea47eb" />
+          <Property Name="AdditionalReferenceDesc" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="94faff1c-abed-4720-aa37-23cb52266c0b" />
+          <Property Name="AdditionalReferenceDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="12510bd8-0241-4ab2-ae0c-b73dcbdd1118" />
+          <Property Name="BuyerId" Type="Int64" ed:ValidateRequired="false" ed:Guid="e43f8439-e917-4dea-9355-20dbdcc05e75" />
+          <Property Name="BuyerDisplayName" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="9a626fac-def0-48da-a087-796b0ae53fc0" />
+          <Property Name="BuyerLegalName" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="3551fd5c-0abb-434c-bc6f-b9b9951362cc" />
+          <Property Name="BuyerTaxCode" Type="String" Nullable="false" MaxLength="14" Unicode="true" ed:ValidateMaxLength="14" ed:ValidateRequired="true" ed:Guid="f9a1d4e5-0c7f-4b0d-8d65-064dbbc93066" />
+          <Property Name="BuyerAddressLine" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="129b364d-77de-4602-bc8a-d8e7add3cb8a" />
+          <Property Name="BuyerPostalCode" Type="String" Nullable="false" MaxLength="10" Unicode="true" ed:ValidateMaxLength="10" ed:ValidateRequired="true" ed:Guid="550241fd-ca59-499b-8d6f-7a4b12e022aa" />
+          <Property Name="BuyerDistrictName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="21498f57-ca70-490c-a4f5-65e1c9e14306" />
+          <Property Name="BuyerCityName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="569efb95-4179-489e-89c6-cc504e803ebb" />
+          <Property Name="BuyerCountryCode" Type="String" Nullable="false" MaxLength="2" ed:ValidateMaxLength="2" ed:ValidateRequired="true" ed:Guid="4b303e4e-fb06-4b18-a91f-3bf4a21cfe3e" />
+          <Property Name="BuyerPhoneNumber" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="c50bcde0-285c-4b28-a227-615cd68baf20" />
+          <Property Name="BuyerFaxNumber" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="dfe069bd-1193-4739-be7f-49eb64d6539f" />
+          <Property Name="BuyerEmail" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="061a681b-e1a9-4140-be73-505f6092e56f" />
+          <Property Name="BuyerBankName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="3c8414b8-ab3f-4be2-8828-11d7051c8fc2" />
+          <Property Name="BuyerBankAccount" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="33644eee-868e-4447-b9d7-a6655092995d" />
+          <Property Name="SellerLegalName" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="7cd21afb-2183-4f87-88cf-59890fd79077" />
+          <Property Name="SellerTaxCode" Type="String" Nullable="false" MaxLength="14" Unicode="true" ed:ValidateMaxLength="14" ed:ValidateRequired="true" ed:Guid="3f026b2e-9725-4948-8232-9f7b5d4ed7ca" />
+          <Property Name="SellerAddressLine" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="dce9c512-61b4-4d36-b035-1e800e74fa50" />
+          <Property Name="SellerPostalCode" Type="String" Nullable="false" MaxLength="10" Unicode="true" ed:ValidateMaxLength="10" ed:ValidateRequired="true" ed:Guid="5e200ea5-a638-4f07-8ee9-0f38b973d4f5" />
+          <Property Name="SellerDistrictName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="dc8db7f6-c963-451f-93aa-a9edd5e06adf" />
+          <Property Name="SellerCityName" Type="String" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="9fb44b7a-aef1-42b5-9e69-bc579539bb32" />
+          <Property Name="SellerCountryCode" Type="String" Nullable="false" MaxLength="2" ed:ValidateMaxLength="2" ed:ValidateRequired="true" ed:Guid="ddfab2bc-c574-412f-a612-1635636e58b2" />
+          <Property Name="SellerPhoneNumber" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="3059ab33-0fec-4497-badc-f0b2c5d39b07" />
+          <Property Name="SellerFaxNumber" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="85e22ca1-fd2a-45af-a5af-7f940e45d983" />
+          <Property Name="SellerEmail" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="b9771a53-0b8b-4716-80d9-c4be6eeab08e" />
+          <Property Name="SellerBankName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="998eb533-dc80-4b86-9824-6ee7dbbf17d4" />
+          <Property Name="SellerBankAccount" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="fa99760b-3786-4dd1-8f56-8e45f5d1b488" />
+          <Property Name="SellerContactPersonName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="68ddcf7b-fd11-4a66-895a-475842318e99" />
+          <Property Name="SellerSignedPersonName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="3b75f1aa-2787-46bd-ada0-ff259dda020e" />
+          <Property Name="SellerSubmittedPersonName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="d0388595-8faa-4590-adf8-42e4d5cac03a" />
+          <Property Name="PaymentMethodName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="1afd6bb8-e122-41a9-9736-5a7e70b7007d" />
+          <Property Name="SumOfTotalLineAmountWithoutVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="cb7b0bbb-ef94-4b73-8901-b9349c315e84" />
+          <Property Name="TotalAmountWithoutVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="0c320ab5-7c34-49f1-bdb8-a8926f242f0c" />
+          <Property Name="TotalVATAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="dfe597e2-9bce-4973-9a7e-66797d5809d1" />
+          <Property Name="TotalAmountWithVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="d3ce0e55-3456-4646-9c86-f54d0561521e" />
+          <Property Name="TotalAmountWithVATFrn" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="ba6dca7d-7d23-4e3c-b965-f2837dda551d" />
+          <Property Name="TotalAmountWithVATInWords" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="7003e164-9200-4802-b37d-bbcd9c754802" />
+          <Property Name="IsTotalAmountPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="b3d05947-84e9-43a5-b4bd-e81c0c8dff56" />
+          <Property Name="IsTotalVATAmountPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="7ed742a9-89a3-4dac-aaec-c41cd3b683ff" />
+          <Property Name="DiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="34e0612e-2469-4954-9c90-71721c82a8e2" />
+          <Property Name="IsDiscountAmtPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="bcae30bc-c78e-47ad-b8d6-5e22aee0fcee" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="1f59c9c8-5353-4357-b921-30b392a2a435" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c4fbbbb7-1c9f-4f47-bc6f-6a82ca3f1231" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a02724ad-fdc3-46d0-b647-2032aa57206a" />
+          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="723c4a57-693b-4619-9ed3-9d2e7dbb9ecd" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="216c208d-da3c-4539-8cd1-047b77e9f9a0" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="6df57be4-c4d2-4fe6-9104-3957196e50a2" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="99d69b30-ddb2-4191-af3c-4ce601cdbb3e" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="490c423a-9b00-4f6b-afba-a01d145ac3fc" />
+          <NavigationProperty Name="EInvoiceLines" Relationship="MyERP.DataAccess.EInvoiceHeader_EInvoiceLine" FromRole="EInvoiceHeader" ToRole="EInvoiceLines" ed:Guid="0cf34276-2001-43c0-a621-f8934afab0f2" />
+          <NavigationProperty Name="EInvFormType" Relationship="MyERP.DataAccess.EInvFormType_EInvoiceHeader" FromRole="EInvoiceHeaders" ToRole="EInvFormType" ed:Guid="a1a741e2-9cfc-47bf-9aef-c29177991eca" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_EInvoiceHeader" FromRole="EInvoiceHeaders" ToRole="Client" ed:Guid="445327cc-dede-4d14-9c26-61b07c040e40" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_EInvoiceHeader" FromRole="EInvoiceHeaders" ToRole="Organization" ed:Guid="1b760ab2-2ea8-4d6a-a4f3-72537d7a60aa" />
+          <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_EInvoiceHeader_RecCreatedBy" FromRole="EInvoiceHeaders" ToRole="RecCreatedByUser" ed:Guid="eccd9a84-76b2-45e1-ba3e-522dd0b26f83" />
+          <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_EInvoiceHeader_RecModifiedBy" FromRole="EInvoiceHeaders1" ToRole="RecModifiedByUser" ed:Guid="ce597ff1-0c5f-427b-a9ef-84fcbfc49373" />
+          <NavigationProperty Name="BusinessPartner" Relationship="MyERP.DataAccess.BusinessPartner_EInvoiceHeader" FromRole="EInvoiceHeaders" ToRole="BusinessPartner" ed:Guid="5c8de2de-02c3-4cf0-b3e9-b67ca56ac53e" />
+          <NavigationProperty Name="Currency" Relationship="MyERP.DataAccess.Currency_EInvoiceHeader" FromRole="EInvoiceHeaders" ToRole="Currency" ed:Guid="e8d1ed6f-6d81-4274-9073-b51c8569a28d" />
+        </EntityType>
+        <EntityType Name="EInvoiceLine" ed:Guid="092583e8-c0a3-4228-82f2-1c3ddb5ef04d">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="1af1917e-c537-4aed-b0e5-337ab9ccbcf7" />
+          <Property Name="EInvoiceHeaderId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="d8686f17-5375-4790-a9b7-fbdb5044a587" />
+          <Property Name="LineNumber" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="eb4626cb-b263-496d-918c-436dfe0f4eff" />
+          <Property Name="ItemCode" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="99701261-e576-4cbd-b832-7ca77b3fe348" />
+          <Property Name="ItemName" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="443c308f-040a-4cc1-ac29-d38c4135f97c" />
+          <Property Name="UnitCode" Type="String" Nullable="false" MaxLength="10" Unicode="true" ed:ValidateMaxLength="10" ed:ValidateRequired="true" ed:Guid="3c3624fa-dab2-424a-9b30-0b23c18f458a" />
+          <Property Name="UnitName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="862ccf76-7177-485b-a76a-5b30ef87730a" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="ddb9ef02-1780-45a7-8415-29e8964b32f4" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="5f37eefc-cc6d-42d0-a1cc-287a0cdbcffb" />
+          <Property Name="ItemTotalAmountWithoutVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="4e51a10d-c0a2-4112-b919-6360e9bc22d8" />
+          <Property Name="VatId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5af79947-4552-4a9c-abcc-7fc88defc701" />
+          <Property Name="VATPercentage" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="14ede8e2-08fc-4057-9b2f-35b0cf641d15" />
+          <Property Name="VATAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="4fab86a8-87df-4917-9fda-e036484b6b24" />
+          <Property Name="Promotion" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="27aa2f00-c0be-41a4-af75-6fac887ed836" />
+          <Property Name="AdjustmentVATAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="cde940f7-27b1-40a8-bbc4-aa3446d7ed10" />
+          <Property Name="IsIncreaseItem" Type="Boolean" ed:ValidateRequired="false" ed:Guid="2721e780-70ab-4a6f-9f3a-8335028123c0" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4f708c87-7401-4f3b-bee5-27909c71afe6" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="ea5139b9-663c-4c4d-8b6c-160ab8bbfbf6" />
+          <NavigationProperty Name="EInvoiceHeader" Relationship="MyERP.DataAccess.EInvoiceHeader_EInvoiceLine" FromRole="EInvoiceLines" ToRole="EInvoiceHeader" ed:Guid="b8c7ae54-cf4b-48a9-a48b-f37fb5de0e2e" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_EInvoiceLine" FromRole="EInvoiceLines" ToRole="Client" ed:Guid="8a29fbb1-375d-4ea3-aa5d-38bc5c5feaed" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_EInvoiceLine" FromRole="EInvoiceLines" ToRole="Organization" ed:Guid="0d6dda13-0253-48ed-b0ed-291f2d6c21ad" />
+          <NavigationProperty Name="Vat" Relationship="MyERP.DataAccess.Vat_EInvoiceLine" FromRole="EInvoiceLines" ToRole="Vat" ed:Guid="e03547a1-a936-4836-9cff-94bb29fd3abe" />
+        </EntityType>
+        <EntityType Name="EInvoiceSigned" ed:Guid="7dc8f22b-c861-4eb1-b2d4-8ca5f8508587">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="6d0a6f57-3bd3-4f4f-aa0b-a66a7b9c5356" />
+          <Property Name="FormTypeId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e0398762-54b8-4308-844e-9094d722846d" />
+          <Property Name="FormReleaseNo" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="a3e1a97e-8580-436f-b9cd-a4ec445685ee" />
+          <Property Name="OriginalInvoiceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="1668d955-a5ee-4c2d-9e6e-e56c01033214" />
+          <Property Name="InvoiceType" Type="String" Nullable="false" MaxLength="6" Unicode="true" ed:ValidateMaxLength="6" ed:ValidateRequired="true" ed:Guid="7df0e795-dcb3-449a-ad54-8741f23e923f" />
+          <Property Name="TemplateCode" Type="String" Nullable="false" MaxLength="11" Unicode="true" ed:ValidateMaxLength="11" ed:ValidateRequired="true" ed:Guid="468ed810-9bf1-4a63-9e51-7d405434e87e" />
+          <Property Name="InvoiceSeries" Type="String" Nullable="false" MaxLength="6" Unicode="true" ed:ValidateMaxLength="6" ed:ValidateRequired="true" ed:Guid="dacfc70d-c190-489e-a225-05f28e45053b" />
+          <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="7" Unicode="true" ed:ValidateMaxLength="7" ed:ValidateRequired="true" ed:Guid="41df64b0-6558-4d5a-8a0d-7bedcfdd550e" />
+          <Property Name="InvoiceName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="aa437af8-427e-42d3-80c7-fe5beb347066" />
+          <Property Name="InvoiceIssuedDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="8d95f438-add2-4c6f-bc32-cca07e55b438" />
+          <Property Name="SignedDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="e6f0bb05-4439-4708-80be-e35773286404" />
+          <Property Name="SubmittedDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="fb76cf71-1fae-4017-a256-b3cb008e441b" />
+          <Property Name="ContractNumber" Type="String" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="c97d6e59-deaa-4c59-933c-0844bff74e17" />
+          <Property Name="ContractDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="dcbadc03-e230-4a72-99d0-9d8e5d66c376" />
+          <Property Name="Description" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="6270d919-b86a-448b-8d58-73a7b199793c" />
+          <Property Name="CurrencyCode" Type="String" Nullable="false" MaxLength="3" Unicode="true" ed:ValidateMaxLength="3" ed:ValidateRequired="true" ed:Guid="63c7da8d-6031-4180-9b69-aa8328fbc0d2" />
+          <Property Name="ExchangeRate" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="b81f4c60-0d72-4dbe-9d8e-4fa256d298a1" />
+          <Property Name="InvoiceNote" Type="String" MaxLength="400" Unicode="true" ed:ValidateMaxLength="400" ed:ValidateRequired="false" ed:Guid="8a8f421e-bb67-40f8-a9de-7231cd8253d7" />
+          <Property Name="AdjustmentType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="15628069-6167-4e8f-97c9-4e78baa14bbc" />
+          <Property Name="AdditionalReferenceDesc" Type="String" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="false" ed:Guid="e6daa5a4-dec8-425e-a547-3fa60c01968c" />
+          <Property Name="AdditionalReferenceDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="fafd14d5-e9fe-4c38-8433-d79fa98e3ee7" />
+          <Property Name="BuyerDisplayName" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="b7c6ee69-183d-4c01-9960-1924c14bcac1" />
+          <Property Name="BuyerLegalName" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="9f326d7c-594e-48e3-a633-7dc14efafaed" />
+          <Property Name="BuyerTaxCode" Type="String" Nullable="false" MaxLength="14" Unicode="true" ed:ValidateMaxLength="14" ed:ValidateRequired="true" ed:Guid="a2c67416-f4e3-442a-98b4-9613567bbcb0" />
+          <Property Name="BuyerAddressLine" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="6a088f11-8c3f-4e30-9ff8-3ca42f640ebd" />
+          <Property Name="BuyerPostalCode" Type="String" Nullable="false" MaxLength="10" Unicode="true" ed:ValidateMaxLength="10" ed:ValidateRequired="true" ed:Guid="38ec14b4-88dd-4b18-8548-76ad7b7c6d7e" />
+          <Property Name="BuyerDistrictName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="e9f74d9a-6dd8-4e08-892b-c00ae675aa32" />
+          <Property Name="BuyerCityName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="b84c9f84-1fc6-45a7-86a9-88316afec1ca" />
+          <Property Name="BuyerCountryCode" Type="String" Nullable="false" MaxLength="2" Unicode="true" ed:ValidateMaxLength="2" ed:ValidateRequired="true" ed:Guid="41595113-04da-402c-ba00-8e3461458ac7" />
+          <Property Name="BuyerPhoneNumber" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="37a96766-5d5b-44d0-af42-8b7df4e37353" />
+          <Property Name="BuyerFaxNumber" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="26cabf20-e527-4225-945a-90388dea9369" />
+          <Property Name="BuyerEmail" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="8fde4568-6c76-4f71-a05c-581f08b86a74" />
+          <Property Name="BuyerBankName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="0c409c04-fe74-43a0-9e77-001bca215a55" />
+          <Property Name="BuyerBankAccount" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="5eed8c5f-d500-4642-ace5-493ffc012a76" />
+          <Property Name="SellerLegalName" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="6ae2711f-be58-4aec-a9cd-37a24bf677cd" />
+          <Property Name="SellerTaxCode" Type="String" Nullable="false" MaxLength="14" Unicode="true" ed:ValidateMaxLength="14" ed:ValidateRequired="true" ed:Guid="11c3ad49-9529-4fb9-bb14-7afa024ce940" />
+          <Property Name="SellerAddressLine" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="b2c5bf7a-867c-4671-91f5-6e0a244a48e1" />
+          <Property Name="SellerPostalCode" Type="String" Nullable="false" MaxLength="10" Unicode="true" ed:ValidateMaxLength="10" ed:ValidateRequired="true" ed:Guid="68eb0b34-e410-4b2b-896a-4865c4c41f49" />
+          <Property Name="SellerDistrictName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="c1a64656-461f-4009-9baf-a1fce5d30b51" />
+          <Property Name="SellerCityName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="153e406b-229e-470f-a9d0-824251137bc7" />
+          <Property Name="SellerCountryCode" Type="String" Nullable="false" MaxLength="2" Unicode="true" ed:ValidateMaxLength="2" ed:ValidateRequired="true" ed:Guid="aa9fc0f9-1946-47ee-af24-55fd7cf72d17" />
+          <Property Name="SellerPhoneNumber" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="965b3d56-a380-4df7-a85c-4f26b2a0fe52" />
+          <Property Name="SellerFaxNumber" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="85ae336a-537e-4f4a-8f8f-d81967a83e0f" />
+          <Property Name="SellerEmail" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="0a4b85f5-35e5-4178-a7eb-5072af44966f" />
+          <Property Name="SellerBankName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="f29883b4-47ba-4415-a863-f1a758636214" />
+          <Property Name="SellerBankAccount" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="6bb500f5-a8a1-43f9-9823-35b504eefb2d" />
+          <Property Name="SellerContactPersonName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="55a2280d-f85e-4144-8ee9-85869a7dd0a8" />
+          <Property Name="SellerSignedPersonName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="177275b3-92d5-4011-853a-56778c066434" />
+          <Property Name="SellerSubmittedPersonName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="d0de8ae8-61ab-4341-a7f9-72adefae1290" />
+          <Property Name="PaymentMethodName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="e838c535-53d4-4d19-a0d3-09eb68e335c3" />
+          <Property Name="SumOfTotalLineAmountWithoutVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="01e90bcf-5c94-46c6-a10d-c348ad053ff4" />
+          <Property Name="TotalAmountWithoutVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="0ec8f309-38b0-415d-ab7c-5ac4b6beb51d" />
+          <Property Name="TotalVATAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="b6ae906e-e353-41bc-9e72-a0f81413cba3" />
+          <Property Name="TotalAmountWithVAT" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="fecbf863-56e2-4e96-b8fb-7ee255508a7b" />
+          <Property Name="TotalAmountWithVATFrn" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="648dbb1a-ab8a-42a6-87b4-cc4bec937f4c" />
+          <Property Name="TotalAmountWithVATInWords" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="eb72051f-59e4-40e3-8342-27fa13c8f8b5" />
+          <Property Name="IsTotalAmountPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="5d60ce2b-652c-43bc-b48a-455df086c877" />
+          <Property Name="IsTotalVATAmountPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="8eeaf73c-c444-43c6-b5a6-5ab8acc827dd" />
+          <Property Name="DiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="556a8ead-6e7f-430e-af69-42fd136714b0" />
+          <Property Name="IsDiscountAmtPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="3ac549e5-b726-47d5-a189-3f09b22cc05a" />
+          <Property Name="EInvoiceSignedXMLFile" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="2687b1fb-5a84-4d3a-83fa-7362018d16b4" />
+          <Property Name="EInvoiceSignedXSLFile" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="576d6c9a-ba50-4b2c-abb9-64f8b38e672a" />
+          <Property Name="EInvoiceSignedFileName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="dc17825b-9a55-4db3-ad74-c1ad5ec38020" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c4bd1d41-8844-4f13-a62c-a2b74d1b8f10" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="99d53369-bdef-416c-99e3-c899c4345aa2" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="079dcaa0-bf1d-4ad9-a742-0f39b63c8655" />
+          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="2d85d01c-1cfe-447b-98e9-9a71f6e906a7" />
+          <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="04d9afec-a76d-4fe7-aa39-e58a6184e17e" />
+          <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="94ca0f06-11b2-4622-9fdf-0dbf1ee230ce" />
+          <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c6dc900a-d7c1-49de-87f8-b040173eece9" />
+          <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="2c70b921-bb0d-4ebb-bcc4-929bf10a2a8b" />
+          <NavigationProperty Name="EInvFormType" Relationship="MyERP.DataAccess.EInvFormType_EInvoiceSigned" FromRole="EInvoiceSigneds" ToRole="EInvFormType" ed:Guid="2d95106a-05a9-4586-abdf-01424056d039" />
+          <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_EInvoiceSigned" FromRole="EInvoiceSigneds" ToRole="Client" ed:Guid="adf35c28-6034-48f0-8129-d7c8cfc12629" />
+          <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_EInvoiceSigned" FromRole="EInvoiceSigneds" ToRole="Organization" ed:Guid="66e5ee73-1188-4922-911b-962ab5383388" />
         </EntityType>
         <Association Name="User_Client_CreatedBy" ed:Guid="cc64066d-a254-493f-8be0-7609622c4e6a">
           <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
@@ -9446,6 +10854,426 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="BusinessPartner_Job" ed:Guid="257b8453-ca08-4c1c-aefd-f7d6f572e09d">
+          <End Role="BusinessPartner" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="0..1" />
+          <End Role="Jobs" Type="MyERP.DataAccess.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusinessPartner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="BusinessPartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GeneralJournalHeader_GeneralJournalLine" ed:Guid="a77fec9b-794a-455e-a3c6-8d1c7c1fcb82">
+          <End Role="GeneralJournalHeader" Type="MyERP.DataAccess.GeneralJournalHeader" Multiplicity="1" />
+          <End Role="GeneralJournalLines" Type="MyERP.DataAccess.GeneralJournalLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GeneralJournalHeader">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneralJournalLines">
+              <PropertyRef Name="GeneralJournalHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_GeneralJournalHeader" ed:Guid="633aa088-c5be-4f25-a3b8-0175767aa3b8">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="GeneralJournalHeaders" Type="MyERP.DataAccess.GeneralJournalHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneralJournalHeaders">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_GeneralJournalHeader" ed:Guid="98343c94-4dd8-4ea7-b8c9-1ed8a03dd066">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="GeneralJournalHeaders" Type="MyERP.DataAccess.GeneralJournalHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneralJournalHeaders">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Currency_GeneralJournalHeader" ed:Guid="2f5cc70e-d4f1-4408-947c-cb7f3fba5545">
+          <End Role="Currency" Type="MyERP.DataAccess.Currency" Multiplicity="1" />
+          <End Role="GeneralJournalHeaders" Type="MyERP.DataAccess.GeneralJournalHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneralJournalHeaders">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Account_GeneralJournalLine" ed:Guid="55a7fdb8-bb26-4188-b12b-b0d64c7fb097">
+          <End Role="Account" Type="MyERP.DataAccess.Account" Multiplicity="1" />
+          <End Role="GeneralJournalLines" Type="MyERP.DataAccess.GeneralJournalLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneralJournalLines">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BusinessPartner_GeneralJournalLine" ed:Guid="03070bfc-ed8d-4dc4-a586-7197d2bacc4a">
+          <End Role="BusinessPartner" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="0..1" />
+          <End Role="GeneralJournalLines" Type="MyERP.DataAccess.GeneralJournalLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusinessPartner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneralJournalLines">
+              <PropertyRef Name="BusinessPartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Job_GeneralJournalLine" ed:Guid="2085d94b-89cc-49cf-a1cd-955b04d599e4">
+          <End Role="Job" Type="MyERP.DataAccess.Job" Multiplicity="0..1" />
+          <End Role="GeneralJournalLines" Type="MyERP.DataAccess.GeneralJournalLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneralJournalLines">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ItemJournalHeader_ItemJournalLine" ed:Guid="ac02af69-72fc-4075-904e-762e43f14a2d">
+          <End Role="ItemJournalHeader" Type="MyERP.DataAccess.ItemJournalHeader" Multiplicity="1" />
+          <End Role="ItemJournalLines" Type="MyERP.DataAccess.ItemJournalLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemJournalHeader">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItemJournalLines">
+              <PropertyRef Name="ItemJournalHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TransferHeader_TransferLine" ed:Guid="4c31c535-5284-4b2e-ad35-f001b2e60bd1">
+          <End Role="TransferHeader" Type="MyERP.DataAccess.TransferHeader" Multiplicity="1" />
+          <End Role="TransferLines" Type="MyERP.DataAccess.TransferLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransferHeader">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransferLines">
+              <PropertyRef Name="TransferHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TransferShipmentHeader_TransferShipmentLine" ed:Guid="5b6a84bb-1594-44f1-9467-f97eb1d527e7">
+          <End Role="TransferShipmentHeader" Type="MyERP.DataAccess.TransferShipmentHeader" Multiplicity="1" />
+          <End Role="TransferShipmentLines" Type="MyERP.DataAccess.TransferShipmentLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransferShipmentHeader">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransferShipmentLines">
+              <PropertyRef Name="TransferShipmentHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TransferReceiptHeader_TransferReceiptLine" ed:Guid="142617bb-eb44-4e55-803f-71ddb520a26e">
+          <End Role="TransferReceiptHeader" Type="MyERP.DataAccess.TransferReceiptHeader" Multiplicity="1" />
+          <End Role="TransferReceiptLines" Type="MyERP.DataAccess.TransferReceiptLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransferReceiptHeader">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransferReceiptLines">
+              <PropertyRef Name="TransferReceiptHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EInvFormType_EInvFormRelease" ed:Guid="c731c23c-d800-481f-99bf-5d255982a921">
+          <End Role="EInvFormType" Type="MyERP.DataAccess.EInvFormType" Multiplicity="1" />
+          <End Role="EInvFormReleases" Type="MyERP.DataAccess.EInvFormRelease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EInvFormType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvFormReleases">
+              <PropertyRef Name="FormTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EInvoiceHeader_EInvoiceLine" ed:Guid="cdfb3000-9ebc-4b08-b247-890e331ac8f9">
+          <End Role="EInvoiceHeader" Type="MyERP.DataAccess.EInvoiceHeader" Multiplicity="1" />
+          <End Role="EInvoiceLines" Type="MyERP.DataAccess.EInvoiceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EInvoiceHeader">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvoiceLines">
+              <PropertyRef Name="EInvoiceHeaderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EInvFormType_EInvoiceHeader" ed:Guid="68c07a01-2e2e-4c97-86e1-73191ad8b2c4">
+          <End Role="EInvFormType" Type="MyERP.DataAccess.EInvFormType" Multiplicity="1" />
+          <End Role="EInvoiceHeaders" Type="MyERP.DataAccess.EInvoiceHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EInvFormType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvoiceHeaders">
+              <PropertyRef Name="FormTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EInvFormType_EInvoiceSigned" ed:Guid="20c6b83b-1422-4694-bb9a-78097a57a4f9">
+          <End Role="EInvFormType" Type="MyERP.DataAccess.EInvFormType" Multiplicity="1" />
+          <End Role="EInvoiceSigneds" Type="MyERP.DataAccess.EInvoiceSigned" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EInvFormType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvoiceSigneds">
+              <PropertyRef Name="FormTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_EInvoiceSigned" ed:Guid="26537095-8645-4ba6-9367-f526cfd3dbbe">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="EInvoiceSigneds" Type="MyERP.DataAccess.EInvoiceSigned" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvoiceSigneds">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_EInvoiceSigned" ed:Guid="3497fecc-f292-4a1c-bfd4-eae7513ac0b6">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="EInvoiceSigneds" Type="MyERP.DataAccess.EInvoiceSigned" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvoiceSigneds">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_EInvoiceHeader" ed:Guid="f0f6717b-9414-49c7-b958-e0420f84c841">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="EInvoiceHeaders" Type="MyERP.DataAccess.EInvoiceHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvoiceHeaders">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_EInvoiceHeader" ed:Guid="8fafbf35-ad10-4c67-97e3-4b253778365f">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="EInvoiceHeaders" Type="MyERP.DataAccess.EInvoiceHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvoiceHeaders">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_EInvoiceHeader_RecCreatedBy" ed:Guid="ffc3f1f4-937b-45ea-8e2b-a6fc83f95af0">
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="EInvoiceHeaders" Type="MyERP.DataAccess.EInvoiceHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecCreatedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvoiceHeaders">
+              <PropertyRef Name="RecCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_EInvoiceHeader_RecModifiedBy" ed:Guid="fd877899-06f4-453d-87e2-e0e9280d7001">
+          <End Role="RecModifiedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="EInvoiceHeaders1" Type="MyERP.DataAccess.EInvoiceHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecModifiedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvoiceHeaders1">
+              <PropertyRef Name="RecModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_EInvoiceLine" ed:Guid="6bd741e3-906c-44df-8013-b91e83c58307">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="EInvoiceLines" Type="MyERP.DataAccess.EInvoiceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvoiceLines">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_EInvoiceLine" ed:Guid="fe68b945-8a55-4cef-ac51-396366b14696">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="EInvoiceLines" Type="MyERP.DataAccess.EInvoiceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvoiceLines">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_EInvFormType" ed:Guid="bd89c557-0b5f-453f-96a2-23e89e9484f3">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="EInvFormTypes" Type="MyERP.DataAccess.EInvFormType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvFormTypes">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_EInvFormType" ed:Guid="95d41bda-24b8-438f-9252-5c2d6ce820eb">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="EInvFormTypes" Type="MyERP.DataAccess.EInvFormType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvFormTypes">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_EInvFormType_RecCreatedBy" ed:Guid="61417f12-c41f-489d-95f4-2bde956445dd">
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="EInvFormTypes" Type="MyERP.DataAccess.EInvFormType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecCreatedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvFormTypes">
+              <PropertyRef Name="RecCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_EInvFormType_RecModifiedBy" ed:Guid="6bdf6cb2-2e4b-43e8-9f93-ca9375553252">
+          <End Role="RecModifiedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="EInvFormTypes1" Type="MyERP.DataAccess.EInvFormType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecModifiedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvFormTypes1">
+              <PropertyRef Name="RecModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Client_EInvFormRelease" ed:Guid="d256ee11-cc67-4118-bb21-406449779378">
+          <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
+          <End Role="EInvFormReleases" Type="MyERP.DataAccess.EInvFormRelease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvFormReleases">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Organization_EInvFormRelease" ed:Guid="2c5190ba-aa98-45a4-9f34-43f3f4bccaff">
+          <End Role="Organization" Type="MyERP.DataAccess.Organization" Multiplicity="1" />
+          <End Role="EInvFormReleases" Type="MyERP.DataAccess.EInvFormRelease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvFormReleases">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_EInvFormRelease_RecCreatedBy" ed:Guid="8b67c141-695f-462e-84e1-f89e2083a2d1">
+          <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="EInvFormReleases" Type="MyERP.DataAccess.EInvFormRelease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecCreatedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvFormReleases">
+              <PropertyRef Name="RecCreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_EInvFormRelease_RecModifiedBy" ed:Guid="5ec18955-a712-4700-aeed-64b5e2d67590">
+          <End Role="RecModifiedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
+          <End Role="EInvFormReleases1" Type="MyERP.DataAccess.EInvFormRelease" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RecModifiedByUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvFormReleases1">
+              <PropertyRef Name="RecModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Vat_EInvoiceLine" ed:Guid="9218947d-7c6b-43a6-9f08-865dc7f6ddfd">
+          <End Role="Vat" Type="MyERP.DataAccess.Vat" Multiplicity="1" />
+          <End Role="EInvoiceLines" Type="MyERP.DataAccess.EInvoiceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vat">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvoiceLines">
+              <PropertyRef Name="VatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BusinessPartner_EInvoiceHeader" ed:Guid="bce618a9-e5cd-43bf-945b-4fa26c82a7e0">
+          <End Role="BusinessPartner" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="0..1" />
+          <End Role="EInvoiceHeaders" Type="MyERP.DataAccess.EInvoiceHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusinessPartner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvoiceHeaders">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Currency_EInvoiceHeader" ed:Guid="e92838b6-a156-4169-bd4e-43bb802cb9ec">
+          <End Role="Currency" Type="MyERP.DataAccess.Currency" Multiplicity="1" />
+          <End Role="EInvoiceHeaders" Type="MyERP.DataAccess.EInvoiceHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvoiceHeaders">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- MSL content -->
@@ -10514,6 +12342,10 @@
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
                 <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="StartingDate" ColumnName="starting_date" />
+                <ScalarProperty Name="EndingDate" ColumnName="ending_date" />
+                <ScalarProperty Name="CreationDate" ColumnName="creation_date" />
+                <ScalarProperty Name="BusinessPartnerId" ColumnName="business_partner_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -10539,6 +12371,335 @@
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
                 <ScalarProperty Name="Status" ColumnName="status" />
                 <ScalarProperty Name="Version" ColumnName="version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeneralJournalHeaders">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.GeneralJournalHeader">
+              <MappingFragment StoreEntitySet="general_journal_headers">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="DocumentType" ColumnName="document_type" />
+                <ScalarProperty Name="DocSubType" ColumnName="doc_sub_type" />
+                <ScalarProperty Name="DocSequenceId" ColumnName="doc_sequence_id" />
+                <ScalarProperty Name="DocumentNo" ColumnName="document_no" />
+                <ScalarProperty Name="DocumentDate" ColumnName="document_date" />
+                <ScalarProperty Name="PostingDate" ColumnName="posting_date" />
+                <ScalarProperty Name="CurrencyId" ColumnName="currency_id" />
+                <ScalarProperty Name="CurrencyFactor" ColumnName="currency_factor" />
+                <ScalarProperty Name="NoPrinted" ColumnName="no_printed" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="TotalDebitAmountLCY" ColumnName="total_debit_amount_lcy" />
+                <ScalarProperty Name="TotalDebitAmount" ColumnName="total_debit_amount" />
+                <ScalarProperty Name="TotalCreditAmountLCY" ColumnName="total_credit_amount_lcy" />
+                <ScalarProperty Name="TotalCreditAmount" ColumnName="total_credit_amount" />
+                <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeneralJournalLines">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.GeneralJournalLine">
+              <MappingFragment StoreEntitySet="general_journal_lines">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="GeneralJournalHeaderId" ColumnName="general_journal_header_id" />
+                <ScalarProperty Name="LineNo" ColumnName="line_no" />
+                <ScalarProperty Name="AccountId" ColumnName="account_id" />
+                <ScalarProperty Name="Description" ColumnName="description" />
+                <ScalarProperty Name="DocumentType" ColumnName="document_type" />
+                <ScalarProperty Name="DocumentNo" ColumnName="document_no" />
+                <ScalarProperty Name="PostingDate" ColumnName="posting_date" />
+                <ScalarProperty Name="DebitAmountLCY" ColumnName="debit_amount_lcy" />
+                <ScalarProperty Name="DebitAmount" ColumnName="debit_amount" />
+                <ScalarProperty Name="CreditAmountLCY" ColumnName="credit_amount_lcy" />
+                <ScalarProperty Name="CreditAmount" ColumnName="credit_amount" />
+                <ScalarProperty Name="BusinessPartnerId" ColumnName="business_partner_id" />
+                <ScalarProperty Name="JobId" ColumnName="job_id" />
+                <ScalarProperty Name="FixAssetId" ColumnName="fix_asset_id" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="PostingGroup" ColumnName="posting_group" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemJournalHeaders">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.ItemJournalHeader">
+              <MappingFragment StoreEntitySet="item_journal_headers">
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemJournalLines">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.ItemJournalLine">
+              <MappingFragment StoreEntitySet="item_journal_lines">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="ItemJournalHeaderId" ColumnName="item_journal_header_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransferHeaders">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.TransferHeader">
+              <MappingFragment StoreEntitySet="transfer_headers">
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransferLines">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.TransferLine">
+              <MappingFragment StoreEntitySet="transfer_lines">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="TransferHeaderId" ColumnName="transfer_header_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransferReceiptHeaders">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.TransferReceiptHeader">
+              <MappingFragment StoreEntitySet="transfer_receipt_headers">
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransferReceiptLines">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.TransferReceiptLine">
+              <MappingFragment StoreEntitySet="transfer_receipt_lines">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="TransferReceiptHeaderId" ColumnName="transfer_receipt_header_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransferShipmentHeaders">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.TransferShipmentHeader">
+              <MappingFragment StoreEntitySet="transfer_shipment_headers">
+                <ScalarProperty Name="Id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransferShipmentLines">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.TransferShipmentLine">
+              <MappingFragment StoreEntitySet="transfer_shipment_lines">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="TransferShipmentHeaderId" ColumnName="transfer_shipment_header_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EInvFormTypes">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.EInvFormType">
+              <MappingFragment StoreEntitySet="einv_form_types">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="InvoiceType" ColumnName="invoice_type" />
+                <ScalarProperty Name="TemplateCode" ColumnName="template_code" />
+                <ScalarProperty Name="InvoiceForm" ColumnName="invoice_form" />
+                <ScalarProperty Name="InvoiceSeries" ColumnName="invoice_series" />
+                <ScalarProperty Name="FormFileName" ColumnName="form_file_name" />
+                <ScalarProperty Name="FormFile" ColumnName="form_file" />
+                <ScalarProperty Name="FormVars" ColumnName="form_vars" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EInvFormReleases">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.EInvFormRelease">
+              <MappingFragment StoreEntitySet="einv_form_releases">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="FormTypeId" ColumnName="form_type_id" />
+                <ScalarProperty Name="ReleaseTotal" ColumnName="release_total" />
+                <ScalarProperty Name="ReleaseFrom" ColumnName="release_from" />
+                <ScalarProperty Name="ReleaseTo" ColumnName="release_to" />
+                <ScalarProperty Name="ReleaseUsed" ColumnName="release_used" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="release_date" />
+                <ScalarProperty Name="StartDate" ColumnName="start_date" />
+                <ScalarProperty Name="TaxAuthoritiesStatus" ColumnName="tax_authorities_status" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EInvoiceHeaders">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.EInvoiceHeader">
+              <MappingFragment StoreEntitySet="einvoice_headers">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="FormTypeId" ColumnName="form_type_id" />
+                <ScalarProperty Name="OriginalInvoiceId" ColumnName="original_invoice_id" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="invoice_number" />
+                <ScalarProperty Name="InvoiceName" ColumnName="invoice_name" />
+                <ScalarProperty Name="InvoiceIssuedDate" ColumnName="invoice_issued_date" />
+                <ScalarProperty Name="SignedDate" ColumnName="signed_date" />
+                <ScalarProperty Name="SubmittedDate" ColumnName="submitted_date" />
+                <ScalarProperty Name="ContractNumber" ColumnName="contract_number" />
+                <ScalarProperty Name="ContractDate" ColumnName="contract_date" />
+                <ScalarProperty Name="CurrencyId" ColumnName="currency_id" />
+                <ScalarProperty Name="ExchangeRate" ColumnName="exchange_rate" />
+                <ScalarProperty Name="InvoiceNote" ColumnName="invoice_note" />
+                <ScalarProperty Name="AdjustmentType" ColumnName="adjustment_type" />
+                <ScalarProperty Name="AdditionalReferenceDesc" ColumnName="additional_reference_desc" />
+                <ScalarProperty Name="AdditionalReferenceDate" ColumnName="additional_reference_date" />
+                <ScalarProperty Name="BuyerId" ColumnName="buyer_id" />
+                <ScalarProperty Name="BuyerDisplayName" ColumnName="buyer_display_name" />
+                <ScalarProperty Name="BuyerLegalName" ColumnName="buyer_legal_name" />
+                <ScalarProperty Name="BuyerTaxCode" ColumnName="buyer_tax_code" />
+                <ScalarProperty Name="BuyerAddressLine" ColumnName="buyer_address_line" />
+                <ScalarProperty Name="BuyerPostalCode" ColumnName="buyer_postal_code" />
+                <ScalarProperty Name="BuyerDistrictName" ColumnName="buyer_district_name" />
+                <ScalarProperty Name="BuyerCityName" ColumnName="buyer_city_name" />
+                <ScalarProperty Name="BuyerCountryCode" ColumnName="buyer_country_code" />
+                <ScalarProperty Name="BuyerPhoneNumber" ColumnName="buyer_phone_number" />
+                <ScalarProperty Name="BuyerFaxNumber" ColumnName="buyer_fax_number" />
+                <ScalarProperty Name="BuyerEmail" ColumnName="buyer_email" />
+                <ScalarProperty Name="BuyerBankName" ColumnName="buyer_bank_name" />
+                <ScalarProperty Name="BuyerBankAccount" ColumnName="buyer_bank_account" />
+                <ScalarProperty Name="SellerLegalName" ColumnName="seller_legal_name" />
+                <ScalarProperty Name="SellerTaxCode" ColumnName="seller_tax_code" />
+                <ScalarProperty Name="SellerAddressLine" ColumnName="seller_address_line" />
+                <ScalarProperty Name="SellerPostalCode" ColumnName="seller_postal_code" />
+                <ScalarProperty Name="SellerDistrictName" ColumnName="seller_district_name" />
+                <ScalarProperty Name="SellerCityName" ColumnName="seller_city_name" />
+                <ScalarProperty Name="SellerCountryCode" ColumnName="seller_country_code" />
+                <ScalarProperty Name="SellerPhoneNumber" ColumnName="seller_phone_number" />
+                <ScalarProperty Name="SellerFaxNumber" ColumnName="seller_fax_number" />
+                <ScalarProperty Name="SellerEmail" ColumnName="seller_email" />
+                <ScalarProperty Name="SellerBankName" ColumnName="seller_bank_name" />
+                <ScalarProperty Name="SellerBankAccount" ColumnName="seller_bank_account" />
+                <ScalarProperty Name="SellerContactPersonName" ColumnName="seller_contact_person_name" />
+                <ScalarProperty Name="SellerSignedPersonName" ColumnName="seller_signed_person_name" />
+                <ScalarProperty Name="SellerSubmittedPersonName" ColumnName="seller_submitted_person_name" />
+                <ScalarProperty Name="PaymentMethodName" ColumnName="payment_method_name" />
+                <ScalarProperty Name="SumOfTotalLineAmountWithoutVAT" ColumnName="sum_of_total_line_amount_without_vat" />
+                <ScalarProperty Name="TotalAmountWithoutVAT" ColumnName="total_amount_without_vat" />
+                <ScalarProperty Name="TotalVATAmount" ColumnName="total_vat_amount" />
+                <ScalarProperty Name="TotalAmountWithVAT" ColumnName="total_amount_with_vat" />
+                <ScalarProperty Name="TotalAmountWithVATFrn" ColumnName="total_amount_with_vat_frn" />
+                <ScalarProperty Name="TotalAmountWithVATInWords" ColumnName="total_amount_with_vat_in_words" />
+                <ScalarProperty Name="IsTotalAmountPos" ColumnName="is_total_amount_pos" />
+                <ScalarProperty Name="IsTotalVATAmountPos" ColumnName="is_total_vat_amount_pos" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="discount_amount" />
+                <ScalarProperty Name="IsDiscountAmtPos" ColumnName="is_discount_amt_pos" />
+                <ScalarProperty Name="Description" ColumnName="description" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EInvoiceLines">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.EInvoiceLine">
+              <MappingFragment StoreEntitySet="einvoice_lines">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="EInvoiceHeaderId" ColumnName="einvoice_header_id" />
+                <ScalarProperty Name="LineNumber" ColumnName="line_number" />
+                <ScalarProperty Name="ItemCode" ColumnName="item_code" />
+                <ScalarProperty Name="ItemName" ColumnName="item_name" />
+                <ScalarProperty Name="UnitCode" ColumnName="unit_code" />
+                <ScalarProperty Name="UnitName" ColumnName="unit_name" />
+                <ScalarProperty Name="UnitPrice" ColumnName="unit_price" />
+                <ScalarProperty Name="Quantity" ColumnName="quantity" />
+                <ScalarProperty Name="ItemTotalAmountWithoutVAT" ColumnName="item_total_amount_without_vat" />
+                <ScalarProperty Name="VATPercentage" ColumnName="vat_percentage" />
+                <ScalarProperty Name="VATAmount" ColumnName="vat_amount" />
+                <ScalarProperty Name="Promotion" ColumnName="promotion" />
+                <ScalarProperty Name="AdjustmentVATAmount" ColumnName="adjustment_vat_amount" />
+                <ScalarProperty Name="IsIncreaseItem" ColumnName="is_increase_item" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="VatId" ColumnName="vat_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EInvoiceSigneds">
+            <EntityTypeMapping TypeName="MyERP.DataAccess.EInvoiceSigned">
+              <MappingFragment StoreEntitySet="einvoice_signeds">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="FormTypeId" ColumnName="form_type_id" />
+                <ScalarProperty Name="FormReleaseNo" ColumnName="form_release_no" />
+                <ScalarProperty Name="OriginalInvoiceId" ColumnName="original_invoice_id" />
+                <ScalarProperty Name="InvoiceType" ColumnName="invoice_type" />
+                <ScalarProperty Name="TemplateCode" ColumnName="template_code" />
+                <ScalarProperty Name="InvoiceSeries" ColumnName="invoice_series" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="invoice_number" />
+                <ScalarProperty Name="InvoiceName" ColumnName="invoice_name" />
+                <ScalarProperty Name="InvoiceIssuedDate" ColumnName="invoice_issued_date" />
+                <ScalarProperty Name="SignedDate" ColumnName="signed_date" />
+                <ScalarProperty Name="SubmittedDate" ColumnName="submitted_date" />
+                <ScalarProperty Name="ContractNumber" ColumnName="contract_number" />
+                <ScalarProperty Name="ContractDate" ColumnName="contract_date" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="currency_code" />
+                <ScalarProperty Name="ExchangeRate" ColumnName="exchange_rate" />
+                <ScalarProperty Name="InvoiceNote" ColumnName="invoice_note" />
+                <ScalarProperty Name="AdjustmentType" ColumnName="adjustment_type" />
+                <ScalarProperty Name="AdditionalReferenceDesc" ColumnName="additional_reference_desc" />
+                <ScalarProperty Name="AdditionalReferenceDate" ColumnName="additional_reference_date" />
+                <ScalarProperty Name="BuyerDisplayName" ColumnName="buyer_display_name" />
+                <ScalarProperty Name="BuyerLegalName" ColumnName="buyer_legal_name" />
+                <ScalarProperty Name="BuyerTaxCode" ColumnName="buyer_tax_code" />
+                <ScalarProperty Name="BuyerAddressLine" ColumnName="buyer_address_line" />
+                <ScalarProperty Name="BuyerPostalCode" ColumnName="buyer_postal_code" />
+                <ScalarProperty Name="BuyerDistrictName" ColumnName="buyer_district_name" />
+                <ScalarProperty Name="BuyerCityName" ColumnName="buyer_city_name" />
+                <ScalarProperty Name="BuyerCountryCode" ColumnName="buyer_country_code" />
+                <ScalarProperty Name="BuyerPhoneNumber" ColumnName="buyer_phone_number" />
+                <ScalarProperty Name="BuyerFaxNumber" ColumnName="buyer_fax_number" />
+                <ScalarProperty Name="BuyerEmail" ColumnName="buyer_email" />
+                <ScalarProperty Name="BuyerBankName" ColumnName="buyer_bank_name" />
+                <ScalarProperty Name="BuyerBankAccount" ColumnName="buyer_bank_account" />
+                <ScalarProperty Name="SellerLegalName" ColumnName="seller_legal_name" />
+                <ScalarProperty Name="SellerTaxCode" ColumnName="seller_tax_code" />
+                <ScalarProperty Name="SellerAddressLine" ColumnName="seller_address_line" />
+                <ScalarProperty Name="SellerPostalCode" ColumnName="seller_postal_code" />
+                <ScalarProperty Name="SellerDistrictName" ColumnName="seller_district_name" />
+                <ScalarProperty Name="SellerCityName" ColumnName="seller_city_name" />
+                <ScalarProperty Name="SellerCountryCode" ColumnName="seller_country_code" />
+                <ScalarProperty Name="SellerPhoneNumber" ColumnName="seller_phone_number" />
+                <ScalarProperty Name="SellerFaxNumber" ColumnName="seller_fax_number" />
+                <ScalarProperty Name="SellerEmail" ColumnName="seller_email" />
+                <ScalarProperty Name="SellerBankName" ColumnName="seller_bank_name" />
+                <ScalarProperty Name="SellerBankAccount" ColumnName="seller_bank_account" />
+                <ScalarProperty Name="SellerContactPersonName" ColumnName="seller_contact_person_name" />
+                <ScalarProperty Name="SellerSignedPersonName" ColumnName="seller_signed_person_name" />
+                <ScalarProperty Name="SellerSubmittedPersonName" ColumnName="seller_submitted_person_name" />
+                <ScalarProperty Name="PaymentMethodName" ColumnName="payment_method_name" />
+                <ScalarProperty Name="SumOfTotalLineAmountWithoutVAT" ColumnName="sum_of_total_line_amount_without_vat" />
+                <ScalarProperty Name="TotalAmountWithoutVAT" ColumnName="total_amount_without_vat" />
+                <ScalarProperty Name="TotalVATAmount" ColumnName="total_vat_amount" />
+                <ScalarProperty Name="TotalAmountWithVAT" ColumnName="total_amount_with_vat" />
+                <ScalarProperty Name="TotalAmountWithVATFrn" ColumnName="total_amount_with_vat_frn" />
+                <ScalarProperty Name="TotalAmountWithVATInWords" ColumnName="total_amount_with_vat_in_words" />
+                <ScalarProperty Name="IsTotalAmountPos" ColumnName="is_total_amount_pos" />
+                <ScalarProperty Name="IsTotalVATAmountPos" ColumnName="is_total_vat_amount_pos" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="discount_amount" />
+                <ScalarProperty Name="IsDiscountAmtPos" ColumnName="is_discount_amt_pos" />
+                <ScalarProperty Name="EInvoiceSignedXMLFile" ColumnName="einvoice_signed_xml_file" />
+                <ScalarProperty Name="EInvoiceSignedXSLFile" ColumnName="einvoice_signed_xsl_file" />
+                <ScalarProperty Name="EInvoiceSignedFileName" ColumnName="einvoice_signed_file_name" />
+                <ScalarProperty Name="Description" ColumnName="description" />
+                <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
+                <ScalarProperty Name="Version" ColumnName="version" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
+                <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
+                <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+                <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

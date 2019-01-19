@@ -313,6 +313,51 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to EInvoice.
+        /// </summary>
+        public static string eInvoice {
+            get {
+                return ResourceManager.GetString("eInvoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Draft Invoice.
+        /// </summary>
+        public static string eInvoiceDraftInvoice {
+            get {
+                return ResourceManager.GetString("eInvoiceDraftInvoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Form Release.
+        /// </summary>
+        public static string eInvoiceFormRelease {
+            get {
+                return ResourceManager.GetString("eInvoiceFormRelease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Form Type.
+        /// </summary>
+        public static string eInvoiceFormType {
+            get {
+                return ResourceManager.GetString("eInvoiceFormType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Signed Invoice.
+        /// </summary>
+        public static string eInvoiceSignedInvoice {
+            get {
+                return ResourceManager.GetString("eInvoiceSignedInvoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {

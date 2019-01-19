@@ -167,4 +167,28 @@ namespace MyERP.Web
 
     }
 
+    public partial class EInvFormReleaseRepository : BaseRepository<MyERP.DataAccess.EInvFormRelease, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class EInvFormTypeRepository : BaseRepository<MyERP.DataAccess.EInvFormType, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class EInvoiceHeaderRepository : BaseRepository<MyERP.DataAccess.EInvoiceHeader, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class EInvoiceLineRepository : BaseRepository<MyERP.DataAccess.EInvoiceLine, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
+
+    public partial class EInvoiceSignedRepository : BaseRepository<MyERP.DataAccess.EInvoiceSigned, MyERP.DataAccess.EntitiesModel>
+    {
+
+    }
 }

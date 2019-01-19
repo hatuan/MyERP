@@ -386,3 +386,28 @@ System.Data.DataException: An exception occurred while initializing the database
    at System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
    at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
    at MyERP.Web.CustomMembershipProvider.ValidateUser(String username, String password) in C:\Projects\MyERP-Web\MyERP.Web\CustomMembershipProvider.cs:line 42
+INFO  2018-12-30 22:01:51,651 2205704ms SalesPriceRepository   GetPriceOfItem     - URL AbsoluteUri = http://localhost:8080/SalesPrices/GetPriceOfItem
+INFO  2018-12-30 22:01:51,689 2205742ms SalesPriceRepository   GetPriceOfItem     - URL Parameters = ?org_id=1&bus_part_id=18&date=2018/12/30&item_id=25&uom_id=7&qty=1.00
+ERROR 2018-12-30 22:01:53,812 2207865ms SalesPriceRepository   GetPriceOfItem     - Failed
+System.AggregateException: One or more errors occurred. ---> System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 127.0.0.1:8080
+   at System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at MyERP.Web.SalesPriceRepository.GetPriceOfItem(Int64 OrgId, Int64 BusPartId, DateTime date, Int64 ItemId, Int64 UomId, Decimal Qty) in C:\Projects\MyERP-Web\MyERP.Web\Repository\SalesPriceRepository.cs:line 37
+---> (Inner Exception #0) System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 127.0.0.1:8080
+   at System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   at System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---<---
+

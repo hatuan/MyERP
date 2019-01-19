@@ -480,4 +480,19 @@
   <data name="JobGroup" xml:space="preserve">
     <value>Job Group</value>
   </data>
+  <data name="eInvoice" xml:space="preserve">
+    <value>EInvoice</value>
+  </data>
+  <data name="eInvoiceDraftInvoice" xml:space="preserve">
+    <value>Draft Invoice</value>
+  </data>
+  <data name="eInvoiceFormRelease" xml:space="preserve">
+    <value>Form Release</value>
+  </data>
+  <data name="eInvoiceFormType" xml:space="preserve">
+    <value>Form Type</value>
+  </data>
+  <data name="eInvoiceSignedInvoice" xml:space="preserve">
+    <value>Signed Invoice</value>
+  </data>
 </root>

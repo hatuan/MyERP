@@ -449,6 +449,9 @@
     <Content Include="Areas\Job\Views\JobGroup\_Maintenance.cshtml" />
     <Content Include="Areas\Job\Views\Index\_List.cshtml" />
     <Content Include="Areas\Job\Views\Index\_Maintenance.cshtml" />
+    <Content Include="Areas\EInvoice\Views\web.config" />
+    <Content Include="Areas\EInvoice\Views\EInvoice\Index.cshtml" />
+    <Content Include="Areas\EInvoice\Views\EInvoice\_List.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Resources\reports\salespos.json" />
     <Content Include="Resources\reports\salespos_001.mrt" />
@@ -487,6 +490,8 @@
     <Compile Include="Areas\Cash\CashAreaRegistration.cs" />
     <Compile Include="Areas\Cash\Controllers\CashPaymentController.cs" />
     <Compile Include="Areas\Cash\Controllers\CashReceiptController.cs" />
+    <Compile Include="Areas\EInvoice\Controllers\EInvoiceController.cs" />
+    <Compile Include="Areas\EInvoice\EInvoiceAreaRegistration.cs" />
     <Compile Include="Areas\Item\Controllers\IndexController.cs" />
     <Compile Include="Areas\Item\Controllers\ItemGroupController.cs" />
     <Compile Include="Areas\Item\Controllers\ItemUomController.cs" />
@@ -531,6 +536,11 @@
     <Compile Include="Models\ClientViewModels.cs" />
     <Compile Include="Models\BusinessPartnerGroupViewModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EInvSigned.cs" />
+    <Compile Include="Models\EInvFormRelease.cs" />
+    <Compile Include="Models\EInvFormType.cs" />
+    <Compile Include="Models\EInvHeaderViewModels.cs" />
+    <Compile Include="Models\EInvLineViewModels.cs" />
     <Compile Include="Models\ExtNetComboBoxModel.cs" />
     <Compile Include="Models\ExtNetModel.cs" />
     <Compile Include="Models\JobGroupViewModels.cs" />
@@ -589,6 +599,7 @@
     </Compile>
     <Compile Include="Repository\BusinessPartnerPriceGroupRepository.cs" />
     <Compile Include="Repository\CurrencyRepository.cs" />
+    <Compile Include="Repository\EInvoiceRepository.cs" />
     <Compile Include="Repository\JobGroupRepository.cs" />
     <Compile Include="Repository\PurchaseInvoiceLineRepository.cs" />
     <Compile Include="Repository\PurchaseInvoiceHeaderRepository.cs" />
@@ -638,6 +649,8 @@
     <Folder Include="Areas\BusinessPartner\Models\" />
     <Folder Include="Areas\Cash\Models\" />
     <Folder Include="Areas\Cash\Views\Shared\" />
+    <Folder Include="Areas\EInvoice\Models\" />
+    <Folder Include="Areas\EInvoice\Views\Shared\" />
     <Folder Include="Areas\Item\Models\" />
     <Folder Include="Areas\Job\Models\" />
     <Folder Include="Areas\Job\Views\Shared\" />
