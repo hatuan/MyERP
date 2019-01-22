@@ -6547,7 +6547,7 @@
             <End Role="EInvoiceLines" EntitySet="EInvoiceLines" />
           </AssociationSet>
           <AssociationSet Name="BusinessPartner_EInvoiceHeaderSet" Association="MyERP.DataAccess.BusinessPartner_EInvoiceHeader">
-            <End Role="BusinessPartner" EntitySet="BusinessPartners" />
+            <End Role="Buyer" EntitySet="BusinessPartners" />
             <End Role="EInvoiceHeaders" EntitySet="EInvoiceHeaders" />
           </AssociationSet>
           <AssociationSet Name="Currency_EInvoiceHeaderSet" Association="MyERP.DataAccess.Currency_EInvoiceHeader">
@@ -8177,7 +8177,7 @@
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_EInvoiceHeader" FromRole="EInvoiceHeaders" ToRole="Organization" ed:Guid="1b760ab2-2ea8-4d6a-a4f3-72537d7a60aa" />
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_EInvoiceHeader_RecCreatedBy" FromRole="EInvoiceHeaders" ToRole="RecCreatedByUser" ed:Guid="eccd9a84-76b2-45e1-ba3e-522dd0b26f83" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_EInvoiceHeader_RecModifiedBy" FromRole="EInvoiceHeaders1" ToRole="RecModifiedByUser" ed:Guid="ce597ff1-0c5f-427b-a9ef-84fcbfc49373" />
-          <NavigationProperty Name="BusinessPartner" Relationship="MyERP.DataAccess.BusinessPartner_EInvoiceHeader" FromRole="EInvoiceHeaders" ToRole="BusinessPartner" ed:Guid="5c8de2de-02c3-4cf0-b3e9-b67ca56ac53e" />
+          <NavigationProperty Name="Buyer" Relationship="MyERP.DataAccess.BusinessPartner_EInvoiceHeader" FromRole="EInvoiceHeaders" ToRole="Buyer" ed:Guid="5c8de2de-02c3-4cf0-b3e9-b67ca56ac53e" />
           <NavigationProperty Name="Currency" Relationship="MyERP.DataAccess.Currency_EInvoiceHeader" FromRole="EInvoiceHeaders" ToRole="Currency" ed:Guid="e8d1ed6f-6d81-4274-9073-b51c8569a28d" />
         </EntityType>
         <EntityType Name="EInvoiceLine" ed:Guid="092583e8-c0a3-4228-82f2-1c3ddb5ef04d">
@@ -11251,10 +11251,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="BusinessPartner_EInvoiceHeader" ed:Guid="bce618a9-e5cd-43bf-945b-4fa26c82a7e0">
-          <End Role="BusinessPartner" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="0..1" />
+          <End Role="Buyer" Type="MyERP.DataAccess.BusinessPartner" Multiplicity="0..1" />
           <End Role="EInvoiceHeaders" Type="MyERP.DataAccess.EInvoiceHeader" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BusinessPartner">
+            <Principal Role="Buyer">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="EInvoiceHeaders">

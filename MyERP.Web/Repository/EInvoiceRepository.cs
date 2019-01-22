@@ -63,7 +63,7 @@ namespace MyERP.Web
 
         public Paging<EInvoiceHeader> Paging(int start, int limit, string sort, SortDirection dir)
         {
-            var entities = Get(includePaths: new String[] { "Organization", "Client", "RecCreatedByUser", "RecModifiedByUser", "BusinessPartner", "Currency" });
+            var entities = Get(includePaths: new String[] { "Organization", "Client", "RecCreatedByUser", "RecModifiedByUser", "Buyer", "Currency" });
 
             if (!string.IsNullOrEmpty(sort))
                 entities = dir == SortDirection.ASC ? entities.OrderBy(sort) : entities.OrderBy(sort + " DESC");

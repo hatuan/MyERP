@@ -452,6 +452,8 @@
     <Content Include="Areas\EInvoice\Views\web.config" />
     <Content Include="Areas\EInvoice\Views\EInvoice\Index.cshtml" />
     <Content Include="Areas\EInvoice\Views\EInvoice\_List.cshtml" />
+    <Content Include="Areas\EInvoice\Views\EInvoice\_Maintenance.cshtml" />
+    <Content Include="Areas\EInvoice\Views\EInvoice\_Maintenance - Copy.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Resources\reports\salespos.json" />
     <Content Include="Resources\reports\salespos_001.mrt" />

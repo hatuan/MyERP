@@ -490,7 +490,7 @@
                                                 })
                                                 .CheckChangeEvents(new string[]{"blur"})
                                             ,
-                                            Html.X().ComboBoxFor(m => m.Status).Editable(false).ReadOnly(true).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.CashDocumentStatusType)).ID("Status")
+                                            Html.X().ComboBoxFor(m => m.Status).Editable(false).ReadOnly(true).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.PurchaseInvoiceDocumentStatusType)).ID("Status")
                                         )
                                 ));
                       items.Add(Html.X().TabPanel()

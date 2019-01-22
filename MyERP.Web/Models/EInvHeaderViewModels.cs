@@ -144,7 +144,7 @@ namespace MyERP.Web.Models
 
         [Display(Name = "Buyer Code")]
         [Required]
-        public String BuyerCode { get; set; }
+        public long? BuyerId { get; set; }
 
         [Display(Name = "Buyer Display Name")]
         [Required]
@@ -231,7 +231,7 @@ namespace MyERP.Web.Models
         public String TotalAmountWithVATInWords { get; set; }
 
         [EnsureMinimumElements(1, ErrorMessage = "At least a Invoice Line is required")]
-        public List<EInvLineEditViewModel> InvoiceLines { get; set; }
+        public List<EInvLineEditViewModel> EInvoiceLines { get; set; }
 
         public Int64 Version { get; set; }
 

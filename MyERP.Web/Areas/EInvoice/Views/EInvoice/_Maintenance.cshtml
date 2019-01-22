@@ -1,0 +1,484 @@
+﻿@using MyERP.DataAccess.Enum
+@model MyERP.Web.Models.EInvHeaderEditViewModel
+
+@{                                                                                  
+    var documentCurrencyIsLCY = Model.CurrencyId == (long)ViewData["CurrencyLCYId"];
+    var readOnlyCurrencyFactor = Model.CurrencyId == (long)ViewData["CurrencyLCYId"];
+}
+
+@(Html.X().Window()
+          .ID("WindowEInvoiceHeaderMaintenance")
+          .Title("EInvoice Maintenance")
+          .Height(800)
+          .Width(950)
+          .Modal(true)
+          .Maximized(true)
+          .Layout(LayoutType.Fit)
+          .MarginSpec("0 5 5 0")
+          .BodyPadding(5)
+          .TopBar(
+              Html.X().Toolbar().Items(items =>
+              {
+                  items.Add(Html.X().Button()
+                      .ID("btnSave")
+                      .Text("Save")
+                      .Icon(Icon.Disk)
+                      .DirectEvents(de =>
+                      {
+                          de.Click.Url = Url.Action("_Maintenance");
+                          de.Click.Method = HttpMethod.POST;
+                          de.Click.Before = "return #{FormEInvoiceHeaderMaintenance}.getForm().isValid();";
+                          de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
+                          de.Click.ShowWarningOnFailure = true;
+                          de.Click.EventMask.ShowMask = true;
+                          de.Click.FormID = "FormEInvoiceHeaderMaintenance";
+                          de.Click.ExtraParams.Add(new Parameter { Name = "EInvoiceLinesJSON", Value = "#{EInvoiceLineGridPanel}.getRowsValues()", Mode = ParameterMode.Raw, Encode = true });
+                          de.Click.Success = "function(response, result) { \n" +
+                                             "  App.EInvoiceList.getSelectionModel().deselectAll(); \n" +
+                                             "  App.EInvoiceList.getStore().load({ \n" +
+                                             "      callback : function() { \n" +
+                                             "          var record = App.EInvoiceList.store.getById(result.result.Id); \n" +
+                                             "          var index = App.EInvoiceList.store.indexOf(record); \n" +
+                                             "          App.EInvoiceList.getSelectionModel().select(index, true); \n" +
+                                             "          Ext.net.directRequest({ \n" +
+                                             "              url:baseURL + 'EInvoice/EInvoice/_Maintenance?id='+result.result.Id, \n" +
+                                             "              method:'GET', eventMask:{showMask:true}, \n" +
+                                             "              success: function() { \n" +
+                                             "                  var alert = Ext.Msg.alert('Status', 'Changes saved successfully', Ext.emptyFn); \n" +
+                                             "                  Ext.defer(function(){ alert.toFront(); }, 100); \n " +
+                                             "              } \n" +
+                                             "          }); \n" +
+                                             "      } \n" +
+                                             "  }); \n" +
+                                             "}";
+                      })
+                  );
+                  items.Add(Html.X().Button()
+                      .ID("btnPrint")
+                      .Text("Print")
+                      .Icon(Icon.Printer)
+                      .DirectEvents(de =>
+                      {
+                          de.Click.Action = "Print";
+                          de.Click.Before = "return #{Id}.getValue() !== '';";
+                          de.Click.ShowWarningOnFailure = true;
+                          de.Click.EventMask.ShowMask = true;
+                          de.Click.ExtraParams.Add(new Parameter("id", "#{Id}.getValue()", ParameterMode.Raw));
+                          de.Click.Success = "function(response, result) { \n" +
+                                             "  showPreviewReport(result.result.FileName); \n" +
+                                             "}";
+                      })
+                  );
+              })
+          )
+          .Bin(
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("BuyerStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Index", new { area = "BusinessPartner" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["BuyerStore"]),
+              
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("CurrencyStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Currency", new { area = "" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["CurrencyStore"]),
+                            
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("VatStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "Index", new { area = "Vat" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["VatStore"])
+          )
+          .Items(
+              Html.X().FormPanel()
+                  .ID("FormEInvoiceHeaderMaintenance")
+                  .Layout(LayoutType.VBox)
+                  .AutoScroll(true)
+                  .LayoutConfig(action => action.Add(new VBoxLayoutConfig() { Align = VBoxAlign.Stretch }))
+                  .Items(items =>
+                  {
+                      items.Add(Html.X().Container()
+                          .Items(
+                              Html.X().AntiForgeryField(),
+                              Html.X().HiddenFor(m => m.Id).ID("Id"),
+                              Html.X().HiddenFor(m => m.Version).ID("Version"))
+                      );
+                      items.Add(Html.X().Container()
+                          .Layout(LayoutType.HBox)
+                          .Items(
+                              Html.X().Panel()
+                                  .Layout(LayoutType.Form)
+                                  .Width(600)
+                                  .Items(
+                                      Html.X().ComboBoxFor(m => m.BuyerId).AllowBlank(false).ID("BuyerId").Width(150)
+                                          .AutoFocus(true)
+                                          .DisplayField("Code")
+                                          .ValueField("Id")
+                                          .FieldStyle("text-transform: uppercase;")
+                                          .TypeAhead(true)
+                                          .MinChars(0)
+                                          .PageSize(10)
+                                          .SelectOnTab(true)
+                                          .ForceSelection(true)
+                                          .ValidateOnBlur(true)
+                                          .ValidateOnChange(true)
+                                          .ListConfig(Html.X().BoundList()
+                                              .LoadingText("Searching...")
+                                              .ItemTpl(Html.X().XTemplate()
+                                                  .Html(@<text>
+                                                            <tpl for=".">
+                                                                <div class="search-item">
+                                                                    <h3>{Code}</h3>
+                                                                    {Description}
+                                                                </div>
+                                                            </tpl>
+                                                         </text>))
+                                              .MinWidth(400)
+                                          )
+                                          .StoreID("BuyerStore")
+                                          .Listeners(ls =>
+                                          {
+                                              ls.BeforeQuery.Handler = @"var _id = #{BuyerId}.getValue();
+                                                      this.getStore().id = _id;
+                                                      /*this.getStore().load();*/";
+                                          })
+                                          .DirectEvents(de =>
+                                          {
+                                              de.Select.Action = "ChangeBuyer";
+                                              de.Select.EventMask.ShowMask = true;
+                                              de.Select.ExtraParams.Add(new Parameter("selectedData", "records[0].data", ParameterMode.Raw, true));
+                                          }),
+
+                                  Html.X().TextFieldFor(m => m.BuyerDisplayName).EnforceMaxLength(true).ID("BuyerDisplayName"),
+                                  Html.X().TextFieldFor(m => m.BuyerLegalName).EnforceMaxLength(true).ID("BuyerLegalName"),
+                                  Html.X().TextFieldFor(m => m.BuyerTaxCode).EnforceMaxLength(true).ID("BuyerTaxCode"),
+                                  Html.X().TextFieldFor(m => m.BuyerAddressLine).EnforceMaxLength(true).ID("BuyerAddressLine"),
+                                  Html.X().TextFieldFor(m => m.BuyerBankName).EnforceMaxLength(true).ID("BuyerBankName"),
+                                  Html.X().TextFieldFor(m => m.BuyerBankAccount).EnforceMaxLength(true).ID("BuyerBankAccount"),
+                                  Html.X().TextFieldFor(m => m.Description).AllowBlank(false).EnforceMaxLength(true).ID("Description")),
+                            Html.X().Panel()
+                                .Layout(LayoutType.Form)
+                                .Width(350)
+                                .Items(
+                                    Html.X().DateFieldFor(m => m.InvoiceIssuedDate).AllowBlank(false).ID("InvoiceIssuedDate"),
+                                    Html.X().ComboBoxFor(m => m.CurrencyId).AllowBlank(false).ID("CurrencyId")
+                                        .DisplayField("Code")
+                                        .ValueField("Id")
+                                        .FieldStyle("text-transform: uppercase;")
+                                        .TypeAhead(true)
+                                        .MinChars(0)
+                                        .PageSize(10)
+                                        .SelectOnTab(true)
+                                        .ForceSelection(true)
+                                        .ValidateOnBlur(true)
+                                        .ValidateOnChange(true)
+                                        .ListConfig(Html.X().BoundList()
+                                            .LoadingText("Searching...")
+                                            .ItemTpl(Html.X().XTemplate()
+                                                .Html(@<text>
+                                                    <tpl for=".">
+                                                        <div class="search-item">
+                                                            <h3>{Code}</h3>
+                                                            {Description}
+                                                        </div>
+                                                    </tpl>
+                                                </text>))
+                                                    .MinWidth(400)
+                                                )
+                                                .StoreID("CurrencyStore")
+                                                .Listeners(ls =>
+                                                {
+                                                    ls.BeforeQuery.Handler = @"var _id = #{CurrencyId}.getValue();
+                                                                  this.getStore().id = _id;
+                                                                  this.getStore().load();";
+                                                })
+                                                .DirectEvents(de =>
+                                                {
+                                                    de.Select.Action = "ChangeCurrency";
+                                                    de.Select.EventMask.ShowMask = true;
+                                                    de.Select.ExtraParams.Add(new Parameter("currencyId", "records[0].data.ID", ParameterMode.Raw));
+                                                    de.Select.ExtraParams.Add(new Parameter("currencyFactor", "#{CurrencyFactor}.getValue()", ParameterMode.Raw));
+                                                })
+                                            ,
+                                            Html.X().TextFieldFor(m => m.ExchangeRate).AllowBlank(false).ID("ExchangeRate")
+                                                .ReadOnly(readOnlyCurrencyFactor)
+                                                .MaskRe(@"/[0-9\,\.]")
+                                                .Listeners(ls =>
+                                                {
+                                                    ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
+                                                    ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
+                                                                        this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
+                                                })
+                                                .DirectEvents(de =>
+                                                {
+                                                    de.Change.Action = "ChangeExchangeRate"; @*HttpMethod.POST will post FORM to action *@
+                                                    de.Change.EventMask.ShowMask = true;
+                                                    de.Change.ExtraParams.Add(new Parameter("EInvoiceLinesJSON", "#{EInvoiceLineGridPanel}.getRowsValues()", ParameterMode.Raw, true));
+                                                    de.Change.Success = "function() { \n"+
+                                                                        "   EInvoice.CalcHeaderTotal(#{EInvoiceLineGridPanel}); \n" +
+                                                                        "}";
+                                                })
+                                                .CheckChangeEvents(new string[]{"blur"})
+                                            ,
+                                            Html.X().ComboBoxFor(m => m.Status).Editable(false).ReadOnly(true).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.EInvoiceDocumentStatusType)).ID("Status")
+                                        )
+                                ));
+                      items.Add(Html.X().TabPanel()
+                          .Height(350)
+                          .Items(tabPanelItems => 
+                          {
+                              tabPanelItems.Add(Html.X().GridPanel()
+                                  .ID("EInvoiceLineGridPanel")
+                                  .Height(350)
+                                  .Title("Line")
+                                  .Border(true)
+                                  .View(new GridView() { MarkDirty = false, KeyMap = { new KeyBindItem{Key = "ctrl+a", Handler = "#{btnAddLine}.fireEvent('click')"}}})
+                                  .EnableColumnHide(false)
+                                  .LeftBar(leftBarItems =>
+                                  {
+                                      leftBarItems.Add(Html.X().Toolbar()
+                                          .Flat(true)
+                                          .Layout(LayoutType.VBox)
+                                          .Items(buttons =>
+                                          {
+                                              buttons.Add(Html.X().Button()
+                                                  .ID("btnAddLine")
+                                                  .Icon(Icon.Add)
+                                                  .DirectEvents(de =>
+                                                  {
+                                                      de.Click.Action = "AddLine";
+                                                      de.Click.ExtraParams.Add(new Parameter("EInvoiceLinesJSON", "#{EInvoiceLineGridPanel}.getRowsValues()", ParameterMode.Raw, true));
+                                                      de.Click.Before = "return #{FormEInvoiceHeaderMaintenance}.getForm().isValid();";
+                                                      de.Click.Success = "function(response, result) {" +
+                                                                         "  var grid = this.up('grid');" +
+                                                                         "  var record = grid.store.getById(result.result.LineNo); " +
+                                                                         "  var index = grid.store.indexOf(record);" +
+                                                                         "  grid.getSelectionModel().select(index, true);" +
+                                                                         "  Ext.Function.defer(function() {" +
+                                                                         "      grid.editingPlugin.startEdit(index, 1);" +
+                                                                         "  }, 100);" +
+                                                                         "}";
+                                                  })
+                                              );
+                                              buttons.Add(Html.X().Button()
+                                                  .ID("btnDeleteLine")
+                                                  .Icon(Icon.Delete)
+                                                  .Listeners(ls =>
+                                                  {
+                                                      ls.Click.Handler = @"if ( !#{EInvoiceLineGridPanel}.hasSelection() ) {
+                                                                              return false;
+                                                                          } else {
+                                                                              Ext.Msg.confirm('Alert', 'Do you want to DELETE?', function(btn) {
+                                                                                if(btn == 'yes') {
+                                                                                    #{EInvoiceLineGridPanel}.deleteSelected();
+                                                                                    return true;        
+                                                                                } else 
+                                                                                    return false;
+                                                                              });
+                                                                          }";
+                                                  })
+                                              );
+                                          })
+                                      );
+                                  })
+                                  .Store(Html.X().Store()
+                                      .ID("EInvoiceLineGridStore")
+                                      .Model(
+                                          Html.X().Model()
+                                              .IDProperty("LineNumber")
+                                              .Fields(
+                                                  new ModelField("LineNumber", ModelFieldType.String),
+                                                  new ModelField("Id", ModelFieldType.String),
+                                                  new ModelField("ItemCode", ModelFieldType.String),
+                                                  new ModelField("Item", ModelFieldType.Object),
+                                                  new ModelField("ItemName", ModelFieldType.String),
+                                                  new ModelField("UnitCode", ModelFieldType.String),
+                                                  new ModelField("Uom", ModelFieldType.Object),
+                                                  new ModelField("UnitName", ModelFieldType.String),
+                                                  new ModelField("UnitPrice", ModelFieldType.Float),
+                                                  new ModelField("Quantity", ModelFieldType.Float),
+                                                  new ModelField("ItemTotalAmountWithoutVAT", ModelFieldType.Float),
+                                                  new ModelField("VatId", ModelFieldType.String),
+                                                  new ModelField("Vat", ModelFieldType.Object),
+                                                  new ModelField("VATPercentage", ModelFieldType.Int),
+                                                  new ModelField("VATAmount", ModelFieldType.Float)))
+                                      .DataSource(Model.EInvoiceLines))
+                                  .ColumnModel(cols =>
+                                  {
+                                      cols.Columns.Add(Html.X().RowNumbererColumn());
+                                      cols.Columns.Add(
+                                          Html.X().ColumnFor(Model.EInvoiceLines, m => m.ItemCode).ToBuilder<Column.Builder>().ID("EInvoiceLineItemCodeCol").Sortable(false).Width(125));
+                                      cols.Columns.Add(
+                                          Html.X().ColumnFor(Model.EInvoiceLines, m => m.ItemName).ToBuilder<Column.Builder>().ID("EInvoiceLineItemNameCol").Sortable(false).Width(256));
+                                      cols.Columns.Add(
+                                          Html.X().ColumnFor(Model.EInvoiceLines, m => m.UnitCode).ToBuilder<Column.Builder>().ID("EInvoiceLineUomCodeCol").Sortable(false).Width(125));
+                                      cols.Columns.Add(
+                                          Html.X().ColumnFor(Model.EInvoiceLines, m => m.Quantity).ToBuilder<Column.Builder>().ID("EInvoiceLineQuantityCol").Sortable(false).Width(125)
+                                              .Editor(Html.X().NumberField().ID("EInvoiceLineQuantityEditor").SelectOnFocus(true).DecimalPrecision(2)).Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
+                                          );
+                                      cols.Columns.Add(
+                                          Html.X().ColumnFor(Model.EInvoiceLines, m => m.UnitPrice).ToBuilder<Column.Builder>().ID("EInvoiceLineUnitPriceCol").Sortable(false).Width(125)
+                                              .Editor(Html.X().NumberField().ID("EInvoiceLineUnitPriceEditor").SelectOnFocus(true).DecimalPrecision(2)).Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
+                                          );
+                                      cols.Columns.Add(
+                                          Html.X().ColumnFor(Model.EInvoiceLines, m => m.ItemTotalAmountWithoutVAT).ToBuilder<Column.Builder>().ID("EInvoiceLineItemTotalAmountWithoutVATCol").Sortable(false).Width(125)
+                                              .Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
+                                          );
+                                      cols.Columns.Add(Html.X().ColumnFor(Model.EInvoiceLines, m => m.VatId).ToBuilder<Column.Builder>().ID("EInvoiceLineVatIdCol").Sortable(false).Width(125)
+                                          .Editor(Html.X().ComboBox()
+                                              .ID("EInvoiceLineVatEditor")
+                                              .DisplayField("Code")
+                                              .ValueField("Id")
+                                              .FieldLabel("")
+                                              .FieldStyle("text-transform: uppercase;")
+                                              .AllowBlank(false)
+                                              .TypeAhead(true)
+                                              .MinChars(0)
+                                              .PageSize(10)
+                                              .SelectOnTab(true)
+                                              .ForceSelection(true)
+                                              .ValidateOnBlur(true)
+                                              .ValidateOnChange(true)
+                                              .ListConfig(Html.X().BoundList()
+                                                  .LoadingText("Searching...")
+                                                  .ItemTpl(Html.X().XTemplate()
+                                                      .Html(@<text>
+                                                            <div class="search-item">
+                                                                <h3>{Code}</h3>
+                                                                {Description}
+                                                            </div>
+                                                         </text>))
+                                                      .MinWidth(400))
+                                                  .StoreID("VatStore")
+                                                  .Listeners(ls =>
+                                                  {
+                                                      ls.BeforeQuery.Handler = @"var _id = #{EInvoiceLineVatEditor}.getValue();
+                                                                                      this.getStore().id = _id;
+                                                                                      /*this.getStore().load();*/";
+                                                  }))
+                                              .Renderer("EInvoice.VatRenderer")
+                                              .EditorOptions(action =>
+                                              {
+                                                      action.Listeners.StartEdit.Delay = 500;
+                                              }));
+                                      cols.Columns.Add(
+                                          Html.X().ColumnFor(Model.EInvoiceLines, m => m.VATAmount).ToBuilder<Column.Builder>().ID("EInvoiceLineVatAmountCol").Sortable(false).Width(125)
+                                              .Editor(Html.X().NumberField().ID("EInvoiceLineVatAmountEditor").SelectOnFocus(true).DecimalPrecision(2)).Renderer(RendererFormat.Number, new string[] { "'0.000,00/i'" })
+                                          );
+                                  })
+                                  .SelectionModel(Html.X().CellSelectionModel())
+                                  .Plugins(Html.X().CellEditing().Listeners(ls =>
+                                  {
+                                      ls.Edit.Handler = "function(editor, e) { \n" +
+                                                        "   if (!(e.value === e.originalValue || (Ext.isDate(e.value) && Ext.Date.isEqual(e.value, e.originalValue)))) { \n" +
+                                                        "       Ext.net.DirectMethod.request({ \n" +
+                                                        "           url: '" + Url.Action("LineEdit") + "', \n" +
+                                                        "           params: { \n" +
+                                                        "               lineNo: e.record.data.LineNo, \n" +
+                                                        "               field: e.field, \n" +
+                                                        "               oldValue: e.originalValue, \n" +
+                                                        "               newValue: e.value, \n" +
+                                                        "               recordData: e.record.data, \n" +
+                                                        "               headerData: #{FormEInvoiceHeaderMaintenance}.getForm().getValues() \n" +
+                                                        "           }, \n" +
+                                                        "           eventMask: { \n" +
+                                                        "               showMask:true, \n" +
+                                                        "               target:'customtarget', \n" +
+                                                        "               customTarget:#{EInvoiceLineGridPanel} \n" +
+                                                        "           }, \n" +
+                                                        "           success: function() { \n" +
+                                                        "               #{EInvoiceLineGridPanel}.getView().refresh(); \n" +
+                                                        "               EInvoice.CalcHeaderTotal(e.grid); \n" +
+                                                        "           } \n" +
+                                                        "       }); \n" +
+                                                        "   } \n" +
+                                                        "}";
+                                      ls.BeforeEdit.Fn = "EInvoice.InvoiceLineBeforeEdit";
+                                  })));
+                          }));
+                      items.Add(Html.X().Container()
+                          .Layout(LayoutType.HBox)
+                          .Items(
+                              Html.X().Panel()
+                                  .Layout(LayoutType.Form)
+                                  .Width(600),
+                              Html.X().Panel()
+                                  .Layout(LayoutType.Form)
+                                  .Width(300)
+                                  .Items(totalItems =>
+                                  {
+                                      totalItems.Add(Html.X().TextFieldFor(m => m.TotalAmountWithoutVAT)
+                                          .ID("TotalAmount")
+                                          .ReadOnly(true)
+                                          .TabIndex(-1));
+                                      totalItems.Add(Html.X().TextFieldFor(m => m.TotalVATAmount)
+                                          .ID("TotalVATAmount")
+                                          .ReadOnly(true)
+                                          .TabIndex(-1));
+                                      totalItems.Add(Html.X().TextFieldFor(m => m.TotalAmountWithVAT)
+                                          .ID("TotalAmountWithVAT")
+                                          .ReadOnly(true)
+                                          .TabIndex(-1));
+                                  })
+                              )
+                      );
+                  })
+                )
+
+                .Buttons(buttons =>
+                {
+                    buttons.Add(Html.X().Button()
+                        .ID("btnClose")
+                        .Text("Close")
+                        .Icon(Icon.Cancel)
+                        .Listeners(ls =>
+                        {
+                            ls.Click.Handler = "this.up('window').close();";
+                        }));
+                })
+)
+
+
