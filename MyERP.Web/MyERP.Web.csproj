@@ -355,6 +355,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Resources\printReports\blank.txt" />
+    <Content Include="Resources\reports\einvoices\01GTKT_001.png" />
+    <Content Include="Resources\reports\einvoices\01GTKT_001.xsl" />
+    <Content Include="Resources\reports\einvoices\Blank.png" />
     <Content Include="Resources\uploadFiles\blank.txt" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -453,7 +456,10 @@
     <Content Include="Areas\EInvoice\Views\EInvoice\Index.cshtml" />
     <Content Include="Areas\EInvoice\Views\EInvoice\_List.cshtml" />
     <Content Include="Areas\EInvoice\Views\EInvoice\_Maintenance.cshtml" />
-    <Content Include="Areas\EInvoice\Views\EInvoice\_Maintenance - Copy.cshtml" />
+    <Content Include="Areas\EInvoice\Views\FormType\Index.cshtml" />
+    <Content Include="Areas\EInvoice\Views\FormType\_List.cshtml" />
+    <Content Include="Areas\EInvoice\Views\FormType\_Maintenance.cshtml" />
+    <Content Include="Areas\EInvoice\Views\FormRelease\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Resources\reports\salespos.json" />
     <Content Include="Resources\reports\salespos_001.mrt" />
@@ -463,6 +469,10 @@
     <Content Include="Views\Shared\_ReportLayout.cshtml" />
     <Content Include="Resources\reports\cashReceipt_001.mrt" />
     <Content Include="Resources\reports\cashPayment_001.mrt" />
+    <Content Include="Resources\reports\einvoices\01GTKT_001.mrt" />
+    <Content Include="Resources\reports\einvoices\Blank.mrt" />
+    <Content Include="Resources\reports\einvoices\invoice.json" />
+    <Content Include="Resources\reports\einvoices\vars.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -493,6 +503,8 @@
     <Compile Include="Areas\Cash\Controllers\CashPaymentController.cs" />
     <Compile Include="Areas\Cash\Controllers\CashReceiptController.cs" />
     <Compile Include="Areas\EInvoice\Controllers\EInvoiceController.cs" />
+    <Compile Include="Areas\EInvoice\Controllers\FormReleaseController.cs" />
+    <Compile Include="Areas\EInvoice\Controllers\FormTypeController.cs" />
     <Compile Include="Areas\EInvoice\EInvoiceAreaRegistration.cs" />
     <Compile Include="Areas\Item\Controllers\IndexController.cs" />
     <Compile Include="Areas\Item\Controllers\ItemGroupController.cs" />
@@ -538,11 +550,12 @@
     <Compile Include="Models\ClientViewModels.cs" />
     <Compile Include="Models\BusinessPartnerGroupViewModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\EInvSigned.cs" />
-    <Compile Include="Models\EInvFormRelease.cs" />
-    <Compile Include="Models\EInvFormType.cs" />
+    <Compile Include="Models\EInvSignedViewModels.cs" />
+    <Compile Include="Models\EInvFormReleaseViewModels.cs" />
+    <Compile Include="Models\EInvFormTypeViewModels.cs" />
     <Compile Include="Models\EInvHeaderViewModels.cs" />
     <Compile Include="Models\EInvLineViewModels.cs" />
+    <Compile Include="Models\EInvXMLModels.cs" />
     <Compile Include="Models\ExtNetComboBoxModel.cs" />
     <Compile Include="Models\ExtNetModel.cs" />
     <Compile Include="Models\JobGroupViewModels.cs" />

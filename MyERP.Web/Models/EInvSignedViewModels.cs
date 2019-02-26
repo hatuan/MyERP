@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MyERP.Web.Models
 {
-    public class EInvSigned
+    public class EInvSignedViewModel
     {
     }
 }

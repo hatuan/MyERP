@@ -93,6 +93,26 @@
                   .Data(ViewData["BuyerStore"]),
               
               Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("FormTypeStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "FormType", new { area = "EInvoice" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("Code", ModelFieldType.String),
+                          new ModelField("Description", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["FormTypeStore"]),        
+
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
                   .ID("CurrencyStore")
                   .Proxy(Html.X().AjaxProxy()
                       .Url(Url.Action("LookupData", "Currency", new { area = "" }))
@@ -203,6 +223,38 @@
                                 .Layout(LayoutType.Form)
                                 .Width(350)
                                 .Items(
+                                    Html.X().ComboBoxFor(m => m.FormTypeId).AllowBlank(false).ID("FormTypeId")
+                                        .DisplayField("Code")
+                                        .ValueField("Id")
+                                        .FieldStyle("text-transform: uppercase;")
+                                        .TypeAhead(true)
+                                        .MinChars(0)
+                                        .PageSize(10)
+                                        .SelectOnTab(true)
+                                        .ForceSelection(true)
+                                        .ValidateOnBlur(true)
+                                        .ValidateOnChange(true)
+                                        .ListConfig(Html.X().BoundList()
+                                            .LoadingText("Searching...")
+                                            .ItemTpl(Html.X().XTemplate()
+                                                .Html(@<text>
+                                                    <tpl for=".">
+                                                        <div class="search-item">
+                                                            <h3>{Code}</h3>
+                                                            {Description}
+                                                        </div>
+                                                    </tpl>
+                                                </text>))
+                                                    .MinWidth(400)
+                                                )
+                                                .StoreID("FormTypeStore")
+                                                .Listeners(ls =>
+                                                {
+                                                    ls.BeforeQuery.Handler = @"var _id = #{FormTypeId}.getValue();
+                                                                  this.getStore().id = _id;
+                                                                  this.getStore().load();";
+                                                })
+                                            ,
                                     Html.X().DateFieldFor(m => m.InvoiceIssuedDate).AllowBlank(false).ID("InvoiceIssuedDate"),
                                     Html.X().ComboBoxFor(m => m.CurrencyId).AllowBlank(false).ID("CurrencyId")
                                         .DisplayField("Code")
@@ -243,27 +295,27 @@
                                                     de.Select.ExtraParams.Add(new Parameter("currencyFactor", "#{CurrencyFactor}.getValue()", ParameterMode.Raw));
                                                 })
                                             ,
-                                            Html.X().TextFieldFor(m => m.ExchangeRate).AllowBlank(false).ID("ExchangeRate")
-                                                .ReadOnly(readOnlyCurrencyFactor)
-                                                .MaskRe(@"/[0-9\,\.]")
-                                                .Listeners(ls =>
-                                                {
-                                                    ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
-                                                    ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
-                                                                        this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
-                                                })
-                                                .DirectEvents(de =>
-                                                {
-                                                    de.Change.Action = "ChangeExchangeRate"; @*HttpMethod.POST will post FORM to action *@
-                                                    de.Change.EventMask.ShowMask = true;
-                                                    de.Change.ExtraParams.Add(new Parameter("EInvoiceLinesJSON", "#{EInvoiceLineGridPanel}.getRowsValues()", ParameterMode.Raw, true));
-                                                    de.Change.Success = "function() { \n"+
-                                                                        "   EInvoice.CalcHeaderTotal(#{EInvoiceLineGridPanel}); \n" +
-                                                                        "}";
-                                                })
-                                                .CheckChangeEvents(new string[]{"blur"})
-                                            ,
-                                            Html.X().ComboBoxFor(m => m.Status).Editable(false).ReadOnly(true).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.EInvoiceDocumentStatusType)).ID("Status")
+                                    Html.X().TextFieldFor(m => m.ExchangeRate).AllowBlank(false).ID("ExchangeRate")
+                                        .ReadOnly(readOnlyCurrencyFactor)
+                                        .MaskRe(@"/[0-9\,\.]")
+                                        .Listeners(ls =>
+                                        {
+                                            ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
+                                            ls.Blur.Handler = @"var v = this.getRawValue().replace(/\./g,'').replace(',', '.');
+                                                                this.setRawValue(Ext.util.Format.number(v, '0.000,00/i'));";
+                                        })
+                                        .DirectEvents(de =>
+                                        {
+                                            de.Change.Action = "ChangeExchangeRate"; @*HttpMethod.POST will post FORM to action *@
+                                            de.Change.EventMask.ShowMask = true;
+                                            de.Change.ExtraParams.Add(new Parameter("EInvoiceLinesJSON", "#{EInvoiceLineGridPanel}.getRowsValues()", ParameterMode.Raw, true));
+                                            de.Change.Success = "function() { \n"+
+                                                                "   EInvoice.CalcHeaderTotal(#{EInvoiceLineGridPanel}); \n" +
+                                                                "}";
+                                        })
+                                        .CheckChangeEvents(new string[]{"blur"})
+                                    ,
+                                    Html.X().ComboBoxFor(m => m.Status).Editable(false).ReadOnly(true).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.EInvoiceDocumentStatusType)).ID("Status")
                                         )
                                 ));
                       items.Add(Html.X().TabPanel()

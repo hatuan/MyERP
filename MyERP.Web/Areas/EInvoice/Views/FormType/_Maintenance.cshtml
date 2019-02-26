@@ -1,0 +1,91 @@
+﻿@model MyERP.Web.Models.EInvFormTypeEditViewModel
+
+@(Html.X().Window()
+          .ID("WindowFormTypeMaintenance")
+          .Title("FormType Maintenance")
+          .Height(700)
+          .Width(1200)
+          .Modal(true)
+          .Layout(LayoutType.Fit)
+          .Items(
+              Html.X().Panel()
+                  .ID("FormFormTypeMaintenance")
+                  .Border(false)
+                  .Layout(LayoutType.Border)
+                  .BodyPadding(5)
+                  .DefaultButton("btnSave")
+                  .Items(items =>
+                  {
+                      items.Add(Html.X().Panel()
+                          .Region(Region.West)
+                          .Layout(LayoutType.Form)
+                          .Width(300)
+                          .Items(
+                              Html.X().AntiForgeryField(),
+                              Html.X().HiddenFor(m => m.Id).ID("Id"),
+                              Html.X().HiddenFor(m => m.Version).ID("Version"),
+                              Html.X().ComboBoxFor(m => m.Status).Width(150).ID("Status").Editable(false).Hidden(true).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
+                              Html.X().HiddenFor(m => m.TemplateCode).ID("TemplateCode"),
+                              Html.X().HiddenFor(m => m.InvoiceForm).ID("InvoiceForm"),
+                              Html.X().HiddenFor(m => m.FormFileName).ID("FormFileName"),
+                              Html.X().HiddenFor(m => m.FormFile).ID("FormFile").SubmitValue(false)
+                                  .Listeners(listeners => listeners.AfterRender.Handler="this.setValue('" + Model.FormFile + "')"),
+                              Html.X().HiddenFor(m => m.FormVars).ID("FormVars").SubmitValue(false)
+                                  .Listeners(listeners => listeners.AfterRender.Handler="this.setValue('" + Model.FormVars + "')"),
+                              Html.X().ComboBoxFor(m => m.InvoiceType).ID("InvoiceType").Editable(false)
+                                  .Items(action =>
+                                  {
+                                      action.Add(new ListItem("Hóa đơn GTGT", "01GTKT"));
+                                  }),
+                              Html.X().TextFieldFor(m => m.InvoiceTypeNo).ID("InvoiceTypeNo").EnforceMaxLength(true).FieldStyle("text-transform: uppercase;"),
+                              Html.X().TextFieldFor(m => m.InvoiceSeries).ID("InvoiceSeries").EnforceMaxLength(true).FieldStyle("text-transform: uppercase;")
+                          ));
+                      items.Add(Html.X().Panel()
+                          .ID("InvoiceFormViewer")
+                          .Region(Region.Center)
+                          .Layout(LayoutType.Fit)
+                          .Border(true)
+                          .Loader(new ComponentLoader(){ Mode = LoadMode.Frame, AutoLoad = true, Url = Url.Action("InvoiceFormRender"), Params =
+                          {
+                              new Parameter { Name = "formFile", Value="#{FormFile}.getValue()", Mode = ParameterMode.Raw, Encode = true},
+                              new Parameter { Name = "formVars", Value="#{FormVars}.getValue()", Mode = ParameterMode.Raw, Encode = true}
+                          }
+                          }));
+                  })
+                  .Buttons(
+                      Html.X().Button()
+                          .ID("btnSave")
+                          .Text("Save")
+                          .Icon(Icon.Disk)
+                          .DirectEvents(de =>
+                          {
+                              de.Click.Url = Url.Action("_Maintenance");
+                              de.Click.Method = HttpMethod.POST;
+                              de.Click.Before = "return this.up('form').isValid();";
+                              de.Click.Success = "function(response, result) { " +
+                                                 "  this.up('window').close();" +
+                                                 "  App.FormTypeList.getSelectionModel().deselectAll();" +
+                                                 "  App.StoreFormTypeList.reload({ " +
+                                                 "    callback : function() { " +
+                                                 "      var record = App.FormTypeList.store.getById(result.result.Id); " +
+                                                 "      var index = App.FormTypeList.store.indexOf(record);" +
+                                                 "      App.FormTypeList.getSelectionModel().select(index);" +
+                                                 "   }" +
+                                                 " });" +
+                                                 "}";
+                              de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
+                              de.Click.ShowWarningOnFailure = true;
+                              de.Click.EventMask.ShowMask = true;
+                              de.Click.FormID = "FormFormTypeMaintenance";
+                          }),
+                       Html.X().Button()
+                           .ID("btnCancel")
+                           .Text("Cancel")
+                           .Icon(Icon.Cancel)
+                           .Listeners(ls =>
+                           {
+                               ls.Click.Handler = "this.up('window').close();";
+                           }))
+    )
+)
+

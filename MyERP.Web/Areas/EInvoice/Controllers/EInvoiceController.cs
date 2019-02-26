@@ -114,7 +114,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
 
             ViewData["CurrencyLCYId"] = currencyLcyId;
             CurrencyRepository currencyRepository = new CurrencyRepository();
-            ViewData["Currencies"] = currencyRepository.Get(filter: c => c.Id == currencyLcyId, includePaths: new string[] { "Organization" })
+            ViewData["CurrencyStore"] = currencyRepository.Get(filter: c => c.Id == currencyLcyId, includePaths: new string[] { "Organization" })
                 .Select(x => new ExtNetComboBoxModel()
                 {
                     Id = x.Id,
@@ -136,7 +136,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.Get(c => c.Id == _id, new string[] { "Buyer", "Currency",
+                var entity = repository.Get(c => c.Id == _id, new string[] { "Buyer", "Currency", "EInvFormType",
                     "EInvoiceLines", "EInvoiceLines.Vat"  }).SingleOrDefault();
                 if (entity == null)
                 {
@@ -171,6 +171,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 model = new EInvHeaderEditViewModel()
                 {
                     Id = entity.Id,
+                    FormTypeId = entity.FormTypeId,
                     InvoiceIssuedDate = entity.InvoiceIssuedDate,
                     CurrencyId = entity.CurrencyId,
                     ExchangeRate = entity.ExchangeRate,
@@ -203,6 +204,16 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                         Id = entity.BuyerId,
                         Code = entity.Buyer?.Code,
                         Description = entity.Buyer?.Description
+                    }
+                };
+
+                ViewData["FormTypeStore"] = new List<object>()
+                {
+                    new ExtNetComboBoxModel
+                    {
+                        Id = entity.FormTypeId,
+                        Code = entity.EInvFormType.InvoiceSeries,
+                        Description = entity.EInvFormType.TemplateCode
                     }
                 };
 
@@ -247,21 +258,11 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             {
                 Culture = Thread.CurrentThread.CurrentCulture
             });
-            /*
-            this.GetCmp<TextField>("BuyFromVendorName").Value = selectedPartner.Description;
-            this.GetCmp<TextField>("BuyFromAddress").Value = selectedPartner.Address;
-            this.GetCmp<TextField>("BuyFromContactName").Value = selectedPartner.ContactName;
-            this.GetCmp<Hidden>("BuyFromContactName").Value = selectedPartner.ContactName;
-            this.GetCmp<Hidden>("PayToVendorId").Value = selectedPartner.Id;
-            this.GetCmp<Hidden>("PayToName").Value = selectedPartner.Description;
-            this.GetCmp<Hidden>("PayToAddress").Value = selectedPartner.Address;
-            this.GetCmp<Hidden>("PayToContactName").Value = selectedPartner.ContactName;
-            this.GetCmp<Hidden>("PayToVatCode").Value = selectedPartner.VatCode;
-            this.GetCmp<Hidden>("PayToVatNote").Value = "";
-            this.GetCmp<Hidden>("ShipToName").Value = selectedPartner.Description;
-            this.GetCmp<Hidden>("ShipToAddress").Value = selectedPartner.Address;
-            this.GetCmp<Hidden>("ShipToContactName").Value = selectedPartner.ContactName;
-            */
+            
+            this.GetCmp<TextField>("BuyerDisplayName").Value = selectedPartner.ContactName;
+            this.GetCmp<TextField>("BuyerLegalName").Value = selectedPartner.Description;
+            this.GetCmp<TextField>("BuyerTaxCode").Value = selectedPartner.VatCode;
+            this.GetCmp<TextField>("BuyerAddressLine").Value = selectedPartner.Address;
             return this.Direct();
         }
 

@@ -135,6 +135,10 @@ namespace MyERP.Web.Models
     {
         public long? Id { get; set; }
 
+        [Display(Name = "Invoice Series")]
+        [Required]
+        public long? FormTypeId { get; set; }
+
         [Display(Name = "Invoice Number")]
         public string InvoiceNumber { get; set; }
 

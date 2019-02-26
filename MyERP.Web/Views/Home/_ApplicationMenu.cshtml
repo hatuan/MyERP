@@ -108,15 +108,15 @@
                                                                                             Html.X().MenuItem()
                                                                                                 .Text(@Resources.Resources.eInvoice).Menu(Html.X().Menu()
                                                                                                     .Items(
-                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.eInvoiceFormType).Tag("eInvoiceFormRelease").DirectEvents(de =>
+                                                                                                        Html.X().MenuItem().Text(@Resources.Resources.eInvoiceFormType).Tag("eInvoiceFormType").DirectEvents(de =>
                                                                                                         {
-                                                                                                            de.Click.Url = Url.Action("_List", "Currency");
+                                                                                                            de.Click.Url = Url.Action("_List", "FormType", new { area = "EInvoice"});
                                                                                                             de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
                                                                                                             de.Click.EventMask.ShowMask = true;
                                                                                                         }),
                                                                                                         Html.X().MenuItem().Text(@Resources.Resources.eInvoiceFormRelease).Tag("eInvoiceFormRelease").DirectEvents(de =>
                                                                                                         {
-                                                                                                            de.Click.Url = Url.Action("_List", "Index", new { area = "NoSequence" });
+                                                                                                            de.Click.Url = Url.Action("_List", "FormRelease", new { area = "EInvoice" });
                                                                                                             de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
                                                                                                             de.Click.EventMask.ShowMask = true;
                                                                                                         })
