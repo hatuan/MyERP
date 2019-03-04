@@ -522,8 +522,8 @@
                                         <td align="right" class= "boxSmall itemNormal">
                                             <xsl:choose>
                                                 <xsl:when test="string-length(inv:quantity) = 0">
-	</xsl:when>
-     <xsl:when test="inv:quantity = null">
+	                                              </xsl:when>
+                                                <xsl:when test="inv:quantity = null">
                                                     <xsl:value-of select="format-number(inv:quantity, '###.###,####')"/>
                                                 </xsl:when>
                                                 <xsl:when test="string-length(inv:quantity) = 1">
@@ -805,12 +805,12 @@
                                                     <table>
                                                         <tr>
                                                             <td align="center" >
-                                                                <font class="labelItalic"> Đơn vị cung cấp dịch vụ Hóa đơn điện tử: Tập đoàn Công nghiệp - Viễn thông Quân đội (Viettel), MST: 0100109106 </font>
+                                                                <font class="labelItalic"> Đơn vị cung cấp dịch vụ Hóa đơn điện tử: Công ty TNHH Đầu Tư Và Phát Triển Doanh Nghiệp BÌNH MINH, MST: 0108196397 </font>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="center" >
-                                                                <font class="labelItalic">Tra cứu hóa đơn điện tử tại Website: https://sinvoice.viettel.vn, Mã số bí mật:</font>
+                                                                <font class="labelItalic">Tra cứu hóa đơn điện tử tại Website: https://ehoadon.com.vn, Mã số bí mật:</font>
                                                                 <font class = "itemNormal">
                                                                     <xsl:value-of 
                                                                         select ="substring-after(substring-before(inv:invoiceData/inv:userDefines,'&lt;/reservationCode>'),'&lt;reservationCode>')" />

@@ -1,14 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Xml;
+using System.Xml.Serialization;
+using System.Xml.Xsl;
 using Ext.Net;
 using Ext.Net.MVC;
+using MyERP.DataAccess;
 using MyERP.DataAccess.Enum;
 using MyERP.Web.Controllers;
 using MyERP.Web.Models;
+using Newtonsoft.Json;
 
 namespace MyERP.Web.Areas.EInvoice.Controllers
 {
@@ -113,6 +121,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
         [HttpGet]
         public ActionResult _Maintenance(string id = null)
         {
+            
             var model = new EInvFormTypeEditViewModel()
             {
                 Id = null,
@@ -129,9 +138,63 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     TemplateCode = entity.TemplateCode,
                     InvoiceForm = entity.InvoiceForm,
                     InvoiceSeries = entity.InvoiceSeries,
+                    FormFileName = entity.FormFileName,
+                    FormFile = entity.FormFile,
+                    FormVars = entity.FormVars,
                     Status = (DefaultStatusType)entity.Status,
                     Version = entity.Version
                 };
+            }
+            else
+            {
+                Client _client = (new ClientRepository()).Get(User);
+                EInvXMLInvoiceInfo invoiceInfo = new EInvXMLInvoiceInfo
+                {
+                    InvoiceDataInfo = new EInvXMLInvoiceDataInfo()
+                    {
+                        InvoiceNumber = "00000000"
+                    }
+                };
+                invoiceInfo.InvoiceDataInfo.SellerInfo = new EInvXMLSellerInfo
+                {
+                    SellerLegalName = _client.Description,
+                    SellerAddressLine = _client.Adress,
+                    SellerTaxCode = _client.TaxCode,
+                    SellerEmail = _client.Email,
+                    SellerPhoneNumber = _client.Telephone,
+                };
+
+                XmlWriterSettings settings = new XmlWriterSettings()
+                {
+                    Encoding = new UTF8Encoding(false),
+                    Indent = true
+                };
+                using (MemoryStream sww = new MemoryStream())
+                {
+                    using (System.Xml.XmlWriter writer = System.Xml.XmlWriter.Create(sww, settings))
+                    //using (System.Xml.XmlWriter writer = System.Xml.XmlWriter.Create(sww))
+                    {
+                        XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                        ns.Add("inv", "http://laphoadon.gdt.gov.vn/2014/09/invoicexml/v1");
+                        //ns.Add("ns1", "http://www.w3.org/2000/09/xmldsig#");
+                        XmlSerializer xsSubmit = new XmlSerializer(invoiceInfo.GetType());
+                        xsSubmit.Serialize(writer, invoiceInfo, ns);
+                        byte[] textAsBytes = sww.ToArray(); //Encoding.UTF8.GetBytes(Encoding.Default.GetString(sww.ToArray()));
+                        model.FormVars = Convert.ToBase64String(textAsBytes); // Your XML
+                    }
+                }
+
+                model.FormFileName = "01GTKT_001";
+                try
+                {
+                    Byte[] textAsBytes = System.IO.File.ReadAllBytes(Server.MapPath("~/Resources/Reports/EInvoices/01GTKT_001.xsl"));
+                    model.FormFile = Convert.ToBase64String(textAsBytes);
+                }
+                catch
+                {
+                    model.FormFile = "";
+                }
+                
             }
             return new Ext.Net.MVC.PartialViewResult() { Model = model };
         }
@@ -170,6 +233,9 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     _update.TemplateCode = model.TemplateCode;
                     _update.InvoiceForm = model.InvoiceForm;
                     _update.InvoiceSeries = model.InvoiceSeries;
+                    _update.FormFileName = model.FormFileName;
+                    _update.FormFile = model.FormFile;
+                    _update.FormVars = model.FormVars;
                     _update.Status = (byte)model.Status;
                     _update.RecModifiedAt = DateTime.Now;
                     _update.RecModifiedBy = (long)user.ProviderUserKey;
@@ -260,9 +326,77 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             return this.Direct();
         }
 
-        public ActionResult InvoiceFormRender(EInvFormTypeEditViewModel model)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult InvoiceFormRender(string modelJson)
         {
-            return this.Content("<html><body>Hello World</body></html>");
+            EInvFormTypeEditViewModel model = JSON.Deserialize<EInvFormTypeEditViewModel>(modelJson, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+            
+            String formVars = Encoding.UTF8.GetString(Convert.FromBase64String(model.FormVars));
+            String formFile = Encoding.UTF8.GetString(Convert.FromBase64String(model.FormFile));
+
+            using (StringReader sri = new StringReader(formVars))
+            {
+                EInvXMLInvoiceInfo invoiceInfo = new EInvXMLInvoiceInfo();
+                XmlSerializer serializer = new XmlSerializer(invoiceInfo.GetType());
+                invoiceInfo = (EInvXMLInvoiceInfo) serializer.Deserialize(sri);
+                invoiceInfo.InvoiceDataInfo.InvoiceType = model.InvoiceType;
+                invoiceInfo.InvoiceDataInfo.InvoiceSeries = model.InvoiceSeries;
+                invoiceInfo.InvoiceDataInfo.TemplateCode = model.InvoiceType + "0/" + model.InvoiceTypeNo;
+
+                XmlWriterSettings settings = new XmlWriterSettings()
+                {
+                    Encoding = new UTF8Encoding(false),
+                    Indent = true
+                };
+                using (MemoryStream sww = new MemoryStream())
+                {
+                    using (System.Xml.XmlWriter writer = System.Xml.XmlWriter.Create(sww, settings))
+                    {
+                        XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                        ns.Add("inv", "http://laphoadon.gdt.gov.vn/2014/09/invoicexml/v1");
+                        //ns.Add("ns1", "http://www.w3.org/2000/09/xmldsig#");
+                        XmlSerializer xsSubmit = new XmlSerializer(invoiceInfo.GetType());
+                        xsSubmit.Serialize(writer, invoiceInfo, ns);
+                        byte[] textAsBytes = sww.ToArray(); //Encoding.UTF8.GetBytes(Encoding.Default.GetString(sww.ToArray()));
+                        model.FormVars = Convert.ToBase64String(textAsBytes); // Your XML
+                        formVars = Encoding.UTF8.GetString(textAsBytes);
+                    }
+                }
+            }
+
+            string fileHtmlRenderName = $"formTypeRender_{User.Identity.Name}_{DateTime.Now:yyyyMMddhhmmss}.html";
+            using (StringReader srt = new StringReader(formFile)) // xslInput is a string that contains xsl
+            using (StringReader sri = new StringReader(formVars)) // xmlInput is a string that contains xml
+            {
+                using (System.Xml.XmlReader xrt = System.Xml.XmlReader.Create(srt))
+                using (System.Xml.XmlReader xri = System.Xml.XmlReader.Create(sri))
+                {
+                    XslCompiledTransform xslt = new XslCompiledTransform();
+                    xslt.Load(xrt);
+                    using (StringWriter sw = new StringWriter())
+                    using (System.Xml.XmlWriter xwo = System.Xml.XmlWriter.Create(sw, xslt.OutputSettings)) // use OutputSettings of xsl, so it can be output as HTML
+                    {
+                        xslt.Transform(xri, xwo);
+                        System.IO.File.WriteAllText(Server.MapPath($"~/Resources/PrintReports/EInvoices/{fileHtmlRenderName}"), sw.ToString(), Encoding.UTF8);
+                    }
+                }
+            }
+
+            Panel invoiceFormViewer = X.GetCmp<Panel>("InvoiceFormViewer");
+            invoiceFormViewer.Loader = new ComponentLoader()
+            {
+                Mode = LoadMode.Frame,
+                DisableCaching = true,
+                Url = $"~/Resources/PrintReports/EInvoices/{fileHtmlRenderName}"
+            };
+            invoiceFormViewer.Loader.SuspendScripting();
+            invoiceFormViewer.LoadContent();
+
+            return this.Direct();
         }
     }
 }

@@ -52,5 +52,10 @@ namespace MyERP.Web.Controllers
 
             return StiMvcReportResponse.PrintAsPdf(report);
         }
+
+        public ActionResult GetReportHtml(string fileName)
+        {
+            return Content("");
+        }
     }
 }

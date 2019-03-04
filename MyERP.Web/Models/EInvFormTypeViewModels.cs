@@ -58,12 +58,7 @@ namespace MyERP.Web.Models
 
     public class EInvFormTypeEditViewModel
     {
-        [Required]
         public Int64? Id { get; set; }
-
-        [Required]
-        [Display(Name = "Organization")]
-        public String OrganizationCode { get; set; }
 
         [Required]
         [Display(Name = "Invoice Type")]
@@ -72,6 +67,7 @@ namespace MyERP.Web.Models
         [Required]
         [Display(Name = "Invoice Type No")]
         [StringLength(3, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        [RegularExpression("[0-9]{2}[1-9]|[0-9][1-9][0-9]|[1-9][0-9]{2}", ErrorMessage = "Enter only 001 to 999 of Invoice Type No")]
         public String InvoiceTypeNo { get; set; }
 
         [Display(Name = "Template Code")]
@@ -94,29 +90,11 @@ namespace MyERP.Web.Models
         [Display(Name = "Form Vars")]
         public String FormVars { get; set; }
 
-        [Required]
         public Int64 Version { get; set; }
 
         [Required]
         [Display(Name = "Status")]
         public DefaultStatusType Status { get; set; }
 
-        [Required]
-        [Display(Name = "Created By")]
-        public String RecCreateBy { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
-        [Display(Name = "Created")]
-        public DateTime RecCreatedAt { get; set; }
-
-        [Required]
-        [Display(Name = "Modified By")]
-        public String RecModifiedBy { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
-        [Display(Name = "Modified")]
-        public DateTime RecModifiedAt { get; set; }
     }
 }

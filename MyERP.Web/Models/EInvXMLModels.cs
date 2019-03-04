@@ -7,18 +7,15 @@ using System.Xml.Serialization;
 namespace MyERP.Web.Models
 {
 
-    [XmlRoot("invoice")]
+    [XmlRoot("invoice", Namespace = "http://laphoadon.gdt.gov.vn/2014/09/invoicexml/v1")]
     public class EInvXMLInvoiceInfo
     {
         [XmlElement("invoiceData")]
-        public EInvXMLInvoiceDateInfo InvoiceDateInfo { get; set; }
-
-        [XmlElement("Barcode")]
-        public String Barcode { get; set; }
+        public EInvXMLInvoiceDataInfo InvoiceDataInfo { get; set; }
     }
 
     [XmlType("invoiceData")]
-    public class EInvXMLInvoiceDateInfo
+    public class EInvXMLInvoiceDataInfo
     {
         [XmlAttribute("id")]
         public string Id { get; set; }
@@ -31,6 +28,9 @@ namespace MyERP.Web.Models
 
         [XmlElement("invoiceSeries")]
         public String InvoiceSeries { get; set; }
+
+        [XmlElement("invoiceNumber")]
+        public String InvoiceNumber { get; set; }
 
         [XmlElement("invoiceName")]
         public String InvoiceName { get; set; }
@@ -112,7 +112,7 @@ namespace MyERP.Web.Models
         public Decimal TotalAmountWithVatFrn { get; set; }
 
         [XmlElement("totalAmountWithVATInWords")]
-        public Decimal TotalAmountWithVATInWords { get; set; }
+        public String TotalAmountWithVATInWords { get; set; }
 
         /// <summary>
         /// Trường nhận biết tổng tiền hóa đơn bao gồm VAT tăng giảm
@@ -121,7 +121,9 @@ namespace MyERP.Web.Models
         /// </summary>
         [XmlElement("isTotalAmountPos")]
         public Boolean? IsTotalAmountPos { get; set; }
-        
+
+        public bool ShouldSerializeIsTotalAmountPos() { return IsTotalAmountPos.HasValue; }
+
         /// <summary>
         /// Trường nhận biết tổng tiền thuế hóa đơn tăng giảm 
         ///     Hóa đơn thường: null
@@ -129,14 +131,18 @@ namespace MyERP.Web.Models
         /// </summary>
         [XmlElement("isTotalVATAmountPos")]
         public Boolean? IsTotalVATAmountPos { get; set; }
-        
+
+        public bool ShouldSerializeIsTotalVATAmountPos() { return IsTotalVATAmountPos.HasValue; }
+
         /// <summary>
         /// Trường nhận biết tổng tiền hóa đơn chưa bao gồm VAT tăng giảm  
         ///     Hóa đơn thường: null
         ///     Hóa đơn điều chỉnh: True: tăng- False: Giảm
         /// </summary>
         [XmlElement("isTotalAmtWithoutVatPos")]
-        public Boolean IsTotalAmtWithoutVatPos { get; set; }
+        public Boolean? IsTotalAmtWithoutVatPos { get; set; }
+
+        public bool ShouldSerializeIsTotalAmtWithoutVatPos() { return IsTotalAmtWithoutVatPos.HasValue; }
 
         [XmlElement("discountAmount")]
         public Decimal DiscountAmount { get; set; }
@@ -148,6 +154,8 @@ namespace MyERP.Web.Models
         /// </summary>
         [XmlElement("isDiscountAmtPos")]
         public Boolean? IsDiscountAmtPos { get; set; }
+
+        public bool ShouldSerializeIsDiscountAmtPos() { return IsDiscountAmtPos.HasValue; }
     }
 
     [XmlType("buyer")]
@@ -315,13 +323,17 @@ namespace MyERP.Web.Models
         /// </summary>
         [XmlElement("adjustmentVatAmount")]
         public Decimal? AdjustmentVatAmount { get; set; }
-        
+
+        public bool ShouldSerializeAdjustmentVatAmount() { return AdjustmentVatAmount.HasValue; }
+
         /// <summary>
         /// Hóa đơn gốc: có giá trị là Null
         /// Hóa đơn điều chỉnh: - False: dòng hàng hóa dịch vụ bị điều chình giảm - True: dòng hàng hóa dịch vụ bị điều chỉnh tăng
         /// </summary>
         [XmlElement("isIncreaseItem")]
         public Boolean? IsIncreaseItem { get; set; }
+
+        public bool ShouldSerializeIsIncreaseItem() { return IsIncreaseItem.HasValue; }
     }
 
     [XmlType("discountItem")]
@@ -358,7 +370,7 @@ namespace MyERP.Web.Models
         public Decimal TotalAmountWithVatFrn { get; set; }
 
         [XmlElement("totalAmountWithVATInWords")]
-        public Decimal TotalAmountWithVATInWords { get; set; }
+        public String TotalAmountWithVATInWords { get; set; }
         
         /// <summary>
         /// Trường nhận biết tổng tiền hóa đơn bao gồm VAT tăng giảm
@@ -367,7 +379,9 @@ namespace MyERP.Web.Models
         /// </summary>
         [XmlElement("isTotalAmountPos")]
         public Boolean? IsTotalAmountPos { get; set; }
-        
+
+        public bool ShouldSerializeIsTotalAmountPos() { return IsTotalAmountPos.HasValue; }
+
         /// <summary>
         /// Trường nhận biết tổng tiền thuế hóa đơn tăng giảm 
         ///     Hóa đơn thường: null
@@ -375,14 +389,18 @@ namespace MyERP.Web.Models
         /// </summary>
         [XmlElement("isTotalVATAmountPos")]
         public Boolean? IsTotalVATAmountPos { get; set; }
-        
+
+        public bool ShouldSerializeIsTotalVATAmountPos() { return IsTotalVATAmountPos.HasValue; }
+
         /// <summary>
         /// Trường nhận biết tổng tiền hóa đơn chưa bao gồm VAT tăng giảm  
         ///     Hóa đơn thường: null
         ///     Hóa đơn điều chỉnh: True: tăng- False: Giảm
         /// </summary>
         [XmlElement("isTotalAmtWithoutVatPos")]
-        public Boolean IsTotalAmtWithoutVatPos { get; set; }
+        public Boolean? IsTotalAmtWithoutVatPos { get; set; }
+
+        public bool ShouldSerializeIsTotalAmtWithoutVatPos() { return IsTotalAmtWithoutVatPos.HasValue; }
 
         [XmlElement("discountAmount")]
         public Decimal DiscountAmount { get; set; }
@@ -394,6 +412,8 @@ namespace MyERP.Web.Models
         /// </summary>
         [XmlElement("isDiscountAmtPos")]
         public Boolean? IsDiscountAmtPos { get; set; }
+
+        public bool ShouldSerializeIsDiscountAmtPos() { return IsDiscountAmtPos.HasValue; }
     }
 
     [XmlType("invoiceTaxBreakdowns")]
@@ -413,15 +433,19 @@ namespace MyERP.Web.Models
         /// Hóa đơn điều chỉnh: - True: Tổng tiền đánh thuế dương - False: Tổng tiền đánh thuế âm
         /// </summary>
         [XmlElement("isVatTaxableAmountPos")]
-        public Boolean IsVatTaxableAmountPos { get; set; }
+        public Boolean? IsVatTaxableAmountPos { get; set; }
+
+        public bool ShouldSerializeIsVatTaxableAmountPos() { return IsVatTaxableAmountPos.HasValue; }
         
         /// <summary>
         /// Hóa đơn thường: giá trị này là Null
         /// Hóa đơn điều chỉnh: - True: Tổng tiền thuế dương - False: Tổng tiền thuế âm
         /// </summary>
         [XmlElement("isVatTaxAmountPos")]
-        public Boolean IsVatTaxAmountPos { get; set; }
-        
+        public Boolean? IsVatTaxAmountPos { get; set; }
+
+        public bool ShouldSerializeIsVatTaxAmountPos() { return IsVatTaxAmountPos.HasValue; }
+
         /// <summary>
         /// Lý do miễn giảm thuế
         /// </summary>
