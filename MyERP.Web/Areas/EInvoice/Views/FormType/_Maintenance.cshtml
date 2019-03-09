@@ -27,7 +27,6 @@
                               Html.X().ComboBoxFor(m => m.Status).Width(150).ID("Status").Editable(false).Hidden(true).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
                               Html.X().HiddenFor(m => m.TemplateCode).ID("TemplateCode"),
                               Html.X().HiddenFor(m => m.InvoiceForm).ID("InvoiceForm"),
-                              Html.X().HiddenFor(m => m.FormFileName).ID("FormFileName"),
                               Html.X().HiddenFor(m => m.FormFile).ID("FormFile"),
                               Html.X().HiddenFor(m => m.FormVars).ID("FormVars"),
                               Html.X().ComboBoxFor(m => m.InvoiceType).ID("InvoiceType").Editable(false)
@@ -81,31 +80,75 @@
                                                           "       })" +
                                                           "    }" +
                                                           "}";
-                                  })
+                                  }),
+                              Html.X().TextFieldFor(m => m.FormFileName).ID("FormFileName").ReadOnly(true)
                           ));
-                      items.Add(Html.X().Panel()
-                          .ID("InvoiceFormViewer")
-                          .Region(Region.Center)
-                          .Layout(LayoutType.Fit)
-                          .Border(true)
-                          .Loader(Html.X().ComponentLoader()
-                              .Mode(LoadMode.Frame)
-                              .AutoLoad(false))
-                          .Listeners(ls =>
-                          {
-                              ls.AfterRender.Handler = "function() { \n" +
-                                                       "    if(this.up('form').isValid())" +
-                                                       "    {" +
-                                                       "       Ext.net.DirectMethod.request({ \n" +
-                                                       "           url: '" + Url.Action("InvoiceFormRender") + "', \n" +
-                                                       "           params: { \n" +
-                                                       "               __RequestVerificationToken:  #{AntiForgeryField}.getValue()," +
-                                                       "               modelJson: #{FormFormTypeMaintenance}.getForm().getValues() \n" +
-                                                       "           }, \n" +
-                                                       "       })" +
-                                                       "    }" +
-                                                       "}";
-                          }));
+                      items.Add(
+                          Html.X().TabPanel()
+                              .ID("InvoiceFormTabPanel")
+                              .Region(Region.Center)
+                              .Layout(LayoutType.Fit)
+                              .Frame(true)
+                              .Items(tabItems =>
+                              {
+                                  tabItems.Add(Html.X().Panel()
+                                      .ID("InvoiceFormViewer")
+                                      .Title("Preview")
+                                      .Layout(LayoutType.Fit)
+                                      .Loader(Html.X().ComponentLoader().Mode(LoadMode.Frame).AutoLoad(false))
+                                      .Listeners(ls =>
+                                      {
+                                          ls.AfterRender.Handler = "function() { \n" +
+                                                                   "    if(this.up('form').isValid())" +
+                                                                   "    {" +
+                                                                   "       Ext.net.DirectMethod.request({ \n" +
+                                                                   "           url: '" + Url.Action("InvoiceFormRender") + "', \n" +
+                                                                   "           params: { \n" +
+                                                                   "               __RequestVerificationToken:  #{AntiForgeryField}.getValue()," +
+                                                                   "               modelJson: #{FormFormTypeMaintenance}.getForm().getValues() \n" +
+                                                                   "           }, \n" +
+                                                                   "       })" +
+                                                                   "    }" +
+                                                                   "}";
+                                      }));
+                                  tabItems.Add(Html.X().Panel()
+                                      .ID("InvoiceFormSelect")
+                                      .Title("Select Template")
+                                      .Layout(LayoutType.Fit)
+                                      .TopBar(topBarItems =>
+                                      {
+                                          topBarItems.Add(Html.X().Toolbar().Items(buttons =>
+                                          {
+                                              buttons.Add(Html.X().Button()
+                                                  .ID("btnSelectTemplate")
+                                                  .Text("Select")
+                                                  .Icon(Icon.ApplicationAdd)
+                                                  .Listeners(ls =>
+                                                  {
+                                                      ls.Click.Handler = "function() { \n" +
+                                                                         "  var listInvoiceTemplateSelect = App.ListInvoiceTemplate.selModel.getSelection(); \n" +
+                                                                         "  if( App.ListInvoiceTemplate.selModel.hasSelection())" +
+                                                                         "       Ext.net.DirectMethod.request({ \n" +
+                                                                         "           url: '" + Url.Action("_SelectInvoiceTemplate") + "', \n" +
+                                                                         "           params: { \n" +
+                                                                         "               __RequestVerificationToken:  #{AntiForgeryField}.getValue()," +
+                                                                         "               selectedInvoiceTemplateID: App.ListInvoiceTemplate.selModel.getSelection()[0].id \n" +
+                                                                         "           }, \n" +
+                                                                         "           success: function() { \n" +
+                                                                         "              #{InvoiceFormTabPanel}.setActiveTab(0); \n" +
+                                                                         "           },\n" +
+                                                                         "           failure: function(errorMessage) { \n" +
+                                                                         "               console.log(errorMessage); \n" +
+                                                                         "           }" +
+                                                                         "       })" +
+                                                                         "}" ;
+                                                  }));
+                                          }));
+                                      })
+                                      .ItemsFromAction("_ListInvoiceTemplate")
+                                  );
+                              })
+                          );
                   })
                   .Buttons(
                       Html.X().Button()

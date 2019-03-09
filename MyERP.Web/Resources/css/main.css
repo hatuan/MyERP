@@ -429,7 +429,7 @@ body {
     font-weight : normal;
     padding     : 5px 10px;
 }
-
+/*
 div.thumb-wrap {
     border-color : #444444;
     float        : left;
@@ -472,27 +472,7 @@ div.thumb-wrap p {
     font         : 11px tahoma,arial,helvetica,sans-serif;
     margin-right : 5px;
 }
-
-.images-view .x-view-over { background : url(../images/sample-over.gif) #E5E5E5 no-repeat; }
-
-#sample-ct { padding : 6px 12px 24px 12px; }
-
-#sample-ct h2 {
-    border-bottom : 2px solid #E5E5E5;
-    cursor        : pointer;
-    padding-top   : 6px;
-}
-
-#sample-ct h2 div {
-    background : transparent url(../images/group-expand-sprite.gif) no-repeat 3px -47px;
-    padding    : 4px 4px 4px 17px;
-    color      : #0589C7;
-    font       : bold 11px 'OpenSansRegular';
-}
-
-#sample-ct .collapsed h2 div { background-position : 3px 3px; }
-#sample-ct dl { margin-left : 2px; }
-#sample-ct .collapsed dl { display : none; }
+*/
 
 .message {
     text-align    : center;

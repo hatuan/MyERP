@@ -81,7 +81,8 @@ namespace MyERP.Web.Models
         [StringLength(6, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String InvoiceSeries { get; set; }
 
-        [Display(Name = "Form Filename")]
+        [Required(ErrorMessage = "Please choose Invoice template")]
+        [Display(Name = "Invoice Template")]
         public String FormFileName { get; set; }
 
         [Display(Name = "Form File")]

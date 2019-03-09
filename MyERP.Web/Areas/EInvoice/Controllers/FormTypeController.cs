@@ -127,6 +127,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 Id = null,
                 Status = DefaultStatusType.Active
             };
+
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
@@ -232,7 +233,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     _update.InvoiceType = model.InvoiceType;
                     _update.TemplateCode = model.TemplateCode;
                     _update.InvoiceForm = model.InvoiceForm;
-                    _update.InvoiceSeries = model.InvoiceSeries;
+                    _update.InvoiceSeries = model.InvoiceSeries.ToUpper();
                     _update.FormFileName = model.FormFileName;
                     _update.FormFile = model.FormFile;
                     _update.FormVars = model.FormVars;
@@ -262,7 +263,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                         InvoiceType = model.InvoiceType,
                         TemplateCode = model.TemplateCode,
                         InvoiceForm = model.InvoiceForm,
-                        InvoiceSeries = model.InvoiceSeries,
+                        InvoiceSeries = model.InvoiceSeries.ToLower(),
                         Status = (byte)model.Status,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
@@ -344,7 +345,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 XmlSerializer serializer = new XmlSerializer(invoiceInfo.GetType());
                 invoiceInfo = (EInvXMLInvoiceInfo) serializer.Deserialize(sri);
                 invoiceInfo.InvoiceDataInfo.InvoiceType = model.InvoiceType;
-                invoiceInfo.InvoiceDataInfo.InvoiceSeries = model.InvoiceSeries;
+                invoiceInfo.InvoiceDataInfo.InvoiceSeries = model.InvoiceSeries.ToUpper();
                 invoiceInfo.InvoiceDataInfo.TemplateCode = model.InvoiceType + "0/" + model.InvoiceTypeNo;
 
                 XmlWriterSettings settings = new XmlWriterSettings()
@@ -395,6 +396,45 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             };
             invoiceFormViewer.Loader.SuspendScripting();
             invoiceFormViewer.LoadContent();
+
+            return this.Direct();
+        }
+
+        [HttpGet]
+        public ActionResult _ListInvoiceTemplate()
+        {
+            string path = Server.MapPath("~/Resources/Reports/EInvoices");
+            var ext = new List<string> { ".png" };
+            var files = System.IO.Directory.GetFiles(path, "*.png", SearchOption.AllDirectories).Where(s => !s.ToLower().Contains("blank.png")).ToArray();
+
+            List<object> model = new List<object>(files.Length);
+            foreach (string fileName in files)
+            {
+                System.IO.FileInfo fi = new System.IO.FileInfo(fileName);
+                model.Add(new
+                {
+                    Name = fi.Name.Substring(0, fi.Name.IndexOf(".png")),
+                    Url = Url.Content("~/Resources/Reports/EInvoices/") + fi.Name
+                });
+            }
+
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult _SelectInvoiceTemplate(string selectedInvoiceTemplateID)
+        {
+            X.GetCmp<TextField>("FormFileName").SetValue(selectedInvoiceTemplateID);
+            try
+            {
+                Byte[] textAsBytes = System.IO.File.ReadAllBytes(Server.MapPath($"~/Resources/Reports/EInvoices/{selectedInvoiceTemplateID}.xsl"));
+                X.GetCmp<TextField>("FormFile").SetValue(Convert.ToBase64String(textAsBytes));
+            }
+            catch
+            {
+                return this.Direct(false, $"ERROR : In Function _SelectInvoiceTemplate with template : {selectedInvoiceTemplateID}");
+            }
 
             return this.Direct();
         }

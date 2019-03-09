@@ -1,0 +1,110 @@
+﻿@model System.Collections.IEnumerable
+
+@(Html.X().DataView()
+        .ID("ListInvoiceTemplate")
+        .Cls("images-view")
+        .Store(
+            Html.X().Store()
+                .DataSource(Model)
+                .Model(
+                    Html.X().Model()
+                        .IDProperty("Name")
+                        .Fields(
+                            Html.X().ModelField().Name("Name"),
+                            Html.X().ModelField().Name("Url")
+                        )
+                )
+        )
+       .HtmlBin(
+           @<text>
+               <style>
+                   .images-view .x-panel-body {
+                       background: white;
+                       font: 11px Arial, Helvetica, sans-serif;
+                   }
+                   .images-view .thumb {
+                       background: #dddddd;
+                       padding: 3px;
+                       padding-bottom: 0;
+                   }
+
+                   .x-quirks .images-view .thumb {
+                       padding-bottom: 3px;
+                   }
+
+                   .images-view .thumb img {
+                       height: 280px;
+                       width: 230px;
+                   }
+
+                   .images-view .thumb-wrap {
+                       float: left;
+                       margin: 4px;
+                       margin-right: 0;
+                       padding: 5px;
+                   }
+
+                   .images-view .thumb-wrap span {
+                       display: block;
+                       overflow: hidden;
+                       text-align: center;
+                       width: 230px;
+                   }
+
+                   .images-view .x-item-over {
+                       border: 1px solid #dddddd;
+                       background: #efefef url(~/resources/images/x-item-over.gif) repeat-x left top;
+                       padding: 4px;
+                   }
+
+                   .images-view .x-item-selected {
+                       background: #eff5fb url(~/resources/images/x-item-selected.gif) no-repeat right bottom;
+                       border: 1px solid #99bbe8;
+                       padding: 4px;
+                   }
+
+                   .images-view .x-item-selected .thumb{
+                       background: transparent;
+                   }
+
+                   .images-view .loading-indicator {
+                       font-size: 11px;
+                       background-image : url('~/resources/images/loading.gif');
+                       background-repeat: no-repeat;
+                       background-position: left;
+                       padding-left: 20px;
+                       margin: 10px;
+                   }
+
+                   .x-view-item-focused {
+                       outline: 0 !important;
+                   }
+               </style>
+               <script>
+                   var prepareData = function(data) {
+                       data.shortName = Ext.util.Format.ellipsis(data.Name, 15);
+                       return data;
+                   };
+               </script>
+            </text>)
+        .SingleSelect(true)
+        .OverItemCls("x-item-over")
+        .ItemSelector("div.thumb-wrap")
+        .EmptyText("No templates to display")
+        .TrackOver(true)
+        .Tpl(
+            Html.X().XTemplate()
+                .Html(
+                    @<text>
+                        <tpl for=".">
+                            <div class="thumb-wrap" id="{Name}">
+                                <div class="thumb"><img src="{Url}" title="{Name}"></div>
+                                <span>{shortName}</span>
+                            </div>
+                        </tpl>
+                        <div class="x-clear"></div>
+                    </text>
+                    )
+                )
+        .PrepareData("prepareData")
+)

@@ -308,12 +308,16 @@
     <Content Include="Resources\images\new.gif" />
     <Content Include="Resources\images\newgray.gif" />
     <Content Include="Resources\images\noimage.png" />
+    <Content Include="Resources\images\row-over.gif" />
     <Content Include="Resources\images\sample-over.gif" />
+    <Content Include="Resources\images\selected.gif" />
     <Content Include="Resources\images\title-background.png" />
     <Content Include="Resources\images\titlebar-badge-bg.png" />
     <Content Include="Resources\images\titlebar-bg.jpg" />
     <Content Include="Resources\images\titlebar-logo-bg.jpg" />
     <Content Include="Resources\images\welcome-bullet.png" />
+    <Content Include="Resources\images\x-item-over.gif" />
+    <Content Include="Resources\images\x-item-selected.gif" />
     <Content Include="Resources\js\jquery-2.2.0.js" />
     <Content Include="Resources\js\jquery-2.2.0.min.js" />
     <Content Include="Resources\js\jquery.unobtrusive-ajax.js" />
@@ -456,6 +460,7 @@
     <Content Include="App_Readme\Ext.NET\README.md" />
     <Content Include="App_Readme\Ext.NET\LICENSE" />
     <Content Include="App_Readme\Ext.NET\CHANGELOG.md" />
+    <Content Include="Areas\EInvoice\Views\FormType\_ListInvoiceTemplate.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Resources\reports\salespos.json" />
     <Content Include="Resources\reports\salespos_001.mrt" />
