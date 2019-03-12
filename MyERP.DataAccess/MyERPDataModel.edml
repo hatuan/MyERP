@@ -2311,13 +2311,13 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="invoice_type" Type="nvarchar" Nullable="false" MaxLength="6" />
           <Property Name="template_code" Type="nvarchar" Nullable="false" MaxLength="11" />
           <Property Name="invoice_form" Type="nvarchar" Nullable="false" MaxLength="32" />
           <Property Name="invoice_series" Type="nvarchar" Nullable="false" MaxLength="6" />
           <Property Name="form_file_name" Type="varchar" Nullable="false" MaxLength="32" />
-          <Property Name="form_file" Type="xml" Nullable="false" />
+          <Property Name="form_file" Type="nvarchar(max)" Nullable="false" />
           <Property Name="form_vars" Type="nvarchar(max)" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" />
@@ -2327,17 +2327,20 @@
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
+          <Property Name="invoice_type_no" Type="varchar" Nullable="false" MaxLength="3" />
+          <Property Name="logo" Type="nvarchar(max)" />
+          <Property Name="watermark" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="einv_form_release">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="form_type_id" Type="bigint" Nullable="false" />
-          <Property Name="release_total" Type="int" Nullable="false" />
-          <Property Name="release_from" Type="int" Nullable="false" />
-          <Property Name="release_to" Type="int" Nullable="false" />
-          <Property Name="release_used" Type="int" Nullable="false" />
+          <Property Name="release_total" Type="decimal" Nullable="false" Precision="7" Scale="0" />
+          <Property Name="release_from" Type="decimal" Nullable="false" Precision="7" Scale="0" />
+          <Property Name="release_to" Type="decimal" Nullable="false" Precision="7" Scale="0" />
+          <Property Name="release_used" Type="decimal" Nullable="false" Precision="7" Scale="0" />
           <Property Name="release_date" Type="datetime2" Nullable="false" />
           <Property Name="start_date" Type="datetime2" Nullable="false" />
           <Property Name="tax_authorities_status" Type="tinyint" Nullable="false" />
@@ -2354,7 +2357,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="form_type_id" Type="bigint" Nullable="false" />
           <Property Name="original_invoice_id" Type="bigint" />
           <Property Name="invoice_number" Type="varchar" Nullable="false" MaxLength="7" />
@@ -2424,7 +2427,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="einvoice_header_id" Type="bigint" Nullable="false" />
           <Property Name="line_number" Type="bigint" Nullable="false" />
           <Property Name="item_code" Type="nvarchar" Nullable="false" MaxLength="50" />
@@ -2447,7 +2450,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="form_type_id" Type="bigint" Nullable="false" />
           <Property Name="form_release_no" Type="int" Nullable="false" />
           <Property Name="original_invoice_id" Type="bigint" />
@@ -8053,14 +8056,17 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="47ee27ec-8d2e-47fd-97c9-17f1b7d07202" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="47ee27ec-8d2e-47fd-97c9-17f1b7d07202" />
           <Property Name="InvoiceType" Type="String" Nullable="false" MaxLength="6" Unicode="true" ed:ValidateMaxLength="6" ed:ValidateRequired="true" ed:Guid="21e58b43-d67b-496b-82ef-cd94aeb4fa00" />
+          <Property Name="InvoiceTypeNo" Type="String" Nullable="false" MaxLength="3" ed:ValidateMaxLength="3" ed:ValidateRequired="true" ed:Guid="1098637d-830f-497c-bc5f-59f8c91e4dd4" />
           <Property Name="TemplateCode" Type="String" Nullable="false" MaxLength="11" Unicode="true" ed:ValidateMaxLength="11" ed:ValidateRequired="true" ed:Guid="af8204ae-82d5-4167-abe2-a427571338ee" />
           <Property Name="InvoiceForm" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="6cf4f087-05dc-4b44-b95b-c525f2aded05" />
           <Property Name="InvoiceSeries" Type="String" Nullable="false" MaxLength="6" Unicode="true" ed:ValidateMaxLength="6" ed:ValidateRequired="true" ed:Guid="98358f20-7a26-4cb2-8fbb-eb950a80dff4" />
           <Property Name="FormFileName" Type="String" Nullable="false" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="f6b9e03f-9135-4945-8024-84144b2b1791" />
           <Property Name="FormFile" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="5025a289-3894-440e-8c4e-769d90660eda" />
           <Property Name="FormVars" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="db43ac58-ea73-4080-9d5e-6f8a37f92f1b" />
+          <Property Name="Logo" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="f56127e4-0d9e-4329-8aaa-cf74a66d6d32" />
+          <Property Name="Watermark" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="3bbb1846-1f63-4e86-bd2d-4df0b67cb3e2" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a4875466-de8c-4a86-ab43-89bc941921cb" />
           <Property Name="OrganizationId" Type="Int64" ed:ValidateRequired="false" ed:Guid="2988e39a-a24a-490b-bba3-5e71260f219e" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e9d40cac-54c6-404a-a9ca-f278468bc573" />
@@ -8079,12 +8085,12 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="579ffc96-9f3d-409b-aca8-3aae3d122953" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="579ffc96-9f3d-409b-aca8-3aae3d122953" />
           <Property Name="FormTypeId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="0b8c2a38-dc4c-45bb-ad18-b32aeed2fb52" />
-          <Property Name="ReleaseTotal" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="c18b6929-df9a-4e65-abe1-b50aa3fdcf57" />
-          <Property Name="ReleaseFrom" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="af66e54a-a50d-4a42-ad45-de434f00019f" />
-          <Property Name="ReleaseTo" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="427f80a8-50ee-47dc-b3f6-30fd5f645539" />
-          <Property Name="ReleaseUsed" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="1572d813-1f28-46a6-b274-5f3e47a321eb" />
+          <Property Name="ReleaseTotal" Type="Decimal" Nullable="false" Precision="7" Scale="0" ed:ValidateRequired="true" ed:Guid="c18b6929-df9a-4e65-abe1-b50aa3fdcf57" />
+          <Property Name="ReleaseFrom" Type="Decimal" Nullable="false" Precision="7" Scale="0" ed:ValidateRequired="true" ed:Guid="af66e54a-a50d-4a42-ad45-de434f00019f" />
+          <Property Name="ReleaseTo" Type="Decimal" Nullable="false" Precision="7" Scale="0" ed:ValidateRequired="true" ed:Guid="427f80a8-50ee-47dc-b3f6-30fd5f645539" />
+          <Property Name="ReleaseUsed" Type="Decimal" Nullable="false" Precision="7" Scale="0" ed:ValidateRequired="true" ed:Guid="1572d813-1f28-46a6-b274-5f3e47a321eb" />
           <Property Name="ReleaseDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="bf59b85c-3910-4f64-8b11-1d5a22f5d941" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="65ad7c11-0897-460f-9f72-49bcee977b6b" />
           <Property Name="TaxAuthoritiesStatus" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="bf7502e2-2f45-4024-8d71-26d4550ac021" />
@@ -8106,7 +8112,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a5f21194-b986-457b-b440-f5efb8f2b141" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="a5f21194-b986-457b-b440-f5efb8f2b141" />
           <Property Name="FormTypeId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5e1aa5da-05f1-431f-b06a-59a61160cc5c" />
           <Property Name="OriginalInvoiceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="ce47d185-b0ed-4c9b-9f74-f5c019c3725c" />
           <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="7" ed:ValidateMaxLength="7" ed:ValidateRequired="true" ed:Guid="ccdbbd40-69a2-4e24-8da9-eb2e8d45a4a6" />
@@ -8184,7 +8190,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="1af1917e-c537-4aed-b0e5-337ab9ccbcf7" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="1af1917e-c537-4aed-b0e5-337ab9ccbcf7" />
           <Property Name="EInvoiceHeaderId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="d8686f17-5375-4790-a9b7-fbdb5044a587" />
           <Property Name="LineNumber" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="eb4626cb-b263-496d-918c-436dfe0f4eff" />
           <Property Name="ItemCode" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="99701261-e576-4cbd-b832-7ca77b3fe348" />
@@ -8211,7 +8217,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="6d0a6f57-3bd3-4f4f-aa0b-a66a7b9c5356" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="6d0a6f57-3bd3-4f4f-aa0b-a66a7b9c5356" />
           <Property Name="FormTypeId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e0398762-54b8-4308-844e-9094d722846d" />
           <Property Name="FormReleaseNo" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="a3e1a97e-8580-436f-b9cd-a4ec445685ee" />
           <Property Name="OriginalInvoiceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="1668d955-a5ee-4c2d-9e6e-e56c01033214" />
@@ -12505,6 +12511,9 @@
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
+                <ScalarProperty Name="InvoiceTypeNo" ColumnName="invoice_type_no" />
+                <ScalarProperty Name="Logo" ColumnName="logo" />
+                <ScalarProperty Name="Watermark" ColumnName="watermark" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

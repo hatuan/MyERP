@@ -311,6 +311,7 @@
     <Content Include="Resources\images\row-over.gif" />
     <Content Include="Resources\images\sample-over.gif" />
     <Content Include="Resources\images\selected.gif" />
+    <Content Include="Resources\images\signature.png" />
     <Content Include="Resources\images\title-background.png" />
     <Content Include="Resources\images\titlebar-badge-bg.png" />
     <Content Include="Resources\images\titlebar-bg.jpg" />
@@ -354,6 +355,8 @@
     <Content Include="Global.asax" />
     <Content Include="Resources\printReports\blank.txt" />
     <Content Include="Resources\printReports\eInvoices\blank.txt" />
+    <Content Include="Resources\reports\einvoices\01GTKT_002.xsl" />
+    <Content Include="Resources\reports\einvoices\01GTKT_002.png" />
     <Content Include="Resources\reports\einvoices\01GTKT_001.png" />
     <Content Include="Resources\reports\einvoices\01GTKT_001.xsl" />
     <Content Include="Resources\reports\einvoices\Blank.html" />
@@ -461,6 +464,7 @@
     <Content Include="App_Readme\Ext.NET\LICENSE" />
     <Content Include="App_Readme\Ext.NET\CHANGELOG.md" />
     <Content Include="Areas\EInvoice\Views\FormType\_ListInvoiceTemplate.cshtml" />
+    <Content Include="Areas\EInvoice\Views\FormRelease\_List.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Resources\reports\salespos.json" />
     <Content Include="Resources\reports\salespos_001.mrt" />

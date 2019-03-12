@@ -1,6 +1,6 @@
 ﻿@(Html.X().GridPanel()
-              .ID("FormTypeList")
-              .Title("Form Type List")
+              .ID("FormReleaseList")
+              .Title("Form Release List")
               .MinHeight(300)
               .Region(Region.Center)
               .Frame(true)
@@ -16,7 +16,7 @@
                           .Disabled(true)
                           .Listeners(ls =>
                           {
-                              ls.Click.Handler = @"if (!#{FormTypeList}.hasSelection()) {
+                              ls.Click.Handler = @"if (!#{FormReleaseList}.hasSelection()) {
                                                         return false;
                                                     } else {
                                                         return true;
@@ -28,7 +28,7 @@
                               de.Click.Method = HttpMethod.GET;
                               de.Click.ShowWarningOnFailure = true;
                               de.Click.EventMask.ShowMask = true;
-                              de.Click.ExtraParams.Add(new Parameter("ID", "#{FormTypeList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
+                              de.Click.ExtraParams.Add(new Parameter("ID", "#{FormReleaseList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
                           })
                           );
                       buttons.Add(Html.X().Button()
@@ -50,7 +50,7 @@
                           .Disabled(true)
                           .Listeners(ls =>
                           {
-                              ls.Click.Handler = @"if (!#{FormTypeList}.hasSelection() ) {
+                              ls.Click.Handler = @"if (!#{FormReleaseList}.hasSelection() ) {
                                                         return false;
                                                     } else {
                                                         return true;
@@ -63,10 +63,10 @@
                               de.Click.Confirmation.ConfirmRequest = true;
                               de.Click.Confirmation.Title = "Alert";
                               de.Click.Confirmation.Message = "Do you want to DELETE ?";
-                              de.Click.ExtraParams.Add(new Parameter("ID", "#{FormTypeList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
+                              de.Click.ExtraParams.Add(new Parameter("ID", "#{FormReleaseList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
                               de.Click.Failure = "Ext.Msg.notify('Error', result.errorMessage);";
                               de.Click.Success = "function(response, result) { " +
-                                                 "  App.StoreFormTypeList.reload({ callback: function() {}});" +
+                                                 "  App.StoreFormReleaseList.reload({ callback: function() {}});" +
                                                  "}";
                           })
                           );
@@ -75,12 +75,13 @@
               })
               .Store(
                   Html.X().Store()
-                      .ID("StoreFormTypeList")
+                      .ID("StoreFormReleaseList")
                       .RemoteSort(true)
                       .PageSize(10)
                       .Sorters(sorts =>
                       {
-                          sorts.Add(new DataSorter { Property = "InvoiceType", Direction = Ext.Net.SortDirection.ASC});
+                          sorts.Add(new DataSorter { Property = "ReleaseDate", Direction = Ext.Net.SortDirection.DESC });
+                          sorts.Add(new DataSorter { Property = "TemplateCode", Direction = Ext.Net.SortDirection.ASC});
                           sorts.Add(new DataSorter { Property = "InvoiceSeries", Direction = Ext.Net.SortDirection.ASC });
                       })
                       .AutoLoad(true)
@@ -90,11 +91,15 @@
                               .Fields(
                                   new ModelField("Id", ModelFieldType.Int),
                                   new ModelField("OrganizationCode", ModelFieldType.String),
-                                  new ModelField("InvoiceType", ModelFieldType.String),
                                   new ModelField("TemplateCode", ModelFieldType.String),
-                                  new ModelField("InvoiceForm", ModelFieldType.String),
                                   new ModelField("InvoiceSeries", ModelFieldType.String),
-                                  new ModelField("Status", ModelFieldType.String),
+                                  new ModelField("ReleaseDate", ModelFieldType.Date),
+                                  new ModelField("ReleaseTotal", ModelFieldType.Int),
+                                  new ModelField("ReleaseFrom", ModelFieldType.Int),
+                                  new ModelField("ReleaseTo", ModelFieldType.Int),
+                                  new ModelField("ReleaseUsed", ModelFieldType.Int),
+                                  new ModelField("TaxAuthoritiesStatus", ModelFieldType.String),
+                                  new ModelField("StartDate", ModelFieldType.Date),
                                   new ModelField("RecCreateBy", ModelFieldType.String),
                                   new ModelField("RecCreatedAt", ModelFieldType.Date),
                                   new ModelField("RecModifiedBy", ModelFieldType.String),
@@ -110,11 +115,9 @@
               )
               .ColumnModel(
                   Html.X().Column().Text("Org").DataIndex("OrganizationCode").Width(75),
-                  Html.X().Column().Text("Invoice Type").DataIndex("InvoiceType").Width(150),
                   Html.X().Column().Text("Template Code").DataIndex("TemplateCode").MinWidth(150),
-                  Html.X().Column().Text("Invoice Form").DataIndex("InvoiceForm").Width(100),
                   Html.X().Column().Text("Invoice Series").DataIndex("InvoiceSeries").Width(150),
-                  Html.X().Column().Text("Status").DataIndex("Status").Width(85),
+                  Html.X().Column().Text("Tax Authorities Status").DataIndex("TaxAuthoritiesStatus").Width(85),
                   Html.X().Column().Text("Last User").DataIndex("RecModifiedBy").Width(85),
                   Html.X().DateColumn().Text("Last Updated").DataIndex("RecModifiedAt").Width(150).Format("dd/MM/yyyy H:mm:ss")
               )
@@ -137,12 +140,12 @@
                               .Listeners(ls =>
                               {
                                   ls.Select.Fn = @"function (item, records) {
-                                        var curPageSize = #{StoreFormTypeList}.pageSize,
+                                        var curPageSize = #{StoreFormReleaseList}.pageSize,
                                         wantedPageSize = parseInt(item.getValue(), 10);
                                         if (wantedPageSize != curPageSize) {
-                                            #{StoreFormTypeList}.pageSize = wantedPageSize;
-                                            #{StoreFormTypeList}.reload();
-                                            #{StoreFormTypeList}.loadPage(1);
+                                            #{StoreFormReleaseList}.pageSize = wantedPageSize;
+                                            #{StoreFormReleaseList}.reload();
+                                            #{StoreFormReleaseList}.loadPage(1);
                                         }
                                     }";
                               })
@@ -154,7 +157,7 @@
                       .Listeners(ls =>
                       {
                           ls.Select.Handler = "#{btnDelete}.enable();#{btnEdit}.enable();";
-                          ls.Deselect.Handler = "if (!#{FormTypeList}.hasSelection()) {#{btnDelete}.disable();#{btnEdit}.disable()}";
+                          ls.Deselect.Handler = "if (!#{FormReleaseList}.hasSelection()) {#{btnDelete}.disable();#{btnEdit}.disable()}";
                       })
               )
               .ViewConfig(new GridView() { Listeners = { Refresh = { Handler = "#{btnDelete}.disable();#{btnEdit}.disable();" } } })

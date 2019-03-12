@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using MyERP.DataAccess.Enum;
 
 namespace MyERP.Web.Models
@@ -78,6 +79,7 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Invoice Series")]
+        [Remote("ExtCheckDuplicateEInvoiceSeries", "Validation", AreaReference.UseRoot, AdditionalFields = "Id", ErrorMessageResourceName = "Code_already_exists_Please_specify_another_one", ErrorMessageResourceType = typeof(Resources.Resources))]
         [StringLength(6, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String InvoiceSeries { get; set; }
 
@@ -86,10 +88,20 @@ namespace MyERP.Web.Models
         public String FormFileName { get; set; }
 
         [Display(Name = "Form File")]
+        [AllowHtml]
         public String FormFile { get; set; }
 
         [Display(Name = "Form Vars")]
+        [AllowHtml]
         public String FormVars { get; set; }
+
+        [Display(Name = "Logo")]
+        public String Logo { get; set; }
+
+        [Display(Name = "Watermark")]
+        public String Watermark { get; set; }
+
+        public Boolean HasFormRelease { get; set; }
 
         public Int64 Version { get; set; }
 

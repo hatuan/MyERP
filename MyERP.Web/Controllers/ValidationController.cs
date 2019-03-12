@@ -534,5 +534,40 @@ namespace MyERP.Web.Controllers
                 }
             };
         }
+
+        //
+        // CheckDuplicateEInvoiceSeries
+        public JsonResult CheckDuplicateEInvoiceSeries(EInvFormTypeEditViewModel entity)
+        {
+            var repository = new EInvFormTypeRepository();
+            object exists;
+            if (entity.Id != null && entity.Id != 0)
+                exists = repository.GetBy(c => c.InvoiceSeries.Equals(entity.InvoiceSeries, StringComparison.InvariantCultureIgnoreCase) && c.Id != entity.Id);
+            else
+                exists = repository.GetBy(c => c.InvoiceSeries.Equals(entity.InvoiceSeries, StringComparison.InvariantCultureIgnoreCase));
+
+            return Json(exists != null, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ExtCheckDuplicateEInvoiceSeries(EInvFormTypeEditViewModel entity)
+        {
+            var repository = new EInvFormTypeRepository();
+            object exists;
+            if (entity.Id != null && entity.Id != 0)
+                exists = repository.GetBy(c => c.InvoiceSeries.Equals(entity.InvoiceSeries, StringComparison.InvariantCultureIgnoreCase) && c.Id != entity.Id);
+            else
+                exists = repository.GetBy(c => c.InvoiceSeries.Equals(entity.InvoiceSeries, StringComparison.InvariantCultureIgnoreCase));
+
+            return new JsonResult
+            {
+                Data = new
+                {
+                    serviceResponse = new
+                    {
+                        valid = exists == null
+                    }
+                }
+            };
+        }
     }
 }

@@ -1,5 +1,8 @@
 ﻿@model MyERP.Web.Models.EInvFormTypeEditViewModel
 
+@{
+    bool readOnly = Model.HasFormRelease;
+}
 @(Html.X().Window()
           .ID("WindowFormTypeMaintenance")
           .Title("FormType Maintenance")
@@ -25,11 +28,10 @@
                               Html.X().HiddenFor(m => m.Id).ID("Id"),
                               Html.X().HiddenFor(m => m.Version).ID("Version"),
                               Html.X().ComboBoxFor(m => m.Status).Width(150).ID("Status").Editable(false).Hidden(true).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
-                              Html.X().HiddenFor(m => m.TemplateCode).ID("TemplateCode"),
                               Html.X().HiddenFor(m => m.InvoiceForm).ID("InvoiceForm"),
                               Html.X().HiddenFor(m => m.FormFile).ID("FormFile"),
                               Html.X().HiddenFor(m => m.FormVars).ID("FormVars"),
-                              Html.X().ComboBoxFor(m => m.InvoiceType).ID("InvoiceType").Editable(false)
+                              Html.X().ComboBoxFor(m => m.InvoiceType).ID("InvoiceType").Editable(false).ReadOnly(readOnly)
                                   .Items(action =>
                                   {
                                       action.Add(new ListItem("Hóa đơn GTGT", "01GTKT"));
@@ -37,35 +39,46 @@
                                   .Listeners(ls =>
                                   {
                                       ls.Select.Handler = "function() { \n" +
-                                                          "    if(this.up('form').isValid())" +
-                                                          "    {" +
+                                                          "    if(#{InvoiceTypeNo}.isValid()) { \n" +
+                                                          "       #{TemplateCode}.setValue(#{InvoiceType}.getValue() + '0/' + #{InvoiceTypeNo}.getValue()); \n" +
+                                                          "    } else { \n" +
+                                                          "       #{TemplateCode}.setValue();" +
+                                                          "    } \n" +
+                                                          "    if(this.up('form').isValid()) \n" +
+                                                          "    { \n" +
                                                           "       Ext.net.DirectMethod.request({ \n" +
                                                           "           url: '" + Url.Action("InvoiceFormRender") + "', \n" +
                                                           "           params: { \n" +
-                                                          "               __RequestVerificationToken:  #{AntiForgeryField}.getValue()," +
+                                                          "               __RequestVerificationToken:  #{AntiForgeryField}.getValue(), \n" +
                                                           "               modelJson: #{FormFormTypeMaintenance}.getForm().getValues() \n" +
                                                           "           }, \n" +
-                                                          "       })" +
-                                                          "    }" +
+                                                          "       }) \n" +
+                                                          "    } \n" +
                                                           "}";
                                   }),
-                              Html.X().TextFieldFor(m => m.InvoiceTypeNo).ID("InvoiceTypeNo").EnforceMaxLength(true).FieldStyle("text-transform: uppercase;")
+                              Html.X().TextFieldFor(m => m.InvoiceTypeNo).ID("InvoiceTypeNo").EnforceMaxLength(true).FieldStyle("text-transform: uppercase;").ReadOnly(readOnly)
                                   .Listeners(ls =>
                                   {
                                       ls.Change.Handler = "function(field) { \n" +
-                                                          "    if(this.up('form').isValid() && field.isValid())" +
-                                                          "    {" +
+                                                          "    if(field.isValid()) { \n" +
+                                                          "       #{TemplateCode}.setValue(#{InvoiceType}.getValue() + '0/' + #{InvoiceTypeNo}.getValue()); \n" +
+                                                          "    } else { \n" +
+                                                          "       #{TemplateCode}.setValue();" +
+                                                          "    } \n" +
+                                                          "    if(this.up('form').isValid() && field.isValid()) \n" +
+                                                          "    { \n" +
                                                           "       Ext.net.DirectMethod.request({ \n" +
                                                           "           url: '" + Url.Action("InvoiceFormRender") + "', \n" +
                                                           "           params: { \n" +
                                                           "               __RequestVerificationToken:  #{AntiForgeryField}.getValue()," +
                                                           "               modelJson: #{FormFormTypeMaintenance}.getForm().getValues() \n" +
                                                           "           }, \n" +
-                                                          "       })" +
-                                                          "    }" +
+                                                          "       }) \n" +
+                                                          "    } \n" +
                                                           "}";
                                   }),
-                              Html.X().TextFieldFor(m => m.InvoiceSeries).ID("InvoiceSeries").EnforceMaxLength(true).FieldStyle("text-transform: uppercase;")
+                              Html.X().TextFieldFor(m => m.TemplateCode).ID("TemplateCode").ReadOnly(true),
+                              Html.X().TextFieldFor(m => m.InvoiceSeries).ID("InvoiceSeries").EnforceMaxLength(true).FieldStyle("text-transform: uppercase;").ReadOnly(readOnly)
                                   .Listeners(ls =>
                                   {
                                       ls.Change.Handler = "function(field) { \n" +
@@ -114,6 +127,7 @@
                                   tabItems.Add(Html.X().Panel()
                                       .ID("InvoiceFormSelect")
                                       .Title("Select Template")
+                                      .Disabled(readOnly)
                                       .Layout(LayoutType.Fit)
                                       .TopBar(topBarItems =>
                                       {
@@ -126,6 +140,7 @@
                                                   .Listeners(ls =>
                                                   {
                                                       ls.Click.Handler = "function() { \n" +
+                                                                         "  var _form = this.up('form');" +
                                                                          "  var listInvoiceTemplateSelect = App.ListInvoiceTemplate.selModel.getSelection(); \n" +
                                                                          "  if( App.ListInvoiceTemplate.selModel.hasSelection())" +
                                                                          "       Ext.net.DirectMethod.request({ \n" +
@@ -136,9 +151,18 @@
                                                                          "           }, \n" +
                                                                          "           success: function() { \n" +
                                                                          "              #{InvoiceFormTabPanel}.setActiveTab(0); \n" +
+                                                                         "              if(_form.isValid()) { \n" +
+                                                                         "                 Ext.net.DirectMethod.request({ \n" +
+                                                                         "                     url: '" + Url.Action("InvoiceFormRender") + "', \n" +
+                                                                         "                     params: { \n" +
+                                                                         "                         __RequestVerificationToken:  #{AntiForgeryField}.getValue()," +
+                                                                         "                         modelJson: #{FormFormTypeMaintenance}.getForm().getValues() \n" +
+                                                                         "                     }, \n" +
+                                                                         "                 }) \n" +
+                                                                         "               }\n" +
                                                                          "           },\n" +
                                                                          "           failure: function(errorMessage) { \n" +
-                                                                         "               console.log(errorMessage); \n" +
+                                                                         "               Ext.Msg.notify('Error', errorMessage); \n" +
                                                                          "           }" +
                                                                          "       })" +
                                                                          "}" ;
@@ -175,7 +199,8 @@
                               de.Click.ShowWarningOnFailure = true;
                               de.Click.EventMask.ShowMask = true;
                               de.Click.FormID = "FormFormTypeMaintenance";
-                          }),
+                          })
+                          .Disabled(readOnly),
                        Html.X().Button()
                            .ID("btnCancel")
                            .Text("Cancel")

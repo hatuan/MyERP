@@ -131,17 +131,23 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.Get(c => c.Id == _id).Single();
+                var entity = repository.Get(c => c.Id == _id, new string[] { "EInvFormReleases" }).Single();
+                string formVars = Convert.ToBase64String(Encoding.UTF8.GetBytes(entity.FormVars));
+                string formFile = Convert.ToBase64String(Encoding.UTF8.GetBytes(entity.FormFile));
                 model = new EInvFormTypeEditViewModel()
                 {
                     Id = entity.Id,
                     InvoiceType = entity.InvoiceType,
+                    InvoiceTypeNo = entity.InvoiceTypeNo,
                     TemplateCode = entity.TemplateCode,
                     InvoiceForm = entity.InvoiceForm,
                     InvoiceSeries = entity.InvoiceSeries,
                     FormFileName = entity.FormFileName,
-                    FormFile = entity.FormFile,
-                    FormVars = entity.FormVars,
+                    FormFile = formFile,
+                    FormVars = formVars,
+                    Logo = entity.Logo,
+                    Watermark = entity.Watermark,
+                    HasFormRelease = entity.EInvFormReleases.Count > 0,
                     Status = (DefaultStatusType)entity.Status,
                     Version = entity.Version
                 };
@@ -195,7 +201,9 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 {
                     model.FormFile = "";
                 }
-                
+
+                model.InvoiceForm = "E";
+                model.HasFormRelease = false;
             }
             return new Ext.Net.MVC.PartialViewResult() { Model = model };
         }
@@ -219,10 +227,12 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     return r;
                 }
                 bool isEdit = model.Id.HasValue;
+                String formVars = Encoding.UTF8.GetString(Convert.FromBase64String(model.FormVars));
+                String formFile = Encoding.UTF8.GetString(Convert.FromBase64String(model.FormFile));
 
                 if (model.Id.HasValue)
                 {
-                    var _update = repository.Get(c => c.Id == model.Id).SingleOrDefault();
+                    var _update = repository.Get(c => c.Id == model.Id, new string[] { "EInvFormReleases" }).SingleOrDefault();
                     if (_update == null || _update.Version != model.Version)
                     {
                         r.Success = false;
@@ -230,13 +240,23 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                         return r;
                     }
 
+                    if (_update.EInvFormReleases.Count > 0)
+                    {
+                        r.Success = false;
+                        r.ErrorMessage = "Form has release number! Can not Edit or Delete";
+                        return r;
+                    }
+
                     _update.InvoiceType = model.InvoiceType;
-                    _update.TemplateCode = model.TemplateCode;
+                    _update.InvoiceTypeNo = model.InvoiceTypeNo;
+                    _update.TemplateCode = model.InvoiceType + "0/" + model.InvoiceTypeNo;
                     _update.InvoiceForm = model.InvoiceForm;
                     _update.InvoiceSeries = model.InvoiceSeries.ToUpper();
                     _update.FormFileName = model.FormFileName;
-                    _update.FormFile = model.FormFile;
-                    _update.FormVars = model.FormVars;
+                    _update.FormFile = formFile;
+                    _update.FormVars = formVars;
+                    _update.Logo = model.Logo;
+                    _update.Watermark = model.Watermark;
                     _update.Status = (byte)model.Status;
                     _update.RecModifiedAt = DateTime.Now;
                     _update.RecModifiedBy = (long)user.ProviderUserKey;
@@ -261,9 +281,15 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                         ClientId = clientId,
                         OrganizationId = organizationId,
                         InvoiceType = model.InvoiceType,
-                        TemplateCode = model.TemplateCode,
+                        InvoiceTypeNo = model.InvoiceTypeNo,
+                        TemplateCode = model.InvoiceType + "0/" + model.InvoiceTypeNo,
                         InvoiceForm = model.InvoiceForm,
-                        InvoiceSeries = model.InvoiceSeries.ToLower(),
+                        InvoiceSeries = model.InvoiceSeries.ToUpper(),
+                        FormFileName = model.FormFileName,
+                        FormFile = formFile,
+                        FormVars = formVars,
+                        Logo = model.Logo,
+                        Watermark = model.Watermark,
                         Status = (byte)model.Status,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
@@ -300,11 +326,18 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.Get(c => c.Id == _id).SingleOrDefault();
+                var entity = repository.Get(c => c.Id == _id, new string[] { "EInvFormReleases" }).SingleOrDefault();
                 if (entity == null)
                 {
                     r.Success = false;
                     r.ErrorMessage = "Form not found! Please check";
+                    return r;
+                }
+
+                if (entity.EInvFormReleases.Count > 0)
+                {
+                    r.Success = false;
+                    r.ErrorMessage = "Form has release number! Can not Edit or Delete";
                     return r;
                 }
 
@@ -369,7 +402,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 }
             }
 
-            string fileHtmlRenderName = $"formTypeRender_{User.Identity.Name}_{DateTime.Now:yyyyMMddhhmmss}.html";
+            string fileHtmlRenderName = $"formTypeRender_{User.Identity.Name}_{DateTime.Now:yyyyMMddhhmmss}";
             using (StringReader srt = new StringReader(formFile)) // xslInput is a string that contains xsl
             using (StringReader sri = new StringReader(formVars)) // xmlInput is a string that contains xml
             {
@@ -382,7 +415,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     using (System.Xml.XmlWriter xwo = System.Xml.XmlWriter.Create(sw, xslt.OutputSettings)) // use OutputSettings of xsl, so it can be output as HTML
                     {
                         xslt.Transform(xri, xwo);
-                        System.IO.File.WriteAllText(Server.MapPath($"~/Resources/PrintReports/EInvoices/{fileHtmlRenderName}"), sw.ToString(), Encoding.UTF8);
+                        System.IO.File.WriteAllText(Server.MapPath($"~/Resources/PrintReports/EInvoices/{fileHtmlRenderName}.html"), sw.ToString(), Encoding.UTF8);
                     }
                 }
             }
@@ -392,7 +425,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             {
                 Mode = LoadMode.Frame,
                 DisableCaching = true,
-                Url = $"~/Resources/PrintReports/EInvoices/{fileHtmlRenderName}"
+                Url = $"~/Resources/PrintReports/EInvoices/{fileHtmlRenderName}.html"
             };
             invoiceFormViewer.Loader.SuspendScripting();
             invoiceFormViewer.LoadContent();
@@ -413,7 +446,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 System.IO.FileInfo fi = new System.IO.FileInfo(fileName);
                 model.Add(new
                 {
-                    Name = fi.Name.Substring(0, fi.Name.IndexOf(".png")),
+                    Name = fi.Name.Substring(0, fi.Name.IndexOf(".png", StringComparison.Ordinal)),
                     Url = Url.Content("~/Resources/Reports/EInvoices/") + fi.Name
                 });
             }

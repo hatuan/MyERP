@@ -805,7 +805,7 @@
                                                     <table>
                                                         <tr>
                                                             <td align="center" >
-                                                                <font class="labelItalic"> Đơn vị cung cấp dịch vụ Hóa đơn điện tử: Công ty TNHH Đầu Tư Và Phát Triển Doanh Nghiệp BÌNH MINH, MST: 0108196397 </font>
+                                                                <font class="labelItalic"> Đơn vị cung cấp Hóa đơn điện tử: Công ty TNHH Đầu Tư Và Phát Triển Doanh Nghiệp BÌNH MINH, MST: 0108196397 </font>
                                                             </td>
                                                         </tr>
                                                         <tr>

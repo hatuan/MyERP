@@ -167,6 +167,7 @@
     <Compile Include="Entities\MyERPDataModel.Vat.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.VatEntry.cs" />
     <Compile Include="Entities\MyERPDataModel.VatEntry.Generated.cs" />
+    <Compile Include="Enum\EInvoiceFormReleaseTaxAuthStatus.cs" />
     <Compile Include="Enum\EInvoiceDocumentStatusType.cs" />
     <Compile Include="Enum\PurchaseInvoiceDocumentStatusType.cs" />
     <Compile Include="Enum\CashDocumentStatusType.cs" />
