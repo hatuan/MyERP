@@ -7,6 +7,68 @@
           .Width(650)
           .Modal(true)
           .Layout(LayoutType.Fit)
+          .Bin(
+              Html.X().Store().AutoLoad(false).AutoDestroy(false)
+                  .ID("FormTypeStore")
+                  .Proxy(Html.X().AjaxProxy()
+                      .Url(Url.Action("LookupData", "FormType", new { area = "EInvoice" }))
+                      .Reader(Html.X().JsonReader().RootProperty("data").TotalProperty("total")))
+                  .Model(Html.X().Model()
+                      .IDProperty("Id")
+                      .Fields(
+                          new ModelField("Id", ModelFieldType.Int),
+                          new ModelField("OrganizationCode", ModelFieldType.String),
+                          new ModelField("TemplateCode", ModelFieldType.String),
+                          new ModelField("InvoiceSeries", ModelFieldType.String)
+                      )
+                  )
+                  .Parameters(p =>
+                  {
+                      p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                  })
+                  .Data(ViewData["FormTypeStore"]))
+          .HtmlBin(@<text>
+                       <script>
+                           Ext.apply(Ext.form.VTypes, {
+                               mydaterange: function (val, field) {
+                                   var date = field.parseDate(val),
+                                       ct, end, start;
+                                   if (date) {
+                                       if(field.startDateField && (!this.dateRangeMax||(date.getTime()!==this.dateRangeMax.getTime())) && !this.startValidating) {
+                                           ct=field.up('container');
+                                           if (ct) {
+                                               start=ct.down('#'+field.startDateField);
+                                           }
+                                           if(!start) {
+                                               start = Ext.getCmp(field.startDateField);
+                                           }
+                                           this.dateRangeMax = Ext.Date.add(date, Ext.Date.DAY, -2);
+                                           start.setMaxValue(Ext.Date.add(date, Ext.Date.DAY, -2));
+                                           this.startValidating=true;
+                                           start.validate();
+                                           delete this.startValidating;
+                                       }
+                                       else if(field.endDateField && (!this.dateRangeMin||(date.getTime()!==this.dateRangeMin.getTime())) && !this.endValidating) {
+                                           ct=field.up('container');
+                                           if (ct) {
+                                               end=ct.down('#'+field.endDateField);
+                                           }
+                                           if (!end) {
+                                               end=Ext.getCmp(field.endDateField);
+                                           }
+                                           this.dateRangeMin = Ext.Date.add(date, Ext.Date.DAY, 2);
+                                           end.setMinValue(Ext.Date.add(date, Ext.Date.DAY, 2));
+                                           this.endValidating = true;
+                                           end.validate();
+                                           delete this.endValidating;
+                                       }
+                                   }
+                                   return true;
+                               },
+                               mydaterangeText: "Start date must be more than Release date + 2 days"
+                           });
+                       </script>
+                    </text>)
           .Items(
               Html.X().FormPanel()
                   .ID("FormFormReleaseMaintenance")
@@ -16,40 +78,82 @@
                   .DefaultButton("btnSave")
                   .Items(items =>
                   {
-                      items.Add(Html.X().AntiForgeryField());
+                      items.Add(Html.X().AntiForgeryField().ID("AntiForgeryField"));
                       items.Add(Html.X().HiddenFor(m => m.Id).ID("Id"));
                       items.Add(Html.X().HiddenFor(m => m.Version).ID("Version"));
                       items.Add(Html.X().ComboBoxFor(m => m.FormTypeId).AllowBlank(false).ID("FormTypeId")
-                                              .DisplayField("Description")
-                                              .ValueField("Id")
-                                              .LabelWidth(100)
-                                              .FieldStyle("text-transform: uppercase;")
-                                              .TypeAhead(true)
-                                              .MinChars(0)
-                                              .PageSize(10)
-                                              .SelectOnTab(true)
-                                              .ForceSelection(true)
-                                              .ValidateOnBlur(true)
-                                              .ValidateOnChange(true)
-                                              .ListConfig(Html.X().BoundList()
-                                                  .LoadingText("Searching...")
-                                                  .ItemTpl(Html.X().XTemplate()
-                                                      .Html(@<text>
-                                                                <div class="search-item">
-                                                                    <h3>{Description}</h3>
-                                                                </div>
-                                                             </text>)
-                                                  )
-                                                  .MinWidth(400))
-                                              .StoreID("FormTypeStore")
-                                              .Listeners(ls =>
-                                              {
-                                                  ls.BeforeQuery.Handler = @"var _id = this.getValue();
-                                                                            this.getStore().id = _id;";
-                                              }));
-                      items.Add(Html.X().DateFieldFor(m => m.ReleaseDate).AllowBlank(false).ID("ReleaseDate"));
-                      items.Add(Html.X().DateFieldFor(m => m.StartDate).AllowBlank(false).ID("StartDate"));
-                      items.Add(Html.X().TextFieldFor(m => m.ReleaseTotal).MaskRe(@"/[0-9\,\.]").AllowBlank(false).ID("ReleaseTotal"));
+                          .DisplayTpl(Html.X().XTemplate()
+                              .Html(@<text>
+                                        <tpl for=".">
+                                            {TemplateCode} - {InvoiceSeries}
+                                        </tpl>
+                                     </text>))
+                          .ValueField("Id")
+                          .LabelWidth(100)
+                          .FieldStyle("text-transform: uppercase;")
+                          .Editable(false)
+                          .AutoFocus(true)
+                          .TypeAhead(true)
+                          .MinChars(0)
+                          .PageSize(0)
+                          .SelectOnTab(true)
+                          .ForceSelection(true)
+                          .ValidateOnBlur(true)
+                          .ValidateOnChange(true)
+                          .ListConfig(Html.X().BoundList()
+                              .LoadingText("Searching...")
+                              .ItemTpl(Html.X().XTemplate()
+                                  .Html(@<text>
+                                        <div class="search-item">
+                                            <h3>{InvoiceType}</h3>
+                                            {TemplateCode} - {InvoiceSeries}
+                                        </div>
+                                         </text>))
+                              .MinWidth(400))
+                          .StoreID("FormTypeStore")
+                          .DirectEvents(de =>
+                          {
+                              de.Select.Url = Url.Action("ChangeFormType");
+                              de.Show.EventMask.ShowMask = true;
+                              de.Show.Method = HttpMethod.POST;
+                              de.Select.Success = "function(response, result) { \n" +
+                                                  "  App.ReleaseFrom.setRawValue(Ext.util.Format.number(result.result.ReleaseFrom, '0.000/i')); \n" +
+                                                  "  App.ReleaseTo.setRawValue(Ext.util.Format.number(result.result.ReleaseTo, '0.000/i')); \n" +
+                                                  "}";
+                          }));
+                      items.Add(Html.X().DateFieldFor(m => m.ReleaseDate).AllowBlank(false).ID("ReleaseDate")
+                          .Vtype("mydaterange")
+                          .CustomConfig(configItems =>
+                          {
+                              configItems.Add(new ConfigItem("endDateField", "StartDate", ParameterMode.Value));
+                          }));
+                      items.Add(Html.X().DateFieldFor(m => m.StartDate).AllowBlank(false).ID("StartDate")
+                          .Vtype("mydaterange")
+                          .CustomConfig(configItems =>
+                          {
+                              configItems.Add(new ConfigItem("startDateField", "ReleaseDate", ParameterMode.Value));
+                          }));
+                      items.Add(Html.X().TextFieldFor(m => m.ReleaseTotal).MaskRe(@"/[0-9\,\.]").AllowBlank(false).ID("ReleaseTotal")
+                          .Listeners(ls =>
+                          {
+                              ls.Focus.Handler = @"this.setRawValue(this.getRawValue().replace(/\./g,''))";
+                              ls.Blur.Handler = "function() { \n" +
+                                                "  var v = this.getRawValue().replace(/\\./g,'').replace(',', '.') \n" +
+                                                "  this.setRawValue(Ext.util.Format.number(v, '0.000/i')); " +
+                                                "  Ext.net.DirectMethod.request({ \n" +
+                                                "    url: '" + Url.Action("ChangeFormType") + "', \n" +
+                                                "      params: #{FormFormReleaseMaintenance}.getForm().getValues(), \n" +
+                                                "      success: function(response) { \n" +
+                                                "        App.ReleaseFrom.setRawValue(Ext.util.Format.number(response.ReleaseFrom, '0.000/i')); \n" +
+                                                "        App.ReleaseTo.setRawValue(Ext.util.Format.number(response.ReleaseTo, '0.000/i')); \n" +
+                                                "      },\n" +
+                                                "      failure: function(errorMessage) { \n" +
+                                                "        Ext.Msg.notify('Error', errorMessage); \n" +
+                                                "      } \n" +
+                                                "  }); \n" +
+                                                "}";
+                          })
+                      );
                       items.Add(Html.X().TextFieldFor(m => m.ReleaseFrom).MaskRe(@"/[0-9\,\.]").AllowBlank(false).ID("ReleaseFrom").ReadOnly(true));
                       items.Add(Html.X().TextFieldFor(m => m.ReleaseTo).MaskRe(@"/[0-9\,\.]").AllowBlank(false).ID("ReleaseTo").ReadOnly(true));
                   })

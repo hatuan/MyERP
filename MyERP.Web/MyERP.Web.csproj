@@ -465,6 +465,7 @@
     <Content Include="App_Readme\Ext.NET\CHANGELOG.md" />
     <Content Include="Areas\EInvoice\Views\FormType\_ListInvoiceTemplate.cshtml" />
     <Content Include="Areas\EInvoice\Views\FormRelease\_List.cshtml" />
+    <Content Include="Areas\EInvoice\Views\FormRelease\_Maintenance.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Resources\reports\salespos.json" />
     <Content Include="Resources\reports\salespos_001.mrt" />

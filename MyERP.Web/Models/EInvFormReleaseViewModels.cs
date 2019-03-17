@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using MyERP.DataAccess.Enum;
 
 namespace MyERP.Web.Models
@@ -79,18 +80,29 @@ namespace MyERP.Web.Models
         [Display(Name = "Form Type")]
         public Int64 FormTypeId { get; set; }
 
+        [Required]
         [Display(Name = "Release Total")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
+        [Range(1, 9999999, ErrorMessage = "Please enter a value between 1 to 9.999.999.00")]
         public Decimal ReleaseTotal { get; set; }
 
+        [Required]
         [Display(Name = "Release From")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
+        [Range(1, 9999999)]
         public Decimal ReleaseFrom { get; set; }
 
+        [Required]
         [Display(Name = "Release To")]
+        [DisplayFormat(DataFormatString = "{0:n0}")]
+        [Range(1, 9999999)]
         public Decimal ReleaseTo { get; set; }
 
         [Display(Name = "Release Date")]
+        [Required]
         public DateTime ReleaseDate { get; set; }
 
+        [Required]
         [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
 

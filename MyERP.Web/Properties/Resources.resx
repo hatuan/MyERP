@@ -495,4 +495,7 @@
   <data name="eInvoiceSignedInvoice" xml:space="preserve">
     <value>Signed Invoice</value>
   </data>
+  <data name="Start_Date_Must_2_Day_After_Release_Date" xml:space="preserve">
+    <value>Start Date must after Release Date +2 days</value>
+  </data>
 </root>
