@@ -110,4 +110,32 @@ namespace MyERP.Web.Models
         public DefaultStatusType Status { get; set; }
 
     }
+
+    public class EInvFormTypeLookupViewModel
+    {
+        [Required]
+        public Int64 Id { get; set; }
+
+        [Required]
+        [Display(Name = "Organization")]
+        public String OrganizationCode { get; set; }
+
+        [Required]
+        [Display(Name = "Invoice Type")]
+        public String InvoiceType { get; set; }
+
+        [Required]
+        [Display(Name = "Template Code")]
+        public String TemplateCode { get; set; }
+
+        [Display(Name = "Invoice Form")]
+        public String InvoiceForm { get; set; }
+
+        [Display(Name = "Invoice Series")]
+        public String InvoiceSeries { get; set; }
+
+        [Required]
+        [Display(Name = "Status")]
+        public DefaultStatusType Status { get; set; }
+    }
 }

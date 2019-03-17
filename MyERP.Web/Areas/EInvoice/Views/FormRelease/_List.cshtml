@@ -117,6 +117,12 @@
                   Html.X().Column().Text("Org").DataIndex("OrganizationCode").Width(75),
                   Html.X().Column().Text("Template Code").DataIndex("TemplateCode").MinWidth(150),
                   Html.X().Column().Text("Invoice Series").DataIndex("InvoiceSeries").Width(150),
+                  Html.X().DateColumn().Text("Release Date").DataIndex("ReleaseDate").Width(150).Format("dd/MM/yyyy"),
+                  Html.X().NumberColumn().Text("Release Total").DataIndex("ReleaseTotal").Width(150),
+                  Html.X().NumberColumn().Text("Release From").DataIndex("ReleaseFrom").Width(150),
+                  Html.X().NumberColumn().Text("Release To").DataIndex("ReleaseTo").Width(150),
+                  Html.X().NumberColumn().Text("Release Used").DataIndex("ReleaseUsed").Width(150),
+                  Html.X().DateColumn().Text("Start Date").DataIndex("StartDate").Width(150).Format("dd/MM/yyyy"),
                   Html.X().Column().Text("Tax Authorities Status").DataIndex("TaxAuthoritiesStatus").Width(85),
                   Html.X().Column().Text("Last User").DataIndex("RecModifiedBy").Width(85),
                   Html.X().DateColumn().Text("Last Updated").DataIndex("RecModifiedAt").Width(150).Format("dd/MM/yyyy H:mm:ss")

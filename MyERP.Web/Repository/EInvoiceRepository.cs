@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
+using System.Linq.Expressions;
 using System.Web;
 using Ext.Net;
 using MyERP.DataAccess;
@@ -51,6 +52,20 @@ namespace MyERP.Web
             var ranges = (start < 0 || limit <= 0) ? entities.ToList() : entities.Skip(start).Take(limit).ToList();
 
             return new Paging<EInvFormType>(ranges, count);
+        }
+
+        public decimal GetMaxReleaseOfFormType(long formTypeId, long formReleaseId)
+        {
+            try
+            {
+                var formType = Get(includePaths: new String[] {"EInvFormReleases"}).First(x => x.Id == formTypeId);
+                var maxFormReleaseTo = formType.EInvFormReleases.Where(x => x.Id != formReleaseId).Max(x => x.ReleaseTo);
+                return maxFormReleaseTo;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
     }
 

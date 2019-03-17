@@ -86,7 +86,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             if (id != null && id > 0)
             {
                 var data = repository.Get(c => c.Id == id, new[] { "Organization" }).Select(c =>
-                    new EInvFormTypeViewModel()
+                    new EInvFormTypeLookupViewModel()
                     {
                         Id = c.Id,
                         InvoiceType = c.InvoiceType,
@@ -104,7 +104,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     parameters.SimpleSort, parameters.SimpleSortDirection);
 
                 var data = paging.Data.Where(c => c.Status == (short)DefaultStatusType.Active)
-                    .Select(c => new EInvFormTypeViewModel
+                    .Select(c => new EInvFormTypeLookupViewModel
                     {
                         Id = c.Id,
                         InvoiceType = c.InvoiceType,

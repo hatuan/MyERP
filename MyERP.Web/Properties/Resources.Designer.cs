@@ -1069,6 +1069,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start Date must after Release Date +2 days.
+        /// </summary>
+        public static string Start_Date_Must_2_Day_After_Release_Date {
+            get {
+                return ResourceManager.GetString("Start_Date_Must_2_Day_After_Release_Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         public static string Status {

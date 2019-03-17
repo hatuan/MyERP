@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -10,6 +11,7 @@ using Ext.Net.MVC;
 using MyERP.DataAccess.Enum;
 using MyERP.Web.Controllers;
 using MyERP.Web.Models;
+using Newtonsoft.Json;
 
 namespace MyERP.Web.Areas.EInvoice.Controllers
 {
@@ -86,13 +88,13 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             var model = new EInvFormReleaseEditViewModel()
             {
                 Id = null,
-                TaxAuthoritiesStatus = TaxAuthoritiesStatus.Inactive
+                TaxAuthoritiesStatus = TaxAuthoritiesStatus.Wait
             };
 
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.Get(c => c.Id == _id).Single();
+                var entity = repository.Get(c => c.Id == _id, includePaths: new String[] { "EInvFormType" }).Single();
 
                 model = new EInvFormReleaseEditViewModel()
                 {
@@ -106,9 +108,27 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     TaxAuthoritiesStatus = (TaxAuthoritiesStatus)entity.Status,
                     Version = entity.Version
                 };
+
+
+                ViewData["FormTypeStore"] = new List<EInvFormTypeLookupViewModel>
+                {
+                    new EInvFormTypeLookupViewModel()
+                    {
+                        Id = entity.FormTypeId,
+                        InvoiceType = entity.EInvFormType.InvoiceType,
+                        TemplateCode = entity.EInvFormType.TemplateCode,
+                        InvoiceForm = entity.EInvFormType.InvoiceForm,
+                        InvoiceSeries = entity.EInvFormType.InvoiceSeries,
+                    }
+                };
+               
+            }
+            else
+            {
+                
             }
             
-            return new Ext.Net.MVC.PartialViewResult() { Model = model };
+            return new Ext.Net.MVC.PartialViewResult() { Model = model, ViewData = ViewData };
         }
 
         [HttpPost]
@@ -252,5 +272,15 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
 
             return this.Direct();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeFormType(EInvFormReleaseEditViewModel model)
+        {
+            //Calc max release to of FormType
+            decimal maxFormReleaseTo = (new EInvFormTypeRepository()).GetMaxReleaseOfFormType(model.FormTypeId, model.Id??0);
+
+            return this.Direct(new { ReleaseFrom = maxFormReleaseTo + 1, ReleaseTo = maxFormReleaseTo + 1 + model.ReleaseTotal });
+    }
     }
 }
