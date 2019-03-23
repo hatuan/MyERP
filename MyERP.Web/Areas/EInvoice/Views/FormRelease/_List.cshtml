@@ -5,6 +5,7 @@
               .Region(Region.Center)
               .Frame(true)
               .SelectionMemory(true)
+              .SortableColumns(false)
               .TopBar(items =>
               {
                   items.Add(Html.X().Toolbar().Items(buttons =>
@@ -80,7 +81,7 @@
                       .PageSize(10)
                       .Sorters(sorts =>
                       {
-                          sorts.Add(new DataSorter { Property = "ReleaseDate", Direction = Ext.Net.SortDirection.DESC });
+                          sorts.Add(new DataSorter { Property = "ReleaseDate", Direction = Ext.Net.SortDirection.ASC });
                           sorts.Add(new DataSorter { Property = "TemplateCode", Direction = Ext.Net.SortDirection.ASC});
                           sorts.Add(new DataSorter { Property = "InvoiceSeries", Direction = Ext.Net.SortDirection.ASC });
                       })

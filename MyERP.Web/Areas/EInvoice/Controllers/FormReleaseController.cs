@@ -68,11 +68,11 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 ReleaseUsed = c.ReleaseUsed,
                 ReleaseDate = c.ReleaseDate,
                 StartDate = c.StartDate,
+                TaxAuthoritiesStatus = (TaxAuthoritiesStatus)c.TaxAuthoritiesStatus,
                 RecCreateBy = c.RecCreatedByUser.Name,
                 RecCreatedAt = c.RecCreatedAt,
                 RecModifiedBy = c.RecModifiedByUser.Name,
-                RecModifiedAt = c.RecModifiedAt,
-                TaxAuthoritiesStatus = (TaxAuthoritiesStatus)c.Status,
+                RecModifiedAt = c.RecModifiedAt,             
                 Version = c.Version
             }).ToList();
 
@@ -88,6 +88,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             var model = new EInvFormReleaseEditViewModel()
             {
                 Id = null,
+                Status = DefaultStatusType.Active,
                 TaxAuthoritiesStatus = TaxAuthoritiesStatus.Wait
             };
 
@@ -105,7 +106,8 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     ReleaseTo = entity.ReleaseTo,
                     ReleaseDate = entity.ReleaseDate,
                     StartDate = entity.StartDate,
-                    TaxAuthoritiesStatus = (TaxAuthoritiesStatus)entity.Status,
+                    TaxAuthoritiesStatus = (TaxAuthoritiesStatus)entity.TaxAuthoritiesStatus,
+                    Status = (DefaultStatusType)entity.Status,
                     Version = entity.Version
                 };
 
@@ -151,6 +153,13 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 }
                 bool isEdit = model.Id.HasValue;
 
+                if ((new EInvFormTypeRepository()).HasOtherLargerReleaseOfFormType(model.ReleaseTo, model.FormTypeId))
+                {
+                    r.Success = false;
+                    r.ErrorMessage = "Form Release has other larger! Can not Edit or Delete";
+                    return r;
+                }
+
                 if (model.Id.HasValue)
                 {
                     var _update = repository.Get(c => c.Id == model.Id).SingleOrDefault();
@@ -161,7 +170,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                         return r;
                     }
 
-                    if (_update.ReleaseUsed > 0 || (TaxAuthoritiesStatus)_update.TaxAuthoritiesStatus == TaxAuthoritiesStatus.Active)
+                    if ((TaxAuthoritiesStatus)_update.TaxAuthoritiesStatus == TaxAuthoritiesStatus.Active)
                     {
                         r.Success = false;
                         r.ErrorMessage = "Form Release has been used! Can not Edit or Delete";
@@ -175,6 +184,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     _update.ReleaseDate = model.ReleaseDate;
                     _update.StartDate = model.StartDate;
                     _update.TaxAuthoritiesStatus = (byte)model.TaxAuthoritiesStatus;
+                    _update.Status = (byte) model.Status;
                     _update.RecModifiedAt = DateTime.Now;
                     _update.RecModifiedBy = (long)user.ProviderUserKey;
                     _update.Version++;
@@ -204,6 +214,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                         ReleaseDate = model.ReleaseDate,
                         StartDate = model.StartDate,
                         TaxAuthoritiesStatus = (byte)model.TaxAuthoritiesStatus,
+                        Status = (byte)model.Status,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
                         RecCreatedBy = (long)user.ProviderUserKey,
@@ -247,13 +258,19 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     return r;
                 }
 
-                if (entity.ReleaseUsed > 0 || (TaxAuthoritiesStatus)entity.TaxAuthoritiesStatus ==  TaxAuthoritiesStatus.Active)
+                if ((TaxAuthoritiesStatus)entity.TaxAuthoritiesStatus ==  TaxAuthoritiesStatus.Active)
                 {
                     r.Success = false;
                     r.ErrorMessage = "Form Release has been used! Can not Edit or Delete";
                     return r;
                 }
 
+                if ((new EInvFormTypeRepository()).HasOtherLargerReleaseOfFormType(entity.ReleaseTo, entity.FormTypeId))
+                {
+                    r.Success = false;
+                    r.ErrorMessage = "Form Release has other larger! Can not Edit or Delete";
+                    return r;
+                }
                 try
                 {
                     this.repository.Delete(entity);
@@ -281,6 +298,6 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             decimal maxFormReleaseTo = (new EInvFormTypeRepository()).GetMaxReleaseOfFormType(model.FormTypeId, model.Id??0);
 
             return this.Direct(new { ReleaseFrom = maxFormReleaseTo + 1, ReleaseTo = maxFormReleaseTo + 1 + model.ReleaseTotal });
-    }
+        }
     }
 }

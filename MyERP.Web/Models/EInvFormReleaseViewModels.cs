@@ -111,5 +111,9 @@ namespace MyERP.Web.Models
         [Required]
         [Display(Name = "Tax Authorities Status")]
         public TaxAuthoritiesStatus TaxAuthoritiesStatus { get; set; }
+
+        [Required]
+        [Display(Name = "Status")]
+        public DefaultStatusType Status { get; set; }
     }
 }

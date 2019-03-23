@@ -54,6 +54,20 @@ namespace MyERP.Web
             return new Paging<EInvFormType>(ranges, count);
         }
 
+        public bool HasOtherLargerReleaseOfFormType(decimal releaseTo, long formTypeId)
+        {
+            try
+            {
+                var formType = Get(includePaths: new String[] { "EInvFormReleases" }).First(x => x.Id == formTypeId);
+                var othersLarger = formType.EInvFormReleases.Where(x => x.ReleaseFrom >= releaseTo);
+                return othersLarger.Any();
+            }
+            catch (Exception ex)
+            {
+                return true;
+            }
+        }
+
         public decimal GetMaxReleaseOfFormType(long formTypeId, long formReleaseId)
         {
             try
