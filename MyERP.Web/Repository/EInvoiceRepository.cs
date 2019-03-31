@@ -6,6 +6,9 @@ using System.Linq.Expressions;
 using System.Web;
 using Ext.Net;
 using MyERP.DataAccess;
+using MyERP.DataAccess.Enum;
+using MyERP.Web.Models;
+using MyERP.Web.Others;
 
 namespace MyERP.Web
 {
@@ -81,6 +84,15 @@ namespace MyERP.Web
                 return 0;
             }
         }
+
+        public string GetNextReleaseNo(long formTypeId, DateTime invoiceIssuedDate)
+        {
+            var formType = Get(includePaths: new String[] { "EInvFormReleases" }).First(x => x.Id == formTypeId);
+            var formRelease = formType.EInvFormReleases.Where(x => x.StartDate.CompareTo(invoiceIssuedDate) >= 0 
+                                                                   && (TaxAuthoritiesStatus) x.TaxAuthoritiesStatus == TaxAuthoritiesStatus.Active);
+            
+            return "";
+        }
     }
 
     public partial class EInvoiceHeaderRepository 
@@ -104,11 +116,206 @@ namespace MyERP.Web
 
             return new Paging<EInvoiceHeader>(ranges, count);
         }
+
+        public string SetEInvNumber(long id)
+        {
+
+            return "";
+        }
     }
 
     public partial class EInvoiceLineRepository 
     {
+        public void Update(string columnName, long currencyLcyId, ref EInvHeaderEditViewModel eInvoiceHeader, ref EInvLineEditViewModel eInvoiceLine)
+        {
+            switch (columnName)
+            {
+                case "Quantity":
+                case "UnitPrice":
+                    {
+                        eInvoiceLine.ItemTotalAmountWithoutVAT = Round.RoundAmount(eInvoiceLine.Quantity * eInvoiceLine.UnitPrice);
 
+                        CalcVatBaseAmount(ref eInvoiceLine);
+
+                        eInvoiceLine.ItemTotalAmountWithVAT =
+                            eInvoiceLine.ItemTotalAmountWithoutVAT + eInvoiceLine.VATAmount;
+
+                        if (eInvoiceHeader.CurrencyId == currencyLcyId)
+                        {
+                            eInvoiceLine.ItemTotalAmountWithoutVAT = eInvoiceLine.ItemTotalAmountWithoutVATLCY =
+                                Round.RoundUnitAmountLCY(eInvoiceLine.ItemTotalAmountWithoutVAT);
+
+                            eInvoiceLine.UnitPrice = eInvoiceLine.UnitPriceLCY = Round.RoundUnitAmountLCY(eInvoiceLine.UnitPrice);
+
+                            SetVatBaseAmountToLCY(ref eInvoiceLine);
+
+                            eInvoiceLine.ItemTotalAmountWithVAT = eInvoiceLine.ItemTotalAmountWithVATLCY =
+                                Round.RoundUnitAmountLCY(eInvoiceLine.ItemTotalAmountWithVAT);
+                        }
+                        else
+                        {
+                            if (columnName == "UnitPrice")
+                            {
+                                eInvoiceLine.UnitPriceLCY = Round.RoundUnitAmountLCY(eInvoiceLine.UnitPrice *
+                                                             eInvoiceHeader.ExchangeRate);
+                            }
+
+                            eInvoiceLine.ItemTotalAmountWithoutVATLCY =
+                                Round.RoundAmount(eInvoiceLine.Quantity * eInvoiceLine.UnitPriceLCY);
+
+                            CalcVatBaseAmountLCY(ref eInvoiceLine);
+
+                            eInvoiceLine.ItemTotalAmountWithVATLCY =
+                                eInvoiceLine.ItemTotalAmountWithoutVATLCY + eInvoiceLine.VATAmountLCY;
+                        }
+
+                        break;
+                    }
+                
+                case "ItemTotalAmountWithoutVAT":
+                    {
+                        CalcVatBaseAmount(ref eInvoiceLine);
+
+                        eInvoiceLine.ItemTotalAmountWithVAT =
+                            eInvoiceLine.ItemTotalAmountWithoutVAT + eInvoiceLine.VATAmount;
+
+                        if (eInvoiceHeader.CurrencyId == currencyLcyId)
+                        {
+                            SetVatBaseAmountToLCY(ref eInvoiceLine);
+
+                            eInvoiceLine.ItemTotalAmountWithoutVAT = eInvoiceLine.ItemTotalAmountWithoutVATLCY =
+                                Round.RoundUnitAmountLCY(eInvoiceLine.ItemTotalAmountWithoutVAT);
+                        }
+                        else
+                        {
+                            eInvoiceLine.ItemTotalAmountWithoutVATLCY =
+                                Round.RoundAmount(eInvoiceLine.Quantity * eInvoiceLine.UnitPriceLCY) ;
+
+                            CalcVatBaseAmountLCY(ref eInvoiceLine);
+
+                            eInvoiceLine.ItemTotalAmountWithVATLCY =
+                                eInvoiceLine.ItemTotalAmountWithoutVATLCY + eInvoiceLine.VATAmountLCY;
+                        }
+                        break;
+                    }
+                case "UnitPriceLCY":
+                    {
+                        eInvoiceLine.ItemTotalAmountWithoutVATLCY = Round.RoundAmount(eInvoiceLine.Quantity * eInvoiceLine.UnitPriceLCY);
+                        
+                        CalcVatBaseAmountLCY(ref eInvoiceLine);
+
+                        eInvoiceLine.ItemTotalAmountWithVATLCY =
+                            eInvoiceLine.ItemTotalAmountWithoutVATLCY + eInvoiceLine.VATAmountLCY;
+                        break;
+                    }
+                case "ItemTotalAmountWithoutVATLCY":
+                    {
+                        CalcVatBaseAmountLCY(ref eInvoiceLine);
+
+                        eInvoiceLine.ItemTotalAmountWithVATLCY =
+                            eInvoiceLine.ItemTotalAmountWithoutVATLCY + eInvoiceLine.VATAmountLCY;
+                        break;
+                    }
+
+                case "VATPercentage":
+                    {
+                        eInvoiceLine.VATAmount = eInvoiceLine.VATPercentage > 0
+                            ? Round.RoundAmount(eInvoiceLine.ItemTotalAmountWithoutVAT *
+                                                eInvoiceLine.VATPercentage / 100)
+                            : 0;
+                        eInvoiceLine.VATAmountLCY = eInvoiceLine.VATPercentage > 0
+                            ? Round.RoundAmountLCY(eInvoiceLine.ItemTotalAmountWithoutVATLCY *
+                                                   eInvoiceLine.VATPercentage / 100)
+                            : 0;
+
+                        eInvoiceLine.ItemTotalAmountWithVAT =
+                            eInvoiceLine.ItemTotalAmountWithoutVAT + eInvoiceLine.VATAmount;
+
+                        eInvoiceLine.ItemTotalAmountWithVATLCY =
+                            eInvoiceLine.ItemTotalAmountWithoutVATLCY + eInvoiceLine.VATAmountLCY;
+                        break;
+                    }
+                case "VATAmount":
+                    {
+                        if (eInvoiceHeader.CurrencyId == currencyLcyId)
+                        {
+                            eInvoiceLine.VATAmount = eInvoiceLine.VATAmountLCY =
+                                Round.RoundAmountLCY(eInvoiceLine.VATAmount);
+
+                            eInvoiceLine.ItemTotalAmountWithoutVAT = eInvoiceLine.ItemTotalAmountWithoutVATLCY =
+                                Round.RoundUnitAmountLCY(eInvoiceLine.ItemTotalAmountWithoutVAT);
+                        }
+                        else
+                        {
+                            eInvoiceLine.VATAmountLCY =
+                                Round.RoundAmountLCY(eInvoiceLine.VATAmount * eInvoiceHeader.ExchangeRate);
+
+                            eInvoiceLine.ItemTotalAmountWithVATLCY =
+                                eInvoiceLine.ItemTotalAmountWithoutVATLCY + eInvoiceLine.VATAmountLCY;
+                        }
+                        break;
+                    }
+                case "VATAmountLCY":
+                    {
+                        eInvoiceLine.ItemTotalAmountWithVATLCY =
+                            eInvoiceLine.ItemTotalAmountWithoutVATLCY + eInvoiceLine.VATAmountLCY;
+
+                        break;
+                    }
+            }
+        }
+
+        public void UpdateTotal(ref EInvHeaderEditViewModel eInvoiceHeader)
+        {
+            eInvoiceHeader.TotalAmountWithoutVAT = eInvoiceHeader.EInvoiceLines.Sum(x => x.ItemTotalAmountWithoutVAT);
+            eInvoiceHeader.TotalAmountWithoutVATLCY = eInvoiceHeader.EInvoiceLines.Sum(x => x.ItemTotalAmountWithoutVATLCY);
+
+            eInvoiceHeader.TotalVATAmount = eInvoiceHeader.EInvoiceLines.Sum(x => x.VATAmount);
+            eInvoiceHeader.TotalVATAmountLCY = eInvoiceHeader.EInvoiceLines.Sum(x => x.VATAmountLCY);
+
+            eInvoiceHeader.TotalAmountWithVAT = eInvoiceHeader.EInvoiceLines.Sum(x => x.ItemTotalAmountWithVAT);
+
+            eInvoiceHeader.TotalAmountWithVATFrn = eInvoiceHeader.EInvoiceLines.Sum(x => x.ItemTotalAmountWithVATLCY);
+        }
+
+        public void CalcVatBaseAmount(ref EInvLineEditViewModel eInvoiceLine)
+        {
+            eInvoiceLine.VATAmount = eInvoiceLine.VATPercentage > 0
+                ? Round.RoundAmount(eInvoiceLine.ItemTotalAmountWithoutVAT *
+                                    eInvoiceLine.VATPercentage / 100)
+                : 0;
+
+        }
+
+        public void CalcVatBaseAmountLCY(ref EInvLineEditViewModel eInvoiceLine)
+        {
+            eInvoiceLine.VATAmountLCY = eInvoiceLine.VATPercentage > 0
+                ? Round.RoundAmount(eInvoiceLine.ItemTotalAmountWithoutVATLCY *
+                                    eInvoiceLine.VATPercentage / 100)
+                : 0;
+
+        }
+
+        public void SetVatBaseAmountToLCY(ref EInvLineEditViewModel eInvoiceLine)
+        {
+            eInvoiceLine.VATAmount = eInvoiceLine.VATAmountLCY =
+                Round.RoundAmountLCY(eInvoiceLine.VATAmount);
+        }
+
+        public void UpdateRecord(EInvLineEditViewModel eInvoiceLine, ref ModelProxy record)
+        {
+            record.Set("ItemTotalAmountWithoutVAT", eInvoiceLine.ItemTotalAmountWithoutVAT);
+            record.Set("UnitPrice", eInvoiceLine.UnitPrice);
+
+            record.Set("ItemTotalAmountWithoutVATLCY", eInvoiceLine.ItemTotalAmountWithoutVATLCY);
+            record.Set("UnitPriceLCY", eInvoiceLine.UnitPriceLCY);
+
+            record.Set("VATAmount", eInvoiceLine.VATAmount);
+            record.Set("VATAmountLCY", eInvoiceLine.VATAmountLCY);
+
+            record.Set("ItemTotalAmountWithVAT", eInvoiceLine.ItemTotalAmountWithVAT);
+            record.Set("ItemTotalAmountWithVATLCY", eInvoiceLine.ItemTotalAmountWithVATLCY);
+        }
     }
 
     public partial class EInvoiceSignedRepository 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Threading;
 using System.Web;
@@ -13,6 +14,7 @@ using MyERP.Web.Controllers;
 using MyERP.Web.Models;
 using MyERP.Web.Others;
 using Newtonsoft.Json;
+using WebGrease.Css.Extensions;
 
 namespace MyERP.Web.Areas.EInvoice.Controllers
 {
@@ -243,12 +245,419 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult _Maintenance(EInvHeaderEditViewModel headerModel, String eInvoiceLinesJSON)
         {
-            return this.Direct();
+            List<EInvLineEditViewModel> eInvoiceLines = JsonConvert.DeserializeObject<List<EInvLineEditViewModel>>(eInvoiceLinesJSON, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+
+            //Save
+            ModelState.Clear();
+            headerModel.EInvoiceLines = eInvoiceLines;
+            TryValidateModel(headerModel);
+            if (!ModelState.IsValid)
+            {
+                return this.Direct(false, ModelState.StringifyModelErrors());
+            }
+
+            MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
+            long clientId = user.ClientId ?? 0;
+            long organizationId = user.OrganizationId ?? 0;
+
+            if (clientId == 0 || organizationId == 0)
+            {
+                return this.Direct(false, Resources.Resources.User_dont_have_Client_or_Organization_Please_set);
+            }
+
+            if (headerModel.Id.HasValue)
+            {
+                var updateEInvoiceHeader = repository.Get(c => c.Id == headerModel.Id, new string[] { "EInvoiceLines" }).SingleOrDefault();
+                if (updateEInvoiceHeader == null || updateEInvoiceHeader.Version != headerModel.Version)
+                {
+                    return this.Direct(false, "EInvoice has been changed or deleted! Please check");
+                }
+                updateEInvoiceHeader.FormTypeId = headerModel.FormTypeId;
+                updateEInvoiceHeader.OriginalInvoiceId = headerModel.OriginalInvoiceId;
+                updateEInvoiceHeader.InvoiceNumber = headerModel.InvoiceNumber;
+                updateEInvoiceHeader.InvoiceIssuedDate = headerModel.InvoiceIssuedDate;
+                updateEInvoiceHeader.ContractNumber = headerModel.ContractNumber;
+                updateEInvoiceHeader.ContractDate = headerModel.ContractDate;
+                updateEInvoiceHeader.Description = headerModel.Description;
+                updateEInvoiceHeader.CurrencyId = headerModel.CurrencyId;
+                updateEInvoiceHeader.ExchangeRate = headerModel.ExchangeRate;
+                updateEInvoiceHeader.InvoiceNote = headerModel.InvoiceNote;
+                updateEInvoiceHeader.AdjustmentType = headerModel.AdjustmentType;
+                updateEInvoiceHeader.AdditionalReferenceDesc = headerModel.AdditionalReferenceDesc;
+                updateEInvoiceHeader.AdditionalReferenceDate = headerModel.AdditionalReferenceDate;
+
+                updateEInvoiceHeader.BuyerId = headerModel.BuyerId;
+                updateEInvoiceHeader.BuyerDisplayName = headerModel.BuyerDisplayName;
+                updateEInvoiceHeader.BuyerLegalName = headerModel.BuyerLegalName;
+                updateEInvoiceHeader.BuyerTaxCode = headerModel.BuyerTaxCode;
+                updateEInvoiceHeader.BuyerAddressLine = headerModel.BuyerAddressLine;
+                updateEInvoiceHeader.BuyerPostalCode = headerModel.BuyerPostalCode;
+                updateEInvoiceHeader.BuyerDistrictName = headerModel.BuyerDistrictName;
+                updateEInvoiceHeader.BuyerCityName = headerModel.BuyerCityName;
+                updateEInvoiceHeader.BuyerCountryCode = headerModel.BuyerCountryCode;
+                updateEInvoiceHeader.BuyerPhoneNumber = headerModel.BuyerPhoneNumber;
+                updateEInvoiceHeader.BuyerFaxNumber = headerModel.BuyerFaxNumber;
+                updateEInvoiceHeader.BuyerEmail = headerModel.BuyerEmail;
+                updateEInvoiceHeader.BuyerBankName = headerModel.BuyerBankName;
+                updateEInvoiceHeader.BuyerBankAccount = headerModel.BuyerBankAccount;
+
+                updateEInvoiceHeader.SellerLegalName = headerModel.SellerLegalName;
+                updateEInvoiceHeader.SellerTaxCode = headerModel.SellerTaxCode;
+                updateEInvoiceHeader.SellerAddressLine = headerModel.SellerAddressLine;
+                updateEInvoiceHeader.SellerPostalCode = headerModel.SellerPostalCode;
+                updateEInvoiceHeader.SellerDistrictName = headerModel.SellerDistrictName;
+                updateEInvoiceHeader.SellerCityName = headerModel.SellerCityName;
+                updateEInvoiceHeader.SellerCountryCode = headerModel.SellerCountryCode;
+                updateEInvoiceHeader.SellerPhoneNumber = headerModel.SellerPhoneNumber;
+                updateEInvoiceHeader.SellerFaxNumber = headerModel.SellerFaxNumber;
+                updateEInvoiceHeader.SellerEmail = headerModel.SellerEmail;
+                updateEInvoiceHeader.SellerBankName = headerModel.SellerBankName;
+                updateEInvoiceHeader.SellerBankAccount = headerModel.SellerBankAccount;
+                updateEInvoiceHeader.SellerContactPersonName = headerModel.SellerContactPersonName;
+                updateEInvoiceHeader.SellerSignedPersonName = headerModel.SellerSignedPersonName;
+                
+                updateEInvoiceHeader.PaymentMethodName = headerModel.BuyerDisplayName;
+
+                updateEInvoiceHeader.SumOfTotalLineAmountWithoutVAT = headerModel.TotalAmountWithoutVAT;
+                updateEInvoiceHeader.TotalAmountWithoutVAT = headerModel.TotalAmountWithoutVAT;
+                updateEInvoiceHeader.TotalVATAmount = headerModel.TotalVATAmount;
+                updateEInvoiceHeader.TotalAmountWithVAT = headerModel.TotalAmountWithVAT;
+                updateEInvoiceHeader.TotalAmountWithVATFrn = headerModel.TotalAmountWithVATFrn;
+                updateEInvoiceHeader.TotalAmountWithVATInWords = headerModel.TotalAmountWithVATInWords;
+                updateEInvoiceHeader.Status = (byte)headerModel.Status;
+                updateEInvoiceHeader.RecModifiedAt = DateTime.Now;
+                updateEInvoiceHeader.RecModifiedBy = (long)user.ProviderUserKey;
+                updateEInvoiceHeader.Version++;
+
+                foreach (var eInvoiceLine in eInvoiceLines)
+                {
+                    if (eInvoiceLine.Id == 0 || eInvoiceLine.Id == null)
+                        updateEInvoiceHeader.EInvoiceLines.Add(new DataAccess.EInvoiceLine()
+                        {
+                            ClientId = clientId,
+                            OrganizationId = organizationId,
+                            LineNumber = eInvoiceLine.LineNumber,
+                            ItemId = eInvoiceLine.ItemId,
+                            ItemCode = eInvoiceLine.ItemCode,
+                            ItemName = eInvoiceLine.ItemName,
+                            UnitId = eInvoiceLine.UnitId,
+                            UnitCode = eInvoiceLine.UnitCode,
+                            UnitName = eInvoiceLine.UnitName,
+                            Quantity = eInvoiceLine.Quantity,
+                            UnitPrice = eInvoiceLine.UnitPrice,
+                            ItemTotalAmountWithoutVAT = eInvoiceLine.ItemTotalAmountWithoutVAT,
+                            ItemTotalAmountWithoutVATLCY = eInvoiceLine.ItemTotalAmountWithVATLCY,
+                            VatId = eInvoiceLine.VatId,
+                            VATPercentage = eInvoiceLine.VATPercentage,
+                            VATAmount = eInvoiceLine.VATAmount,
+                            VATAmountLCY = eInvoiceLine.VATAmountLCY,
+                            ItemTotalAmountWithVAT = eInvoiceLine.ItemTotalAmountWithVAT,
+                            ItemTotalAmountWithVATLCY = eInvoiceLine.ItemTotalAmountWithVATLCY,
+                        });
+                    else
+                    {
+                        updateEInvoiceHeader.EInvoiceLines.Where(c => c.Id == eInvoiceLine.Id)
+                            .ForEach(x =>
+                            {
+                                x.LineNumber = eInvoiceLine.LineNumber;
+                                x.ItemId = eInvoiceLine.ItemId;
+                                x.ItemCode = eInvoiceLine.ItemCode;
+                                x.ItemName = eInvoiceLine.ItemName;
+                                x.UnitId = eInvoiceLine.UnitId;
+                                x.UnitCode = eInvoiceLine.UnitCode;
+                                x.UnitName = eInvoiceLine.UnitName;
+                                x.Quantity = eInvoiceLine.Quantity;
+                                x.UnitPrice = eInvoiceLine.UnitPrice;
+                                x.ItemTotalAmountWithoutVAT = eInvoiceLine.ItemTotalAmountWithoutVAT;
+                                x.ItemTotalAmountWithoutVATLCY = eInvoiceLine.ItemTotalAmountWithoutVATLCY;
+                                x.VatId = eInvoiceLine.VatId;
+                                x.VATPercentage = eInvoiceLine.VATPercentage;
+                                x.VATAmount = eInvoiceLine.VATAmount;
+                                x.VATAmountLCY = eInvoiceLine.VATAmountLCY;
+                                x.ItemTotalAmountWithVAT = eInvoiceLine.ItemTotalAmountWithVAT;
+                                x.ItemTotalAmountWithVATLCY = eInvoiceLine.ItemTotalAmountWithVATLCY;
+                            });
+                    }
+                }
+
+                foreach (var eInvoiceLine in updateEInvoiceHeader.EInvoiceLines.Where(x => eInvoiceLines.All(u => u.Id != x.Id && u.Id != 0 && u.Id.HasValue)).ToList())
+                {
+                    updateEInvoiceHeader.EInvoiceLines.Remove(eInvoiceLine);
+                    this.repository.DataContext.EInvoiceLines.Remove(eInvoiceLine); //this.repository.DataContext.Entry(salesPriceRemove).State = EntityState.Deleted;
+                }
+
+                try
+                {
+                    var updateEntity = this.repository.Update(updateEInvoiceHeader);
+                    headerModel.Id = updateEntity.Id;
+                    headerModel.Version = updateEntity.Version;
+                }
+                catch (Exception ex)
+                {
+                    return this.Direct(false, ex.Message);
+                }
+
+            }
+            else //Add New
+            {
+                headerModel.Version = 1;
+
+                var newEInvoiceHeader = new DataAccess.EInvoiceHeader()
+                {
+                    ClientId = clientId,
+                    OrganizationId = organizationId,
+                    FormTypeId = headerModel.FormTypeId,
+                    OriginalInvoiceId = headerModel.OriginalInvoiceId,
+                    InvoiceNumber = headerModel.InvoiceNumber,
+                    InvoiceIssuedDate = headerModel.InvoiceIssuedDate,
+                    ContractNumber = headerModel.ContractNumber,
+                    ContractDate = headerModel.ContractDate,
+                    Description = headerModel.Description,
+                    CurrencyId = headerModel.CurrencyId,
+                    ExchangeRate = headerModel.ExchangeRate,
+                    InvoiceNote = headerModel.InvoiceNote,
+                    AdjustmentType = headerModel.AdjustmentType,
+                    AdditionalReferenceDesc = headerModel.AdditionalReferenceDesc,
+                    AdditionalReferenceDate = headerModel.AdditionalReferenceDate,
+                    BuyerId = headerModel.BuyerId,
+                    BuyerDisplayName = headerModel.BuyerDisplayName,
+                    BuyerLegalName = headerModel.BuyerLegalName,
+                    BuyerTaxCode = headerModel.BuyerTaxCode,
+                    BuyerAddressLine = headerModel.BuyerAddressLine,
+                    BuyerPostalCode = headerModel.BuyerPostalCode,
+                    BuyerDistrictName = headerModel.BuyerDistrictName,
+                    BuyerCityName = headerModel.BuyerCityName,
+                    BuyerCountryCode = headerModel.BuyerCountryCode,
+                    BuyerPhoneNumber = headerModel.BuyerPhoneNumber,
+                    BuyerFaxNumber = headerModel.BuyerFaxNumber,
+                    BuyerEmail = headerModel.BuyerEmail,
+                    BuyerBankName = headerModel.BuyerBankName,
+                    BuyerBankAccount = headerModel.BuyerBankAccount,
+
+                    SellerLegalName = headerModel.SellerLegalName,
+                    SellerTaxCode = headerModel.SellerTaxCode,
+                    SellerAddressLine = headerModel.SellerAddressLine,
+                    SellerPostalCode = headerModel.SellerPostalCode,
+                    SellerDistrictName = headerModel.SellerDistrictName,
+                    SellerCityName = headerModel.SellerCityName,
+                    SellerCountryCode = headerModel.SellerCountryCode,
+                    SellerPhoneNumber = headerModel.SellerPhoneNumber,
+                    SellerFaxNumber = headerModel.SellerFaxNumber,
+                    SellerEmail = headerModel.SellerEmail,
+                    SellerBankName = headerModel.SellerBankName,
+                    SellerBankAccount = headerModel.SellerBankAccount,
+                    SellerContactPersonName = headerModel.SellerContactPersonName,
+                    SellerSignedPersonName = headerModel.SellerSignedPersonName,
+
+                    PaymentMethodName = headerModel.BuyerDisplayName,
+
+                    SumOfTotalLineAmountWithoutVAT = headerModel.TotalAmountWithoutVAT,
+                    TotalAmountWithoutVAT = headerModel.TotalAmountWithoutVAT,
+                    TotalVATAmount = headerModel.TotalVATAmount,
+                    TotalAmountWithVAT = headerModel.TotalAmountWithVAT,
+                    TotalAmountWithVATFrn = headerModel.TotalAmountWithVATFrn,
+                    TotalAmountWithVATInWords = headerModel.TotalAmountWithVATInWords,
+
+                    Status = (byte)headerModel.Status,
+                    Version = 1,
+                    RecModifiedAt = DateTime.Now,
+                    RecCreatedBy = (long)user.ProviderUserKey,
+                    RecCreatedAt = DateTime.Now,
+                    RecModifiedBy = (long)user.ProviderUserKey
+                };
+
+                newEInvoiceHeader.EInvoiceLines = eInvoiceLines
+                    .Select(eInvoiceLine => new DataAccess.EInvoiceLine()
+                    {
+                        ClientId = clientId,
+                        OrganizationId = organizationId,
+                        LineNumber = eInvoiceLine.LineNumber,
+                        ItemId = eInvoiceLine.ItemId,
+                        ItemCode = eInvoiceLine.ItemCode,
+                        ItemName = eInvoiceLine.ItemName,
+                        UnitId = eInvoiceLine.UnitId,
+                        UnitCode = eInvoiceLine.UnitCode,
+                        UnitName = eInvoiceLine.UnitName,
+                        Quantity = eInvoiceLine.Quantity,
+                        UnitPrice = eInvoiceLine.UnitPrice,
+                        ItemTotalAmountWithoutVAT = eInvoiceLine.ItemTotalAmountWithoutVAT,
+                        ItemTotalAmountWithoutVATLCY = eInvoiceLine.ItemTotalAmountWithVATLCY,
+                        VatId = eInvoiceLine.VatId,
+                        VATPercentage = eInvoiceLine.VATPercentage,
+                        VATAmount = eInvoiceLine.VATAmount,
+                        VATAmountLCY = eInvoiceLine.VATAmountLCY,
+                        ItemTotalAmountWithVAT = eInvoiceLine.ItemTotalAmountWithVAT,
+                        ItemTotalAmountWithVATLCY = eInvoiceLine.ItemTotalAmountWithVATLCY
+                    }).ToList();
+                
+                try
+                {
+                    var newEntity = this.repository.AddNew(newEInvoiceHeader);
+                    headerModel.Id = newEntity.Id;
+                    headerModel.Version = newEntity.Version;
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    return this.Direct(false, ex.DbEntityValidationExceptionToString());
+                }
+                catch (Exception ex)
+                {
+                    return this.Direct(false, ex.Message);
+                }
+            }
+
+            //Store storePurchaseInvoiceList = X.GetCmp<Store>("StorePurchaseInvoiceList");
+            //storePurchaseInvoiceList.Reload();
+
+            return this.Direct(new { Id = headerModel.Id, Version = headerModel.Version });
         }
 
         public ActionResult LineEdit(int lineNo, string field, string oldValue, string newValue, string recordData,
             string headerData)
         {
+            if (String.Compare(oldValue, newValue, StringComparison.CurrentCultureIgnoreCase) == 0)
+                return this.Direct();
+
+            MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
+            long clientId = user.ClientId ?? 0;
+            long organizationId = user.OrganizationId ?? 0;
+
+            if (clientId == 0 || organizationId == 0)
+            {
+                return this.Direct(false, Resources.Resources.User_dont_have_Client_or_Organization_Please_set);
+            }
+
+            Client client = (new ClientRepository()).Get(User);
+            long currencyLcyId = client.CurrencyLcyId ?? 0;
+            if (currencyLcyId == 0)
+                return this.Direct(false, "ERROR : Please set Client CurrencyLcy first");
+
+            EInvHeaderEditViewModel eInvoiceHeaderEditViewModel = JSON.Deserialize<EInvHeaderEditViewModel>(headerData, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+
+            EInvLineEditViewModel eInvoiceLineEditViewModel = JSON.Deserialize<EInvLineEditViewModel>(recordData, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+
+            ModelProxy record = X.GetCmp<Store>("EInvoiceLineGridStore").GetById(lineNo);
+
+            switch (field)
+            {
+                case "ItemId":
+                    {
+                        var itemRepository = new ItemRepository();
+                        var itemId = Convert.ToInt64(newValue);
+                        var item = itemRepository.Get(c => c.Id == itemId, new string[] { "Organization", "Vat", "Vat.Organization" }).First();
+                        var itemModel = new LookupViewModel()
+                        {
+                            Id = item.Id,
+                            Code = item.Code,
+                            Description = item.Description,
+                            OrganizationCode = item.Organization.Code,
+                            Status = (DefaultStatusType)item.Status
+                        };
+
+                        record.Set("Item", itemModel);
+                        var itemUomRepository = new ItemUomRepository();
+                        var itemUom = itemUomRepository.Get(c => c.ItemId == itemId && c.UomId == item.SalesUomId,
+                            new string[] { "Uom" }).First();
+                        var uomModel = new ItemUomLookUpViewModel
+                        {
+                            Code = itemUom.Uom.Code,
+                            UomId = itemUom.UomId,
+                            Description = itemUom.Uom.Description,
+                            QtyPerUom = itemUom.QtyPerUom
+                        };
+                        record.Set("ItemName", itemModel.Description);
+                        record.Set("Uom", uomModel);
+                        record.Set("UnitId", uomModel.UomId);
+                        record.Set("QtyPerUom", uomModel.QtyPerUom);
+
+                        if (item.Vat != null)
+                        {
+                            var vatModel = new VatLookupViewModel
+                            {
+                                Id = item.VatId ?? 0,
+                                Code = item.Vat.Code,
+                                Description = item.Vat.Description,
+                                OrganizationCode = item.Vat.Organization.Code,
+                                Status = (DefaultStatusType)item.Vat.Status
+                            };
+
+                            record.Set("Vat", vatModel);
+                            record.Set("VatId", vatModel.Id);
+                            record.Set("VATPercentage", item.Vat.VatPercentage);
+                        }
+                        break;
+                    }
+                case "UnitId":
+                    {
+                        var uomId = Convert.ToInt64(newValue);
+                        var itemUomRepository = new ItemUomRepository();
+                        var itemUom = itemUomRepository.Get(c => c.ItemId == eInvoiceLineEditViewModel.ItemId && c.UomId == uomId,
+                            new string[] { "Uom" }).First();
+                        var uomModel = new ItemUomLookUpViewModel()
+                        {
+                            UomId = itemUom.Id,
+                            Code = itemUom.Uom.Code,
+                            Description = itemUom.Uom.Description,
+                            QtyPerUom = itemUom.QtyPerUom
+                        };
+                        record.Set("Uom", uomModel);
+                        record.Set("UnitId", uomModel.UomId);
+                        record.Set("QtyPerUom", uomModel.QtyPerUom);
+                        break;
+                    }
+                case "VatId":
+                    {
+                        var vatRepository = new VatRepository();
+                        var vatId = Convert.ToInt64(newValue);
+                        var vat = vatRepository.Get(c => c.Id == vatId, new string[] { "Organization" }).First();
+                        var vatModel = new LookupViewModel()
+                        {
+                            Id = vat.Id,
+                            Code = vat.Code,
+                            Description = vat.Description,
+                            OrganizationCode = vat.Organization.Code,
+                            Status = (DefaultStatusType)vat.Status
+                        };
+
+                        record.Set("Vat", vatModel);
+                        record.Set("VATPercentage", vat.VatPercentage);
+
+                        eInvoiceLineEditViewModel.VatId = vat.Id;
+                        eInvoiceLineEditViewModel.VATPercentage = vat.VatPercentage;
+
+                        var eInvoiceLineRepository = new EInvoiceLineRepository();
+                        eInvoiceLineRepository.Update("VATPercentage", currencyLcyId, ref eInvoiceHeaderEditViewModel, ref eInvoiceLineEditViewModel);
+
+                        eInvoiceLineRepository.UpdateRecord(eInvoiceLineEditViewModel, ref record);
+                        break;
+                    }
+                
+                case "Quantity":
+                case "UnitPrice":
+                case "ItemTotalAmountWithoutVAT":
+                case "UnitPriceLCY":
+                case "ItemTotalAmountWithoutVATLCY":
+                case "VATAmount":
+                case "VATAmountLCY":
+                    {
+                        var eInvoiceLineRepository = new EInvoiceLineRepository();
+                        eInvoiceLineRepository.Update(field, currencyLcyId, ref eInvoiceHeaderEditViewModel,
+                            ref eInvoiceLineEditViewModel);
+
+                        eInvoiceLineRepository.UpdateRecord(eInvoiceLineEditViewModel, ref record);
+                        break;
+                    }
+            }
+            record.Commit();
             return this.Direct();
         }
 
@@ -316,7 +725,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 LineNumber = lineNumber
             };
 
-            Store invoiceLineGridStore = X.GetCmp<Store>("InvoiceLineGridStore");
+            Store invoiceLineGridStore = X.GetCmp<Store>("EInvoiceLineGridStore");
             invoiceLineGridStore.Add(newItem);
 
             return this.Direct(new { LineNo = lineNumber });

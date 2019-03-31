@@ -130,6 +130,28 @@ var showPreviewReport = function(fileNameOfSnapshotReport) {
     }).show();
 };
 
+var showHtmlPreviewReport = function (fileHtmlRenderName) {
+    Ext.create("Ext.window.Window", {
+        renderTo: Ext.net.ResourceMgr.getRenderTarget(),
+        title: "Report Preview",
+        width: 200,
+        frame: true,
+        items: [{
+            loader:
+            {
+                renderer: 'frame',
+                url: baseURL + 'Resources/PrintReports/EInvoices/' + fileHtmlRenderName +'.html'
+            }
+        }],
+        layout: 'fit',
+        bodyPadding: 0,
+        closeAction: 'destroy',
+        iconCls: '#Printer',
+        maximized: true,
+        modal: true
+    }).show();
+};
+
 var CashReceipt = {
     CorrespAccountRenderer: function(value, metadata, record, rowIndex, colIndex, store) {
         if (Ext.isDefined(record.data.CorrespAccount) && record.data.CorrespAccount !== null && value > 0) {
@@ -455,7 +477,7 @@ var EInvoice = {
                     field.store.add(e.record.data.Item);
                 }
                 break;
-            case "UomId":
+            case "UnitId":
                 field.allQuery = e.record.get('ItemId');
                 //field.store.id = e.record.data.UomId;
                 if (e.record.data.Uom !== null) {
@@ -472,22 +494,28 @@ var EInvoice = {
     },
 
     CalcHeaderTotal: function (grid) {
-        var sumAmount = 0;
-        var sumAmountLCY = 0;
+        var sumItemTotalAmountWithoutVAT = 0;
+        var sumVATAmount = 0;
+        var sumItemTotalAmountWithVAT = 0;
 
         grid.getStore().each(function (record) {
-            var v = (record.get("Amount") + "").replace(/\./g, '').replace(',', '.');
-            sumAmount += parseFloat(v);
+            var v = (record.get("ItemTotalAmountWithoutVAT") + "").replace(/\./g, '').replace(',', '.');
+            sumItemTotalAmountWithoutVAT += parseFloat(v);
 
-            v = (record.get("AmountLCY") + "").replace(/\./g, '').replace(',', '.');
-            sumAmountLCY += parseFloat(v);
+            v = (record.get("VATAmount") + "").replace(/\./g, '').replace(',', '.');
+            sumVATAmount += parseFloat(v);
+
+            v = (record.get("ItemTotalAmountWithVAT") + "").replace(/\./g, '').replace(',', '.');
+            sumItemTotalAmountWithVAT += parseFloat(v);
         });
 
-        var totalAmountId = "TotalAmount";
-        var totalAmountLCYId = "TotalAmountLCY";
+        var totalTotalAmountWithoutVATId = "TotalAmountWithoutVAT";
+        var totalTotalVATAmountId = "TotalVATAmount";
+        var totalAmountWithVATId = "TotalAmountWithVAT";
 
-        Ext.getCmp(totalAmountId).setRawValue(Ext.util.Format.number(sumAmount, '0.000,00/i'));
-        Ext.getCmp(totalAmountLCYId).setRawValue(Ext.util.Format.number(sumAmountLCY, '0.000,00/i'));
+        Ext.getCmp(totalTotalAmountWithoutVATId).setRawValue(Ext.util.Format.number(sumItemTotalAmountWithoutVAT, '0.000,00/i'));
+        Ext.getCmp(totalTotalVATAmountId).setRawValue(Ext.util.Format.number(sumVATAmount, '0.000,00/i'));
+        Ext.getCmp(totalAmountWithVATId).setRawValue(Ext.util.Format.number(sumItemTotalAmountWithVAT, '0.000,00/i'));
     }
 
 };

@@ -137,7 +137,9 @@ namespace MyERP.Web.Models
 
         [Display(Name = "Invoice Series")]
         [Required]
-        public long? FormTypeId { get; set; }
+        public long FormTypeId { get; set; }
+
+        public long? OriginalInvoiceId { get; set; }
 
         [Display(Name = "Invoice Number")]
         public string InvoiceNumber { get; set; }
@@ -145,6 +147,13 @@ namespace MyERP.Web.Models
         [Display(Name = "Invoice Issued Date")]
         [Required]
         public DateTime InvoiceIssuedDate { get; set; }
+
+        [Display(Name = "Contract Number")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String ContractNumber { get; set; }
+
+        [Display(Name = "Contract Date")]
+        public DateTime? ContractDate { get; set; }
 
         [Display(Name = "Buyer Code")]
         [Required]
@@ -205,9 +214,81 @@ namespace MyERP.Web.Models
         [StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String BuyerBankAccount { get; set; }
 
+        [Display(Name = "Seller Legal Name")]
+        [Required]
+        [StringLength(255, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerLegalName { get; set; }
+
+        [Display(Name = "Seller Tax Code")]
+        [Required]
+        [StringLength(14, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerTaxCode { get; set; }
+
+        [Display(Name = "Seller Address")]
+        [StringLength(255, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerAddressLine { get; set; }
+
+        [Display(Name = "Buyer Postal Code")]
+        [StringLength(10, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerPostalCode { get; set; }
+
+        [Display(Name = "Seller District Name")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerDistrictName { get; set; }
+
+        [Display(Name = "Seller City Name")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerCityName { get; set; }
+
+        [Display(Name = "Seller Country Code")]
+        [StringLength(2, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerCountryCode { get; set; }
+
+        [Display(Name = "Seller Phone Number")]
+        [StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerPhoneNumber { get; set; }
+
+        [Display(Name = "Seller Fax Number")]
+        [StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerFaxNumber { get; set; }
+
+        [Display(Name = "Seller Email")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerEmail { get; set; }
+
+        [Display(Name = "Seller Bank Name")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerBankName { get; set; }
+
+        [Display(Name = "Seller Bank Account")]
+        [StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerBankAccount { get; set; }
+
+        [Display(Name = "Seller Contact Person Name")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerContactPersonName { get; set; }
+
+        [Display(Name = "Seller Signed Person Name")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerSignedPersonName { get; set; }
+
+        [Display(Name = "Invoice Note")]
+        [StringLength(400, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String InvoiceNote { get; set; }
+
         [Display(Name = "Description")]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String Description { get; set; }
+
+        [Display(Name = "Adjustment Type")]
+        public SByte AdjustmentType { get; set; } /*1: Hóa đơn gốc - 3: Hóa đơn thay thế - 5: Hóa đơn điều chỉnh - 7: Hóa đơn  xóa bỏ - 9: Hóa đơn điều chỉnh chiết khấu*/
+
+        [Display(Name = "Additional Reference Desc")]
+        [StringLength(255, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String AdditionalReferenceDesc { get; set; }
+
+        [Display(Name = "Additional Reference Date")]
+        public DateTime? AdditionalReferenceDate { get; set; }
 
         [Display(Name = "Currency")]
         [Required]
@@ -218,17 +299,34 @@ namespace MyERP.Web.Models
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal ExchangeRate { get; set; }
 
+        [Display(Name = "Payment Method Name")]
+        [Required]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String PaymentMethodName { get; set; }
+
         [Display(Name = "Total Amount")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal TotalAmountWithoutVAT { get; set; }
+
+        [Display(Name = "Total Amount LCY")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal TotalAmountWithoutVATLCY { get; set; }
 
         [Display(Name = "Total Vat Amount")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal TotalVATAmount { get; set; }
 
+        [Display(Name = "Total Vat Amount LCY")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal TotalVATAmountLCY { get; set; }
+
         [Display(Name = "Total Payment")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal TotalAmountWithVAT { get; set; }
+
+        [Display(Name = "Total Payment LCY")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal TotalAmountWithVATFrn { get; set; }
 
         [Display(Name = "Total Payment In Words")]
         [StringLength(255, ErrorMessage = "The {0} must be at least {2} characters long.")]

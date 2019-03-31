@@ -15,6 +15,10 @@ namespace MyERP.Web.Models
 
         [Display(Name = "Item")]
         [Required]
+        public long ItemId { get; set; }
+
+        [Display(Name = "Item Code")]
+        [Required]
         [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String ItemCode { get; set; }
 
@@ -28,12 +32,22 @@ namespace MyERP.Web.Models
         [Required]
         [Display(Name = "UOM")]
         [StringLength(10, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public long UnitId { get; set; }
+
+        [Required]
+        [Display(Name = "UOM Code")]
+        [StringLength(10, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String UnitCode { get; set; }
 
         public ItemUomLookUpViewModel Uom { get; set; }
 
         [Display(Name = "Uom Description")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String UnitName { get; set; }
+        
+        [Display(Name = "Unit Price LCY")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal UnitPriceLCY { get; set; }
 
         [Display(Name = "Unit Price")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
@@ -47,15 +61,13 @@ namespace MyERP.Web.Models
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal ItemTotalAmountWithoutVAT { get; set; }
         
-        /*
-        [Display(Name = "Unit Price LCY")]
+        [Display(Name = "Line Amount LCY")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
-        public Decimal UnitPriceLCY { get; set; }
-        */
-
+        public Decimal ItemTotalAmountWithoutVATLCY { get; set; }
+        
         [Display(Name = "Vat Identity")]
         [Required]
-        public long? VatId { get; set; }
+        public long VatId { get; set; }
 
         public LookupViewModel Vat { get; set; }
 
@@ -67,10 +79,16 @@ namespace MyERP.Web.Models
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal VATAmount { get; set; }
 
-        /*
-        [Display(Name = "Amount LCY")]
+        [Display(Name = "Vat Amount LCY")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
-        public Decimal ItemTotalAmountWithoutVATLCY { get; set; }
-        */
+        public Decimal VATAmountLCY { get; set; }
+
+        [Display(Name = "Payment Amount")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal ItemTotalAmountWithVAT { get; set; }
+
+        [Display(Name = "Payment Amount LCY")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal ItemTotalAmountWithVATLCY { get; set; }
     }
 }
