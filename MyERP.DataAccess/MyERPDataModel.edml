@@ -1054,6 +1054,10 @@
             <End Role="currency" EntitySet="currencies" />
             <End Role="einvoice_header" EntitySet="einvoice_headers" />
           </AssociationSet>
+          <AssociationSet Name="FK_einvoice_line_item" Association="MyERP.DataAccess.Store.FK_einvoice_line_item">
+            <End Role="item" EntitySet="items" />
+            <End Role="einvoice_line" EntitySet="einvoice_lines" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -2445,6 +2449,12 @@
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="vat_id" Type="bigint" Nullable="false" />
+          <Property Name="item_id" Type="bigint" Nullable="false" />
+          <Property Name="unit_id" Type="bigint" Nullable="false" />
+          <Property Name="item_total_amount_without_vat_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="vat_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="item_total_amount_with_vat" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="item_total_amount_with_vatlcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
         </EntityType>
         <EntityType Name="einvoice_signed">
           <Key>
@@ -5498,6 +5508,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_einvoice_line_item">
+          <End Role="item" Type="MyERP.DataAccess.Store.item" Multiplicity="1" />
+          <End Role="einvoice_line" Type="MyERP.DataAccess.Store.einvoice_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einvoice_line">
+              <PropertyRef Name="item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -6556,6 +6578,10 @@
           <AssociationSet Name="Currency_EInvoiceHeaderSet" Association="MyERP.DataAccess.Currency_EInvoiceHeader">
             <End Role="Currency" EntitySet="Currencies" />
             <End Role="EInvoiceHeaders" EntitySet="EInvoiceHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="Item_EInvoiceLineSet" Association="MyERP.DataAccess.Item_EInvoiceLine">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="EInvoiceLines" EntitySet="EInvoiceLines" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="User" ed:Guid="9db53af2-5944-494f-aba3-885778b03531">
@@ -8193,16 +8219,22 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="1af1917e-c537-4aed-b0e5-337ab9ccbcf7" />
           <Property Name="EInvoiceHeaderId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="d8686f17-5375-4790-a9b7-fbdb5044a587" />
           <Property Name="LineNumber" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="eb4626cb-b263-496d-918c-436dfe0f4eff" />
+          <Property Name="ItemId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="6a85bc85-afac-47aa-8909-617d346944b3" />
           <Property Name="ItemCode" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="99701261-e576-4cbd-b832-7ca77b3fe348" />
           <Property Name="ItemName" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="443c308f-040a-4cc1-ac29-d38c4135f97c" />
+          <Property Name="UnitId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f3329aea-2be4-477b-b943-7466049f887f" />
           <Property Name="UnitCode" Type="String" Nullable="false" MaxLength="10" Unicode="true" ed:ValidateMaxLength="10" ed:ValidateRequired="true" ed:Guid="3c3624fa-dab2-424a-9b30-0b23c18f458a" />
           <Property Name="UnitName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="862ccf76-7177-485b-a76a-5b30ef87730a" />
           <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="ddb9ef02-1780-45a7-8415-29e8964b32f4" />
           <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="5f37eefc-cc6d-42d0-a1cc-287a0cdbcffb" />
           <Property Name="ItemTotalAmountWithoutVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="4e51a10d-c0a2-4112-b919-6360e9bc22d8" />
+          <Property Name="ItemTotalAmountWithoutVATLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="f80a7398-b428-49bb-891d-01d57a4d1ee0" />
           <Property Name="VatId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5af79947-4552-4a9c-abcc-7fc88defc701" />
           <Property Name="VATPercentage" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="14ede8e2-08fc-4057-9b2f-35b0cf641d15" />
           <Property Name="VATAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="4fab86a8-87df-4917-9fda-e036484b6b24" />
+          <Property Name="VATAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="8ddb18ed-46d6-4b49-acf8-f7f0a11d4d12" />
+          <Property Name="ItemTotalAmountWithVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="aa6916a8-d96e-4f4d-921f-e5de7faa70fe" />
+          <Property Name="ItemTotalAmountWithVATLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="ee5d6740-daa0-429c-a2f8-94c28354aff1" />
           <Property Name="Promotion" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="27aa2f00-c0be-41a4-af75-6fac887ed836" />
           <Property Name="AdjustmentVATAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="cde940f7-27b1-40a8-bbc4-aa3446d7ed10" />
           <Property Name="IsIncreaseItem" Type="Boolean" ed:ValidateRequired="false" ed:Guid="2721e780-70ab-4a6f-9f3a-8335028123c0" />
@@ -8212,6 +8244,7 @@
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_EInvoiceLine" FromRole="EInvoiceLines" ToRole="Client" ed:Guid="8a29fbb1-375d-4ea3-aa5d-38bc5c5feaed" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_EInvoiceLine" FromRole="EInvoiceLines" ToRole="Organization" ed:Guid="0d6dda13-0253-48ed-b0ed-291f2d6c21ad" />
           <NavigationProperty Name="Vat" Relationship="MyERP.DataAccess.Vat_EInvoiceLine" FromRole="EInvoiceLines" ToRole="Vat" ed:Guid="e03547a1-a936-4836-9cff-94bb29fd3abe" />
+          <NavigationProperty Name="Item" Relationship="MyERP.DataAccess.Item_EInvoiceLine" FromRole="EInvoiceLines" ToRole="Item" ed:Guid="ba50451a-3482-4182-9720-81e1c8ec23be" />
         </EntityType>
         <EntityType Name="EInvoiceSigned" ed:Guid="7dc8f22b-c861-4eb1-b2d4-8ca5f8508587">
           <Key>
@@ -11280,6 +11313,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Item_EInvoiceLine" ed:Guid="a9f91919-5b81-4232-ae3d-5ad9ac14636f">
+          <End Role="Item" Type="MyERP.DataAccess.Item" Multiplicity="1" />
+          <End Role="EInvoiceLines" Type="MyERP.DataAccess.EInvoiceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvoiceLines">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- MSL content -->
@@ -12632,6 +12677,12 @@
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="VatId" ColumnName="vat_id" />
+                <ScalarProperty Name="ItemId" ColumnName="item_id" />
+                <ScalarProperty Name="UnitId" ColumnName="unit_id" />
+                <ScalarProperty Name="ItemTotalAmountWithoutVATLCY" ColumnName="item_total_amount_without_vat_lcy" />
+                <ScalarProperty Name="VATAmountLCY" ColumnName="vat_amount_lcy" />
+                <ScalarProperty Name="ItemTotalAmountWithVAT" ColumnName="item_total_amount_with_vat" />
+                <ScalarProperty Name="ItemTotalAmountWithVATLCY" ColumnName="item_total_amount_with_vatlcy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -222,13 +222,25 @@ namespace MyERP.Web.Models
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal TotalAmountWithoutVAT { get; set; }
 
+        [Display(Name = "Total Amount LCY")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal TotalAmountWithoutVATLCY { get; set; }
+
         [Display(Name = "Total Vat Amount")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal TotalVATAmount { get; set; }
 
+        [Display(Name = "Total Vat Amount LCY")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal TotalVATAmountLCY { get; set; }
+
         [Display(Name = "Total Payment")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public Decimal TotalAmountWithVAT { get; set; }
+
+        [Display(Name = "Total Payment LCY")]
+        [DisplayFormat(DataFormatString = "{0:n2}")]
+        public Decimal TotalAmountWithVATFrn { get; set; }
 
         [Display(Name = "Total Payment In Words")]
         [StringLength(255, ErrorMessage = "The {0} must be at least {2} characters long.")]

@@ -109,6 +109,11 @@ namespace MyERP.Web.Areas.Item.Controllers
             }
         }
 
+        //public ActionResult LookupData(StoreRequestParameters parameters, string code = "")
+        //{
+        //    return this.Direct();
+        //}
+
         [HttpGet]
         public ActionResult _Maintenance(string id = null)
         {

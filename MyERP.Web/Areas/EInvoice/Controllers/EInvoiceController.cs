@@ -249,6 +249,146 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
         public ActionResult LineEdit(int lineNo, string field, string oldValue, string newValue, string recordData,
             string headerData)
         {
+            if (String.Compare(oldValue, newValue, StringComparison.CurrentCultureIgnoreCase) == 0)
+                return this.Direct();
+
+            MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
+            long clientId = user.ClientId ?? 0;
+            long organizationId = user.OrganizationId ?? 0;
+
+            if (clientId == 0 || organizationId == 0)
+            {
+                return this.Direct(false, Resources.Resources.User_dont_have_Client_or_Organization_Please_set);
+            }
+
+            Client client = (new ClientRepository()).Get(User);
+            long currencyLcyId = client.CurrencyLcyId ?? 0;
+            if (currencyLcyId == 0)
+                return this.Direct(false, "ERROR : Please set Client CurrencyLcy first");
+
+            EInvHeaderEditViewModel eInvoiceHeaderEditViewModel = JSON.Deserialize<EInvHeaderEditViewModel>(headerData, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+
+            EInvLineEditViewModel eInvoiceLineEditViewModel = JSON.Deserialize<EInvLineEditViewModel>(recordData, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+
+            ModelProxy record = X.GetCmp<Store>("EInvoiceLineGridStore").GetById(lineNo);
+
+            switch (field)
+            {
+                case "ItemId":
+                    {
+                        var itemRepository = new ItemRepository();
+                        var itemId = Convert.ToInt64(newValue);
+                        var item = itemRepository.Get(c => c.Id == itemId, new string[] { "Organization", "Vat", "Vat.Organization" }).First();
+                        var itemModel = new LookupViewModel()
+                        {
+                            Id = item.Id,
+                            Code = item.Code,
+                            Description = item.Description,
+                            OrganizationCode = item.Organization.Code,
+                            Status = (DefaultStatusType)item.Status
+                        };
+
+                        record.Set("Item", itemModel);
+                        var itemUomRepository = new ItemUomRepository();
+                        var itemUom = itemUomRepository.Get(c => c.ItemId == itemId && c.UomId == item.SalesUomId,
+                            new string[] { "Uom" }).First();
+                        var uomModel = new ItemUomLookUpViewModel
+                        {
+                            Code = itemUom.Uom.Code,
+                            UomId = itemUom.UomId,
+                            Description = itemUom.Uom.Description,
+                            QtyPerUom = itemUom.QtyPerUom
+                        };
+                        record.Set("ItemName", itemModel.Description);
+                        record.Set("Uom", uomModel);
+                        record.Set("UnitId", uomModel.UomId);
+                        record.Set("QtyPerUom", uomModel.QtyPerUom);
+
+                        if (item.Vat != null)
+                        {
+                            var vatModel = new VatLookupViewModel
+                            {
+                                Id = item.VatId ?? 0,
+                                Code = item.Vat.Code,
+                                Description = item.Vat.Description,
+                                OrganizationCode = item.Vat.Organization.Code,
+                                Status = (DefaultStatusType)item.Vat.Status
+                            };
+
+                            record.Set("Vat", vatModel);
+                            record.Set("VatId", vatModel.Id);
+                            record.Set("VATPercentage", item.Vat.VatPercentage);
+                        }
+                        break;
+                    }
+                case "UnitId":
+                    {
+                        var uomId = Convert.ToInt64(newValue);
+                        var itemUomRepository = new ItemUomRepository();
+                        var itemUom = itemUomRepository.Get(c => c.ItemId == eInvoiceLineEditViewModel.ItemId && c.UomId == uomId,
+                            new string[] { "Uom" }).First();
+                        var uomModel = new ItemUomLookUpViewModel()
+                        {
+                            UomId = itemUom.Id,
+                            Code = itemUom.Uom.Code,
+                            Description = itemUom.Uom.Description,
+                            QtyPerUom = itemUom.QtyPerUom
+                        };
+                        record.Set("Uom", uomModel);
+                        record.Set("UnitId", uomModel.UomId);
+                        record.Set("QtyPerUom", uomModel.QtyPerUom);
+                        break;
+                    }
+                case "VatId":
+                    {
+                        var vatRepository = new VatRepository();
+                        var vatId = Convert.ToInt64(newValue);
+                        var vat = vatRepository.Get(c => c.Id == vatId, new string[] { "Organization" }).First();
+                        var vatModel = new LookupViewModel()
+                        {
+                            Id = vat.Id,
+                            Code = vat.Code,
+                            Description = vat.Description,
+                            OrganizationCode = vat.Organization.Code,
+                            Status = (DefaultStatusType)vat.Status
+                        };
+
+                        record.Set("Vat", vatModel);
+                        record.Set("VATPercentage", vat.VatPercentage);
+
+                        eInvoiceLineEditViewModel.VatId = vat.Id;
+                        eInvoiceLineEditViewModel.VATPercentage = vat.VatPercentage;
+
+                        var eInvoiceLineRepository = new EInvoiceLineRepository();
+                        eInvoiceLineRepository.Update("VATPercentage", currencyLcyId, ref eInvoiceHeaderEditViewModel, ref eInvoiceLineEditViewModel);
+
+                        eInvoiceLineRepository.UpdateRecord(eInvoiceLineEditViewModel, ref record);
+                        break;
+                    }
+                
+                case "Quantity":
+                case "UnitPrice":
+                case "ItemTotalAmountWithoutVAT":
+                case "UnitPriceLCY":
+                case "ItemTotalAmountWithoutVATLCY":
+                case "VATAmount":
+                case "VATAmountLCY":
+                    {
+                        var eInvoiceLineRepository = new EInvoiceLineRepository();
+                        eInvoiceLineRepository.Update(field, currencyLcyId, ref eInvoiceHeaderEditViewModel,
+                            ref eInvoiceLineEditViewModel);
+
+                        eInvoiceLineRepository.UpdateRecord(eInvoiceLineEditViewModel, ref record);
+                        break;
+                    }
+            }
+            record.Commit();
             return this.Direct();
         }
 
@@ -316,7 +456,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 LineNumber = lineNumber
             };
 
-            Store invoiceLineGridStore = X.GetCmp<Store>("InvoiceLineGridStore");
+            Store invoiceLineGridStore = X.GetCmp<Store>("EInvoiceLineGridStore");
             invoiceLineGridStore.Add(newItem);
 
             return this.Direct(new { LineNo = lineNumber });
