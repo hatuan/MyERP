@@ -281,7 +281,7 @@ namespace MyERP.Web.Models
         public String Description { get; set; }
 
         [Display(Name = "Adjustment Type")]
-        public SByte AdjustmentType { get; set; } /*1: Hóa đơn gốc - 3: Hóa đơn thay thế - 5: Hóa đơn điều chỉnh - 7: Hóa đơn  xóa bỏ - 9: Hóa đơn điều chỉnh chiết khấu*/
+        public Byte AdjustmentType { get; set; } /*1: Hóa đơn gốc - 3: Hóa đơn thay thế - 5: Hóa đơn điều chỉnh - 7: Hóa đơn  xóa bỏ - 9: Hóa đơn điều chỉnh chiết khấu*/
 
         [Display(Name = "Additional Reference Desc")]
         [StringLength(255, ErrorMessage = "The {0} must be at least {2} characters long.")]

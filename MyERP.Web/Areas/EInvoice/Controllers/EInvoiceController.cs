@@ -131,6 +131,9 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 InvoiceIssuedDate = preference.WorkingDate,
                 CurrencyId = currencyLcyId,
                 ExchangeRate = 1,
+                SellerLegalName = client.Description,
+                SellerTaxCode = client.TaxCode,
+                SellerAddressLine = client.Adress,
                 EInvoiceLines = new List<EInvLineEditViewModel>(),
                 Status = EInvoiceDocumentStatusType.Draft
             };
@@ -157,6 +160,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                                                                                    UnitPrice = eInvoiceLine.UnitPrice,
                                                                                    Quantity = eInvoiceLine.Quantity,
                                                                                    ItemTotalAmountWithoutVAT = eInvoiceLine.ItemTotalAmountWithoutVAT,
+                                                                                   ItemTotalAmountWithoutVATLCY = eInvoiceLine.ItemTotalAmountWithoutVATLCY,
                                                                                    VatId = eInvoiceLine.VatId,
                                                                                    Vat = eInvoiceLine.Vat == null ? null : new LookupViewModel()
                                                                                    {
@@ -168,6 +172,8 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                                                                                    },
                                                                                    VATPercentage = eInvoiceLine.VATPercentage,
                                                                                    VATAmount = eInvoiceLine.VATAmount,
+                                                                                   ItemTotalAmountWithVAT = eInvoiceLine.ItemTotalAmountWithVAT,
+                                                                                   ItemTotalAmountWithVATLCY = eInvoiceLine.ItemTotalAmountWithVATLCY,
                                                                                }).ToList();
 
                 model = new EInvHeaderEditViewModel()
@@ -190,10 +196,28 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     BuyerEmail = entity.BuyerEmail,
                     BuyerBankName = entity.BuyerBankName,
                     BuyerBankAccount = entity.BuyerBankAccount,
+                    SellerLegalName = entity.SellerLegalName,
+                    SellerTaxCode = entity.SellerTaxCode,
+                    SellerAddressLine = entity.SellerAddressLine,
+                    SellerPostalCode = entity.SellerPostalCode,
+                    SellerDistrictName = entity.SellerDistrictName,
+                    SellerCityName = entity.SellerCityName,
+                    SellerCountryCode = entity.SellerCountryCode,
+                    SellerPhoneNumber = entity.SellerPhoneNumber,
+                    SellerFaxNumber = entity.SellerFaxNumber,
+                    SellerEmail = entity.SellerEmail,
+                    SellerBankName = entity.SellerBankName,
+                    SellerBankAccount = entity.SellerBankAccount,
+                    SellerContactPersonName = entity.SellerContactPersonName,
+                    SellerSignedPersonName = entity.SellerSignedPersonName,
+                    PaymentMethodName = entity.PaymentMethodName,
                     Description = entity.Description,
+                    InvoiceNote = entity.InvoiceNote,
                     TotalAmountWithoutVAT = entity.TotalAmountWithoutVAT,
                     TotalVATAmount = entity.TotalVATAmount,
                     TotalAmountWithVAT = entity.TotalAmountWithVAT,
+                    TotalAmountWithVATFrn = entity.TotalAmountWithVATFrn,
+                    TotalAmountWithVATInWords = entity.TotalAmountWithVATInWords,
                     EInvoiceLines = eInvoiceLines,
                     Status = (EInvoiceDocumentStatusType)entity.Status,
                     Version = entity.Version
@@ -319,7 +343,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 updateEInvoiceHeader.SellerContactPersonName = headerModel.SellerContactPersonName;
                 updateEInvoiceHeader.SellerSignedPersonName = headerModel.SellerSignedPersonName;
                 
-                updateEInvoiceHeader.PaymentMethodName = headerModel.BuyerDisplayName;
+                updateEInvoiceHeader.PaymentMethodName = headerModel.PaymentMethodName;
 
                 updateEInvoiceHeader.SumOfTotalLineAmountWithoutVAT = headerModel.TotalAmountWithoutVAT;
                 updateEInvoiceHeader.TotalAmountWithoutVAT = headerModel.TotalAmountWithoutVAT;
@@ -452,14 +476,14 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     SellerContactPersonName = headerModel.SellerContactPersonName,
                     SellerSignedPersonName = headerModel.SellerSignedPersonName,
 
-                    PaymentMethodName = headerModel.BuyerDisplayName,
+                    PaymentMethodName = headerModel.PaymentMethodName,
 
                     SumOfTotalLineAmountWithoutVAT = headerModel.TotalAmountWithoutVAT,
                     TotalAmountWithoutVAT = headerModel.TotalAmountWithoutVAT,
                     TotalVATAmount = headerModel.TotalVATAmount,
                     TotalAmountWithVAT = headerModel.TotalAmountWithVAT,
                     TotalAmountWithVATFrn = headerModel.TotalAmountWithVATFrn,
-                    TotalAmountWithVATInWords = headerModel.TotalAmountWithVATInWords,
+                    TotalAmountWithVATInWords = "3232322 rrewre",//headerModel.TotalAmountWithVATInWords,
 
                     Status = (byte)headerModel.Status,
                     Version = 1,
@@ -574,9 +598,12 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                             Description = itemUom.Uom.Description,
                             QtyPerUom = itemUom.QtyPerUom
                         };
+                        record.Set("ItemCode", itemModel.Code);
                         record.Set("ItemName", itemModel.Description);
                         record.Set("Uom", uomModel);
                         record.Set("UnitId", uomModel.UomId);
+                        record.Set("UnitCode", uomModel.Code);
+                        record.Set("UnitName", uomModel.Description);
                         record.Set("QtyPerUom", uomModel.QtyPerUom);
 
                         if (item.Vat != null)
@@ -611,6 +638,8 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                         };
                         record.Set("Uom", uomModel);
                         record.Set("UnitId", uomModel.UomId);
+                        record.Set("UnitCode", uomModel.Code);
+                        record.Set("UnitName", uomModel.Description);
                         record.Set("QtyPerUom", uomModel.QtyPerUom);
                         break;
                     }

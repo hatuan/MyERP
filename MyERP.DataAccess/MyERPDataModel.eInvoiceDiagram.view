@@ -500,7 +500,7 @@
                     </Size>
                     <Enabled>false</Enabled>
                     <Oid xsi:type="SchemaModelOID">
-                      <Path>9b591cd1-a022-4a37-9b03-e5290c96a5ee</Path>
+                      <Path>f6291e05-a598-46e1-9fd6-6c970ff0d8ce</Path>
                       <TypeName>EntityDeveloper.EntityFramework.EntityRelationProperty</TypeName>
                     </Oid>
                   </Model>
@@ -516,7 +516,7 @@
                     </Size>
                     <Enabled>false</Enabled>
                     <Oid xsi:type="SchemaModelOID">
-                      <Path>6cb11a3b-b372-47a6-811d-ab76a187338b</Path>
+                      <Path>00a1303e-ea8e-44c6-9970-f1654a8064a5</Path>
                       <TypeName>EntityDeveloper.EntityFramework.EntityRelationProperty</TypeName>
                     </Oid>
                   </Model>
@@ -4771,10 +4771,10 @@
         <GridSize>8 px</GridSize>
         <ViewPort>
           <ScaleMode>Free</ScaleMode>
-          <Scale>1</Scale>
+          <Scale>0.75</Scale>
           <Location>
-            <X>-362 px</X>
-            <Y>-239 px</Y>
+            <X>-617.333333333333 px</X>
+            <Y>-289.333333333333 px</Y>
           </Location>
         </ViewPort>
         <Oid xsi:type="SchemaModelOID">

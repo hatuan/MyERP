@@ -276,13 +276,22 @@
                                               de.Select.ExtraParams.Add(new Parameter("selectedData", "records[0].data", ParameterMode.Raw, true));
                                           }),
 
-                                  Html.X().TextFieldFor(m => m.BuyerDisplayName).EnforceMaxLength(true).ID("BuyerDisplayName"),
-                                  Html.X().TextFieldFor(m => m.BuyerLegalName).EnforceMaxLength(true).ID("BuyerLegalName"),
-                                  Html.X().TextFieldFor(m => m.BuyerTaxCode).EnforceMaxLength(true).ID("BuyerTaxCode"),
-                                  Html.X().TextFieldFor(m => m.BuyerAddressLine).EnforceMaxLength(true).ID("BuyerAddressLine"),
-                                  Html.X().TextFieldFor(m => m.BuyerBankName).EnforceMaxLength(true).ID("BuyerBankName"),
-                                  Html.X().TextFieldFor(m => m.BuyerBankAccount).EnforceMaxLength(true).ID("BuyerBankAccount"),
-                                  Html.X().TextFieldFor(m => m.Description).AllowBlank(false).EnforceMaxLength(true).ID("Description")),
+                                      Html.X().TextFieldFor(m => m.BuyerDisplayName).AllowBlank(false).EnforceMaxLength(true).ID("BuyerDisplayName"),
+                                      Html.X().TextFieldFor(m => m.BuyerLegalName).AllowBlank(false).EnforceMaxLength(true).ID("BuyerLegalName"),
+                                      Html.X().TextFieldFor(m => m.BuyerTaxCode).AllowBlank(false).EnforceMaxLength(true).ID("BuyerTaxCode"),
+                                      Html.X().TextFieldFor(m => m.BuyerAddressLine).AllowBlank(false).EnforceMaxLength(true).ID("BuyerAddressLine"),
+                                      Html.X().TextFieldFor(m => m.BuyerBankName).EnforceMaxLength(true).ID("BuyerBankName"),
+                                      Html.X().TextFieldFor(m => m.BuyerBankAccount).EnforceMaxLength(true).ID("BuyerBankAccount")),
+                              Html.X().Panel()
+                                      .Layout(LayoutType.Form)
+                                      .Width(600)
+                                      .Items(
+                                          Html.X().TextFieldFor(m => m.SellerLegalName).AllowBlank(false).EnforceMaxLength(true).ID("SellerLegalName"),
+                                          Html.X().TextFieldFor(m => m.SellerTaxCode).AllowBlank(false).EnforceMaxLength(true).ID("SellerTaxCode"),
+                                          Html.X().TextFieldFor(m => m.SellerAddressLine).AllowBlank(false).EnforceMaxLength(true).ID("SellerAddressLine"),
+                                          Html.X().TextFieldFor(m => m.SellerBankName).EnforceMaxLength(true).ID("SellerBankName"),
+                                          Html.X().TextFieldFor(m => m.SellerBankAccount).EnforceMaxLength(true).ID("SellerBankAccount"),
+                                          Html.X().TextFieldFor(m => m.InvoiceNote).EnforceMaxLength(true).ID("InvoiceNote")),
                             Html.X().Panel()
                                 .Layout(LayoutType.Form)
                                 .Width(350)
@@ -326,6 +335,13 @@
                                     ,
                                     Html.X().TextFieldFor(m => m.InvoiceNumber).AllowBlank(true).ID("InvoiceNumber").ReadOnly(true),
                                     Html.X().DateFieldFor(m => m.InvoiceIssuedDate).AllowBlank(false).ID("InvoiceIssuedDate"),
+                                    Html.X().ComboBoxFor(m => m.PaymentMethodName).ID("PaymentMethodName").Editable(false)
+                                        .Items(action =>
+                                        {
+                                            action.Add(new ListItem("TM", "TM"));
+                                            action.Add(new ListItem("CK", "CK"));
+                                            action.Add(new ListItem("TM/CK", "TM/CK"));
+                                        }),
                                     Html.X().ComboBoxFor(m => m.CurrencyId).AllowBlank(false).ID("CurrencyId")
                                         .DisplayField("Code")
                                         .ValueField("Id")
