@@ -451,6 +451,7 @@
                                                                               Ext.Msg.confirm('Alert', 'Do you want to DELETE?', function(btn) {
                                                                                 if(btn == 'yes') {
                                                                                     #{EInvoiceLineGridPanel}.deleteSelected();
+                                                                                    EInvoice.CalcHeaderTotal(#{EInvoiceLineGridPanel});    
                                                                                     return true;        
                                                                                 } else 
                                                                                     return false;
@@ -541,34 +542,33 @@
                                       cols.Columns.Add(
                                           Html.X().ColumnFor(Model.EInvoiceLines, m => m.UnitId).ToBuilder<Column.Builder>().ID("EInvoiceLineUnitIdCol").Sortable(false).Width(125)
                                               .Editor(
-                                                          Html.X().ComboBox()
-                                                              .ID("EInvoiceLineUomEditor")
-                                                              .DisplayField("Code")
-                                                              .ValueField("UomId")
-                                                              .FieldLabel("")
-                                                              .FieldStyle("text-transform: uppercase;")
-                                                              .AllowBlank(false)
-                                                              .TypeAhead(true)
-                                                              .MinChars(0)
-                                                              .PageSize(10)
-                                                              .SelectOnTab(true)
-                                                              .ForceSelection(true)
-                                                              .ValidateOnBlur(true)
-                                                              .ValidateOnChange(true)
-                                                              .ListConfig(Html.X().BoundList()
-                                                                  .LoadingText("Searching...")
-                                                                  .ItemTpl(Html.X().XTemplate()
-                                                                      .Html(@<text>
-                                                                                <div class="search-item">
-                                                                                    <h3>{Code}</h3>
-                                                                                    {Description}
-                                                                                </div>
-                                                                             </text>)
-                                                                  )
-                                                                  .MinWidth(400)
-                                                              )
-                                                              .StoreID("UomStore")
+                                                  Html.X().ComboBox()
+                                                      .ID("EInvoiceLineUomEditor")
+                                                      .DisplayField("Code")
+                                                      .ValueField("UomId")
+                                                      .FieldLabel("")
+                                                      .FieldStyle("text-transform: uppercase;")
+                                                      .AllowBlank(false)
+                                                      .TypeAhead(true)
+                                                      .MinChars(0)
+                                                      .PageSize(10)
+                                                      .SelectOnTab(true)
+                                                      .ForceSelection(true)
+                                                      .ValidateOnBlur(true)
+                                                      .ValidateOnChange(true)
+                                                      .ListConfig(Html.X().BoundList()
+                                                          .LoadingText("Searching...")
+                                                          .ItemTpl(Html.X().XTemplate()
+                                                              .Html(@<text>
+                                                                        <div class="search-item">
+                                                                            <h3>{Code}</h3>
+                                                                            {Description}
+                                                                        </div>
+                                                                     </text>)
+                                                          )
+                                                          .MinWidth(400)
                                                       )
+                                                      .StoreID("UomStore"))
                                                   .Renderer("EInvoice.UomRenderer")
                                                   .EditorOptions(action =>
                                                   {
@@ -669,7 +669,12 @@
                           .Items(
                               Html.X().Panel()
                                   .Layout(LayoutType.Form)
-                                  .Width(600),
+                                  .Width(600)
+                                  .Items(
+                                      Html.X().TextFieldFor(m => m.TotalAmountWithVATInWords)
+                                          .ID("TotalAmountWithVATInWords")
+                                          .TabIndex(-1)
+                                  ),
                               Html.X().Panel()
                                   .Layout(LayoutType.Form)
                                   .Width(300)

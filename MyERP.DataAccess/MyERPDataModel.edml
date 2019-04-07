@@ -1058,6 +1058,10 @@
             <End Role="item" EntitySet="items" />
             <End Role="einvoice_line" EntitySet="einvoice_lines" />
           </AssociationSet>
+          <AssociationSet Name="FK_einvoice_line_uom" Association="MyERP.DataAccess.Store.FK_einvoice_line_uom">
+            <End Role="uom" EntitySet="uoms" />
+            <End Role="einvoice_line" EntitySet="einvoice_lines" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="user">
           <Key>
@@ -5532,6 +5536,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_einvoice_line_uom">
+          <End Role="uom" Type="MyERP.DataAccess.Store.uom" Multiplicity="1" />
+          <End Role="einvoice_line" Type="MyERP.DataAccess.Store.einvoice_line" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uom">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="einvoice_line">
+              <PropertyRef Name="unit_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -6593,6 +6609,10 @@
           </AssociationSet>
           <AssociationSet Name="Item_EInvoiceLineSet" Association="MyERP.DataAccess.Item_EInvoiceLine">
             <End Role="Item" EntitySet="Items" />
+            <End Role="EInvoiceLines" EntitySet="EInvoiceLines" />
+          </AssociationSet>
+          <AssociationSet Name="Uom_EInvoiceLineSet" Association="MyERP.DataAccess.Uom_EInvoiceLine">
+            <End Role="Uom" EntitySet="Uoms" />
             <End Role="EInvoiceLines" EntitySet="EInvoiceLines" />
           </AssociationSet>
         </EntityContainer>
@@ -8269,6 +8289,7 @@
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_EInvoiceLine" FromRole="EInvoiceLines" ToRole="Organization" ed:Guid="0d6dda13-0253-48ed-b0ed-291f2d6c21ad" />
           <NavigationProperty Name="Vat" Relationship="MyERP.DataAccess.Vat_EInvoiceLine" FromRole="EInvoiceLines" ToRole="Vat" ed:Guid="e03547a1-a936-4836-9cff-94bb29fd3abe" />
           <NavigationProperty Name="Item" Relationship="MyERP.DataAccess.Item_EInvoiceLine" FromRole="EInvoiceLines" ToRole="Item" ed:Guid="ba50451a-3482-4182-9720-81e1c8ec23be" />
+          <NavigationProperty Name="Uom" Relationship="MyERP.DataAccess.Uom_EInvoiceLine" FromRole="EInvoiceLines" ToRole="Uom" ed:Guid="8b2732e6-f4fa-43f4-b2c7-93b52e75f697" />
         </EntityType>
         <EntityType Name="EInvoiceSigned" ed:Guid="7dc8f22b-c861-4eb1-b2d4-8ca5f8508587">
           <Key>
@@ -11346,6 +11367,18 @@
             </Principal>
             <Dependent Role="EInvoiceLines">
               <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Uom_EInvoiceLine" ed:Guid="704ef98b-e862-4e93-822d-767d49c24774">
+          <End Role="Uom" Type="MyERP.DataAccess.Uom" Multiplicity="1" />
+          <End Role="EInvoiceLines" Type="MyERP.DataAccess.EInvoiceLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EInvoiceLines">
+              <PropertyRef Name="UnitId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

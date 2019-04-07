@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
+using System.Text;
 using System.Web;
+using System.Xml;
+using System.Xml.Serialization;
 using Ext.Net;
 using MyERP.DataAccess;
 using MyERP.DataAccess.Enum;
@@ -119,7 +123,126 @@ namespace MyERP.Web
 
         public string SetEInvNumber(long id)
         {
+            return "";
+        }
 
+        public string Print(EInvoiceHeader entity)
+        {
+            var formTypeRepository = new EInvFormTypeRepository();
+            var formType = formTypeRepository.Get(x => x.Id == entity.FormTypeId).First();
+            String formVars = Encoding.UTF8.GetString(Convert.FromBase64String(formType.FormVars));
+            String formFile = Encoding.UTF8.GetString(Convert.FromBase64String(formType.FormFile));
+
+            using (StringReader sri = new StringReader(formVars))
+            {
+                EInvXMLInvoiceInfo invoiceInfo = new EInvXMLInvoiceInfo();
+                XmlSerializer serializer = new XmlSerializer(invoiceInfo.GetType());
+                invoiceInfo = (EInvXMLInvoiceInfo)serializer.Deserialize(sri);
+                invoiceInfo.InvoiceDataInfo.InvoiceType = formType.InvoiceType;
+                invoiceInfo.InvoiceDataInfo.InvoiceSeries = formType.InvoiceSeries.ToUpper();
+                invoiceInfo.InvoiceDataInfo.TemplateCode = formType.InvoiceType + "0/" + formType.InvoiceTypeNo;
+
+                XmlWriterSettings settings = new XmlWriterSettings()
+                {
+                    Encoding = new UTF8Encoding(false),
+                    Indent = true
+                };
+                using (MemoryStream sww = new MemoryStream())
+                {
+                    using (System.Xml.XmlWriter writer = System.Xml.XmlWriter.Create(sww, settings))
+                    {
+                        XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                        ns.Add("inv", "http://laphoadon.gdt.gov.vn/2014/09/invoicexml/v1");
+                        //ns.Add("ns1", "http://www.w3.org/2000/09/xmldsig#");
+                        XmlSerializer xsSubmit = new XmlSerializer(invoiceInfo.GetType());
+                        xsSubmit.Serialize(writer, invoiceInfo, ns);
+                        byte[] textAsBytes = sww.ToArray(); //Encoding.UTF8.GetBytes(Encoding.Default.GetString(sww.ToArray()));
+                        formVars = Encoding.UTF8.GetString(textAsBytes);
+                    }
+                }
+            }
+
+            var detailLines = (from eInvoiceLine in entity.EInvoiceLines
+                               select new
+                               {
+                                   LineNumber = eInvoiceLine.LineNumber,
+                                   ItemId = eInvoiceLine.ItemId,
+                                   ItemCode = eInvoiceLine.ItemCode,
+                                   ItemName = eInvoiceLine.ItemName,
+                                   UnitId = eInvoiceLine.UnitId,
+                                   UnitCode = eInvoiceLine.UnitCode,
+                                   UnitName = eInvoiceLine.UnitName,
+                                   Quantity = eInvoiceLine.Quantity,
+                                   UnitPrice = eInvoiceLine.UnitPrice,
+                                   ItemTotalAmountWithoutVAT = eInvoiceLine.ItemTotalAmountWithoutVAT,
+                                   ItemTotalAmountWithoutVATLCY = eInvoiceLine.ItemTotalAmountWithoutVATLCY,
+                                   VatId = eInvoiceLine.VatId,
+                                   VATPercentage = eInvoiceLine.VATPercentage,
+                                   VATAmount = eInvoiceLine.VATAmount,
+                                   VATAmountLCY = eInvoiceLine.VATAmountLCY,
+                                   ItemTotalAmountWithVAT = eInvoiceLine.ItemTotalAmountWithVAT,
+                                   ItemTotalAmountWithVATLCY = eInvoiceLine.ItemTotalAmountWithVATLCY
+                               }).ToList();
+
+            var headerModel = new
+            {
+                Id = entity.Id,
+                DocumentType = (DocumentType)entity.DocumentType,
+                DocSubType = (CashPaymentDocumentSubType)entity.DocSubType,
+                DocSequenceId = entity.DocSequenceId,
+                DocumentNo = entity.DocumentNo,
+                DocumentDate = entity.DocumentDate,
+                PostingDate = entity.PostingDate,
+                CurrencyId = entity.CurrencyId,
+                CurrencyCode = entity.Currency.Code,
+                CurrencyFactor = entity.CurrencyFactor,
+                BusinessPartnerId = entity.BusinessPartnerId,
+                BusinessPartnerCode = entity.BusinessPartner.Code,
+                BusinessPartnerName = entity.BusinessPartnerName,
+                BusinessPartnerAddress = entity.BusinessPartnerAddress,
+                BusinessPartnerContactName = entity.BusinessPartnerContactName,
+                AccountId = entity.AccountId,
+                AccountCode = entity.Account.Code,
+                Description = entity.Description,
+                TotalAmount = entity.TotalAmount,
+                TotalAmountLCY = entity.TotalAmountLCY,
+                TotalVatAmount = entity.TotalVatAmount,
+                TotalVatAmountLCY = entity.TotalVatAmountLCY,
+                TotalPayment = entity.TotalPayment,
+                TotalPaymentLCY = entity.TotalPaymentLCY,
+                Status = (CashDocumentStatusType)entity.Status,
+                Version = entity.Version
+            };
+
+            //Print
+            StiReport report = new StiReport();
+            report.Load(Server.MapPath("~/Resources/Reports/cashPayment_001.mrt"));
+
+            Client _client = (new ClientRepository()).Get(User, new string[] { "CurrencyLcy" });
+            var client = new
+            {
+                _client.Description,
+                _client.Adress,
+                _client.TaxCode,
+                _client.Telephone,
+                _client.Email,
+                _client.Website,
+                _client.Image,
+                CurrencyLcyCode = _client.CurrencyLcy.Code
+            };
+
+            var data = JObject.FromObject(new { CashHeader = headerModel, CashLines = detailLines, Client = client, T = ReportServices.ReportGlobalizedTexts() });
+            report.Dictionary.Databases.Clear();
+            var ds = StiJsonToDataSetConverter.GetDataSet(data);
+            report.RegData("data", "", ds);
+            report.Dictionary.Synchronize();
+            report.Render();
+
+            var fileName = $"cashreceipt_Id_{headerModel.Id}_No_{headerModel.DocumentNo}_{User.Identity.Name}_{DateTime.Now:yyyyMMddhhmmss}";
+            report.ExportDocument(StiExportFormat.Pdf, Server.MapPath("~/Resources/printReports/") + fileName + ".pdf");
+            report.SaveDocument(Server.MapPath("~/Resources/printReports/") + fileName + ".mdc");
+
+            return this.Direct(new { FileName = fileName });
             return "";
         }
     }

@@ -142,7 +142,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             {
                 var _id = Convert.ToInt64(id);
                 var entity = repository.Get(c => c.Id == _id, new string[] { "Buyer", "Currency", "EInvFormType",
-                    "EInvoiceLines", "EInvoiceLines.Vat"  }).SingleOrDefault();
+                    "EInvoiceLines", "EInvoiceLines.Vat", "EInvoiceLines.Item", "EInvoiceLines.Uom" }).SingleOrDefault();
                 if (entity == null)
                 {
                     return this.Direct(false, "Document has been changed or deleted! Please check");
@@ -153,10 +153,26 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                                                                                {
                                                                                    Id = eInvoiceLine.Id,
                                                                                    LineNumber = eInvoiceLine.LineNumber,
-                                                                                   ItemCode = eInvoiceLine.ItemCode,
-                                                                                   ItemName = eInvoiceLine.ItemName,
-                                                                                   UnitCode = eInvoiceLine.UnitCode,
-                                                                                   UnitName = eInvoiceLine.UnitName,
+                                                                                   ItemId = eInvoiceLine.ItemId,
+                                                                                   ItemCode = eInvoiceLine.Item == null ? "" : eInvoiceLine.Item.Code,
+                                                                                   ItemName = eInvoiceLine.Item == null ? "" : eInvoiceLine.Item.Description,
+                                                                                   Item = eInvoiceLine.Item == null ? null : new LookupViewModel()
+                                                                                   {
+                                                                                       Code = eInvoiceLine.Item.Code,
+                                                                                       OrganizationCode = "",
+                                                                                       Description = eInvoiceLine.Item.Description,
+                                                                                       Status = (DefaultStatusType)eInvoiceLine.Item.Status
+                                                                                   },
+                                                                                   UnitId = eInvoiceLine.UnitId,
+                                                                                   UnitCode = eInvoiceLine.Uom == null ? "" : eInvoiceLine.Uom.Code,
+                                                                                   UnitName = eInvoiceLine.Uom == null ? "" : eInvoiceLine.Uom.Description,
+                                                                                   Uom = eInvoiceLine.Uom == null ? null : new ItemUomLookUpViewModel()
+                                                                                   {
+                                                                                       UomId = eInvoiceLine.UnitId,
+                                                                                       Code = eInvoiceLine.Uom.Code,
+                                                                                       Description = eInvoiceLine.Uom.Description,
+                                                                                       QtyPerUom = 0
+                                                                                   },
                                                                                    UnitPrice = eInvoiceLine.UnitPrice,
                                                                                    Quantity = eInvoiceLine.Quantity,
                                                                                    ItemTotalAmountWithoutVAT = eInvoiceLine.ItemTotalAmountWithoutVAT,
@@ -235,11 +251,13 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
 
                 ViewData["FormTypeStore"] = new List<object>()
                 {
-                    new ExtNetComboBoxModel
+                    new EInvFormTypeLookupViewModel()
                     {
                         Id = entity.FormTypeId,
-                        Code = entity.EInvFormType.InvoiceSeries,
-                        Description = entity.EInvFormType.TemplateCode
+                        InvoiceType = entity.EInvFormType.InvoiceType,
+                        TemplateCode = entity.EInvFormType.TemplateCode,
+                        InvoiceForm = entity.EInvFormType.InvoiceForm,
+                        InvoiceSeries = entity.EInvFormType.InvoiceSeries,
                     }
                 };
 
@@ -252,6 +270,22 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                         Description = entity.Currency.Description
                     }
                 };
+
+                ViewData["ItemStore"] = eInvoiceLines.Where(x => x.Item != null).GroupBy(x => new { x.ItemId }).Select(i => i.First())
+                    .Select(x => new ExtNetComboBoxModel
+                    {
+                        Id = x.ItemId,
+                        Code = x.Item.Code,
+                        Description = x.Item.Description,
+                    }).ToList();
+
+                ViewData["UomStore"] = eInvoiceLines.Where(x => x.Uom != null).GroupBy(x => new { x.UnitId }).Select(i => i.First())
+                    .Select(x => new ExtNetComboBoxModel
+                    {
+                        Id = x.UnitId,
+                        Code = x.Uom.Code,
+                        Description = x.Uom.Description,
+                    }).ToList();
 
                 ViewData["VatStore"] = eInvoiceLines.Where(x => x.Vat != null).GroupBy(x => new { x.VatId }).Select(i => i.First())
                     .Select(x => new ExtNetComboBoxModel
@@ -373,7 +407,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                             Quantity = eInvoiceLine.Quantity,
                             UnitPrice = eInvoiceLine.UnitPrice,
                             ItemTotalAmountWithoutVAT = eInvoiceLine.ItemTotalAmountWithoutVAT,
-                            ItemTotalAmountWithoutVATLCY = eInvoiceLine.ItemTotalAmountWithVATLCY,
+                            ItemTotalAmountWithoutVATLCY = eInvoiceLine.ItemTotalAmountWithoutVATLCY,
                             VatId = eInvoiceLine.VatId,
                             VATPercentage = eInvoiceLine.VATPercentage,
                             VATAmount = eInvoiceLine.VATAmount,
@@ -483,7 +517,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     TotalVATAmount = headerModel.TotalVATAmount,
                     TotalAmountWithVAT = headerModel.TotalAmountWithVAT,
                     TotalAmountWithVATFrn = headerModel.TotalAmountWithVATFrn,
-                    TotalAmountWithVATInWords = "3232322 rrewre",//headerModel.TotalAmountWithVATInWords,
+                    TotalAmountWithVATInWords = headerModel.TotalAmountWithVATInWords,
 
                     Status = (byte)headerModel.Status,
                     Version = 1,
@@ -508,7 +542,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                         Quantity = eInvoiceLine.Quantity,
                         UnitPrice = eInvoiceLine.UnitPrice,
                         ItemTotalAmountWithoutVAT = eInvoiceLine.ItemTotalAmountWithoutVAT,
-                        ItemTotalAmountWithoutVATLCY = eInvoiceLine.ItemTotalAmountWithVATLCY,
+                        ItemTotalAmountWithoutVATLCY = eInvoiceLine.ItemTotalAmountWithoutVATLCY,
                         VatId = eInvoiceLine.VatId,
                         VATPercentage = eInvoiceLine.VATPercentage,
                         VATAmount = eInvoiceLine.VATAmount,
@@ -537,6 +571,67 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             //storePurchaseInvoiceList.Reload();
 
             return this.Direct(new { Id = headerModel.Id, Version = headerModel.Version });
+        }
+
+        public ActionResult Print(string id)
+        {
+            if (String.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
+
+            var _id = Convert.ToInt64(id);
+            var entity =  repository.Get(c => c.Id == _id, new string[] { "EInvoiceLines" }).SingleOrDefault();
+            if (entity == null)
+            {
+                return this.Direct(false, "Invoice Header has been changed or deleted! Please check");
+            }
+
+            var fileName = (repository as EInvoiceHeaderRepository).Print(entity);
+            return this.Direct(new { FileName = fileName });
+          
+        }
+
+        [HttpGet]
+        public ActionResult Delete(string id)
+        {
+            if (!String.IsNullOrEmpty(id))
+            {
+                var _id = Convert.ToInt64(id);
+                var entity = repository.Get(c => c.Id == _id, new string[] { "CashLines" }).SingleOrDefault();
+                if (entity == null)
+                {
+                    return this.Direct(false, "Cash Header not found!Please check");
+                }
+
+                using (var dbContextTransaction = this.repository.DataContext.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        foreach (var cashLine in entity.CashLines.ToList())
+                        {
+                            entity.CashLines.Remove(cashLine);
+                            this.repository.DataContext.CashLines.Remove(cashLine);  //this.repository.DataContext.Entry(salesPriceRemove).State = EntityState.Deleted;
+                        }
+
+                        this.repository.Delete(entity);
+
+                        dbContextTransaction.Commit();
+                    }
+                    catch (Exception e)
+                    {
+                        dbContextTransaction.Rollback();
+
+                        return this.Direct(false, e.Message);
+                    }
+                }
+                Store StoreCashPaymentList = X.GetCmp<Store>("StoreCashPaymentList");
+                StoreCashPaymentList.Reload();
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            return this.Direct();
         }
 
         public ActionResult LineEdit(int lineNo, string field, string oldValue, string newValue, string recordData,
