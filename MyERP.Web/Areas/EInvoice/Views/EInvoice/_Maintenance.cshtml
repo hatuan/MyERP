@@ -65,7 +65,7 @@
                           de.Click.EventMask.ShowMask = true;
                           de.Click.ExtraParams.Add(new Parameter("id", "#{Id}.getValue()", ParameterMode.Raw));
                           de.Click.Success = "function(response, result) { \n" +
-                                             "  showPreviewReport(result.result.FileName); \n" +
+                                             "  showHtmlPreviewReport(result.result.FileName); \n" +
                                              "}";
                       })
                   );

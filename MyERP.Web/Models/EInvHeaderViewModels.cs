@@ -139,7 +139,7 @@ namespace MyERP.Web.Models
         [Required]
         public long FormTypeId { get; set; }
 
-        public long? OriginalInvoiceId { get; set; }
+        public long? OriginalEInvoiceId { get; set; }
 
         [Display(Name = "Invoice Number")]
         public string InvoiceNumber { get; set; }

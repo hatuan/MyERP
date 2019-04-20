@@ -334,7 +334,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     return this.Direct(false, "EInvoice has been changed or deleted! Please check");
                 }
                 updateEInvoiceHeader.FormTypeId = headerModel.FormTypeId;
-                updateEInvoiceHeader.OriginalInvoiceId = headerModel.OriginalInvoiceId;
+                updateEInvoiceHeader.OriginalEInvoiceId = headerModel.OriginalEInvoiceId;
                 updateEInvoiceHeader.InvoiceNumber = headerModel.InvoiceNumber;
                 updateEInvoiceHeader.InvoiceIssuedDate = headerModel.InvoiceIssuedDate;
                 updateEInvoiceHeader.ContractNumber = headerModel.ContractNumber;
@@ -468,7 +468,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     ClientId = clientId,
                     OrganizationId = organizationId,
                     FormTypeId = headerModel.FormTypeId,
-                    OriginalInvoiceId = headerModel.OriginalInvoiceId,
+                    OriginalEInvoiceId = headerModel.OriginalEInvoiceId,
                     InvoiceNumber = headerModel.InvoiceNumber,
                     InvoiceIssuedDate = headerModel.InvoiceIssuedDate,
                     ContractNumber = headerModel.ContractNumber,
@@ -579,15 +579,26 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 throw new ArgumentNullException(nameof(id));
 
             var _id = Convert.ToInt64(id);
-            var entity =  repository.Get(c => c.Id == _id, new string[] { "EInvoiceLines" }).SingleOrDefault();
+            var entity =  repository.Get(c => c.Id == _id, new string[] { "Currency", "EInvFormType", "EInvoiceLines", "EInvoiceLines.Item", "EInvoiceLines.Vat", "EInvoiceLines.Uom" }).SingleOrDefault();
             if (entity == null)
             {
                 return this.Direct(false, "Invoice Header has been changed or deleted! Please check");
             }
-
-            var fileName = (repository as EInvoiceHeaderRepository).Print(entity);
-            return this.Direct(new { FileName = fileName });
-          
+            string renderName = $"eInvoiceRender_{User.Identity.Name}_{DateTime.Now:yyyyMMddhhmmss}";
+            string dirPath = Server.MapPath($"~/Resources/PrintReports/EInvoices/{renderName}");
+            if (!System.IO.Directory.Exists(dirPath))
+            {
+                System.IO.Directory.CreateDirectory(dirPath);
+            }
+            string fullHtmlPath = dirPath + $"/{renderName}.html";
+            try
+            {
+                (repository as EInvoiceHeaderRepository).CreateHtmlFile(entity, dirPath, fullHtmlPath);
+            }
+            catch (Exception ex)
+            {
+            }
+            return this.Direct(new { FileName = renderName });
         }
 
         [HttpGet]
@@ -596,20 +607,20 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 var _id = Convert.ToInt64(id);
-                var entity = repository.Get(c => c.Id == _id, new string[] { "CashLines" }).SingleOrDefault();
+                var entity = repository.Get(c => c.Id == _id, new string[] { "EInvoiceLines" }).SingleOrDefault();
                 if (entity == null)
                 {
-                    return this.Direct(false, "Cash Header not found!Please check");
+                    return this.Direct(false, "Header not found!Please check");
                 }
 
                 using (var dbContextTransaction = this.repository.DataContext.Database.BeginTransaction())
                 {
                     try
                     {
-                        foreach (var cashLine in entity.CashLines.ToList())
+                        foreach (var line in entity.EInvoiceLines.ToList())
                         {
-                            entity.CashLines.Remove(cashLine);
-                            this.repository.DataContext.CashLines.Remove(cashLine);  //this.repository.DataContext.Entry(salesPriceRemove).State = EntityState.Deleted;
+                            entity.EInvoiceLines.Remove(line);
+                            this.repository.DataContext.EInvoiceLines.Remove(line);  //this.repository.DataContext.Entry(salesPriceRemove).State = EntityState.Deleted;
                         }
 
                         this.repository.Delete(entity);
@@ -623,8 +634,8 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                         return this.Direct(false, e.Message);
                     }
                 }
-                Store StoreCashPaymentList = X.GetCmp<Store>("StoreCashPaymentList");
-                StoreCashPaymentList.Reload();
+                Store storeList = X.GetCmp<Store>("StoreEInvoiceList");
+                storeList.Reload();
             }
             else
             {

@@ -1549,7 +1549,7 @@
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="sales_price_id" Type="bigint" />
           <Property Name="vat_identifier_id" Type="bigint" />
-          <Property Name="vat_percentage" Type="tinyint" Nullable="false" />
+          <Property Name="vat_percentage" Type="smallint" Nullable="false" />
           <Property Name="vat_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="discount_id" Type="bigint" />
           <Property Name="line_discount_percentage" Type="tinyint" Nullable="false" />
@@ -2118,7 +2118,7 @@
           <Property Name="vat_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="cost_price_qty_base" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="cost_price_qty_base_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
-          <Property Name="vat_percentage" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="vat_percentage" Type="smallint" Nullable="false" />
           <Property Name="vat_id" Type="bigint" />
           <Property Name="amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
@@ -2142,7 +2142,7 @@
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
           <Property Name="status" Type="tinyint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
-          <Property Name="vat_percentage" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="vat_percentage" Type="smallint" Nullable="false" />
           <Property Name="account_input_vat_id" Type="bigint" Nullable="false" />
           <Property Name="account_output_vat_id" Type="bigint" Nullable="false" />
         </EntityType>
@@ -2168,7 +2168,7 @@
           <Property Name="currency_factor" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="vat_base_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="vat_id" Type="bigint" Nullable="false" />
-          <Property Name="vat_percentage" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="vat_percentage" Type="smallint" Nullable="false" />
           <Property Name="vat_base_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="vat_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="vat_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
@@ -2381,7 +2381,7 @@
           </Key>
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="form_type_id" Type="bigint" Nullable="false" />
-          <Property Name="original_invoice_id" Type="bigint" />
+          <Property Name="original_invoice_id" Type="varchar" MaxLength="32" />
           <Property Name="invoice_number" Type="varchar" MaxLength="7" />
           <Property Name="invoice_name" Type="nvarchar" MaxLength="100" />
           <Property Name="invoice_issued_date" Type="datetime2" Nullable="false" />
@@ -2456,6 +2456,9 @@
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
+          <Property Name="is_total_amount_without_vat_pos" Type="bit" />
+          <Property Name="original_invoice_issue_date" Type="datetime2" />
+          <Property Name="original_einvoice_id" Type="bigint" />
         </EntityType>
         <EntityType Name="einvoice_line">
           <Key>
@@ -2471,7 +2474,7 @@
           <Property Name="unit_price" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="quantity" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="item_total_amount_without_vat" Type="decimal" Nullable="false" Precision="38" Scale="20" />
-          <Property Name="vat_percentage" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="vat_percentage" Type="smallint" Nullable="false" />
           <Property Name="vat_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="promotion" Type="tinyint" Nullable="false" />
           <Property Name="adjustment_vat_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
@@ -2493,7 +2496,7 @@
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="form_type_id" Type="bigint" Nullable="false" />
           <Property Name="form_release_no" Type="int" Nullable="false" />
-          <Property Name="original_invoice_id" Type="bigint" />
+          <Property Name="original_invoice_id" Type="varchar" MaxLength="32" />
           <Property Name="invoice_type" Type="nvarchar" Nullable="false" MaxLength="6" />
           <Property Name="template_code" Type="nvarchar" Nullable="false" MaxLength="11" />
           <Property Name="invoice_series" Type="nvarchar" Nullable="false" MaxLength="6" />
@@ -2561,6 +2564,9 @@
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
+          <Property Name="is_total_amount_without_vat_pos" Type="bit" />
+          <Property Name="original_invoice_issue_date" Type="datetime2" />
+          <Property Name="original_einvoice_id" Type="bigint" />
         </EntityType>
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
@@ -7219,7 +7225,7 @@
           <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="aeba8926-aecc-47b1-a306-a5e544fdc1c5" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="3971eae5-9324-4214-8a98-60641d4e9a95" />
           <Property Name="VatIdentifierId" Type="Int64" ed:ValidateRequired="false" ed:Guid="9623964a-b103-46de-b8cb-b210945b8254" />
-          <Property Name="VatPercentage" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="ea4593db-048c-49ad-8330-6f44dd6e86fe" />
+          <Property Name="VatPercentage" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="ea4593db-048c-49ad-8330-6f44dd6e86fe" />
           <Property Name="VatAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="17be5105-e208-4241-ac6d-2d0ee4a670f4" />
           <Property Name="DiscountId" Type="Int64" ed:ValidateRequired="false" ed:Guid="bb48dca9-07bc-4447-8573-4a78a75cbc46" />
           <Property Name="LineDiscountPercentage" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="39245405-214b-496b-9a25-3b58d1d5ad8a" />
@@ -7894,7 +7900,7 @@
           </Property>
           <Property Name="VatBaseAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="1303a817-2d6c-4118-82cd-1263ddb55e68" />
           <Property Name="VatId" Type="Int64" ed:ValidateRequired="false" ed:Guid="205d5092-e7bc-4a61-842d-40d4c4f97a35" />
-          <Property Name="VatPercentage" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="4653db05-2c46-4d70-a14e-fcc9e589f8af" />
+          <Property Name="VatPercentage" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="4653db05-2c46-4d70-a14e-fcc9e589f8af" />
           <Property Name="VatAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="40a0ea24-24e3-4868-beda-d585aedc60b7" />
           <Property Name="VatBaseAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="7c2d553f-9661-4b40-a738-233737728020" />
           <Property Name="VatAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="390acf31-d9fe-4309-98a7-e84ffee7b9cd" />
@@ -7927,7 +7933,7 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="50a22fc9-c1d0-4cbe-b6eb-beecb25c3347" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="c146ef94-d100-4ff5-acf2-eca3aa49f92e" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="2ce70d6c-9390-473c-94e6-ea13cf3d76b7" />
-          <Property Name="VatPercentage" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="85913a88-4749-405b-a316-67c4f2a40ffe" />
+          <Property Name="VatPercentage" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="85913a88-4749-405b-a316-67c4f2a40ffe" />
           <Property Name="AccountInputVatId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="14445e29-b4ec-4b52-aca9-9a63a41a269a" />
           <Property Name="AccountOutputVatId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4d66c11a-971b-4adb-883b-538236494eb5" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="fb7cef1e-3591-4471-9aaa-1803d4b2a37d" />
@@ -7971,7 +7977,7 @@
           <Property Name="VatBaseAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="bc488852-91c5-4f42-8bc2-62791e7591d9" />
           <Property Name="VatBaseAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="f1823564-08ed-4595-bcc6-bc4e4e355bb7" />
           <Property Name="VatId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="0ac01973-0147-4a6e-95fe-7fc030a7a707" />
-          <Property Name="VatPercentage" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="c81f1705-d684-4b68-80dc-32d88d6ccf39" />
+          <Property Name="VatPercentage" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="c81f1705-d684-4b68-80dc-32d88d6ccf39" />
           <Property Name="VatAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="c31ceece-7a97-43b8-b76f-599a41886bc9" />
           <Property Name="VatAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="90c9037c-5b7e-4562-a93c-4406c0663166" />
           <Property Name="AccountVatId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="0761c366-8d02-4e10-98b0-9c33cc7718d4" />
@@ -8226,7 +8232,9 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="a5f21194-b986-457b-b440-f5efb8f2b141" />
           <Property Name="FormTypeId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5e1aa5da-05f1-431f-b06a-59a61160cc5c" />
-          <Property Name="OriginalInvoiceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="ce47d185-b0ed-4c9b-9f74-f5c019c3725c" />
+          <Property Name="OriginalEInvoiceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="e4c88d5e-ea19-4c5d-8f0b-a35c225d9074" />
+          <Property Name="OriginalInvoiceId" Type="String" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="ce47d185-b0ed-4c9b-9f74-f5c019c3725c" />
+          <Property Name="OriginalInvoiceIssueDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="05a30cb6-fcfe-48fa-aa0f-d0349e0787e1" />
           <Property Name="InvoiceNumber" Type="String" MaxLength="7" ed:ValidateMaxLength="7" ed:ValidateRequired="false" ed:Guid="ccdbbd40-69a2-4e24-8da9-eb2e8d45a4a6" />
           <Property Name="InvoiceName" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="f6bfa460-0f04-4be6-a526-ad7fedace1d8" />
           <Property Name="InvoiceIssuedDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="92820e72-8b25-4907-8e10-d51ac9bcb957" />
@@ -8285,12 +8293,13 @@
           <Property Name="PaymentMethodName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="1afd6bb8-e122-41a9-9736-5a7e70b7007d" />
           <Property Name="SumOfTotalLineAmountWithoutVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="cb7b0bbb-ef94-4b73-8901-b9349c315e84" />
           <Property Name="TotalAmountWithoutVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="0c320ab5-7c34-49f1-bdb8-a8926f242f0c" />
+          <Property Name="IsTotalAmountWithoutVATPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="1aa5c69d-50c7-4c27-9df2-57d9ea9c770e" />
           <Property Name="TotalVATAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="dfe597e2-9bce-4973-9a7e-66797d5809d1" />
+          <Property Name="IsTotalVATAmountPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="7ed742a9-89a3-4dac-aaec-c41cd3b683ff" />
           <Property Name="TotalAmountWithVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="d3ce0e55-3456-4646-9c86-f54d0561521e" />
           <Property Name="TotalAmountWithVATFrn" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="ba6dca7d-7d23-4e3c-b965-f2837dda551d" />
           <Property Name="TotalAmountWithVATInWords" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="7003e164-9200-4802-b37d-bbcd9c754802" />
           <Property Name="IsTotalAmountPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="b3d05947-84e9-43a5-b4bd-e81c0c8dff56" />
-          <Property Name="IsTotalVATAmountPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="7ed742a9-89a3-4dac-aaec-c41cd3b683ff" />
           <Property Name="DiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="34e0612e-2469-4954-9c90-71721c82a8e2" />
           <Property Name="IsDiscountAmtPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="bcae30bc-c78e-47ad-b8d6-5e22aee0fcee" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="1f59c9c8-5353-4357-b921-30b392a2a435" />
@@ -8328,7 +8337,7 @@
           <Property Name="ItemTotalAmountWithoutVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="4e51a10d-c0a2-4112-b919-6360e9bc22d8" />
           <Property Name="ItemTotalAmountWithoutVATLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="f80a7398-b428-49bb-891d-01d57a4d1ee0" />
           <Property Name="VatId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5af79947-4552-4a9c-abcc-7fc88defc701" />
-          <Property Name="VATPercentage" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="14ede8e2-08fc-4057-9b2f-35b0cf641d15" />
+          <Property Name="VATPercentage" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="14ede8e2-08fc-4057-9b2f-35b0cf641d15" />
           <Property Name="VATAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="4fab86a8-87df-4917-9fda-e036484b6b24" />
           <Property Name="VATAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="8ddb18ed-46d6-4b49-acf8-f7f0a11d4d12" />
           <Property Name="ItemTotalAmountWithVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="aa6916a8-d96e-4f4d-921f-e5de7faa70fe" />
@@ -8352,7 +8361,9 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="6d0a6f57-3bd3-4f4f-aa0b-a66a7b9c5356" />
           <Property Name="FormTypeId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e0398762-54b8-4308-844e-9094d722846d" />
           <Property Name="FormReleaseNo" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="a3e1a97e-8580-436f-b9cd-a4ec445685ee" />
-          <Property Name="OriginalInvoiceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="1668d955-a5ee-4c2d-9e6e-e56c01033214" />
+          <Property Name="OriginalEInvoiceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="7f2dcfff-d646-4fe0-99b6-c1d4a27d06ea" />
+          <Property Name="OriginalInvoiceId" Type="String" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="1668d955-a5ee-4c2d-9e6e-e56c01033214" />
+          <Property Name="OriginalInvoiceIssueDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="aee64ef3-51bd-4387-903e-ffac206b3f10" />
           <Property Name="InvoiceType" Type="String" Nullable="false" MaxLength="6" Unicode="true" ed:ValidateMaxLength="6" ed:ValidateRequired="true" ed:Guid="7df0e795-dcb3-449a-ad54-8741f23e923f" />
           <Property Name="TemplateCode" Type="String" Nullable="false" MaxLength="11" Unicode="true" ed:ValidateMaxLength="11" ed:ValidateRequired="true" ed:Guid="468ed810-9bf1-4a63-9e51-7d405434e87e" />
           <Property Name="InvoiceSeries" Type="String" Nullable="false" MaxLength="6" Unicode="true" ed:ValidateMaxLength="6" ed:ValidateRequired="true" ed:Guid="dacfc70d-c190-489e-a225-05f28e45053b" />
@@ -8401,12 +8412,13 @@
           <Property Name="PaymentMethodName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="e838c535-53d4-4d19-a0d3-09eb68e335c3" />
           <Property Name="SumOfTotalLineAmountWithoutVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="01e90bcf-5c94-46c6-a10d-c348ad053ff4" />
           <Property Name="TotalAmountWithoutVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="0ec8f309-38b0-415d-ab7c-5ac4b6beb51d" />
+          <Property Name="IsTotalAmountWithoutVATPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="88185a00-a83b-43dd-b080-d2b57a437a98" />
           <Property Name="TotalVATAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="b6ae906e-e353-41bc-9e72-a0f81413cba3" />
+          <Property Name="IsTotalVATAmountPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="8eeaf73c-c444-43c6-b5a6-5ab8acc827dd" />
           <Property Name="TotalAmountWithVAT" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="fecbf863-56e2-4e96-b8fb-7ee255508a7b" />
           <Property Name="TotalAmountWithVATFrn" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="648dbb1a-ab8a-42a6-87b4-cc4bec937f4c" />
           <Property Name="TotalAmountWithVATInWords" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="eb72051f-59e4-40e3-8342-27fa13c8f8b5" />
           <Property Name="IsTotalAmountPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="5d60ce2b-652c-43bc-b48a-455df086c877" />
-          <Property Name="IsTotalVATAmountPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="8eeaf73c-c444-43c6-b5a6-5ab8acc827dd" />
           <Property Name="DiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="556a8ead-6e7f-430e-af69-42fd136714b0" />
           <Property Name="IsDiscountAmtPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="3ac549e5-b726-47d5-a189-3f09b22cc05a" />
           <Property Name="EInvoiceSignedXMLFile" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="2687b1fb-5a84-4d3a-83fa-7362018d16b4" />
@@ -12794,6 +12806,9 @@
                 <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+                <ScalarProperty Name="IsTotalAmountWithoutVATPos" ColumnName="is_total_amount_without_vat_pos" />
+                <ScalarProperty Name="OriginalInvoiceIssueDate" ColumnName="original_invoice_issue_date" />
+                <ScalarProperty Name="OriginalEInvoiceId" ColumnName="original_einvoice_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -12901,6 +12916,9 @@
                 <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
+                <ScalarProperty Name="IsTotalAmountWithoutVATPos" ColumnName="is_total_amount_without_vat_pos" />
+                <ScalarProperty Name="OriginalInvoiceIssueDate" ColumnName="original_invoice_issue_date" />
+                <ScalarProperty Name="OriginalEInvoiceId" ColumnName="original_einvoice_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

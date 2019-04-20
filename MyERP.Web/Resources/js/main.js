@@ -130,7 +130,7 @@ var showPreviewReport = function(fileNameOfSnapshotReport) {
     }).show();
 };
 
-var showHtmlPreviewReport = function (fileHtmlRenderName) {
+var showHtmlPreviewReport = function (renderName) {
     Ext.create("Ext.window.Window", {
         renderTo: Ext.net.ResourceMgr.getRenderTarget(),
         title: "Report Preview",
@@ -140,7 +140,7 @@ var showHtmlPreviewReport = function (fileHtmlRenderName) {
             loader:
             {
                 renderer: 'frame',
-                url: baseURL + 'Resources/PrintReports/EInvoices/' + fileHtmlRenderName +'.html'
+                url: baseURL + 'Resources/PrintReports/EInvoices/' + renderName + "/" + renderName + ".html",
             }
         }],
         layout: 'fit',

@@ -4,10 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
+using System.Security.Principal;
 using System.Text;
 using System.Web;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Xml.Xsl;
 using Ext.Net;
 using MyERP.DataAccess;
 using MyERP.DataAccess.Enum;
@@ -126,43 +128,211 @@ namespace MyERP.Web
             return "";
         }
 
-        public string Print(EInvoiceHeader entity)
+        public string GetXmlInvoiceInfo(EInvoiceHeader entity)
         {
             var formTypeRepository = new EInvFormTypeRepository();
             var formType = formTypeRepository.Get(x => x.Id == entity.FormTypeId).First();
-            String formVars = Encoding.UTF8.GetString(Convert.FromBase64String(formType.FormVars));
-            String formFile = Encoding.UTF8.GetString(Convert.FromBase64String(formType.FormFile));
+            String formVars = formType.FormVars;
+
+            EInvXMLInvoiceInfo invoiceInfo = new EInvXMLInvoiceInfo();
+            invoiceInfo.InvoiceDataInfo = new EInvXMLInvoiceDataInfo();
+            invoiceInfo.InvoiceDataInfo.InvoiceType = formType.InvoiceType;
+            invoiceInfo.InvoiceDataInfo.InvoiceSeries = formType.InvoiceSeries.ToUpper();
+            invoiceInfo.InvoiceDataInfo.TemplateCode = formType.InvoiceType + "0/" + formType.InvoiceTypeNo;
+
+            //invoiceInfo.InvoiceDataInfo.OriginalInvoiceId = entity.OriginalInvoiceId;
+            //invoiceInfo.InvoiceDataInfo.OriginalInvoiceIssueDate = entity.OriginalInvoiceIssueDate == null ? "" : entity.OriginalInvoiceIssueDate?.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss");
+            invoiceInfo.InvoiceDataInfo.CurrencyCode = entity.Currency.Code;
+            invoiceInfo.InvoiceDataInfo.ExchangeRate = entity.ExchangeRate;
+            invoiceInfo.InvoiceDataInfo.InvoiceNote = entity.InvoiceNote;
+            invoiceInfo.InvoiceDataInfo.AdjustmentType = Convert.ToString(entity.AdjustmentType);
+            invoiceInfo.InvoiceDataInfo.AdditionalReferenceDesc = entity.AdditionalReferenceDesc;
+            invoiceInfo.InvoiceDataInfo.AdditionalReferenceDate = entity.AdditionalReferenceDate == null ? "" : entity.AdditionalReferenceDate?.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss");
+
+            invoiceInfo.InvoiceDataInfo.InvoiceNumber = entity.InvoiceNumber;
+            invoiceInfo.InvoiceDataInfo.InvoiceName = entity.InvoiceName;
+            invoiceInfo.InvoiceDataInfo.InvoiceIssuedDate = entity.InvoiceIssuedDate;
+
 
             using (StringReader sri = new StringReader(formVars))
             {
-                EInvXMLInvoiceInfo invoiceInfo = new EInvXMLInvoiceInfo();
+                EInvXMLInvoiceInfo invoiceInfoTemp = new EInvXMLInvoiceInfo();
                 XmlSerializer serializer = new XmlSerializer(invoiceInfo.GetType());
-                invoiceInfo = (EInvXMLInvoiceInfo)serializer.Deserialize(sri);
-                invoiceInfo.InvoiceDataInfo.InvoiceType = formType.InvoiceType;
-                invoiceInfo.InvoiceDataInfo.InvoiceSeries = formType.InvoiceSeries.ToUpper();
-                invoiceInfo.InvoiceDataInfo.TemplateCode = formType.InvoiceType + "0/" + formType.InvoiceTypeNo;
+                invoiceInfoTemp = (EInvXMLInvoiceInfo)serializer.Deserialize(sri);
 
-                XmlWriterSettings settings = new XmlWriterSettings()
+                invoiceInfo.InvoiceDataInfo.SellerInfo = new EInvXMLSellerInfo();
+                invoiceInfo.InvoiceDataInfo.SellerInfo.SellerLegalName = invoiceInfoTemp.InvoiceDataInfo.SellerInfo.SellerLegalName;
+                invoiceInfo.InvoiceDataInfo.SellerInfo.SellerTaxCode = invoiceInfoTemp.InvoiceDataInfo.SellerInfo.SellerTaxCode;
+                invoiceInfo.InvoiceDataInfo.SellerInfo.SellerAddressLine = invoiceInfoTemp.InvoiceDataInfo.SellerInfo.SellerAddressLine;
+                invoiceInfo.InvoiceDataInfo.SellerInfo.SellerPhoneNumber = invoiceInfoTemp.InvoiceDataInfo.SellerInfo.SellerPhoneNumber;
+                invoiceInfo.InvoiceDataInfo.SellerInfo.SellerEmail = invoiceInfoTemp.InvoiceDataInfo.SellerInfo.SellerEmail;
+            }
+            invoiceInfo.InvoiceDataInfo.BuyerInfo = new EInvXMLBuyerInfo();
+            invoiceInfo.InvoiceDataInfo.BuyerInfo.BuyerLegalName = entity.BuyerLegalName;
+            invoiceInfo.InvoiceDataInfo.BuyerInfo.BuyerTaxCode = entity.BuyerTaxCode;
+            invoiceInfo.InvoiceDataInfo.BuyerInfo.BuyerDisplayName = entity.BuyerDisplayName;
+            invoiceInfo.InvoiceDataInfo.BuyerInfo.BuyerAddressLine = entity.BuyerAddressLine;
+            invoiceInfo.InvoiceDataInfo.BuyerInfo.BuyerBankAccount = entity.BuyerBankAccount;
+            invoiceInfo.InvoiceDataInfo.BuyerInfo.BuyerBankName = entity.BuyerBankName;
+
+            invoiceInfo.InvoiceDataInfo.PaymentInfos = new List<EInvXMLPaymentInfo> {
+                new EInvXMLPaymentInfo
                 {
-                    Encoding = new UTF8Encoding(false),
-                    Indent = true
-                };
-                using (MemoryStream sww = new MemoryStream())
-                {
-                    using (System.Xml.XmlWriter writer = System.Xml.XmlWriter.Create(sww, settings))
+                    PaymentMethodName = entity.PaymentMethodName
+                }
+            };
+
+            invoiceInfo.InvoiceDataInfo.SumOfTotalLineAmountWithoutVat = entity.SumOfTotalLineAmountWithoutVAT;
+            invoiceInfo.InvoiceDataInfo.TotalAmountWithoutVAT = entity.TotalAmountWithoutVAT;
+            invoiceInfo.InvoiceDataInfo.IsTotalAmtWithoutVATPos = entity.IsTotalAmountWithoutVATPos;
+            invoiceInfo.InvoiceDataInfo.TotalVATAmount = entity.TotalVATAmount;
+            invoiceInfo.InvoiceDataInfo.IsTotalVATAmountPos = entity.IsTotalVATAmountPos;
+            invoiceInfo.InvoiceDataInfo.TotalAmountWithVAT = entity.TotalAmountWithVAT;
+            invoiceInfo.InvoiceDataInfo.TotalAmountWithVATFrn = entity.TotalAmountWithVATFrn;
+            invoiceInfo.InvoiceDataInfo.TotalAmountWithVATInWords = entity.TotalAmountWithVATInWords;
+            invoiceInfo.InvoiceDataInfo.IsTotalAmountPos = entity.IsTotalAmountPos;
+            invoiceInfo.InvoiceDataInfo.DiscountAmount = entity.DiscountAmount;
+            invoiceInfo.InvoiceDataInfo.IsDiscountAmtPos = entity.IsDiscountAmtPos;
+
+            int lineNumber = 1;
+            foreach(var line in entity.EInvoiceLines)
+            {
+                if (invoiceInfo.InvoiceDataInfo.ItemInfos == null)
+                    invoiceInfo.InvoiceDataInfo.ItemInfos = new List<EInvXMLItemInfo>
                     {
-                        XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-                        ns.Add("inv", "http://laphoadon.gdt.gov.vn/2014/09/invoicexml/v1");
-                        //ns.Add("ns1", "http://www.w3.org/2000/09/xmldsig#");
-                        XmlSerializer xsSubmit = new XmlSerializer(invoiceInfo.GetType());
-                        xsSubmit.Serialize(writer, invoiceInfo, ns);
-                        byte[] textAsBytes = sww.ToArray(); //Encoding.UTF8.GetBytes(Encoding.Default.GetString(sww.ToArray()));
-                        formVars = Encoding.UTF8.GetString(textAsBytes);
+                        new EInvXMLItemInfo
+                        {
+                            LineNumber = lineNumber,
+                            ItemCode = line.ItemCode,
+                            ItemName = line.ItemName,
+                            UnitCode = line.UnitCode,
+                            UnitName = line.UnitName,
+                            UnitPrice = line.UnitPrice,
+                            Quantity = line.Quantity,
+                            ItemTotalAmountWithoutVAT = line.ItemTotalAmountWithoutVAT,
+                            VatPercentage = line.VATPercentage,
+                            VatAmount = line.VATAmount,
+                            ItemTotalAmountWithVAT = line.ItemTotalAmountWithVAT,
+                            Promotion = line.Promotion,
+                            //ItemDiscount = line.ItemDiscount,
+                            AdjustmentVatAmount = line.AdjustmentVATAmount,
+                            IsIncreaseItem = line.IsIncreaseItem,
+                        }
+                    };
+                else
+                    invoiceInfo.InvoiceDataInfo.ItemInfos.Add(
+                        new EInvXMLItemInfo
+                        {
+                            LineNumber = lineNumber,
+                            ItemCode = line.ItemCode,
+                            ItemName = line.ItemName,
+                            UnitCode = line.UnitCode,
+                            UnitName = line.UnitName,
+                            UnitPrice = line.UnitPrice,
+                            Quantity = line.Quantity,
+                            ItemTotalAmountWithoutVAT = line.ItemTotalAmountWithoutVAT,
+                            VatPercentage = line.VATPercentage,
+                            VatAmount = line.VATAmount,
+                            ItemTotalAmountWithVAT = line.ItemTotalAmountWithVAT,
+                            Promotion = line.Promotion,
+                            //ItemDiscount = line.ItemDiscount,
+                            AdjustmentVatAmount = line.AdjustmentVATAmount,
+                            IsIncreaseItem = line.IsIncreaseItem,
+                        });
+                
+                if(invoiceInfo.InvoiceDataInfo.InvoiceTaxBreakdowns == null)
+                {
+                    invoiceInfo.InvoiceDataInfo.InvoiceTaxBreakdowns = new List<EInvXMLTaxBreakdowns>
+                    {
+                        new EInvXMLTaxBreakdowns
+                        {
+                            VatPercentage = line.VATPercentage,
+                            VatTaxableAmount = line.ItemTotalAmountWithoutVAT,
+                            VatTaxAmount = line.VATAmount,
+                            IsVatTaxableAmountPos = line.IsIncreaseItem,
+                            IsVatTaxAmountPos = line.IsIncreaseItem,
+                        }
+                    };
+                }
+                else
+                {
+                    EInvXMLTaxBreakdowns foundTaxBreakdown = invoiceInfo.InvoiceDataInfo.InvoiceTaxBreakdowns.Where(x => x.VatPercentage == line.VATPercentage).FirstOrDefault();
+                    if(foundTaxBreakdown == null)
+                    {
+                        invoiceInfo.InvoiceDataInfo.InvoiceTaxBreakdowns.Add(
+                            new EInvXMLTaxBreakdowns
+                            {
+                                VatPercentage = line.VATPercentage,
+                                VatTaxableAmount = line.ItemTotalAmountWithoutVAT,
+                                VatTaxAmount = line.VATAmount,
+                                IsVatTaxableAmountPos = line.IsIncreaseItem,
+                                IsVatTaxAmountPos = line.IsIncreaseItem,
+                            }
+                        );
+                    }
+                    else
+                    {
+                        foundTaxBreakdown.VatTaxableAmount += line.ItemTotalAmountWithoutVAT;
+                        foundTaxBreakdown.VatTaxAmount += line.VATAmount;
                     }
                 }
+
+                lineNumber++;
             }
 
-            return "";
+            XmlWriterSettings settings = new XmlWriterSettings()
+            {
+                Encoding = new UTF8Encoding(false),
+                Indent = true
+            };
+            using (MemoryStream sww = new MemoryStream())
+            {
+                using (System.Xml.XmlWriter writer = System.Xml.XmlWriter.Create(sww, settings))
+                {
+                    XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                    ns.Add("inv", "http://laphoadon.gdt.gov.vn/2014/09/invoicexml/v1");
+                    //ns.Add("ns1", "http://www.w3.org/2000/09/xmldsig#");
+                    XmlSerializer xsSubmit = new XmlSerializer(invoiceInfo.GetType());
+                    xsSubmit.Serialize(writer, invoiceInfo, ns);
+                    byte[] textAsBytes = sww.ToArray(); //Encoding.UTF8.GetBytes(Encoding.Default.GetString(sww.ToArray()));
+                    return Encoding.UTF8.GetString(textAsBytes);
+                }
+            }
+        }
+
+        public void CreateHtmlFile(EInvoiceHeader entity, string dirPath, string fullHtmlPath)
+        {
+            try
+            {
+                var formType = entity.EInvFormType;
+                String xslInput = formType.FormFile;
+                String xmlInput = GetXmlInvoiceInfo(entity);
+                        
+                using (StringReader srt = new StringReader(xslInput)) // xslInput is a string that contains xsl
+                using (StringReader sri = new StringReader(xmlInput)) // xmlInput is a string that contains xml
+                {
+                    using (System.Xml.XmlReader xrt = System.Xml.XmlReader.Create(srt))
+                    using (System.Xml.XmlReader xri = System.Xml.XmlReader.Create(sri))
+                    {
+                        XslCompiledTransform xslt = new XslCompiledTransform();
+                        xslt.Load(xrt);
+                        using (StringWriter sw = new StringWriter())
+                        using (System.Xml.XmlWriter xwo = System.Xml.XmlWriter.Create(sw, xslt.OutputSettings)) // use OutputSettings of xsl, so it can be output as HTML
+                        {
+                            xslt.Transform(xri, xwo);
+                            System.IO.File.WriteAllText(fullHtmlPath, sw.ToString(), Encoding.UTF8);
+                        }
+                    }
+                }
+                if (!String.IsNullOrEmpty(formType.Logo))
+                {
+                    System.IO.File.WriteAllBytes(dirPath + "/logo.png", Convert.FromBase64String(formType.Logo));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 

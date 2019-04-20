@@ -47,7 +47,7 @@
                               de.Click.EventMask.ShowMask = true;
                               de.Click.ExtraParams.Add(new Parameter("id", "#{EInvoiceList}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
                               de.Click.Success = "function(response, result) { \n" +
-                                                 "  showPreviewReport(result.result.FileName); \n" +
+                                                 "  showHtmlPreviewReport(result.result.FileName); \n" +
                                                  "}";
                           })
                           );
@@ -146,7 +146,7 @@
                   Html.X().Column().Text("Buyer Email").DataIndex("BuyerEmail").MinWidth(200),
                   Html.X().Column().Text("Description").DataIndex("Description").MinWidth(256),
                   Html.X().Column().Text("Total Amount").DataIndex("TotalAmountWithoutVAT").Width(100),
-                  Html.X().Column().Text("Total Vat").DataIndex("TotalVatAmount").Width(100),
+                  Html.X().Column().Text("Total Vat").DataIndex("TotalVATAmount").Width(100),
                   Html.X().Column().Text("Total Payment").DataIndex("TotalAmountWithVAT").Width(100),
                   Html.X().Column().Text("Status").DataIndex("Status").Width(85),
                   Html.X().Column().Text("Last User").DataIndex("RecModifiedBy").Width(85),

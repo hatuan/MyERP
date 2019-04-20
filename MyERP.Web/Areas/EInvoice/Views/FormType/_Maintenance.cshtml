@@ -31,6 +31,8 @@
                               Html.X().HiddenFor(m => m.InvoiceForm).ID("InvoiceForm"),
                               Html.X().HiddenFor(m => m.FormFile).ID("FormFile"),
                               Html.X().HiddenFor(m => m.FormVars).ID("FormVars"),
+                              Html.X().HiddenFor(m => m.Logo).ID("Logo"),
+                              Html.X().HiddenFor(m => m.Watermark).ID("Watermark"),
                               Html.X().ComboBoxFor(m => m.InvoiceType).ID("InvoiceType").Editable(false).ReadOnly(readOnly)
                                   .Items(action =>
                                   {
@@ -165,6 +167,47 @@
                                                                          "               Ext.Msg.notify('Error', errorMessage); \n" +
                                                                          "           } \n" +
                                                                          "       }) \n" +
+                                                                         "}" ;
+                                                  }));
+                                              buttons.Add(Html.X().Component().Flex(1));
+                                              buttons.Add(Html.X().Label().ID("lblLogoName"));
+                                              buttons.Add(Html.X().FileUploadField()
+                                                  .ID("btnSelectLogo")
+                                                  .ButtonText("Logo.png")
+                                                  .ButtonOnly(true)
+                                                  .Icon(Icon.ImageAdd)
+                                                  .Listeners(ls =>
+                                                  {
+
+                                                      ls.Change.Handler = "function() { \n" +
+                                                                         "  //if(!Ext.getCmp('btnSelectLogo').isValid()) { \n" +
+                                                                         "  //   return; \n" +
+                                                                         "  //} \n" +
+                                                                         "  var file = Ext.getCmp('btnSelectLogo').fileInputEl.dom.files[0], \n" +
+                                                                         "            reader; \n" +
+                                                                         "  if (file === undefined || !(file instanceof File)) { \n" +
+                                                                         "    return; \n" +
+                                                                         "  } \n" +
+                                                                         "  if(file.name.toLowerCase() != 'logo.png') { \n" +
+                                                                         "    Ext.Msg.notify('Error', 'Please choose file name : logo.png'); \n" +
+                                                                         "    return;" +
+                                                                         "  } \n" +
+                                                                         "  Ext.getCmp('lblLogoName').setText(file.name.toLowerCase()); \n" +
+                                                                         "  reader = new FileReader(); \n" +
+                                                                         "  reader.onloadend = function (event) { \n" +
+                                                                         "    var binaryString = '', \n" +
+                                                                         "        bytes = new Uint8Array(event.target.result), \n"+
+                                                                         "        length = bytes.byteLength, \n"+
+                                                                         "        i, \n"+
+                                                                         "        base64String; \n"+
+                                                                         "    for (i = 0; i < length; i++) { \n" +
+                                                                         "      binaryString += String.fromCharCode(bytes[i]); \n"+
+                                                                         "    } \n"+
+                                                                         "    base64String = btoa(binaryString); \n" +
+                                                                         "    Ext.getCmp('Logo').setRawValue(base64String); \n" +
+                                                                         "  } \n" +
+                                                                         "  reader.readAsArrayBuffer(file); \n" +
+                                                                         "  Ext.getCmp('btnSelectLogo').reset();" +
                                                                          "}" ;
                                                   }));
                                           }));

@@ -84,17 +84,17 @@ namespace MyERP.Web.Models
         [XmlElement("buyer")]
         public EInvXMLBuyerInfo BuyerInfo { get; set; }
 
-        [XmlElement("items")]
-        public EInvXMLItemInfo[] ItemInfos { get; set; }
+        [XmlArray("items")]
+        public List<EInvXMLItemInfo> ItemInfos { get; set; }
 
-        [XmlElement("discountItems")]
-        public EInvXMLDiscountItemInfo[] DiscountItemInfos { get; set; }
+        [XmlArray("discountItems")]
+        public List<EInvXMLDiscountItemInfo> DiscountItemInfos { get; set; }
 
-        [XmlElement("invoiceTaxBreakdowns")]
-        public EInvXMLTaxBreakdowns[] InvoiceTaxBreakdowns { get; set; }
+        [XmlArray("invoiceTaxBreakdowns")]
+        public List<EInvXMLTaxBreakdowns> InvoiceTaxBreakdowns { get; set; }
 
-        [XmlElement("payments")]
-        public EInvXMLPaymentInfo[] PaymentInfos { get; set; }
+        [XmlArray("payments")]
+        public List<EInvXMLPaymentInfo> PaymentInfos { get; set; }
 
         [XmlElement("sumOfTotalLineAmountWithoutVat")]
         public Decimal SumOfTotalLineAmountWithoutVat { get; set; }
@@ -105,11 +105,11 @@ namespace MyERP.Web.Models
         [XmlElement("totalVATAmount")]
         public Decimal TotalVATAmount { get; set; }
 
-        [XmlElement("totalAmountWithVat")]
-        public Decimal TotalAmountWithVat { get; set; }
+        [XmlElement("totalAmountWithVAT")]
+        public Decimal TotalAmountWithVAT { get; set; }
 
-        [XmlElement("totalAmountWithVatFrn")]
-        public Decimal TotalAmountWithVatFrn { get; set; }
+        [XmlElement("totalAmountWithVATFrn")]
+        public Decimal TotalAmountWithVATFrn { get; set; }
 
         [XmlElement("totalAmountWithVATInWords")]
         public String TotalAmountWithVATInWords { get; set; }
@@ -140,9 +140,9 @@ namespace MyERP.Web.Models
         ///     Hóa đơn điều chỉnh: True: tăng- False: Giảm
         /// </summary>
         [XmlElement("isTotalAmtWithoutVatPos")]
-        public Boolean? IsTotalAmtWithoutVatPos { get; set; }
+        public Boolean? IsTotalAmtWithoutVATPos { get; set; }
 
-        public bool ShouldSerializeIsTotalAmtWithoutVatPos() { return IsTotalAmtWithoutVatPos.HasValue; }
+        public bool ShouldSerializeIsTotalAmtWithoutVatPos() { return IsTotalAmtWithoutVATPos.HasValue; }
 
         [XmlElement("discountAmount")]
         public Decimal DiscountAmount { get; set; }
@@ -297,15 +297,18 @@ namespace MyERP.Web.Models
         [XmlElement("quantity")]
         public Decimal Quantity { get; set; }
 
-        [XmlElement("itemTotalAmountWithoutVAT")]
+        [XmlElement("itemTotalAmountWithoutVat")]
         public Decimal ItemTotalAmountWithoutVAT { get; set; }
 
         [XmlElement("vatPercentage")]
-        public Decimal VatPercentage { get; set; }
+        public Int16 VatPercentage { get; set; }
 
         [XmlElement("vatAmount")]
         public Decimal VatAmount { get; set; }
-        
+
+        [XmlElement("itemTotalAmountWithVat")]
+        public Decimal ItemTotalAmountWithVAT { get; set; }
+
         /// <summary>
         /// Cho biết loại hàng hóa dịch vụ là khuyến mãi hay không:
         ///     1-hàng khuyến mãi
@@ -420,7 +423,7 @@ namespace MyERP.Web.Models
     public class EInvXMLTaxBreakdowns
     {
         [XmlElement("vatPercentage")]
-        public Decimal VatPercentage { get; set; }
+        public Int16 VatPercentage { get; set; }
 
         [XmlElement("vatTaxableAmount")]
         public Decimal VatTaxableAmount { get; set; }

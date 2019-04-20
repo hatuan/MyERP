@@ -402,7 +402,12 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 }
             }
 
-            string fileHtmlRenderName = $"formTypeRender_{User.Identity.Name}_{DateTime.Now:yyyyMMddhhmmss}";
+            string renderName = $"formTypeRender_{User.Identity.Name}_{DateTime.Now:yyyyMMddhhmmss}";
+            string dirPath = Server.MapPath($"~/Resources/PrintReports/EInvoices/{renderName}");
+            if (!System.IO.Directory.Exists(dirPath))
+            {
+                System.IO.Directory.CreateDirectory(dirPath);
+            }
             using (StringReader srt = new StringReader(formFile)) // xslInput is a string that contains xsl
             using (StringReader sri = new StringReader(formVars)) // xmlInput is a string that contains xml
             {
@@ -415,9 +420,13 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     using (System.Xml.XmlWriter xwo = System.Xml.XmlWriter.Create(sw, xslt.OutputSettings)) // use OutputSettings of xsl, so it can be output as HTML
                     {
                         xslt.Transform(xri, xwo);
-                        System.IO.File.WriteAllText(Server.MapPath($"~/Resources/PrintReports/EInvoices/{fileHtmlRenderName}.html"), sw.ToString(), Encoding.UTF8);
+                        System.IO.File.WriteAllText(dirPath + $"/{renderName}.html", sw.ToString(), Encoding.UTF8);
                     }
                 }
+            }
+            if (!String.IsNullOrEmpty(model.Logo))
+            {
+                System.IO.File.WriteAllBytes(dirPath + "/logo.png", Convert.FromBase64String(model.Logo));
             }
 
             Panel invoiceFormViewer = X.GetCmp<Panel>("InvoiceFormViewer");
@@ -425,7 +434,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             {
                 Mode = LoadMode.Frame,
                 DisableCaching = true,
-                Url = $"~/Resources/PrintReports/EInvoices/{fileHtmlRenderName}.html"
+                Url = $"~/Resources/PrintReports/EInvoices/{renderName}/{renderName}.html"
             };
             invoiceFormViewer.Loader.SuspendScripting();
             invoiceFormViewer.LoadContent();
@@ -469,6 +478,26 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 return this.Direct(false, $"ERROR : In Function _SelectInvoiceTemplate with template : {selectedInvoiceTemplateID}");
             }
 
+            return this.Direct();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult _SelectLogo()
+        {
+            var btnSelectLogo = this.GetCmp<FileUploadField>("btnSelectLogo");
+            if (btnSelectLogo.HasFile)
+            {
+                var contentLength = btnSelectLogo.PostedFile.ContentLength;
+                var contentType = btnSelectLogo.PostedFile.ContentType;
+                var stream = btnSelectLogo.PostedFile.InputStream;
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    stream.CopyTo(ms);
+                    string base64 = Convert.ToBase64String(ms.ToArray());
+                    this.GetCmp<Hidden>("Logo").SetValue(base64);
+                }
+            }
             return this.Direct();
         }
     }

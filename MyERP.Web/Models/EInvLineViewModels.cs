@@ -73,7 +73,7 @@ namespace MyERP.Web.Models
 
         [Display(Name = "Vat %")]
         [DisplayFormat(DataFormatString = "{0}")]
-        public Decimal VATPercentage { get; set; }
+        public Int16 VATPercentage { get; set; }
 
         [Display(Name = "Vat Amount")]
         [DisplayFormat(DataFormatString = "{0:n2}")]
