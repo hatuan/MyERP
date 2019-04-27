@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Text;
 using System.Threading;
 using System.Web;
@@ -81,7 +82,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             return this.Store(data, paging.TotalRecords);
         }
 
-        public ActionResult LookupData(StoreRequestParameters parameters, long? id = null)
+        public ActionResult LookupData(StoreRequestParameters parameters, long? id = null, TaxAuthoritiesStatus? taxAuthoritiesStatus = null)
         {
             if (id != null && id > 0)
             {
@@ -100,21 +101,31 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             }
             else
             {
-                var paging = ((EInvFormTypeRepository)repository).Paging(parameters.Start, parameters.Limit,
-                    parameters.SimpleSort, parameters.SimpleSortDirection);
+                var entities = repository.Get(includePaths: new String[] { "Organization", "EInvFormReleases" });
 
-                var data = paging.Data.Where(c => c.Status == (short)DefaultStatusType.Active)
-                    .Select(c => new EInvFormTypeLookupViewModel
-                    {
-                        Id = c.Id,
-                        InvoiceType = c.InvoiceType,
-                        TemplateCode = c.TemplateCode,
-                        InvoiceForm = c.InvoiceForm,
-                        InvoiceSeries = c.InvoiceSeries,
-                        OrganizationCode = c.Organization.Code,
-                        Status = (DefaultStatusType)c.Status
-                    }).ToList();
-                return this.Store(data, paging.TotalRecords);
+                entities = entities.Where(c => c.Status == (short)DefaultStatusType.Active);
+                if (taxAuthoritiesStatus != null)
+                    entities = entities.Where(c => c.EInvFormReleases.Any(d => d.TaxAuthoritiesStatus == (short)taxAuthoritiesStatus));
+
+                if (!string.IsNullOrEmpty(parameters.SimpleSort))
+                    entities = parameters.SimpleSortDirection == SortDirection.ASC ? entities.OrderBy(parameters.SimpleSort) : entities.OrderBy(parameters.SimpleSort + " DESC");
+                else
+                    entities = entities.OrderBy(c => c.InvoiceTypeNo);
+
+                var count = entities.ToList().Count;
+                var ranges = (parameters.Start < 0 || parameters.Limit <= 0) ? entities.ToList() : entities.Skip(parameters.Start).Take(parameters.Limit).ToList();
+                var data = ranges.Select(c => new EInvFormTypeLookupViewModel
+                {
+                    Id = c.Id,
+                    InvoiceType = c.InvoiceType,
+                    TemplateCode = c.TemplateCode,
+                    InvoiceForm = c.InvoiceForm,
+                    InvoiceSeries = c.InvoiceSeries,
+                    OrganizationCode = c.Organization.Code,
+                    Status = (DefaultStatusType)c.Status
+                }).ToList();
+
+                return this.Store(data, data.Count);
             }
         }
 

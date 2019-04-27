@@ -54,7 +54,9 @@ namespace MyERP.Web.Models
         public String ContractNumber { get; set; }
 
         [XmlElement("contractDate")]
-        public DateTime ContractDate { get; set; }
+        public DateTime? ContractDate { get; set; }
+
+        public bool ShouldSerializeContractDate() { return ContractDate.HasValue; }
 
         [XmlElement("invoiceNote")]
         public String InvoiceNote { get; set; }
@@ -139,10 +141,10 @@ namespace MyERP.Web.Models
         ///     Hóa đơn thường: null
         ///     Hóa đơn điều chỉnh: True: tăng- False: Giảm
         /// </summary>
-        [XmlElement("isTotalAmtWithoutVatPos")]
+        [XmlElement("isTotalAmtWithoutVATPos")]
         public Boolean? IsTotalAmtWithoutVATPos { get; set; }
 
-        public bool ShouldSerializeIsTotalAmtWithoutVatPos() { return IsTotalAmtWithoutVATPos.HasValue; }
+        public bool ShouldSerializeIsTotalAmtWithoutVATPos() { return IsTotalAmtWithoutVATPos.HasValue; }
 
         [XmlElement("discountAmount")]
         public Decimal DiscountAmount { get; set; }
@@ -258,10 +260,14 @@ namespace MyERP.Web.Models
         public String PaymentNote { get; set; }
 
         [XmlElement("paymentAmount")]
-        public Decimal PaymentAmount { get; set; }
+        public Decimal? PaymentAmount { get; set; }
+
+        public bool ShouldSerializePaymentAmount() { return PaymentDueDate.HasValue; }
 
         [XmlElement("paymentDueDate")]
-        public DateTime PaymentDueDate { get; set; }
+        public DateTime? PaymentDueDate { get; set; }
+
+        public bool ShouldSerializePaymentDueDate() { return PaymentDueDate.HasValue; }
 
         [XmlElement("paymentTerm")]
         public String PaymentTerm { get; set; }
@@ -300,6 +306,9 @@ namespace MyERP.Web.Models
         [XmlElement("itemTotalAmountWithoutVat")]
         public Decimal ItemTotalAmountWithoutVAT { get; set; }
 
+        [XmlElement("itemDiscount")]
+        public Decimal ItemDiscount { get; set; }
+
         [XmlElement("vatPercentage")]
         public Int16 VatPercentage { get; set; }
 
@@ -316,9 +325,6 @@ namespace MyERP.Web.Models
         /// </summary>
         [XmlElement("promotion")]
         public Decimal Promotion { get; set; }
-
-        [XmlElement("itemDiscount")]
-        public Decimal ItemDiscount { get; set; }
         
         /// <summary>
         /// Hóa đơn thường: có giá trị là Null.

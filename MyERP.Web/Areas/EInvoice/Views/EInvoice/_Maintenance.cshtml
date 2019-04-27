@@ -137,6 +137,7 @@
                   .Parameters(p =>
                   {
                       p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
+                      p.Add(new StoreParameter("taxAuthoritiesStatus", TaxAuthoritiesStatus.Active));
                   })
                   .Data(ViewData["FormTypeStore"]),        
 

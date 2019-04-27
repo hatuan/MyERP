@@ -2,13 +2,11 @@
       .Header(false)
       .Region(Region.North)
       .Border(false)
-      .Height(110)
       .Items(
           Html.X().Panel()
               .Header(false)
               .Region(Region.North)
               .Border(false)
-              .Height(70)
               .Content(
                   @<text>
                       <header class="site-header" role="banner">
@@ -18,9 +16,19 @@
                               </div>
                               <div class="navigation-bar">
                                   <div class="application-title-container">
-                                      @(Html.X().Label()
-                                            .Cls("application-title")
-                                            .Text("Hệ thống quản lý bán hàng"))
+                                      @(Html.X().Panel()
+                                          .ID("ApplicationMenuContainer")
+                                          .Header(false)
+                                          .Region(Region.South)
+                                          .Border(false)
+                                          .Height(45)
+                                          .Layout(LayoutType.Fit)
+                                          .BodyCls("application-menu-panel")
+                                          .Loader(Html.X().ComponentLoader()
+                                              .Url(Url.Action("ApplicationMenuPartialView"))
+                                              .Mode(LoadMode.Script)
+                                              .Params(new { containerId = "ApplicationMenuContainer" })
+                                          ))
                                   </div>
                                   <input type="checkbox" id="menu-button-checkbox" />
                                   <label id="menu-button" for="menu-button-checkbox">
@@ -30,18 +38,6 @@
                           </nav>
                       </header>
                    </text>
-              ),
-          Html.X().Panel()
-              .ID("ApplicationMenuContainer")
-              .Header(false)
-              .Region(Region.South)
-              .Border(false)
-              .Height(40)
-              .Layout(LayoutType.Fit)
-              .BodyCls("application-menu-panel")
-              .Loader(Html.X().ComponentLoader()
-                  .Url(Url.Action("ApplicationMenuPartialView"))
-                  .Mode(LoadMode.Script)
-                  .Params(new { containerId = "ApplicationMenuContainer" })
               )
+          
       ))

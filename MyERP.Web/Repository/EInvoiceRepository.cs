@@ -127,7 +127,17 @@ namespace MyERP.Web
         {
             return "";
         }
+        public string GetXmlInvoiceInfo(long id)
+        {
+            var entity = Get(c => c.Id == id, new string[] { "Currency", "EInvFormType", "EInvoiceLines", "EInvoiceLines.Item", "EInvoiceLines.Vat", "EInvoiceLines.Uom" }).SingleOrDefault();
+            if (entity == null)
+            {
+                throw new Exception("Invoice Header has been changed or deleted! Please check");
+            }
 
+            return GetXmlInvoiceInfo(entity);
+        }
+        
         public string GetXmlInvoiceInfo(EInvoiceHeader entity)
         {
             var formTypeRepository = new EInvFormTypeRepository();
@@ -136,6 +146,7 @@ namespace MyERP.Web
 
             EInvXMLInvoiceInfo invoiceInfo = new EInvXMLInvoiceInfo();
             invoiceInfo.InvoiceDataInfo = new EInvXMLInvoiceDataInfo();
+            invoiceInfo.InvoiceDataInfo.Id = "data";
             invoiceInfo.InvoiceDataInfo.InvoiceType = formType.InvoiceType;
             invoiceInfo.InvoiceDataInfo.InvoiceSeries = formType.InvoiceSeries.ToUpper();
             invoiceInfo.InvoiceDataInfo.TemplateCode = formType.InvoiceType + "0/" + formType.InvoiceTypeNo;
@@ -283,15 +294,16 @@ namespace MyERP.Web
             XmlWriterSettings settings = new XmlWriterSettings()
             {
                 Encoding = new UTF8Encoding(false),
-                Indent = true
+                Indent = false, //Default false - indent elements
+                NewLineHandling = NewLineHandling.None
             };
             using (MemoryStream sww = new MemoryStream())
             {
                 using (System.Xml.XmlWriter writer = System.Xml.XmlWriter.Create(sww, settings))
                 {
                     XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                    ns.Add("ns1", "http://www.w3.org/2000/09/xmldsig#");
                     ns.Add("inv", "http://laphoadon.gdt.gov.vn/2014/09/invoicexml/v1");
-                    //ns.Add("ns1", "http://www.w3.org/2000/09/xmldsig#");
                     XmlSerializer xsSubmit = new XmlSerializer(invoiceInfo.GetType());
                     xsSubmit.Serialize(writer, invoiceInfo, ns);
                     byte[] textAsBytes = sww.ToArray(); //Encoding.UTF8.GetBytes(Encoding.Default.GetString(sww.ToArray()));
@@ -307,7 +319,10 @@ namespace MyERP.Web
                 var formType = entity.EInvFormType;
                 String xslInput = formType.FormFile;
                 String xmlInput = GetXmlInvoiceInfo(entity);
-                        
+
+                System.IO.File.WriteAllText(dirPath + "/xslTemplate.xsl", xslInput, Encoding.UTF8);
+                System.IO.File.WriteAllText(dirPath + "/xmlInput.xml", xmlInput, Encoding.UTF8);
+
                 using (StringReader srt = new StringReader(xslInput)) // xslInput is a string that contains xsl
                 using (StringReader sri = new StringReader(xmlInput)) // xmlInput is a string that contains xml
                 {
@@ -539,7 +554,7 @@ namespace MyERP.Web
 
         public Paging<EInvoiceSigned> Paging(int start, int limit, string sort, SortDirection dir)
         {
-            var entities = Get(includePaths: new String[] { "Organization", "Client", "RecCreatedByUser", "RecModifiedByUser" });
+            var entities = Get(includePaths: new String[] { "Organization", "Client", "RecCreatedByUser", "RecModifiedByUser", "EInvFormType" });
 
             if (!string.IsNullOrEmpty(sort))
                 entities = dir == SortDirection.ASC ? entities.OrderBy(sort) : entities.OrderBy(sort + " DESC");
