@@ -10,7 +10,9 @@ namespace MyERP.DataAccess.Enum
     {
         [System.ComponentModel.DataAnnotations.Display(Name = "Draft", Order = 1)]
         Draft = 0,
-        [System.ComponentModel.DataAnnotations.Display(Name = "Signed", Order = 2)]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Released", Order = 2)]
+        Released = 1,
+        [System.ComponentModel.DataAnnotations.Display(Name = "Signed", Order = 3)]
         Signed = 1,
     }
 }

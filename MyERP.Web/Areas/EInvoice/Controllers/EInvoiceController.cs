@@ -865,5 +865,33 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
 
             return this.Direct(new { LineNo = lineNumber });
         }
+
+        public ActionResult SetInvoiceNumber(string id, string version)
+        {
+            if (String.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
+            if (String.IsNullOrEmpty(version))
+                throw new ArgumentNullException(nameof(version));
+
+            MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
+
+            var _id = Convert.ToInt64(id);
+            var _version = Convert.ToInt64(version);
+
+            try
+            {
+                (repository as EInvoiceHeaderRepository).SetEInvNumber(_id, _version, (long)user.ProviderUserKey);
+            }
+            catch (System.Data.Entity.Core.ObjectNotFoundException ex)
+            {
+                return this.Direct(false, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return this.Direct(false, ex.Message);
+            }
+
+            return this.Direct(new { Id = _id });
+        }
     }
 }

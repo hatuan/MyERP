@@ -76,24 +76,60 @@
                       .Menu(Html.X().Menu()
                           .MinWidth(200)
                           .Items(
-                              Html.X().MenuItem().Text(@Resources.Resources.Account).Tag("Account").DirectEvents(de =>
+                              Html.X().MenuItem().Text("1 - Set Invoice Number").Tag("InvoiceNumber").DirectEvents(de =>
                               {
-                                  de.Click.Url = Url.Action("_List", "Index", new { area = "Account" });
-                                  de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
+                                  de.Click.Action = "SetInvoiceNumber";
+                                  de.Click.Before = "return #{Id}.getValue() !== '';";
+                                  de.Click.ShowWarningOnFailure = true;
                                   de.Click.EventMask.ShowMask = true;
+                                  de.Click.ExtraParams.Add(new Parameter("id", "#{Id}.getValue()", ParameterMode.Raw));
+                                  de.Click.ExtraParams.Add(new Parameter("version", "#{Version}.getValue()", ParameterMode.Raw));
+                                  de.Click.Success = "function(response, result) { \n" +
+                                             "  App.EInvoiceList.getSelectionModel().deselectAll(); \n" +
+                                             "  App.EInvoiceList.getStore().load({ \n" +
+                                             "      callback : function() { \n" +
+                                             "          var record = App.EInvoiceList.store.getById(result.result.Id); \n" +
+                                             "          var index = App.EInvoiceList.store.indexOf(record); \n" +
+                                             "          App.EInvoiceList.getSelectionModel().select(index, true); \n" +
+                                             "          Ext.net.directRequest({ \n" +
+                                             "              url:baseURL + 'EInvoice/EInvoice/_Maintenance?id='+result.result.Id, \n" +
+                                             "              method:'GET', eventMask:{showMask:true}, \n" +
+                                             "              success: function() { \n" +
+                                             "                  var alert = Ext.Msg.alert('Status', 'Set invoice number successfully', Ext.emptyFn); \n" +
+                                             "                  Ext.defer(function(){ alert.toFront(); }, 100); \n " +
+                                             "              } \n" +
+                                             "          }); \n" +
+                                             "      } \n" +
+                                             "  }); \n" +
+                                             "}";
                               }),
                               Html.X().MenuSeparator(),
-                              Html.X().MenuItem().Text(@Resources.Resources.Job).Tag("Job").DirectEvents(de =>
+                              Html.X().MenuItem().Text("2 - Sign Invoice").Tag("SignInvoice").DirectEvents(de =>
                               {
-                                  de.Click.Url = Url.Action("_List", "Index", new { area = "Job" });
-                                  de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
+                                  de.Click.Action = "SignInvoice";
+                                  de.Click.Before = "return #{Id}.getValue() !== '';";
+                                  de.Click.ShowWarningOnFailure = true;
                                   de.Click.EventMask.ShowMask = true;
-                              }),
-                              Html.X().MenuItem().Text(@Resources.Resources.JobGroup).Tag("JobGroup").DirectEvents(de =>
-                              {
-                                  de.Click.Url = Url.Action("_List", "JobGroup", new { area = "Job" });
-                                  de.Click.ExtraParams.Add(new { containerId = "MainCenterPanel" });
-                                  de.Click.EventMask.ShowMask = true;
+                                  de.Click.ExtraParams.Add(new Parameter("id", "#{Id}.getValue()", ParameterMode.Raw));
+                                  de.Click.ExtraParams.Add(new Parameter("version", "#{Version}.getValue()", ParameterMode.Raw));
+                                  de.Click.Success = "function(response, result) { \n" +
+                                             "  App.EInvoiceList.getSelectionModel().deselectAll(); \n" +
+                                             "  App.EInvoiceList.getStore().load({ \n" +
+                                             "      callback : function() { \n" +
+                                             "          var record = App.EInvoiceList.store.getById(result.result.Id); \n" +
+                                             "          var index = App.EInvoiceList.store.indexOf(record); \n" +
+                                             "          App.EInvoiceList.getSelectionModel().select(index, true); \n" +
+                                             "          Ext.net.directRequest({ \n" +
+                                             "              url:baseURL + 'EInvoice/EInvoice/_Maintenance?id='+result.result.Id, \n" +
+                                             "              method:'GET', eventMask:{showMask:true}, \n" +
+                                             "              success: function() { \n" +
+                                             "                  var alert = Ext.Msg.alert('Status', 'Set invoice number successfully', Ext.emptyFn); \n" +
+                                             "                  Ext.defer(function(){ alert.toFront(); }, 100); \n " +
+                                             "              } \n" +
+                                             "          }); \n" +
+                                             "      } \n" +
+                                             "  }); \n" +
+                                             "}";
                               })
                         ))
                   );

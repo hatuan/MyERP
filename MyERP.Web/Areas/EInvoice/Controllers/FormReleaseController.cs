@@ -297,7 +297,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             //Calc max release to of FormType
             decimal maxFormReleaseTo = (new EInvFormTypeRepository()).GetMaxReleaseOfFormType(model.FormTypeId, model.Id??0);
 
-            return this.Direct(new { ReleaseFrom = maxFormReleaseTo + 1, ReleaseTo = maxFormReleaseTo + 1 + model.ReleaseTotal });
+            return this.Direct(new { ReleaseFrom = maxFormReleaseTo + 1, ReleaseTo = maxFormReleaseTo + model.ReleaseTotal });
         }
     }
 }

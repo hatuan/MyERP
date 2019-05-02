@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
 using System.Security.Principal;
 using System.Text;
+using System.Transactions;
 using System.Web;
 using System.Xml;
 using System.Xml.Serialization;
@@ -91,13 +94,37 @@ namespace MyERP.Web
             }
         }
 
-        public string GetNextReleaseNo(long formTypeId, DateTime invoiceIssuedDate)
+        public decimal GetNextReleaseNo(long formTypeId, DateTime invoiceIssuedDate)
         {
-            var formType = Get(includePaths: new String[] { "EInvFormReleases" }).First(x => x.Id == formTypeId);
-            var formRelease = formType.EInvFormReleases.Where(x => x.StartDate.CompareTo(invoiceIssuedDate) >= 0 
-                                                                   && (TaxAuthoritiesStatus) x.TaxAuthoritiesStatus == TaxAuthoritiesStatus.Active);
-            
-            return "";
+            /*
+            TransactionOptions TransOpt = new TransactionOptions();
+            TransOpt.IsolationLevel = System.Transactions.IsolationLevel.RepeatableRead;
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, TransOpt))
+            {
+                var formReleases = dataContext.EInvFormReleases.SqlQuery("SELECT * FROM einv_form_release WITH (INDEX(idx_einv_form_release_form_type_id)) WHERE form_type_id = @form_type_id", new SqlParameter("@form_type_id", formTypeId));
+                var formRelease = formReleases.Where(x => x.StartDate.CompareTo(invoiceIssuedDate) >= 0
+                                                                       && (TaxAuthoritiesStatus)x.TaxAuthoritiesStatus == TaxAuthoritiesStatus.Active);
+                scope.Complete();
+            }
+            */
+            decimal _nextReleaseNo = 0;
+            using (DbContextTransaction scope = dataContext.Database.BeginTransaction())
+            {
+                var formReleases = dataContext.EInvFormReleases.SqlQuery("SELECT * FROM einv_form_release WITH (UPDLOCK, INDEX(idx_einv_form_release_form_type_id)) WHERE form_type_id = @form_type_id", new SqlParameter("@form_type_id", formTypeId))
+                    .ToList<EInvFormRelease>();
+                var formRelease = formReleases.Where(x => x.StartDate.CompareTo(invoiceIssuedDate) >= 0 && x.ReleaseUsed < x.ReleaseTotal && (TaxAuthoritiesStatus)x.TaxAuthoritiesStatus == TaxAuthoritiesStatus.Active)
+                    .OrderBy(x => x.ReleaseFrom)
+                    .FirstOrDefault();
+                if (formRelease == null)
+                    throw new System.Data.Entity.Core.ObjectNotFoundException();
+
+                _nextReleaseNo = formRelease.ReleaseFrom + formRelease.ReleaseUsed;
+                formRelease.ReleaseUsed = formRelease.ReleaseUsed + 1;
+                dataContext.SaveChanges();
+                scope.Commit();
+            }
+
+            return _nextReleaseNo;
         }
     }
 
@@ -123,9 +150,50 @@ namespace MyERP.Web
             return new Paging<EInvoiceHeader>(ranges, count);
         }
 
-        public string SetEInvNumber(long id)
+        public void SetEInvNumber(long eInvoiceHeaderId, long version, long userId)
         {
-            return "";
+            decimal _nextReleaseNo = 0;
+            using (DbContextTransaction scope = dataContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    var eInvoiceHeader = dataContext.EInvoiceHeaders.SqlQuery("SELECT * FROM einvoice_header WITH (UPDLOCK, INDEX(pk_einvoice_header)) WHERE id = @id", new SqlParameter("@id", eInvoiceHeaderId)).FirstOrDefault();
+                    if (eInvoiceHeader == null || eInvoiceHeader.Version != version)
+                        throw new System.Data.Entity.Core.ObjectNotFoundException("Invoice Header has been changed or deleted! Please check");
+
+                    var formReleases = dataContext.EInvFormReleases.SqlQuery("SELECT * FROM einv_form_release WITH (UPDLOCK, INDEX(idx_einv_form_release_form_type_id)) WHERE form_type_id = @form_type_id", new SqlParameter("@form_type_id", eInvoiceHeader.FormTypeId))
+                        .ToList<EInvFormRelease>();
+                    var formRelease = formReleases.Where(x => x.StartDate.CompareTo(eInvoiceHeader.InvoiceIssuedDate) <= 0 && x.ReleaseUsed < x.ReleaseTotal && (TaxAuthoritiesStatus)x.TaxAuthoritiesStatus == TaxAuthoritiesStatus.Active)
+                        .OrderBy(x => x.ReleaseFrom)
+                        .FirstOrDefault();
+                    if (formRelease == null)
+                        throw new System.Data.Entity.Core.ObjectNotFoundException("Invoice Form Release not found! Please check");
+
+                    _nextReleaseNo = formRelease.ReleaseFrom + formRelease.ReleaseUsed;
+                    formRelease.ReleaseUsed++;
+
+                    eInvoiceHeader.InvoiceNumber = _nextReleaseNo.ToString().PadLeft(7, '0');
+                    eInvoiceHeader.Status = (byte)EInvoiceDocumentStatusType.Released;
+                    eInvoiceHeader.RecModifiedAt = DateTime.Now;
+                    eInvoiceHeader.RecModifiedBy = userId;
+                    eInvoiceHeader.Version++;
+
+                    dataContext.SaveChanges();
+
+                    scope.Commit();
+                }
+                catch (System.Data.Entity.Core.ObjectNotFoundException ex)
+                {
+                    scope.Rollback();
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    scope.Rollback();
+                    throw ex;
+                }
+            }
+
         }
         public string GetXmlInvoiceInfo(long id)
         {
@@ -297,19 +365,19 @@ namespace MyERP.Web
                 Indent = false, //Default false - indent elements
                 NewLineHandling = NewLineHandling.None
             };
+
             using (MemoryStream sww = new MemoryStream())
+            using (System.Xml.XmlWriter writer = System.Xml.XmlWriter.Create(sww, settings))
             {
-                using (System.Xml.XmlWriter writer = System.Xml.XmlWriter.Create(sww, settings))
-                {
-                    XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-                    ns.Add("ns1", "http://www.w3.org/2000/09/xmldsig#");
-                    ns.Add("inv", "http://laphoadon.gdt.gov.vn/2014/09/invoicexml/v1");
-                    XmlSerializer xsSubmit = new XmlSerializer(invoiceInfo.GetType());
-                    xsSubmit.Serialize(writer, invoiceInfo, ns);
-                    byte[] textAsBytes = sww.ToArray(); //Encoding.UTF8.GetBytes(Encoding.Default.GetString(sww.ToArray()));
-                    return Encoding.UTF8.GetString(textAsBytes);
-                }
+                XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                ns.Add("ns1", "http://www.w3.org/2000/09/xmldsig#");
+                ns.Add("inv", "http://laphoadon.gdt.gov.vn/2014/09/invoicexml/v1");
+                XmlSerializer xsSubmit = new XmlSerializer(invoiceInfo.GetType());
+                xsSubmit.Serialize(writer, invoiceInfo, ns);
+                byte[] textAsBytes = sww.ToArray(); //Encoding.UTF8.GetBytes(Encoding.Default.GetString(sww.ToArray()));
+                return Encoding.UTF8.GetString(textAsBytes);
             }
+
         }
 
         public void CreateHtmlFile(EInvoiceHeader entity, string dirPath, string fullHtmlPath)
