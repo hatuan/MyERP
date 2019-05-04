@@ -1119,7 +1119,7 @@
           <Property Name="rec_modified_at" Type="datetime2" />
           <Property Name="version" Type="bigint" Nullable="false" DefaultValue="1" />
           <Property Name="tax_code" Type="varchar" MaxLength="14" />
-          <Property Name="adress" Type="nvarchar" MaxLength="256" />
+          <Property Name="address" Type="nvarchar" MaxLength="256" />
           <Property Name="address_transition" Type="nvarchar" MaxLength="256" />
           <Property Name="telephone" Type="varchar" MaxLength="32" />
           <Property Name="email" Type="nvarchar" MaxLength="32" />
@@ -2340,7 +2340,6 @@
           <Property Name="invoice_series" Type="nvarchar" Nullable="false" MaxLength="6" />
           <Property Name="form_file_name" Type="varchar" Nullable="false" MaxLength="32" />
           <Property Name="form_file" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="form_vars" Type="nvarchar(max)" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" />
           <Property Name="version" Type="bigint" Nullable="false" />
@@ -2352,6 +2351,22 @@
           <Property Name="invoice_type_no" Type="varchar" Nullable="false" MaxLength="3" />
           <Property Name="logo" Type="nvarchar(max)" />
           <Property Name="watermark" Type="nvarchar(max)" />
+          <Property Name="seller_legal_name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="seller_tax_code" Type="nvarchar" Nullable="false" MaxLength="14" />
+          <Property Name="seller_address_line" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="seller_postal_code" Type="varchar" MaxLength="10" />
+          <Property Name="seller_district_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="seller_city_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="seller_phone_number" Type="nvarchar" MaxLength="20" />
+          <Property Name="seller_fax_number" Type="nvarchar" MaxLength="20" />
+          <Property Name="seller_email" Type="nvarchar" MaxLength="50" />
+          <Property Name="seller_bank_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="seller_bank_account" Type="nvarchar" MaxLength="20" />
+          <Property Name="seller_contact_person_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="seller_signed_person_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="seller_submitted_person_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="invoice_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="seller_country_code" Type="nvarchar" MaxLength="2" />
         </EntityType>
         <EntityType Name="einv_form_release">
           <Key>
@@ -6714,7 +6729,7 @@
           <Property Name="UnitAmountRoundingPrecision" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="1d0151b9-1593-47cd-95b7-240144c598d3" />
           <Property Name="CurrencyLcyId" Type="Int64" ed:ValidateRequired="false" ed:Guid="75ad659c-bb0b-4eaf-b311-277192c574ac" />
           <Property Name="TaxCode" Type="String" MaxLength="14" ed:ValidateMaxLength="14" ed:ValidateRequired="false" ed:Guid="16fa9131-54b6-43c8-8872-df574e8dac24" />
-          <Property Name="Adress" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="018299ea-b183-4855-97cc-c6d24c4855b3" />
+          <Property Name="Address" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="018299ea-b183-4855-97cc-c6d24c4855b3" />
           <Property Name="AddressTransition" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="739b5b9a-688b-4ef0-a52a-2a8b06de050e" />
           <Property Name="Telephone" Type="String" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="66b7e6de-68d8-4e52-bf2a-193933439720" />
           <Property Name="Email" Type="String" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="0b14b6aa-04a3-41d7-ab45-1e7fb17e730a" />
@@ -8175,6 +8190,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="47ee27ec-8d2e-47fd-97c9-17f1b7d07202" />
+          <Property Name="InvoiceName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="5ec6ee43-be96-4bdf-9828-0199b7e1a5d7" />
           <Property Name="InvoiceType" Type="String" Nullable="false" MaxLength="6" Unicode="true" ed:ValidateMaxLength="6" ed:ValidateRequired="true" ed:Guid="21e58b43-d67b-496b-82ef-cd94aeb4fa00" />
           <Property Name="InvoiceTypeNo" Type="String" Nullable="false" MaxLength="3" ed:ValidateMaxLength="3" ed:ValidateRequired="true" ed:Guid="1098637d-830f-497c-bc5f-59f8c91e4dd4" />
           <Property Name="TemplateCode" Type="String" Nullable="false" MaxLength="11" Unicode="true" ed:ValidateMaxLength="11" ed:ValidateRequired="true" ed:Guid="af8204ae-82d5-4167-abe2-a427571338ee" />
@@ -8182,7 +8198,21 @@
           <Property Name="InvoiceSeries" Type="String" Nullable="false" MaxLength="6" Unicode="true" ed:ValidateMaxLength="6" ed:ValidateRequired="true" ed:Guid="98358f20-7a26-4cb2-8fbb-eb950a80dff4" />
           <Property Name="FormFileName" Type="String" Nullable="false" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="f6b9e03f-9135-4945-8024-84144b2b1791" />
           <Property Name="FormFile" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="5025a289-3894-440e-8c4e-769d90660eda" />
-          <Property Name="FormVars" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="db43ac58-ea73-4080-9d5e-6f8a37f92f1b" />
+          <Property Name="SellerLegalName" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="52f858b6-7a6b-4ea1-be6c-87c804b46efb" />
+          <Property Name="SellerTaxCode" Type="String" Nullable="false" MaxLength="14" Unicode="true" ed:ValidateMaxLength="14" ed:ValidateRequired="true" ed:Guid="7830dd56-747b-4b9d-ab08-14132307cfc9" />
+          <Property Name="SellerAddressLine" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="8ec319f0-db64-4599-9f75-28ba2285b9be" />
+          <Property Name="SellerPostalCode" Type="String" MaxLength="10" ed:ValidateMaxLength="10" ed:ValidateRequired="false" ed:Guid="e3358065-70d2-4801-bc79-35ce4e829dd4" />
+          <Property Name="SellerDistrictName" Type="String" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="1bf66271-d953-48d3-ae09-18188b35a1ff" />
+          <Property Name="SellerCityName" Type="String" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="0ed5604e-2046-4275-bce6-966d528c67fa" />
+          <Property Name="SellerCountryCode" Type="String" MaxLength="2" Unicode="true" ed:ValidateMaxLength="2" ed:ValidateRequired="false" ed:Guid="5ac5b1ec-7595-4bf5-95ca-07f3c92ec699" />
+          <Property Name="SellerPhoneNumber" Type="String" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="false" ed:Guid="ed12c7f1-d615-4ca0-afbc-7a5fd1420039" />
+          <Property Name="SellerFaxNumber" Type="String" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="false" ed:Guid="4268a08e-29c6-4157-98d7-799cc6858acb" />
+          <Property Name="SellerEmail" Type="String" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="116aade1-83db-47e1-b285-55d52082ee35" />
+          <Property Name="SellerBankName" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="720396c0-1e12-46a9-a0ed-d184c60cb23c" />
+          <Property Name="SellerBankAccount" Type="String" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="false" ed:Guid="abd5b410-c7a5-40dd-b959-c3368b4f0cf8" />
+          <Property Name="SellerContactPersonName" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="840ce5d9-3071-4e15-b88d-81a197c7ba15" />
+          <Property Name="SellerSignedPersonName" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="81ca960f-c6d3-4fd2-94dc-aef9c04b0398" />
+          <Property Name="SellerSubmittedPersonName" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="8764cbb7-11d8-4e43-8532-dd0a7c2b8fd9" />
           <Property Name="Logo" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="f56127e4-0d9e-4329-8aaa-cf74a66d6d32" />
           <Property Name="Watermark" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="3bbb1846-1f63-4e86-bd2d-4df0b67cb3e2" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a4875466-de8c-4a86-ab43-89bc941921cb" />
@@ -11526,7 +11556,7 @@
                 <ScalarProperty Name="CurrencyLcyId" ColumnName="currency_lcy_id" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="TaxCode" ColumnName="tax_code" />
-                <ScalarProperty Name="Adress" ColumnName="adress" />
+                <ScalarProperty Name="Address" ColumnName="address" />
                 <ScalarProperty Name="AddressTransition" ColumnName="address_transition" />
                 <ScalarProperty Name="Telephone" ColumnName="telephone" />
                 <ScalarProperty Name="Email" ColumnName="email" />
@@ -12700,7 +12730,6 @@
                 <ScalarProperty Name="InvoiceSeries" ColumnName="invoice_series" />
                 <ScalarProperty Name="FormFileName" ColumnName="form_file_name" />
                 <ScalarProperty Name="FormFile" ColumnName="form_file" />
-                <ScalarProperty Name="FormVars" ColumnName="form_vars" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="Version" ColumnName="version" />
@@ -12712,6 +12741,22 @@
                 <ScalarProperty Name="InvoiceTypeNo" ColumnName="invoice_type_no" />
                 <ScalarProperty Name="Logo" ColumnName="logo" />
                 <ScalarProperty Name="Watermark" ColumnName="watermark" />
+                <ScalarProperty Name="SellerLegalName" ColumnName="seller_legal_name" />
+                <ScalarProperty Name="SellerTaxCode" ColumnName="seller_tax_code" />
+                <ScalarProperty Name="SellerAddressLine" ColumnName="seller_address_line" />
+                <ScalarProperty Name="SellerPostalCode" ColumnName="seller_postal_code" />
+                <ScalarProperty Name="SellerDistrictName" ColumnName="seller_district_name" />
+                <ScalarProperty Name="SellerCityName" ColumnName="seller_city_name" />
+                <ScalarProperty Name="SellerPhoneNumber" ColumnName="seller_phone_number" />
+                <ScalarProperty Name="SellerFaxNumber" ColumnName="seller_fax_number" />
+                <ScalarProperty Name="SellerEmail" ColumnName="seller_email" />
+                <ScalarProperty Name="SellerBankName" ColumnName="seller_bank_name" />
+                <ScalarProperty Name="SellerBankAccount" ColumnName="seller_bank_account" />
+                <ScalarProperty Name="SellerContactPersonName" ColumnName="seller_contact_person_name" />
+                <ScalarProperty Name="SellerSignedPersonName" ColumnName="seller_signed_person_name" />
+                <ScalarProperty Name="SellerSubmittedPersonName" ColumnName="seller_submitted_person_name" />
+                <ScalarProperty Name="InvoiceName" ColumnName="invoice_name" />
+                <ScalarProperty Name="SellerCountryCode" ColumnName="seller_country_code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

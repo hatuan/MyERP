@@ -7,9 +7,25 @@
           .ID("WindowFormTypeMaintenance")
           .Title("FormType Maintenance")
           .Height(700)
-          .Width(1200)
+          .Width(1500)
           .Modal(true)
           .Layout(LayoutType.Fit)
+          .HtmlBin(
+             @<text>
+                 <script>
+                     var validFieldAndRenderTemplate = function (field) {
+                         if (this.up('form').isValid() && field.isValid()) {
+                            Ext.net.DirectMethod.request({ 
+                                url: '@Url.Action("InvoiceFormRender")', 
+                                params: { 
+                                    __RequestVerificationToken: Ext.getCmp("AntiForgeryField").getValue(),
+                                    modelJson: Ext.getCmp("FormFormTypeMaintenance").getForm().getValues() 
+                                }
+                            })
+                         }
+                     };
+                 </script>
+             </text>)
           .Items(
               Html.X().FormPanel()
                   .ID("FormFormTypeMaintenance")
@@ -21,8 +37,10 @@
                   {
                       items.Add(Html.X().Panel()
                           .Region(Region.West)
+                          .Split(true)
+                          .Scrollable(ScrollableOption.Vertical)
                           .Layout(LayoutType.Form)
-                          .Width(300)
+                          .MinWidth(500)
                           .Items(
                               Html.X().AntiForgeryField().ID("AntiForgeryField"),
                               Html.X().HiddenFor(m => m.Id).ID("Id"),
@@ -30,13 +48,17 @@
                               Html.X().ComboBoxFor(m => m.Status).Width(150).ID("Status").Editable(false).Hidden(true).ItemsFromEnum(typeof(MyERP.DataAccess.Enum.DefaultStatusType)),
                               Html.X().HiddenFor(m => m.InvoiceForm).ID("InvoiceForm"),
                               Html.X().HiddenFor(m => m.FormFile).ID("FormFile"),
-                              Html.X().HiddenFor(m => m.FormVars).ID("FormVars"),
                               Html.X().HiddenFor(m => m.Logo).ID("Logo"),
                               Html.X().HiddenFor(m => m.Watermark).ID("Watermark"),
+                              Html.X().TextFieldFor(m => m.InvoiceName).ID("InvoiceName").EnforceMaxLength(true).FieldStyle("text-transform: uppercase;").ReadOnly(readOnly)
+                                  .Listeners(ls =>
+                                  {
+                                      ls.Change.Fn = "validFieldAndRenderTemplate";
+                                  }),
                               Html.X().ComboBoxFor(m => m.InvoiceType).ID("InvoiceType").Editable(false).ReadOnly(readOnly)
                                   .Items(action =>
                                   {
-                                      action.Add(new ListItem("Hóa đơn GTGT", "01GTKT"));
+                                      action.Add(new ListItem(Resources.Resources.VAT_Invoice, "01GTKT"));
                                   })
                                   .Listeners(ls =>
                                   {
@@ -83,20 +105,79 @@
                               Html.X().TextFieldFor(m => m.InvoiceSeries).ID("InvoiceSeries").EnforceMaxLength(true).FieldStyle("text-transform: uppercase;").ReadOnly(readOnly)
                                   .Listeners(ls =>
                                   {
-                                      ls.Change.Handler = "function(field) { \n" +
-                                                          "    if(this.up('form').isValid() && field.isValid())" +
-                                                          "    {" +
-                                                          "       Ext.net.DirectMethod.request({ \n" +
-                                                          "           url: '" + Url.Action("InvoiceFormRender") + "', \n" +
-                                                          "           params: { \n" +
-                                                          "               __RequestVerificationToken:  #{AntiForgeryField}.getValue()," +
-                                                          "               modelJson: #{FormFormTypeMaintenance}.getForm().getValues() \n" +
-                                                          "           }, \n" +
-                                                          "       })" +
-                                                          "    }" +
-                                                          "}";
+                                      ls.Change.Fn = "validFieldAndRenderTemplate";
                                   }),
-                              Html.X().TextFieldFor(m => m.FormFileName).ID("FormFileName").ReadOnly(true)
+                              Html.X().TextFieldFor(m => m.FormFileName).ID("FormFileName").ReadOnly(true),
+                              Html.X().TextFieldFor(m => m.SellerLegalName).AllowBlank(false).EnforceMaxLength(true).ID("SellerLegalName").ReadOnly(readOnly)
+                                  .Listeners(ls =>
+                                  {
+                                      ls.Change.Fn = "validFieldAndRenderTemplate";
+                                  }),
+                              Html.X().TextFieldFor(m => m.SellerTaxCode).AllowBlank(false).EnforceMaxLength(true).ID("SellerTaxCode").ReadOnly(readOnly)
+                                  .Listeners(ls =>
+                                  {
+                                      ls.Change.Fn = "validFieldAndRenderTemplate";
+                                  }),
+                              Html.X().TextFieldFor(m => m.SellerAddressLine).AllowBlank(false).EnforceMaxLength(true).ID("SellerAddressLine").ReadOnly(readOnly)
+                                  .Listeners(ls =>
+                                  {
+                                      ls.Change.Fn = "validFieldAndRenderTemplate";
+                                  }),
+                              Html.X().TextFieldFor(m => m.SellerBankName).EnforceMaxLength(true).ID("SellerBankName").ReadOnly(readOnly)
+                                  .Listeners(ls =>
+                                  {
+                                      ls.Change.Fn = "validFieldAndRenderTemplate";
+                                  }),
+                              Html.X().TextFieldFor(m => m.SellerBankAccount).EnforceMaxLength(true).ID("SellerBankAccount").ReadOnly(readOnly)
+                                  .Listeners(ls =>
+                                  {
+                                      ls.Change.Fn = "validFieldAndRenderTemplate";
+                                  }),
+                              Html.X().TextFieldFor(m => m.SellerPostalCode).EnforceMaxLength(true).ID("SellerPostalCode").ReadOnly(readOnly)
+                                  .Listeners(ls =>
+                                  {
+                                      ls.Change.Fn = "validFieldAndRenderTemplate";
+                                  }),
+                              Html.X().TextFieldFor(m => m.SellerDistrictName).EnforceMaxLength(true).ID("SellerDistrictName").ReadOnly(readOnly)
+                                  .Listeners(ls =>
+                                  {
+                                      ls.Change.Fn = "validFieldAndRenderTemplate";
+                                  }),
+                              Html.X().TextFieldFor(m => m.SellerCityName).EnforceMaxLength(true).ID("SellerCityName").ReadOnly(readOnly)
+                                  .Listeners(ls =>
+                                  {
+                                      ls.Change.Fn = "validFieldAndRenderTemplate";
+                                  }),
+                              Html.X().TextFieldFor(m => m.SellerCountryCode).EnforceMaxLength(true).ID("SellerCountryCode").ReadOnly(readOnly)
+                                  .Listeners(ls =>
+                                  {
+                                      ls.Change.Fn = "validFieldAndRenderTemplate";
+                                  }),
+                              Html.X().TextFieldFor(m => m.SellerPhoneNumber).EnforceMaxLength(true).ID("SellerPhoneNumber").ReadOnly(readOnly)
+                                  .Listeners(ls =>
+                                  {
+                                      ls.Change.Fn = "validFieldAndRenderTemplate";
+                                  }),
+                              Html.X().TextFieldFor(m => m.SellerFaxNumber).EnforceMaxLength(true).ID("SellerFaxNumber").ReadOnly(readOnly)
+                                  .Listeners(ls =>
+                                  {
+                                      ls.Change.Fn = "validFieldAndRenderTemplate";
+                                  }),
+                              Html.X().TextFieldFor(m => m.SellerEmail).EnforceMaxLength(true).ID("SellerEmail").ReadOnly(readOnly)
+                                  .Listeners(ls =>
+                                  {
+                                      ls.Change.Fn = "validFieldAndRenderTemplate";
+                                  }),
+                              Html.X().TextFieldFor(m => m.SellerContactPersonName).EnforceMaxLength(true).ID("SellerContactPersonName").ReadOnly(readOnly)
+                                  .Listeners(ls =>
+                                  {
+                                      ls.Change.Fn = "validFieldAndRenderTemplate";
+                                  }),
+                              Html.X().TextFieldFor(m => m.SellerSignedPersonName).EnforceMaxLength(true).ID("SellerSignedPersonName").ReadOnly(readOnly)
+                                  .Listeners(ls =>
+                                  {
+                                      ls.Change.Fn = "validFieldAndRenderTemplate";
+                                  })
                           ));
                       items.Add(
                           Html.X().TabPanel()

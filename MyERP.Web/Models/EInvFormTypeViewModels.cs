@@ -61,6 +61,11 @@ namespace MyERP.Web.Models
     {
         public Int64? Id { get; set; }
 
+        [Display(Name = "Invoice Name")]
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String InvoiceName { get; set; }
+
         [Required]
         [Display(Name = "Invoice Type")]
         public String InvoiceType { get; set; }
@@ -91,15 +96,69 @@ namespace MyERP.Web.Models
         [AllowHtml]
         public String FormFile { get; set; }
 
-        [Display(Name = "Form Vars")]
-        [AllowHtml]
-        public String FormVars { get; set; }
-
         [Display(Name = "Logo")]
         public String Logo { get; set; }
 
         [Display(Name = "Watermark")]
         public String Watermark { get; set; }
+
+        [Display(Name = "Seller Legal Name")]
+        [Required]
+        [StringLength(255, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerLegalName { get; set; }
+
+        [Display(Name = "Seller Tax Code")]
+        [Required]
+        [StringLength(14, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerTaxCode { get; set; }
+
+        [Display(Name = "Seller Address")]
+        [StringLength(255, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerAddressLine { get; set; }
+
+        [Display(Name = "Buyer Postal Code")]
+        [StringLength(10, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerPostalCode { get; set; }
+
+        [Display(Name = "Seller District Name")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerDistrictName { get; set; }
+
+        [Display(Name = "Seller City Name")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerCityName { get; set; }
+
+        [Display(Name = "Seller Country Code")]
+        [StringLength(2, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerCountryCode { get; set; }
+
+        [Display(Name = "Seller Phone Number")]
+        [StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerPhoneNumber { get; set; }
+
+        [Display(Name = "Seller Fax Number")]
+        [StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerFaxNumber { get; set; }
+
+        [Display(Name = "Seller Email")]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerEmail { get; set; }
+
+        [Display(Name = "Seller Bank Name")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerBankName { get; set; }
+
+        [Display(Name = "Seller Bank Account")]
+        [StringLength(20, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerBankAccount { get; set; }
+
+        [Display(Name = "Seller Contact Person Name")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerContactPersonName { get; set; }
+
+        [Display(Name = "Seller Signed Person Name")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public String SellerSignedPersonName { get; set; }
 
         public Boolean HasFormRelease { get; set; }
 

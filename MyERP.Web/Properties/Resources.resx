@@ -498,4 +498,7 @@
   <data name="Start_Date_Must_2_Day_After_Release_Date" xml:space="preserve">
     <value>Start Date must after Release Date +2 days</value>
   </data>
+  <data name="VAT_Invoice" xml:space="preserve">
+    <value>Vat Invoce</value>
+  </data>
 </root>

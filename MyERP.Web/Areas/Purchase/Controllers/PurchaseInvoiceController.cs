@@ -1390,7 +1390,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
             var client = new
             {
                 _client.Description,
-                _client.Adress,
+                _client.Address,
                 _client.TaxCode,
                 _client.Telephone,
                 _client.Email,

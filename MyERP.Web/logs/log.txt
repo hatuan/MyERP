@@ -629,3 +629,39 @@ System.Data.SqlClient.SqlException (0x80131904): Login failed for user 'CERP\tua
    at MyERP.Web.CustomMembershipProvider.ValidateUser(String username, String password) in C:\Projects\MyERP-WEB\MyERP.Web\CustomMembershipProvider.cs:line 42
 ClientConnectionId:06d169ce-6573-41ff-9ed9-64793a08e226
 Error Number:18456,State:1,Class:14
+ERROR 2019-05-02 23:46:54,679 79777ms stomMembershipProvider ValidateUser       - Failed
+System.InvalidOperationException: Unable to determine the principal end of an association between the types 'MyERP.DataAccess.Currency' and 'MyERP.DataAccess.Client'. The principal end of this association must be explicitly configured using either the relationship fluent API or data annotations.
+   at System.Data.Entity.ModelConfiguration.Edm.Services.AssociationTypeMappingGenerator.GenerateIndependentAssociationType(AssociationType associationType, DbDatabaseMapping databaseMapping)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.AssociationTypeMappingGenerator.Generate(AssociationType associationType, DbDatabaseMapping databaseMapping)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.DatabaseMappingGenerator.GenerateAssociationTypes(DbDatabaseMapping databaseMapping)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.DatabaseMappingGenerator.Generate(EdmModel conceptualModel)
+   at System.Data.Entity.DbModelBuilder.Build(DbProviderManifest providerManifest, DbProviderInfo providerInfo)
+   at System.Data.Entity.DbModelBuilder.Build(DbConnection providerConnection)
+   at System.Data.Entity.Internal.LazyInternalContext.CreateModel(LazyInternalContext internalContext)
+   at System.Data.Entity.Internal.RetryLazy`2.GetValue(TInput input)
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at MyERP.Web.CustomMembershipProvider.ValidateUser(String username, String password) in C:\Projects\MyERP-WEB\MyERP.Web\CustomMembershipProvider.cs:line 42
+ERROR 2019-05-02 23:51:12,671 94361ms stomMembershipProvider ValidateUser       - Failed
+System.InvalidOperationException: Unable to determine the principal end of an association between the types 'MyERP.DataAccess.Currency' and 'MyERP.DataAccess.Client'. The principal end of this association must be explicitly configured using either the relationship fluent API or data annotations.
+   at System.Data.Entity.ModelConfiguration.Edm.Services.AssociationTypeMappingGenerator.GenerateIndependentAssociationType(AssociationType associationType, DbDatabaseMapping databaseMapping)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.AssociationTypeMappingGenerator.Generate(AssociationType associationType, DbDatabaseMapping databaseMapping)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.DatabaseMappingGenerator.GenerateAssociationTypes(DbDatabaseMapping databaseMapping)
+   at System.Data.Entity.ModelConfiguration.Edm.Services.DatabaseMappingGenerator.Generate(EdmModel conceptualModel)
+   at System.Data.Entity.DbModelBuilder.Build(DbProviderManifest providerManifest, DbProviderInfo providerInfo)
+   at System.Data.Entity.DbModelBuilder.Build(DbConnection providerConnection)
+   at System.Data.Entity.Internal.LazyInternalContext.CreateModel(LazyInternalContext internalContext)
+   at System.Data.Entity.Internal.RetryLazy`2.GetValue(TInput input)
+   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
+   at System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
+   at MyERP.Web.CustomMembershipProvider.ValidateUser(String username, String password) in C:\Projects\MyERP-WEB\MyERP.Web\CustomMembershipProvider.cs:line 42

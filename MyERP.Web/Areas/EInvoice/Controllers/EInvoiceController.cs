@@ -109,11 +109,6 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             if (currencyLcyId == 0)
                 return this.Direct(false, "ERROR : Please set Client CurrencyLcy first");
 
-            var optionRepository = new OptionRepository();
-            long purchaseInvoiceSequenceId = optionRepository.OptionParameter(organizationId, OptionParameter.PurchInvoiceSeqId);
-            if (purchaseInvoiceSequenceId == 0)
-                return this.Direct(false, "ERROR : Please set Option Purchase Invoice first");
-
             ViewData["CurrencyLCYId"] = currencyLcyId;
             CurrencyRepository currencyRepository = new CurrencyRepository();
             ViewData["CurrencyStore"] = currencyRepository.Get(filter: c => c.Id == currencyLcyId, includePaths: new string[] { "Organization" })
@@ -133,7 +128,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 ExchangeRate = 1,
                 SellerLegalName = client.Description,
                 SellerTaxCode = client.TaxCode,
-                SellerAddressLine = client.Adress,
+                SellerAddressLine = client.Address,
                 EInvoiceLines = new List<EInvLineEditViewModel>(),
                 Status = EInvoiceDocumentStatusType.Draft
             };
@@ -197,6 +192,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     Id = entity.Id,
                     FormTypeId = entity.FormTypeId,
                     InvoiceIssuedDate = entity.InvoiceIssuedDate,
+                    InvoiceNumber = entity.InvoiceNumber,
                     CurrencyId = entity.CurrencyId,
                     ExchangeRate = entity.ExchangeRate,
                     BuyerId = entity.Buyer?.Id,

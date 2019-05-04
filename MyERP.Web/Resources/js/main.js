@@ -652,6 +652,10 @@ var EInvoice = {
     },
 
     InvoiceLineBeforeEdit: function (editor, e) {
+        if (Ext.getCmp("Status").getValue() !== "0") {
+            return false;
+        }
+
         e.grid.getSelectionModel().select(e.rowIdx, true);
 
         var field = this.getEditor(e.record, e.column).field;

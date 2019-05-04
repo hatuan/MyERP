@@ -157,11 +157,11 @@ namespace MyERP.Web
             {
                 try
                 {
-                    var eInvoiceHeader = dataContext.EInvoiceHeaders.SqlQuery("SELECT * FROM einvoice_header WITH (UPDLOCK, INDEX(pk_einvoice_header)) WHERE id = @id", new SqlParameter("@id", eInvoiceHeaderId)).FirstOrDefault();
+                    var eInvoiceHeader = dataContext.EInvoiceHeaders.WithHint("UPDLOCK, INDEX(pk_einvoice_header)").Where(x => x.Id == eInvoiceHeaderId).FirstOrDefault();
                     if (eInvoiceHeader == null || eInvoiceHeader.Version != version)
                         throw new System.Data.Entity.Core.ObjectNotFoundException("Invoice Header has been changed or deleted! Please check");
 
-                    var formReleases = dataContext.EInvFormReleases.SqlQuery("SELECT * FROM einv_form_release WITH (UPDLOCK, INDEX(idx_einv_form_release_form_type_id)) WHERE form_type_id = @form_type_id", new SqlParameter("@form_type_id", eInvoiceHeader.FormTypeId))
+                    var formReleases = dataContext.EInvFormReleases.WithHint("UPDLOCK, INDEX(idx_einv_form_release_form_type_id)").Where(x => x.FormTypeId == eInvoiceHeader.FormTypeId)
                         .ToList<EInvFormRelease>();
                     var formRelease = formReleases.Where(x => x.StartDate.CompareTo(eInvoiceHeader.InvoiceIssuedDate) <= 0 && x.ReleaseUsed < x.ReleaseTotal && (TaxAuthoritiesStatus)x.TaxAuthoritiesStatus == TaxAuthoritiesStatus.Active)
                         .OrderBy(x => x.ReleaseFrom)
@@ -210,7 +210,6 @@ namespace MyERP.Web
         {
             var formTypeRepository = new EInvFormTypeRepository();
             var formType = formTypeRepository.Get(x => x.Id == entity.FormTypeId).First();
-            String formVars = formType.FormVars;
 
             EInvXMLInvoiceInfo invoiceInfo = new EInvXMLInvoiceInfo();
             invoiceInfo.InvoiceDataInfo = new EInvXMLInvoiceDataInfo();
@@ -232,27 +231,35 @@ namespace MyERP.Web
             invoiceInfo.InvoiceDataInfo.InvoiceName = entity.InvoiceName;
             invoiceInfo.InvoiceDataInfo.InvoiceIssuedDate = entity.InvoiceIssuedDate;
 
-
-            using (StringReader sri = new StringReader(formVars))
+            invoiceInfo.InvoiceDataInfo.SellerInfo = new EInvXMLSellerInfo()
             {
-                EInvXMLInvoiceInfo invoiceInfoTemp = new EInvXMLInvoiceInfo();
-                XmlSerializer serializer = new XmlSerializer(invoiceInfo.GetType());
-                invoiceInfoTemp = (EInvXMLInvoiceInfo)serializer.Deserialize(sri);
+                SellerLegalName = formType.SellerLegalName,
+                SellerAddressLine = formType.SellerAddressLine,
+                SellerTaxCode = formType.SellerTaxCode,
+                SellerBankAccount = String.IsNullOrWhiteSpace(formType.SellerBankAccount) ? null : formType.SellerBankAccount,
+                SellerBankName = String.IsNullOrWhiteSpace(formType.SellerBankName) ? null : formType.SellerBankName,
+                SellerPostalCode = String.IsNullOrWhiteSpace(formType.SellerPostalCode) ? null : formType.SellerPostalCode,
+                SellerDistrictName = String.IsNullOrWhiteSpace(formType.SellerDistrictName) ? null : formType.SellerDistrictName,
+                SellerCityName = String.IsNullOrWhiteSpace(formType.SellerCityName) ? null : formType.SellerCityName,
+                SellerCountryCode = String.IsNullOrWhiteSpace(formType.SellerCountryCode) ? null : formType.SellerCountryCode,
+                SellerPhoneNumber = String.IsNullOrWhiteSpace(formType.SellerPhoneNumber) ? null : formType.SellerPhoneNumber,
+                SellerFaxNumber = String.IsNullOrWhiteSpace(formType.SellerFaxNumber) ? null : formType.SellerFaxNumber,
+                SellerEmail = String.IsNullOrWhiteSpace(formType.SellerEmail) ? null : formType.SellerEmail,
+                SellerContactPersonName = String.IsNullOrWhiteSpace(formType.SellerContactPersonName) ? null : formType.SellerContactPersonName,
+                SellerSignedPersonName = String.IsNullOrWhiteSpace(formType.SellerSignedPersonName) ? null : formType.SellerSignedPersonName
+            };
 
-                invoiceInfo.InvoiceDataInfo.SellerInfo = new EInvXMLSellerInfo();
-                invoiceInfo.InvoiceDataInfo.SellerInfo.SellerLegalName = invoiceInfoTemp.InvoiceDataInfo.SellerInfo.SellerLegalName;
-                invoiceInfo.InvoiceDataInfo.SellerInfo.SellerTaxCode = invoiceInfoTemp.InvoiceDataInfo.SellerInfo.SellerTaxCode;
-                invoiceInfo.InvoiceDataInfo.SellerInfo.SellerAddressLine = invoiceInfoTemp.InvoiceDataInfo.SellerInfo.SellerAddressLine;
-                invoiceInfo.InvoiceDataInfo.SellerInfo.SellerPhoneNumber = invoiceInfoTemp.InvoiceDataInfo.SellerInfo.SellerPhoneNumber;
-                invoiceInfo.InvoiceDataInfo.SellerInfo.SellerEmail = invoiceInfoTemp.InvoiceDataInfo.SellerInfo.SellerEmail;
-            }
-            invoiceInfo.InvoiceDataInfo.BuyerInfo = new EInvXMLBuyerInfo();
-            invoiceInfo.InvoiceDataInfo.BuyerInfo.BuyerLegalName = entity.BuyerLegalName;
-            invoiceInfo.InvoiceDataInfo.BuyerInfo.BuyerTaxCode = entity.BuyerTaxCode;
-            invoiceInfo.InvoiceDataInfo.BuyerInfo.BuyerDisplayName = entity.BuyerDisplayName;
-            invoiceInfo.InvoiceDataInfo.BuyerInfo.BuyerAddressLine = entity.BuyerAddressLine;
-            invoiceInfo.InvoiceDataInfo.BuyerInfo.BuyerBankAccount = entity.BuyerBankAccount;
-            invoiceInfo.InvoiceDataInfo.BuyerInfo.BuyerBankName = entity.BuyerBankName;
+
+            invoiceInfo.InvoiceDataInfo.BuyerInfo = new EInvXMLBuyerInfo()
+            {
+                BuyerLegalName = entity.BuyerLegalName,
+                BuyerTaxCode = entity.BuyerTaxCode,
+                BuyerDisplayName = entity.BuyerDisplayName,
+                BuyerAddressLine = entity.BuyerAddressLine,
+                BuyerBankAccount = entity.BuyerBankAccount,
+                BuyerBankName = entity.BuyerBankName,
+            };
+            
 
             invoiceInfo.InvoiceDataInfo.PaymentInfos = new List<EInvXMLPaymentInfo> {
                 new EInvXMLPaymentInfo
@@ -279,7 +286,7 @@ namespace MyERP.Web
                 if (invoiceInfo.InvoiceDataInfo.ItemInfos == null)
                     invoiceInfo.InvoiceDataInfo.ItemInfos = new List<EInvXMLItemInfo>
                     {
-                        new EInvXMLItemInfo
+                        new EInvXMLItemInfo()
                         {
                             LineNumber = lineNumber,
                             ItemCode = line.ItemCode,

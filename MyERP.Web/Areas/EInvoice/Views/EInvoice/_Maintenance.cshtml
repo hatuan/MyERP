@@ -4,6 +4,7 @@
 @{                                                                                  
     var documentCurrencyIsLCY = Model.CurrencyId == (long)ViewData["CurrencyLCYId"];
     var readOnlyCurrencyFactor = Model.CurrencyId == (long)ViewData["CurrencyLCYId"];
+    var readOnly = Model.Status != EInvoiceDocumentStatusType.Draft;
 }
 
 @(Html.X().Window()
@@ -76,7 +77,9 @@
                       .Menu(Html.X().Menu()
                           .MinWidth(200)
                           .Items(
-                              Html.X().MenuItem().Text("1 - Set Invoice Number").Tag("InvoiceNumber").DirectEvents(de =>
+                              Html.X().MenuItem().Text("1 - Set Invoice Number").Tag("InvoiceNumber")
+                              .Disabled(Model.Status != EInvoiceDocumentStatusType.Draft)
+                              .DirectEvents(de =>
                               {
                                   de.Click.Action = "SetInvoiceNumber";
                                   de.Click.Before = "return #{Id}.getValue() !== '';";
@@ -103,8 +106,9 @@
                                              "  }); \n" +
                                              "}";
                               }),
-                              Html.X().MenuSeparator(),
-                              Html.X().MenuItem().Text("2 - Sign Invoice").Tag("SignInvoice").DirectEvents(de =>
+                              Html.X().MenuItem().Text("2 - Sign Invoice").Tag("SignInvoice")
+                              .Disabled(Model.Status != EInvoiceDocumentStatusType.Released)
+                              .DirectEvents(de =>
                               {
                                   de.Click.Action = "SignInvoice";
                                   de.Click.Before = "return #{Id}.getValue() !== '';";
@@ -275,6 +279,7 @@
                                   .Width(600)
                                   .Items(
                                       Html.X().ComboBoxFor(m => m.BuyerId).AllowBlank(false).ID("BuyerId").Width(150)
+                                          .ReadOnly(readOnly)
                                           .AutoFocus(true)
                                           .DisplayField("Code")
                                           .ValueField("Id")
@@ -313,27 +318,28 @@
                                               de.Select.ExtraParams.Add(new Parameter("selectedData", "records[0].data", ParameterMode.Raw, true));
                                           }),
 
-                                      Html.X().TextFieldFor(m => m.BuyerDisplayName).AllowBlank(false).EnforceMaxLength(true).ID("BuyerDisplayName"),
-                                      Html.X().TextFieldFor(m => m.BuyerLegalName).AllowBlank(false).EnforceMaxLength(true).ID("BuyerLegalName"),
-                                      Html.X().TextFieldFor(m => m.BuyerTaxCode).AllowBlank(false).EnforceMaxLength(true).ID("BuyerTaxCode"),
-                                      Html.X().TextFieldFor(m => m.BuyerAddressLine).AllowBlank(false).EnforceMaxLength(true).ID("BuyerAddressLine"),
-                                      Html.X().TextFieldFor(m => m.BuyerBankName).EnforceMaxLength(true).ID("BuyerBankName"),
-                                      Html.X().TextFieldFor(m => m.BuyerBankAccount).EnforceMaxLength(true).ID("BuyerBankAccount")),
+                                      Html.X().TextFieldFor(m => m.BuyerDisplayName).AllowBlank(false).EnforceMaxLength(true).ID("BuyerDisplayName").ReadOnly(readOnly),
+                                      Html.X().TextFieldFor(m => m.BuyerLegalName).AllowBlank(false).EnforceMaxLength(true).ID("BuyerLegalName").ReadOnly(readOnly),
+                                      Html.X().TextFieldFor(m => m.BuyerTaxCode).AllowBlank(false).EnforceMaxLength(true).ID("BuyerTaxCode").ReadOnly(readOnly),
+                                      Html.X().TextFieldFor(m => m.BuyerAddressLine).AllowBlank(false).EnforceMaxLength(true).ID("BuyerAddressLine").ReadOnly(readOnly),
+                                      Html.X().TextFieldFor(m => m.BuyerBankName).EnforceMaxLength(true).ID("BuyerBankName").ReadOnly(readOnly),
+                                      Html.X().TextFieldFor(m => m.BuyerBankAccount).EnforceMaxLength(true).ID("BuyerBankAccount").ReadOnly(readOnly)),
                               Html.X().Panel()
                                       .Layout(LayoutType.Form)
                                       .Width(600)
                                       .Items(
-                                          Html.X().TextFieldFor(m => m.SellerLegalName).AllowBlank(false).EnforceMaxLength(true).ID("SellerLegalName"),
-                                          Html.X().TextFieldFor(m => m.SellerTaxCode).AllowBlank(false).EnforceMaxLength(true).ID("SellerTaxCode"),
-                                          Html.X().TextFieldFor(m => m.SellerAddressLine).AllowBlank(false).EnforceMaxLength(true).ID("SellerAddressLine"),
-                                          Html.X().TextFieldFor(m => m.SellerBankName).EnforceMaxLength(true).ID("SellerBankName"),
-                                          Html.X().TextFieldFor(m => m.SellerBankAccount).EnforceMaxLength(true).ID("SellerBankAccount"),
-                                          Html.X().TextFieldFor(m => m.InvoiceNote).EnforceMaxLength(true).ID("InvoiceNote")),
+                                          Html.X().TextFieldFor(m => m.SellerLegalName).AllowBlank(false).EnforceMaxLength(true).ID("SellerLegalName").ReadOnly(true),
+                                          Html.X().TextFieldFor(m => m.SellerTaxCode).AllowBlank(false).EnforceMaxLength(true).ID("SellerTaxCode").ReadOnly(true),
+                                          Html.X().TextFieldFor(m => m.SellerAddressLine).AllowBlank(false).EnforceMaxLength(true).ID("SellerAddressLine").ReadOnly(true),
+                                          Html.X().TextFieldFor(m => m.SellerBankName).EnforceMaxLength(true).ID("SellerBankName").ReadOnly(true),
+                                          Html.X().TextFieldFor(m => m.SellerBankAccount).EnforceMaxLength(true).ID("SellerBankAccount").ReadOnly(true),
+                                          Html.X().TextFieldFor(m => m.InvoiceNote).EnforceMaxLength(true).ID("InvoiceNote").ReadOnly(readOnly)),
                             Html.X().Panel()
                                 .Layout(LayoutType.Form)
                                 .Width(350)
                                 .Items(
                                     Html.X().ComboBoxFor(m => m.FormTypeId).AllowBlank(false).ID("FormTypeId")
+                                        .ReadOnly(readOnly)
                                         .DisplayTpl(Html.X().XTemplate()
                                             .Html(@<text>
                                                       <tpl for=".">
@@ -371,8 +377,8 @@
                                         })
                                     ,
                                     Html.X().TextFieldFor(m => m.InvoiceNumber).AllowBlank(true).ID("InvoiceNumber").ReadOnly(true),
-                                    Html.X().DateFieldFor(m => m.InvoiceIssuedDate).AllowBlank(false).ID("InvoiceIssuedDate"),
-                                    Html.X().ComboBoxFor(m => m.PaymentMethodName).ID("PaymentMethodName").Editable(false)
+                                    Html.X().DateFieldFor(m => m.InvoiceIssuedDate).AllowBlank(false).ID("InvoiceIssuedDate").ReadOnly(readOnly),
+                                    Html.X().ComboBoxFor(m => m.PaymentMethodName).ID("PaymentMethodName").Editable(false).ReadOnly(readOnly)
                                         .Items(action =>
                                         {
                                             action.Add(new ListItem("TM", "TM"));
@@ -380,6 +386,7 @@
                                             action.Add(new ListItem("TM/CK", "TM/CK"));
                                         }),
                                     Html.X().ComboBoxFor(m => m.CurrencyId).AllowBlank(false).ID("CurrencyId")
+                                        .ReadOnly(readOnly)
                                         .DisplayField("Code")
                                         .ValueField("Id")
                                         .FieldStyle("text-transform: uppercase;")
@@ -418,7 +425,7 @@
                                         })
                                     ,
                                     Html.X().TextFieldFor(m => m.ExchangeRate).AllowBlank(false).ID("ExchangeRate")
-                                        .ReadOnly(readOnlyCurrencyFactor)
+                                        .ReadOnly(readOnlyCurrencyFactor || readOnly)
                                         .MaskRe(@"/[0-9\,\.]")
                                         .Listeners(ls =>
                                         {
@@ -710,6 +717,7 @@
                                   .Items(
                                       Html.X().TextFieldFor(m => m.TotalAmountWithVATInWords)
                                           .ID("TotalAmountWithVATInWords")
+                                          .ReadOnly(readOnly)
                                           .TabIndex(-1)
                                   ),
                               Html.X().Panel()

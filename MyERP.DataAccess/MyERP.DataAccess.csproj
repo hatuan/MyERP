@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\MyERPDataModel.EntitiesModelConfig.cs" />
     <Compile Include="Context\MyERPDataModel.EntitiesModel.cs" />
     <Compile Include="Context\MyERPDataModel.EntitiesModel.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Account.cs" />
@@ -181,6 +182,8 @@
     <Compile Include="Enum\DefaultStatusType.cs" />
     <Compile Include="Enum\CurrencyStatusType.cs" />
     <Compile Include="Enum\OrganizationStatusType.cs" />
+    <Compile Include="HintExtension.cs" />
+    <Compile Include="HintInterceptor.cs" />
     <Compile Include="Mapping\MyERPDataModel.AccountConfiguration.cs" />
     <Compile Include="Mapping\MyERPDataModel.AccountConfiguration.Generated.cs" />
     <Compile Include="Mapping\MyERPDataModel.AccountsPayableLedgerConfiguration.cs" />

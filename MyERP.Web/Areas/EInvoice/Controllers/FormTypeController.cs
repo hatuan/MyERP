@@ -143,11 +143,11 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             {
                 var _id = Convert.ToInt64(id);
                 var entity = repository.Get(c => c.Id == _id, new string[] { "EInvFormReleases" }).Single();
-                string formVars = Convert.ToBase64String(Encoding.UTF8.GetBytes(entity.FormVars));
                 string formFile = Convert.ToBase64String(Encoding.UTF8.GetBytes(entity.FormFile));
                 model = new EInvFormTypeEditViewModel()
                 {
                     Id = entity.Id,
+                    InvoiceName = entity.InvoiceName,
                     InvoiceType = entity.InvoiceType,
                     InvoiceTypeNo = entity.InvoiceTypeNo,
                     TemplateCode = entity.TemplateCode,
@@ -155,9 +155,22 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     InvoiceSeries = entity.InvoiceSeries,
                     FormFileName = entity.FormFileName,
                     FormFile = formFile,
-                    FormVars = formVars,
                     Logo = entity.Logo,
                     Watermark = entity.Watermark,
+                    SellerLegalName = entity.SellerLegalName,
+                    SellerTaxCode = entity.SellerTaxCode,
+                    SellerAddressLine = entity.SellerAddressLine,
+                    SellerPostalCode = entity.SellerPostalCode,
+                    SellerDistrictName = entity.SellerDistrictName,
+                    SellerCityName = entity.SellerCityName,
+                    SellerCountryCode = entity.SellerCountryCode,
+                    SellerPhoneNumber = entity.SellerPhoneNumber,
+                    SellerFaxNumber = entity.SellerFaxNumber,
+                    SellerEmail = entity.SellerEmail,
+                    SellerBankName = entity.SellerBankName,
+                    SellerBankAccount = entity.SellerBankAccount,
+                    SellerContactPersonName = entity.SellerContactPersonName,
+                    SellerSignedPersonName = entity.SellerSignedPersonName,
                     HasFormRelease = entity.EInvFormReleases.Count > 0,
                     Status = (DefaultStatusType)entity.Status,
                     Version = entity.Version
@@ -166,42 +179,6 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             else
             {
                 Client _client = (new ClientRepository()).Get(User);
-                EInvXMLInvoiceInfo invoiceInfo = new EInvXMLInvoiceInfo
-                {
-                    InvoiceDataInfo = new EInvXMLInvoiceDataInfo()
-                    {
-                        InvoiceNumber = "00000000"
-                    }
-                };
-                invoiceInfo.InvoiceDataInfo.SellerInfo = new EInvXMLSellerInfo
-                {
-                    SellerLegalName = _client.Description,
-                    SellerAddressLine = _client.Adress,
-                    SellerTaxCode = _client.TaxCode,
-                    SellerEmail = _client.Email,
-                    SellerPhoneNumber = _client.Telephone,
-                };
-
-                XmlWriterSettings settings = new XmlWriterSettings()
-                {
-                    Encoding = new UTF8Encoding(false),
-                    Indent = true
-                };
-                using (MemoryStream sww = new MemoryStream())
-                {
-                    using (System.Xml.XmlWriter writer = System.Xml.XmlWriter.Create(sww, settings))
-                    //using (System.Xml.XmlWriter writer = System.Xml.XmlWriter.Create(sww))
-                    {
-                        XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-                        ns.Add("inv", "http://laphoadon.gdt.gov.vn/2014/09/invoicexml/v1");
-                        //ns.Add("ns1", "http://www.w3.org/2000/09/xmldsig#");
-                        XmlSerializer xsSubmit = new XmlSerializer(invoiceInfo.GetType());
-                        xsSubmit.Serialize(writer, invoiceInfo, ns);
-                        byte[] textAsBytes = sww.ToArray(); //Encoding.UTF8.GetBytes(Encoding.Default.GetString(sww.ToArray()));
-                        model.FormVars = Convert.ToBase64String(textAsBytes); // Your XML
-                    }
-                }
-
                 model.FormFileName = "01GTKT_001";
                 try
                 {
@@ -214,6 +191,14 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 }
 
                 model.InvoiceForm = "E";
+                model.InvoiceName = Resources.Resources.VAT_Invoice;
+                model.SellerLegalName = _client.Description;
+                model.SellerAddressLine = _client.Address;
+                model.SellerTaxCode = _client.TaxCode;
+                model.SellerEmail = _client.Email;
+                model.SellerPhoneNumber = _client.Telephone;
+                model.SellerContactPersonName = _client.ContactName;
+                model.SellerSignedPersonName = _client.RepresentativeName;
                 model.HasFormRelease = false;
             }
             return new Ext.Net.MVC.PartialViewResult() { Model = model };
@@ -238,7 +223,6 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     return r;
                 }
                 bool isEdit = model.Id.HasValue;
-                String formVars = Encoding.UTF8.GetString(Convert.FromBase64String(model.FormVars));
                 String formFile = Encoding.UTF8.GetString(Convert.FromBase64String(model.FormFile));
 
                 if (model.Id.HasValue)
@@ -265,9 +249,22 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     _update.InvoiceSeries = model.InvoiceSeries.ToUpper();
                     _update.FormFileName = model.FormFileName;
                     _update.FormFile = formFile;
-                    _update.FormVars = formVars;
                     _update.Logo = model.Logo;
                     _update.Watermark = model.Watermark;
+                    _update.SellerLegalName = model.SellerLegalName;
+                    _update.SellerTaxCode = model.SellerTaxCode;
+                    _update.SellerAddressLine = model.SellerAddressLine;
+                    _update.SellerPostalCode = String.IsNullOrWhiteSpace(model.SellerPostalCode) ? null : model.SellerPostalCode;
+                    _update.SellerDistrictName = String.IsNullOrWhiteSpace(model.SellerDistrictName) ? null : model.SellerDistrictName;
+                    _update.SellerCityName = String.IsNullOrWhiteSpace(model.SellerCityName) ? null : model.SellerCityName;
+                    _update.SellerCountryCode = String.IsNullOrWhiteSpace(model.SellerCountryCode) ? null : model.SellerCountryCode;
+                    _update.SellerPhoneNumber = String.IsNullOrWhiteSpace(model.SellerPhoneNumber) ? null : model.SellerPhoneNumber;
+                    _update.SellerFaxNumber = String.IsNullOrWhiteSpace(model.SellerFaxNumber) ? null : model.SellerFaxNumber;
+                    _update.SellerEmail = String.IsNullOrWhiteSpace(model.SellerEmail) ? null : model.SellerEmail;
+                    _update.SellerBankName = String.IsNullOrWhiteSpace(model.SellerBankName) ? null : model.SellerBankName;
+                    _update.SellerBankAccount = String.IsNullOrWhiteSpace(model.SellerBankAccount) ? null : model.SellerBankAccount;
+                    _update.SellerContactPersonName = String.IsNullOrWhiteSpace(model.SellerContactPersonName) ? null : model.SellerContactPersonName;
+                    _update.SellerSignedPersonName = String.IsNullOrWhiteSpace(model.SellerSignedPersonName) ? null : model.SellerSignedPersonName;
                     _update.Status = (byte)model.Status;
                     _update.RecModifiedAt = DateTime.Now;
                     _update.RecModifiedBy = (long)user.ProviderUserKey;
@@ -298,9 +295,22 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                         InvoiceSeries = model.InvoiceSeries.ToUpper(),
                         FormFileName = model.FormFileName,
                         FormFile = formFile,
-                        FormVars = formVars,
                         Logo = model.Logo,
                         Watermark = model.Watermark,
+                        SellerLegalName = model.SellerLegalName,
+                        SellerTaxCode = model.SellerTaxCode,
+                        SellerAddressLine = model.SellerAddressLine,
+                        SellerPostalCode = String.IsNullOrWhiteSpace(model.SellerPostalCode) ? null : model.SellerPostalCode,
+                        SellerDistrictName = String.IsNullOrWhiteSpace(model.SellerDistrictName) ? null : model.SellerDistrictName,
+                        SellerCityName = String.IsNullOrWhiteSpace(model.SellerCityName) ? null : model.SellerCityName,
+                        SellerCountryCode = String.IsNullOrWhiteSpace(model.SellerCountryCode) ? null : model.SellerCountryCode,
+                        SellerPhoneNumber = String.IsNullOrWhiteSpace(model.SellerPhoneNumber) ? null : model.SellerPhoneNumber,
+                        SellerFaxNumber = String.IsNullOrWhiteSpace(model.SellerFaxNumber) ? null : model.SellerFaxNumber,
+                        SellerEmail = String.IsNullOrWhiteSpace(model.SellerEmail) ? null : model.SellerEmail,
+                        SellerBankName = String.IsNullOrWhiteSpace(model.SellerBankName) ? null : model.SellerBankName,
+                        SellerBankAccount = String.IsNullOrWhiteSpace(model.SellerBankAccount) ? null : model.SellerBankAccount,
+                        SellerContactPersonName = String.IsNullOrWhiteSpace(model.SellerContactPersonName) ? null : model.SellerContactPersonName,
+                        SellerSignedPersonName = String.IsNullOrWhiteSpace(model.SellerSignedPersonName) ? null : model.SellerSignedPersonName,
                         Status = (byte)model.Status,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
@@ -380,39 +390,54 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 Culture = Thread.CurrentThread.CurrentCulture
             });
             
-            String formVars = Encoding.UTF8.GetString(Convert.FromBase64String(model.FormVars));
             String formFile = Encoding.UTF8.GetString(Convert.FromBase64String(model.FormFile));
 
-            using (StringReader sri = new StringReader(formVars))
-            {
-                EInvXMLInvoiceInfo invoiceInfo = new EInvXMLInvoiceInfo();
-                XmlSerializer serializer = new XmlSerializer(invoiceInfo.GetType());
-                invoiceInfo = (EInvXMLInvoiceInfo) serializer.Deserialize(sri);
-                invoiceInfo.InvoiceDataInfo.InvoiceType = model.InvoiceType;
-                invoiceInfo.InvoiceDataInfo.InvoiceSeries = model.InvoiceSeries.ToUpper();
-                invoiceInfo.InvoiceDataInfo.TemplateCode = model.InvoiceType + "0/" + model.InvoiceTypeNo;
+            EInvXMLInvoiceInfo invoiceInfo = new EInvXMLInvoiceInfo();
+            invoiceInfo.InvoiceDataInfo = new EInvXMLInvoiceDataInfo() {
+                InvoiceName = model.InvoiceName,
+                InvoiceType = model.InvoiceType,
+                InvoiceSeries = model.InvoiceSeries.ToUpper(),
+                TemplateCode = model.InvoiceType + "0/" + model.InvoiceTypeNo
+            };
 
-                XmlWriterSettings settings = new XmlWriterSettings()
+            invoiceInfo.InvoiceDataInfo.SellerInfo = new EInvXMLSellerInfo()
+            {
+                SellerLegalName = model.SellerLegalName,
+                SellerAddressLine = model.SellerAddressLine,
+                SellerTaxCode = model.SellerTaxCode,
+                SellerBankAccount = String.IsNullOrWhiteSpace(model.SellerBankAccount) ? null : model.SellerBankAccount,
+                SellerBankName = String.IsNullOrWhiteSpace(model.SellerBankName) ? null : model.SellerBankName,
+                SellerPostalCode = String.IsNullOrWhiteSpace(model.SellerPostalCode) ? null : model.SellerPostalCode,
+                SellerDistrictName = String.IsNullOrWhiteSpace(model.SellerDistrictName) ? null : model.SellerDistrictName,
+                SellerCityName = String.IsNullOrWhiteSpace(model.SellerCityName) ? null : model.SellerCityName,
+                SellerCountryCode = String.IsNullOrWhiteSpace(model.SellerCountryCode) ? null : model.SellerCountryCode,
+                SellerPhoneNumber = String.IsNullOrWhiteSpace(model.SellerPhoneNumber) ? null : model.SellerPhoneNumber,
+                SellerFaxNumber = String.IsNullOrWhiteSpace(model.SellerFaxNumber) ? null : model.SellerFaxNumber,
+                SellerEmail = String.IsNullOrWhiteSpace(model.SellerEmail) ? null : model.SellerEmail,
+                SellerContactPersonName = String.IsNullOrWhiteSpace(model.SellerContactPersonName) ? null : model.SellerContactPersonName,
+                SellerSignedPersonName = String.IsNullOrWhiteSpace(model.SellerSignedPersonName) ? null : model.SellerSignedPersonName
+            };
+
+            String formVars = "";
+            XmlWriterSettings settings = new XmlWriterSettings()
+            {
+                Encoding = new UTF8Encoding(false),
+                Indent = true
+            };
+            using (MemoryStream sww = new MemoryStream())
+            {
+                using (System.Xml.XmlWriter writer = System.Xml.XmlWriter.Create(sww, settings))
                 {
-                    Encoding = new UTF8Encoding(false),
-                    Indent = true
-                };
-                using (MemoryStream sww = new MemoryStream())
-                {
-                    using (System.Xml.XmlWriter writer = System.Xml.XmlWriter.Create(sww, settings))
-                    {
-                        XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-                        ns.Add("inv", "http://laphoadon.gdt.gov.vn/2014/09/invoicexml/v1");
-                        //ns.Add("ns1", "http://www.w3.org/2000/09/xmldsig#");
-                        XmlSerializer xsSubmit = new XmlSerializer(invoiceInfo.GetType());
-                        xsSubmit.Serialize(writer, invoiceInfo, ns);
-                        byte[] textAsBytes = sww.ToArray(); //Encoding.UTF8.GetBytes(Encoding.Default.GetString(sww.ToArray()));
-                        model.FormVars = Convert.ToBase64String(textAsBytes); // Your XML
-                        formVars = Encoding.UTF8.GetString(textAsBytes);
-                    }
+                    XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                    ns.Add("inv", "http://laphoadon.gdt.gov.vn/2014/09/invoicexml/v1");
+                    //ns.Add("ns1", "http://www.w3.org/2000/09/xmldsig#");
+                    XmlSerializer xsSubmit = new XmlSerializer(invoiceInfo.GetType());
+                    xsSubmit.Serialize(writer, invoiceInfo, ns);
+                    byte[] textAsBytes = sww.ToArray(); //Encoding.UTF8.GetBytes(Encoding.Default.GetString(sww.ToArray()));
+                    formVars = Encoding.UTF8.GetString(textAsBytes); // Your XML
                 }
             }
-
+            
             string renderName = $"formTypeRender_{User.Identity.Name}_{DateTime.Now:yyyyMMddhhmmss}";
             string dirPath = Server.MapPath($"~/Resources/PrintReports/EInvoices/{renderName}");
             if (!System.IO.Directory.Exists(dirPath))
