@@ -2474,6 +2474,7 @@
           <Property Name="is_total_amount_without_vat_pos" Type="bit" />
           <Property Name="original_invoice_issue_date" Type="datetime2" />
           <Property Name="original_einvoice_id" Type="bigint" />
+          <Property Name="reservation_code" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="einvoice_line">
           <Key>
@@ -2567,9 +2568,9 @@
           <Property Name="is_total_vat_amount_pos" Type="bit" />
           <Property Name="discount_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="is_discount_amt_pos" Type="bit" />
-          <Property Name="einvoice_signed_xml_file" Type="xml" Nullable="false" />
-          <Property Name="einvoice_signed_xsl_file" Type="xml" Nullable="false" />
-          <Property Name="einvoice_signed_file_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="signed_xml" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="signed_xsl" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="signed_file_name" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="description" Type="nvarchar" MaxLength="256" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
@@ -2582,6 +2583,9 @@
           <Property Name="is_total_amount_without_vat_pos" Type="bit" />
           <Property Name="original_invoice_issue_date" Type="datetime2" />
           <Property Name="original_einvoice_id" Type="bigint" />
+          <Property Name="logo" Type="nvarchar(max)" />
+          <Property Name="watermark" Type="nvarchar(max)" />
+          <Property Name="reservation_code" Type="nchar" Nullable="false" MaxLength="10" />
         </EntityType>
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
@@ -6586,10 +6590,6 @@
             <End Role="EInvFormType" EntitySet="EInvFormTypes" />
             <End Role="EInvoiceHeaders" EntitySet="EInvoiceHeaders" />
           </AssociationSet>
-          <AssociationSet Name="EInvFormType_EInvoiceSignedSet" Association="MyERP.DataAccess.EInvFormType_EInvoiceSigned">
-            <End Role="EInvFormType" EntitySet="EInvFormTypes" />
-            <End Role="EInvoiceSigneds" EntitySet="EInvoiceSigneds" />
-          </AssociationSet>
           <AssociationSet Name="Client_EInvoiceSignedSet" Association="MyERP.DataAccess.Client_EInvoiceSigned">
             <End Role="Client" EntitySet="Clients" />
             <End Role="EInvoiceSigneds" EntitySet="EInvoiceSigneds" />
@@ -8332,6 +8332,7 @@
           <Property Name="IsTotalAmountPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="b3d05947-84e9-43a5-b4bd-e81c0c8dff56" />
           <Property Name="DiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="34e0612e-2469-4954-9c90-71721c82a8e2" />
           <Property Name="IsDiscountAmtPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="bcae30bc-c78e-47ad-b8d6-5e22aee0fcee" />
+          <Property Name="ReservationCode" Type="String" MaxLength="10" Unicode="true" FixedLength="true" ed:ValidateMaxLength="10" ed:ValidateRequired="false" ed:Guid="384a1cf4-3b8f-414a-ab50-eeb11b3e728e" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="1f59c9c8-5353-4357-b921-30b392a2a435" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c4fbbbb7-1c9f-4f47-bc6f-6a82ca3f1231" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a02724ad-fdc3-46d0-b647-2032aa57206a" />
@@ -8451,9 +8452,12 @@
           <Property Name="IsTotalAmountPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="5d60ce2b-652c-43bc-b48a-455df086c877" />
           <Property Name="DiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="556a8ead-6e7f-430e-af69-42fd136714b0" />
           <Property Name="IsDiscountAmtPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="3ac549e5-b726-47d5-a189-3f09b22cc05a" />
-          <Property Name="EInvoiceSignedXMLFile" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="2687b1fb-5a84-4d3a-83fa-7362018d16b4" />
-          <Property Name="EInvoiceSignedXSLFile" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="576d6c9a-ba50-4b2c-abb9-64f8b38e672a" />
-          <Property Name="EInvoiceSignedFileName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="dc17825b-9a55-4db3-ad74-c1ad5ec38020" />
+          <Property Name="ReservationCode" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" ed:ValidateMaxLength="10" ed:ValidateRequired="true" ed:Guid="f9191f5b-b8e6-4db7-aec9-a782839b7532" />
+          <Property Name="Logo" Type="String" ed:ValidateRequired="false" ed:Guid="77f2d4e7-a1d5-4438-84c7-6b0e0a3d4a12" />
+          <Property Name="Watermark" Type="String" ed:ValidateRequired="false" ed:Guid="f82488b0-6bb2-43b4-be7d-2e78e72b1bd5" />
+          <Property Name="SignedXML" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="2687b1fb-5a84-4d3a-83fa-7362018d16b4" />
+          <Property Name="SignedXSL" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="576d6c9a-ba50-4b2c-abb9-64f8b38e672a" />
+          <Property Name="SignedFileName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="dc17825b-9a55-4db3-ad74-c1ad5ec38020" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c4bd1d41-8844-4f13-a62c-a2b74d1b8f10" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="99d53369-bdef-416c-99e3-c899c4345aa2" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="079dcaa0-bf1d-4ad9-a742-0f39b63c8655" />
@@ -8462,7 +8466,6 @@
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="94ca0f06-11b2-4622-9fdf-0dbf1ee230ce" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c6dc900a-d7c1-49de-87f8-b040173eece9" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="2c70b921-bb0d-4ebb-bcc4-929bf10a2a8b" />
-          <NavigationProperty Name="EInvFormType" Relationship="MyERP.DataAccess.EInvFormType_EInvoiceSigned" FromRole="EInvoiceSigneds" ToRole="EInvFormType" ed:Guid="2d95106a-05a9-4586-abdf-01424056d039" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_EInvoiceSigned" FromRole="EInvoiceSigneds" ToRole="Client" ed:Guid="adf35c28-6034-48f0-8129-d7c8cfc12629" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_EInvoiceSigned" FromRole="EInvoiceSigneds" ToRole="Organization" ed:Guid="66e5ee73-1188-4922-911b-962ab5383388" />
         </EntityType>
@@ -11214,18 +11217,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="EInvFormType_EInvoiceSigned" ed:Guid="20c6b83b-1422-4694-bb9a-78097a57a4f9">
-          <End Role="EInvFormType" Type="MyERP.DataAccess.EInvFormType" Multiplicity="1" />
-          <End Role="EInvoiceSigneds" Type="MyERP.DataAccess.EInvoiceSigned" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EInvFormType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EInvoiceSigneds">
-              <PropertyRef Name="FormTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="Client_EInvoiceSigned" ed:Guid="26537095-8645-4ba6-9367-f526cfd3dbbe">
           <End Role="Client" Type="MyERP.DataAccess.Client" Multiplicity="1" />
           <End Role="EInvoiceSigneds" Type="MyERP.DataAccess.EInvoiceSigned" Multiplicity="*" />
@@ -12854,6 +12845,7 @@
                 <ScalarProperty Name="IsTotalAmountWithoutVATPos" ColumnName="is_total_amount_without_vat_pos" />
                 <ScalarProperty Name="OriginalInvoiceIssueDate" ColumnName="original_invoice_issue_date" />
                 <ScalarProperty Name="OriginalEInvoiceId" ColumnName="original_einvoice_id" />
+                <ScalarProperty Name="ReservationCode" ColumnName="reservation_code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -12949,9 +12941,9 @@
                 <ScalarProperty Name="IsTotalVATAmountPos" ColumnName="is_total_vat_amount_pos" />
                 <ScalarProperty Name="DiscountAmount" ColumnName="discount_amount" />
                 <ScalarProperty Name="IsDiscountAmtPos" ColumnName="is_discount_amt_pos" />
-                <ScalarProperty Name="EInvoiceSignedXMLFile" ColumnName="einvoice_signed_xml_file" />
-                <ScalarProperty Name="EInvoiceSignedXSLFile" ColumnName="einvoice_signed_xsl_file" />
-                <ScalarProperty Name="EInvoiceSignedFileName" ColumnName="einvoice_signed_file_name" />
+                <ScalarProperty Name="SignedXML" ColumnName="signed_xml" />
+                <ScalarProperty Name="SignedXSL" ColumnName="signed_xsl" />
+                <ScalarProperty Name="SignedFileName" ColumnName="signed_file_name" />
                 <ScalarProperty Name="Description" ColumnName="description" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
@@ -12964,6 +12956,9 @@
                 <ScalarProperty Name="IsTotalAmountWithoutVATPos" ColumnName="is_total_amount_without_vat_pos" />
                 <ScalarProperty Name="OriginalInvoiceIssueDate" ColumnName="original_invoice_issue_date" />
                 <ScalarProperty Name="OriginalEInvoiceId" ColumnName="original_einvoice_id" />
+                <ScalarProperty Name="Logo" ColumnName="logo" />
+                <ScalarProperty Name="Watermark" ColumnName="watermark" />
+                <ScalarProperty Name="ReservationCode" ColumnName="reservation_code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

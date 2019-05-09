@@ -39,10 +39,13 @@ namespace MyERP.Web.Models
         public DateTime InvoiceIssuedDate { get; set; }
 
         [XmlElement("signedDate")]
-        public String SignedDate { get; set; }
+        public DateTime? SignedDate { get; set; }
+        public bool ShouldSerializeSignedDate() { return SignedDate.HasValue; }
 
         [XmlElement("submittedDate")]
-        public String SubmittedDate { get; set; }
+        public DateTime? SubmittedDate { get; set; }
+
+        public bool ShouldSerializeSubmittedDate() { return SubmittedDate.HasValue; }
 
         [XmlElement("currencyCode")]
         public String CurrencyCode { get; set; }
@@ -158,6 +161,22 @@ namespace MyERP.Web.Models
         public Boolean? IsDiscountAmtPos { get; set; }
 
         public bool ShouldSerializeIsDiscountAmtPos() { return IsDiscountAmtPos.HasValue; }
+
+        [XmlIgnore]
+        public string UserDefines { get; set; }
+
+        [XmlElement("userDefines")]
+        public System.Xml.XmlCDataSection UserDefinesCDATA
+        {
+            get
+            {
+                return new System.Xml.XmlDocument().CreateCDataSection(UserDefines ?? String.Empty);
+            }
+            set
+            {
+                UserDefines = value.Value;
+            }
+        }
     }
 
     [XmlType("buyer")]

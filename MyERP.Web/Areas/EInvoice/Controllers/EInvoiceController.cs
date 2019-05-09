@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
@@ -126,9 +127,6 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 InvoiceIssuedDate = preference.WorkingDate,
                 CurrencyId = currencyLcyId,
                 ExchangeRate = 1,
-                SellerLegalName = client.Description,
-                SellerTaxCode = client.TaxCode,
-                SellerAddressLine = client.Address,
                 EInvoiceLines = new List<EInvLineEditViewModel>(),
                 Status = EInvoiceDocumentStatusType.Draft
             };
@@ -806,6 +804,21 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             return this.Direct();
         }
 
+        public ActionResult ChangeFormType(string selectedData)
+        {
+            EInvFormTypeLookupViewModel selectedFormType = JsonConvert.DeserializeObject<EInvFormTypeLookupViewModel>(selectedData, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+
+            this.GetCmp<TextField>("SellerLegalName").Value = selectedFormType.SellerLegalName;
+            this.GetCmp<TextField>("SellerTaxCode").Value = selectedFormType.SellerTaxCode;
+            this.GetCmp<TextField>("SellerAddressLine").Value = selectedFormType.SellerAddressLine;
+            this.GetCmp<TextField>("SellerBankName").Value = selectedFormType.SellerBankName;
+            this.GetCmp<TextField>("SellerBankAccount").Value = selectedFormType.SellerBankAccount;
+            return this.Direct();
+        }
+
         public ActionResult ChangeCurrency(long? currencyId)
         {
             if (currencyId == null)
@@ -876,7 +889,12 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
 
             try
             {
-                (repository as EInvoiceHeaderRepository).SetEInvNumber(_id, _version, (long)user.ProviderUserKey);
+                string reservationCode = MyERP.Web.Others.Functions.RandomString();
+                while (!(repository as EInvoiceHeaderRepository).CheckReservationCode(reservationCode))
+                {
+                    reservationCode = MyERP.Web.Others.Functions.RandomString();
+                }
+                (repository as EInvoiceHeaderRepository).SetEInvNumber(_id, ref _version, (long)user.ProviderUserKey, reservationCode);
             }
             catch (System.Data.Entity.Core.ObjectNotFoundException ex)
             {
@@ -889,5 +907,87 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
 
             return this.Direct(new { Id = _id });
         }
+
+        public ActionResult SigningInvoice(string id, string version)
+        {
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(version))
+                throw new ArgumentNullException(nameof(version));
+
+            var _id = Convert.ToInt64(id);
+            var _version = Convert.ToInt64(version);
+
+            try
+            {
+                string originXML = (repository as EInvoiceHeaderRepository).GetXmlInvoiceInfo(_id, _version);
+                string base64OriginXML = Convert.ToBase64String(Encoding.UTF8.GetBytes(originXML));
+                
+                return this.Direct(new { OriginXML = base64OriginXML, SerialNumber = "00C62199148ACD49FAAC90AD8E0013B6E2", PIN = "12345678" });
+            }
+            catch (System.Data.Entity.Core.ObjectNotFoundException ex)
+            {
+                return this.Direct(false, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return this.Direct(false, ex.Message);
+            }
+        }
+        public ActionResult StartSignAction(string id, string version)
+        {
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrEmpty(version))
+                throw new ArgumentNullException(nameof(version));
+
+            MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
+
+            var _id = Convert.ToInt64(id);
+            var _version = Convert.ToInt64(version);
+            string originXML, base64OriginXML;
+            try
+            {
+                string reservationCode = MyERP.Web.Others.Functions.RandomString();
+                while (!(repository as EInvoiceHeaderRepository).CheckReservationCode(reservationCode))
+                {
+                    reservationCode = MyERP.Web.Others.Functions.RandomString();
+                }
+                (repository as EInvoiceHeaderRepository).SetEInvNumber(_id, ref _version, (long)user.ProviderUserKey, reservationCode);
+
+                originXML = (repository as EInvoiceHeaderRepository).GetXmlInvoiceInfo(_id, _version);
+                base64OriginXML = Convert.ToBase64String(Encoding.UTF8.GetBytes(originXML));
+            }
+            catch (System.Data.Entity.Core.ObjectNotFoundException ex)
+            {
+                return this.Direct(false, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return this.Direct(false, ex.Message);
+            }
+
+            X.GetCmp<Hidden>("Version").SetValue(_version);
+            X.GetCmp<ComboBox>("Status").SetValue(EInvoiceDocumentStatusType.Released);
+            return this.Direct(new {OriginXML = base64OriginXML, SerialNumber = "00C62199148ACD49FAAC90AD8E0013B6E2", PIN = "12345678" });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PublicSignedInvoice(string id, string signedModelJson)
+        {
+            SignXMLDTO signedXMLDTO = JsonConvert.DeserializeObject<SignXMLDTO>(signedModelJson, new JsonSerializerSettings
+            {
+                Culture = Thread.CurrentThread.CurrentCulture
+            });
+            var _id = Convert.ToInt64(id);
+
+            Thread.Sleep(10000);
+
+            //X.Js.Call("updateSignMask", "All finished!");
+            //X.Js.AddScript("Ext.defer(Ext.net.Mask.hide, 1000);");
+            return this.Direct(new { Id = _id });
+        }
+
     }
 }

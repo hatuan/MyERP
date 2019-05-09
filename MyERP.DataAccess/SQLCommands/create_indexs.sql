@@ -734,6 +734,11 @@ BEGIN
 	CREATE INDEX idx_einvoice_header_buyer_tax_code ON dbo.einvoice_header (buyer_tax_code)
 END
 
+IF NOT EXISTS(SELECT * FROM sys.indexes indexes INNER JOIN sys.objects objects ON indexes.object_id = objects.object_id WHERE indexes.name ='idx_einvoice_header_reservation_code' AND objects.name = 'einvoice_header')
+BEGIN
+	CREATE UNIQUE INDEX idx_einvoice_header_reservation_code ON dbo.einvoice_header (reservation_code) WHERE reservation_code IS NOT NULL
+END
+
 /**************************** einvoice_line ********************************************/
 IF NOT EXISTS(SELECT * FROM sys.indexes indexes INNER JOIN sys.objects objects ON indexes.object_id = objects.object_id WHERE indexes.name ='idx_einvoice_line_client_id' AND objects.name = 'einvoice_line')
 BEGIN

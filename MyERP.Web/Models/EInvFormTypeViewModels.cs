@@ -113,6 +113,7 @@ namespace MyERP.Web.Models
         public String SellerTaxCode { get; set; }
 
         [Display(Name = "Seller Address")]
+        [Required]
         [StringLength(255, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String SellerAddressLine { get; set; }
 
@@ -192,6 +193,50 @@ namespace MyERP.Web.Models
 
         [Display(Name = "Invoice Series")]
         public String InvoiceSeries { get; set; }
+
+        [Display(Name = "Seller Legal Name")]
+        [Required]
+        public String SellerLegalName { get; set; }
+
+        [Display(Name = "Seller Tax Code")]
+        [Required]
+        public String SellerTaxCode { get; set; }
+
+        [Display(Name = "Seller Address")]
+        public String SellerAddressLine { get; set; }
+
+        [Display(Name = "Buyer Postal Code")]
+        public String SellerPostalCode { get; set; }
+
+        [Display(Name = "Seller District Name")]
+        public String SellerDistrictName { get; set; }
+
+        [Display(Name = "Seller City Name")]
+        public String SellerCityName { get; set; }
+
+        [Display(Name = "Seller Country Code")]
+        public String SellerCountryCode { get; set; }
+
+        [Display(Name = "Seller Phone Number")]
+        public String SellerPhoneNumber { get; set; }
+
+        [Display(Name = "Seller Fax Number")]
+        public String SellerFaxNumber { get; set; }
+
+        [Display(Name = "Seller Email")]
+        public String SellerEmail { get; set; }
+
+        [Display(Name = "Seller Bank Name")]
+        public String SellerBankName { get; set; }
+
+        [Display(Name = "Seller Bank Account")]
+        public String SellerBankAccount { get; set; }
+
+        [Display(Name = "Seller Contact Person Name")]
+        public String SellerContactPersonName { get; set; }
+
+        [Display(Name = "Seller Signed Person Name")]
+        public String SellerSignedPersonName { get; set; }
 
         [Required]
         [Display(Name = "Status")]

@@ -150,17 +150,34 @@ namespace MyERP.Web
             return new Paging<EInvoiceHeader>(ranges, count);
         }
 
-        public void SetEInvNumber(long eInvoiceHeaderId, long version, long userId)
+        /// <summary>
+        /// return true if reservationCode is avaliable
+        /// </summary>
+        /// <param name="reservationCode"></param>
+        /// <returns></returns>
+        public bool CheckReservationCode(string reservationCode)
+        {
+            //because index condition is reservation_code != null so where must include x.ReservationCode != null
+            var entity = DataContext.EInvoiceHeaders.WithHint("INDEX(idx_einvoice_header_reservation_code)").Where(x => x.ReservationCode == reservationCode && x.ReservationCode != null).FirstOrDefault();
+            return entity == null;
+        }
+
+        public void SetEInvNumber(long eInvoiceHeaderId, ref long version, long userId, string reservationCode)
         {
             decimal _nextReleaseNo = 0;
             using (DbContextTransaction scope = dataContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var eInvoiceHeader = dataContext.EInvoiceHeaders.WithHint("UPDLOCK, INDEX(pk_einvoice_header)").Where(x => x.Id == eInvoiceHeaderId).FirstOrDefault();
-                    if (eInvoiceHeader == null || eInvoiceHeader.Version != version)
+                    var _version = version;
+                    var eInvoiceHeader = dataContext.EInvoiceHeaders.WithHint("UPDLOCK, INDEX(pk_einvoice_header)").Where(x => x.Id == eInvoiceHeaderId && x.Version == _version).FirstOrDefault();
+                    if (eInvoiceHeader == null)
                         throw new System.Data.Entity.Core.ObjectNotFoundException("Invoice Header has been changed or deleted! Please check");
-
+                    if(!String.IsNullOrWhiteSpace(eInvoiceHeader.InvoiceNumber)) //skip if invoice has number  
+                    {
+                        scope.Rollback();
+                        return;
+                    }
                     var formReleases = dataContext.EInvFormReleases.WithHint("UPDLOCK, INDEX(idx_einv_form_release_form_type_id)").Where(x => x.FormTypeId == eInvoiceHeader.FormTypeId)
                         .ToList<EInvFormRelease>();
                     var formRelease = formReleases.Where(x => x.StartDate.CompareTo(eInvoiceHeader.InvoiceIssuedDate) <= 0 && x.ReleaseUsed < x.ReleaseTotal && (TaxAuthoritiesStatus)x.TaxAuthoritiesStatus == TaxAuthoritiesStatus.Active)
@@ -173,10 +190,11 @@ namespace MyERP.Web
                     formRelease.ReleaseUsed++;
 
                     eInvoiceHeader.InvoiceNumber = _nextReleaseNo.ToString().PadLeft(7, '0');
+                    eInvoiceHeader.ReservationCode = reservationCode;
                     eInvoiceHeader.Status = (byte)EInvoiceDocumentStatusType.Released;
                     eInvoiceHeader.RecModifiedAt = DateTime.Now;
                     eInvoiceHeader.RecModifiedBy = userId;
-                    eInvoiceHeader.Version++;
+                    eInvoiceHeader.Version = ++version;
 
                     dataContext.SaveChanges();
 
@@ -200,7 +218,18 @@ namespace MyERP.Web
             var entity = Get(c => c.Id == id, new string[] { "Currency", "EInvFormType", "EInvoiceLines", "EInvoiceLines.Item", "EInvoiceLines.Vat", "EInvoiceLines.Uom" }).SingleOrDefault();
             if (entity == null)
             {
-                throw new Exception("Invoice Header has been changed or deleted! Please check");
+                throw new System.Data.Entity.Core.ObjectNotFoundException("Invoice Header has been changed or deleted! Please check");
+            }
+
+            return GetXmlInvoiceInfo(entity);
+        }
+
+        public string GetXmlInvoiceInfo(long id, long version)
+        {
+            var entity = Get(c => c.Id == id && c.Version == version, new string[] { "Currency", "EInvFormType", "EInvoiceLines", "EInvoiceLines.Item", "EInvoiceLines.Vat", "EInvoiceLines.Uom" }).SingleOrDefault();
+            if (entity == null)
+            {
+                throw new System.Data.Entity.Core.ObjectNotFoundException("Invoice Header has been changed or deleted! Please check");
             }
 
             return GetXmlInvoiceInfo(entity);
@@ -230,6 +259,7 @@ namespace MyERP.Web
             invoiceInfo.InvoiceDataInfo.InvoiceNumber = entity.InvoiceNumber;
             invoiceInfo.InvoiceDataInfo.InvoiceName = entity.InvoiceName;
             invoiceInfo.InvoiceDataInfo.InvoiceIssuedDate = entity.InvoiceIssuedDate;
+            invoiceInfo.InvoiceDataInfo.SignedDate = DateTime.Now;
 
             invoiceInfo.InvoiceDataInfo.SellerInfo = new EInvXMLSellerInfo()
             {
@@ -259,7 +289,6 @@ namespace MyERP.Web
                 BuyerBankAccount = entity.BuyerBankAccount,
                 BuyerBankName = entity.BuyerBankName,
             };
-            
 
             invoiceInfo.InvoiceDataInfo.PaymentInfos = new List<EInvXMLPaymentInfo> {
                 new EInvXMLPaymentInfo
@@ -365,6 +394,8 @@ namespace MyERP.Web
 
                 lineNumber++;
             }
+            //UserDefines
+            invoiceInfo.InvoiceDataInfo.UserDefines = $"<reservationCode>{entity.ReservationCode}</reservationCode>";
 
             XmlWriterSettings settings = new XmlWriterSettings()
             {
@@ -393,6 +424,10 @@ namespace MyERP.Web
             {
                 var formType = entity.EInvFormType;
                 String xslInput = formType.FormFile;
+
+                if (entity.Status < (byte)EInvoiceDocumentStatusType.Signed) //Clear reservationCode if not signed document
+                    entity.ReservationCode = "";
+
                 String xmlInput = GetXmlInvoiceInfo(entity);
 
                 System.IO.File.WriteAllText(dirPath + "/xslTemplate.xsl", xslInput, Encoding.UTF8);

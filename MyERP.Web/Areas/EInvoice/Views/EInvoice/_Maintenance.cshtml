@@ -7,6 +7,7 @@
     var readOnly = Model.Status != EInvoiceDocumentStatusType.Draft;
 }
 
+
 @(Html.X().Window()
           .ID("WindowEInvoiceHeaderMaintenance")
           .Title("EInvoice Maintenance")
@@ -42,7 +43,7 @@
                                              "          var index = App.EInvoiceList.store.indexOf(record); \n" +
                                              "          App.EInvoiceList.getSelectionModel().select(index, true); \n" +
                                              "          Ext.net.directRequest({ \n" +
-                                             "              url:baseURL + 'EInvoice/EInvoice/_Maintenance?id='+result.result.Id, \n" +
+                                             "              url:baseURL + 'EInvoice/EInvoice/_Maintenance?id='+result.Id, \n" +
                                              "              method:'GET', eventMask:{showMask:true}, \n" +
                                              "              success: function() { \n" +
                                              "                  var alert = Ext.Msg.alert('Status', 'Changes saved successfully', Ext.emptyFn); \n" +
@@ -73,15 +74,15 @@
                   items.Add(Html.X().Button()
                       .ID("btnProcess")
                       .Text("Process")
-                      .Icon(Icon.ArrowRight)
+                      .Icon(Icon.ScriptGo)
                       .Menu(Html.X().Menu()
                           .MinWidth(200)
                           .Items(
-                              Html.X().MenuItem().Text("1 - Set Invoice Number").Tag("InvoiceNumber")
-                              .Disabled(Model.Status != EInvoiceDocumentStatusType.Draft)
+                              Html.X().MenuItem().Text("Replace Invoice").Tag("ReplaceInvoice")
+                              .Disabled(Model.Status != EInvoiceDocumentStatusType.Signed)
                               .DirectEvents(de =>
                               {
-                                  de.Click.Action = "SetInvoiceNumber";
+                                  de.Click.Action = "ReplaceInvoice";
                                   de.Click.Before = "return #{Id}.getValue() !== '';";
                                   de.Click.ShowWarningOnFailure = true;
                                   de.Click.EventMask.ShowMask = true;
@@ -106,39 +107,125 @@
                                              "  }); \n" +
                                              "}";
                               }),
-                              Html.X().MenuItem().Text("2 - Sign Invoice").Tag("SignInvoice")
-                              .Disabled(Model.Status != EInvoiceDocumentStatusType.Released)
+                              Html.X().MenuItem().Text("Cancel Invoice").Tag("CancelInvoice")
+                              .Disabled(Model.Status != EInvoiceDocumentStatusType.Signed)
                               .DirectEvents(de =>
                               {
-                                  de.Click.Action = "SignInvoice";
+                                  de.Click.Action = "CancelInvoice";
                                   de.Click.Before = "return #{Id}.getValue() !== '';";
                                   de.Click.ShowWarningOnFailure = true;
                                   de.Click.EventMask.ShowMask = true;
                                   de.Click.ExtraParams.Add(new Parameter("id", "#{Id}.getValue()", ParameterMode.Raw));
                                   de.Click.ExtraParams.Add(new Parameter("version", "#{Version}.getValue()", ParameterMode.Raw));
-                                  de.Click.Success = "function(response, result) { \n" +
-                                             "  App.EInvoiceList.getSelectionModel().deselectAll(); \n" +
-                                             "  App.EInvoiceList.getStore().load({ \n" +
-                                             "      callback : function() { \n" +
-                                             "          var record = App.EInvoiceList.store.getById(result.result.Id); \n" +
-                                             "          var index = App.EInvoiceList.store.indexOf(record); \n" +
-                                             "          App.EInvoiceList.getSelectionModel().select(index, true); \n" +
-                                             "          Ext.net.directRequest({ \n" +
-                                             "              url:baseURL + 'EInvoice/EInvoice/_Maintenance?id='+result.result.Id, \n" +
-                                             "              method:'GET', eventMask:{showMask:true}, \n" +
-                                             "              success: function() { \n" +
-                                             "                  var alert = Ext.Msg.alert('Status', 'Set invoice number successfully', Ext.emptyFn); \n" +
-                                             "                  Ext.defer(function(){ alert.toFront(); }, 100); \n " +
-                                             "              } \n" +
-                                             "          }); \n" +
-                                             "      } \n" +
-                                             "  }); \n" +
-                                             "}";
+                                  de.Click.Success = "function(response, opts) { \n" +
+                                                    "   Ext.net.directRequest({ \n" +
+                                                    "       url:'http://localhost:18330/EDoc/SignXML', \n" +
+                                                    "       cors: true,\n" +
+                                                    "       useDefaultXhrHeader: false, \n" +
+                                                    "       method:'POST', \n" +
+                                                    "       jsonData: opts.result, \n" +
+                                                    "       success: function(response, opts) {\n" +
+                                                    "           debugger;\n" +
+                                                    "           if(opts.Status == false) {\n" +
+                                                    "               var alert = Ext.Msg.alert('Status', 'Sign invoice number fail : ' + opts.Exception, Ext.emptyFn); \n" +
+                                                    "               Ext.defer(function(){ alert.toFront(); }, 100); \n " +
+                                                    "               return;\n" +
+                                                    "           } else {\n" +
+                                                    "               " +
+                                                    "           }" +
+                                                    "       },\n" +
+                                                    "       failure: function(response, opts) {\n" +
+                                                    "           var alert = Ext.Msg.alert('Status', 'Sign invoice number fail : ' + opts.errorMessage, Ext.emptyFn); \n" +
+                                                    "           Ext.defer(function(){ alert.toFront(); }, 100); \n " +
+                                                    "       }\n" +
+                                                    "   })\n" +
+                                                    "}";
                               })
                         ))
                   );
+                  items.Add(Html.X().Button()
+                      .ID("btnSignAction")
+                      .Text("Sign")
+                      .Icon(Icon.ScriptKey)
+                      .DirectEvents(de =>
+                      {
+                          de.Click.Action = "StartSignAction";
+                          de.Click.Before = "if(#{Id}.getValue() !== '') { window.signMask = Ext.net.Mask.show({ msg: 'Step 1 of 3...' }); return true;} else return false;";
+                          de.Click.CleanRequest = true;
+                          de.Click.ExtraParams.Add(new Parameter("id", "#{Id}.getValue()", ParameterMode.Raw));
+                          de.Click.ExtraParams.Add(new Parameter("version", "#{Version}.getValue()", ParameterMode.Raw));
+                          de.Click.Failure = "function() {\n " +
+                                             "  Ext.net.Mask.hide(); \n" +
+                                             "  Ext.net.directRequest({ \n" +
+                                             "      url:baseURL + 'EInvoice/EInvoice/_Maintenance?id='+ #{Id}.getValue(), \n" +
+                                             "      method:'GET', \n" +
+                                             "      eventMask: { showMask:true }, \n" +
+                                             "  }); \n" +
+                                             "}";
+                          de.Click.Success = "function(response, opts) { \n" +
+                                            "   updateSignMask('Step 2 of 3...');" +
+                                            "   Ext.net.directRequest({ \n" +
+                                            "       url:'http://localhost:18330/EDoc/SignXML', \n" +
+                                            "       cors: true,\n" +
+                                            "       useDefaultXhrHeader: false, \n" +
+                                            "       method:'POST', \n" +
+                                            "       jsonData: opts.result, \n" +
+                                            "       success: function(response, opts) {\n" +
+                                            "           if(opts.Status == false) {\n" +
+                                            "               var alert = Ext.Msg.alert('Status', 'Sign invoice number fail : ' + opts.Exception, Ext.emptyFn); \n" +
+                                            "               Ext.defer(function(){ alert.toFront(); }, 1500); \n " +
+                                            "               return;\n" +
+                                            "           } else {\n" +
+                                            "               updateSignMask('Step 3 of 3...');" +
+                                            "               Ext.net.DirectMethod.request({ \n" +
+                                            "                   url:'" + Url.Action("PublicSignedInvoice") + "', \n" +
+                                            "                   params: { \n" +
+                                            "                       __RequestVerificationToken:  #{AntiForgeryField}.getValue(),\n" +
+                                            "                       id: #{Id}.getValue(), \n" +
+                                            "                       version: #{Version}.getValue(), \n" +
+                                            "                       signedModelJson: opts \n" +
+                                            "                   }, \n" +
+                                            "                   success: function(result) {\n" +
+                                            "                       updateSignMask('All finished!');" +
+                                            "                        \n" +
+                                            "                       Ext.net.directRequest({ \n" +
+                                            "                           url:baseURL + 'EInvoice/EInvoice/_Maintenance?id='+ #{Id}.getValue(), \n" +
+                                            "                           method:'GET', \n" +
+                                            "                           eventMask:{ showMask: false }, \n" +
+                                            "                           success: function() { \n" +
+                                            "                               Ext.defer(function() { Ext.net.Mask.hide(); }, 1000); \n " +
+                                            "                           }, \n" +
+                                            "                           failure: function() {\n" +
+                                            "                               var alert = Ext.Msg.alert('Status', 'Signed invoice refresh unsuccessfully! Please check', Ext.emptyFn); \n" +
+                                            "                               Ext.net.Mask.hide(); alert.toFront(); \n " +
+                                            "                           }" +
+                                            "                       }); \n" +
+                                            "                   },\n" +
+                                            "                   failure: function() {\n" +
+                                            "                       Ext.net.Mask.hide();" +
+                                            "                   }" +
+                                            "               });\n" +
+                                            "           }\n" +
+                                            "       },\n" +
+                                            "       failure: function(response, opts) {\n" +
+                                            "           Ext.net.Mask.hide(); \n" +
+                                            "           var alert = Ext.Msg.alert('Status', 'Sign invoice number fail : ' + opts.errorMessage, Ext.emptyFn); \n" +
+                                            "           Ext.defer(function(){ alert.toFront(); }, 1500); \n " +
+                                            "       }\n" +
+                                            "   })\n" +
+                                            "}";
+                      })
+                   );
               })
           )
+          .HtmlBin(
+             @<text>
+                 <script>
+                     var updateSignMask = function (text) {
+                          signMask.down("div.x-mask-msg-text").update(text);
+                     };
+                 </script>
+             </text>)
           .Bin(
               Html.X().Store().AutoLoad(false).AutoDestroy(false)
                   .ID("BuyerStore")
@@ -159,7 +246,7 @@
                       p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
                   })
                   .Data(ViewData["BuyerStore"]),
-              
+
               Html.X().Store().AutoLoad(false).AutoDestroy(false)
                   .ID("FormTypeStore")
                   .Proxy(Html.X().AjaxProxy()
@@ -179,7 +266,7 @@
                       p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
                       p.Add(new StoreParameter("taxAuthoritiesStatus", TaxAuthoritiesStatus.Active));
                   })
-                  .Data(ViewData["FormTypeStore"]),        
+                  .Data(ViewData["FormTypeStore"]),
 
               Html.X().Store().AutoLoad(false).AutoDestroy(false)
                   .ID("CurrencyStore")
@@ -200,7 +287,7 @@
                       p.Add(new StoreParameter("id", "this.id", ParameterMode.Raw));
                   })
                   .Data(ViewData["CurrencyStore"]),
-              
+
               Html.X().Store()
                   .ID("ItemStore")
                   .Proxy(Html.X().AjaxProxy()
@@ -236,7 +323,7 @@
                       )
                   )
                   .Data(ViewData["UomStore"]),
-                            
+
               Html.X().Store().AutoLoad(false).AutoDestroy(false)
                   .ID("VatStore")
                   .Proxy(Html.X().AjaxProxy()
@@ -267,7 +354,7 @@
                   {
                       items.Add(Html.X().Container()
                           .Items(
-                              Html.X().AntiForgeryField(),
+                              Html.X().AntiForgeryField().ID("AntiForgeryField"),
                               Html.X().HiddenFor(m => m.Id).ID("Id"),
                               Html.X().HiddenFor(m => m.Version).ID("Version"))
                       );
@@ -276,7 +363,7 @@
                           .Items(
                               Html.X().Panel()
                                   .Layout(LayoutType.Form)
-                                  .Width(600)
+                                  .Width(500)
                                   .Items(
                                       Html.X().ComboBoxFor(m => m.BuyerId).AllowBlank(false).ID("BuyerId").Width(150)
                                           .ReadOnly(readOnly)
@@ -326,7 +413,7 @@
                                       Html.X().TextFieldFor(m => m.BuyerBankAccount).EnforceMaxLength(true).ID("BuyerBankAccount").ReadOnly(readOnly)),
                               Html.X().Panel()
                                       .Layout(LayoutType.Form)
-                                      .Width(600)
+                                      .Width(500)
                                       .Items(
                                           Html.X().TextFieldFor(m => m.SellerLegalName).AllowBlank(false).EnforceMaxLength(true).ID("SellerLegalName").ReadOnly(true),
                                           Html.X().TextFieldFor(m => m.SellerTaxCode).AllowBlank(false).EnforceMaxLength(true).ID("SellerTaxCode").ReadOnly(true),
@@ -336,7 +423,7 @@
                                           Html.X().TextFieldFor(m => m.InvoiceNote).EnforceMaxLength(true).ID("InvoiceNote").ReadOnly(readOnly)),
                             Html.X().Panel()
                                 .Layout(LayoutType.Form)
-                                .Width(350)
+                                .Width(400)
                                 .Items(
                                     Html.X().ComboBoxFor(m => m.FormTypeId).AllowBlank(false).ID("FormTypeId")
                                         .ReadOnly(readOnly)
@@ -375,6 +462,12 @@
                                                           this.getStore().id = _id;
                                                           /*this.getStore().load();*/";
                                         })
+                                        .DirectEvents(de =>
+                                          {
+                                              de.Select.Action = "ChangeFormType";
+                                              de.Select.EventMask.ShowMask = true;
+                                              de.Select.ExtraParams.Add(new Parameter("selectedData", "records[0].data", ParameterMode.Raw, true));
+                                          })
                                     ,
                                     Html.X().TextFieldFor(m => m.InvoiceNumber).AllowBlank(true).ID("InvoiceNumber").ReadOnly(true),
                                     Html.X().DateFieldFor(m => m.InvoiceIssuedDate).AllowBlank(false).ID("InvoiceIssuedDate").ReadOnly(readOnly),
@@ -742,7 +835,6 @@
                       );
                   })
                 )
-
                 .Buttons(buttons =>
                 {
                     buttons.Add(Html.X().Button()
@@ -755,5 +847,4 @@
                         }));
                 })
 )
-
 

@@ -733,6 +733,11 @@ BEGIN
 	DROP INDEX idx_einvoice_header_buyer_tax_code ON dbo.einvoice_header 
 END
 
+IF EXISTS(SELECT * FROM sys.indexes indexes INNER JOIN sys.objects objects ON indexes.object_id = objects.object_id WHERE indexes.name ='idx_einvoice_header_reservation_code' AND objects.name = 'einvoice_header')
+BEGIN
+	DROP INDEX idx_einvoice_header_reservation_code ON dbo.einvoice_header 
+END
+
 /**************************** einvoice_line ********************************************/
 IF EXISTS(SELECT * FROM sys.indexes indexes INNER JOIN sys.objects objects ON indexes.object_id = objects.object_id WHERE indexes.name ='idx_einvoice_line_client_id' AND objects.name = 'einvoice_line')
 BEGIN
