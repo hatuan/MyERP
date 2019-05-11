@@ -480,6 +480,7 @@
     <Content Include="Resources\reports\einvoices\invoice.json" />
     <Content Include="Resources\reports\einvoices\vars.json" />
     <Content Include="Views\ExtNet\Index.cshtml" />
+    <Content Include="Views\EInvoiceSigned\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -538,6 +539,7 @@
     <Compile Include="Areas\Vat\VatAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CurrencyController.cs" />
+    <Compile Include="Controllers\EInvoiceSignedController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ExtNetController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

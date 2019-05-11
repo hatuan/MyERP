@@ -1,0 +1,166 @@
+﻿@model MyERP.Web.Models.EInvoiceSignedViewModel
+
+@{
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+@section headtag
+{
+    <script>
+        var showHtmlPreviewReport = function (renderName) {
+            var _url = baseURL + 'Resources/PrintReports/EInvoiceSigned/' + renderName + "/" + renderName + ".html";
+
+            window.open(_url, '_blank', 'location=yes,height='+screen.height+',width='+screen.width+',scrollbars=yes,status=yes');
+        };
+    </script>
+}
+
+@section main
+{
+    @(Html.X().Viewport()
+        .Layout(LayoutType.Center)
+        .Items(
+            Html.X().Panel()
+                .ID("PanelSearchConditions")
+                .Width(1000)
+                .Height(600)
+                .BodyPadding(5)
+                .Layout(LayoutType.Anchor)
+                .Items(
+                    Html.X().FormPanel()
+                        .ID("FormSearchConditions")
+                        .AnchorHorizontal("100%")
+                        .Layout(LayoutType.Form)
+                        .Items(
+                            Html.X().Hidden().ID("SellerTaxCode").Value(ViewData["SellerTaxCode"]),
+                            Html.X().Hidden().ID("ClientUUID").Value(ViewData["ClientUUID"]),
+                            Html.X().TextField().ID("BuyerTaxCode")
+                                .FieldLabel("Buyer TaxCode"),
+                            Html.X().TextField().ID("ReservationCode")
+                                .FieldLabel("Reservation Code")
+                        ),
+                    Html.X().Container()
+                        .AnchorHorizontal("100%")
+                        .Layout(LayoutType.HBox)
+                        .Padding(5)
+                        .LayoutConfig(
+                            config => config.Add(new HBoxLayoutConfig() { Align = HBoxAlign.Middle, Pack = BoxPack.End})
+                        )
+                        .Items(
+                            Html.X().Button().ID("btnSearch")
+                                .Text("Search")
+                                .Width(100)
+                                .DirectEvents(de =>
+                                {
+                                    de.Click.Url = Url.Action("Search");
+                                    de.Click.Method = HttpMethod.POST;
+                                    de.Click.FormID = "FormSearchConditions";
+                                    de.Click.Before = "function() { \n" +
+                                                      "     if (#{BuyerTaxCode}.getValue() == '' && #{ReservationCode}.getValue() == '') { \n" +
+                                                      "         #{BuyerTaxCode}.markInvalid('Must input Buyer TaxCode or Reservation Code'); \n" +
+                                                      "         #{ReservationCode}.markInvalid('Must input Buyer TaxCode or Reservation Code');\n" +
+                                                      "         return false; \n" +
+                                                      "     }" +
+                                                      "     else { \n" +
+                                                      "         #{BuyerTaxCode}.markAsValid(); \n" +
+                                                      "         #{ReservationCode}.markAsValid();\n" +
+                                                      "         return true;" +
+                                                      "     }\n" +
+                                                      "}";
+                                    de.Click.EventMask.ShowMask = true;
+
+                                })
+                        ),
+                    Html.X().GridPanel().ID("grdSearchResults")
+                        .Border(true)
+                        .Padding(5)
+                        .AnchorHorizontal("100%")
+                        .AnchorVertical("75%")
+                        .TopBar(items =>
+                        {
+                              items.Add(Html.X().Toolbar().Items(buttons =>
+                              {
+                                  buttons.Add(Html.X().Button()
+                                      .ID("btnView")
+                                      .Text("View")
+                                      .Icon(Icon.Printer)
+                                      .DirectEvents(de =>
+                                      {
+                                          de.Click.Url = Url.Action("Print");
+                                          de.Click.Before = "return #{grdSearchResults}.hasSelection();";
+                                          de.Click.ShowWarningOnFailure = true;
+                                          de.Click.EventMask.ShowMask = true;
+                                          de.Click.ExtraParams.Add(new Parameter("reservationCode", "#{grdSearchResults}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
+                                          de.Click.Success = "function(response, opts) { \n" +
+                                                             "  showHtmlPreviewReport(opts.result.FileName); \n" +
+                                                             "}";
+                                      })
+                                  );
+                              }));
+                        })
+                        .Store(
+                            Html.X().Store()
+                                .ID("StoreEInvoiceSigned")
+                                .RemoteSort(false)
+                                .PageSize(10)
+                                .Sorters("InvoiceNumber", Ext.Net.SortDirection.Default)
+                                .AutoLoad(false)
+                                .Model(
+                                    Html.X().Model()
+                                        .IDProperty("ReservationCode")
+                                        .Fields(
+                                            new ModelField("Id", ModelFieldType.Int),
+                                            new ModelField("ReservationCode", ModelFieldType.String),
+                                            new ModelField("InvoiceNumber", ModelFieldType.String),
+                                            new ModelField("InvoiceIssuedDate", ModelFieldType.Date),
+                                            new ModelField("BuyerLegalName", ModelFieldType.String),
+                                            new ModelField("BuyerTaxCode", ModelFieldType.String),
+                                            new ModelField("BuyerAddressLine", ModelFieldType.String),
+                                            new ModelField("Description", ModelFieldType.String),
+                                            new ModelField("TotalAmountWithoutVAT", ModelFieldType.Float)
+                                            {
+                                                Convert =
+                                                {
+                                                    Handler = @"var v = value + '';
+                                                                v.replace(/\./g,'').replace(',', '.');
+                                                                return Ext.util.Format.number(v, '0.000,00/i');"
+                                                }
+                                            },
+                                            new ModelField("TotalVATAmount", ModelFieldType.Float)
+                                            {
+                                                Convert =
+                                                {
+                                                    Handler = @"var v = value + '';
+                                                                v.replace(/\./g,'').replace(',', '.');
+                                                                return Ext.util.Format.number(v, '0.000,00/i');"
+                                                }
+                                            },
+                                            new ModelField("TotalAmountWithVAT", ModelFieldType.Float)
+                                            {
+                                                Convert =
+                                                {
+                                                    Handler = @"var v = value + '';
+                                                                v.replace(/\./g,'').replace(',', '.');
+                                                                return Ext.util.Format.number(v, '0.000,00/i');"
+                                                }
+                                            },
+                                            new ModelField("Status", ModelFieldType.String)
+                                        )
+                                )
+                        )
+                        .ColumnModel(
+                            Html.X().Column().Text("Number").DataIndex("InvoiceNumber").MinWidth(85).Locked(true),
+                            Html.X().DateColumn().Text("Date").DataIndex("InvoiceIssuedDate").Width(100).Locked(true).Format("dd/MM/yyyy"),
+                            Html.X().Column().Text("Buyer Legal Name").DataIndex("BuyerLegalName").Sortable(false).MinWidth(200),
+                            Html.X().Column().Text("Buyer Tax Code").DataIndex("BuyerTaxCode").Sortable(false).MinWidth(150),
+                            Html.X().Column().Text("Buyer Address Line").DataIndex("BuyerAddressLine").Sortable(false).MinWidth(200),
+                            Html.X().Column().Text("Description").DataIndex("Description").Sortable(false).MinWidth(256),
+                            Html.X().ColumnFor(m => m.TotalAmountWithoutVAT).ToBuilder<Column.Builder>().ID("EInvoiceSignedItemTotalAmountWithoutVAT").Sortable(false).Width(150),
+                            Html.X().ColumnFor(m => m.TotalVATAmount).ToBuilder<Column.Builder>().ID("EInvoiceSignedItemTotalVATAmount").Sortable(false).Width(150),
+                            Html.X().ColumnFor(m => m.TotalAmountWithVAT).ToBuilder<Column.Builder>().ID("EInvoiceSignedItemTotalAmountWithVAT").Sortable(false).Width(150),
+                            Html.X().Column().Text("Status").Sortable(false).DataIndex("Status").Width(85)
+                        )
+                )
+        )
+    )
+}

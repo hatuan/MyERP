@@ -162,7 +162,7 @@ namespace MyERP.Web
             return entity == null;
         }
 
-        public void SetEInvNumber(long eInvoiceHeaderId, ref long version, long userId, string reservationCode)
+        public string SetEInvNumber(long eInvoiceHeaderId, ref long version, long userId, string reservationCode)
         {
             decimal _nextReleaseNo = 0;
             using (DbContextTransaction scope = dataContext.Database.BeginTransaction())
@@ -175,8 +175,9 @@ namespace MyERP.Web
                         throw new System.Data.Entity.Core.ObjectNotFoundException("Invoice Header has been changed or deleted! Please check");
                     if(!String.IsNullOrWhiteSpace(eInvoiceHeader.InvoiceNumber)) //skip if invoice has number  
                     {
+                        var _invoiceNumber = eInvoiceHeader.InvoiceNumber;
                         scope.Rollback();
-                        return;
+                        return _invoiceNumber;
                     }
                     var formReleases = dataContext.EInvFormReleases.WithHint("UPDLOCK, INDEX(idx_einv_form_release_form_type_id)").Where(x => x.FormTypeId == eInvoiceHeader.FormTypeId)
                         .ToList<EInvFormRelease>();
@@ -199,6 +200,8 @@ namespace MyERP.Web
                     dataContext.SaveChanges();
 
                     scope.Commit();
+
+                    return eInvoiceHeader.InvoiceNumber;
                 }
                 catch (System.Data.Entity.Core.ObjectNotFoundException ex)
                 {
@@ -459,6 +462,123 @@ namespace MyERP.Web
                 throw;
             }
         }
+
+        /// <summary>
+        /// Return EInvoiceSigned Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="signedXMLDTO"></param>
+        /// <returns></returns>
+        public long PublicSignedInvoice(long id, SignXMLDTO signedXMLDTO, long userId)
+        {
+            using (DbContextTransaction scope = dataContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    var entity = Get(c => c.Id == id, new string[] { "Currency", "EInvFormType" }).SingleOrDefault();
+                    if (entity == null)
+                    {
+                        throw new System.Data.Entity.Core.ObjectNotFoundException("Invoice Header has been changed or deleted! Please check");
+                    }
+
+                    var newEInvoiceSigned = new EInvoiceSigned
+                    {
+                        EInvoiceHeaderId = id,
+                        FormTypeId = entity.FormTypeId,
+                        OriginalEInvoiceId = entity.OriginalEInvoiceId,
+                        OriginalInvoiceId = entity.OriginalInvoiceId,
+                        OriginalInvoiceIssueDate = entity.OriginalInvoiceIssueDate,
+                        InvoiceType = entity.EInvFormType.InvoiceType,
+                        TemplateCode = entity.EInvFormType.TemplateCode,
+                        InvoiceSeries = entity.EInvFormType.InvoiceSeries,
+                        InvoiceNumber = entity.InvoiceNumber,
+                        InvoiceName = entity.EInvFormType.InvoiceName,
+                        InvoiceIssuedDate = entity.InvoiceIssuedDate,
+                        SignedDate = entity.SignedDate,
+                        SubmittedDate = entity.SubmittedDate,
+                        ContractNumber = entity.ContractNumber,
+                        ContractDate = entity.ContractDate,
+                        Description = entity.Description,
+                        CurrencyCode = entity.Currency.Code,
+                        ExchangeRate = entity.ExchangeRate,
+                        InvoiceNote = entity.InvoiceNote,
+                        AdjustmentType = entity.AdjustmentType,
+                        AdditionalReferenceDate = entity.AdditionalReferenceDate,
+                        AdditionalReferenceDesc = entity.AdditionalReferenceDesc,
+                        BuyerDisplayName = entity.BuyerDisplayName,
+                        BuyerLegalName = entity.BuyerLegalName,
+                        BuyerTaxCode = entity.BuyerTaxCode,
+                        BuyerAddressLine = entity.BuyerAddressLine,
+                        BuyerPostalCode = entity.BuyerPostalCode,
+                        BuyerDistrictName = entity.BuyerDistrictName,
+                        BuyerCityName = entity.BuyerCityName,
+                        BuyerCountryCode = entity.BuyerCountryCode,
+                        BuyerPhoneNumber = entity.BuyerPhoneNumber,
+                        BuyerFaxNumber = entity.BuyerFaxNumber,
+                        BuyerEmail = entity.BuyerEmail,
+                        BuyerBankName = entity.BuyerBankName,
+                        BuyerBankAccount = entity.BuyerBankAccount,
+                        SellerLegalName = entity.SellerLegalName,
+                        SellerTaxCode = entity.SellerTaxCode,
+                        SellerAddressLine = entity.SellerAddressLine,
+                        SellerPostalCode = entity.SellerPostalCode,
+                        SellerDistrictName = entity.SellerDistrictName,
+                        SellerCityName = entity.SellerCityName,
+                        SellerCountryCode = entity.SellerCountryCode,
+                        SellerPhoneNumber = entity.SellerPhoneNumber,
+                        SellerFaxNumber = entity.SellerFaxNumber,
+                        SellerEmail = entity.SellerEmail,
+                        SellerBankName = entity.SellerBankName,
+                        SellerBankAccount = entity.SellerBankAccount,
+                        SellerContactPersonName = entity.SellerContactPersonName,
+                        SellerSignedPersonName = entity.SellerSignedPersonName,
+                        SellerSubmittedPersonName = entity.SellerSubmittedPersonName,
+                        PaymentMethodName = entity.PaymentMethodName,
+                        SumOfTotalLineAmountWithoutVAT = entity.SumOfTotalLineAmountWithoutVAT,
+                        TotalAmountWithoutVAT = entity.TotalAmountWithoutVAT,
+                        IsTotalAmountWithoutVATPos = entity.IsTotalAmountWithoutVATPos,
+                        TotalVATAmount = entity.TotalVATAmount,
+                        IsTotalVATAmountPos = entity.IsTotalVATAmountPos,
+                        TotalAmountWithVAT = entity.TotalAmountWithVAT,
+                        TotalAmountWithVATFrn = entity.TotalAmountWithVATFrn,
+                        TotalAmountWithVATInWords = entity.TotalAmountWithVATInWords,
+                        IsTotalAmountPos = entity.IsTotalAmountPos,
+                        DiscountAmount = entity.DiscountAmount,
+                        IsDiscountAmtPos = entity.IsDiscountAmtPos,
+                        ReservationCode = entity.ReservationCode,
+                        Logo = entity.EInvFormType.Logo,
+                        Watermark = entity.EInvFormType.Watermark,
+                        SignedXML = signedXMLDTO.SignedXML,
+                        SignedXSL = entity.EInvFormType.FormFile,
+                        SignedFileName = entity.EInvFormType.FormFileName,
+                        ClientId = entity.ClientId,
+                        OrganizationId = entity.OrganizationId,
+                        Version = 1,
+                        Status = (byte)EInvoiceDocumentStatusType.Signed,
+                        RecCreatedAt = DateTime.Now,
+                        RecCreatedBy = userId,
+                        RecModifiedAt = DateTime.Now,
+                        RecModifiedBy = userId
+                    };
+                    newEInvoiceSigned = dataContext.Set<EInvoiceSigned>().Add(newEInvoiceSigned);
+                    dataContext.SaveChanges();
+
+                    scope.Commit();
+
+                    return newEInvoiceSigned.Id;
+                }
+                catch (System.Data.Entity.Core.ObjectNotFoundException ex)
+                {
+                    scope.Rollback();
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    scope.Rollback();
+                    throw ex;
+                }
+            }
+        }
     }
 
     public partial class EInvoiceLineRepository 
@@ -675,6 +795,70 @@ namespace MyERP.Web
             var ranges = (start < 0 || limit <= 0) ? entities.ToList() : entities.Skip(start).Take(limit).ToList();
 
             return new Paging<EInvoiceSigned>(ranges, count);
+        }
+
+        public List<EInvoiceSignedViewModel> Search(string sellerTaxCode, string clientUUID, string buyerTaxCode, string reservationCode)
+        {
+            var query = dataContext.EInvoiceSigneds.Include("Client").Where(x => x.Client.UUID == clientUUID && x.SellerTaxCode == sellerTaxCode);
+            if (!String.IsNullOrWhiteSpace(buyerTaxCode))
+                query = query.Where(x => x.BuyerTaxCode == buyerTaxCode);
+            if (!String.IsNullOrWhiteSpace(reservationCode))
+                query = query.Where(x => x.ReservationCode == reservationCode);
+
+            return query.Select(x => new EInvoiceSignedViewModel() {
+                Id = x.Id,
+                InvoiceNumber = x.InvoiceNumber,
+                InvoiceIssuedDate = x.InvoiceIssuedDate,
+                BuyerLegalName = x.BuyerLegalName,
+                BuyerTaxCode = x.BuyerTaxCode,
+                BuyerAddressLine = x.BuyerAddressLine,
+                Description = x.Description,
+                TotalAmountWithoutVAT = x.TotalAmountWithoutVAT,
+                TotalVATAmount = x.TotalVATAmount,
+                TotalAmountWithVAT = x.TotalAmountWithVAT,
+                Status = (EInvoiceDocumentStatusType)x.Status,
+                ReservationCode = x.ReservationCode,
+                Logo = x.Logo,
+                Watermark = x.Watermark,
+                SignedXML = x.SignedXML,
+                SignedXSL = x.SignedXSL
+            }).ToList();
+        }
+
+        internal void CreateHtmlFile(EInvoiceSignedViewModel printInvoice, string dirPath, string fullHtmlPath)
+        {
+            try
+            {
+                String xmlInput = Encoding.UTF8.GetString(Convert.FromBase64String(printInvoice.SignedXML));
+                String xslInput = printInvoice.SignedXSL;
+
+                System.IO.File.WriteAllText(dirPath + "/xslTemplate.xsl", xslInput, Encoding.UTF8);
+                System.IO.File.WriteAllText(dirPath + "/xmlInput.xml", xmlInput, Encoding.UTF8);
+
+                using (StringReader srt = new StringReader(xslInput)) // xslInput is a string that contains xsl
+                using (StringReader sri = new StringReader(xmlInput)) // xmlInput is a string that contains xml
+                {
+                    using (System.Xml.XmlReader xrt = System.Xml.XmlReader.Create(srt))
+                    using (System.Xml.XmlReader xri = System.Xml.XmlReader.Create(sri))
+                    {
+                        XslCompiledTransform xslt = new XslCompiledTransform();
+                        xslt.Load(xrt);
+                        using (StringWriter sw = new StringWriter())
+                        using (System.Xml.XmlWriter xwo = System.Xml.XmlWriter.Create(sw, xslt.OutputSettings)) // use OutputSettings of xsl, so it can be output as HTML
+                        {
+                            xslt.Transform(xri, xwo);
+                            System.IO.File.WriteAllText(fullHtmlPath, sw.ToString(), Encoding.UTF8);
+                        }
+                    }
+                }
+                if (!String.IsNullOrEmpty(printInvoice.Logo))
+                {
+                    System.IO.File.WriteAllBytes(dirPath + "/logo.png", Convert.FromBase64String(printInvoice.Logo));
+                }
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
         }
     }
 }

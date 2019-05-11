@@ -24,6 +24,7 @@
                   items.Add(Html.X().Button()
                       .ID("btnSave")
                       .Text("Save")
+                      .Disabled(Model.Status != EInvoiceDocumentStatusType.Draft)
                       .Icon(Icon.Disk)
                       .DirectEvents(de =>
                       {
@@ -35,27 +36,19 @@
                           de.Click.EventMask.ShowMask = true;
                           de.Click.FormID = "FormEInvoiceHeaderMaintenance";
                           de.Click.ExtraParams.Add(new Parameter { Name = "EInvoiceLinesJSON", Value = "#{EInvoiceLineGridPanel}.getRowsValues()", Mode = ParameterMode.Raw, Encode = true });
-                          de.Click.Success = "function(response, result) { \n" +
-                                             "  App.EInvoiceList.getSelectionModel().deselectAll(); \n" +
-                                             "  App.EInvoiceList.getStore().load({ \n" +
-                                             "      callback : function() { \n" +
-                                             "          var record = App.EInvoiceList.store.getById(result.result.Id); \n" +
-                                             "          var index = App.EInvoiceList.store.indexOf(record); \n" +
-                                             "          App.EInvoiceList.getSelectionModel().select(index, true); \n" +
-                                             "          Ext.net.directRequest({ \n" +
-                                             "              url:baseURL + 'EInvoice/EInvoice/_Maintenance?id='+result.Id, \n" +
-                                             "              method:'GET', eventMask:{showMask:true}, \n" +
-                                             "              success: function() { \n" +
-                                             "                  var alert = Ext.Msg.alert('Status', 'Changes saved successfully', Ext.emptyFn); \n" +
-                                             "                  Ext.defer(function(){ alert.toFront(); }, 100); \n " +
-                                             "              } \n" +
-                                             "          }); \n" +
+                          de.Click.Success = "function(response, opts) { \n" +
+                                             "  Ext.net.directRequest({ \n" +
+                                             "      url:baseURL + 'EInvoice/EInvoice/_Maintenance?id='+opts.result.Id, \n" +
+                                             "      method:'GET', eventMask:{showMask:true}, \n" +
+                                             "      success: function() { \n" +
+                                             "          var alert = Ext.Msg.alert('Status', 'Changes saved successfully', Ext.emptyFn); \n" +
+                                             "          Ext.defer(function(){ alert.toFront(); }, 100); \n " +
                                              "      } \n" +
                                              "  }); \n" +
                                              "}";
                       })
                   );
-                  items.Add(Html.X().Button()
+                  items.Add(Html.X().SplitButton()
                       .ID("btnPrint")
                       .Text("Print")
                       .Icon(Icon.Printer)
@@ -70,77 +63,51 @@
                                              "  showHtmlPreviewReport(result.result.FileName); \n" +
                                              "}";
                       })
+                      .Menu(Html.X().Menu().MinWidth(200)
+                          .Items(
+                            Html.X().MenuItem().Text("Send Mail").Tag("SendMail")
+                                .Icon(Icon.Mail),
+                            Html.X().MenuItem().Text("Download PDF").Tag("DownloadPDF")
+                                .Icon(Icon.PageWhiteAcrobat)
+                          )
+                      )
                   );
                   items.Add(Html.X().Button()
                       .ID("btnProcess")
                       .Text("Process")
                       .Icon(Icon.ScriptGo)
+                      .Disabled(Model.Status != EInvoiceDocumentStatusType.Signed)
                       .Menu(Html.X().Menu()
                           .MinWidth(200)
                           .Items(
                               Html.X().MenuItem().Text("Replace Invoice").Tag("ReplaceInvoice")
-                              .Disabled(Model.Status != EInvoiceDocumentStatusType.Signed)
-                              .DirectEvents(de =>
-                              {
-                                  de.Click.Action = "ReplaceInvoice";
-                                  de.Click.Before = "return #{Id}.getValue() !== '';";
-                                  de.Click.ShowWarningOnFailure = true;
-                                  de.Click.EventMask.ShowMask = true;
-                                  de.Click.ExtraParams.Add(new Parameter("id", "#{Id}.getValue()", ParameterMode.Raw));
-                                  de.Click.ExtraParams.Add(new Parameter("version", "#{Version}.getValue()", ParameterMode.Raw));
-                                  de.Click.Success = "function(response, result) { \n" +
-                                             "  App.EInvoiceList.getSelectionModel().deselectAll(); \n" +
-                                             "  App.EInvoiceList.getStore().load({ \n" +
-                                             "      callback : function() { \n" +
-                                             "          var record = App.EInvoiceList.store.getById(result.result.Id); \n" +
-                                             "          var index = App.EInvoiceList.store.indexOf(record); \n" +
-                                             "          App.EInvoiceList.getSelectionModel().select(index, true); \n" +
-                                             "          Ext.net.directRequest({ \n" +
-                                             "              url:baseURL + 'EInvoice/EInvoice/_Maintenance?id='+result.result.Id, \n" +
-                                             "              method:'GET', eventMask:{showMask:true}, \n" +
-                                             "              success: function() { \n" +
-                                             "                  var alert = Ext.Msg.alert('Status', 'Set invoice number successfully', Ext.emptyFn); \n" +
-                                             "                  Ext.defer(function(){ alert.toFront(); }, 100); \n " +
-                                             "              } \n" +
-                                             "          }); \n" +
-                                             "      } \n" +
-                                             "  }); \n" +
-                                             "}";
-                              }),
+                                  .Icon(Icon.ScriptLink)
+                                  .Disabled(Model.Status != EInvoiceDocumentStatusType.Signed)
+                                  .DirectEvents(de =>
+                                  {
+                                      de.Click.Action = "ReplaceInvoice";
+                                      de.Click.Before = "return #{Id}.getValue() !== '';";
+                                      de.Click.ShowWarningOnFailure = true;
+                                      de.Click.EventMask.ShowMask = true;
+                                      de.Click.ExtraParams.Add(new Parameter("id", "#{Id}.getValue()", ParameterMode.Raw));
+                                      de.Click.ExtraParams.Add(new Parameter("version", "#{Version}.getValue()", ParameterMode.Raw));
+                                      de.Click.Success = "function(response, result) { \n" +
+                                                        "}";
+                                  }),
                               Html.X().MenuItem().Text("Cancel Invoice").Tag("CancelInvoice")
-                              .Disabled(Model.Status != EInvoiceDocumentStatusType.Signed)
-                              .DirectEvents(de =>
-                              {
-                                  de.Click.Action = "CancelInvoice";
-                                  de.Click.Before = "return #{Id}.getValue() !== '';";
-                                  de.Click.ShowWarningOnFailure = true;
-                                  de.Click.EventMask.ShowMask = true;
-                                  de.Click.ExtraParams.Add(new Parameter("id", "#{Id}.getValue()", ParameterMode.Raw));
-                                  de.Click.ExtraParams.Add(new Parameter("version", "#{Version}.getValue()", ParameterMode.Raw));
-                                  de.Click.Success = "function(response, opts) { \n" +
-                                                    "   Ext.net.directRequest({ \n" +
-                                                    "       url:'http://localhost:18330/EDoc/SignXML', \n" +
-                                                    "       cors: true,\n" +
-                                                    "       useDefaultXhrHeader: false, \n" +
-                                                    "       method:'POST', \n" +
-                                                    "       jsonData: opts.result, \n" +
-                                                    "       success: function(response, opts) {\n" +
-                                                    "           debugger;\n" +
-                                                    "           if(opts.Status == false) {\n" +
-                                                    "               var alert = Ext.Msg.alert('Status', 'Sign invoice number fail : ' + opts.Exception, Ext.emptyFn); \n" +
-                                                    "               Ext.defer(function(){ alert.toFront(); }, 100); \n " +
-                                                    "               return;\n" +
-                                                    "           } else {\n" +
-                                                    "               " +
-                                                    "           }" +
-                                                    "       },\n" +
-                                                    "       failure: function(response, opts) {\n" +
-                                                    "           var alert = Ext.Msg.alert('Status', 'Sign invoice number fail : ' + opts.errorMessage, Ext.emptyFn); \n" +
-                                                    "           Ext.defer(function(){ alert.toFront(); }, 100); \n " +
-                                                    "       }\n" +
-                                                    "   })\n" +
-                                                    "}";
-                              })
+                                  .Icon(Icon.ScriptDelete)
+                                  .Disabled(Model.Status != EInvoiceDocumentStatusType.Signed)
+                                  .DirectEvents(de =>
+                                  {
+                                      de.Click.Action = "CancelInvoice";
+                                      de.Click.Before = "return #{Id}.getValue() !== '';";
+                                      de.Click.ShowWarningOnFailure = true;
+                                      de.Click.EventMask.ShowMask = true;
+                                      de.Click.ExtraParams.Add(new Parameter("id", "#{Id}.getValue()", ParameterMode.Raw));
+                                      de.Click.ExtraParams.Add(new Parameter("version", "#{Version}.getValue()", ParameterMode.Raw));
+                                      de.Click.Success = "function(response, opts) { \n" +
+                                                        "}";
+                                  })
                         ))
                   );
                   items.Add(Html.X().Button()
@@ -186,8 +153,7 @@
                                             "                       signedModelJson: opts \n" +
                                             "                   }, \n" +
                                             "                   success: function(result) {\n" +
-                                            "                       updateSignMask('All finished!');" +
-                                            "                        \n" +
+                                            "                       updateSignMask('All finished!'); \n" +
                                             "                       Ext.net.directRequest({ \n" +
                                             "                           url:baseURL + 'EInvoice/EInvoice/_Maintenance?id='+ #{Id}.getValue(), \n" +
                                             "                           method:'GET', \n" +
@@ -209,13 +175,15 @@
                                             "       },\n" +
                                             "       failure: function(response, opts) {\n" +
                                             "           Ext.net.Mask.hide(); \n" +
-                                            "           var alert = Ext.Msg.alert('Status', 'Sign invoice number fail : ' + opts.errorMessage, Ext.emptyFn); \n" +
-                                            "           Ext.defer(function(){ alert.toFront(); }, 1500); \n " +
+                                            "           if(opts.errorMessage == '') \n" +
+                                            "               opts.errorMessage = 'Unknow error or EHoadon.exe tool not run !!!! <br>PLEASE RUN EHoadon.exe tool before sign'; \n" +
+                                            "           var alert = Ext.Msg.alert('Error', 'Sign XML fail : ' + opts.errorMessage, Ext.emptyFn); \n" +
+                                            "           Ext.defer(function(){ alert.toFront(); }, 1000); \n " +
                                             "       }\n" +
                                             "   })\n" +
                                             "}";
                       })
-                   );
+                  );
               })
           )
           .HtmlBin(
@@ -760,7 +728,7 @@
                                               .Renderer("EInvoice.VatRenderer")
                                               .EditorOptions(action =>
                                               {
-                                                      action.Listeners.StartEdit.Delay = 500;
+                                                  action.Listeners.StartEdit.Delay = 500;
                                               }));
                                       cols.Columns.Add(
                                           Html.X().ColumnFor(Model.EInvoiceLines, m => m.VATAmount).ToBuilder<Column.Builder>().ID("EInvoiceLineVatAmountCol").Sortable(false).Width(125)
@@ -835,6 +803,20 @@
                       );
                   })
                 )
+                .Listeners(ls => {
+                    ls.Close.Handler = "function() { \n" +
+                                    "    if(App.EInvoiceList == null || #{Id}.getValue() == '') \n" +
+                                    "        return; \n" +
+                                    "    App.EInvoiceList.getSelectionModel().deselectAll(); \n" +
+                                    "    App.EInvoiceList.getStore().load({ \n" +
+                                    "        callback : function() { \n" +
+                                    "            var record = App.EInvoiceList.store.getById(#{Id}.getValue()); \n" +
+                                    "            var index = App.EInvoiceList.store.indexOf(record); \n" +
+                                    "            App.EInvoiceList.getSelectionModel().select(index, true); \n" +
+                                    "        } \n" +
+                                    "    });\n" +
+                                    "}";
+                })
                 .Buttons(buttons =>
                 {
                     buttons.Add(Html.X().Button()

@@ -13,6 +13,6 @@ namespace MyERP.DataAccess.Enum
         [System.ComponentModel.DataAnnotations.Display(Name = "Released", Order = 2)]
         Released = 1,
         [System.ComponentModel.DataAnnotations.Display(Name = "Signed", Order = 3)]
-        Signed = 1,
+        Signed = 2,
     }
 }

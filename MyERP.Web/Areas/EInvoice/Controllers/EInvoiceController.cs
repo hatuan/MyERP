@@ -607,6 +607,11 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     return this.Direct(false, "Header not found!Please check");
                 }
 
+                if(entity.Status != (byte)EInvoiceDocumentStatusType.Draft)
+                {
+                    return this.Direct(false, "Cannot delete document which had been released or signed!!");
+                }
+
                 using (var dbContextTransaction = this.repository.DataContext.Database.BeginTransaction())
                 {
                     try
@@ -875,7 +880,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             return this.Direct(new { LineNo = lineNumber });
         }
 
-        public ActionResult SetInvoiceNumber(string id, string version)
+        public ActionResult ReplaceInvoice(string id, string version)
         {
             if (String.IsNullOrEmpty(id))
                 throw new ArgumentNullException(nameof(id));
@@ -889,12 +894,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
 
             try
             {
-                string reservationCode = MyERP.Web.Others.Functions.RandomString();
-                while (!(repository as EInvoiceHeaderRepository).CheckReservationCode(reservationCode))
-                {
-                    reservationCode = MyERP.Web.Others.Functions.RandomString();
-                }
-                (repository as EInvoiceHeaderRepository).SetEInvNumber(_id, ref _version, (long)user.ProviderUserKey, reservationCode);
+
             }
             catch (System.Data.Entity.Core.ObjectNotFoundException ex)
             {
@@ -905,25 +905,24 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 return this.Direct(false, ex.Message);
             }
 
-            return this.Direct(new { Id = _id });
+            return this.Direct();
         }
 
-        public ActionResult SigningInvoice(string id, string version)
+        public ActionResult CancelInvoice(string id, string version)
         {
             if (string.IsNullOrEmpty(id))
                 throw new ArgumentNullException(nameof(id));
             if (string.IsNullOrEmpty(version))
                 throw new ArgumentNullException(nameof(version));
 
+            MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
             var _id = Convert.ToInt64(id);
             var _version = Convert.ToInt64(version);
 
             try
             {
-                string originXML = (repository as EInvoiceHeaderRepository).GetXmlInvoiceInfo(_id, _version);
-                string base64OriginXML = Convert.ToBase64String(Encoding.UTF8.GetBytes(originXML));
-                
-                return this.Direct(new { OriginXML = base64OriginXML, SerialNumber = "00C62199148ACD49FAAC90AD8E0013B6E2", PIN = "12345678" });
+               
+                return this.Direct();
             }
             catch (System.Data.Entity.Core.ObjectNotFoundException ex)
             {
@@ -945,6 +944,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
 
             var _id = Convert.ToInt64(id);
             var _version = Convert.ToInt64(version);
+            var _invoiceNumber = "";
             string originXML, base64OriginXML;
             try
             {
@@ -953,7 +953,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 {
                     reservationCode = MyERP.Web.Others.Functions.RandomString();
                 }
-                (repository as EInvoiceHeaderRepository).SetEInvNumber(_id, ref _version, (long)user.ProviderUserKey, reservationCode);
+                _invoiceNumber = (repository as EInvoiceHeaderRepository).SetEInvNumber(_id, ref _version, (long)user.ProviderUserKey, reservationCode);
 
                 originXML = (repository as EInvoiceHeaderRepository).GetXmlInvoiceInfo(_id, _version);
                 base64OriginXML = Convert.ToBase64String(Encoding.UTF8.GetBytes(originXML));
@@ -967,6 +967,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 return this.Direct(false, ex.Message);
             }
 
+            X.GetCmp<Hidden>("InvoiceNumber").SetValue(_invoiceNumber);
             X.GetCmp<Hidden>("Version").SetValue(_version);
             X.GetCmp<ComboBox>("Status").SetValue(EInvoiceDocumentStatusType.Released);
             return this.Direct(new {OriginXML = base64OriginXML, SerialNumber = "00C62199148ACD49FAAC90AD8E0013B6E2", PIN = "12345678" });
@@ -980,13 +981,24 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             {
                 Culture = Thread.CurrentThread.CurrentCulture
             });
+            MyERPMembershipUser user = (MyERPMembershipUser)Membership.GetUser(User.Identity.Name, true);
+
             var _id = Convert.ToInt64(id);
+            long _signedId = 0;
+            try
+            {
+                _signedId = (repository as EInvoiceHeaderRepository).PublicSignedInvoice(_id, signedXMLDTO, (long)user.ProviderUserKey);
+            }
+            catch (System.Data.Entity.Core.ObjectNotFoundException ex)
+            {
+                return this.Direct(false, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return this.Direct(false, ex.Message);
+            }
 
-            Thread.Sleep(10000);
-
-            //X.Js.Call("updateSignMask", "All finished!");
-            //X.Js.AddScript("Ext.defer(Ext.net.Mask.hide, 1000);");
-            return this.Direct(new { Id = _id });
+            return this.Direct(new { Id = _signedId });
         }
 
     }

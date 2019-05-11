@@ -1130,6 +1130,11 @@
           <Property Name="contact_name" Type="nvarchar" MaxLength="32" />
           <Property Name="mobilephone" Type="varchar" MaxLength="32" />
           <Property Name="tax_authorities_id" Type="bigint" />
+          <Property Name="uuid" Type="char" Nullable="false" MaxLength="36">
+            <Documentation>
+              <Summary>Use to lookup ClientId when access from outsite like api ...</Summary>
+            </Documentation>
+          </Property>
         </EntityType>
         <EntityType Name="currency">
           <Key>
@@ -2434,7 +2439,7 @@
           <Property Name="buyer_bank_account" Type="nvarchar" MaxLength="20" />
           <Property Name="seller_legal_name" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="seller_tax_code" Type="nvarchar" Nullable="false" MaxLength="14" />
-          <Property Name="seller_address_line" Type="nvarchar" MaxLength="255" />
+          <Property Name="seller_address_line" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="seller_postal_code" Type="nvarchar" MaxLength="10" />
           <Property Name="seller_district_name" Type="nvarchar" MaxLength="50" />
           <Property Name="seller_city_name" Type="nvarchar" MaxLength="50" />
@@ -2511,7 +2516,6 @@
           </Key>
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="form_type_id" Type="bigint" Nullable="false" />
-          <Property Name="form_release_no" Type="int" Nullable="false" />
           <Property Name="original_invoice_id" Type="varchar" MaxLength="32" />
           <Property Name="invoice_type" Type="nvarchar" Nullable="false" MaxLength="6" />
           <Property Name="template_code" Type="nvarchar" Nullable="false" MaxLength="11" />
@@ -2519,8 +2523,8 @@
           <Property Name="invoice_number" Type="nvarchar" Nullable="false" MaxLength="7" />
           <Property Name="invoice_name" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="invoice_issued_date" Type="datetime2" Nullable="false" />
-          <Property Name="signed_date" Type="datetime2" Nullable="false" />
-          <Property Name="submitted_date" Type="datetime2" Nullable="false" />
+          <Property Name="signed_date" Type="datetime2" />
+          <Property Name="submitted_date" Type="datetime2" />
           <Property Name="contract_number" Type="nvarchar" MaxLength="50" />
           <Property Name="contract_date" Type="datetime2" />
           <Property Name="currency_code" Type="nvarchar" Nullable="false" MaxLength="3" />
@@ -2533,37 +2537,37 @@
           <Property Name="buyer_legal_name" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="buyer_tax_code" Type="nvarchar" Nullable="false" MaxLength="14" />
           <Property Name="buyer_address_line" Type="nvarchar" Nullable="false" MaxLength="255" />
-          <Property Name="buyer_postal_code" Type="nvarchar" Nullable="false" MaxLength="10" />
-          <Property Name="buyer_district_name" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="buyer_city_name" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="buyer_country_code" Type="nvarchar" Nullable="false" MaxLength="2" />
-          <Property Name="buyer_phone_number" Type="nvarchar" Nullable="false" MaxLength="20" />
-          <Property Name="buyer_fax_number" Type="nvarchar" Nullable="false" MaxLength="20" />
-          <Property Name="buyer_email" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="buyer_bank_name" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="buyer_bank_account" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="buyer_postal_code" Type="nvarchar" MaxLength="10" />
+          <Property Name="buyer_district_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="buyer_city_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="buyer_country_code" Type="nvarchar" MaxLength="2" />
+          <Property Name="buyer_phone_number" Type="nvarchar" MaxLength="20" />
+          <Property Name="buyer_fax_number" Type="nvarchar" MaxLength="20" />
+          <Property Name="buyer_email" Type="nvarchar" MaxLength="50" />
+          <Property Name="buyer_bank_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="buyer_bank_account" Type="nvarchar" MaxLength="20" />
           <Property Name="seller_legal_name" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="seller_tax_code" Type="nvarchar" Nullable="false" MaxLength="14" />
           <Property Name="seller_address_line" Type="nvarchar" Nullable="false" MaxLength="255" />
-          <Property Name="seller_postal_code" Type="nvarchar" Nullable="false" MaxLength="10" />
-          <Property Name="seller_district_name" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="seller_city_name" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="seller_country_code" Type="nvarchar" Nullable="false" MaxLength="2" />
-          <Property Name="seller_phone_number" Type="nvarchar" Nullable="false" MaxLength="20" />
-          <Property Name="seller_fax_number" Type="nvarchar" Nullable="false" MaxLength="20" />
-          <Property Name="seller_email" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="seller_bank_name" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="seller_bank_account" Type="nvarchar" Nullable="false" MaxLength="20" />
-          <Property Name="seller_contact_person_name" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="seller_signed_person_name" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="seller_submitted_person_name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="seller_postal_code" Type="nvarchar" MaxLength="10" />
+          <Property Name="seller_district_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="seller_city_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="seller_country_code" Type="nvarchar" MaxLength="2" />
+          <Property Name="seller_phone_number" Type="nvarchar" MaxLength="20" />
+          <Property Name="seller_fax_number" Type="nvarchar" MaxLength="20" />
+          <Property Name="seller_email" Type="nvarchar" MaxLength="50" />
+          <Property Name="seller_bank_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="seller_bank_account" Type="nvarchar" MaxLength="20" />
+          <Property Name="seller_contact_person_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="seller_signed_person_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="seller_submitted_person_name" Type="nvarchar" MaxLength="100" />
           <Property Name="payment_method_name" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="sum_of_total_line_amount_without_vat" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_amount_without_vat" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_vat_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
-          <Property Name="total_amount_with_vat" Type="decimal" Precision="38" Scale="20" />
+          <Property Name="total_amount_with_vat" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_amount_with_vat_frn" Type="decimal" Nullable="false" Precision="38" Scale="20" />
-          <Property Name="total_amount_with_vat_in_words" Type="decimal" Nullable="false" Precision="38" Scale="20" />
+          <Property Name="total_amount_with_vat_in_words" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="is_total_amount_pos" Type="bit" />
           <Property Name="is_total_vat_amount_pos" Type="bit" />
           <Property Name="discount_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
@@ -2586,6 +2590,7 @@
           <Property Name="logo" Type="nvarchar(max)" />
           <Property Name="watermark" Type="nvarchar(max)" />
           <Property Name="reservation_code" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="einvoice_header_id" Type="bigint" Nullable="false" />
         </EntityType>
         <Association Name="FK_client_user_profile">
           <End Role="user" Type="MyERP.DataAccess.Store.user" Multiplicity="0..1" />
@@ -6720,6 +6725,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="d3b7a0f4-9e7e-4950-9844-209f002a2989" />
+          <Property Name="UUID" Type="String" Nullable="false" MaxLength="36" FixedLength="true" ed:ValidateMaxLength="36" ed:ValidateRequired="true" ed:Guid="7eac2ad9-4203-4a73-8c75-f97f4fb1f212">
+            <Documentation>
+              <Summary>Use to lookup ClientId when access from outsite like api ...</Summary>
+            </Documentation>
+          </Property>
           <Property Name="Description" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="d0a40861-7b0f-4a6e-8fe6-13ef2bc7e477" />
           <Property Name="IsActivated" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="0a7fa17b-be3c-457e-84a2-feccd5f4334f" />
           <Property Name="CultureId" Type="String" MaxLength="8" ed:ValidateMaxLength="8" ed:ValidateRequired="false" ed:Guid="a4a18b92-4cc8-4768-b6c0-3d23f4baae2b" />
@@ -8303,7 +8313,7 @@
           <Property Name="BuyerBankAccount" Type="String" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="false" ed:Guid="33644eee-868e-4447-b9d7-a6655092995d" />
           <Property Name="SellerLegalName" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="7cd21afb-2183-4f87-88cf-59890fd79077" />
           <Property Name="SellerTaxCode" Type="String" Nullable="false" MaxLength="14" Unicode="true" ed:ValidateMaxLength="14" ed:ValidateRequired="true" ed:Guid="3f026b2e-9725-4948-8232-9f7b5d4ed7ca" />
-          <Property Name="SellerAddressLine" Type="String" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="dce9c512-61b4-4d36-b035-1e800e74fa50" />
+          <Property Name="SellerAddressLine" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="dce9c512-61b4-4d36-b035-1e800e74fa50" />
           <Property Name="SellerPostalCode" Type="String" MaxLength="10" Unicode="true" ed:ValidateMaxLength="10" ed:ValidateRequired="false" ed:Guid="5e200ea5-a638-4f07-8ee9-0f38b973d4f5" />
           <Property Name="SellerDistrictName" Type="String" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="dc8db7f6-c963-451f-93aa-a9edd5e06adf" />
           <Property Name="SellerCityName" Type="String" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="9fb44b7a-aef1-42b5-9e69-bc579539bb32" />
@@ -8390,8 +8400,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="6d0a6f57-3bd3-4f4f-aa0b-a66a7b9c5356" />
+          <Property Name="EInvoiceHeaderId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="97a20403-9ad1-491b-862b-0f4da5d6e842" />
           <Property Name="FormTypeId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e0398762-54b8-4308-844e-9094d722846d" />
-          <Property Name="FormReleaseNo" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="a3e1a97e-8580-436f-b9cd-a4ec445685ee" />
           <Property Name="OriginalEInvoiceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="7f2dcfff-d646-4fe0-99b6-c1d4a27d06ea" />
           <Property Name="OriginalInvoiceId" Type="String" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="false" ed:Guid="1668d955-a5ee-4c2d-9e6e-e56c01033214" />
           <Property Name="OriginalInvoiceIssueDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="aee64ef3-51bd-4387-903e-ffac206b3f10" />
@@ -8401,8 +8411,8 @@
           <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="7" Unicode="true" ed:ValidateMaxLength="7" ed:ValidateRequired="true" ed:Guid="41df64b0-6558-4d5a-8a0d-7bedcfdd550e" />
           <Property Name="InvoiceName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="aa437af8-427e-42d3-80c7-fe5beb347066" />
           <Property Name="InvoiceIssuedDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="8d95f438-add2-4c6f-bc32-cca07e55b438" />
-          <Property Name="SignedDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="e6f0bb05-4439-4708-80be-e35773286404" />
-          <Property Name="SubmittedDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="fb76cf71-1fae-4017-a256-b3cb008e441b" />
+          <Property Name="SignedDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="e6f0bb05-4439-4708-80be-e35773286404" />
+          <Property Name="SubmittedDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="fb76cf71-1fae-4017-a256-b3cb008e441b" />
           <Property Name="ContractNumber" Type="String" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="c97d6e59-deaa-4c59-933c-0844bff74e17" />
           <Property Name="ContractDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="dcbadc03-e230-4a72-99d0-9d8e5d66c376" />
           <Property Name="Description" Type="String" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="false" ed:Guid="6270d919-b86a-448b-8d58-73a7b199793c" />
@@ -8416,39 +8426,39 @@
           <Property Name="BuyerLegalName" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="9f326d7c-594e-48e3-a633-7dc14efafaed" />
           <Property Name="BuyerTaxCode" Type="String" Nullable="false" MaxLength="14" Unicode="true" ed:ValidateMaxLength="14" ed:ValidateRequired="true" ed:Guid="a2c67416-f4e3-442a-98b4-9613567bbcb0" />
           <Property Name="BuyerAddressLine" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="6a088f11-8c3f-4e30-9ff8-3ca42f640ebd" />
-          <Property Name="BuyerPostalCode" Type="String" Nullable="false" MaxLength="10" Unicode="true" ed:ValidateMaxLength="10" ed:ValidateRequired="true" ed:Guid="38ec14b4-88dd-4b18-8548-76ad7b7c6d7e" />
-          <Property Name="BuyerDistrictName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="e9f74d9a-6dd8-4e08-892b-c00ae675aa32" />
-          <Property Name="BuyerCityName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="b84c9f84-1fc6-45a7-86a9-88316afec1ca" />
-          <Property Name="BuyerCountryCode" Type="String" Nullable="false" MaxLength="2" Unicode="true" ed:ValidateMaxLength="2" ed:ValidateRequired="true" ed:Guid="41595113-04da-402c-ba00-8e3461458ac7" />
-          <Property Name="BuyerPhoneNumber" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="37a96766-5d5b-44d0-af42-8b7df4e37353" />
-          <Property Name="BuyerFaxNumber" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="26cabf20-e527-4225-945a-90388dea9369" />
-          <Property Name="BuyerEmail" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="8fde4568-6c76-4f71-a05c-581f08b86a74" />
-          <Property Name="BuyerBankName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="0c409c04-fe74-43a0-9e77-001bca215a55" />
-          <Property Name="BuyerBankAccount" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="5eed8c5f-d500-4642-ace5-493ffc012a76" />
+          <Property Name="BuyerPostalCode" Type="String" MaxLength="10" Unicode="true" ed:ValidateMaxLength="10" ed:ValidateRequired="false" ed:Guid="38ec14b4-88dd-4b18-8548-76ad7b7c6d7e" />
+          <Property Name="BuyerDistrictName" Type="String" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="e9f74d9a-6dd8-4e08-892b-c00ae675aa32" />
+          <Property Name="BuyerCityName" Type="String" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="b84c9f84-1fc6-45a7-86a9-88316afec1ca" />
+          <Property Name="BuyerCountryCode" Type="String" MaxLength="2" Unicode="true" ed:ValidateMaxLength="2" ed:ValidateRequired="false" ed:Guid="41595113-04da-402c-ba00-8e3461458ac7" />
+          <Property Name="BuyerPhoneNumber" Type="String" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="false" ed:Guid="37a96766-5d5b-44d0-af42-8b7df4e37353" />
+          <Property Name="BuyerFaxNumber" Type="String" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="false" ed:Guid="26cabf20-e527-4225-945a-90388dea9369" />
+          <Property Name="BuyerEmail" Type="String" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="8fde4568-6c76-4f71-a05c-581f08b86a74" />
+          <Property Name="BuyerBankName" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="0c409c04-fe74-43a0-9e77-001bca215a55" />
+          <Property Name="BuyerBankAccount" Type="String" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="false" ed:Guid="5eed8c5f-d500-4642-ace5-493ffc012a76" />
           <Property Name="SellerLegalName" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="6ae2711f-be58-4aec-a9cd-37a24bf677cd" />
           <Property Name="SellerTaxCode" Type="String" Nullable="false" MaxLength="14" Unicode="true" ed:ValidateMaxLength="14" ed:ValidateRequired="true" ed:Guid="11c3ad49-9529-4fb9-bb14-7afa024ce940" />
           <Property Name="SellerAddressLine" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="b2c5bf7a-867c-4671-91f5-6e0a244a48e1" />
-          <Property Name="SellerPostalCode" Type="String" Nullable="false" MaxLength="10" Unicode="true" ed:ValidateMaxLength="10" ed:ValidateRequired="true" ed:Guid="68eb0b34-e410-4b2b-896a-4865c4c41f49" />
-          <Property Name="SellerDistrictName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="c1a64656-461f-4009-9baf-a1fce5d30b51" />
-          <Property Name="SellerCityName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="153e406b-229e-470f-a9d0-824251137bc7" />
-          <Property Name="SellerCountryCode" Type="String" Nullable="false" MaxLength="2" Unicode="true" ed:ValidateMaxLength="2" ed:ValidateRequired="true" ed:Guid="aa9fc0f9-1946-47ee-af24-55fd7cf72d17" />
-          <Property Name="SellerPhoneNumber" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="965b3d56-a380-4df7-a85c-4f26b2a0fe52" />
-          <Property Name="SellerFaxNumber" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="85ae336a-537e-4f4a-8f8f-d81967a83e0f" />
-          <Property Name="SellerEmail" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="0a4b85f5-35e5-4178-a7eb-5072af44966f" />
-          <Property Name="SellerBankName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="f29883b4-47ba-4415-a863-f1a758636214" />
-          <Property Name="SellerBankAccount" Type="String" Nullable="false" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="true" ed:Guid="6bb500f5-a8a1-43f9-9823-35b504eefb2d" />
-          <Property Name="SellerContactPersonName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="55a2280d-f85e-4144-8ee9-85869a7dd0a8" />
-          <Property Name="SellerSignedPersonName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="177275b3-92d5-4011-853a-56778c066434" />
-          <Property Name="SellerSubmittedPersonName" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="d0de8ae8-61ab-4341-a7f9-72adefae1290" />
+          <Property Name="SellerPostalCode" Type="String" MaxLength="10" Unicode="true" ed:ValidateMaxLength="10" ed:ValidateRequired="false" ed:Guid="68eb0b34-e410-4b2b-896a-4865c4c41f49" />
+          <Property Name="SellerDistrictName" Type="String" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="c1a64656-461f-4009-9baf-a1fce5d30b51" />
+          <Property Name="SellerCityName" Type="String" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="153e406b-229e-470f-a9d0-824251137bc7" />
+          <Property Name="SellerCountryCode" Type="String" MaxLength="2" Unicode="true" ed:ValidateMaxLength="2" ed:ValidateRequired="false" ed:Guid="aa9fc0f9-1946-47ee-af24-55fd7cf72d17" />
+          <Property Name="SellerPhoneNumber" Type="String" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="false" ed:Guid="965b3d56-a380-4df7-a85c-4f26b2a0fe52" />
+          <Property Name="SellerFaxNumber" Type="String" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="false" ed:Guid="85ae336a-537e-4f4a-8f8f-d81967a83e0f" />
+          <Property Name="SellerEmail" Type="String" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="false" ed:Guid="0a4b85f5-35e5-4178-a7eb-5072af44966f" />
+          <Property Name="SellerBankName" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="f29883b4-47ba-4415-a863-f1a758636214" />
+          <Property Name="SellerBankAccount" Type="String" MaxLength="20" Unicode="true" ed:ValidateMaxLength="20" ed:ValidateRequired="false" ed:Guid="6bb500f5-a8a1-43f9-9823-35b504eefb2d" />
+          <Property Name="SellerContactPersonName" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="55a2280d-f85e-4144-8ee9-85869a7dd0a8" />
+          <Property Name="SellerSignedPersonName" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="177275b3-92d5-4011-853a-56778c066434" />
+          <Property Name="SellerSubmittedPersonName" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="d0de8ae8-61ab-4341-a7f9-72adefae1290" />
           <Property Name="PaymentMethodName" Type="String" Nullable="false" MaxLength="50" Unicode="true" ed:ValidateMaxLength="50" ed:ValidateRequired="true" ed:Guid="e838c535-53d4-4d19-a0d3-09eb68e335c3" />
           <Property Name="SumOfTotalLineAmountWithoutVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="01e90bcf-5c94-46c6-a10d-c348ad053ff4" />
           <Property Name="TotalAmountWithoutVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="0ec8f309-38b0-415d-ab7c-5ac4b6beb51d" />
           <Property Name="IsTotalAmountWithoutVATPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="88185a00-a83b-43dd-b080-d2b57a437a98" />
           <Property Name="TotalVATAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="b6ae906e-e353-41bc-9e72-a0f81413cba3" />
           <Property Name="IsTotalVATAmountPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="8eeaf73c-c444-43c6-b5a6-5ab8acc827dd" />
-          <Property Name="TotalAmountWithVAT" Type="Decimal" Precision="38" Scale="20" ed:ValidateRequired="false" ed:Guid="fecbf863-56e2-4e96-b8fb-7ee255508a7b" />
+          <Property Name="TotalAmountWithVAT" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="fecbf863-56e2-4e96-b8fb-7ee255508a7b" />
           <Property Name="TotalAmountWithVATFrn" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="648dbb1a-ab8a-42a6-87b4-cc4bec937f4c" />
-          <Property Name="TotalAmountWithVATInWords" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="eb72051f-59e4-40e3-8342-27fa13c8f8b5" />
+          <Property Name="TotalAmountWithVATInWords" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="eb72051f-59e4-40e3-8342-27fa13c8f8b5" />
           <Property Name="IsTotalAmountPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="5d60ce2b-652c-43bc-b48a-455df086c877" />
           <Property Name="DiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="556a8ead-6e7f-430e-af69-42fd136714b0" />
           <Property Name="IsDiscountAmtPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="3ac549e5-b726-47d5-a189-3f09b22cc05a" />
@@ -11558,6 +11568,7 @@
                 <ScalarProperty Name="ContactName" ColumnName="contact_name" />
                 <ScalarProperty Name="Mobilephone" ColumnName="mobilephone" />
                 <ScalarProperty Name="TaxAuthoritiesId" ColumnName="tax_authorities_id" />
+                <ScalarProperty Name="UUID" ColumnName="uuid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -12884,7 +12895,6 @@
               <MappingFragment StoreEntitySet="einvoice_signeds">
                 <ScalarProperty Name="Id" ColumnName="id" />
                 <ScalarProperty Name="FormTypeId" ColumnName="form_type_id" />
-                <ScalarProperty Name="FormReleaseNo" ColumnName="form_release_no" />
                 <ScalarProperty Name="OriginalInvoiceId" ColumnName="original_invoice_id" />
                 <ScalarProperty Name="InvoiceType" ColumnName="invoice_type" />
                 <ScalarProperty Name="TemplateCode" ColumnName="template_code" />
@@ -12959,6 +12969,7 @@
                 <ScalarProperty Name="Logo" ColumnName="logo" />
                 <ScalarProperty Name="Watermark" ColumnName="watermark" />
                 <ScalarProperty Name="ReservationCode" ColumnName="reservation_code" />
+                <ScalarProperty Name="EInvoiceHeaderId" ColumnName="einvoice_header_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

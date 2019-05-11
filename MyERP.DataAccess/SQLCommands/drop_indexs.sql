@@ -56,6 +56,12 @@ BEGIN
 END
 GO
 
+IF EXISTS(SELECT * FROM sys.indexes indexes INNER JOIN sys.objects objects ON indexes.object_id = objects.object_id WHERE indexes.name ='idx_client_uuid' AND objects.name = 'client')
+BEGIN
+	DROP INDEX idx_client_uuid ON dbo.client
+END
+GO
+
 /**************************** ORGANIZATION ********************************************/
 IF EXISTS(SELECT * FROM sys.indexes indexes INNER JOIN sys.objects objects ON indexes.object_id = objects.object_id WHERE indexes.name ='idx_organization_code' AND objects.name = 'organization')
 BEGIN
@@ -828,6 +834,16 @@ END
 IF EXISTS(SELECT * FROM sys.indexes indexes INNER JOIN sys.objects objects ON indexes.object_id = objects.object_id WHERE indexes.name ='idx_einvoice_signed_buyer_tax_code' AND objects.name = 'einvoice_signed')
 BEGIN
 	DROP INDEX idx_einvoice_signed_buyer_tax_code ON dbo.einvoice_signed 
+END
+
+IF EXISTS(SELECT * FROM sys.indexes indexes INNER JOIN sys.objects objects ON indexes.object_id = objects.object_id WHERE indexes.name ='idx_einvoice_signed_seller_tax_code' AND objects.name = 'einvoice_signed')
+BEGIN
+	DROP INDEX idx_einvoice_signed_seller_tax_code ON dbo.einvoice_signed 
+END
+
+IF EXISTS(SELECT * FROM sys.indexes indexes INNER JOIN sys.objects objects ON indexes.object_id = objects.object_id WHERE indexes.name ='idx_einvoice_signed_reservation_code' AND objects.name = 'einvoice_signed')
+BEGIN
+	DROP INDEX idx_einvoice_signed_reservation_code ON dbo.einvoice_signed 
 END
 
 /**************************** general_journal_header ********************************************/

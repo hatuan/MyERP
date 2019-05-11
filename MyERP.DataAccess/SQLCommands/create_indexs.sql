@@ -58,6 +58,12 @@ BEGIN
 END
 GO
 
+IF NOT EXISTS(SELECT * FROM sys.indexes indexes INNER JOIN sys.objects objects ON indexes.object_id = objects.object_id WHERE indexes.name ='idx_client_uuid' AND objects.name = 'client')
+BEGIN
+	CREATE UNIQUE INDEX idx_client_uuid ON dbo.client (uuid)
+END
+GO
+
 /**************************** ORGANIZATION ********************************************/
 IF NOT EXISTS(SELECT * FROM sys.indexes indexes INNER JOIN sys.objects objects ON indexes.object_id = objects.object_id WHERE indexes.name ='idx_organization_code' AND objects.name = 'organization')
 BEGIN
@@ -829,6 +835,16 @@ END
 IF NOT EXISTS(SELECT * FROM sys.indexes indexes INNER JOIN sys.objects objects ON indexes.object_id = objects.object_id WHERE indexes.name ='idx_einvoice_signed_buyer_tax_code' AND objects.name = 'einvoice_signed')
 BEGIN
 	CREATE INDEX idx_einvoice_signed_buyer_tax_code ON dbo.einvoice_signed (buyer_tax_code)
+END
+
+IF NOT EXISTS(SELECT * FROM sys.indexes indexes INNER JOIN sys.objects objects ON indexes.object_id = objects.object_id WHERE indexes.name ='idx_einvoice_signed_seller_tax_code' AND objects.name = 'einvoice_signed')
+BEGIN
+	CREATE INDEX idx_einvoice_signed_seller_tax_code ON dbo.einvoice_signed (seller_tax_code)
+END
+
+IF NOT EXISTS(SELECT * FROM sys.indexes indexes INNER JOIN sys.objects objects ON indexes.object_id = objects.object_id WHERE indexes.name ='idx_einvoice_signed_reservation_code' AND objects.name = 'einvoice_signed')
+BEGIN
+	CREATE UNIQUE INDEX idx_einvoice_signed_reservation_code ON dbo.einvoice_signed (reservation_code)
 END
 
 /**************************** general_journal_header ********************************************/

@@ -785,7 +785,7 @@
                     </Size>
                     <Enabled>false</Enabled>
                     <Oid xsi:type="SchemaModelOID">
-                      <Path>c8282de0-cb95-45bd-a479-812c696d7ad7</Path>
+                      <Path>90f9d685-2537-4dec-aba5-5d67d5433946</Path>
                       <TypeName>EntityDeveloper.EntityFramework.EntityRelationProperty</TypeName>
                     </Oid>
                   </Model>
@@ -3616,7 +3616,7 @@
                       <Height>18 px</Height>
                     </Size>
                     <Oid xsi:type="SchemaModelOID">
-                      <Path>e0398762-54b8-4308-844e-9094d722846d</Path>
+                      <Path>97a20403-9ad1-491b-862b-0f4da5d6e842</Path>
                       <TypeName>EntityDeveloper.EntityFramework.EntityProperty</TypeName>
                     </Oid>
                   </Model>
@@ -3635,7 +3635,7 @@
                       <Height>18 px</Height>
                     </Size>
                     <Oid xsi:type="SchemaModelOID">
-                      <Path>a3e1a97e-8580-436f-b9cd-a4ec445685ee</Path>
+                      <Path>e0398762-54b8-4308-844e-9094d722846d</Path>
                       <TypeName>EntityDeveloper.EntityFramework.EntityProperty</TypeName>
                     </Oid>
                   </Model>
@@ -5191,8 +5191,8 @@
           <ScaleMode>Free</ScaleMode>
           <Scale>0.75</Scale>
           <Location>
-            <X>-1141.33333333333 px</X>
-            <Y>824 px</Y>
+            <X>-954.666666666667 px</X>
+            <Y>773.333333333333 px</Y>
           </Location>
         </ViewPort>
         <Oid xsi:type="SchemaModelOID">

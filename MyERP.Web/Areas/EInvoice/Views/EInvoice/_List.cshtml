@@ -84,6 +84,7 @@
                               .Fields(
                                   new ModelField("Id", ModelFieldType.Int),
                                   new ModelField("OrganizationCode", ModelFieldType.String),
+                                  new ModelField("InvoiceNumber", ModelFieldType.String),
                                   new ModelField("InvoiceIssuedDate", ModelFieldType.Date),
                                   new ModelField("BuyerCode", ModelFieldType.String),
                                   new ModelField("BuyerDisplayName", ModelFieldType.String),
@@ -136,6 +137,7 @@
               )
               .ColumnModel(
                   Html.X().Column().Text("Org").DataIndex("OrganizationCode").Width(75).Locked(true),
+                  Html.X().Column().Text("Number").DataIndex("InvoiceNumber").MinWidth(85).Locked(true),
                   Html.X().DateColumn().Text("Date").DataIndex("InvoiceIssuedDate").Width(100).Locked(true).Format("dd/MM/yyyy"),
                   Html.X().Column().Text("Buyer Code").DataIndex("BuyerCode").MinWidth(85),
                   Html.X().Column().Text("Buyer Display Name").DataIndex("BuyerDisplayName").MinWidth(200),
