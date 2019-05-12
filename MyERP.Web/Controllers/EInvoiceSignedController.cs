@@ -43,6 +43,7 @@ namespace MyERP.Web.Controllers
 
         [AllowAnonymous]
         [HttpPost]
+        [Throttle(Name = "EInvoiceSignedSearchThrottle", Message = "You must wait {n} seconds before search again.", Seconds = 2)]
         public ActionResult Search(string sellerTaxCode, string clientUUID, string buyerTaxCode, string reservationCode)
         {
             if(String.IsNullOrWhiteSpace(sellerTaxCode))
@@ -85,6 +86,7 @@ namespace MyERP.Web.Controllers
         }
 
         [AllowAnonymous]
+        [Throttle(Name = "EInvoiceSignedPrintThrottle", Message = "You must wait {n} seconds before accessing this url again.", Seconds = 2)]
         public ActionResult Print(string reservationCode)
         {
             if (String.IsNullOrEmpty(reservationCode))
@@ -93,7 +95,7 @@ namespace MyERP.Web.Controllers
             var searchResult = Session["SearchResult"] as List<EInvoiceSignedViewModel>;
             EInvoiceSignedViewModel printInvoice = searchResult.Where(x => x.ReservationCode == reservationCode).First();
             string renderName = $"eInvoiceRender_{printInvoice.ReservationCode}_{DateTime.Now:yyyyMMddhhmmss}";
-            string dirPath = Server.MapPath($"~/Resources/PrintReports/EInvoiceSigned/{renderName}");
+            string dirPath = Server.MapPath($"~/Resources/PrintReports/eInvoiceSigned/{renderName}");
             if (!System.IO.Directory.Exists(dirPath))
             {
                 System.IO.Directory.CreateDirectory(dirPath);
@@ -102,6 +104,12 @@ namespace MyERP.Web.Controllers
             try
             {
                 (repository as EInvoiceSignedRepository).CreateHtmlFile(printInvoice, dirPath, fullHtmlPath);
+
+                if(System.IO.File.Exists(Server.MapPath($"~/Resources/images/signature.png")))
+                {
+                    System.IO.File.WriteAllBytes(dirPath + "/signature.png", System.IO.File.ReadAllBytes(Server.MapPath($"~/Resources/images/signature.png")));
+                }
+
             }
             catch (Exception ex)
             {

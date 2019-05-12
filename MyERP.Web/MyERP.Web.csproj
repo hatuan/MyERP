@@ -355,7 +355,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Resources\printReports\blank.txt" />
-    <Content Include="Resources\printReports\eInvoices\blank.txt" />
     <Content Include="Resources\reports\einvoices\01GTKT_002.xsl" />
     <Content Include="Resources\reports\einvoices\01GTKT_002.png" />
     <Content Include="Resources\reports\einvoices\01GTKT_001.png" />
@@ -665,6 +664,7 @@
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="odata\UsersController.partial.cs" />
     <Compile Include="odata\UsersController.cs" />
+    <Compile Include="ThrottleAttribute.cs" />
     <Compile Include="ValidateJsonAntiForgeryTokenAttribute.cs" />
   </ItemGroup>
   <ItemGroup>

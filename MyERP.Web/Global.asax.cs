@@ -100,7 +100,8 @@ namespace MyERP.Web
                 if (context.Session["Preference"] == null 
                     && HttpContext.Current.User.Identity.IsAuthenticated
                     && !Context.Request.Url.AbsoluteUri.ToLower().Contains("/user/preference")
-                    && !Context.Request.Url.AbsoluteUri.ToLower().Contains("/user/login"))
+                    && !Context.Request.Url.AbsoluteUri.ToLower().Contains("/user/login")
+                    && !Context.Request.Url.AbsoluteUri.ToLower().Contains("einvoicesigned"))
                 {
                     // You've handled the error, so clear it. Leaving the server in an error state can cause unintended side effects as the server continues its attempts to handle the error.
                     Server.ClearError();

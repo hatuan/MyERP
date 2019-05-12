@@ -1,6 +1,7 @@
 ﻿@model MyERP.Web.Models.EInvoiceSignedViewModel
 
 @{
+    ViewBag.Title = "MyERP";
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
 }
 
@@ -18,18 +19,16 @@
 @section main
 {
     @(Html.X().Viewport()
-        .Layout(LayoutType.Center)
+        .Layout(LayoutType.Fit)
         .Items(
             Html.X().Panel()
                 .ID("PanelSearchConditions")
-                .Width(1000)
-                .Height(600)
                 .BodyPadding(5)
-                .Layout(LayoutType.Anchor)
+                .Layout(LayoutType.VBox)
+                .LayoutConfig(config => config.Add(new VBoxLayoutConfig { Align = VBoxAlign.Stretch}))
                 .Items(
                     Html.X().FormPanel()
                         .ID("FormSearchConditions")
-                        .AnchorHorizontal("100%")
                         .Layout(LayoutType.Form)
                         .Items(
                             Html.X().Hidden().ID("SellerTaxCode").Value(ViewData["SellerTaxCode"]),
@@ -40,7 +39,6 @@
                                 .FieldLabel("Reservation Code")
                         ),
                     Html.X().Container()
-                        .AnchorHorizontal("100%")
                         .Layout(LayoutType.HBox)
                         .Padding(5)
                         .LayoutConfig(
@@ -74,29 +72,28 @@
                     Html.X().GridPanel().ID("grdSearchResults")
                         .Border(true)
                         .Padding(5)
-                        .AnchorHorizontal("100%")
-                        .AnchorVertical("75%")
+                        .Flex(1)
                         .TopBar(items =>
                         {
-                              items.Add(Html.X().Toolbar().Items(buttons =>
-                              {
-                                  buttons.Add(Html.X().Button()
-                                      .ID("btnView")
-                                      .Text("View")
-                                      .Icon(Icon.Printer)
-                                      .DirectEvents(de =>
-                                      {
-                                          de.Click.Url = Url.Action("Print");
-                                          de.Click.Before = "return #{grdSearchResults}.hasSelection();";
-                                          de.Click.ShowWarningOnFailure = true;
-                                          de.Click.EventMask.ShowMask = true;
-                                          de.Click.ExtraParams.Add(new Parameter("reservationCode", "#{grdSearchResults}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
-                                          de.Click.Success = "function(response, opts) { \n" +
-                                                             "  showHtmlPreviewReport(opts.result.FileName); \n" +
-                                                             "}";
-                                      })
-                                  );
-                              }));
+                            items.Add(Html.X().Toolbar().Items(buttons =>
+                            {
+                                buttons.Add(Html.X().Button()
+                                    .ID("btnView")
+                                    .Text("View")
+                                    .Icon(Icon.Printer)
+                                    .DirectEvents(de =>
+                                    {
+                                        de.Click.Url = Url.Action("Print");
+                                        de.Click.Before = "return #{grdSearchResults}.hasSelection();";
+                                        de.Click.ShowWarningOnFailure = true;
+                                        de.Click.EventMask.ShowMask = true;
+                                        de.Click.ExtraParams.Add(new Parameter("reservationCode", "#{grdSearchResults}.getSelectionModel().getSelected().getAt(0).getId()", ParameterMode.Raw));
+                                        de.Click.Success = "function(response, opts) { \n" +
+                                                           "  showHtmlPreviewReport(opts.result.FileName); \n" +
+                                                           "}";
+                                    })
+                                );
+                            }));
                         })
                         .Store(
                             Html.X().Store()
