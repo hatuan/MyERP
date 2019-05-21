@@ -799,7 +799,11 @@ namespace MyERP.Web
 
         public List<EInvoiceSignedViewModel> Search(string sellerTaxCode, string clientUUID, string buyerTaxCode, string reservationCode)
         {
-            var query = dataContext.EInvoiceSigneds.Include("Client").Where(x => x.Client.UUID == clientUUID && x.SellerTaxCode == sellerTaxCode);
+            var client = dataContext.Clients.Where(x => x.UUID == clientUUID).FirstOrDefault();
+            if(client == null)
+                throw new System.Data.Entity.Core.ObjectNotFoundException($"Client UUID {clientUUID} not found! Please check");
+
+            var query = dataContext.EInvoiceSigneds.Where(x => x.ClientId == client.Id && x.SellerTaxCode == sellerTaxCode);
             if (!String.IsNullOrWhiteSpace(buyerTaxCode))
                 query = query.Where(x => x.BuyerTaxCode == buyerTaxCode);
             if (!String.IsNullOrWhiteSpace(reservationCode))

@@ -5,17 +5,20 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.OData;
 using System.Data.Entity;
+using Microsoft.AspNet.OData;
 
 namespace MyERP.Web.Odata
 {
-    public abstract partial class BaseApiController<TEntity, TContext> : ODataController
+    public abstract partial class BaseOdataController<TEntity, TContext> : ODataController
         where TContext : DbContext, new()
         where TEntity : class
     {
         protected IBaseRepository<TEntity, TContext> repository;
 
+        [Route("")]
+        [HttpGet]
+        [EnableQuery]
         public virtual IQueryable<TEntity> Get()
         {
             var allEntities = repository.GetAll(User);
@@ -23,7 +26,7 @@ namespace MyERP.Web.Odata
         }
 
 
-		/// <summary>
+        /// <summary>
         /// Creates a new entity based on the provided data
         /// </summary>
         /// <param name="entity">The new entity to be created</param>
@@ -31,6 +34,8 @@ namespace MyERP.Web.Odata
         /// - Accepted when operation is successful or 
         /// - MethodNotAllowed if the operation is disabled for this entity or
         /// - BadRequest if the provided entity is NULL</returns>
+        [Route("")]
+        [HttpPost]
         public virtual HttpResponseMessage Post(TEntity entity)
         {
             if (entity == null)

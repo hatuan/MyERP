@@ -30,13 +30,13 @@ namespace MyERP.Web
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configuration.MessageHandlers.Add(new MethodOverrideHandler());
-            WebApiOdataConfig.Register(GlobalConfiguration.Configuration);
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             GlobalConfiguration.Configuration.Filters.Add(new MembershipHttpAuthorizeAttribute());
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-
+            
             ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
             ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
 
@@ -56,7 +56,7 @@ namespace MyERP.Web
 
         private bool IsWebApiOdataRequest()
         {
-            return HttpContext.Current.Request.AppRelativeCurrentExecutionFilePath.StartsWith(WebApiOdataConfig.UrlPrefixRelative);
+            return HttpContext.Current.Request.AppRelativeCurrentExecutionFilePath.StartsWith(WebApiConfig.UrlPrefixRelative);
         }
 
         protected void Session_Start(object sender, EventArgs e)

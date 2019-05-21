@@ -41,7 +41,7 @@ namespace MyERP.Web.Models
         public bool RememberMe { get; set; }
     }
 
-    public class RegisterViewModel
+    public class RegisterUserViewModel
     {
         [Required]
         [Display(Name = "User_Name", ResourceType = typeof(Resources.Resources))]

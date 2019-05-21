@@ -11,7 +11,7 @@ namespace MyERP.Web.Odata
     /// <summary>
     /// Web API Controller for Currencies entity defined in MyERP.DataAccess.EntitiesModel data model
     /// </summary>
-    public partial class CurrenciesController : BaseApiController<MyERP.DataAccess.Currency, MyERP.DataAccess.EntitiesModel>
+    public partial class CurrenciesController : BaseOdataController<MyERP.DataAccess.Currency, MyERP.DataAccess.EntitiesModel>
     {
         /// <summary>
         /// Constructor used by the Web API infrastructure.

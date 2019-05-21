@@ -1,20 +1,34 @@
 ﻿using System.Web.Http;
-using System.Web.Http.OData.Builder;
+using Microsoft.AspNet.OData.Builder;
+using Microsoft.AspNet.OData.Extensions;
+using Microsoft.OData.Edm;
 using MyERP.DataAccess;
 
 namespace MyERP.Web
 {
-    public static class WebApiOdataConfig
+    public static class WebApiConfig
     {
         public static string UrlPrefix { get { return "odata"; } }
         public static string UrlPrefixRelative { get { return "~/odata"; } }
 
         public static void Register(HttpConfiguration config)
         {
-            //var apiRoute =  config.Routes.MapHttpRoute(name: "DefaultApi",
-            //                               routeTemplate: "api/{controller}/{id}",
-            //                               defaults: new { id = RouteParameter.Optional });
+            // Web API routes
+            config.MapHttpAttributeRoutes();
 
+            // Map OData routes
+            //var odataRouter = config.MapODataServiceRoute("DefaultOdata", "odata", GetModel());
+            //odataRouter.DataTokens["Namespaces"] = new string[] { "MyERP.Web.Odata" };
+
+            // Add default route
+            var apiRouter = config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional });
+        }
+
+        public static IEdmModel GetModel()
+        {
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             builder.EntitySet<Client>("Clients");
             builder.EntitySet<Currency>("Currencies");
@@ -22,7 +36,7 @@ namespace MyERP.Web
             builder.EntitySet<Role>("Roles");
             builder.EntitySet<User>("Users");
             builder.EntitySet<UserInRole>("UserInRoles");
-            
+
             //var tutorsEntitySet = builder.EntitySet<Tutor>("Tutors");
             //tutorsEntitySet.EntityType.Ignore(s => s.UserName);
             //tutorsEntitySet.EntityType.Ignore(s => s.Password);
@@ -40,9 +54,7 @@ namespace MyERP.Web
             //generalJournalSetupOfOrganization.Parameter<Guid>("organizationKey");
             //generalJournalSetupOfOrganization.ReturnsFromEntitySet<GeneralJournalSetup>("GeneralJournalSetups");
 
-
-            config.Routes.MapODataRoute("DefaultOdata", "odata", builder.GetEdmModel());
-            config.EnableQuerySupport();
+            return builder.GetEdmModel();
         }
     }
 }

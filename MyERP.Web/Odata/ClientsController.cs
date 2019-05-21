@@ -12,7 +12,8 @@ namespace MyERP.Web.Odata
     /// <summary>
     /// Web API Controller for Clients entity defined in MyERP.DataAccess.EntitiesModel data model
     /// </summary>
-    public partial class ClientsController : BaseApiController<MyERP.DataAccess.Client, MyERP.DataAccess.EntitiesModel>
+    [RoutePrefix("odata/clients")]
+    public partial class ClientsController : BaseOdataController<MyERP.DataAccess.Client, MyERP.DataAccess.EntitiesModel>
     {
         /// <summary>
         /// Constructor used by the Web API infrastructure.

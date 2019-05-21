@@ -12,7 +12,7 @@ namespace MyERP.Web.Odata
     /// Web API Controller for Users entity defined in MyERP.DataAccess.EntitiesModel data model
     /// </summary>
     
-    public partial class RolesController : BaseApiController<MyERP.DataAccess.Role, MyERP.DataAccess.EntitiesModel>
+    public partial class RolesController : BaseOdataController<MyERP.DataAccess.Role, MyERP.DataAccess.EntitiesModel>
     {
         /// <summary>
         /// Constructor used by the Web API infrastructure.

@@ -143,6 +143,7 @@ namespace MyERP.Web.Models
 
         [Display(Name = "Seller Email")]
         [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public String SellerEmail { get; set; }
 
         [Display(Name = "Seller Bank Name")]

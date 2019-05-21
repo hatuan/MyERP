@@ -164,7 +164,7 @@ namespace MyERP.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterViewModel model)
+        public ActionResult Register(RegisterUserViewModel model)
         {
             if (ModelState.IsValid)
             {
