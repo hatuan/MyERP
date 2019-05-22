@@ -63,18 +63,19 @@ namespace MyERP.Web.Api
 
         [HttpGet]
         [AllowAnonymous]
-        public IHttpActionResult Active(string email, string user, string password)
+        public IHttpActionResult Register(string UUID)
         {
-            if (user != "cc2f1503-140e-4c0b-bb46-2340ab4387c5" || password != "0a8c5803-80b5-4418-8fea-ca39f4d45a14")
-                return Unauthorized();
+            //if (user != "cc2f1503-140e-4c0b-bb46-2340ab4387c5" || password != "0a8c5803-80b5-4418-8fea-ca39f4d45a14")
+            //    return Unauthorized();
 
-            if (!String.IsNullOrEmpty(email))
+            if (!String.IsNullOrEmpty(UUID))
             {
                 try
                 {
-                    var success = (repository as ClientRepository).Active(email);
+                    string userName, password, email;
+                    var success = (repository as ClientRepository).Active(UUID, out userName, out password, out email);
 
-                    return Ok(success);
+                    return Ok<RegisterResultDTO>(new RegisterResultDTO { Succcess = success, UserName = userName, Password = password, Email = email, Error = "" });
                 }
                 catch (Exception ex)
                 {

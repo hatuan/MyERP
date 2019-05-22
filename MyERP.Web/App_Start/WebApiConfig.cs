@@ -22,6 +22,11 @@ namespace MyERP.Web
 
             // Add default route
             var apiRouter = config.Routes.MapHttpRoute(
+                name: "MapByAction",
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { id = RouteParameter.Optional });
+
+            var apiRouterDefault = config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional });

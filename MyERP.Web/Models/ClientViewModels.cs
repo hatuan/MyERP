@@ -210,4 +210,17 @@ namespace MyERP.Web.Models
         [StringLength(32, ErrorMessage = "The {0} must be at least {2} characters long.")]
         public String Mobilephone { get; set; }
     }
+
+    public class RegisterResultDTO
+    {
+        public Boolean Succcess { get; set; }
+
+        public String Error { get; set; }
+
+        public String UserName { get; set; }
+
+        public String Password { get; set; }
+
+        public String Email { get; set; }
+    }
 }

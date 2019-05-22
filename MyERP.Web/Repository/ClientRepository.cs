@@ -87,27 +87,28 @@ namespace MyERP.Web
         /// <summary>
         /// Default User, Role, UserInRole, Org, Currency will create after client active
         /// </summary>
-        /// <param name="email"></param>
+        /// <param name="UUID"></param>
         /// <returns></returns>
-        public bool Active(string email)
+        public bool Active(string UUID, out string userName, out string password, out string email)
         {
             using (DbContextTransaction scope = dataContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var client = DataContext.Clients.Where(x => x.Email == email).FirstOrDefault();
+                    var client = DataContext.Clients.Where(x => x.UUID == UUID && x.IsActivated == false).FirstOrDefault();
                     if (client == null)
                     {
-                        throw new System.Data.Entity.Core.ObjectNotFoundException($"Client email {email} has been changed or deleted! Please check");
+                        throw new System.Data.Entity.Core.ObjectNotFoundException($"Client {UUID} has been changed or deleted! Please check");
                     }
 
                     client.IsActivated = true;
 
                     //Register new user
-                    var _name = client.TaxCode + "-ADMIN";
-                    var _pass = "123456";
-                    var _salt = _name + _pass;
-                    var _passEncrypt = Cryptography.Encrypt(Cryptography.GetHashKey(_salt), _pass);
+                    var _name = userName = client.TaxCode + "-ADMIN";
+                    var _pass = password = Functions.RandomString(8);
+                    var _email = email = client.Email;
+                    var _salt = Functions.RandomString(8);
+                    var _passEncrypt = Cryptography.Encrypt(Cryptography.GetHashKey(_name + _pass), _pass);
                     var activeUser = new User
                     {
                         Name = client.TaxCode +  "-ADMIN",
