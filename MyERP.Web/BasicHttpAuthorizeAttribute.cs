@@ -11,6 +11,10 @@ using System.Web.Http.Controllers;
 
 namespace MyERP.Web
 {
+    /// <summary>
+    /// Remember use : http(s)://username:encrypt_password@...
+    /// encrypt_password store in user table like R2UXFUC+WF2Ra+4eJLXXyA==
+    /// </summary>
     public abstract class BasicHttpAuthorizeAttribute : AuthorizeAttribute
     {
         private const string BasicAuthResponseHeader = "WWW-Authenticate";

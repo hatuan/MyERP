@@ -588,6 +588,11 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             try
             {
                 (repository as EInvoiceHeaderRepository).CreateHtmlFile(entity, dirPath, fullHtmlPath);
+                
+                if (System.IO.File.Exists(Server.MapPath($"~/Resources/images/signature.png")) && entity.Status == (byte)EInvoiceDocumentStatusType.Signed)
+                {
+                    System.IO.File.WriteAllBytes(dirPath + "/signature.png", System.IO.File.ReadAllBytes(Server.MapPath($"~/Resources/images/signature.png")));
+                }
             }
             catch (Exception ex)
             {

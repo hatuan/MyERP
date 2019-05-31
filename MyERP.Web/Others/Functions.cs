@@ -54,6 +54,32 @@ namespace MyERP.Web.Others
             }
         }
 
+        public static string GetEHoaDonUrl(string path = "")
+        {
+            if (!String.IsNullOrEmpty(path) && path[0] != '/')
+            {
+                path = "/" + path;
+            }
+
+            if (IsAbsoluteUrl(AppSettings.EHoaDonUrl)) //example http://localhost:8080
+            {
+                return AppSettings.EHoaDonUrl + (String.IsNullOrEmpty(path) ? "" : path);
+            }
+            else //is Relative example ~/MyERPBase.dll
+            {
+                string myERPBaseUrl = AppSettings.EHoaDonUrl.StartsWith("~/")
+                    ? AppSettings.EHoaDonUrl.TrimStart(new[] { '~' })
+                    : AppSettings.EHoaDonUrl;
+
+                var appUrl = HttpRuntime.AppDomainAppVirtualPath; //return "/" or "/xxx"
+
+                if (appUrl == "/")
+                    appUrl = "";
+
+                return GetBaseUrl() + myERPBaseUrl + (String.IsNullOrEmpty(path) ? "" : path);
+            }
+        }
+
         /// <summary>
         /// https://stackoverflow.com/questions/730268/unique-random-string-generation
         /// </summary>

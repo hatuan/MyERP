@@ -15,6 +15,14 @@ namespace MyERP.Web.Others
             }
         }
 
+        public static string EHoaDonUrl
+        {
+            get
+            {
+                return Setting<string>("EHoaDonUrl");
+            }
+        }
+
         private static T Setting<T>(string name)
         {
             string value = ConfigurationManager.AppSettings[name];

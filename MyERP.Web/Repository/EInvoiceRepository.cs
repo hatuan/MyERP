@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Principal;
 using System.Text;
 using System.Transactions;
@@ -14,10 +16,12 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Xml.Xsl;
 using Ext.Net;
+using log4net;
 using MyERP.DataAccess;
 using MyERP.DataAccess.Enum;
 using MyERP.Web.Models;
 using MyERP.Web.Others;
+using Newtonsoft.Json;
 
 namespace MyERP.Web
 {
@@ -130,6 +134,8 @@ namespace MyERP.Web
 
     public partial class EInvoiceHeaderRepository 
     {
+        ILog log = log4net.LogManager.GetLogger(typeof(EInvoiceHeaderRepository));
+
         public Paging<EInvoiceHeader> Paging(StoreRequestParameters parameters)
         {
             return Paging(parameters.Start, parameters.Limit, parameters.SimpleSort, parameters.SimpleSortDirection);
@@ -429,8 +435,10 @@ namespace MyERP.Web
                 String xslInput = formType.FormFile;
 
                 if (entity.Status < (byte)EInvoiceDocumentStatusType.Signed) //Clear reservationCode if not signed document
+                {
                     entity.ReservationCode = "";
-
+                    entity.SignedDate = null;
+                }
                 String xmlInput = GetXmlInvoiceInfo(entity);
 
                 System.IO.File.WriteAllText(dirPath + "/xslTemplate.xsl", xslInput, Encoding.UTF8);
@@ -475,11 +483,17 @@ namespace MyERP.Web
             {
                 try
                 {
-                    var entity = Get(c => c.Id == id, new string[] { "Currency", "EInvFormType" }).SingleOrDefault();
+                    var entity = Get(c => c.Id == id && c.Status == (byte)EInvoiceDocumentStatusType.Released, new string[] { "Currency", "EInvFormType" }).SingleOrDefault();
                     if (entity == null)
                     {
                         throw new System.Data.Entity.Core.ObjectNotFoundException("Invoice Header has been changed or deleted! Please check");
                     }
+                    //save to EInvoiceHeader
+                    entity.SignedDate = DateTime.Now;
+                    entity.Version++;
+                    entity.Status = (byte)EInvoiceDocumentStatusType.Signed;
+                    entity.RecModifiedAt = DateTime.Now;
+                    dataContext.SaveChanges();
 
                     var newEInvoiceSigned = new EInvoiceSigned
                     {
@@ -560,9 +574,40 @@ namespace MyERP.Web
                         RecModifiedAt = DateTime.Now,
                         RecModifiedBy = userId
                     };
+                    //save to EInvoiceSigned table before send to EHoaDon server
+                    //if error in EHoaDon server, will rollback
                     newEInvoiceSigned = dataContext.Set<EInvoiceSigned>().Add(newEInvoiceSigned);
                     dataContext.SaveChanges();
 
+                    string URL = Functions.GetEHoaDonUrl("/EInvoiceSigned");
+
+                    using (var httpClient = new HttpClient())
+                    {
+                        httpClient.BaseAddress = new Uri(URL);
+                        httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                        var content = new StringContent(JsonConvert.SerializeObject(newEInvoiceSigned), Encoding.UTF8, "application/json");
+                        string urlParameters = $"";
+
+                        log.Info($"URL AbsoluteUri = {httpClient.BaseAddress.AbsoluteUri}");
+
+                        try
+                        {
+                            var response = httpClient.PostAsync(urlParameters, content);
+                            var result = response.Result;
+                            if (!result.IsSuccessStatusCode)
+                            {
+                                log.Error("Failed", new Exception(result.StatusCode.ToString() + " " + result.ToString()));
+                                throw new Exception("PublicSignedInvoice failed");
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            log.Error("Failed", e);
+                            throw e;
+                        }
+                    }
+                                        
+                    //If dont have error on EHoaDon server : commit                    
                     scope.Commit();
 
                     return newEInvoiceSigned.Id;

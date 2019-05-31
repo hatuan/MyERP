@@ -1105,7 +1105,7 @@
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
-          <Property Name="version" Type="bigint" Nullable="false" DefaultValue="1" />
+          <Property Name="version" Type="bigint" Nullable="false" devart:DefaultValue="" />
           <Property Name="tax_code" Type="varchar" MaxLength="14" />
           <Property Name="address" Type="nvarchar" MaxLength="256" />
           <Property Name="address_transition" Type="nvarchar" MaxLength="256" />
@@ -2467,7 +2467,7 @@
           <Property Name="is_total_amount_without_vat_pos" Type="bit" />
           <Property Name="original_invoice_issue_date" Type="datetime2" />
           <Property Name="original_einvoice_id" Type="bigint" />
-          <Property Name="reservation_code" Type="nchar" MaxLength="10" />
+          <Property Name="reservation_code" Type="char" MaxLength="36" />
         </EntityType>
         <EntityType Name="einvoice_line">
           <Key>
@@ -2577,7 +2577,7 @@
           <Property Name="original_einvoice_id" Type="bigint" />
           <Property Name="logo" Type="nvarchar(max)" />
           <Property Name="watermark" Type="nvarchar(max)" />
-          <Property Name="reservation_code" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="reservation_code" Type="char" Nullable="false" MaxLength="36" />
           <Property Name="einvoice_header_id" Type="bigint" Nullable="false" />
         </EntityType>
         <Association Name="FK_client_user_profile">
@@ -6698,7 +6698,7 @@
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="7201971a-c51f-4753-826c-25116b4cfc3f" />
           <Property Name="RecModifiedBy" Type="Int64" ed:ValidateRequired="false" ed:Guid="c6fcd91e-15ef-4481-a32a-a0075cb44ac6" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="73e42812-2bb8-4648-8704-5c7659eaf0d8" />
-          <Property Name="Version" Type="Int64" Nullable="false" DefaultValue="1" ed:ValidateRequired="true" ed:Guid="c4bed1e7-5396-4842-8b64-feec4ffc7bbc" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c4bed1e7-5396-4842-8b64-feec4ffc7bbc" />
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Client_CreatedBy" FromRole="Clients" ToRole="RecCreatedByUser" ed:Guid="ce4d1885-6424-455d-9277-01aed8112888" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_Client_ModifiedBy" FromRole="Clients1" ToRole="RecModifiedByUser" ed:Guid="41eb4c56-5928-4a60-a555-6aeff073f145" />
           <NavigationProperty Name="Organizations" Relationship="MyERP.DataAccess.Client_Organization" FromRole="Client" ToRole="Organizations" ed:Guid="806ea340-2c45-455f-ba36-673e246dfde5" />
@@ -8286,7 +8286,7 @@
           <Property Name="IsTotalAmountPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="b3d05947-84e9-43a5-b4bd-e81c0c8dff56" />
           <Property Name="DiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="34e0612e-2469-4954-9c90-71721c82a8e2" />
           <Property Name="IsDiscountAmtPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="bcae30bc-c78e-47ad-b8d6-5e22aee0fcee" />
-          <Property Name="ReservationCode" Type="String" MaxLength="10" Unicode="true" FixedLength="true" ed:ValidateMaxLength="10" ed:ValidateRequired="false" ed:Guid="384a1cf4-3b8f-414a-ab50-eeb11b3e728e" />
+          <Property Name="ReservationCode" Type="String" MaxLength="36" FixedLength="true" ed:ValidateMaxLength="36" ed:ValidateRequired="false" ed:Guid="384a1cf4-3b8f-414a-ab50-eeb11b3e728e" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="1f59c9c8-5353-4357-b921-30b392a2a435" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c4fbbbb7-1c9f-4f47-bc6f-6a82ca3f1231" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a02724ad-fdc3-46d0-b647-2032aa57206a" />
@@ -8406,7 +8406,7 @@
           <Property Name="IsTotalAmountPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="5d60ce2b-652c-43bc-b48a-455df086c877" />
           <Property Name="DiscountAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="556a8ead-6e7f-430e-af69-42fd136714b0" />
           <Property Name="IsDiscountAmtPos" Type="Boolean" ed:ValidateRequired="false" ed:Guid="3ac549e5-b726-47d5-a189-3f09b22cc05a" />
-          <Property Name="ReservationCode" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" ed:ValidateMaxLength="10" ed:ValidateRequired="true" ed:Guid="f9191f5b-b8e6-4db7-aec9-a782839b7532" />
+          <Property Name="ReservationCode" Type="String" Nullable="false" MaxLength="36" FixedLength="true" ed:ValidateMaxLength="36" ed:ValidateRequired="true" ed:Guid="f9191f5b-b8e6-4db7-aec9-a782839b7532" />
           <Property Name="Logo" Type="String" ed:ValidateRequired="false" ed:Guid="77f2d4e7-a1d5-4438-84c7-6b0e0a3d4a12" />
           <Property Name="Watermark" Type="String" ed:ValidateRequired="false" ed:Guid="f82488b0-6bb2-43b4-be7d-2e78e72b1bd5" />
           <Property Name="SignedXML" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="2687b1fb-5a84-4d3a-83fa-7362018d16b4" />
