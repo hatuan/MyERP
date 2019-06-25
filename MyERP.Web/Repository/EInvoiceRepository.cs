@@ -168,7 +168,7 @@ namespace MyERP.Web
             return entity == null;
         }
 
-        public string SetEInvNumber(long eInvoiceHeaderId, ref long version, long userId, string reservationCode)
+        public EInvoiceHeader SetEInvNumber(long eInvoiceHeaderId, ref long version, long userId, string reservationCode)
         {
             decimal _nextReleaseNo = 0;
             using (DbContextTransaction scope = dataContext.Database.BeginTransaction())
@@ -181,9 +181,8 @@ namespace MyERP.Web
                         throw new System.Data.Entity.Core.ObjectNotFoundException("Invoice Header has been changed or deleted! Please check");
                     if(!String.IsNullOrWhiteSpace(eInvoiceHeader.InvoiceNumber)) //skip if invoice has number  
                     {
-                        var _invoiceNumber = eInvoiceHeader.InvoiceNumber;
                         scope.Rollback();
-                        return _invoiceNumber;
+                        return eInvoiceHeader;
                     }
                     var formReleases = dataContext.EInvFormReleases.WithHint("UPDLOCK, INDEX(idx_einv_form_release_form_type_id)").Where(x => x.FormTypeId == eInvoiceHeader.FormTypeId)
                         .ToList<EInvFormRelease>();
@@ -207,7 +206,7 @@ namespace MyERP.Web
 
                     scope.Commit();
 
-                    return eInvoiceHeader.InvoiceNumber;
+                    return eInvoiceHeader;
                 }
                 catch (System.Data.Entity.Core.ObjectNotFoundException ex)
                 {

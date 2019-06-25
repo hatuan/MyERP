@@ -2467,7 +2467,7 @@
           <Property Name="is_total_amount_without_vat_pos" Type="bit" />
           <Property Name="original_invoice_issue_date" Type="datetime2" />
           <Property Name="original_einvoice_id" Type="bigint" />
-          <Property Name="reservation_code" Type="char" MaxLength="36" />
+          <Property Name="reservation_code" Type="nvarchar" MaxLength="36" />
         </EntityType>
         <EntityType Name="einvoice_line">
           <Key>
@@ -2577,7 +2577,7 @@
           <Property Name="original_einvoice_id" Type="bigint" />
           <Property Name="logo" Type="nvarchar(max)" />
           <Property Name="watermark" Type="nvarchar(max)" />
-          <Property Name="reservation_code" Type="char" Nullable="false" MaxLength="36" />
+          <Property Name="reservation_code" Type="nvarchar" Nullable="false" MaxLength="36" />
           <Property Name="einvoice_header_id" Type="bigint" Nullable="false" />
         </EntityType>
         <Association Name="FK_client_user_profile">

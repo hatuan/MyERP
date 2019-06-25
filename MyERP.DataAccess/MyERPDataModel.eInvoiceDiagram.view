@@ -785,7 +785,7 @@
                     </Size>
                     <Enabled>false</Enabled>
                     <Oid xsi:type="SchemaModelOID">
-                      <Path>90f9d685-2537-4dec-aba5-5d67d5433946</Path>
+                      <Path>e020de5b-0757-4143-ad5f-b968a6812c51</Path>
                       <TypeName>EntityDeveloper.EntityFramework.EntityRelationProperty</TypeName>
                     </Oid>
                   </Model>
@@ -5157,7 +5157,7 @@
           <Scale>0.75</Scale>
           <Location>
             <X>-954.666666666667 px</X>
-            <Y>444 px</Y>
+            <Y>828 px</Y>
           </Location>
         </ViewPort>
         <Oid xsi:type="SchemaModelOID">

@@ -949,7 +949,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
 
             var _id = Convert.ToInt64(id);
             var _version = Convert.ToInt64(version);
-            var _invoiceNumber = "";
+            EInvoiceHeader _eInvoiceHeader;
             string originXML, base64OriginXML;
             try
             {
@@ -958,7 +958,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 {
                     reservationCode = MyERP.Web.Others.Functions.RandomString();
                 }
-                _invoiceNumber = (repository as EInvoiceHeaderRepository).SetEInvNumber(_id, ref _version, (long)user.ProviderUserKey, reservationCode);
+                _eInvoiceHeader = (repository as EInvoiceHeaderRepository).SetEInvNumber(_id, ref _version, (long)user.ProviderUserKey, reservationCode);
 
                 originXML = (repository as EInvoiceHeaderRepository).GetXmlInvoiceInfo(_id, _version);
                 base64OriginXML = Convert.ToBase64String(Encoding.UTF8.GetBytes(originXML));
@@ -972,9 +972,9 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 return this.Direct(false, ex.Message);
             }
 
-            X.GetCmp<Hidden>("InvoiceNumber").SetValue(_invoiceNumber);
-            X.GetCmp<Hidden>("Version").SetValue(_version);
-            X.GetCmp<ComboBox>("Status").SetValue(EInvoiceDocumentStatusType.Released);
+            X.GetCmp<Hidden>("InvoiceNumber").SetValue(_eInvoiceHeader.InvoiceNumber);
+            X.GetCmp<Hidden>("Version").SetValue(_eInvoiceHeader.Version);
+            X.GetCmp<ComboBox>("Status").SetValue(_eInvoiceHeader.Status);
             return this.Direct(new {OriginXML = base64OriginXML, SerialNumber = "00C62199148ACD49FAAC90AD8E0013B6E2", PIN = "12345678" });
         }
 
