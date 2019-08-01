@@ -1,23 +1,23 @@
 using System.Web.Mvc;
 using System.Web.Routing;
- 
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MyERP.Web.ExtNetConfig), "Start")]
 
-namespace MyERP.Web 
+namespace MyERP.Web
 {
-    public static class ExtNetConfig 
+    public static class ExtNetConfig
     {
-        public static void Start() 
+        public static void Start()
         {
             ExtNetConfig.RegisterRoutes(RouteTable.Routes);
         }
- 
+
         public static void RegisterRoutes(RouteCollection routes)
         {
             // Ignore all ext.axd embedded resource paths
             routes.IgnoreRoute("{extnet-root}/{extnet-file}/ext.axd");
 
-            // Add http://example.com/extnet/ Route
+            // Add https://example.com/extnet/ Route
             routes.MapRoute(
                 "ExtNet", // Route name
                 "extnet/{action}/{id}", // URL with parameters
@@ -25,8 +25,8 @@ namespace MyERP.Web
             );
         }
 
-        // If you use configure forms authentication in your Web.config and 
-        // use <deny users="*"> to deny all requests, such as the following: 
+        // If you use configure forms authentication in your Web.config and
+        // use <deny users="*"> to deny all requests, such as the following:
         //
         //  <location>
         //    <system.web>
@@ -36,10 +36,10 @@ namespace MyERP.Web
         //    </system.web>
         //  </location>
         //
-        // Add the following Application_AuthenticateRequest event handler 
-        // to your Global.asax.cs to exclude authenticating Ext.NET related 
+        // Add the following Application_AuthenticateRequest event handler
+        // to your Global.asax.cs to exclude authenticating Ext.NET related
         // resource files (.js, .css, images).
-        // 
+        //
         //protected void Application_AuthenticateRequest(object sender, System.EventArgs e)
         //{
         //    // Skip authenticating all ext.axd embedded resources (.js, .css, images)

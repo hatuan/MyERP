@@ -1,5 +1,27 @@
 | Product | Ext.NET Enterprise |
 | :---- | :---- |
+| Release Date | 2019-06-10 |
+| Current Version | 4.8.2 |
+| Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.8.2) on GitHub |
+
+#### FEATURES
+
+1. [[#1636](https://github.com/extnet/Ext.NET/issues/1636)] Replace http:// Ext.NET urls to https://
+
+#### DEFECTS
+
+1. [[#1645](https://github.com/extnet/Ext.NET/issues/1645)] References to Newtonsoft.Json and Microsoft.Aspnet.Mvc are wrong throughout project
+2. [[#1642](https://github.com/extnet/Ext.NET/issues/1642)] Ext.net.PasswordMask plugin issue while destroying the component
+
+#### BREAKING CHANGES
+
+None
+
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
+
+
+| Product | Ext.NET Enterprise |
+| :---- | :---- |
 | Release Date | 2019-02-27 |
 | Current Version | 4.8.1 |
 | Issue Tracker | [Ext.NET](https://github.com/extnet/Ext.NET/issues?&q=is%3Aissue%20is%3Aclosed%20milestone%3A4.8.1) on GitHub |
@@ -16,7 +38,7 @@ None
 
 None
 
-If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
 
 | Product | Ext.NET Enterprise |
@@ -46,7 +68,7 @@ If you experience a Breaking Change, please report in the [forums](http://forums
 
 1. [[#1615](https://github.com/extnet/Ext.NET/issues/1615)] Ext.Net.Node implements non-existing listeners
 
-If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
 
 | Product | Ext.NET Enterprise |
@@ -67,7 +89,7 @@ None
 
 None
 
-If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
 
 | Product | Ext.NET Enterprise |
@@ -99,7 +121,7 @@ If you experience a Breaking Change, please report in the [forums](http://forums
 1. [[#1604](https://github.com/extnet/Ext.NET/issues/1604)] Ext JS 6.6.0 reliance on native JSON breaks Ext.NET implementations
 2. [[#1594](https://github.com/extnet/Ext.NET/issues/1594)] Remove Grid Filter's events
 
-If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
 
 | Product | Ext.NET Enterprise |
@@ -131,7 +153,7 @@ If you experience a Breaking Change, please report in the [forums](http://forums
 
 None
 
-If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
 
 | Product | Ext.NET Enterprise |
@@ -156,7 +178,7 @@ None
 
 None
 
-If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
 
 | Product | Ext.NET Enterprise |
@@ -183,7 +205,7 @@ If you experience a Breaking Change, please report in the [forums](http://forums
 
 1. [[#1562](https://github.com/extnet/Ext.NET/issues/1562)] Remove Ext.form.field.Text.growAppend setting
 
-If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
 
 | Product | Ext.NET Enterprise |
@@ -210,7 +232,7 @@ None
 
 None
 
-If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
 
 | Product | Ext.NET Enterprise |
@@ -239,7 +261,7 @@ If you experience a Breaking Change, please report in the [forums](http://forums
 1. [[#1533](https://github.com/extnet/Ext.NET/issues/1533)] Remove Ext.NET.Axis' Increment and LabelInSpan config options
 2. [[#1531](https://github.com/extnet/Ext.NET/issues/1531)] Ext.Net.ModelField.Persist default value issue
 
-If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
 
 | Product | Ext.NET Enterprise |
@@ -278,7 +300,7 @@ If you experience a Breaking Change, please report in the [forums](http://forums
 3. [[#1510](https://github.com/extnet/Ext.NET/issues/1510)] Remove Ext.Net.ClickRepeater Disable(), SetDisabled() and Enable() methods
 4. [[#1504](https://github.com/extnet/Ext.NET/issues/1504)] Remove Ext.Net.TimeAxis.CalculateByLabelSize
 
-If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
 
 | Product | Ext.NET Enterprise |
@@ -310,7 +332,7 @@ If you experience a Breaking Change, please report in the [forums](http://forums
 
 None
 
-If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
 
 | Product | Ext.NET Enterprise |
@@ -341,7 +363,7 @@ None
 1. [[#1444](https://github.com/extnet/Ext.NET/issues/1444)] Component's Resizable setting as false is ignored by Ext.NET
 2. [[#1494](https://github.com/extnet/Ext.NET/issues/1494)] VS2012: Newtonsoft.Json v10 breaks NuGet package restore
 
-If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
 
 | Product | Ext.NET Enterprise |
@@ -400,7 +422,7 @@ If you experience a Breaking Change, please report in the [forums](http://forums
 2. [[#1403](https://github.com/extnet/Ext.NET/issues/1403)] Ext.Net.TabPanel event parameters didn't match ExtJS
 3. [[#1380](https://github.com/extnet/Ext.NET/issues/1380)] Chart Label: Default display value of 'None' prevents hiding labels
 
-If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
 
 | Product | Ext.NET Enterprise |
@@ -432,7 +454,7 @@ If you experience a Breaking Change, please report in the [forums](http://forums
 #### BREAKING CHANGES
 
 None.
-If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
 ---
 
@@ -445,7 +467,7 @@ If you experience a Breaking Change, please report in the [forums](http://forums
 #### BREAKING CHANGES
 
 None.
-If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
 ---
 
@@ -472,7 +494,7 @@ If you experience a Breaking Change, please report in the [forums](http://forums
 #### BREAKING CHANGES
 
 None.
-If you experience a Breaking Change, please report in the [forums](http://forums.ext.net/).
+If you experience a Breaking Change, please report in the [forums](https://forums.ext.net/).
 
 ---
 
@@ -677,4 +699,4 @@ If you experience a Breaking Change, please report in the [forums](http://forums
 1. [[#1203](https://github.com/extnet/Ext.NET/issues/1203)] TreeDropZone's AllowParentInsert has to be AllowParentInserts (with the "s" at the end)] `sencha`
 1. [[#1155](https://github.com/extnet/Ext.NET/issues/1155)] ComponentLoader doesn't take Mode="Html" into account, but it should render this setting to client
 
-Copyright 2008-2017 [Object.NET](http://object.net/), Inc., All rights reserved.
+Copyright 2008-2019 [Object.NET](https://object.net/), Inc., All rights reserved.
