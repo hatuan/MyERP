@@ -6,7 +6,7 @@ using System.Collections.Specialized;
 namespace MyERP.DataAccess
 {
 
-    public partial class BusinessPartnerDiscountGroup
+    public partial class BusinessPartnerDiscGroup
     {
     }
 }
