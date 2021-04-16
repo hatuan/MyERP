@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2037
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1BCFFFB5-B236-44DB-8208-4058CF67A653}"
 	ProjectSection(SolutionItems) = preProject
@@ -22,6 +22,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedCode", "SharedCode", 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.DataAccess.Client", "MyERP.DataAccess.Client\MyERP.DataAccess.Client.csproj", "{06D4183D-79F5-4156-8F81-FE69CF095132}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Next", "Next", "{DD34D97F-184F-43DD-A8A3-F5C430A31C23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.CommonUI", "Next\MyERP.CommonUI\MyERP.CommonUI.csproj", "{3224B5BE-C28B-46C0-958D-2AC400BE71FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.Web", "Next\MyERP.Web\MyERP.Web.csproj", "{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,9 +71,37 @@ Global
 		{06D4183D-79F5-4156-8F81-FE69CF095132}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{06D4183D-79F5-4156-8F81-FE69CF095132}.Release|x86.ActiveCfg = Release|Any CPU
 		{06D4183D-79F5-4156-8F81-FE69CF095132}.Release|x86.Build.0 = Release|Any CPU
+		{3224B5BE-C28B-46C0-958D-2AC400BE71FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3224B5BE-C28B-46C0-958D-2AC400BE71FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3224B5BE-C28B-46C0-958D-2AC400BE71FB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3224B5BE-C28B-46C0-958D-2AC400BE71FB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3224B5BE-C28B-46C0-958D-2AC400BE71FB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3224B5BE-C28B-46C0-958D-2AC400BE71FB}.Debug|x86.Build.0 = Debug|Any CPU
+		{3224B5BE-C28B-46C0-958D-2AC400BE71FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3224B5BE-C28B-46C0-958D-2AC400BE71FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3224B5BE-C28B-46C0-958D-2AC400BE71FB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3224B5BE-C28B-46C0-958D-2AC400BE71FB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3224B5BE-C28B-46C0-958D-2AC400BE71FB}.Release|x86.ActiveCfg = Release|Any CPU
+		{3224B5BE-C28B-46C0-958D-2AC400BE71FB}.Release|x86.Build.0 = Release|Any CPU
+		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}.Debug|x86.Build.0 = Debug|Any CPU
+		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}.Release|x86.ActiveCfg = Release|Any CPU
+		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3224B5BE-C28B-46C0-958D-2AC400BE71FB} = {DD34D97F-184F-43DD-A8A3-F5C430A31C23}
+		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86} = {DD34D97F-184F-43DD-A8A3-F5C430A31C23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {96EC2254-12B9-441E-B1AD-2826A735F8DA}
