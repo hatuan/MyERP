@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.CommonUI", "Next\MyER
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.Web", "Next\MyERP.Web\MyERP.Web.csproj", "{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.Infrastructure", "Next\MyERP.Infrastructure\MyERP.Infrastructure.csproj", "{D0E83283-45DE-4581-AA89-04D1FB674B1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyERP.BusinessObject", "Next\MyERP.BusinessObject\MyERP.BusinessObject.csproj", "{F1239B84-7F32-4FAA-82AD-24C31C129224}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +99,30 @@ Global
 		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}.Release|x86.ActiveCfg = Release|Any CPU
 		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86}.Release|x86.Build.0 = Release|Any CPU
+		{D0E83283-45DE-4581-AA89-04D1FB674B1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0E83283-45DE-4581-AA89-04D1FB674B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0E83283-45DE-4581-AA89-04D1FB674B1C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D0E83283-45DE-4581-AA89-04D1FB674B1C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D0E83283-45DE-4581-AA89-04D1FB674B1C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D0E83283-45DE-4581-AA89-04D1FB674B1C}.Debug|x86.Build.0 = Debug|Any CPU
+		{D0E83283-45DE-4581-AA89-04D1FB674B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0E83283-45DE-4581-AA89-04D1FB674B1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0E83283-45DE-4581-AA89-04D1FB674B1C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D0E83283-45DE-4581-AA89-04D1FB674B1C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D0E83283-45DE-4581-AA89-04D1FB674B1C}.Release|x86.ActiveCfg = Release|Any CPU
+		{D0E83283-45DE-4581-AA89-04D1FB674B1C}.Release|x86.Build.0 = Release|Any CPU
+		{F1239B84-7F32-4FAA-82AD-24C31C129224}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1239B84-7F32-4FAA-82AD-24C31C129224}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1239B84-7F32-4FAA-82AD-24C31C129224}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F1239B84-7F32-4FAA-82AD-24C31C129224}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F1239B84-7F32-4FAA-82AD-24C31C129224}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F1239B84-7F32-4FAA-82AD-24C31C129224}.Debug|x86.Build.0 = Debug|Any CPU
+		{F1239B84-7F32-4FAA-82AD-24C31C129224}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1239B84-7F32-4FAA-82AD-24C31C129224}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1239B84-7F32-4FAA-82AD-24C31C129224}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F1239B84-7F32-4FAA-82AD-24C31C129224}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F1239B84-7F32-4FAA-82AD-24C31C129224}.Release|x86.ActiveCfg = Release|Any CPU
+		{F1239B84-7F32-4FAA-82AD-24C31C129224}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,12 +130,14 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3224B5BE-C28B-46C0-958D-2AC400BE71FB} = {DD34D97F-184F-43DD-A8A3-F5C430A31C23}
 		{253C36FD-3870-4C68-A9C9-E12FAFAD7E86} = {DD34D97F-184F-43DD-A8A3-F5C430A31C23}
+		{D0E83283-45DE-4581-AA89-04D1FB674B1C} = {DD34D97F-184F-43DD-A8A3-F5C430A31C23}
+		{F1239B84-7F32-4FAA-82AD-24C31C129224} = {DD34D97F-184F-43DD-A8A3-F5C430A31C23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {96EC2254-12B9-441E-B1AD-2826A735F8DA}
-		VersionFieldUsingAttrib = True
-		FetchGroupUsingAttrib = True
-		IndexUsingAttrib = False
 		ShowOldMenu = False
+		IndexUsingAttrib = False
+		FetchGroupUsingAttrib = True
+		VersionFieldUsingAttrib = True
+		SolutionGuid = {96EC2254-12B9-441E-B1AD-2826A735F8DA}
 	EndGlobalSection
 EndGlobal

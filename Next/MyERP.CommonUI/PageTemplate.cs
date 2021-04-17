@@ -34,5 +34,15 @@ namespace MyERP.CommonUI
 
             Application.MainPage = instance as Page;
         }
+
+        private void btnPersonInfo_Click(object sender, EventArgs e)
+        {
+            ExecPersonInfoPopup();
+        }
+
+        protected virtual void ExecPersonInfoPopup()
+        {
+
+        }
     }
 }

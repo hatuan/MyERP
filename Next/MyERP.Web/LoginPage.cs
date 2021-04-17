@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MyERP.BusinessObject.Services;
+using System;
+using System.Collections.Generic;
 using Wisej.Web;
 
 
@@ -18,11 +20,23 @@ namespace MyERP.Web
 
         private void Login()
         {
-            Application.Session.LoginUser = txtUserName.Text;
-            Application.Session.IsLogin = true;
-            Application.Session.MainPage = "MyERP.Web.MainPage";
+            UserService userService = new UserService();
 
-            Application.MainPage = new MainPage();
+            string passEncrypt = Cryptography.Encrypt(Cryptography.GetHashKey(txtUserName.Text.Trim() + txtPassword.Text.Trim()), txtPassword.Text.Trim());
+
+            try
+            {
+                userService.Login(txtUserName.Text.Trim(), passEncrypt);
+
+                Application.Session.IsLogin = true;
+                Application.Session.MainPage = "MyERP.Web.MainPage";
+
+                Application.MainPage = new MainPage();
+            }
+            catch(KeyNotFoundException ex)
+            {
+                MessageBox.Show("User/Password not found");
+            }
         }
 
         private void LoginPage_Accelerator(object sender, AcceleratorEventArgs e)
