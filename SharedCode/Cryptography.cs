@@ -13,7 +13,7 @@ namespace MyERP
         /// </summary>
         /// <param name="hashKey">Generate the keys or username+password </param>
         /// <returns></returns>
-        internal static byte[] GetHashKey(string hashKey)
+        public static byte[] GetHashKey(string hashKey)
         {
             // Initialise
             UTF8Encoding encoder = new UTF8Encoding();
@@ -29,7 +29,22 @@ namespace MyERP
             return rfc.GetBytes(16);
         }
 
-        internal static string Encrypt(byte[] key, string dataToEncrypt)
+        public static byte[] GetHashKey(string hashKey, string salt)
+        {
+            // Initialise
+            UTF8Encoding encoder = new UTF8Encoding();
+
+            // Get the salt
+            byte[] saltBytes = encoder.GetBytes(salt);
+
+            // Setup the hasher
+            Rfc2898DeriveBytes rfc = new Rfc2898DeriveBytes(hashKey, saltBytes);
+
+            // Return the key
+            return rfc.GetBytes(16);
+        }
+
+        public static string Encrypt(byte[] key, string dataToEncrypt)
         {
             // Initialise
             AesManaged encryptor = new AesManaged {Key = key, IV = key};
@@ -54,7 +69,7 @@ namespace MyERP
             }
         }
 
-        internal static string Decrypt(byte[] key, string encryptedString)
+        public static string Decrypt(byte[] key, string encryptedString)
         {
             // Initialise
             AesManaged decryptor = new AesManaged {Key = key, IV = key};

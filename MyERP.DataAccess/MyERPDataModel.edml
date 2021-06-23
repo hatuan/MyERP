@@ -1861,7 +1861,7 @@
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="status" Type="smallint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="posting_date" Type="datetime2" Nullable="false" />
           <Property Name="total_vat_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
@@ -1912,7 +1912,7 @@
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
           <Property Name="currency_id" Type="bigint" />
-          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="status" Type="smallint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="parent_id" Type="bigint" />
         </EntityType>
@@ -2336,7 +2336,7 @@
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" />
           <Property Name="version" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="status" Type="smallint" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
@@ -2373,11 +2373,11 @@
           <Property Name="release_used" Type="decimal" Nullable="false" Precision="7" Scale="0" />
           <Property Name="release_date" Type="datetime2" Nullable="false" />
           <Property Name="start_date" Type="datetime2" Nullable="false" />
-          <Property Name="tax_authorities_status" Type="tinyint" Nullable="false" />
+          <Property Name="tax_authorities_status" Type="smallint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="status" Type="smallint" Nullable="false" />
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
@@ -2459,7 +2459,7 @@
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="status" Type="smallint" Nullable="false" />
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
@@ -2567,7 +2567,7 @@
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="status" Type="smallint" Nullable="false" />
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
@@ -6713,7 +6713,7 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="d9ce13c5-825d-4d01-b0ef-2dc69e3cb844" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f822fd4e-5fdf-42f3-9209-7137a7f7dd41" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f636cade-01a4-43cc-860c-c527b84193ee" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="dca1b7e2-f951-4dd3-bb4c-ec09a7b4d5d0" />
+          <Property Name="Status" Type="MyERP.DataAccess.CurrencyStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="dca1b7e2-f951-4dd3-bb4c-ec09a7b4d5d0" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="30bf07ad-4abd-4de3-b820-db7bc8766492" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4bdea275-3d08-41dc-a5a1-1baada77a0d9" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a976dad5-6bb0-4777-bafd-328c70f3a144" />
@@ -6732,7 +6732,7 @@
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="ed1dcb77-2dda-40d2-8f4b-33cc9b718826" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="b571d474-0a6f-41df-9304-2e5b1bd67e25" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="109cc6af-6c2f-44d5-8cf8-8f8cefe5ee09" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="7261e335-251c-4379-88e9-c9f7907dc4bb" />
+          <Property Name="Status" Type="MyERP.DataAccess.OrganizationStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="7261e335-251c-4379-88e9-c9f7907dc4bb" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="411da790-27e6-46b7-8a6a-372ea450c3c5" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="8dbf461f-531b-4354-ba57-13ca9fc2ebb8" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4a1bf37a-bbca-4c7d-af17-33ac8c087fed" />
@@ -6935,7 +6935,7 @@
           <Property Name="Level" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="01b14c28-8cf0-4c09-9cb9-5fb3f0444ef0" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="a643c072-a622-453a-b6c1-8e53587b5159" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="2f74aed5-16a7-46c9-a910-a8cfa741820b" />
-          <Property Name="Status" Type="Int16" ed:ValidateRequired="false" ed:Guid="d1abb6fc-5e69-40b3-967e-869fe68d014d" />
+          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" ed:ValidateRequired="false" ed:Guid="d1abb6fc-5e69-40b3-967e-869fe68d014d" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="d4fa625c-d295-4be9-a2d6-9c56a46bacca" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="7f519602-bd25-4ced-9296-d477e60faf43" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="afbdb2fb-a8b2-4903-b9f6-70689d28f5ca" />
@@ -6961,7 +6961,7 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a0c05e0e-790f-4697-bc94-88a331c070a0" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="60072f5a-86aa-4c24-b386-99c8eca40638" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="b6e6381b-7138-4f72-ba40-e0217baf87c0" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="477f2e87-5894-4c84-a42d-6e6a7b92600b" />
+          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="477f2e87-5894-4c84-a42d-6e6a7b92600b" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="870e51a2-b01c-4c89-8f14-b3a342bfb2f0" />
           <Property Name="BusinessPartnerPriceGroupId" Type="Int64" ed:ValidateRequired="false" ed:Guid="be3b9c8b-0492-48d6-b43c-1331032e0ab0" />
           <Property Name="BusinessPartnerGroupId1" Type="Int64" ed:ValidateRequired="false" ed:Guid="b5166d18-455e-446b-8c93-bf83f5c91e81" />
@@ -7298,7 +7298,7 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="359d74c6-1a22-432a-8afc-ba5eb20c1a27" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="28bfa332-7134-4545-a4fd-a13a5fda6d1d" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="6341c5df-efda-49bc-b731-926348f1b1ca" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="6598efef-2e45-40e6-a3f4-0882d8b1756c" />
+          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="6598efef-2e45-40e6-a3f4-0882d8b1756c" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="879378bc-1c56-408f-b589-804e3e0c7384" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c8087228-5e01-4a79-89e4-759dca626e39" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="b735b07e-d463-4902-b7f4-83edb3ec9f22" />
@@ -7318,7 +7318,7 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="3ad49567-4d07-4f6b-9529-59106522db88" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="60c753ae-5a75-4f08-a7d9-0087cce613d4" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="0b08c1a8-f80f-4074-966a-00950cf8af4d" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="b0f2029e-5f12-4ec3-aa7d-7bef25b3b1aa" />
+          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="b0f2029e-5f12-4ec3-aa7d-7bef25b3b1aa" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e426112e-e90f-4855-92c3-2678705f126d" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5e32f173-19b8-46cc-b658-d49c84be3ee5" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="caaa8aad-633c-455f-a607-7556bb00854b" />
@@ -7368,7 +7368,7 @@
           <Property Name="ManualNo" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="b09601cb-3e75-41c5-b9f7-16dd8ce2bbe4" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="eab9b274-5f4a-485b-9d9d-ec066f6bc6cc" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="300f9ce7-68ab-4f03-9576-90450c2d542e" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="c5ce9145-066f-4ba3-abea-cf9112ee32cc" />
+          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="c5ce9145-066f-4ba3-abea-cf9112ee32cc" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a0be6c6d-4eb5-4b1b-9917-241547f189ae" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="6f5ade12-eebe-4b07-ab95-70d8abe1b0cd" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="80b1ba3d-88d7-4620-b779-1e1e0ff6ce15" />
@@ -7396,7 +7396,7 @@
           <Property Name="LastDateUsed" Type="DateTime" ed:ValidateRequired="false" ed:Guid="058b252b-6ccc-4261-88de-abe9254c71e0" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="92f18e94-5b0b-4037-872a-7241046a5455" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="9e46eb84-be48-401c-af5b-abecdb36fc65" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="e1a9e507-e4b9-45fb-a8c9-c117a1226109" />
+          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="e1a9e507-e4b9-45fb-a8c9-c117a1226109" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="80fba58f-5305-4e1d-876b-a60f93c6e142" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4c606e02-879f-4950-9b3d-cb2664871559" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="a9339607-2d74-48cf-a147-19f59c7de9c4" />
@@ -7429,7 +7429,7 @@
           <Property Name="BankCheckqueSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="f3606035-e770-46eb-9acc-40138335edfc" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="19193184-9f47-49da-a79e-1702ab8b2b0d" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f76d4599-0080-4766-8af6-b593b2cb5826" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="e179bfd9-f149-49cf-a633-f4355fdc1329" />
+          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="e179bfd9-f149-49cf-a633-f4355fdc1329" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="9e6aa219-352c-45c3-845d-983439e9daf4" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="74facb80-7cd3-463a-988d-b7775c0d4198" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="78ef60dd-5238-4db4-ab48-c5c6ce9d9c35" />
@@ -7598,7 +7598,7 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="fcca7e38-d0c1-45f8-97d0-10b19de45e63" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="89487936-f255-4daf-a7cf-0d2b8f9a8eb8" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="7ff3e235-1565-4e47-ad33-6bf2aba1e736" />
-          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="b3c0a820-9469-4687-b653-8f2f7143fa62" />
+          <Property Name="Status" Type="MyERP.DataAccess.DefaultDocumentStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="b3c0a820-9469-4687-b653-8f2f7143fa62" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="46e3ea5d-433e-48e0-a430-44d1b0db2b34" />
           <NavigationProperty Name="CashLines" Relationship="MyERP.DataAccess.CashHeader_CashLine" FromRole="CashHeader" ToRole="CashLines" ed:Guid="aaffc1a4-4683-49e2-9b9f-6a2a37d123c3" />
           <NavigationProperty Name="BusinessPartner" Relationship="MyERP.DataAccess.BusinessPartner_CashHeader" FromRole="CashHeaders" ToRole="BusinessPartner" ed:Guid="a52d945e-bf59-41e2-9361-2fb003e1b6d5" />
@@ -7660,7 +7660,7 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="808920e8-2fa3-4dd1-9388-a9e46bc0e66d" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="9d0bb8fa-917c-4f59-81dd-78c5ba1c8398" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e7727bc1-af9e-45fb-9514-84a4b195c2f1" />
-          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="96252b46-717d-4a01-8dfe-17586c74a3f4" />
+          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="96252b46-717d-4a01-8dfe-17586c74a3f4" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e30f5a14-e99b-4c6d-8390-3c550756c56c" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_Account" FromRole="Accounts" ToRole="Client" ed:Guid="3b0abe87-6aed-4375-82a7-d01399aac290" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_Account" FromRole="Accounts" ToRole="Organization" ed:Guid="20642fbe-7d38-4f22-80c6-e465b3e01b50" />
@@ -8172,7 +8172,7 @@
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a4875466-de8c-4a86-ab43-89bc941921cb" />
           <Property Name="OrganizationId" Type="Int64" ed:ValidateRequired="false" ed:Guid="2988e39a-a24a-490b-bba3-5e71260f219e" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e9d40cac-54c6-404a-a9ca-f278468bc573" />
-          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="59cd683a-0e6f-4cf6-a7bc-90d6f508bfc3" />
+          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="59cd683a-0e6f-4cf6-a7bc-90d6f508bfc3" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="34512949-e10a-4dd1-8cca-ab0d0d378b0e" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="6e6fc436-2b9a-4a5a-8364-91d3bcf89867" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="29b2b0ea-99a6-40b9-a23c-22e4ff586864" />
@@ -8195,11 +8195,11 @@
           <Property Name="ReleaseUsed" Type="Decimal" Nullable="false" Precision="7" Scale="0" ed:ValidateRequired="true" ed:Guid="1572d813-1f28-46a6-b274-5f3e47a321eb" />
           <Property Name="ReleaseDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="bf59b85c-3910-4f64-8b11-1d5a22f5d941" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="65ad7c11-0897-460f-9f72-49bcee977b6b" />
-          <Property Name="TaxAuthoritiesStatus" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="bf7502e2-2f45-4024-8d71-26d4550ac021" />
+          <Property Name="TaxAuthoritiesStatus" Type="MyERP.DataAccess.TaxAuthoritiesStatus" Nullable="false" ed:ValidateRequired="true" ed:Guid="bf7502e2-2f45-4024-8d71-26d4550ac021" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4aef08f6-95b1-475c-b0f5-6c1390868a19" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e5c4d862-d621-4e99-ab31-53bb92748565" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="89c6c129-bd2d-4808-88d7-31f0456644db" />
-          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="4b0c38cf-54a1-4144-a0d1-db19cff2af7f" />
+          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="4b0c38cf-54a1-4144-a0d1-db19cff2af7f" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="80a5fc07-ea15-4b1b-8f46-63bc5666c417" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="4fc3e533-ad42-4e21-b659-7cc64f4152a0" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="3608080b-9156-4985-9d30-ffd1cc879bad" />
@@ -8290,7 +8290,7 @@
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="1f59c9c8-5353-4357-b921-30b392a2a435" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c4fbbbb7-1c9f-4f47-bc6f-6a82ca3f1231" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a02724ad-fdc3-46d0-b647-2032aa57206a" />
-          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="723c4a57-693b-4619-9ed3-9d2e7dbb9ecd" />
+          <Property Name="Status" Type="MyERP.DataAccess.EInvoiceDocumentStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="723c4a57-693b-4619-9ed3-9d2e7dbb9ecd" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="216c208d-da3c-4539-8cd1-047b77e9f9a0" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="6df57be4-c4d2-4fe6-9104-3957196e50a2" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="99d69b30-ddb2-4191-af3c-4ce601cdbb3e" />
@@ -8415,12 +8415,251 @@
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c4bd1d41-8844-4f13-a62c-a2b74d1b8f10" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="99d53369-bdef-416c-99e3-c899c4345aa2" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="079dcaa0-bf1d-4ad9-a742-0f39b63c8655" />
-          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="2d85d01c-1cfe-447b-98e9-9a71f6e906a7" />
+          <Property Name="Status" Type="MyERP.DataAccess.EInvoiceDocumentStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="2d85d01c-1cfe-447b-98e9-9a71f6e906a7" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="04d9afec-a76d-4fe7-aa39-e58a6184e17e" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="94ca0f06-11b2-4622-9fdf-0dbf1ee230ce" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c6dc900a-d7c1-49de-87f8-b040173eece9" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="2c70b921-bb0d-4ebb-bcc4-929bf10a2a8b" />
         </EntityType>
+        <EnumType Name="OrganizationStatusType" ed:Namespace="MyERP.DataAccess.Enum" UnderlyingType="Int16" ed:Guid="41560179-460b-4942-ac54-869097f3a582">
+          <Member Name="Inactive" Value="0" ed:Guid="2c147968-d831-466a-bd51-0de71c5d2c98">
+            <ed:Attributes>
+              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <ed:AttributeConstructor />
+                <ed:Properties>
+                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <string xmlns="">Inactive</string>
+                  </ed:PropertyValue>
+                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <int xmlns="">1</int>
+                  </ed:PropertyValue>
+                </ed:Properties>
+              </ed:Attribute>
+            </ed:Attributes>
+          </Member>
+          <Member Name="Active" Value="1" ed:Guid="60602397-d385-4680-9ae9-bb401e848040">
+            <ed:Attributes>
+              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <ed:AttributeConstructor />
+                <ed:Properties>
+                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <string xmlns="">Active</string>
+                  </ed:PropertyValue>
+                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <int xmlns="">0</int>
+                  </ed:PropertyValue>
+                </ed:Properties>
+              </ed:Attribute>
+            </ed:Attributes>
+          </Member>
+        </EnumType>
+        <EnumType Name="CurrencyStatusType" ed:Namespace="MyERP.DataAccess.Enum" UnderlyingType="Int16" ed:Guid="9541f350-f3d4-401f-87bb-d646020f2a92">
+          <Member Name="Inactive" Value="0" ed:Guid="323ccb30-bf27-42b8-9be4-b6f918cfdad5">
+            <ed:Attributes>
+              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <ed:AttributeConstructor />
+                <ed:Properties>
+                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <string xmlns="">Inactive</string>
+                  </ed:PropertyValue>
+                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <int xmlns="">1</int>
+                  </ed:PropertyValue>
+                </ed:Properties>
+              </ed:Attribute>
+            </ed:Attributes>
+          </Member>
+          <Member Name="Active" Value="1" ed:Guid="6eee9970-37a6-45de-9b90-98cc6159ddf2">
+            <ed:Attributes>
+              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <ed:AttributeConstructor />
+                <ed:Properties>
+                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <string xmlns="">Active</string>
+                  </ed:PropertyValue>
+                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <int xmlns="">0</int>
+                  </ed:PropertyValue>
+                </ed:Properties>
+              </ed:Attribute>
+            </ed:Attributes>
+          </Member>
+        </EnumType>
+        <EnumType Name="DefaultMasterStatusType" ed:Namespace="MyERP.DataAccess.Enum" UnderlyingType="Int16" ed:Guid="883e4f57-4cdf-4f28-b748-b57bb0c408e2">
+          <Member Name="Inactive" Value="0" ed:Guid="d872b8a1-99be-4343-a4f7-a3e5184960a7">
+            <ed:Attributes>
+              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <ed:AttributeConstructor />
+                <ed:Properties>
+                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <string xmlns="">Inactive</string>
+                  </ed:PropertyValue>
+                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <int xmlns="">1</int>
+                  </ed:PropertyValue>
+                </ed:Properties>
+              </ed:Attribute>
+            </ed:Attributes>
+          </Member>
+          <Member Name="Active" Value="1" ed:Guid="8476b5a6-6d69-4345-bfc6-92d964a76c9f">
+            <ed:Attributes>
+              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <ed:AttributeConstructor />
+                <ed:Properties>
+                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <string xmlns="">Active</string>
+                  </ed:PropertyValue>
+                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <int xmlns="">0</int>
+                  </ed:PropertyValue>
+                </ed:Properties>
+              </ed:Attribute>
+            </ed:Attributes>
+          </Member>
+        </EnumType>
+        <EnumType Name="CashDocumentStatusType" ed:Namespace="MyERP.DataAccess.Enum" UnderlyingType="Int16" ed:Guid="0214f0e1-bd5e-41d5-b490-9d47df9c88b9">
+          <Member Name="Draft" Value="0" ed:Guid="bafcaf0f-d020-44a7-87e1-b7378e6e0c3f">
+            <ed:Attributes>
+              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <ed:AttributeConstructor />
+                <ed:Properties>
+                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <string xmlns="">Draft</string>
+                  </ed:PropertyValue>
+                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <int xmlns="">0</int>
+                  </ed:PropertyValue>
+                </ed:Properties>
+              </ed:Attribute>
+            </ed:Attributes>
+          </Member>
+          <Member Name="Released" Value="1" ed:Guid="606a0275-5c43-4029-a334-d973382b8d01">
+            <ed:Attributes>
+              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <ed:AttributeConstructor />
+                <ed:Properties>
+                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <string xmlns="">Released</string>
+                  </ed:PropertyValue>
+                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <int xmlns="">1</int>
+                  </ed:PropertyValue>
+                </ed:Properties>
+              </ed:Attribute>
+            </ed:Attributes>
+          </Member>
+        </EnumType>
+        <EnumType Name="DefaultDocumentStatusType" ed:Namespace="MyERP.DataAccess.Enum" UnderlyingType="Int16" ed:Guid="c8db2390-a4d4-48c0-a611-82ab1e9e42b6">
+          <Member Name="Draft" Value="0" ed:Guid="50c37b0d-2c2d-4e6f-aef9-4de9f577a0c3">
+            <ed:Attributes>
+              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <ed:AttributeConstructor />
+                <ed:Properties>
+                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <string xmlns="">Draft</string>
+                  </ed:PropertyValue>
+                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <int xmlns="">0</int>
+                  </ed:PropertyValue>
+                </ed:Properties>
+              </ed:Attribute>
+            </ed:Attributes>
+          </Member>
+          <Member Name="Released" Value="1" ed:Guid="508d0d75-de65-4c81-92d2-cdbdae0d1bc7">
+            <ed:Attributes>
+              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <ed:AttributeConstructor />
+                <ed:Properties>
+                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <string xmlns="">Released</string>
+                  </ed:PropertyValue>
+                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <int xmlns="">1</int>
+                  </ed:PropertyValue>
+                </ed:Properties>
+              </ed:Attribute>
+            </ed:Attributes>
+          </Member>
+        </EnumType>
+        <EnumType Name="EInvoiceDocumentStatusType" ed:Namespace="MyERP.DataAccess.Enum" UnderlyingType="Int16" ed:Guid="ec54c74e-d3f2-46fb-8cc2-779f57d082ed">
+          <Member Name="Draft" Value="0" ed:Guid="7bd2bec7-bef0-4464-974f-3efa08808aae">
+            <ed:Attributes>
+              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <ed:AttributeConstructor />
+                <ed:Properties>
+                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <string xmlns="">Draft</string>
+                  </ed:PropertyValue>
+                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <int xmlns="">0</int>
+                  </ed:PropertyValue>
+                </ed:Properties>
+              </ed:Attribute>
+            </ed:Attributes>
+          </Member>
+          <Member Name="Released" Value="1" ed:Guid="3f95c1e9-305d-47c6-89e9-edd669052c1e">
+            <ed:Attributes>
+              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <ed:AttributeConstructor />
+                <ed:Properties>
+                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <string xmlns="">Released</string>
+                  </ed:PropertyValue>
+                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <int xmlns="">1</int>
+                  </ed:PropertyValue>
+                </ed:Properties>
+              </ed:Attribute>
+            </ed:Attributes>
+          </Member>
+          <Member Name="Signed" Value="2" ed:Guid="7b7df3e3-0697-4460-ac1f-261f1abcef6f">
+            <ed:Attributes>
+              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <ed:AttributeConstructor />
+                <ed:Properties>
+                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <string xmlns="">Signed</string>
+                  </ed:PropertyValue>
+                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <int xmlns="">2</int>
+                  </ed:PropertyValue>
+                </ed:Properties>
+              </ed:Attribute>
+            </ed:Attributes>
+          </Member>
+        </EnumType>
+        <EnumType Name="TaxAuthoritiesStatus" ed:Namespace="MyERP.DataAccess.Enum" UnderlyingType="Int16" ed:Guid="628fc91e-ee19-4c87-a649-5989f25f7ebc">
+          <Member Name="Wait" Value="0" ed:Guid="410a63c1-3512-47dd-a62e-dd715b832cd7">
+            <ed:Attributes>
+              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <ed:AttributeConstructor />
+                <ed:Properties>
+                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <string xmlns="">Wait</string>
+                  </ed:PropertyValue>
+                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <int xmlns="">0</int>
+                  </ed:PropertyValue>
+                </ed:Properties>
+              </ed:Attribute>
+            </ed:Attributes>
+          </Member>
+          <Member Name="Actived" Value="1" ed:Guid="8b8a0a52-9869-4b0c-be55-1eea16f60129">
+            <ed:Attributes>
+              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <ed:AttributeConstructor />
+                <ed:Properties>
+                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <string xmlns="">Actived</string>
+                  </ed:PropertyValue>
+                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                    <int xmlns="">1</int>
+                  </ed:PropertyValue>
+                </ed:Properties>
+              </ed:Attribute>
+            </ed:Attributes>
+          </Member>
+        </EnumType>
         <Association Name="User_Client_CreatedBy" ed:Guid="cc64066d-a254-493f-8be0-7609622c4e6a">
           <End Role="RecCreatedByUser" Type="MyERP.DataAccess.User" Multiplicity="1" />
           <End Role="Clients" Type="MyERP.DataAccess.Client" Multiplicity="*" />

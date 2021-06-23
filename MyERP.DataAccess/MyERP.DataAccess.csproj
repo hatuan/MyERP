@@ -71,6 +71,7 @@
     <Compile Include="Entities\MyERPDataModel.BusinessPartnerGroup.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.BusinessPartnerPriceGroup.cs" />
     <Compile Include="Entities\MyERPDataModel.BusinessPartnerPriceGroup.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.CashDocumentStatusType.cs" />
     <Compile Include="Entities\MyERPDataModel.CashHeader.cs" />
     <Compile Include="Entities\MyERPDataModel.CashHeader.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.CashLine.cs" />
@@ -79,10 +80,14 @@
     <Compile Include="Entities\MyERPDataModel.Client.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Currency.cs" />
     <Compile Include="Entities\MyERPDataModel.Currency.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.CurrencyStatusType.cs" />
+    <Compile Include="Entities\MyERPDataModel.DefaultDocumentStatusType.cs" />
+    <Compile Include="Entities\MyERPDataModel.DefaultMasterStatusType.cs" />
     <Compile Include="Entities\MyERPDataModel.EInvFormRelease.cs" />
     <Compile Include="Entities\MyERPDataModel.EInvFormRelease.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.EInvFormType.cs" />
     <Compile Include="Entities\MyERPDataModel.EInvFormType.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.EInvoiceDocumentStatusType.cs" />
     <Compile Include="Entities\MyERPDataModel.EInvoiceHeader.cs" />
     <Compile Include="Entities\MyERPDataModel.EInvoiceHeader.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.EInvoiceLine.cs" />
@@ -123,6 +128,7 @@
     <Compile Include="Entities\MyERPDataModel.Option.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.Organization.cs" />
     <Compile Include="Entities\MyERPDataModel.Organization.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.OrganizationStatusType.cs" />
     <Compile Include="Entities\MyERPDataModel.PosHeader.cs" />
     <Compile Include="Entities\MyERPDataModel.PosHeader.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.PosLine.cs" />
@@ -149,6 +155,7 @@
     <Compile Include="Entities\MyERPDataModel.SalesPriceGroup.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.StockkeepingUnit.cs" />
     <Compile Include="Entities\MyERPDataModel.StockkeepingUnit.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.TaxAuthoritiesStatus.cs" />
     <Compile Include="Entities\MyERPDataModel.TransferHeader.cs" />
     <Compile Include="Entities\MyERPDataModel.TransferHeader.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.TransferLine.cs" />
@@ -171,10 +178,7 @@
     <Compile Include="Entities\MyERPDataModel.Vat.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.VatEntry.cs" />
     <Compile Include="Entities\MyERPDataModel.VatEntry.Generated.cs" />
-    <Compile Include="Enum\EInvoiceFormReleaseTaxAuthStatus.cs" />
-    <Compile Include="Enum\EInvoiceDocumentStatusType.cs" />
     <Compile Include="Enum\PurchaseInvoiceDocumentStatusType.cs" />
-    <Compile Include="Enum\CashDocumentStatusType.cs" />
     <Compile Include="Enum\CurrencySearchField.cs" />
     <Compile Include="Enum\DocumentType.cs" />
     <Compile Include="Enum\SalesPosDocumentStatusType.cs" />
@@ -182,9 +186,6 @@
     <Compile Include="Enum\PurchaseInvoiceLineType.cs" />
     <Compile Include="Enum\SalesPriceSalesType.cs" />
     <Compile Include="Enum\GroupLevelType.cs" />
-    <Compile Include="Enum\DefaultStatusType.cs" />
-    <Compile Include="Enum\CurrencyStatusType.cs" />
-    <Compile Include="Enum\OrganizationStatusType.cs" />
     <Compile Include="HintExtension.cs" />
     <Compile Include="HintInterceptor.cs" />
     <Compile Include="Mapping\MyERPDataModel.AccountConfiguration.cs" />

@@ -1,6 +1,4 @@
 ﻿using MyERP.BusinessObject.ViewModels;
-using MyERP.DataAccess;
-using MyERP.DataAccess.Enum;
 using MyERP.Infrastructure;
 using System;
 using System.Collections.Generic;

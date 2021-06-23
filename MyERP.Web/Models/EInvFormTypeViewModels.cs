@@ -36,7 +36,7 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Status")]
-        public DefaultStatusType Status { get; set; }
+        public DefaultMasterStatusType Status { get; set; }
 
         [Required]
         [Display(Name = "Created By")]
@@ -168,7 +168,7 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Status")]
-        public DefaultStatusType Status { get; set; }
+        public DefaultMasterStatusType Status { get; set; }
 
     }
 
@@ -241,6 +241,6 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Status")]
-        public DefaultStatusType Status { get; set; }
+        public DefaultMasterStatusType Status { get; set; }
     }
 }

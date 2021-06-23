@@ -1,124 +1,540 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<EntityDeveloper Version="6.6.936.0">
+<EntityDeveloper Version="6.11.1213.0">
   <ModelSettings xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" AppConnectionStringName="Connection" ConnectionStringInAppConfig="True" RegenareteConnectionStringInAppConfig="False" DetectTPTInheritance="False" UseDatabaseComments="False" EntityFrameworkVersion="Version6" IncludeForeignKeysInModel="true" DetectFunctionBasedColumnDefault="false">
     <Connection ConnectionString="Data Source=10.10.20.3;Initial Catalog=myerp;Integrated Security=False;Persist Security Info=True;User ID=myerp;Password=LWhhYTu2" Provider="System.Data.SqlClient" />
     <Generation>
       <GeneratedFiles>
-        <File Name="MyERPDataModel.EntitiesModel.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Context" />
-        <File Name="MyERPDataModel.User.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.Client.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.Currency.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.Organization.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.Role.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.UserInRole.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.Uom.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.Item.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.ItemUom.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.ItemGroup.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.BusinessPartnerGroup.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.BusinessPartner.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.SalesHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.SalesLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.PosHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.PosLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.ItemDiscountGroup.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.SalesPriceGroup.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.SalesPrice.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.BusinessPartnerPriceGroup.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.BusinessPartnerDiscGroup.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.Location.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.NoSequence.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.NoSequenceLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.Option.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.PurchaseHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.PurchaseLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.CashHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.CashLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.Account.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.AccountsReceivableLedger.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.AccountsPayableLedger.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.ItemLedgerEntry.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.GeneralLedgerEntry.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.Report.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.PurchaseInvoiceHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.PurchaseInvoiceLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.Vat.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.VatEntry.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.Job.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.StockkeepingUnit.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.JobGroup.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.GeneralJournalHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.GeneralJournalLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.ItemJournalHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.ItemJournalLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.TransferHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.TransferLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.TransferReceiptHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.TransferReceiptLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.TransferShipmentHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.TransferShipmentLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.EInvFormType.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.EInvFormRelease.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.EInvoiceHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.EInvoiceLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.EInvoiceSigned.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.UserConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.ClientConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.CurrencyConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.OrganizationConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.RoleConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.UserInRoleConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.UomConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.ItemConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.ItemUomConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.ItemGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.BusinessPartnerGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.BusinessPartnerConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.SalesHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.SalesLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.PosHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.PosLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.ItemDiscountGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.SalesPriceGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.SalesPriceConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.BusinessPartnerPriceGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.BusinessPartnerDiscGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.LocationConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.NoSequenceConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.NoSequenceLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.OptionConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.PurchaseHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.PurchaseLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.CashHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.CashLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.AccountConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.AccountsReceivableLedgerConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.AccountsPayableLedgerConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.ItemLedgerEntryConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.GeneralLedgerEntryConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.ReportConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.PurchaseInvoiceHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.PurchaseInvoiceLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.VatConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.VatEntryConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.JobConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.StockkeepingUnitConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.JobGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.GeneralJournalHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.GeneralJournalLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.ItemJournalHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.ItemJournalLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.TransferHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.TransferLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.TransferReceiptHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.TransferReceiptLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.TransferShipmentHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.TransferShipmentLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.EInvFormTypeConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.EInvFormReleaseConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.EInvoiceHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.EInvoiceLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
-        <File Name="MyERPDataModel.EInvoiceSignedConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.EntitiesModel.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Context" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EntitiesModel.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Context" />
+        <File Name="MyERPDataModel.User.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.User.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.Client.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Client.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.Currency.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Currency.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.Organization.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Organization.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.Role.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Role.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.UserInRole.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.UserInRole.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.Uom.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Uom.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.Item.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Item.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.ItemUom.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemUom.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.ItemGroup.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.BusinessPartnerGroup.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.BusinessPartnerGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.BusinessPartner.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.BusinessPartner.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.SalesHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.SalesHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.SalesLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.SalesLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.PosHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PosHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.PosLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PosLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.ItemDiscountGroup.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemDiscountGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.SalesPriceGroup.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.SalesPriceGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.SalesPrice.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.SalesPrice.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.BusinessPartnerPriceGroup.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.BusinessPartnerPriceGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.BusinessPartnerDiscGroup.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.BusinessPartnerDiscGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.Location.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Location.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.NoSequence.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.NoSequence.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.NoSequenceLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.NoSequenceLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.Option.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Option.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.PurchaseHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PurchaseHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.PurchaseLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PurchaseLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.CashHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.CashHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.CashLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.CashLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.Account.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Account.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.AccountsReceivableLedger.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.AccountsReceivableLedger.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.AccountsPayableLedger.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.AccountsPayableLedger.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.ItemLedgerEntry.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemLedgerEntry.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.GeneralLedgerEntry.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.GeneralLedgerEntry.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.Report.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Report.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.PurchaseInvoiceHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PurchaseInvoiceHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.PurchaseInvoiceLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PurchaseInvoiceLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.Vat.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Vat.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.VatEntry.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.VatEntry.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.Job.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Job.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.StockkeepingUnit.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.StockkeepingUnit.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.JobGroup.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.JobGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.GeneralJournalHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.GeneralJournalHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.GeneralJournalLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.GeneralJournalLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.ItemJournalHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemJournalHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.ItemJournalLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemJournalLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.TransferHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.TransferLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.TransferReceiptHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferReceiptHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.TransferReceiptLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferReceiptLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.TransferShipmentHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferShipmentHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.TransferShipmentLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferShipmentLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.EInvFormType.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvFormType.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.EInvFormRelease.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvFormRelease.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.EInvoiceHeader.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvoiceHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.EInvoiceLine.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvoiceLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.EInvoiceSigned.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvoiceSigned.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.OrganizationStatusType.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.CurrencyStatusType.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.DefaultMasterStatusType.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.CashDocumentStatusType.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.DefaultDocumentStatusType.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.EInvoiceDocumentStatusType.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.TaxAuthoritiesStatus.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
+        <File Name="MyERPDataModel.UserConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.UserConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.ClientConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ClientConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.CurrencyConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.CurrencyConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.OrganizationConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.OrganizationConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.RoleConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.RoleConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.UserInRoleConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.UserInRoleConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.UomConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.UomConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.ItemConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.ItemUomConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemUomConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.ItemGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.BusinessPartnerGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.BusinessPartnerGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.BusinessPartnerConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.BusinessPartnerConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.SalesHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.SalesHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.SalesLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.SalesLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.PosHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PosHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.PosLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PosLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.ItemDiscountGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemDiscountGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.SalesPriceGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.SalesPriceGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.SalesPriceConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.SalesPriceConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.BusinessPartnerPriceGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.BusinessPartnerPriceGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.BusinessPartnerDiscGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.BusinessPartnerDiscGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.LocationConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.LocationConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.NoSequenceConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.NoSequenceConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.NoSequenceLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.NoSequenceLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.OptionConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.OptionConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.PurchaseHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PurchaseHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.PurchaseLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PurchaseLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.CashHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.CashHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.CashLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.CashLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.AccountConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.AccountConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.AccountsReceivableLedgerConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.AccountsReceivableLedgerConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.AccountsPayableLedgerConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.AccountsPayableLedgerConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.ItemLedgerEntryConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemLedgerEntryConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.GeneralLedgerEntryConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.GeneralLedgerEntryConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.ReportConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ReportConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.PurchaseInvoiceHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PurchaseInvoiceHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.PurchaseInvoiceLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PurchaseInvoiceLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.VatConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.VatConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.VatEntryConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.VatEntryConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.JobConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.JobConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.StockkeepingUnitConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.StockkeepingUnitConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.JobGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.JobGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.GeneralJournalHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.GeneralJournalHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.GeneralJournalLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.GeneralJournalLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.ItemJournalHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemJournalHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.ItemJournalLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemJournalLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.TransferHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.TransferLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.TransferReceiptHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferReceiptHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.TransferReceiptLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferReceiptLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.TransferShipmentHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferShipmentHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.TransferShipmentLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferShipmentLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.EInvFormTypeConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvFormTypeConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.EInvFormReleaseConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvFormReleaseConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.EInvoiceHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvoiceHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.EInvoiceLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvoiceLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.EInvoiceSignedConfiguration.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvoiceSignedConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Mapping" />
+        <File Name="MyERPDataModel.EntitiesModel.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Context" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EntitiesModel.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Context" />
+        <File Name="MyERPDataModel.User.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.User.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.Client.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Client.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.Currency.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Currency.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.Organization.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Organization.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.Role.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Role.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.UserInRole.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.UserInRole.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.Uom.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Uom.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.Item.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Item.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.ItemUom.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemUom.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.ItemGroup.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.BusinessPartnerGroup.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.BusinessPartnerGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.BusinessPartner.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.BusinessPartner.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.SalesHeader.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.SalesHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.SalesLine.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.SalesLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.PosHeader.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PosHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.PosLine.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PosLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.ItemDiscountGroup.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemDiscountGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.SalesPriceGroup.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.SalesPriceGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.SalesPrice.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.SalesPrice.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.BusinessPartnerPriceGroup.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.BusinessPartnerPriceGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.BusinessPartnerDiscGroup.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.BusinessPartnerDiscGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.Location.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Location.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.NoSequence.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.NoSequence.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.NoSequenceLine.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.NoSequenceLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.Option.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Option.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.PurchaseHeader.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PurchaseHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.PurchaseLine.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PurchaseLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.CashHeader.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.CashHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.CashLine.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.CashLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.Account.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Account.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.AccountsReceivableLedger.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.AccountsReceivableLedger.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.AccountsPayableLedger.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.AccountsPayableLedger.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.ItemLedgerEntry.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemLedgerEntry.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.GeneralLedgerEntry.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.GeneralLedgerEntry.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.Report.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Report.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.PurchaseInvoiceHeader.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PurchaseInvoiceHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.PurchaseInvoiceLine.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PurchaseInvoiceLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.Vat.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Vat.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.VatEntry.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.VatEntry.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.Job.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.Job.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.StockkeepingUnit.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.StockkeepingUnit.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.JobGroup.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.JobGroup.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.GeneralJournalHeader.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.GeneralJournalHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.GeneralJournalLine.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.GeneralJournalLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.ItemJournalHeader.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemJournalHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.ItemJournalLine.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemJournalLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.TransferHeader.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.TransferLine.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.TransferReceiptHeader.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferReceiptHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.TransferReceiptLine.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferReceiptLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.TransferShipmentHeader.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferShipmentHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.TransferShipmentLine.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferShipmentLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.EInvFormType.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvFormType.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.EInvFormRelease.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvFormRelease.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.EInvoiceHeader.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvoiceHeader.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.EInvoiceLine.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvoiceLine.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.EInvoiceSigned.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvoiceSigned.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.OrganizationStatusType.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.CurrencyStatusType.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.DefaultMasterStatusType.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.CashDocumentStatusType.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.DefaultDocumentStatusType.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.EInvoiceDocumentStatusType.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.TaxAuthoritiesStatus.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
+        <File Name="MyERPDataModel.UserConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.UserConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.ClientConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ClientConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.CurrencyConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.CurrencyConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.OrganizationConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.OrganizationConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.RoleConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.RoleConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.UserInRoleConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.UserInRoleConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.UomConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.UomConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.ItemConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.ItemUomConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemUomConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.ItemGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.BusinessPartnerGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.BusinessPartnerGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.BusinessPartnerConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.BusinessPartnerConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.SalesHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.SalesHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.SalesLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.SalesLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.PosHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PosHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.PosLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PosLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.ItemDiscountGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemDiscountGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.SalesPriceGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.SalesPriceGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.SalesPriceConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.SalesPriceConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.BusinessPartnerPriceGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.BusinessPartnerPriceGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.BusinessPartnerDiscGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.BusinessPartnerDiscGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.LocationConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.LocationConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.NoSequenceConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.NoSequenceConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.NoSequenceLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.NoSequenceLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.OptionConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.OptionConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.PurchaseHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PurchaseHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.PurchaseLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PurchaseLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.CashHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.CashHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.CashLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.CashLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.AccountConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.AccountConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.AccountsReceivableLedgerConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.AccountsReceivableLedgerConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.AccountsPayableLedgerConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.AccountsPayableLedgerConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.ItemLedgerEntryConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemLedgerEntryConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.GeneralLedgerEntryConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.GeneralLedgerEntryConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.ReportConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ReportConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.PurchaseInvoiceHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PurchaseInvoiceHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.PurchaseInvoiceLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.PurchaseInvoiceLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.VatConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.VatConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.VatEntryConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.VatEntryConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.JobConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.JobConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.StockkeepingUnitConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.StockkeepingUnitConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.JobGroupConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.JobGroupConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.GeneralJournalHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.GeneralJournalHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.GeneralJournalLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.GeneralJournalLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.ItemJournalHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemJournalHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.ItemJournalLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.ItemJournalLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.TransferHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.TransferLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.TransferReceiptHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferReceiptHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.TransferReceiptLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferReceiptLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.TransferShipmentHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferShipmentHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.TransferShipmentLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.TransferShipmentLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.EInvFormTypeConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvFormTypeConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.EInvFormReleaseConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvFormReleaseConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.EInvoiceHeaderConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvoiceHeaderConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.EInvoiceLineConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvoiceLineConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.EInvoiceSignedConfiguration.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" OverwriteMode="OverwriteIfAutoGenerated" />
+        <File Name="MyERPDataModel.EInvoiceSignedConfiguration.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping" />
+        <File Name="MyERPDataModel.User.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.Client.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.Currency.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.Organization.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.Role.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.UserInRole.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.Uom.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.Item.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.ItemUom.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.ItemGroup.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.BusinessPartnerGroup.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.BusinessPartner.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.SalesHeader.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.SalesLine.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.PosHeader.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.PosLine.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.ItemDiscountGroup.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.SalesPriceGroup.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.SalesPrice.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.BusinessPartnerPriceGroup.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.BusinessPartnerDiscGroup.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.Location.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.NoSequence.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.NoSequenceLine.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.Option.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.PurchaseHeader.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.PurchaseLine.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.CashHeader.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.CashLine.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.Account.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.AccountsReceivableLedger.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.AccountsPayableLedger.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.ItemLedgerEntry.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.GeneralLedgerEntry.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.Report.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.PurchaseInvoiceHeader.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.PurchaseInvoiceLine.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.Vat.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.VatEntry.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.Job.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.StockkeepingUnit.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.JobGroup.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.GeneralJournalHeader.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.GeneralJournalLine.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.ItemJournalHeader.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.ItemJournalLine.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.TransferHeader.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.TransferLine.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.TransferReceiptHeader.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.TransferReceiptLine.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.TransferShipmentHeader.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.TransferShipmentLine.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.EInvFormType.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.EInvFormRelease.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.EInvoiceHeader.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.EInvoiceLine.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
+        <File Name="MyERPDataModel.EInvoiceSigned.Metadata.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata" />
       </GeneratedFiles>
     </Generation>
     <DatabaseFirstNamingRules>
@@ -146,10 +562,10 @@
     </Diagrams>
     <Templates>
       <Template Name="DbContext" Description="Use this template to generate a strongly-typed DbContext class and persistence ignorant entity classes." Enabled="True" PredefinedTemplateName="Entity DbContext C#">
-        <ed:Property Name="ValidationFramework" Type="EntityDeveloper.TemplateEngine.ValidationFramework, EntityDeveloper.Common, Version=6.6.936.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="ValidationFramework" Type="EntityDeveloper.TemplateEngine.ValidationFramework, EntityDeveloper.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <ValidationFramework>DataAnnotations</ValidationFramework>
         </ed:Property>
-        <ed:Property Name="ValidationErrorMessages" Type="EntityDeveloper.TemplateEngine.ValidationErrorMessages, EntityDeveloper.Common, Version=6.6.936.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="ValidationErrorMessages" Type="EntityDeveloper.TemplateEngine.ValidationErrorMessages, EntityDeveloper.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <ValidationErrorMessages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
         </ed:Property>
         <ed:Property Name="FilePerClass" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -161,14 +577,14 @@
         <ed:Property Name="HeaderTimestampVersionControlTag" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <string d6p1:nil="true" xmlns:d6p1="http://www.w3.org/2001/XMLSchema-instance" />
         </ed:Property>
-        <ed:Property Name="EntitiesOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.6.936.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="EntitiesOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <OutputInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
             <Project />
             <ProjectFolder />
             <DestinationFolder>C:\Projects\MyERP-Web\MyERP.DataAccess\Entities</DestinationFolder>
           </OutputInfo>
         </ed:Property>
-        <ed:Property Name="ContextOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.6.936.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="ContextOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <OutputInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
             <Project />
             <ProjectFolder />
@@ -193,11 +609,17 @@
         <ed:Property Name="PropertyChangePartialMethods" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <boolean>false</boolean>
         </ed:Property>
-        <ed:Property Name="WcfDataContractAttributes" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+        <ed:Property Name="GenerateDummyComments" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <boolean>false</boolean>
         </ed:Property>
-        <ed:Property Name="WcfDataMemberOnNavigationProperties" Type="EntityDeveloper.WcfDataMemberGenerationBehavior, EntityDeveloper.Orm.Common, Version=6.6.936.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
-          <WcfDataMemberGenerationBehavior>All</WcfDataMemberGenerationBehavior>
+        <ed:Property Name="GenerateGeneratedCodeAttributes" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="PrimitiveDefaultValueGeneration" Type="EntityDeveloper.DefaultValueBehavior, EntityDeveloper.Orm.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <DefaultValueBehavior>Literal</DefaultValueBehavior>
+        </ed:Property>
+        <ed:Property Name="NullableReferenceTypes" Type="EntityDeveloper.ReferenceTypeNullability, EntityDeveloper.Orm.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <ReferenceTypeNullability>Default</ReferenceTypeNullability>
         </ed:Property>
         <ed:Property Name="EnableWinFormsDataBinding" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <boolean>false</boolean>
@@ -205,25 +627,25 @@
         <ed:Property Name="UseObservableCollection" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <boolean>false</boolean>
         </ed:Property>
-        <ed:Property Name="GenerateDummyComments" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <boolean>false</boolean>
+        <ed:Property Name="CollectionPropertyType" Type="EntityDeveloper.EntityFramework.EntityCollectionPropertyType, EntityDeveloper.Orm.EntityFramework, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <EntityCollectionPropertyType>Default</EntityCollectionPropertyType>
         </ed:Property>
-        <ed:Property Name="GenerateGeneratedCodeAttributes" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <boolean>false</boolean>
+        <ed:Property Name="CollectionInitializationType" Type="EntityDeveloper.EntityFramework.EntityCollectionInitializationType, EntityDeveloper.Orm.EntityFramework, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <EntityCollectionInitializationType>Default</EntityCollectionInitializationType>
         </ed:Property>
         <ed:Property Name="FluentMapping" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <boolean>true</boolean>
         </ed:Property>
-        <ed:Property Name="MappingGenerationStrategy" Type="EntityDeveloper.EntityFramework.CodeFirstMappingGenerationStrategy, EntityDeveloper.Orm.EntityFramework, Version=6.6.936.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="MappingGenerationStrategy" Type="EntityDeveloper.EntityFramework.CodeFirstMappingGenerationStrategy, EntityDeveloper.Orm.EntityFramework, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <CodeFirstMappingGenerationStrategy>UseConfigurationClasses</CodeFirstMappingGenerationStrategy>
         </ed:Property>
         <ed:Property Name="DatabaseIndependent" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <boolean>false</boolean>
         </ed:Property>
-        <ed:Property Name="DisabledConventions" Type="EntityDeveloper.EntityFramework.CodeFirstConfigurationConvention, EntityDeveloper.Orm.EntityFramework, Version=6.6.936.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="DisabledConventions" Type="EntityDeveloper.EntityFramework.CodeFirstConfigurationConvention, EntityDeveloper.Orm.EntityFramework, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <CodeFirstConfigurationConvention />
         </ed:Property>
-        <ed:Property Name="ConfigurationsOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.6.936.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+        <ed:Property Name="ConfigurationsOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <OutputInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
             <Project />
             <ProjectFolder />
@@ -250,6 +672,188 @@
         </ed:Property>
         <ed:Property Name="UseDbConfigurationTypeAttribute" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="SerializationLibrary" Type="EntityDeveloper.SerializationLibrary, EntityDeveloper.Orm.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <SerializationLibrary>None</SerializationLibrary>
+        </ed:Property>
+        <ed:Property Name="SerializeOriginalColumnNames" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="SerializeNullValues" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="SerializeNavigationProperties" Type="EntityDeveloper.NavigationPropertySerializationBehavior, EntityDeveloper.Orm.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <NavigationPropertySerializationBehavior>All</NavigationPropertySerializationBehavior>
+        </ed:Property>
+        <ed:Property Name="WcfDataContractAttributes" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="WcfDataMemberOnNavigationProperties" Type="EntityDeveloper.WcfDataMemberGenerationBehavior, EntityDeveloper.Orm.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <WcfDataMemberGenerationBehavior>All</WcfDataMemberGenerationBehavior>
+        </ed:Property>
+      </Template>
+      <Template Name="DbContextTemplate" Enabled="True" File="..\Next\MyERP.Data\DbContextTemplate.tmpl">
+        <ed:Property Name="ValidationFramework" Type="EntityDeveloper.TemplateEngine.ValidationFramework, EntityDeveloper.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <ValidationFramework>DataAnnotations</ValidationFramework>
+        </ed:Property>
+        <ed:Property Name="ValidationErrorMessages" Type="EntityDeveloper.TemplateEngine.ValidationErrorMessages, EntityDeveloper.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <ValidationErrorMessages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </ed:Property>
+        <ed:Property Name="FilePerClass" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="ModelNameAsFilesPrefix" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="HeaderTimestampVersionControlTag" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <string d6p1:nil="true" xmlns:d6p1="http://www.w3.org/2001/XMLSchema-instance" />
+        </ed:Property>
+        <ed:Property Name="EntitiesOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <OutputInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <Project />
+            <ProjectFolder />
+            <DestinationFolder>C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities</DestinationFolder>
+          </OutputInfo>
+        </ed:Property>
+        <ed:Property Name="ContextOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <OutputInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <Project />
+            <ProjectFolder />
+            <DestinationFolder>C:\Projects\MyERP-WEB\Next\MyERP.Data\Context</DestinationFolder>
+          </OutputInfo>
+        </ed:Property>
+        <ed:Property Name="GeneratePartialClass" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="ImplementCloneable" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="ImplementEquals" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="ImplementINotifyPropertyChanging" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="ImplementINotifyPropertyChanged" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="PropertyChangePartialMethods" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="GenerateDummyComments" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="GenerateGeneratedCodeAttributes" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="PrimitiveDefaultValueGeneration" Type="EntityDeveloper.DefaultValueBehavior, EntityDeveloper.Orm.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <DefaultValueBehavior>Literal</DefaultValueBehavior>
+        </ed:Property>
+        <ed:Property Name="NullableReferenceTypes" Type="EntityDeveloper.ReferenceTypeNullability, EntityDeveloper.Orm.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <ReferenceTypeNullability>Default</ReferenceTypeNullability>
+        </ed:Property>
+        <ed:Property Name="EnableWinFormsDataBinding" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="UseObservableCollection" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="CollectionPropertyType" Type="EntityDeveloper.EntityFramework.EntityCollectionPropertyType, EntityDeveloper.Orm.EntityFramework, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <EntityCollectionPropertyType>Default</EntityCollectionPropertyType>
+        </ed:Property>
+        <ed:Property Name="CollectionInitializationType" Type="EntityDeveloper.EntityFramework.EntityCollectionInitializationType, EntityDeveloper.Orm.EntityFramework, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <EntityCollectionInitializationType>Default</EntityCollectionInitializationType>
+        </ed:Property>
+        <ed:Property Name="FluentMapping" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="MappingGenerationStrategy" Type="EntityDeveloper.EntityFramework.CodeFirstMappingGenerationStrategy, EntityDeveloper.Orm.EntityFramework, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <CodeFirstMappingGenerationStrategy>UseConfigurationClasses</CodeFirstMappingGenerationStrategy>
+        </ed:Property>
+        <ed:Property Name="DatabaseIndependent" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="DisabledConventions" Type="EntityDeveloper.EntityFramework.CodeFirstConfigurationConvention, EntityDeveloper.Orm.EntityFramework, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <CodeFirstConfigurationConvention />
+        </ed:Property>
+        <ed:Property Name="ConfigurationsOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <OutputInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <Project />
+            <ProjectFolder />
+            <DestinationFolder>C:\Projects\MyERP-WEB\Next\MyERP.Data\Mapping</DestinationFolder>
+          </OutputInfo>
+        </ed:Property>
+        <ed:Property Name="AutoDetectChangesEnabled" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="ProxyCreationEnabled" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="ValidateOnSaveEnabled" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="JsonFileBasePath" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <string d6p1:nil="true" xmlns:d6p1="http://www.w3.org/2001/XMLSchema-instance" />
+        </ed:Property>
+        <ed:Property Name="IncludeEnvironmentVariables" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="ConfigurationTypeName" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <string>%Default%</string>
+        </ed:Property>
+        <ed:Property Name="UseDbConfigurationTypeAttribute" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="SerializationLibrary" Type="EntityDeveloper.SerializationLibrary, EntityDeveloper.Orm.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <SerializationLibrary>None</SerializationLibrary>
+        </ed:Property>
+        <ed:Property Name="SerializeOriginalColumnNames" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="SerializeNullValues" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="SerializeNavigationProperties" Type="EntityDeveloper.NavigationPropertySerializationBehavior, EntityDeveloper.Orm.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <NavigationPropertySerializationBehavior>All</NavigationPropertySerializationBehavior>
+        </ed:Property>
+        <ed:Property Name="WcfDataContractAttributes" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="WcfDataMemberOnNavigationProperties" Type="EntityDeveloper.WcfDataMemberGenerationBehavior, EntityDeveloper.Orm.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <WcfDataMemberGenerationBehavior>All</WcfDataMemberGenerationBehavior>
+        </ed:Property>
+      </Template>
+      <Template Name="Data Annotations Metadata" Description="Use this template to generate Data Annotations metadata classes and decorate classes and properties with data annotation attributes that specify validation rules, specify how the data is displayed, and define metadata for Windows Communication Foundation(WCF), Dynamic Data and WCF RIA Services." Enabled="True" PredefinedTemplateName="Data Annotations Metadata C#">
+        <ed:Property Name="EntitiesOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <OutputInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <Project />
+            <ProjectFolder />
+            <DestinationFolder>C:\Projects\MyERP-WEB\Next\MyERP.Data\Metadata</DestinationFolder>
+          </OutputInfo>
+        </ed:Property>
+        <ed:Property Name="NestedMetadata" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="GenerateDisplayResourceFile" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="Validation" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>true</boolean>
+        </ed:Property>
+        <ed:Property Name="ValidationErrorMessages" Type="EntityDeveloper.TemplateEngine.ValidationErrorMessages, EntityDeveloper.Common, Version=6.11.1213.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+          <ValidationErrorMessages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </ed:Property>
+        <ed:Property Name="DynamicData" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="RIAService" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="WCFService" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
+        </ed:Property>
+        <ed:Property Name="CoreMVC" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <boolean>false</boolean>
         </ed:Property>
       </Template>
     </Templates>

@@ -1,6 +1,4 @@
 ﻿using MyERP.BusinessObject.ViewModels;
-using MyERP.DataAccess;
-using MyERP.DataAccess.Enum;
 using MyERP.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -57,7 +55,7 @@ namespace MyERP.BusinessObject.Services
                     Id = user.Organization.Id,
                     Code = user.Organization.Code,
                     Name = user.Organization.Description,
-                    Status = (OrganizationStatusType) user.Organization.Status,
+                    Status = user.Organization.Status,
                 };
 
                 return true;

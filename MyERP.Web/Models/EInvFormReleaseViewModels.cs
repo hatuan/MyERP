@@ -114,6 +114,6 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Status")]
-        public DefaultStatusType Status { get; set; }
+        public DefaultMasterStatusType Status { get; set; }
     }
 }

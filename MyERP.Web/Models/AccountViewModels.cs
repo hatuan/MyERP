@@ -33,7 +33,7 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Status", ResourceType = typeof(Resources.Resources))]
-        public DefaultStatusType Status { get; set; }
+        public DefaultMasterStatusType Status { get; set; }
 
         [Required]
         [Display(Name="Created_By", ResourceType = typeof(Resources.Resources))]
@@ -80,7 +80,7 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Status", ResourceType = typeof(Resources.Resources))]
-        public DefaultStatusType Status { get; set; }
+        public DefaultMasterStatusType Status { get; set; }
 
         public Int64 Version { get; set; }
     }
@@ -102,6 +102,6 @@ namespace MyERP.Web.Models
         public String Description { get; set; }
 
         [Display(Name = "Status")]
-        public DefaultStatusType Status { get; set; }
+        public DefaultMasterStatusType Status { get; set; }
     }
 }

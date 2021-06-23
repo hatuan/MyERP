@@ -40,6 +40,6 @@
 {
 	"url": "Default.html",
 	"showLoader": true,
-	"mainWindow": "MyERP.Web.LoginPage, MyERP.Web",
+	"mainWindow": "MyERP.Web.LoginPage, MyERP.Framework",
 	"startup": "MyERP.Web.Program.Main, MyERP.Web"
 }

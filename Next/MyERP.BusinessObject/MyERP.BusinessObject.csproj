@@ -55,9 +55,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\MyERP.DataAccess\MyERP.DataAccess.csproj">
-      <Project>{9529eaec-44b4-4e50-8ebb-5eac00b0912b}</Project>
-      <Name>MyERP.DataAccess</Name>
+    <ProjectReference Include="..\MyERP.Data\MyERP.Data.csproj">
+      <Project>{db337458-f2a0-4786-aaf9-d9b5c7583438}</Project>
+      <Name>MyERP.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\MyERP.Infrastructure\MyERP.Infrastructure.csproj">
       <Project>{d0e83283-45de-4581-aa89-04d1fb674b1c}</Project>

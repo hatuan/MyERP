@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DB337458-F2A0-4786-AAF9-D9B5C7583438}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyERP.Data</RootNamespace>
+    <AssemblyName>MyERP.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Context\MyERPDataModel.EntitiesModel.cs" />
+    <Compile Include="Context\MyERPDataModel.EntitiesModel.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Account.cs" />
+    <Compile Include="Entities\MyERPDataModel.Account.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.AccountsPayableLedger.cs" />
+    <Compile Include="Entities\MyERPDataModel.AccountsPayableLedger.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.AccountsReceivableLedger.cs" />
+    <Compile Include="Entities\MyERPDataModel.AccountsReceivableLedger.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.BusinessPartner.cs" />
+    <Compile Include="Entities\MyERPDataModel.BusinessPartner.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.BusinessPartnerDiscGroup.cs" />
+    <Compile Include="Entities\MyERPDataModel.BusinessPartnerDiscGroup.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.BusinessPartnerGroup.cs" />
+    <Compile Include="Entities\MyERPDataModel.BusinessPartnerGroup.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.BusinessPartnerPriceGroup.cs" />
+    <Compile Include="Entities\MyERPDataModel.BusinessPartnerPriceGroup.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.CashDocumentStatusType.cs" />
+    <Compile Include="Entities\MyERPDataModel.CashHeader.cs" />
+    <Compile Include="Entities\MyERPDataModel.CashHeader.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.CashLine.cs" />
+    <Compile Include="Entities\MyERPDataModel.CashLine.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Client.cs" />
+    <Compile Include="Entities\MyERPDataModel.Client.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Currency.cs" />
+    <Compile Include="Entities\MyERPDataModel.Currency.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.CurrencyStatusType.cs" />
+    <Compile Include="Entities\MyERPDataModel.DefaultDocumentStatusType.cs" />
+    <Compile Include="Entities\MyERPDataModel.DefaultMasterStatusType.cs" />
+    <Compile Include="Entities\MyERPDataModel.EInvFormRelease.cs" />
+    <Compile Include="Entities\MyERPDataModel.EInvFormRelease.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.EInvFormType.cs" />
+    <Compile Include="Entities\MyERPDataModel.EInvFormType.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.EInvoiceDocumentStatusType.cs" />
+    <Compile Include="Entities\MyERPDataModel.EInvoiceHeader.cs" />
+    <Compile Include="Entities\MyERPDataModel.EInvoiceHeader.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.EInvoiceLine.cs" />
+    <Compile Include="Entities\MyERPDataModel.EInvoiceLine.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.EInvoiceSigned.cs" />
+    <Compile Include="Entities\MyERPDataModel.EInvoiceSigned.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.GeneralJournalHeader.cs" />
+    <Compile Include="Entities\MyERPDataModel.GeneralJournalHeader.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.GeneralJournalLine.cs" />
+    <Compile Include="Entities\MyERPDataModel.GeneralJournalLine.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.GeneralLedgerEntry.cs" />
+    <Compile Include="Entities\MyERPDataModel.GeneralLedgerEntry.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Item.cs" />
+    <Compile Include="Entities\MyERPDataModel.Item.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.ItemDiscountGroup.cs" />
+    <Compile Include="Entities\MyERPDataModel.ItemDiscountGroup.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.ItemGroup.cs" />
+    <Compile Include="Entities\MyERPDataModel.ItemGroup.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.ItemJournalHeader.cs" />
+    <Compile Include="Entities\MyERPDataModel.ItemJournalHeader.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.ItemJournalLine.cs" />
+    <Compile Include="Entities\MyERPDataModel.ItemJournalLine.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.ItemLedgerEntry.cs" />
+    <Compile Include="Entities\MyERPDataModel.ItemLedgerEntry.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.ItemUom.cs" />
+    <Compile Include="Entities\MyERPDataModel.ItemUom.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Job.cs" />
+    <Compile Include="Entities\MyERPDataModel.Job.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.JobGroup.cs" />
+    <Compile Include="Entities\MyERPDataModel.JobGroup.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Location.cs" />
+    <Compile Include="Entities\MyERPDataModel.Location.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.NoSequence.cs" />
+    <Compile Include="Entities\MyERPDataModel.NoSequence.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.NoSequenceLine.cs" />
+    <Compile Include="Entities\MyERPDataModel.NoSequenceLine.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Option.cs" />
+    <Compile Include="Entities\MyERPDataModel.Option.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Organization.cs" />
+    <Compile Include="Entities\MyERPDataModel.Organization.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.OrganizationStatusType.cs" />
+    <Compile Include="Entities\MyERPDataModel.PosHeader.cs" />
+    <Compile Include="Entities\MyERPDataModel.PosHeader.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.PosLine.cs" />
+    <Compile Include="Entities\MyERPDataModel.PosLine.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.PurchaseHeader.cs" />
+    <Compile Include="Entities\MyERPDataModel.PurchaseHeader.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.PurchaseInvoiceHeader.cs" />
+    <Compile Include="Entities\MyERPDataModel.PurchaseInvoiceHeader.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.PurchaseInvoiceLine.cs" />
+    <Compile Include="Entities\MyERPDataModel.PurchaseInvoiceLine.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.PurchaseLine.cs" />
+    <Compile Include="Entities\MyERPDataModel.PurchaseLine.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Report.cs" />
+    <Compile Include="Entities\MyERPDataModel.Report.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Role.cs" />
+    <Compile Include="Entities\MyERPDataModel.Role.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.SalesHeader.cs" />
+    <Compile Include="Entities\MyERPDataModel.SalesHeader.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.SalesLine.cs" />
+    <Compile Include="Entities\MyERPDataModel.SalesLine.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.SalesPrice.cs" />
+    <Compile Include="Entities\MyERPDataModel.SalesPrice.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.SalesPriceGroup.cs" />
+    <Compile Include="Entities\MyERPDataModel.SalesPriceGroup.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.StockkeepingUnit.cs" />
+    <Compile Include="Entities\MyERPDataModel.StockkeepingUnit.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.TaxAuthoritiesStatus.cs" />
+    <Compile Include="Entities\MyERPDataModel.TransferHeader.cs" />
+    <Compile Include="Entities\MyERPDataModel.TransferHeader.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.TransferLine.cs" />
+    <Compile Include="Entities\MyERPDataModel.TransferLine.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.TransferReceiptHeader.cs" />
+    <Compile Include="Entities\MyERPDataModel.TransferReceiptHeader.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.TransferReceiptLine.cs" />
+    <Compile Include="Entities\MyERPDataModel.TransferReceiptLine.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.TransferShipmentHeader.cs" />
+    <Compile Include="Entities\MyERPDataModel.TransferShipmentHeader.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.TransferShipmentLine.cs" />
+    <Compile Include="Entities\MyERPDataModel.TransferShipmentLine.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Uom.cs" />
+    <Compile Include="Entities\MyERPDataModel.Uom.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.User.cs" />
+    <Compile Include="Entities\MyERPDataModel.User.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.UserInRole.cs" />
+    <Compile Include="Entities\MyERPDataModel.UserInRole.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.Vat.cs" />
+    <Compile Include="Entities\MyERPDataModel.Vat.Generated.cs" />
+    <Compile Include="Entities\MyERPDataModel.VatEntry.cs" />
+    <Compile Include="Entities\MyERPDataModel.VatEntry.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.AccountConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.AccountConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.AccountsPayableLedgerConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.AccountsPayableLedgerConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.AccountsReceivableLedgerConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.AccountsReceivableLedgerConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.BusinessPartnerConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.BusinessPartnerConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.BusinessPartnerDiscGroupConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.BusinessPartnerDiscGroupConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.BusinessPartnerGroupConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.BusinessPartnerGroupConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.BusinessPartnerPriceGroupConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.BusinessPartnerPriceGroupConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.CashHeaderConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.CashHeaderConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.CashLineConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.CashLineConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ClientConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ClientConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.CurrencyConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.CurrencyConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.EInvFormReleaseConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.EInvFormReleaseConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.EInvFormTypeConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.EInvFormTypeConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.EInvoiceHeaderConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.EInvoiceHeaderConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.EInvoiceLineConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.EInvoiceLineConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.EInvoiceSignedConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.EInvoiceSignedConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.GeneralJournalHeaderConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.GeneralJournalHeaderConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.GeneralJournalLineConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.GeneralJournalLineConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.GeneralLedgerEntryConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.GeneralLedgerEntryConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ItemConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ItemConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ItemDiscountGroupConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ItemDiscountGroupConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ItemGroupConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ItemGroupConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ItemJournalHeaderConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ItemJournalHeaderConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ItemJournalLineConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ItemJournalLineConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ItemLedgerEntryConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ItemLedgerEntryConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ItemUomConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ItemUomConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.JobConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.JobConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.JobGroupConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.JobGroupConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.LocationConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.LocationConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.NoSequenceConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.NoSequenceConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.NoSequenceLineConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.NoSequenceLineConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.OptionConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.OptionConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.OrganizationConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.OrganizationConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.PosHeaderConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.PosHeaderConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.PosLineConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.PosLineConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.PurchaseHeaderConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.PurchaseHeaderConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.PurchaseInvoiceHeaderConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.PurchaseInvoiceHeaderConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.PurchaseInvoiceLineConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.PurchaseInvoiceLineConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.PurchaseLineConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.PurchaseLineConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ReportConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.ReportConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.RoleConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.RoleConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.SalesHeaderConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.SalesHeaderConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.SalesLineConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.SalesLineConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.SalesPriceConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.SalesPriceConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.SalesPriceGroupConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.SalesPriceGroupConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.StockkeepingUnitConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.StockkeepingUnitConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.TransferHeaderConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.TransferHeaderConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.TransferLineConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.TransferLineConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.TransferReceiptHeaderConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.TransferReceiptHeaderConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.TransferReceiptLineConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.TransferReceiptLineConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.TransferShipmentHeaderConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.TransferShipmentHeaderConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.TransferShipmentLineConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.TransferShipmentLineConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.UomConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.UomConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.UserConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.UserConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.UserInRoleConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.UserInRoleConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.VatConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.VatConfiguration.Generated.cs" />
+    <Compile Include="Mapping\MyERPDataModel.VatEntryConfiguration.cs" />
+    <Compile Include="Mapping\MyERPDataModel.VatEntryConfiguration.Generated.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

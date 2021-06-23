@@ -109,7 +109,7 @@ namespace MyERP.Web
             this.panel1.Controls.Add(this.txtPassword);
             this.panel1.Controls.Add(this.txtUserName);
             this.panel1.CssStyle = "box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);";
-            this.panel1.Location = new System.Drawing.Point(204, 98);
+            this.panel1.Location = new System.Drawing.Point(405, 153);
             this.panel1.Name = "panel1";
             this.panel1.ShowCloseButton = false;
             this.panel1.Size = new System.Drawing.Size(291, 328);
@@ -131,7 +131,7 @@ namespace MyERP.Web
             this.tableLayoutPanel1.RowStyles.Add(new Wisej.Web.RowStyle(Wisej.Web.SizeType.Percent, 48.28F));
             this.tableLayoutPanel1.RowStyles.Add(new Wisej.Web.RowStyle(Wisej.Web.SizeType.Absolute, 334F));
             this.tableLayoutPanel1.RowStyles.Add(new Wisej.Web.RowStyle(Wisej.Web.SizeType.Percent, 48.28F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(700, 524);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1101, 634);
             this.tableLayoutPanel1.TabIndex = 6;
             this.tableLayoutPanel1.TabStop = true;
             // 
@@ -144,7 +144,7 @@ namespace MyERP.Web
             this.BackColor = System.Drawing.Color.FromName("@window");
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "LoginPage";
-            this.Size = new System.Drawing.Size(700, 524);
+            this.Size = new System.Drawing.Size(1101, 634);
             this.Text = "Login";
             this.Load += new System.EventHandler(this.LoginPage_Load);
             this.Activated += new System.EventHandler(this.LoginPage_Activated);
