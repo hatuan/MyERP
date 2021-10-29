@@ -68,7 +68,7 @@ namespace MyERP.Web.Areas.Location.Controllers
                 RecCreatedAt = c.RecCreatedAt,
                 RecModifiedBy = c.RecModifiedByUser.Name,
                 RecModifiedAt = c.RecModifiedAt,
-                Status = (DefaultStatusType)c.Status,
+                Blocked = c.Blocked,
                 Version = c.Version
             }).ToList();
 
@@ -88,7 +88,7 @@ namespace MyERP.Web.Areas.Location.Controllers
                     Id = c.Id,
                     Description = c.Description,
                     OrganizationCode = c.Organization.Code,
-                    Status = (DefaultStatusType)c.Status
+                    Blocked = c.Blocked
                 });
                 return this.Store(data, 1);
             }
@@ -97,14 +97,14 @@ namespace MyERP.Web.Areas.Location.Controllers
                 var paging = ((LocationRepository)repository).Paging(parameters.Start, parameters.Limit,
                     parameters.SimpleSort, parameters.SimpleSortDirection, parameters.Query);
 
-                var data = paging.Data.Where(c => c.Status == (short)DefaultStatusType.Active)
+                var data = paging.Data.Where(c => c.Blocked == false)
                     .Select(c => new LocationViewModel
                     {
                         Code = c.Code,
                         Id = c.Id,
                         Description = c.Description,
                         OrganizationCode = c.Organization.Code,
-                        Status = (DefaultStatusType)c.Status
+                        Blocked = c.Blocked
                     }).ToList();
                 return this.Store(data, paging.TotalRecords);
             }
@@ -116,7 +116,7 @@ namespace MyERP.Web.Areas.Location.Controllers
             var model = new LocationEditViewModel()
             {
                 Id = null,
-                Status = DefaultStatusType.Active
+                Blocked = false
             };
             if (!String.IsNullOrEmpty(id))
             {
@@ -133,7 +133,7 @@ namespace MyERP.Web.Areas.Location.Controllers
                     Mobilephone = entity.Mobiphone,
                     Fax = entity.Fax,
                     Email = entity.Email,
-                    Status = (DefaultStatusType)entity.Status,
+                    Blocked = entity.Blocked,
                     Version = entity.Version
                 };
             }
@@ -178,7 +178,7 @@ namespace MyERP.Web.Areas.Location.Controllers
                     _update.Mobiphone = model.Mobilephone;
                     _update.Fax = model.Fax;
                     _update.Email = model.Email;
-                    _update.Status = (byte)model.Status;
+                    _update.Blocked = model.Blocked;
                     _update.RecModifiedAt = DateTime.Now;
                     _update.RecModifiedBy = (long)user.ProviderUserKey;
                     _update.Version++;
@@ -209,7 +209,7 @@ namespace MyERP.Web.Areas.Location.Controllers
                         Mobiphone = model.Mobilephone,
                         Fax = model.Fax,
                         Email = model.Email,
-                        Status = (byte)model.Status,
+                        Blocked = model.Blocked,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
                         RecCreatedBy = (long)user.ProviderUserKey,

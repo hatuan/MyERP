@@ -91,7 +91,7 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
                 RecCreatedAt = c.RecCreatedAt,
                 RecModifiedBy = c.RecModifiedByUser.Name,
                 RecModifiedAt = c.RecModifiedAt,
-                Status = (DefaultStatusType)c.Status,
+                Blocked = c.Blocked,
                 Version = c.Version
             }).ToList();
 
@@ -107,7 +107,7 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
             {
                 Id = null,
                 NoSequenceLines = new List<NoSequenceLineEditViewModel>(),
-                Status = DefaultStatusType.Active
+                Blocked = false
             };
 
             if (!String.IsNullOrEmpty(id))
@@ -131,7 +131,7 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
                                    CurrentNo = noSequenceLine.CurrentNo == 0 ? (int?)null : noSequenceLine.CurrentNo,
                                    WarningNo = noSequenceLine.WarningNo == 0 ? (int?)null : noSequenceLine.WarningNo,
                                    FormatNo = noSequenceLine.FormatNo,
-                                   Status = (DefaultStatusType)noSequenceLine.Status,
+                                   Blocked = noSequenceLine.Blocked,
                                    Version = noSequenceLine.Version
                                }).ToList();
 
@@ -141,7 +141,7 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
                     Code = entity.Code,
                     Description = entity.Description,
                     NoSequenceLines = noSequenceLines,
-                    Status = (DefaultStatusType)entity.Status,
+                    Blocked = entity.Blocked,
                     Version = entity.Version
                 };
             }
@@ -184,7 +184,7 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
                         OrganizationId = organizationId,
                         Code = model.Code,
                         Description = model.Description,
-                        Status = (byte)model.Status,
+                        Blocked = model.Blocked,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
                         RecCreatedBy = (long)user.ProviderUserKey,
@@ -203,7 +203,7 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
                             EndingNo = c.EndingNo??0,
                             WarningNo = c.WarningNo??0,
                             FormatNo = c.FormatNo,
-                            Status = (byte)c.Status,
+                            Blocked = c.Blocked,
                             Version = 1,
                             RecModifiedAt = DateTime.Now,
                             RecCreatedBy = (long)user.ProviderUserKey,
@@ -236,7 +236,7 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
 
                     updateNoSequence.Code = model.Code;
                     updateNoSequence.Description = model.Description;
-                    updateNoSequence.Status = (byte)model.Status;
+                    updateNoSequence.Blocked = model.Blocked;
                     updateNoSequence.RecModifiedAt = DateTime.Now;
                     updateNoSequence.RecModifiedBy = (long)user.ProviderUserKey;
                     updateNoSequence.Version++;
@@ -254,7 +254,7 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
                                 EndingNo = noSequenceLineEditViewModel.EndingNo??0,
                                 WarningNo = noSequenceLineEditViewModel.WarningNo??0,
                                 FormatNo = noSequenceLineEditViewModel.FormatNo,
-                                Status = (byte)noSequenceLineEditViewModel.Status,
+                                Blocked = noSequenceLineEditViewModel.Blocked,
                                 Version = 1,
                                 RecCreatedBy = (long)user.ProviderUserKey,
                                 RecCreatedAt = DateTime.Now,
@@ -272,7 +272,7 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
                                     x.EndingNo = noSequenceLineEditViewModel.EndingNo??0;
                                     x.WarningNo = noSequenceLineEditViewModel.WarningNo??0;
                                     x.FormatNo = noSequenceLineEditViewModel.FormatNo;
-                                    x.Status = (byte)noSequenceLineEditViewModel.Status;
+                                    x.Blocked = noSequenceLineEditViewModel.Blocked;
                                     x.Version++;
                                     x.RecModifiedAt = DateTime.Now;
                                     x.RecModifiedBy = (long)user.ProviderUserKey;
@@ -361,7 +361,7 @@ namespace MyERP.Web.Areas.NoSequence.Controllers
                 CurrentNo = null,
                 WarningNo = 990,
                 FormatNo = "####",
-                Status = DefaultStatusType.Active,
+                Blocked = false,
                 Version = 1
             };
 

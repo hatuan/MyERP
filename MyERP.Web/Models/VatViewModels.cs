@@ -24,7 +24,7 @@ namespace MyERP.Web.Models
         [Display(Name = "Description")]
         public String Description { get; set; }
 
-        [Display(Name = "Status")]
-        public DefaultStatusType Status { get; set; }
+        [Display(Name = "Blocked")]
+        public Boolean Blocked { get; set; }
     }
 }

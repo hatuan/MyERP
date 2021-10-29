@@ -47,8 +47,8 @@ namespace MyERP.Web.Models
         public Int64 Version { get; set; }
 
         [Required]
-        [Display(Name = "Status")]
-        public DefaultStatusType Status { get; set; }
+        [Display(Name = "Blocked")]
+        public Boolean Blocked { get; set; }
 
         [Required]
         [Display(Name="Created By")]
@@ -88,8 +88,8 @@ namespace MyERP.Web.Models
         public List<NoSequenceLineEditViewModel> NoSequenceLines { get; set; }
 
         [Required]
-        [Display(Name = "Status")]
-        public DefaultStatusType Status { get; set; }
+        [Display(Name = "Blocked")]
+        public Boolean Blocked { get; set; }
 
         public Int64 Version { get; set; }
     }

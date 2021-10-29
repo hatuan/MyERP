@@ -46,7 +46,7 @@ namespace MyERP.Web.Areas.Vat.Controllers
                         Id = c.Id,
                         Description = c.Description,
                         OrganizationCode = c.Organization.Code,
-                        Status = (DefaultStatusType)c.Status
+                        Blocked = c.Blocked
                     });
                 return this.Store(data, 1);
             }
@@ -55,14 +55,14 @@ namespace MyERP.Web.Areas.Vat.Controllers
                 var paging = ((VatRepository)repository).Paging(parameters.Start, parameters.Limit,
                     parameters.SimpleSort, parameters.SimpleSortDirection, parameters.Query);
 
-                var data = paging.Data.Where(c => c.Status == (short)DefaultStatusType.Active)
+                var data = paging.Data.Where(c => c.Blocked == false)
                     .Select(c => new VatLookupViewModel
                     {
                         Code = c.Code,
                         Id = c.Id,
                         Description = c.Description,
                         OrganizationCode = c.Organization.Code,
-                        Status = (DefaultStatusType)c.Status
+                        Blocked = c.Blocked
                     }).ToList();
                 return this.Store(data, paging.TotalRecords);
             }

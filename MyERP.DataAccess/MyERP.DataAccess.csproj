@@ -82,7 +82,6 @@
     <Compile Include="Entities\MyERPDataModel.Currency.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.CurrencyStatusType.cs" />
     <Compile Include="Entities\MyERPDataModel.DefaultDocumentStatusType.cs" />
-    <Compile Include="Entities\MyERPDataModel.DefaultMasterStatusType.cs" />
     <Compile Include="Entities\MyERPDataModel.EInvFormRelease.cs" />
     <Compile Include="Entities\MyERPDataModel.EInvFormRelease.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.EInvFormType.cs" />
@@ -178,6 +177,7 @@
     <Compile Include="Entities\MyERPDataModel.Vat.Generated.cs" />
     <Compile Include="Entities\MyERPDataModel.VatEntry.cs" />
     <Compile Include="Entities\MyERPDataModel.VatEntry.Generated.cs" />
+    <Compile Include="Enum\DefaultStatusType.cs" />
     <Compile Include="Enum\PurchaseInvoiceDocumentStatusType.cs" />
     <Compile Include="Enum\CurrencySearchField.cs" />
     <Compile Include="Enum\DocumentType.cs" />

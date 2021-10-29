@@ -116,7 +116,7 @@ namespace MyERP.Web
             {
                 var formReleases = dataContext.EInvFormReleases.SqlQuery("SELECT * FROM einv_form_release WITH (UPDLOCK, INDEX(idx_einv_form_release_form_type_id)) WHERE form_type_id = @form_type_id", new SqlParameter("@form_type_id", formTypeId))
                     .ToList<EInvFormRelease>();
-                var formRelease = formReleases.Where(x => x.StartDate.CompareTo(invoiceIssuedDate) >= 0 && x.ReleaseUsed < x.ReleaseTotal && (TaxAuthoritiesStatus)x.TaxAuthoritiesStatus == TaxAuthoritiesStatus.Active)
+                var formRelease = formReleases.Where(x => x.StartDate.CompareTo(invoiceIssuedDate) >= 0 && x.ReleaseUsed < x.ReleaseTotal && (TaxAuthoritiesStatus)x.TaxAuthoritiesStatus == TaxAuthoritiesStatus.Actived)
                     .OrderBy(x => x.ReleaseFrom)
                     .FirstOrDefault();
                 if (formRelease == null)
@@ -186,7 +186,7 @@ namespace MyERP.Web
                     }
                     var formReleases = dataContext.EInvFormReleases.WithHint("UPDLOCK, INDEX(idx_einv_form_release_form_type_id)").Where(x => x.FormTypeId == eInvoiceHeader.FormTypeId)
                         .ToList<EInvFormRelease>();
-                    var formRelease = formReleases.Where(x => x.StartDate.CompareTo(eInvoiceHeader.InvoiceIssuedDate) <= 0 && x.ReleaseUsed < x.ReleaseTotal && (TaxAuthoritiesStatus)x.TaxAuthoritiesStatus == TaxAuthoritiesStatus.Active)
+                    var formRelease = formReleases.Where(x => x.StartDate.CompareTo(eInvoiceHeader.InvoiceIssuedDate) <= 0 && x.ReleaseUsed < x.ReleaseTotal && (TaxAuthoritiesStatus)x.TaxAuthoritiesStatus == TaxAuthoritiesStatus.Actived)
                         .OrderBy(x => x.ReleaseFrom)
                         .FirstOrDefault();
                     if (formRelease == null)
@@ -197,7 +197,7 @@ namespace MyERP.Web
 
                     eInvoiceHeader.InvoiceNumber = _nextReleaseNo.ToString().PadLeft(7, '0');
                     eInvoiceHeader.ReservationCode = reservationCode;
-                    eInvoiceHeader.Status = (byte)EInvoiceDocumentStatusType.Released;
+                    eInvoiceHeader.Status = EInvoiceDocumentStatusType.Released;
                     eInvoiceHeader.RecModifiedAt = DateTime.Now;
                     eInvoiceHeader.RecModifiedBy = userId;
                     eInvoiceHeader.Version = ++version;
@@ -433,7 +433,7 @@ namespace MyERP.Web
                 var formType = entity.EInvFormType;
                 String xslInput = formType.FormFile;
 
-                if (entity.Status < (byte)EInvoiceDocumentStatusType.Signed) //Clear reservationCode if not signed document
+                if (entity.Status < EInvoiceDocumentStatusType.Signed) //Clear reservationCode if not signed document
                 {
                     entity.ReservationCode = "";
                     entity.SignedDate = null;
@@ -482,7 +482,7 @@ namespace MyERP.Web
             {
                 try
                 {
-                    var entity = Get(c => c.Id == id && c.Status == (byte)EInvoiceDocumentStatusType.Released, new string[] { "Currency", "EInvFormType" }).SingleOrDefault();
+                    var entity = Get(c => c.Id == id && c.Status == EInvoiceDocumentStatusType.Released, new string[] { "Currency", "EInvFormType" }).SingleOrDefault();
                     if (entity == null)
                     {
                         throw new System.Data.Entity.Core.ObjectNotFoundException("Invoice Header has been changed or deleted! Please check");
@@ -490,7 +490,7 @@ namespace MyERP.Web
                     //save to EInvoiceHeader
                     entity.SignedDate = DateTime.Now;
                     entity.Version++;
-                    entity.Status = (byte)EInvoiceDocumentStatusType.Signed;
+                    entity.Status = EInvoiceDocumentStatusType.Signed;
                     entity.RecModifiedAt = DateTime.Now;
                     dataContext.SaveChanges();
 
@@ -567,7 +567,7 @@ namespace MyERP.Web
                         ClientId = entity.ClientId,
                         OrganizationId = entity.OrganizationId,
                         Version = 1,
-                        Status = (byte)EInvoiceDocumentStatusType.Signed,
+                        Status = EInvoiceDocumentStatusType.Signed,
                         RecCreatedAt = DateTime.Now,
                         RecCreatedBy = userId,
                         RecModifiedAt = DateTime.Now,

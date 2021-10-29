@@ -1086,7 +1086,8 @@
           <Property Name="last_locked_out_reason" Type="nvarchar" MaxLength="512" devart:DefaultValue="" />
           <Property Name="last_locked_out_date" Type="datetime2" Nullable="false" devart:DefaultValue="" />
           <Property Name="last_password_changed_date" Type="datetime2" Nullable="false" devart:DefaultValue="" />
-          <Property Name="version" Type="bigint" Nullable="false" DefaultValue="1" />
+          <Property Name="version" Type="bigint" Nullable="false" devart:DefaultValue="" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="client">
           <Key>
@@ -1123,6 +1124,7 @@
               <Summary>Use to lookup ClientId when access from outsite like api ...</Summary>
             </Documentation>
           </Property>
+          <Property Name="blocked" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="currency">
           <Key>
@@ -1133,7 +1135,7 @@
           <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" devart:DefaultValue="" />
@@ -1148,12 +1150,12 @@
           <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="code" Type="varchar" Nullable="false" MaxLength="32" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
-          <Property Name="version" Type="bigint" Nullable="false" DefaultValue="1" />
+          <Property Name="version" Type="bigint" Nullable="false" devart:DefaultValue="" />
         </EntityType>
         <EntityType Name="role">
           <Key>
@@ -1184,7 +1186,7 @@
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="item">
@@ -1201,7 +1203,7 @@
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="item_group_id1" Type="bigint" />
           <Property Name="item_group_id2" Type="bigint" />
@@ -1279,7 +1281,7 @@
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="item_group">
@@ -1290,7 +1292,7 @@
           <Property Name="level" Type="tinyint" Nullable="false" />
           <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
           <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
@@ -1307,7 +1309,7 @@
           <Property Name="level" Type="tinyint" Nullable="false" />
           <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
           <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="status" Type="smallint" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
@@ -1329,7 +1331,7 @@
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="business_partner_group_id1" Type="bigint" />
           <Property Name="business_partner_group_id2" Type="bigint" />
@@ -1410,7 +1412,7 @@
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="total_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
@@ -1503,7 +1505,7 @@
           <Property Name="total_payment" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="total_payment_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
           <Property Name="total_vat_amount_lcy" Type="decimal" Nullable="false" Precision="38" Scale="20" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="sales_person_id" Type="bigint" Nullable="false" />
@@ -1564,7 +1566,7 @@
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
         </EntityType>
@@ -1575,7 +1577,7 @@
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
           <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="blocked" Type="bit" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
@@ -1591,7 +1593,7 @@
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="starting_date" Type="datetime" Nullable="false" />
           <Property Name="ending_date" Type="datetime" />
-          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="blocked" Type="bit" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
@@ -1623,7 +1625,7 @@
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
           <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
@@ -1639,7 +1641,7 @@
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="code" Type="nvarchar" Nullable="false" MaxLength="32" />
           <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
@@ -1661,7 +1663,7 @@
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="contact_name" Type="nvarchar" MaxLength="32" />
           <Property Name="address" Type="nvarchar" MaxLength="256" />
@@ -1681,7 +1683,7 @@
           <Property Name="manual_no" Type="tinyint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
@@ -1699,7 +1701,7 @@
           <Property Name="current_no" Type="int" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
@@ -1731,7 +1733,7 @@
           <Property Name="sales_pos_location_id" Type="bigint" />
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="general_ledger_sequence_id" Type="bigint" />
           <Property Name="cash_receipt_sequence_id" Type="bigint" />
@@ -1786,7 +1788,7 @@
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
           <Property Name="location_id" Type="bigint" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="doc_sub_type" Type="tinyint" Nullable="false" />
@@ -1861,7 +1863,7 @@
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="posting_date" Type="datetime2" Nullable="false" />
           <Property Name="total_vat_amount" Type="decimal" Nullable="false" Precision="38" Scale="20" />
@@ -1912,7 +1914,7 @@
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
           <Property Name="currency_id" Type="bigint" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="parent_id" Type="bigint" />
         </EntityType>
@@ -2000,7 +2002,7 @@
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="posting_date" Type="datetime2" Nullable="false" />
           <Property Name="discount_id" Type="bigint">
@@ -2133,7 +2135,7 @@
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
           <Property Name="vat_percentage" Type="smallint" Nullable="false" />
           <Property Name="account_input_vat_id" Type="bigint" Nullable="false" />
@@ -2186,7 +2188,7 @@
           <Property Name="job_group_id3" Type="bigint" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
@@ -2217,7 +2219,7 @@
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="general_journal_header">
@@ -2336,7 +2338,7 @@
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" />
           <Property Name="version" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_modified_at" Type="datetime2" Nullable="false" />
@@ -2373,11 +2375,11 @@
           <Property Name="release_used" Type="decimal" Nullable="false" Precision="7" Scale="0" />
           <Property Name="release_date" Type="datetime2" Nullable="false" />
           <Property Name="start_date" Type="datetime2" Nullable="false" />
-          <Property Name="tax_authorities_status" Type="smallint" Nullable="false" />
+          <Property Name="tax_authorities_status" Type="tinyint" Nullable="false" />
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="blocked" Type="bit" Nullable="false" />
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
@@ -2459,7 +2461,7 @@
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
@@ -2567,7 +2569,7 @@
           <Property Name="client_id" Type="bigint" Nullable="false" />
           <Property Name="organization_id" Type="bigint" Nullable="false" />
           <Property Name="version" Type="bigint" Nullable="false" />
-          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
           <Property Name="rec_created_by" Type="bigint" Nullable="false" />
           <Property Name="rec_created_at" Type="datetime2" Nullable="false" />
           <Property Name="rec_modified_by" Type="bigint" Nullable="false" />
@@ -6659,7 +6661,8 @@
           <Property Name="LastLockedOutReason" Type="String" MaxLength="512" Unicode="true" ed:ValidateMaxLength="512" ed:ValidateRequired="false" ed:Guid="7966921c-6da5-481e-999b-f1677a125794" />
           <Property Name="LastLockedOutDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="73a20203-54fa-42fc-b5bb-136641825c56" />
           <Property Name="LastPasswordChangedDate" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="c36ce865-18aa-43e8-b699-202ac287268d" />
-          <Property Name="Version" Type="Int64" Nullable="false" DefaultValue="1" ed:ValidateRequired="true" ed:Guid="7b3ad66f-1125-4a4e-b85b-ddc6c191a7fb" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="7b3ad66f-1125-4a4e-b85b-ddc6c191a7fb" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="dfe38f9e-0612-459d-b562-63cc17080c08" />
           <NavigationProperty Name="Roles" Relationship="MyERP.DataAccess.User_UserInRole" FromRole="User" ToRole="Roles" ed:Guid="43260679-7d39-401a-9f63-24023798eccc" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_User" FromRole="Users" ToRole="Organization" ed:Guid="dfe685df-2d02-44cf-9884-0da3cb05954e" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_User" FromRole="Users" ToRole="Client" ed:Guid="aa9f2477-2bbc-45d0-8300-32910ef59c0e" />
@@ -6699,6 +6702,7 @@
           <Property Name="RecModifiedBy" Type="Int64" ed:ValidateRequired="false" ed:Guid="c6fcd91e-15ef-4481-a32a-a0075cb44ac6" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="73e42812-2bb8-4648-8704-5c7659eaf0d8" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c4bed1e7-5396-4842-8b64-feec4ffc7bbc" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="45d222d7-e4c9-4183-9f72-c30576c28cd5" />
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.User_Client_CreatedBy" FromRole="Clients" ToRole="RecCreatedByUser" ed:Guid="ce4d1885-6424-455d-9277-01aed8112888" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.User_Client_ModifiedBy" FromRole="Clients1" ToRole="RecModifiedByUser" ed:Guid="41eb4c56-5928-4a60-a555-6aeff073f145" />
           <NavigationProperty Name="Organizations" Relationship="MyERP.DataAccess.Client_Organization" FromRole="Client" ToRole="Organizations" ed:Guid="806ea340-2c45-455f-ba36-673e246dfde5" />
@@ -6713,7 +6717,7 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="d9ce13c5-825d-4d01-b0ef-2dc69e3cb844" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f822fd4e-5fdf-42f3-9209-7137a7f7dd41" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f636cade-01a4-43cc-860c-c527b84193ee" />
-          <Property Name="Status" Type="MyERP.DataAccess.CurrencyStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="dca1b7e2-f951-4dd3-bb4c-ec09a7b4d5d0" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="dca1b7e2-f951-4dd3-bb4c-ec09a7b4d5d0" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="30bf07ad-4abd-4de3-b820-db7bc8766492" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4bdea275-3d08-41dc-a5a1-1baada77a0d9" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a976dad5-6bb0-4777-bafd-328c70f3a144" />
@@ -6732,12 +6736,12 @@
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="ed1dcb77-2dda-40d2-8f4b-33cc9b718826" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="b571d474-0a6f-41df-9304-2e5b1bd67e25" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="109cc6af-6c2f-44d5-8cf8-8f8cefe5ee09" />
-          <Property Name="Status" Type="MyERP.DataAccess.OrganizationStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="7261e335-251c-4379-88e9-c9f7907dc4bb" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="7261e335-251c-4379-88e9-c9f7907dc4bb" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="411da790-27e6-46b7-8a6a-372ea450c3c5" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="8dbf461f-531b-4354-ba57-13ca9fc2ebb8" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4a1bf37a-bbca-4c7d-af17-33ac8c087fed" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="31e02098-19a5-4afe-b983-75377513196c" />
-          <Property Name="Version" Type="Int64" Nullable="false" DefaultValue="1" ed:ValidateRequired="true" ed:Guid="fe42486a-b742-440f-8204-14a56b7109b4" />
+          <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="fe42486a-b742-440f-8204-14a56b7109b4" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_Organization" FromRole="Organizations" ToRole="Client" ed:Guid="e0450b37-3420-4eb9-a997-5ea36c14b2aa" />
           <NavigationProperty Name="RecCreatedByUser" Relationship="MyERP.DataAccess.UserProfile_Organization_CreatedBy" FromRole="Organizations" ToRole="RecCreatedByUser" ed:Guid="263cd6b0-0bce-4f03-8cb3-481dd5debe0f" />
           <NavigationProperty Name="RecModifiedByUser" Relationship="MyERP.DataAccess.UserProfile_Organization_ModifiedBy" FromRole="Organizations1" ToRole="RecModifiedByUser" ed:Guid="25101752-59ad-43d5-b8a5-7a76ded9dc21" />
@@ -6775,7 +6779,7 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="299ff7a4-f4ce-4d06-91ce-126900a69915" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="54aea98a-9bdf-436a-8522-8cc3edefeafd" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="757d86f3-1335-42c8-9b28-0e3c4857e749" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="2f783961-865d-4cae-9071-e39251147b62" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="2f783961-865d-4cae-9071-e39251147b62" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e5762543-485c-45d1-85ff-22dc3c20d5d9" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_Uom" FromRole="Uoms" ToRole="Client" ed:Guid="ca876961-5698-4ec8-b15b-681569f5f1a5" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_Uom" FromRole="Uoms" ToRole="Organization" ed:Guid="04c6d634-3701-4df3-a56d-2f4a63f2b8aa" />
@@ -6856,7 +6860,7 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="615cc7bf-e2f8-466c-8cc2-402b28cbbc10" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="69c34791-0b14-46c9-a1bf-7339f5e0b8d6" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4833a51b-3100-4c75-b29c-6138041e404c" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="3e248b03-4b98-449c-84e3-6c557924d442" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="3e248b03-4b98-449c-84e3-6c557924d442" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="3222b6d9-15a0-4544-bb03-ad20911a9425" />
           <NavigationProperty Name="BaseUom" Relationship="MyERP.DataAccess.Uom_Item" FromRole="Products" ToRole="BaseUom" ed:Guid="56faaecf-d482-42b1-a53f-a70e753dd6cc" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_Product" FromRole="Products" ToRole="Client" ed:Guid="462c01cc-8acf-4d08-ac93-d6ea7ac3d4fc" />
@@ -6897,7 +6901,7 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="ece77f1a-c92b-4162-a318-88d45a4d4d22" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="4a5bf296-05b4-4149-b57e-ea8e631b0081" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="2b0860cb-5d82-4865-82dc-5931e8635ea5" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="c8280820-a30d-4862-af53-f191e68b7582" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="c8280820-a30d-4862-af53-f191e68b7582" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="2964b9cc-a7d9-43b5-94e1-f389e2aec121" />
           <NavigationProperty Name="Uom" Relationship="MyERP.DataAccess.Uom_ItemUom" FromRole="ProductUoms" ToRole="Uom" ed:Guid="ef8dbe6a-66e5-4492-9f41-023bef20a451" />
           <NavigationProperty Name="Item" Relationship="MyERP.DataAccess.Item_ItemUom" FromRole="ItemUoms" ToRole="Item" ed:Guid="fe48333d-0c96-4326-939e-4cd338db34c1" />
@@ -6914,7 +6918,7 @@
           <Property Name="Level" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="a46787cd-dfe5-4fd9-8ebd-1ecf273e3cd7" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="7f73aeaf-29d4-45c1-8fa2-22ef9bf630ad" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="a7832506-43b5-4c4b-acaa-394c55c17574" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="9f5112b8-edca-461d-a852-23eae9b5237f" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="9f5112b8-edca-461d-a852-23eae9b5237f" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="9eee689b-972c-42f7-993e-4ea8055c40fe" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="68713ec9-011b-4e8e-b3ad-fd87b7990de8" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="cd19728c-99c2-4c94-bd02-971c1c7cf554" />
@@ -6935,7 +6939,7 @@
           <Property Name="Level" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="01b14c28-8cf0-4c09-9cb9-5fb3f0444ef0" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="a643c072-a622-453a-b6c1-8e53587b5159" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="2f74aed5-16a7-46c9-a910-a8cfa741820b" />
-          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" ed:ValidateRequired="false" ed:Guid="d1abb6fc-5e69-40b3-967e-869fe68d014d" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="d1abb6fc-5e69-40b3-967e-869fe68d014d" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="d4fa625c-d295-4be9-a2d6-9c56a46bacca" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="7f519602-bd25-4ced-9296-d477e60faf43" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="afbdb2fb-a8b2-4903-b9f6-70689d28f5ca" />
@@ -6961,7 +6965,7 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a0c05e0e-790f-4697-bc94-88a331c070a0" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="60072f5a-86aa-4c24-b386-99c8eca40638" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="b6e6381b-7138-4f72-ba40-e0217baf87c0" />
-          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="477f2e87-5894-4c84-a42d-6e6a7b92600b" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="477f2e87-5894-4c84-a42d-6e6a7b92600b" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="870e51a2-b01c-4c89-8f14-b3a342bfb2f0" />
           <Property Name="BusinessPartnerPriceGroupId" Type="Int64" ed:ValidateRequired="false" ed:Guid="be3b9c8b-0492-48d6-b43c-1331032e0ab0" />
           <Property Name="BusinessPartnerGroupId1" Type="Int64" ed:ValidateRequired="false" ed:Guid="b5166d18-455e-446b-8c93-bf83f5c91e81" />
@@ -7063,7 +7067,7 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="130a79ed-552f-4296-aa1c-c2e80bf11e97" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="9715b4e5-a230-4df6-9e74-83cae8911756" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a761ac63-3616-4625-91bf-6c65ec766b38" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="e9247ea4-5189-46ae-938f-f65432a78a94" />
+          <Property Name="Status" Type="MyERP.DataAccess.DefaultDocumentStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="e9247ea4-5189-46ae-938f-f65432a78a94" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c47e4ba3-374e-4fef-a992-c27669588e85" />
           <Property Name="PostingDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="8a8ecf10-1e81-4ca9-bcc5-f0187d7eeabe" />
           <Property Name="DocSubType" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="49dff1b0-f69c-4e50-8ccd-d874a1f6fba8" />
@@ -7165,7 +7169,7 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="68af2c9d-ec38-4b05-8ea6-3c127a8f90df" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="c9bb7ef7-0143-4cc3-80a3-22dbaeb429b0" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="34fee5a8-cde9-4797-9b32-0b7a9e2e57e2" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="258db733-b647-4911-ae1c-5d56e3f6ee1d" />
+          <Property Name="Status" Type="MyERP.DataAccess.DefaultDocumentStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="258db733-b647-4911-ae1c-5d56e3f6ee1d" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="bf7cc6ba-e0bc-40a9-af3e-e2e0ea4de0e6" />
           <NavigationProperty Name="PosLines" Relationship="MyERP.DataAccess.PosHeader_PosLine" FromRole="PosHeader" ToRole="PosLines" ed:Guid="013cef17-0db3-4196-95f1-cba030e0be7b" />
           <NavigationProperty Name="Location" Relationship="MyERP.DataAccess.Location_PosHeader" FromRole="PosHeaders" ToRole="Location" ed:Guid="a24b433d-58d1-45d2-91d9-ebec9fde734c" />
@@ -7226,7 +7230,7 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="3261cefe-8796-481a-a88a-866931576b4e" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="9d1c00d6-4081-43b6-8c63-557ea3d256d2" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="7dccdff2-d88e-4e9b-b86c-8a3476869662" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="35819959-8cbd-4159-9514-c93aed42e9a9" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="35819959-8cbd-4159-9514-c93aed42e9a9" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4e3eb53e-cc5b-4e3a-9d3b-1db66c06e684" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_ItemDiscountGroup" FromRole="ItemDiscountGroups" ToRole="Client" ed:Guid="9bd9f4fb-951a-4890-9f33-3e1429318fe6" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_ItemDiscountGroup" FromRole="ItemDiscountGroups" ToRole="Organization" ed:Guid="c772d9a7-62d8-445f-a9d7-957ac21ee8cf" />
@@ -7240,7 +7244,7 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="43e73329-8c0c-4a2c-b980-f5911ade4f9b" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="0f7c75e7-a899-4f99-ba16-ae556c0e0005" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="e42c922c-f8a3-43d3-9c3f-d67a654268c9" />
-          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="b64fe557-84e5-4358-af39-03c5e14985c4" />
+          <Property Name="Blocked" Type="Boolean" ed:ValidateRequired="false" ed:Guid="b64fe557-84e5-4358-af39-03c5e14985c4" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="2d0f1c46-30f7-4d7a-942c-6d6d72ab2261" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="23640162-1094-49bd-9ce6-d5379e9cb3ba" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="bec671c9-33f7-49a6-ac96-9be73ce3ff02" />
@@ -7277,7 +7281,7 @@
           <Property Name="MinQty" Type="Decimal" Nullable="false" ed:ValidateRequired="true" ed:Guid="53612974-258c-458b-a9d9-e4736919c561" />
           <Property Name="UnitPrice" Type="Decimal" Nullable="false" ed:ValidateRequired="true" ed:Guid="ed7d4acd-87a6-4458-b1c0-2dc64431e611" />
           <Property Name="EndingDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="948b6b11-71b1-4362-ae39-7fc26de6a78f" />
-          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="3445038c-1ad2-416e-a0ca-7c25b4885576" />
+          <Property Name="Blocked" Type="Boolean" ed:ValidateRequired="false" ed:Guid="3445038c-1ad2-416e-a0ca-7c25b4885576" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="df4f6ea5-dbe3-4f35-8bca-f43a897b07ba" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="b3deea57-f021-442d-aa8e-fb8b2f5e8ebc" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a1370857-cc11-47da-8de5-e4f2aa1df12f" />
@@ -7298,7 +7302,7 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="359d74c6-1a22-432a-8afc-ba5eb20c1a27" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="28bfa332-7134-4545-a4fd-a13a5fda6d1d" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="6341c5df-efda-49bc-b731-926348f1b1ca" />
-          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="6598efef-2e45-40e6-a3f4-0882d8b1756c" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="6598efef-2e45-40e6-a3f4-0882d8b1756c" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="879378bc-1c56-408f-b589-804e3e0c7384" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c8087228-5e01-4a79-89e4-759dca626e39" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="b735b07e-d463-4902-b7f4-83edb3ec9f22" />
@@ -7318,7 +7322,7 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="3ad49567-4d07-4f6b-9529-59106522db88" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="32" Unicode="true" ed:ValidateMaxLength="32" ed:ValidateRequired="true" ed:Guid="60c753ae-5a75-4f08-a7d9-0087cce613d4" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="256" Unicode="true" ed:ValidateMaxLength="256" ed:ValidateRequired="true" ed:Guid="0b08c1a8-f80f-4074-966a-00950cf8af4d" />
-          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="b0f2029e-5f12-4ec3-aa7d-7bef25b3b1aa" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="b0f2029e-5f12-4ec3-aa7d-7bef25b3b1aa" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e426112e-e90f-4855-92c3-2678705f126d" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5e32f173-19b8-46cc-b658-d49c84be3ee5" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="caaa8aad-633c-455f-a607-7556bb00854b" />
@@ -7350,7 +7354,7 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="d91a3dd1-e7e8-4543-99cf-3956dbbf0f34" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="f90a7258-362c-42a7-9445-0c11f7a171e8" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="100e78d4-a167-4683-83df-1fe64cb12476" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="bcd33051-c9cf-40a1-8a24-296ea9d1c328" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="bcd33051-c9cf-40a1-8a24-296ea9d1c328" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="815e37d9-e6b4-47f1-8f61-1b8d271caab5" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_Location" FromRole="Locations" ToRole="Client" ed:Guid="7500928b-1391-4d0f-8eb4-dc12d8466a4e" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_Location" FromRole="Locations" ToRole="Organization" ed:Guid="7422abb9-b7c1-45e6-8c17-0dd2b0ee28fd" />
@@ -7368,7 +7372,7 @@
           <Property Name="ManualNo" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="b09601cb-3e75-41c5-b9f7-16dd8ce2bbe4" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="eab9b274-5f4a-485b-9d9d-ec066f6bc6cc" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="300f9ce7-68ab-4f03-9576-90450c2d542e" />
-          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="c5ce9145-066f-4ba3-abea-cf9112ee32cc" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="c5ce9145-066f-4ba3-abea-cf9112ee32cc" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a0be6c6d-4eb5-4b1b-9917-241547f189ae" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="6f5ade12-eebe-4b07-ab95-70d8abe1b0cd" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="80b1ba3d-88d7-4620-b779-1e1e0ff6ce15" />
@@ -7396,7 +7400,7 @@
           <Property Name="LastDateUsed" Type="DateTime" ed:ValidateRequired="false" ed:Guid="058b252b-6ccc-4261-88de-abe9254c71e0" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="92f18e94-5b0b-4037-872a-7241046a5455" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="9e46eb84-be48-401c-af5b-abecdb36fc65" />
-          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="e1a9e507-e4b9-45fb-a8c9-c117a1226109" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="e1a9e507-e4b9-45fb-a8c9-c117a1226109" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="80fba58f-5305-4e1d-876b-a60f93c6e142" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4c606e02-879f-4950-9b3d-cb2664871559" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="a9339607-2d74-48cf-a147-19f59c7de9c4" />
@@ -7429,7 +7433,7 @@
           <Property Name="BankCheckqueSequenceId" Type="Int64" ed:ValidateRequired="false" ed:Guid="f3606035-e770-46eb-9acc-40138335edfc" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="19193184-9f47-49da-a79e-1702ab8b2b0d" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="f76d4599-0080-4766-8af6-b593b2cb5826" />
-          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="e179bfd9-f149-49cf-a633-f4355fdc1329" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="e179bfd9-f149-49cf-a633-f4355fdc1329" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="9e6aa219-352c-45c3-845d-983439e9daf4" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="74facb80-7cd3-463a-988d-b7775c0d4198" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="78ef60dd-5238-4db4-ab48-c5c6ce9d9c35" />
@@ -7503,7 +7507,7 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a4e86482-9842-4cfd-b95f-3dc476aaa389" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="f971b533-63cb-4e58-988d-58eb4b78b24f" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="6ba43e76-7c7e-4fc1-ad14-eb71c52546cf" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="860bd444-1f04-40a9-b011-5563f0ebde57" />
+          <Property Name="Status" Type="MyERP.DataAccess.DefaultDocumentStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="860bd444-1f04-40a9-b011-5563f0ebde57" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="1ef1194b-8518-40b3-9549-9c8b72dd17d2" />
           <NavigationProperty Name="PuchaseLines" Relationship="MyERP.DataAccess.PurchaseHeader_PurchaseLine" FromRole="PurchaseHeader" ToRole="PuchaseLines" ed:Guid="379219b9-c70f-419e-9cee-bd0cb908f127" />
           <NavigationProperty Name="BuyFromVendor" Relationship="MyERP.DataAccess.BusinessPartner_PurchaseHeader_BuyFromVendor" FromRole="PurchaseHeaders" ToRole="BuyFromVendor" ed:Guid="5e4d01bb-ba3d-4415-a72a-19ba091d4112" />
@@ -7660,7 +7664,7 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="808920e8-2fa3-4dd1-9388-a9e46bc0e66d" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="9d0bb8fa-917c-4f59-81dd-78c5ba1c8398" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e7727bc1-af9e-45fb-9514-84a4b195c2f1" />
-          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="96252b46-717d-4a01-8dfe-17586c74a3f4" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="96252b46-717d-4a01-8dfe-17586c74a3f4" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e30f5a14-e99b-4c6d-8390-3c550756c56c" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_Account" FromRole="Accounts" ToRole="Client" ed:Guid="3b0abe87-6aed-4375-82a7-d01399aac290" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_Account" FromRole="Accounts" ToRole="Organization" ed:Guid="20642fbe-7d38-4f22-80c6-e465b3e01b50" />
@@ -7778,7 +7782,7 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="558ebb16-8a65-4a79-bba8-323a54aa4a43" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="6aa910c3-4b31-4fe3-90c7-67f1858d874f" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e64af9f0-77a5-46d6-816f-1dc8afa24a06" />
-          <Property Name="Status" Type="Int16" Nullable="false" ed:ValidateRequired="true" ed:Guid="084aed83-3de2-4d18-b14f-a1b3f9598e7c" />
+          <Property Name="Status" Type="MyERP.DataAccess.DefaultDocumentStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="084aed83-3de2-4d18-b14f-a1b3f9598e7c" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="7964b2d6-9e6d-4500-8ef7-59d8bcbf27e8" />
           <NavigationProperty Name="PurchaseInvoiceLines" Relationship="MyERP.DataAccess.PurchaseInvoiceHeader_PurchaseInvoiceLine" FromRole="PurchaseInvoiceHeader" ToRole="PurchaseInvoiceLines" ed:Guid="7c752d10-79d6-4a9b-b8e5-048b8e4709c1" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_PurchaseInvoiceHeader" FromRole="PurchaseInvoiceHeaders" ToRole="Client" ed:Guid="2b6ce62e-a8e2-4b16-9201-a458ce42f549" />
@@ -7911,7 +7915,7 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="ecc768e0-7a8b-4b18-84ae-499cb2a265b7" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="87e50fbd-501a-491d-a0fc-f6b5e09479a6" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5047a964-1853-42ef-abf6-326ba70c1f89" />
-          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="802d6aa4-4cf5-4f38-a016-b0b5f857634c" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="802d6aa4-4cf5-4f38-a016-b0b5f857634c" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="c14d1943-4b15-4f03-99d0-11d941b08582" />
           <NavigationProperty Name="AccountInputVat" Relationship="MyERP.DataAccess.Account_Vat_Input" FromRole="Vats" ToRole="AccountInputVat" ed:Guid="dd47cee5-7d4f-4239-ba67-e9a57dd51723" />
           <NavigationProperty Name="AccountOutputVat" Relationship="MyERP.DataAccess.Account_Vat_Output" FromRole="Vats1" ToRole="AccountOutputVat" ed:Guid="e4dda1c4-3937-4273-b3ab-6fcdb2d83091" />
@@ -7979,7 +7983,7 @@
           <Property Name="EndingDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="98256891-87b1-4cea-9914-2a47e4e3bee2" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="2b40dc5f-2193-4e85-97ea-c63de169f64c" />
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e56ecc25-bad8-4082-a0cf-8ad64c275049" />
-          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="0414cab4-b288-4ff3-b54a-f389fa270f3b" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="0414cab4-b288-4ff3-b54a-f389fa270f3b" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="2d7b3788-00f4-4b18-a2b1-7e2d4898afc8" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="1a67b64f-56a2-45a9-82d5-bd4d663e37f2" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="fb3f0a13-82dc-4b6b-b0f2-38a816bdfa9d" />
@@ -8014,7 +8018,7 @@
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="3ead03ad-800b-4192-998f-586986005e9f" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="126dd249-026d-4199-8c0f-e81485d8053a" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="7d3f5fe7-a388-4911-81ea-1d3d73819dd6" />
-          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="047f8a35-c2c1-4ebd-be70-0b2bc74d25b1" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="047f8a35-c2c1-4ebd-be70-0b2bc74d25b1" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="49e69bad-9d04-4490-81fd-d7b87aa8d12b" />
           <NavigationProperty Name="Client" Relationship="MyERP.DataAccess.Client_JobGroup" FromRole="JobGroups" ToRole="Client" ed:Guid="ea2ca3e3-783a-4f16-b7cf-e3b7a171dcfe" />
           <NavigationProperty Name="Organization" Relationship="MyERP.DataAccess.Organization_JobGroup" FromRole="JobGroups" ToRole="Organization" ed:Guid="26ec5b9f-2c92-4fe6-a31e-b1b21d593d60" />
@@ -8042,7 +8046,7 @@
           <Property Name="TotalCreditAmountLCY" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="4193e427-9092-4bb3-ac48-527e693b110c" />
           <Property Name="TotalCreditAmount" Type="Decimal" Nullable="false" Precision="38" Scale="20" ed:ValidateRequired="true" ed:Guid="2b2a17c5-7f93-40af-a9d1-16f107af8abd" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="419aee51-d011-42ba-9094-3d0291bb60c3" />
-          <Property Name="Status" Type="Byte" Nullable="false" ed:ValidateRequired="true" ed:Guid="178c2db2-aae8-46a2-91b2-f10a2bbdd5ea" />
+          <Property Name="Status" Type="MyERP.DataAccess.DefaultDocumentStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="178c2db2-aae8-46a2-91b2-f10a2bbdd5ea" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="b373a4d3-1c93-4e0d-94a1-dd915c3abc0e" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="5e6d6062-a7b8-41c2-b536-d0a27dd04674" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="f8db1a32-8b70-4436-b365-b94b09f7dabb" />
@@ -8172,7 +8176,7 @@
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="a4875466-de8c-4a86-ab43-89bc941921cb" />
           <Property Name="OrganizationId" Type="Int64" ed:ValidateRequired="false" ed:Guid="2988e39a-a24a-490b-bba3-5e71260f219e" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e9d40cac-54c6-404a-a9ca-f278468bc573" />
-          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="59cd683a-0e6f-4cf6-a7bc-90d6f508bfc3" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="59cd683a-0e6f-4cf6-a7bc-90d6f508bfc3" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="34512949-e10a-4dd1-8cca-ab0d0d378b0e" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="6e6fc436-2b9a-4a5a-8364-91d3bcf89867" />
           <Property Name="RecModifiedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="29b2b0ea-99a6-40b9-a23c-22e4ff586864" />
@@ -8199,7 +8203,7 @@
           <Property Name="ClientId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="4aef08f6-95b1-475c-b0f5-6c1390868a19" />
           <Property Name="OrganizationId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="e5c4d862-d621-4e99-ab31-53bb92748565" />
           <Property Name="Version" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="89c6c129-bd2d-4808-88d7-31f0456644db" />
-          <Property Name="Status" Type="MyERP.DataAccess.DefaultMasterStatusType" Nullable="false" ed:ValidateRequired="true" ed:Guid="4b0c38cf-54a1-4144-a0d1-db19cff2af7f" />
+          <Property Name="Blocked" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="4b0c38cf-54a1-4144-a0d1-db19cff2af7f" />
           <Property Name="RecCreatedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="80a5fc07-ea15-4b1b-8f46-63bc5666c417" />
           <Property Name="RecCreatedAt" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="4fc3e533-ad42-4e21-b659-7cc64f4152a0" />
           <Property Name="RecModifiedBy" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="3608080b-9156-4985-9d30-ffd1cc879bad" />
@@ -8485,39 +8489,7 @@
             </ed:Attributes>
           </Member>
         </EnumType>
-        <EnumType Name="DefaultMasterStatusType" ed:Namespace="MyERP.DataAccess.Enum" UnderlyingType="Int16" ed:Guid="883e4f57-4cdf-4f28-b748-b57bb0c408e2">
-          <Member Name="Inactive" Value="0" ed:Guid="d872b8a1-99be-4343-a4f7-a3e5184960a7">
-            <ed:Attributes>
-              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-                <ed:AttributeConstructor />
-                <ed:Properties>
-                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-                    <string xmlns="">Inactive</string>
-                  </ed:PropertyValue>
-                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-                    <int xmlns="">1</int>
-                  </ed:PropertyValue>
-                </ed:Properties>
-              </ed:Attribute>
-            </ed:Attributes>
-          </Member>
-          <Member Name="Active" Value="1" ed:Guid="8476b5a6-6d69-4345-bfc6-92d964a76c9f">
-            <ed:Attributes>
-              <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-                <ed:AttributeConstructor />
-                <ed:Properties>
-                  <ed:PropertyValue Name="Name" Type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-                    <string xmlns="">Active</string>
-                  </ed:PropertyValue>
-                  <ed:PropertyValue Name="Order" Type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-                    <int xmlns="">0</int>
-                  </ed:PropertyValue>
-                </ed:Properties>
-              </ed:Attribute>
-            </ed:Attributes>
-          </Member>
-        </EnumType>
-        <EnumType Name="CashDocumentStatusType" ed:Namespace="MyERP.DataAccess.Enum" UnderlyingType="Int16" ed:Guid="0214f0e1-bd5e-41d5-b490-9d47df9c88b9">
+        <EnumType Name="CashDocumentStatusType" ed:Namespace="MyERP.DataAccess.Enum" UnderlyingType="Byte" ed:Guid="0214f0e1-bd5e-41d5-b490-9d47df9c88b9">
           <Member Name="Draft" Value="0" ed:Guid="bafcaf0f-d020-44a7-87e1-b7378e6e0c3f">
             <ed:Attributes>
               <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
@@ -8549,7 +8521,7 @@
             </ed:Attributes>
           </Member>
         </EnumType>
-        <EnumType Name="DefaultDocumentStatusType" ed:Namespace="MyERP.DataAccess.Enum" UnderlyingType="Int16" ed:Guid="c8db2390-a4d4-48c0-a611-82ab1e9e42b6">
+        <EnumType Name="DefaultDocumentStatusType" ed:Namespace="MyERP.DataAccess.Enum" UnderlyingType="Byte" ed:Guid="c8db2390-a4d4-48c0-a611-82ab1e9e42b6">
           <Member Name="Draft" Value="0" ed:Guid="50c37b0d-2c2d-4e6f-aef9-4de9f577a0c3">
             <ed:Attributes>
               <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
@@ -8581,7 +8553,7 @@
             </ed:Attributes>
           </Member>
         </EnumType>
-        <EnumType Name="EInvoiceDocumentStatusType" ed:Namespace="MyERP.DataAccess.Enum" UnderlyingType="Int16" ed:Guid="ec54c74e-d3f2-46fb-8cc2-779f57d082ed">
+        <EnumType Name="EInvoiceDocumentStatusType" ed:Namespace="MyERP.DataAccess.Enum" UnderlyingType="Byte" ed:Guid="ec54c74e-d3f2-46fb-8cc2-779f57d082ed">
           <Member Name="Draft" Value="0" ed:Guid="7bd2bec7-bef0-4464-974f-3efa08808aae">
             <ed:Attributes>
               <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
@@ -8628,7 +8600,7 @@
             </ed:Attributes>
           </Member>
         </EnumType>
-        <EnumType Name="TaxAuthoritiesStatus" ed:Namespace="MyERP.DataAccess.Enum" UnderlyingType="Int16" ed:Guid="628fc91e-ee19-4c87-a649-5989f25f7ebc">
+        <EnumType Name="TaxAuthoritiesStatus" ed:Namespace="MyERP.DataAccess.Enum" UnderlyingType="Byte" ed:Guid="628fc91e-ee19-4c87-a649-5989f25f7ebc">
           <Member Name="Wait" Value="0" ed:Guid="410a63c1-3512-47dd-a62e-dd715b832cd7">
             <ed:Attributes>
               <ed:Attribute Name="System.ComponentModel.DataAnnotations.DisplayAttribute" Assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
@@ -11693,6 +11665,7 @@
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -11726,6 +11699,7 @@
                 <ScalarProperty Name="Mobilephone" ColumnName="mobilephone" />
                 <ScalarProperty Name="TaxAuthoritiesId" ColumnName="tax_authorities_id" />
                 <ScalarProperty Name="UUID" ColumnName="uuid" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -11736,7 +11710,7 @@
                 <ScalarProperty Name="Code" ColumnName="code" />
                 <ScalarProperty Name="Description" ColumnName="description" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
@@ -11752,7 +11726,7 @@
                 <ScalarProperty Name="Id" ColumnName="id" />
                 <ScalarProperty Name="Description" ColumnName="description" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
                 <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
@@ -11792,7 +11766,7 @@
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -11809,7 +11783,7 @@
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="BaseUomId" ColumnName="base_uom_id" />
                 <ScalarProperty Name="ItemGroupId1" ColumnName="item_group_id1" />
@@ -11869,7 +11843,7 @@
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -11881,7 +11855,7 @@
                 <ScalarProperty Name="Level" ColumnName="level" />
                 <ScalarProperty Name="Code" ColumnName="code" />
                 <ScalarProperty Name="Description" ColumnName="description" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
@@ -11899,7 +11873,7 @@
                 <ScalarProperty Name="Level" ColumnName="level" />
                 <ScalarProperty Name="Code" ColumnName="code" />
                 <ScalarProperty Name="Description" ColumnName="description" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
@@ -11922,7 +11896,7 @@
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="BusinessPartnerGroupId1" ColumnName="business_partner_group_id1" />
                 <ScalarProperty Name="BusinessPartnerGroupId2" ColumnName="business_partner_group_id2" />
@@ -12150,7 +12124,7 @@
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="Code" ColumnName="code" />
               </MappingFragment>
@@ -12162,7 +12136,7 @@
                 <ScalarProperty Name="Id" ColumnName="id" />
                 <ScalarProperty Name="Code" ColumnName="code" />
                 <ScalarProperty Name="Description" ColumnName="description" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
@@ -12179,7 +12153,7 @@
                 <ScalarProperty Name="Id" ColumnName="id" />
                 <ScalarProperty Name="StartingDate" ColumnName="starting_date" />
                 <ScalarProperty Name="EndingDate" ColumnName="ending_date" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
@@ -12205,7 +12179,7 @@
                 <ScalarProperty Name="Id" ColumnName="id" />
                 <ScalarProperty Name="Code" ColumnName="code" />
                 <ScalarProperty Name="Description" ColumnName="description" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
@@ -12222,7 +12196,7 @@
                 <ScalarProperty Name="Id" ColumnName="id" />
                 <ScalarProperty Name="Code" ColumnName="code" />
                 <ScalarProperty Name="Description" ColumnName="description" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
@@ -12245,7 +12219,7 @@
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="ContactName" ColumnName="contact_name" />
                 <ScalarProperty Name="Address" ColumnName="address" />
@@ -12266,7 +12240,7 @@
                 <ScalarProperty Name="ManualNo" ColumnName="manual_no" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
                 <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
@@ -12285,7 +12259,7 @@
                 <ScalarProperty Name="CurrentNo" ColumnName="current_no" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
                 <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
@@ -12316,7 +12290,7 @@
                 <ScalarProperty Name="PurchInvoiceSeqId" ColumnName="purch_invoice_seq_id" />
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
                 <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="SalesPosLocationId" ColumnName="sales_pos_location_id" />
                 <ScalarProperty Name="OneTimeBusinessPartnerId" ColumnName="one_time_business_partner_id" />
@@ -12494,7 +12468,7 @@
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
                 <ScalarProperty Name="CurrencyId" ColumnName="currency_id" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="ParentId" ColumnName="parent_id" />
               </MappingFragment>
@@ -12674,7 +12648,7 @@
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
                 <ScalarProperty Name="VatPercentage" ColumnName="vat_percentage" />
                 <ScalarProperty Name="AccountInputVatId" ColumnName="account_input_vat_id" />
@@ -12729,7 +12703,7 @@
                 <ScalarProperty Name="JobGroupId3" ColumnName="job_group_id3" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
@@ -12762,7 +12736,7 @@
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="Version" ColumnName="version" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -12892,7 +12866,7 @@
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="Version" ColumnName="version" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
                 <ScalarProperty Name="RecModifiedAt" ColumnName="rec_modified_at" />
@@ -12934,7 +12908,7 @@
                 <ScalarProperty Name="ClientId" ColumnName="client_id" />
                 <ScalarProperty Name="OrganizationId" ColumnName="organization_id" />
                 <ScalarProperty Name="Version" ColumnName="version" />
-                <ScalarProperty Name="Status" ColumnName="status" />
+                <ScalarProperty Name="Blocked" ColumnName="blocked" />
                 <ScalarProperty Name="RecCreatedBy" ColumnName="rec_created_by" />
                 <ScalarProperty Name="RecCreatedAt" ColumnName="rec_created_at" />
                 <ScalarProperty Name="RecModifiedBy" ColumnName="rec_modified_by" />

@@ -73,7 +73,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 RecCreatedAt = c.RecCreatedAt,
                 RecModifiedBy = c.RecModifiedByUser.Name,
                 RecModifiedAt = c.RecModifiedAt,
-                Status = (DefaultStatusType)c.Status,
+                Blocked = c.Blocked,
                 Version = c.Version
             }).ToList();
 
@@ -109,7 +109,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                         SellerContactPersonName = c.SellerContactPersonName,
                         SellerSignedPersonName = c.SellerSignedPersonName,
                         OrganizationCode = c.Organization.Code,
-                        Status = (DefaultStatusType)c.Status
+                        Blocked = c.Blocked
                     });
                 return this.Store(data, 1);
             }
@@ -117,9 +117,9 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             {
                 var entities = repository.Get(includePaths: new String[] { "Organization", "EInvFormReleases" });
 
-                entities = entities.Where(c => c.Status == (short)DefaultStatusType.Active);
+                entities = entities.Where(c => c.Blocked == false);
                 if (taxAuthoritiesStatus != null)
-                    entities = entities.Where(c => c.EInvFormReleases.Any(d => d.TaxAuthoritiesStatus == (short)taxAuthoritiesStatus));
+                    entities = entities.Where(c => c.EInvFormReleases.Any(d => d.TaxAuthoritiesStatus == taxAuthoritiesStatus));
 
                 if (!string.IsNullOrEmpty(parameters.SimpleSort))
                     entities = parameters.SimpleSortDirection == SortDirection.ASC ? entities.OrderBy(parameters.SimpleSort) : entities.OrderBy(parameters.SimpleSort + " DESC");
@@ -150,7 +150,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     SellerContactPersonName = c.SellerContactPersonName,
                     SellerSignedPersonName = c.SellerSignedPersonName,
                     OrganizationCode = c.Organization.Code,
-                    Status = (DefaultStatusType)c.Status
+                    Blocked = c.Blocked
                 }).ToList();
 
                 return this.Store(data, data.Count);
@@ -164,7 +164,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             var model = new EInvFormTypeEditViewModel()
             {
                 Id = null,
-                Status = DefaultStatusType.Active
+                Blocked = false
             };
 
             if (!String.IsNullOrEmpty(id))
@@ -200,7 +200,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     SellerContactPersonName = entity.SellerContactPersonName,
                     SellerSignedPersonName = entity.SellerSignedPersonName,
                     HasFormRelease = entity.EInvFormReleases.Count > 0,
-                    Status = (DefaultStatusType)entity.Status,
+                    Blocked = entity.Blocked,
                     Version = entity.Version
                 };
             }
@@ -293,7 +293,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     _update.SellerBankAccount = String.IsNullOrWhiteSpace(model.SellerBankAccount) ? null : model.SellerBankAccount;
                     _update.SellerContactPersonName = String.IsNullOrWhiteSpace(model.SellerContactPersonName) ? null : model.SellerContactPersonName;
                     _update.SellerSignedPersonName = String.IsNullOrWhiteSpace(model.SellerSignedPersonName) ? null : model.SellerSignedPersonName;
-                    _update.Status = (byte)model.Status;
+                    _update.Blocked = model.Blocked;
                     _update.RecModifiedAt = DateTime.Now;
                     _update.RecModifiedBy = (long)user.ProviderUserKey;
                     _update.Version++;
@@ -339,7 +339,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                         SellerBankAccount = String.IsNullOrWhiteSpace(model.SellerBankAccount) ? null : model.SellerBankAccount,
                         SellerContactPersonName = String.IsNullOrWhiteSpace(model.SellerContactPersonName) ? null : model.SellerContactPersonName,
                         SellerSignedPersonName = String.IsNullOrWhiteSpace(model.SellerSignedPersonName) ? null : model.SellerSignedPersonName,
-                        Status = (byte)model.Status,
+                        Blocked = model.Blocked,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
                         RecCreatedBy = (long)user.ProviderUserKey,

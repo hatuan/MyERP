@@ -53,8 +53,8 @@ namespace MyERP.Web.Models
 
         public Int64 Version { get; set; }
 
-        [Display(Name = "Status")]
-        public DefaultStatusType Status { get; set; }
+        [Display(Name = "Blocked")]
+        public Boolean Blocked { get; set; }
 
         [Display(Name="Created By")]
         public String RecCreateBy { get; set; }
@@ -121,8 +121,8 @@ namespace MyERP.Web.Models
         public long? BusinessPartnerGroupId3 { get; set; }
 
         [Required]
-        [Display(Name = "Status")]
-        public DefaultStatusType Status { get; set; }
+        [Display(Name = "Blocked")]
+        public Boolean Blocked { get; set; }
 
         public Int64 Version { get; set; }
     }
@@ -161,7 +161,7 @@ namespace MyERP.Web.Models
         [Display(Name = "Contact Name")]
         public String ContactName { get; set; }
 
-        [Display(Name = "Status")]
-        public DefaultStatusType Status { get; set; }
+        [Display(Name = "Blocked")]
+        public Boolean Blocked { get; set; }
     }
 }

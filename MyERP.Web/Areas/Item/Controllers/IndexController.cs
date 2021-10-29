@@ -67,7 +67,7 @@ namespace MyERP.Web.Areas.Item.Controllers
                 RecCreatedAt = c.RecCreatedAt,
                 RecModifiedBy = c.RecModifiedByUser.Name,
                 RecModifiedAt = c.RecModifiedAt,
-                Status = (DefaultStatusType)c.Status,
+                Blocked = c.Blocked,
                 Version = c.Version
             }).ToList();
 
@@ -87,7 +87,7 @@ namespace MyERP.Web.Areas.Item.Controllers
                         Id = c.Id,
                         Description = c.Description,
                         OrganizationCode = c.Organization.Code,
-                        Status = (DefaultStatusType)c.Status
+                        Blocked = c.Blocked
                     });
                 return this.Store(data, 1);
             }
@@ -96,14 +96,14 @@ namespace MyERP.Web.Areas.Item.Controllers
                 var paging = ((ItemRepository)repository).Paging(parameters.Start, parameters.Limit,
                     parameters.SimpleSort, parameters.SimpleSortDirection, parameters.Query);
 
-                var data = paging.Data.Where(c => c.Status == (short)DefaultStatusType.Active)
+                var data = paging.Data.Where(c => c.Blocked == false)
                     .Select(c => new ItemViewModel
                     {
                         Code = c.Code,
                         Id = c.Id,
                         Description = c.Description,
                         OrganizationCode = c.Organization.Code,
-                        Status = (DefaultStatusType)c.Status
+                        Blocked = c.Blocked
                     }).ToList();
                 return this.Store(data, paging.TotalRecords);
             }
@@ -123,7 +123,7 @@ namespace MyERP.Web.Areas.Item.Controllers
                 ItemGroupId1 = null,
                 ItemGroupId2 = null,
                 ItemGroupId3 = null,
-                Status = DefaultStatusType.Active
+                Blocked = false
             };
             if (!String.IsNullOrEmpty(id))
             {
@@ -153,7 +153,7 @@ namespace MyERP.Web.Areas.Item.Controllers
                     COGSAccountId = entity.COGSAccountId,
                     COGSDiffAccountId = entity.COGSDiffAccountId,
                     WIPAccountId = entity.WIPAccountId,
-                    Status = (DefaultStatusType)entity.Status,
+                    Blocked = entity.Blocked,
                     Version = entity.Version
                 };
 
@@ -377,7 +377,7 @@ namespace MyERP.Web.Areas.Item.Controllers
                     _update.COGSAccountId = model.COGSAccountId;
                     _update.COGSDiffAccountId = model.COGSDiffAccountId;
                     _update.WIPAccountId = model.WIPAccountId;
-                    _update.Status = (byte)model.Status;
+                    _update.Blocked = model.Blocked;
                     _update.RecModifiedAt = DateTime.Now;
                     _update.RecModifiedBy = (long)user.ProviderUserKey;
                     _update.Version++;
@@ -420,7 +420,7 @@ namespace MyERP.Web.Areas.Item.Controllers
                         COGSAccountId = model.COGSAccountId == 0 ? null : model.COGSAccountId,
                         COGSDiffAccountId = model.COGSDiffAccountId == 0 ? null : model.COGSDiffAccountId,
                         WIPAccountId = model.WIPAccountId == 0 ? null : model.WIPAccountId,
-                        Status = (byte)model.Status,
+                        Blocked = model.Blocked,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
                         RecCreatedBy = (long)user.ProviderUserKey,
@@ -471,7 +471,7 @@ namespace MyERP.Web.Areas.Item.Controllers
                         UomId = model.BaseUomId,
                         QtyPerUom = 1,
                         IsBaseUom = 1,
-                        Status = (byte)DefaultStatusType.Active,
+                        Blocked = false,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
                         RecCreatedBy = (long)user.ProviderUserKey,

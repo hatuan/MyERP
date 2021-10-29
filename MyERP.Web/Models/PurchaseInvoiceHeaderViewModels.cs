@@ -81,7 +81,7 @@ namespace MyERP.Web.Models
 
         [Required]
         [Display(Name = "Status")]
-        public PurchaseInvoiceDocumentStatusType Status { get; set; }
+        public DefaultDocumentStatusType Status { get; set; }
 
         [Required]
         [Display(Name = "Created By")]
@@ -275,7 +275,7 @@ namespace MyERP.Web.Models
 
         public Int64 Version { get; set; }
 
-        public PurchaseInvoiceDocumentStatusType Status { get; set; }
+        public DefaultDocumentStatusType Status { get; set; }
 
         [Display(Name = "Created By")]
         public String RecCreateBy { get; set; }

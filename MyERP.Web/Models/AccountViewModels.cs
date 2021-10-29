@@ -32,8 +32,8 @@ namespace MyERP.Web.Models
         public Int64 Version { get; set; }
 
         [Required]
-        [Display(Name = "Status", ResourceType = typeof(Resources.Resources))]
-        public DefaultMasterStatusType Status { get; set; }
+        [Display(Name = "Blocked", ResourceType = typeof(Resources.Resources))]
+        public Boolean Blocked { get; set; }
 
         [Required]
         [Display(Name="Created_By", ResourceType = typeof(Resources.Resources))]
@@ -79,8 +79,8 @@ namespace MyERP.Web.Models
         public long? CurrencyId { get; set; }
 
         [Required]
-        [Display(Name = "Status", ResourceType = typeof(Resources.Resources))]
-        public DefaultMasterStatusType Status { get; set; }
+        [Display(Name = "Blocked", ResourceType = typeof(Resources.Resources))]
+        public Boolean Blocked { get; set; }
 
         public Int64 Version { get; set; }
     }
@@ -101,7 +101,7 @@ namespace MyERP.Web.Models
         [Display(Name = "Description")]
         public String Description { get; set; }
 
-        [Display(Name = "Status")]
-        public DefaultMasterStatusType Status { get; set; }
+        [Display(Name = "Blocked")]
+        public Boolean Blocked { get; set; }
     }
 }

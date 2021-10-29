@@ -72,7 +72,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                 RecCreatedAt = c.RecCreatedAt,
                 RecModifiedBy = c.RecModifiedByUser.Name,
                 RecModifiedAt = c.RecModifiedAt,
-                Status = (DefaultStatusType)c.Status,
+                Blocked = c.Blocked,
                 Version = c.Version
             }).ToList();
 
@@ -98,7 +98,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                         VatCode = c.TaxCode,
                         ContactName = c.ContactName,
                         OrganizationCode = c.Organization.Code,
-                        Status = (DefaultStatusType)c.Status
+                        Blocked = c.Blocked
                     });
                 return this.Store(data, 1);
             }
@@ -107,7 +107,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                 var paging = ((BusinessPartnerRepository)repository).Paging(parameters.Start, parameters.Limit,
                     parameters.SimpleSort, parameters.SimpleSortDirection, parameters.Query);
 
-                var data = paging.Data.Where(c => c.Status == (short)DefaultStatusType.Active)
+                var data = paging.Data.Where(c => c.Blocked == false)
                     .Select(c => new BusinessPartnerLookupViewModel
                     {
                         Code = c.Code,
@@ -120,7 +120,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                         VatCode = c.TaxCode,
                         ContactName = c.ContactName,
                         OrganizationCode = c.Organization.Code,
-                        Status = (DefaultStatusType)c.Status
+                        Blocked = c.Blocked
                     }).ToList();
                 return this.Store(data, paging.TotalRecords);
             }
@@ -135,7 +135,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                 BusinessPartnerGroupId1 = null,
                 BusinessPartnerGroupId2 = null,
                 BusinessPartnerGroupId3 = null,
-                Status = DefaultStatusType.Active
+                Blocked = false
             };
             if (!String.IsNullOrEmpty(id))
             {
@@ -155,7 +155,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                     Mobilephone = entity.Mobilephone,
                     Mail = entity.Mail,
                     ContactName = entity.ContactName,
-                    Status = (DefaultStatusType)entity.Status,
+                    Blocked = entity.Blocked,
                     Version = entity.Version
                 };
 
@@ -240,7 +240,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                     _update.BusinessPartnerGroupId1 = model.BusinessPartnerGroupId1;
                     _update.BusinessPartnerGroupId2 = model.BusinessPartnerGroupId2;
                     _update.BusinessPartnerGroupId3 = model.BusinessPartnerGroupId3;
-                    _update.Status = (byte)model.Status;
+                    _update.Blocked = model.Blocked;
                     _update.RecModifiedAt = DateTime.Now;
                     _update.RecModifiedBy = (long)user.ProviderUserKey;
                     _update.Version++;
@@ -274,7 +274,7 @@ namespace MyERP.Web.Areas.BusinessPartner.Controllers
                         BusinessPartnerGroupId1 = model.BusinessPartnerGroupId1 == 0 ? null : model.BusinessPartnerGroupId1,
                         BusinessPartnerGroupId2 = model.BusinessPartnerGroupId2 == 0 ? null : model.BusinessPartnerGroupId2,
                         BusinessPartnerGroupId3 = model.BusinessPartnerGroupId3 == 0 ? null : model.BusinessPartnerGroupId3,
-                        Status = (byte)model.Status,
+                        Blocked = model.Blocked,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
                         RecCreatedBy = (long)user.ProviderUserKey,

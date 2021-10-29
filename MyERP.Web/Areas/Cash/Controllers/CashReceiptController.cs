@@ -80,7 +80,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
                 RecCreatedAt = c.RecCreatedAt,
                 RecModifiedBy = c.RecModifiedByUser.Name,
                 RecModifiedAt = c.RecModifiedAt,
-                Status = (CashDocumentStatusType)c.Status,
+                Status = c.Status,
                 Version = c.Version
             }).ToList();
 
@@ -118,7 +118,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
                     Code = x.Code,
                     Description = x.Description,
                     OrganizationCode = x.Organization.Code,
-                    Status = (DefaultStatusType)x.Status
+                    Blocked = x.Blocked
                 }).ToList();
 
             PreferenceViewModel preference = (PreferenceViewModel) Session["Preference"];
@@ -133,7 +133,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
                 CurrencyId = currencyLcyId,
                 CurrencyFactor = 1,
                 CashLines = new List<CashLineEditViewModel>(),
-                Status = CashDocumentStatusType.Draft
+                Status = DefaultDocumentStatusType.Draft
             };
 
             if (!String.IsNullOrEmpty(id))
@@ -157,7 +157,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
                                                                  Code = cashLine.CorrespAccount.Code,
                                                                  Description = cashLine.CorrespAccount.Description,
                                                                  OrganizationCode = "",
-                                                                 Status = (DefaultStatusType)cashLine.CorrespAccount.Status
+                                                                 Blocked = cashLine.CorrespAccount.Blocked
                                                              },
                                                              Description = cashLine.Description,
                                                              BusinessPartnerId = cashLine.BusinessPartnerId,
@@ -167,7 +167,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
                                                                  Code = cashLine.BusinessPartner.Code,
                                                                  Description = cashLine.BusinessPartner.Description,
                                                                  OrganizationCode = "",
-                                                                 Status = (DefaultStatusType)cashLine.BusinessPartner.Status
+                                                                 Blocked = cashLine.BusinessPartner.Blocked
                                                              },
                                                              Amount = cashLine.Amount,
                                                              AmountLCY = cashLine.AmountLCY,
@@ -198,7 +198,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
                     TotalVatAmountLCY = entity.TotalVatAmountLCY,
                     TotalPayment = entity.TotalPayment,
                     TotalPaymentLCY = entity.TotalPaymentLCY,
-                    Status = (CashDocumentStatusType)entity.Status,
+                    Status = entity.Status,
                     Version = entity.Version
                 };
 
@@ -305,7 +305,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
                 updateCashHeader.TotalVatAmountLCY = headerModel.TotalVatAmountLCY;
                 updateCashHeader.TotalPayment = headerModel.TotalPayment;
                 updateCashHeader.TotalPaymentLCY = headerModel.TotalPaymentLCY;
-                updateCashHeader.Status = (byte)headerModel.Status;
+                updateCashHeader.Status = headerModel.Status;
                 updateCashHeader.RecModifiedAt = DateTime.Now;
                 updateCashHeader.RecModifiedBy = (long)user.ProviderUserKey;
                 updateCashHeader.Version++;
@@ -428,7 +428,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
                     TotalVatAmountLCY = headerModel.TotalVatAmountLCY,
                     TotalPayment = headerModel.TotalPayment,
                     TotalPaymentLCY = headerModel.TotalPaymentLCY,
-                    Status = (byte)headerModel.Status,
+                    Status = headerModel.Status,
                     Version = 1,
                     RecModifiedAt = DateTime.Now,
                     RecCreatedBy = (long)user.ProviderUserKey,
@@ -614,7 +614,7 @@ namespace MyERP.Web.Areas.Cash.Controllers
                                 Code = c.Code,
                                 Description = c.Description,
                                 OrganizationCode = c.Organization.Code,
-                                Status = (DefaultStatusType) c.Status
+                                Blocked = c.Blocked
                             }
                         ).First();
                     record.Set("CorrespAccount", corespAcc);

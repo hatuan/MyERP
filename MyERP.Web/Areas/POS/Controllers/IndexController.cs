@@ -119,7 +119,7 @@ namespace MyERP.Web.Areas.POS.Controllers
                 TotalLineDiscountAmount = 0,
                 TotalPayment = 0,
                 Version = 1,
-                Status = SalesPosDocumentStatusType.Released,
+                Status = DefaultDocumentStatusType.Released,
                 PosLines = new List<PosLineEditViewModel>()
             };
 
@@ -165,7 +165,7 @@ namespace MyERP.Web.Areas.POS.Controllers
                 RecCreatedAt = c.RecCreatedAt,
                 RecModifiedBy = c.RecModifiedByUser.Name,
                 RecModifiedAt = c.RecModifiedAt,
-                Status = (DefaultStatusType)c.Status,
+                Status = c.Status,
                 Version = c.Version
             }).ToList();
 
@@ -534,7 +534,7 @@ namespace MyERP.Web.Areas.POS.Controllers
                 TotalPaymentLCY = headerModel.TotalPayment,
                 CashOfCustomer = headerModel.CashOfCustomer,
                 ChangeReturnToCustomer = headerModel.ChangeReturnToCustomer,
-                Status = (byte)headerModel.Status,
+                Status = headerModel.Status,
                 Version = headerModel.Version,
                 RecModifiedAt = DateTime.Now,
                 RecCreatedBy = (long)user.ProviderUserKey,

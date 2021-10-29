@@ -1,5 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<modules>
-  <module type="LoginPage" kind="Page" assembly="MyERP.Framework.dll" namespace="MyERP.Web"/>
-  <module type="MainPage" kind="Page" assembly="MyERP.Framework.dll" namespace="MyERP.Web"/>
-</modules>

@@ -154,7 +154,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                                                                                        Code = eInvoiceLine.Item.Code,
                                                                                        OrganizationCode = "",
                                                                                        Description = eInvoiceLine.Item.Description,
-                                                                                       Status = (DefaultStatusType)eInvoiceLine.Item.Status
+                                                                                       Blocked = eInvoiceLine.Item.Blocked
                                                                                    },
                                                                                    UnitId = eInvoiceLine.UnitId,
                                                                                    UnitCode = eInvoiceLine.Uom == null ? "" : eInvoiceLine.Uom.Code,
@@ -176,7 +176,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                                                                                        Code = eInvoiceLine.Vat.Code,
                                                                                        OrganizationCode = "",
                                                                                        Description = eInvoiceLine.Vat.Description,
-                                                                                       Status = (DefaultStatusType)eInvoiceLine.Vat.Status
+                                                                                       Blocked = eInvoiceLine.Vat.Blocked
 
                                                                                    },
                                                                                    VATPercentage = eInvoiceLine.VATPercentage,
@@ -379,7 +379,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                 updateEInvoiceHeader.TotalAmountWithVAT = headerModel.TotalAmountWithVAT;
                 updateEInvoiceHeader.TotalAmountWithVATFrn = headerModel.TotalAmountWithVATFrn;
                 updateEInvoiceHeader.TotalAmountWithVATInWords = headerModel.TotalAmountWithVATInWords;
-                updateEInvoiceHeader.Status = (byte)headerModel.Status;
+                updateEInvoiceHeader.Status = headerModel.Status;
                 updateEInvoiceHeader.RecModifiedAt = DateTime.Now;
                 updateEInvoiceHeader.RecModifiedBy = (long)user.ProviderUserKey;
                 updateEInvoiceHeader.Version++;
@@ -513,7 +513,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     TotalAmountWithVATFrn = headerModel.TotalAmountWithVATFrn,
                     TotalAmountWithVATInWords = headerModel.TotalAmountWithVATInWords,
 
-                    Status = (byte)headerModel.Status,
+                    Status = headerModel.Status,
                     Version = 1,
                     RecModifiedAt = DateTime.Now,
                     RecCreatedBy = (long)user.ProviderUserKey,
@@ -589,7 +589,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             {
                 (repository as EInvoiceHeaderRepository).CreateHtmlFile(entity, dirPath, fullHtmlPath);
                 
-                if (System.IO.File.Exists(Server.MapPath($"~/Resources/images/signature.png")) && entity.Status == (byte)EInvoiceDocumentStatusType.Signed)
+                if (System.IO.File.Exists(Server.MapPath($"~/Resources/images/signature.png")) && entity.Status == EInvoiceDocumentStatusType.Signed)
                 {
                     System.IO.File.WriteAllBytes(dirPath + "/signature.png", System.IO.File.ReadAllBytes(Server.MapPath($"~/Resources/images/signature.png")));
                 }
@@ -694,7 +694,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                             Code = item.Code,
                             Description = item.Description,
                             OrganizationCode = item.Organization.Code,
-                            Status = (DefaultStatusType)item.Status
+                            Blocked = item.Blocked
                         };
 
                         record.Set("Item", itemModel);
@@ -724,7 +724,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                                 Code = item.Vat.Code,
                                 Description = item.Vat.Description,
                                 OrganizationCode = item.Vat.Organization.Code,
-                                Status = (DefaultStatusType)item.Vat.Status
+                                Blocked = item.Vat.Blocked
                             };
 
                             record.Set("Vat", vatModel);
@@ -764,7 +764,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                             Code = vat.Code,
                             Description = vat.Description,
                             OrganizationCode = vat.Organization.Code,
-                            Status = (DefaultStatusType)vat.Status
+                            Blocked = vat.Blocked
                         };
 
                         record.Set("Vat", vatModel);

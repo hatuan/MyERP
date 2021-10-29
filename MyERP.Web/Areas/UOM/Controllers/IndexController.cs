@@ -63,7 +63,7 @@ namespace MyERP.Web.Areas.UOM.Controllers
                 RecCreatedAt = c.RecCreatedAt,
                 RecModifiedBy = c.RecModifiedByUser.Name,
                 RecModifiedAt = c.RecModifiedAt,
-                Status = (DefaultStatusType)c.Status,
+                Blocked = c.Blocked,
                 Version = c.Version
             }).ToList();
 
@@ -83,7 +83,7 @@ namespace MyERP.Web.Areas.UOM.Controllers
                     Id = c.Id,
                     Description = c.Description,
                     OrganizationCode = c.Organization.Code,
-                    Status = (DefaultStatusType)c.Status
+                    Blocked = c.Blocked
                 });
                 return this.Store(data, 1);
             }
@@ -92,14 +92,14 @@ namespace MyERP.Web.Areas.UOM.Controllers
                 var paging = ((UomRepository) repository).UomsPaging(parameters.Start, parameters.Limit,
                     parameters.SimpleSort, parameters.SimpleSortDirection, parameters.Query);
 
-                var data = paging.Data.Where(c => c.Status == (short) DefaultStatusType.Active).Select(c =>
+                var data = paging.Data.Where(c => c.Blocked == false).Select(c =>
                     new UOMViewModel
                     {
                         Code = c.Code,
                         Id = c.Id,
                         Description = c.Description,
                         OrganizationCode = c.Organization.Code,
-                        Status = (DefaultStatusType) c.Status
+                        Blocked = c.Blocked
                     }).ToList();
                 return this.Store(data, paging.TotalRecords);
             }
@@ -111,7 +111,7 @@ namespace MyERP.Web.Areas.UOM.Controllers
             var model = new UOMEditViewModel()
             {
                 Id = null,
-                Status = DefaultStatusType.Active
+                Blocked = false
             };
             if (!String.IsNullOrEmpty(id))
             {
@@ -122,7 +122,7 @@ namespace MyERP.Web.Areas.UOM.Controllers
                     Id = uom.Id,
                     Code = uom.Code,
                     Description = uom.Description,
-                    Status = (DefaultStatusType)uom.Status,
+                    Blocked = uom.Blocked,
                     Version = uom.Version
                 };
             }
@@ -162,7 +162,7 @@ namespace MyERP.Web.Areas.UOM.Controllers
 
                     _update.Code = model.Code;
                     _update.Description = model.Description;
-                    _update.Status = (byte) model.Status;
+                    _update.Blocked = model.Blocked;
                     _update.RecModifiedAt = DateTime.Now;
                     _update.RecModifiedBy = (long) user.ProviderUserKey;
                     _update.Version++;
@@ -187,7 +187,7 @@ namespace MyERP.Web.Areas.UOM.Controllers
                         OrganizationId = organizationId,
                         Code = model.Code,
                         Description = model.Description,
-                        Status = (byte)model.Status,
+                        Blocked = model.Blocked,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
                         RecCreatedBy = (long)user.ProviderUserKey,

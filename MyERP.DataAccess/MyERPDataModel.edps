@@ -122,7 +122,6 @@
         <File Name="MyERPDataModel.EInvoiceSigned.Generated.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
         <File Name="MyERPDataModel.OrganizationStatusType.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
         <File Name="MyERPDataModel.CurrencyStatusType.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
-        <File Name="MyERPDataModel.DefaultMasterStatusType.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
         <File Name="MyERPDataModel.CashDocumentStatusType.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
         <File Name="MyERPDataModel.DefaultDocumentStatusType.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
         <File Name="MyERPDataModel.EInvoiceDocumentStatusType.cs" DestinationFolder="C:\Projects\MyERP-Web\MyERP.DataAccess\Entities" />
@@ -359,7 +358,6 @@
         <File Name="MyERPDataModel.EInvoiceSigned.Generated.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
         <File Name="MyERPDataModel.OrganizationStatusType.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
         <File Name="MyERPDataModel.CurrencyStatusType.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
-        <File Name="MyERPDataModel.DefaultMasterStatusType.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
         <File Name="MyERPDataModel.CashDocumentStatusType.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
         <File Name="MyERPDataModel.DefaultDocumentStatusType.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />
         <File Name="MyERPDataModel.EInvoiceDocumentStatusType.cs" DestinationFolder="C:\Projects\MyERP-WEB\Next\MyERP.Data\Entities" />

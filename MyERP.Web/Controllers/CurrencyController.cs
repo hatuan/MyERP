@@ -65,7 +65,7 @@ namespace MyERP.Web.Controllers
                 RecCreatedAt = c.RecCreatedAt,
                 RecModifiedBy = c.RecModifiedByUser.Name,
                 RecModifiedAt = c.RecModifiedAt,
-                Status = (DefaultStatusType)c.Status,
+                Blocked = c.Blocked,
                 Version = c.Version
             }).ToList();
 
@@ -85,7 +85,7 @@ namespace MyERP.Web.Controllers
                     Id = entity.Id,
                     Description = entity.Description,
                     OrganizationCode = entity.Organization.Code,
-                    Status = (DefaultStatusType)entity.Status
+                    Blocked = entity.Blocked
                 };
                 return this.Store(data, 1);
             }
@@ -94,14 +94,14 @@ namespace MyERP.Web.Controllers
                 var paging = ((CurrencyRepository)repository).Paging(parameters.Start, parameters.Limit,
                     parameters.SimpleSort, parameters.SimpleSortDirection, parameters.Query);
 
-                var data = paging.Data.Where(c => c.Status == (short)DefaultStatusType.Active)
+                var data = paging.Data.Where(c => c.Blocked == false)
                     .Select(c => new CurrencyViewModel
                     {
                         Code = c.Code,
                         Id = c.Id,
                         Description = c.Description,
                         OrganizationCode = c.Organization.Code,
-                        Status = (DefaultStatusType)c.Status
+                        Blocked = c.Blocked
                     }).ToList();
                 return this.Store(data, paging.TotalRecords);
             }
@@ -113,7 +113,7 @@ namespace MyERP.Web.Controllers
             var model = new CurrencyEditViewModel()
             {
                 Id = null,
-                Status = DefaultStatusType.Active
+                Blocked = false
             };
             if (!String.IsNullOrEmpty(id))
             {
@@ -124,7 +124,7 @@ namespace MyERP.Web.Controllers
                     Id = entity.Id,
                     Code = entity.Code,
                     Description = entity.Description,
-                    Status = (DefaultStatusType)entity.Status,
+                    Blocked = entity.Blocked,
                     Version = entity.Version
                 };
             }
@@ -163,7 +163,7 @@ namespace MyERP.Web.Controllers
 
                     _update.Code = model.Code;
                     _update.Description = model.Description;
-                    _update.Status = (byte)model.Status;
+                    _update.Blocked = model.Blocked;
                     _update.RecModifiedAt = DateTime.Now;
                     _update.RecModifiedBy = (long)user.ProviderUserKey;
                     _update.Version++;
@@ -190,7 +190,7 @@ namespace MyERP.Web.Controllers
                         OrganizationId = organizationId,
                         Code = model.Code,
                         Description = model.Description,
-                        Status = (byte)model.Status,
+                        Blocked = model.Blocked,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
                         RecCreatedBy = (long)user.ProviderUserKey,

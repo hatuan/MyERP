@@ -25,8 +25,8 @@ namespace MyERP.Web.Models
         public Int64 Version { get; set; }
 
         [Required]
-        [Display(Name = "Status", ResourceType = typeof(Resources.Resources))]
-        public DefaultStatusType Status { get; set; }
+        [Display(Name = "Blocked", ResourceType = typeof(Resources.Resources))]
+        public Boolean Blocked { get; set; }
 
         [Required]
         [Display(Name="Created_By", ResourceType = typeof(Resources.Resources))]
@@ -97,8 +97,8 @@ namespace MyERP.Web.Models
         public long? OneTimeBusinessPartnerId { get; set; }
 
         [Required]
-        [Display(Name = "Status", ResourceType = typeof(Resources.Resources))]
-        public DefaultStatusType Status { get; set; }
+        [Display(Name = "Blocked", ResourceType = typeof(Resources.Resources))]
+        public Boolean Blocked { get; set; }
 
         public Int64 Version { get; set; }
     }

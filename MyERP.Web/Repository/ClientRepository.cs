@@ -162,7 +162,7 @@ namespace MyERP.Web
                         RecCreatedAt = DateTime.Now,
                         RecModifiedByUser = activeUser,
                         RecModifiedAt = DateTime.Now,
-                        Status = 1,
+                        Blocked = false,
                         Version = 1
                     };
                     newOrg = DataContext.Organizations.Add(newOrg);
@@ -182,7 +182,7 @@ namespace MyERP.Web
                         RecCreatedAt = DateTime.Now,
                         RecModifiedByUser = activeUser,
                         RecModifiedAt = DateTime.Now,
-                        Status = 1,
+                        Blocked = false,
                         Version = 1
                     };
                     newCurrency = DataContext.Currencies.Add(newCurrency);

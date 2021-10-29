@@ -64,7 +64,7 @@ namespace MyERP.Web.Areas.Account.Controllers
                 RecCreatedAt = c.RecCreatedAt,
                 RecModifiedBy = c.RecModifiedByUser.Name,
                 RecModifiedAt = c.RecModifiedAt,
-                Status = (DefaultStatusType) c.Status,
+                Blocked = c.Blocked,
                 Version = c.Version
             }).ToList();
 
@@ -84,7 +84,7 @@ namespace MyERP.Web.Areas.Account.Controllers
                         Id = c.Id,
                         Description = c.Description,
                         OrganizationCode = c.Organization.Code,
-                        Status = (DefaultStatusType) c.Status
+                        Blocked = c.Blocked
                     }).ToList();
                 return this.Store(data, 1);
             }
@@ -93,14 +93,14 @@ namespace MyERP.Web.Areas.Account.Controllers
                 var paging = ((AccountRepository) repository).Paging(parameters.Start, parameters.Limit,
                     parameters.SimpleSort, parameters.SimpleSortDirection, parameters.Query);
 
-                var data = paging.Data.Where(c => c.Status == (short) DefaultStatusType.Active).Select(c =>
+                var data = paging.Data.Where(c => c.Blocked == false).Select(c =>
                     new AccountLookupViewModel
                     {
                         Code = c.Code,
                         Id = c.Id,
                         Description = c.Description,
                         OrganizationCode = c.Organization.Code,
-                        Status = (DefaultStatusType) c.Status
+                        Blocked = c.Blocked
                     }).ToList();
                 return this.Store(data, paging.TotalRecords);
             }
@@ -112,7 +112,7 @@ namespace MyERP.Web.Areas.Account.Controllers
             var model = new AccountEditViewModel()
             {
                 Id = null,
-                Status = DefaultStatusType.Active
+                Blocked = false
             };
             if (!String.IsNullOrEmpty(id))
             {
@@ -125,7 +125,7 @@ namespace MyERP.Web.Areas.Account.Controllers
                     Description = entity.Description,
                     CurrencyId = entity.CurrencyId,
                     ParentId = entity.ParentId,
-                    Status = (DefaultStatusType)entity.Status,
+                    Blocked = entity.Blocked,
                     Version = entity.Version
                 };
 
@@ -193,7 +193,7 @@ namespace MyERP.Web.Areas.Account.Controllers
                     _update.Description = model.Description;
                     _update.CurrencyId = model.CurrencyId;
                     _update.ParentId = model.ParentId;
-                    _update.Status = (byte)model.Status;
+                    _update.Blocked = model.Blocked;
                     _update.RecModifiedAt = DateTime.Now;
                     _update.RecModifiedBy = (long)user.ProviderUserKey;
                     _update.Version++;
@@ -220,7 +220,7 @@ namespace MyERP.Web.Areas.Account.Controllers
                         Description = model.Description,
                         CurrencyId = model.CurrencyId,
                         ParentId = model.ParentId,
-                        Status = (byte)model.Status,
+                        Blocked = model.Blocked,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
                         RecCreatedBy = (long)user.ProviderUserKey,

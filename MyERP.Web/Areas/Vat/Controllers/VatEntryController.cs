@@ -125,7 +125,7 @@ namespace MyERP.Web.Areas.Vat.Controllers
                             Code = businessPartner.Code,
                             Description = businessPartner.Description,
                             OrganizationCode = businessPartner.Organization.Code,
-                            Status = (DefaultStatusType)businessPartner.Status
+                            Blocked = businessPartner.Blocked
                         };
 
                         record.Set("BusinessPartner", businessPartnerModel);
@@ -145,7 +145,7 @@ namespace MyERP.Web.Areas.Vat.Controllers
                         Code = accountVat.Code,
                         Description = accountVat.Description,
                         OrganizationCode = accountVat.Organization.Code,
-                        Status = (DefaultStatusType)accountVat.Status
+                        Blocked = accountVat.Blocked
                     };
 
                     record.Set("AccountVat", accountVatModel);
@@ -162,7 +162,7 @@ namespace MyERP.Web.Areas.Vat.Controllers
                             Code = vat.Code,
                             Description = vat.Description,
                             OrganizationCode = vat.Organization.Code,
-                            Status = (DefaultStatusType)vat.Status
+                            Blocked = vat.Blocked
                         };
 
                         record.Set("Vat", vatModel);
@@ -172,7 +172,7 @@ namespace MyERP.Web.Areas.Vat.Controllers
                             Id = vat.AccountInputVatId,
                             Code = vat.AccountInputVat.Code,
                             OrganizationCode = "",
-                            Status = (DefaultStatusType)vat.AccountInputVat.Status
+                            Blocked = vat.AccountInputVat.Blocked
                         };
                         record.Set("AccountVatId", vat.AccountInputVatId);
                         record.Set("AccountVat", accountVat);

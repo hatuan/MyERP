@@ -48,7 +48,7 @@ namespace MyERP.Web.Areas.Job.Controllers
                         Id = c.Id,
                         Description = c.Description,
                         OrganizationCode = c.Organization.Code,
-                        Status = (DefaultStatusType)c.Status
+                        Blocked = c.Blocked
                     });
                 return this.Store(data, 1);
             }
@@ -57,14 +57,14 @@ namespace MyERP.Web.Areas.Job.Controllers
                 var paging = ((JobRepository)repository).Paging(parameters.Start, parameters.Limit,
                     parameters.SimpleSort, parameters.SimpleSortDirection, parameters.Query);
 
-                var data = paging.Data.Where(c => c.Status == (short)DefaultStatusType.Active)
+                var data = paging.Data.Where(c => c.Blocked == false)
                     .Select(c => new JobLookupViewModel
                     {
                         Code = c.Code,
                         Id = c.Id,
                         Description = c.Description,
                         OrganizationCode = c.Organization.Code,
-                        Status = (DefaultStatusType)c.Status
+                        Blocked = c.Blocked
                     }).ToList();
                 return this.Store(data, paging.TotalRecords);
             }
@@ -99,7 +99,7 @@ namespace MyERP.Web.Areas.Job.Controllers
                 RecCreatedAt = c.RecCreatedAt,
                 RecModifiedBy = c.RecModifiedByUser.Name,
                 RecModifiedAt = c.RecModifiedAt,
-                Status = (DefaultStatusType)c.Status,
+                Blocked = c.Blocked,
                 Version = c.Version
             }).ToList();
 
@@ -116,7 +116,7 @@ namespace MyERP.Web.Areas.Job.Controllers
                 JobGroupId1 = null,
                 JobGroupId2 = null,
                 JobGroupId3 = null,
-                Status = DefaultStatusType.Active
+                Blocked = false
             };
             if (!String.IsNullOrEmpty(id))
             {
@@ -131,7 +131,7 @@ namespace MyERP.Web.Areas.Job.Controllers
                     JobGroupId3 = entity.JobGroupId3,
                     Description = entity.Description,
 
-                    Status = (DefaultStatusType)entity.Status,
+                    Blocked = entity.Blocked,
                     Version = entity.Version
                 };
 
@@ -210,7 +210,7 @@ namespace MyERP.Web.Areas.Job.Controllers
                     _update.JobGroupId1 = model.JobGroupId1;
                     _update.JobGroupId2 = model.JobGroupId2;
                     _update.JobGroupId3 = model.JobGroupId3;
-                    _update.Status = (byte)model.Status;
+                    _update.Blocked = model.Blocked;
                     _update.RecModifiedAt = DateTime.Now;
                     _update.RecModifiedBy = (long)user.ProviderUserKey;
                     _update.Version++;
@@ -238,7 +238,7 @@ namespace MyERP.Web.Areas.Job.Controllers
                         JobGroupId1 = model.JobGroupId1 == 0 ? null : model.JobGroupId1,
                         JobGroupId2 = model.JobGroupId2 == 0 ? null : model.JobGroupId2,
                         JobGroupId3 = model.JobGroupId3 == 0 ? null : model.JobGroupId3,
-                        Status = (byte)model.Status,
+                        Blocked = model.Blocked,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
                         RecCreatedBy = (long)user.ProviderUserKey,

@@ -88,7 +88,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
             var model = new EInvFormReleaseEditViewModel()
             {
                 Id = null,
-                Status = DefaultStatusType.Active,
+                Blocked = false,
                 TaxAuthoritiesStatus = TaxAuthoritiesStatus.Wait
             };
 
@@ -107,7 +107,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     ReleaseDate = entity.ReleaseDate,
                     StartDate = entity.StartDate,
                     TaxAuthoritiesStatus = (TaxAuthoritiesStatus)entity.TaxAuthoritiesStatus,
-                    Status = (DefaultStatusType)entity.Status,
+                    Blocked = entity.Blocked,
                     Version = entity.Version
                 };
 
@@ -170,7 +170,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                         return r;
                     }
 
-                    if ((TaxAuthoritiesStatus)_update.TaxAuthoritiesStatus == TaxAuthoritiesStatus.Active)
+                    if ((TaxAuthoritiesStatus)_update.TaxAuthoritiesStatus == TaxAuthoritiesStatus.Actived)
                     {
                         r.Success = false;
                         r.ErrorMessage = "Form Release has been used! Can not Edit or Delete";
@@ -183,8 +183,8 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     _update.ReleaseTo = model.ReleaseTo;
                     _update.ReleaseDate = model.ReleaseDate;
                     _update.StartDate = model.StartDate;
-                    _update.TaxAuthoritiesStatus = (byte)model.TaxAuthoritiesStatus;
-                    _update.Status = (byte) model.Status;
+                    _update.TaxAuthoritiesStatus = model.TaxAuthoritiesStatus;
+                    _update.Blocked = model.Blocked;
                     _update.RecModifiedAt = DateTime.Now;
                     _update.RecModifiedBy = (long)user.ProviderUserKey;
                     _update.Version++;
@@ -213,8 +213,8 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                         ReleaseTo = model.ReleaseTo,
                         ReleaseDate = model.ReleaseDate,
                         StartDate = model.StartDate,
-                        TaxAuthoritiesStatus = (byte)model.TaxAuthoritiesStatus,
-                        Status = (byte)model.Status,
+                        TaxAuthoritiesStatus = model.TaxAuthoritiesStatus,
+                        Blocked = model.Blocked,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
                         RecCreatedBy = (long)user.ProviderUserKey,
@@ -258,7 +258,7 @@ namespace MyERP.Web.Areas.EInvoice.Controllers
                     return r;
                 }
 
-                if ((TaxAuthoritiesStatus)entity.TaxAuthoritiesStatus ==  TaxAuthoritiesStatus.Active)
+                if ((TaxAuthoritiesStatus)entity.TaxAuthoritiesStatus ==  TaxAuthoritiesStatus.Actived)
                 {
                     r.Success = false;
                     r.ErrorMessage = "Form Release has been used! Can not Edit or Delete";

@@ -67,7 +67,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                 Id = c.Id,
                 Code = c.Code,
                 Description = c.Description,
-                Status = (DefaultStatusType) c.Status,
+                Blocked = c.Blocked,
                 Version = c.Version
             }).ToList();
 
@@ -83,7 +83,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
             {
                 Id = null,
                 SalesPrices = new List<SalesPriceEditViewModel>(),
-                Status = DefaultStatusType.Active
+                Blocked = false
             };
 
             if (!String.IsNullOrEmpty(id))
@@ -130,7 +130,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                         MinQty = salesPrice.MinQty,
                         UnitPrice = salesPrice.UnitPrice,
                         EndingDate = salesPrice.EndingDate,
-                        Status = (DefaultStatusType) salesPrice.Status,
+                        Blocked = salesPrice.Blocked,
                         Version = salesPrice.Version
                     }).ToList();
 
@@ -164,7 +164,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                     Code = entity.Code,
                     Description = entity.Description,
                     SalesPrices = salesPrices,
-                    Status = (DefaultStatusType) entity.Status,
+                    Blocked = entity.Blocked,
                     RecCreatedBy = entity.RecCreatedByUser.Name,
                     RecCreatedAt = entity.RecCreatedAt,
                     RecModifiedBy = entity.RecModifiedByUser.Name,
@@ -216,7 +216,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                         OrganizationId = organizationId,
                         Code = model.Code,
                         Description = model.Description,
-                        Status = (byte) model.Status,
+                        Blocked = model.Blocked,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
                         RecCreatedBy = (long) user.ProviderUserKey,
@@ -236,7 +236,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                             StartingDate = c.StartingDate ?? new DateTime(1900, 1, 1, 0, 0, 0),
                             MinQty = c.MinQty ?? 0,
                             UnitPrice = c.UnitPrice ?? 0,
-                            Status = (byte)DefaultStatusType.Active,
+                            Blocked = false,
                             Version = 1,
                             RecModifiedAt = DateTime.Now,
                             RecCreatedBy = (long)user.ProviderUserKey,
@@ -270,7 +270,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
 
                     updateSalesPriceGroup.Code = model.Code;
                     updateSalesPriceGroup.Description = model.Description;
-                    updateSalesPriceGroup.Status = (byte)model.Status;
+                    updateSalesPriceGroup.Blocked = model.Blocked;
                     updateSalesPriceGroup.RecModifiedAt = DateTime.Now;
                     updateSalesPriceGroup.RecModifiedBy = (long)user.ProviderUserKey;
                     updateSalesPriceGroup.Version++;
@@ -293,7 +293,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                                 StartingDate = salesPriceViewModel.StartingDate ?? new DateTime(1900, 1, 1, 0, 0, 0),
                                 MinQty = salesPriceViewModel.MinQty ?? 0,
                                 UnitPrice = salesPriceViewModel.UnitPrice ?? 0,
-                                Status = (byte) DefaultStatusType.Active,
+                                Blocked = false,
                                 Version = 1,
                                 RecCreatedBy = (long)user.ProviderUserKey,
                                 RecCreatedAt = DateTime.Now,
@@ -317,7 +317,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                                         salesPriceViewModel.StartingDate ?? new DateTime(1900, 1, 1, 0, 0, 0);
                                     x.MinQty = salesPriceViewModel.MinQty ?? 0;
                                     x.UnitPrice = salesPriceViewModel.UnitPrice ?? 0;
-                                    x.Status = (byte) DefaultStatusType.Active;
+                                    x.Blocked = false;
                                     x.Version++;
                                     x.RecModifiedAt = DateTime.Now;
                                     x.RecModifiedBy = (long) user.ProviderUserKey;
@@ -412,7 +412,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                 MinQty = null,
                 UnitPrice = null,
                 EndingDate = null,
-                Status = DefaultStatusType.Active,
+                Blocked = false,
                 Version = 1
             };
 
@@ -436,7 +436,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                         Id = entity.Id,
                         Description = entity.Description,
                         OrganizationCode = entity.Organization.Code,
-                        Status = (DefaultStatusType)entity.Status
+                        Blocked = entity.Blocked
                     };
                     return this.Store(data, 1);
                 }
@@ -445,14 +445,14 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                     var paging = ((BusinessPartnerRepository)_repository).Paging(parameters.Start, parameters.Limit,
                         parameters.SimpleSort, parameters.SimpleSortDirection, parameters.Query);
 
-                    var data = paging.Data.Where(c => c.Status == (short)DefaultStatusType.Active)
+                    var data = paging.Data.Where(c => c.Blocked == false)
                         .Select(c => new BusinessPartnerViewModel
                         {
                             Code = c.Code,
                             Id = c.Id,
                             Description = c.Description,
                             OrganizationCode = c.Organization.Code,
-                            Status = (DefaultStatusType)c.Status
+                            Blocked = c.Blocked
                         }).ToList();
                     return this.Store(data, paging.TotalRecords);
                 }
@@ -468,7 +468,7 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                         Id = entity.Id,
                         Description = entity.Description,
                         OrganizationCode = entity.Organization.Code,
-                        Status = (DefaultStatusType)entity.Status
+                        Blocked = entity.Blocked
                     };
                     return this.Store(data, 1);
                 }
@@ -477,14 +477,14 @@ namespace MyERP.Web.Areas.SalesPrice.Controllers
                     var paging = ((BusinessPartnerPriceGroupRepository)_repository).Paging(parameters.Start, parameters.Limit,
                         parameters.SimpleSort, parameters.SimpleSortDirection, parameters.Query);
 
-                    var data = paging.Data.Where(c => c.Status == (short)DefaultStatusType.Active)
+                    var data = paging.Data.Where(c => c.Blocked == false)
                         .Select(c => new BusinessPartnerPriceGroupViewModel
                         {
                             Code = c.Code,
                             Id = c.Id,
                             Description = c.Description,
                             OrganizationCode = c.Organization.Code,
-                            Status = (DefaultStatusType)c.Status
+                            Blocked = c.Blocked
                         }).ToList();
                     return this.Store(data, paging.TotalRecords);
                 }

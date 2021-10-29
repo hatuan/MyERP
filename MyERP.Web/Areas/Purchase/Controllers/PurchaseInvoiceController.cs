@@ -82,7 +82,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 RecCreatedAt = c.RecCreatedAt,
                 RecModifiedBy = c.RecModifiedByUser.Name,
                 RecModifiedAt = c.RecModifiedAt,
-                Status = (PurchaseInvoiceDocumentStatusType)c.Status,
+                Status = c.Status,
                 Version = c.Version
             }).ToList();
 
@@ -134,7 +134,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 CurrencyFactor = 1,
                 PurchaseInvoiceLines = new List<PurchaseInvoiceLineEditViewModel>(),
                 VatEntries = new List<VatEntryEditViewModel>(),
-                Status = PurchaseInvoiceDocumentStatusType.Draft
+                Status =DefaultDocumentStatusType.Draft
             };
 
             if (!String.IsNullOrEmpty(id))
@@ -160,7 +160,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                                  Code = purchaseInvoiceLine.Item.Code,
                                                                  OrganizationCode = "",
                                                                  Description = purchaseInvoiceLine.Item.Description,
-                                                                 Status = (DefaultStatusType) purchaseInvoiceLine.Item.Status
+                                                                 Blocked = purchaseInvoiceLine.Item.Blocked
 
                                                              }, 
                                                              Description = purchaseInvoiceLine.Description,
@@ -180,7 +180,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                                  Code = purchaseInvoiceLine.Location.Code,
                                                                  OrganizationCode = "",
                                                                  Description = purchaseInvoiceLine.Location.Description,
-                                                                 Status = (DefaultStatusType)purchaseInvoiceLine.Location.Status
+                                                                 Blocked = purchaseInvoiceLine.Location.Blocked
 
                                                              },
                                                              Quantity = purchaseInvoiceLine.Quantity,
@@ -210,7 +210,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                                  Code = purchaseInvoiceLine.Vat.Code,
                                                                  OrganizationCode = "",
                                                                  Description = purchaseInvoiceLine.Vat.Description,
-                                                                 Status = (DefaultStatusType)purchaseInvoiceLine.Vat.Status
+                                                                 Blocked = purchaseInvoiceLine.Vat.Blocked
 
                                                              },
                                                              VatPercentage = purchaseInvoiceLine.VatPercentage,
@@ -231,7 +231,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                                  Code = purchaseInvoiceLine.InventoryAccount.Code,
                                                                  OrganizationCode = "",
                                                                  Description = purchaseInvoiceLine.InventoryAccount.Description,
-                                                                 Status = (DefaultStatusType)purchaseInvoiceLine.InventoryAccount.Status
+                                                                 Blocked = purchaseInvoiceLine.InventoryAccount.Blocked
 
                                                              },
                                                              JobId = purchaseInvoiceLine.JobId,
@@ -240,7 +240,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                                  Code = purchaseInvoiceLine.Job.Code,
                                                                  OrganizationCode = "",
                                                                  Description = purchaseInvoiceLine.Job.Description,
-                                                                 Status = (DefaultStatusType)purchaseInvoiceLine.Job.Status
+                                                                 Blocked = purchaseInvoiceLine.Job.Blocked
 
                                                              },
                                                          }).ToList();
@@ -259,7 +259,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                                         Code = line.BusinessPartner.Code,
                                                                         OrganizationCode = "",
                                                                         Description = line.BusinessPartner.Description,
-                                                                        Status = (DefaultStatusType)line.BusinessPartner.Status
+                                                                        Blocked = line.BusinessPartner.Blocked
                                                                     },
                                                                     BusinessPartnerName = line.BusinessPartnerName,
                                                                     BusinessPartnerAddress = line.BusinessPartnerAddress,
@@ -274,7 +274,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                                         Code = line.Vat.Code,
                                                                         OrganizationCode = "",
                                                                         Description = line.Vat.Description,
-                                                                        Status = (DefaultStatusType)line.Vat.Status
+                                                                        Blocked = line.Vat.Blocked
 
                                                                     },
                                                                     VatPercentage = line.VatPercentage,
@@ -287,7 +287,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                                         Code = line.AccountVat.Code,
                                                                         OrganizationCode = "",
                                                                         Description = line.AccountVat.Description,
-                                                                        Status = (DefaultStatusType)line.AccountVat.Status
+                                                                        Blocked = line.AccountVat.Blocked
 
                                                                     },
                                                                     JobId = line.JobId,
@@ -296,7 +296,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                                                         Code = line.Job.Code,
                                                                         OrganizationCode = "",
                                                                         Description = line.Job.Description,
-                                                                        Status = (DefaultStatusType)line.Job.Status
+                                                                        Blocked = line.Job.Blocked
 
                                                                     },
                                                                 }).ToList();
@@ -335,7 +335,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     TotalVatAmountLCY = entity.TotalVatAmountLCY,
                     TotalPayment = entity.TotalPayment,
                     TotalPaymentLCY = entity.TotalPaymentLCY,
-                    Status = (PurchaseInvoiceDocumentStatusType)entity.Status,
+                    Status = entity.Status,
                     Version = entity.Version
                 };
 
@@ -532,7 +532,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                 updatePurchaseInvoiceHeader.TotalVatAmountLCY = headerModel.TotalVatAmountLCY;
                 updatePurchaseInvoiceHeader.TotalPayment = headerModel.TotalPayment;
                 updatePurchaseInvoiceHeader.TotalPaymentLCY = headerModel.TotalPaymentLCY;
-                updatePurchaseInvoiceHeader.Status = (byte)headerModel.Status;
+                updatePurchaseInvoiceHeader.Status = headerModel.Status;
                 updatePurchaseInvoiceHeader.RecModifiedAt = DateTime.Now;
                 updatePurchaseInvoiceHeader.RecModifiedBy = (long)user.ProviderUserKey;
                 updatePurchaseInvoiceHeader.Version++;
@@ -790,7 +790,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                     TotalVatAmountLCY = headerModel.TotalVatAmountLCY,
                     TotalPayment = headerModel.TotalPayment,
                     TotalPaymentLCY = headerModel.TotalPaymentLCY,
-                    Status = (byte)headerModel.Status,
+                    Status = headerModel.Status,
                     Version = 1,
                     RecModifiedAt = DateTime.Now,
                     RecCreatedBy = (long)user.ProviderUserKey,
@@ -1092,7 +1092,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                         Code = item.Code,
                         Description = item.Description,
                         OrganizationCode = item.Organization.Code,
-                        Status = (DefaultStatusType) item.Status
+                        Blocked = item.Blocked
                     };
 
                     record.Set("Item", itemModel);
@@ -1119,7 +1119,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                             Code = item.InventoryAccount.Code,
                             Description = item.InventoryAccount.Description,
                             OrganizationCode = item.InventoryAccount.Organization.Code,
-                            Status = (DefaultStatusType)item.InventoryAccount.Status
+                            Blocked = item.InventoryAccount.Blocked
                         };
 
                         record.Set("InventoryAccount", inventoryAccountModel);
@@ -1134,7 +1134,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                             Code = item.Vat.Code,
                             Description = item.Vat.Description,
                             OrganizationCode = item.Vat.Organization.Code,
-                            Status = (DefaultStatusType)item.Vat.Status
+                            Blocked = item.Vat.Blocked
                         };
 
                         record.Set("Vat", vatModel);
@@ -1176,7 +1176,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                                 Code = c.Code,
                                 Description = c.Description,
                                 OrganizationCode = c.Organization.Code,
-                                Status = (DefaultStatusType) c.Status
+                                Blocked = c.Blocked
                             }
                         ).First();
                     record.Set("Location", locationModel);
@@ -1193,7 +1193,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                         Code = vat.Code,
                         Description = vat.Description,
                         OrganizationCode = vat.Organization.Code,
-                        Status = (DefaultStatusType)vat.Status
+                        Blocked = vat.Blocked
                     };
 
                     record.Set("Vat", vatModel);
@@ -1219,7 +1219,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                         Code = account.Code,
                         Description = account.Description,
                         OrganizationCode = account.Organization.Code,
-                        Status = (DefaultStatusType)account.Status
+                        Blocked = account.Blocked
                     };
 
                     record.Set("InventoryAccount", accountModel);
@@ -1236,7 +1236,7 @@ namespace MyERP.Web.Areas.Purchase.Controllers
                         Code = job.Code,
                         Description = job.Description,
                         OrganizationCode = job.Organization.Code,
-                        Status = (DefaultStatusType)job.Status
+                        Blocked = job.Blocked
                     };
 
                     record.Set("Job", jobModel);

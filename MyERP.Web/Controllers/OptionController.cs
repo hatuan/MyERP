@@ -62,7 +62,7 @@ namespace MyERP.Web.Controllers
                     Code = x.Code,
                     Description = x.Description,
                     OrganizationCode = x.Organization.Code,
-                    Status = (DefaultStatusType)x.Status
+                    Blocked = x.Blocked
                 }).ToList();
 
             var optionRepository = new OptionRepository();
@@ -83,7 +83,7 @@ namespace MyERP.Web.Controllers
                     Code = x.Code,
                     Description = x.Description,
                     OrganizationCode = x.Organization.Code,
-                    Status = (DefaultStatusType)x.Status
+                    Blocked = x.Blocked
                 }).ToList();
 
             var model = new OptionEditViewModel()
@@ -104,7 +104,7 @@ namespace MyERP.Web.Controllers
                 SalesInvoiceSeqId = option.SalesInvoiceSeqId,
                 SalesOrderSequenceId = option.SalesOrderSequenceId,
                 SalesShipmentSeqId = option.SalesShipmentSeqId,
-                Status = (DefaultStatusType) option.Status,
+                Blocked = option.Blocked,
                 Version = option.Version
             };
 
@@ -161,7 +161,7 @@ namespace MyERP.Web.Controllers
                     _update.SalesInvoiceSeqId = model.SalesInvoiceSeqId;
                     _update.SalesPosSequenceId = model.SalesPosSequenceId;
                     _update.SalesShipmentSeqId = model.SalesShipmentSeqId;
-                    _update.Status = (byte)model.Status;
+                    _update.Blocked = model.Blocked;
                     _update.RecModifiedAt = DateTime.Now;
                     _update.RecModifiedBy = (long)user.ProviderUserKey;
                     _update.Version++;
@@ -197,7 +197,7 @@ namespace MyERP.Web.Controllers
                         SalesInvoiceSeqId = model.SalesInvoiceSeqId,
                         SalesPosSequenceId = model.SalesPosSequenceId,
                         SalesShipmentSeqId = model.SalesShipmentSeqId,
-                        Status = (byte)model.Status,
+                        Blocked = model.Blocked,
                         Version = 1,
                         RecModifiedAt = DateTime.Now,
                         RecCreatedBy = (long)user.ProviderUserKey,
@@ -237,7 +237,7 @@ namespace MyERP.Web.Controllers
                 RecCreatedAt = c.RecCreatedAt,
                 RecModifiedBy = c.RecModifiedByUser.Name,
                 RecModifiedAt = c.RecModifiedAt,
-                Status = (DefaultStatusType)c.Status,
+                Blocked = c.Blocked,
                 Version = c.Version
             }).ToList();
 

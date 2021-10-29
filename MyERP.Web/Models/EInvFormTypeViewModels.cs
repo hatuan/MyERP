@@ -35,8 +35,8 @@ namespace MyERP.Web.Models
         public Int64 Version { get; set; }
 
         [Required]
-        [Display(Name = "Status")]
-        public DefaultMasterStatusType Status { get; set; }
+        [Display(Name = "Blocked")]
+        public Boolean Blocked { get; set; }
 
         [Required]
         [Display(Name = "Created By")]
@@ -167,8 +167,8 @@ namespace MyERP.Web.Models
         public Int64 Version { get; set; }
 
         [Required]
-        [Display(Name = "Status")]
-        public DefaultMasterStatusType Status { get; set; }
+        [Display(Name = "Blocked")]
+        public Boolean Blocked { get; set; }
 
     }
 
@@ -240,7 +240,7 @@ namespace MyERP.Web.Models
         public String SellerSignedPersonName { get; set; }
 
         [Required]
-        [Display(Name = "Status")]
-        public DefaultMasterStatusType Status { get; set; }
+        [Display(Name = "Blocked")]
+        public Boolean Blocked { get; set; }
     }
 }
